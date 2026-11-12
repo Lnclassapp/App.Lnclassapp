@@ -1,0 +1,3130 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — Dynamisme démographique et qualité de la vie en Côte d'Ivoire",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "bilan-population",
+          "kind": "diagram",
+          "description": "Un schéma fléché qui montre comment une population évolue. Les naissances s'ajoutent et les décès se retranchent : cela donne la croissance naturelle. Les arrivées s'ajoutent et les départs se retranchent : cela donne le solde migratoire. Les deux ensemble donnent la croissance totale.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "nais",
+                "label": "Naissances",
+                "category": 1
+              },
+              {
+                "id": "dec",
+                "label": "Décès",
+                "category": 2
+              },
+              {
+                "id": "arr",
+                "label": "Arrivées",
+                "category": 1
+              },
+              {
+                "id": "dep",
+                "label": "Départs",
+                "category": 2
+              },
+              {
+                "id": "cn",
+                "label": "Croissance naturelle"
+              },
+              {
+                "id": "sm",
+                "label": "Solde migratoire"
+              },
+              {
+                "id": "ct",
+                "label": "Croissance totale"
+              }
+            ],
+            "edges": [
+              {
+                "from": "nais",
+                "to": "cn",
+                "label": "s'ajoutent"
+              },
+              {
+                "from": "dec",
+                "to": "cn",
+                "label": "se retranchent"
+              },
+              {
+                "from": "arr",
+                "to": "sm",
+                "label": "s'ajoutent"
+              },
+              {
+                "from": "dep",
+                "to": "sm",
+                "label": "se retranchent"
+              },
+              {
+                "from": "cn",
+                "to": "ct"
+              },
+              {
+                "from": "sm",
+                "to": "ct"
+              }
+            ],
+            "legend": [
+              "Ce qui fait augmenter la population",
+              "Ce qui fait diminuer la population"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "recensements-ci",
+          "kind": "timeline",
+          "description": "Une frise de 1970 à 2025 qui place les cinq recensements généraux de la population et de l'habitat de la Côte d'Ivoire : 1975, 1988, 1998, 2014 et 2021. Le recensement de 2021 est le plus récent : il a compté 29 389 150 habitants.",
+          "params": {
+            "start": 1970,
+            "end": 2025,
+            "step": 5,
+            "unit": "year",
+            "periods": [],
+            "events": [
+              {
+                "at": 1975,
+                "label": "Recensement de 1975"
+              },
+              {
+                "at": 1988,
+                "label": "Recensement de 1988"
+              },
+              {
+                "at": 1998,
+                "label": "Recensement de 1998"
+              },
+              {
+                "at": 2014,
+                "label": "Recensement de 2014"
+              },
+              {
+                "at": 2021,
+                "label": "Recensement de 2021"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "composantes-idh",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : l'indice de développement humain (IDH) est relié à ses trois dimensions. La santé est mesurée par l'espérance de vie à la naissance, l'éducation par la durée de scolarisation et le niveau de vie par le revenu par habitant.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "idh",
+                "label": "Indice de développement humain (IDH)"
+              },
+              {
+                "id": "sante",
+                "label": "Santé : espérance de vie à la naissance",
+                "category": 1
+              },
+              {
+                "id": "edu",
+                "label": "Éducation : durée de scolarisation",
+                "category": 1
+              },
+              {
+                "id": "niv",
+                "label": "Niveau de vie : revenu par habitant",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "idh",
+                "to": "sante"
+              },
+              {
+                "from": "idh",
+                "to": "edu"
+              },
+              {
+                "from": "idh",
+                "to": "niv"
+              }
+            ],
+            "legend": [
+              "Dimension de l'IDH"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lien-population-services",
+          "kind": "diagram",
+          "description": "Un cycle à cinq étapes qui montre le lien à double sens. La croissance de la population crée des besoins en écoles, santé et eau. Quand les services se développent, la santé et l'éducation progressent. Cela fait évoluer la natalité et la mortalité, donc la croissance de la population.",
+          "params": {
+            "layout": "cycle",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "pop",
+                "label": "Croissance de la population"
+              },
+              {
+                "id": "bes",
+                "label": "Besoins en écoles, santé et eau"
+              },
+              {
+                "id": "ser",
+                "label": "Services publics qui se développent"
+              },
+              {
+                "id": "se",
+                "label": "Santé et éducation meilleures"
+              },
+              {
+                "id": "nm",
+                "label": "Natalité et mortalité qui évoluent"
+              }
+            ],
+            "edges": [
+              {
+                "from": "pop",
+                "to": "bes",
+                "label": "crée"
+              },
+              {
+                "from": "bes",
+                "to": "ser",
+                "label": "appelle"
+              },
+              {
+                "from": "ser",
+                "to": "se",
+                "label": "permet"
+              },
+              {
+                "from": "se",
+                "to": "nm",
+                "label": "fait évoluer"
+              },
+              {
+                "from": "nm",
+                "to": "pop",
+                "label": "modifie"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        },
+        {
+          "key": "eleves-par-salle",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres sur l'école d'un village imaginé, Dougbakro. Il donne le nombre d'élèves par salle de classe : 40 en 2000, 65 en 2010 et 50 en 2020. La barre de 2010 est la plus haute : c'est l'année où les classes étaient les plus chargées.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              40,
+              65,
+              50
+            ],
+            "labels": [
+              "2000",
+              "2010",
+              "2020"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Calculer la croissance d'une population",
+          "remember": "La **population** d'un pays change à cause de deux mouvements : les naissances et les décès, puis les arrivées et les départs.\n\nLe **taux de natalité** est le nombre de naissances vivantes en une année pour 1 000 habitants. Le **taux de mortalité** est le nombre de décès en une année pour 1 000 habitants. Pour les calculer : nombre ÷ population × 1 000.\n\nLa **croissance naturelle** est la différence entre la natalité et la mortalité. Le **solde migratoire** est la différence entre les arrivées et les départs : il peut être négatif. La **croissance totale** est la somme des deux.\n\nUn taux de 30 pour 1 000 s'écrit aussi 3 %. **Repère ivoirien** : le recensement général de 2021 a compté 29 389 150 habitants en Côte d'Ivoire.",
+          "method": [
+            "Relever les données de l'énoncé : population, naissances, décès, arrivées et départs.",
+            "Calculer les taux de natalité et de mortalité : nombre divisé par la population, puis multiplié par 1 000.",
+            "Calculer la croissance naturelle : taux de natalité moins taux de mortalité.",
+            "Calculer le solde migratoire (arrivées moins départs), puis la croissance totale (croissance naturelle plus solde migratoire)."
+          ],
+          "example": {
+            "statement": "Un village imaginé (chiffres inventés pour l'exemple) compte 4 000 habitants. En un an, il y a 140 naissances, 40 décès, 50 arrivées et 30 départs. Calcule sa croissance naturelle et sa croissance totale.",
+            "steps": [
+              "Relever : population 4 000 ; naissances 140 ; décès 40 ; arrivées 50 ; départs 30.",
+              "Calculer les taux : natalité $= \\frac{140}{4\\,000} \\times 1\\,000 = 35$ pour 1 000 ; mortalité $= \\frac{40}{4\\,000} \\times 1\\,000 = 10$ pour 1 000.",
+              "Calculer la croissance naturelle : $35 - 10 = 25$ pour 1 000, soit 2,5 %. En personnes : $140 - 40 = 100$.",
+              "Calculer le solde migratoire : $50 - 30 = +20$ personnes. Croissance totale : $100 + 20 = 120$ personnes, soit $\\frac{120}{4\\,000} = 3$ % de la population."
+            ]
+          },
+          "pitfall": "L'erreur la plus fréquente est de **s'arrêter à la croissance naturelle** et d'oublier le solde migratoire. Contre-exemple : un village de 1 000 habitants a 40 naissances et 10 décès, donc +30 personnes. Mais 50 personnes partent vers la ville et 10 arrivent : le solde migratoire est $10 - 50 = -40$. La population passe de $+30$ à $-10$ : elle **diminue**. Autre piège : un taux de 30 pour 1 000 n'est pas 30 %, mais 3 %.",
+          "figure": "bilan-population",
+          "exercise": [
+            {
+              "title": "Calculer la croissance d'un village",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à des villages et à des familles imaginés. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": "recensements-ci",
+              "questions": [
+                {
+                  "content": "Un village de 2 000 habitants compte 60 naissances en une année. Son taux de natalité est de ___ pour 1 000 habitants.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : population 2 000 ; naissances 60. Étape 2 — Calculer les taux : $\\frac{60}{2\\,000} = 0{,}03$, puis $0{,}03 \\times 1\\,000 = 30$. Le taux de natalité est de 30 pour 1 000. Si tu trouves 3, tu as multiplié par 100 : tu as calculé un pourcentage, pas un taux pour 1 000.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village de 5 000 habitants compte 25 décès en une année. Quel est son taux de mortalité, en nombre de décès pour 1 000 habitants ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : population 5 000 ; décès 25. Étape 2 — Calculer les taux : $\\frac{25}{5\\,000} = 0{,}005$, puis $0{,}005 \\times 1\\,000 = 5$. Le taux de mortalité est de 5 pour 1 000. Le résultat 200 vient de la division à l'envers ($5\\,000 \\div 25$).",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "pour mille"
+                },
+                {
+                  "content": "Un pays a un taux de natalité de 34 pour 1 000 et un taux de mortalité de 11 pour 1 000. Quelle est sa croissance naturelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : natalité 34 ; mortalité 11. Étape 3 — Calculer la croissance naturelle : natalité moins mortalité, soit $34 - 11 = 23$ pour 1 000. La réponse 45 vient d'une addition : les décès font baisser la population, ils ne s'ajoutent pas aux naissances.",
+                  "answers": [
+                    {
+                      "content": "45 pour 1 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "23 pour 1 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "34 pour 1 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "11 pour 1 000",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque notion à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Calculer les taux : la natalité compte les naissances, la mortalité compte les décès, toutes deux pour 1 000 habitants. Étape 4 — Calculer le solde migratoire, puis la croissance totale : le solde migratoire est arrivées moins départs ; la croissance totale additionne croissance naturelle et solde migratoire.",
+                  "answers": [
+                    {
+                      "content": "Taux de natalité",
+                      "match": "Naissances d'une année pour 1 000 habitants"
+                    },
+                    {
+                      "content": "Taux de mortalité",
+                      "match": "Décès d'une année pour 1 000 habitants"
+                    },
+                    {
+                      "content": "Solde migratoire",
+                      "match": "Arrivées moins départs"
+                    },
+                    {
+                      "content": "Croissance totale",
+                      "match": "Croissance naturelle plus solde migratoire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'habitants le recensement général de 2021 a-t-il comptés en Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la donnée : le recensement général de la population et de l'habitat de 2021, le plus récent de la frise, a compté 29 389 150 habitants. Les autres propositions ressemblent à ce nombre mais changent un chiffre : relis-le chiffre par chiffre.",
+                  "answers": [
+                    {
+                      "content": "23 389 150",
+                      "correct": false
+                    },
+                    {
+                      "content": "29 398 150",
+                      "correct": false
+                    },
+                    {
+                      "content": "29 389 150",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 938 915",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taux de natalité de 30 pour 1 000 habitants équivaut à ___ % de la population.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Calculer les taux : 30 pour 1 000 signifie 30 sur 1 000, soit $\\frac{30}{1\\,000} = 0{,}03 = 3$ %. Pour passer d'un taux pour 1 000 à un pourcentage, on divise par 10. L'erreur tentante est de croire que 30 pour 1 000 font 30 %.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village de 1 000 habitants compte 40 naissances, 10 décès, 10 arrivées et 50 départs en une année. Comment sa population évolue-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 40 naissances, 10 décès, 10 arrivées, 50 départs. Étape 3 — Calculer la croissance naturelle : $40 - 10 = +30$. Étape 4 — Calculer le solde migratoire : $10 - 50 = -40$, puis la croissance totale : $30 + (-40) = -10$. La population diminue de 10 personnes. La réponse +30 est le piège : elle oublie le solde migratoire.",
+                  "answers": [
+                    {
+                      "content": "Elle augmente de 30 personnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle diminue de 10 personnes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle augmente de 10 personnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle diminue de 40 personnes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Bilan démographique de villages et de pays imaginés",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (relever les données, calculer les taux, calculer la croissance naturelle, calculer le solde migratoire et la croissance totale) à des villages et à des pays imaginés. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": "bilan-population",
+              "hint": "Un taux se calcule en divisant par la population, puis en multipliant par 1 000. La croissance totale ajoute le solde migratoire à la croissance naturelle.",
+              "questions": [
+                {
+                  "content": "Un village imaginé compte 2 000 habitants et 80 naissances en un an. Quel est son taux de natalité, en naissances pour 1 000 habitants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : population 2 000 ; naissances 80. Étape 2 — Calculer le taux de natalité : 80 ÷ 2 000 × 1 000 = 40 pour 1 000. Répondre 80 revient à donner le nombre de naissances sans le ramener à 1 000 habitants ; répondre 4 donne un pourcentage sans le dire.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village imaginé compte 2 000 habitants et 30 décès en un an. Quel est son taux de mortalité, en décès pour 1 000 habitants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : population 2 000 ; décès 30. Étape 2 — Calculer le taux de mortalité : 30 ÷ 2 000 × 1 000 = 15 pour 1 000. Répondre 30 oublie de diviser par la population.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays imaginé a un taux de natalité de 38 pour 1 000 et un taux de mortalité de 12 pour 1 000. Quelle est sa croissance naturelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer la croissance naturelle : natalité − mortalité = 38 − 12 = 26 pour 1 000, soit 2,6 %. Répondre 50 pour 1 000 additionne au lieu de soustraire ; répondre 26 % confond 26 pour 1 000 et 26 pour 100 : un taux de 30 pour 1 000 s'écrit 3 %.",
+                  "answers": [
+                    {
+                      "content": "26 pour 1 000, soit 2,6 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "50 pour 1 000, soit 5 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "26 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,26 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Calculer les taux, Étape 3 — Croissance naturelle (natalité − mortalité), Étape 4 — Solde migratoire (arrivées − départs) puis croissance totale (somme des deux). Lier croissance totale à « natalité moins mortalité » est l'oubli du solde migratoire.",
+                  "answers": [
+                    {
+                      "content": "Taux de natalité",
+                      "match": "Naissances vivantes d'une année pour 1 000 habitants"
+                    },
+                    {
+                      "content": "Croissance naturelle",
+                      "match": "Natalité moins mortalité"
+                    },
+                    {
+                      "content": "Solde migratoire",
+                      "match": "Arrivées moins départs"
+                    },
+                    {
+                      "content": "Croissance totale",
+                      "match": "Croissance naturelle plus solde migratoire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village de 1 000 habitants a 40 naissances, 10 décès, 10 arrivées et 50 départs. Sa population augmente cette année.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Croissance naturelle : 40 − 10 = +30 personnes. Étape 4 — Solde migratoire : 10 − 50 = −40. Croissance totale : 30 + (−40) = −10 : la population diminue. Répondre Vrai, c'est s'arrêter à la croissance naturelle, l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taux de 30 pour 1 000 s'écrit aussi ___ % (un nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Pour passer de pour 1 000 à pour cent, on divise par 10 : 30 pour 1 000 = 3 %. Écrire 30 % confond les deux unités.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mesurer la qualité de la vie",
+          "remember": "La **qualité de la vie** est l'ensemble des conditions qui permettent à une famille de bien vivre : santé, éducation, revenu, logement, accès à l'eau potable et à l'électricité, sécurité, environnement.\n\nOn la mesure avec des **indicateurs**. Le **taux de scolarisation** est la part des enfants d'un âge donné qui vont à l'école : enfants scolarisés ÷ enfants d'âge scolaire × 100. L'**espérance de vie à la naissance** est le nombre moyen d'années qu'un nouveau-né peut espérer vivre.\n\nL'**indice de développement humain (IDH)** est calculé par le **PNUD** (Programme des Nations unies pour le développement). Sa valeur est comprise entre 0 et 1 : plus il est proche de 1, plus le niveau est élevé. Il combine trois dimensions : la **santé** (espérance de vie), l'**éducation** (durée de scolarisation) et le **niveau de vie** (revenu par habitant).",
+          "method": [
+            "Identifier la dimension de la qualité de la vie étudiée : santé, éducation, niveau de vie, eau, logement.",
+            "Relever les données utiles du document et l'indicateur qui les mesure.",
+            "Calculer l'indicateur : pour un taux de scolarisation, enfants scolarisés divisés par enfants d'âge scolaire, multiplié par 100.",
+            "Interpréter le résultat : dire ce qu'il montre, le comparer, puis préciser ce qu'il ne mesure pas."
+          ],
+          "example": {
+            "statement": "Dans le village imaginé de Zouankro, 300 enfants ont l'âge d'aller à l'école primaire et 240 y sont scolarisés. À l'échelle d'un pays, la moyenne est de 75 %. Que dit cette donnée sur la qualité de la vie du village ?",
+            "steps": [
+              "Identifier : la donnée concerne l'éducation, une dimension de la qualité de la vie (et de l'IDH).",
+              "Relever : 300 enfants d'âge scolaire ; 240 enfants scolarisés ; l'indicateur est le taux de scolarisation.",
+              "Calculer : $\\frac{240}{300} \\times 100 = 80$, donc le taux de scolarisation est de 80 %.",
+              "Interpréter : 80 % est supérieur à la moyenne de 75 % : l'éducation est plutôt favorable. Mais ce taux ne dit rien de l'eau, de la santé ni du revenu des familles du village."
+            ]
+          },
+          "pitfall": "L'erreur la plus fréquente est de croire que **le revenu seul mesure la qualité de la vie**. Contre-exemple : deux familles ont le même revenu. L'une habite à 10 minutes d'un centre de santé et a l'eau au robinet. L'autre marche 2 heures pour atteindre le dispensaire et porte l'eau d'un puits. Leur qualité de vie est très différente. De même, un taux de scolarisation de 80 % ne dit rien de la santé. L'IDH combine **trois** dimensions, et il ne mesure ni la sécurité ni l'environnement.",
+          "figure": "composantes-idh",
+          "exercise": [
+            {
+              "title": "Mesurer la qualité de la vie d'un village",
+              "statement": "Dans cet exercice, tu identifies des dimensions de la qualité de la vie et tu calcules des indicateurs sur des villages imaginés. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": "composantes-idh",
+              "questions": [
+                {
+                  "content": "Parmi ces éléments, lesquels font partie de la qualité de la vie d'une famille ? Trois réponses sont exactes.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier la dimension : la qualité de la vie regroupe la santé, l'éducation, le revenu, l'eau, le logement, la sécurité. L'accès à l'eau potable, la santé et l'éducation en font partie. La superficie du pays et le nombre de ministres ne décrivent pas les conditions de vie d'une famille.",
+                  "answers": [
+                    {
+                      "content": "L'accès à l'eau potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "La superficie du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "La santé des membres de la famille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de ministres du gouvernement",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'éducation des enfants",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un village imaginé, 600 enfants ont l'âge d'aller à l'école primaire et 450 sont scolarisés. Quel est le taux de scolarisation, en pourcentage ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : 600 enfants d'âge scolaire ; 450 scolarisés. Étape 3 — Calculer l'indicateur : $\\frac{450}{600} \\times 100 = 75$. Le taux de scolarisation est de 75 %. Le résultat 133 vient de la division à l'envers ($600 \\div 450$).",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "%"
+                },
+                {
+                  "content": "Entre quelles valeurs se situe l'indice de développement humain (IDH) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever l'indicateur : l'IDH est un indice compris entre 0 et 1. Plus il est proche de 1, plus le niveau de développement humain est élevé. Une valeur de 0,3 est donc faible, et une valeur de 0,9 est élevée. Les échelles de 0 à 100 ou de 0 à 10 sont celles d'autres notes, pas de l'IDH.",
+                  "answers": [
+                    {
+                      "content": "Entre 0 et 100",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 0 et 10",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 0 et 1",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre -1 et 1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'indice de développement humain est calculé par le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relever l'indicateur et sa source : l'IDH est calculé par le PNUD, le Programme des Nations unies pour le développement. L'UNESCO s'occupe d'éducation, de science et de culture ; l'OMS s'occupe de santé ; le FMI s'occupe de finances. Aucun des trois ne calcule l'IDH.",
+                  "answers": [
+                    {
+                      "content": "FMI",
+                      "correct": false
+                    },
+                    {
+                      "content": "PNUD",
+                      "correct": true
+                    },
+                    {
+                      "content": "UNESCO",
+                      "correct": false
+                    },
+                    {
+                      "content": "OMS",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque indicateur à la dimension qu'il mesure.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la dimension, puis Étape 2 — Relever l'indicateur qui la mesure : le taux de scolarisation mesure l'éducation ; l'espérance de vie mesure la santé ; le revenu par habitant mesure le niveau de vie ; l'accès à l'eau potable mesure les conditions de logement et d'hygiène.",
+                  "answers": [
+                    {
+                      "content": "Taux de scolarisation",
+                      "match": "Éducation"
+                    },
+                    {
+                      "content": "Espérance de vie à la naissance",
+                      "match": "Santé"
+                    },
+                    {
+                      "content": "Revenu par habitant",
+                      "match": "Niveau de vie"
+                    },
+                    {
+                      "content": "Accès à l'eau potable",
+                      "match": "Conditions de logement et d'hygiène"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une famille de village dont le revenu est élevé a forcément une bonne qualité de la vie.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Étape 4 — Interpréter : le revenu ne mesure qu'une dimension, le niveau de vie. Une famille peut avoir un bon revenu et vivre à 20 km d'un centre de santé, sans eau potable ni électricité. Il faut regarder aussi la santé, l'éducation, l'eau et le logement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Indicateurs, IDH et qualité de la vie de villages imaginés",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (identifier la dimension, relever les données, calculer l'indicateur, interpréter) à des villages imaginés et aux indicateurs de la leçon. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": "composantes-idh",
+              "hint": "Le taux de scolarisation = enfants scolarisés ÷ enfants d'âge scolaire × 100. L'IDH combine trois dimensions, pas une seule.",
+              "questions": [
+                {
+                  "content": "Dans un village imaginé, 400 enfants ont l'âge d'aller à l'école primaire et 320 y sont scolarisés. Quel est le taux de scolarisation, en pourcentage ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : la donnée concerne l'éducation. Étape 2 — Relever : 400 enfants d'âge scolaire ; 320 scolarisés. Étape 3 — Calculer : 320 ÷ 400 × 100 = 80 %. Répondre 320 donne le nombre d'élèves sans calculer un taux ; répondre 20 donne la part des enfants non scolarisés.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Quelles sont les trois dimensions de l'indice de développement humain (IDH) ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier la dimension : l'IDH combine la santé, l'éducation et le niveau de vie. Il ne mesure ni la sécurité ni l'environnement, ce que rappelle le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "La santé, mesurée par l'espérance de vie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'éducation, mesurée par la durée de scolarisation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le niveau de vie, mesuré par le revenu par habitant",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sécurité, mesurée par le nombre de policiers",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'environnement, mesuré par la surface des forêts",
+                      "correct": false
+                    },
+                    {
+                      "content": "La population, mesurée par le nombre d'habitants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par quel organisme l'indice de développement humain (IDH) est-il calculé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : l'IDH est calculé par le PNUD. Le recensement compte les habitants, il ne calcule pas l'IDH.",
+                  "answers": [
+                    {
+                      "content": "Le PNUD, Programme des Nations unies pour le développement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque village, avec son propre recensement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le recensement général de la population et de l'habitat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une école, à partir de ses élèves",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un IDH égal à 1,4 est possible.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Interpréter : la valeur de l'IDH est comprise entre 0 et 1 ; plus elle est proche de 1, plus le niveau est élevé. 1,4 dépasse 1 : c'est impossible.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le taux de scolarisation mesure la dimension ___ de la qualité de la vie.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la dimension : le taux de scolarisation donne la part des enfants d'âge scolaire qui vont à l'école, donc l'éducation. La santé se mesure par l'espérance de vie, le niveau de vie par le revenu.",
+                  "answers": [
+                    {
+                      "content": "éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "santé",
+                      "correct": false
+                    },
+                    {
+                      "content": "niveau de vie",
+                      "correct": false
+                    },
+                    {
+                      "content": "environnement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque indicateur à ce qu'il mesure.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever l'indicateur qui mesure chaque donnée. Étape 4 — Interpréter : chaque indicateur ne mesure qu'une dimension, c'est pourquoi le revenu seul ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Espérance de vie à la naissance",
+                      "match": "Nombre moyen d'années qu'un nouveau-né peut espérer vivre"
+                    },
+                    {
+                      "content": "Taux de scolarisation",
+                      "match": "Part des enfants d'âge scolaire qui vont à l'école"
+                    },
+                    {
+                      "content": "Revenu par habitant",
+                      "match": "Niveau de vie"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Relier dynamisme démographique et qualité de la vie",
+          "remember": "Le **dynamisme démographique** est la façon dont la population change : croissance rapide ou lente, population jeune ou âgée. Entre population et qualité de la vie, le lien va **dans les deux sens**.\n\n**Population vers qualité de la vie.** Une population nombreuse et jeune a des besoins : écoles, centres de santé, eau, logements, emplois. Si les services augmentent moins vite que la population, la qualité de la vie par habitant peut baisser (classes surchargées, attente plus longue).\n\n**Qualité de la vie vers population.** Une meilleure santé fait baisser la mortalité. Une meilleure éducation est souvent associée à une baisse de la natalité.\n\nLes services sont **inégalement répartis** : les grandes villes concentrent souvent écoles et hôpitaux, alors que de nombreux villages sont moins bien équipés. Une population nombreuse est aussi une **force de travail** : l'effet dépend des services et des emplois créés.",
+          "method": [
+            "Présenter le document : sa nature, sa source, sa date et son sujet.",
+            "Comparer les données : relever ce qui augmente et ce qui augmente moins vite.",
+            "Expliquer le lien entre la population et les services, dans un sens ou dans l'autre.",
+            "Conclure en nuançant : dire l'effet sur la qualité de la vie et proposer une mesure."
+          ],
+          "example": {
+            "statement": "Document imaginé pour l'exemple : relevé de l'école d'un village. Au début de l'année 2005, l'école compte 6 salles et 240 élèves. Au début de 2010, elle compte toujours 6 salles et 300 élèves. Explique ce que montre ce relevé.",
+            "steps": [
+              "Présenter : c'est un relevé chiffré de l'école d'un village imaginé, qui compare deux années, 2005 et 2010. Il porte sur le nombre d'élèves et de salles.",
+              "Comparer : les élèves passent de 240 à 300, soit 25 % de plus, alors que les salles restent à 6. Les élèves par salle passent de $\\frac{240}{6} = 40$ à $\\frac{300}{6} = 50$.",
+              "Expliquer : plus d'enfants en âge d'aller à l'école créent un besoin de salles. Les services n'ont pas suivi, donc les classes sont plus chargées.",
+              "Conclure : la qualité de la vie scolaire a baissé. Pour revenir à 40 élèves par salle, il faut $\\frac{300}{40} = 7{,}5$ salles, donc 8 : il faut en construire 2 de plus."
+            ]
+          },
+          "pitfall": "L'erreur la plus fréquente est de dire qu'**une population nombreuse suffit à expliquer une mauvaise qualité de la vie**. Ce qui compte, c'est le rapport entre la population et les services. Contre-exemple : une école de 240 élèves avec 6 salles a 40 élèves par salle. Une autre école de 300 élèves avec 10 salles n'a que 30 élèves par salle : elle a plus d'élèves, mais de meilleures conditions. Compare toujours la population **aux** services.",
+          "figure": "lien-population-services",
+          "exercise": [
+            {
+              "title": "Relier population et services dans un village",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à des écoles et à des villages imaginés. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": "lien-population-services",
+              "questions": [
+                {
+                  "content": "Une école de village a 5 salles et 200 élèves. Le nombre d'élèves passe à 300 sans nouvelle salle. Combien d'élèves y a-t-il alors par salle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Présenter : le relevé porte sur une école, avant et après l'arrivée des nouveaux élèves. Étape 2 — Comparer les données : avant, $\\frac{200}{5} = 40$ élèves par salle ; après, $\\frac{300}{5} = 60$. Les élèves augmentent de 50 %, les salles ne bougent pas, donc les classes sont plus chargées. La réponse 40 oublie les nouveaux élèves.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Remets dans l'ordre cette chaîne de causes.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Expliquer le lien : une hausse des naissances augmente le nombre d'enfants en âge d'aller à l'école. Ces enfants créent un besoin de salles et d'enseignants. Si les services ne suivent pas, les classes sont surchargées (Étape 4 — Conclure). L'ordre va de la cause à la conséquence.",
+                  "answers": [
+                    {
+                      "content": "Les naissances augmentent dans le village."
+                    },
+                    {
+                      "content": "Le nombre d'enfants en âge d'aller à l'école augmente."
+                    },
+                    {
+                      "content": "Le besoin de salles de classe et d'enseignants augmente."
+                    },
+                    {
+                      "content": "Les classes sont surchargées si les salles ne sont pas construites."
+                    }
+                  ]
+                },
+                {
+                  "content": "L'amélioration des soins de santé dans un village peut faire baisser le taux de mortalité.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Étape 3 — Expliquer le lien dans le sens « qualité de la vie vers population » : avec un centre de santé proche, la vaccination et les soins, moins de personnes meurent, donc la mortalité baisse. Cela montre que la qualité de la vie agit sur la population.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le village A a 200 élèves et 5 salles. Le village B a 300 élèves et 10 salles. Dans quel village les classes sont-elles les moins chargées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer les données : village A, $\\frac{200}{5} = 40$ élèves par salle ; village B, $\\frac{300}{10} = 30$. Étape 4 — Conclure : B a plus d'élèves mais de meilleures conditions. Dire que A est mieux parce qu'il a moins d'élèves est le piège : on compare toujours la population aux services, pas la population seule.",
+                  "answers": [
+                    {
+                      "content": "Le village A, car il a moins d'élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village B, car il a 30 élèves par salle contre 40",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux villages sont identiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village A, car il a moins de salles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une croissance rapide de la population dépasse les services d'un village. Quelles mesures peuvent améliorer la qualité de la vie ? Deux réponses sont exactes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure en proposant une mesure : si les besoins augmentent, il faut augmenter les services. Construire des salles et équiper le village en eau et en santé répond directement aux besoins. Attendre ou réduire les enseignants aggraverait la surcharge.",
+                  "answers": [
+                    {
+                      "content": "Construire de nouvelles salles de classe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Attendre que la population diminue d'elle-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réduire le nombre d'enseignants pour économiser",
+                      "correct": false
+                    },
+                    {
+                      "content": "Équiper le village d'un point d'eau et d'un centre de santé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les grandes villes concentrent souvent plus de services que les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Expliquer le lien : les services (écoles, hôpitaux, eau courante) sont inégalement répartis. Les grandes villes en concentrent beaucoup, alors que de nombreux villages sont moins bien équipés. Cette inégalité explique en partie des différences de qualité de la vie entre ville et campagne.",
+                  "answers": [
+                    {
+                      "content": "villages",
+                      "correct": true
+                    },
+                    {
+                      "content": "village",
+                      "correct": true
+                    },
+                    {
+                      "content": "campagnes",
+                      "correct": true
+                    },
+                    {
+                      "content": "campagne",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique en quatre ou cinq lignes pourquoi une croissance rapide de la population peut faire baisser la qualité de la vie d'un village, puis propose une mesure.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Fait le lien entre l'augmentation de la population et les besoins",
+                    "Cite deux services concernés (école, santé, eau)",
+                    "Explique que les services augmentent moins vite que la population",
+                    "Propose une mesure précise"
+                  ],
+                  "explanation": "Corrigé modèle : Étape 3 — Expliquer le lien. Quand la population d'un village augmente vite, les besoins en écoles, en soins et en eau augmentent aussi. Si l'école, le centre de santé et le point d'eau ne se développent pas aussi vite, chaque habitant dispose de moins de services : les classes sont surchargées et l'attente au dispensaire est plus longue. La qualité de la vie baisse. Étape 4 — Conclure : il faut construire des salles de classe et équiper le village. Barème : lien population-besoins (1) ; deux services cités (0,5) ; services moins rapides que la population (1) ; mesure (0,5).",
+                  "answers": [],
+                  "starter": "Quand la population augmente vite, les besoins…"
+                }
+              ]
+            },
+            {
+              "title": "Écoles, classes et services dans des villages imaginés",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (présenter, comparer, expliquer, conclure) au lien entre la population et les services dans des villages imaginés. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": "lien-population-services",
+              "hint": "Compare toujours la population aux services : le nombre d'élèves par salle se calcule en divisant les élèves par les salles.",
+              "questions": [
+                {
+                  "content": "Une école de village imaginé compte 360 élèves et 9 salles de classe. Combien d'élèves y a-t-il par salle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer les données : élèves par salle = 360 ÷ 9 = 40. Répondre 9 ou 360 donne l'une des deux données sans les comparer.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Une école compte 300 élèves. On veut 30 élèves par salle au plus. Combien de salles faut-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Conclure en proposant une mesure : salles nécessaires = 300 ÷ 30 = 10. Répondre 30 reprend le nombre d'élèves par salle voulu, pas le nombre de salles.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "salles"
+                },
+                {
+                  "content": "Une population nombreuse suffit à expliquer, à elle seule, une mauvaise qualité de la vie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer le lien : ce qui compte est le rapport entre la population et les services. Une population nombreuse est aussi une force de travail ; l'effet dépend des services et des emplois créés. C'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre cet enchaînement dans un village imaginé.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Comparer : les élèves augmentent plus vite que les salles. Étape 3 — Expliquer le lien population-services : plus d'élèves créent un besoin de salles ; si elles manquent, les classes se chargent. Étape 4 — Conclure : la qualité de la vie scolaire baisse.",
+                  "answers": [
+                    {
+                      "content": "Le nombre d'enfants en âge d'aller à l'école augmente"
+                    },
+                    {
+                      "content": "Les besoins en salles de classe augmentent"
+                    },
+                    {
+                      "content": "Les salles ne sont pas assez nombreuses, les classes se chargent"
+                    },
+                    {
+                      "content": "La qualité de la vie scolaire baisse"
+                    }
+                  ]
+                },
+                {
+                  "content": "École A : 240 élèves et 6 salles. École B : 300 élèves et 10 salles. Laquelle a les meilleures conditions d'accueil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : A = 240 ÷ 6 = 40 élèves par salle ; B = 300 ÷ 10 = 30. Étape 4 — Conclure : B est mieux équipée. Choisir A parce qu'elle a moins d'élèves, c'est oublier de comparer les élèves aux salles.",
+                  "answers": [
+                    {
+                      "content": "L'école B : 30 élèves par salle contre 40 pour l'école A",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'école A, parce qu'elle a moins d'élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'école B, parce qu'elle a plus d'élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont identiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux conséquences de la qualité de la vie sur la population ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer le lien dans le sens qualité de la vie vers population : la santé fait baisser la mortalité, l'éducation est souvent associée à une baisse de la natalité. Les services sont inégalement répartis, entre grandes villes et villages.",
+                  "answers": [
+                    {
+                      "content": "Une meilleure santé fait baisser la mortalité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une meilleure éducation est souvent associée à une baisse de la natalité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une meilleure santé fait monter la mortalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une meilleure éducation fait toujours monter la natalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les services sont répartis de façon égale partout",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Interrogation — Le bilan démographique d'un village",
+          "exercise_type": "fixation",
+          "figure": "bilan-population",
+          "statement": "Document : relevé de l'état civil du village imaginé de Boniankro, établi par le chef de village pour une année (chiffres inventés pour l'exercice). Population : 5 000 habitants. Naissances : 175. Décès : 50. Personnes arrivées : 60. Personnes parties vers la ville : 85.",
+          "questions": [
+            {
+              "content": "Document : le village de Boniankro compte 5 000 habitants et 175 naissances en une année. Quel est son taux de natalité, en nombre de naissances pour 1 000 habitants ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Relever les données : population 5 000 ; naissances 175. 2) Calculer le taux : nombre divisé par la population, multiplié par 1 000. 3) Application : $\\frac{175}{5\\,000} = 0{,}035$, puis $0{,}035 \\times 1\\,000 = 35$. Le taux de natalité est de 35 pour 1 000, soit 3,5 %. Erreur tentante : répondre 3,5, qui est le pourcentage (multiplication par 100 au lieu de 1 000).",
+              "answers": [
+                {
+                  "content": "35",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "pour mille"
+            },
+            {
+              "content": "Document : le village de Boniankro compte 5 000 habitants et 50 décès en une année. Quel est son taux de mortalité, en nombre de décès pour 1 000 habitants ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Relever : population 5 000 ; décès 50. 2) Calculer le taux : $\\frac{50}{5\\,000} = 0{,}01$, puis $0{,}01 \\times 1\\,000 = 10$. Le taux de mortalité est de 10 pour 1 000, soit 1 %. Un résultat de 100 viendrait de la division à l'envers, qui ne donne pas un taux.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "pour mille"
+            },
+            {
+              "content": "Document : à Boniankro, la natalité est de 35 pour 1 000 et la mortalité de 10 pour 1 000, pour 5 000 habitants. Quelle est la croissance naturelle en nombre de personnes ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Relever : 175 naissances ; 50 décès. 2) Calculer la croissance naturelle : naissances moins décès. 3) Application : $175 - 50 = 125$ personnes. Cela correspond à $35 - 10 = 25$ pour 1 000, soit $25 \\times 5 = 125$ pour 5 000 habitants. La réponse 25 est le taux pour 1 000, pas le nombre de personnes. La réponse 225 vient d'une addition fausse des décès.",
+              "answers": [
+                {
+                  "content": "25 personnes",
+                  "correct": false
+                },
+                {
+                  "content": "125 personnes",
+                  "correct": true
+                },
+                {
+                  "content": "225 personnes",
+                  "correct": false
+                },
+                {
+                  "content": "175 personnes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Document : à Boniankro, 60 personnes sont arrivées et 85 sont parties vers la ville. Quel est le solde migratoire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Relever : arrivées 60 ; départs 85. 2) Calculer le solde migratoire : arrivées moins départs. 3) Application : $60 - 85 = -25$. Le solde est négatif car il y a plus de départs que d'arrivées. La réponse +25 oublie le signe moins ; elle laisserait croire que le village gagne des habitants.",
+              "answers": [
+                {
+                  "content": "+25 personnes",
+                  "correct": false
+                },
+                {
+                  "content": "-25 personnes",
+                  "correct": true
+                },
+                {
+                  "content": "+145 personnes",
+                  "correct": false
+                },
+                {
+                  "content": "-145 personnes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Document : à Boniankro, la croissance naturelle est de +125 personnes et le solde migratoire de -25 personnes. De combien de personnes la population augmente-t-elle au total en un an ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Relever : croissance naturelle +125 ; solde migratoire -25. 2) Calculer la croissance totale : croissance naturelle plus solde migratoire. 3) Application : $125 + (-25) = 100$ personnes, soit $\\frac{100}{5\\,000} = 2$ % de la population. La réponse 125 est le piège : elle s'arrête à la croissance naturelle et oublie les départs vers la ville.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "personnes"
+            },
+            {
+              "content": "À partir du document sur Boniankro, dis si la population du village augmente ou diminue, et explique le rôle des migrations dans ce résultat.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Conclut que la population augmente de 100 personnes",
+                "Distingue croissance naturelle et solde migratoire",
+                "Explique que les départs vers la ville réduisent la croissance"
+              ],
+              "explanation": "Corrigé modèle : La population de Boniankro augmente de 100 personnes en un an, soit 2 %. Les naissances dépassent largement les décès : la croissance naturelle est de +125. Mais le solde migratoire est négatif (-25) car plus de personnes partent vers la ville qu'il n'en arrive. Les migrations réduisent donc la croissance du village : sans elles, il gagnerait 125 habitants. Barème : conclusion chiffrée (0,5) ; distinction entre croissance naturelle et solde migratoire (1) ; rôle des départs (0,5).",
+              "answers": [],
+              "starter": "La population de Boniankro…"
+            }
+          ]
+        },
+        {
+          "title": "Interrogation — Comparer la qualité de la vie de deux villages",
+          "exercise_type": "fixation",
+          "figure": "composantes-idh",
+          "statement": "Document : fiche d'enquête sur deux villages imaginés, A et B (chiffres inventés pour l'exercice). Village A : 400 enfants d'âge scolaire primaire, dont 320 scolarisés ; centre de santé à 3 km. Village B : 500 enfants d'âge scolaire primaire, dont 350 scolarisés ; centre de santé à 15 km.",
+          "questions": [
+            {
+              "content": "Document : dans le village A, 400 enfants ont l'âge d'aller à l'école primaire et 320 sont scolarisés. Quel est le taux de scolarisation, en pourcentage ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Identifier la dimension : l'éducation. 2) Relever les données : 400 enfants d'âge scolaire ; 320 scolarisés ; indicateur : taux de scolarisation. 3) Calculer : $\\frac{320}{400} \\times 100 = 80$. Le taux de scolarisation de A est de 80 %. Le résultat 125 vient de la division à l'envers ($400 \\div 320 \\times 100$).",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Document : dans le village B, 500 enfants ont l'âge d'aller à l'école primaire et 350 sont scolarisés. Quel est le taux de scolarisation, en pourcentage ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Identifier la dimension : l'éducation. 2) Relever : 500 enfants d'âge scolaire ; 350 scolarisés. 3) Calculer : $\\frac{350}{500} \\times 100 = 70$. Le taux de scolarisation de B est de 70 %.",
+              "answers": [
+                {
+                  "content": "70",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Document : le village A scolarise 320 enfants sur 400 (80 %), le village B en scolarise 350 sur 500 (70 %). Dans quel village la scolarisation est-elle la meilleure ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 4) Interpréter et comparer. Pour comparer deux villages de tailles différentes, on utilise le taux, pas le nombre d'enfants. A a 80 %, B a 70 % : A scolarise une plus grande part de ses enfants. Le piège est de comparer 350 et 320, car B a simplement plus d'enfants en âge d'aller à l'école.",
+              "answers": [
+                {
+                  "content": "Le village B, car il scolarise plus d'enfants (350 contre 320)",
+                  "correct": false
+                },
+                {
+                  "content": "Le village A, car son taux de scolarisation est plus élevé",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux villages, car les taux sont proches",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas comparer deux villages",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles dimensions combine l'indice de développement humain ? Trois réponses sont exactes.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1) Identifier la dimension. L'IDH, calculé par le PNUD, combine trois dimensions : la santé (espérance de vie), l'éducation (durée de scolarisation) et le niveau de vie (revenu par habitant). La sécurité et l'environnement font partie de la qualité de la vie, mais l'IDH ne les mesure pas : c'est ce que l'on précise à l'étape d'interprétation.",
+              "answers": [
+                {
+                  "content": "La santé, mesurée par l'espérance de vie",
+                  "correct": true
+                },
+                {
+                  "content": "La sécurité du quartier",
+                  "correct": false
+                },
+                {
+                  "content": "L'éducation, mesurée par la durée de scolarisation",
+                  "correct": true
+                },
+                {
+                  "content": "Le niveau de vie, mesuré par le revenu par habitant",
+                  "correct": true
+                },
+                {
+                  "content": "La qualité de l'environnement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un village peut avoir un IDH de 1,4.",
+              "question_type": "true_false",
+              "explanation": "Faux. Méthode : 2) Relever l'indicateur. L'IDH est un indice compris entre 0 et 1. Une valeur de 1,4 dépasse le maximum et ne peut donc pas exister. Plus l'IDH est proche de 1, plus le niveau est élevé.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Compare la scolarisation des villages A et B à partir de la fiche d'enquête, puis dis ce que le taux de scolarisation ne permet pas de savoir sur leur qualité de la vie.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Calcule ou cite les taux de A (80 %) et de B (70 %)",
+                "Conclut que la scolarisation est meilleure dans le village A",
+                "Précise qu'un taux de scolarisation ne mesure que l'éducation",
+                "Cite une autre dimension, par exemple la santé avec la distance au centre de santé"
+              ],
+              "explanation": "Corrigé modèle : 1) Identifier : l'éducation. 2) Relever : A scolarise 320 enfants sur 400, B en scolarise 350 sur 500. 3) Calculer : A 80 %, B 70 %. 4) Interpréter : la scolarisation est meilleure dans le village A, même si B scolarise plus d'enfants en nombre. Mais le taux ne mesure que l'éducation : il ne dit rien de la santé. Par exemple, le centre de santé est à 3 km de A et à 15 km de B. Barème : taux (1) ; conclusion (0,5) ; limite du taux (1) ; autre dimension citée (0,5).",
+              "answers": [],
+              "starter": "Le taux de scolarisation de A est…"
+            }
+          ]
+        },
+        {
+          "title": "Devoir — L'école d'un village face à la croissance",
+          "exercise_type": "evaluation",
+          "figure": "eleves-par-salle",
+          "statement": "Document : relevé de l'école du village imaginé de Dougbakro (chiffres inventés pour l'exercice). En 2000 : 160 élèves et 4 salles. En 2010 : 260 élèves et 4 salles. En 2020 : 300 élèves et 6 salles. Pendant ces vingt ans, la population du village a augmenté et de nombreuses familles ont eu des enfants.",
+          "questions": [
+            {
+              "content": "Document : à Dougbakro, en 2010, l'école compte 260 élèves et 4 salles. Combien y a-t-il d'élèves par salle ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Présenter le document : relevé de l'école de Dougbakro, trois années. 2) Comparer les données : on divise les élèves par les salles. 3) Application : $\\frac{260}{4} = 65$ élèves par salle en 2010. Pour comparer des années, on utilise ce rapport et non le nombre d'élèves seul.",
+              "answers": [
+                {
+                  "content": "65",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Document : à Dougbakro, en 2020, l'école compte 300 élèves et 6 salles. Combien y a-t-il d'élèves par salle ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 2) Comparer les données : $\\frac{300}{6} = 50$ élèves par salle en 2020. En 2000, le calcul donne $\\frac{160}{4} = 40$. Le résultat 300 ou 6 ne vient d'aucun rapport : il faut diviser les élèves par les salles.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Document : à Dougbakro, il y avait 40 élèves par salle en 2000, 65 en 2010 et 50 en 2020. À quelle date les classes étaient-elles les plus chargées ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 2) Comparer les données : 40, 65, 50. Le nombre le plus élevé est 65, en 2010. En 2010, les élèves ont beaucoup augmenté (de 160 à 260) alors que le nombre de salles est resté à 4. Ne choisis pas 2020 parce que c'est l'année la plus récente : ce qui compte est le rapport élèves par salle.",
+              "answers": [
+                {
+                  "content": "En 2000",
+                  "correct": false
+                },
+                {
+                  "content": "En 2010",
+                  "correct": true
+                },
+                {
+                  "content": "En 2020",
+                  "correct": false
+                },
+                {
+                  "content": "Les classes étaient aussi chargées chaque année",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À Dougbakro, la situation des classes s'est améliorée entre 2010 et 2020, mais elle n'est pas revenue au niveau de 2000.",
+              "question_type": "true_false",
+              "explanation": "Vrai. Méthode : 2) Comparer, 4) Conclure en nuançant. Entre 2010 et 2020, on passe de 65 à 50 élèves par salle parce que deux salles ont été construites : la situation s'améliore. Mais 50 reste supérieur à 40, le niveau de 2000. L'amélioration est donc réelle, mais incomplète.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Document : en 2010, l'école de Dougbakro compte 260 élèves. On veut au plus 40 élèves par salle. De combien de salles faut-il disposer, en arrondissant au nombre entier supérieur ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 3) Expliquer le lien entre population et services : le nombre de salles doit suivre le nombre d'élèves. Application : $\\frac{260}{40} = 6{,}5$. On ne construit pas une demi-salle, donc on arrondit à 7. Comme l'école n'en a que 4, il manquait 3 salles. La réponse 6 est le piège : avec 6 salles, il y aurait $\\frac{260}{6} \\approx 43$ élèves par salle, au-dessus de 40.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "salles"
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la démarche pour expliquer ce relevé.",
+              "question_type": "ordering",
+              "explanation": "Méthode : l'ordre est celui des quatre étapes de la fiche. 1) Présenter le document avant de l'utiliser. 2) Comparer les données pour voir ce qui change. 3) Expliquer le lien entre cause et conséquence. 4) Conclure en nuançant. On ne conclut jamais avant d'avoir comparé et expliqué.",
+              "answers": [
+                {
+                  "content": "Présenter le document : sa nature, sa date, son sujet"
+                },
+                {
+                  "content": "Comparer les données : élèves et salles à chaque date"
+                },
+                {
+                  "content": "Expliquer le lien entre l'augmentation de la population et le besoin de salles"
+                },
+                {
+                  "content": "Conclure en nuançant et proposer une mesure"
+                }
+              ]
+            },
+            {
+              "content": "En utilisant le relevé de Dougbakro, explique en une dizaine de lignes comment la croissance de la population a pesé sur l'école entre 2000 et 2010, puis ce qui a changé ensuite. Propose une mesure pour l'avenir.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Présente le document (école de Dougbakro, 2000, 2010 et 2020)",
+                "Compare les élèves par salle : 40 puis 65 puis 50",
+                "Explique le lien entre hausse du nombre d'enfants et besoin de salles",
+                "Nuance : amélioration en 2020 mais 50 reste supérieur à 40",
+                "Propose une mesure précise"
+              ],
+              "explanation": "Corrigé modèle : 1) Présenter. Le document est un relevé de l'école du village imaginé de Dougbakro pour 2000, 2010 et 2020. 2) Comparer. Les élèves passent de 160 à 260 entre 2000 et 2010, alors que les salles restent à 4 : on passe de 40 à 65 élèves par salle. 3) Expliquer. Plus d'enfants en âge d'aller à l'école créent un besoin de salles, mais les services n'ont pas suivi : les classes sont surchargées. 4) Conclure. En 2020, deux salles ont été ajoutées et le rapport tombe à 50, mais il reste supérieur à 40. Il faut continuer à construire, par exemple 8 salles pour 300 élèves à 40 par salle. Barème : présentation (0,5) ; comparaison chiffrée (1) ; explication (1) ; nuance (1) ; mesure (0,5).",
+              "answers": [],
+              "starter": "Le relevé de l'école de Dougbakro montre…"
+            }
+          ]
+        },
+        {
+          "title": "Bac — Un village face à sa croissance",
+          "exercise_type": "evaluation",
+          "figure": "lien-population-services",
+          "statement": "Texte écrit pour Lnclass (village imaginé, chiffres inventés). Le village de Tiassalékro compte 6 000 habitants. En un an, la sage-femme du centre de santé a enregistré 210 naissances et 60 décès. Dans le même temps, 90 personnes sont arrivées au village et 120 en sont parties vers la ville. L'école du village compte 8 salles pour 480 élèves. Le chef du village aimerait n'avoir pas plus de 40 élèves par salle.",
+          "questions": [
+            {
+              "content": "Texte : le village de Tiassalékro compte 6 000 habitants et 210 naissances en un an. Quel est son taux de natalité, en nombre de naissances pour 1 000 habitants ?",
+              "question_type": "numeric",
+              "explanation": "Méthode (Calculer la croissance d'une population) : 1) Relever les données : population 6 000 ; naissances 210. 2) Calculer le taux : nombre divisé par la population, multiplié par 1 000. 3) Application : $\\frac{210}{6\\,000} = 0{,}035$, puis $0{,}035 \\times 1\\,000 = 35$ pour 1 000. Erreur tentante : répondre 3,5, qui est le pourcentage.",
+              "answers": [
+                {
+                  "content": "35",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "pour mille"
+            },
+            {
+              "content": "Texte : à Tiassalékro, il y a 210 naissances et 60 décès, 90 arrivées et 120 départs en un an. De combien de personnes la population augmente-t-elle au total ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Relever : 210 naissances ; 60 décès ; 90 arrivées ; 120 départs. 2) Croissance naturelle : $210 - 60 = 150$. 3) Solde migratoire : $90 - 120 = -30$. 4) Croissance totale : $150 + (-30) = 120$ personnes. Le piège est de répondre 150 en oubliant les départs, ou 180 en ajoutant 30 au lieu de le retrancher.",
+              "answers": [
+                {
+                  "content": "120",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "personnes"
+            },
+            {
+              "content": "Texte : la population de Tiassalékro passe de 6 000 habitants à 6 120 en un an. Quel est le taux de croissance totale en pourcentage ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 4) Croissance totale. On compare la hausse à la population de départ : $\\frac{120}{6\\,000} = 0{,}02$, soit 2 %. La réponse 20 % vient d'une virgule décalée ; la réponse 0,2 % d'un calcul pour 1 000 mal converti : 120 pour 6 000 donne 20 pour 1 000, soit 2 %.",
+              "answers": [
+                {
+                  "content": "20 %",
+                  "correct": false
+                },
+                {
+                  "content": "2 %",
+                  "correct": true
+                },
+                {
+                  "content": "0,2 %",
+                  "correct": false
+                },
+                {
+                  "content": "12 %",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Texte : l'école de Tiassalékro compte 480 élèves et 8 salles. Le chef du village veut au plus 40 élèves par salle. Combien de salles faut-il construire en plus ?",
+              "question_type": "numeric",
+              "explanation": "Méthode (Relier dynamisme démographique et qualité de la vie) : 2) Comparer les données : aujourd'hui, $\\frac{480}{8} = 60$ élèves par salle, soit 20 de plus que l'objectif. 3) Expliquer le lien : les services n'ont pas suivi le nombre d'enfants. 4) Conclure : pour 40 élèves par salle, il faut $\\frac{480}{40} = 12$ salles. Comme il y en a 8, il faut en construire $12 - 8 = 4$. La réponse 12 oublie les salles existantes.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "salles"
+            },
+            {
+              "content": "À Tiassalékro, les services augmentent moins vite que la population. Quelles sont deux conséquences probables ? Deux réponses sont exactes.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 3) Expliquer le lien : si les besoins augmentent plus vite que les services, chaque habitant dispose de moins de services. Les classes sont plus chargées et l'attente au centre de santé est plus longue. Les services par habitant baissent. La mortalité ne baisse pas automatiquement : elle baisse quand la santé s'améliore.",
+              "answers": [
+                {
+                  "content": "Les classes sont plus chargées",
+                  "correct": true
+                },
+                {
+                  "content": "Les services disponibles par habitant augmentent",
+                  "correct": false
+                },
+                {
+                  "content": "L'attente au centre de santé devient plus longue",
+                  "correct": true
+                },
+                {
+                  "content": "La mortalité baisse automatiquement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en cinq ou six lignes que le lien entre dynamisme démographique et qualité de la vie va dans les deux sens. Appuie-toi sur l'exemple de Tiassalékro.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Explique le sens population vers qualité de la vie, avec un exemple du village",
+                "Explique le sens qualité de la vie vers population",
+                "Cite santé et mortalité, ou éducation et natalité",
+                "Texte clair et organisé"
+              ],
+              "explanation": "Corrigé modèle : Population vers qualité de la vie : à Tiassalékro, la population augmente de 120 personnes par an et il y a 60 élèves par salle au lieu de 40 : les besoins augmentent plus vite que les services, donc les conditions de vie baissent. Qualité de la vie vers population : si le centre de santé progresse, moins de personnes meurent et la mortalité baisse ; si l'éducation progresse, les familles ont souvent moins d'enfants. Barème : sens population vers qualité de la vie (1) ; sens qualité de la vie vers population (1) ; santé/mortalité ou éducation/natalité (0,5) ; clarté (0,5).",
+              "answers": [],
+              "starter": "Le lien va dans les deux sens, car…"
+            },
+            {
+              "content": "Rédige un paragraphe de synthèse d'une dizaine de lignes : présente le bilan démographique de Tiassalékro, montre ses effets sur la qualité de la vie et propose deux mesures.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Donne le bilan chiffré : natalité 35 pour 1 000, croissance naturelle +150, solde migratoire -30, croissance totale +120",
+                "Distingue croissance naturelle et solde migratoire",
+                "Relie la croissance à la surcharge de l'école (60 élèves par salle au lieu de 40)",
+                "Cite une autre dimension de la qualité de la vie, comme la santé ou l'eau",
+                "Propose deux mesures précises, dont la construction de 4 salles",
+                "Nuance : une population nombreuse est aussi une force de travail",
+                "Texte organisé en parties"
+              ],
+              "explanation": "Corrigé modèle : 1) Bilan. Tiassalékro compte 6 000 habitants. Le taux de natalité est de 35 pour 1 000. La croissance naturelle est de $210 - 60 = +150$, le solde migratoire de $90 - 120 = -30$, donc la croissance totale est de +120 personnes, soit 2 %. 2) Effets. L'école a 60 élèves par salle, au lieu des 40 souhaités : les services n'ont pas suivi la population, donc la qualité de la vie scolaire baisse. L'attente au centre de santé peut aussi s'allonger. 3) Nuance et mesures. Une population nombreuse est aussi une force de travail. Il faut construire 4 salles de classe et renforcer le centre de santé. Barème : bilan (1,5) ; distinction (0,5) ; surcharge de l'école (1) ; autre dimension (0,5) ; deux mesures (1,5) ; nuance (0,5) ; organisation (0,5).",
+              "answers": [],
+              "starter": "Le bilan démographique de Tiassalékro est…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Taux de natalité et de mortalité, croissance naturelle, solde migratoire et croissance totale ; recensements de la Côte d'Ivoire ; qualité de la vie, taux de scolarisation et IDH ; lien entre population et services (élèves par salle).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple. Un village imaginé compte 5 000 habitants. En un an, il y a 200 naissances, 50 décès, 60 arrivées et 40 départs. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "bilan-population",
+              "hint": "Natalité = naissances ÷ population × 1 000 ; solde migratoire = arrivées − départs.",
+              "questions": [
+                {
+                  "content": "Un village de 5 000 habitants a 200 naissances en un an. Quel est son taux de natalité, en naissances pour 1 000 habitants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : population 5 000 ; naissances 200. Étape 2 — Calculer le taux : 200 ÷ 5 000 × 1 000 = 40 pour 1 000. Répondre 200 oublie de ramener à 1 000 habitants.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village de 5 000 habitants a 200 naissances et 50 décès en un an. Quelle est sa croissance naturelle, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer la croissance naturelle : 200 − 50 = 150 personnes (soit 40 − 10 = 30 pour 1 000). Répondre 250 additionne naissances et décès.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Un village a 60 arrivées et 40 départs en un an. Quel est son solde migratoire, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Calculer le solde migratoire : arrivées − départs = 60 − 40 = +20 personnes. Répondre 100 additionne au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Un village a une croissance naturelle de +150 personnes et un solde migratoire de +20 personnes. Quelle est sa croissance totale, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Croissance totale = croissance naturelle + solde migratoire = 150 + 20 = 170 personnes. Répondre 150 s'arrête à la croissance naturelle, l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "170",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Un solde migratoire peut être négatif quand les départs sont plus nombreux que les arrivées.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Le solde migratoire est la différence entre les arrivées et les départs : il peut être négatif. Par exemple 10 arrivées et 50 départs donnent −40.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Repères de la leçon. La Côte d'Ivoire a connu cinq recensements généraux de la population et de l'habitat : en 1975, 1988, 1998, 2014 et 2021. Le recensement de 2021 a compté 29 389 150 habitants.",
+              "exercise_type": "evaluation",
+              "figure": "recensements-ci",
+              "hint": "Classe les années du plus ancien au plus récent ; le plus récent est celui de 2021.",
+              "questions": [
+                {
+                  "content": "Le recensement général le plus récent de la frise date de ___ (année).",
+                  "question_type": "fill_blank",
+                  "explanation": "Les cinq recensements sont en 1975, 1988, 1998, 2014 et 2021 : le plus récent est celui de 2021. Écrire 2014 s'arrête à l'avant-dernier.",
+                  "answers": [
+                    {
+                      "content": "2021",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'habitants le recensement général de 2021 a-t-il comptés en Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Repère ivoirien de la fiche : le recensement de 2021 a compté 29 389 150 habitants. Les autres nombres décalent la virgule ou omettent des chiffres.",
+                  "answers": [
+                    {
+                      "content": "29 389 150",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 938 915",
+                      "correct": false
+                    },
+                    {
+                      "content": "293 891 500",
+                      "correct": false
+                    },
+                    {
+                      "content": "29 389",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets les cinq recensements dans l'ordre, du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Les cinq recensements sont 1975, 1988, 1998, 2014 et 2021. Placer 2014 après 2021 inverserait les deux plus récents.",
+                  "answers": [
+                    {
+                      "content": "Recensement de 1975"
+                    },
+                    {
+                      "content": "Recensement de 1988"
+                    },
+                    {
+                      "content": "Recensement de 1998"
+                    },
+                    {
+                      "content": "Recensement de 2014"
+                    },
+                    {
+                      "content": "Recensement de 2021"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Calculer les taux, Étape 3 — Croissance naturelle, Étape 4 — Solde migratoire. Lier solde migratoire à « natalité moins mortalité » confond les deux mouvements.",
+                  "answers": [
+                    {
+                      "content": "Taux de mortalité",
+                      "match": "Décès d'une année pour 1 000 habitants"
+                    },
+                    {
+                      "content": "Croissance naturelle",
+                      "match": "Natalité moins mortalité"
+                    },
+                    {
+                      "content": "Solde migratoire",
+                      "match": "Arrivées moins départs"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taux de 30 pour 1 000 s'écrit 30 %.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — 30 pour 1 000 s'écrit 3 %, car on divise par 10. 30 % serait 300 pour 1 000.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple. Dans le village imaginé de Zouankro, 450 enfants ont l'âge d'aller à l'école primaire et 360 y sont scolarisés. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "composantes-idh",
+              "hint": "Taux de scolarisation = enfants scolarisés ÷ enfants d'âge scolaire × 100.",
+              "questions": [
+                {
+                  "content": "À Zouankro, 450 enfants ont l'âge d'aller à l'école primaire et 360 y sont scolarisés. Quel est le taux de scolarisation, en pourcentage ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Identifier : l'éducation. Étape 2 — Relever : 450 et 360. Étape 3 — Calculer : 360 ÷ 450 × 100 = 80 %. Répondre 360 est un nombre d'enfants, pas un taux.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Quelles sont les trois dimensions de l'IDH ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "L'IDH combine la santé (espérance de vie), l'éducation (durée de scolarisation) et le niveau de vie (revenu par habitant). Il ne mesure ni la sécurité ni l'environnement.",
+                  "answers": [
+                    {
+                      "content": "La santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le niveau de vie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sécurité",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'environnement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'habitants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur possible de l'IDH ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Interpréter : l'IDH est compris entre 0 et 1 ; plus il est proche de 1, plus le niveau est élevé.",
+                  "answers": [
+                    {
+                      "content": "Un nombre compris entre 0 et 1",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nombre compris entre 0 et 100",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nombre supérieur à 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nombre négatif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'IDH est calculé par le ___ (sigle d'un organisme des Nations unies).",
+                  "question_type": "fill_blank",
+                  "explanation": "L'indice de développement humain est calculé par le PNUD (Programme des Nations unies pour le développement).",
+                  "answers": [
+                    {
+                      "content": "PNUD",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le revenu seul suffit à mesurer la qualité de la vie d'une famille.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Interpréter en précisant ce qu'un indicateur ne mesure pas : deux familles au même revenu peuvent avoir des conditions très différentes (accès à l'eau, au centre de santé). C'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : diagramme imaginé pour Lnclass sur l'école d'un village, Dougbakro. Il donne le nombre d'élèves par salle de classe : 40 en 2000, 65 en 2010 et 50 en 2020.",
+              "exercise_type": "evaluation",
+              "figure": "eleves-par-salle",
+              "hint": "La barre la plus haute indique l'année où les classes sont les plus chargées.",
+              "questions": [
+                {
+                  "content": "Dans l'école de Dougbakro, 40 élèves par salle en 2000, 65 en 2010 et 50 en 2020. Quelle année a les classes les plus chargées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer les données : 65 > 50 > 40. Les classes sont les plus chargées en 2010. Choisir 2020, c'est prendre la dernière année sans comparer.",
+                  "answers": [
+                    {
+                      "content": "2010",
+                      "correct": true
+                    },
+                    {
+                      "content": "2000",
+                      "correct": false
+                    },
+                    {
+                      "content": "2020",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont identiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À Dougbakro, il y a 40 élèves par salle en 2000 et 65 en 2010. De combien le nombre d'élèves par salle a-t-il augmenté ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 65 − 40 = 25 élèves par salle de plus.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "À Dougbakro, le nombre d'élèves par salle a baissé entre 2010 (65) et 2020 (50).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : 65 > 50, donc le nombre d'élèves par salle a baissé. Étape 3 — Expliquer : les services (salles) ont progressé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le nombre d'élèves par salle augmente, que devient l'accueil des élèves ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : si les services augmentent moins vite que la population, la qualité de la vie par habitant peut baisser (classes surchargées).",
+                  "answers": [
+                    {
+                      "content": "Les classes sont plus chargées : les conditions d'accueil se dégradent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les classes sont moins chargées",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accueil ne change pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de salles diminue forcément",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour comparer la population aux services, on calcule le nombre d'élèves par ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Comparer les données : élèves ÷ salles donne le nombre d'élèves par salle.",
+                  "answers": [
+                    {
+                      "content": "salle",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La démographie et la qualité de la vie dans la vie courante en Côte d'Ivoire",
+          "notions": "Situations d'exemple en Côte d'Ivoire (village imaginé près de Bondoukou, école d'un village près de Korhogo, club de géographie d'un lycée d'Abidjan, marché de Bouaké) : bilan démographique, indicateurs de qualité de la vie, lien entre population et services.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple. Près de Bondoukou, un village imaginé compte 2 500 habitants. En un an, on relève 100 naissances, 25 décès, 30 arrivées et 45 départs. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "bilan-population",
+              "hint": "Calcule d'abord la croissance naturelle, puis le solde migratoire, puis additionne.",
+              "questions": [
+                {
+                  "content": "Un village de 2 500 habitants a 100 naissances en un an. Quel est son taux de natalité, en naissances pour 1 000 habitants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer le taux : 100 ÷ 2 500 × 1 000 = 40 pour 1 000.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village de 2 500 habitants a 100 naissances et 25 décès en un an. Quelle est sa croissance naturelle, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Croissance naturelle : 100 − 25 = 75 personnes.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Un village a 30 arrivées et 45 départs en un an. Quel est son solde migratoire, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Solde migratoire = arrivées − départs = 30 − 45 = −15 personnes. Répondre 15 oublie le signe moins : les départs l'emportent.",
+                  "answers": [
+                    {
+                      "content": "-15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Un village a une croissance naturelle de +75 personnes et un solde migratoire de −15 personnes. Quelle est sa croissance totale, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Croissance totale = 75 + (−15) = 60 personnes. Répondre 75 oublie le solde migratoire.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Un village a une croissance naturelle de +75 personnes et un solde migratoire de −15 personnes. Que devient sa population ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — 75 − 15 = +60 : la population augmente de 60 personnes. Ajouter 15 au lieu de le retrancher donnerait 90 : c'est ignorer que le solde est négatif.",
+                  "answers": [
+                    {
+                      "content": "Elle augmente de 60 personnes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle diminue de 15 personnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle augmente de 90 personnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne change pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple. Près de Korhogo, Mme Traoré enseigne dans un village imaginé. Elle compte 250 enfants d'âge primaire, dont 200 sont scolarisés. À l'échelle du pays, la moyenne d'exemple est de 75 %. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "composantes-idh",
+              "hint": "Calcule le taux de scolarisation du village, puis compare-le à la moyenne.",
+              "questions": [
+                {
+                  "content": "Dans un village, 250 enfants ont l'âge d'aller à l'école primaire et 200 y sont scolarisés. Quel est le taux de scolarisation, en pourcentage ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 3 — Calculer : 200 ÷ 250 × 100 = 80 %.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Le taux de scolarisation d'un village est de 80 % et la moyenne d'exemple du pays est de 75 %. Que peut-on dire de l'éducation dans ce village ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Interpréter : 80 % est supérieur à 75 %. Dire qu'elle est défavorable inverse la comparaison.",
+                  "answers": [
+                    {
+                      "content": "Elle est plutôt favorable, car 80 % est supérieur à 75 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est défavorable, car 80 % est trop élevé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est identique à la moyenne",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien comparer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce taux de scolarisation de 80 % renseigne aussi sur l'eau potable et la santé du village.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Préciser ce qu'il ne mesure pas : un taux de scolarisation ne dit rien de l'eau, de la santé ni du revenu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le taux de scolarisation mesure la dimension ___ de l'IDH.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la dimension : le taux de scolarisation relève de l'éducation. La sécurité n'est pas une dimension de l'IDH.",
+                  "answers": [
+                    {
+                      "content": "éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "santé",
+                      "correct": false
+                    },
+                    {
+                      "content": "niveau de vie",
+                      "correct": false
+                    },
+                    {
+                      "content": "sécurité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque indicateur à sa dimension de l'IDH.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la dimension : l'IDH combine la santé, l'éducation et le niveau de vie. Chaque indicateur n'en mesure qu'une.",
+                  "answers": [
+                    {
+                      "content": "Espérance de vie à la naissance",
+                      "match": "Santé"
+                    },
+                    {
+                      "content": "Durée de scolarisation",
+                      "match": "Éducation"
+                    },
+                    {
+                      "content": "Revenu par habitant",
+                      "match": "Niveau de vie"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple. Dans un lycée d'Abidjan, le club de géographie compare deux écoles de villages imaginés. École A : 240 élèves et 6 salles. École B : 300 élèves et 10 salles. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "lien-population-services",
+              "hint": "Divise les élèves par les salles pour comparer les deux écoles.",
+              "questions": [
+                {
+                  "content": "L'école A compte 240 élèves et 6 salles. Combien d'élèves y a-t-il par salle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 2 — Comparer : 240 ÷ 6 = 40 élèves par salle.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "L'école B compte 300 élèves et 10 salles. Combien d'élèves y a-t-il par salle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 300 ÷ 10 = 30 élèves par salle.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "L'école A a 40 élèves par salle et l'école B en a 30. Quelle conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : il faut comparer la population aux services. B a plus d'élèves mais plus de salles. C'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "L'école B accueille mieux ses élèves, même si elle en a plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'école A accueille mieux, car elle a moins d'élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux écoles sont identiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer deux écoles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du club de géographie.",
+                  "question_type": "ordering",
+                  "explanation": "L'ordre est celui de la méthode : Étape 1 — Présenter, Étape 2 — Comparer, Étape 3 — Expliquer, Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Présenter les deux écoles"
+                    },
+                    {
+                      "content": "Comparer les élèves par salle"
+                    },
+                    {
+                      "content": "Expliquer le lien entre élèves et salles"
+                    },
+                    {
+                      "content": "Conclure et proposer une mesure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une population nombreuse ne suffit pas à expliquer une mauvaise qualité de la vie.",
+                  "question_type": "true_false",
+                  "explanation": "Ce qui compte, c'est le rapport entre la population et les services : une école de 300 élèves avec 10 salles accueille mieux qu'une de 240 élèves avec 6.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple. À Bouaké, un élève lit le relevé imaginé d'un quartier : en 2005, 1 000 familles se partagent 4 points d'eau ; en 2015, 1 500 familles se partagent toujours 4 points d'eau. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare le nombre de familles par point d'eau aux deux dates.",
+              "questions": [
+                {
+                  "content": "En 2005, 1 000 familles se partagent 4 points d'eau. Combien de familles y a-t-il par point d'eau ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 1 000 ÷ 4 = 250 familles par point d'eau.",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "familles"
+                },
+                {
+                  "content": "En 2015, 1 500 familles se partagent 4 points d'eau. Combien de familles y a-t-il par point d'eau ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 1 500 ÷ 4 = 375 familles par point d'eau.",
+                  "answers": [
+                    {
+                      "content": "375",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "familles"
+                },
+                {
+                  "content": "Entre 2005 et 2015, le nombre de familles passe de 1 000 à 1 500 et les points d'eau restent à 4. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : la population augmente mais les services restent constants. Étape 4 — Conclure : la qualité de la vie baisse.",
+                  "answers": [
+                    {
+                      "content": "L'accès à l'eau s'est dégradé : les services n'ont pas suivi la population",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'accès à l'eau s'est amélioré",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accès à l'eau n'a pas changé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a moins de familles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour revenir à 250 familles par point d'eau avec 1 500 familles, il faut 6 points d'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Proposer une mesure : 1 500 ÷ 250 = 6 points d'eau, soit 2 de plus que les 4 existants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles mesures peuvent améliorer l'accès à l'eau de ce quartier ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure en proposant une mesure : il faut augmenter ou mieux répartir les services. Réduire les points d'eau aggraverait la situation.",
+                  "answers": [
+                    {
+                      "content": "Construire de nouveaux points d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mieux répartir les points d'eau selon les familles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Réduire le nombre de points d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Interdire toute arrivée de familles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien changer",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Comparer deux villages par leur croissance totale, justifier l'effet d'un solde migratoire négatif, relier les deux sens du lien entre population et qualité de la vie, nuancer ce que mesure un indicateur.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple. Deux villages imaginés de 1 000 habitants chacun. Village A : 40 naissances, 10 décès, 10 arrivées, 50 départs. Village B : 30 naissances, 10 décès, 40 arrivées, 10 départs. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "bilan-population",
+              "hint": "Pour chaque village : croissance naturelle, puis solde migratoire, puis croissance totale.",
+              "questions": [
+                {
+                  "content": "Le village A (1 000 habitants) a 40 naissances, 10 décès, 10 arrivées et 50 départs. Quelle est sa croissance totale, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Croissance naturelle : 40 − 10 = +30. Étape 4 — Solde migratoire : 10 − 50 = −40 ; croissance totale = 30 − 40 = −10 personnes. Répondre +30 s'arrête à la croissance naturelle.",
+                  "answers": [
+                    {
+                      "content": "-10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Le village B (1 000 habitants) a 30 naissances, 10 décès, 40 arrivées et 10 départs. Quelle est sa croissance totale, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Croissance naturelle : 30 − 10 = +20. Étape 4 — Solde migratoire : 40 − 10 = +30 ; croissance totale = 20 + 30 = 50 personnes.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Le village A a une croissance totale de −10 personnes et le village B de +50. Quelle explication est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — A : +30 de croissance naturelle, −40 de solde migratoire. Sa croissance naturelle est positive, c'est son solde migratoire qui entraîne la baisse.",
+                  "answers": [
+                    {
+                      "content": "Le village A perd plus de personnes par départs qu'il n'en gagne par la croissance naturelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le village A a une croissance naturelle négative",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village B a moins d'habitants au départ",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux villages ont la même croissance totale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le village A a une croissance naturelle positive mais sa population diminue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Croissance naturelle : 40 − 10 = +30. Étape 4 — Solde migratoire −40. Population : −10. C'est exactement le contre-exemple du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont exactes pour le village B (30 naissances, 10 décès, 40 arrivées, 10 départs) ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Solde migratoire : 40 − 10 = +30. Croissance naturelle : 30 − 10 = +20. Croissance totale : +50.",
+                  "answers": [
+                    {
+                      "content": "Son solde migratoire est positif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa population augmente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son solde migratoire est négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa population diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa croissance naturelle est négative",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document imaginé pour l'exemple : relevé de l'école d'un village. En 2005, 6 salles et 240 élèves. En 2010, 6 salles et 300 élèves. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les élèves par salle aux deux dates, puis explique ce que montre l'écart.",
+              "questions": [
+                {
+                  "content": "En 2005, une école compte 6 salles et 240 élèves. Combien d'élèves y a-t-il par salle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 240 ÷ 6 = 40 élèves par salle.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "En 2010, la même école compte toujours 6 salles et 300 élèves. Combien d'élèves y a-t-il par salle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 300 ÷ 6 = 50 élèves par salle.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Les élèves passent de 240 à 300 alors que les salles restent à 6. Quelle explication est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer le lien : plus d'élèves créent un besoin de salles. Étape 4 — Conclure : la qualité de la vie scolaire a baissé.",
+                  "answers": [
+                    {
+                      "content": "Les services n'ont pas suivi la population : les classes sont plus chargées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les élèves sont moins nombreux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les salles sont plus nombreuses",
+                      "correct": false
+                    },
+                    {
+                      "content": "La qualité de la vie scolaire s'est améliorée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour revenir à 40 élèves par salle avec 300 élèves, combien de salles faut-il au minimum, en arrondissant au nombre entier supérieur ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Proposer une mesure : 300 ÷ 40 = 7,5, donc 8 salles ; il en faut 2 de plus que les 6 existantes.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "salles"
+                },
+                {
+                  "content": "Le nombre d'élèves a augmenté de 25 % entre 2005 et 2010 (de 240 à 300).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : 300 − 240 = 60 ; 60 ÷ 240 = 0,25, soit 25 %.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situations imaginées pour Lnclass. Situation 1 : les classes d'un village sont surchargées. Situation 2 : grâce à un centre de santé, moins d'enfants meurent en bas âge. Situation 3 : dans un quartier, plus de filles vont à l'école et les familles ont en moyenne moins d'enfants. Situation 4 : un village attend de nouveaux puits pour sa population qui grandit.",
+              "exercise_type": "evaluation",
+              "figure": "lien-population-services",
+              "hint": "Demande-toi : est-ce la population qui agit sur les services, ou la qualité de la vie qui agit sur la population ?",
+              "questions": [
+                {
+                  "content": "Les classes d'un village sont surchargées parce que le nombre d'enfants augmente plus vite que le nombre de salles. Dans quel sens va le lien ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer le lien : une population nombreuse et jeune a des besoins ; si les services ne suivent pas, la qualité de la vie baisse.",
+                  "answers": [
+                    {
+                      "content": "De la population vers la qualité de la vie",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la qualité de la vie vers la population",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucun lien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du revenu vers la mortalité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Grâce à un centre de santé, moins d'enfants meurent en bas âge. Quel effet cela a-t-il sur la population ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer le lien dans le sens qualité de la vie vers population : une meilleure santé fait baisser la mortalité.",
+                  "answers": [
+                    {
+                      "content": "La mortalité baisse",
+                      "correct": true
+                    },
+                    {
+                      "content": "La mortalité monte",
+                      "correct": false
+                    },
+                    {
+                      "content": "La natalité monte forcément",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un quartier, plus de filles vont à l'école et les familles ont en moyenne moins d'enfants. Quelle idée de la fiche illustre cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer le lien : l'éducation est souvent associée à une baisse de la natalité. Les propositions fausses inventent un lien que la fiche ne donne pas.",
+                  "answers": [
+                    {
+                      "content": "Une meilleure éducation est souvent associée à une baisse de la natalité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une meilleure éducation fait monter la mortalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une meilleure santé fait monter la natalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "La population n'a pas de lien avec l'éducation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une population nombreuse est toujours un obstacle à la qualité de la vie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Nuancer : une population nombreuse est aussi une force de travail ; l'effet dépend des services et des emplois créés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux situations où la qualité de la vie agit sur la population ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : dans le sens qualité de la vie vers population, la santé fait baisser la mortalité et l'éducation est souvent associée à une baisse de la natalité. Les trois autres propositions vont de la population vers les services.",
+                  "answers": [
+                    {
+                      "content": "La mortalité baisse grâce à un centre de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "La natalité baisse quand plus de filles vont à l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des classes surchargées par des élèves plus nombreux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des puits insuffisants pour une population qui grandit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une population jeune qui a besoin d'écoles",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document imaginé pour Lnclass. Deux familles imaginées ont le même revenu. L'une habite à dix minutes d'un centre de santé et a l'eau au robinet. L'autre marche deux heures pour atteindre le dispensaire et porte l'eau d'un puits.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le revenu est une seule dimension : cherche ce qu'il ne dit pas.",
+              "questions": [
+                {
+                  "content": "Les deux familles ont le même revenu. Que peut-on conclure de leur qualité de vie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Interpréter : deux familles au même revenu n'ont pas la même qualité de vie si leur accès à la santé et à l'eau diffère. C'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Elle peut être très différente, car le revenu seul ne la mesure pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est identique, puisque le revenu est le même",
+                      "correct": false
+                    },
+                    {
+                      "content": "La famille du puits vit mieux",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas parler de qualité de vie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles dimensions sont différentes entre les deux familles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier la dimension : eau et santé sont différentes ; le revenu est le même.",
+                  "answers": [
+                    {
+                      "content": "L'accès à l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'accès aux soins",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le revenu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de recensements",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croissance naturelle du pays",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un IDH élevé signifie que la sécurité et l'environnement sont bien mesurés.",
+                  "question_type": "true_false",
+                  "explanation": "L'IDH combine santé, éducation et niveau de vie ; il ne mesure ni la sécurité ni l'environnement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village a un taux de scolarisation de 90 %. Que ne dit pas cet indicateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Préciser ce qu'il ne mesure pas : un taux de scolarisation ne dit rien de l'eau, de la santé ni du revenu.",
+                  "answers": [
+                    {
+                      "content": "L'état de l'eau, de la santé et du revenu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre d'enfants scolarisés",
+                      "correct": false
+                    },
+                    {
+                      "content": "La part des enfants à l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le revenu par habitant mesure la dimension « niveau de ___ » de l'IDH (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Le niveau de vie est mesuré par le revenu par habitant.",
+                  "answers": [
+                    {
+                      "content": "vie",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : dynamisme démographique et qualité de la vie",
+          "notions": "Bilan de toutes les notions : calcul des taux, de la croissance naturelle, du solde migratoire et de la croissance totale ; recensements ; qualité de la vie, taux de scolarisation et IDH ; lien à double sens entre population et services ; mesures possibles.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple. Un village imaginé compte 4 000 habitants. En un an : 140 naissances, 40 décès, 50 arrivées et 30 départs. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "bilan-population",
+              "hint": "Natalité et mortalité, puis croissance naturelle, solde migratoire, croissance totale.",
+              "questions": [
+                {
+                  "content": "Un village de 4 000 habitants a 140 naissances en un an. Quel est son taux de natalité, en naissances pour 1 000 habitants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer : 140 ÷ 4 000 × 1 000 = 35 pour 1 000.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village de 4 000 habitants a 40 décès en un an. Quel est son taux de mortalité, en décès pour 1 000 habitants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer : 40 ÷ 4 000 × 1 000 = 10 pour 1 000.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village a un taux de natalité de 35 pour 1 000 et un taux de mortalité de 10 pour 1 000. Quelle est sa croissance naturelle, en pour 1 000 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Croissance naturelle : 35 − 10 = 25 pour 1 000, soit 2,5 %.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village a une croissance naturelle de +100 personnes et un solde migratoire de +20 personnes. Quelle est sa croissance totale, en personnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Croissance totale : 100 + 20 = 120 personnes, soit 3 % de 4 000.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "personnes"
+                },
+                {
+                  "content": "La croissance totale de ce village est égale à sa seule croissance naturelle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — La croissance totale ajoute le solde migratoire (+20) à la croissance naturelle (+100) : 120. S'arrêter à 100, c'est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Repères de la leçon. Cinq recensements généraux de la population et de l'habitat ont eu lieu en Côte d'Ivoire : 1975, 1988, 1998, 2014 et 2021. Le recensement de 2021 a compté 29 389 150 habitants.",
+              "exercise_type": "evaluation",
+              "figure": "recensements-ci",
+              "hint": "Classe les années, puis lis le nombre d'habitants de 2021.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les recensements, du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Les années dans l'ordre : 1975, 1998, 2014, 2021.",
+                  "answers": [
+                    {
+                      "content": "Recensement de 1975"
+                    },
+                    {
+                      "content": "Recensement de 1998"
+                    },
+                    {
+                      "content": "Recensement de 2014"
+                    },
+                    {
+                      "content": "Recensement de 2021"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Côte d'Ivoire a connu des recensements généraux en 1975, 1988, 1998, 2014 et 2021. Combien de recensements cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever les données : on compte 1975, 1988, 1998, 2014, 2021, soit 5 recensements. Répondre 4 oublie l'une des années.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase décrit correctement le recensement de 2021 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Repère ivoirien de la fiche : 29 389 150 habitants en 2021.",
+                  "answers": [
+                    {
+                      "content": "Il a compté 29 389 150 habitants en Côte d'Ivoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a compté 2 938 915 habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est le premier recensement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il date de 2014",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taux de 30 pour 1 000 est égal à 3 %.",
+                  "question_type": "true_false",
+                  "explanation": "30 ÷ 10 = 3 : 30 pour 1 000 = 3 %.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Taux ; Étape 4 — Solde migratoire et croissance totale.",
+                  "answers": [
+                    {
+                      "content": "Taux de natalité",
+                      "match": "Naissances d'une année pour 1 000 habitants"
+                    },
+                    {
+                      "content": "Solde migratoire",
+                      "match": "Arrivées moins départs"
+                    },
+                    {
+                      "content": "Croissance totale",
+                      "match": "Croissance naturelle plus solde migratoire"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple. Dans le village imaginé de Zouankro, 300 enfants ont l'âge d'aller à l'école primaire et 240 y sont scolarisés. À l'échelle d'un pays, la moyenne d'exemple est de 75 %. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "composantes-idh",
+              "hint": "Identifie la dimension, calcule le taux, compare, puis dis ce qu'il ne mesure pas.",
+              "questions": [
+                {
+                  "content": "À Zouankro, 300 enfants ont l'âge d'aller à l'école primaire et 240 y sont scolarisés. Quel est le taux de scolarisation, en pourcentage ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer : 240 ÷ 300 × 100 = 80 %.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Le taux de scolarisation de Zouankro est de 80 % et la moyenne d'exemple du pays de 75 %. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Interpréter : 80 > 75. Le taux ne dit rien du revenu ni de l'eau.",
+                  "answers": [
+                    {
+                      "content": "L'éducation y est plutôt favorable",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'éducation y est défavorable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le revenu y est élevé",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau y est de bonne qualité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois dimensions de l'IDH ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "L'IDH combine santé, éducation et niveau de vie.",
+                  "answers": [
+                    {
+                      "content": "La santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le niveau de vie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sécurité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le climat",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'IDH est calculé par le ___ (sigle).",
+                  "question_type": "fill_blank",
+                  "explanation": "L'IDH est calculé par le Programme des Nations unies pour le développement (PNUD).",
+                  "answers": [
+                    {
+                      "content": "PNUD",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'IDH peut prendre la valeur 0,6.",
+                  "question_type": "true_false",
+                  "explanation": "L'IDH est compris entre 0 et 1 : 0,6 est possible.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Sujet de type bac. Dans un village imaginé, la population augmente de 3 % par an et l'école n'a pas gagné de salle depuis dix ans. L'école compte 6 salles et 300 élèves. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": "lien-population-services",
+              "hint": "Compare les élèves par salle, explique le lien, propose une mesure.",
+              "questions": [
+                {
+                  "content": "Une école compte 6 salles et 300 élèves. Combien d'élèves y a-t-il par salle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 300 ÷ 6 = 50 élèves par salle.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "La population d'un village augmente mais le nombre de salles n'a pas changé. Que devient la qualité de la vie scolaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : si les services augmentent moins vite que la population, la qualité de la vie par habitant baisse.",
+                  "answers": [
+                    {
+                      "content": "Elle baisse : les classes sont plus chargées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle s'améliore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne dépend pas des salles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'élèves diminue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour accueillir 300 élèves avec 30 élèves par salle au plus, combien de salles faut-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Mesure : 300 ÷ 30 = 10 salles, soit 4 de plus que les 6 existantes.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "salles"
+                },
+                {
+                  "content": "Remets dans l'ordre l'enchaînement de ce village.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 à 3 : la population augmente, les besoins suivent, les services ne suivent pas, les classes se chargent.",
+                  "answers": [
+                    {
+                      "content": "La population augmente"
+                    },
+                    {
+                      "content": "Les besoins en écoles augmentent"
+                    },
+                    {
+                      "content": "Les salles ne suivent pas"
+                    },
+                    {
+                      "content": "Les classes se chargent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles mesures sont adaptées à ce village ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure en proposant une mesure : augmenter les services. Supprimer ou fermer aggraverait le problème.",
+                  "answers": [
+                    {
+                      "content": "Construire des salles de classe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Recruter des enseignants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Supprimer des salles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien changer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une population nombreuse suffit à expliquer une mauvaise qualité de la vie, sans regarder les services.",
+                  "question_type": "true_false",
+                  "explanation": "Il faut comparer la population aux services : le nombre d'élèves par salle est le bon indicateur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -53,6 +53,79 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ## Leçons traitées
 
+### 1ère, 3 premières leçons de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
+
+Depuis le 2026-11-12, les 3 premières leçons de la progression DPFC 2026-2027 de chaque série (A1, A2, C, D) et matière (Français, Mathématiques, Physique-Chimie, SVT, Philosophie, Histoire-Géographie) de 1ère sont revenues de `a-reprendre/` au format complet : 63 fichiers, 36 fiches distinctes (une fiche commune à plusieurs séries est écrite une fois et recopiée avec le `series_name` et le `theme` de chaque série). Chaque notion a reçu un second exercice en `fixation` de 6 questions d'au moins 4 types, et chaque leçon 4 sujets de devoir de 4 exercices de 5 ou 6 questions. Le cours, les fiches, le premier exercice, le `practice` et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement.
+
+Un script hors dépôt a vérifié chaque fichier : format, `valider.rb` sur la leçon et sur chaque sujet mis à la place des problèmes, contenu d'origine identique ; sympy sur chaque calcul en Mathématiques et Physique-Chimie. Détail et points à faire valider dans [le journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `1ere-a1/francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 28 | 163 | 106 |
+| `1ere-a1/francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 4 | 28 | 154 | 104 |
+| `1ere-a1/francais/oeuvre-poetique.json` | Œuvre poétique | 4 | 28 | 160 | 104 |
+| `1ere-a1/mathematiques/denombrement.json` | Dénombrement | 4 | 28 | 154 | 104 |
+| `1ere-a1/mathematiques/equations-et-inequations.json` | Équations et inéquations | 4 | 28 | 154 | 106 |
+| `1ere-a1/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 4 | 28 | 155 | 104 |
+| `1ere-a1/philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 5 | 30 | 166 | 110 |
+| `1ere-a1/philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 5 | 30 | 164 | 111 |
+| `1ere-a1/philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 4 | 28 | 155 | 105 |
+| `1ere-a1/physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 4 | 28 | 167 | 107 |
+| `1ere-a1/physique-chimie/les-alcanes.json` | Les alcanes | 5 | 30 | 166 | 110 |
+| `1ere-a1/physique-chimie/les-alcenes-cas-de-l-ethylene.json` | Les alcènes : cas de l'éthylène | 5 | 30 | 171 | 111 |
+| `1ere-a1/svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 5 | 30 | 155 | 110 |
+| `1ere-a1/svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 26 | 143 | 98 |
+| `1ere-a1/svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 4 | 28 | 152 | 104 |
+| `1ere-a2/francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 28 | 163 | 106 |
+| `1ere-a2/francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 4 | 28 | 154 | 104 |
+| `1ere-a2/francais/oeuvre-poetique.json` | Œuvre poétique | 4 | 28 | 160 | 104 |
+| `1ere-a2/mathematiques/denombrement.json` | Dénombrement | 4 | 28 | 154 | 104 |
+| `1ere-a2/mathematiques/equations-et-inequations.json` | Équations et inéquations | 4 | 28 | 154 | 106 |
+| `1ere-a2/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 4 | 28 | 155 | 104 |
+| `1ere-a2/philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 5 | 30 | 166 | 110 |
+| `1ere-a2/philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 5 | 30 | 164 | 111 |
+| `1ere-a2/philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 4 | 28 | 155 | 105 |
+| `1ere-a2/physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 4 | 28 | 167 | 107 |
+| `1ere-a2/physique-chimie/les-alcanes.json` | Les alcanes | 5 | 30 | 166 | 110 |
+| `1ere-a2/physique-chimie/les-alcenes-cas-de-l-ethylene.json` | Les alcènes : cas de l'éthylène | 5 | 30 | 171 | 111 |
+| `1ere-a2/svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 5 | 30 | 155 | 110 |
+| `1ere-a2/svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 26 | 143 | 98 |
+| `1ere-a2/svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 4 | 28 | 152 | 104 |
+| `1ere-c/francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 28 | 163 | 106 |
+| `1ere-c/francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 4 | 28 | 154 | 104 |
+| `1ere-c/francais/oeuvre-poetique.json` | Œuvre poétique | 4 | 28 | 160 | 104 |
+| `1ere-c/mathematiques/angles-orientes-et-trigonometrie.json` | Angles orientés et trigonométrie | 4 | 28 | 154 | 106 |
+| `1ere-c/mathematiques/equations-et-inequations-dans.json` | Équations et inéquations dans ℝ | 4 | 28 | 156 | 107 |
+| `1ere-c/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 30 | 169 | 113 |
+| `1ere-c/philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 5 | 30 | 166 | 110 |
+| `1ere-c/philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 5 | 30 | 164 | 111 |
+| `1ere-c/philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 4 | 28 | 155 | 105 |
+| `1ere-c/physique-chimie/generalites-sur-les-composes-organiques.json` | Généralités sur les composés organiques | 7 | 34 | 196 | 122 |
+| `1ere-c/physique-chimie/travail-et-puissance-dans-le-cas-d-un-mouvement-de-rotation-autour-d-un-axe-fixe.json` | Travail et puissance dans le cas d'un mouvement de rotation autour d'un axe fixe | 4 | 28 | 166 | 105 |
+| `1ere-c/physique-chimie/travail-et-puissance-dans-le-cas-d-un-mouvement-de-translation.json` | Travail et puissance dans le cas d'un mouvement de translation | 5 | 30 | 177 | 111 |
+| `1ere-c/svt/la-division-meiotique.json` | La division méiotique | 4 | 28 | 150 | 104 |
+| `1ere-c/svt/la-gametogenese-chez-les-mammiferes.json` | La gamétogénèse chez les mammifères | 4 | 28 | 152 | 104 |
+| `1ere-c/svt/le-role-et-la-structure-des-gonades-des-mammiferes.json` | Le rôle et la structure des gonades des mammifères | 4 | 28 | 150 | 104 |
+| `1ere-d/francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 28 | 163 | 106 |
+| `1ere-d/francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 4 | 28 | 154 | 104 |
+| `1ere-d/francais/oeuvre-poetique.json` | Œuvre poétique | 4 | 28 | 160 | 104 |
+| `1ere-d/mathematiques/angles-orientes-et-trigonometrie.json` | Angles orientés et trigonométrie | 4 | 28 | 152 | 104 |
+| `1ere-d/mathematiques/equations-et-inequations-du-second-degre-dans.json` | Équations et inéquations du second degré dans ℝ | 4 | 28 | 158 | 104 |
+| `1ere-d/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 30 | 170 | 115 |
+| `1ere-d/philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 5 | 30 | 166 | 110 |
+| `1ere-d/philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 5 | 30 | 164 | 111 |
+| `1ere-d/philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 4 | 28 | 155 | 105 |
+| `1ere-d/physique-chimie/generalites-sur-les-composes-organiques.json` | Généralités sur les composés organiques | 7 | 34 | 196 | 122 |
+| `1ere-d/physique-chimie/hydrocarbures-satures-les-alcanes.json` | Hydrocarbures saturés : les alcanes | 7 | 34 | 192 | 122 |
+| `1ere-d/physique-chimie/travail-et-puissance-d-une-force-constante-dans-le-cas-d-un-mouvement-de-translation.json` | Travail et puissance d'une force constante dans le cas d'un mouvement de translation | 5 | 30 | 177 | 111 |
+| `1ere-d/svt/la-division-meiotique.json` | La division méiotique | 4 | 28 | 150 | 104 |
+| `1ere-d/svt/la-gametogenese.json` | La gamétogénèse | 4 | 28 | 154 | 104 |
+| `1ere-d/svt/les-fonctions-des-gonades.json` | Les fonctions des gonades | 4 | 28 | 154 | 104 |
+| `1ere/histoire-geographie/geographie-dynamisme-demographique-et-qualite-de-la-vie-en-cote-d-ivoire.json` | Géographie — Dynamisme démographique et qualité de la vie en Côte d'Ivoire | 3 | 26 | 145 | 99 |
+| `1ere/histoire-geographie/histoire-l-essor-du-capitalisme-et-ses-consequences.json` | Histoire — L'essor du capitalisme et ses conséquences | 4 | 28 | 156 | 105 |
+| `1ere/histoire-geographie/histoire-les-revolutions-industrielles.json` | Histoire — Les révolutions industrielles | 5 | 30 | 170 | 111 |
+| **Total** | | | | **10126** | **6749** |
+
 ### Tle C au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-tle-c-comme-thales`, #484)
 
 Depuis le 2026-11-07, les 45 leçons de Tle C au format 3 (Mathématiques 10, Français 6, Philosophie 9, Physique-Chimie 10, SVT 10) sont construites comme la leçon Thalès de 3ème. Chaque notion a deux exercices : le premier, d'origine, et un second en `fixation` de 6 questions de types mêlés, avec titre, énoncé « Dans cet exercice, tu … » et indice. Chaque leçon a 4 sujets de devoir (« Sujet 1 · … » à « Sujet 4 · … ») de 4 exercices de 5 ou 6 questions, en `evaluation`. Le cours, les fiches et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement. 4 874 questions ajoutées, 7 figures ajoutées (SVT).

@@ -257,6 +257,20 @@ module Repositories
 
         assert_equal [ question_id, other_id ], @repository.find_by_public_id(public_id: started.public_id).hinted_question_ids
       end
+
+      test "S2 : lock_restart_window prend un verrou consultatif de transaction propre à (élève, exercice), le même verrou repris sans attendre" do
+        advisory = -> { Orm::ExerciseSession.connection.select_value("SELECT count(*) FROM pg_locks WHERE locktype = 'advisory' AND pid = pg_backend_pid()").to_i }
+        before = advisory.call
+
+        Orm::ExerciseSession.transaction do
+          assert_nil @repository.lock_restart_window(student_id: @student.id, exercise_id: @exercise.id)
+          assert_equal before + 1, advisory.call
+          @repository.lock_restart_window(student_id: @student.id, exercise_id: @exercise.id)
+          assert_equal before + 1, advisory.call
+          @repository.lock_restart_window(student_id: @student.id, exercise_id: @exercise.id + 1)
+          assert_equal before + 2, advisory.call
+        end
+      end
     end
   end
 end

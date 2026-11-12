@@ -44,6 +44,11 @@ CI_PLAN = CiPlan.define do
     step "Guard: Decision index (numbers set at merge)", "script/docs/build_index --check"
 
     step "Style: Ruby", "bin/rubocop", inputs: :ruby
+
+    # hors-connexion, Lot 0: the JavaScript that holds no DOM of its own (the local store, the grader, the sync) is tested by Node's
+    # own runner, no browser and no dependency; the shell does not expand `**`, node does.
+    step "Tests: Node (JavaScript)", "node --test 'test/javascript/**/*.test.js'",
+         inputs: CiScope::Inputs.new(only: %w[test/javascript/ app/javascript/ package.json config/ci.rb])
   end
 
   group "security" do

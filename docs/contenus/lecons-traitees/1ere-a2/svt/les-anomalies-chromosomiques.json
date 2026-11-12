@@ -1,0 +1,3338 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les anomalies chromosomiques",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "A2",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "arbre-nommer-anomalie",
+          "kind": "diagram",
+          "description": "Schéma fléché pour nommer un caryotype. Question 1 : compte-t-il 46 chromosomes ? Si oui, il est normal. Sinon, question 2 : la paire 21 a-t-elle trois chromosomes ? Si oui, trisomie 21. Sinon, question 3 : n'y a-t-il qu'un seul gonosome X ? Si oui, syndrome de Turner. Sinon, question 4 : les gonosomes sont-ils XXY ? Si oui, syndrome de Klinefelter.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Question",
+              "Conclusion"
+            ],
+            "nodes": [
+              {
+                "id": "q1",
+                "label": "Le caryotype a-t-il 46 chromosomes ?",
+                "category": 1
+              },
+              {
+                "id": "normal",
+                "label": "Caryotype normal (XX ou XY)",
+                "category": 2
+              },
+              {
+                "id": "q2",
+                "label": "La paire 21 a-t-elle trois chromosomes ?",
+                "category": 1
+              },
+              {
+                "id": "t21",
+                "label": "Trisomie 21 (47 chromosomes)",
+                "category": 2
+              },
+              {
+                "id": "q3",
+                "label": "Y a-t-il un seul gonosome X ?",
+                "category": 1
+              },
+              {
+                "id": "turner",
+                "label": "Syndrome de Turner (45 chromosomes)",
+                "category": 2
+              },
+              {
+                "id": "q4",
+                "label": "Les gonosomes sont-ils XXY ?",
+                "category": 1
+              },
+              {
+                "id": "kline",
+                "label": "Syndrome de Klinefelter (47 chromosomes)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "q1",
+                "to": "normal",
+                "label": "oui"
+              },
+              {
+                "from": "q1",
+                "to": "q2",
+                "label": "non"
+              },
+              {
+                "from": "q2",
+                "to": "t21",
+                "label": "oui"
+              },
+              {
+                "from": "q2",
+                "to": "q3",
+                "label": "non"
+              },
+              {
+                "from": "q3",
+                "to": "turner",
+                "label": "oui"
+              },
+              {
+                "from": "q3",
+                "to": "q4",
+                "label": "non"
+              },
+              {
+                "from": "q4",
+                "to": "kline",
+                "label": "oui"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "nombre-chromosomes-caryotypes",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres du nombre total de chromosomes selon le caryotype : 46 pour un caryotype normal, 47 pour la trisomie 21, 45 pour le syndrome de Turner et 47 pour le syndrome de Klinefelter. Le nombre total ne suffit pas à nommer l'anomalie, car deux syndromes différents ont 47 chromosomes.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              46,
+              47,
+              45,
+              47
+            ],
+            "labels": [
+              "Normal",
+              "Trisomie 21",
+              "Turner",
+              "Klinefelter"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Lire un caryotype humain normal",
+          "remember": "Le **caryotype** est le classement des chromosomes d'une cellule, rangés par **paires** de chromosomes de même taille et de même forme. On le réalise, par exemple, à partir de cellules du sang. Chez l'espèce humaine, un caryotype normal compte **46 chromosomes**, soit **23 paires**. Parmi elles, **22 paires d'autosomes** (numérotées de 1 à 22), identiques chez la femme et chez l'homme, et **1 paire de gonosomes**, les chromosomes sexuels, qui détermine le sexe : **XX** chez la femme, **XY** chez l'homme (le Y est plus petit que le X). La formule s'écrit : 44 autosomes + XX (femme) ou 44 autosomes + XY (homme).",
+          "method": [
+            "Compter tous les chromosomes du caryotype.",
+            "Compter les paires d'autosomes (numérotées de 1 à 22) et vérifier que chacune contient deux chromosomes.",
+            "Repérer la dernière paire, celle des gonosomes, et lire sa nature : XX ou XY.",
+            "Conclure : donner le sexe et la formule (44 autosomes + gonosomes)."
+          ],
+          "example": {
+            "statement": "Lors d'une consultation, un centre de santé reçoit le caryotype d'un enfant : 46 chromosomes classés en 23 paires. Les 22 premières paires sont formées de deux chromosomes identiques. La 23e paire est formée d'un grand chromosome X et d'un petit chromosome Y. Lire ce caryotype.",
+            "steps": [
+              "Compter : le caryotype montre 46 chromosomes, le nombre normal.",
+              "Compter les paires d'autosomes : les paires 1 à 22 contiennent chacune deux chromosomes, soit 44 autosomes.",
+              "Repérer la dernière paire : c'est la paire de gonosomes, formée d'un X et d'un Y, donc XY.",
+              "Conclure : c'est un garçon, au caryotype normal, de formule 44 autosomes + XY."
+            ]
+          },
+          "pitfall": "Ne confonds pas les autosomes et les gonosomes. Il y a bien 23 paires en tout, mais **22 paires d'autosomes seulement** : la 23e paire, celle des gonosomes, est à part. Contre-exemple : écrire « 46 autosomes + XX » donnerait $46 + 2 = 48$ chromosomes, alors que le caryotype normal en compte 46. La bonne formule est $44 + 2 = 46$ : 44 autosomes + XX.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Lire un caryotype normal au centre de santé",
+              "statement": "Dans cet exercice, tu lis des caryotypes humains normaux avec la méthode de la fiche : compter, compter les paires d'autosomes, repérer les gonosomes, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le caryotype normal d'une femme compte 46 chromosomes, dont 44 autosomes et deux chromosomes X.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter : le caryotype normal compte 46 chromosomes. Étape 2 — Compter les paires d'autosomes : 22 paires, soit 44 autosomes. Étape 3 — Repérer les gonosomes : la dernière paire est XX chez la femme. Étape 4 — Conclure : 44 + 2 = 46, la formule est 44 autosomes + XX. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype normal est classé en 23 paires de chromosomes. Combien de chromosomes cela fait-il au total ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : chaque paire contient deux chromosomes, donc $23 \\times 2 = 46$. Étape 2 — Compter les paires d'autosomes : 22 paires, soit 44 autosomes. Étape 3 — Repérer la dernière paire : la 23e paire, celle des gonosomes, compte 2 chromosomes, et $44 + 2 = 46$. Étape 4 — Conclure : le caryotype compte 46 chromosomes. L'erreur à éviter est de répondre 23, qui est le nombre de paires et non de chromosomes.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "46",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un caryotype normal, les paires numérotées de 1 à 22 sont des ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Compter les paires d'autosomes : les paires 1 à 22 sont les autosomes, identiques chez la femme et chez l'homme. Étape 3 — Repérer les gonosomes : la 23e paire est à part, c'est elle qui est formée des chromosomes sexuels.",
+                  "answers": [
+                    {
+                      "content": "autosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "autosome",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le laboratoire d'un centre de santé lit le caryotype d'une enfant : 46 chromosomes, 22 paires d'autosomes complètes, et une dernière paire formée de deux grands chromosomes X. Que conclut-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 46 chromosomes, c'est le nombre normal. Étape 2 — Compter les paires d'autosomes : 22 paires complètes. Étape 3 — Repérer les gonosomes : XX. Étape 4 — Conclure : XX désigne une fille, la formule est 44 autosomes + XX. Écrire 46 autosomes + XX est faux : cela ferait 48 chromosomes, les deux X ne sont pas des autosomes. L'absence de Y est normale chez une fille.",
+                  "answers": [
+                    {
+                      "content": "C'est une fille au caryotype normal, de formule 44 autosomes + XX",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un garçon, car il y a deux grands chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caryotype est anormal, car il ne contient pas de chromosome Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une fille, de formule 46 autosomes + XX",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément du caryotype humain normal à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Compter les paires d'autosomes : 22 paires numérotées de 1 à 22. Étape 3 — Repérer les gonosomes : une seule paire, XX chez la femme, XY chez l'homme. Étape 4 — Conclure : on écrit la formule en additionnant les 44 autosomes et les deux gonosomes.",
+                  "answers": [
+                    {
+                      "content": "Les autosomes",
+                      "match": "22 paires, identiques chez la femme et chez l'homme"
+                    },
+                    {
+                      "content": "Les gonosomes",
+                      "match": "1 paire de chromosomes sexuels"
+                    },
+                    {
+                      "content": "Formule d'une femme",
+                      "match": "44 autosomes + XX"
+                    },
+                    {
+                      "content": "Formule d'un homme",
+                      "match": "44 autosomes + XY"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur le caryotype normal d'un garçon ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Compter : 46 chromosomes. Étape 3 — Repérer les gonosomes : XY chez le garçon. Les autosomes forment 22 paires (44 chromosomes), et non 23 paires : la 23e paire est celle des gonosomes. Il n'y a que deux gonosomes, pas 44. Deux X désignent une fille.",
+                  "answers": [
+                    {
+                      "content": "Il compte 46 chromosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa dernière paire est formée d'un X et d'un Y",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il compte 23 paires d'autosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il compte 44 gonosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa dernière paire est formée de deux X",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit « 46 autosomes + XX » pour une femme au caryotype normal. Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 46 est le total de tous les chromosomes. Étape 2 — Compter les paires d'autosomes : 22 paires, soit 44 autosomes. Étape 3 — Repérer les gonosomes : XX. Étape 4 — Conclure : 44 + 2 = 46, d'où 44 autosomes + XX. Avec 46 autosomes + XX, on compterait 48 chromosomes.",
+                  "answers": [
+                    {
+                      "content": "Les 46 chromosomes comprennent déjà les gonosomes : il y a 44 autosomes seulement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une femme n'a pas de gonosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut écrire 23 autosomes + XX",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut écrire 46 autosomes + XY",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire des caryotypes normaux",
+              "statement": "Dans cet exercice, tu lis des caryotypes humains normaux avec la méthode de la fiche : compter, compter les paires d'autosomes, repérer la dernière paire, conclure. Les situations sont fictives.",
+              "hint": "Un caryotype normal : 46 chromosomes, soit 22 paires d'autosomes et 1 paire de gonosomes (XX ou XY).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un caryotype humain normal compte 22 paires d'autosomes et 1 paire de gonosomes. Combien de chromosomes cela fait-il au total ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter tous les chromosomes. Étape 2 — Compter les paires d'autosomes : 22 paires, soit $22 \\times 2 = 44$ autosomes. Étape 3 — Repérer la dernière paire : 2 gonosomes. Étape 4 — Conclure : $44 + 2 = 46$ chromosomes. Compter 22 + 1 = 23 donnerait le nombre de paires, pas de chromosomes.",
+                  "answers": [
+                    {
+                      "content": "46",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le laboratoire d'un centre de santé lit un caryotype : 46 chromosomes, 22 paires d'autosomes complètes, et une dernière paire formée d'un grand chromosome X et d'un petit chromosome Y. Que conclut-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 46 chromosomes, nombre normal. Étape 2 — Compter les paires d'autosomes : 22 paires complètes, soit 44. Étape 3 — Repérer la dernière paire : X et Y. Étape 4 — Conclure : garçon, formule 44 autosomes + XY. La présence d'un Y exclut une fille.",
+                  "answers": [
+                    {
+                      "content": "C'est une fille au caryotype normal, de formule 44 autosomes + XX",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un garçon au caryotype normal, de formule 44 autosomes + XY",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un garçon atteint d'une trisomie",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une fille atteinte du syndrome de Turner",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un caryotype normal, les 22 paires d'autosomes sont identiques chez la femme et chez l'homme. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Compter les paires d'autosomes numérotées de 1 à 22 : elles sont identiques chez la femme et chez l'homme. Étape 3 — Seule la paire de gonosomes diffère, XX ou XY. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un caryotype normal d'homme, la paire de gonosomes est formée d'un chromosome X et d'un chromosome ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Repérer la dernière paire et lire sa nature : XX chez la femme, XY chez l'homme. Le Y est plus petit que le X. Étape 4 — Conclure : la lettre attendue est Y.",
+                  "answers": [
+                    {
+                      "content": "Y",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter tous les chromosomes du caryotype. Étape 2 — Les paires 1 à 22 sont les autosomes. Étape 3 — La dernière paire est celle des gonosomes. Étape 4 — Conclure : trois termes à ne pas confondre.",
+                  "answers": [
+                    {
+                      "content": "Caryotype",
+                      "match": "Classement des chromosomes d'une cellule par paires"
+                    },
+                    {
+                      "content": "Autosomes",
+                      "match": "Les 22 paires numérotées de 1 à 22"
+                    },
+                    {
+                      "content": "Gonosomes",
+                      "match": "La paire de chromosomes sexuels qui détermine le sexe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « Un caryotype normal compte 23 paires d'autosomes. » Quelle correction apporter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 46 chromosomes. Étape 2 — Compter les paires d'autosomes : 22 seulement. Étape 3 — Repérer la dernière paire : celle des gonosomes, la 23e, est à part. Étape 4 — Conclure : 23 paires en tout, dont 22 d'autosomes. Confondre les deux nombres est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Il compte 23 paires d'autosomes et 23 paires de gonosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il compte 22 paires en tout, dont 1 de gonosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il compte 23 paires en tout : 22 paires d'autosomes et 1 paire de gonosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il compte 46 paires d'autosomes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à lire un caryotype normal, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le caryotype normal d'une femme se termine par la paire de gonosomes ___ ; celui d'un homme, par la paire ___ .",
+                "question_type": "fill_blank",
+                "hint": "Pense à la lettre du petit chromosome sexuel de l'homme.",
+                "explanation": "Étape 3 — Repérer la dernière paire : chez la femme, les deux gonosomes sont des X (XX) ; chez l'homme, un X et un Y (XY). Étape 4 — Conclure : la femme a 44 autosomes + XX, l'homme 44 autosomes + XY.",
+                "answers": [
+                  {
+                    "content": "XX",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "XY",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Sur le caryotype d'une cellule du sang d'un garçon en bonne santé, combien de chromosomes sont des autosomes ?",
+                "question_type": "single_choice",
+                "hint": "22 est un nombre de paires, pas de chromosomes.",
+                "explanation": "Étape 1 — Compter : 46 chromosomes au total. Étape 2 — Compter les paires d'autosomes : 22 paires de 2 chromosomes, soit $22 \\times 2 = 44$. Étape 3 — Repérer les gonosomes : XY, deux chromosomes. Étape 4 — Conclure : 44 autosomes + XY. Répondre 22 donne le nombre de paires, et 46 compte aussi les gonosomes.",
+                "answers": [
+                  {
+                    "content": "44",
+                    "correct": true
+                  },
+                  {
+                    "content": "46",
+                    "correct": false
+                  },
+                  {
+                    "content": "22",
+                    "correct": false
+                  },
+                  {
+                    "content": "23",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les deux chromosomes de la paire de gonosomes d'un homme normal ont exactement la même taille.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Repérer la dernière paire : chez l'homme, elle est formée d'un X et d'un Y, et le Y est plus petit que le X. Étape 4 — Conclure : seule la paire XX de la femme est formée de deux chromosomes identiques. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître une anomalie de nombre sur un caryotype",
+          "remember": "Une **anomalie chromosomique de nombre** se repère à un caryotype qui ne compte pas 46 chromosomes : il y a un chromosome en trop ou en moins. Une **trisomie** est la présence de **trois** chromosomes, au lieu de deux, dans une paire. Trois anomalies sont à connaître. La **trisomie 21** : trois chromosomes 21, donc **47 chromosomes** (45 autosomes + XX ou XY). Le **syndrome de Turner** : un seul gonosome X, sans second gonosome, donc **45 chromosomes** (44 autosomes + X). Le **syndrome de Klinefelter** : deux X et un Y, donc **47 chromosomes** (44 autosomes + XXY). La trisomie 21 touche un autosome ; les syndromes de Turner et de Klinefelter touchent les gonosomes.",
+          "method": [
+            "Compter les chromosomes du caryotype et comparer le total à 46.",
+            "Chercher la paire anormale : une paire à trois chromosomes, ou des gonosomes en nombre inhabituel.",
+            "Identifier cette paire : le numéro de l'autosome, ou la nature des gonosomes (X seul, XXY).",
+            "Conclure : nommer l'anomalie (trisomie 21, syndrome de Turner ou de Klinefelter) et écrire la formule."
+          ],
+          "example": {
+            "statement": "Le laboratoire d'un centre de santé rend le caryotype d'un nouveau-né : 47 chromosomes. Les paires 1 à 20 et la paire 22 contiennent chacune deux chromosomes, la paire 21 en contient trois. Les gonosomes sont X et Y. Nommer l'anomalie.",
+            "steps": [
+              "Compter : le caryotype montre 47 chromosomes, soit un de plus que 46.",
+              "Chercher la paire anormale : la paire 21 contient trois chromosomes ; les autres paires et les gonosomes sont normaux.",
+              "Identifier : c'est un autosome, le numéro 21 ; les gonosomes XY sont normaux, c'est un garçon.",
+              "Conclure : trisomie 21 chez un garçon, de formule 45 autosomes + XY, car $44 + 1 = 45$."
+            ]
+          },
+          "pitfall": "Ne conclus pas d'après le seul nombre total de chromosomes. Contre-exemple : la trisomie 21 et le syndrome de Klinefelter ont tous deux 47 chromosomes. Dans le premier cas, la paire 21 compte trois chromosomes ; dans le second, les gonosomes sont XXY. Pour nommer l'anomalie, cherche toujours la paire anormale.",
+          "figure": "arbre-nommer-anomalie",
+          "exercise": [
+            {
+              "title": "Nommer l'anomalie d'un caryotype",
+              "statement": "Dans cet exercice, tu lis des caryotypes anormaux décrits en texte et tu nommes l'anomalie avec la méthode de la fiche. Les situations sont fictives, les résultats sont simplifiés.",
+              "exercise_type": "fixation",
+              "figure": "arbre-nommer-anomalie",
+              "questions": [
+                {
+                  "content": "Le caryotype d'une personne compte 45 chromosomes : 22 paires d'autosomes complètes et un seul gonosome, un X. Quelle est cette anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 45 chromosomes, un de moins que 46. Étape 2 — Chercher la paire anormale : les 22 paires d'autosomes sont complètes, c'est la paire de gonosomes qui est incomplète. Étape 3 — Identifier : il n'y a qu'un X, sans second gonosome. Étape 4 — Conclure : syndrome de Turner, de formule 44 autosomes + X. Le syndrome de Klinefelter et la trisomie 21 ont 47 chromosomes.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune : c'est un caryotype normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype montre 22 paires d'autosomes complètes et trois gonosomes : X, X et Y. Combien de chromosomes compte-t-il au total ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : $22 \\times 2 = 44$ autosomes, plus 3 gonosomes, soit $44 + 3 = 47$. Étape 2 — Chercher la paire anormale : les gonosomes sont trois au lieu de deux. Étape 3 — Identifier : XXY. Étape 4 — Conclure : syndrome de Klinefelter, 47 chromosomes, formule 44 autosomes + XXY.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "47",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne atteinte de trisomie 21 possède 47 chromosomes, car sa paire 21 compte trois chromosomes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter : 47, soit un de plus que 46. Étape 2 — Chercher la paire anormale : la paire 21 a trois chromosomes (trisomie). Étape 3 — Identifier : c'est un autosome, le numéro 21. Étape 4 — Conclure : trisomie 21. L'affirmation est vraie : $46 + 1 = 47$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une fille dont la paire 21 compte trois chromosomes, la formule du caryotype est : 45 autosomes + ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Compter : 47 chromosomes. Étape 2 — Chercher la paire anormale : la paire 21 a trois chromosomes, donc $44 + 1 = 45$ autosomes. Étape 3 — Identifier les gonosomes : une fille est XX. Étape 4 — Conclure : trisomie 21, formule 45 autosomes + XX.",
+                  "answers": [
+                    {
+                      "content": "XX",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype compte 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes X, X et Y. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Compter : 47 chromosomes, donc un de trop. Étape 2 — Chercher la paire anormale : les 22 paires d'autosomes sont complètes, l'excès est dans les gonosomes. Étape 3 — Identifier : XXY. Étape 4 — Conclure : syndrome de Klinefelter, 44 autosomes + XXY. Ce n'est pas une trisomie 21, car la paire 21 a deux chromosomes.",
+                  "answers": [
+                    {
+                      "content": "L'anomalie touche les gonosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "La formule est 44 autosomes + XXY",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est une trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "La paire 21 compte trois chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caryotype compte 46 chromosomes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux caryotypes comptent chacun 47 chromosomes. Zoé affirme : « Ce sont forcément deux trisomies 21. » Pourquoi peut-elle se tromper ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47 est un de plus que 46, donc anormal. Étape 2 — Chercher la paire anormale : c'est ce qui permet de trancher. Étape 3 — Identifier : trois chromosomes 21 donnent une trisomie 21 ; trois gonosomes XXY donnent un syndrome de Klinefelter. Étape 4 — Conclure : le nombre total ne suffit jamais à nommer l'anomalie.",
+                  "answers": [
+                    {
+                      "content": "Parce que 47 chromosomes peut aussi correspondre au syndrome de Klinefelter (XXY) : il faut chercher la paire anormale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que 47 est le nombre normal de chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la trisomie 21 compte 45 chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'un caryotype à 47 chromosomes n'est jamais anormal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître une anomalie de nombre sur un caryotype.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Compter et comparer à 46. Étape 2 — Chercher la paire anormale. Étape 3 — Identifier la paire. Étape 4 — Conclure en nommant l'anomalie et en écrivant la formule. On ne peut pas nommer l'anomalie avant d'avoir identifié la paire concernée.",
+                  "answers": [
+                    {
+                      "content": "Compter les chromosomes et comparer à 46"
+                    },
+                    {
+                      "content": "Chercher la paire anormale"
+                    },
+                    {
+                      "content": "Identifier cette paire (numéro d'autosome ou gonosomes)"
+                    },
+                    {
+                      "content": "Conclure : nommer l'anomalie et écrire la formule"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Nommer des anomalies de nombre",
+              "statement": "Dans cet exercice, tu nommes des anomalies chromosomiques décrites en texte avec la méthode de la fiche : compter, chercher la paire anormale, identifier, conclure. Les situations sont fictives et simplifiées.",
+              "hint": "Le nombre total de chromosomes ne suffit pas : cherche toujours la paire anormale.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un caryotype compte 47 chromosomes : la paire 21 en contient trois, les autres paires deux, et les gonosomes sont X et X. Quelle est cette anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47 chromosomes, soit un de plus que 46. Étape 2 — Chercher la paire anormale : la paire 21 compte trois chromosomes. Étape 3 — Identifier : c'est un autosome, le 21 ; les gonosomes XX sont normaux. Étape 4 — Conclure : trisomie 21 chez une fille, formule 45 autosomes + XX.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un caryotype normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21, chez une fille",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype montre 22 paires d'autosomes complètes et un seul gonosome, un X. Combien de chromosomes compte-t-il au total ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter. Étape 2 — Chercher la paire anormale : les 22 paires d'autosomes sont complètes, soit 44. Étape 3 — Identifier : un seul gonosome X. Étape 4 — Conclure : $44 + 1 = 45$ chromosomes, c'est le syndrome de Turner.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Relie chaque description de caryotype à l'anomalie correspondante.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter les chromosomes. Étape 2 — Chercher la paire anormale. Étape 3 — Identifier l'autosome ou les gonosomes concernés. Étape 4 — Conclure : trisomie 21, syndrome de Turner ou syndrome de Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Trois chromosomes 21",
+                      "match": "Trisomie 21"
+                    },
+                    {
+                      "content": "45 chromosomes avec un seul gonosome X",
+                      "match": "Syndrome de Turner"
+                    },
+                    {
+                      "content": "47 chromosomes avec les gonosomes XXY",
+                      "match": "Syndrome de Klinefelter"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype de 47 chromosomes est forcément celui d'une trisomie 21. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter : 47 chromosomes. Étape 2 — Chercher la paire anormale : le syndrome de Klinefelter compte aussi 47 chromosomes, avec les gonosomes XXY. Étape 4 — Conclure : le nombre total ne suffit pas à nommer l'anomalie. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une trisomie est la présence de ___ chromosomes, au lieu de deux, dans une paire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher la paire anormale : une paire qui compte trois chromosomes au lieu de deux. Étape 4 — Conclure : une trisomie est la présence de trois chromosomes dans une paire.",
+                  "answers": [
+                    {
+                      "content": "trois",
+                      "correct": true
+                    },
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur des caryotypes anormaux ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Compter : Turner 45, trisomie 21 et Klinefelter 47. Étape 2 — Chercher la paire anormale : gonosomes XXY pour Klinefelter, un seul X pour Turner, trois chromosomes 21 pour la trisomie. Étape 4 — Conclure : seules les deux premières affirmations sont exactes.",
+                  "answers": [
+                    {
+                      "content": "Dans le syndrome de Klinefelter, les gonosomes sont XXY",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Turner compte 45 chromosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trisomie 21 compte 45 chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter compte 45 chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le syndrome de Turner, la paire 21 compte trois chromosomes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une anomalie de nombre, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une personne dont le caryotype ne montre qu'un seul gonosome X a le syndrome de ___ ; son caryotype compte ___ chromosomes.",
+                "question_type": "fill_blank",
+                "hint": "Il manque un chromosome par rapport à 46.",
+                "explanation": "Étape 1 — Compter : il manque un gonosome, donc $46 - 1 = 45$ chromosomes. Étape 3 — Identifier : un seul X. Étape 4 — Conclure : syndrome de Turner, de formule 44 autosomes + X.",
+                "answers": [
+                  {
+                    "content": "Turner",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "45",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "quarante-cinq",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le syndrome de Klinefelter est une trisomie 21.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher la paire anormale : dans le syndrome de Klinefelter, ce sont les gonosomes qui sont anormaux (XXY), alors que la paire 21 compte deux chromosomes. Étape 4 — Conclure : la trisomie 21 touche la paire 21, le syndrome de Klinefelter touche les gonosomes. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Classe ces caryotypes du plus petit au plus grand nombre de chromosomes.",
+                "question_type": "ordering",
+                "hint": "Compte chaque total : 46 moins un, 46, 46 plus un.",
+                "explanation": "Étape 1 — Compter : le syndrome de Turner compte 45 chromosomes, le caryotype normal 46, la trisomie 21 en compte 47. On les classe donc 45, 46, 47.",
+                "answers": [
+                  {
+                    "content": "Syndrome de Turner (un seul X)"
+                  },
+                  {
+                    "content": "Caryotype humain normal"
+                  },
+                  {
+                    "content": "Trisomie 21 (trois chromosomes 21)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Relier un syndrome à ses conséquences",
+          "remember": "Chaque anomalie de nombre a des conséquences qui lui sont propres, **variables d'une personne à l'autre**. **Trisomie 21** (garçons et filles) : déficience intellectuelle de degré variable, visage aux traits caractéristiques, muscles souvent mous (hypotonie), parfois une malformation du cœur. **Syndrome de Turner** (phénotype féminin, un seul X) : petite taille, ovaires peu développés, puberté incomplète et stérilité ; l'intelligence est en général normale. **Syndrome de Klinefelter** (phénotype masculin, XXY) : souvent grande taille, testicules petits, stérilité, pilosité peu développée. Ce ne sont pas des maladies contagieuses : ce sont des anomalies du caryotype. Un suivi médical et un accompagnement adapté aident ces personnes.",
+          "method": [
+            "Lire le caryotype : relever le nombre de chromosomes et la paire anormale.",
+            "Nommer le syndrome correspondant.",
+            "Associer le sexe (phénotype) : garçon, fille, ou les deux selon le syndrome.",
+            "Rappeler les conséquences propres à ce syndrome : corps, fertilité, intelligence.",
+            "Conclure en nuançant : les conséquences varient d'une personne à l'autre et un accompagnement est possible."
+          ],
+          "example": {
+            "statement": "Une adolescente de 15 ans, nettement plus petite que les filles de son âge et sans règles, consulte au centre de santé. Le médecin prescrit un caryotype : 45 chromosomes, 22 paires d'autosomes complètes, un seul gonosome X. Que peut-on dire de sa situation ?",
+            "steps": [
+              "Lire le caryotype : 45 chromosomes, 22 paires complètes, un seul X.",
+              "Nommer : c'est le syndrome de Turner.",
+              "Associer le sexe : il n'y a pas de Y, le phénotype est féminin, ce qui concorde avec sa situation.",
+              "Rappeler les conséquences propres à ce syndrome : petite taille, ovaires peu développés, puberté incomplète et stérilité ; l'intelligence est en général normale.",
+              "Conclure : le caryotype explique ses signes ; les conséquences varient d'une personne à l'autre et un suivi médical est possible. Ce n'est pas contagieux."
+            ]
+          },
+          "pitfall": "Ne reporte pas sur un syndrome les conséquences d'un autre. Contre-exemple : la déficience intellectuelle est une conséquence de la trisomie 21 ; une fille atteinte du syndrome de Turner a pourtant un caryotype anormal et une intelligence en général normale, ses difficultés étant la petite taille, la puberté incomplète et la stérilité. Pour chaque cas, repars du caryotype, nomme le syndrome, puis cherche ses conséquences.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Relier un syndrome à ses conséquences",
+              "statement": "Dans cet exercice, tu passes du caryotype au syndrome, puis du syndrome à ses conséquences, avec la méthode de la fiche. Les situations sont fictives, les résultats sont simplifiés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque syndrome à sa caractéristique principale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire le caryotype : trois chromosomes 21 (trisomie 21), un seul X (Turner), XXY (Klinefelter). Étape 2 — Nommer le syndrome. Étape 4 — Rappeler les conséquences propres à chaque syndrome : déficience intellectuelle et traits du visage pour la trisomie 21 ; petite taille, puberté incomplète et stérilité chez la fille pour Turner ; testicules petits et stérilité chez le garçon pour Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Trisomie 21",
+                      "match": "Déficience intellectuelle de degré variable et visage aux traits caractéristiques"
+                    },
+                    {
+                      "content": "Syndrome de Turner",
+                      "match": "Fille de petite taille, puberté incomplète, stérilité"
+                    },
+                    {
+                      "content": "Syndrome de Klinefelter",
+                      "match": "Garçon, testicules petits, stérilité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype montre 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes X, X et Y. Que peut-on annoncer à la famille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le caryotype : 47 chromosomes, gonosomes XXY. Étape 2 — Nommer le syndrome : Klinefelter. Étape 3 — Associer le sexe : il y a un Y, donc un phénotype masculin. Étape 4 — Rappeler les conséquences : testicules petits, stérilité en général. Étape 5 — Conclure en nuançant : les conséquences varient d'une personne à l'autre. Le syndrome de Turner n'a pas de Y ; la trisomie 21 ne touche pas les gonosomes.",
+                  "answers": [
+                    {
+                      "content": "Syndrome de Klinefelter : un garçon, en général stérile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Syndrome de Turner : une fille de petite taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trisomie 21 : une déficience intellectuelle certaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un caryotype normal de garçon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le syndrome de Turner touche uniquement des personnes de phénotype féminin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire le caryotype : un seul gonosome, un X, sans Y. Étape 3 — Associer le sexe : sans chromosome Y, le phénotype est féminin. Étape 5 — Conclure : le syndrome de Turner ne concerne que des filles et des femmes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur la trisomie 21 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire le caryotype : trois chromosomes 21, soit 47 au total. Étape 2 — Nommer : trisomie 21. Étape 3 — Associer le sexe : garçons et filles sont touchés. Étape 4 — Rappeler les conséquences : déficience intellectuelle de degré variable, traits du visage caractéristiques. Étape 5 — Conclure : ce n'est pas une maladie contagieuse, mais une anomalie du caryotype.",
+                  "answers": [
+                    {
+                      "content": "Elle entraîne une déficience intellectuelle de degré variable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle donne souvent un visage aux traits caractéristiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle touche uniquement les filles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se transmet comme une maladie contagieuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caryotype compte 45 chromosomes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne qui n'a qu'un seul X et pas de Y a un phénotype ___ (féminin ou masculin).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire le caryotype : un seul X, aucun Y. Étape 2 — Nommer le syndrome : Turner. Étape 3 — Associer le sexe : c'est la présence du Y qui conduit au phénotype masculin ; sans Y, le phénotype est féminin.",
+                  "answers": [
+                    {
+                      "content": "féminin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Konan apprend que sa fille a le syndrome de Turner. Elle dit : « Ma fille aura forcément une déficience intellectuelle, comme dans la trisomie 21. » Quelle est la bonne réponse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le caryotype : un seul X, 45 chromosomes. Étape 2 — Nommer le syndrome : Turner. Étape 4 — Rappeler les conséquences propres à ce syndrome : petite taille, puberté incomplète, stérilité, intelligence en général normale. Étape 5 — Conclure en nuançant : chaque syndrome a ses propres conséquences. Reporter celles de la trisomie 21 sur Turner est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : les conséquences dépendent du syndrome. Dans le syndrome de Turner, ce sont surtout la petite taille, la puberté incomplète et la stérilité ; l'intelligence est en général normale",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai : toutes les anomalies du caryotype donnent une déficience intellectuelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai, car sa fille n'a que 45 chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : le syndrome de Turner n'a aucune conséquence",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Du caryotype aux conséquences",
+              "statement": "Dans cet exercice, tu passes du caryotype au syndrome, puis du syndrome à ses conséquences, avec la méthode de la fiche. Les situations sont fictives, les conséquences varient d'une personne à l'autre.",
+              "hint": "Repars toujours du caryotype, nomme le syndrome, puis cherche ses conséquences propres. Ce ne sont pas des maladies contagieuses.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un adolescent de 16 ans est grand, ses testicules sont petits. Son caryotype montre 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes X, X et Y. Quel est le syndrome ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le caryotype : 47 chromosomes, gonosomes XXY. Étape 2 — Nommer : syndrome de Klinefelter. Étape 3 — Associer le sexe : présence d'un Y, phénotype masculin. Étape 4 — Rappeler les conséquences : souvent grande taille, testicules petits, stérilité. Étape 5 — Conclure en nuançant.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un caryotype normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque syndrome à son phénotype.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire le caryotype. Étape 2 — Nommer le syndrome. Étape 3 — Associer le sexe : Turner, un seul X sans Y, phénotype féminin ; Klinefelter, XXY, phénotype masculin ; trisomie 21, touche les garçons comme les filles.",
+                  "answers": [
+                    {
+                      "content": "Syndrome de Turner",
+                      "match": "Phénotype féminin"
+                    },
+                    {
+                      "content": "Syndrome de Klinefelter",
+                      "match": "Phénotype masculin"
+                    },
+                    {
+                      "content": "Trisomie 21",
+                      "match": "Garçons et filles"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le syndrome de Klinefelter est une maladie contagieuse. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Nommer : le syndrome de Klinefelter est une anomalie du caryotype, XXY. Étape 5 — Conclure : ce ne sont pas des maladies contagieuses. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences possibles du syndrome de Turner ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire le caryotype : un seul X, 45 chromosomes. Étape 2 — Nommer : syndrome de Turner. Étape 4 — Rappeler les conséquences propres : petite taille, ovaires peu développés, puberté incomplète, stérilité. La déficience intellectuelle et le visage caractéristique relèvent de la trisomie 21, les testicules du syndrome de Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Une déficience intellectuelle de degré variable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des testicules petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une petite taille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une puberté incomplète",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un visage aux traits caractéristiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le syndrome de Klinefelter, le phénotype est ___ (féminin ou masculin).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Associer le sexe : les gonosomes XXY comptent un chromosome Y, le phénotype est masculin.",
+                  "answers": [
+                    {
+                      "content": "masculin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le médecin annonce à une famille que leur fils a le syndrome de Klinefelter. La grand-mère dit : « Il aura forcément une déficience intellectuelle, comme dans la trisomie 21. » Quelle est la bonne réponse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le caryotype : XXY. Étape 2 — Nommer : Klinefelter. Étape 4 — Rappeler les conséquences propres à ce syndrome. Étape 5 — Conclure en nuançant. Reporter les conséquences de la trisomie 21 sur un autre syndrome est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Elle a raison : tous les syndromes donnent une déficience intellectuelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a raison : le syndrome de Klinefelter est une trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a tort : le syndrome de Klinefelter n'a aucune conséquence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle confond les syndromes : dans le syndrome de Klinefelter, ce sont surtout une grande taille, des testicules petits et une stérilité",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à relier un syndrome à ses conséquences, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans le syndrome de Klinefelter, la personne a un phénotype ___ et elle est en général ___ (fertile ou stérile).",
+                "question_type": "fill_blank",
+                "hint": "Il y a un chromosome Y.",
+                "explanation": "Étape 3 — Associer le sexe : les gonosomes XXY comptent un Y, donc le phénotype est masculin. Étape 4 — Rappeler les conséquences : les testicules sont petits et la personne est en général stérile.",
+                "answers": [
+                  {
+                    "content": "masculin",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "stérile",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La trisomie 21 est une maladie contagieuse : on peut l'attraper en côtoyant une personne trisomique.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire le caryotype : la trisomie 21 est la présence de trois chromosomes 21 dans les cellules. Étape 5 — Conclure : c'est une anomalie du caryotype, pas une infection ; on ne peut pas l'attraper. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle conséquence est typique du syndrome de Turner ?",
+                "question_type": "single_choice",
+                "hint": "Pense à la fille avec un seul X.",
+                "explanation": "Étape 2 — Nommer : le syndrome de Turner concerne une fille avec un seul X. Étape 4 — Rappeler les conséquences : petite taille, ovaires peu développés, puberté incomplète. Les testicules petits relèvent du syndrome de Klinefelter, le visage et la déficience intellectuelle de la trisomie 21.",
+                "answers": [
+                  {
+                    "content": "Une petite taille et une puberté incomplète",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une grande taille et des testicules petits",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un visage aux traits caractéristiques avec une déficience intellectuelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un phénotype masculin",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Au centre de santé : le caryotype d'Aïcha",
+          "statement": "Aïcha, 2 mois, est amenée au centre de santé de son quartier par sa mère. La sage-femme remarque un visage aux traits caractéristiques et des muscles très mous. Le médecin demande un caryotype. Résultat du laboratoire : les paires 1 à 20 et la paire 22 contiennent deux chromosomes, la paire 21 en contient trois ; les gonosomes sont XX. Pour expliquer à la famille, le médecin montre un graphique en barres du nombre de chromosomes : caryotype normal 46 ; trisomie 21 : 47 ; syndrome de Turner : 45 ; syndrome de Klinefelter : 47. Situation fictive.",
+          "exercise_type": "fixation",
+          "figure": "nombre-chromosomes-caryotypes",
+          "questions": [
+            {
+              "content": "Le caryotype d'Aïcha compte une paire 21 à trois chromosomes, les paires 1 à 20 et la paire 22 à deux chromosomes, et deux gonosomes XX. Combien de chromosomes compte-t-il au total ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Compter : les 21 autres paires d'autosomes ($20 + 1 = 21$ paires) donnent $21 \\times 2 = 42$ chromosomes, plus 3 chromosomes 21, soit 45 autosomes. On ajoute les 2 gonosomes XX : $45 + 2 = 47$. Le total est supérieur à 46 : il y a un chromosome en trop.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "47",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le caryotype d'Aïcha compte 47 chromosomes, dont trois chromosomes 21, et ses gonosomes sont XX. Quelle anomalie présente-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : on compte (47, un de plus que 46), on cherche la paire anormale (la paire 21 a trois chromosomes), on l'identifie (un autosome, le 21) puis on conclut : trisomie 21. Le syndrome de Turner compte 45 chromosomes et touche les gonosomes ; le syndrome de Klinefelter est XXY, or les gonosomes d'Aïcha sont XX.",
+              "answers": [
+                {
+                  "content": "La trisomie 21",
+                  "correct": true
+                },
+                {
+                  "content": "Le syndrome de Turner",
+                  "correct": false
+                },
+                {
+                  "content": "Le syndrome de Klinefelter",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune anomalie : 47 est un nombre normal",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La formule chromosomique d'Aïcha est : ___ autosomes + XX.",
+              "question_type": "fill_blank",
+              "explanation": "Les 44 autosomes de la formule normale deviennent 45 à cause du troisième chromosome 21 : $44 + 1 = 45$. Les gonosomes d'Aïcha sont XX, ce qui est normal pour une fille. La formule est donc 45 autosomes + XX, soit $45 + 2 = 47$ chromosomes. Répondre 47 serait compter aussi les deux gonosomes.",
+              "answers": [
+                {
+                  "content": "45",
+                  "correct": true
+                },
+                {
+                  "content": "quarante-cinq",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après le graphique, la trisomie 21 et le syndrome de Klinefelter ont chacun 47 chromosomes : le nombre total suffit donc à les distinguer.",
+              "question_type": "true_false",
+              "explanation": "Les deux barres sont bien à 47, mais c'est justement pour cela que le nombre total ne suffit pas à distinguer ces deux anomalies. Pour les nommer, il faut chercher la paire anormale : trois chromosomes 21 pour la trisomie 21, des gonosomes XXY pour le syndrome de Klinefelter. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux affirmations exactes pour Aïcha ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : lire le caryotype (trois chromosomes 21), nommer le syndrome (trisomie 21), associer le sexe (XX : une fille), rappeler les conséquences propres à ce syndrome (déficience intellectuelle de degré variable, visage caractéristique, hypotonie). Le syndrome de Turner est un X seul. Une anomalie du caryotype n'est pas contagieuse. Le sexe se lit sur les gonosomes, pas sur le total.",
+              "answers": [
+                {
+                  "content": "Elle peut avoir une déficience intellectuelle de degré variable",
+                  "correct": true
+                },
+                {
+                  "content": "Son visage aux traits caractéristiques et ses muscles mous sont compatibles avec sa trisomie 21",
+                  "correct": true
+                },
+                {
+                  "content": "Elle a le syndrome de Turner",
+                  "correct": false
+                },
+                {
+                  "content": "Sa trisomie est une maladie contagieuse",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est un garçon, car elle a 47 chromosomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La mère d'Aïcha demande au médecin si sa fille a attrapé un microbe. Quelle réponse du médecin est correcte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode, étape finale : conclure en nuançant. La trisomie 21 est une anomalie du caryotype, présente dans les cellules de l'enfant : ce n'est ni une infection ni une maladie contagieuse, et les antibiotiques n'ont aucun effet sur les chromosomes. Dire qu'elle n'a aucune particularité est faux : le caryotype et les signes observés montrent une trisomie 21. Un suivi médical et éducatif aide l'enfant à progresser.",
+              "answers": [
+                {
+                  "content": "Non : c'est une anomalie du nombre de chromosomes dans les cellules de l'enfant, pas une infection ; un suivi médical et un accompagnement adapté sont possibles",
+                  "correct": true
+                },
+                {
+                  "content": "Oui : la trisomie 21 se transmet par contact avec une personne atteinte",
+                  "correct": false
+                },
+                {
+                  "content": "Non : Aïcha est en parfaite santé et n'a aucune particularité",
+                  "correct": false
+                },
+                {
+                  "content": "Oui : un traitement par antibiotiques fait disparaître le chromosome en trop",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Trois dossiers au laboratoire du centre de santé",
+          "statement": "Le laboratoire d'un centre de santé rend trois résultats à trois familles. Dans les trois dossiers, les 22 paires d'autosomes sont complètes (deux chromosomes chacune). Dossier 1 : un seul gonosome, un X. Dossier 2 : deux gonosomes, X et X. Dossier 3 : trois gonosomes, X, X et Y. Situations fictives, résultats simplifiés.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque dossier au résultat du laboratoire.",
+              "question_type": "matching",
+              "explanation": "Pour chaque dossier : compter (45, 46 ou 47 chromosomes), chercher la paire anormale, identifier les gonosomes, conclure. Dossier 1 : $44 + 1 = 45$, un seul X, donc Turner. Dossier 2 : $44 + 2 = 46$, XX, caryotype normal de femme. Dossier 3 : $44 + 3 = 47$, XXY, donc Klinefelter.",
+              "answers": [
+                {
+                  "content": "Dossier 1 : 22 paires d'autosomes complètes et un seul X",
+                  "match": "Syndrome de Turner"
+                },
+                {
+                  "content": "Dossier 2 : 22 paires d'autosomes complètes et deux X",
+                  "match": "Caryotype normal de femme"
+                },
+                {
+                  "content": "Dossier 3 : 22 paires d'autosomes complètes et X, X, Y",
+                  "match": "Syndrome de Klinefelter"
+                }
+              ]
+            },
+            {
+              "content": "Dans le dossier 3, combien de chromosomes sont des autosomes ?",
+              "question_type": "numeric",
+              "explanation": "Compter les paires d'autosomes : 22 paires de deux chromosomes, soit $22 \\times 2 = 44$ autosomes. Les trois autres chromosomes (X, X et Y) sont des gonosomes, ce qui donne 47 chromosomes en tout. Il ne faut pas compter les gonosomes parmi les autosomes.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "44",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans quels dossiers l'anomalie touche-t-elle les gonosomes ?",
+              "question_type": "single_choice",
+              "explanation": "Dossier 1 : un seul gonosome, il en manque un, donc 45 chromosomes. Dossier 2 : XX, normal. Dossier 3 : trois gonosomes, un en trop, 47 chromosomes. Les dossiers 1 et 3 présentent donc une anomalie des gonosomes ; le dossier 2 est normal.",
+              "answers": [
+                {
+                  "content": "Les dossiers 1 et 3",
+                  "correct": true
+                },
+                {
+                  "content": "Les dossiers 2 et 3",
+                  "correct": false
+                },
+                {
+                  "content": "Le dossier 1 seulement",
+                  "correct": false
+                },
+                {
+                  "content": "Les dossiers 1 et 2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le dossier 1 est celui d'un garçon, car il lui manque un chromosome.",
+              "question_type": "true_false",
+              "explanation": "Le sexe se lit sur les gonosomes. Dans le dossier 1, il y a un X et aucun Y. Sans chromosome Y, le phénotype est féminin : c'est le syndrome de Turner, qui touche des filles. Perdre un chromosome ne transforme donc pas une fille en garçon. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois affirmations exactes sur les dossiers 1 et 3 ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Dossier 1 : Turner, un X sans Y, phénotype féminin, stérilité en général. Dossier 3 : Klinefelter, XXY, il y a un Y donc phénotype masculin, stérilité en général. Ce n'est pas une trisomie, car aucune paire d'autosomes n'a trois chromosomes. Le dossier 3 compte $44 + 3 = 47$ chromosomes, et non 45.",
+              "answers": [
+                {
+                  "content": "Le dossier 1 concerne une personne de phénotype féminin",
+                  "correct": true
+                },
+                {
+                  "content": "Le dossier 3 concerne une personne de phénotype masculin",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux personnes sont en général stériles",
+                  "correct": true
+                },
+                {
+                  "content": "Le dossier 1 est une trisomie",
+                  "correct": false
+                },
+                {
+                  "content": "Le dossier 3 compte 45 chromosomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Par rapport au caryotype normal de 46 chromosomes, le dossier 3 compte ___ chromosome(s) en plus.",
+              "question_type": "fill_blank",
+              "explanation": "Le dossier 3 compte 47 chromosomes ($44 + 3$). Comparé à 46, il y a $47 - 46 = 1$ chromosome en plus : un troisième gonosome. Le dossier 1, à l'inverse, compte un chromosome de moins (45).",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                },
+                {
+                  "content": "un",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Consultation d'Ismaël et de sa mère",
+          "statement": "Mme Diabaté consulte au centre de santé avec son fils Ismaël, 17 ans. Il est plus grand que les garçons de son âge, a très peu de barbe et ses testicules sont petits. Le médecin prescrit un caryotype. Résultat : 47 chromosomes ; les 22 paires d'autosomes sont complètes ; les gonosomes sont X, X et Y. La petite sœur d'Ismaël, Mariam, 9 ans, n'a aucun signe particulier et son caryotype est normal. Famille fictive.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien d'autosomes compte le caryotype d'Ismaël ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : compter les paires d'autosomes. Les 22 paires sont complètes, soit $22 \\times 2 = 44$ autosomes. Les trois gonosomes (X, X et Y) sont à part. Le total $44 + 3 = 47$ explique le résultat du laboratoire : 47 comprend les gonosomes, il ne donne pas le nombre d'autosomes.",
+              "answers": [
+                {
+                  "content": "44",
+                  "correct": true
+                },
+                {
+                  "content": "45",
+                  "correct": false
+                },
+                {
+                  "content": "46",
+                  "correct": false
+                },
+                {
+                  "content": "47",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel syndrome présente Ismaël ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : compter (47, un de trop), chercher la paire anormale (les gonosomes), identifier (XXY), conclure. Les gonosomes XXY correspondent au syndrome de Klinefelter. Ce n'est pas une trisomie 21, car les paires d'autosomes sont complètes. Il y a un Y, ce n'est pas le syndrome de Turner.",
+              "answers": [
+                {
+                  "content": "Le syndrome de Klinefelter",
+                  "correct": true
+                },
+                {
+                  "content": "Le syndrome de Turner",
+                  "correct": false
+                },
+                {
+                  "content": "La trisomie 21",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun : son caryotype est normal",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La formule chromosomique normale de Mariam, sa petite sœur, est 44 autosomes + ___ .",
+              "question_type": "fill_blank",
+              "explanation": "Mariam est une fille au caryotype normal : 46 chromosomes, soit 22 paires d'autosomes (44) et une paire de gonosomes XX. Sa formule est 44 autosomes + XX. Le caryotype d'Ismaël, lui, a un gonosome de plus (XXY).",
+              "answers": [
+                {
+                  "content": "XX",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux affirmations exactes pour Ismaël ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : lire le caryotype (47, XXY), nommer le syndrome (Klinefelter), associer le sexe (il y a un Y : phénotype masculin), rappeler les conséquences (testicules petits, stérilité en général). Il ne manque aucun chromosome : il en a un de trop, $47 - 46 = 1$. Aucune paire d'autosomes n'a trois chromosomes : ce n'est pas une trisomie 21.",
+              "answers": [
+                {
+                  "content": "Il a un phénotype masculin, car son caryotype compte un Y",
+                  "correct": true
+                },
+                {
+                  "content": "Il est en général stérile",
+                  "correct": true
+                },
+                {
+                  "content": "Il a une trisomie 21",
+                  "correct": false
+                },
+                {
+                  "content": "Il lui manque un chromosome X",
+                  "correct": false
+                },
+                {
+                  "content": "Son caryotype compte 45 chromosomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam peut attraper le syndrome de Klinefelter si elle partage les repas d'Ismaël.",
+              "question_type": "true_false",
+              "explanation": "Le syndrome de Klinefelter est une anomalie du caryotype d'Ismaël. Ce n'est pas une infection : il n'existe aucun microbe en cause et aucun contact ne la transmet. Conclure en nuançant, c'est aussi rassurer la famille : l'anomalie d'Ismaël n'est pas contagieuse. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le médecin doit expliquer à Mme Diabaté ce que montre le caryotype d'Ismaël. Rédige son explication en trois ou quatre phrases : ce qu'est un caryotype, ce qu'on a vu d'anormal, le nom du syndrome et une conséquence.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Le caryotype est…",
+              "criteria": [
+                "Le caryotype est défini : classement des chromosomes par paires",
+                "L'anomalie est décrite : 47 chromosomes, gonosomes XXY",
+                "Le syndrome de Klinefelter est nommé",
+                "Une conséquence est citée (par exemple la stérilité) et le caractère non contagieux est précisé"
+              ],
+              "explanation": "Corrigé modèle : « Le caryotype est le classement des chromosomes d'une cellule par paires. Celui d'Ismaël compte 47 chromosomes au lieu de 46, avec trois gonosomes XXY. C'est le syndrome de Klinefelter. Il explique ses testicules petits et il peut entraîner une stérilité ; ce n'est pas une maladie contagieuse et un suivi médical est possible. » Barème sur 3 points : définition du caryotype (0,5), anomalie décrite (1), syndrome nommé (0,5), conséquence et nuance (1).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Trois consultations en une matinée",
+          "statement": "Au centre de santé, le médecin reçoit trois patients. Patient A : une fille de 11 ans, la plus petite de sa classe, que sa mère amène parce qu'elle ne grandit presque plus ; caryotype à 45 chromosomes : les autosomes sont normaux, il n'y a qu'un gonosome, un X. Patient B : un garçon de 3 ans, au retard de langage, au visage aux traits caractéristiques et aux muscles mous ; caryotype à 47 chromosomes, avec trois chromosomes 21 et les gonosomes XY. Patient C : un homme de 25 ans, grand, qui consulte avec sa femme parce que le couple n'arrive pas à avoir d'enfant ; caryotype à 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes XXY. Situations fictives, résultats simplifiés.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Chez quel patient l'anomalie touche-t-elle une paire d'autosomes ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : chercher la paire anormale. Patient A : les 22 paires d'autosomes sont complètes, c'est le gonosome qui manque. Patient B : trois chromosomes 21, donc un autosome en excès. Patient C : les 22 paires sont complètes, ce sont les gonosomes (XXY) qui sont en excès. Seul B a une anomalie d'autosome.",
+              "answers": [
+                {
+                  "content": "Le patient B",
+                  "correct": true
+                },
+                {
+                  "content": "Le patient A",
+                  "correct": false
+                },
+                {
+                  "content": "Le patient C",
+                  "correct": false
+                },
+                {
+                  "content": "Les patients A et C",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque patient à son diagnostic.",
+              "question_type": "matching",
+              "explanation": "Méthode : compter, chercher la paire anormale, identifier, conclure. A : 45 chromosomes et un X seul, donc syndrome de Turner. B : 47 chromosomes dont trois 21, donc trisomie 21. C : 47 chromosomes et gonosomes XXY, donc syndrome de Klinefelter. B et C ont le même total (47) mais pas la même anomalie.",
+              "answers": [
+                {
+                  "content": "Patient A (45 chromosomes, un seul X)",
+                  "match": "Syndrome de Turner"
+                },
+                {
+                  "content": "Patient B (47 chromosomes, trois chromosomes 21)",
+                  "match": "Trisomie 21"
+                },
+                {
+                  "content": "Patient C (47 chromosomes, XXY)",
+                  "match": "Syndrome de Klinefelter"
+                }
+              ]
+            },
+            {
+              "content": "Combien de gonosomes possède le patient C ?",
+              "question_type": "numeric",
+              "explanation": "Les gonosomes du patient C sont X, X et Y : il en possède 3 au lieu de 2. Ses 22 paires d'autosomes sont complètes, soit 44 autosomes, et $44 + 3 = 47$ chromosomes. Un gonosome en excès caractérise le syndrome de Klinefelter.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Chez la patiente A, c'est l'absence de chromosome Y qui explique le phénotype féminin.",
+              "question_type": "true_false",
+              "explanation": "Le sexe se lit sur les gonosomes. La patiente A n'a qu'un X et aucun Y. Sans Y, le phénotype est féminin, même si un chromosome manque. C'est le cas dans le syndrome de Turner. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois affirmations exactes sur les patients A, B et C ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "A compte 45 chromosomes, B et C en comptent 47 : aucun n'a 46. A (X seul) et C (XXY) ont une anomalie des gonosomes. B et C ont le même total mais pas la même anomalie : B est une trisomie 21 (autosome), C un syndrome de Klinefelter (gonosomes). B a des gonosomes XY : c'est un garçon.",
+              "answers": [
+                {
+                  "content": "Les patients B et C ont chacun 47 chromosomes",
+                  "correct": true
+                },
+                {
+                  "content": "Les patients A et C ont une anomalie des gonosomes",
+                  "correct": true
+                },
+                {
+                  "content": "Aucun des trois n'a un caryotype à 46 chromosomes",
+                  "correct": true
+                },
+                {
+                  "content": "Les patients B et C ont la même anomalie",
+                  "correct": false
+                },
+                {
+                  "content": "Le patient B est une fille",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes que suit le médecin pour interpréter un caryotype.",
+              "question_type": "ordering",
+              "explanation": "Le médecin compte d'abord les chromosomes et compare à 46, puis cherche la paire anormale et l'identifie pour nommer le syndrome. Ensuite seulement il rappelle les conséquences du syndrome et conclut en nuançant. Nommer le syndrome avant d'avoir identifié la paire est une erreur : 47 chromosomes peut être une trisomie 21 comme un Klinefelter.",
+              "answers": [
+                {
+                  "content": "Compter les chromosomes et comparer à 46"
+                },
+                {
+                  "content": "Chercher la paire anormale"
+                },
+                {
+                  "content": "Identifier cette paire et nommer le syndrome"
+                },
+                {
+                  "content": "Rappeler ses conséquences et conclure en nuançant"
+                }
+              ]
+            },
+            {
+              "content": "Compare le syndrome de Turner et le syndrome de Klinefelter : donne pour chacun le caryotype, le sexe de la personne et une conséquence.",
+              "question_type": "written",
+              "points": 4,
+              "starter": "Dans le syndrome de Turner…",
+              "criteria": [
+                "Turner : 45 chromosomes, un seul X, 44 autosomes + X",
+                "Klinefelter : 47 chromosomes, XXY, 44 autosomes + XXY",
+                "Sexe : phénotype féminin pour Turner, masculin pour Klinefelter",
+                "Une conséquence de chacun (par exemple petite taille ou stérilité)"
+              ],
+              "explanation": "Corrigé modèle : « Dans le syndrome de Turner, le caryotype compte 45 chromosomes avec un seul X (44 autosomes + X) : la personne est de phénotype féminin, de petite taille, avec une puberté incomplète et en général stérile. Dans le syndrome de Klinefelter, le caryotype compte 47 chromosomes avec les gonosomes XXY (44 autosomes + XXY) : la personne est de phénotype masculin, souvent grande, avec des testicules petits et en général stérile. » Barème sur 4 points : caryotype de Turner (1), caryotype de Klinefelter (1), sexe des deux (1), une conséquence de chacun (1).",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Le caryotype humain normal (46 chromosomes, 22 paires d'autosomes, gonosomes XX ou XY), les anomalies de nombre (trisomie 21, syndrome de Turner, syndrome de Klinefelter), leurs formules et leurs conséquences.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le laboratoire d'un centre de santé rappelle comment lire un caryotype humain normal.",
+              "hint": "Un caryotype normal : 46 chromosomes, soit 22 paires d'autosomes et une paire de gonosomes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de chromosomes compte un caryotype humain normal ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 23 paires de chromosomes, soit 46 chromosomes. 23 est le nombre de paires, 44 le nombre d'autosomes, 47 celui d'une trisomie.",
+                  "answers": [
+                    {
+                      "content": "46",
+                      "correct": true
+                    },
+                    {
+                      "content": "23",
+                      "correct": false
+                    },
+                    {
+                      "content": "44",
+                      "correct": false
+                    },
+                    {
+                      "content": "47",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype normal compte 22 paires d'autosomes. Combien d'autosomes cela fait-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Compter les paires d'autosomes : $22 \\times 2 = 44$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "44",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La paire de chromosomes sexuels, qui détermine le sexe, est la paire de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Repérer la dernière paire : c'est la paire de gonosomes, XX chez la femme et XY chez l'homme.",
+                  "answers": [
+                    {
+                      "content": "gonosomes",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le caryotype normal d'un homme a pour formule 44 autosomes + XY. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : un homme normal a 44 autosomes et les gonosomes XY, soit 46 chromosomes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque sexe à la formule de son caryotype normal.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Lire la nature de la paire de gonosomes. Étape 4 — Conclure : XX chez la femme, XY chez l'homme, avec 44 autosomes dans les deux cas.",
+                  "answers": [
+                    {
+                      "content": "Femme",
+                      "match": "44 autosomes + XX"
+                    },
+                    {
+                      "content": "Homme",
+                      "match": "44 autosomes + XY"
+                    },
+                    {
+                      "content": "Caryotype",
+                      "match": "Classement des chromosomes par paires"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Résultats d'exemple de quatre dossiers d'un laboratoire. A : 46 chromosomes, gonosomes XX. B : 47 chromosomes, trois chromosomes dans la paire 21, gonosomes XY. C : 45 chromosomes, un seul gonosome X. D : 47 chromosomes, gonosomes XXY.",
+              "hint": "Compte les chromosomes, cherche la paire anormale, puis nomme l'anomalie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un caryotype compte 47 chromosomes dont trois chromosomes 21, avec les gonosomes XY. Quelle est l'anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — Chercher la paire anormale : la paire 21. Étape 3 — Identifier : un autosome. Étape 4 — Conclure : trisomie 21.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune anomalie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype compte 45 chromosomes, avec un seul gonosome, un X. Quelle est l'anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 45, un de moins que 46. Étape 2 — Chercher la paire anormale : les gonosomes. Étape 3 — Identifier : un seul X. Étape 4 — Conclure : syndrome de Turner.",
+                  "answers": [
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune anomalie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype compte 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes X, X et Y. Quelle est l'anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — Chercher la paire anormale : les gonosomes. Étape 3 — Identifier : XXY. Étape 4 — Conclure : syndrome de Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune anomalie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype montre 22 paires d'autosomes complètes et trois gonosomes X, X et Y. Combien de chromosomes compte-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : $44 + 3 = 47$ chromosomes.",
+                  "answers": [
+                    {
+                      "content": "47",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le nombre total de chromosomes suffit toujours à nommer l'anomalie. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher la paire anormale : la trisomie 21 et le syndrome de Klinefelter ont tous deux 47 chromosomes. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une conférence au lycée présente les conséquences des trois anomalies de nombre du programme.",
+              "hint": "Les conséquences sont propres à chaque syndrome et varient d'une personne à l'autre. Ce ne sont pas des maladies contagieuses.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque syndrome à une conséquence qui lui est propre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Nommer le syndrome. Étape 4 — Rappeler les conséquences propres : trisomie 21, déficience intellectuelle ; Turner, petite taille et puberté incomplète ; Klinefelter, testicules petits et stérilité.",
+                  "answers": [
+                    {
+                      "content": "Trisomie 21",
+                      "match": "Déficience intellectuelle de degré variable"
+                    },
+                    {
+                      "content": "Syndrome de Turner",
+                      "match": "Petite taille et puberté incomplète"
+                    },
+                    {
+                      "content": "Syndrome de Klinefelter",
+                      "match": "Testicules petits et stérilité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les anomalies chromosomiques ne sont pas des maladies contagieuses. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : ce sont des anomalies du caryotype, pas des maladies contagieuses. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une jeune fille est petite et sa puberté est incomplète. Son caryotype compte 45 chromosomes avec un seul X. Quel est le syndrome ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le caryotype : 45, un seul X. Étape 2 — Nommer : Turner. Étape 4 — Les conséquences correspondent.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un caryotype normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences possibles de la trisomie 21 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Rappeler : trisomie 21 = déficience intellectuelle de degré variable, visage caractéristique, muscles souvent mous. Les autres propositions sont des conséquences des syndromes de Turner et de Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Un visage aux traits caractéristiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une petite taille avec des ovaires peu développés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une déficience intellectuelle de degré variable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des testicules petits avec une stérilité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une grande taille avec une pilosité peu développée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le syndrome de Turner touche des personnes de phénotype ___ (féminin ou masculin).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Associer le sexe : un seul X et pas de Y, phénotype féminin.",
+                  "answers": [
+                    {
+                      "content": "féminin",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Les formules de caryotype s'écrivent : nombre d'autosomes + gonosomes. Un caryotype normal s'écrit 44 autosomes + XX ou 44 autosomes + XY.",
+              "hint": "Trisomie 21 : un 21 en plus, donc 45 autosomes. Turner : 44 autosomes + X. Klinefelter : 44 autosomes + XXY.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La formule du caryotype d'une fille atteinte de trisomie 21 est 45 autosomes + ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Identifier : la trisomie 21 touche un autosome ; les gonosomes d'une fille sont XX. Étape 4 — Conclure : 45 autosomes + XX.",
+                  "answers": [
+                    {
+                      "content": "XX",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fille est atteinte de trisomie 21 : 22 paires d'autosomes avec un 21 en trop. Combien d'autosomes a-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Chercher la paire anormale : $44 + 1 = 45$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la formule du caryotype du syndrome de Turner ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier : un seul gonosome X. Étape 4 — Conclure : 44 autosomes + X, soit 45 chromosomes.",
+                  "answers": [
+                    {
+                      "content": "44 autosomes + XXY",
+                      "correct": false
+                    },
+                    {
+                      "content": "45 autosomes + XX",
+                      "correct": false
+                    },
+                    {
+                      "content": "44 autosomes + X",
+                      "correct": true
+                    },
+                    {
+                      "content": "46 autosomes + XX",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la formule du caryotype du syndrome de Klinefelter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier : les gonosomes XXY. Étape 4 — Conclure : 44 autosomes + XXY, soit 47 chromosomes.",
+                  "answers": [
+                    {
+                      "content": "44 autosomes + X",
+                      "correct": false
+                    },
+                    {
+                      "content": "45 autosomes + XY",
+                      "correct": false
+                    },
+                    {
+                      "content": "44 autosomes + XX",
+                      "correct": false
+                    },
+                    {
+                      "content": "44 autosomes + XXY",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype a pour formule 44 autosomes + X. Combien de chromosomes compte-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : $44 + 1 = 45$ chromosomes.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Des consultations fictives dans des centres de santé de Côte d'Ivoire : lire un caryotype, nommer l'anomalie, relier le syndrome à ses conséquences, répondre aux idées reçues.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le laboratoire d'un centre de santé de Bouaké rend le caryotype d'un nouveau-né : 47 chromosomes, trois chromosomes dans la paire 21, gonosomes X et Y.",
+              "hint": "Cherche la paire anormale, puis lis les gonosomes pour le sexe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le caryotype d'un nouveau-né compte 47 chromosomes, dont trois chromosomes 21, avec les gonosomes X et Y. Quel est son sexe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer la paire de gonosomes : X et Y. Étape 4 — Conclure : la présence d'un Y indique un garçon.",
+                  "answers": [
+                    {
+                      "content": "C'est un garçon",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est une fille",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sexe n'est pas défini par les gonosomes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le caryotype d'un nouveau-né compte 47 chromosomes, dont trois chromosomes 21. Quelle est l'anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — Chercher la paire anormale : la paire 21. Étape 4 — Conclure : trisomie 21.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune anomalie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un garçon atteint de trisomie 21 a 22 paires d'autosomes dont une, la paire 21, compte un chromosome en trop. Combien d'autosomes a-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Compter : $44 + 1 = 45$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La trisomie 21 est une anomalie du caryotype, pas une maladie contagieuse. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : ce ne sont pas des maladies contagieuses. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences possibles de la trisomie 21 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Rappeler les conséquences propres : déficience intellectuelle de degré variable, visage caractéristique, muscles souvent mous. Les autres relèvent des syndromes de Turner et de Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Des muscles souvent mous",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une petite taille avec une puberté incomplète",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des testicules petits avec une grande taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une déficience intellectuelle de degré variable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une stérilité due à un seul gonosome X",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une adolescente de 15 ans, plus petite que les filles de son âge et sans règles, consulte dans un centre de santé d'Abidjan. Son caryotype montre 45 chromosomes, avec un seul gonosome X.",
+              "hint": "Un seul X et pas de Y : phénotype féminin. Les conséquences sont propres au syndrome.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le caryotype d'une adolescente compte 45 chromosomes, avec un seul gonosome X. Quel est le syndrome ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 45, un seul X. Étape 2 — Nommer : Turner.",
+                  "answers": [
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un caryotype normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype avec un seul X et pas de Y correspond à un phénotype féminin. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer le sexe : pas de Y, phénotype féminin. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conséquences sont propres au syndrome de Turner ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Rappeler les conséquences : petite taille, ovaires peu développés, puberté incomplète et stérilité ; l'intelligence est en général normale.",
+                  "answers": [
+                    {
+                      "content": "Petite taille, ovaires peu développés, puberté incomplète, stérilité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Déficience intellectuelle et visage caractéristique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Grande taille et testicules petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune conséquence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une adolescente atteinte du syndrome de Turner a 22 paires d'autosomes complètes et un seul chromosome X. Combien de chromosomes compte son caryotype ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : $44 + 1 = 45$.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une adolescente a le syndrome de Turner. Que peut-on dire à sa famille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 5 — Conclure en nuançant : les conséquences varient d'une personne à l'autre et un accompagnement est possible. Ce n'est pas contagieux ; l'intelligence est en général normale.",
+                  "answers": [
+                    {
+                      "content": "Elle a forcément une déficience intellectuelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les conséquences varient d'une personne à l'autre, un suivi médical est possible et ce n'est pas contagieux",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est contagieux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne peut l'aider",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un adolescent de 17 ans, très grand, aux testicules petits, consulte au centre de santé d'un quartier de Yamoussoukro. Son caryotype compte 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes X, X et Y.",
+              "hint": "Gonosomes XXY : phénotype masculin. Cherche les conséquences propres à ce syndrome.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un caryotype compte 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes X, X et Y. Quel est le syndrome ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 47, gonosomes XXY. Étape 2 — Nommer : Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un caryotype normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype montre les gonosomes X, X et Y. Quel est le phénotype ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer le sexe : la présence d'un Y donne un phénotype masculin.",
+                  "answers": [
+                    {
+                      "content": "Féminin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Indéterminé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Masculin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences possibles du syndrome de Klinefelter ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Rappeler : souvent grande taille, testicules petits, stérilité, pilosité peu développée. Les autres sont des conséquences de Turner ou de la trisomie 21.",
+                  "answers": [
+                    {
+                      "content": "Souvent une grande taille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une stérilité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une petite taille avec une puberté incomplète",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une déficience intellectuelle de degré variable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un visage aux traits caractéristiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le syndrome de Klinefelter est une maladie contagieuse. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : c'est une anomalie du caryotype, pas une maladie contagieuse. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La formule du caryotype du syndrome de Klinefelter est 44 autosomes + ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Identifier les gonosomes : X, X et Y. Étape 4 — Conclure : 44 autosomes + XXY.",
+                  "answers": [
+                    {
+                      "content": "XXY",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un quartier, on entend des idées reçues : « un enfant trisomique 21 a attrapé une maladie contagieuse », « toutes les anomalies du caryotype ont les mêmes conséquences ». Un agent de santé répond.",
+              "hint": "Une anomalie du caryotype n'est pas contagieuse. Chaque syndrome a ses conséquences propres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un voisin affirme : « Un enfant trisomique 21 a attrapé une maladie contagieuse. » Quelle est la bonne réponse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Nommer : la trisomie 21 est une anomalie du caryotype. Étape 5 — Conclure : ce n'est pas contagieux.",
+                  "answers": [
+                    {
+                      "content": "Oui : la trisomie 21 se transmet par contact",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : c'est une anomalie du caryotype, avec trois chromosomes 21, pas une maladie contagieuse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : elle se transmet par l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : la trisomie 21 n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un suivi médical et un accompagnement adapté aident les personnes atteintes d'une anomalie du caryotype. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : un suivi médical et un accompagnement adapté aident ces personnes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un voisin affirme : « Toutes les anomalies du caryotype ont les mêmes conséquences. » Quelle est la bonne réponse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Rappeler les conséquences propres à chaque syndrome. Étape 5 — Les conséquences varient d'un syndrome à l'autre et d'une personne à l'autre.",
+                  "answers": [
+                    {
+                      "content": "Vrai : elles donnent toutes une déficience intellectuelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai : elles donnent toutes une petite taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : chaque syndrome a ses conséquences propres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux : aucune n'a de conséquence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Associer le sexe : Turner, phénotype féminin. Étape 5 — Les conséquences varient d'une personne à l'autre.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner se transmet comme une maladie contagieuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21 ne touche que les garçons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les personnes atteintes ont les mêmes conséquences",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les conséquences varient d'une personne à l'autre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Turner touche des personnes de phénotype féminin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les anomalies du caryotype ne sont pas des maladies ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 5 — Conclure : ce sont des anomalies du caryotype, pas des maladies contagieuses.",
+                  "answers": [
+                    {
+                      "content": "contagieuses",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Utiliser l'arbre de décision pour nommer un caryotype, montrer que le nombre total ne suffit pas, justifier un diagnostic à partir du caryotype et des signes, calculer des formules de caryotype.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Arbre de décision pour nommer un caryotype. Question 1 : compte-t-il 46 chromosomes ? Si oui, il est normal. Sinon, question 2 : la paire 21 a-t-elle trois chromosomes ? Si oui, trisomie 21. Sinon, question 3 : n'y a-t-il qu'un seul gonosome X ? Si oui, syndrome de Turner. Sinon, question 4 : les gonosomes sont-ils XXY ? Si oui, syndrome de Klinefelter.",
+              "hint": "Parcours l'arbre dans l'ordre des questions, en t'arrêtant dès que la réponse est « oui ».",
+              "exercise_type": "evaluation",
+              "figure": "arbre-nommer-anomalie",
+              "questions": [
+                {
+                  "content": "Un caryotype compte 46 chromosomes avec les gonosomes XX. Que conclut-on en suivant l'arbre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 46 chromosomes. Étape 4 — Conclure : le caryotype est normal.",
+                  "answers": [
+                    {
+                      "content": "Il est normal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Syndrome de Klinefelter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype compte 47 chromosomes dont trois chromosomes 21. Que conclut-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — La paire 21 a trois chromosomes. Étape 4 — Conclure : trisomie 21.",
+                  "answers": [
+                    {
+                      "content": "Caryotype normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trisomie 21",
+                      "correct": true
+                    },
+                    {
+                      "content": "Syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Syndrome de Klinefelter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype compte 45 chromosomes avec un seul gonosome, un X. Que conclut-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 45. Étape 2 — La paire 21 est normale. Étape 3 — Identifier : un seul X. Étape 4 — Conclure : syndrome de Turner.",
+                  "answers": [
+                    {
+                      "content": "Trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Caryotype normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Syndrome de Turner",
+                      "correct": true
+                    },
+                    {
+                      "content": "Syndrome de Klinefelter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype compte 47 chromosomes, la paire 21 compte deux chromosomes, les gonosomes sont X, X et Y. Que conclut-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — La paire 21 n'a pas trois chromosomes. Étape 3 — Il y a plus d'un X. Étape 4 — Les gonosomes sont XXY : syndrome de Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Caryotype normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Syndrome de Klinefelter",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre questions de l'arbre de décision.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — On commence par compter les chromosomes. Étape 2 — On cherche ensuite la paire 21 anormale, puis le gonosome X unique, puis XXY. On s'arrête dès qu'une réponse est « oui ».",
+                  "answers": [
+                    {
+                      "content": "Le caryotype compte-t-il 46 chromosomes ?"
+                    },
+                    {
+                      "content": "La paire 21 a-t-elle trois chromosomes ?"
+                    },
+                    {
+                      "content": "N'y a-t-il qu'un seul gonosome X ?"
+                    },
+                    {
+                      "content": "Les gonosomes sont-ils XXY ?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux dossiers ont chacun 47 chromosomes. Dossier P : trois chromosomes dans la paire 21, gonosomes XY. Dossier Q : toutes les paires d'autosomes ont deux chromosomes, gonosomes XXY.",
+              "hint": "Le nombre total est le même : cherche la paire anormale dans chaque dossier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un dossier compte 47 chromosomes, dont trois chromosomes 21 et les gonosomes XY. Quelle est l'anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — Paire anormale : la paire 21. Étape 4 — Trisomie 21.",
+                  "answers": [
+                    {
+                      "content": "La trisomie 21",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune anomalie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un dossier compte 47 chromosomes, toutes les paires d'autosomes ont deux chromosomes et les gonosomes sont XXY. Quelle est l'anomalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — Paire anormale : les gonosomes. Étape 3 — XXY. Étape 4 — Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune anomalie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 47 suffit à nommer l'anomalie d'un caryotype. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Deux anomalies différentes ont 47 chromosomes : il faut chercher la paire anormale. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype de trisomie 21 a 22 paires d'autosomes dont une, la paire 21, compte un chromosome en trop. Combien d'autosomes compte-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — $44 + 1 = 45$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux caryotypes comptent 47 chromosomes : le premier a trois chromosomes 21 et les gonosomes XY, le second a toutes ses paires d'autosomes à deux chromosomes et les gonosomes XXY. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Identifier : la trisomie 21 touche l'autosome 21 ; le syndrome de Klinefelter touche les gonosomes. Les deux dossiers ont 47 chromosomes.",
+                  "answers": [
+                    {
+                      "content": "Les deux dossiers sont des trisomies 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dossier XXY touche les gonosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dossier XXY touche l'autosome 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dossier de trisomie 21 touche un autosome",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dossier de trisomie 21 compte 45 chromosomes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une fille de 14 ans est petite, sa puberté n'a pas commencé, son intelligence est normale. Son caryotype compte 45 chromosomes, avec 22 paires d'autosomes complètes et un seul gonosome X.",
+              "hint": "Justifie à partir du caryotype puis des signes, sans reporter les conséquences d'un autre syndrome.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une fille de 14 ans est petite, sa puberté n'a pas commencé et son caryotype compte 45 chromosomes avec un seul gonosome X. Quels sont les trois arguments qui justifient le diagnostic de syndrome de Turner ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Lire : 45 chromosomes. Étape 2 — Nommer : un seul X, Turner. Étape 4 — Les signes concordent. La paire 21 est normale ; l'intelligence normale ne prouve pas une trisomie 21.",
+                  "answers": [
+                    {
+                      "content": "La paire 21 compte trois chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a qu'un seul gonosome X",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une intelligence normale prouve une trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caryotype compte 45 chromosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "La petite taille et la puberté incomplète correspondent au syndrome",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype compte 45 chromosomes, dont un seul gonosome, un X. Pourquoi n'est-il pas celui d'une trisomie 21 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 45 chromosomes. Étape 2 — Pas de paire 21 à trois chromosomes. Étape 4 — Conclure : Turner.",
+                  "answers": [
+                    {
+                      "content": "Il compte 45 chromosomes et un seul X, la paire 21 n'a pas trois chromosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il compte 47 chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il compte trois chromosomes 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il montre les gonosomes XXY",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fille atteinte du syndrome de Turner a 22 paires d'autosomes complètes. Combien d'autosomes a-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $22 \\times 2 = 44$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "44",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une intelligence en général normale est cohérente avec le syndrome de Turner. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Rappeler : dans le syndrome de Turner, l'intelligence est en général normale. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype comporte un seul gonosome, un X, et aucun chromosome Y. Quel est le phénotype ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer le sexe : pas de Y, phénotype féminin.",
+                  "answers": [
+                    {
+                      "content": "Masculin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Féminin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Indéterminé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un caryotype normal s'écrit 44 autosomes + XX (femme) ou 44 autosomes + XY (homme). Un élève calcule des formules de caryotype pour un devoir.",
+              "hint": "Additionne les autosomes et les gonosomes pour trouver le total.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un caryotype a pour formule 44 autosomes + XX. Combien de chromosomes compte-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : $44 + 2 = 46$ chromosomes.",
+                  "answers": [
+                    {
+                      "content": "46",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un garçon atteint du syndrome de Klinefelter a pour formule 44 autosomes + XXY. Combien de chromosomes compte-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : $44 + 3 = 47$ chromosomes.",
+                  "answers": [
+                    {
+                      "content": "47",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pourquoi la formule d'une fille atteinte de trisomie 21 est-elle 45 autosomes + XX ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher la paire anormale : la paire 21 compte trois chromosomes. Étape 3 — $44 + 1 = 45$ autosomes. Étape 4 — Conclure : 45 autosomes + XX.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'elle a un chromosome X supplémentaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle n'a que 22 autosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les 44 autosomes normaux s'ajoutent à un chromosome 21 supplémentaire, avec les gonosomes XX",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la formule est toujours 45 autosomes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le syndrome de Turner, le caryotype compte 22 paires d'autosomes complètes. Combien de gonosomes compte-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Identifier : un seul gonosome, un X, sans second gonosome. Étape 4 — Conclure : 1 gonosome, soit $44 + 1 = 45$ chromosomes.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La formule « 46 autosomes + XX » est exacte pour un caryotype normal de femme. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Il y a 22 paires d'autosomes seulement, soit 44. Étape 4 — « 46 autosomes + XX » donnerait $46 + 2 = 48$ chromosomes. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : lire un caryotype normal, nommer une anomalie de nombre (trisomie 21, Turner, Klinefelter), écrire la formule, relier le syndrome à ses conséquences, avec des calculs simples sur des dossiers fictifs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois dossiers d'un laboratoire (cas d'exemple). Dossier 1 : 46 chromosomes, gonosomes XX. Dossier 2 : 47 chromosomes, trois chromosomes 21, gonosomes XX. Dossier 3 : 45 chromosomes, un seul gonosome X.",
+              "hint": "Lis chaque dossier : nombre total, paire anormale, gonosomes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque dossier à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter. Étape 2 — Chercher la paire anormale. Étape 3 — Lire les gonosomes. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "46 chromosomes, gonosomes XX",
+                      "match": "Fille au caryotype normal"
+                    },
+                    {
+                      "content": "47 chromosomes, trois chromosomes 21, gonosomes XX",
+                      "match": "Fille atteinte de trisomie 21"
+                    },
+                    {
+                      "content": "45 chromosomes, un seul gonosome X",
+                      "match": "Syndrome de Turner"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fille atteinte de trisomie 21 a 22 paires d'autosomes dont une, la paire 21, compte un chromosome en trop. Combien d'autosomes a-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — $44 + 1 = 45$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un caryotype compte 45 chromosomes avec un seul gonosome, un X. Quel est le phénotype ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer le sexe : pas de Y, phénotype féminin.",
+                  "answers": [
+                    {
+                      "content": "Masculin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Indéterminé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Féminin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La trisomie 21 touche un autosome. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Identifier : la paire 21 est une paire d'autosomes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La formule du caryotype du syndrome de Turner est 44 autosomes + ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Identifier : un seul gonosome, un X. Étape 4 — Conclure : 44 autosomes + X.",
+                  "answers": [
+                    {
+                      "content": "X",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Ismaël, 16 ans, est très grand et ses testicules sont petits. Son caryotype compte 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes X, X et Y.",
+              "hint": "Gonosomes XXY : syndrome de Klinefelter, phénotype masculin.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un caryotype compte 47 chromosomes, avec les gonosomes X, X et Y. Quel est le syndrome ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 47, XXY. Étape 2 — Nommer : Klinefelter.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un caryotype normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caryotype comporte les gonosomes X, X et Y. Quel est le phénotype ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer le sexe : un Y, phénotype masculin.",
+                  "answers": [
+                    {
+                      "content": "Féminin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Masculin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Indéterminé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adolescent atteint du syndrome de Klinefelter a 22 paires d'autosomes complètes. Combien d'autosomes a-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — $22 \\times 2 = 44$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "44",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelles sont les deux conséquences possibles du syndrome de Klinefelter ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Rappeler : souvent grande taille, testicules petits, stérilité, pilosité peu développée. Les autres propositions relèvent d'autres syndromes.",
+                  "answers": [
+                    {
+                      "content": "Une déficience intellectuelle de degré variable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une petite taille avec une puberté incomplète",
+                      "correct": false
+                    },
+                    {
+                      "content": "Souvent une grande taille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un visage aux traits caractéristiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une stérilité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le syndrome de Klinefelter est une anomalie du caryotype qui se transmet comme une maladie contagieuse. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : c'est une anomalie du caryotype, pas une maladie contagieuse. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au centre de santé, un technicien lit un caryotype et plusieurs personnes donnent leur avis.",
+              "hint": "Le nombre total ne suffit pas : cherche la paire anormale. Chaque syndrome a ses conséquences.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un technicien dit : « 47 chromosomes, c'est donc la trisomie 21. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 47. Étape 2 — Chercher la paire anormale : paire 21 pour la trisomie, XXY pour Klinefelter. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Oui : 47 chromosomes signifient toujours trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : 47 chromosomes est un caryotype normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : seul le nombre compte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : le syndrome de Klinefelter a aussi 47 chromosomes, il faut chercher la paire anormale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux anomalies qui touchent les gonosomes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Identifier : Turner (un seul X) et Klinefelter (XXY) touchent les gonosomes ; la trisomie 21 touche l'autosome 21.",
+                  "answers": [
+                    {
+                      "content": "Le syndrome de Turner",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Klinefelter",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trisomie 21",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caryotype normal de femme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caryotype normal d'homme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour lire un caryotype normal.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Compter. Étape 2 — Compter les paires d'autosomes. Étape 3 — Repérer la paire de gonosomes. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Compter tous les chromosomes du caryotype."
+                    },
+                    {
+                      "content": "Compter les paires d'autosomes et vérifier que chacune contient deux chromosomes."
+                    },
+                    {
+                      "content": "Repérer la dernière paire, celle des gonosomes, et lire sa nature."
+                    },
+                    {
+                      "content": "Conclure : donner le sexe et la formule."
+                    }
+                  ]
+                },
+                {
+                  "content": "La trisomie 21 touche les garçons comme les filles. L'affirmation est :",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer le sexe : la trisomie 21 touche un autosome, donc les garçons comme les filles. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La déficience intellectuelle de degré variable est une conséquence de la trisomie ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Rappeler : la déficience intellectuelle de degré variable est une conséquence de la trisomie 21.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Trois consultations en une matinée (cas d'exemple). A : un nouveau-né, 47 chromosomes, trois chromosomes 21, gonosomes XY. B : une adolescente, 45 chromosomes, un seul gonosome X. C : un adolescent, 47 chromosomes, gonosomes XXY.",
+              "hint": "Pour chaque consultation : compter, chercher la paire anormale, associer le sexe, rappeler les conséquences.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque consultation à son syndrome.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter. Étape 2 — Chercher la paire anormale. Étape 3 — Identifier. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Nouveau-né, 47 chromosomes, trois chromosomes 21, XY",
+                      "match": "Trisomie 21"
+                    },
+                    {
+                      "content": "Adolescente, 45 chromosomes, un seul X",
+                      "match": "Syndrome de Turner"
+                    },
+                    {
+                      "content": "Adolescent, 47 chromosomes, XXY",
+                      "match": "Syndrome de Klinefelter"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nouveau-né atteint de trisomie 21 a 22 paires d'autosomes dont une, la paire 21, compte un chromosome en trop. Combien d'autosomes a-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — $44 + 1 = 45$ autosomes.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Parmi ces trois personnes (trisomie 21 avec XY, Turner avec un seul X, Klinefelter avec XXY), laquelle est de phénotype féminin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer le sexe : Turner, pas de Y, phénotype féminin ; les deux autres ont un Y.",
+                  "answers": [
+                    {
+                      "content": "Celle atteinte de trisomie 21 avec XY",
+                      "correct": false
+                    },
+                    {
+                      "content": "La personne atteinte du syndrome de Turner",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celle atteinte du syndrome de Klinefelter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À propos de la trisomie 21, du syndrome de Turner et du syndrome de Klinefelter, quelles sont les trois affirmations exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Compter : trisomie 21, 47 ; Turner, 45 ; Klinefelter, 47. Étape 3 — Identifier la paire concernée. Les anomalies ne sont pas contagieuses.",
+                  "answers": [
+                    {
+                      "content": "Dans le syndrome de Klinefelter, les gonosomes sont XXY",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Turner n'a qu'un seul gonosome X",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trisomie 21 compte 45 chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trisomie 21 touche un autosome",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le syndrome de Turner est contagieux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une famille apprend que son enfant a la trisomie 21, le syndrome de Turner ou le syndrome de Klinefelter. Que peut-on lui dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 5 — Conclure en nuançant : les conséquences varient d'une personne à l'autre ; un suivi médical et un accompagnement adapté aident ; ce ne sont pas des maladies contagieuses.",
+                  "answers": [
+                    {
+                      "content": "Les trois syndromes ont exactement les mêmes conséquences",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce sont des maladies contagieuses",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun suivi n'est possible",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les conséquences varient d'une personne à l'autre, un suivi médical et un accompagnement adapté aident, et ce n'est pas contagieux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
