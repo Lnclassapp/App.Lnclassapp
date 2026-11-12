@@ -8,7 +8,7 @@ Décision du porteur (2026-11-12) : au train, on ne rend **que les leçons nouve
 
 1. Job `plan`, étape `changes` : à partir de la liste `files` déjà lue (fichiers de la PR), garder les `docs/contenus/lecons-traitees/*/*/*.json` présents dans l'arbre (un fichier supprimé ne se rend pas). Sorties nouvelles :
    - `lecons_files` : la liste séparée par des virgules ; vide → le contenu de `script/ci/lecons_temoins.txt` ;
-   - `lecons_parts` : tableau JSON `[1..n]`, n = max(1, ⌈nombre de fichiers / 10⌉) (10 leçons au plus par part : décision du porteur du 2026-11-12 ; ≈ 20 s par leçon + ≈ 50 s d'installation, soit ≈ 250 s au pire).
+   - `lecons_parts` : tableau JSON `[1..n]`, n = max(1, ⌈nombre de fichiers / 8⌉) (8 leçons au plus par part : décision du porteur du 2026-11-12, après le train #545 où la part la plus longue de 10 leçons a fini à 283 s pour 300 s).
    - Lecture du diff impossible → comportement prudent : liste vide côté sélection = les témoins **et** un avertissement `::warning::` dans le journal (pas d'échec silencieux).
 2. Job `lecons` : `name: lecons ${{ matrix.part }}/${{ needs.plan.outputs.lecons_count_parts }}` (ou équivalent), `matrix.part: ${{ fromJSON(needs.plan.outputs.lecons_parts) }}`, env `LECONS: ${{ needs.plan.outputs.lecons_files }}`, `LECONS_PART: ${{ matrix.part }}/<n>`. `timeout-minutes: 5`, `fail-fast: false`, un seul processus : inchangés.
 3. `Selection.call` : `LECONS=<liste>` accepte aussi `LECONS_PART` (découpage glouton existant `part`, appliqué à la liste nommée). `LECONS=tout` reste disponible à la main.
@@ -16,7 +16,7 @@ Décision du porteur (2026-11-12) : au train, on ne rend **que les leçons nouve
 5. Commentaire du job `lecons` dans `ci.yml` : remplacer l'historique des 24/32 parts par la règle ci-dessus et la mesure avant.
 6. Tests : `ci_plan_test.rb` vérifie la matrice dynamique (issue de `plan`), `LECONS_PART` = `${{ matrix.part }}/<n>`, 5 min, un processus ; test de `Selection` : liste nommée + `LECONS_PART` découpe, les témoins existent et sont v3.
 
-**Done quand** : la tâche `lecons` d'un train sans leçon changée coûte **1 part, ≤ 3 min de machine** (avant : 32 parts, 98,7 min) ; un train avec N leçons changées en coûte ⌈N/10⌉ parts, chacune < 5 min ; tests de garde verts ; aucun défaut détecté n'est retiré de la vérification.
+**Done quand** : la tâche `lecons` d'un train sans leçon changée coûte **1 part, ≤ 3 min de machine** (avant : 32 parts, 98,7 min) ; un train avec N leçons changées en coûte ⌈N/8⌉ parts, chacune < 5 min ; tests de garde verts ; aucun défaut détecté n'est retiré de la vérification.
 
 ## Lot B — Rendu complet quand le train touche aux écrans
 
@@ -25,7 +25,7 @@ Décision du porteur (2026-11-12) : le train rend les 223 leçons **seulement qu
 **Fichiers** : `.github/workflows/ci.yml` (étape `changes` du job `plan`, commentaire du job `lecons`), `test/guards/ci_plan_test.rb`. `Selection.call` gère déjà `LECONS=tout` avec `LECONS_PART` : inchangé.
 
 - Variable shell `screens` (expression étendue : `app/(views|javascript|assets|helpers)/`, `app/controllers/catalog/`, queries et repositories `catalog`, entités, cas d'usage et DTO `catalog`, `package.json`, `yarn.lock`, `lesson_rendering_test.rb`).
-- Un fichier de la PR correspond : `lecons_files=tout`, nombre = les `docs/contenus/lecons-traitees/*/*/*.json` de l'arbre, parts = ⌈nombre/10⌉, un `echo` cite le premier fichier d'écran. Diff illisible : témoins + `::warning::`, comme au lot A.
+- Un fichier de la PR correspond : `lecons_files=tout`, nombre = les `docs/contenus/lecons-traitees/*/*/*.json` de l'arbre, parts = ⌈nombre/8⌉, un `echo` cite le premier fichier d'écran. Diff illisible : témoins + `::warning::`, comme au lot A.
 
 **Done quand** : une PR qui touche une vue donne `lecons_files=tout` et 23 parts ; une leçon seule ou de la doc seule donne les mêmes sorties qu'au lot A ; `ci_plan_test.rb` fixe l'expression et la branche `tout` ; tests de sélection verts.
 

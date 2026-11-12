@@ -41,6 +41,19 @@ Run GitHub du train #541, tête `cf0483e70` (2026-11-12), tâche `lecons`, 32 pa
 
 Protocole reproductible : `gh api "repos/Lnclassapp/App.Lnclassapp/commits/<sha>/check-runs?per_page=100" --jq '[.check_runs[]|select(.name|startswith("lecons"))|((.completed_at|fromdate)-(.started_at|fromdate))]|{n:length,total:add,max:max}'`, sur la tête de la PR de train, au même nombre de leçons. Localement : `LECONS=<7 fichiers> bin/rails test test/system/catalog/lesson_rendering_test.rb -v`, 3 exécutions, médiane.
 
+## Mesure après
+
+Même protocole (`gh api …/check-runs`, somme et maximum des check runs `lecons *`).
+
+| Train | Cas | Parts | Minutes de machine | Part la plus longue | Médiane |
+|---|---|---|---|---|---|
+| #541 (`cf0483e70`), avant | 223 leçons, 7 par part | 32 | 98,7 | 213 s | 188 s |
+| #545 (`bd1d61bd`) | écrans touchés : rendu complet, 10 par part | 23 | 91,4 | **283 s** | 239 s |
+
+- Le rendu complet coûte presque autant qu'avant : le gain vient des trains sans écran touché (1 part de 2 témoins, ou ⌈N/8⌉ parts).
+- 10 par part est trop près du plafond de 300 s : passage à 8 (décision du porteur).
+- À relever : le premier train sans écran touché (attendu : 1 part, ≤ 3 min).
+
 ## Hors périmètre
 
 - Les vues des leçons et des feuilles : aucun écran ne change.
