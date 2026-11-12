@@ -1,0 +1,2989 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'élément chimique",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "figures": [
+        {
+          "key": "classification-matiere",
+          "kind": "diagram",
+          "description": "Un arbre qui classe la matière. La racine « Matière » se sépare en « Mélange » et en « Corps pur ». Le corps pur se sépare à son tour en « Corps simple » (un seul élément, par exemple le dioxygène ou le fer) et en « Corps composé » (plusieurs éléments, par exemple l'eau ou le dioxyde de carbone).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "m",
+                "label": "Matière"
+              },
+              {
+                "id": "mel",
+                "label": "Mélange"
+              },
+              {
+                "id": "cp",
+                "label": "Corps pur"
+              },
+              {
+                "id": "cs",
+                "label": "Corps simple"
+              },
+              {
+                "id": "cc",
+                "label": "Corps composé"
+              }
+            ],
+            "edges": [
+              {
+                "from": "m",
+                "to": "mel"
+              },
+              {
+                "from": "m",
+                "to": "cp"
+              },
+              {
+                "from": "cp",
+                "to": "cs"
+              },
+              {
+                "from": "cp",
+                "to": "cc"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "L'élément chimique et son symbole",
+          "remember": "Un **élément chimique** est désigné par un **symbole** : une lettre majuscule, éventuellement suivie d'une lettre minuscule. H hydrogène, C carbone, N azote, O oxygène, Na sodium, Cl chlore, Fe fer, Cu cuivre, Zn zinc, Al aluminium, Ca calcium, K potassium, Mg magnésium, S soufre. Un même élément se trouve dans plusieurs corps (l'oxygène est dans O2, H2O, CO2). Au cours d'une transformation chimique, les éléments se **conservent** : les atomes sont réarrangés, mais un élément ne se change pas en un autre.",
+          "method": [
+            "Repérer, dans l'énoncé, les corps qui interviennent (noms ou formules).",
+            "Relever les symboles des éléments chimiques contenus dans chaque corps.",
+            "Comparer les éléments avant et après (ou d'un corps à l'autre) : un élément se conserve."
+          ],
+          "example": {
+            "statement": "Le carbone brûle dans le dioxygène et donne du dioxyde de carbone CO2. Quels éléments y a-t-il avant et après la transformation ? L'élément carbone se conserve-t-il ?",
+            "steps": [
+              "Repérer : les corps sont le carbone C, le dioxygène O2 et le dioxyde de carbone CO2.",
+              "Relever : C contient l'élément C ; O2 contient l'élément O ; CO2 contient les éléments C et O.",
+              "Comparer : avant, on a C et O ; après, on a C et O. Les éléments sont les mêmes : l'élément carbone se conserve, de même que l'élément oxygène."
+            ]
+          },
+          "pitfall": "Ne confonds pas les majuscules et les minuscules d'un symbole. Contre-exemple : CO désigne deux éléments, le carbone C et l'oxygène O, alors que Co désigne un seul élément, le cobalt. Ne crois pas non plus qu'un élément se transforme en un autre : le fer qui rouille reste de l'élément fer.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Écrire et reconnaître les symboles des éléments",
+              "statement": "Dans cet exercice, tu relèves les symboles des éléments chimiques et tu vérifies qu'un élément se conserve au cours d'une transformation.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le symbole de l'élément sodium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le corps cherché est le sodium. Étape 2 — Relever le symbole : le sodium s'écrit Na, avec une majuscule puis une minuscule (c'est l'élément du sel de cuisine NaCl). Étape 3 — Comparer : S est le soufre et N l'azote ; So n'est le symbole d'aucun élément à connaître.",
+                  "answers": [
+                    {
+                      "content": "Na",
+                      "correct": true
+                    },
+                    {
+                      "content": "S",
+                      "correct": false
+                    },
+                    {
+                      "content": "So",
+                      "correct": false
+                    },
+                    {
+                      "content": "N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le symbole de l'élément fer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le corps cherché est le fer. Étape 2 — Relever le symbole : le fer s'écrit Fe, deux lettres, la première en majuscule. Étape 3 — Comparer : F seul ne désigne pas le fer ; le symbole du fer ne se devine pas à partir du nom, il se retient.",
+                  "answers": [
+                    {
+                      "content": "Fe",
+                      "correct": true
+                    },
+                    {
+                      "content": "F",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fr",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole de l'élément carbone s'écrit avec une seule lettre majuscule : ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'élément est le carbone. Étape 2 — Relever le symbole : c'est la lettre majuscule C. Étape 3 — Comparer : on retrouve C dans le charbon, le dioxyde de carbone CO2 et le méthane CH4.",
+                  "answers": [
+                    {
+                      "content": "C",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures sont des symboles d'éléments correctement écrits ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on examine chaque écriture. Étape 2 — Relever les symboles : un symbole commence par une majuscule, suivie au plus d'une minuscule. Cl (chlore) et Mg (magnésium) respectent cette règle. Étape 3 — Comparer : CL a deux majuscules et mg commence par une minuscule, donc ces écritures sont fausses.",
+                  "answers": [
+                    {
+                      "content": "Cl",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mg",
+                      "correct": true
+                    },
+                    {
+                      "content": "CL",
+                      "correct": false
+                    },
+                    {
+                      "content": "mg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les écritures CO et Co désignent la même chose.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : deux écritures qui ne diffèrent que par une minuscule. Étape 2 — Relever les symboles : CO est la juxtaposition de deux symboles, C (carbone) et O (oxygène) ; Co est un seul symbole, celui de l'élément cobalt. Étape 3 — Comparer : ce ne sont pas les mêmes éléments, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la transformation du carbone qui brûle dans le dioxygène, l'élément carbone ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : les corps sont le carbone C, le dioxygène O2 et le dioxyde de carbone CO2. Étape 2 — Relever les symboles : C et O avant la transformation, C et O après. Étape 3 — Comparer : les éléments sont les mêmes avant et après, l'élément carbone se conserve. Il ne disparaît pas et ne se change pas en oxygène.",
+                  "answers": [
+                    {
+                      "content": "se conserve",
+                      "correct": true
+                    },
+                    {
+                      "content": "disparaît",
+                      "correct": false
+                    },
+                    {
+                      "content": "se transforme en élément oxygène",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Associer symboles, noms et éléments conservés",
+              "statement": "Dans cet exercice, tu relies des noms à des symboles, tu comptes des éléments et tu vérifies leur conservation.",
+              "hint": "Un symbole commence toujours par une majuscule. Un élément ne change pas quand les corps se transforment.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque élément à son symbole.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : cinq noms d'éléments. Étape 2 — Relever les symboles : hydrogène H, azote N, cuivre Cu, calcium Ca, potassium K. Étape 3 — Comparer : attention à Ca (calcium) et Cu (cuivre), souvent confondus ; le potassium n'est pas P, il s'écrit K.",
+                  "answers": [
+                    {
+                      "content": "hydrogène",
+                      "match": "H"
+                    },
+                    {
+                      "content": "azote",
+                      "match": "N"
+                    },
+                    {
+                      "content": "cuivre",
+                      "match": "Cu"
+                    },
+                    {
+                      "content": "calcium",
+                      "match": "Ca"
+                    },
+                    {
+                      "content": "potassium",
+                      "match": "K"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau a pour formule H2O. Quels éléments contient-elle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : le corps est l'eau, de formule H2O. Étape 2 — Relever les symboles : H est l'hydrogène, O est l'oxygène. Étape 3 — Comparer : aucun symbole C ni N dans H2O, donc ni carbone ni azote.",
+                  "answers": [
+                    {
+                      "content": "Hydrogène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Azote",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ammoniac a pour formule NH3. Combien d'éléments différents contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le corps est l'ammoniac NH3. Étape 2 — Relever les symboles : N (azote) et H (hydrogène). Étape 3 — Comparer : il y a 2 éléments différents. L'indice 3 compte les atomes d'hydrogène, pas les éléments.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le carbone brûle pour donner du dioxyde de carbone CO2, l'élément carbone se conserve.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le carbone C et le dioxyde de carbone CO2. Étape 2 — Relever les symboles : C avant, C et O après. Étape 3 — Comparer : l'élément C est présent avant et après, donc il se conserve.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour montrer qu'un élément se conserve.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer les corps qui interviennent. Étape 2 — Relever les symboles de leurs éléments. Étape 3 — Comparer avant et après. On ne peut pas comparer avant d'avoir relevé les symboles.",
+                  "answers": [
+                    {
+                      "content": "Repérer les corps qui interviennent"
+                    },
+                    {
+                      "content": "Relever les symboles des éléments de chaque corps"
+                    },
+                    {
+                      "content": "Comparer les éléments avant et après la transformation"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élément présent dans le dioxygène O2, l'eau H2O et le dioxyde de carbone CO2 est l'élément ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : trois corps, O2, H2O et CO2. Étape 2 — Relever les symboles : O2 contient O ; H2O contient H et O ; CO2 contient C et O. Étape 3 — Comparer : le seul symbole commun est O, l'élément oxygène.",
+                  "answers": [
+                    {
+                      "content": "oxygène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Corps purs, corps simples et corps composés",
+          "remember": "Un **corps pur** est constitué d'une seule espèce chimique ; un **mélange** en contient plusieurs. Un corps pur change d'état à une température fixe sous pression donnée. Un **corps simple** est un corps pur formé d'un seul élément (O2, H2, N2, Fe, C). Un **corps composé** est un corps pur formé de plusieurs éléments (H2O, CO2, NaCl, CH4). Dans une formule, l'indice donne le nombre d'atomes de l'élément qui précède : H2O contient 2 atomes H et 1 atome O.",
+          "method": [
+            "Compter les espèces chimiques de la substance : une seule (corps pur) ou plusieurs (mélange).",
+            "Pour un corps pur, lire sa formule et relever les symboles des éléments.",
+            "Compter les éléments différents : un seul (corps simple) ou plusieurs (corps composé).",
+            "Conclure en donnant la classe de la substance : mélange, corps simple ou corps composé."
+          ],
+          "example": {
+            "statement": "Classer l'eau distillée, de formule H2O : mélange, corps simple ou corps composé ?",
+            "steps": [
+              "Compter : l'eau distillée ne contient qu'une espèce chimique, l'eau : c'est un corps pur.",
+              "Lire : la formule est H2O ; les symboles sont H et O.",
+              "Compter : H et O sont deux éléments différents.",
+              "Conclure : l'eau distillée est un corps pur composé."
+            ]
+          },
+          "pitfall": "Ne compte pas les atomes à la place des éléments. Contre-exemple : O2 contient deux atomes, mais un seul élément, l'oxygène : c'est un corps simple, pas un corps composé. À l'inverse, l'eau du robinet ou l'eau de mer sont des mélanges, même si l'on dit « de l'eau ».",
+          "figure": "classification-matiere",
+          "exercise": [
+            {
+              "title": "Classer des substances",
+              "statement": "Dans cet exercice, tu comptes les espèces chimiques, puis les éléments, et tu classes chaque substance.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'eau distillée est faite uniquement d'eau, de formule H2O. De quelle classe est-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : une seule, l'eau, donc un corps pur. Étape 2 — Lire la formule : H2O, symboles H et O. Étape 3 — Compter les éléments : deux éléments différents. Étape 4 — Conclure : corps pur composé. Ce n'est pas un mélange (une seule espèce) ni un corps simple (deux éléments).",
+                  "answers": [
+                    {
+                      "content": "Corps pur composé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mélange",
+                      "correct": false
+                    },
+                    {
+                      "content": "Corps simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "Élément chimique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dioxygène a pour formule O2. De quelle classe est-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : le dioxygène est une seule espèce, un corps pur. Étape 2 — Lire la formule : O2, un seul symbole, O. Étape 3 — Compter les éléments : un seul élément. Étape 4 — Conclure : corps simple. L'indice 2 compte des atomes, pas des éléments.",
+                  "answers": [
+                    {
+                      "content": "Corps simple",
+                      "correct": true
+                    },
+                    {
+                      "content": "Corps composé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mélange",
+                      "correct": false
+                    },
+                    {
+                      "content": "Atome",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau salée est un corps pur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter les espèces : l'eau salée contient de l'eau et du sel, donc plusieurs espèces chimiques. Étape 4 — Conclure : c'est un mélange, pas un corps pur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une molécule de dioxyde de carbone CO2 contient combien d'atomes au total ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : CO2 est un corps pur. Étape 2 — Lire la formule : C n'a pas d'indice (1 atome), O a l'indice 2 (2 atomes). Étape 3 — Compter les éléments : deux, C et O. Étape 4 — Conclure sur le nombre d'atomes : 1 + 2 = 3 atomes.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels corps sont des corps composés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Compter les espèces : ce sont tous des corps purs. Étape 2 — Lire les formules : H2O (H et O), CH4 (C et H), N2 (N), Fe (Fe). Étape 3 — Compter les éléments : deux éléments pour H2O et CH4, un seul pour N2 et Fe. Étape 4 — Conclure : H2O et CH4 sont composés ; N2 et Fe sont des corps simples.",
+                  "answers": [
+                    {
+                      "content": "L'eau H2O",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le méthane CH4",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le diazote N2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fer Fe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La formule O2 contient deux atomes : le dioxygène est donc un corps composé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Lire la formule : O2 contient un seul symbole, O. Étape 3 — Compter les éléments : un seul, et non le nombre d'atomes. Étape 4 — Conclure : le dioxygène est un corps simple. L'erreur est de compter les atomes au lieu des éléments.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Corps purs, mélanges, corps simples et composés",
+              "statement": "Dans cet exercice, tu utilises l'arbre de classification de la matière pour ranger des substances de la vie courante.",
+              "hint": "D'abord une espèce ou plusieurs ? Puis, pour un corps pur : un élément ou plusieurs ?",
+              "exercise_type": "fixation",
+              "figure": "classification-matiere",
+              "questions": [
+                {
+                  "content": "Relie chaque substance à sa classe.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter les espèces : H2 et NaCl sont des corps purs ; l'eau sucrée contient de l'eau et du sucre. Étape 2 — Lire les formules : H2 (élément H), NaCl (éléments Na et Cl). Étape 3 — Compter les éléments : un pour H2, deux pour NaCl. Étape 4 — Conclure : H2 corps simple, NaCl corps composé, eau sucrée mélange.",
+                  "answers": [
+                    {
+                      "content": "Le dihydrogène H2",
+                      "match": "Corps simple"
+                    },
+                    {
+                      "content": "Le chlorure de sodium NaCl",
+                      "match": "Corps composé"
+                    },
+                    {
+                      "content": "L'eau sucrée",
+                      "match": "Mélange"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles substances sont des corps purs ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Compter les espèces : O2, H2O pure et Fe ne contiennent qu'une espèce. L'air contient plusieurs gaz (dont le diazote et le dioxygène) et l'eau de mer contient de l'eau et des sels dissous. Étape 4 — Conclure : trois corps purs, deux mélanges. Les étapes 2 et 3 ne s'appliquent qu'aux corps purs.",
+                  "answers": [
+                    {
+                      "content": "Le dioxygène O2",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau pure H2O",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fer Fe",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau de mer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une molécule de méthane a pour formule CH4. Combien d'atomes contient-elle au total ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Compter : le méthane est un corps pur. Étape 2 — Lire la formule : C (1 atome) et H avec l'indice 4 (4 atomes). Étape 3 — Compter les éléments : 2 éléments, C et H. Étape 4 — Conclure sur les atomes : 1 + 4 = 5 atomes.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sous une pression donnée, un corps pur change d'état à une température ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Compter les espèces : un corps pur n'a qu'une espèce. Étape 4 — Conclure : sa température de changement d'état est fixe sous pression donnée (par exemple l'eau pure bout à 100 °C sous la pression atmosphérique normale). Elle n'est pas toujours 100 °C : cette valeur est propre à l'eau.",
+                  "answers": [
+                    {
+                      "content": "fixe",
+                      "correct": true
+                    },
+                    {
+                      "content": "qui varie sans cesse",
+                      "correct": false
+                    },
+                    {
+                      "content": "toujours égale à 100 °C",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour classer une substance.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Compter les espèces. Étape 2 — Lire la formule et relever les symboles. Étape 3 — Compter les éléments. Étape 4 — Conclure. On ne peut distinguer simple et composé qu'après avoir su qu'on a un corps pur.",
+                  "answers": [
+                    {
+                      "content": "Compter les espèces chimiques de la substance"
+                    },
+                    {
+                      "content": "Lire la formule du corps pur et relever les symboles"
+                    },
+                    {
+                      "content": "Compter les éléments différents"
+                    },
+                    {
+                      "content": "Conclure en donnant la classe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps pur formé d'un seul élément chimique est un corps ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Compter les éléments différents : un seul élément. Étape 4 — Conclure : c'est un corps simple, comme le dioxygène O2 ou le fer Fe.",
+                  "answers": [
+                    {
+                      "content": "simple",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les ions monoatomiques",
+          "remember": "Un **ion monoatomique** est un atome qui a perdu ou gagné des électrons. S'il en **perd**, il porte une charge **positive** : c'est un **cation** ($\\mathrm{Na^{+}}$, $\\mathrm{K^{+}}$, $\\mathrm{Ca^{2+}}$, $\\mathrm{Mg^{2+}}$, $\\mathrm{Al^{3+}}$). S'il en **gagne**, il porte une charge **négative** : c'est un **anion** ($\\mathrm{Cl^{-}}$, $\\mathrm{F^{-}}$, $\\mathrm{O^{2-}}$, $\\mathrm{S^{2-}}$). Le nombre en exposant est le nombre d'électrons perdus ou gagnés. Le symbole ne change pas : l'élément se conserve.",
+          "method": [
+            "Repérer le symbole de l'élément et la charge de l'ion (ou le nombre d'électrons perdus ou gagnés).",
+            "Déduire le signe de la charge : positif si l'atome perd des électrons, négatif s'il en gagne ; le nombre en exposant est le nombre d'électrons échangés.",
+            "Conclure : écrire la formule de l'ion avec le même symbole, et dire s'il s'agit d'un cation ou d'un anion."
+          ],
+          "example": {
+            "statement": "Un atome de calcium perd 2 électrons. Écrire la formule de l'ion obtenu et dire s'il s'agit d'un cation ou d'un anion.",
+            "steps": [
+              "Repérer : l'élément est le calcium, de symbole Ca ; l'atome perd 2 électrons.",
+              "Déduire : une perte d'électrons donne une charge positive, et 2 électrons perdus donnent la charge 2+.",
+              "Conclure : l'ion est $\\mathrm{Ca^{2+}}$, un cation. L'élément calcium se conserve."
+            ]
+          },
+          "pitfall": "Ne confonds pas perte d'électrons et charge négative. Contre-exemple : l'atome de sodium qui perd 1 électron devient $\\mathrm{Na^{+}}$, un ion positif, et non $\\mathrm{Na^{-}}$. Un atome qui gagne des électrons devient un ion négatif : le chlore qui gagne 1 électron devient $\\mathrm{Cl^{-}}$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Écrire la formule d'un ion monoatomique",
+              "statement": "Dans cet exercice, tu relies le nombre d'électrons perdus ou gagnés à la charge de l'ion, et tu écris sa formule.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un atome de sodium perd un électron. Quelle est la formule de l'ion obtenu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est le sodium, symbole Na ; l'atome perd 1 électron. Étape 2 — Déduire : une perte d'électron donne une charge positive, et 1 électron perdu donne la charge 1+. Étape 3 — Conclure : l'ion est Na+, un cation. Na− correspondrait à un gain d'électron, Na2+ à la perte de deux électrons.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Na^{+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Na^{-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Na^{2+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{+}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de chlore gagne un électron. Quelle est la formule de l'ion obtenu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est le chlore, symbole Cl ; l'atome gagne 1 électron. Étape 2 — Déduire : un gain d'électron donne une charge négative, et 1 électron gagné donne la charge 1−. Étape 3 — Conclure : l'ion est Cl−, un anion. Cl+ viendrait d'une perte, Cl2− de deux gains, et Cl2 est une molécule, pas un ion.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Cl^{-}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{2-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Cl_2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ion de charge positive s'appelle un ___ (un nom).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la charge est positive. Étape 2 — Déduire : l'atome a perdu des électrons. Étape 3 — Conclure : un ion de charge positive est un cation ; un ion de charge négative est un anion.",
+                  "answers": [
+                    {
+                      "content": "cation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome d'aluminium forme l'ion $\\mathrm{Al^{3+}}$. Combien d'électrons a-t-il perdus ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'élément est l'aluminium Al et la charge est 3+. Étape 2 — Déduire : le signe + indique des électrons perdus, et le nombre 3 en exposant indique combien. Étape 3 — Conclure : l'atome d'aluminium a perdu 3 électrons ; Al3+ est un cation.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ion $\\mathrm{O^{2-}}$ est un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : l'élément est l'oxygène O, la charge est 2−. Étape 2 — Déduire : le signe − indique un gain de 2 électrons. Étape 3 — Conclure : c'est un anion. Ce n'est pas un cation (qui serait positif) ni un atome neutre (charge nulle).",
+                  "answers": [
+                    {
+                      "content": "anion",
+                      "correct": true
+                    },
+                    {
+                      "content": "cation",
+                      "correct": false
+                    },
+                    {
+                      "content": "atome neutre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome qui perd des électrons devient un ion de charge négative.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Déduire : un électron porte une charge négative ; en perdre rend l'ensemble positif, comme on retire du négatif. Exemple : Na perd 1 électron et devient Na+, pas Na−. Étape 3 — Conclure : la perte d'électrons donne un cation. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Noms, charges et conservation de l'élément pour les ions",
+              "statement": "Dans cet exercice, tu associes des ions à leur nom, tu repères les cations et les anions, puis tu vérifies que l'élément se conserve.",
+              "hint": "Le signe de la charge dit si des électrons ont été perdus (+) ou gagnés (−). Le symbole de l'élément ne change pas.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque ion à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : quatre ions avec leur symbole et leur charge. Étape 2 — Déduire : Na+ et Ca2+ sont positifs (cations), Cl− et O2− sont négatifs (anions). Étape 3 — Conclure : Na+ ion sodium, Cl− ion chlorure, Ca2+ ion calcium, O2− ion oxyde. Le nom d'un anion se termine en -ure ou -yde.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Na^{+}}$",
+                      "match": "ion sodium"
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{-}}$",
+                      "match": "ion chlorure"
+                    },
+                    {
+                      "content": "$\\mathrm{Ca^{2+}}$",
+                      "match": "ion calcium"
+                    },
+                    {
+                      "content": "$\\mathrm{O^{2-}}$",
+                      "match": "ion oxyde"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels ions sont des cations ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les symboles K, Mg, F et S et leurs charges. Étape 2 — Déduire : K+ et Mg2+ ont une charge positive, donc des électrons perdus ; F− et S2− ont une charge négative, donc des électrons gagnés. Étape 3 — Conclure : K+ et Mg2+ sont des cations ; F− et S2− sont des anions.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{K^{+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Mg^{2+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{F^{-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{S^{2-}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de soufre forme l'ion $\\mathrm{S^{2-}}$. Combien d'électrons a-t-il gagnés ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'élément est le soufre S, la charge est 2−. Étape 2 — Déduire : le signe − indique des électrons gagnés, le nombre 2 indique combien. Étape 3 — Conclure : l'atome de soufre a gagné 2 électrons et forme un anion.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un atome de sodium Na devient un ion $\\mathrm{Na^{+}}$, l'élément chimique reste le même : c'est toujours le sodium.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : Na avant, Na+ après. Étape 2 — Déduire : seul le nombre d'électrons a changé. Étape 3 — Conclure : le symbole est resté Na, donc l'élément sodium se conserve.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour écrire la formule d'un ion.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le symbole et le nombre d'électrons. Étape 2 — Déduire le signe. Étape 3 — Conclure en écrivant la formule, puis dire cation ou anion. Le signe doit être connu avant d'écrire la charge.",
+                  "answers": [
+                    {
+                      "content": "Repérer le symbole de l'élément et le nombre d'électrons échangés"
+                    },
+                    {
+                      "content": "Déduire le signe de la charge"
+                    },
+                    {
+                      "content": "Écrire la formule de l'ion avec le même symbole"
+                    },
+                    {
+                      "content": "Dire s'il s'agit d'un cation ou d'un anion"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de magnésium perd 2 électrons. Quelle est la formule de l'ion obtenu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est le magnésium Mg, avec 2 électrons perdus. Étape 2 — Déduire : une perte donne une charge positive, et 2 électrons perdus donnent 2+. Étape 3 — Conclure : l'ion est Mg2+, un cation. Mg2− correspondrait à un gain ; Mg+ à une seule perte ; Mg2 n'est pas un ion.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Mg^{2+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Mg^{2-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Mg^{+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Mg_2}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Au marché : que contiennent les produits ?",
+          "statement": "Une vendeuse du marché propose une marmite en aluminium (Al), une barre de fer (Fe), un sachet de sel de cuisine (chlorure de sodium, de formule NaCl) et une bouteille d'eau minérale (de l'eau avec des sels minéraux dissous).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Pour chaque produit, commence par compter les espèces chimiques, puis les éléments si c'est un corps pur.",
+          "questions": [
+            {
+              "content": "Quel est le symbole de l'élément aluminium ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le corps est l'aluminium de la marmite. Étape 2 — Relever le symbole : Al, une majuscule puis une minuscule. Étape 3 — Comparer : A seul n'est pas le symbole de l'aluminium et Au est celui de l'or.",
+              "answers": [
+                {
+                  "content": "Al",
+                  "correct": true
+                },
+                {
+                  "content": "A",
+                  "correct": false
+                },
+                {
+                  "content": "Au",
+                  "correct": false
+                },
+                {
+                  "content": "Am",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La marmite est en aluminium pur, de symbole Al. De quelle classe est ce corps ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Compter les espèces : l'aluminium pur est une seule espèce, un corps pur. Étape 2 — Lire la formule : Al, un seul symbole. Étape 3 — Compter les éléments : un seul élément. Étape 4 — Conclure : corps simple.",
+              "answers": [
+                {
+                  "content": "Corps simple",
+                  "correct": true
+                },
+                {
+                  "content": "Corps composé",
+                  "correct": false
+                },
+                {
+                  "content": "Mélange",
+                  "correct": false
+                },
+                {
+                  "content": "Ion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le sel de cuisine a pour formule NaCl. Quels sont les éléments qui le composent ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Compter les espèces : NaCl est un corps pur. Étape 2 — Lire la formule : les symboles sont Na et Cl. Étape 3 — Compter les éléments : le sodium et le chlore, deux éléments différents, donc un corps composé. Étape 4 — Conclure : NaCl est un corps pur composé de sodium et de chlore.",
+              "answers": [
+                {
+                  "content": "Le sodium et le chlore",
+                  "correct": true
+                },
+                {
+                  "content": "Le soufre et le carbone",
+                  "correct": false
+                },
+                {
+                  "content": "Le sodium et le carbone",
+                  "correct": false
+                },
+                {
+                  "content": "L'azote et le chlore",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une bouteille d'eau minérale, avec ses sels dissous, est un corps pur composé.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Compter les espèces : l'eau minérale contient de l'eau et des sels dissous, donc plusieurs espèces chimiques. Étape 4 — Conclure : c'est un mélange. Les étapes 2 et 3 (formule, éléments) ne concernent que les corps purs.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels produits de la vendeuse sont des corps purs ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Compter les espèces : Fe pur et NaCl pur n'ont qu'une espèce chimique. L'eau minérale en a plusieurs (eau, sels dissous) et le mélange de sel et de sucre aussi. Étape 4 — Conclure : la barre de fer et le sel pur sont des corps purs ; les deux autres sont des mélanges.",
+              "answers": [
+                {
+                  "content": "La barre de fer Fe",
+                  "correct": true
+                },
+                {
+                  "content": "Le sel de cuisine pur NaCl",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau minérale",
+                  "correct": false
+                },
+                {
+                  "content": "Un mélange de sel et de sucre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand la barre de fer rouille, l'élément fer se change en élément oxygène.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le fer Fe et le dioxygène de l'air. Étape 2 — Relever les symboles : Fe et O. Étape 3 — Comparer : l'élément fer se conserve au cours de la transformation, il ne devient pas de l'oxygène. La rouille contient les deux éléments, Fe et O.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du sodium et du chlore devenus ions",
+          "statement": "Un atome de sodium (Na) perd un électron et devient un ion. Un atome de chlore (Cl) gagne un électron et devient un autre ion. On étudie ces deux ions, présents dans l'eau salée.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Une perte d'électrons donne une charge positive (cation) ; un gain donne une charge négative (anion).",
+          "questions": [
+            {
+              "content": "Un atome de sodium Na perd un électron. Quelle est la formule de l'ion formé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'élément est le sodium Na, 1 électron perdu. Étape 2 — Déduire : une perte donne une charge positive, 1 électron donne 1+. Étape 3 — Conclure : Na+. Na− viendrait d'un gain, Na2+ de deux pertes.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Na^{+}}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Na^{-}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Na^{2+}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Cl^{+}}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un atome de chlore Cl gagne un électron. Quelle est la formule de l'ion formé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'élément est le chlore Cl, 1 électron gagné. Étape 2 — Déduire : un gain donne une charge négative, 1 électron donne 1−. Étape 3 — Conclure : Cl−. Cl+ viendrait d'une perte, Cl2− de deux gains.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Cl^{-}}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Cl^{+}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Cl^{2-}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Na^{-}}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque ion à sa nature.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer : trois ions. Étape 2 — Déduire : Na+ a une charge positive ; Cl− une charge négative ; Ca2+ une charge 2+, donc 2 électrons perdus. Étape 3 — Conclure : Na+ est un cation, Cl− un anion, Ca2+ un cation formé par la perte de 2 électrons.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Na^{+}}$",
+                  "match": "Cation"
+                },
+                {
+                  "content": "$\\mathrm{Cl^{-}}$",
+                  "match": "Anion"
+                },
+                {
+                  "content": "$\\mathrm{Ca^{2+}}$",
+                  "match": "Cation formé par la perte de 2 électrons"
+                }
+              ]
+            },
+            {
+              "content": "Quand un atome de chlore devient un ion chlorure $\\mathrm{Cl^{-}}$, l'élément chlore se conserve.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : Cl avant, Cl− après. Étape 2 — Déduire : seul le nombre d'électrons change. Étape 3 — Conclure : le symbole Cl reste le même, l'élément chlore se conserve.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un atome d'aluminium forme l'ion $\\mathrm{Al^{3+}}$. Combien d'électrons a-t-il perdus ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : l'élément aluminium Al, charge 3+. Étape 2 — Déduire : le signe + indique des électrons perdus et le nombre 3 dit combien. Étape 3 — Conclure : 3 électrons perdus, c'est un cation.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un ion de charge négative s'appelle un ___ (un nom).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 2 — Déduire : une charge négative signifie que l'atome a gagné des électrons. Étape 3 — Conclure : un tel ion est un anion.",
+              "answers": [
+                {
+                  "content": "anion",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Analyser des gaz et de l'eau",
+          "statement": "Un élève de 2nde étudie cinq substances : l'air, l'eau pure (H2O), le dihydrogène (H2), le dioxyde de carbone (CO2) et le diazote (N2). L'air est un mélange de plusieurs gaz, dont le diazote et le dioxygène. On prend les formules comme données.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Pour chaque substance : une espèce ou plusieurs ? Puis, pour un corps pur : un élément ou plusieurs ?",
+          "questions": [
+            {
+              "content": "Relie chaque substance à sa classe.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Compter les espèces : H2 et CO2 sont des corps purs, l'air contient plusieurs gaz. Étape 2 — Lire les formules : H2 (H), CO2 (C et O). Étape 3 — Compter les éléments : un pour H2, deux pour CO2. Étape 4 — Conclure : H2 corps simple, CO2 corps composé, l'air mélange.",
+              "answers": [
+                {
+                  "content": "Le dihydrogène H2",
+                  "match": "Corps simple"
+                },
+                {
+                  "content": "Le dioxyde de carbone CO2",
+                  "match": "Corps composé"
+                },
+                {
+                  "content": "L'air",
+                  "match": "Mélange"
+                }
+              ]
+            },
+            {
+              "content": "Une molécule d'eau H2O contient combien d'atomes au total ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Compter : l'eau pure est un corps pur. Étape 2 — Lire la formule : H avec l'indice 2 (2 atomes) et O (1 atome). Étape 3 — Compter les éléments : deux, H et O. Étape 4 — Conclure sur les atomes : 2 + 1 = 3 atomes.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces substances, lesquelles sont des corps simples ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Lire les formules : H2 (H), N2 (N), H2O (H et O), CO2 (C et O). Étape 3 — Compter les éléments : un seul pour H2 et N2, deux pour H2O et CO2. Étape 4 — Conclure : H2 et N2 sont des corps simples ; H2O et CO2 sont des corps composés.",
+              "answers": [
+                {
+                  "content": "Le dihydrogène H2",
+                  "correct": true
+                },
+                {
+                  "content": "Le diazote N2",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau pure H2O",
+                  "correct": false
+                },
+                {
+                  "content": "Le dioxyde de carbone CO2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le dihydrogène brûle dans le dioxygène et donne de l'eau H2O. Dans cette transformation, l'élément hydrogène se conserve.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le dihydrogène H2, le dioxygène O2 et l'eau H2O. Étape 2 — Relever les symboles : H, O avant ; H, O après. Étape 3 — Comparer : les éléments sont les mêmes avant et après, l'élément hydrogène se conserve.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi l'air n'est pas un corps pur, alors que le dioxygène O2 en est un.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Compter les espèces chimiques : l'air contient plusieurs gaz, dont le diazote et le dioxygène, donc plusieurs espèces ; le dioxygène O2 ne contient qu'une seule espèce. Étape 4 — Conclure : l'air est un mélange, le dioxygène est un corps pur (et même un corps simple, car il ne contient que l'élément O). Barème : plusieurs espèces dans l'air (1 pt), une seule espèce dans O2 (1 pt), conclusion mélange / corps pur (1 pt).",
+              "points": 3,
+              "criteria": [
+                "Dit que l'air contient plusieurs espèces chimiques (plusieurs gaz)",
+                "Dit que le dioxygène ne contient qu'une espèce chimique",
+                "Conclut : mélange pour l'air, corps pur pour O2"
+              ],
+              "answers": [],
+              "starter": "L'air contient…"
+            },
+            {
+              "content": "Un élève classe les corps purs de la liste : H2O, H2, CO2, N2. Combien sont des corps composés ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Compter les espèces : les quatre sont des corps purs. Étape 2 — Lire les formules : H2O (H, O), H2 (H), CO2 (C, O), N2 (N). Étape 3 — Compter les éléments : deux éléments pour H2O et CO2, un seul pour H2 et N2. Étape 4 — Conclure : 2 corps composés.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le fer, la rouille et les ions fer",
+          "statement": "Une clôture en fer (Fe) rouille sous la pluie. La rouille contient de l'élément fer et de l'élément oxygène. Dans certains composés de la rouille, le fer est présent sous forme d'ions $\\mathrm{Fe^{2+}}$ et $\\mathrm{Fe^{3+}}$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Le symbole d'un élément ne change pas quand l'atome devient un ion ni quand le corps se transforme.",
+          "questions": [
+            {
+              "content": "Le fer pur, de formule Fe, est un corps…",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Compter les espèces : le fer pur est une seule espèce, un corps pur. Étape 2 — Lire la formule : Fe, un seul symbole. Étape 3 — Compter les éléments : un seul. Étape 4 — Conclure : corps simple.",
+              "answers": [
+                {
+                  "content": "simple",
+                  "correct": true
+                },
+                {
+                  "content": "composé",
+                  "correct": false
+                },
+                {
+                  "content": "mélange",
+                  "correct": false
+                },
+                {
+                  "content": "ionique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La rouille contient de l'élément fer : l'élément fer s'est conservé quand la clôture a rouillé.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le fer Fe, le dioxygène de l'air et la rouille. Étape 2 — Relever les symboles : Fe et O dans la rouille. Étape 3 — Comparer : l'élément fer est présent avant et après, il se conserve.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'ion $\\mathrm{Fe^{3+}}$ est formé à partir d'un atome de fer. Combien d'électrons l'atome a-t-il perdus ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : l'élément est le fer Fe, la charge est 3+. Étape 2 — Déduire : le signe + indique des électrons perdus, et le nombre 3 dit combien. Étape 3 — Conclure : 3 électrons perdus.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'ion $\\mathrm{Fe^{2+}}$ est un…",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le symbole Fe et la charge 2+. Étape 2 — Déduire : la charge est positive, l'atome a perdu 2 électrons. Étape 3 — Conclure : c'est un cation, pas un anion (charge négative) ni un atome neutre (charge nulle).",
+              "answers": [
+                {
+                  "content": "cation",
+                  "correct": true
+                },
+                {
+                  "content": "anion",
+                  "correct": false
+                },
+                {
+                  "content": "atome neutre",
+                  "correct": false
+                },
+                {
+                  "content": "corps simple",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sur les ions fer sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : le fer Fe et deux de ses ions. Étape 2 — Déduire : les charges 2+ et 3+ sont positives, donc des électrons perdus, pas gagnés. Étape 3 — Conclure : ce sont des cations et le symbole Fe montre que l'élément fer se conserve.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Fe^{2+}}$ et $\\mathrm{Fe^{3+}}$ sont des cations",
+                  "correct": true
+                },
+                {
+                  "content": "Le symbole Fe se retrouve dans le fer et dans ses ions",
+                  "correct": true
+                },
+                {
+                  "content": "Les ions fer ont gagné des électrons",
+                  "correct": false
+                },
+                {
+                  "content": "Un ion fer est un autre élément que le fer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève affirme : « En rouillant, le fer s'est transformé en un autre élément. » Corrige cette phrase en une ou deux phrases.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Repérer : le fer Fe et le dioxygène O2 donnent la rouille. Étape 2 — Relever les symboles : Fe et O avant ; Fe et O dans la rouille. Étape 3 — Comparer : les éléments sont les mêmes avant et après. La phrase de l'élève est fausse : les corps ont changé (le fer est devenu de la rouille), mais l'élément fer se conserve. Barème : conservation de l'élément fer (1 pt), distinction corps et élément (1 pt), appui sur Fe et O dans la rouille (1 pt).",
+              "points": 3,
+              "criteria": [
+                "Dit que l'élément fer se conserve",
+                "Précise que les corps changent (fer et dioxygène donnent de la rouille) mais pas les éléments",
+                "S'appuie sur la présence de fer et d'oxygène dans la rouille"
+              ],
+              "answers": [],
+              "starter": "L'élément fer ne change pas, car…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Symboles des éléments ; conservation de l'élément dans une combustion ; classement des substances en mélange, corps simple et corps composé ; cations et anions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie les symboles de quelques éléments chimiques courants : hydrogène, oxygène, carbone, azote, sodium, chlore, fer, cuivre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un symbole commence par une majuscule, suivie au plus d'une minuscule.",
+              "questions": [
+                {
+                  "content": "Quel est le symbole de l'élément oxygène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est l'oxygène. Étape 2 — Relever le symbole : O, une seule majuscule. Étape 3 — Comparer : les autres écritures ne sont pas des symboles à connaître.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oy",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ox",
+                      "correct": false
+                    },
+                    {
+                      "content": "On",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le symbole de l'élément cuivre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est le cuivre. Étape 2 — Relever le symbole : Cu. Étape 3 — Comparer : C est le carbone, Co le cobalt, Cl le chlore.",
+                  "answers": [
+                    {
+                      "content": "Cu",
+                      "correct": true
+                    },
+                    {
+                      "content": "C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Co",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cl",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son symbole.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : quatre éléments. Étape 2 — Relever les symboles : azote N, sodium Na, chlore Cl, fer Fe. Étape 3 — Comparer : N seul est l'azote, Na est le sodium, Cl le chlore.",
+                  "answers": [
+                    {
+                      "content": "azote",
+                      "match": "N"
+                    },
+                    {
+                      "content": "sodium",
+                      "match": "Na"
+                    },
+                    {
+                      "content": "chlore",
+                      "match": "Cl"
+                    },
+                    {
+                      "content": "fer",
+                      "match": "Fe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole de l'élément hydrogène est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'élément est l'hydrogène. Étape 2 — Relever le symbole : la majuscule H. Étape 3 — Comparer : on le retrouve dans H2O, CH4 et NH3.",
+                  "answers": [
+                    {
+                      "content": "H",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole d'un élément s'écrit toujours avec deux majuscules, comme CL pour le chlore.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever les symboles : un symbole a une majuscule suivie, s'il y a une deuxième lettre, d'une minuscule : Cl, pas CL. Étape 3 — Comparer : CL se lirait comme deux symboles, C et L, alors que L n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le charbon de bois est du carbone (C). Il brûle dans le dioxygène (O2) de l'air et donne du dioxyde de carbone (CO2).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Liste les éléments avant la combustion, puis après, et compare.",
+              "questions": [
+                {
+                  "content": "Quels éléments sont présents avant la combustion du carbone C dans le dioxygène O2 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les corps avant la transformation sont C et O2. Étape 2 — Relever les symboles : C et O. Étape 3 — Comparer : H et N n'apparaissent ni dans C ni dans O2.",
+                  "answers": [
+                    {
+                      "content": "Le carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hydrogène",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'azote",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont présents dans le dioxyde de carbone CO2, produit par la combustion ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : le corps produit est CO2. Étape 2 — Relever les symboles : C et O. Étape 3 — Comparer : les éléments C et O sont les mêmes qu'avant la transformation.",
+                  "answers": [
+                    {
+                      "content": "Le carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hydrogène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le calcium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les éléments présents après la combustion du carbone sont les mêmes que ceux présents avant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : avant, C et O2 ; après, CO2. Étape 2 — Relever les symboles : C et O avant, C et O après. Étape 3 — Comparer : mêmes éléments, ils se conservent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au cours d'une transformation chimique, les éléments ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Comparer : avant et après, on retrouve les mêmes éléments (par exemple C et O dans la combustion du carbone). Les éléments ne disparaissent pas et ne se transforment pas en d'autres éléments.",
+                  "answers": [
+                    {
+                      "content": "se conservent",
+                      "correct": true
+                    },
+                    {
+                      "content": "disparaissent",
+                      "correct": false
+                    },
+                    {
+                      "content": "se changent en d'autres éléments",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dioxyde de carbone CO2 contient combien d'éléments différents ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le corps est CO2. Étape 2 — Relever les symboles : C et O. Étape 3 — Comparer : 2 éléments différents. L'indice 2 compte des atomes d'oxygène, pas des éléments.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On classe des substances : l'eau pure (H2O), le fer (Fe), l'eau sucrée, le dioxygène (O2), le chlorure de sodium (NaCl) et l'air.",
+              "exercise_type": "evaluation",
+              "figure": "classification-matiere",
+              "hint": "Une seule espèce ? Corps pur. Un seul élément ? Corps simple. Plusieurs ? Composé.",
+              "questions": [
+                {
+                  "content": "Relie chaque substance à sa classe.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter les espèces : Fe et NaCl purs sont des corps purs ; l'eau sucrée contient de l'eau et du sucre. Étape 2 — Lire les formules : Fe (Fe), NaCl (Na, Cl). Étape 3 — Compter les éléments : un pour Fe, deux pour NaCl. Étape 4 — Conclure : corps simple, corps composé, mélange.",
+                  "answers": [
+                    {
+                      "content": "Le fer Fe",
+                      "match": "Corps simple"
+                    },
+                    {
+                      "content": "Le chlorure de sodium NaCl",
+                      "match": "Corps composé"
+                    },
+                    {
+                      "content": "L'eau sucrée",
+                      "match": "Mélange"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dioxygène O2 est un…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : une seule, O2. Étape 2 — Lire la formule : O2, symbole O. Étape 3 — Compter les éléments : un seul. Étape 4 — Conclure : corps simple.",
+                  "answers": [
+                    {
+                      "content": "corps simple",
+                      "correct": true
+                    },
+                    {
+                      "content": "corps composé",
+                      "correct": false
+                    },
+                    {
+                      "content": "mélange",
+                      "correct": false
+                    },
+                    {
+                      "content": "élément chimique seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau pure H2O est un…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : une seule, l'eau. Étape 2 — Lire la formule : H et O. Étape 3 — Compter les éléments : deux. Étape 4 — Conclure : corps composé.",
+                  "answers": [
+                    {
+                      "content": "corps composé",
+                      "correct": true
+                    },
+                    {
+                      "content": "corps simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "mélange",
+                      "correct": false
+                    },
+                    {
+                      "content": "atome",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'air est un corps pur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter les espèces : l'air contient plusieurs gaz (diazote, dioxygène...). Étape 4 — Conclure : c'est un mélange, pas un corps pur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une molécule d'eau H2O contient combien d'atomes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Lire la formule : H2 donne 2 atomes d'hydrogène, O donne 1 atome d'oxygène. Étape 3 — Compter : 2 + 1 = 3 atomes, de 2 éléments différents.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie quelques ions monoatomiques : sodium, chlore, calcium, oxygène.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Perte d'électrons : charge positive (cation). Gain d'électrons : charge négative (anion).",
+              "questions": [
+                {
+                  "content": "Un atome de calcium perd 2 électrons. Quelle est la formule de l'ion formé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est le calcium Ca, 2 électrons perdus. Étape 2 — Déduire : perte donne charge positive, 2 électrons donnent 2+. Étape 3 — Conclure : Ca2+, un cation.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Ca^{2+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Ca^{2-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Ca^{+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Ca^{-}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome d'oxygène gagne 2 électrons. Quelle est la formule de l'ion formé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est l'oxygène O, 2 électrons gagnés. Étape 2 — Déduire : gain donne charge négative, 2 électrons donnent 2−. Étape 3 — Conclure : O2−, un anion. O2 est la molécule de dioxygène, pas un ion.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{O^{2-}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{O^{2+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{O^{-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{O_2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ion de charge négative est un ___ (un nom).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Déduire : une charge négative vient d'un gain d'électrons. Étape 3 — Conclure : cet ion est un anion.",
+                  "answers": [
+                    {
+                      "content": "anion",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de magnésium forme l'ion $\\mathrm{Mg^{2+}}$. Combien d'électrons a-t-il perdus ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'élément est le magnésium Mg, charge 2+. Étape 2 — Déduire : le signe + signifie des électrons perdus, le nombre 2 dit combien. Étape 3 — Conclure : 2 électrons perdus.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ion $\\mathrm{Na^{+}}$ est un cation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : élément Na, charge 1+. Étape 2 — Déduire : charge positive, donc un électron perdu. Étape 3 — Conclure : c'est un cation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Classer les produits d'un marché (sel, eau, aluminium, cuivre, fer, zinc) ; combustion du charbon de bois et conservation du carbone ; ions sodium et chlorure de l'eau salée.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché d'Adjamé, un client examine le sel de cuisine (NaCl), le sucre en poudre, l'eau en sachet et une casserole en aluminium (Al).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte d'abord les espèces chimiques de chaque produit.",
+              "questions": [
+                {
+                  "content": "Le sel de cuisine pur, de formule NaCl, est un…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : le sel pur est une espèce. Étape 2 — Lire la formule : Na et Cl. Étape 3 — Compter les éléments : deux. Étape 4 — Conclure : corps pur composé.",
+                  "answers": [
+                    {
+                      "content": "corps pur composé",
+                      "correct": true
+                    },
+                    {
+                      "content": "corps simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "mélange",
+                      "correct": false
+                    },
+                    {
+                      "content": "ion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La casserole est en aluminium pur, de symbole Al. Elle est faite d'un…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : l'aluminium pur est une espèce. Étape 2 — Lire la formule : Al. Étape 3 — Compter les éléments : un seul. Étape 4 — Conclure : corps simple.",
+                  "answers": [
+                    {
+                      "content": "corps simple",
+                      "correct": true
+                    },
+                    {
+                      "content": "corps composé",
+                      "correct": false
+                    },
+                    {
+                      "content": "mélange de plusieurs éléments",
+                      "correct": false
+                    },
+                    {
+                      "content": "ion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau en sachet du marché contient souvent des sels dissous ; elle est alors un mélange.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter les espèces : l'eau et les sels dissous font plusieurs espèces. Étape 4 — Conclure : c'est un mélange, même si on dit « de l'eau ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels symboles sont corrects pour le sodium et l'aluminium ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les deux éléments sont le sodium et l'aluminium. Étape 2 — Relever les symboles : Na et Al. Étape 3 — Comparer : So et A ne sont pas les symboles de ces éléments.",
+                  "answers": [
+                    {
+                      "content": "Na pour le sodium",
+                      "correct": true
+                    },
+                    {
+                      "content": "Al pour l'aluminium",
+                      "correct": true
+                    },
+                    {
+                      "content": "So pour le sodium",
+                      "correct": false
+                    },
+                    {
+                      "content": "A pour l'aluminium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sel de cuisine a pour formule NaCl. Combien d'éléments différents contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Lire la formule : Na et Cl. Étape 3 — Compter : 2 éléments différents, le sodium et le chlore.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une cuisine ivoirienne, on fait cuire du riz sur un feu de charbon de bois. Le charbon est surtout du carbone (C) ; il brûle dans le dioxygène (O2) de l'air et produit du dioxyde de carbone (CO2).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les éléments avant et après la combustion.",
+              "questions": [
+                {
+                  "content": "Quels éléments trouve-t-on dans le charbon (carbone) et dans le dioxygène avant la combustion ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les corps sont C et O2. Étape 2 — Relever les symboles : C et O. Étape 3 — Comparer : N et Na ne figurent pas dans ces corps.",
+                  "answers": [
+                    {
+                      "content": "Le carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'azote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sodium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La combustion du carbone dans le dioxygène produit du dioxyde de carbone CO2. Quels éléments contient CO2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le corps produit est CO2. Étape 2 — Relever les symboles : C et O. Étape 3 — Comparer : ce sont exactement les éléments du charbon et du dioxygène de départ.",
+                  "answers": [
+                    {
+                      "content": "Le carbone et l'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le carbone seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'oxygène seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carbone et l'hydrogène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dioxygène O2 est un corps simple, le dioxyde de carbone CO2 est un corps composé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Lire les formules : O2 contient l'élément O seul, CO2 contient C et O. Étape 3 — Compter les éléments : un pour O2, deux pour CO2. Étape 4 — Conclure : corps simple et corps composé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au cours de la combustion du charbon, l'élément carbone se ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer : le carbone se retrouve dans CO2 après la transformation. Il ne disparaît pas : il se conserve.",
+                  "answers": [
+                    {
+                      "content": "conserve",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour vérifier qu'un élément se conserve.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer les corps. Étape 2 — Relever les symboles. Étape 3 — Comparer avant et après.",
+                  "answers": [
+                    {
+                      "content": "Repérer les corps avant et après la transformation"
+                    },
+                    {
+                      "content": "Relever les symboles des éléments de chaque corps"
+                    },
+                    {
+                      "content": "Comparer les éléments avant et après"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Les fils électriques sont souvent en cuivre (Cu). Une pile contient du zinc (Zn). Un clou est en fer (Fe). Un bijou peut contenir de l'or (Au).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Les symboles à connaître : Cu cuivre, Zn zinc, Fe fer. L'or Au est donné dans l'énoncé.",
+              "questions": [
+                {
+                  "content": "Quel est le symbole du cuivre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est le cuivre. Étape 2 — Relever le symbole : Cu. Étape 3 — Comparer : C est le carbone ; Ci et Cr ne conviennent pas pour le cuivre.",
+                  "answers": [
+                    {
+                      "content": "Cu",
+                      "correct": true
+                    },
+                    {
+                      "content": "C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ci",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cr",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le symbole du zinc ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élément est le zinc. Étape 2 — Relever le symbole : Zn. Étape 3 — Comparer : Z seul n'est pas le symbole du zinc.",
+                  "answers": [
+                    {
+                      "content": "Zn",
+                      "correct": true
+                    },
+                    {
+                      "content": "Z",
+                      "correct": false
+                    },
+                    {
+                      "content": "Zi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sn",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un clou en fer pur est un corps simple.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter les espèces : le fer pur est une espèce. Étape 2 — Lire la formule : Fe. Étape 3 — Compter les éléments : un seul. Étape 4 — Conclure : corps simple.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels objets sont faits d'un corps simple (corps pur d'un seul élément) ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Compter les espèces : tous sont des corps purs. Étape 2 — Lire les formules : Cu, Zn, NaCl (Na, Cl), H2O (H, O). Étape 3 — Compter les éléments : un pour Cu et Zn, deux pour NaCl et H2O. Étape 4 — Conclure : Cu et Zn sont des corps simples.",
+                  "answers": [
+                    {
+                      "content": "Un fil de cuivre pur Cu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un morceau de zinc pur Zn",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du sel de cuisine NaCl",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'eau pure H2O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de cuivre peut former l'ion $\\mathrm{Cu^{2+}}$. Combien d'électrons a-t-il perdus ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'élément est le cuivre Cu, charge 2+. Étape 2 — Déduire : charge positive, donc électrons perdus, 2 d'après l'exposant. Étape 3 — Conclure : 2 électrons perdus.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "L'eau de la lagune près de Grand-Bassam est salée : elle contient notamment des ions sodium et des ions chlorure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un cation a une charge positive, un anion une charge négative.",
+              "questions": [
+                {
+                  "content": "L'eau salée est un…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : l'eau salée contient de l'eau et des sels dissous, donc plusieurs espèces. Étape 4 — Conclure : c'est un mélange.",
+                  "answers": [
+                    {
+                      "content": "mélange",
+                      "correct": true
+                    },
+                    {
+                      "content": "corps pur simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "corps pur composé",
+                      "correct": false
+                    },
+                    {
+                      "content": "ion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ion sodium porte la charge 1+. Quelle est sa formule ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : élément Na, charge 1+. Étape 2 — Déduire : positive, un électron perdu. Étape 3 — Conclure : Na+.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Na^{+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Na^{-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Na^{2+}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ion chlorure porte la charge 1−. Quelle est sa formule ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : élément Cl, charge 1−. Étape 2 — Déduire : négative, un électron gagné. Étape 3 — Conclure : Cl−.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Cl^{-}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Na^{-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{Cl_2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'eau salée, quels ions sont présents ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : Na+ et Cl−. Étape 2 — Déduire : Na+ est positif donc un cation ; Cl− est négatif donc un anion. Étape 3 — Conclure : les deux bonnes propositions donnent le bon type d'ion ; les deux autres inversent cation et anion.",
+                  "answers": [
+                    {
+                      "content": "Les ions sodium, qui sont des cations",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les ions chlorure, qui sont des anions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les ions sodium, qui sont des anions",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les ions chlorure, qui sont des cations",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'atome de sodium Na devient l'ion $\\mathrm{Na^{+}}$, il change d'élément chimique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : Na avant, Na+ après. Étape 2 — Déduire : seul le nombre d'électrons change. Étape 3 — Conclure : le symbole est le même, l'élément sodium se conserve.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Corriger des affirmations d'élèves (symboles, atomes et éléments) ; justifier la classe d'une substance ; justifier le signe et le nombre d'électrons d'un ion ; conservation de l'élément fer dans la rouille.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève a écrit des affirmations dans son cahier. Tu dois dire si elles sont justes et corriger les erreurs.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Regarde les majuscules et les minuscules, puis la différence entre atomes et éléments.",
+              "questions": [
+                {
+                  "content": "L'élève écrit : « CO est le symbole du cobalt. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : deux écritures, CO et Co. Étape 2 — Relever les symboles : Co est un seul symbole (cobalt) ; CO est la suite de deux symboles, C (carbone) et O (oxygène). Étape 3 — Comparer : on ne peut pas confondre un élément et deux éléments.",
+                  "answers": [
+                    {
+                      "content": "Le symbole du cobalt est Co ; CO désigne le carbone et l'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le symbole du cobalt est bien CO",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le symbole du cobalt est C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cobalt n'a pas de symbole",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève écrit : « O2 est un corps composé parce qu'il contient deux atomes. » Cette affirmation est correcte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Lire la formule : O2 contient un seul symbole, donc un seul élément. Étape 3 — Compter les éléments : un. Étape 4 — Conclure : c'est un corps simple. Il faut compter les éléments différents, pas les atomes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève écrit : « Dans l'eau H2O, il y a trois éléments, car il y a trois atomes. » Cette affirmation est correcte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Lire la formule : H2O a 3 atomes (2 H et 1 O), mais seulement 2 symboles différents. Étape 3 — Compter les éléments : 2 éléments, H et O. L'élève a confondu atomes et éléments.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une molécule de méthane CH4 contient 5 atomes. Combien d'éléments différents contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Lire la formule : CH4 contient les symboles C et H. Étape 3 — Compter les éléments : 2 éléments différents, même s'il y a 5 atomes.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fer qui rouille contient toujours l'élément ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Comparer : l'élément fer se conserve au cours d'une transformation chimique. La rouille contient donc toujours du fer. Le cuivre ou le carbone ne sont pas apparus à sa place.",
+                  "answers": [
+                    {
+                      "content": "fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "carbone",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Pour justifier la classe d'une substance, on compte les espèces puis les éléments. Voici cinq cas à justifier.",
+              "exercise_type": "evaluation",
+              "figure": "classification-matiere",
+              "hint": "Une substance n'est un corps pur que si elle contient une seule espèce chimique.",
+              "questions": [
+                {
+                  "content": "Pourquoi l'eau de mer n'est-elle pas un corps pur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : eau et sels dissous, plusieurs espèces. Étape 4 — Conclure : c'est un mélange. Le goût salé est une conséquence, pas la raison chimique.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'elle contient de l'eau et des sels dissous, donc plusieurs espèces",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'elle est salée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle contient trop d'oxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle bouge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le dihydrogène H2 est-il un corps simple ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : H2 est une espèce, un corps pur. Étape 2 — Lire la formule : H2, symbole H. Étape 3 — Compter les éléments : un seul. Étape 4 — Conclure : corps simple, quel que soit son état physique.",
+                  "answers": [
+                    {
+                      "content": "Parce que c'est un corps pur qui ne contient que l'élément hydrogène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il contient deux éléments",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il est un gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il ne contient aucun atome",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps pur change d'état à une température fixe sous pression donnée, alors qu'un mélange n'a pas de température de changement d'état fixe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter les espèces : un corps pur n'a qu'une espèce, sa température de changement d'état est fixe (l'eau pure bout à 100 °C sous la pression atmosphérique normale). Étape 4 — Conclure : un mélange n'a pas cette propriété.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels corps sont des corps composés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Lire les formules : CO2 (C, O), NH3 (N, H), Cl2 (Cl), C (C). Étape 3 — Compter les éléments : deux pour CO2 et NH3, un pour Cl2 et C. Étape 4 — Conclure : CO2 et NH3 sont composés.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone CO2",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ammoniac NH3",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dichlore Cl2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carbone C",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour classer une substance.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Compter les espèces. Étape 2 — Lire la formule. Étape 3 — Compter les éléments. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Compter les espèces chimiques"
+                    },
+                    {
+                      "content": "Lire la formule du corps pur"
+                    },
+                    {
+                      "content": "Compter les éléments différents"
+                    },
+                    {
+                      "content": "Conclure sur la classe"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Des élèves discutent des ions. Tu dois justifier chaque réponse avec la charge, le signe et le nombre d'électrons.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le signe de la charge dit si des électrons ont été perdus (+) ou gagnés (−).",
+              "questions": [
+                {
+                  "content": "Un ion $\\mathrm{Al^{3+}}$ a-t-il perdu ou gagné des électrons ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : élément Al, charge 3+. Étape 2 — Déduire : le signe + indique des électrons perdus ; l'exposant 3 donne leur nombre. Étape 3 — Conclure : 3 électrons perdus, c'est un cation.",
+                  "answers": [
+                    {
+                      "content": "Il a perdu 3 électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a gagné 3 électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a perdu 1 électron",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a ni perdu ni gagné d'électron",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ion $\\mathrm{S^{2-}}$ a-t-il perdu ou gagné des électrons ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : élément S, charge 2−. Étape 2 — Déduire : le signe − indique des électrons gagnés ; l'exposant 2 donne leur nombre. Étape 3 — Conclure : 2 électrons gagnés, c'est un anion.",
+                  "answers": [
+                    {
+                      "content": "Il a gagné 2 électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a perdu 2 électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a gagné 1 électron",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a rien échangé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un anion est un atome qui a perdu des électrons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Déduire : un anion a une charge négative, donc il a gagné des électrons. Un atome qui a perdu des électrons forme un cation. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque ion au nombre d'électrons échangés par l'atome.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : symbole et charge de chaque ion. Étape 2 — Déduire : + pour perte, − pour gain, et l'exposant pour le nombre. Étape 3 — Conclure : Na+ (1 perdu), Mg2+ (2 perdus), Cl− (1 gagné), O2− (2 gagnés).",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Na^{+}}$",
+                      "match": "1 électron perdu"
+                    },
+                    {
+                      "content": "$\\mathrm{Mg^{2+}}$",
+                      "match": "2 électrons perdus"
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{-}}$",
+                      "match": "1 électron gagné"
+                    },
+                    {
+                      "content": "$\\mathrm{O^{2-}}$",
+                      "match": "2 électrons gagnés"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies pour l'ion $\\mathrm{Ca^{2+}}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : élément Ca, charge 2+. Étape 2 — Déduire : charge positive, donc 2 électrons perdus. Étape 3 — Conclure : cation, et le symbole Ca montre que l'élément calcium est conservé. Les deux autres affirmations traitent la charge comme négative.",
+                  "answers": [
+                    {
+                      "content": "C'est un cation",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'élément calcium est conservé",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un anion",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'atome a gagné 2 électrons",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le fer d'un portail rouille. On étudie le fer Fe, le dioxygène O2 de l'air et la rouille, qui contient de l'élément fer et de l'élément oxygène.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les éléments avant et après. Un corps change, un élément se conserve.",
+              "questions": [
+                {
+                  "content": "Dans la transformation du fer qui rouille, les corps changent mais les éléments se conservent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : fer et dioxygène avant, rouille après. Étape 2 — Relever les symboles : Fe et O avant ; Fe et O après. Étape 3 — Comparer : mêmes éléments. Les corps (fer, rouille) sont différents, les éléments sont conservés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments trouve-t-on dans la rouille, d'après l'énoncé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la rouille. Étape 2 — Relever les symboles : Fe et O. Étape 3 — Comparer : ce sont les éléments du fer et du dioxygène de départ.",
+                  "answers": [
+                    {
+                      "content": "Le fer et l'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fer seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carbone et l'oxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cuivre et l'oxygène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fer pur Fe est un…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : une espèce. Étape 2 — Lire la formule : Fe. Étape 3 — Compter les éléments : un. Étape 4 — Conclure : corps simple.",
+                  "answers": [
+                    {
+                      "content": "corps simple",
+                      "correct": true
+                    },
+                    {
+                      "content": "corps composé",
+                      "correct": false
+                    },
+                    {
+                      "content": "mélange",
+                      "correct": false
+                    },
+                    {
+                      "content": "ion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ion $\\mathrm{Fe^{3+}}$ est formé à partir d'un atome de fer. Combien d'électrons a-t-il perdus ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : élément Fe, charge 3+. Étape 2 — Déduire : positive, électrons perdus, 3 d'après l'exposant. Étape 3 — Conclure : 3 électrons perdus.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ion $\\mathrm{Fe^{2+}}$ est un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : Fe et la charge 2+. Étape 2 — Déduire : charge positive. Étape 3 — Conclure : c'est un cation.",
+                  "answers": [
+                    {
+                      "content": "cation",
+                      "correct": true
+                    },
+                    {
+                      "content": "anion",
+                      "correct": false
+                    },
+                    {
+                      "content": "corps simple",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : conservation de l'élément dans une combustion, classement des substances, cations et anions, ions Ca2+, K+, Cl−, Mg2+ et O2−.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le méthane (CH4) est le gaz de certains foyers. Il brûle dans le dioxygène (O2) et donne du dioxyde de carbone (CO2) et de l'eau (H2O).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relève les symboles de chaque corps, puis compare avant et après.",
+              "questions": [
+                {
+                  "content": "Quels éléments sont présents dans les corps de départ, le méthane CH4 et le dioxygène O2 ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : CH4 et O2. Étape 2 — Relever les symboles : C et H dans CH4, O dans O2. Étape 3 — Comparer : les éléments de départ sont C, H et O ; N et Na n'y sont pas.",
+                  "answers": [
+                    {
+                      "content": "Le carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hydrogène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'azote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sodium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont présents dans les corps formés, le dioxyde de carbone CO2 et l'eau H2O ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : CO2 et H2O. Étape 2 — Relever les symboles : C et O dans CO2, H et O dans H2O. Étape 3 — Comparer : mêmes éléments que ceux de départ, C, H et O.",
+                  "answers": [
+                    {
+                      "content": "Le carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hydrogène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'azote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chlore",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les éléments présents avant la combustion du méthane sont les mêmes qu'après.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever les symboles : C, H, O avant ; C, H, O après. Étape 3 — Comparer : mêmes éléments, ils se conservent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une molécule de méthane CH4 contient combien d'atomes au total ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Lire la formule : C (1 atome) et H avec l'indice 4 (4 atomes). Étape 3 — Compter : 1 + 4 = 5 atomes, de 2 éléments.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dioxygène O2, le dioxyde de carbone CO2 et l'eau H2O sont respectivement…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : trois corps purs. Étape 2 — Lire les formules : O2 (O), CO2 (C, O), H2O (H, O). Étape 3 — Compter les éléments : un, deux, deux. Étape 4 — Conclure : corps simple, corps composé, corps composé.",
+                  "answers": [
+                    {
+                      "content": "un corps simple, un corps composé, un corps composé",
+                      "correct": true
+                    },
+                    {
+                      "content": "un corps composé, un corps simple, un corps simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "un mélange, un corps composé, un corps simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "un corps simple, un corps simple, un corps composé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie des ions de la vie courante : le calcium Ca2+ des os et du lait, le potassium K+ des bananes, le chlore Cl− du sel de cuisine.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Charge positive : cation, électrons perdus. Charge négative : anion, électrons gagnés.",
+              "questions": [
+                {
+                  "content": "Un atome de potassium perd un électron. Quelle est la formule de l'ion formé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : élément K, 1 électron perdu. Étape 2 — Déduire : perte donne charge positive, 1 électron donne 1+. Étape 3 — Conclure : K+, un cation.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{K^{+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{K^{-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{K^{2+}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{P^{+}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi $\\mathrm{Ca^{2+}}$, $\\mathrm{K^{+}}$, $\\mathrm{Cl^{-}}$ et $\\mathrm{S^{2-}}$, quels ions sont des cations ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les symboles et les charges. Étape 2 — Déduire : Ca2+ et K+ sont positifs (électrons perdus) ; Cl− et S2− sont négatifs (électrons gagnés). Étape 3 — Conclure : Ca2+ et K+ sont des cations.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Ca^{2+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{K^{+}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Cl^{-}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{S^{2-}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de calcium forme l'ion $\\mathrm{Ca^{2+}}$. Combien d'électrons a-t-il perdus ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : élément Ca, charge 2+. Étape 2 — Déduire : électrons perdus, 2 d'après l'exposant. Étape 3 — Conclure : 2 électrons perdus.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ion chlorure $\\mathrm{Cl^{-}}$ est un anion formé par un atome de chlore qui a gagné un électron.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : élément Cl, charge 1−. Étape 2 — Déduire : un électron gagné. Étape 3 — Conclure : c'est un anion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un atome devient un ion, son symbole ne change pas : l'élément chimique se ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Conclure : le symbole est inchangé (Na devient Na+), l'élément se conserve.",
+                  "answers": [
+                    {
+                      "content": "conserve",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève range des substances dans le tableau de classification de la matière : air, eau pure H2O, dioxygène O2, eau salée, dioxyde de carbone CO2, fer Fe.",
+              "exercise_type": "evaluation",
+              "figure": "classification-matiere",
+              "hint": "Un mélange contient plusieurs espèces ; un corps simple contient un seul élément.",
+              "questions": [
+                {
+                  "content": "Relie chaque substance à sa classe.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter les espèces : l'air contient plusieurs gaz ; O2 et H2O sont des corps purs. Étape 2 — Lire les formules : O2 (O), H2O (H, O). Étape 3 — Compter les éléments : un pour O2, deux pour H2O. Étape 4 — Conclure : mélange, corps simple, corps composé.",
+                  "answers": [
+                    {
+                      "content": "L'air",
+                      "match": "Mélange"
+                    },
+                    {
+                      "content": "Le dioxygène O2",
+                      "match": "Corps simple"
+                    },
+                    {
+                      "content": "L'eau pure H2O",
+                      "match": "Corps composé"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels corps sont des corps purs ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Compter les espèces : H2O, O2 et Fe ne contiennent qu'une espèce. L'air et l'eau salée en contiennent plusieurs. Étape 4 — Conclure : trois corps purs, deux mélanges.",
+                  "answers": [
+                    {
+                      "content": "L'eau pure H2O",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dioxygène O2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fer Fe",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau salée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel corps est un corps composé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Lire les formules : CO2 (C, O), Fe (Fe), O2 (O). Étape 3 — Compter les éléments : deux pour CO2, un pour Fe et O2. Étape 4 — Conclure : CO2 est composé ; l'air est un mélange.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone CO2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fer Fe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxygène O2",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi H2O, O2, CO2 et Fe, combien sont des corps simples ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Lire les formules : H2O (H, O), O2 (O), CO2 (C, O), Fe (Fe). Étape 3 — Compter les éléments : un pour O2 et Fe, deux pour H2O et CO2. Étape 4 — Conclure : 2 corps simples.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau salée est un corps composé, car elle contient plusieurs éléments.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter les espèces : l'eau salée contient de l'eau et du sel, donc plusieurs espèces. Étape 4 — Conclure : c'est un mélange. On ne parle de corps composé que pour un corps pur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un morceau de magnésium (Mg) brûle dans l'air en donnant un solide blanc, l'oxyde de magnésium. Dans ce solide, le magnésium est présent sous forme d'ions $\\mathrm{Mg^{2+}}$ et l'oxygène sous forme d'ions $\\mathrm{O^{2-}}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche ce qui se conserve, puis le signe de chaque ion.",
+              "questions": [
+                {
+                  "content": "Le magnésium pur Mg est un…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les espèces : une seule. Étape 2 — Lire la formule : Mg. Étape 3 — Compter les éléments : un. Étape 4 — Conclure : corps simple.",
+                  "answers": [
+                    {
+                      "content": "corps simple",
+                      "correct": true
+                    },
+                    {
+                      "content": "corps composé",
+                      "correct": false
+                    },
+                    {
+                      "content": "mélange",
+                      "correct": false
+                    },
+                    {
+                      "content": "ion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments retrouve-t-on dans l'oxyde de magnésium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les ions Mg2+ et O2−. Étape 2 — Relever les symboles : Mg et O. Étape 3 — Comparer : ce sont les éléments du magnésium et du dioxygène de l'air.",
+                  "answers": [
+                    {
+                      "content": "Le magnésium et l'oxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magnésium seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carbone et l'oxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magnésium et l'hydrogène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies pour les ions $\\mathrm{Mg^{2+}}$ et $\\mathrm{O^{2-}}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : Mg2+ et O2−. Étape 2 — Déduire : Mg2+ est positif (2 électrons perdus), O2− est négatif (2 électrons gagnés). Étape 3 — Conclure : cation pour Mg2+, anion pour O2−.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{Mg^{2+}}$ est un cation",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{O^{2-}}$ est un anion",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{Mg^{2+}}$ est un anion",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{O^{2-}}$ est un cation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome d'oxygène forme l'ion $\\mathrm{O^{2-}}$. Combien d'électrons a-t-il gagnés ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : élément O, charge 2−. Étape 2 — Déduire : électrons gagnés, 2 d'après l'exposant. Étape 3 — Conclure : 2 électrons gagnés.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le magnésium brûle, l'élément magnésium disparaît.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : Mg avant, Mg2+ dans l'oxyde de magnésium après. Étape 2 — Relever : le symbole Mg est toujours là. Étape 3 — Comparer : l'élément se conserve, il ne disparaît pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

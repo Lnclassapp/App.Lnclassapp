@@ -1,0 +1,3223 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La transmission d'un message nerveux",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "A",
+      "material_name": "SVT",
+      "figures": [
+        {
+          "key": "neurone-trajet",
+          "kind": "diagram",
+          "description": "Schéma fléché du sens du message nerveux dans un neurone : les dendrites (prolongements courts et ramifiés) reçoivent le message, le corps cellulaire (qui contient le noyau) le fait transiter, l'axone (long prolongement entouré de myéline) le conduit jusqu'aux extrémités de l'axone, tournées vers la cellule suivante.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "d",
+                "label": "Dendrites : elles reçoivent"
+              },
+              {
+                "id": "c",
+                "label": "Corps cellulaire : noyau"
+              },
+              {
+                "id": "a",
+                "label": "Axone entouré de myéline : il conduit"
+              },
+              {
+                "id": "e",
+                "label": "Extrémités de l'axone : vers la cellule suivante"
+              }
+            ],
+            "edges": [
+              {
+                "from": "d",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "a"
+              },
+              {
+                "from": "a",
+                "to": "e"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "arc-reflexe",
+          "kind": "diagram",
+          "description": "Schéma fléché d'un arc réflexe de retrait : un stimulus agit sur un récepteur de la peau, le neurone sensitif conduit le message jusqu'à la moelle épinière (centre nerveux), le neurone moteur conduit l'ordre jusqu'au muscle (effecteur) qui exécute la réponse. Les flèches indiquent le sens du message.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "s",
+                "label": "Stimulus"
+              },
+              {
+                "id": "r",
+                "label": "Récepteur (peau)"
+              },
+              {
+                "id": "ns",
+                "label": "Neurone sensitif"
+              },
+              {
+                "id": "m",
+                "label": "Moelle épinière (centre nerveux)"
+              },
+              {
+                "id": "nm",
+                "label": "Neurone moteur"
+              },
+              {
+                "id": "e",
+                "label": "Effecteur (muscle)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "s",
+                "to": "r"
+              },
+              {
+                "from": "r",
+                "to": "ns",
+                "label": "message"
+              },
+              {
+                "from": "ns",
+                "to": "m"
+              },
+              {
+                "from": "m",
+                "to": "nm",
+                "label": "ordre"
+              },
+              {
+                "from": "nm",
+                "to": "e"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "synapse-etapes",
+          "kind": "diagram",
+          "description": "Schéma fléché du passage du message nerveux à une synapse : le message électrique arrive à l'extrémité de l'axone du neurone 1, un neurotransmetteur est libéré dans la fente synaptique, il se fixe sur les récepteurs du neurone 2, ce qui déclenche un nouveau message électrique dans le neurone 2.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Message électrique à l'extrémité de l'axone du neurone 1",
+                "category": 1
+              },
+              {
+                "id": "l",
+                "label": "Libération du neurotransmetteur",
+                "category": 2
+              },
+              {
+                "id": "f",
+                "label": "Fixation sur les récepteurs du neurone 2",
+                "category": 3
+              },
+              {
+                "id": "n",
+                "label": "Nouveau message électrique dans le neurone 2",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "l"
+              },
+              {
+                "from": "l",
+                "to": "f",
+                "label": "traverse la fente"
+              },
+              {
+                "from": "f",
+                "to": "n"
+              }
+            ],
+            "legend": [
+              "Neurone 1",
+              "Fente synaptique",
+              "Neurone 2"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "stimulation-nerf",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la contraction d'un muscle de grenouille (en unités arbitraires) quand on stimule son nerf avec le même courant : 8 pour le nerf intact, 8 pour le bout du nerf sectionné resté relié au muscle, 0 pour le bout du nerf sectionné relié à la moelle épinière.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              8,
+              8,
+              0
+            ],
+            "labels": [
+              "Nerf intact",
+              "Bout côté muscle",
+              "Bout côté moelle"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le neurone et le nerf",
+          "remember": "Le **neurone** est la cellule du système nerveux. Il comprend : le **corps cellulaire**, renflement qui contient le **noyau** ; les **dendrites**, prolongements courts et ramifiés qui **reçoivent** les messages venant d'autres cellules ; l'**axone**, prolongement long et unique qui **conduit** le message vers la cellule suivante. La **gaine de myéline** est une enveloppe isolante qui entoure certains axones et **accélère** le message. Dans un neurone, le message nerveux circule dans un seul sens : dendrites, corps cellulaire, axone. Un **nerf** est un faisceau qui regroupe les axones (fibres nerveuses) de très nombreux neurones : il relie un centre nerveux à un organe.",
+          "method": [
+            "Repérer le corps cellulaire : le renflement qui contient le noyau.",
+            "Distinguer les dendrites (prolongements courts et ramifiés) de l'axone (prolongement long et unique, parfois entouré de myéline).",
+            "Attribuer un rôle à chaque partie : les dendrites reçoivent, le corps cellulaire entretient la cellule, l'axone conduit.",
+            "Suivre le sens du message : il entre par les dendrites, traverse le corps cellulaire et sort par l'axone ; un nerf rassemble les axones de nombreux neurones."
+          ],
+          "example": {
+            "statement": "Un neurone moteur a un renflement qui contient un noyau, un prolongement court et très ramifié, et un prolongement long, entouré de myéline, qui va jusqu'à un muscle. Identifier les parties du neurone, donner leur rôle et le sens du message.",
+            "steps": [
+              "Repérer : le noyau est dans le renflement, c'est donc le corps cellulaire.",
+              "Distinguer : le prolongement court et ramifié correspond aux dendrites ; le prolongement long entouré de myéline est l'axone.",
+              "Attribuer : les dendrites reçoivent le message, l'axone le conduit jusqu'au muscle, et la myéline l'accélère.",
+              "Suivre : le message entre par les dendrites, traverse le corps cellulaire, puis sort par l'axone vers le muscle."
+            ]
+          },
+          "pitfall": "Ne pas confondre un neurone et un nerf. Contre-exemple : un nerf du bras n'est pas une cellule, c'est un faisceau qui contient les axones de très nombreux neurones ; si on le sectionne, on coupe tous ces axones à la fois. Ne pas confondre non plus les deux sens : le message circule des dendrites vers l'axone, jamais de l'axone vers les dendrites.",
+          "figure": "neurone-trajet",
+          "exercise": [
+            {
+              "title": "Reconnaître les parties d'un neurone",
+              "statement": "Dans cet exercice, tu nommes les parties d'un neurone et tu suis le message avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle partie d'un neurone contient le noyau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le corps cellulaire : c'est le renflement qui contient le noyau. Les dendrites et l'axone sont des prolongements, ils ne contiennent pas le noyau. La myéline est une enveloppe isolante autour de l'axone, pas une partie qui contient le noyau.",
+                  "answers": [
+                    {
+                      "content": "Le corps cellulaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les dendrites",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'axone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La gaine de myéline",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un neurone, quel prolongement reçoit les messages venant d'autres cellules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Distinguer : les dendrites sont les prolongements courts et ramifiés. Étape 3 — Attribuer un rôle : elles reçoivent le message. L'axone fait l'inverse : il conduit le message vers la cellule suivante.",
+                  "answers": [
+                    {
+                      "content": "Les dendrites",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'axone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La gaine de myéline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La gaine de myéline ralentit le message nerveux dans l'axone.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Attribuer un rôle : la gaine de myéline est une enveloppe isolante qui entoure certains axones. Elle accélère le message, elle ne le ralentit pas. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message nerveux traverse un neurone. Remets dans l'ordre les parties qu'il traverse, de l'entrée à la sortie.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 4 — Suivre le sens du message : il entre par les dendrites, traverse le corps cellulaire, puis sort par l'axone. Le sens inverse est faux : le message ne circule pas de l'axone vers les dendrites.",
+                  "answers": [
+                    {
+                      "content": "Les dendrites"
+                    },
+                    {
+                      "content": "Le corps cellulaire"
+                    },
+                    {
+                      "content": "L'axone"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf du bras d'un élève est observé au microscope. Que contient-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Suivre le message jusqu'à l'organe : un nerf n'est pas une cellule, c'est un faisceau de fibres nerveuses, c'est-à-dire d'axones de nombreux neurones. Un seul neurone très long est l'erreur du piège : on confond le nerf et le neurone.",
+                  "answers": [
+                    {
+                      "content": "Les axones de très nombreux neurones, réunis en faisceau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un seul neurone très long",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement des corps cellulaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les dendrites d'un seul neurone",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Neurone, dendrites, axone et nerf : fixation",
+              "statement": "Dans cet exercice, tu retrouves les parties d'un neurone, leur rôle et le sens du message dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque partie du neurone à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le corps cellulaire : il contient le noyau. Étape 2 — Distinguer dendrites et axone. Étape 3 — Attribuer un rôle : dendrites qui reçoivent, axone qui conduit, myéline qui isole et accélère.",
+                  "answers": [
+                    {
+                      "content": "Dendrites",
+                      "match": "Reçoivent le message"
+                    },
+                    {
+                      "content": "Corps cellulaire",
+                      "match": "Contient le noyau"
+                    },
+                    {
+                      "content": "Axone",
+                      "match": "Conduit le message vers la cellule suivante"
+                    },
+                    {
+                      "content": "Gaine de myéline",
+                      "match": "Isole l'axone et accélère le message"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prolongement long et unique d'un neurone, qui conduit le message, s'appelle l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Distinguer : le prolongement long et unique est l'axone ; les dendrites sont courtes et nombreuses. Étape 3 — Attribuer un rôle : l'axone conduit le message.",
+                  "answers": [
+                    {
+                      "content": "axone",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux caractéristiques de l'axone d'un neurone ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Distinguer : l'axone est long et unique, alors que les dendrites sont courtes et ramifiées. Étape 3 — Attribuer un rôle : l'axone conduit le message. Recevoir les messages est le rôle des dendrites, et le noyau est dans le corps cellulaire.",
+                  "answers": [
+                    {
+                      "content": "C'est un prolongement long et unique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il conduit le message vers la cellule suivante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est court et très ramifié",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reçoit les messages d'autres cellules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il contient le noyau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un neurone, le message nerveux entre par les dendrites et sort par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Suivre le sens du message : il entre par les dendrites, traverse le corps cellulaire et sort par l'axone. Le noyau et la myéline ne sont pas des voies de sortie.",
+                  "answers": [
+                    {
+                      "content": "l'axone",
+                      "correct": true
+                    },
+                    {
+                      "content": "le noyau",
+                      "correct": false
+                    },
+                    {
+                      "content": "la gaine de myéline",
+                      "correct": false
+                    },
+                    {
+                      "content": "les dendrites",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf est un faisceau de fibres nerveuses qui relie un centre nerveux à un organe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Suivre : un nerf rassemble les axones de nombreux neurones et relie un centre nerveux (par exemple la moelle épinière) à un organe. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un neurone d'un schéma a 1 axone, 1 corps cellulaire et 5 dendrites. Combien de parties principales (axone, corps cellulaire et dendrites) compte-t-il en tout ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer le corps cellulaire : 1. Étape 2 — Distinguer l'axone (1) et les dendrites (5). On additionne : 1 + 1 + 5 = 7 parties.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Commence par le noyau : il est dans le corps cellulaire. Ensuite, le long prolongement unique est l'axone, les courts et ramifiés sont les dendrites."
+            }
+          ]
+        },
+        {
+          "name": "L'arc réflexe",
+          "remember": "Un **stimulus** est un changement du milieu ou du corps qui déclenche une réponse. Un **récepteur** capte le stimulus et le transforme en message nerveux. Le **neurone sensitif** conduit le message du récepteur vers le **centre nerveux** (ici la **moelle épinière**), qui l'analyse et élabore un ordre. Le **neurone moteur** conduit l'ordre du centre nerveux vers l'**effecteur**, un organe (un muscle) qui exécute la réponse. Ce trajet est l'**arc réflexe**. Un **réflexe** est une réponse **automatique, involontaire et rapide** : le cerveau n'est pas nécessaire pour qu'elle ait lieu, il reçoit seulement le message après coup, ce qui permet de sentir la douleur.",
+          "method": [
+            "Identifier le stimulus : le changement qui déclenche la réponse.",
+            "Repérer le récepteur qui capte le stimulus, puis le neurone sensitif qui porte le message vers la moelle épinière.",
+            "Situer le centre nerveux, la moelle épinière, qui reçoit le message et élabore l'ordre.",
+            "Suivre le neurone moteur qui conduit l'ordre jusqu'à l'effecteur, un muscle.",
+            "Conclure en écrivant le trajet dans l'ordre et en précisant que le réflexe est automatique et rapide."
+          ],
+          "example": {
+            "statement": "Un élève pose la main sur une tôle brûlante et la retire aussitôt. Décrire l'arc réflexe.",
+            "steps": [
+              "Identifier : le stimulus est la chaleur de la tôle.",
+              "Repérer : le récepteur est la peau de la main, qui transforme la chaleur en message nerveux ; le neurone sensitif porte ce message vers la moelle épinière.",
+              "Situer : le centre nerveux est la moelle épinière, qui élabore l'ordre de retrait.",
+              "Suivre : le neurone moteur conduit l'ordre jusqu'au muscle du bras, l'effecteur.",
+              "Conclure : le trajet est stimulus, récepteur, neurone sensitif, moelle épinière, neurone moteur, muscle ; la réponse est automatique et rapide."
+            ]
+          },
+          "pitfall": "Ne pas croire que le cerveau commande un réflexe. Contre-exemple : une grenouille dont le cerveau a été détruit, mais dont la moelle épinière est intacte, retire encore la patte quand on la pince ; si on détruit la moelle épinière, le retrait disparaît. Le centre nerveux du réflexe est donc la moelle épinière. Ne pas confondre non plus le neurone sensitif (vers le centre nerveux) et le neurone moteur (vers l'effecteur).",
+          "figure": "arc-reflexe",
+          "exercise": [
+            {
+              "title": "Décrire un arc réflexe",
+              "statement": "Dans cet exercice, tu décris l'arc réflexe d'un retrait de la main avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une élève pose la main sur une casserole brûlante et la retire aussitôt. Quel est le stimulus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le stimulus : c'est le changement qui déclenche la réponse, ici la chaleur de la casserole. Le muscle est l'effecteur, la moelle épinière le centre nerveux, et le retrait de la main est la réponse.",
+                  "answers": [
+                    {
+                      "content": "La chaleur de la casserole",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle du bras",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le retrait de la main",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève retire la main d'une casserole brûlante. Quel est l'effecteur de ce réflexe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Suivre le neurone moteur jusqu'à l'effecteur : l'effecteur est l'organe qui exécute la réponse, ici le muscle du bras. La peau est le récepteur et la moelle épinière le centre nerveux.",
+                  "answers": [
+                    {
+                      "content": "Le muscle du bras",
+                      "correct": true
+                    },
+                    {
+                      "content": "La peau de la main",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone sensitif",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet du message dans l'arc réflexe du retrait de la main d'une casserole brûlante.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Repérer le récepteur puis le neurone sensitif. Étape 3 — Situer la moelle épinière. Étape 4 — Suivre le neurone moteur jusqu'à l'effecteur. Le trajet commence par le récepteur et finit par l'effecteur.",
+                  "answers": [
+                    {
+                      "content": "Récepteur (peau de la main)"
+                    },
+                    {
+                      "content": "Neurone sensitif"
+                    },
+                    {
+                      "content": "Centre nerveux (moelle épinière)"
+                    },
+                    {
+                      "content": "Neurone moteur"
+                    },
+                    {
+                      "content": "Effecteur (muscle du bras)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un arc réflexe, le neurone sensitif conduit le message de la moelle épinière vers le muscle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer le neurone sensitif : il conduit le message du récepteur vers la moelle épinière. Étape 4 — C'est le neurone moteur qui conduit l'ordre vers le muscle. L'affirmation inverse les deux neurones : elle est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grenouille dont le cerveau est détruit, mais dont la moelle épinière est intacte, retire la patte quand on la pince. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Situer le centre nerveux : le réflexe persiste sans cerveau, donc la moelle épinière suffit comme centre nerveux. Étape 5 — Conclure : un réflexe est automatique. Dire que le cerveau commande tous les réflexes est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Le centre nerveux de ce réflexe est la moelle épinière, pas le cerveau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cerveau commande tous les réflexes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La grenouille réfléchit avant de retirer la patte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récepteur de la peau est détruit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Stimulus, récepteur, centre nerveux et effecteur : fixation",
+              "statement": "Dans cet exercice, tu retrouves chaque élément d'un arc réflexe et les caractères d'un réflexe dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque élément de l'arc réflexe à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le stimulus qui déclenche. Étape 2 — Repérer le récepteur qui capte. Étape 3 — Situer le centre nerveux qui élabore l'ordre. Étape 4 — Suivre jusqu'à l'effecteur qui exécute.",
+                  "answers": [
+                    {
+                      "content": "Stimulus",
+                      "match": "Déclenche la réponse"
+                    },
+                    {
+                      "content": "Récepteur",
+                      "match": "Capte le stimulus et crée un message nerveux"
+                    },
+                    {
+                      "content": "Centre nerveux",
+                      "match": "Analyse le message et élabore l'ordre"
+                    },
+                    {
+                      "content": "Effecteur",
+                      "match": "Exécute la réponse"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le réflexe de retrait de la main, le centre nerveux est la ___ épinière.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Situer le centre nerveux : dans un réflexe de retrait, c'est la moelle épinière qui reçoit le message sensitif et élabore l'ordre moteur.",
+                  "answers": [
+                    {
+                      "content": "moelle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois caractères d'un réflexe ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 5 — Conclure : un réflexe est automatique, involontaire et rapide. Il n'est pas commandé par la volonté, et le cerveau n'est pas nécessaire à la réponse, comme le montre le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Il est automatique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est involontaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est commandé par la volonté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il passe toujours par le cerveau avant que la réponse ait lieu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le neurone qui conduit l'ordre de la moelle épinière vers le muscle est le neurone ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Suivre le neurone moteur : il conduit l'ordre du centre nerveux vers l'effecteur. Le neurone sensitif, lui, va du récepteur vers la moelle épinière.",
+                  "answers": [
+                    {
+                      "content": "moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "sensitif",
+                      "correct": false
+                    },
+                    {
+                      "content": "récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "stimulant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message nerveux atteint aussi le cerveau, ce qui permet de ressentir la douleur après le retrait.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : la réponse du réflexe a lieu avant que le cerveau n'intervienne ; le cerveau reçoit seulement le message, ce qui explique que l'on sente la douleur après coup. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi un réflexe est-il plus rapide qu'un mouvement volontaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Situer le centre nerveux : la moelle épinière élabore elle-même l'ordre. Étape 5 — Conclure : le trajet est court et automatique. Les autres propositions sont fausses : un réflexe a bien un neurone sensitif, et la force du stimulus n'explique pas la rapidité.",
+                  "answers": [
+                    {
+                      "content": "Le trajet est court : le message passe par la moelle épinière sans attendre une décision du cerveau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les neurones sont plus gros",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de neurone sensitif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le stimulus est plus fort",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Suis le trajet dans l'ordre : stimulus, récepteur, neurone sensitif, moelle épinière, neurone moteur, effecteur. Le réflexe ne demande pas de réfléchir."
+            }
+          ]
+        },
+        {
+          "name": "La synapse",
+          "remember": "Une **synapse** est la zone de contact entre deux neurones, ou entre un neurone et la cellule qu'il commande (un muscle, par exemple). Les deux cellules sont séparées par la **fente synaptique**, un très petit espace que le message électrique ne franchit pas directement. Quand le message électrique arrive à l'extrémité de l'axone du premier neurone, celui-ci libère un **neurotransmetteur**, substance chimique, dans la fente. Le neurotransmetteur se fixe sur des **récepteurs** de la cellule suivante et déclenche un nouveau message nerveux. Le message est donc électrique, puis chimique dans la fente, puis de nouveau électrique. Il ne passe que dans **un seul sens**.",
+          "method": [
+            "Repérer l'arrivée du message électrique à l'extrémité de l'axone du premier neurone.",
+            "Décrire la libération du neurotransmetteur dans la fente synaptique.",
+            "Indiquer la fixation du neurotransmetteur sur les récepteurs de la cellule suivante, qui déclenche un nouveau message.",
+            "Conclure sur la nature du message à chaque étape (électrique, chimique, électrique) et sur le sens unique du passage."
+          ],
+          "example": {
+            "statement": "Un message électrique arrive à l'extrémité de l'axone d'un neurone 1. Expliquer comment il passe au neurone 2.",
+            "steps": [
+              "Repérer : le message électrique atteint l'extrémité de l'axone du neurone 1.",
+              "Décrire : cette extrémité libère un neurotransmetteur dans la fente synaptique.",
+              "Indiquer : le neurotransmetteur traverse la fente et se fixe sur les récepteurs du neurone 2, ce qui déclenche un nouveau message.",
+              "Conclure : le message est électrique dans le neurone 1, chimique dans la fente, électrique dans le neurone 2 ; il ne passe que du neurone 1 vers le neurone 2."
+            ]
+          },
+          "pitfall": "Ne pas croire que le message électrique traverse la fente comme un fil. Contre-exemple : si une substance occupe les récepteurs du neurone 2, le neurotransmetteur est bien libéré par le neurone 1, mais le neurone 2 ne produit aucun message. Ce qui franchit la fente, c'est une substance chimique, pas l'électricité. Ne pas croire non plus que le message peut revenir en arrière : les récepteurs ne sont que du côté de la cellule suivante.",
+          "figure": "synapse-etapes",
+          "exercise": [
+            {
+              "title": "Décrire le passage du message à la synapse",
+              "statement": "Dans cet exercice, tu décris comment un message passe d'un neurone au suivant avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Comment s'appelle l'espace qui sépare deux neurones en contact au niveau d'une synapse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la zone de contact : entre l'extrémité de l'axone du premier neurone et la cellule suivante se trouve la fente synaptique. La myéline entoure l'axone, le corps cellulaire contient le noyau et le récepteur est une structure de la cellule suivante.",
+                  "answers": [
+                    {
+                      "content": "La fente synaptique",
+                      "correct": true
+                    },
+                    {
+                      "content": "La gaine de myéline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le corps cellulaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récepteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message arrive à la fin de l'axone d'un neurone 1. Quelle substance traverse la fente synaptique pour atteindre le neurone 2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire la libération : l'extrémité de l'axone libère un neurotransmetteur dans la fente. Étape 3 — C'est lui qui se fixe sur le neurone 2. Le courant électrique ne franchit pas la fente : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Un neurotransmetteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un courant électrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La gaine de myéline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau du neurone 1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du passage d'un message du neurone 1 au neurone 2.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer l'arrivée du message. Étape 2 — Décrire la libération du neurotransmetteur. Étape 3 — Indiquer sa fixation sur les récepteurs. Étape 4 — Conclure : un nouveau message naît dans le neurone 2.",
+                  "answers": [
+                    {
+                      "content": "Le message électrique arrive à l'extrémité de l'axone du neurone 1"
+                    },
+                    {
+                      "content": "Le neurotransmetteur est libéré dans la fente synaptique"
+                    },
+                    {
+                      "content": "Le neurotransmetteur se fixe sur les récepteurs du neurone 2"
+                    },
+                    {
+                      "content": "Un nouveau message nerveux naît dans le neurone 2"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la fente synaptique, quelle est la nature du message nerveux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure sur la nature du message : électrique dans le neurone 1, chimique dans la fente, électrique de nouveau dans le neurone 2. Le message ne disparaît pas : le neurotransmetteur le relaie.",
+                  "answers": [
+                    {
+                      "content": "Chimique : il est porté par un neurotransmetteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Électrique, comme dans l'axone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune : le message disparaît dans la fente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mécanique : les neurones se touchent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message électrique du neurone 1 traverse directement la fente synaptique et entre dans le neurone 2.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire : le message électrique ne franchit pas la fente. Étape 3 — Il est relayé par un neurotransmetteur qui se fixe sur les récepteurs du neurone 2. L'affirmation est l'erreur du piège : elle est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La synapse et le neurotransmetteur : fixation",
+              "statement": "Dans cet exercice, tu retrouves le vocabulaire de la synapse et le sens du message dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer la zone de contact : c'est la synapse. Étape 2 — La fente est l'espace, le neurotransmetteur est libéré par l'axone. Étape 3 — Les récepteurs, situés sur la cellule suivante, le fixent.",
+                  "answers": [
+                    {
+                      "content": "Synapse",
+                      "match": "Zone de contact entre deux neurones"
+                    },
+                    {
+                      "content": "Fente synaptique",
+                      "match": "Espace entre les deux cellules"
+                    },
+                    {
+                      "content": "Neurotransmetteur",
+                      "match": "Substance chimique libérée par le premier neurone"
+                    },
+                    {
+                      "content": "Récepteurs",
+                      "match": "Structures de la cellule suivante qui fixent le neurotransmetteur"
+                    }
+                  ]
+                },
+                {
+                  "content": "La substance chimique libérée dans la fente synaptique s'appelle le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Décrire la libération : l'extrémité de l'axone libère le neurotransmetteur dans la fente synaptique.",
+                  "answers": [
+                    {
+                      "content": "neurotransmetteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur une synapse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Les récepteurs sont sur la cellule suivante. Étape 4 — Conclure : le message est chimique dans la fente et ne passe que dans un seul sens, du premier neurone vers le suivant.",
+                  "answers": [
+                    {
+                      "content": "Le message y devient chimique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message n'y passe que dans un seul sens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message y reste électrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le message y circule aussi bien dans les deux sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les récepteurs sont portés par le premier neurone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au niveau d'une synapse, le message nerveux circule ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure sur le sens du passage : le neurotransmetteur est libéré par le premier neurone, et les récepteurs sont seulement sur la cellule suivante. Le sens est donc unique.",
+                  "answers": [
+                    {
+                      "content": "dans un seul sens, du premier neurone vers le suivant",
+                      "correct": true
+                    },
+                    {
+                      "content": "dans les deux sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "uniquement de la cellule suivante vers le premier neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans aucune direction",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une synapse peut relier l'axone d'un neurone à un muscle qu'il commande.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la zone de contact : une synapse relie deux neurones, ou un neurone et la cellule qu'il commande, par exemple une cellule musculaire. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une substance occupe tous les récepteurs du neurone 2. Le neurone 1 reçoit un message électrique. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Le neurotransmetteur est libéré dans la fente. Étape 3 — Il ne peut pas se fixer car les récepteurs sont occupés, donc aucun nouveau message ne naît. Le message électrique ne passe pas seul, c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Le neurotransmetteur est libéré, mais aucun nouveau message n'apparaît dans le neurone 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message électrique passe directement dans le neurone 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone 1 ne libère plus de neurotransmetteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone 2 produit un message plus fort",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Dans une synapse, le message change de nature : électrique, puis chimique dans la fente, puis de nouveau électrique."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La section d'un nerf chez la grenouille",
+          "statement": "Un chercheur étudie le nerf qui commande un muscle de la cuisse d'une grenouille. Il stimule le nerf avec le même courant et mesure la contraction du muscle (unités arbitraires) : nerf intact, 8 ; nerf sectionné, stimulation du bout resté relié au muscle, 8 ; nerf sectionné, stimulation du bout relié à la moelle épinière, 0.",
+          "exercise_type": "fixation",
+          "figure": "stimulation-nerf",
+          "questions": [
+            {
+              "content": "Qu'est-ce qu'un nerf ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Rappeler la définition : un nerf n'est pas une cellule. 2. Il rassemble en faisceau les axones (fibres nerveuses) de très nombreux neurones. 3. Il relie un centre nerveux à un organe. Un nerf n'est donc ni un neurone, ni un corps cellulaire, ni une synapse.",
+              "answers": [
+                {
+                  "content": "Un faisceau qui regroupe les axones de nombreux neurones",
+                  "correct": true
+                },
+                {
+                  "content": "Un seul neurone très long",
+                  "correct": false
+                },
+                {
+                  "content": "Le corps cellulaire d'un neurone",
+                  "correct": false
+                },
+                {
+                  "content": "Une synapse entre deux neurones",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un nerf de grenouille est sectionné. On stimule le bout resté relié au muscle : le muscle se contracte avec la même intensité que pour le nerf intact (8 et 8).",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Lire les valeurs : nerf intact 8, bout côté muscle 8. 2. Comparer : elles sont égales. 3. Conclure : les axones restés reliés au muscle conduisent encore le message jusqu'à lui. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le nerf d'un muscle de grenouille est sectionné. On stimule le bout relié à la moelle épinière : la contraction vaut 0. Pourquoi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer : on stimule le bout relié à la moelle, séparé du muscle par la coupure. 2. Raisonner : le message nerveux circule dans les axones, et la coupure l'arrête. 3. Conclure : le muscle ne reçoit rien, donc il ne se contracte pas. Le muscle est intact : stimulé par le bout côté muscle, il se contracte (8).",
+              "answers": [
+                {
+                  "content": "Le message ne peut plus circuler jusqu'au muscle, car le nerf est coupé entre le point stimulé et le muscle",
+                  "correct": true
+                },
+                {
+                  "content": "Le muscle est détruit par la section",
+                  "correct": false
+                },
+                {
+                  "content": "Le nerf n'est pas capable de conduire un message",
+                  "correct": false
+                },
+                {
+                  "content": "La moelle épinière se contracte à la place du muscle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un nerf est sectionné : le bout relié au muscle fait contracter le muscle (8), le bout relié à la moelle épinière non (0). Quelles sont les deux conclusions correctes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Comparer les trois valeurs (8, 8, 0). 2. Déduire : le message va du point stimulé au muscle par le nerf, et ne passe pas la coupure. 3. Écarter : le muscle ne se contracte pas sans message (0 avec le bout côté moelle), un nerf n'est pas un neurone, et le centre nerveux est la moelle épinière.",
+              "answers": [
+                {
+                  "content": "Les axones du nerf conduisent le message vers le muscle",
+                  "correct": true
+                },
+                {
+                  "content": "Le message ne peut atteindre le muscle que si le nerf est continu entre le point stimulé et le muscle",
+                  "correct": true
+                },
+                {
+                  "content": "Le muscle se contracte sans message nerveux",
+                  "correct": false
+                },
+                {
+                  "content": "Le nerf est un neurone unique",
+                  "correct": false
+                },
+                {
+                  "content": "Le muscle est le centre nerveux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un nerf est un ___ d'axones de nombreux neurones.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. 1. Un nerf regroupe des axones. 2. Ils sont réunis en un faisceau. 3. On dit donc qu'un nerf est un faisceau de fibres nerveuses.",
+              "answers": [
+                {
+                  "content": "faisceau",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Compare les trois valeurs : la contraction est la même pour le nerf intact et pour le bout côté muscle, et nulle pour le bout côté moelle."
+        },
+        {
+          "title": "Le réflexe d'un joueur sur un terrain",
+          "statement": "Un joueur marche pieds nus sur un terrain. Il pose le pied sur un tesson de bouteille et le retire aussitôt, avant même de sentir la douleur. Le schéma fléché montre le trajet du message dans l'arc réflexe.",
+          "exercise_type": "fixation",
+          "figure": "arc-reflexe",
+          "questions": [
+            {
+              "content": "Un joueur pose le pied sur un tesson et le retire aussitôt. Remets dans l'ordre le trajet du message dans l'arc réflexe, du stimulus à la réponse.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Identifier le stimulus : le tesson. 2. Repérer le récepteur (la peau du pied) et le neurone sensitif qui porte le message vers la moelle épinière. 3. Situer le centre nerveux : la moelle épinière. 4. Suivre le neurone moteur jusqu'à l'effecteur, le muscle de la jambe qui retire le pied.",
+              "answers": [
+                {
+                  "content": "Le tesson (stimulus)"
+                },
+                {
+                  "content": "La peau du pied (récepteur)"
+                },
+                {
+                  "content": "Le neurone sensitif"
+                },
+                {
+                  "content": "La moelle épinière (centre nerveux)"
+                },
+                {
+                  "content": "Le neurone moteur"
+                },
+                {
+                  "content": "Le muscle de la jambe (effecteur)"
+                }
+              ]
+            },
+            {
+              "content": "Un joueur retire son pied après avoir marché sur un tesson. Relie chaque élément de la situation à son nom dans l'arc réflexe.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. Le tesson déclenche la réponse : stimulus. La peau capte le stimulus : récepteur. La moelle épinière élabore l'ordre : centre nerveux. Le muscle exécute le retrait : effecteur.",
+              "answers": [
+                {
+                  "content": "Le tesson",
+                  "match": "Stimulus"
+                },
+                {
+                  "content": "La peau du pied",
+                  "match": "Récepteur"
+                },
+                {
+                  "content": "La moelle épinière",
+                  "match": "Centre nerveux"
+                },
+                {
+                  "content": "Le muscle de la jambe",
+                  "match": "Effecteur"
+                }
+              ]
+            },
+            {
+              "content": "Un joueur retire son pied d'un tesson avant de sentir la douleur. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer le trajet : récepteur, neurone sensitif, moelle épinière, neurone moteur, muscle. 2. Constater qu'il est court et ne passe pas par le cerveau. 3. Conclure : la réponse a lieu avant que le cerveau reçoive le message, d'où la douleur ressentie après le retrait.",
+              "answers": [
+                {
+                  "content": "La moelle épinière élabore la réponse, et le cerveau ne reçoit le message qu'après coup",
+                  "correct": true
+                },
+                {
+                  "content": "Le joueur a décidé de retirer son pied avant le contact",
+                  "correct": false
+                },
+                {
+                  "content": "Le tesson n'a pas touché le récepteur",
+                  "correct": false
+                },
+                {
+                  "content": "Le muscle a agi sans recevoir d'ordre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le retrait du pied d'un joueur qui marche sur un tesson est une réponse volontaire.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Un réflexe est automatique et involontaire. 2. Le retrait a lieu avant que le joueur ait pu décider quoi que ce soit. 3. L'affirmation est donc fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le neurone qui conduit le message du récepteur vers la moelle épinière est le neurone ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. 1. Le message part du récepteur. 2. Il est conduit vers la moelle épinière par le neurone sensitif. 3. Le neurone moteur, lui, conduit l'ordre vers le muscle.",
+              "answers": [
+                {
+                  "content": "sensitif",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Suis le trajet dans l'ordre, du stimulus à l'effecteur, en passant par la moelle épinière."
+        },
+        {
+          "title": "Quatre expériences sur le réflexe d'une grenouille",
+          "statement": "Quand on pince la peau d'une patte de grenouille, elle retire cette patte. On réalise quatre expériences. A : le cerveau est détruit, la moelle épinière est intacte, la patte est retirée. B : la moelle épinière est détruite, la patte n'est plus retirée. C : le nerf sensitif de la patte est sectionné ; pincer la peau ne provoque rien, mais stimuler le bout relié à la moelle épinière provoque le retrait. D : le nerf moteur de la patte est sectionné ; pincer la peau ne provoque rien, mais stimuler le bout resté relié au muscle fait contracter le muscle.",
+          "exercise_type": "evaluation",
+          "figure": "arc-reflexe",
+          "questions": [
+            {
+              "content": "Chez une grenouille dont le cerveau est détruit mais la moelle épinière intacte, le pincement de la patte provoque le retrait. Que montre cette expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Constater : le retrait a lieu sans cerveau. 2. Déduire : le centre nerveux de ce réflexe se trouve ailleurs que dans le cerveau. 3. Conclure : le cerveau n'est pas nécessaire. L'idée que le cerveau commande tous les réflexes est donc fausse.",
+              "answers": [
+                {
+                  "content": "Le cerveau n'est pas nécessaire au réflexe de retrait",
+                  "correct": true
+                },
+                {
+                  "content": "Le cerveau commande le retrait",
+                  "correct": false
+                },
+                {
+                  "content": "La moelle épinière n'a aucun rôle",
+                  "correct": false
+                },
+                {
+                  "content": "Le réflexe est volontaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez une grenouille dont la moelle épinière est détruite, pincer la patte ne provoque plus le retrait. Que montre cette expérience, comparée à l'expérience où seul le cerveau est détruit ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Comparer : sans cerveau, le retrait a lieu ; sans moelle épinière, il disparaît. 2. Déduire : la moelle épinière est indispensable. 3. Conclure : elle est le centre nerveux du réflexe de retrait.",
+              "answers": [
+                {
+                  "content": "La moelle épinière est indispensable : c'est le centre nerveux du réflexe",
+                  "correct": true
+                },
+                {
+                  "content": "La peau n'est plus un récepteur",
+                  "correct": false
+                },
+                {
+                  "content": "Le cerveau devient le centre nerveux",
+                  "correct": false
+                },
+                {
+                  "content": "Le muscle est détruit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le nerf sensitif de la patte d'une grenouille est sectionné. Stimuler le bout relié à la moelle épinière provoque le retrait de la patte. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer : on stimule en aval de la coupure, du côté de la moelle. 2. Suivre : le message atteint la moelle épinière (centre nerveux). 3. Conclure : elle élabore l'ordre, conduit jusqu'au muscle par le neurone moteur intact. Le nerf sensitif conduit vers la moelle, pas vers le muscle.",
+              "answers": [
+                {
+                  "content": "Le message arrive à la moelle épinière, qui renvoie l'ordre par le nerf moteur resté intact",
+                  "correct": true
+                },
+                {
+                  "content": "Le muscle est stimulé directement",
+                  "correct": false
+                },
+                {
+                  "content": "Le message passe par le cerveau",
+                  "correct": false
+                },
+                {
+                  "content": "Le nerf sensitif conduit l'ordre vers le muscle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans les expériences où le nerf sensitif, puis le nerf moteur, sont sectionnés, on peut déduire deux choses. Lesquelles ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Section du nerf sensitif : pincer la peau ne donne rien, donc le message sensitif va de la peau à la moelle. 2. Section du nerf moteur : le muscle ne reçoit plus l'ordre, donc le nerf moteur le conduit de la moelle au muscle. 3. Les autres propositions inversent les rôles ou contredisent l'expérience B.",
+              "answers": [
+                {
+                  "content": "Le nerf sensitif conduit le message de la peau vers la moelle épinière",
+                  "correct": true
+                },
+                {
+                  "content": "Le nerf moteur conduit l'ordre de la moelle épinière vers le muscle",
+                  "correct": true
+                },
+                {
+                  "content": "Le nerf sensitif conduit l'ordre vers le muscle",
+                  "correct": false
+                },
+                {
+                  "content": "La moelle épinière est inutile quand les nerfs sont intacts",
+                  "correct": false
+                },
+                {
+                  "content": "Le nerf moteur capte le stimulus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet du message dans l'arc réflexe de retrait de la patte d'une grenouille pincée.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Le récepteur capte le stimulus. 2. Le nerf sensitif porte le message vers la moelle épinière. 3. La moelle élabore l'ordre. 4. Le nerf moteur le conduit. 5. Le muscle (effecteur) retire la patte.",
+              "answers": [
+                {
+                  "content": "Récepteur de la peau"
+                },
+                {
+                  "content": "Nerf sensitif"
+                },
+                {
+                  "content": "Moelle épinière"
+                },
+                {
+                  "content": "Nerf moteur"
+                },
+                {
+                  "content": "Muscle de la patte"
+                }
+              ]
+            },
+            {
+              "content": "Dans les expériences C et D sur la patte d'une grenouille, on montre que le muscle est le centre nerveux du réflexe.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Le muscle exécute la réponse : c'est l'effecteur. 2. L'expérience B montre que sans moelle épinière, il n'y a plus de réflexe. 3. Le centre nerveux est donc la moelle épinière. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Pour chaque expérience, demande-toi quel élément de l'arc réflexe est supprimé et ce qui disparaît."
+        },
+        {
+          "title": "Une substance qui perturbe la commande d'un muscle",
+          "statement": "On étudie une substance fictive X sur un muscle de grenouille relié à son nerf. Sans X, la stimulation du nerf fait contracter le muscle. Avec X : la stimulation du nerf ne fait plus contracter le muscle ; la stimulation directe du muscle le fait contracter ; un enregistrement montre que le message nerveux arrive normalement à l'extrémité du nerf. On sait de plus que X se fixe sur les récepteurs de la cellule musculaire.",
+          "exercise_type": "evaluation",
+          "figure": "synapse-etapes",
+          "questions": [
+            {
+              "content": "Avec la substance X, la stimulation directe du muscle de grenouille le fait contracter. Que montre ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Constater : stimulé directement, le muscle se contracte malgré X. 2. Déduire : X n'a pas détruit le muscle. 3. Conclure : le défaut de contraction avec stimulation du nerf vient d'ailleurs.",
+              "answers": [
+                {
+                  "content": "Le muscle est toujours capable de se contracter",
+                  "correct": true
+                },
+                {
+                  "content": "Le nerf est détruit",
+                  "correct": false
+                },
+                {
+                  "content": "X est sans effet sur le muscle ni sur le nerf",
+                  "correct": false
+                },
+                {
+                  "content": "Le muscle est le centre nerveux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec la substance X, un enregistrement montre que le message nerveux arrive normalement à l'extrémité du nerf. Que montre ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Constater : le message arrive à l'extrémité du nerf. 2. Déduire : l'axone conduit toujours le message. 3. Conclure : le blocage a lieu après l'arrivée du message, donc plus loin que l'axone.",
+              "answers": [
+                {
+                  "content": "X n'empêche pas le message de circuler dans l'axone",
+                  "correct": true
+                },
+                {
+                  "content": "X détruit les axones",
+                  "correct": false
+                },
+                {
+                  "content": "X empêche le message de naître",
+                  "correct": false
+                },
+                {
+                  "content": "X remplace le neurotransmetteur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec la substance X, le message arrive à l'extrémité du nerf et le muscle, stimulé directement, se contracte, mais la stimulation du nerf ne le fait pas contracter. Où X agit-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Éliminer l'axone (message normal) et le muscle (se contracte seul). 2. Que reste-t-il entre les deux ? La synapse entre le neurone et le muscle. 3. Conclure : X agit à cet endroit.",
+              "answers": [
+                {
+                  "content": "Au niveau de la synapse entre le nerf et le muscle",
+                  "correct": true
+                },
+                {
+                  "content": "Dans le corps cellulaire du neurone",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la moelle épinière",
+                  "correct": false
+                },
+                {
+                  "content": "Sur la gaine de myéline",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La substance X se fixe sur les récepteurs de la cellule musculaire. Quelles sont les deux explications possibles de l'absence de contraction ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Rappeler le passage à la synapse : le neurotransmetteur se fixe sur les récepteurs de la cellule suivante. 2. Si X occupe les récepteurs, le neurotransmetteur ne peut plus s'y fixer. 3. Aucun nouveau message ne naît dans la cellule musculaire, donc pas de contraction.",
+              "answers": [
+                {
+                  "content": "Les récepteurs sont occupés par X",
+                  "correct": true
+                },
+                {
+                  "content": "Le neurotransmetteur libéré ne peut plus se fixer sur le muscle",
+                  "correct": true
+                },
+                {
+                  "content": "Le neurone ne libère plus aucun message électrique",
+                  "correct": false
+                },
+                {
+                  "content": "Le message électrique traverse la fente sans neurotransmetteur",
+                  "correct": false
+                },
+                {
+                  "content": "La gaine de myéline est détruite",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec la substance X sur un muscle de grenouille, remets dans l'ordre ce qui se passe quand on stimule le nerf.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Repérer l'arrivée du message électrique. 2. Décrire la libération du neurotransmetteur. 3. Constater l'absence de fixation, les récepteurs étant occupés par X. 4. Conclure : aucun nouveau message ne naît, le muscle reste au repos.",
+              "answers": [
+                {
+                  "content": "Le message électrique arrive à l'extrémité du nerf"
+                },
+                {
+                  "content": "Le neurotransmetteur est libéré dans la fente"
+                },
+                {
+                  "content": "Le neurotransmetteur ne peut pas se fixer sur les récepteurs occupés"
+                },
+                {
+                  "content": "Le muscle ne se contracte pas"
+                }
+              ]
+            },
+            {
+              "content": "Avec la substance X, le message nerveux n'arrive plus à l'extrémité du nerf de grenouille.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. L'énoncé donne un enregistrement : le message arrive normalement. 2. X n'agit donc pas sur la conduction dans l'axone. 3. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Élimine d'abord l'axone et le muscle, qui fonctionnent. Il reste la zone de contact entre les deux."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base du message nerveux",
+          "notions": "Parties du neurone et sens du message, neurone et nerf, arc réflexe, synapse et neurotransmetteur.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un schéma présente un neurone : des dendrites courtes et ramifiées, un corps cellulaire avec un noyau, un long axone entouré de myéline qui se termine près d'une autre cellule.",
+              "exercise_type": "evaluation",
+              "figure": "neurone-trajet",
+              "questions": [
+                {
+                  "content": "Dans un neurone, quelle partie contient le noyau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le renflement de la cellule. 2. Le noyau s'y trouve : c'est le corps cellulaire. Les prolongements (dendrites, axone) n'ont pas de noyau.",
+                  "answers": [
+                    {
+                      "content": "Le corps cellulaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les dendrites",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'axone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La gaine de myéline",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un neurone, quelle partie conduit le message vers la cellule suivante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Distinguer les prolongements : les dendrites reçoivent, l'axone conduit. 2. Le message part donc par l'axone, vers la cellule suivante.",
+                  "answers": [
+                    {
+                      "content": "L'axone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les dendrites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fente synaptique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque partie du neurone à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Repérer chaque partie. 2. Associer son rôle : les dendrites reçoivent, le corps cellulaire contient le noyau, l'axone conduit, la myéline isole l'axone et accélère le message.",
+                  "answers": [
+                    {
+                      "content": "Dendrites",
+                      "match": "Reçoivent le message"
+                    },
+                    {
+                      "content": "Corps cellulaire",
+                      "match": "Contient le noyau"
+                    },
+                    {
+                      "content": "Axone",
+                      "match": "Conduit le message"
+                    },
+                    {
+                      "content": "Gaine de myéline",
+                      "match": "Accélère le message"
+                    }
+                  ]
+                },
+                {
+                  "content": "La gaine de ___ entoure certains axones et accélère le message nerveux.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : l'enveloppe isolante qui entoure certains axones s'appelle la gaine de myéline ; elle accélère le message.",
+                  "answers": [
+                    {
+                      "content": "myéline",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message nerveux traverse un neurone. Remets dans l'ordre les parties traversées, de l'entrée à la sortie.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Le message entre par les dendrites. 2. Il traverse le corps cellulaire. 3. Il sort par l'axone. Le sens inverse n'existe pas dans un neurone.",
+                  "answers": [
+                    {
+                      "content": "Les dendrites"
+                    },
+                    {
+                      "content": "Le corps cellulaire"
+                    },
+                    {
+                      "content": "L'axone"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Les dendrites reçoivent, l'axone conduit."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève confond souvent un neurone et un nerf. Tu dois les distinguer avec précision.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un nerf est un faisceau qui regroupe les axones de nombreux neurones.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Un nerf n'est pas une cellule. 2. Il réunit en faisceau les axones de très nombreux neurones. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf relie :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Un nerf est un faisceau de fibres nerveuses. 2. Son rôle est de relier un centre nerveux, comme la moelle épinière, à un organe.",
+                  "answers": [
+                    {
+                      "content": "Un centre nerveux à un organe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux dendrites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un noyau à une myéline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux corps cellulaires d'un même neurone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur le neurone ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Le neurone est une cellule avec un noyau. 2. Son axone est unique et long. Le faisceau de fibres décrit un nerf.",
+                  "answers": [
+                    {
+                      "content": "C'est une cellule",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il possède un seul axone",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un faisceau de fibres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il possède plusieurs axones principaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas de noyau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf contient les ___ de très nombreux neurones.",
+                  "question_type": "select",
+                  "explanation": "Méthode : un nerf rassemble les axones des neurones, pas leurs noyaux ni leurs corps cellulaires.",
+                  "answers": [
+                    {
+                      "content": "axones",
+                      "correct": true
+                    },
+                    {
+                      "content": "noyaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "corps cellulaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "synapses",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf de la jambe contient les axones de 400 neurones (valeur fictive). On le sectionne entièrement. Combien d'axones sont coupés ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Un nerf regroupe tous ses axones. 2. Le sectionner coupe tous les axones qu'il contient : 400.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Relis la situation : repère le stimulus ou la zone étudiée, puis suis le message pas à pas."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève pose la main sur une plaque brûlante et la retire aussitôt. Le schéma fléché montre l'arc réflexe.",
+              "exercise_type": "evaluation",
+              "figure": "arc-reflexe",
+              "questions": [
+                {
+                  "content": "Dans l'arc réflexe du retrait d'une main posée sur une plaque brûlante, quel est le récepteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Le stimulus est la chaleur. 2. Le récepteur capte le stimulus : c'est la peau de la main. Le muscle est l'effecteur.",
+                  "answers": [
+                    {
+                      "content": "La peau de la main",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle du bras",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chaleur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'arc réflexe du retrait de la main, quel est le centre nerveux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Le message du neurone sensitif arrive à la moelle épinière. 2. Elle élabore l'ordre : c'est le centre nerveux de ce réflexe.",
+                  "answers": [
+                    {
+                      "content": "La moelle épinière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La peau de la main",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le muscle du bras",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cerveau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet du message dans l'arc réflexe du retrait de la main.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : récepteur, puis neurone sensitif vers la moelle, centre nerveux, puis neurone moteur vers l'effecteur.",
+                  "answers": [
+                    {
+                      "content": "Récepteur (peau)"
+                    },
+                    {
+                      "content": "Neurone sensitif"
+                    },
+                    {
+                      "content": "Moelle épinière"
+                    },
+                    {
+                      "content": "Neurone moteur"
+                    },
+                    {
+                      "content": "Effecteur (muscle)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un réflexe est une réponse automatique et rapide.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un réflexe est automatique, involontaire et rapide car son trajet est court. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément de l'arc réflexe à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : le stimulus déclenche, le récepteur capte, le neurone moteur conduit l'ordre vers l'effecteur.",
+                  "answers": [
+                    {
+                      "content": "Stimulus",
+                      "match": "Déclenche la réponse"
+                    },
+                    {
+                      "content": "Récepteur",
+                      "match": "Capte le stimulus"
+                    },
+                    {
+                      "content": "Neurone moteur",
+                      "match": "Conduit l'ordre vers l'effecteur"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le trajet commence par le stimulus et finit par l'effecteur."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un schéma fléché montre le passage d'un message du neurone 1 au neurone 2 par une synapse.",
+              "exercise_type": "evaluation",
+              "figure": "synapse-etapes",
+              "questions": [
+                {
+                  "content": "Comment s'appelle la substance qui traverse la fente synaptique entre deux neurones ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Le message arrive à l'extrémité de l'axone. 2. Un neurotransmetteur est libéré dans la fente : c'est lui qui la traverse.",
+                  "answers": [
+                    {
+                      "content": "Le neurotransmetteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La myéline",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hormone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'espace entre deux neurones au niveau d'une synapse s'appelle la fente ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : la zone de contact comprend la fente synaptique, espace que le message électrique ne franchit pas directement.",
+                  "answers": [
+                    {
+                      "content": "synaptique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une synapse, le message peut passer aussi bien du neurone 2 vers le neurone 1 que du neurone 1 vers le neurone 2.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : les récepteurs ne sont que du côté de la cellule suivante : le message ne passe que dans un seul sens. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du passage du message d'un neurone 1 à un neurone 2.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : arrivée du message, libération du neurotransmetteur, fixation sur les récepteurs, nouveau message.",
+                  "answers": [
+                    {
+                      "content": "Le message électrique arrive à l'extrémité de l'axone du neurone 1"
+                    },
+                    {
+                      "content": "Le neurotransmetteur est libéré dans la fente"
+                    },
+                    {
+                      "content": "Il se fixe sur les récepteurs du neurone 2"
+                    },
+                    {
+                      "content": "Un nouveau message naît dans le neurone 2"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la fente synaptique, le message est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : le message est électrique dans le neurone 1, chimique dans la fente (neurotransmetteur), électrique dans le neurone 2.",
+                  "answers": [
+                    {
+                      "content": "chimique",
+                      "correct": true
+                    },
+                    {
+                      "content": "électrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "inexistant",
+                      "correct": false
+                    },
+                    {
+                      "content": "mécanique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Électrique, chimique, électrique : le message change de nature."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Le message nerveux dans la vie courante",
+          "notions": "Réflexe d'un retrait, effet d'une plaie sur un nerf, douleur ressentie après le réflexe, substance agissant sur une synapse.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché, une vendeuse marche pieds nus et pose le pied sur une épine. Elle retire aussitôt son pied.",
+              "exercise_type": "evaluation",
+              "figure": "arc-reflexe",
+              "questions": [
+                {
+                  "content": "Une vendeuse pose le pied sur une épine et le retire aussitôt. Quel est le stimulus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier ce qui déclenche la réponse : l'épine. Le muscle est l'effecteur, la moelle épinière le centre nerveux.",
+                  "answers": [
+                    {
+                      "content": "L'épine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle de la jambe",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le retrait du pied",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse retire son pied d'une épine. Quel organe exécute le retrait ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : l'effecteur est l'organe qui exécute la réponse, ici un muscle de la jambe. La peau est le récepteur.",
+                  "answers": [
+                    {
+                      "content": "Un muscle de la jambe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La peau du pied",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurone sensitif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La vendeuse retire son pied avant que son cerveau n'ait reçu le message de la douleur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le réflexe est élaboré par la moelle épinière, sans attendre le cerveau, qui ne reçoit le message qu'après coup. C'est pourquoi on sent la douleur après le retrait.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le centre nerveux du réflexe de retrait du pied est la ___ épinière.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le message du neurone sensitif arrive à la moelle épinière, qui est le centre nerveux de ce réflexe.",
+                  "answers": [
+                    {
+                      "content": "moelle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse retire son pied d'une épine. Quel neurone conduit l'ordre vers le muscle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le neurone sensitif conduit le message vers la moelle, le neurone moteur conduit l'ordre vers l'effecteur.",
+                  "answers": [
+                    {
+                      "content": "Le neurone moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le neurone sensitif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'épine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le stimulus ou la zone étudiée, puis suis le message pas à pas."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un jardinier se blesse profondément le bras. Le nerf du bras, qui contient des fibres sensitives (vers le centre nerveux) et des fibres motrices (vers le muscle), est sectionné. Il ne sent plus son doigt et ne peut plus le bouger.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le nerf du bras d'un jardinier est sectionné : il ne sent plus son doigt. Quelle fibre est coupée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Sentir suppose que le message de la peau arrive au centre nerveux. 2. Il passe par les fibres sensitives du nerf. Si le doigt n'est plus senti, elles sont coupées.",
+                  "answers": [
+                    {
+                      "content": "Les fibres sensitives, qui conduisent le message vers le centre nerveux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fibres motrices uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le corps cellulaire du muscle",
+                      "correct": false
+                    },
+                    {
+                      "content": "La peau du doigt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nerf du bras d'un jardinier est sectionné : il ne peut plus bouger son doigt. Quelle fibre est coupée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : bouger suppose que l'ordre du centre nerveux arrive au muscle par les fibres motrices. Le doigt reste immobile : elles sont coupées.",
+                  "answers": [
+                    {
+                      "content": "Les fibres motrices, qui conduisent l'ordre vers le muscle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fibres sensitives uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les dendrites du muscle",
+                      "correct": false
+                    },
+                    {
+                      "content": "La peau du doigt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nerf sectionné du jardinier contient les axones de nombreux neurones.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un nerf est un faisceau d'axones de très nombreux neurones : sectionner le nerf coupe tous ces axones à la fois.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nerf du bras d'un jardinier contient des fibres sensitives et des fibres motrices. Quelles sont les deux conséquences de sa section complète ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : sectionner le nerf coupe à la fois les fibres sensitives (plus de sensation) et les fibres motrices (plus de commande). Le cerveau et le muscle ne sont pas détruits.",
+                  "answers": [
+                    {
+                      "content": "Le doigt n'est plus senti",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le doigt ne peut plus être commandé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le doigt devient plus sensible",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cerveau n'est plus capable de fonctionner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le muscle est détruit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ___ regroupe les axones de nombreux neurones et relie un centre nerveux à un organe.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le faisceau d'axones qui relie un centre nerveux à un organe s'appelle un nerf.",
+                  "answers": [
+                    {
+                      "content": "nerf",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense à la sensation (message vers le centre nerveux) et à la commande (message vers le muscle)."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "En cuisinant, un apprenti touche une marmite brûlante et retire sa main avant de sentir la brûlure. Il ressent ensuite une vive douleur.",
+              "exercise_type": "evaluation",
+              "figure": "arc-reflexe",
+              "questions": [
+                {
+                  "content": "Un apprenti touche une marmite brûlante. Remets dans l'ordre le trajet du message jusqu'au retrait de la main.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : stimulus (chaleur), récepteur (peau), neurone sensitif, centre nerveux (moelle épinière), neurone moteur, effecteur (muscle).",
+                  "answers": [
+                    {
+                      "content": "La chaleur de la marmite"
+                    },
+                    {
+                      "content": "La peau de la main"
+                    },
+                    {
+                      "content": "Le neurone sensitif"
+                    },
+                    {
+                      "content": "La moelle épinière"
+                    },
+                    {
+                      "content": "Le neurone moteur"
+                    },
+                    {
+                      "content": "Le muscle du bras"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'apprenti décide de retirer sa main avant de toucher la marmite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le retrait est un réflexe, donc involontaire et automatique. Il ne résulte pas d'une décision.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un apprenti retire la main d'une marmite brûlante, puis sent la douleur. Pourquoi sent-il la douleur après ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le message sensitif part aussi vers le cerveau. Le retrait a déjà eu lieu, car la moelle épinière n'a pas attendu le cerveau.",
+                  "answers": [
+                    {
+                      "content": "Le message atteint aussi le cerveau, mais après que la moelle a déclenché le retrait",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le retrait est commandé par le cerveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La douleur est produite par le muscle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone moteur ne conduit pas l'ordre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément de la situation à son rôle dans l'arc réflexe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : la marmite déclenche (stimulus), la peau capte (récepteur), le muscle exécute (effecteur).",
+                  "answers": [
+                    {
+                      "content": "La marmite brûlante",
+                      "match": "Stimulus"
+                    },
+                    {
+                      "content": "La peau de la main",
+                      "match": "Récepteur"
+                    },
+                    {
+                      "content": "Le muscle du bras",
+                      "match": "Effecteur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le réflexe est une réponse ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : un réflexe est automatique, involontaire et rapide ; il n'attend pas le cerveau.",
+                  "answers": [
+                    {
+                      "content": "automatique et rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "volontaire et lente",
+                      "correct": false
+                    },
+                    {
+                      "content": "possible seulement avec le cerveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "toujours précédée de la douleur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le stimulus ou la zone étudiée, puis suis le message pas à pas."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un médicament fictif Y empêche un muscle de se contracter. On sait que le message nerveux arrive normalement à l'extrémité du nerf, que le muscle stimulé directement se contracte, et que Y occupe les récepteurs de la cellule musculaire.",
+              "exercise_type": "evaluation",
+              "figure": "synapse-etapes",
+              "questions": [
+                {
+                  "content": "Un médicament fictif Y occupe les récepteurs d'un muscle. Le nerf du muscle est stimulé et le message arrive à son extrémité. Où Y agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le message arrive normalement et le muscle se contracte seul : l'axone et le muscle fonctionnent. Les récepteurs occupés sont à la synapse.",
+                  "answers": [
+                    {
+                      "content": "Au niveau de la synapse entre le nerf et le muscle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans l'axone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le noyau du neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la moelle épinière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec le médicament Y, le neurotransmetteur ne peut plus se fixer sur les récepteurs du muscle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : les récepteurs étant occupés par Y, le neurotransmetteur ne peut plus s'y fixer. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec le médicament Y, le muscle ne se contracte plus quand on stimule le nerf. Quelle est la conséquence sur le message nerveux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : sans fixation du neurotransmetteur sur les récepteurs, le message ne passe pas à la cellule suivante, donc le muscle ne reçoit rien.",
+                  "answers": [
+                    {
+                      "content": "Aucun nouveau message ne naît dans la cellule musculaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message revient vers le neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le message devient plus rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau du neurone disparaît",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La substance libérée dans la fente synaptique par l'extrémité du nerf est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : l'extrémité de l'axone libère un neurotransmetteur dans la fente synaptique.",
+                  "answers": [
+                    {
+                      "content": "neurotransmetteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec le médicament Y, remets dans l'ordre ce qui se passe quand on stimule le nerf.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : arrivée du message, libération du neurotransmetteur, absence de fixation, pas de contraction.",
+                  "answers": [
+                    {
+                      "content": "Le message arrive à l'extrémité du nerf"
+                    },
+                    {
+                      "content": "Le neurotransmetteur est libéré dans la fente"
+                    },
+                    {
+                      "content": "Il ne peut pas se fixer sur les récepteurs occupés"
+                    },
+                    {
+                      "content": "Le muscle ne se contracte pas"
+                    }
+                  ]
+                }
+              ],
+              "hint": "L'axone et le muscle fonctionnent : le blocage est à la synapse."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier à partir d'expériences",
+          "notions": "Interpréter la section d'un nerf, comparer des expériences sur le réflexe, justifier le sens du message à la synapse.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur un muscle de grenouille, on stimule le nerf avec le même courant. Contraction mesurée (unités arbitraires) : nerf intact, 8 ; bout relié au muscle d'un nerf sectionné, 8 ; bout relié à la moelle épinière d'un nerf sectionné, 0.",
+              "exercise_type": "evaluation",
+              "figure": "stimulation-nerf",
+              "questions": [
+                {
+                  "content": "Un nerf de grenouille est sectionné. Stimuler le bout relié au muscle donne une contraction de 8, comme le nerf intact. Que peut-on en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Comparer 8 et 8. 2. Les valeurs sont égales : le message arrive au muscle depuis le bout resté relié.",
+                  "answers": [
+                    {
+                      "content": "Les axones restés reliés au muscle conduisent encore le message jusqu'à lui",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle n'a pas besoin du nerf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nerf n'a aucun rôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "La section a détruit le muscle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf de grenouille est sectionné. Stimuler le bout relié à la moelle épinière donne une contraction de 0. Que peut-on en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire 0. 2. Le muscle ne se contracte pas car le message ne l'atteint pas : le nerf est coupé entre le point stimulé et le muscle.",
+                  "answers": [
+                    {
+                      "content": "Le message ne franchit pas la coupure pour atteindre le muscle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle est détruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière commande le muscle sans nerf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le courant est trop faible pour tout nerf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le résultat 0 prouve que le muscle ne peut plus jamais se contracter.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : stimulé par le bout resté relié au muscle, le muscle se contracte (8). Il est donc intact ; seul le message ne l'atteint plus depuis l'autre bout.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conclusions exactes de cette expérience sur le nerf de grenouille ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : les valeurs 8, 8, 0 montrent que le nerf conduit le message et que la coupure l'arrête. Les autres propositions contredisent les mesures.",
+                  "answers": [
+                    {
+                      "content": "Le nerf conduit le message vers le muscle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une coupure du nerf arrête le message",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle se contracte sans nerf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nerf est un neurone unique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière est le muscle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un muscle de grenouille se contracte à 8 unités avec le nerf intact et à 0 avec le bout relié à la moelle épinière d'un nerf sectionné. De combien d'unités la contraction diminue-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Relever les valeurs 8 et 0. 2. Calculer 8 - 0 = 8 unités de baisse.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "unités"
+                }
+              ],
+              "hint": "Compare chaque valeur à celle du nerf intact."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève affirme : « Le cerveau commande tous les réflexes. » Pour le tester, on étudie une grenouille : si on détruit son cerveau mais pas sa moelle épinière, elle retire la patte quand on la pince ; si on détruit sa moelle épinière, elle ne la retire plus.",
+              "exercise_type": "evaluation",
+              "figure": "arc-reflexe",
+              "questions": [
+                {
+                  "content": "Une grenouille sans cerveau retire la patte pincée, mais plus si sa moelle épinière est détruite. Cette expérience valide-t-elle l'affirmation « le cerveau commande tous les réflexes » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Confronter l'affirmation à l'expérience. 2. Sans cerveau, le retrait a lieu : le cerveau n'est donc pas nécessaire à ce réflexe. L'affirmation est réfutée.",
+                  "answers": [
+                    {
+                      "content": "Non : le réflexe persiste sans cerveau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : la moelle épinière dépend du cerveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : le retrait a lieu",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grenouille sans cerveau retire la patte pincée, mais plus si sa moelle épinière est détruite. Quel est le centre nerveux de ce réflexe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le réflexe disparaît seulement quand la moelle est détruite : c'est elle le centre nerveux.",
+                  "answers": [
+                    {
+                      "content": "La moelle épinière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cerveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le muscle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez une grenouille, détruire la moelle épinière supprime le réflexe de retrait de la patte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'énoncé indique que, sans moelle épinière, la patte n'est plus retirée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet du message dans le réflexe de retrait d'une patte de grenouille pincée.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : récepteur, neurone sensitif, centre nerveux (moelle), neurone moteur, effecteur (muscle).",
+                  "answers": [
+                    {
+                      "content": "Récepteur de la peau"
+                    },
+                    {
+                      "content": "Neurone sensitif"
+                    },
+                    {
+                      "content": "Moelle épinière"
+                    },
+                    {
+                      "content": "Neurone moteur"
+                    },
+                    {
+                      "content": "Muscle de la patte"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le centre nerveux du réflexe de retrait de la patte de grenouille est la ___ épinière.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : l'expérience montre que la moelle épinière est indispensable au réflexe de retrait.",
+                  "answers": [
+                    {
+                      "content": "moelle",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un réflexe qui persiste sans un organe prouve que cet organe n'est pas nécessaire."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À une synapse, un neurone 1 libère un neurotransmetteur et un neurone 2 porte des récepteurs. On bloque les récepteurs du neurone 2 avec une substance fictive Z.",
+              "exercise_type": "evaluation",
+              "figure": "synapse-etapes",
+              "questions": [
+                {
+                  "content": "Les récepteurs du neurone 2 sont bloqués par une substance Z. Le neurone 1 libère du neurotransmetteur. Le neurone 2 produit-il un nouveau message ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Le neurotransmetteur est libéré. 2. Il ne peut pas se fixer sur des récepteurs occupés. 3. Aucun nouveau message ne naît.",
+                  "answers": [
+                    {
+                      "content": "Non : le neurotransmetteur ne peut pas se fixer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : le message électrique passe seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : le neurone 1 se fixe directement",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne sait pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une synapse, le message électrique franchit directement la fente synaptique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le message électrique ne franchit pas la fente : un neurotransmetteur le relaie. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une synapse, pourquoi le message ne peut-il pas aller du neurone 2 vers le neurone 1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le neurotransmetteur est libéré par le neurone 1 et se fixe sur le neurone 2 seulement : le passage est à sens unique.",
+                  "answers": [
+                    {
+                      "content": "Les récepteurs ne sont que du côté de la cellule suivante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le neurone 2 n'a pas de noyau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fente synaptique est vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone 1 n'a pas d'axone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux natures successives du message dans le passage d'un neurone à l'autre, en dehors de la fente ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : le message est électrique dans les neurones et chimique dans la fente.",
+                  "answers": [
+                    {
+                      "content": "Électrique dans le neurone 1",
+                      "correct": true
+                    },
+                    {
+                      "content": "Électrique dans le neurone 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chimique dans les deux neurones",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mécanique dans le neurone 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune dans le neurone 2",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois natures du message dans le passage d'un neurone à un autre.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : électrique, puis chimique, puis de nouveau électrique.",
+                  "answers": [
+                    {
+                      "content": "Électrique dans le neurone 1"
+                    },
+                    {
+                      "content": "Chimique dans la fente synaptique"
+                    },
+                    {
+                      "content": "Électrique dans le neurone 2"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pas de fixation possible, donc pas de nouveau message."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un chercheur compare deux réflexes de retrait d'une patte de grenouille. Il détruit successivement la moelle épinière, puis le nerf moteur : dans les deux cas, la patte n'est plus retirée quand on pince la peau.",
+              "exercise_type": "evaluation",
+              "figure": "arc-reflexe",
+              "questions": [
+                {
+                  "content": "Le nerf moteur d'une grenouille est détruit. Pincer la peau ne fait plus retirer la patte. Quel élément de l'arc réflexe est atteint ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le neurone moteur conduit l'ordre vers le muscle. S'il est détruit, l'ordre n'arrive plus, même si le reste de l'arc fonctionne.",
+                  "answers": [
+                    {
+                      "content": "Le neurone moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le stimulus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone sensitif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La moelle épinière d'une grenouille est détruite. Pincer la peau ne fait plus retirer la patte. Quel élément de l'arc réflexe est atteint ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : sans moelle épinière, le message sensitif n'est plus traité et aucun ordre n'est élaboré.",
+                  "answers": [
+                    {
+                      "content": "Le centre nerveux",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'effecteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le stimulus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Détruire le récepteur de la peau et détruire le muscle ont tous deux pour effet de supprimer le retrait de la patte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un arc réflexe est une chaîne : si un seul maillon est supprimé (récepteur, centre nerveux, effecteur…), la réponse disparaît.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments forment l'arc réflexe d'un retrait de patte de grenouille ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : l'arc réflexe est formé du récepteur, des neurones, du centre nerveux (moelle épinière) et de l'effecteur (muscle).",
+                  "answers": [
+                    {
+                      "content": "Le récepteur de la peau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La moelle épinière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle de la patte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le noyau du cerveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La gaine de myéline seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le muscle qui exécute le retrait de la patte est l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : l'organe qui exécute la réponse est l'effecteur.",
+                  "answers": [
+                    {
+                      "content": "effecteur",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un seul maillon supprimé suffit à interrompre la réponse."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan du message nerveux",
+          "notions": "Toutes les notions : neurone et nerf, arc réflexe, synapse et neurotransmetteur, interprétation d'expériences.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un neurone, un message circule des dendrites vers l'axone ; un nerf de grenouille est étudié avec trois mesures : nerf intact 8, bout côté muscle 8, bout côté moelle 0.",
+              "exercise_type": "evaluation",
+              "figure": "stimulation-nerf",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les parties qu'un message traverse dans un neurone.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : le message entre par les dendrites, traverse le corps cellulaire et sort par l'axone.",
+                  "answers": [
+                    {
+                      "content": "Dendrites"
+                    },
+                    {
+                      "content": "Corps cellulaire"
+                    },
+                    {
+                      "content": "Axone"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la fonction de la gaine de myéline autour de l'axone ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la myéline est une enveloppe isolante qui accélère la transmission du message.",
+                  "answers": [
+                    {
+                      "content": "Elle isole l'axone et accélère le message",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reçoit le message",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle contient le noyau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fabrique le neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf de grenouille est sectionné. La stimulation du bout relié au muscle donne 8 et celle du bout relié à la moelle épinière donne 0. Que montre la valeur 0 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 0 vient de ce que le message n'atteint pas le muscle. Le muscle fonctionne, puisqu'il se contracte à 8 depuis l'autre bout.",
+                  "answers": [
+                    {
+                      "content": "Le message ne franchit pas la coupure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle est détruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nerf est un neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière commande le muscle sans nerf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf est une seule cellule nerveuse très longue.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un nerf est un faisceau d'axones de très nombreux neurones, pas une cellule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les ___ reçoivent les messages venant d'autres cellules.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : les dendrites sont les prolongements courts et ramifiés qui reçoivent les messages.",
+                  "answers": [
+                    {
+                      "content": "dendrites",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le stimulus ou la zone étudiée, puis suis le message pas à pas."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une élève pose la main sur une casserole brûlante et la retire aussitôt, puis sent la brûlure.",
+              "exercise_type": "evaluation",
+              "figure": "arc-reflexe",
+              "questions": [
+                {
+                  "content": "Une élève retire la main d'une casserole brûlante. Quel est le stimulus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le stimulus est ce qui déclenche la réponse, ici la chaleur.",
+                  "answers": [
+                    {
+                      "content": "La chaleur de la casserole",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le muscle du bras",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle épinière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone moteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément de l'arc réflexe du retrait de la main à sa fonction.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : le récepteur capte, le neurone sensitif conduit vers la moelle, le neurone moteur conduit l'ordre, l'effecteur exécute.",
+                  "answers": [
+                    {
+                      "content": "Récepteur",
+                      "match": "Capte le stimulus"
+                    },
+                    {
+                      "content": "Neurone sensitif",
+                      "match": "Conduit le message vers la moelle épinière"
+                    },
+                    {
+                      "content": "Neurone moteur",
+                      "match": "Conduit l'ordre vers le muscle"
+                    },
+                    {
+                      "content": "Effecteur",
+                      "match": "Exécute la réponse"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève sent la douleur avant que sa main ne soit retirée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le réflexe est élaboré par la moelle épinière avant que le cerveau ne reçoive le message : la douleur est sentie après le retrait.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cerveau n'est pas nécessaire au retrait de la main : le centre nerveux du réflexe est la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : la moelle épinière traite le message sensitif et élabore l'ordre moteur.",
+                  "answers": [
+                    {
+                      "content": "moelle épinière",
+                      "correct": true
+                    },
+                    {
+                      "content": "peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "gaine de myéline",
+                      "correct": false
+                    },
+                    {
+                      "content": "fente synaptique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois caractères d'un réflexe ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : un réflexe est automatique, involontaire et rapide.",
+                  "answers": [
+                    {
+                      "content": "Automatique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Involontaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Volontaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le stimulus ou la zone étudiée, puis suis le message pas à pas."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au niveau d'une synapse, le neurone 1 libère un neurotransmetteur qui se fixe sur les récepteurs du neurone 2. Une substance fictive W occupe ces récepteurs.",
+              "exercise_type": "evaluation",
+              "figure": "synapse-etapes",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes normales du passage d'un message entre deux neurones.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : arrivée, libération, fixation, nouveau message.",
+                  "answers": [
+                    {
+                      "content": "Le message électrique arrive à l'extrémité de l'axone du neurone 1"
+                    },
+                    {
+                      "content": "Le neurotransmetteur est libéré"
+                    },
+                    {
+                      "content": "Il se fixe sur les récepteurs du neurone 2"
+                    },
+                    {
+                      "content": "Un nouveau message naît dans le neurone 2"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une substance W occupe les récepteurs du neurone 2. Que se passe-t-il quand le neurone 1 libère du neurotransmetteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : les récepteurs occupés ne peuvent plus fixer le neurotransmetteur, donc le message ne passe pas.",
+                  "answers": [
+                    {
+                      "content": "Il ne se fixe pas et aucun message ne naît dans le neurone 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se fixe quand même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le message traverse la fente seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurone 1 libère plus de neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message est chimique dans la fente synaptique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le neurotransmetteur est une substance chimique qui relaie le message dans la fente.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La zone de contact entre deux neurones s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : la synapse comprend la fin de l'axone, la fente et la cellule suivante.",
+                  "answers": [
+                    {
+                      "content": "synapse",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une synapse, le message circule ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : les récepteurs sont seulement sur la cellule suivante : le sens est unique.",
+                  "answers": [
+                    {
+                      "content": "dans un seul sens",
+                      "correct": true
+                    },
+                    {
+                      "content": "dans les deux sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "uniquement vers le premier neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans direction",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Électrique, chimique, électrique."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une patiente fictive a une plaie profonde du poignet. Le nerf qui commande ses doigts est sectionné : elle ne bouge plus ses doigts, mais elle retire encore la main d'un objet brûlant grâce à un autre nerf intact.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le nerf d'une patiente qui commande ses doigts est sectionné. Elle ne peut plus les bouger. Quelles fibres sont coupées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : bouger suppose que l'ordre arrive au muscle par les fibres motrices ; si elles sont coupées, l'ordre n'arrive plus.",
+                  "answers": [
+                    {
+                      "content": "Les fibres motrices du nerf",
+                      "correct": true
+                    },
+                    {
+                      "content": "La peau des doigts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le corps cellulaire du muscle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les dendrites du cerveau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nerf sectionné coupe les axones de nombreux neurones à la fois.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un nerf est un faisceau d'axones de nombreux neurones : le sectionner les coupe tous.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une patiente retire encore la main d'un objet brûlant grâce à un autre nerf intact. Ce retrait est :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : un retrait rapide et involontaire est un réflexe, dont l'arc passe par la moelle épinière.",
+                  "answers": [
+                    {
+                      "content": "Un réflexe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un acte volontaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un effet de la synapse seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un message hormonal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur les nerfs et les neurones ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : le nerf est un faisceau, le neurone possède un seul axone, et les dendrites reçoivent le message.",
+                  "answers": [
+                    {
+                      "content": "Un nerf est un faisceau de fibres",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'axone d'un neurone est long et unique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nerf est un neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurone possède plusieurs axones principaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les dendrites conduisent le message hors du neurone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet du message dans le retrait d'une main brûlée.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : stimulus, récepteur, neurone sensitif, centre nerveux, neurone moteur, effecteur.",
+                  "answers": [
+                    {
+                      "content": "Stimulus : la chaleur"
+                    },
+                    {
+                      "content": "Récepteur : la peau"
+                    },
+                    {
+                      "content": "Neurone sensitif"
+                    },
+                    {
+                      "content": "Moelle épinière"
+                    },
+                    {
+                      "content": "Neurone moteur"
+                    },
+                    {
+                      "content": "Effecteur : le muscle"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le stimulus ou la zone étudiée, puis suis le message pas à pas."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

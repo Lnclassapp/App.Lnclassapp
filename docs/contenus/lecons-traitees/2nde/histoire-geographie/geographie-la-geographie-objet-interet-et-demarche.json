@@ -1,0 +1,3018 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — La géographie : objet, intérêt et démarche",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Histoire-Géographie",
+      "figures": [
+        {
+          "key": "carte-ports-et-axes",
+          "kind": "map",
+          "description": "Une carte de la Côte d'Ivoire sur laquelle sont repérés Abidjan et San-Pédro (les deux ports du sud), Yamoussoukro, Bouaké et Korhogo, avec un axe routier qui relie le littoral au nord du pays en passant par le centre. Elle sert à localiser une ville et à décrire sa position par rapport à la mer et aux routes.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "places": [
+              {
+                "id": "abidjan",
+                "label": "Abidjan (port)"
+              },
+              {
+                "id": "san_pedro",
+                "label": "San-Pédro (port)"
+              },
+              {
+                "id": "yamoussoukro"
+              },
+              {
+                "id": "bouake"
+              },
+              {
+                "id": "korhogo"
+              }
+            ],
+            "routes": [
+              {
+                "from": "abidjan",
+                "to": "yamoussoukro",
+                "label": "Axe routier"
+              },
+              {
+                "from": "yamoussoukro",
+                "to": "bouake"
+              },
+              {
+                "from": "bouake",
+                "to": "korhogo"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "demarche-du-geographe",
+          "kind": "diagram",
+          "description": "Un schéma en quatre étapes reliées par des flèches : poser la question (où, quoi, comment, pourquoi), recueillir des informations (observations, cartes, statistiques, témoignages), analyser en croisant les informations, puis conclure par une réponse argumentée. Une flèche de retour indique qu'on peut reposer la question.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "q",
+                "label": "Poser la question"
+              },
+              {
+                "id": "r",
+                "label": "Recueillir"
+              },
+              {
+                "id": "a",
+                "label": "Analyser en croisant"
+              },
+              {
+                "id": "c",
+                "label": "Conclure"
+              }
+            ],
+            "edges": [
+              {
+                "from": "q",
+                "to": "r"
+              },
+              {
+                "from": "r",
+                "to": "a"
+              },
+              {
+                "from": "a",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "q",
+                "label": "reposer"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Qu'est-ce que la géographie ?",
+          "remember": "La **géographie** est la science qui étudie les **sociétés humaines dans leur rapport à l'espace**. Elle décrit et explique la répartition des hommes, des activités et des aménagements à la surface de la Terre.\n\nL'**espace géographique** est le territoire que les sociétés occupent, utilisent et aménagent : villes, routes, ports, champs. Un **aménagement** est une transformation de l'espace par les sociétés.\n\nOrigine du mot : *géographie* vient du grec *gê*, « la Terre », et *graphein*, « décrire ». Une étude géographique ne se contente pas de la question « où ? » : elle répond aussi à « **pourquoi là ?** ».",
+          "method": [
+            "Localiser le lieu étudié : où se trouve-t-il ?",
+            "Décrire ce qu'on y observe : éléments naturels, aménagements, activités.",
+            "Expliquer pourquoi cela se trouve là, en reliant la société et l'espace.",
+            "Conclure en formulant la question géographique et sa réponse."
+          ],
+          "example": {
+            "statement": "Un élève écrit : « Il y a un port à Abidjan. » Transforme cette phrase en étude de géographie.",
+            "steps": [
+              "Localiser : Abidjan est une ville du sud de la Côte d'Ivoire, au bord de la lagune Ébrié, reliée à l'océan Atlantique ; le port se trouve donc sur ce plan d'eau.",
+              "Décrire : le port accueille des navires, des quais, des entrepôts, des camions et des dockers qui chargent des marchandises.",
+              "Expliquer : un port a besoin d'un accès à la mer ; Abidjan réunit cette condition et concentre aussi une population nombreuse, des routes et des activités économiques.",
+              "Conclure : la question géographique devient « Pourquoi le port est-il à cet endroit ? ». La réponse associe l'accès à la mer et les activités de la ville."
+            ]
+          },
+          "pitfall": "Ne te contente pas de décrire. Contre-exemple : « Il y a un port à Abidjan » est un constat, pas une explication. En géographie, la description est le point de départ, pas la réponse. Demande-toi toujours : « Pourquoi là, et pas ailleurs ? »",
+          "figure": "carte-ports-et-axes",
+          "exercise": [
+            {
+              "title": "Localiser, décrire, expliquer : reconnaître la notion",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (localiser, décrire, expliquer, conclure) pour reconnaître ce qu'étudie la géographie.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Qu'étudie la géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : la géographie étudie les sociétés humaines dans leur rapport à l'espace. Retenir des noms de villes est un outil, pas l'objet ; le passé des peuples est l'objet de l'histoire.",
+                  "answers": [
+                    {
+                      "content": "Les sociétés humaines dans leur rapport à l'espace",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les noms des villes et des pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement le passé des peuples",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les roches et les climats",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mot géographie vient du grec : « géo » signifie « la Terre » et « graphein » signifie « ___ » (un verbe).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Décrire : l'origine du mot rappelle que la géographie décrit la Terre. Elle ne se limite pas à décrire : elle explique aussi (Étape 3).",
+                  "answers": [
+                    {
+                      "content": "décrire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La question « où ? » suffit pour faire une étude de géographie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : localiser répond à « où ? » (Étape 1), mais la géographie cherche aussi « pourquoi là ? ». S'arrêter à la localisation est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Abidjan est située…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : Abidjan est une ville du sud, sur la lagune Ébrié, reliée à l'océan Atlantique. Korhogo est au nord et Bouaké au centre : les confondre est une erreur de localisation.",
+                  "answers": [
+                    {
+                      "content": "au sud de la Côte d'Ivoire, au bord de la lagune Ébrié",
+                      "correct": true
+                    },
+                    {
+                      "content": "au nord de la Côte d'Ivoire, près de Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "au centre du pays, près de Bouaké",
+                      "correct": false
+                    },
+                    {
+                      "content": "à l'ouest, au pied des montagnes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Il y a un port à Abidjan. » Que lui manque-t-il pour faire de la géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : décrire ne suffit pas. Il faut relier le port à l'accès à la mer, à la population et aux activités. Les trois autres propositions ne mènent à aucune explication.",
+                  "answers": [
+                    {
+                      "content": "Expliquer pourquoi le port est à cet endroit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Apprendre le nom de tous les ports du monde",
+                      "correct": false
+                    },
+                    {
+                      "content": "Compter les lettres du mot « port »",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer la description par une date",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Du constat à la question géographique",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (localiser, décrire, expliquer, conclure) à des lieux de Côte d'Ivoire.",
+              "exercise_type": "fixation",
+              "figure": "carte-ports-et-axes",
+              "hint": "Pour chaque lieu, demande-toi : où est-il ? qu'y voit-on ? pourquoi est-il là ?",
+              "questions": [
+                {
+                  "content": "Relie chaque ville à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Localiser : chaque ville a une position précise (sud, sud-ouest, centre, nord). Étape 2 — Décrire : on la reconnaît à sa fonction (port, capitale). Ne confonds pas Abidjan, ville économique et portuaire, avec Yamoussoukro, capitale politique et administrative.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "match": "Grande ville du sud, sur la lagune Ébrié, avec un grand port"
+                    },
+                    {
+                      "content": "San-Pédro",
+                      "match": "Ville portuaire du sud-ouest"
+                    },
+                    {
+                      "content": "Yamoussoukro",
+                      "match": "Capitale politique et administrative"
+                    },
+                    {
+                      "content": "Korhogo",
+                      "match": "Ville du nord du pays"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de la méthode de la fiche.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Localiser, Étape 2 — Décrire, Étape 3 — Expliquer, Étape 4 — Conclure. Expliquer avant de décrire n'a pas de sens : on ne peut pas expliquer ce qu'on n'a pas observé.",
+                  "answers": [
+                    {
+                      "content": "Localiser le lieu étudié"
+                    },
+                    {
+                      "content": "Décrire ce qu'on y observe"
+                    },
+                    {
+                      "content": "Expliquer pourquoi cela se trouve là"
+                    },
+                    {
+                      "content": "Conclure en formulant la question géographique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase est une explication et non une simple description ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : « parce que » relie le port à l'espace et à la société. Les autres phrases décrivent (Étape 2) sans dire pourquoi.",
+                  "answers": [
+                    {
+                      "content": "Le port est à Abidjan parce que la ville a un accès à la mer et une population nombreuse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le port d'Abidjan a des quais et des entrepôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a des camions devant le port",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le port est grand",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux informations qui relèvent de la localisation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Localiser : on situe un lieu (sud, sud-ouest, bord d'une lagune). Le bruit et la fatigue sont des descriptions de l'ambiance (Étape 2), pas des localisations.",
+                  "answers": [
+                    {
+                      "content": "Abidjan se trouve au sud du pays, sur la lagune Ébrié",
+                      "correct": true
+                    },
+                    {
+                      "content": "San-Pédro est un port du sud-ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le port est très bruyant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les dockers sont fatigués le soir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le port d'Abidjan est un espace aménagé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire : les quais, les entrepôts et les routes sont des aménagements, c'est-à-dire des transformations de l'espace faites par la société. Le port est donc un espace aménagé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lieu transformé par les sociétés (route, port, champ) est un espace ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Décrire : on parle d'espace aménagé quand la société a transformé le territoire. C'est le sens du mot aménagement de la fiche.",
+                  "answers": [
+                    {
+                      "content": "aménagé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "L'intérêt de la géographie",
+          "remember": "La géographie sert à quatre choses.\n\n**Comprendre le monde** : elle explique la répartition des populations, des richesses et des activités, ainsi que les inégalités entre espaces.\n\n**Aménager le territoire** : elle aide à placer routes, écoles, hôpitaux, marchés et zones d'activité en tenant compte de la population et du terrain.\n\n**Prévenir les risques** : elle repère les zones exposées (inondations, érosion du littoral) pour anticiper et mieux construire.\n\n**Former le citoyen** : connaître son espace permet de comprendre les projets qui le concernent et de participer au débat.\n\nLimite : la géographie fournit des **éléments pour décider** ; les élus choisissent aussi selon le budget et leurs priorités.",
+          "method": [
+            "Localiser les habitants concernés et leurs besoins.",
+            "Vérifier l'accès au site : routes, distance, saison des pluies.",
+            "Repérer les risques du terrain : inondation, érosion, nuisances.",
+            "Comparer les sites possibles et conclure en retenant le meilleur, en précisant que la décision revient aux élus."
+          ],
+          "example": {
+            "statement": "Une commune veut installer une nouvelle école. Quelle démarche géographique suit-elle ?",
+            "steps": [
+              "Localiser : on repère les quartiers où vivent les enfants en âge d'aller à l'école et leur nombre.",
+              "Vérifier : la route est-elle praticable toute l'année, y compris pendant la saison des pluies ? Combien de temps faut-il pour arriver à pied ?",
+              "Repérer : le terrain est-il inondable ? Est-il proche d'une zone bruyante ou dangereuse ?",
+              "Comparer et conclure : le site le plus proche des élèves, accessible et sans risque, est retenu. La géographie a fourni les éléments ; la commune décide."
+            ]
+          },
+          "pitfall": "Ne pense pas que la géographie sert seulement à lire une carte ou à apprendre des noms de villes. Contre-exemple : savoir situer cent villes ne dit pas où construire une école. La carte n'est qu'un outil ; la géographie sert à comprendre un espace et à éclairer des décisions. Demande-toi : « À quoi sert cette connaissance, concrètement ? »",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "À quoi sert la géographie : reconnaître la notion",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (localiser, vérifier, repérer, comparer et conclure) à des projets d'aménagement.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Quels sont trois usages de la géographie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Conclure : la géographie sert à comprendre, à aménager, à prévenir les risques et à former le citoyen. Elle ne prédit pas un match et ne remplace pas les élus : elle leur fournit des éléments.",
+                  "answers": [
+                    {
+                      "content": "Comprendre la répartition des populations et des activités",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager le territoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévenir les risques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prédire le résultat d'un match",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer les élus dans leurs décisions",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie sert seulement à apprendre des noms de villes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : c'est le piège de la fiche. Les noms de villes sont un outil ; la géographie sert à comprendre un espace et à éclairer des décisions.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une commune veut placer un marché. Que doit-elle regarder en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : on commence par repérer les habitants concernés et leurs besoins. Les autres propositions n'ont aucun lien avec l'aménagement.",
+                  "answers": [
+                    {
+                      "content": "Où vivent les habitants et comment ils se déplacent",
+                      "correct": true
+                    },
+                    {
+                      "content": "La couleur du ciel le matin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom du maire précédent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de lettres du nom du quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour prévenir les risques, la géographie repère les zones ___ à l'inondation.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Repérer les risques : la géographie signale les zones exposées (inondation, érosion) pour anticiper et mieux construire. Les autres mots n'ont pas de sens ici.",
+                  "answers": [
+                    {
+                      "content": "exposées",
+                      "correct": true
+                    },
+                    {
+                      "content": "habituées",
+                      "correct": false
+                    },
+                    {
+                      "content": "interdites",
+                      "correct": false
+                    },
+                    {
+                      "content": "inventées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui prend finalement la décision d'installer l'école ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : la géographie fournit des éléments ; les élus choisissent en tenant compte du budget et de leurs priorités. Le géographe ne décide pas seul.",
+                  "answers": [
+                    {
+                      "content": "Les élus, qui s'appuient sur les éléments fournis par la géographie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le géographe seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les camions du port",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Choisir un site avec la méthode de la fiche",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à des choix d'équipement dans des communes imaginées. Les données sont inventées pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque site, compare la distance, l'accès toute l'année et les risques.",
+              "questions": [
+                {
+                  "content": "Un quartier compte 3 écoles pour 6 000 enfants en âge d'aller à l'école. Combien d'enfants y a-t-il en moyenne par école ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Localiser les habitants concernés : 6 000 enfants. Pour comparer, on divise par le nombre d'écoles : $6000 \\div 3 = 2000$. Il y a 2 000 enfants par école, ce qui montre un besoin d'équipement.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "enfants"
+                },
+                {
+                  "content": "Relie chaque situation à l'étape de la fiche qu'elle illustre.",
+                  "question_type": "matching",
+                  "explanation": "Chaque situation correspond à une étape de la méthode : Étape 1 — Localiser, Étape 2 — Vérifier l'accès, Étape 3 — Repérer les risques, Étape 4 — Comparer et conclure. Mélanger l'accès et le risque est une erreur fréquente.",
+                  "answers": [
+                    {
+                      "content": "Compter où vivent les enfants",
+                      "match": "Localiser"
+                    },
+                    {
+                      "content": "Mesurer le temps de marche et vérifier la route en saison des pluies",
+                      "match": "Vérifier l'accès"
+                    },
+                    {
+                      "content": "Noter qu'un terrain se remplit d'eau lors des fortes pluies",
+                      "match": "Repérer les risques"
+                    },
+                    {
+                      "content": "Retenir le site proche, accessible et sans risque",
+                      "match": "Comparer et conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un terrain bon marché se remplit d'eau chaque saison des pluies. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer les risques : un terrain inondable est une zone exposée. Étape 4 — Comparer : on examine d'autres sites. Choisir seulement le prix est le piège d'une décision sans géographie.",
+                  "answers": [
+                    {
+                      "content": "Il présente un risque d'inondation ; on le compare à d'autres sites avant de le retenir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est idéal car il ne coûte rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le risque ne compte pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut y construire quand même sans réfléchir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie donne la décision toute faite aux élus.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : elle fournit des éléments ; les élus décident aussi selon le budget et leurs priorités. Dire qu'elle impose la décision est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour choisir le site d'une école.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Localiser, Étape 2 — Vérifier, Étape 3 — Repérer, Étape 4 — Comparer et conclure. On ne compare qu'après avoir recueilli les informations.",
+                  "answers": [
+                    {
+                      "content": "Localiser les habitants concernés"
+                    },
+                    {
+                      "content": "Vérifier l'accès au site"
+                    },
+                    {
+                      "content": "Repérer les risques du terrain"
+                    },
+                    {
+                      "content": "Comparer les sites et conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un projet de route, d'école ou de marché est un ___ du territoire (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : placer une route, une école ou un marché est un aménagement du territoire. La géographie aide à le préparer.",
+                  "answers": [
+                    {
+                      "content": "aménagement",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La démarche géographique",
+          "remember": "La **démarche géographique** suit quatre étapes.\n\n**1. Poser la question** : précise (où ? quoi ? comment ? pourquoi ? quelles conséquences ?).\n**2. Recueillir les informations** : observations de terrain, cartes, statistiques, photographies, témoignages. On vérifie la fiabilité de chaque information.\n**3. Analyser** : repérer les acteurs (habitants, entreprises, État), les liens entre les éléments et l'**échelle** de l'étude (locale, nationale, mondiale), puis croiser les documents.\n**4. Conclure** : répondre à la question par une réponse argumentée, appuyée sur les documents et nuancée si nécessaire.\n\nLa démarche n'est pas une recette figée : une observation peut conduire à reposer la question.",
+          "method": [
+            "Poser une question géographique précise (où, quoi, comment, pourquoi).",
+            "Recueillir des informations variées et en vérifier la fiabilité.",
+            "Analyser en croisant les documents, les acteurs et l'échelle.",
+            "Conclure par une réponse argumentée et nuancée, appuyée sur les documents."
+          ],
+          "example": {
+            "statement": "Un élève se demande pourquoi, certains matins, les camions font la queue à l'entrée d'un port. Applique la démarche.",
+            "steps": [
+              "Poser : « Pourquoi, à quelles heures, depuis quand et à quel endroit précis les camions font-ils la queue ? »",
+              "Recueillir : compter les camions à plusieurs heures, relever les jours, consulter le plan des routes d'accès et interroger un chauffeur et un agent du port.",
+              "Analyser : les camions arrivent-ils tous à la même heure ? Les déchargements sont-ils lents ? Les routes d'accès sont-elles étroites ? On croise chaque réponse avec les autres.",
+              "Conclure : dans ce cas imaginaire, la file pourrait s'expliquer par une arrivée concentrée sur quelques heures et un accès étroit. Cette explication doit être confirmée par d'autres relevés."
+            ]
+          },
+          "pitfall": "Ne décris pas sans te poser de question, et ne t'appuie pas sur une seule source. Contre-exemple : écrire « il y a des camions » est un fait, pas une réponse. Relever des faits sans question précise, ou conclure à partir d'un seul témoignage, empêche toute explication. Demande-toi : « À quelle question est-ce que je réponds ? »",
+          "figure": "demarche-du-geographe",
+          "exercise": [
+            {
+              "title": "Les quatre étapes de la démarche géographique",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (poser, recueillir, analyser, conclure) à des enquêtes de géographie.",
+              "exercise_type": "fixation",
+              "figure": "demarche-du-geographe",
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de la démarche géographique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Poser, Étape 2 — Recueillir, Étape 3 — Analyser, Étape 4 — Conclure. Conclure avant d'avoir recueilli et analysé donne une réponse sans appui.",
+                  "answers": [
+                    {
+                      "content": "Poser une question géographique précise"
+                    },
+                    {
+                      "content": "Recueillir des informations variées"
+                    },
+                    {
+                      "content": "Analyser en croisant les documents"
+                    },
+                    {
+                      "content": "Conclure par une réponse argumentée"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une question géographique précise ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser la question : une question géographique porte sur un lieu, un phénomène et son explication (pourquoi). Les autres propositions sont soit un jugement, soit sans lien avec l'espace.",
+                  "answers": [
+                    {
+                      "content": "Pourquoi les camions font-ils la queue à l'entrée du port certains matins ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le port est-il beau ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Qui a inventé les camions ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Combien de lettres contient le mot port ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux informations utiles pour recueillir des données ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Recueillir : observations, comptages, témoignages sont des informations ; il faut en vérifier la fiabilité. Une rumeur sans source n'en est pas une.",
+                  "answers": [
+                    {
+                      "content": "Un comptage de camions à plusieurs heures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le témoignage d'un agent du port",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une rumeur sans source",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une affirmation de quelqu'un qui n'a rien observé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un géographe peut conclure à partir d'une seule source.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Analyser en croisant : on compare plusieurs documents. Une seule source peut être incomplète ou partiale ; la conclure seule est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on compare plusieurs documents entre eux, on les ___ (un verbe à l'infinitif : « croiser » ou un mot de sens proche).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Analyser en croisant : croiser les documents, c'est les comparer pour vérifier leurs informations et en tirer une explication.",
+                  "answers": [
+                    {
+                      "content": "croiser",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Enquêter sur le marché d'un quartier",
+              "statement": "Dans cet exercice, tu appliques la démarche de la fiche (poser, recueillir, analyser, conclure) à une enquête imaginée sur un marché. Les chiffres sont inventés pour l'exercice.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque étape, demande-toi : de quelle question part-on ? quelle information est fiable ? que dit le croisement ?",
+              "questions": [
+                {
+                  "content": "Relie chaque geste de l'enquête à l'étape de la démarche.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Poser la question, Étape 2 — Recueillir, Étape 3 — Analyser en croisant, Étape 4 — Conclure. Comparer n'est pas recueillir : on analyse après avoir réuni les informations.",
+                  "answers": [
+                    {
+                      "content": "Se demander pourquoi le marché est plein le samedi",
+                      "match": "Poser la question"
+                    },
+                    {
+                      "content": "Compter les clients à plusieurs heures et interroger des commerçants",
+                      "match": "Recueillir"
+                    },
+                    {
+                      "content": "Comparer les comptages et les témoignages",
+                      "match": "Analyser"
+                    },
+                    {
+                      "content": "Rédiger une réponse appuyée sur les documents",
+                      "match": "Conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un comptage donne 120 clients à 8 h, 180 à 10 h et 300 à 12 h. Combien de clients ont été comptés en tout sur ces trois relevés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Recueillir : on additionne les relevés : $120 + 180 + 300 = 600$. Il y a 600 clients comptés. Étape 3 : on pourra comparer les heures pour voir quand le marché est le plus fréquenté (ici midi).",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "clients"
+                },
+                {
+                  "content": "D'après ce comptage (120 à 8 h, 180 à 10 h, 300 à 12 h), à quelle heure le marché est-il le plus fréquenté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Analyser : on compare les relevés. 300 est le plus grand nombre, donc le marché est le plus fréquenté à 12 h. Dire qu'on ne peut pas savoir est faux : le comptage suffit pour cette question.",
+                  "answers": [
+                    {
+                      "content": "À 12 h",
+                      "correct": true
+                    },
+                    {
+                      "content": "À 8 h",
+                      "correct": false
+                    },
+                    {
+                      "content": "À 10 h",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul comptage suffit pour affirmer pourquoi le marché est plein le samedi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Analyser en croisant : un comptage décrit, il n'explique pas. Il faut le croiser avec des témoignages et le plan des routes. Conclure sur un seul comptage est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est correcte et nuancée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : une réponse argumentée appuyée sur les relevés, nuancée par le besoin de confirmation. Une affirmation absolue ne tient pas compte du nombre de relevés.",
+                  "answers": [
+                    {
+                      "content": "Le marché semble le plus fréquenté à midi ; il faudrait confirmer avec d'autres jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le marché est toujours plein, c'est certain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le marché est toujours vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune conclusion n'est possible",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'étude d'un quartier, d'une ville, d'un pays ou du monde se fait à une ___ différente (un mot : locale, nationale, mondiale).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Analyser : l'échelle de l'étude est locale, nationale ou mondiale. Il faut la préciser pour comparer des documents de même niveau.",
+                  "answers": [
+                    {
+                      "content": "échelle",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Lire une carte : les ports et les axes de la Côte d'Ivoire",
+          "statement": "Document : une carte de la Côte d'Ivoire repère Abidjan et San-Pédro (deux ports du sud), Yamoussoukro, Bouaké et Korhogo, et un axe routier qui part d'Abidjan vers le nord en passant par Yamoussoukro et Bouaké. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "carte-ports-et-axes",
+          "hint": "Localise d'abord, décris ensuite, puis explique pourquoi.",
+          "questions": [
+            {
+              "content": "Quelle ville de la carte se trouve la plus au nord ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Localiser : situer chaque ville sur la carte. 2) Comparer les positions du sud au nord : San-Pédro et Abidjan au sud, Yamoussoukro et Bouaké au centre, Korhogo au nord. 3) Korhogo est la plus au nord.",
+              "answers": [
+                {
+                  "content": "Korhogo",
+                  "correct": true
+                },
+                {
+                  "content": "Abidjan",
+                  "correct": false
+                },
+                {
+                  "content": "San-Pédro",
+                  "correct": false
+                },
+                {
+                  "content": "Yamoussoukro",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux villes portuaires de la carte ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Lire la légende : les ports sont repérés par (port). 2) Abidjan et San-Pédro bordent la mer ou une lagune reliée à la mer. 3) Yamoussoukro et Bouaké sont à l'intérieur des terres.",
+              "answers": [
+                {
+                  "content": "Abidjan",
+                  "correct": true
+                },
+                {
+                  "content": "San-Pédro",
+                  "correct": true
+                },
+                {
+                  "content": "Yamoussoukro",
+                  "correct": false
+                },
+                {
+                  "content": "Bouaké",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'axe routier relie le littoral au nord en passant par le centre du pays.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Décrire l'axe : il part d'Abidjan, passe par Yamoussoukro et Bouaké et arrive à Korhogo. 2) Il relie donc le littoral au nord. 3) La réponse est Vrai.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi un port se situe-t-il à Abidjan ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Localiser : sud, lagune Ébrié reliée à l'océan. 2) Décrire : quais, routes, entrepôts. 3) Expliquer : accès à la mer, population et routes. Les trois autres réponses n'expliquent rien.",
+              "answers": [
+                {
+                  "content": "La ville a un accès à la mer, une population nombreuse et des routes vers l'intérieur",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que le nom commence par A",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il n'y a pas d'autre ville",
+                  "correct": false
+                },
+                {
+                  "content": "Par hasard",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les ports du sud servent à exporter et à importer des ___ (un mot : par exemple le cacao).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Décrire la fonction d'un port. 2) Il permet d'importer et d'exporter des marchandises ou des produits. 3) Le cacao, premier produit d'exportation, en est un exemple.",
+              "answers": [
+                {
+                  "content": "marchandises",
+                  "correct": true
+                },
+                {
+                  "content": "produits",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quatre phrases pourquoi la géographie ne se limite pas à repérer Abidjan sur une carte.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dire que localiser ne suffit pas",
+                "Expliquer pourquoi le port est à cet endroit",
+                "Citer au moins deux éléments (mer, routes, population)"
+              ],
+              "explanation": "Corrigé modèle : Repérer Abidjan répond seulement à « où ? ». La géographie cherche aussi pourquoi le port est là. Abidjan a un accès à la mer par la lagune Ébrié et des routes qui mènent vers l'intérieur. Sa population nombreuse et ses activités expliquent aussi la place du port. Barème : localiser n'est pas expliquer (1) ; explication du port (1) ; deux éléments cités (1).",
+              "answers": [],
+              "starter": "Repérer Abidjan sur une carte répond seulement à…"
+            }
+          ]
+        },
+        {
+          "title": "Où installer un nouveau marché dans une ville de taille moyenne ?",
+          "statement": "Situation d'exemple, avec des données inventées : une commune imaginaire hésite entre trois sites pour un marché. Site A : au centre-ville, à 10 minutes de marche des quartiers, route praticable toute l'année. Site B : au bord d'un bas-fond, à 5 minutes des quartiers, inondé chaque saison des pluies. Site C : à 30 minutes de marche, route de terre impraticable en saison des pluies. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Compare les trois sites sur la distance, l'accès toute l'année et les risques.",
+          "questions": [
+            {
+              "content": "Quel site présente un risque pour le terrain ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Repérer les risques du terrain pour chaque site. 2) B est inondé chaque saison des pluies. 3) A et C n'ont pas ce risque, même si C a un problème d'accès.",
+              "answers": [
+                {
+                  "content": "Le site B, inondé chaque saison des pluies",
+                  "correct": true
+                },
+                {
+                  "content": "Le site A",
+                  "correct": false
+                },
+                {
+                  "content": "Le site C",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun site",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel site a un problème d'accès toute l'année ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Vérifier l'accès de chaque site. 2) La route du site C est impraticable en saison des pluies. 3) Les sites A et B restent accessibles.",
+              "answers": [
+                {
+                  "content": "Le site C, dont la route est impraticable en saison des pluies",
+                  "correct": true
+                },
+                {
+                  "content": "Le site A",
+                  "correct": false
+                },
+                {
+                  "content": "Le site B",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun site",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un habitant va au site A (10 minutes de marche) et en revient. Combien de minutes de marche fait-il en tout pour un aller-retour ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Localiser : le site A est à 10 minutes. 2) Un aller-retour double ce temps : $10 \\times 2 = 20$. 3) Il marche 20 minutes.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "min"
+            },
+            {
+              "content": "Le site B est le meilleur choix car il est le plus proche des quartiers.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Comparer les trois critères : distance, accès, risque. 2) B est proche mais inondé. 3) La seule distance ne suffit pas : le risque l'écarte. La réponse est Faux.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux raisons de retenir le site A ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Reprendre les critères. 2) A est proche et accessible toute l'année, sans risque signalé. 3) Les deux autres propositions décrivent les défauts des sites B et C.",
+              "answers": [
+                {
+                  "content": "Il est à 10 minutes des quartiers",
+                  "correct": true
+                },
+                {
+                  "content": "Sa route est praticable toute l'année",
+                  "correct": true
+                },
+                {
+                  "content": "Il est le plus loin",
+                  "correct": false
+                },
+                {
+                  "content": "Il est inondé chaque année",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe qui compare les trois sites et conseille un choix. Précise qui prend la décision.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Comparer les trois sites sur la distance, l'accès et le risque",
+                "Retenir un site et justifier le choix",
+                "Rappeler que la décision revient aux élus",
+                "Rédiger un texte clair et organisé"
+              ],
+              "explanation": "Corrigé modèle : Le site A est proche des quartiers et sa route est praticable toute l'année. Le site B est proche mais inondé chaque saison des pluies. Le site C est trop éloigné et sa route est impraticable en saison des pluies. Je conseille le site A, qui réunit la proximité, l'accès et l'absence de risque. La géographie fournit ces éléments ; les élus décident ensuite en tenant compte du budget. Barème : comparaison (1) ; choix justifié (1) ; décision revenant aux élus (1) ; clarté (1).",
+              "answers": [],
+              "starter": "Je conseille le site A parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Une enquête sur les files de camions à l'entrée d'un port",
+          "statement": "Situation d'exemple, avec des données inventées : un élève relève le nombre de camions en attente à l'entrée d'un port. Lundi 7 h : 15 camions ; lundi 9 h : 40 ; lundi 11 h : 20 ; mardi 9 h : 38. Un chauffeur dit : « L'entrée est étroite et tout le monde arrive vers 9 h. » Un agent du port ajoute : « Les déchargements prennent en moyenne 30 minutes par camion. » Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Croise les relevés et les deux témoignages avant de conclure.",
+          "questions": [
+            {
+              "content": "Quelle question géographique l'élève se pose-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Poser la question : elle porte sur un phénomène localisé et demande une explication. 2) Les relevés montrent un pic vers 9 h. 3) Les autres questions ne concernent pas ces relevés.",
+              "answers": [
+                {
+                  "content": "Pourquoi les camions font-ils la queue à l'entrée du port vers 9 h ?",
+                  "correct": true
+                },
+                {
+                  "content": "Qui a construit le port ?",
+                  "correct": false
+                },
+                {
+                  "content": "Combien de camions existent dans le monde ?",
+                  "correct": false
+                },
+                {
+                  "content": "Le port est-il agréable ?",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la différence entre le nombre de camions à 9 h le lundi (40) et à 7 h le même jour (15) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Recueillir : lire les relevés. 2) Calculer : $40 - 15 = 25$. 3) Il y a 25 camions de plus à 9 h qu'à 7 h.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "unit": "camions"
+            },
+            {
+              "content": "Quelles sont deux observations que l'on peut tirer des relevés ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Analyser les relevés. 2) Le lundi, 40 camions à 9 h contre 15 à 7 h et 20 à 11 h. De 40 à 20 entre 9 h et 11 h, la file diminue. 3) À 7 h, il n'y a que 15 camions.",
+              "answers": [
+                {
+                  "content": "Le lundi, le nombre de camions est le plus élevé à 9 h",
+                  "correct": true
+                },
+                {
+                  "content": "Le lundi, la file diminue entre 9 h et 11 h",
+                  "correct": true
+                },
+                {
+                  "content": "La file est la plus longue à 7 h",
+                  "correct": false
+                },
+                {
+                  "content": "Les camions n'attendent jamais",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le témoignage du chauffeur est confirmé par les relevés.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Croiser le témoignage et les chiffres. 2) Le chauffeur dit que tout le monde arrive vers 9 h : les relevés montrent le pic à 9 h (40 et 38). 3) La réponse est Vrai. Cela ne prouve pas encore la cause « entrée étroite ».",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand on compare les relevés, les témoignages et le plan, on ___ les documents (un verbe à l'infinitif).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Analyser : comparer ce que disent les documents. 2) Cela s'appelle croiser les documents. 3) C'est la clé de l'étape d'analyse.",
+              "answers": [
+                {
+                  "content": "croiser",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige une conclusion nuancée de cinq lignes qui répond à la question de l'élève en t'appuyant sur les relevés et les deux témoignages.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Répondre à la question posée",
+                "S'appuyer sur au moins deux données chiffrées",
+                "Utiliser les deux témoignages",
+                "Nuancer et proposer une vérification",
+                "Rédiger clairement"
+              ],
+              "explanation": "Corrigé modèle : La file de camions s'explique probablement par une arrivée concentrée vers 9 h : les relevés montrent 40 camions le lundi et 38 le mardi à cette heure, contre 15 à 7 h. Le chauffeur évoque une entrée étroite et l'agent signale que les déchargements durent 30 minutes. Ces deux éléments expliquent que les camions s'accumulent. Il faudrait pourtant confirmer avec d'autres jours et mesurer la largeur de l'entrée. Barème : réponse (1) ; chiffres (1) ; témoignages (1) ; nuance (1) ; rédaction (1).",
+              "answers": [],
+              "starter": "La file de camions s'explique probablement par…"
+            }
+          ]
+        },
+        {
+          "title": "Un quartier de ville exposé aux inondations : étudier et décider",
+          "statement": "Situation d'exemple, avec des données inventées : dans un quartier imaginaire au bord d'un bas-fond, les pluies de juin remplissent les rues d'eau. Document 1 : un relevé indique 3 inondations en 2022, 4 en 2023 et 5 en 2024. Document 2 : le témoignage d'une habitante : « L'eau monte parce que le caniveau est bouché. » Document 3 : une carte montre le quartier à 2 mètres au-dessus du niveau du bas-fond, sans route de secours. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Pose la question, recueille, croise les trois documents et conclus avec nuance.",
+          "questions": [
+            {
+              "content": "Quelle question géographique est la plus précise ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Poser la question à partir des documents. 2) Elle doit porter sur le phénomène et demander pourquoi. 3) Les autres propositions ne mènent pas à une explication.",
+              "answers": [
+                {
+                  "content": "Pourquoi ce quartier est-il inondé de plus en plus souvent depuis 2022 ?",
+                  "correct": true
+                },
+                {
+                  "content": "Le quartier est-il joli ?",
+                  "correct": false
+                },
+                {
+                  "content": "Qui est le maire ?",
+                  "correct": false
+                },
+                {
+                  "content": "Quel est le nom du bas-fond ?",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'inondations ont eu lieu en tout de 2022 à 2024 d'après le relevé ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Recueillir : 3, 4 et 5 inondations. 2) Additionner : $3 + 4 + 5 = 12$. 3) Il y a eu 12 inondations en trois ans.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que montre l'évolution du relevé (3, 4, 5) ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Analyser : comparer les années. 2) 3 < 4 < 5 : la fréquence augmente. 3) Les autres propositions contredisent le relevé.",
+              "answers": [
+                {
+                  "content": "Les inondations deviennent plus fréquentes",
+                  "correct": true
+                },
+                {
+                  "content": "Elles deviennent plus rares",
+                  "correct": false
+                },
+                {
+                  "content": "Elles restent stables",
+                  "correct": false
+                },
+                {
+                  "content": "Elles ont disparu",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux facteurs qui, d'après les documents, peuvent expliquer le problème ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Croiser les documents. 2) Le témoignage cite un caniveau bouché ; la carte montre un quartier proche d'un bas-fond sans route de secours. 3) Les deux autres propositions sont sans lien.",
+              "answers": [
+                {
+                  "content": "Un caniveau bouché",
+                  "correct": true
+                },
+                {
+                  "content": "Un quartier proche d'un bas-fond et sans route de secours",
+                  "correct": true
+                },
+                {
+                  "content": "La couleur des maisons",
+                  "correct": false
+                },
+                {
+                  "content": "Le nombre de lettres dans le nom du quartier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le témoignage de l'habitante suffit à expliquer entièrement le problème.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Un seul témoignage ne suffit pas. 2) Il faut le croiser avec le relevé et la carte. 3) La réponse est Faux.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige une réponse argumentée (dix lignes) : explique pourquoi les inondations augmentent, propose deux aménagements et indique les limites de ton étude.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Poser le problème avec des données du relevé",
+                "Croiser au moins deux documents pour expliquer",
+                "Proposer deux aménagements adaptés",
+                "Montrer comment la géographie aide à prévenir les risques",
+                "Reconnaître les limites de l'étude (peu de données)",
+                "Rappeler que la décision appartient aux autorités",
+                "Rédiger un texte structuré"
+              ],
+              "explanation": "Corrigé modèle : Les inondations passent de 3 en 2022 à 5 en 2024 : elles augmentent. Le témoignage signale un caniveau bouché et la carte montre un quartier proche d'un bas-fond sans route de secours. L'eau s'accumule donc parce que l'écoulement est mauvais et que le quartier est exposé. On peut nettoyer et agrandir les caniveaux et créer une route de secours. La géographie aide à repérer les zones exposées et à prévenir les risques. L'étude manque de données (nombre de pluies, niveau de l'eau), il faudra confirmer. Les autorités décident des travaux. Barème (8 points) : données (1) ; croisement (1,5) ; deux aménagements (1,5) ; prévention (1) ; limites (1) ; décision (1) ; rédaction (1).",
+              "answers": [],
+              "starter": "Les inondations augmentent parce que…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base : objet, intérêt et démarche de la géographie",
+          "notions": "Définition de la géographie et origine du mot, espace géographique et aménagement, localiser et expliquer, usages de la géographie, quatre étapes de la démarche géographique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : au cours de géographie, le professeur demande à ta classe de définir la discipline, son origine et ses deux grandes questions.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rappelle-toi le grec : la Terre et décrire. Pense aussi aux deux questions : où ? et pourquoi là ?",
+              "questions": [
+                {
+                  "content": "La géographie étudie…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Retrouver la définition de la fiche : la géographie étudie les sociétés humaines dans leur rapport à l'espace. 2) Repérer les deux mots clés : sociétés et espace. 3) Écarter « le passé des sociétés », qui est l'objet de l'histoire, ainsi que les plantes et les astres, qui ne mettent pas la société en jeu.",
+                  "answers": [
+                    {
+                      "content": "les sociétés humaines dans leur rapport à l'espace",
+                      "correct": true
+                    },
+                    {
+                      "content": "le passé des sociétés humaines",
+                      "correct": false
+                    },
+                    {
+                      "content": "uniquement les plantes et les animaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "uniquement les astres du ciel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mot géographie vient du grec : « gê » signifie « la ___ » et « graphein » signifie « décrire » (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Retrouver l'origine du mot : gê désigne la Terre, graphein signifie décrire. 2) Assembler : géographie veut dire « décrire la Terre ». 3) Attention, la géographie ne fait pas que décrire : elle explique aussi, c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "terre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Poser la question « où ? » suffit pour faire une étude de géographie.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Localiser répond à « où ? ». 2) Une étude géographique va plus loin : elle décrit, puis explique « pourquoi là ? ». 3) La réponse est donc Faux : s'arrêter à la localisation, c'est donner un constat sans explication.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Associer chaque mot à sa définition de la fiche. 2) Ne pas confondre localiser, qui répond à « où ? », avec expliquer, qui répond à « pourquoi là ? ». 3) Un aménagement (route, port, champ) fait partie de l'espace géographique.",
+                  "answers": [
+                    {
+                      "content": "L'espace géographique",
+                      "match": "Le territoire que les sociétés occupent, utilisent et aménagent"
+                    },
+                    {
+                      "content": "Un aménagement",
+                      "match": "Une transformation de l'espace par les sociétés"
+                    },
+                    {
+                      "content": "Localiser",
+                      "match": "Dire où se trouve un lieu"
+                    },
+                    {
+                      "content": "Expliquer",
+                      "match": "Dire pourquoi c'est à cet endroit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un port, une route et un champ sont des espaces ___ par la société.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) Se rappeler la définition : l'aménagement est la transformation de l'espace par les sociétés. 2) Un port, une route et un champ ont été construits ou travaillés : ils sont aménagés. 3) « Oubliés », « imaginés » ou « effacés » ne décrivent pas une transformation voulue.",
+                  "answers": [
+                    {
+                      "content": "aménagés",
+                      "correct": true
+                    },
+                    {
+                      "content": "oubliés",
+                      "correct": false
+                    },
+                    {
+                      "content": "imaginés",
+                      "correct": false
+                    },
+                    {
+                      "content": "effacés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : un élève de 2nde prépare un exposé qui présente des villes de Côte d'Ivoire à l'aide d'une carte.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Place chaque ville : sud, centre ou nord. Souviens-toi de la fonction de chacune.",
+              "questions": [
+                {
+                  "content": "Yamoussoukro est…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Localiser : Yamoussoukro se trouve au centre du pays. 2) Décrire sa fonction : c'est la capitale politique et administrative. 3) Le principal port est à Abidjan, au sud : confondre les deux est une erreur de fonction et de localisation.",
+                  "answers": [
+                    {
+                      "content": "la capitale politique et administrative de la Côte d'Ivoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "une ville du nord du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "le principal port du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "une île de la lagune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Abidjan est située…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Localiser : Abidjan est au sud de la Côte d'Ivoire, sur la lagune Ébrié reliée à l'océan Atlantique. 2) Éliminer les autres propositions : Korhogo est au nord, et Abidjan n'est pas en montagne. 3) Le Niger n'est pas un voisin direct de la Côte d'Ivoire.",
+                  "answers": [
+                    {
+                      "content": "au sud du pays, au bord de la lagune Ébrié",
+                      "correct": true
+                    },
+                    {
+                      "content": "au nord du pays, près de Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "à l'est du pays, près du Niger",
+                      "correct": false
+                    },
+                    {
+                      "content": "au sommet d'une montagne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux villes du sud de la Côte d'Ivoire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Localiser chaque ville. 2) Abidjan et San-Pédro sont des villes portuaires du sud. 3) Korhogo est au nord et Bouaké au centre : les choisir revient à confondre le nord, le centre et le sud.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "San-Pédro",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bouaké",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "San-Pédro est une ville portuaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Localiser San-Pédro : au sud-ouest du pays, sur la côte. 2) Décrire sa fonction : elle possède un port. 3) La réponse est Vrai ; ne confonds pas ce port avec celui d'Abidjan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de la méthode de la fiche.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) On localise d'abord le lieu. 2) On décrit ensuite ce qu'on y observe. 3) On explique pourquoi cela se trouve là. 4) On conclut en formulant la question géographique et sa réponse. Expliquer avant de décrire n'aurait pas de sens.",
+                  "answers": [
+                    {
+                      "content": "Localiser"
+                    },
+                    {
+                      "content": "Décrire"
+                    },
+                    {
+                      "content": "Expliquer"
+                    },
+                    {
+                      "content": "Conclure"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : une commune imaginaire veut construire un centre de santé et demande l'avis d'un géographe. Tu dois dire à quoi sert la géographie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Quatre usages : comprendre, aménager, prévenir, former le citoyen. Elle éclaire, elle ne décide pas.",
+              "questions": [
+                {
+                  "content": "Quels sont trois usages de la géographie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1) Reprendre les usages de la fiche : comprendre le monde, aménager le territoire, prévenir les risques, former le citoyen. 2) Choisir les trois qui y figurent. 3) Prévoir des notes n'est pas du ressort de la géographie, et elle ne décide pas à la place des élus.",
+                  "answers": [
+                    {
+                      "content": "Comprendre la répartition des populations et des activités",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager le territoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévenir les risques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévoir les notes des élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décider à la place des élus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui prend la décision d'installer le centre de santé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Rappeler la limite : la géographie fournit des éléments pour décider. 2) Les élus choisissent aussi selon le budget et leurs priorités. 3) Le géographe seul ne décide pas : c'est l'erreur de ceux qui croient que la géographie impose la décision.",
+                  "answers": [
+                    {
+                      "content": "Les élus, qui s'appuient sur les éléments fournis par la géographie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le géographe seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune personne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La carte est le but final de la géographie.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Se demander à quoi sert la carte : c'est un outil pour localiser et comprendre. 2) Le but de la géographie est de comprendre un espace et d'éclairer des décisions. 3) La réponse est Faux : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un centre de santé est un ___ du territoire (un mot : une transformation de l'espace).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Identifier la nature du projet : on construit un équipement public. 2) Construire quelque chose pour la population est un aménagement du territoire. 3) La géographie aide à choisir l'emplacement.",
+                  "answers": [
+                    {
+                      "content": "aménagement",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle information la commune doit-elle chercher en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Localiser les habitants concernés et leurs besoins. 2) C'est la première étape de la démarche d'aménagement. 3) Les autres propositions n'ont pas de lien avec l'emplacement du centre.",
+                  "answers": [
+                    {
+                      "content": "Où vivent les habitants qui utiliseront le centre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le prix du ciment à l'étranger",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur du bâtiment",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom du fondateur de la commune",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : un élève enquête sur l'affluence à la cantine de son lycée, avec des relevés faits à trois heures différentes (50, 80 et 120 élèves).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Quatre étapes : poser, recueillir, analyser, conclure.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de la démarche géographique.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Poser une question précise. 2) Recueillir des informations. 3) Analyser en les croisant. 4) Conclure par une réponse argumentée. On ne peut pas conclure avant d'avoir recueilli et analysé.",
+                  "answers": [
+                    {
+                      "content": "Poser la question"
+                    },
+                    {
+                      "content": "Recueillir des informations"
+                    },
+                    {
+                      "content": "Analyser en croisant"
+                    },
+                    {
+                      "content": "Conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la première étape de l'enquête ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Se rappeler que la démarche commence par la question. 2) Sans question précise, on relève des faits sans savoir à quoi ils servent. 3) Conclure est la dernière étape, pas la première.",
+                  "answers": [
+                    {
+                      "content": "Poser une question précise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Conclure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Recopier un texte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Voter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une seule source suffit pour conclure.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Se rappeler la deuxième étape : recueillir des informations variées. 2) Une seule source peut être incomplète ou partiale. 3) La réponse est Faux : il faut croiser plusieurs sources.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les relevés donnent 50, 80 et 120 élèves. Quel est le total des trois relevés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Recueillir : lire les trois relevés. 2) Additionner : $50 + 80 + 120 = 250$. 3) Le total est de 250 élèves ; ne confonds pas ce total avec le nombre d'élèves présents en même temps.",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "À la dernière étape, le géographe formule une ___ argumentée (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Conclure répond à la question posée. 2) La réponse est appuyée sur les documents recueillis. 3) Elle est argumentée et, si besoin, nuancée.",
+                  "answers": [
+                    {
+                      "content": "conclusion",
+                      "correct": true
+                    },
+                    {
+                      "content": "réponse",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La géographie dans la vie courante en Côte d'Ivoire",
+          "notions": "Situations d'exemple en Côte d'Ivoire (port d'Abidjan, marché de Daloa, école d'un village près de Bouaké, littoral près de San-Pédro) : localiser, décrire, expliquer, aménager, prévenir les risques.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : au port d'Abidjan, un élève observe des conteneurs, des grues, des camions et une route qui part vers le nord du pays.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Localise, décris, puis explique la fonction de chaque élément.",
+              "questions": [
+                {
+                  "content": "Quelle phrase localise le port d'Abidjan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Localiser : Abidjan est au sud de la Côte d'Ivoire, sur la lagune Ébrié, reliée à l'océan Atlantique. 2) Écarter Korhogo, qui est au nord, et la montagne, qui ne correspond pas à un port. 3) Un lieu a toujours une position précise.",
+                  "answers": [
+                    {
+                      "content": "Il se trouve au sud du pays, sur la lagune Ébrié reliée à l'océan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se trouve à Korhogo, dans le nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se trouve en haute montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a aucune position précise",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux éléments d'aménagement du port ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Décrire ce qu'on observe. 2) Les quais et les entrepôts ont été construits par la société : ce sont des aménagements. 3) Le soleil et la pluie sont des éléments naturels, pas des aménagements.",
+                  "answers": [
+                    {
+                      "content": "Les quais",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les entrepôts",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le port est un exemple de lien entre une société et un espace.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Rappeler l'objet de la géographie : les sociétés dans leur rapport à l'espace. 2) Le port est un espace aménagé par des hommes, utilisé par des entreprises et des travailleurs. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle explication est correcte pour la route qui part vers le nord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Décrire la route : elle part du port vers le nord. 2) Expliquer sa fonction : relier le port aux régions de l'intérieur. 3) Une explication doit relier l'espace et la société ; « décorer » ou « aucune fonction » n'explique rien.",
+                  "answers": [
+                    {
+                      "content": "Elle permet d'acheminer les marchandises du port vers l'intérieur du pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle sert seulement à décorer le port",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a aucune fonction",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ferme le port aux navires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un produit comme le cacao est ___ par le port, c'est-à-dire vendu à l'étranger (un mot au participe passé).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Décrire la fonction d'un port : recevoir et expédier des marchandises. 2) Un produit vendu à l'étranger est exporté. 3) Importé voudrait dire acheté à l'étranger : c'est l'erreur opposée.",
+                  "answers": [
+                    {
+                      "content": "exporté",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : à Daloa, une commune imaginaire veut déplacer un marché devenu trop petit. Elle compare deux sites : un terrain sec en bordure de la route principale et un terrain situé dans un bas-fond.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare l'accès et les risques de chaque site.",
+              "questions": [
+                {
+                  "content": "Quel site paraît préférable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Vérifier l'accès : la route principale est praticable. 2) Repérer les risques : un bas-fond peut être inondé. 3) Comparer : le terrain sec est plus sûr. Dire que les deux sont identiques ignore le risque d'inondation.",
+                  "answers": [
+                    {
+                      "content": "Le terrain sec en bordure de la route principale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le terrain dans le bas-fond",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont identiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun site ne convient",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bas-fond peut être exposé aux inondations.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Repérer les risques du terrain. 2) Un bas-fond est une zone basse où l'eau s'accumule en saison des pluies. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux critères d'un bon site pour un marché ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Appliquer la démarche : localiser, vérifier l'accès, repérer les risques, comparer. 2) Accès et risques sont des critères. 3) Un nom ou une couleur ne changent rien à l'usage du marché.",
+                  "answers": [
+                    {
+                      "content": "Un accès praticable toute l'année",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'absence de risque d'inondation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nom du site",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur du terrain",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant habite à 12 minutes de marche du marché actuel et à 8 minutes du nouveau site. Combien de minutes de marche gagne-t-il à l'aller ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Localiser : relever les deux distances en temps, 12 et 8 minutes. 2) Comparer par soustraction : $12 - 8 = 4$. 3) Il gagne 4 minutes à l'aller ; ne les additionne pas, ce serait un calcul sans sens.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "min"
+                },
+                {
+                  "content": "Qui décide du site retenu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Se rappeler la limite : la géographie éclaire mais ne décide pas. 2) La commune choisit selon le budget et ses priorités. 3) Un commerçant seul ne représente pas la commune.",
+                  "answers": [
+                    {
+                      "content": "La commune, avec les éléments fournis par la géographie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le terrain lui-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un commerçant seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne ne décide",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : près de Bouaké, un village imaginaire demande une école. Les enfants de 6 à 12 ans habitent à 6 km de l'école la plus proche.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à la distance, à l'accès et au rôle de l'aménagement.",
+              "questions": [
+                {
+                  "content": "Quelle est la difficulté géographique du village ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Localiser le besoin : des enfants à 6 km d'une école. 2) Repérer l'obstacle : la distance gêne l'accès à l'école. 3) Les autres propositions n'ont aucun lien avec le problème.",
+                  "answers": [
+                    {
+                      "content": "La distance entre les enfants et l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nom du village",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur des maisons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de lettres du nom de l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque enfant fait un aller-retour de 6 km pour aller à l'école. Combien de kilomètres parcourt-il par jour ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Localiser : 6 km pour aller à l'école. 2) Un aller-retour double la distance : $6 \\times 2 = 12$. 3) L'enfant parcourt 12 km par jour. Se tromper en comptant un seul trajet donnerait 6 km.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "km"
+                },
+                {
+                  "content": "Construire une école dans le village règle en grande partie le problème de distance.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Un aménagement rapproche l'équipement des habitants. 2) Une école dans le village supprime le long trajet quotidien. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux conditions pour réussir ce projet ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Vérifier l'accès : une route praticable toute l'année. 2) Repérer les risques : un terrain sans inondation. 3) Un drapeau ou un nom long n'influencent pas le fonctionnement de l'école.",
+                  "answers": [
+                    {
+                      "content": "Un terrain sans risque d'inondation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une route praticable en saison des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un grand drapeau devant l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nom d'école très long",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une école publique est un ___ du territoire (un mot : un équipement ou un aménagement).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Identifier la nature du projet. 2) Une école est un équipement public, c'est-à-dire un aménagement du territoire. 3) La géographie aide à choisir où le placer.",
+                  "answers": [
+                    {
+                      "content": "équipement",
+                      "correct": true
+                    },
+                    {
+                      "content": "aménagement",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : sur le littoral près de San-Pédro, des habitants imaginaires constatent que la mer ronge la plage chaque année : c'est l'érosion du littoral.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à prévenir plutôt qu'à subir.",
+              "questions": [
+                {
+                  "content": "Quel risque est décrit dans la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Repérer le phénomène : la mer ronge la plage. 2) Le nommer : c'est l'érosion du littoral. 3) Les autres risques ne correspondent pas à une plage grignotée par la mer.",
+                  "answers": [
+                    {
+                      "content": "L'érosion du littoral",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une sécheresse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un incendie de forêt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éruption volcanique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie peut aider à repérer les zones exposées à un tel risque.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Se rappeler le deuxième usage de la fiche : prévenir les risques. 2) La géographie repère les zones exposées pour anticiper. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux mesures raisonnables ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Prévenir le risque. 2) Construire plus loin du rivage et surveiller son évolution sont des mesures de prévention. 3) Ne rien faire ou construire plus près aggraverait le risque.",
+                  "answers": [
+                    {
+                      "content": "Éviter de construire trop près du rivage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Surveiller régulièrement la position du rivage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne rien faire et attendre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Construire encore plus près de la mer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour prévenir un risque, il faut d'abord le ___ sur le terrain (un verbe à l'infinitif : le situer).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) La première étape d'une étude géographique est de localiser. 2) On situe les zones exposées. 3) Ensuite on peut agir.",
+                  "answers": [
+                    {
+                      "content": "localiser",
+                      "correct": true
+                    },
+                    {
+                      "content": "repérer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui décide de protéger la plage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) La géographie fournit les éléments. 2) Les autorités décident des travaux. 3) Les vagues et le hasard ne décident pas d'une protection.",
+                  "answers": [
+                    {
+                      "content": "Les autorités, avec l'appui d'études géographiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les vagues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne ne peut décider",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier en géographie",
+          "notions": "Distinguer décrire et expliquer, comparer deux sources qui divergent, croiser des causes naturelles et humaines, juger une explication.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : un élève écrit : « Il y a beaucoup de camions près du port d'Abidjan. » Son professeur lui demande s'il a fait de la géographie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Constater n'est pas expliquer.",
+              "questions": [
+                {
+                  "content": "La phrase de l'élève est…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Lire la phrase : elle dit ce qu'on observe. 2) Chercher une cause : il n'y en a pas. 3) C'est donc une description, pas une explication.",
+                  "answers": [
+                    {
+                      "content": "une description",
+                      "correct": true
+                    },
+                    {
+                      "content": "une explication",
+                      "correct": false
+                    },
+                    {
+                      "content": "une conclusion argumentée",
+                      "correct": false
+                    },
+                    {
+                      "content": "une carte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase ajoute une explication ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Chercher un mot de cause comme « car » ou « parce que ». 2) Seule la première phrase relie les camions à la fonction du port. 3) Les autres phrases décrivent encore.",
+                  "answers": [
+                    {
+                      "content": "Il y a beaucoup de camions car le port reçoit des marchandises à transporter",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a des camions de couleurs variées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les camions font beaucoup de bruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les camions sont grands",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une description suffit pour répondre à la question « pourquoi ? ».",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Décrire dit ce qu'on voit. 2) Répondre à « pourquoi ? » demande une cause. 3) La réponse est Faux : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux questions d'un géographe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Se rappeler les questions : où, quoi, comment, pourquoi, quelles conséquences. 2) « Pourquoi là ? » et « qui en profite ? » mènent à une explication. 3) Compter des lettres ou parler de couleurs n'apporte rien.",
+                  "answers": [
+                    {
+                      "content": "Pourquoi là, et pas ailleurs ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Qui en profite ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Combien de lettres contient ce nom ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quelle couleur préfère-t-on ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En géographie, la description est le point de ___, pas la réponse (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Reprendre le piège de la fiche. 2) La description sert à commencer l'étude. 3) La réponse vient de l'explication.",
+                  "answers": [
+                    {
+                      "content": "départ",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : deux sources parlent de la fréquentation d'un marché. Un affichage officiel annonce 1 000 visiteurs par jour ; un commerçant affirme « au moins 3 000 ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Quand deux sources divergent, il faut les croiser.",
+              "questions": [
+                {
+                  "content": "Que faire en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Constater la divergence. 2) Recueillir d'autres informations pour croiser les sources. 3) Choisir un chiffre au hasard serait renoncer à la démarche.",
+                  "answers": [
+                    {
+                      "content": "Comparer avec un comptage et d'autres témoignages",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir le nombre le plus grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir le nombre le plus petit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien écrire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chiffre le plus élevé est forcément le bon.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Se rappeler qu'aucune source n'est vraie par principe. 2) Un chiffre élevé peut être une estimation exagérée. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la différence entre les deux chiffres, 3 000 et 1 000 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Relever les deux chiffres. 2) Soustraire : $3000 - 1000 = 2000$. 3) Il y a 2 000 visiteurs d'écart, ce qui justifie un nouveau comptage.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux raisons possibles de cette différence ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Chercher pourquoi les sources divergent. 2) Jours différents et méthodes différentes sont des explications possibles. 3) Les deux autres propositions contredisent le texte.",
+                  "answers": [
+                    {
+                      "content": "Les deux sources n'ont pas compté les mêmes jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'un est un comptage et l'autre une estimation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux nombres sont égaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le marché n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est la plus juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Conclure avec nuance. 2) Tant que les sources divergent, on ne tranche pas. 3) Déclarer l'une des deux fausse sans vérification est une erreur.",
+                  "answers": [
+                    {
+                      "content": "On ne peut pas trancher sans nouveau comptage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le commerçant a forcément tort",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'affichage a forcément tort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le marché est vide",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : un élève dit : « Les inondations dans mon quartier sont dues à la pluie seule. » Il oublie un caniveau bouché et des maisons construites dans un bas-fond.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Plusieurs facteurs, naturels et humains.",
+              "questions": [
+                {
+                  "content": "La pluie seule explique forcément les inondations du quartier.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Chercher toutes les causes. 2) Un caniveau bouché et une construction en bas-fond y contribuent. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois facteurs possibles d'inondation ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1) Distinguer facteurs naturels (pluie, bas-fond) et facteurs humains (caniveau bouché, construction). 2) Retenir les trois facteurs réels. 3) Couleur du ciel et nom de rue ne jouent aucun rôle.",
+                  "answers": [
+                    {
+                      "content": "Une forte pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un caniveau bouché",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une construction en bas-fond",
+                      "correct": true
+                    },
+                    {
+                      "content": "La couleur du ciel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom de la rue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle explication est la plus complète ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Analyser en croisant. 2) Un phénomène géographique a souvent plusieurs causes. 3) Une cause unique ou une opinion ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Un croisement de causes naturelles et humaines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une cause unique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une opinion sans preuve",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un souvenir isolé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les facteurs naturels et les facteurs ___ se combinent (un mot : liés à l'action des hommes).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Distinguer les deux sortes de facteurs. 2) L'action des hommes (construction, entretien) donne les facteurs humains. 3) Ils s'ajoutent aux facteurs naturels.",
+                  "answers": [
+                    {
+                      "content": "humains",
+                      "correct": true
+                    },
+                    {
+                      "content": "humain",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle mesure agit sur un facteur humain ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier le facteur humain : le caniveau bouché. 2) Une mesure humaine peut le corriger. 3) On ne peut pas arrêter la pluie, qui est un facteur naturel.",
+                  "answers": [
+                    {
+                      "content": "Nettoyer et entretenir les caniveaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Arrêter la pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Attendre sans rien faire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Changer la couleur du ciel",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : un élève conclut : « Le port d'Abidjan est là parce que les mots « port » et « Abidjan » commencent par la même sorte de son. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une explication géographique relie la société et l'espace.",
+              "questions": [
+                {
+                  "content": "Pourquoi cette explication est-elle fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Se rappeler qu'expliquer, c'est relier une société et un espace. 2) Un son ne relie rien. 3) Une explication correcte parle de l'accès à la mer, des routes et de la population.",
+                  "answers": [
+                    {
+                      "content": "Elle ne relie ni la mer, ni les routes, ni la population",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est trop longue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est trop courte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est correcte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une explication géographique relie la société et l'espace.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Reprendre la définition de la géographie. 2) Elle étudie le lien entre les sociétés et l'espace. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux bonnes causes de la position du port ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Chercher des causes réelles. 2) L'accès à la mer et les routes vers l'intérieur expliquent un port. 3) Hasard et coïncidence ne sont pas des explications.",
+                  "answers": [
+                    {
+                      "content": "L'accès à la mer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les routes vers l'intérieur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une coïncidence de sons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un simple hasard",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour expliquer, on cherche les ___ d'un phénomène (un mot : ses raisons).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Poser la question « pourquoi ? ». 2) Chercher ses causes. 3) Sans cause, on n'a qu'un constat.",
+                  "answers": [
+                    {
+                      "content": "causes",
+                      "correct": true
+                    },
+                    {
+                      "content": "raisons",
+                      "correct": true
+                    },
+                    {
+                      "content": "cause",
+                      "correct": true
+                    },
+                    {
+                      "content": "raison",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est la bonne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Reprendre les causes réelles. 2) Conclure par une réponse argumentée. 3) Les autres réponses n'expliquent rien.",
+                  "answers": [
+                    {
+                      "content": "Le port est à Abidjan grâce à l'accès à la mer et aux routes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le port est là par hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le port est là à cause du nom",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le port n'est nulle part",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : objet, intérêt et démarche de la géographie",
+          "notions": "Bilan des trois notions : objet de la géographie, intérêt (comprendre, aménager, prévenir, former le citoyen) et démarche en quatre étapes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : un lycée de Korhogo imaginaire prépare un exposé intitulé « À quoi sert la géographie ? ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Quatre usages.",
+              "questions": [
+                {
+                  "content": "Quels sont trois usages de la géographie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1) Reprendre les usages de la fiche. 2) Comprendre, aménager, prévenir. 3) Prévoir la météo relève de la météorologie et la décision revient aux élus.",
+                  "answers": [
+                    {
+                      "content": "Comprendre les inégalités entre espaces",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager le territoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévenir les risques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévoir la météo de demain avec certitude",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir à la place des élus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie ne sert qu'à lire une carte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) La carte est un outil. 2) La géographie sert à comprendre un espace et à éclairer des décisions. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui décide d'un aménagement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) La géographie fournit des éléments. 2) Les élus choisissent selon le budget et leurs priorités. 3) Une carte ne décide pas.",
+                  "answers": [
+                    {
+                      "content": "Les élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le géographe seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "La carte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le hasard",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mot géographie vient du grec : « décrire la ___ » (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Retrouver gê, la Terre. 2) Associer graphein, décrire. 3) Géographie signifie décrire la Terre.",
+                  "answers": [
+                    {
+                      "content": "terre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une classe de 40 élèves se partage en 5 groupes égaux pour enquêter. Combien d'élèves y a-t-il par groupe ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Relever les données : 40 élèves, 5 groupes. 2) Diviser : $40 \\div 5 = 8$. 3) Chaque groupe compte 8 élèves.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : une enquête sur la fréquentation d'un marché de Daloa, avec des comptages et des témoignages.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Poser, recueillir, analyser, conclure.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de l'enquête.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Poser. 2) Recueillir. 3) Analyser en croisant. 4) Conclure. Chaque étape prépare la suivante.",
+                  "answers": [
+                    {
+                      "content": "Poser la question"
+                    },
+                    {
+                      "content": "Recueillir"
+                    },
+                    {
+                      "content": "Analyser en croisant"
+                    },
+                    {
+                      "content": "Conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une source fiable pour cette enquête ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Se demander si l'information est vérifiable. 2) Un comptage daté et répété l'est. 3) Rumeur, publicité et souhait ne le sont pas.",
+                  "answers": [
+                    {
+                      "content": "Un comptage fait à plusieurs heures par l'élève",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une rumeur entendue sur la route",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une publicité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un souhait",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'échelle d'une étude peut être locale, nationale ou mondiale.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Rappeler les échelles de la fiche. 2) Un quartier, un pays ou le monde sont des échelles. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux informations à croiser ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Croiser des informations de nature différente sur le même phénomène. 2) Comptage et témoignage se complètent. 3) Les deux autres propositions n'ont aucun lien avec l'enquête.",
+                  "answers": [
+                    {
+                      "content": "Un comptage de clients",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un témoignage de commerçant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une couleur préférée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nom de rue pris au hasard",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la fin, on formule une réponse ___ et nuancée (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Conclure répond à la question posée. 2) La réponse s'appuie sur les documents. 3) Elle est argumentée et nuancée.",
+                  "answers": [
+                    {
+                      "content": "argumentée",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : une commune imaginaire hésite entre deux sites pour une école. Le site X est à 4 km des élèves, le site Y à 7 km, mais le site X est inondé en saison des pluies.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare la distance, l'accès et le risque.",
+              "questions": [
+                {
+                  "content": "Quel site paraît le plus sûr ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Vérifier le risque : X est inondé. 2) Comparer la distance : X est plus proche mais inaccessible en saison des pluies. 3) Choisir sur la seule distance est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "Y, car X est inondé en saison des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "X, car il est plus proche, sans autre critère",
+                      "correct": false
+                    },
+                    {
+                      "content": "X, car il est plus petit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun, il faut abandonner le projet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de kilomètres le site Y est-il plus éloigné que le site X ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Relever 4 km et 7 km. 2) Soustraire : $7 - 4 = 3$. 3) Le site Y est à 3 km de plus.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "km"
+                },
+                {
+                  "content": "La géographie décide à la place des élus du site à retenir.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Rappeler la limite de la géographie. 2) Elle fournit les éléments. 3) Les élus décident.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux critères utilisés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Appliquer la démarche de la notion 2. 2) Accès et risque sont des critères. 3) Couleur et nom n'ont pas d'effet.",
+                  "answers": [
+                    {
+                      "content": "L'accès toute l'année",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le risque d'inondation",
+                      "correct": true
+                    },
+                    {
+                      "content": "La couleur du terrain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom du site",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une école publique est un ___ du territoire (un mot : une transformation de l'espace pour la population).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Identifier la nature du projet. 2) Un équipement public est un aménagement. 3) La géographie aide à choisir où le placer.",
+                  "answers": [
+                    {
+                      "content": "aménagement",
+                      "correct": true
+                    },
+                    {
+                      "content": "équipement",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : sur la lagune d'Abidjan, un élève décrit le port puis cherche à expliquer sa position.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Décrire d'abord, expliquer ensuite.",
+              "questions": [
+                {
+                  "content": "Quelle phrase est une explication ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Chercher une cause. 2) « Parce qu'il y a un accès à la mer » relie le port à l'espace. 3) Les autres phrases décrivent.",
+                  "answers": [
+                    {
+                      "content": "Le port est là parce qu'il y a un accès à la mer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le port a des quais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le port est grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le port est bruyant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Décrire et expliquer sont la même chose.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Décrire dit ce qu'on voit. 2) Expliquer dit pourquoi. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux bonnes explications de la position du port ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Chercher des causes réelles. 2) Accès à la mer et routes sont des causes. 3) Hasard et coïncidence n'expliquent rien.",
+                  "answers": [
+                    {
+                      "content": "L'accès à la mer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les routes vers l'intérieur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une coïncidence de noms",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie répond à « où ? » et à « ___ là ? » (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Se rappeler les deux questions. 2) Où ? localise. 3) Pourquoi là ? explique.",
+                  "answers": [
+                    {
+                      "content": "pourquoi",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre étapes d'une étude de géographie.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Localiser. 2) Décrire. 3) Expliquer. 4) Conclure. Cet ordre est celui de la notion 1.",
+                  "answers": [
+                    {
+                      "content": "Localiser"
+                    },
+                    {
+                      "content": "Décrire"
+                    },
+                    {
+                      "content": "Expliquer"
+                    },
+                    {
+                      "content": "Conclure"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

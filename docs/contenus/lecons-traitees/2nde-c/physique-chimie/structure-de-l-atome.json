@@ -1,0 +1,2943 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Structure de l'atome",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "figures": [
+        {
+          "key": "structure-atome",
+          "kind": "diagram",
+          "description": "Un arbre qui décrit l'atome. La racine « Atome » se sépare en « Noyau » et en « Électrons (charge négative) ». Le noyau se sépare à son tour en « Protons (charge positive) » et en « Neutrons (sans charge) ». Les protons et les neutrons sont appelés nucléons.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "at",
+                "label": "Atome"
+              },
+              {
+                "id": "no",
+                "label": "Noyau"
+              },
+              {
+                "id": "el",
+                "label": "Électrons (charge négative)"
+              },
+              {
+                "id": "pr",
+                "label": "Protons (charge positive)"
+              },
+              {
+                "id": "ne",
+                "label": "Neutrons (sans charge)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "at",
+                "to": "no"
+              },
+              {
+                "from": "at",
+                "to": "el"
+              },
+              {
+                "from": "no",
+                "to": "pr"
+              },
+              {
+                "from": "no",
+                "to": "ne"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "couches-sodium",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres qui donne le nombre d'électrons de l'atome de sodium sur chacune de ses couches : 2 électrons sur la couche K, 8 électrons sur la couche L et 1 électron sur la couche M. La structure électronique du sodium s'écrit donc (K)2 (L)8 (M)1.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              2,
+              8,
+              1
+            ],
+            "labels": [
+              "K",
+              "L",
+              "M"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le noyau et les électrons",
+          "remember": "Un **atome** est formé d'un **noyau** entouré d'**électrons**. Le noyau contient des **protons** (charge $+e$) et des **neutrons** (sans charge), appelés **nucléons**. Un électron porte la charge $-e$, avec $e \\approx 1{,}6 \\times 10^{-19}$ C (la charge élémentaire). Presque toute la masse de l'atome est dans le noyau (un électron est environ 1 800 fois plus léger qu'un proton). L'atome est **neutre** : il a autant d'électrons que de protons, donc la charge du noyau est opposée à celle des électrons.",
+          "method": [
+            "Relever le nombre de protons, de neutrons et d'électrons de l'atome.",
+            "Calculer la charge du noyau (nombre de protons × +e) et celle des électrons (nombre d'électrons × −e).",
+            "Conclure : comparer les deux charges pour dire si l'atome est neutre, et situer sa masse dans le noyau."
+          ],
+          "example": {
+            "statement": "Un atome de carbone est formé de 6 protons, 6 neutrons et 6 électrons. Quelle est la charge du noyau ? L'atome est-il neutre ? Où se trouve sa masse ?",
+            "steps": [
+              "Relever : 6 protons, 6 neutrons et 6 électrons.",
+              "Calculer : charge du noyau $6 \\times (+e) = +6e$ ; charge des électrons $6 \\times (-e) = -6e$.",
+              "Conclure : $+6e - 6e = 0$, l'atome est neutre ; sa masse est presque entièrement dans le noyau."
+            ]
+          },
+          "pitfall": "Ne confonds pas « neutre » et « sans charges ». Contre-exemple : l'atome de carbone est neutre, mais il contient 6 protons ($+6e$) et 6 électrons ($-6e$) : les charges existent, elles se compensent. Et le neutron, lui, n'a vraiment aucune charge : il n'est pas négatif.",
+          "figure": "structure-atome",
+          "exercise": [
+            {
+              "title": "Décrire un atome : particules et charges",
+              "statement": "Dans cet exercice, tu relèves les particules d'un atome, tu calcules les charges de ses parties et tu conclus sur sa neutralité.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle particule de l'atome porte une charge électrique négative ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : les particules d'un atome sont le proton, le neutron et l'électron. Étape 2 — Calculer : la charge du proton est +e, celle du neutron 0, celle de l'électron −e. Étape 3 — Conclure : seul l'électron est négatif. Le noyau tout entier est positif, à cause de ses protons.",
+                  "answers": [
+                    {
+                      "content": "l'électron",
+                      "correct": true
+                    },
+                    {
+                      "content": "le proton",
+                      "correct": false
+                    },
+                    {
+                      "content": "le neutron",
+                      "correct": false
+                    },
+                    {
+                      "content": "le noyau tout entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se trouvent les protons et les neutrons dans un atome ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : trois sortes de particules. Étape 2 — Calculer : les charges (+e, 0, −e) ne changent pas leur place. Étape 3 — Conclure : protons et neutrons sont dans le noyau, ce sont les nucléons ; les électrons sont autour du noyau.",
+                  "answers": [
+                    {
+                      "content": "Dans le noyau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Autour du noyau, avec les électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les protons dans le noyau et les neutrons autour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans chaque électron",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le noyau d'un atome de lithium contient 3 protons. Quelle est la charge de ce noyau, exprimée en nombre de charges élémentaires e ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : 3 protons. Étape 2 — Calculer : chaque proton porte +e, donc la charge du noyau est 3 × (+e) = +3e. Étape 3 — Conclure : la charge du noyau vaut +3e ; les neutrons, sans charge, n'y changent rien.",
+                  "tolerance": 0,
+                  "unit": "e",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre contient autant d'électrons que de protons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : N protons et N' électrons. Étape 2 — Calculer : charge du noyau +N e, charge des électrons −N' e. Étape 3 — Conclure : la charge totale est nulle seulement si N' = N, donc il y a autant d'électrons que de protons.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Presque toute la masse de l'atome est concentrée dans le ___ (un nom).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : les protons et les neutrons sont dans le noyau. Étape 2 — Calculer : un électron est environ 1 800 fois plus léger qu'un proton. Étape 3 — Conclure : presque toute la masse de l'atome est dans le noyau.",
+                  "answers": [
+                    {
+                      "content": "noyau",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre ne contient aucune particule chargée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : l'atome de carbone contient 6 protons et 6 électrons. Étape 2 — Calculer : le noyau vaut +6e, les électrons valent −6e, la somme est 0. Étape 3 — Conclure : l'atome est neutre parce que les charges se compensent, pas parce qu'il n'y en a pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Charges, particules et neutralité d'un atome",
+              "statement": "Dans cet exercice, tu associes chaque particule à sa charge, tu comptes des électrons et tu utilises le schéma de l'atome.",
+              "hint": "Un proton vaut +e, un électron −e, un neutron 0. Un atome neutre a autant d'électrons que de protons.",
+              "exercise_type": "fixation",
+              "figure": "structure-atome",
+              "questions": [
+                {
+                  "content": "Relie chaque particule à sa charge électrique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever : trois particules. Étape 2 — Calculer : le proton porte +e, l'électron −e, le neutron n'a pas de charge. Étape 3 — Conclure : proton +e, électron −e, neutron 0.",
+                  "answers": [
+                    {
+                      "content": "Le proton",
+                      "match": "+e"
+                    },
+                    {
+                      "content": "L'électron",
+                      "match": "−e"
+                    },
+                    {
+                      "content": "Le neutron",
+                      "match": "0, sans charge"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre contient 9 protons. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : 9 protons, donc une charge de noyau +9e. Étape 2 — Calculer : pour que l'atome soit neutre, les électrons doivent valoir −9e, soit 9 électrons. Étape 3 — Conclure : il y a 9 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur l'atome sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever : protons et neutrons dans le noyau, électrons autour. Étape 2 — Calculer : le noyau n'a que des charges positives ou nulles, donc il est positif. Étape 3 — Conclure : les affirmations sur le contenu du noyau et sur la neutralité sont justes, les deux autres inversent les places ou le signe.",
+                  "answers": [
+                    {
+                      "content": "Le noyau contient les protons et les neutrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un atome est électriquement neutre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les électrons sont dans le noyau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau a une charge négative",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de carbone contient 6 protons, 6 neutrons et 6 électrons. Quelle est la charge de son noyau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 6 protons, 6 neutrons, 6 électrons. Étape 2 — Calculer : 6 × (+e) = +6e pour le noyau ; les neutrons ne comptent pas. Étape 3 — Conclure : la charge du noyau est +6e. 0 oublie les protons ; +12e compte les neutrons comme positifs ; −6e confond avec les électrons.",
+                  "answers": [
+                    {
+                      "content": "+6e",
+                      "correct": true
+                    },
+                    {
+                      "content": "−6e",
+                      "correct": false
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "+12e",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier les charges d'un atome.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever les nombres de particules. Étape 2 — Calculer les charges. Étape 3 — Conclure. On ne peut conclure sur la neutralité qu'après avoir calculé les deux charges.",
+                  "answers": [
+                    {
+                      "content": "Relever le nombre de protons, de neutrons et d'électrons"
+                    },
+                    {
+                      "content": "Calculer la charge du noyau et celle des électrons"
+                    },
+                    {
+                      "content": "Conclure sur la neutralité et la place de la masse"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles particules constituent un atome ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Relever : un atome est formé d'un noyau (protons, neutrons) entouré d'électrons. Étape 2 — Calculer : leurs charges sont +e, 0 et −e. Étape 3 — Conclure : trois sortes de particules. Les ions et les molécules ne sont pas des particules de l'atome : ce sont des ensembles d'atomes ou des atomes chargés.",
+                  "answers": [
+                    {
+                      "content": "Les protons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les neutrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les ions",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les molécules",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Numéro atomique, nombre de masse et notation",
+          "remember": "Le **numéro atomique** $Z$ est le nombre de protons du noyau ; il caractérise l'élément, et l'atome neutre a $Z$ électrons. Le **nombre de masse** $A$ est le nombre de nucléons : $A = Z + N$, où $N$ est le nombre de neutrons, donc $N = A - Z$. La notation d'un atome est ${}^{A}_{Z}\\mathrm{X}$ : $A$ en haut, $Z$ en bas, à gauche du symbole $\\mathrm{X}$ de l'élément. Exemple : ${}^{12}_{6}\\mathrm{C}$ a 6 protons, 6 neutrons et 6 électrons.",
+          "method": [
+            "Lire le symbole X, le nombre de masse A (en haut) et le numéro atomique Z (en bas) dans la notation.",
+            "Déduire le nombre de protons : il est égal à Z.",
+            "Calculer le nombre de neutrons : $N = A - Z$.",
+            "Conclure sur le nombre d'électrons (égal à Z pour un atome neutre) et écrire la composition de l'atome."
+          ],
+          "example": {
+            "statement": "Un atome de sodium s'écrit ${}^{23}_{11}\\mathrm{Na}$. Donner sa composition : protons, neutrons, électrons.",
+            "steps": [
+              "Lire : le symbole est Na, $A = 23$ et $Z = 11$.",
+              "Déduire : le nombre de protons est égal à $Z$, soit 11 protons.",
+              "Calculer : $N = A - Z = 23 - 11 = 12$ neutrons.",
+              "Conclure : l'atome est neutre, donc il a 11 électrons. Composition : 11 protons, 12 neutrons, 11 électrons."
+            ]
+          },
+          "pitfall": "Ne confonds pas $A$ et $Z$, et n'additionne pas à la place de soustraire. Contre-exemple : pour ${}^{23}_{11}\\mathrm{Na}$, écrire $N = 23 + 11 = 34$ est faux, puisque 23 est déjà le total des protons et des neutrons. Le bon calcul est $N = 23 - 11 = 12$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Lire la notation d'un atome",
+              "statement": "Dans cet exercice, tu lis le symbole, le numéro atomique Z et le nombre de masse A, puis tu en déduis la composition de l'atome.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un atome de sodium s'écrit ${}^{23}_{11}\\mathrm{Na}$. Combien de protons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : le symbole est Na, A = 23 (en haut) et Z = 11 (en bas). Étape 2 — Déduire : le nombre de protons est égal à Z, donc 11 protons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de sodium s'écrit ${}^{23}_{11}\\mathrm{Na}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 23 et Z = 11. Étape 2 — Déduire : 11 protons. Étape 3 — Calculer : N = A − Z = 23 − 11 = 12 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre d'oxygène s'écrit ${}^{16}_{8}\\mathrm{O}$. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 16 et Z = 8. Étape 2 — Déduire : 8 protons. Étape 4 — Conclure : l'atome est neutre, donc il a autant d'électrons que de protons, soit 8 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre contient 7 protons et 7 neutrons. Quelle est sa notation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 7 protons donc Z = 7 (c'est l'azote N) et 7 neutrons. Étape 2 — Déduire : A = Z + N = 7 + 7 = 14. Étape 4 — Conclure : la notation est 14 en haut, 7 en bas, symbole N. Mettre 7 en haut et 14 en bas inverse A et Z ; le symbole O correspond à Z = 8.",
+                  "answers": [
+                    {
+                      "content": "${}^{14}_{7}\\mathrm{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{7}_{14}\\mathrm{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{14}_{7}\\mathrm{O}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{7}_{7}\\mathrm{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre A, la somme des protons et des neutrons, s'appelle le nombre de ___ (un seul mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : A se place en haut de la notation. Étape 3 — Calculer : A = Z + N, la somme des protons et des neutrons. C'est le nombre de masse, ou nombre de nucléons.",
+                  "answers": [
+                    {
+                      "content": "masse",
+                      "correct": true
+                    },
+                    {
+                      "content": "nucléons",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour ${}^{23}_{11}\\mathrm{Na}$, le nombre de neutrons est 23 + 11 = 34.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : A = 23 et Z = 11. Étape 3 — Calculer : N = A − Z = 23 − 11 = 12, et non A + Z. Trouver 34 neutrons est absurde, car A = 23 est déjà le total des nucléons (protons et neutrons).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Composition d'atomes à partir de leur notation",
+              "statement": "Dans cet exercice, tu retrouves la composition d'atomes (protons, neutrons, électrons) à partir de leur notation, et inversement.",
+              "hint": "Z est en bas, A est en haut. N = A − Z. Un atome neutre a Z électrons.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque grandeur à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : Z est en bas, A en haut. Étape 2 — Déduire : Z est le nombre de protons. Étape 3 — Calculer : A = Z + N est le nombre de nucléons, donc N = A − Z.",
+                  "answers": [
+                    {
+                      "content": "Z",
+                      "match": "Nombre de protons"
+                    },
+                    {
+                      "content": "A",
+                      "match": "Nombre de nucléons"
+                    },
+                    {
+                      "content": "N",
+                      "match": "A − Z"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de chlore s'écrit ${}^{35}_{17}\\mathrm{Cl}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 35 et Z = 17. Étape 2 — Déduire : 17 protons. Étape 3 — Calculer : N = 35 − 17 = 18 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la composition de l'atome neutre ${}^{27}_{13}\\mathrm{Al}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : A = 27 et Z = 13. Étape 2 — Déduire : 13 protons. Étape 3 — Calculer : N = 27 − 13 = 14 neutrons. Étape 4 — Conclure : 13 électrons, car l'atome est neutre. Les autres propositions confondent A et Z, ou prennent A pour le nombre de neutrons.",
+                  "answers": [
+                    {
+                      "content": "13 protons, 14 neutrons, 13 électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "13 protons, 27 neutrons, 13 électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "27 protons, 13 neutrons, 27 électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "14 protons, 13 neutrons, 14 électrons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux atomes qui ont le même numéro atomique Z appartiennent au même élément chimique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on compare les valeurs de Z. Étape 2 — Déduire : le nombre de protons caractérise l'élément. Étape 4 — Conclure : même Z, même élément.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la composition d'un atome.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire la notation. Étape 2 — Déduire les protons. Étape 3 — Calculer les neutrons. Étape 4 — Conclure avec les électrons. N = A − Z suppose de connaître A et Z, donc de lire d'abord.",
+                  "answers": [
+                    {
+                      "content": "Lire le symbole, A et Z dans la notation"
+                    },
+                    {
+                      "content": "Déduire le nombre de protons, égal à Z"
+                    },
+                    {
+                      "content": "Calculer le nombre de neutrons N = A − Z"
+                    },
+                    {
+                      "content": "Conclure sur le nombre d'électrons et écrire la composition"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies pour l'atome neutre ${}^{40}_{20}\\mathrm{Ca}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : A = 40 et Z = 20. Étape 2 — Déduire : 20 protons. Étape 3 — Calculer : N = 40 − 20 = 20 neutrons. Étape 4 — Conclure : 20 électrons. Les propositions avec 40 prennent A pour le nombre de protons ou d'électrons.",
+                  "answers": [
+                    {
+                      "content": "Il contient 20 neutrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il contient 20 électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il contient 40 électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il contient 40 protons",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les isotopes",
+          "remember": "Des **isotopes** sont des atomes d'un même élément : ils ont le même numéro atomique $Z$ (même nombre de protons, même symbole), mais des nombres de masse $A$ différents, donc des nombres de neutrons différents. Exemples : ${}^{12}_{6}\\mathrm{C}$, ${}^{13}_{6}\\mathrm{C}$ et ${}^{14}_{6}\\mathrm{C}$ (6, 7 et 8 neutrons) ; ${}^{1}_{1}\\mathrm{H}$ et ${}^{3}_{1}\\mathrm{H}$. Les isotopes d'un élément ont le même nombre d'électrons : ils ont les mêmes propriétés chimiques.",
+          "method": [
+            "Lire pour chaque atome le symbole, le numéro atomique Z et le nombre de masse A.",
+            "Comparer les valeurs de Z, puis les valeurs de A.",
+            "Conclure : ce sont des isotopes si Z est le même et A différent ; calculer au besoin les neutrons de chacun."
+          ],
+          "example": {
+            "statement": "Les atomes ${}^{12}_{6}\\mathrm{C}$ et ${}^{14}_{6}\\mathrm{C}$ sont-ils des isotopes ? Combien de neutrons chacun contient-il ?",
+            "steps": [
+              "Lire : le carbone 12 a $Z = 6$ et $A = 12$ ; le carbone 14 a $Z = 6$ et $A = 14$ ; le symbole est C pour les deux.",
+              "Comparer : les valeurs de $Z$ sont égales (6) ; les valeurs de $A$ sont différentes (12 et 14).",
+              "Conclure : même $Z$ et $A$ différent, ce sont des isotopes. Neutrons : $12 - 6 = 6$ pour le carbone 12, $14 - 6 = 8$ pour le carbone 14."
+            ]
+          },
+          "pitfall": "Avoir le même nombre de masse $A$ ne suffit pas pour être isotopes. Contre-exemple : ${}^{14}_{6}\\mathrm{C}$ et ${}^{14}_{7}\\mathrm{N}$ ont tous deux $A = 14$, mais $Z = 6$ et $Z = 7$ : ce sont des atomes de deux éléments différents. Les isotopes ont le même $Z$ et des $A$ différents.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Reconnaître des isotopes",
+              "statement": "Dans cet exercice, tu compares le numéro atomique et le nombre de masse de plusieurs atomes pour reconnaître des isotopes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que sont des isotopes d'un même élément ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on regarde Z et A de chaque atome. Étape 2 — Comparer : les isotopes ont le même Z (même nombre de protons), donc le même élément. Étape 3 — Conclure : leur A est différent, car ils n'ont pas le même nombre de neutrons. Des atomes de même A et de Z différents sont d'éléments différents.",
+                  "answers": [
+                    {
+                      "content": "Des atomes de même Z et de nombres de masse A différents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des atomes de même A et de Z différents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des atomes de même nombre de neutrons mais de Z différents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des atomes identiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les atomes ${}^{12}_{6}\\mathrm{C}$ et ${}^{14}_{6}\\mathrm{C}$ sont des isotopes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : les deux ont Z = 6 ; A vaut 12 et 14. Étape 2 — Comparer : Z identique, A différent. Étape 3 — Conclure : ce sont des isotopes du carbone.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de carbone 14 s'écrit ${}^{14}_{6}\\mathrm{C}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 14 et Z = 6. Étape 2 — Comparer : pas de comparaison nécessaire ici. Étape 3 — Conclure : N = A − Z = 14 − 6 = 8 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Lequel de ces atomes est un isotope de l'atome ${}^{35}_{17}\\mathrm{Cl}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : l'atome de départ a Z = 17. Étape 2 — Comparer : seul Cl-37 a aussi Z = 17, avec un A différent (37 au lieu de 35). Étape 3 — Conclure : c'est lui l'isotope. Les autres ont un Z différent (16 ou 18), donc ce sont d'autres éléments, même si A est parfois le même.",
+                  "answers": [
+                    {
+                      "content": "${}^{37}_{17}\\mathrm{Cl}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{35}_{16}\\mathrm{S}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{37}_{18}\\mathrm{Ar}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{35}_{18}\\mathrm{Ar}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux isotopes ont le même nombre de ___ (particules du noyau), mais pas le même nombre de neutrons.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Comparer : même Z, donc même nombre de protons. Étape 3 — Conclure : seul le nombre de neutrons change, donc A change aussi.",
+                  "answers": [
+                    {
+                      "content": "protons",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les atomes ${}^{14}_{6}\\mathrm{C}$ et ${}^{14}_{7}\\mathrm{N}$ sont des isotopes parce qu'ils ont le même nombre de masse A.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 6 pour le carbone et Z = 7 pour l'azote ; A = 14 pour les deux. Étape 2 — Comparer : Z différents. Étape 3 — Conclure : ce sont deux éléments différents, pas des isotopes. Avoir le même A ne suffit pas : il faut le même Z.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Isotopes du carbone, de l'hydrogène et du chlore",
+              "statement": "Dans cet exercice, tu repères des paires d'isotopes, tu comptes leurs neutrons et tu compares leurs électrons.",
+              "hint": "Isotopes : même Z, A différent. Pour les neutrons, N = A − Z.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles paires d'atomes sont des paires d'isotopes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : Z et A de chaque atome. Étape 2 — Comparer : C-12 et C-13 ont Z = 6 ; H-1 et H-3 ont Z = 1 ; C-14 et N-14 ont Z = 6 et 7 ; Na et Mg ont Z = 11 et 12. Étape 3 — Conclure : seules les paires C-12 et C-13, puis H-1 et H-3, ont le même Z avec un A différent.",
+                  "answers": [
+                    {
+                      "content": "${}^{12}_{6}\\mathrm{C}$ et ${}^{13}_{6}\\mathrm{C}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{1}_{1}\\mathrm{H}$ et ${}^{3}_{1}\\mathrm{H}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{14}_{6}\\mathrm{C}$ et ${}^{14}_{7}\\mathrm{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{23}_{11}\\mathrm{Na}$ et ${}^{24}_{12}\\mathrm{Mg}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de chlore s'écrit ${}^{37}_{17}\\mathrm{Cl}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 37 et Z = 17. Étape 2 — Comparer : même Z que Cl-35, A différent. Étape 3 — Conclure : N = 37 − 17 = 20 neutrons (contre 18 pour Cl-35).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque atome de carbone à son nombre de neutrons.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : Z = 6 pour les trois. Étape 2 — Comparer : A vaut 12, 13 et 14. Étape 3 — Conclure : N = A − Z donne 12 − 6 = 6, 13 − 6 = 7 et 14 − 6 = 8.",
+                  "answers": [
+                    {
+                      "content": "${}^{12}_{6}\\mathrm{C}$",
+                      "match": "6 neutrons"
+                    },
+                    {
+                      "content": "${}^{13}_{6}\\mathrm{C}$",
+                      "match": "7 neutrons"
+                    },
+                    {
+                      "content": "${}^{14}_{6}\\mathrm{C}$",
+                      "match": "8 neutrons"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux isotopes d'un même élément ont le même nombre d'électrons lorsque les atomes sont neutres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : même Z. Étape 2 — Comparer : même nombre de protons. Étape 3 — Conclure : un atome neutre a autant d'électrons que de protons, donc les deux isotopes ont le même nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître des isotopes.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Comparer. Étape 3 — Conclure. On ne peut pas conclure avant d'avoir comparé Z et A.",
+                  "answers": [
+                    {
+                      "content": "Lire le symbole, Z et A de chaque atome"
+                    },
+                    {
+                      "content": "Comparer les Z, puis les A"
+                    },
+                    {
+                      "content": "Conclure : même Z et A différent, ce sont des isotopes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le carbone 13 et le carbone 12 diffèrent par…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : Z = 6 pour les deux, A = 13 et A = 12. Étape 2 — Comparer : même Z (donc mêmes protons, mêmes électrons, même symbole C), A différent. Étape 3 — Conclure : ils diffèrent par le nombre de neutrons, 7 contre 6.",
+                  "answers": [
+                    {
+                      "content": "le nombre de neutrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "le nombre de protons",
+                      "correct": false
+                    },
+                    {
+                      "content": "le nombre d'électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "le symbole de l'élément",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Structure électronique d'un atome",
+          "remember": "Les électrons d'un atome sont répartis en **couches**, notées K, L et M. La couche K contient au plus 2 électrons, la couche L au plus 8, la couche M au plus 8 pour les atomes de numéro atomique $Z \\leq 18$. On remplit K, puis L, puis M : on n'entame une couche que si la précédente est pleine. La structure électronique s'écrit $(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{1}$ pour le sodium ($Z = 11$). La dernière couche occupée est la **couche externe**.",
+          "method": [
+            "Déterminer le nombre d'électrons de l'atome : pour un atome neutre, il est égal à Z.",
+            "Remplir la couche K avec 2 électrons au plus.",
+            "Remplir ensuite la couche L (8 électrons au plus), puis la couche M avec les électrons restants.",
+            "Écrire la structure électronique (K)(L)(M) et nommer la couche externe, la dernière occupée."
+          ],
+          "example": {
+            "statement": "Écrire la structure électronique de l'atome de sodium, de numéro atomique $Z = 11$, et nommer sa couche externe.",
+            "steps": [
+              "Déterminer : l'atome neutre a $Z = 11$ électrons.",
+              "Remplir : la couche K reçoit 2 électrons ; il en reste 9.",
+              "Remplir : la couche L reçoit 8 électrons, il reste 1 électron, qui va sur la couche M.",
+              "Écrire : la structure est $(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{1}$ ; la couche externe est la couche M."
+            ]
+          },
+          "pitfall": "N'entame jamais une couche avant que la précédente soit pleine. Contre-exemple : pour 10 électrons, écrire $(\\mathrm{K})^{2}(\\mathrm{L})^{6}(\\mathrm{M})^{2}$ est faux ; la couche L doit d'abord recevoir 8 électrons, ce qui donne $(\\mathrm{K})^{2}(\\mathrm{L})^{8}$. Vérifie toujours que la somme des électrons vaut $Z$.",
+          "figure": "couches-sodium",
+          "exercise": [
+            {
+              "title": "Écrire la structure électronique d'un atome",
+              "statement": "Dans cet exercice, tu répartis les électrons d'un atome sur les couches K, L et M, puis tu nommes la couche externe.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la structure électronique de l'atome de carbone, de numéro atomique Z = 6 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre a 6 électrons. Étape 2 — Remplir K : 2 électrons. Étape 3 — Remplir L : les 4 électrons restants, ce qui ne dépasse pas 8. Étape 4 — Écrire : (K)²(L)⁴, couche externe L. (K)⁶ dépasse la capacité de K ; (K)⁴(L)² dépasse celle de K ; (K)²(L)²(M)² saute la couche L.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{4}(\\mathrm{L})^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{2}(\\mathrm{M})^{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de sodium, de numéro atomique Z = 11 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 11 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis il reste 1 électron pour la couche M. Étape 4 — Écrire : (K)²(L)⁸(M)¹, couche externe M. (K)²(L)⁹ dépasse la capacité de L ; (K)²(L)⁷(M)² laisse L incomplète ; (K)²(L)⁸ n'a que 10 électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons la couche K peut-elle contenir au plus ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Remplir la couche K : elle contient 2 électrons au plus. La couche L en contient 8 au plus, et la couche M, pour les atomes de Z ≤ 18, aussi 8 au plus.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La dernière couche occupée par des électrons s'appelle la couche ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Écrire : après avoir rempli K, L puis M, on nomme la dernière couche occupée. C'est la couche externe.",
+                  "answers": [
+                    {
+                      "content": "externe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de chlore a pour numéro atomique Z = 17. Combien d'électrons la couche externe contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : 17 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, il reste 17 − 10 = 7 électrons pour M. Étape 4 — Écrire : (K)²(L)⁸(M)⁷, la couche externe M contient 7 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre de numéro atomique Z = 10 a pour structure électronique $(\\mathrm{K})^{2}(\\mathrm{L})^{6}(\\mathrm{M})^{2}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : 10 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : la couche L doit contenir 8 électrons avant que M reçoive le moindre électron : 10 − 2 = 8 va entièrement sur L. Étape 4 — Écrire : (K)²(L)⁸. La structure proposée (K)²(L)⁶(M)² laisse L incomplète.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Structures électroniques de plusieurs atomes",
+              "statement": "Dans cet exercice, tu écris des structures électroniques pour des atomes de numéros atomiques différents et tu lis le diagramme du sodium.",
+              "hint": "On remplit K (2 au plus), puis L (8 au plus), puis M. Le nombre d'électrons de l'atome neutre est Z.",
+              "exercise_type": "fixation",
+              "figure": "couches-sodium",
+              "questions": [
+                {
+                  "content": "Relie chaque atome (numéro atomique Z) à sa structure électronique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Déterminer : 8, 12, 3 et 14 électrons. Étape 2 — Remplir K : 2 électrons chaque fois. Étape 3 — Remplir L puis M : O a 6 électrons en L ; Mg a 8 en L et 2 en M ; Li a 1 en L ; Si a 8 en L et 4 en M. Étape 4 — Écrire les quatre structures obtenues.",
+                  "answers": [
+                    {
+                      "content": "Oxygène (Z = 8)",
+                      "match": "$(\\mathrm{K})^{2}(\\mathrm{L})^{6}$"
+                    },
+                    {
+                      "content": "Magnésium (Z = 12)",
+                      "match": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{2}$"
+                    },
+                    {
+                      "content": "Lithium (Z = 3)",
+                      "match": "$(\\mathrm{K})^{2}(\\mathrm{L})^{1}$"
+                    },
+                    {
+                      "content": "Silicium (Z = 14)",
+                      "match": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{4}$"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de soufre a pour numéro atomique Z = 16. Combien d'électrons la couche L contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : 16 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8 électrons, la couche est pleine ; il reste 6 électrons pour M. Étape 4 — Écrire : (K)²(L)⁸(M)⁶ ; la couche L contient donc 8 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels atomes ont un seul électron sur leur couche externe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Déterminer : 3, 11, 6 et 18 électrons. Étapes 2 et 3 — Remplir : Li (K)²(L)¹ ; Na (K)²(L)⁸(M)¹ ; C (K)²(L)⁴ ; Ar (K)²(L)⁸(M)⁸. Étape 4 — Écrire et nommer : la couche externe de Li et de Na contient 1 électron ; celle de C en contient 4 et celle de Ar en contient 8.",
+                  "answers": [
+                    {
+                      "content": "Le lithium (Z = 3)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le carbone (Z = 6)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'argon (Z = 18)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour écrire une structure électronique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Déterminer le nombre d'électrons. Étape 2 — Remplir K. Étape 3 — Remplir L puis M. Étape 4 — Écrire et nommer la couche externe.",
+                  "answers": [
+                    {
+                      "content": "Déterminer le nombre d'électrons de l'atome"
+                    },
+                    {
+                      "content": "Remplir la couche K avec 2 électrons au plus"
+                    },
+                    {
+                      "content": "Remplir la couche L, puis la couche M"
+                    },
+                    {
+                      "content": "Écrire la structure et nommer la couche externe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome a pour structure électronique $(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{2}$. Quel est son numéro atomique Z ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre a autant d'électrons que Z. Étapes 2 à 4 — Additionner : 2 + 8 + 2 = 12 électrons, donc Z = 12. Z = 10 oublie la couche M ; Z = 11 se trompe d'un électron ; Z = 14 en ajoute deux.",
+                  "answers": [
+                    {
+                      "content": "Z = 12",
+                      "correct": true
+                    },
+                    {
+                      "content": "Z = 10",
+                      "correct": false
+                    },
+                    {
+                      "content": "Z = 11",
+                      "correct": false
+                    },
+                    {
+                      "content": "Z = 14",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les atomes ${}^{12}_{6}\\mathrm{C}$ et ${}^{14}_{6}\\mathrm{C}$ ont la même structure électronique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : les deux ont Z = 6, donc 6 électrons. Étapes 2 et 3 — Remplir : (K)²(L)⁴ pour les deux. Étape 4 — Écrire : même structure. Les isotopes ne diffèrent que par les neutrons, pas par les électrons.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "L'atome de carbone du charbon de bois",
+          "statement": "Le charbon de bois est surtout du carbone. Un atome de carbone neutre s'écrit ${}^{12}_{6}\\mathrm{C}$ (nombre de masse 12, numéro atomique 6).",
+          "exercise_type": "fixation",
+          "figure": "structure-atome",
+          "hint": "Utilise Z pour les protons, N = A − Z pour les neutrons, et Z électrons pour un atome neutre.",
+          "questions": [
+            {
+              "content": "Un atome de carbone s'écrit ${}^{12}_{6}\\mathrm{C}$. Combien de protons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : A = 12 et Z = 6. Étape 2 — Déduire : le nombre de protons est égal à Z, soit 6 protons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un atome de carbone s'écrit ${}^{12}_{6}\\mathrm{C}$. Combien de neutrons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : A = 12 et Z = 6. Étape 2 — Déduire : 6 protons. Étape 3 — Calculer : N = A − Z = 12 − 6 = 6 neutrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un atome neutre de carbone s'écrit ${}^{12}_{6}\\mathrm{C}$. Combien d'électrons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : Z = 6. Étape 2 — Déduire : 6 protons. Étape 4 — Conclure : l'atome est neutre, donc il a 6 électrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un atome de carbone contient 6 protons, 6 neutrons et 6 électrons. Quelle est la charge de son noyau ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : 6 protons, 6 neutrons. Étape 2 — Calculer : 6 × (+e) = +6e ; les neutrons n'ont pas de charge. Étape 3 — Conclure : +6e. +12e compterait les neutrons ; −6e serait la charge des électrons.",
+              "answers": [
+                {
+                  "content": "+6e",
+                  "correct": true
+                },
+                {
+                  "content": "−6e",
+                  "correct": false
+                },
+                {
+                  "content": "0",
+                  "correct": false
+                },
+                {
+                  "content": "+12e",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la structure électronique de l'atome de carbone (Z = 6) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer : 6 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : les 4 restants. Étape 4 — Écrire : (K)²(L)⁴. Les autres écritures dépassent la capacité de K ou sautent la couche L.",
+              "answers": [
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$(\\mathrm{K})^{6}$",
+                  "correct": false
+                },
+                {
+                  "content": "$(\\mathrm{K})^{4}(\\mathrm{L})^{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{2}(\\mathrm{M})^{2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les atomes ${}^{12}_{6}\\mathrm{C}$ et ${}^{13}_{6}\\mathrm{C}$ sont des isotopes du carbone.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : Z = 6 pour les deux ; A = 12 et A = 13. Étape 2 — Comparer : même Z, A différent. Étape 3 — Conclure : ce sont des isotopes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le sodium et le chlore du sel de cuisine",
+          "statement": "Le sel de cuisine est formé de sodium et de chlore. L'atome de sodium s'écrit ${}^{23}_{11}\\mathrm{Na}$ et l'atome de chlore s'écrit ${}^{35}_{17}\\mathrm{Cl}$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Pour un ion, le noyau ne change pas : on enlève ou on ajoute des électrons à l'atome.",
+          "questions": [
+            {
+              "content": "Un atome de sodium s'écrit ${}^{23}_{11}\\mathrm{Na}$. Combien de neutrons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : A = 23 et Z = 11. Étape 2 — Déduire : 11 protons. Étape 3 — Calculer : N = 23 − 11 = 12 neutrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un atome de chlore s'écrit ${}^{35}_{17}\\mathrm{Cl}$. Combien de neutrons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : A = 35 et Z = 17. Étape 2 — Déduire : 17 protons. Étape 3 — Calculer : N = 35 − 17 = 18 neutrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la structure électronique de l'atome de sodium (Z = 11) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer : 11 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 1. Étape 4 — Écrire : (K)²(L)⁸(M)¹. Les autres écritures dépassent la capacité de L, laissent L incomplète ou n'ont pas 11 électrons.",
+              "answers": [
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{1}$",
+                  "correct": true
+                },
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{9}$",
+                  "correct": false
+                },
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'atome de chlore a pour numéro atomique Z = 17. Combien d'électrons sa couche externe contient-elle ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Déterminer : 17 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 17 − 10 = 7. Étape 4 — Écrire : (K)²(L)⁸(M)⁷ ; la couche externe M contient 7 électrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'atome de sodium ${}^{23}_{11}\\mathrm{Na}$ perd un électron et devient l'ion $\\mathrm{Na^{+}}$. Combien d'électrons l'ion contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : Z = 11, donc l'atome neutre a 11 électrons. Étape 2 — Déduire : le noyau ne change pas, il garde 11 protons. Étape 3 — Calculer : l'atome perd 1 électron, donc 11 − 1 = 10 électrons. Étape 4 — Conclure : l'ion Na+ a 10 électrons et une charge +e.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'atome de sodium ${}^{23}_{11}\\mathrm{Na}$ et l'ion $\\mathrm{Na^{+}}$ ont le même nombre de protons.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : Z = 11 pour l'atome. Étape 2 — Déduire : devenir un ion ne change que les électrons, pas le noyau. Étape 4 — Conclure : l'ion Na+ a toujours 11 protons, et l'élément sodium se conserve.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les isotopes du carbone et l'azote 14",
+          "statement": "On compare quatre atomes : ${}^{12}_{6}\\mathrm{C}$, ${}^{13}_{6}\\mathrm{C}$, ${}^{14}_{6}\\mathrm{C}$ (trois atomes de carbone) et ${}^{14}_{7}\\mathrm{N}$ (un atome d'azote).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Isotopes : même Z, A différent. Pour les neutrons, N = A − Z. Les électrons dépendent de Z.",
+          "questions": [
+            {
+              "content": "Quels atomes sont des isotopes du carbone ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Lire : Z = 6 pour C-12, C-13, C-14 ; Z = 7 pour N-14 ; Z = 8 pour O-16. Étape 2 — Comparer : trois atomes ont Z = 6 avec des A différents (12, 13, 14). Étape 3 — Conclure : ce sont les isotopes du carbone. N-14 et O-16 ont un autre Z.",
+              "answers": [
+                {
+                  "content": "${}^{12}_{6}\\mathrm{C}$",
+                  "correct": true
+                },
+                {
+                  "content": "${}^{13}_{6}\\mathrm{C}$",
+                  "correct": true
+                },
+                {
+                  "content": "${}^{14}_{6}\\mathrm{C}$",
+                  "correct": true
+                },
+                {
+                  "content": "${}^{14}_{7}\\mathrm{N}$",
+                  "correct": false
+                },
+                {
+                  "content": "${}^{16}_{8}\\mathrm{O}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un atome de carbone s'écrit ${}^{13}_{6}\\mathrm{C}$. Combien de neutrons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : A = 13 et Z = 6. Étape 2 — Comparer : même Z que C-12, A différent. Étape 3 — Conclure : N = 13 − 6 = 7 neutrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un atome d'azote s'écrit ${}^{14}_{7}\\mathrm{N}$. Combien de neutrons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : A = 14 et Z = 7. Étape 2 — Comparer : pas de comparaison à faire pour une seule valeur. Étape 3 — Conclure : N = 14 − 7 = 7 neutrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi ${}^{14}_{6}\\mathrm{C}$ et ${}^{14}_{7}\\mathrm{N}$ ne sont-ils pas des isotopes ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : Z = 6 pour C-14, Z = 7 pour N-14 ; A = 14 pour les deux. Étape 2 — Comparer : Z différents. Étape 3 — Conclure : ce sont deux éléments différents, donc pas des isotopes. Ils ont au contraire le même nombre de masse A.",
+              "answers": [
+                {
+                  "content": "Parce qu'ils n'ont pas le même numéro atomique Z",
+                  "correct": true
+                },
+                {
+                  "content": "Parce qu'ils n'ont pas le même nombre de masse A",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'ils n'ont pas de neutrons",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que l'un est un ion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les trois isotopes du carbone ont la même structure électronique, $(\\mathrm{K})^{2}(\\mathrm{L})^{4}$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Déterminer : les trois ont Z = 6, donc 6 électrons s'ils sont neutres. Étapes 2 et 3 — Remplir : K reçoit 2 électrons et L en reçoit 4. Étape 4 — Écrire : (K)²(L)⁴ pour les trois. Seul le nombre de neutrons change.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi les isotopes d'un même élément ont les mêmes propriétés chimiques mais des masses différentes.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Lire : les isotopes ont le même Z, donc le même nombre de protons. Étape 2 — Comparer : ils ont donc le même nombre d'électrons dans l'atome neutre, et les mêmes propriétés chimiques ; mais leurs nombres de masse A sont différents, donc leurs nombres de neutrons aussi. Étape 3 — Conclure : plus il y a de neutrons, plus le noyau est massif, donc la masse de l'atome change. Barème : même nombre de protons et d'électrons (1 pt), neutrons différents (1 pt), lien avec la masse (1 pt).",
+              "points": 3,
+              "criteria": [
+                "Dit que les isotopes ont le même nombre de protons, donc le même nombre d'électrons",
+                "Dit qu'ils ont des nombres de neutrons différents",
+                "Relie le nombre de neutrons à la masse du noyau"
+              ],
+              "answers": [],
+              "starter": "Les isotopes ont le même nombre de…"
+            }
+          ]
+        },
+        {
+          "title": "Identifier un atome à partir de sa composition",
+          "statement": "Un atome neutre a pour nombre de masse A = 27 et possède 14 neutrons. L'élément de numéro atomique 13 est l'aluminium, de symbole Al.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "A = Z + N. Retrouve Z, puis écris la notation, la composition et la structure électronique.",
+          "questions": [
+            {
+              "content": "Un atome a un nombre de masse A = 27 et 14 neutrons. Combien de protons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : A = 27 et N = 14. Étape 2 — Déduire : A = Z + N, donc Z = A − N. Étape 3 — Calculer : Z = 27 − 14 = 13 protons. Étape 4 — Conclure : c'est l'élément de numéro atomique 13, l'aluminium.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la notation de cet atome (A = 27, 14 neutrons, aluminium) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : A = 27 et Z = 13. Étape 2 — Déduire : 13 protons, symbole Al. Étape 4 — Conclure : A en haut, Z en bas, soit 27 en haut et 13 en bas. Les autres notations inversent A et Z ou prennent le nombre de neutrons pour Z.",
+              "answers": [
+                {
+                  "content": "${}^{27}_{13}\\mathrm{Al}$",
+                  "correct": true
+                },
+                {
+                  "content": "${}^{13}_{27}\\mathrm{Al}$",
+                  "correct": false
+                },
+                {
+                  "content": "${}^{27}_{14}\\mathrm{Al}$",
+                  "correct": false
+                },
+                {
+                  "content": "${}^{14}_{13}\\mathrm{Al}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'atome neutre d'aluminium a 13 protons. Combien d'électrons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Déduire : 13 protons. Étape 4 — Conclure : l'atome est neutre, il a autant d'électrons que de protons, soit 13.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la structure électronique de l'atome d'aluminium (Z = 13) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer : 13 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 3. Étape 4 — Écrire : (K)²(L)⁸(M)³ ; la couche externe M contient 3 électrons. Les autres écritures ont une couche L ou K mal remplie.",
+              "answers": [
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                  "correct": false
+                },
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{11}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'atome d'aluminium forme l'ion $\\mathrm{Al^{3+}}$ en perdant 3 électrons. Combien d'électrons l'ion contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : Z = 13, donc 13 électrons dans l'atome neutre. Étape 2 — Déduire : le noyau garde ses 13 protons. Étape 3 — Calculer : 13 − 3 = 10 électrons. Étape 4 — Conclure : Al3+ a 10 électrons.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un autre atome d'aluminium contient 15 neutrons. Écris sa notation et dis quel est son lien avec l'atome ${}^{27}_{13}\\mathrm{Al}$, qui contient 14 neutrons.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Lire : l'élément est l'aluminium, Z = 13, et N = 15. Étape 2 — Déduire : 13 protons. Étape 3 — Calculer : A = Z + N = 13 + 15 = 28. Étape 4 — Conclure : la notation est 28 en haut, 13 en bas, symbole Al. Les deux atomes ont le même Z = 13 et des A différents (27 et 28) : ce sont des isotopes. Barème : A = 28 et notation (1 pt), même Z (1 pt), conclusion isotopes (1 pt).",
+              "points": 3,
+              "criteria": [
+                "Calcule A = 13 + 15 = 28 et écris la notation avec 28 en haut et 13 en bas",
+                "Dit que Z est le même (13)",
+                "Conclut que ce sont des isotopes de l'aluminium"
+              ],
+              "answers": [],
+              "starter": "Son nombre de masse est…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Particules de l'atome et charges ; notation (nombre de masse A, numéro atomique Z) et composition d'un atome ; isotopes ; structure électronique avec les couches K, L et M.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie les particules qui constituent un atome et leurs charges électriques, en prenant e pour la charge élémentaire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Proton : +e. Électron : −e. Neutron : 0. L'atome neutre a autant de protons que d'électrons.",
+              "questions": [
+                {
+                  "content": "Quelle particule d'un atome n'a pas de charge électrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : trois particules, proton, neutron, électron. Étape 2 — Calculer : charges +e, 0 et −e. Étape 3 — Conclure : le neutron est la particule sans charge.",
+                  "answers": [
+                    {
+                      "content": "le neutron",
+                      "correct": true
+                    },
+                    {
+                      "content": "le proton",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'électron",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucune, toutes sont chargées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le noyau d'un atome a une charge positive.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : le noyau contient des protons (+e) et des neutrons (0). Étape 2 — Calculer : la somme est positive. Étape 3 — Conclure : le noyau est chargé positivement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le noyau d'un atome de béryllium contient 4 protons. Quelle est sa charge, exprimée en nombre de charges élémentaires e ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : 4 protons. Étape 2 — Calculer : 4 × (+e) = +4e. Étape 3 — Conclure : la charge du noyau vaut +4e.",
+                  "tolerance": 0,
+                  "unit": "e",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les protons et les neutrons, particules du noyau, sont appelés des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : le noyau contient protons et neutrons. Étape 3 — Conclure : on les appelle les nucléons.",
+                  "answers": [
+                    {
+                      "content": "nucléons",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies pour un atome neutre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever : noyau (protons, neutrons) et électrons autour. Étape 2 — Calculer : charges opposées qui se compensent. Étape 3 — Conclure : autant de protons que d'électrons, masse dans le noyau ; les électrons sont autour du noyau.",
+                  "answers": [
+                    {
+                      "content": "Il a autant de protons que d'électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Presque toute sa masse est dans le noyau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'a aucun électron",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ses électrons sont dans le noyau",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie des atomes écrits avec la notation ${}^{A}_{Z}\\mathrm{X}$ : l'atome de fluor ${}^{19}_{9}\\mathrm{F}$ et l'atome de magnésium ${}^{24}_{12}\\mathrm{Mg}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Z est le nombre de protons, N = A − Z, et l'atome neutre a Z électrons.",
+              "questions": [
+                {
+                  "content": "Un atome de fluor s'écrit ${}^{19}_{9}\\mathrm{F}$. Combien de protons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 19 et Z = 9. Étape 2 — Déduire : le nombre de protons est égal à Z, soit 9 protons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de fluor s'écrit ${}^{19}_{9}\\mathrm{F}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 19 et Z = 9. Étape 2 — Déduire : 9 protons. Étape 3 — Calculer : N = A − Z = 19 − 9 = 10 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre de magnésium s'écrit ${}^{24}_{12}\\mathrm{Mg}$. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 12. Étape 2 — Déduire : 12 protons. Étape 4 — Conclure : l'atome est neutre, donc il a autant d'électrons que de protons, soit 12.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de magnésium s'écrit ${}^{24}_{12}\\mathrm{Mg}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 24 et Z = 12. Étape 2 — Déduire : 12 protons. Étape 3 — Calculer : N = A − Z = 24 − 12 = 12 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome contient 15 protons et 16 neutrons. Quelle est sa notation, avec P comme symbole ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 15 protons donc Z = 15, et 16 neutrons. Étape 2 — Déduire : A = Z + N = 15 + 16 = 31. Étape 4 — Conclure : 31 en haut, 15 en bas. Les autres notations inversent A et Z ou prennent le nombre de neutrons pour Z.",
+                  "answers": [
+                    {
+                      "content": "${}^{31}_{15}\\mathrm{P}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{15}_{31}\\mathrm{P}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{16}_{15}\\mathrm{P}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{31}_{16}\\mathrm{P}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On compare les atomes d'hydrogène ${}^{1}_{1}\\mathrm{H}$ et ${}^{2}_{1}\\mathrm{H}$ ainsi que les atomes de carbone ${}^{12}_{6}\\mathrm{C}$ et ${}^{14}_{6}\\mathrm{C}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Isotopes : même Z, A différent.",
+              "questions": [
+                {
+                  "content": "Les atomes ${}^{1}_{1}\\mathrm{H}$ et ${}^{2}_{1}\\mathrm{H}$ sont des isotopes de l'hydrogène.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 1 pour les deux ; A = 1 et A = 2. Étape 2 — Comparer : même Z, A différent. Étape 3 — Conclure : ce sont des isotopes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome d'hydrogène s'écrit ${}^{2}_{1}\\mathrm{H}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 2 et Z = 1. Étape 2 — Comparer : même Z que H-1, A différent. Étape 3 — Conclure : N = 2 − 1 = 1 neutron.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome ${}^{14}_{6}\\mathrm{C}$ contient combien de neutrons de plus que l'atome ${}^{12}_{6}\\mathrm{C}$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : C-14 : N = 14 − 6 = 8 ; C-12 : N = 12 − 6 = 6. Étape 2 — Comparer : même Z, A différent. Étape 3 — Conclure : 8 − 6 = 2 neutrons de plus.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Lequel de ces atomes est un isotope de ${}^{16}_{8}\\mathrm{O}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : l'atome O-16 a Z = 8. Étape 2 — Comparer : seul l'atome de symbole O avec A = 18 a le même Z = 8 et un A différent. Étape 3 — Conclure : c'est O-18. N et F ont un autre Z, donc ce sont d'autres éléments.",
+                  "answers": [
+                    {
+                      "content": "${}^{18}_{8}\\mathrm{O}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{16}_{7}\\mathrm{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{18}_{9}\\mathrm{F}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{17}_{9}\\mathrm{F}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux isotopes d'un même élément ont…",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : on regarde Z et A. Étape 2 — Comparer : même Z, donc même nombre de protons et même symbole ; A différent, donc nombres de neutrons et de nucléons différents. Étape 3 — Conclure : les affirmations sur le nombre de protons et sur les neutrons différents sont justes.",
+                  "answers": [
+                    {
+                      "content": "le même nombre de protons",
+                      "correct": true
+                    },
+                    {
+                      "content": "des nombres de neutrons différents",
+                      "correct": true
+                    },
+                    {
+                      "content": "le même nombre de nucléons",
+                      "correct": false
+                    },
+                    {
+                      "content": "des symboles différents",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On écrit la structure électronique de quelques atomes avec les couches K, L et M.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "K : 2 électrons au plus. L : 8 au plus. M : le reste, pour Z ≤ 18.",
+              "questions": [
+                {
+                  "content": "Quelle est la structure électronique de l'atome de oxygène, de numéro atomique Z = 8 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 8 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 6. Étape 4 — Écrire : (K)²(L)⁶. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{6}(\\mathrm{L})^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{4}(\\mathrm{M})^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de aluminium, de numéro atomique Z = 13 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 13 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 3. Étape 4 — Écrire : (K)²(L)⁸(M)³. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{11}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de soufre a pour numéro atomique Z = 16. Combien d'électrons sa couche externe contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : 16 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 6. Étape 4 — Écrire : (K)²(L)⁸(M)⁶. La couche externe contient 6 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La structure électronique d'un atome neutre se remplit dans l'ordre : K, puis ___, puis M.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Remplir : la couche K reçoit 2 électrons. Étape 3 — Remplir : on passe ensuite à la couche L (8 électrons), puis à M.",
+                  "answers": [
+                    {
+                      "content": "L",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre de numéro atomique Z = 12 a pour structure électronique $(\\mathrm{K})^{2}(\\mathrm{L})^{10}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : 12 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8 au plus, et il reste 2 électrons pour M. Étape 4 — Écrire : (K)²(L)⁸(M)². La structure proposée met 10 électrons sur L, au-delà de sa capacité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Composition (protons, neutrons, électrons) et structure électronique des atomes de sodium, chlore, azote, oxygène, aluminium et carbone ; atomes de calcium et de fer ; isotopes du carbone.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le sel de cuisine est formé de sodium ${}^{23}_{11}\\mathrm{Na}$ et de chlore ${}^{35}_{17}\\mathrm{Cl}$. On étudie ces deux atomes neutres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "N = A − Z ; l'atome neutre a Z électrons.",
+              "questions": [
+                {
+                  "content": "Un atome de sodium s'écrit ${}^{23}_{11}\\mathrm{Na}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 23 et Z = 11. Étape 2 — Déduire : 11 protons. Étape 3 — Calculer : N = A − Z = 23 − 11 = 12 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de chlore s'écrit ${}^{35}_{17}\\mathrm{Cl}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 35 et Z = 17. Étape 2 — Déduire : 17 protons. Étape 3 — Calculer : N = A − Z = 35 − 17 = 18 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre de chlore s'écrit ${}^{35}_{17}\\mathrm{Cl}$. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 17. Étape 2 — Déduire : 17 protons. Étape 4 — Conclure : l'atome est neutre, donc il a autant d'électrons que de protons, soit 17.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de sodium, de numéro atomique Z = 11 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 11 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 1. Étape 4 — Écrire : (K)²(L)⁸(M)¹. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de chlore a pour numéro atomique Z = 17. Combien d'électrons sa couche externe contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : 17 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 7. Étape 4 — Écrire : (K)²(L)⁸(M)⁷. La couche externe contient 7 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "L'air contient surtout du diazote et du dioxygène. L'atome d'azote s'écrit ${}^{14}_{7}\\mathrm{N}$ et l'atome d'oxygène s'écrit ${}^{16}_{8}\\mathrm{O}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Lis A et Z, calcule les neutrons, puis répartis les électrons.",
+              "questions": [
+                {
+                  "content": "Un atome de azote s'écrit ${}^{14}_{7}\\mathrm{N}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 14 et Z = 7. Étape 2 — Déduire : 7 protons. Étape 3 — Calculer : N = A − Z = 14 − 7 = 7 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de oxygène s'écrit ${}^{16}_{8}\\mathrm{O}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 16 et Z = 8. Étape 2 — Déduire : 8 protons. Étape 3 — Calculer : N = A − Z = 16 − 8 = 8 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre de oxygène s'écrit ${}^{16}_{8}\\mathrm{O}$. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 8. Étape 2 — Déduire : 8 protons. Étape 4 — Conclure : l'atome est neutre, donc il a autant d'électrons que de protons, soit 8.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de azote, de numéro atomique Z = 7 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 7 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 5. Étape 4 — Écrire : (K)²(L)⁵. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{4}(\\mathrm{M})^{1}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les atomes ${}^{14}_{7}\\mathrm{N}$ et ${}^{16}_{8}\\mathrm{O}$ sont des isotopes, parce que leurs nombres de masse sont proches.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 7 pour N et Z = 8 pour O. Étape 2 — Comparer : Z différents. Étape 3 — Conclure : ce sont deux éléments différents, donc pas des isotopes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le calcium des os et du lait a pour atome ${}^{40}_{20}\\mathrm{Ca}$. Le fer des clous a pour atome ${}^{56}_{26}\\mathrm{Fe}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Z est le nombre de protons, N = A − Z, l'atome neutre a Z électrons.",
+              "questions": [
+                {
+                  "content": "Un atome de calcium s'écrit ${}^{40}_{20}\\mathrm{Ca}$. Combien de protons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 40 et Z = 20. Étape 2 — Déduire : le nombre de protons est égal à Z, soit 20 protons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de calcium s'écrit ${}^{40}_{20}\\mathrm{Ca}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 40 et Z = 20. Étape 2 — Déduire : 20 protons. Étape 3 — Calculer : N = A − Z = 40 − 20 = 20 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de fer s'écrit ${}^{56}_{26}\\mathrm{Fe}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 56 et Z = 26. Étape 2 — Déduire : 26 protons. Étape 3 — Calculer : N = A − Z = 56 − 26 = 30 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre de fer s'écrit ${}^{56}_{26}\\mathrm{Fe}$. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 26. Étape 2 — Déduire : 26 protons. Étape 4 — Conclure : l'atome est neutre, donc il a autant d'électrons que de protons, soit 26.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de calcium ${}^{40}_{20}\\mathrm{Ca}$ et l'atome de fer ${}^{56}_{26}\\mathrm{Fe}$ ont le même nombre de protons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 20 pour le calcium et Z = 26 pour le fer. Étape 2 — Déduire : 20 protons contre 26 protons. Étape 3 — Calculer : les nombres sont différents. Étape 4 — Conclure : ce sont deux éléments différents.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une marmite en aluminium contient des atomes ${}^{27}_{13}\\mathrm{Al}$. Le charbon de bois contient des atomes de carbone ${}^{12}_{6}\\mathrm{C}$, et le carbone 14 est un autre atome de carbone, ${}^{14}_{6}\\mathrm{C}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les Z pour savoir si ce sont les mêmes éléments.",
+              "questions": [
+                {
+                  "content": "Un atome de aluminium s'écrit ${}^{27}_{13}\\mathrm{Al}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 27 et Z = 13. Étape 2 — Déduire : 13 protons. Étape 3 — Calculer : N = A − Z = 27 − 13 = 14 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de aluminium s'écrit ${}^{27}_{13}\\mathrm{Al}$. Combien de protons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 27 et Z = 13. Étape 2 — Déduire : le nombre de protons est égal à Z, soit 13 protons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de aluminium, de numéro atomique Z = 13 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 13 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 3. Étape 4 — Écrire : (K)²(L)⁸(M)³. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{11}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de carbone 14 s'écrit ${}^{14}_{6}\\mathrm{C}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 14 et Z = 6. Étape 2 — Déduire : 6 protons. Étape 3 — Calculer : N = 14 − 6 = 8 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le carbone 14 ${}^{14}_{6}\\mathrm{C}$ est un isotope du carbone 12 ${}^{12}_{6}\\mathrm{C}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 6 pour les deux, A = 14 et A = 12. Étape 2 — Comparer : même Z, A différent. Étape 3 — Conclure : ce sont des isotopes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Corriger des erreurs de lecture de la notation (A et Z) ; justifier que deux atomes sont ou ne sont pas isotopes ; corriger des structures électroniques ; retrouver un atome à partir de A et du nombre de neutrons.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève lit la notation d'un atome et se trompe parfois. Tu dois repérer et corriger ses erreurs. Il étudie l'atome ${}^{35}_{17}\\mathrm{Cl}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Z est en bas, A est en haut. N = A − Z.",
+              "questions": [
+                {
+                  "content": "L'élève dit : « Pour ${}^{35}_{17}\\mathrm{Cl}$, le nombre de protons est 35. » Cette affirmation est correcte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : le nombre 35 est en haut, c'est A. Étape 2 — Déduire : le nombre de protons est Z = 17, en bas. Étape 4 — Conclure : l'élève a pris A pour Z.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève calcule les neutrons de ${}^{35}_{17}\\mathrm{Cl}$ : « N = 35 + 17 = 52 ». Quelle est la bonne valeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : A = 35 et Z = 17. Étape 3 — Calculer : N = A − Z = 35 − 17 = 18. L'élève a additionné au lieu de soustraire, ce qui donne plus de neutrons qu'il n'y a de nucléons.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    },
+                    {
+                      "content": "52",
+                      "correct": false
+                    },
+                    {
+                      "content": "17",
+                      "correct": false
+                    },
+                    {
+                      "content": "35",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève dit que l'atome neutre ${}^{35}_{17}\\mathrm{Cl}$ a 18 électrons, comme il a 18 neutrons. Combien d'électrons a-t-il vraiment ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Déduire : Z = 17 protons. Étape 4 — Conclure : l'atome neutre a autant d'électrons que de protons, donc 17 électrons. L'élève a confondu neutrons et électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque quantité de l'atome ${}^{35}_{17}\\mathrm{Cl}$ à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : A = 35, Z = 17. Étape 2 — Déduire : 17 protons. Étape 3 — Calculer : N = 35 − 17 = 18, et le nombre de nucléons est A = 35.",
+                  "answers": [
+                    {
+                      "content": "Nombre de protons",
+                      "match": "17"
+                    },
+                    {
+                      "content": "Nombre de neutrons",
+                      "match": "18"
+                    },
+                    {
+                      "content": "Nombre de nucléons",
+                      "match": "35"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures de l'atome ${}^{35}_{17}\\mathrm{Cl}$ sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : en bas Z = 17, en haut A = 35. Les écritures Z = 35 et A = 17 inversent les deux nombres.",
+                  "answers": [
+                    {
+                      "content": "Z = 17",
+                      "correct": true
+                    },
+                    {
+                      "content": "A = 35",
+                      "correct": true
+                    },
+                    {
+                      "content": "Z = 35",
+                      "correct": false
+                    },
+                    {
+                      "content": "A = 17",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On te donne des couples d'atomes. Tu dois justifier s'ils sont isotopes en comparant Z et A.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Même Z et A différent : isotopes. Un Z différent : éléments différents.",
+              "questions": [
+                {
+                  "content": "Les atomes ${}^{12}_{6}\\mathrm{C}$ et ${}^{13}_{6}\\mathrm{C}$ sont des isotopes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 6 et 6 ; A = 12 et 13. Étape 2 — Comparer : même Z, A différent. Étape 3 — Conclure : isotopes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les atomes ${}^{14}_{6}\\mathrm{C}$ et ${}^{14}_{7}\\mathrm{N}$ sont des isotopes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 6 et 7 ; A = 14 et 14. Étape 2 — Comparer : Z différents. Étape 3 — Conclure : ce sont deux éléments, pas des isotopes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les atomes ${}^{35}_{17}\\mathrm{Cl}$ et ${}^{37}_{17}\\mathrm{Cl}$ sont des isotopes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 17 et 17 ; A = 35 et 37. Étape 2 — Comparer : même Z, A différent. Étape 3 — Conclure : isotopes du chlore.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome X contient 8 protons et 9 neutrons, un atome Y contient 8 protons et 10 neutrons. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : Z = 8 pour les deux ; A = 8 + 9 = 17 et A = 8 + 10 = 18. Étape 2 — Comparer : même Z, A différent. Étape 3 — Conclure : isotopes, avec le même nombre d'électrons (8) pour des atomes neutres.",
+                  "answers": [
+                    {
+                      "content": "Ce sont des isotopes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ce sont deux éléments différents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont le même nombre de masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont un nombre d'électrons différent (atomes neutres)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux isotopes d'un même élément ont des nombres de masse 12 et 14 et Z = 6. De combien de neutrons diffèrent-ils ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 12 et A = 14, Z = 6. Étape 2 — Comparer : N = 12 − 6 = 6 et N = 14 − 6 = 8. Étape 3 — Conclure : ils diffèrent de 8 − 6 = 2 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Des élèves proposent des structures électroniques. Tu dois repérer celles qui sont fausses et expliquer pourquoi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "On remplit K (2 au plus), puis L (8 au plus), puis M. La somme des électrons doit valoir Z.",
+              "questions": [
+                {
+                  "content": "Un élève écrit que l'atome de sodium (Z = 11) a pour structure $(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{2}$. Cette structure est correcte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : 11 électrons, 2 + 7 + 2 = 11 : la somme est bonne. Étape 3 — Remplir L : elle doit être pleine (8) avant M. Étape 4 — Écrire : la bonne structure est (K)²(L)⁸(M)¹.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit que l'atome de phosphore (Z = 15) a pour structure $(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{4}$. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 15 électrons attendus. Étapes 2 et 3 — Remplir : K 2, L 8, M 5, soit (K)²(L)⁸(M)⁵. Étape 4 — Écrire et vérifier : 2 + 8 + 4 = 14 ≠ 15. L'élève a oublié un électron.",
+                  "answers": [
+                    {
+                      "content": "La somme fait 14 électrons, alors qu'il en faut 15",
+                      "correct": true
+                    },
+                    {
+                      "content": "La couche K doit contenir 8 électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couche M doit être remplie avant L",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucune erreur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de phosphore a pour numéro atomique Z = 15. Combien d'électrons sa couche externe contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : 15 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 5. Étape 4 — Écrire : (K)²(L)⁸(M)⁵. La couche externe contient 5 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de silicium, de numéro atomique Z = 14 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 14 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 4. Étape 4 — Écrire : (K)²(L)⁸(M)⁴. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{6}(\\mathrm{M})^{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{4}(\\mathrm{L})^{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels atomes neutres ont une couche externe de 8 électrons ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Déterminer : 10, 18, 11 et 6 électrons. Étapes 2 et 3 — Remplir : Ne (K)²(L)⁸ ; Ar (K)²(L)⁸(M)⁸ ; Na (K)²(L)⁸(M)¹ ; C (K)²(L)⁴. Étape 4 — Écrire : les couches externes de Ne (L) et de Ar (M) contiennent 8 électrons ; celle de Na en contient 1 et celle de C en contient 4.",
+                  "answers": [
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'argon (Z = 18)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carbone (Z = 6)",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un atome neutre a un nombre de masse A = 23 et possède 12 neutrons. L'élément de numéro atomique 11 est le sodium (Na).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "A = Z + N donc Z = A − N. Ensuite, répartis les électrons.",
+              "questions": [
+                {
+                  "content": "Un atome a un nombre de masse A = 23 et 12 neutrons. Combien de protons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 23 et N = 12. Étape 2 — Déduire : Z = A − N. Étape 3 — Calculer : 23 − 12 = 11 protons. Étape 4 — Conclure : c'est l'élément de numéro atomique 11, le sodium.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la notation de cet atome (A = 23, 12 neutrons, sodium) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : A = 23 et Z = 11. Étape 4 — Conclure : A en haut, Z en bas. Les autres notations inversent A et Z ou prennent le nombre de neutrons pour Z.",
+                  "answers": [
+                    {
+                      "content": "${}^{23}_{11}\\mathrm{Na}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{11}_{23}\\mathrm{Na}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{23}_{12}\\mathrm{Na}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{12}_{11}\\mathrm{Na}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome neutre de sodium a 11 protons. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Déduire : 11 protons. Étape 4 — Conclure : atome neutre, donc 11 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de sodium, de numéro atomique Z = 11 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 11 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 1. Étape 4 — Écrire : (K)²(L)⁸(M)¹. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de sodium perd 1 électron et devient l'ion $\\mathrm{Na^{+}}$. Combien d'électrons contient l'ion ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 11, donc 11 électrons dans l'atome. Étape 2 — Déduire : le noyau garde ses 11 protons. Étape 3 — Calculer : 11 − 1 = 10 électrons. Étape 4 — Conclure : l'ion Na+ a 10 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : charges du noyau, composition d'un atome, isotopes, structure électronique avec les couches K, L et M, nombre d'électrons d'un ion à partir du numéro atomique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un atome de carbone s'écrit ${}^{12}_{6}\\mathrm{C}$. On étudie sa composition, ses charges et sa structure électronique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "6 protons : charge +6e. L'atome neutre a 6 électrons.",
+              "questions": [
+                {
+                  "content": "Un atome de carbone s'écrit ${}^{12}_{6}\\mathrm{C}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 12 et Z = 6. Étape 2 — Déduire : 6 protons. Étape 3 — Calculer : N = A − Z = 12 − 6 = 6 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le noyau d'un atome de carbone contient 6 protons et 6 neutrons. Quelle est sa charge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 6 protons, 6 neutrons. Étape 2 — Calculer : 6 × (+e) = +6e. Étape 3 — Conclure : +6e. Les neutrons n'ont pas de charge.",
+                  "answers": [
+                    {
+                      "content": "+6e",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "+12e",
+                      "correct": false
+                    },
+                    {
+                      "content": "−6e",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de carbone, de numéro atomique Z = 6 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 6 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 4. Étape 4 — Écrire : (K)²(L)⁴. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{4}(\\mathrm{L})^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{2}(\\mathrm{M})^{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de carbone est neutre parce qu'il ne contient aucune particule chargée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : 6 protons (+6e) et 6 électrons (−6e). Étape 2 — Calculer : +6e − 6e = 0. Étape 3 — Conclure : il est neutre parce que les charges se compensent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de carbone a pour numéro atomique Z = 6. Combien d'électrons sa couche externe contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : 6 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 4. Étape 4 — Écrire : (K)²(L)⁴. La couche externe contient 4 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le magnésium s'écrit ${}^{24}_{12}\\mathrm{Mg}$. Il peut former l'ion $\\mathrm{Mg^{2+}}$ en perdant 2 électrons.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un ion garde le même noyau : seuls les électrons changent.",
+              "questions": [
+                {
+                  "content": "Un atome de magnésium s'écrit ${}^{24}_{12}\\mathrm{Mg}$. Combien de protons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 24 et Z = 12. Étape 2 — Déduire : le nombre de protons est égal à Z, soit 12 protons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de magnésium s'écrit ${}^{24}_{12}\\mathrm{Mg}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 24 et Z = 12. Étape 2 — Déduire : 12 protons. Étape 3 — Calculer : N = A − Z = 24 − 12 = 12 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de magnésium, de numéro atomique Z = 12 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 12 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 2. Étape 4 — Écrire : (K)²(L)⁸(M)². Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}(\\mathrm{M})^{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{6}(\\mathrm{M})^{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de magnésium perd 2 électrons et devient l'ion $\\mathrm{Mg^{2+}}$. Combien d'électrons contient l'ion ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 12, donc 12 électrons dans l'atome. Étape 2 — Déduire : le noyau garde ses 12 protons. Étape 3 — Calculer : 12 − 2 = 10 électrons. Étape 4 — Conclure : l'ion Mg2+ a 10 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome ${}^{24}_{12}\\mathrm{Mg}$ et l'ion $\\mathrm{Mg^{2+}}$ ont le même nombre de protons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 12. Étape 2 — Déduire : devenir un ion ne change que les électrons. Étape 4 — Conclure : 12 protons dans les deux cas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On compare trois atomes : ${}^{16}_{8}\\mathrm{O}$, ${}^{18}_{8}\\mathrm{O}$ et ${}^{19}_{9}\\mathrm{F}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare d'abord les Z, puis les A.",
+              "questions": [
+                {
+                  "content": "Parmi ${}^{16}_{8}\\mathrm{O}$, ${}^{18}_{8}\\mathrm{O}$ et ${}^{19}_{9}\\mathrm{F}$, quels atomes sont des isotopes l'un de l'autre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : Z = 8 pour O-16 et O-18, Z = 9 pour F-19. Étape 2 — Comparer : seuls O-16 et O-18 ont le même Z et des A différents. Étape 3 — Conclure : O-16 et O-18 sont les isotopes ; F est un autre élément.",
+                  "answers": [
+                    {
+                      "content": "${}^{16}_{8}\\mathrm{O}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{18}_{8}\\mathrm{O}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "${}^{19}_{9}\\mathrm{F}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "${}^{19}_{9}\\mathrm{F}$ et ${}^{16}_{8}\\mathrm{O}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de fluor s'écrit ${}^{19}_{9}\\mathrm{F}$. Combien d'électrons contient-il lorsqu'il est neutre ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Déduire : Z = 9 protons. Étape 4 — Conclure : l'atome neutre a 9 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome ${}^{18}_{8}\\mathrm{O}$ contient combien de neutrons ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 18 et Z = 8. Étape 3 — Calculer : N = 18 − 8 = 10 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de fluor, de numéro atomique Z = 9 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 9 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 7. Étape 4 — Écrire : (K)²(L)⁷. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{7}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{6}(\\mathrm{M})^{1}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{9}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les atomes ${}^{16}_{8}\\mathrm{O}$ et ${}^{18}_{8}\\mathrm{O}$ ont la même structure électronique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : les deux ont Z = 8, donc 8 électrons. Étapes 2 et 3 — Remplir : K 2, L 6. Étape 4 — Écrire : (K)²(L)⁶ pour les deux. Seuls les neutrons diffèrent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un atome de soufre s'écrit ${}^{32}_{16}\\mathrm{S}$. Il peut former l'ion $\\mathrm{S^{2-}}$ en gagnant 2 électrons.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un gain d'électrons augmente leur nombre. Le noyau ne change pas.",
+              "questions": [
+                {
+                  "content": "Un atome de soufre s'écrit ${}^{32}_{16}\\mathrm{S}$. Combien de neutrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 32 et Z = 16. Étape 2 — Déduire : 16 protons. Étape 3 — Calculer : N = A − Z = 32 − 16 = 16 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome neutre de soufre s'écrit ${}^{32}_{16}\\mathrm{S}$. Combien d'électrons contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 16. Étape 2 — Déduire : 16 protons. Étape 4 — Conclure : l'atome est neutre, donc il a autant d'électrons que de protons, soit 16.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de soufre, de numéro atomique Z = 16 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : 16 électrons. Étape 2 — Remplir K : 2. Étape 3 — Remplir L : 8, puis M : 6. Étape 4 — Écrire : (K)²(L)⁸(M)⁶. Les autres propositions ne respectent pas les capacités des couches ou n'ont pas le bon nombre d'électrons.",
+                  "answers": [
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{8}(\\mathrm{M})^{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{2}(\\mathrm{L})^{6}(\\mathrm{M})^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\mathrm{K})^{16}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de soufre gagne 2 électrons et devient l'ion $\\mathrm{S^{2-}}$. Combien d'électrons contient l'ion ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 16, donc 16 électrons dans l'atome. Étape 2 — Déduire : le noyau garde ses 16 protons. Étape 3 — Calculer : 16 + 2 = 18 électrons. Étape 4 — Conclure : l'ion S2− a 18 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ion $\\mathrm{S^{2-}}$ et l'atome de soufre ${}^{32}_{16}\\mathrm{S}$ ont le même noyau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : Z = 16 et A = 32 pour l'atome. Étape 2 — Déduire : la formation de l'ion ne change que les électrons. Étape 4 — Conclure : même noyau, 16 protons et 16 neutrons.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

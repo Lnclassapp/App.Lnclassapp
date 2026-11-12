@@ -1,0 +1,3003 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Calcul numérique",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "A",
+      "figures": [
+        {
+          "key": "droite-racine-de-2",
+          "kind": "number_line",
+          "description": "Une droite graduée de 1 à 2, avec une graduation tous les 0,1. Trois points y sont placés : 1, la racine carrée de 2 (environ 1,41) et 2. Elle montre que la racine carrée de 2 est comprise entre 1 et 2, parce que 2 est compris entre 1 au carré et 2 au carré.",
+          "params": {
+            "min": 1,
+            "max": 2,
+            "step": 0.1,
+            "points": [
+              {
+                "value": 1,
+                "label": "1"
+              },
+              {
+                "value": 1.41,
+                "label": "√2"
+              },
+              {
+                "value": 2,
+                "label": "2"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Fractions : additionner, multiplier, diviser",
+          "remember": "Pour $b \\neq 0$, $\\dfrac{a}{b}$ est le quotient de $a$ par $b$. **Même dénominateur** : $\\dfrac{a}{c} + \\dfrac{b}{c} = \\dfrac{a+b}{c}$. Sinon, on multiplie le haut et le bas d'une fraction par un même nombre non nul pour obtenir un dénominateur commun. **Produit** : $\\dfrac{a}{b} \\times \\dfrac{c}{d} = \\dfrac{a \\times c}{b \\times d}$. **Quotient** : pour $c \\neq 0$, $\\dfrac{a}{b} \\div \\dfrac{c}{d} = \\dfrac{a}{b} \\times \\dfrac{d}{c}$ (on multiplie par l'inverse). Une fraction se simplifie en divisant le haut et le bas par un même nombre.",
+          "method": [
+            "Transformer : ramener les fractions au même dénominateur (somme ou différence), ou remplacer la division par une multiplication par l'inverse.",
+            "Calculer : additionner les numérateurs en gardant le dénominateur commun, ou multiplier les numérateurs entre eux et les dénominateurs entre eux.",
+            "Simplifier : diviser le numérateur et le dénominateur par un même nombre jusqu'à obtenir une fraction irréductible."
+          ],
+          "example": {
+            "statement": "Calculer $\\dfrac{2}{3} + \\dfrac{5}{6}$.",
+            "steps": [
+              "Transformer : 6 est un multiple de 3, donc $\\dfrac{2}{3} = \\dfrac{2 \\times 2}{3 \\times 2} = \\dfrac{4}{6}$.",
+              "Calculer : les dénominateurs sont égaux, $\\dfrac{4}{6} + \\dfrac{5}{6} = \\dfrac{9}{6}$.",
+              "Simplifier : on divise le haut et le bas par 3, $\\dfrac{9}{6} = \\dfrac{3}{2}$."
+            ]
+          },
+          "pitfall": "Ne jamais additionner les numérateurs **et** les dénominateurs. Contre-exemple : $\\dfrac{1}{2} + \\dfrac{1}{3} = \\dfrac{2}{5}$ serait faux, car $\\dfrac{1}{2} = \\dfrac{3}{6}$ et $\\dfrac{1}{3} = \\dfrac{2}{6}$ donnent $\\dfrac{5}{6}$. On n'additionne que des parts de même taille : le dénominateur commun reste inchangé.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Additionner, multiplier et diviser des fractions",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour calculer avec des fractions.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule $\\dfrac{3}{8} + \\dfrac{1}{8}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : les deux fractions ont déjà le même dénominateur 8, rien à changer. Étape 2 — Calculer : on additionne les numérateurs et on garde le dénominateur, $\\dfrac{3}{8} + \\dfrac{1}{8} = \\dfrac{4}{8}$. Étape 3 — Simplifier : on divise le haut et le bas par 4, $\\dfrac{4}{8} = \\dfrac{1}{2}$. Additionner aussi les dénominateurs donnerait $\\dfrac{4}{16}$, qui vaut $\\dfrac{1}{4}$ : c'est la faute classique.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{64}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{2}{3} + \\dfrac{1}{4}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : le dénominateur commun est 12, $\\dfrac{2}{3} = \\dfrac{8}{12}$ et $\\dfrac{1}{4} = \\dfrac{3}{12}$. Étape 2 — Calculer : $\\dfrac{8}{12} + \\dfrac{3}{12} = \\dfrac{11}{12}$. Étape 3 — Simplifier : 11 et 12 n'ont aucun diviseur commun autre que 1, la fraction est déjà simplifiée. Le résultat $\\dfrac{3}{7}$ vient de l'addition des numérateurs et des dénominateurs : on ne peut additionner que des parts de même taille.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{11}{12}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2}{12}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{3}{5} \\times \\dfrac{10}{9}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : une multiplication ne demande pas de dénominateur commun, on garde l'opération. Étape 2 — Calculer : $\\dfrac{3}{5} \\times \\dfrac{10}{9} = \\dfrac{30}{45}$. Étape 3 — Simplifier : on divise le haut et le bas par 15, $\\dfrac{30}{45} = \\dfrac{2}{3}$. Le résultat $\\dfrac{13}{14}$ vient d'une addition faite à la place de la multiplication.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{13}{14}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{5}{6} \\div \\dfrac{5}{12}$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Transformer : diviser par $\\dfrac{5}{12}$, c'est multiplier par son inverse $\\dfrac{12}{5}$. Étape 2 — Calculer : $\\dfrac{5}{6} \\times \\dfrac{12}{5} = \\dfrac{60}{30}$. Étape 3 — Simplifier : $\\dfrac{60}{30} = 2$. La réponse attendue est 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Vrai ou faux : $\\dfrac{1}{2} + \\dfrac{1}{3} = \\dfrac{2}{5}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Transformer : on met sur le dénominateur 6, $\\dfrac{1}{2} = \\dfrac{3}{6}$ et $\\dfrac{1}{3} = \\dfrac{2}{6}$. Étape 2 — Calculer : $\\dfrac{3}{6} + \\dfrac{2}{6} = \\dfrac{5}{6}$. Étape 3 — Simplifier : $\\dfrac{5}{6}$ est irréductible. L'égalité est donc fausse : $\\dfrac{2}{5}$ est le résultat de celui qui additionne les numérateurs entre eux et les dénominateurs entre eux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Fractions de sacs, de gâteaux et de bidons",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les fractions, en refaisant à chaque fois la méthode de la fiche.",
+              "hint": "Pour une fraction d'une quantité, multiplie la quantité par la fraction.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sac de riz pèse 50 kg. Un commerçant en vend $\\dfrac{3}{5}$. Il reste ___ kg de riz dans le sac.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Transformer : « les $\\dfrac{3}{5}$ de 50 » se traduit par $\\dfrac{3}{5} \\times 50$. Étape 2 — Calculer : $\\dfrac{3}{5} \\times 50 = 30$ kg vendus, donc il reste $50 - 30 = 20$ kg. Étape 3 — Simplifier : le résultat est un entier, il n'y a rien à réduire. Répondre 30 donnerait la part vendue et non le reste.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque calcul à son résultat simplifié.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Transformer : addition et soustraction se font au même dénominateur, la division devient une multiplication par l'inverse. Étape 2 — Calculer : $\\dfrac{3}{6} + \\dfrac{2}{6} = \\dfrac{5}{6}$ ; $\\dfrac{1}{2} \\times \\dfrac{1}{3} = \\dfrac{1}{6}$ ; $\\dfrac{1}{2} \\times 3 = \\dfrac{3}{2}$ ; $\\dfrac{3}{4} - \\dfrac{2}{4} = \\dfrac{1}{4}$. Étape 3 — Simplifier : tous ces résultats sont irréductibles. La division par $\\dfrac{1}{3}$ ne donne pas $\\dfrac{1}{6}$ : on multiplie par 3.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{2} + \\dfrac{1}{3}$",
+                      "match": "$\\dfrac{5}{6}$"
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2} \\times \\dfrac{1}{3}$",
+                      "match": "$\\dfrac{1}{6}$"
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2} \\div \\dfrac{1}{3}$",
+                      "match": "$\\dfrac{3}{2}$"
+                    },
+                    {
+                      "content": "$\\dfrac{3}{4} - \\dfrac{1}{2}$",
+                      "match": "$\\dfrac{1}{4}$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles fractions valent $\\dfrac{3}{4}$ ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Transformer : pour garder la même valeur, on multiplie le haut et le bas par le même nombre. Étape 2 — Calculer : $\\dfrac{3}{4} = \\dfrac{6}{8}$ (facteur 2) et $\\dfrac{3}{4} = \\dfrac{9}{12}$ (facteur 3). Étape 3 — Simplifier : en divisant par le facteur, on retrouve $\\dfrac{3}{4}$. La fraction $\\dfrac{4}{3}$ est l'inverse de $\\dfrac{3}{4}$ ; $\\dfrac{5}{6}$ et $\\dfrac{7}{8}$ ne s'obtiennent par aucun facteur commun.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{6}{8}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{7}{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{9}{12}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer $\\dfrac{2}{5} + \\dfrac{1}{2}$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Transformer : on cherche d'abord le dénominateur commun 10, car une somme n'a de sens que pour des parts de même taille. Étape 2 — Calculer : on additionne alors les numérateurs, $4 + 5 = 9$. Étape 3 — Simplifier : on regarde si la fraction se réduit ; ici $\\dfrac{9}{10}$ est irréductible.",
+                  "answers": [
+                    {
+                      "content": "Transformer : mettre les deux fractions sur le dénominateur 10, $\\dfrac{4}{10}$ et $\\dfrac{5}{10}$."
+                    },
+                    {
+                      "content": "Calculer : additionner les numérateurs, $4 + 5 = 9$, donc $\\dfrac{9}{10}$."
+                    },
+                    {
+                      "content": "Simplifier : vérifier que 9 et 10 n'ont pas de diviseur commun, donc le résultat est $\\dfrac{9}{10}$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Diviser par $\\dfrac{2}{3}$ revient à multiplier par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Transformer : diviser par une fraction non nulle, c'est multiplier par son inverse, en échangeant le haut et le bas. Étape 2 — Calculer : l'inverse de $\\dfrac{2}{3}$ est $\\dfrac{3}{2}$. Étape 3 — Simplifier : on réduit ensuite le produit obtenu. Multiplier par $\\dfrac{2}{3}$ lui-même ne change pas l'opération.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fût contient $\\dfrac{3}{4}$ de 40 litres. On en verse la moitié dans un bidon. Combien de litres a-t-on versés ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Transformer : « la moitié de $\\dfrac{3}{4}$ de 40 » se traduit par $\\dfrac{1}{2} \\times \\dfrac{3}{4} \\times 40$. Étape 2 — Calculer : $\\dfrac{3}{4} \\times 40 = 30$ litres dans le fût, puis la moitié donne 15 litres. Étape 3 — Simplifier : le résultat est un entier. Répondre 30 litres oublierait de prendre la moitié.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "L"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Puissances d'un nombre",
+          "remember": "Pour $a \\neq 0$ et $n$ entier positif : $a^n = a \\times a \\times \\dots \\times a$ ($n$ facteurs), $a^0 = 1$ et $a^{-n} = \\dfrac{1}{a^n}$. Pour $a \\neq 0$ et $m$, $n$ entiers : $a^m \\times a^n = a^{m+n}$ ; $\\dfrac{a^m}{a^n} = a^{m-n}$ ; $(a^m)^n = a^{m \\times n}$. Pour la base 10 : $10^3 = 1\\,000$ et $10^{-2} = 0{,}01$.",
+          "method": [
+            "Repérer : la base commune et l'opération (produit, quotient ou puissance de puissance).",
+            "Appliquer : la règle des exposants, en additionnant pour un produit, en soustrayant pour un quotient, en multipliant pour une puissance de puissance.",
+            "Calculer : l'exposant obtenu, puis la valeur du nombre si on la demande."
+          ],
+          "example": {
+            "statement": "Calculer $A = \\dfrac{2^3 \\times 2^4}{2^5}$.",
+            "steps": [
+              "Repérer : la base 2 est commune ; le numérateur est un produit et on divise ensuite par $2^5$.",
+              "Appliquer : $2^3 \\times 2^4 = 2^{3+4} = 2^7$, puis $\\dfrac{2^7}{2^5} = 2^{7-5}$.",
+              "Calculer : $2^{7-5} = 2^2 = 4$, donc $A = 4$."
+            ]
+          },
+          "pitfall": "Dans un produit de puissances de même base, on **additionne** les exposants et on garde la base. Contre-exemple : $2^2 \\times 2^3 = 4 \\times 8 = 32 = 2^5$, et non $4^5 = 1\\,024$ ni $2^6 = 64$. On ne multiplie les exposants que pour une puissance de puissance, comme $(2^2)^3 = 2^6$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer avec des puissances",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche aux puissances d'un nombre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le résultat de $3^2 \\times 3^3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base 3 est commune et l'opération est un produit. Étape 2 — Appliquer : pour un produit, on additionne les exposants, $3^2 \\times 3^3 = 3^{2+3}$. Étape 3 — Calculer : $3^5 = 243$. L'erreur $3^6$ multiplie les exposants, et $9^5$ multiplie les bases : les deux sont fausses, la base reste 3.",
+                  "answers": [
+                    {
+                      "content": "$3^{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3^{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9^{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3^{1}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le résultat de $\\dfrac{5^6}{5^2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base 5 est commune et l'opération est un quotient. Étape 2 — Appliquer : pour un quotient, on soustrait les exposants, $\\dfrac{5^6}{5^2} = 5^{6-2}$. Étape 3 — Calculer : $5^4 = 625$. L'erreur $5^3$ divise les exposants, et $5^8$ les additionne ; la base ne devient jamais 1.",
+                  "answers": [
+                    {
+                      "content": "$5^{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5^{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1^{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le résultat de $(2^3)^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : c'est une puissance de puissance de base 2. Étape 2 — Appliquer : on multiplie les exposants, $(2^3)^2 = 2^{3 \\times 2}$. Étape 3 — Calculer : $2^6 = 64$. L'erreur $2^5$ additionne les exposants, $2^9$ élève 3 au carré, et $4^6$ change la base sans raison.",
+                  "answers": [
+                    {
+                      "content": "$2^{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4^{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^{6}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Écris $2^{-3}$ sous forme décimale.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la base est 2 et l'exposant est négatif. Étape 2 — Appliquer : $2^{-3} = \\dfrac{1}{2^3}$. Étape 3 — Calculer : $2^3 = 8$ et $\\dfrac{1}{8} = 0{,}125$. Un exposant négatif ne donne pas un nombre négatif : $-8$ serait une erreur.",
+                  "answers": [
+                    {
+                      "content": "0,125",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Vrai ou faux : $2^3 \\times 2^2 = 2^6$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la base 2 est commune, c'est un produit. Étape 2 — Appliquer : on additionne les exposants, $2^3 \\times 2^2 = 2^{3+2}$. Étape 3 — Calculer : $2^5 = 32$, alors que $2^6 = 64$. L'égalité est fausse : celui qui écrit $2^6$ a multiplié les exposants au lieu de les additionner.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Puissances de 2, de 3 et de 10",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les puissances, en refaisant la méthode de la fiche.",
+              "hint": "Un produit additionne les exposants, un quotient les soustrait, une puissance de puissance les multiplie.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Complète : $10^5 \\times 10^{-3} = 10^{\\,?}$ avec ? égal à ___ (écris seulement l'exposant).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la base 10 est commune, c'est un produit de $10^5$ et $10^{-3}$. Étape 2 — Appliquer : on additionne les exposants, $5 + (-3) = 2$. Étape 3 — Calculer : $10^5 \\times 10^{-3} = 10^2 = 100$. Multiplier les exposants donnerait $-15$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque expression à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : produit, quotient, puissance de puissance et exposant négatif, tous en base 2. Étape 2 — Appliquer : $2^{3+2} = 2^5$ ; $2^{5-3} = 2^2$ ; $2^{2 \\times 3} = 2^6$ ; $2^{-2} = \\dfrac{1}{2^2}$. Étape 3 — Calculer : $32$, $4$, $64$ et $\\dfrac{1}{4}$. L'exposant négatif donne une fraction, jamais un nombre négatif.",
+                  "answers": [
+                    {
+                      "content": "$2^3 \\times 2^2$",
+                      "match": "$32$"
+                    },
+                    {
+                      "content": "$2^5 \\div 2^3$",
+                      "match": "$4$"
+                    },
+                    {
+                      "content": "$(2^2)^3$",
+                      "match": "$64$"
+                    },
+                    {
+                      "content": "$2^{-2}$",
+                      "match": "$\\dfrac{1}{4}$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on examine un produit, une puissance de puissance, une somme et un quotient, tous de base 3. Étape 2 — Appliquer : $3^2 \\times 3^4 = 3^{2+4} = 3^6$ (vrai) ; $(3^2)^4 = 3^{2 \\times 4} = 3^8$ (vrai) ; $\\dfrac{3^6}{3^2} = 3^{6-2} = 3^4$, pas $3^3$ (faux). Étape 3 — Calculer pour la somme : $3^2 + 3^4 = 9 + 81 = 90$, alors que $3^6 = 729$ : la règle des exposants ne vaut pas pour une somme.",
+                  "answers": [
+                    {
+                      "content": "$3^2 + 3^4 = 3^6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3^2)^4 = 3^8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3^6}{3^2} = 3^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3^2 \\times 3^4 = 3^6$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer $\\dfrac{5^3 \\times 5^2}{5^4}$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : base commune 5, un produit puis un quotient. Étape 2 — Appliquer : d'abord $5^3 \\times 5^2 = 5^5$ (on additionne), puis $\\dfrac{5^5}{5^4} = 5^1$ (on soustrait). Étape 3 — Calculer : $5^1 = 5$. On traite le produit avant le quotient parce que le quotient porte sur le résultat du produit.",
+                  "answers": [
+                    {
+                      "content": "Repérer : la base 5 est commune, il y a un produit au numérateur et un quotient."
+                    },
+                    {
+                      "content": "Appliquer la règle du produit : $5^3 \\times 5^2 = 5^{3+2} = 5^5$."
+                    },
+                    {
+                      "content": "Appliquer la règle du quotient : $\\dfrac{5^5}{5^4} = 5^{5-4} = 5^1$."
+                    },
+                    {
+                      "content": "Calculer : $5^1 = 5$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout nombre $a$ non nul, $a^0$ vaut ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : l'exposant est 0 et la base $a$ est non nulle. Étape 2 — Appliquer : $a^m \\div a^m = a^{m-m} = a^0$, et un nombre non nul divisé par lui-même vaut 1. Étape 3 — Calculer : $a^0 = 1$. Répondre 0 confond l'exposant nul avec une multiplication par zéro.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": true
+                    },
+                    {
+                      "content": "a",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prix d'un sachet de riz est $2{,}5 \\times 10^2$ francs. Combien de francs cela fait-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le nombre est $2{,}5$ et la puissance de 10 est $10^2$. Étape 2 — Appliquer : $10^2 = 100$. Étape 3 — Calculer : $2{,}5 \\times 100 = 250$ francs. Écrire 25 ou 2 500 viendrait d'un mauvais décalage de la virgule.",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Racines carrées simples",
+          "remember": "Pour $a \\geq 0$, $\\sqrt{a}$ est le nombre positif dont le carré est $a$ : $(\\sqrt{a})^2 = a$ et $\\sqrt{a^2} = a$. Pour $a \\geq 0$ et $b \\geq 0$ : $\\sqrt{a \\times b} = \\sqrt{a} \\times \\sqrt{b}$ ; pour $b > 0$ : $\\sqrt{\\dfrac{a}{b}} = \\dfrac{\\sqrt{a}}{\\sqrt{b}}$. Carrés parfaits : 1, 4, 9, 16, 25, 36, 49, 64, 81, 100…",
+          "method": [
+            "Décomposer : écrire le nombre sous la racine comme un produit d'un carré parfait et d'un entier.",
+            "Séparer : écrire la racine du produit comme un produit de deux racines.",
+            "Calculer : prendre la racine du carré parfait, puis écrire le résultat sous la forme $a\\sqrt{b}$."
+          ],
+          "example": {
+            "statement": "Simplifier $\\sqrt{50}$.",
+            "steps": [
+              "Décomposer : $50 = 25 \\times 2$, et 25 est un carré parfait ($5^2$).",
+              "Séparer : $\\sqrt{50} = \\sqrt{25} \\times \\sqrt{2}$.",
+              "Calculer : $\\sqrt{25} = 5$, donc $\\sqrt{50} = 5\\sqrt{2}$."
+            ]
+          },
+          "pitfall": "Ne pas écrire $\\sqrt{a + b} = \\sqrt{a} + \\sqrt{b}$. Contre-exemple : $\\sqrt{9 + 16} = \\sqrt{25} = 5$, mais $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$. La racine ne se sépare que sur un **produit**, jamais sur une somme.",
+          "figure": "droite-racine-de-2",
+          "exercise": [
+            {
+              "title": "Simplifier des racines carrées",
+              "statement": "Dans cet exercice, tu simplifies des racines carrées avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la valeur de $\\sqrt{49}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $49 = 7 \\times 7 = 7^2$, c'est un carré parfait. Étape 2 — Séparer : il n'y a rien à séparer, tout le nombre est un carré. Étape 3 — Calculer : $\\sqrt{49} = \\sqrt{7^2} = 7$. L'erreur 24,5 divise 49 par 2, et 14 le double de 7 : la racine carrée n'est ni une moitié ni un double.",
+                  "answers": [
+                    {
+                      "content": "24,5",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": true
+                    },
+                    {
+                      "content": "14",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Simplifie $\\sqrt{18}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $18 = 9 \\times 2$ et 9 est un carré parfait. Étape 2 — Séparer : $\\sqrt{18} = \\sqrt{9} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{9} = 3$, donc $\\sqrt{18} = 3\\sqrt{2}$. L'écriture $9\\sqrt{2}$ oublie de prendre la racine de 9, et $2\\sqrt{3}$ échange les deux facteurs.",
+                  "answers": [
+                    {
+                      "content": "$9\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\sqrt{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6\\sqrt{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\sqrt{2}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Simplifie $\\sqrt{72}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $72 = 36 \\times 2$ et 36 est un carré parfait. Étape 2 — Séparer : $\\sqrt{72} = \\sqrt{36} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{36} = 6$, donc $\\sqrt{72} = 6\\sqrt{2}$. Le résultat $36\\sqrt{2}$ garde 36 au lieu de sa racine.",
+                  "answers": [
+                    {
+                      "content": "$6\\sqrt{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$36\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6\\sqrt{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\sqrt{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\sqrt{4 \\times 25}$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Décomposer : le produit $4 \\times 25$ est déjà fait de deux carrés parfaits. Étape 2 — Séparer : $\\sqrt{4 \\times 25} = \\sqrt{4} \\times \\sqrt{25}$. Étape 3 — Calculer : $2 \\times 5 = 10$. On vérifie : $4 \\times 25 = 100$ et $\\sqrt{100} = 10$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Vrai ou faux : $\\sqrt{9 + 16} = \\sqrt{9} + \\sqrt{16}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : ici le contenu de la racine est une somme et non un produit. Étape 2 — Séparer : la racine ne se sépare que sur un produit, donc on calcule d'abord $9 + 16 = 25$. Étape 3 — Calculer : $\\sqrt{25} = 5$, alors que $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$. L'égalité est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Racines carrées et aire d'un carré",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les racines carrées, en refaisant la méthode de la fiche.",
+              "hint": "Cherche le plus grand carré parfait qui divise le nombre sous la racine.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Complète : $\\sqrt{75} = ___\\sqrt{3}$ (écris le nombre entier qui manque).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Décomposer : $75 = 25 \\times 3$ et 25 est un carré parfait. Étape 2 — Séparer : $\\sqrt{75} = \\sqrt{25} \\times \\sqrt{3}$. Étape 3 — Calculer : $\\sqrt{25} = 5$, donc $\\sqrt{75} = 5\\sqrt{3}$. Choisir $75 = 5 \\times 15$ ne marche pas, car ni 5 ni 15 ne sont des carrés parfaits.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque racine carrée à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Décomposer : chaque nombre est le carré d'un nombre simple : $4 = 2^2$, $100 = 10^2$, $\\dfrac{1}{4} = \\left(\\dfrac{1}{2}\\right)^2$, $\\dfrac{9}{16} = \\left(\\dfrac{3}{4}\\right)^2$. Étape 2 — Séparer : pour une fraction, $\\sqrt{\\dfrac{a}{b}} = \\dfrac{\\sqrt{a}}{\\sqrt{b}}$. Étape 3 — Calculer : $2$, $10$, $\\dfrac{1}{2}$ et $\\dfrac{3}{4}$. La racine de $\\dfrac{1}{4}$ n'est pas $\\dfrac{1}{8}$ : on prend la racine du haut et du bas.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{4}$",
+                      "match": "$2$"
+                    },
+                    {
+                      "content": "$\\sqrt{100}$",
+                      "match": "$10$"
+                    },
+                    {
+                      "content": "$\\sqrt{\\dfrac{1}{4}}$",
+                      "match": "$\\dfrac{1}{2}$"
+                    },
+                    {
+                      "content": "$\\sqrt{\\dfrac{9}{16}}$",
+                      "match": "$\\dfrac{3}{4}$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures sont égales à $4\\sqrt{2}$ ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Décomposer : $32 = 16 \\times 2$ et $8 = 4 \\times 2$. Étape 2 — Séparer : $\\sqrt{32} = \\sqrt{16} \\times \\sqrt{2}$ et $\\sqrt{8} = \\sqrt{4} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{32} = 4\\sqrt{2}$ ; $2\\sqrt{8} = 2 \\times 2\\sqrt{2} = 4\\sqrt{2}$. En revanche $\\sqrt{8} = 2\\sqrt{2}$, $2\\sqrt{16} = 8$ et $8\\sqrt{2}$ sont différents de $4\\sqrt{2}$.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{32}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\sqrt{16}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\sqrt{8}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour simplifier $\\sqrt{45}$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Décomposer : on cherche le plus grand carré parfait qui divise 45, c'est 9. Étape 2 — Séparer : la racine d'un produit est le produit des racines. Étape 3 — Calculer : $\\sqrt{9} = 3$. On ne peut pas séparer avant d'avoir décomposé.",
+                  "answers": [
+                    {
+                      "content": "Décomposer : $45 = 9 \\times 5$, et 9 est un carré parfait."
+                    },
+                    {
+                      "content": "Séparer : $\\sqrt{45} = \\sqrt{9} \\times \\sqrt{5}$."
+                    },
+                    {
+                      "content": "Calculer : $\\sqrt{9} = 3$, donc $\\sqrt{45} = 3\\sqrt{5}$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $a \\geq 0$ et $b \\geq 0$, on a $\\sqrt{a \\times b} = ___$.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Décomposer : le contenu de la racine est un produit $a \\times b$. Étape 2 — Séparer : la règle du cours dit que la racine d'un produit est le produit des racines. Étape 3 — Calculer : par exemple $\\sqrt{4 \\times 9} = 2 \\times 3 = 6$. Avec $\\sqrt{a} + \\sqrt{b}$ on trouverait $2 + 3 = 5$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{a} + \\sqrt{b}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{a} - \\sqrt{b}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{a} \\times \\sqrt{b}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a \\times \\sqrt{b}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un terrain carré a une aire de 169 m². Quelle est la longueur de son côté ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Décomposer : le côté $c$ vérifie $c^2 = 169$, avec $169 = 13 \\times 13$. Étape 2 — Séparer : rien à séparer, 169 est un carré parfait. Étape 3 — Calculer : $c = \\sqrt{169} = 13$ m. Répondre 84,5 reviendrait à diviser l'aire par 2.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pourcentages",
+          "remember": "Prendre $t$ % d'une quantité, c'est la multiplier par $\\dfrac{t}{100}$. Une **hausse** de $t$ % multiplie par $1 + \\dfrac{t}{100}$, une **baisse** de $t$ % multiplie par $1 - \\dfrac{t}{100}$ : c'est le coefficient multiplicateur. Le **taux** d'une partie dans un total vaut $\\dfrac{\\text{partie}}{\\text{total}} \\times 100$ %.",
+          "method": [
+            "Identifier : la quantité de départ, le pourcentage et ce qu'on cherche (une part, une valeur finale ou un taux).",
+            "Traduire : le pourcentage en fraction ou en coefficient multiplicateur ($\\dfrac{t}{100}$, $1 + \\dfrac{t}{100}$ ou $1 - \\dfrac{t}{100}$).",
+            "Calculer : multiplier la quantité par ce nombre (ou diviser la partie par le total pour un taux).",
+            "Conclure : écrire une phrase de réponse avec l'unité."
+          ],
+          "example": {
+            "statement": "Un sac de riz coûte 12 000 F. Son prix augmente de 15 %. Quel est le nouveau prix ?",
+            "steps": [
+              "Identifier : le prix de départ est 12 000 F, la hausse est de 15 %, on cherche le prix final.",
+              "Traduire : une hausse de 15 % se traduit par le coefficient $1 + \\dfrac{15}{100} = 1{,}15$.",
+              "Calculer : $12\\,000 \\times 1{,}15 = 13\\,800$.",
+              "Conclure : le nouveau prix du sac est 13 800 F."
+            ]
+          },
+          "pitfall": "Deux évolutions successives ne s'annulent pas. Contre-exemple : un prix de 100 F baisse de 20 % (il vaut 80 F), puis monte de 20 % : $80 \\times 1{,}2 = 96$ F et non 100 F. Les pourcentages se calculent chaque fois sur la valeur du moment : on multiplie les coefficients, on n'additionne pas les taux.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer avec des pourcentages",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour calculer des parts et des évolutions en pourcentage.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un commerçant a 15 000 F. Il en dépense 20 %. Quelle somme dépense-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : la quantité de départ est 15 000 F, le pourcentage est 20 %, on cherche la part dépensée. Étape 2 — Traduire : 20 % s'écrit $\\dfrac{20}{100} = 0{,}2$. Étape 3 — Calculer : $15\\,000 \\times 0{,}2 = 3\\,000$. Étape 4 — Conclure : il dépense 3 000 F. Le résultat 12 000 F serait ce qui lui reste.",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Un prix augmente de 8 %. Par quel nombre faut-il le multiplier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : c'est une hausse de 8 %, on cherche le coefficient multiplicateur. Étape 2 — Traduire : une hausse de $t$ % se traduit par $1 + \\dfrac{t}{100}$, soit $1 + 0{,}08$. Étape 3 — Calculer : $1 + 0{,}08 = 1{,}08$. Étape 4 — Conclure : on multiplie par 1,08. Le nombre 0,08 donnerait seulement la hausse ; 0,92 correspond à une baisse de 8 %.",
+                  "answers": [
+                    {
+                      "content": "0,08",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,8",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,92",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,08",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de riz coûte 8 000 F. Son prix baisse de 25 %. Quel est le nouveau prix ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : prix de départ 8 000 F, baisse de 25 %, on cherche le prix final. Étape 2 — Traduire : une baisse de 25 % se traduit par $1 - \\dfrac{25}{100} = 0{,}75$. Étape 3 — Calculer : $8\\,000 \\times 0{,}75 = 6\\,000$. Étape 4 — Conclure : le nouveau prix est 6 000 F. Retrancher 25 F (7 975) serait confondre pourcentage et francs.",
+                  "answers": [
+                    {
+                      "content": "6000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, 12 ont plus de 15 ans. Quel pourcentage de la classe cela représente-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la partie est 12, le total est 40, on cherche un taux. Étape 2 — Traduire : le taux est $\\dfrac{12}{40} \\times 100$. Étape 3 — Calculer : $\\dfrac{12}{40} = 0{,}3$ et $0{,}3 \\times 100 = 30$. Étape 4 — Conclure : 30 % des élèves ont plus de 15 ans. Répondre 12 % confond l'effectif et le pourcentage.",
+                  "answers": [
+                    {
+                      "content": "30 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "12 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "3,3 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : après une baisse de 20 % suivie d'une hausse de 20 %, un prix retrouve exactement sa valeur de départ.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : deux évolutions successives, sur un prix de départ qu'on prend égal à 100 F. Étape 2 — Traduire : baisse de 20 % : coefficient 0,8 ; hausse de 20 % : coefficient 1,2. Étape 3 — Calculer : $100 \\times 0{,}8 = 80$, puis $80 \\times 1{,}2 = 96$. Étape 4 — Conclure : le prix final est 96 F et non 100 F, l'affirmation est fausse. Les 20 % ne portent pas sur la même base.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Pourcentages au marché et à la boutique",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les pourcentages, en refaisant la méthode de la fiche.",
+              "hint": "Traduis toujours le pourcentage en nombre (0,2 ; 1,15 ; 0,75) avant de calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une hausse de 50 % multiplie un prix par ___ (écris le coefficient).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : c'est une hausse de 50 %, on cherche le coefficient. Étape 2 — Traduire : $1 + \\dfrac{50}{100} = 1 + 0{,}5$. Étape 3 — Calculer : $1 + 0{,}5 = 1{,}5$. Étape 4 — Conclure : on multiplie par 1,5. Le coefficient 0,5 correspondrait à une baisse de 50 %.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "1.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque pourcentage de 200 F à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : la quantité de départ est 200 F dans les quatre cas. Étape 2 — Traduire : $0{,}10$, $0{,}25$, $0{,}5$ et $0{,}05$. Étape 3 — Calculer : $200 \\times 0{,}10 = 20$ ; $200 \\times 0{,}25 = 50$ ; $200 \\times 0{,}5 = 100$ ; $200 \\times 0{,}05 = 10$. Étape 4 — Conclure : on relie chaque pourcentage à sa valeur. Attention : 5 % n'est pas 50 %.",
+                  "answers": [
+                    {
+                      "content": "10 % de 200 F",
+                      "match": "20 F"
+                    },
+                    {
+                      "content": "25 % de 200 F",
+                      "match": "50 F"
+                    },
+                    {
+                      "content": "50 % de 200 F",
+                      "match": "100 F"
+                    },
+                    {
+                      "content": "5 % de 200 F",
+                      "match": "10 F"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures correspondent à une baisse de 20 % ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : c'est une baisse de 20 %, on cherche le coefficient. Étape 2 — Traduire : une baisse de $t$ % se traduit par $1 - \\dfrac{t}{100}$, soit $1 - 0{,}2$. Étape 3 — Calculer : $1 - 0{,}2 = 0{,}8$. Étape 4 — Conclure : les deux bonnes écritures sont « multiplier par 0,8 » et « multiplier par $1 - \\dfrac{20}{100}$ ». Le coefficient 1,2 est celui d'une hausse, et 0,2 ne garde que 20 % de la valeur.",
+                  "answers": [
+                    {
+                      "content": "multiplier par 0,8",
+                      "correct": true
+                    },
+                    {
+                      "content": "multiplier par 1,2",
+                      "correct": false
+                    },
+                    {
+                      "content": "multiplier par 0,2",
+                      "correct": false
+                    },
+                    {
+                      "content": "multiplier par $1 - \\dfrac{20}{100}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "multiplier par 20",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer le prix de 5 000 F après une baisse de 10 %.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on repère le départ, le taux et ce qu'on cherche. Étape 2 — Traduire : on transforme la baisse en coefficient 0,9. Étape 3 — Calculer : $5\\,000 \\times 0{,}9 = 4\\,500$. Étape 4 — Conclure : on écrit une phrase avec l'unité. Le calcul vient toujours après la traduction.",
+                  "answers": [
+                    {
+                      "content": "Identifier : le prix de départ est 5 000 F, la baisse est de 10 %, on cherche le prix final."
+                    },
+                    {
+                      "content": "Traduire : une baisse de 10 % se traduit par le coefficient $1 - \\dfrac{10}{100} = 0{,}9$."
+                    },
+                    {
+                      "content": "Calculer : $5\\,000 \\times 0{,}9 = 4\\,500$."
+                    },
+                    {
+                      "content": "Conclure : le nouveau prix est 4 500 F."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un prix passe de 2 000 F à 2 400 F. La hausse est de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : le prix de départ est 2 000 F, le prix final 2 400 F, on cherche le taux de hausse. Étape 2 — Traduire : la hausse est $2\\,400 - 2\\,000 = 400$ F, et le taux est $\\dfrac{400}{2\\,000} \\times 100$. Étape 3 — Calculer : $\\dfrac{400}{2\\,000} = 0{,}2$, soit 20 %. Étape 4 — Conclure : la hausse est de 20 %. Répondre 400 % confond la hausse en francs et le taux.",
+                  "answers": [
+                    {
+                      "content": "400 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 400 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant achète une marchandise 6 000 F et la revend avec un bénéfice de 15 % sur le prix d'achat. Quel est le prix de vente ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : prix d'achat 6 000 F, hausse de 15 %, on cherche le prix de vente. Étape 2 — Traduire : une hausse de 15 % se traduit par le coefficient $1 + \\dfrac{15}{100} = 1{,}15$. Étape 3 — Calculer : $6\\,000 \\times 1{,}15 = 6\\,900$. Étape 4 — Conclure : le prix de vente est 6 900 F. Le bénéfice seul vaut 900 F.",
+                  "answers": [
+                    {
+                      "content": "6900",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le sac de riz de Mme Aïcha",
+          "statement": "Au marché de Bouaké, Mme Aïcha possède un sac de 60 kg de riz. Le lundi, elle en vend les $\\dfrac{2}{5}$. Le mardi, elle en vend $\\dfrac{1}{3}$ du sac (toujours du sac de départ).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle fraction du sac de départ Mme Aïcha a-t-elle vendue en deux jours ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Transformer : le dénominateur commun de 5 et 3 est 15, $\\dfrac{2}{5} = \\dfrac{6}{15}$ et $\\dfrac{1}{3} = \\dfrac{5}{15}$. Étape 2 — Calculer : $\\dfrac{6}{15} + \\dfrac{5}{15} = \\dfrac{11}{15}$. Étape 3 — Simplifier : 11 et 15 n'ont pas de diviseur commun, la fraction est irréductible. Additionner les numérateurs et les dénominateurs donnerait $\\dfrac{3}{8}$, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{3}{8}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{11}{15}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{2}{15}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{11}{8}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle fraction du sac de départ reste-t-il après ces deux jours ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Transformer : le sac entier vaut $\\dfrac{15}{15}$. Étape 2 — Calculer : $\\dfrac{15}{15} - \\dfrac{11}{15} = \\dfrac{4}{15}$. Étape 3 — Simplifier : 4 et 15 n'ont pas de diviseur commun. La fraction $\\dfrac{11}{15}$ est la part vendue, pas la part restante.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{11}{15}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{1}{15}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{4}{15}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{7}{15}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle masse de riz reste-t-il dans le sac ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : il reste $\\dfrac{4}{15}$ du sac de 60 kg. Étape 2 — Calculer : $\\dfrac{4}{15} \\times 60 = \\dfrac{240}{15} = 16$. Étape 3 — Conclure : il reste 16 kg de riz.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "kg"
+            },
+            {
+              "content": "Mme Aïcha verse la moitié du riz restant dans un petit sac. Quelle masse de riz met-elle dans ce petit sac ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : il reste 16 kg, on en prend la moitié. Étape 2 — Calculer : $16 \\times \\dfrac{1}{2} = 8$. Étape 3 — Conclure : le petit sac contient 8 kg de riz.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "kg"
+            },
+            {
+              "content": "Mme Aïcha a vendu plus de la moitié de son sac en deux jours (elle en a vendu les $\\dfrac{11}{15}$).",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Transformer : on compare $\\dfrac{11}{15} = \\dfrac{22}{30}$ et $\\dfrac{1}{2} = \\dfrac{15}{30}$. Étape 2 — Calculer : $22 > 15$, donc $\\dfrac{22}{30} > \\dfrac{15}{30}$. Étape 3 — Conclure : elle a bien vendu plus de la moitié du sac.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le prix d'un forfait internet",
+          "statement": "Un forfait internet coûte 5 000 F. Son prix augmente de 10 %. Quelques semaines plus tard, il baisse de 20 % par rapport au nouveau prix.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le prix du forfait après la hausse de 10 % ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : prix de départ 5 000 F, hausse de 10 %. Étape 2 — Traduire : le coefficient est $1 + \\dfrac{10}{100} = 1{,}1$. Étape 3 — Calculer : $5\\,000 \\times 1{,}1 = 5\\,500$. Étape 4 — Conclure : le forfait coûte 5 500 F.",
+              "answers": [
+                {
+                  "content": "5500",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "F"
+            },
+            {
+              "content": "Quel est le prix du forfait après la baisse de 20 % ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : le prix de départ de cette baisse est 5 500 F, la baisse est de 20 %. Étape 2 — Traduire : le coefficient est $1 - \\dfrac{20}{100} = 0{,}8$. Étape 3 — Calculer : $5\\,500 \\times 0{,}8 = 4\\,400$. Étape 4 — Conclure : le forfait coûte maintenant 4 400 F. Calculer 20 % de 5 000 F (et non de 5 500 F) serait une erreur de base.",
+              "answers": [
+                {
+                  "content": "4400",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "F"
+            },
+            {
+              "content": "Par quel nombre unique faut-il multiplier le prix de départ pour obtenir directement le prix final ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : deux évolutions successives, de coefficients 1,1 puis 0,8. Étape 2 — Traduire : on multiplie les coefficients, on n'additionne pas les taux. Étape 3 — Calculer : $1{,}1 \\times 0{,}8 = 0{,}88$. Étape 4 — Conclure : le coefficient global est 0,88. Le nombre 0,9 vient de l'addition des taux ($+10 - 20 = -10$), qui est fausse.",
+              "answers": [
+                {
+                  "content": "0,9",
+                  "correct": false
+                },
+                {
+                  "content": "1,9",
+                  "correct": false
+                },
+                {
+                  "content": "0,92",
+                  "correct": false
+                },
+                {
+                  "content": "0,88",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Par rapport au prix de départ de 5 000 F, le prix final a subi ___.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Identifier : le coefficient global est 0,88. Étape 2 — Traduire : $0{,}88 = 1 - 0{,}12$, c'est le coefficient d'une baisse de 12 %. Étape 3 — Calculer : $\\dfrac{5\\,000 - 4\\,400}{5\\,000} = 0{,}12$. Étape 4 — Conclure : le prix a baissé de 12 %. La baisse de 10 % est la réponse de celui qui additionne les taux.",
+              "answers": [
+                {
+                  "content": "une baisse de 12 %",
+                  "correct": true
+                },
+                {
+                  "content": "une baisse de 10 %",
+                  "correct": false
+                },
+                {
+                  "content": "une hausse de 12 %",
+                  "correct": false
+                },
+                {
+                  "content": "une baisse de 20 %",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une hausse de 10 % suivie d'une baisse de 20 % équivaut à une baisse de 10 %.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : coefficients 1,1 puis 0,8. Étape 2 — Traduire : le coefficient global est leur produit. Étape 3 — Calculer : $1{,}1 \\times 0{,}8 = 0{,}88$, soit une baisse de 12 %. Étape 4 — Conclure : l'affirmation est fausse, car les taux ne s'additionnent pas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le champ carré de Kouadio",
+          "statement": "Kouadio possède un champ carré d'aire 288 m². On cherche la longueur de son côté, son périmètre et quelques valeurs approchées. On prendra $\\sqrt{2} \\approx 1{,}4$ pour les valeurs approchées.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la longueur du côté du champ, sous la forme simplifiée ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : le côté vaut $c = \\sqrt{288}$ et $288 = 144 \\times 2$, avec 144 carré parfait ($12^2$). Étape 2 — Séparer : $\\sqrt{288} = \\sqrt{144} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{144} = 12$, donc $c = 12\\sqrt{2}$ m. L'écriture $144\\sqrt{2}$ oublie de prendre la racine de 144.",
+              "answers": [
+                {
+                  "content": "$144\\sqrt{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$12\\sqrt{2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$12\\sqrt{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$16\\sqrt{2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le périmètre du champ, sous la forme simplifiée ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : le côté est $12\\sqrt{2}$ m. Étape 2 — Séparer : un carré a quatre côtés égaux, donc le périmètre est $4 \\times 12\\sqrt{2}$. Étape 3 — Calculer : $4 \\times 12 = 48$, donc le périmètre est $48\\sqrt{2}$ m. Le résultat $12\\sqrt{2}$ est le côté seul, et 48 oublie la racine.",
+              "answers": [
+                {
+                  "content": "$24\\sqrt{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$12\\sqrt{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$48\\sqrt{2}$",
+                  "correct": true
+                },
+                {
+                  "content": "48 m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $\\sqrt{2} \\approx 1{,}4$, donne une valeur approchée du côté du champ.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Décomposer : le côté est $12\\sqrt{2}$ m. Étape 2 — Séparer : on remplace $\\sqrt{2}$ par 1,4. Étape 3 — Calculer : $12 \\times 1{,}4 = 16{,}8$. Le côté est environ 16,8 m.",
+              "answers": [
+                {
+                  "content": "16,8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "m"
+            },
+            {
+              "content": "Le côté du champ est égal à $\\sqrt{144} + \\sqrt{144}$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Décomposer : le côté est $\\sqrt{288} = 12\\sqrt{2}$, soit environ 16,8 m. Étape 2 — Séparer : $\\sqrt{144} + \\sqrt{144} = 12 + 12$. Étape 3 — Calculer : $12 + 12 = 24$, qui n'est pas 16,8. La racine ne se sépare que sur un produit : $\\sqrt{288} = \\sqrt{144 \\times 2}$, pas une somme.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Convertis l'aire de 288 m² en cm² (on sait que $1\\ \\text{m}^2 = 10^4\\ \\text{cm}^2$).",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : la base est 10 et on convertit 288 m² en multipliant par $10^4$. Étape 2 — Appliquer : $288 \\times 10^4$ revient à décaler la virgule de 4 rangs. Étape 3 — Calculer : $288 \\times 10\\,000 = 2\\,880\\,000$. L'aire est 2 880 000 cm².",
+              "answers": [
+                {
+                  "content": "2880000",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm²"
+            },
+            {
+              "content": "Complète : $2\\,880\\,000 = 2{,}88 \\times 10^{___}$ (écris l'exposant).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer : on veut écrire 2 880 000 comme un nombre entre 1 et 10 fois une puissance de 10. Étape 2 — Appliquer : on place la virgule après le 2, ce qui la déplace de 6 rangs. Étape 3 — Calculer : $2{,}88 \\times 10^6 = 2\\,880\\,000$. L'exposant 6 compte les rangs déplacés.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La boutique de Mme Yao",
+          "statement": "Mme Yao tient une boutique à Daloa. Son stock de riz est de 240 kg. La première semaine, elle vend les $\\dfrac{3}{8}$ du stock. La deuxième semaine, elle vend 20 % de ce qui restait après la première semaine. Le kilo est vendu 600 F ; pendant les soldes, ce prix baisse de 10 %.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle masse de riz a été vendue la première semaine ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Transformer : « les $\\dfrac{3}{8}$ de 240 » se traduit par $\\dfrac{3}{8} \\times 240$. Étape 2 — Calculer : $240 \\div 8 = 30$, puis $30 \\times 3 = 90$. Étape 3 — Simplifier : le résultat est un entier, 90 kg.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "kg"
+            },
+            {
+              "content": "Quelle masse de riz a été vendue la deuxième semaine ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : il restait $240 - 90 = 150$ kg, on en prend 20 %. Étape 2 — Traduire : 20 % s'écrit $\\dfrac{20}{100} = 0{,}2$. Étape 3 — Calculer : $150 \\times 0{,}2 = 30$. Étape 4 — Conclure : elle a vendu 30 kg la deuxième semaine. Prendre 20 % de 240 kg (48 kg) serait une erreur de base.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "kg"
+            },
+            {
+              "content": "Quelle masse de riz reste-t-il après les deux semaines ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : stock de départ 240 kg, ventes 90 kg puis 30 kg. Étape 2 — Calculer : $240 - 90 - 30 = 120$. Étape 3 — Conclure : il reste 120 kg de riz.",
+              "answers": [
+                {
+                  "content": "120",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "kg"
+            },
+            {
+              "content": "Quelle fraction du stock de départ reste-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Transformer : le reste est 120 kg sur un stock de 240 kg, soit $\\dfrac{120}{240}$. Étape 2 — Calculer : on divise le haut et le bas par 120. Étape 3 — Simplifier : $\\dfrac{120}{240} = \\dfrac{1}{2}$. La fraction $\\dfrac{5}{8}$ est le reste après la première semaine seulement.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{3}{8}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{1}{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{5}{8}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{1}{2}$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le prix du kilo de riz pendant les soldes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : prix de départ 600 F, baisse de 10 %. Étape 2 — Traduire : le coefficient est $1 - \\dfrac{10}{100} = 0{,}9$. Étape 3 — Calculer : $600 \\times 0{,}9 = 540$. Étape 4 — Conclure : le kilo coûte 540 F pendant les soldes.",
+              "answers": [
+                {
+                  "content": "540",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "F"
+            },
+            {
+              "content": "Mme Yao vend les 120 kg restants au prix soldé. Quelle recette obtient-elle ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : 120 kg à 540 F le kilo. Étape 2 — Calculer : $120 \\times 540 = 64\\,800$. Étape 3 — Conclure : la recette est de 64 800 F.",
+              "answers": [
+                {
+                  "content": "64800",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "F"
+            },
+            {
+              "content": "Complète : $64\\,800 = 6{,}48 \\times 10^{___}$ (écris l'exposant).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer : on écrit 64 800 comme un nombre entre 1 et 10 fois une puissance de 10. Étape 2 — Appliquer : la virgule se place après le 6 et se déplace de 4 rangs. Étape 3 — Calculer : $6{,}48 \\times 10^4 = 64\\,800$. L'exposant est donc 4.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Fractions (somme, produit, quotient), puissances d'un nombre, racines carrées simples, pourcentages : des calculs directs, à refaire avec la méthode de chaque fiche.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Des calculs directs avec des fractions.",
+              "hint": "Pour additionner, mets d'abord sur le même dénominateur ; pour diviser, multiplie par l'inverse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule $\\dfrac{1}{3} + \\dfrac{1}{6}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : le dénominateur commun est 6, $\\dfrac{1}{3} = \\dfrac{2}{6}$. Étape 2 — Calculer : $\\dfrac{2}{6} + \\dfrac{1}{6} = \\dfrac{3}{6}$. Étape 3 — Simplifier : on divise par 3, $\\dfrac{3}{6} = \\dfrac{1}{2}$. Le résultat $\\dfrac{2}{6}$ oublie d'ajouter la seconde fraction correctement.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2}{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{18}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{2}{7} \\times \\dfrac{3}{4}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : une multiplication ne demande pas de dénominateur commun. Étape 2 — Calculer : $\\dfrac{2}{7} \\times \\dfrac{3}{4} = \\dfrac{6}{28}$. Étape 3 — Simplifier : on divise par 2, $\\dfrac{6}{28} = \\dfrac{3}{14}$. Le résultat $\\dfrac{5}{11}$ additionne au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{5}{11}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{14}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{8}{21}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{6}{11}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{3}{4} \\div \\dfrac{1}{2}$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Transformer : diviser par $\\dfrac{1}{2}$, c'est multiplier par 2. Étape 2 — Calculer : $\\dfrac{3}{4} \\times 2 = \\dfrac{6}{4}$. Étape 3 — Simplifier : $\\dfrac{6}{4} = \\dfrac{3}{2} = 1{,}5$.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Complète l'égalité : $\\dfrac{3}{5} = \\dfrac{___}{20}$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Transformer : pour passer du dénominateur 5 à 20, on multiplie par 4. Étape 2 — Calculer : le numérateur aussi, $3 \\times 4 = 12$. Étape 3 — Simplifier : $\\dfrac{12}{20}$ se simplifie par 4 en $\\dfrac{3}{5}$, la valeur est conservée.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $\\dfrac{7}{10} + \\dfrac{1}{5} = \\dfrac{8}{15}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Transformer : $\\dfrac{1}{5} = \\dfrac{2}{10}$. Étape 2 — Calculer : $\\dfrac{7}{10} + \\dfrac{2}{10} = \\dfrac{9}{10}$. Étape 3 — Simplifier : 9 et 10 n'ont pas de diviseur commun. L'égalité est fausse : $\\dfrac{8}{15}$ vient de l'addition des numérateurs et des dénominateurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Des calculs directs avec des puissances.",
+              "hint": "Un produit additionne les exposants, un quotient les soustrait, une puissance de puissance les multiplie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le résultat de $2^4 \\times 2^3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base 2 est commune, c'est un produit. Étape 2 — Appliquer : on additionne les exposants, $2^{4+3}$. Étape 3 — Calculer : $2^7 = 128$. L'écriture $2^{12}$ multiplie les exposants, et $4^7$ multiplie les bases.",
+                  "answers": [
+                    {
+                      "content": "$2^{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4^{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^{7}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2^{1}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le résultat de $\\dfrac{7^5}{7^3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base 7 est commune, c'est un quotient. Étape 2 — Appliquer : on soustrait les exposants, $7^{5-3}$. Étape 3 — Calculer : $7^2 = 49$. L'écriture $7^8$ additionne les exposants au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "$7^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7^{15}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1^{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7^{2}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $(3^2)^2$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : c'est une puissance de puissance de base 3. Étape 2 — Appliquer : on multiplie les exposants, $3^{2 \\times 2} = 3^4$. Étape 3 — Calculer : $3^4 = 81$.",
+                  "answers": [
+                    {
+                      "content": "81",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On a $10^{-2} = ___$.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : la base est 10 et l'exposant est négatif. Étape 2 — Appliquer : $10^{-2} = \\dfrac{1}{10^2}$. Étape 3 — Calculer : $\\dfrac{1}{100} = 0{,}01$. Un exposant négatif ne rend pas le nombre négatif.",
+                  "answers": [
+                    {
+                      "content": "0,01",
+                      "correct": true
+                    },
+                    {
+                      "content": "-100",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,001",
+                      "correct": false
+                    },
+                    {
+                      "content": "-0,01",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures valent 64 ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on compare chaque puissance à 64. Étape 2 — Appliquer : $2^6 = 2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2$ et $8^2 = 8 \\times 8$. Étape 3 — Calculer : $2^6 = 64$ et $8^2 = 64$, alors que $4^4 = 256$, $6^4 = 1\\,296$ et $2^8 = 256$.",
+                  "answers": [
+                    {
+                      "content": "$2^{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4^{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6^{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8^{2}$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Des calculs directs avec des racines carrées.",
+              "hint": "Cherche le plus grand carré parfait qui divise le nombre sous la racine.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule $\\sqrt{81}$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Décomposer : $81 = 9 \\times 9 = 9^2$, c'est un carré parfait. Étape 2 — Séparer : rien à séparer, tout le nombre est un carré. Étape 3 — Calculer : $\\sqrt{81} = 9$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Simplifie $\\sqrt{20}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $20 = 4 \\times 5$ et 4 est un carré parfait. Étape 2 — Séparer : $\\sqrt{20} = \\sqrt{4} \\times \\sqrt{5}$. Étape 3 — Calculer : $\\sqrt{4} = 2$, donc $\\sqrt{20} = 2\\sqrt{5}$. L'écriture $4\\sqrt{5}$ oublie de prendre la racine de 4.",
+                  "answers": [
+                    {
+                      "content": "$4\\sqrt{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\sqrt{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10\\sqrt{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\sqrt{9 \\times 16}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $9 \\times 16$ est un produit de deux carrés parfaits. Étape 2 — Séparer : $\\sqrt{9 \\times 16} = \\sqrt{9} \\times \\sqrt{16}$. Étape 3 — Calculer : $3 \\times 4 = 12$. Le résultat 7 additionne les racines au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    },
+                    {
+                      "content": "144",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $\\sqrt{98} = ___\\sqrt{2}$ (écris le nombre entier qui manque).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Décomposer : $98 = 49 \\times 2$ et 49 est un carré parfait. Étape 2 — Séparer : $\\sqrt{98} = \\sqrt{49} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{49} = 7$, donc $\\sqrt{98} = 7\\sqrt{2}$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $\\sqrt{36 + 64} = \\sqrt{36} + \\sqrt{64}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : le contenu de la racine est une somme. Étape 2 — Séparer : on ne sépare que sur un produit, donc on calcule $36 + 64 = 100$. Étape 3 — Calculer : $\\sqrt{100} = 10$, alors que $\\sqrt{36} + \\sqrt{64} = 6 + 8 = 14$. L'égalité est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Des calculs directs avec des pourcentages.",
+              "hint": "Traduis le pourcentage en nombre avant de calculer.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule 30 % de 4 000 F.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : quantité 4 000 F, pourcentage 30 %. Étape 2 — Traduire : 30 % s'écrit $0{,}3$. Étape 3 — Calculer : $4\\,000 \\times 0{,}3 = 1\\,200$. Étape 4 — Conclure : 30 % de 4 000 F font 1 200 F.",
+                  "answers": [
+                    {
+                      "content": "1200",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Un prix de 2 500 F augmente de 10 %. Quel est le nouveau prix ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : prix de départ 2 500 F, hausse de 10 %. Étape 2 — Traduire : le coefficient est $1{,}1$. Étape 3 — Calculer : $2\\,500 \\times 1{,}1 = 2\\,750$. Étape 4 — Conclure : le nouveau prix est 2 750 F.",
+                  "answers": [
+                    {
+                      "content": "2750",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Sur 60 élèves, 15 sont absents. Quel pourcentage d'élèves est absent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : partie 15, total 60. Étape 2 — Traduire : le taux est $\\dfrac{15}{60} \\times 100$. Étape 3 — Calculer : $\\dfrac{15}{60} = 0{,}25$, donc 25. Étape 4 — Conclure : 25 % des élèves sont absents. Répondre 15 % confond l'effectif et le pourcentage.",
+                  "answers": [
+                    {
+                      "content": "25 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "45 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une baisse de 30 % multiplie un prix par ___.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : c'est une baisse de 30 %. Étape 2 — Traduire : $1 - \\dfrac{30}{100}$. Étape 3 — Calculer : $1 - 0{,}3 = 0{,}7$. Étape 4 — Conclure : le coefficient est 0,7. Le nombre 0,3 ne garde que 30 % du prix.",
+                  "answers": [
+                    {
+                      "content": "0,3",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,7",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,3",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,07",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : une hausse de 50 % suivie d'une baisse de 50 % redonne le prix de départ.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : deux évolutions successives, coefficients 1,5 puis 0,5. Étape 2 — Traduire : on multiplie les coefficients. Étape 3 — Calculer : $1{,}5 \\times 0{,}5 = 0{,}75$. Étape 4 — Conclure : on obtient 75 % du prix de départ, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une baisse de 5 % multiplie un prix par ___ (écris le coefficient).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : c'est une baisse de 5 %. Étape 2 — Traduire : $1 - \\dfrac{5}{100}$. Étape 3 — Calculer : $1 - 0{,}05 = 0{,}95$. Étape 4 — Conclure : le coefficient est 0,95.",
+                  "answers": [
+                    {
+                      "content": "0,95",
+                      "correct": true
+                    },
+                    {
+                      "content": "0.95",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Fractions d'une quantité (huile, riz), pourcentages (prix d'un trajet), racines carrées (clôturer un jardin carré), puissances de 10 (grands nombres et francs).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Maman Affoué achète un bidon de 20 litres d'huile à Treichville. La première semaine, elle en utilise les $\\dfrac{1}{4}$ du bidon. La semaine suivante, elle en utilise les $\\dfrac{3}{10}$ du bidon.",
+              "hint": "Pour une fraction d'une quantité, multiplie la quantité par la fraction.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle fraction du bidon a été utilisée en deux semaines ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : le dénominateur commun est 20, $\\dfrac{1}{4} = \\dfrac{5}{20}$ et $\\dfrac{3}{10} = \\dfrac{6}{20}$. Étape 2 — Calculer : $\\dfrac{5}{20} + \\dfrac{6}{20} = \\dfrac{11}{20}$. Étape 3 — Simplifier : 11 et 20 n'ont pas de diviseur commun. Additionner numérateurs et dénominateurs donnerait $\\dfrac{4}{14}$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{4}{14}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{40}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{11}{20}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{13}{20}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de litres d'huile ont été utilisés en deux semaines ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Transformer : « les $\\dfrac{11}{20}$ de 20 litres » se traduit par $\\dfrac{11}{20} \\times 20$. Étape 2 — Calculer : $20 \\div 20 = 1$, puis $1 \\times 11 = 11$. Étape 3 — Simplifier : le résultat est un entier, 11 litres.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "L"
+                },
+                {
+                  "content": "Combien de litres d'huile reste-t-il dans le bidon ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Transformer : le bidon entier vaut 20 litres, on retranche ce qui est utilisé. Étape 2 — Calculer : $20 - 11 = 9$. Étape 3 — Simplifier : 9 litres, un entier. Répondre 11 donnerait la quantité utilisée.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "L"
+                },
+                {
+                  "content": "Quelle fraction du bidon reste-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : le bidon entier vaut $\\dfrac{20}{20}$. Étape 2 — Calculer : $\\dfrac{20}{20} - \\dfrac{11}{20} = \\dfrac{9}{20}$. Étape 3 — Simplifier : 9 et 20 n'ont pas de diviseur commun. La fraction $\\dfrac{11}{20}$ est la part utilisée.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{11}{20}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{9}{20}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : il reste moins de la moitié du bidon (il en reste les $\\dfrac{9}{20}$).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Transformer : on compare avec $\\dfrac{1}{2} = \\dfrac{10}{20}$. Étape 2 — Calculer : $9 < 10$, donc $\\dfrac{9}{20} < \\dfrac{10}{20}$. Étape 3 — Simplifier : la comparaison est faite. Il reste donc moins de la moitié du bidon.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un trajet en gbaka à Abidjan coûte 400 F. Le prix augmente de 15 %. Koffi fait 10 trajets dans le mois.",
+              "hint": "Pour une hausse en pourcentage, multiplie par $1 + \\dfrac{t}{100}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le nouveau prix d'un trajet ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : prix de départ 400 F, hausse de 15 %. Étape 2 — Traduire : le coefficient est $1 + \\dfrac{15}{100} = 1{,}15$. Étape 3 — Calculer : $400 \\times 1{,}15 = 460$. Étape 4 — Conclure : un trajet coûte 460 F.",
+                  "answers": [
+                    {
+                      "content": "460",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Combien Koffi paie-t-il pour 10 trajets au nouveau prix ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : 10 trajets à 460 F. Étape 2 — Traduire : on multiplie le prix par le nombre de trajets. Étape 3 — Calculer : $460 \\times 10 = 4\\,600$. Étape 4 — Conclure : Koffi paie 4 600 F.",
+                  "answers": [
+                    {
+                      "content": "4600",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Combien Koffi aurait-il payé pour 10 trajets avant la hausse ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : 10 trajets à 400 F. Étape 2 — Traduire : on multiplie le prix par le nombre de trajets. Étape 3 — Calculer : $400 \\times 10 = 4\\,000$. Étape 4 — Conclure : il aurait payé 4 000 F.",
+                  "answers": [
+                    {
+                      "content": "4000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "De combien de francs la dépense de Koffi pour 10 trajets a-t-elle augmenté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : dépense après la hausse 4 600 F, avant 4 000 F. Étape 2 — Traduire : l'augmentation est la différence des deux dépenses. Étape 3 — Calculer : $4\\,600 - 4\\,000 = 600$. Étape 4 — Conclure : la dépense a augmenté de 600 F. Le nombre 60 est l'augmentation sur un seul trajet.",
+                  "answers": [
+                    {
+                      "content": "600 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "60 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "15 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "460 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : un abonnement à 4 200 F pour ces 10 trajets serait avantageux pour Koffi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : sans abonnement, Koffi paie 4 600 F pour 10 trajets. Étape 2 — Traduire : on compare 4 200 F et 4 600 F. Étape 3 — Calculer : $4\\,600 - 4\\,200 = 400$. Étape 4 — Conclure : l'abonnement fait économiser 400 F, il est avantageux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Mme Bamba veut clôturer un jardin carré d'aire 200 m². On prendra $\\sqrt{2} \\approx 1{,}4$ pour les valeurs approchées.",
+              "hint": "Le côté d'un carré d'aire $A$ est $\\sqrt{A}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la longueur du côté du jardin, sous la forme simplifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : le côté vaut $\\sqrt{200}$ et $200 = 100 \\times 2$, avec 100 carré parfait. Étape 2 — Séparer : $\\sqrt{200} = \\sqrt{100} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{100} = 10$, donc le côté est $10\\sqrt{2}$ m. L'écriture $100\\sqrt{2}$ oublie de prendre la racine de 100.",
+                  "answers": [
+                    {
+                      "content": "$100\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\sqrt{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\sqrt{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\sqrt{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le périmètre du jardin, sous la forme simplifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : le côté est $10\\sqrt{2}$ m. Étape 2 — Séparer : un carré a quatre côtés égaux, donc le périmètre est $4 \\times 10\\sqrt{2}$. Étape 3 — Calculer : $4 \\times 10 = 40$, donc le périmètre est $40\\sqrt{2}$ m. Le résultat $10\\sqrt{2}$ est le côté seul.",
+                  "answers": [
+                    {
+                      "content": "$10\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40\\sqrt{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\sqrt{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $\\sqrt{2} \\approx 1{,}4$, donne une valeur approchée du côté du jardin.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Décomposer : le côté est $10\\sqrt{2}$ m. Étape 2 — Séparer : on remplace $\\sqrt{2}$ par 1,4. Étape 3 — Calculer : $10 \\times 1{,}4 = 14$. Le côté est environ 14 m.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Avec $\\sqrt{2} \\approx 1{,}4$, donne une valeur approchée de la longueur de grillage nécessaire pour faire le tour du jardin.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Décomposer : le côté est environ 14 m. Étape 2 — Séparer : le tour du jardin est formé de quatre côtés égaux. Étape 3 — Calculer : $4 \\times 14 = 56$. Il faut environ 56 m de grillage.",
+                  "answers": [
+                    {
+                      "content": "56",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Vrai ou faux : le côté du jardin mesure 100 m, car 200 divisé par 2 donne 100.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : le côté $c$ vérifie $c^2 = 200$, pas $2c = 200$. Étape 2 — Séparer : $c = \\sqrt{200} = \\sqrt{100} \\times \\sqrt{2}$. Étape 3 — Calculer : $c = 10\\sqrt{2} \\approx 14$ m, très loin de 100 m. Diviser l'aire par 2 ne donne pas le côté d'un carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une école de Yamoussoukro reçoit $3{,}5 \\times 10^3$ cahiers. Chaque cahier coûte $2 \\times 10^2$ francs.",
+              "hint": "Écris les puissances de 10 d'un côté, les décimaux de l'autre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de cahiers l'école reçoit-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le nombre est $3{,}5$ et la puissance de 10 est $10^3$. Étape 2 — Appliquer : $10^3 = 1\\,000$. Étape 3 — Calculer : $3{,}5 \\times 1\\,000 = 3\\,500$. L'école reçoit 3 500 cahiers.",
+                  "answers": [
+                    {
+                      "content": "3500",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est le prix d'un cahier en francs ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le nombre est 2 et la puissance de 10 est $10^2$. Étape 2 — Appliquer : $10^2 = 100$. Étape 3 — Calculer : $2 \\times 100 = 200$. Un cahier coûte 200 F.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Quel est le coût total des cahiers, en puissance de 10 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on multiplie $3{,}5 \\times 10^3$ par $2 \\times 10^2$, les décimaux d'un côté et les puissances de 10 de l'autre. Étape 2 — Appliquer : $3{,}5 \\times 2 = 7$ et $10^3 \\times 10^2 = 10^{3+2} = 10^5$. Étape 3 — Calculer : $7 \\times 10^5$ francs. L'écriture $7 \\times 10^6$ multiplie les exposants, et $5{,}5 \\times 10^5$ additionne les décimaux.",
+                  "answers": [
+                    {
+                      "content": "$7 \\times 10^6$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5{,}5 \\times 10^5$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7 \\times 10^{10}$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7 \\times 10^5$ F",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Exprime ce coût total en francs, écrit en chiffres.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le coût total est $7 \\times 10^5$ francs. Étape 2 — Appliquer : $10^5 = 100\\,000$. Étape 3 — Calculer : $7 \\times 100\\,000 = 700\\,000$. Le coût total est de 700 000 F.",
+                  "answers": [
+                    {
+                      "content": "700000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "On a $0{,}02 = 2 \\times 10^{___}$.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : $0{,}02 = \\dfrac{2}{100}$. Étape 2 — Appliquer : $\\dfrac{1}{100} = 10^{-2}$. Étape 3 — Calculer : $0{,}02 = 2 \\times 10^{-2}$. L'exposant positif 2 donnerait 200.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "-1",
+                      "correct": false
+                    },
+                    {
+                      "content": "-3",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Repérer et corriger des erreurs de calcul sur les fractions, les puissances, les racines carrées et les pourcentages successifs ; justifier chaque réponse avec la méthode de la fiche.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu vérifies des calculs sur les fractions, comme le ferait un professeur qui corrige une copie.",
+              "hint": "Pour comparer ou additionner des fractions, mets-les sur le même dénominateur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève écrit : $\\dfrac{2}{3} + \\dfrac{1}{4} = \\dfrac{3}{7}$. Cette égalité est exacte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Transformer : le dénominateur commun est 12, $\\dfrac{2}{3} = \\dfrac{8}{12}$ et $\\dfrac{1}{4} = \\dfrac{3}{12}$. Étape 2 — Calculer : $\\dfrac{8}{12} + \\dfrac{3}{12} = \\dfrac{11}{12}$. Étape 3 — Simplifier : 11 et 12 n'ont pas de diviseur commun. L'égalité est fausse : l'élève a additionné les numérateurs et les dénominateurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le résultat de $\\dfrac{3}{4} \\div \\dfrac{3}{8}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : diviser par $\\dfrac{3}{8}$, c'est multiplier par son inverse $\\dfrac{8}{3}$. Étape 2 — Calculer : $\\dfrac{3}{4} \\times \\dfrac{8}{3} = \\dfrac{24}{12}$. Étape 3 — Simplifier : $\\dfrac{24}{12} = 2$. Le résultat $\\dfrac{9}{32}$ vient de la multiplication par $\\dfrac{3}{8}$ sans prendre l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{9}{32}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $\\dfrac{1}{3}$ est plus grand que $\\dfrac{1}{4}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Transformer : on met sur le dénominateur 12, $\\dfrac{1}{3} = \\dfrac{4}{12}$ et $\\dfrac{1}{4} = \\dfrac{3}{12}$. Étape 2 — Calculer : on compare $4$ et $3$, donc $4 > 3$. Étape 3 — Simplifier : rien à réduire. Plus le dénominateur est grand, plus la part est petite, donc $\\dfrac{1}{3}$ est plus grand.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles fractions valent $\\dfrac{2}{3}$ ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Transformer : on multiplie le haut et le bas par un même nombre : 2 pour $\\dfrac{4}{6}$ et 5 pour $\\dfrac{10}{15}$. Étape 2 — Calculer : $\\dfrac{2}{3} = \\dfrac{2 \\times 2}{3 \\times 2} = \\dfrac{4}{6}$ et $\\dfrac{2}{3} = \\dfrac{10}{15}$. Étape 3 — Simplifier : en divisant, on retrouve $\\dfrac{2}{3}$. La fraction $\\dfrac{3}{2}$ est l'inverse de $\\dfrac{2}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{4}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{10}{15}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{6}{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $\\dfrac{2}{3} + \\dfrac{___}{6} = \\dfrac{5}{6}$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Transformer : $\\dfrac{2}{3} = \\dfrac{4}{6}$. Étape 2 — Calculer : $\\dfrac{4}{6} + \\dfrac{x}{6} = \\dfrac{5}{6}$ donne $x = 5 - 4$. Étape 3 — Simplifier : $x = 1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu vérifies des égalités sur les puissances.",
+              "hint": "N'applique les règles des exposants qu'à un produit, un quotient ou une puissance de puissance, jamais à une somme.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Vrai ou faux : $2^3 \\times 2^4 = 2^{12}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la base 2 est commune, c'est un produit. Étape 2 — Appliquer : on additionne les exposants, $2^{3+4}$. Étape 3 — Calculer : $2^7 = 128$, alors que $2^{12} = 4\\,096$. L'égalité est fausse : l'exposant 12 vient de la multiplication $3 \\times 4$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $5^0 = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'exposant est 0 et la base 5 est non nulle. Étape 2 — Appliquer : $5^0 = 5^{1-1} = \\dfrac{5}{5}$. Étape 3 — Calculer : $\\dfrac{5}{5} = 1$. L'égalité est fausse : tout nombre non nul à la puissance 0 vaut 1.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $2^{-1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base est 2 et l'exposant est négatif. Étape 2 — Appliquer : $2^{-1} = \\dfrac{1}{2^1}$. Étape 3 — Calculer : $\\dfrac{1}{2} = 0{,}5$. Un exposant négatif ne change pas le signe du nombre.",
+                  "answers": [
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : un quotient, une puissance de puissance, une somme et un produit de puissances de 10. Étape 2 — Appliquer : $\\dfrac{10^4}{10^2} = 10^{4-2}$ ; $(10^2)^3 = 10^{2 \\times 3}$ ; $10^2 \\times 10^3 = 10^{2+3}$. Étape 3 — Calculer : $10^2$ et $10^6$ sont exacts, mais $10^2 \\times 10^3 = 10^5$ et non $10^6$, et $10^2 + 10^3 = 1\\,100$ n'est pas $10^5$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{10^4}{10^2} = 10^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(10^2)^3 = 10^6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10^2 + 10^3 = 10^5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10^2 \\times 10^3 = 10^6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{3^4}{3^2}$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la base 3 est commune, c'est un quotient. Étape 2 — Appliquer : on soustrait les exposants, $3^{4-2} = 3^2$. Étape 3 — Calculer : $3^2 = 9$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu vérifies des égalités sur les racines carrées.",
+              "hint": "La racine carrée ne se sépare que sur un produit ou un quotient, jamais sur une somme.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Vrai ou faux : $\\sqrt{16} + \\sqrt{9} = \\sqrt{25}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : la somme $\\sqrt{16} + \\sqrt{9}$ n'est pas une racine d'un produit. Étape 2 — Séparer : on calcule chaque racine, $\\sqrt{16} = 4$ et $\\sqrt{9} = 3$. Étape 3 — Calculer : $4 + 3 = 7$, alors que $\\sqrt{25} = 5$. L'égalité est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $\\sqrt{4 \\times 9} = \\sqrt{4} \\times \\sqrt{9}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : le contenu de la racine est un produit de deux carrés parfaits. Étape 2 — Séparer : la racine d'un produit est le produit des racines. Étape 3 — Calculer : $\\sqrt{36} = 6$ et $\\sqrt{4} \\times \\sqrt{9} = 2 \\times 3 = 6$. L'égalité est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel nombre est égal à $3\\sqrt{2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $18 = 9 \\times 2$ et 9 est un carré parfait. Étape 2 — Séparer : $\\sqrt{18} = \\sqrt{9} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{9} = 3$, donc $\\sqrt{18} = 3\\sqrt{2}$. L'écriture $\\sqrt{6}$ multiplie 3 et 2 sous la racine, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{18}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 + \\sqrt{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles racines carrées sont des nombres entiers ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Décomposer : on cherche les nombres qui sont des carrés parfaits. Étape 2 — Séparer : $25 = 5^2$ et $36 = 6^2$ sont des carrés parfaits ; 20, 50 et 8 n'en sont pas. Étape 3 — Calculer : $\\sqrt{25} = 5$ et $\\sqrt{36} = 6$, alors que $\\sqrt{20} = 2\\sqrt{5}$, $\\sqrt{50} = 5\\sqrt{2}$ et $\\sqrt{8} = 2\\sqrt{2}$ ne sont pas entiers.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{20}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{36}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{25}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{50}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{8}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $\\sqrt{\\dfrac{16}{25}} = \\dfrac{___}{5}$ (écris le numérateur).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Décomposer : $16 = 4^2$ et $25 = 5^2$. Étape 2 — Séparer : $\\sqrt{\\dfrac{16}{25}} = \\dfrac{\\sqrt{16}}{\\sqrt{25}}$. Étape 3 — Calculer : $\\dfrac{4}{5}$, donc le numérateur est 4.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un prix de 1 000 F augmente de 20 %, puis baisse de 20 %.",
+              "hint": "Deux évolutions successives se traduisent par le produit de leurs coefficients.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le prix après la hausse de 20 % ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : prix de départ 1 000 F, hausse de 20 %. Étape 2 — Traduire : le coefficient est $1 + \\dfrac{20}{100} = 1{,}2$. Étape 3 — Calculer : $1\\,000 \\times 1{,}2 = 1\\,200$. Étape 4 — Conclure : le prix est 1 200 F.",
+                  "answers": [
+                    {
+                      "content": "1200",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Quel est le prix final après la baisse de 20 % qui suit la hausse ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : prix de départ de cette baisse 1 200 F, baisse de 20 %. Étape 2 — Traduire : le coefficient est $1 - \\dfrac{20}{100} = 0{,}8$. Étape 3 — Calculer : $1\\,200 \\times 0{,}8 = 960$. Étape 4 — Conclure : le prix final est 960 F.",
+                  "answers": [
+                    {
+                      "content": "960",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Vrai ou faux : le prix final est égal au prix de départ de 1 000 F.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le prix final est 960 F, le prix de départ 1 000 F. Étape 2 — Traduire : on compare les deux prix. Étape 3 — Calculer : $1\\,000 - 960 = 40$. Étape 4 — Conclure : le prix final est inférieur de 40 F, l'affirmation est fausse, car la baisse de 20 % s'applique à un prix plus grand.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la variation globale du prix, entre le départ et la fin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : coefficients 1,2 puis 0,8. Étape 2 — Traduire : le coefficient global est leur produit. Étape 3 — Calculer : $1{,}2 \\times 0{,}8 = 0{,}96 = 1 - 0{,}04$. Étape 4 — Conclure : le prix a baissé de 4 %. L'absence de variation est la réponse de celui qui additionne les taux.",
+                  "answers": [
+                    {
+                      "content": "aucune variation",
+                      "correct": false
+                    },
+                    {
+                      "content": "une baisse de 20 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "une hausse de 4 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "une baisse de 4 %",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coefficient multiplicateur global de ces deux évolutions est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : deux évolutions de coefficients 1,2 et 0,8. Étape 2 — Traduire : on multiplie les coefficients. Étape 3 — Calculer : $1{,}2 \\times 0{,}8 = 0{,}96$. Étape 4 — Conclure : le coefficient global est 0,96. Le nombre 1 est l'erreur de celui qui additionne les taux.",
+                  "answers": [
+                    {
+                      "content": "0,96",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,8",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,4",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Fractions, puissances, racines carrées simples et pourcentages : quatre situations qui reprennent chacune une notion de la leçon, de la lecture de l'énoncé à la réponse justifiée.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "La cantine d'un collège de Man prépare 120 kg de riz. À midi, les $\\dfrac{3}{4}$ du riz sont servis. Le soir, on sert 20 % du riz qui restait après le repas de midi.",
+              "hint": "Pour un pourcentage du reste, calcule d'abord le reste.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle masse de riz est servie à midi ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Transformer : « les $\\dfrac{3}{4}$ de 120 » se traduit par $\\dfrac{3}{4} \\times 120$. Étape 2 — Calculer : $120 \\div 4 = 30$, puis $30 \\times 3 = 90$. Étape 3 — Simplifier : 90 kg, un entier.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "kg"
+                },
+                {
+                  "content": "Quelle masse de riz restait-il après le repas de midi ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Transformer : le stock est 120 kg, on retranche ce qui est servi. Étape 2 — Calculer : $120 - 90 = 30$. Étape 3 — Simplifier : 30 kg. Répondre 90 donnerait la masse déjà servie.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "kg"
+                },
+                {
+                  "content": "Quelle masse de riz est servie le soir ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : quantité de départ 30 kg (le reste de midi), pourcentage 20 %. Étape 2 — Traduire : 20 % s'écrit $0{,}2$. Étape 3 — Calculer : $30 \\times 0{,}2 = 6$. Étape 4 — Conclure : on sert 6 kg le soir. Prendre 20 % de 120 kg (24 kg) serait une erreur de base.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "kg"
+                },
+                {
+                  "content": "Quelle masse de riz reste-t-il à la fin de la journée ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : il restait 30 kg après midi, on en a servi 6 kg le soir. Étape 2 — Traduire : on retranche la masse servie. Étape 3 — Calculer : $30 - 6 = 24$. Étape 4 — Conclure : il reste 24 kg.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "kg"
+                },
+                {
+                  "content": "Quelle fraction du riz de départ reste-t-il à la fin de la journée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Transformer : il reste 24 kg sur 120 kg, soit $\\dfrac{24}{120}$. Étape 2 — Calculer : on divise le haut et le bas par 24. Étape 3 — Simplifier : $\\dfrac{24}{120} = \\dfrac{1}{5}$. La fraction $\\dfrac{1}{4}$ est celle qui restait à midi, avant le service du soir.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{20}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu calcules avec des puissances dans quatre situations.",
+              "hint": "Une puissance négative est un inverse, pas un nombre négatif.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le résultat de $2^3 \\times 2^{-1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base 2 est commune, c'est un produit. Étape 2 — Appliquer : on additionne les exposants, $3 + (-1) = 2$. Étape 3 — Calculer : $2^2 = 4$. L'écriture $2^{-3}$ multiplie les exposants, et $2^4$ oublie le signe du second exposant.",
+                  "answers": [
+                    {
+                      "content": "$2^{-3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2^{-2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le résultat de $\\dfrac{(5^2)^3}{5^4}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base 5 est commune, il y a une puissance de puissance puis un quotient. Étape 2 — Appliquer : $(5^2)^3 = 5^{2 \\times 3} = 5^6$, puis $\\dfrac{5^6}{5^4} = 5^{6-4}$. Étape 3 — Calculer : $5^2 = 25$. L'écriture $5^{10}$ additionne les exposants au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "$5^{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5^{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5^{-2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5^{2}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Écris $4 \\times 10^{-1}$ sous forme décimale.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le décimal est 4 et la puissance de 10 est $10^{-1}$. Étape 2 — Appliquer : $10^{-1} = \\dfrac{1}{10} = 0{,}1$. Étape 3 — Calculer : $4 \\times 0{,}1 = 0{,}4$.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Complète : $\\dfrac{10^7}{10^4} = 10^{___}$ (écris l'exposant).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la base 10 est commune, c'est un quotient. Étape 2 — Appliquer : on soustrait les exposants, $7 - 4$. Étape 3 — Calculer : $7 - 4 = 3$, donc $10^3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $3^{-2}$ est un nombre négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la base 3 est positive et l'exposant est négatif. Étape 2 — Appliquer : $3^{-2} = \\dfrac{1}{3^2}$. Étape 3 — Calculer : $\\dfrac{1}{9}$, un nombre positif. L'affirmation est fausse : un exposant négatif ne rend pas le nombre négatif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un enclos carré a une aire de 98 m². On prendra $\\sqrt{2} \\approx 1{,}4$ pour les valeurs approchées.",
+              "hint": "Le côté d'un carré d'aire $A$ est $\\sqrt{A}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la longueur du côté de l'enclos, sous la forme simplifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : le côté vaut $\\sqrt{98}$ et $98 = 49 \\times 2$, avec 49 carré parfait. Étape 2 — Séparer : $\\sqrt{98} = \\sqrt{49} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{49} = 7$, donc le côté est $7\\sqrt{2}$ m. L'écriture $49\\sqrt{2}$ oublie de prendre la racine de 49.",
+                  "answers": [
+                    {
+                      "content": "$7\\sqrt{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$49\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14\\sqrt{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7\\sqrt{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le périmètre de l'enclos, sous la forme simplifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : le côté est $7\\sqrt{2}$ m. Étape 2 — Séparer : le périmètre est quatre fois le côté, $4 \\times 7\\sqrt{2}$. Étape 3 — Calculer : $4 \\times 7 = 28$, donc le périmètre est $28\\sqrt{2}$ m. Le résultat $7\\sqrt{2}$ est le côté seul.",
+                  "answers": [
+                    {
+                      "content": "$7\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$28\\sqrt{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$14\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "28 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $\\sqrt{2} \\approx 1{,}4$, donne une valeur approchée du côté de l'enclos.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Décomposer : le côté est $7\\sqrt{2}$ m. Étape 2 — Séparer : on remplace $\\sqrt{2}$ par 1,4. Étape 3 — Calculer : $7 \\times 1{,}4 = 9{,}8$. Le côté est environ 9,8 m.",
+                  "answers": [
+                    {
+                      "content": "9,8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Complète : $\\sqrt{50} = ___\\sqrt{2}$ (écris le nombre entier qui manque).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Décomposer : $50 = 25 \\times 2$ et 25 est un carré parfait. Étape 2 — Séparer : $\\sqrt{50} = \\sqrt{25} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{25} = 5$, donc $\\sqrt{50} = 5\\sqrt{2}$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $\\sqrt{98} = 49$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : $98 = 49 \\times 2$. Étape 2 — Séparer : $\\sqrt{98} = \\sqrt{49} \\times \\sqrt{2}$. Étape 3 — Calculer : $7\\sqrt{2} \\approx 9{,}8$, loin de 49. Le nombre 49 est celui dont 7 est la racine : confondre racine et carré est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un lycée de Korhogo compte 800 élèves. 60 % sont des filles. Parmi les filles, 25 % sont en 2nde.",
+              "hint": "Pour un pourcentage d'un pourcentage, calcule d'abord la première part.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien le lycée compte-t-il de filles ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : quantité de départ 800 élèves, pourcentage 60 %. Étape 2 — Traduire : 60 % s'écrit $0{,}6$. Étape 3 — Calculer : $800 \\times 0{,}6 = 480$. Étape 4 — Conclure : il y a 480 filles.",
+                  "answers": [
+                    {
+                      "content": "480",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Combien de filles sont en 2nde ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : quantité de départ 480 filles, pourcentage 25 %. Étape 2 — Traduire : 25 % s'écrit $0{,}25$. Étape 3 — Calculer : $480 \\times 0{,}25 = 120$. Étape 4 — Conclure : 120 filles sont en 2nde. Prendre 25 % de 800 (200) serait une erreur de base.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Quel pourcentage des 800 élèves du lycée sont des filles de 2nde ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : partie 120 élèves, total 800 élèves. Étape 2 — Traduire : le taux est $\\dfrac{120}{800} \\times 100$. Étape 3 — Calculer : $\\dfrac{120}{800} = 0{,}15$, donc 15. Étape 4 — Conclure : 15 % des élèves sont des filles de 2nde. Le nombre 25 % est une part des filles seulement.",
+                  "answers": [
+                    {
+                      "content": "25 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "60 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "15 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "85 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien le lycée compte-t-il de garçons ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : 800 élèves en tout, dont 480 filles. Étape 2 — Traduire : les garçons sont les élèves qui ne sont pas des filles. Étape 3 — Calculer : $800 - 480 = 320$. Étape 4 — Conclure : il y a 320 garçons.",
+                  "answers": [
+                    {
+                      "content": "320",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "garçons"
+                },
+                {
+                  "content": "Le pourcentage de garçons dans le lycée est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : partie 320 garçons, total 800 élèves. Étape 2 — Traduire : le taux est $\\dfrac{320}{800} \\times 100$. Étape 3 — Calculer : $\\dfrac{320}{800} = 0{,}4$, donc 40. Étape 4 — Conclure : 40 % des élèves sont des garçons. On peut aussi retrancher : $100 - 60 = 40$.",
+                  "answers": [
+                    {
+                      "content": "60 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "25 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 %",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
