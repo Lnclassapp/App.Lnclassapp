@@ -25,6 +25,9 @@
 - [ ] 2026-11-12 · hors-connexion · Entraînement de notion (« Vérifier » dans la leçon) hors ligne ? — appliqué : non (réseau demandé, hors ADR) ; autres : corrigé de l'entraînement dans le paquet ; recommandé : chantier de suivi
 - [ ] 2026-11-12 · hors-connexion Lot 0 · Bandeau visible aussi sur une page servie du cache alors que `navigator.onLine` est vrai (réseau capricieux) ? — appliqué : oui, visible si hors ligne **ou** meta `lnclass-offline-served` présente (texte « Hors ligne. … Gardée le … ») ; autres : seulement si `onLine === false` (UDR §3.1 à la lettre) ; recommandé : appliqué
 - [ ] 2026-11-12 · hors-connexion Lot 0 · Où se rangent les 30 jours des copies en file (rejetées, en attente) ? — appliqué : `store.js` n'expire que les paquets (`getPack`) ; l'expiration des copies est laissée au Lot C (`listCopies` ne supprime jamais rien, pour ne pas perdre une copie en silence) ; autres : expirer à la lecture ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot A · Déconnexion alors que la file de copies n'a pas pu partir (envoi échoué ou délai de 10 s dépassé) : que devient la file ? — appliqué : pages et caches purgés, mais la base garde les copies en attente (`keepQueue`), la déconnexion part quand même, l'erreur va en console ; autres : tout purger (copies perdues), bloquer la déconnexion ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot A · Page du réseau dont la meta de clé diffère de la clé reçue par le programme (première page après un changement de compte) — appliqué : non gardée (la page suivante, après `postMessage`, l'est) ; autres : adopter la clé de la page ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot A · Réponses de frame Turbo (`Turbo-Frame`) portant l'en-tête keep (le concern ne les distingue pas) — appliqué : le programme ne les garde ni ne les sert, pour qu'un morceau de page n'écrase jamais la page entière ; autres : le concern ne pose pas l'en-tête sur une requête de frame (hors fiche, fichier du Lot 0) ; recommandé : appliqué, et reprise dans le concern à une retouche
 
 ## Retouches
 
@@ -42,7 +45,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Lot A : le programme d'arrière-plan est testé dans un `vm` (Cache Storage simulé), pas dans un navigateur ; son exécution dans le WebView de l'app Android n'a pas pu être vérifiée dans le dépôt, à contrôler sur un appareil avant la fusion de la vague.
 
 ## Dette laissée derrière
 

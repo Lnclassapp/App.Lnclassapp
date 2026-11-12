@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::SessionsController
 # Rôle : connexion par numéro et PIN, déconnexion ; échec re-rendu en 422 (le champ PIN ne renvoie jamais sa valeur), dont le refus d'une coque Android
-# ADR  : 0026, 0050, 0084 (§4.5), 0086 (§4.5) · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique), 0080, 0082 (§3.4)
+# ADR  : 0026, 0050, 0084 (§4.5), 0086 (§4.5), hors-connexion (§4.2) · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique), 0080, 0082 (§3.4)
 module Identity
   class SessionsController < ApplicationController
     # Lien du refus : la fiche Play Store de l'app proposée quand elle est publiée, sinon le site (ADR-0086 §4.5).
@@ -34,6 +34,9 @@ module Identity
 
     def destroy
       terminate_session
+      # Filet de la purge JavaScript (hors-connexion §4.2) : le navigateur vide son cache. Jamais « storage » : il désinscrirait
+      # le programme d'arrière-plan et effacerait les files d'autres comptes sur l'appareil.
+      response.set_header("Clear-Site-Data", '"cache"')
       redirect_to main_app.root_path, notice: t(".signed_out"), status: :see_other
     end
 

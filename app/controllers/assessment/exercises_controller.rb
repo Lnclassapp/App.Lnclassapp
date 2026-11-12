@@ -1,10 +1,11 @@
 # 🌐 DELIVERY · Assessment::ExercisesController
 # Rôle : le sujet d'un exercice (AS-02), feuille mélangée de la graine de l'exercice ; propositions correctes pour l'équipe et l'enseignant, jamais pour l'élève (AS-39) ;
 #        bascules d'assignation de l'enseignant vers ses classes du niveau du cours (RE-22)
-# ADR  : 0026, 0028, 0054, 0072, 0094, 0112, 0113, 0115 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · sécurité n° 29
+# ADR  : 0026, 0028, 0054, 0072, 0094, 0112, 0113, 0115, hors-connexion (§4.1) · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · sécurité n° 29
 module Assessment
   class ExercisesController < AuthenticatedController
     include ReadsOwnLevel
+    keep_offline only: :show # hors-connexion §4.1 : le sujet déjà ouvert reste lisible sans réseau
 
     def show
       exercise = Repositories::Assessment::ExerciseRepository.new.find_by_public_id(public_id: params[:public_id])
