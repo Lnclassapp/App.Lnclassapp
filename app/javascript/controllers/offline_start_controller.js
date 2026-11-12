@@ -1,0 +1,77 @@
+// ⚡ FRONT · offline-start — le bouton « Commencer » d'un exercice : en ligne il range le paquet de corrigé, hors ligne il mène à la copie ou se désactive
+// Rôle : en ligne, GET du paquet (même origine) rangé dans la base locale de la clé, puis la copie hors ligne est demandée une fois pour que le programme d'arrière-plan la garde ; hors ligne, paquet présent → visite de la copie, absent → bouton désactivé et message
+// ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4) · UDR : hors-connexion §3.3 · contrat store.js gelé · sans JavaScript ou en ligne, le formulaire part tel quel
+import { Controller } from "@hotwired/stimulus"
+import { currentKey, getPack, putPack } from "../offline/store.js"
+
+export default class extends Controller {
+  static targets = [ "button", "unavailable" ]
+  static values = { exercise: String, packUrl: String, copyUrl: String }
+
+  connect() {
+    this.refresh = this.refresh.bind(this)
+    window.addEventListener("online", this.refresh)
+    window.addEventListener("offline", this.refresh)
+    this.refresh()
+  }
+
+  disconnect() {
+    window.removeEventListener("online", this.refresh)
+    window.removeEventListener("offline", this.refresh)
+  }
+
+  async refresh() {
+    if (navigator.onLine === false) {
+      this.packed = await this.hasPack()
+      this.available(this.packed)
+      return
+    }
+
+    this.available(true)
+    await this.keepPack()
+  }
+
+  // Hors ligne seulement : mène à la copie sans réseau, quand le paquet est là ; sinon rien ne part.
+  go(event) {
+    if (navigator.onLine !== false) return
+
+    event.preventDefault()
+    if (!this.packed) return
+
+    if (globalThis.Turbo) globalThis.Turbo.visit(this.copyUrlValue)
+    else window.location.assign(this.copyUrlValue)
+  }
+
+  async hasPack() {
+    try {
+      const key = currentKey()
+      return Boolean(key && await getPack(key, this.exerciseValue))
+    } catch (error) {
+      console.warn("exercice hors ligne : base locale illisible", error)
+      return false
+    }
+  }
+
+  // En ligne : le paquet (questions, corrigé, jeton) puis la copie hors ligne, que le programme d'arrière-plan garde au passage.
+  // Un refus (accès, limite, réseau) ne gêne pas le démarrage : l'exercice se fait en ligne comme avant.
+  async keepPack() {
+    try {
+      const key = currentKey()
+      if (!key) return
+
+      const response = await fetch(this.packUrlValue, { credentials: "same-origin", headers: { Accept: "application/json" } })
+      if (!response.ok) return
+
+      await putPack(key, await response.json())
+      await fetch(this.copyUrlValue, { credentials: "same-origin", headers: { Accept: "text/html" } })
+    } catch (error) {
+      console.warn("exercice hors ligne : paquet non rangé", error)
+    }
+  }
+
+  available(ok) {
+    this.buttonTarget.disabled = !ok
+    this.buttonTarget.setAttribute("aria-disabled", String(!ok))
+    this.unavailableTarget.hidden = ok
+  }
+}

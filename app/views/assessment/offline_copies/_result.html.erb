@@ -1,0 +1,35 @@
+<%# 🌐 UI · assessment/offline_copies/_result — la note provisoire d'une copie rendue hors ligne : squelette que offline_copy_controller remplit (note, verdicts, corrigé) %>
+<%# Rôle : « Ta note » + « Provisoire » (texte, jamais la couleur seule), le pourcentage, une ligne par question avec bonne réponse et explication ; focus sur le titre à l'affichage %>
+<%# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4) · UDR : hors-connexion §3.5 · Stimulus : offline-copy (clone ce modèle) · locals: (exercise_public_id:) %>
+<section id="offline_result" aria-labelledby="offline_result_title">
+  <div class="flex items-center gap-2">
+    <h1 id="offline_result_title" tabindex="-1" class="font-display text-2xl font-extrabold text-ink focus:outline-none"><%= t("offline.result.title") %></h1>
+    <span class="rounded-full bg-warning-soft px-2 py-0.5 text-xs font-bold text-warning"><%= t("offline.result.provisional") %></span>
+  </div>
+  <p class="mt-1 font-display text-4xl font-extrabold tabular-nums" data-percent><%= t("offline.result.percent", percent: "%{percent}") %></p>
+  <p class="mt-2 text-sm text-mute"><%= t("offline.result.explain") %></p>
+  <ol class="mt-6 grid list-none gap-4" data-questions></ol>
+  <div class="mt-6">
+    <%= ui_button t("offline.result.back"), href: exercise_path(exercise_public_id), variant: :secondary %>
+  </div>
+
+  <%# Une ligne par question : cloné par le contrôleur, jamais rendu tel quel. %>
+  <template data-item>
+    <li class="rounded-card border border-line bg-white p-4 shadow-card">
+      <p class="flex items-center gap-2 text-sm font-medium">
+        <span data-icon="correct" hidden class="text-success"><%= ui_icon "check-circle", variant: :mini, size: :sm %></span>
+        <span data-icon="wrong" hidden class="text-warning"><%= ui_icon "x-circle", variant: :mini, size: :sm %></span>
+        <span data-verdict data-correct-text="<%= t("offline.result.verdict.correct") %>" data-wrong-text="<%= t("offline.result.verdict.wrong") %>" data-unscored-text="<%= t("offline.result.verdict.unscored") %>"></span>
+      </p>
+      <p class="mt-2 font-medium whitespace-pre-line text-ink" data-content></p>
+      <div class="mt-3 rounded-ln bg-success-soft px-3 py-2 text-sm text-ink" data-solution hidden>
+        <p class="font-medium text-success"><%= t("assessment.session_results.question_review.right_answer") %></p>
+        <p class="mt-1 whitespace-pre-line" data-solution-text></p>
+      </div>
+      <div class="mt-3 flex gap-2 rounded-ln bg-info-soft px-3 py-2 text-sm text-ink" data-explanation hidden>
+        <%= ui_icon "light-bulb", variant: :mini, class: "mt-0.5 text-info" %>
+        <p class="min-w-0 flex-1 whitespace-pre-line" data-explanation-text></p>
+      </div>
+    </li>
+  </template>
+</section>

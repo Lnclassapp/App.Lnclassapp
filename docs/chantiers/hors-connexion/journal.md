@@ -25,6 +25,15 @@
 - [ ] 2026-11-12 · hors-connexion · Entraînement de notion (« Vérifier » dans la leçon) hors ligne ? — appliqué : non (réseau demandé, hors ADR) ; autres : corrigé de l'entraînement dans le paquet ; recommandé : chantier de suivi
 - [ ] 2026-11-12 · hors-connexion Lot 0 · Bandeau visible aussi sur une page servie du cache alors que `navigator.onLine` est vrai (réseau capricieux) ? — appliqué : oui, visible si hors ligne **ou** meta `lnclass-offline-served` présente (texte « Hors ligne. … Gardée le … ») ; autres : seulement si `onLine === false` (UDR §3.1 à la lettre) ; recommandé : appliqué
 - [ ] 2026-11-12 · hors-connexion Lot 0 · Où se rangent les 30 jours des copies en file (rejetées, en attente) ? — appliqué : `store.js` n'expire que les paquets (`getPack`) ; l'expiration des copies est laissée au Lot C (`listCopies` ne supprime jamais rien, pour ne pas perdre une copie en silence) ; autres : expirer à la lecture ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot B · Contrat pour le Lot C (ordre d'affichage) : une copie hors ligne n'a pas de session, donc pas de graine de mélange — appliqué : graine = identifiant de l'exercice (`AnswerShuffle.for(session_id: exercise.id, question_id:, ids: question.answer_ids, avoid: (ids_by_position pour ordering et matching))`) ; les `display_order` et `blanks` (liste) de la copie sont des indices dans ce mélange, que le paquet porte en clair (`questions[].display`) ; le serveur du Lot C relit les indices avec la même graine ; autres : un identifiant de proposition par réponse (CopyInput ne le lit pas) ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot B · Empreinte du paquet (`digest`) : calculée par `Queries::Assessment::OfflinePackQuery.digest(questions)` (SHA-256 du JSON canonique, clés triées, 16 hex) sur les questions du paquet — appliqué : le Lot C compare avec `OfflinePackQuery.new.call(public_id:).digest` (lecture seule) ; autres : un calcul dans le domaine sur l'entité `Exercise` (fichier hors fiche) ; recommandé : appliqué, à déplacer au domaine si le Lot C préfère un port
+- [ ] 2026-11-12 · hors-connexion Lot B · Réponse mal formée hors ligne (deux cases cochées sur « une seule », texte illisible) — appliqué : elle compte fausse et n'est pas rangée dans la copie (la copie en ligne la refuserait en 422 ; ici le serveur n'a pas à perdre toute la copie) ; autres : bloquer le rendu avec un message par question ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot B · Libellé « Bonne réponse » du résultat provisoire absent de `offline.fr.yml` (locale gelée) — appliqué : clé existante `assessment.session_results.question_review.right_answer` ; autres : nouvelle clé `offline.result.right_answer` ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot B · Paquet absent au rendu (page gardée mais paquet purgé ou expiré) — appliqué : message `offline.copy.not_saved` (la clé la plus proche), rien n'est rangé, réponses laissées ; autres : message dédié « Ouvre l'exercice avec du réseau » (`offline.start.unavailable`) ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot B · `exercise_sessions/show.html.erb` est hors fiche : la feuille de la copie hors ligne en reprend la structure (partials par type partagés, `_kinds/*`), sans en extraire un partial — appliqué : duplication de ~60 lignes, rendu en ligne inchangé ; autres : extraire un partial commun (touche le rendu en ligne, à faire dans un lot de refactor) ; recommandé : extraire plus tard
+- [ ] 2026-11-12 · hors-connexion Lot B · Copie hors ligne : pas de brouillon ni de fenêtre « questions vides » (UDR §3.4 n'en parle pas) — appliqué : « Vérifier ma copie » rend tout de suite, les questions vides comptent fausses ; autres : reprendre `assessment--copy` ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot B · Pause « Recommencer » hors ligne — appliqué : calculée sur les seules copies de l'appareil (en file, non rejetées) ; le serveur la rejoue à l'envoi (R3) ; autres : ne rien faire hors ligne ; recommandé : appliqué
+- [ ] 2026-11-12 · hors-connexion Lot B · Images de questions hors ligne — appliqué : non gardées (`no-store`, dette déjà notée) : la copie hors ligne montre le texte de remplacement du navigateur ; autres : revoir ADR-0031 ; recommandé : chantier de suivi
 
 ## Retouches
 
@@ -42,7 +51,9 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Lot B : `offline-start` demande aussi la copie hors ligne en `fetch` (Accept `text/html`) après avoir rangé le paquet : c'est ce qui la fait garder par le programme d'arrière-plan du Lot A. Sans le Lot A, la copie hors ligne n'est ouvrable qu'après une visite en ligne gardée.
+- Lot B : un contrôleur Stimulus ne voit que les cibles DOM qu'il contient : le compteur sticky de la copie hors ligne est donc dans le `form` (le contrôleur y est), contrairement à la copie en ligne (contrôleur sur le conteneur).
+- Lot B : `Numeric.parse` et `FillBlank.normalize` ont des cas limites (espace fine insécable, moins Unicode, ligatures, apostrophes) : la table `grading_cases.json` les fige pour Ruby et Node.
 
 ## Dette laissée derrière
 
