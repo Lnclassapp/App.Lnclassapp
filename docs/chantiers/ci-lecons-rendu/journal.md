@@ -15,7 +15,7 @@
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
 - [x] 2026-11-12 · ci-lecons-rendu · Que rend un train ? — tranché par le porteur : les leçons nouvelles ou modifiées seulement (2 ou 3 parts), sinon 2 leçons témoins.
-- [ ] 2026-11-12 · ci-lecons-rendu · Une régression des vues sur une leçon ancienne n'est plus vue au train (seulement par les 2 témoins). Ajouter un rendu complet programmé (une nuit par semaine sur Develop, rouge = issue) ? — appliqué : non ; autres : oui ; recommandé : oui, coût ≈ 99 min de machine par semaine.
+- [x] 2026-11-12 · ci-lecons-rendu · Rendu complet hebdomadaire ? — tranché par le porteur : rendu complet seulement quand le train touche aux écrans (pas d'hebdomadaire).
 - [ ] 2026-11-12 · ci-lecons-rendu · 10 leçons par part (décision du porteur) : ≈ 250 s pour 300 s ; sur #541 une part de 9 leçons a été coupée (installation de 1 min 40). — appliqué : 10 ; autres : 7 ; recommandé : garder 10 et repasser à 7 si une part est coupée au prochain train.
 
 ## Retouches

@@ -74,6 +74,22 @@ class CiPlanTest < Minitest::Test
     assert_equal "${{ needs.plan.outputs.lecons_files }}", env["LECONS"], "la liste vient de « plan », jamais « tout »"
   end
 
+  # Chantier ci-lecons-rendu, lot B (décision du porteur du 2026-11-12) : un train qui touche aux écrans rend les leçons
+  # toutes (« tout », ⌈nombre/10⌉ parts) ; sinon la règle du lot A (leçons changées, sinon témoins) reste inchangée.
+  SCREENS = "^(app/(views|javascript|assets|helpers)/|app/controllers/catalog/|app/infrastructure/(queries|repositories)/catalog/|" \
+            'app/domain/(entities|use_cases|dtos)/catalog/|package\.json$|yarn\.lock$|test/system/catalog/lesson_rendering_test\.rb$)'
+
+  def test_a_train_that_touches_the_screens_renders_every_lesson
+    changes = steps("plan").find { it["id"] == "changes" }["run"]
+
+    assert_includes changes, "screens='#{SCREENS}'", "l'expression des écrans, nommée"
+    assert_includes changes, "lecons_files=tout"
+    assert_includes changes, 'grep -m1 -E "$screens"'
+    assert_includes changes, "docs/contenus/lecons-traitees/*/*/*.json"
+    assert_includes changes, "parts=$(( (count + 9) / 10 ))"
+    assert_operator changes.index("lecons_files=tout"), :<, changes.index('echo "lecons_files=$lecons_files"')
+  end
+
   # ADR-0069 §9 : the two jobs add up to bin/ci: on a full run (promotion, drawn pull request) every group once,
   # nothing twice; any other run that replays the suite leaves out the import performance tests only (ADR-0039),
   # checked again at the promotion. The unit suite plays in UNIT_PARTS parts, every file in one part only.

@@ -18,6 +18,17 @@ Décision du porteur (2026-11-12) : au train, on ne rend **que les leçons nouve
 
 **Done quand** : la tâche `lecons` d'un train sans leçon changée coûte **1 part, ≤ 3 min de machine** (avant : 32 parts, 98,7 min) ; un train avec N leçons changées en coûte ⌈N/10⌉ parts, chacune < 5 min ; tests de garde verts ; aucun défaut détecté n'est retiré de la vérification.
 
+## Lot B — Rendu complet quand le train touche aux écrans
+
+Décision du porteur (2026-11-12) : le train rend les 223 leçons **seulement quand il touche aux écrans** ; sinon la règle du lot A est inchangée. Pas de rendu hebdomadaire.
+
+**Fichiers** : `.github/workflows/ci.yml` (étape `changes` du job `plan`, commentaire du job `lecons`), `test/guards/ci_plan_test.rb`. `Selection.call` gère déjà `LECONS=tout` avec `LECONS_PART` : inchangé.
+
+- Variable shell `screens` (expression étendue : `app/(views|javascript|assets|helpers)/`, `app/controllers/catalog/`, queries et repositories `catalog`, entités, cas d'usage et DTO `catalog`, `package.json`, `yarn.lock`, `lesson_rendering_test.rb`).
+- Un fichier de la PR correspond : `lecons_files=tout`, nombre = les `docs/contenus/lecons-traitees/*/*/*.json` de l'arbre, parts = ⌈nombre/10⌉, un `echo` cite le premier fichier d'écran. Diff illisible : témoins + `::warning::`, comme au lot A.
+
+**Done quand** : une PR qui touche une vue donne `lecons_files=tout` et 23 parts ; une leçon seule ou de la doc seule donne les mêmes sorties qu'au lot A ; `ci_plan_test.rb` fixe l'expression et la branche `tout` ; tests de sélection verts.
+
 ## Contrat d'exécution
 
 1. Mesure avant : dans `memo.md` (run #541, `cf0483e70`).

@@ -105,9 +105,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
         run: |
+          # Les écrans : ce qui peut changer le rendu d'une leçon (vues, JavaScript, styles, aides, le catalogue qui la lit, les
+          # dépendances front, le test de rendu). Un fichier de cette liste dans la PR = rendu de toutes les leçons.
+          screens='^(app/(views|javascript|assets|helpers)/|app/controllers/catalog/|app/infrastructure/(queries|repositories)/catalog/|app/domain/(entities|use_cases|dtos)/catalog/|package\.json$|yarn\.lock$|test/system/catalog/lesson_rendering_test\.rb$)'
           code=true
           lessons=true
           changed=
+          files=
           if files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)') && [ -n "$files" ]; then
             echo "$files"
             echo "$files" | grep -qvE '^docs/|\.md$' || code=false
@@ -126,7 +130,14 @@ jobs:
             lecons_files=$(grep -vE '^[[:space:]]*(#|$)' script/ci/lecons_temoins.txt | paste -sd, -)
             [ -n "$lecons_files" ] || { echo "::error::script/ci/lecons_temoins.txt ne liste aucune leçon témoin"; exit 1; }
           fi
-          count=$(echo "$lecons_files" | tr ',' '\n' | wc -l)
+          # chantier ci-lecons-rendu, lot B : un train qui touche aux écrans rend les leçons toutes ; le premier fichier trouvé est cité.
+          if [ -n "$files" ] && screen=$(echo "$files" | grep -m1 -E "$screens"); then
+            echo "Rendu complet des leçons : la PR touche aux écrans (premier fichier : $screen)."
+            lecons_files=tout
+            count=$(ls docs/contenus/lecons-traitees/*/*/*.json | wc -l)
+          else
+            count=$(echo "$lecons_files" | tr ',' '\n' | wc -l)
+          fi
           parts=$(( (count + 9) / 10 ))
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
           echo "lessons=$lessons" | tee -a "$GITHUB_OUTPUT"
@@ -273,8 +284,9 @@ jobs:
   # par un élève à 390 px puis sur ordinateur, avec chacune de ses feuilles (test/system/catalog/lesson_rendering_test.rb).
   # Règle (chantier ci-lecons-rendu) : le train ne rend que les leçons v3 nouvelles ou modifiées de la PR, 10 au plus par part
   # (≈ 20 s par leçon + ≈ 50 s d'installation, sous les 5 minutes), soit ⌈N/10⌉ parts calculées par « plan ». Sans leçon changée
-  # (ou diff illisible, avec un avertissement), les 2 leçons témoins de script/ci/lecons_temoins.txt, en 1 part. Avant : les 223
-  # leçons en 32 parts, 98,7 min de machine par train (#541). Le rendu complet reste possible à la main (LECONS=tout).
+  # (ou diff illisible, avec un avertissement), les 2 leçons témoins de script/ci/lecons_temoins.txt, en 1 part. Exception (lot B) :
+  # quand la PR touche aux écrans (expression « screens » de l'étape changes), « plan » passe LECONS=tout et rend toutes les
+  # leçons, ⌈nombre/10⌉ parts. Avant : les 223 leçons en 32 parts, 98,7 min de machine par train (#541). À la main : LECONS=tout.
   # Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
   lecons:
     name: lecons ${{ matrix.part }}/${{ needs.plan.outputs.lecons_n }}
