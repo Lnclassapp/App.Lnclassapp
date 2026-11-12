@@ -1,4 +1,4 @@
-# UDR-XXXX : Médailles — les écrans de l'élève
+# UDR-0165 : Médailles — les écrans de l'élève
 <!-- index
 titre: Médailles dans les écrans de l'élève
 statut: Accepté

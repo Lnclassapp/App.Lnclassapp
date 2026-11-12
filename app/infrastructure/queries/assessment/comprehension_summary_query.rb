@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::ComprehensionSummaryQuery
 # Rôle : résumé de la compréhension de chaque exercice assigné d'une classe : catégorie dominante (meilleurs scores) et médailles enregistrées par palier
-# ADR  : 0026, 0079, 0097 (§4.5), XXXX-medailles-lues-a-la-cloture · UDR : 0072 (§3.4) · deux lectures (AssignmentScores, médailles), quel que soit le nombre d'assignations
+# ADR  : 0026, 0079, 0097 (§4.5), 0129-medailles-lues-a-la-cloture · UDR : 0072 (§3.4) · deux lectures (AssignmentScores, médailles), quel que soit le nombre d'assignations
 module Queries
   module Assessment
     module ComprehensionSummaryQuery

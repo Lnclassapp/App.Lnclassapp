@@ -92,8 +92,8 @@ Aucune : toutes tranchées au grill (voir `memo.md`). Réversible, appliqué : l
 - [x] `memo.md` complet, section `Hors périmètre` non vide
 - [x] Grill fait : 5 lignes dans `Ce que le grill a révélé`
 - [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
-- [x] ADR écrit (`XXXX-medailles-lues-a-la-cloture`, changement de source de lecture)
-- [x] UDR écrite pour la vue modifiée (`XXXX-bronze-sans-fete-sous-48`)
+- [x] ADR écrit (`0129-medailles-lues-a-la-cloture`, changement de source de lecture)
+- [x] UDR écrite pour la vue modifiée (`0163-bronze-sans-fete-sous-48`)
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord

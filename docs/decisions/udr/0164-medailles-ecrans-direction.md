@@ -1,4 +1,4 @@
-# UDR-XXXX : Médailles — les écrans de la direction
+# UDR-0164 : Médailles — les écrans de la direction
 <!-- index
 titre: Médailles dans les écrans de la direction
 statut: Accepté

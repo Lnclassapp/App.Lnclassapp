@@ -1,4 +1,4 @@
-# ADR-XXXX : Les modèles de langage passent par un port unique, servi par OpenRouter
+# ADR-0130 : Les modèles de langage passent par un port unique, servi par OpenRouter
 <!-- index
 titre: Modèles de langage par OpenRouter
 statut: Accepté

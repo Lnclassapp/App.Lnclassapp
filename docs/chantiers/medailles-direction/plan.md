@@ -10,4 +10,4 @@
 
 ## Lot B — UDR et journal (même commit)
 
-UDR `XXXX-medailles-ecrans-direction`, journal avec `## À trancher`.
+UDR `0164-medailles-ecrans-direction`, journal avec `## À trancher`.

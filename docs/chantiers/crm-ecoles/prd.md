@@ -214,11 +214,11 @@ Scénario: CA-30 rapport sans donnée
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-contexte-crm-suivi-des-ecoles — nouveau contexte borné, tables, étape calculée, policy, journal d'audit.
-- ADR-XXXX-modeles-de-langage-par-openrouter — port des modèles, adaptateur OpenRouter sans nouvelle gemme, générations asynchrones, enregistrement vocal.
-- UDR-XXXX-bloc-suivi-de-la-fiche-etablissement — bloc « Suivi » de la fiche.
-- UDR-XXXX-pipeline-et-relances — filtres et colonne de la liste, carte de l'Accueil, page « Mes relances ».
-- UDR-XXXX-assistants-du-suivi — briefing, compte rendu dicté, brouillon WhatsApp, rapport pédagogique.
+- ADR-0128 — nouveau contexte borné, tables, étape calculée, policy, journal d'audit.
+- ADR-0130 — port des modèles, adaptateur OpenRouter sans nouvelle gemme, générations asynchrones, enregistrement vocal.
+- UDR-0162 — bloc « Suivi » de la fiche.
+- UDR-0168 — filtres et colonne de la liste, carte de l'Accueil, page « Mes relances ».
+- UDR-0160 — briefing, compte rendu dicté, brouillon WhatsApp, rapport pédagogique.
 
 ## 7. Mesures
 

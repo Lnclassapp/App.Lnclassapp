@@ -1,8 +1,8 @@
-# UDR-XXXX : Le bloc « Suivi » de la fiche établissement
+# UDR-0162 : Le bloc « Suivi » de la fiche établissement
 <!-- index
 titre: Bloc « Suivi » de la fiche établissement
 statut: Accepté
-adr-lie: [XXXX](../adr/XXXX-contexte-crm-suivi-des-ecoles.md)
+adr-lie: [0128](../adr/0128-contexte-crm-suivi-des-ecoles.md)
 problematique: Où et comment l'équipe lit et écrit le suivi d'une école (étape, responsable, usage, contacts, relances, journal) sans alourdir la fiche
 -->
 
@@ -11,7 +11,7 @@ problematique: Où et comment l'équipe lit et écrit le suivi d'une école (ét
 | **Statut** | Accepté |
 | **Date** | 2026-11-04 |
 | **Chantier** | `docs/chantiers/crm-ecoles` |
-| **ADR lié** | ADR-XXXX-contexte-crm-suivi-des-ecoles |
+| **ADR lié** | ADR-0128 |
 | **Remplacé par** | — |
 
 ---
@@ -59,7 +59,7 @@ Un bloc « Suivi » placé **juste sous l'en-tête** de la fiche, chargé dans u
 
 **Relances ouvertes de l'école** (`_follow_ups.html.erb`)
 
-- Liste `<ul role="list">`, triée par échéance. Ligne : échéance (« Aujourd'hui », « Demain », date courte ; si dépassée `ui_badge("Échue", tone: :error, size: :sm)`), destinataire (« destinataire indisponible » en `text-warning` le cas échéant), motif, puis actions : `ui_button("Faite", variant: :secondary, size: :sm)` (PATCH, Turbo Stream sur `school_crm_follow_ups`), `ui_dropdown` ⋮ avec « Réattribuer » (modale) et « Rédiger un message » (UDR-XXXX-assistants-du-suivi).
+- Liste `<ul role="list">`, triée par échéance. Ligne : échéance (« Aujourd'hui », « Demain », date courte ; si dépassée `ui_badge("Échue", tone: :error, size: :sm)`), destinataire (« destinataire indisponible » en `text-warning` le cas échéant), motif, puis actions : `ui_button("Faite", variant: :secondary, size: :sm)` (PATCH, Turbo Stream sur `school_crm_follow_ups`), `ui_dropdown` ⋮ avec « Réattribuer » (modale) et « Rédiger un message » (UDR-0160).
 - Bouton « Nouvelle relance » (`variant: :secondary`, icône `plus`) → modale : date (défaut : dans 3 jours), destinataire (défaut : le responsable, sinon moi), motif.
 - Vide : `ui_empty_state(title: "Aucune relance prévue", icon: "bell")`.
 

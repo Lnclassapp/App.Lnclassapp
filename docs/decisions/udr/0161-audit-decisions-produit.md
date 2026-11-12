@@ -1,4 +1,4 @@
-# UDR-XXXX : Décisions produit de l'audit du 8 novembre — fiche élève de la direction, leçon par adresse, jours de séance, « Voir plus » des leçons
+# UDR-0161 : Décisions produit de l'audit du 8 novembre — fiche élève de la direction, leçon par adresse, jours de séance, « Voir plus » des leçons
 <!-- index
 titre: Décisions produit de l'audit : fiche élève lue par la direction, leçon limitée aux matières de l'enseignant, jours de séance non vides, « Afficher plus » des leçons
 statut: Accepté *(porteur, 2026-11-08)*

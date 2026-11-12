@@ -1,4 +1,4 @@
-# UDR-XXXX : Médailles — le mot « Médaille » remplace « badge » ; les médailles remplacent notes, pourcentages et moyennes à l'écran
+# UDR-0167 : Médailles — le mot « Médaille » remplace « badge » ; les médailles remplacent notes, pourcentages et moyennes à l'écran
 <!-- index
 titre: Médailles à la place des notes, pourcentages et moyennes
 statut: Accepté

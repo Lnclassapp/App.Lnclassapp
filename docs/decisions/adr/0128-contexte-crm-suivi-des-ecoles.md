@@ -1,4 +1,4 @@
-# ADR-XXXX : Le suivi commercial des écoles vit dans un contexte borné `crm`
+# ADR-0128 : Le suivi commercial des écoles vit dans un contexte borné `crm`
 <!-- index
 titre: Contexte crm — suivi des écoles
 statut: Accepté
@@ -53,7 +53,7 @@ Troisième question : qui. La policy existante de gestion des établissements au
 | `crm_contacts` | `public_id`, `school_id`, `full_name` (≤ 80), `position` ∈ {`director`, `censor`, `educator`, `teacher`, `founder`, `other`}, `phone` (`^0[157][0-9]{8}$`, nul), `note` (≤ 500), `created_by_id`, `archived_at` | Retrait = `archived_at`, jamais de suppression |
 | `crm_interactions` | `public_id`, `school_id`, `author_id`, `kind` ∈ {`call`, `whatsapp`, `visit`, `demo`, `other`}, `occurred_at`, `contact_id` (nul), `contact_name` (copie), `outcome` ∈ {`positive`, `neutral`, `negative`}, `next_step` (≤ 200), `note` (≤ 2000), `source` ∈ {`manual`, `dictation`} | Ajout seul : aucune route de modification ni de suppression |
 | `crm_follow_ups` | `public_id`, `school_id`, `assignee_id`, `due_on`, `reason` (≤ 200), `status` ∈ {`open`, `done`}, `done_at`, `done_by_id`, `created_by_id`, `interaction_id` (nul) | Index `(assignee_id, status, due_on)` |
-| `crm_generations` | voir ADR-XXXX-modeles-de-langage-par-openrouter | — |
+| `crm_generations` | voir ADR-0130 | — |
 
 > Liens par identifiant public (Lot 0 bis) : `InteractionRepositoryPort#create(interaction:, contact_public_id: nil)` et `FollowUpRepositoryPort#create(follow_up:, interaction_public_id: nil)` résolvent l'identifiant en interne (même école) ; un identifiant inconnu donne `failure(:not_found)`, jamais un lien nul.
 

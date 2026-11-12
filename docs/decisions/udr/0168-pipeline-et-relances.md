@@ -1,8 +1,8 @@
-# UDR-XXXX : Le pipeline sur « Établissements », la carte « À relancer » et la page « Relances »
+# UDR-0168 : Le pipeline sur « Établissements », la carte « À relancer » et la page « Relances »
 <!-- index
 titre: Pipeline et relances
 statut: Accepté
-adr-lie: [XXXX](../adr/XXXX-contexte-crm-suivi-des-ecoles.md)
+adr-lie: [0128](../adr/0128-contexte-crm-suivi-des-ecoles.md)
 problematique: Comment l'équipe voit son pipeline et ses relances du jour sans nouvelle entrée dans la barre de navigation
 -->
 
@@ -11,7 +11,7 @@ problematique: Comment l'équipe voit son pipeline et ses relances du jour sans 
 | **Statut** | Accepté |
 | **Date** | 2026-11-04 |
 | **Chantier** | `docs/chantiers/crm-ecoles` |
-| **ADR lié** | ADR-XXXX-contexte-crm-suivi-des-ecoles |
+| **ADR lié** | ADR-0128 |
 | **Remplacé par** | — |
 
 ---
@@ -34,7 +34,7 @@ Le matin, un membre `admin` ou `field` veut savoir qui appeler aujourd'hui et po
   - « Étape » (`name="stage"`) : Toutes, Prospect, Démo faite, Inscrite, Active, Abonnée, Perdue.
   - « Responsable » (`name="owner"`) : Tous, Moi (`me`), Sans responsable (`none`), puis les membres `admin`/`field` (`public_id`).
   - Les filtres s'ajoutent à l'URL comme les autres (CA-21) et se conservent dans la pagination.
-- Ligne d'école : colonne « Étape » (`ui_badge`, tons de UDR-XXXX-bloc-suivi-de-la-fiche-etablissement, `size: :sm`) et colonne « Responsable » (nom ou « — »). À 390 px, le badge passe sous le nom de l'école, le responsable n'est pas affiché.
+- Ligne d'école : colonne « Étape » (`ui_badge`, tons de UDR-0162, `size: :sm`) et colonne « Responsable » (nom ou « — »). À 390 px, le badge passe sous le nom de l'école, le responsable n'est pas affiché.
 - Pour `content` : ni filtres ni colonnes (la liste reste celle d'aujourd'hui).
 - Vide après filtre : l'état vide existant de la liste.
 
@@ -54,7 +54,7 @@ Le matin, un membre `admin` ou `field` veut savoir qui appeler aujourd'hui et po
   3. « Sans destinataire » (`orphans`) — **`admin` seulement** : relances ouvertes dont le destinataire est indisponible, et écoles sans responsable ayant un signal.
 - Ligne (bureau : tableau `<table>` avec `<th scope="col">` ; 390 px : cartes empilées `ui_card(padding: :sm)`) : école (lien vers la fiche, ancre `#school_crm`), DRENA en `text-mute`, badges de raison, échéance, destinataire (onglets 2 et 3), actions.
 - Badges de raison : « Relance échue » `:error`, « Perte d'usage » `:warning`, « Démo sans suite » `:info`, « Inscrite sans démarrage » `:brand`.
-- Actions d'une relance : « Faite » (`ui_button` `:secondary`, `:sm`, Turbo Stream `remove` de la ligne + `ui_toast`), ⋮ « Réattribuer » (modale, `admin` ou responsable de l'école), ⋮ « Rédiger un message » (UDR-XXXX-assistants-du-suivi).
+- Actions d'une relance : « Faite » (`ui_button` `:secondary`, `:sm`, Turbo Stream `remove` de la ligne + `ui_toast`), ⋮ « Réattribuer » (modale, `admin` ou responsable de l'école), ⋮ « Rédiger un message » (UDR-0160).
 - Pagination `ui_pagination`, 25 lignes.
 - Vides : « Rien à relancer » (onglet 1, icône `check-circle`), « Aucune relance ouverte » (2), « Rien d'orphelin » (3).
 
