@@ -57,12 +57,10 @@ module Assessment
       { forbidden: "forbidden", not_found: "forbidden", locked: "locked" }.fetch(result.code, "invalid")
     end
 
-    # L'empreinte que le paquet a signée : celle du Lot B (OfflinePackQuery) quand elle existe, sinon le calcul minimal du use case.
-    # Le câblage final se fait à la fusion du Lot B (journal, À trancher).
+    # L'empreinte que le paquet a signée : le calcul du Lot B, sur les mêmes questions que celles qu'il sert.
     def current_digest
-      return UseCases::Assessment::SyncOfflineCopy.method(:digest_for) unless defined?(Queries::Assessment::OfflinePackQuery)
-
-      ->(exercise) { Queries::Assessment::OfflinePackQuery.new.call(public_id: exercise.public_id).digest }
+      query = Queries::Assessment::OfflinePackQuery.new
+      ->(exercise) { query.call(public_id: exercise.public_id).digest }
     end
 
     def sync_copy

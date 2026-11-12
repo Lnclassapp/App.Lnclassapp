@@ -15,18 +15,7 @@ module UseCases
       BLANK_SEPARATOR = " ; ".freeze
       INVALID_PICK = :invalid_pick
 
-      # L'empreinte de version d'un exercice : 16 hex du SHA-256 de ses questions, propositions et corrigé (hors images et indices).
-      # Le paquet de corrigé la signe ; la synchronisation la recalcule : un écart, l'exercice a changé (menace C3).
-      def self.digest_for(exercise)
-        canonical = exercise.questions.sort_by(&:position).map do |question|
-          [ question.id, question.position, question.question_type, question.content, question.explanation, question.points.to_s,
-            question.numeric_tolerance.to_s, question.unit, question.starter, question.criteria,
-            question.answers.sort_by(&:position).map { [ it.id, it.position, it.content, it.match_content, it.correct, it.blank ] } ]
-        end
-        Digest::SHA256.hexdigest(JSON.generate(canonical))[0, 16]
-      end
-
-      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, policy:, transaction:, clock:, access:, current_digest: self.class.method(:digest_for))
+      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, policy:, transaction:, clock:, access:, current_digest:)
         @current_digest = current_digest
         @signer = signer
         @exercises = exercises
@@ -41,7 +30,7 @@ module UseCases
         @access = access
       end
 
-      # current_digest : callable (exercise) → l'empreinte courante de l'exercice (par défaut digest_for ; le câblage final est OfflinePackQuery du Lot B).
+      # current_digest : callable (exercise) → l'empreinte courante de l'exercice (Queries::Assessment::OfflinePackQuery.digest : celle que le paquet a signée ; un écart, l'exercice a changé, menace C3).
       # dto : Dtos::Assessment::OfflineCopyInput. Les droits sont jugés à l'heure de réception (clock), pas à l'heure d'origine.
       # → Result(Synced) | :forbidden (pas un élève ; errors base [:wrong_owner] : jeton d'un autre élève, d'un autre exercice ou altéré ;
       #   [:not_published] : exercice retiré) | :conflict (base [:stale] : exercice modifié ; [:paused] : 3 copies d'affilée)

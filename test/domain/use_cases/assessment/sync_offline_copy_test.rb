@@ -46,7 +46,7 @@ module UseCases
       def wrong(question) = question.answers.where(correct: false).order(:id).first.id
       def pick(question, id) = { display_order: shown(question, id) }
 
-      def digest = SyncOfflineCopy.digest_for(Repositories::Assessment::ExerciseRepository.new.find(id: @exercise.id))
+      def digest = Queries::Assessment::OfflinePackQuery.new.call(public_id: @exercise.public_id).digest
 
       def token(student: @student, digest: self.digest, issued_at: @issued)
         @signer.sign(student_id: student.id, exercise_id: @exercise.id, digest:, issued_at:)
@@ -64,7 +64,8 @@ module UseCases
           gaps: Repositories::Assessment::KnowledgeGapRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
           policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new,
-          clock: Clock.new(NOW), access: FakeAccess.new(blocked)
+          clock: Clock.new(NOW), access: FakeAccess.new(blocked),
+          current_digest: ->(exercise) { Queries::Assessment::OfflinePackQuery.new.call(public_id: exercise.public_id).digest }
         )
       end
 
@@ -227,7 +228,7 @@ module UseCases
         assert_equal 50, Orm::ExerciseSession.find_by!(client_copy_id: UUID).score_percent
       end
 
-      test "l'empreinte courante est injectée : un autre calcul que digest_for décide du stale" do
+      test "l'empreinte courante est injectée : l'empreinte fournie décide du stale" do
         sessions = Repositories::Assessment::ExerciseSessionRepository.new
         use_case = UseCases::Assessment::SyncOfflineCopy.new(
           signer: @signer, exercises: Repositories::Assessment::ExerciseRepository.new, sessions:,

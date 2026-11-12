@@ -21,7 +21,7 @@ class Assessment::OfflineCopySyncsControllerTest < ActionDispatch::IntegrationTe
     [ order.index(id).to_s ]
   end
 
-  def digest = UseCases::Assessment::SyncOfflineCopy.digest_for(Repositories::Assessment::ExerciseRepository.new.find(id: @exercise.id))
+  def digest = Queries::Assessment::OfflinePackQuery.new.call(public_id: @exercise.public_id).digest
 
   def token(student: @student)
     @signer.sign(student_id: student.id, exercise_id: @exercise.id, digest:, issued_at: @now - 3600)
@@ -45,6 +45,16 @@ class Assessment::OfflineCopySyncsControllerTest < ActionDispatch::IntegrationTe
     row = Orm::ExerciseSession.find_by!(client_copy_id: UUIDS[0])
     assert_equal [ { "client_copy_id" => UUIDS[0], "status" => "synced", "percent" => 50, "url" => exercise_session_result_path(row.public_id) } ], results
     assert_equal 50, row.score_percent
+  end
+
+  test "le jeton du paquet réellement servi est accepté : l'empreinte injectée est celle du paquet (sinon toute copie sort stale)" do
+    sign_in_as @student
+    get offline_pack_exercise_path(@exercise.public_id)
+    served = response.parsed_body
+
+    send_copies copy(pack_token: served.fetch("token"), started_at: (Time.current - 600).iso8601, submitted_at: (Time.current - 60).iso8601)
+
+    assert_equal "synced", results.first.fetch("status")
   end
 
   test "le même envoi deux fois : already_synced, une seule copie" do
