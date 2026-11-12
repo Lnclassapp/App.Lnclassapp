@@ -6,8 +6,8 @@
 <% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
 <% disc = "relative grid size-14 place-items-center rounded-full bg-brand-soft transition group-active:scale-95" %>
 <nav id="student_subjects" aria-label="<%= t("classroom.student_homes.subjects.label") %>">
-  <%# CA-D10 : le titre n'est visible que dès lg, où la grille tient sur une ligne de 7 ; sous lg, rien ne change. %>
-  <h2 class="mb-3 hidden font-display text-base font-medium text-ink lg:block"><%= t(".label") %></h2>
+  <%# Amendement eleve-sans-prof (porteur, 2026-11-12 : « affiche la section Mes matières ») : le titre, à toutes les tailles. %>
+  <h2 class="mb-3 font-display text-base font-medium text-ink"><%= t(".label") %></h2>
   <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-7 lg:gap-x-2">
     <% subjects.first(Classroom::StudentHomesController::MAX_SUBJECTS).each do |subject| %>
       <% late = late_slugs.include?(subject.slug) %>

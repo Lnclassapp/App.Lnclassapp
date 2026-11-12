@@ -55,6 +55,7 @@ module Classroom
       @archived = Queries::Classroom::StudentArchiveQuery.new.any?(student_id: current_actor.user_id)
       @subjects = query.level_subjects(student_id: current_actor.user_id)
       @daily = daily_exercise if @subjects.any?
+      @announcements = announcements
       removed_at = query.last_classroom(student_id: current_actor.user_id).recent_removal_at&.to_i
       return if removed_at.nil? || session[REMOVAL_NOTICE] == removed_at
 

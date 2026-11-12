@@ -42,7 +42,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
   def card_buttons = css_select("#{CARD} .ui-button-primary, #{CARD} .ui-button-secondary")
 
-  test "CA-D1: the band, the card, the grid, the history in this order; no bottom bar, no « À faire ensuite », no « Paiement »" do
+  # Amendement eleve-sans-prof (porteur, 2026-11-12) : « À faire » revient entre les annonces et l'historique.
+  test "CA-D1: the band, the card, the grid, the announcements, « À faire », the history in this order; no bottom bar, no « Paiement »" do
     assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
     create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
     sign_in_as @student
@@ -51,13 +52,14 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1.sr-only", text: tl("show.page_title")
-    assert_equal %w[student_next_step student_subjects student_home_announcements student_history],
+    assert_equal %w[student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     # The band is the shell's, above the column, and the page title is not repeated.
     assert_select "main > div.lg\\:hidden > header.student-band.bg-brand.text-band-ink"
     assert_select "header.sticky.max-lg\\:hidden"
     assert_select "[class*='fixed bottom-0'], nav.fixed", 0
     assert_no_match(/À faire ensuite|Paiement/, response.body)
+    assert_select "#student_to_do p", text: tl("to_do.empty")
     assert_no_match "Bonjour", css_select("#main").text
     assert_select "#student_next_step_title", text: "Méiose, les étapes"
   end
@@ -80,7 +82,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#student_home.lg\\:max-w-228.mx-auto.w-full"
     assert_select "nav#student_subjects" do
-      assert_select "h2.hidden.lg\\:block", text: tl("subjects.label")
+      assert_select "h2", text: tl("subjects.label")
+      assert_select "h2.hidden", 0
       assert_select "ul.grid-cols-4.lg\\:grid-cols-7"
     end
     assert_select "section#student_home_announcements.lg\\:bg-paper.lg\\:border.lg\\:border-line"
@@ -609,6 +612,34 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, Orm::ExerciseSession.where(student: @student).count
   end
 
+  test "eleve-sans-prof CA-5: « À faire » lists the open assigned exercises after the card's, by due date, 3 at most, then « Tout voir »" do
+    now = 1.hour.ago
+    first = assign_exercise("Un", due_on: Date.current + 1, assigned_at: now)
+    others = [ [ "Deux", 2 ], [ "Trois", 3 ], [ "Quatre", 4 ], [ "Cinq", 5 ] ].map do |title, days|
+      assign_exercise(title, due_on: Date.current + days, assigned_at: now)
+    end
+    complete(assign_exercise("Fait", due_on: Date.current + 1, assigned_at: now))
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#student_next_step_title", text: "Un"
+    assert_equal %w[Deux Trois Quatre], css_select("#student_to_do li a").map { it.text.strip }
+    assert_select "#student_to_do a[href=?]", exercise_path(others.first.public_id)
+    assert_select "#student_to_do a#student_to_do_all[href=?]", student_classroom_path, text: tl("to_do.all")
+    assert_no_match first.public_id, css_select("#student_to_do").to_s
+  end
+
+  test "eleve-sans-prof CA-6: without a classroom, the announcements show; « À faire » and the history do not" do
+    create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
+    remove(@student, @classroom, at: 10.days.ago)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal %w[student_next_step student_subjects student_home_announcements], css_select("#student_home > [id]").map { it["id"] }
+  end
+
   test "eleve-sans-prof CA-3: never had a classroom: « Choisis ta classe » alone, no grid, no exercise of the day" do
     sign_in_as create_student
 
@@ -733,7 +764,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_equal %w[student_next_step student_subjects student_home_announcements student_history],
+    assert_equal %w[student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     assert_equal [ "Devoirs communs", "Fiches 3", "Fiches 2", "Fiches 1", "Rentrée numérique" ], announcement_titles
   end

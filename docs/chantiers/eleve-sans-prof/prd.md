@@ -39,6 +39,17 @@ Scénario: CA-4 — niveau sans leçon publiée : un message honnête
   Étant donné un élève d'une classe dont le niveau n'a aucun cours publié
   Quand il ouvre son accueil
   Alors la grille dit « Les cours de ton niveau arrivent bientôt. »
+
+Scénario: CA-5 — « À faire » sur l'accueil d'un élève qui a une classe (consigne du porteur, 2026-11-12)
+  Étant donné un élève avec cinq exercices assignés non terminés et un terminé
+  Quand il ouvre son accueil
+  Alors la carte montre le plus urgent
+  Et « À faire » liste les trois suivants par échéance, puis « Tout voir » vers Ma classe
+
+Scénario: CA-6 — sans classe, les annonces s'affichent ; ni « À faire » ni historique
+  Étant donné un élève retiré de sa classe et une annonce de l'équipe
+  Quand il ouvre son accueil
+  Alors il voit la carte, « Mes matières », puis les annonces
 ```
 
 | Critère | Test |
@@ -46,6 +57,8 @@ Scénario: CA-4 — niveau sans leçon publiée : un message honnête
 | CA-1 | `student_homes_controller_test` « eleve-sans-prof CA-1 » ; `archived_classroom_reads_test` |
 | CA-2 | `student_homes_controller_test` « eleve-sans-prof CA-2 » ; `student_audience_query_test` ; `daily_exercise_query_test` |
 | CA-3 | `student_homes_controller_test` « eleve-sans-prof CA-3 » et « CA-D7 » ; `daily_exercise_query_test` « never had a classroom » |
+| CA-5 | `student_homes_controller_test` « eleve-sans-prof CA-5 » et « CA-D1 » |
+| CA-6 | `student_homes_controller_test` « eleve-sans-prof CA-6 » |
 | CA-4 | `student_homes_controller_test` « no published course at the student's level » |
 
 ## 5. Hors périmètre

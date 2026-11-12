@@ -137,3 +137,9 @@ Couleurs, tailles et graisses : uniquement les jetons de l'UDR-0136. Rien en dur
 - **État 6, sans niveau connu**, ou dernier niveau sans cours publié : inchangé, la carte seule.
 - **§3.4, état vide** : la phrase sous la grille devient « Les cours de ton niveau arrivent bientôt. » (13 px `text-mute`, centrée).
 - **États** : vide = carte seule ; chargement = aucun (rendu serveur, pas de cible Turbo nouvelle) ; erreur = celles du champ code, inchangées ; succès = carte, bloc du jour, grille.
+- **Consigne du porteur, même jour** (« si l'élève a une classe, affiche la classe, sinon garde-le comme actuellement ; affiche la section Mes matières, les annonces, À faire ») :
+  - Avec une classe : le lien de classe de la carte reste (« TLE D · LMH › ») ; sans classe, la carte « Choisis ta classe » reste telle quelle.
+  - **Ordre** : carte, « Mes matières », annonces, **« À faire »**, historique. Remplace « ni À faire ni Fiches à revoir sur l'accueil » (§3.1).
+  - **« Mes matières »** : le titre `h2` 16 px graisse 500 est visible à toutes les tailles (plus seulement dès lg).
+  - **Annonces** : rendues aussi sans classe, avec la même règle de lecture (au moins une annonce lisible).
+  - **« À faire »** (`section#student_to_do`, `aria-labelledby="student_to_do_title"`), seulement avec une classe : titre « À faire », puis les exercices assignés non terminés, dans l'ordre de la carte, **sans celui de la carte**, 3 au plus. Ligne : `li` relative, lien étiré sur le titre (14 px graisse 500, tronqué) vers la page de l'exercice ; rond `bg-brand-soft` 44 px et illustration 28 px ; matière 13 px `text-mute` ; l'étiquette d'échéance (`due_badge`) dessous ; chevron à droite ; séparateurs `divide-line`. Plus de 3 : « Tout voir » vers Ma classe, à droite du titre. Vide : « Rien d'autre à faire pour l'instant. » (13 px `text-mute`). Dès lg, carte blanche comme l'historique.
