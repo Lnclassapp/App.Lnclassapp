@@ -1,0 +1,3477 @@
+{
+ "description": "Table partagée Ruby/JavaScript (hors-connexion, CA-6). questions : une réponse postée (display_order, response_text, blanks) à une question du paquet (display : ordre d'affichage en rangs (indices dans answers)) et le verdict attendu. scores : cases = noms de questions ci-dessus, « @<points>:<nom> » remplace les points ; percent = Grading.points_percent. Une réponse mal formée ou vide compte 0.",
+ "questions": [
+  {
+   "name": "vrai/faux juste",
+   "question": {
+    "id": 1,
+    "question_type": "true_false",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Vrai",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Faux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "vrai/faux faux",
+   "question": {
+    "id": 1,
+    "question_type": "true_false",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Vrai",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Faux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "0"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "vrai/faux vide",
+   "question": {
+    "id": 1,
+    "question_type": "true_false",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Vrai",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Faux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     ""
+    ]
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "vrai/faux sans champ",
+   "question": {
+    "id": 1,
+    "question_type": "true_false",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Vrai",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Faux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     0
+    ]
+   },
+   "response": {},
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "choix unique juste",
+   "question": {
+    "id": 1,
+    "question_type": "single_choice",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     3,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "choix unique faux",
+   "question": {
+    "id": 1,
+    "question_type": "single_choice",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     3,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "3"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "choix unique deux cochés",
+   "question": {
+    "id": 1,
+    "question_type": "single_choice",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     3,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1",
+     "2"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "choix unique hors bornes",
+   "question": {
+    "id": 1,
+    "question_type": "single_choice",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     3,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "9"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "choix unique illisible",
+   "question": {
+    "id": 1,
+    "question_type": "single_choice",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     3,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "abc"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "deux justes dans le désordre",
+   "question": {
+    "id": 1,
+    "question_type": "multiple_correct_2",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     3,
+     1,
+     0,
+     2
+    ]
+   },
+   "response": {
+    "display_order": [
+     "2",
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "deux dont une fausse",
+   "question": {
+    "id": 1,
+    "question_type": "multiple_correct_2",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     3,
+     1,
+     0,
+     2
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1",
+     "0"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "deux, un seul coché",
+   "question": {
+    "id": 1,
+    "question_type": "multiple_correct_2",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     3,
+     1,
+     0,
+     2
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "deux, même case deux fois",
+   "question": {
+    "id": 1,
+    "question_type": "multiple_correct_2",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     3,
+     1,
+     0,
+     2
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1",
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "trois justes",
+   "question": {
+    "id": 1,
+    "question_type": "multiple_correct_3",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 5,
+      "content": "E",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     4,
+     2,
+     0,
+     3,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1",
+     "4",
+     "2"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trois dont une fausse",
+   "question": {
+    "id": 1,
+    "question_type": "multiple_correct_3",
+    "kind": "choice",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "A",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "B",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "C",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 4,
+      "content": "D",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 5,
+      "content": "E",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     4,
+     2,
+     0,
+     3,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1",
+     "4",
+     "0"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "liste juste",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "Le ciel est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "rouge",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "bleu",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "vert",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "liste fausse",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "Le ciel est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "rouge",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "bleu",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "vert",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "0"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "liste vide",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "Le ciel est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "rouge",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "bleu",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "vert",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     ""
+    ]
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "liste illisible",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "Le ciel est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "rouge",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "bleu",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "vert",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "xx"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "liste hors bornes",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "Le ciel est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "rouge",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "bleu",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "vert",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     1,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "5"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "liste à deux cases justes",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": false,
+      "blank": 1
+     },
+     {
+      "position": 4,
+      "content": "d",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ],
+    "display": [
+     3,
+     0,
+     2,
+     1
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "1",
+     "1": "0"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "liste à deux cases, une fausse",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": false,
+      "blank": 1
+     },
+     {
+      "position": 4,
+      "content": "d",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ],
+    "display": [
+     3,
+     0,
+     2,
+     1
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "1",
+     "1": "2"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "liste à deux cases, une vide",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": false,
+      "blank": 1
+     },
+     {
+      "position": 4,
+      "content": "d",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ],
+    "display": [
+     3,
+     0,
+     2,
+     1
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "1",
+     "1": ""
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "liste à deux cases, toutes vides",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": false,
+      "blank": 1
+     },
+     {
+      "position": 4,
+      "content": "d",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ],
+    "display": [
+     3,
+     0,
+     2,
+     1
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "",
+     "1": ""
+    }
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "liste à deux cases, proposition d'une autre case",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": false,
+      "blank": 1
+     },
+     {
+      "position": 4,
+      "content": "d",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ],
+    "display": [
+     3,
+     0,
+     2,
+     1
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "0",
+     "1": "0"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "liste à deux cases, hors bornes",
+   "question": {
+    "id": 1,
+    "question_type": "select",
+    "kind": "select",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": false,
+      "blank": 1
+     },
+     {
+      "position": 4,
+      "content": "d",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ],
+    "display": [
+     3,
+     0,
+     2,
+     1
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "1",
+     "1": "9"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "trou juste",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "La capitale est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Abidjan",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Abidjan (CI)",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "abidjan"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trou, majuscules et espaces",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "La capitale est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Abidjan",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Abidjan (CI)",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "  ABIDJAN  "
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trou, accents",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "La capitale est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Abidjan",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Abidjan (CI)",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "Ábídjàn"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trou, faute de frappe",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "La capitale est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Abidjan",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Abidjan (CI)",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "Abidjn"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "trou, seconde réponse acceptée",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "La capitale est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Abidjan",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Abidjan (CI)",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "abidjan (ci)"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trou vide",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "La capitale est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Abidjan",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Abidjan (CI)",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "   "
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "trou trop long",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "La capitale est ___.",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Abidjan",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Abidjan (CI)",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "trou, ligature",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "cœur",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "l'eau",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "tire-bouchon",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "COEUR"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trou, apostrophe typographique",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "cœur",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "l'eau",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "tire-bouchon",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "l’eau"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trou, tiret demi-cadratin",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "cœur",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "l'eau",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "tire-bouchon",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "tire–bouchon"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trou, espaces insécables au milieu",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "cœur",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "l'eau",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "tire-bouchon",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "l' eau"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "trous multiples justes",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "B",
+     "1": "c"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "trous multiples, un faux",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "a",
+     "1": "x"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "trous multiples, un vide",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "",
+     "1": "c"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false,
+     true
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "trous multiples, tous vides",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "",
+     "1": " "
+    }
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "trous multiples, une seule case postée",
+   "question": {
+    "id": 1,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___ et ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "a"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "trois trous, un juste",
+   "question": {
+    "id": 2,
+    "question_type": "fill_blank",
+    "kind": "fill_blank",
+    "content": "___ ___ ___",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "a",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "b",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     },
+     {
+      "position": 3,
+      "content": "c",
+      "match_content": null,
+      "correct": true,
+      "blank": 2
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "a",
+     "1": "x",
+     "2": "y"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     false,
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "nombre juste",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "4,8"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre avec l'unité",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "4.8 cm"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre dans la marge",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "4,85"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre sur la borne de la marge",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "4,9"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre juste au-delà de la marge",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "4,95"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "nombre avec une autre unité",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "4,8 m"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "nombre illisible",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "abc"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "nombre vide",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "Mesure ?",
+    "points": "1.0",
+    "unit": "cm",
+    "numeric_tolerance": "0.1",
+    "answers": [
+     {
+      "position": 1,
+      "content": "4.8",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": ""
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "nombre, moins Unicode",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "n",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "-2",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "−2"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre, milliers à l'espace",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "n",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "1000",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "1 000"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre, milliers à l'espace fine insécable",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "n",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "1000",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "1 000"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre, point décimal lu comme virgule",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "n",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "1",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "1.000"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre sans marge, 5.0",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "n",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "5",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "5.0"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombre sans marge, 5.0001",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "n",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "5",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "5.0001"
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "nombre, espaces aux bords",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "n",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "5",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     }
+    ]
+   },
+   "response": {
+    "response_text": "  5  "
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "nombres multiples, un juste",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "___ m et ___ m",
+    "points": "1.0",
+    "unit": "m",
+    "numeric_tolerance": "0.5",
+    "answers": [
+     {
+      "position": 1,
+      "content": "3",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "4.5",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "3,2",
+     "1": "9"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true,
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "nombres multiples, un illisible",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "___ m et ___ m",
+    "points": "1.0",
+    "unit": "m",
+    "numeric_tolerance": "0.5",
+    "answers": [
+     {
+      "position": 1,
+      "content": "3",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "4.5",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "x",
+     "1": "4"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "nombres multiples, un vide",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "___ m et ___ m",
+    "points": "1.0",
+    "unit": "m",
+    "numeric_tolerance": "0.5",
+    "answers": [
+     {
+      "position": 1,
+      "content": "3",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "4.5",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "",
+     "1": "4.5 m"
+    }
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false,
+     true
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "nombres multiples, tous vides",
+   "question": {
+    "id": 1,
+    "question_type": "numeric",
+    "kind": "numeric",
+    "content": "___ m et ___ m",
+    "points": "1.0",
+    "unit": "m",
+    "numeric_tolerance": "0.5",
+    "answers": [
+     {
+      "position": 1,
+      "content": "3",
+      "match_content": null,
+      "correct": true,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "4.5",
+      "match_content": null,
+      "correct": true,
+      "blank": 1
+     }
+    ]
+   },
+   "response": {
+    "blanks": {
+     "0": "",
+     "1": ""
+    }
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "ordre juste",
+   "question": {
+    "id": 1,
+    "question_type": "ordering",
+    "kind": "ordering",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Un",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Deux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "Trois",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1",
+     "2",
+     "0"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "ordre faux",
+   "question": {
+    "id": 1,
+    "question_type": "ordering",
+    "kind": "ordering",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Un",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Deux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "Trois",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "0",
+     "1",
+     "2"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "ordre avec un doublon",
+   "question": {
+    "id": 1,
+    "question_type": "ordering",
+    "kind": "ordering",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Un",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Deux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "Trois",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "0",
+     "0",
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "ordre avec un trou",
+   "question": {
+    "id": 1,
+    "question_type": "ordering",
+    "kind": "ordering",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Un",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Deux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "Trois",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "1",
+     "",
+     "0"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "ordre vide",
+   "question": {
+    "id": 1,
+    "question_type": "ordering",
+    "kind": "ordering",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "Un",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "Deux",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "Trois",
+      "match_content": null,
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     2,
+     0,
+     1
+    ]
+   },
+   "response": {
+    "display_order": [
+     "",
+     "",
+     ""
+    ]
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "paires justes",
+   "question": {
+    "id": 1,
+    "question_type": "matching",
+    "kind": "matching",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "L1",
+      "match_content": "R1",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "L2",
+      "match_content": "R2",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "L3",
+      "match_content": "R3",
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     2,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "2",
+     "0",
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     true
+    ],
+    "correct": true
+   }
+  },
+  {
+   "name": "paires échangées",
+   "question": {
+    "id": 1,
+    "question_type": "matching",
+    "kind": "matching",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "L1",
+      "match_content": "R1",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "L2",
+      "match_content": "R2",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "L3",
+      "match_content": "R3",
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     2,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "0",
+     "2",
+     "1"
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": true,
+    "blank_results": [
+     false
+    ],
+    "correct": false
+   }
+  },
+  {
+   "name": "paires incomplètes",
+   "question": {
+    "id": 1,
+    "question_type": "matching",
+    "kind": "matching",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "L1",
+      "match_content": "R1",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "L2",
+      "match_content": "R2",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "L3",
+      "match_content": "R3",
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     2,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "2",
+     "",
+     ""
+    ]
+   },
+   "expected": {
+    "answered": true,
+    "well_formed": false,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "paires vides",
+   "question": {
+    "id": 1,
+    "question_type": "matching",
+    "kind": "matching",
+    "content": "Question",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": [
+     {
+      "position": 1,
+      "content": "L1",
+      "match_content": "R1",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 2,
+      "content": "L2",
+      "match_content": "R2",
+      "correct": false,
+      "blank": 0
+     },
+     {
+      "position": 3,
+      "content": "L3",
+      "match_content": "R3",
+      "correct": false,
+      "blank": 0
+     }
+    ],
+    "display": [
+     1,
+     2,
+     0
+    ]
+   },
+   "response": {
+    "display_order": [
+     "",
+     "",
+     ""
+    ]
+   },
+   "expected": {
+    "answered": false,
+    "well_formed": null,
+    "blank_results": null,
+    "correct": false
+   }
+  },
+  {
+   "name": "rédigée jamais notée",
+   "question": {
+    "id": 1,
+    "question_type": "written",
+    "kind": "written",
+    "content": "Explique",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": []
+   },
+   "response": {
+    "response_text": "Mon texte"
+   },
+   "expected": {
+    "graded": false
+   }
+  },
+  {
+   "name": "cahier jamais noté",
+   "question": {
+    "id": 1,
+    "question_type": "notebook",
+    "kind": "notebook",
+    "content": "Fais",
+    "points": "1.0",
+    "unit": null,
+    "numeric_tolerance": null,
+    "answers": []
+   },
+   "response": {},
+   "expected": {
+    "graded": false
+   }
+  }
+ ],
+ "scores": [
+  {
+   "name": "un juste sur deux",
+   "cases": [
+    "choix unique juste",
+    "choix unique faux"
+   ],
+   "percent": 50
+  },
+  {
+   "name": "tout juste",
+   "cases": [
+    "choix unique juste",
+    "liste juste"
+   ],
+   "percent": 100
+  },
+  {
+   "name": "tout vide",
+   "cases": [
+    "vrai/faux vide",
+    "liste vide"
+   ],
+   "percent": 0
+  },
+  {
+   "name": "points inégaux",
+   "cases": [
+    "@2.0:choix unique juste",
+    "@1.0:choix unique faux",
+    "@0.5:liste juste"
+   ],
+   "percent": 71
+  },
+  {
+   "name": "case par case",
+   "cases": [
+    "nombres multiples, un juste",
+    "choix unique juste"
+   ],
+   "percent": 75
+  },
+  {
+   "name": "un tiers des cases",
+   "cases": [
+    "trois trous, un juste"
+   ],
+   "percent": 33
+  },
+  {
+   "name": "rédigée et cahier hors note",
+   "cases": [
+    "rédigée jamais notée",
+    "cahier jamais noté",
+    "choix unique juste"
+   ],
+   "percent": 100
+  },
+  {
+   "name": "aucune question notée",
+   "cases": [
+    "rédigée jamais notée",
+    "cahier jamais noté"
+   ],
+   "percent": 0
+  },
+  {
+   "name": "réponse mal formée compte faux",
+   "cases": [
+    "choix unique deux cochés",
+    "choix unique juste"
+   ],
+   "percent": 50
+  }
+ ]
+}

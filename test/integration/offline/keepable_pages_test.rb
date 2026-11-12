@@ -43,7 +43,7 @@ class KeepablePagesTest < ActionDispatch::IntegrationTest
     assert_nil response.headers[KEEP]
   end
 
-  test "la liste fermée : seuls ces contrôleurs déclarent keep_offline, et seulement pour show" do
+  test "la liste fermée : seuls ces contrôleurs déclarent keep_offline, pour show (et la copie hors ligne du Lot B pour new)" do
     declared = Rails.root.glob("app/controllers/**/*.rb").filter_map do |file|
       lines = file.read.scan(/^\s*keep_offline\b[^#\n]*/)
       [ file.relative_path_from(Rails.root).to_s, lines.map(&:strip) ] if lines.any?
@@ -51,6 +51,7 @@ class KeepablePagesTest < ActionDispatch::IntegrationTest
 
     assert_equal(
       { "app/controllers/assessment/exercises_controller.rb" => [ "keep_offline only: :show" ],
+        "app/controllers/assessment/offline_copies_controller.rb" => [ "keep_offline only: :new" ],
         "app/controllers/catalog/courses_controller.rb" => [ "keep_offline only: :show" ],
         "app/controllers/classroom/student_homes_controller.rb" => [ "keep_offline only: :show" ] },
       declared
