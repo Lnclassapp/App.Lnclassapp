@@ -3,7 +3,11 @@ require "test_helper"
 module Queries
   module Billing
     class StudentAccessQueryTest < ActiveSupport::TestCase
-      setup { @query = StudentAccessQuery.new }
+      # acces-beta : la règle d'après-bêta, réglage Offer::BETA_OPEN_ACCESS fermé (BillingBetaHelper), sauf le dernier test.
+      setup do
+        close_beta_for_this_test
+        @query = StudentAccessQuery.new
+      end
 
       def access(user, on) = @query.call(student_id: user.id, at: Time.utc(*on.split("-").map(&:to_i), 12))
 
@@ -46,6 +50,15 @@ module Queries
         end
         assert_not @query.call(student_id: 0, at: Time.utc(2027, 1, 1)).blocked?
         assert_not @query.call(student_id: nil, at: Time.utc(2027, 1, 1)).blocked?
+      end
+
+      test "bêta ouverte : un élève ancien n'est pas bloqué, un enseignant reste sans restriction" do
+        set_beta_open_access(true)
+        student = create_student
+        student.update_columns(created_at: Time.utc(2026, 10, 1, 8)) # rubocop:disable Rails/SkipsModelValidations
+
+        assert_equal :beta, access(student, "2027-01-16").status
+        assert_equal :subscribed, access(create_teacher, "2027-01-16").status
       end
     end
   end

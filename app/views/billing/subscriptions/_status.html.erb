@@ -1,8 +1,9 @@
-<%# 🌐 UI · billing/subscriptions/_status — carte d'état de l'accès : gratuit, bloqué ou abonné %>
+<%# 🌐 UI · billing/subscriptions/_status — carte d'état de l'accès : bêta, gratuit, bloqué ou abonné %>
 <%# Rôle : titre en h2, texte et icône décorative selon Entities::Billing::Access ; les montants et dates viennent de l'offre %>
-<%# ADR  : 0126 (contexte billing, §4.5 et §4.8) · UDR : 0158 §3.3 %>
+<%# ADR  : 0126 (contexte billing, §4.5 et §4.8) · UDR : 0158 §3.3, acces-beta %>
 <% offer_text = { price: t("billing.price"), date: subscription_date(Entities::Billing::Offer::VALID_UNTIL) } %>
 <% icon, tone, title, text = case access.status
+   when :beta then [ "gift", "bg-success-soft text-success", t(".beta.title"), t(".beta.text") ]
    when :free then [ "gift", "bg-info-soft text-info", t(".free.title", count: access.days_left), t(".free.text", **offer_text) ]
    when :blocked then [ "lock-closed", "bg-warning-soft text-warning", t(".blocked.title"), t(".blocked.text", **offer_text) ]
    else [ "check-badge", "bg-success-soft text-success", t(".subscribed.title"), t(".subscribed.text", date: subscription_date(access.subscribed_until || Entities::Billing::Offer::VALID_UNTIL)) ]
