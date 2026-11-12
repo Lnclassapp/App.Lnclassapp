@@ -63,7 +63,7 @@ module UseCases
           signer: @signer, exercises: Repositories::Assessment::ExerciseRepository.new, sessions:,
           gaps: Repositories::Assessment::KnowledgeGapRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
-          policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new,
+          pending: Repositories::Assessment::PendingAssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new,
           clock: Clock.new(NOW), access: FakeAccess.new(blocked),
           current_digest: ->(exercise) { Queries::Assessment::OfflinePackQuery.new.call(public_id: exercise.public_id).digest }
         )
@@ -145,6 +145,13 @@ module UseCases
         other = create_student_for(@exercise.course)
 
         assert_nothing_written { assert_refused sync(payload(pack_token: token(student: other)), actor: @actor), :forbidden, :wrong_owner }
+      end
+
+      test "F4 : un jeton de plus de 30 jours est refusé expired" do
+        old = nil
+        travel_to(NOW - 31.days) { old = token(issued_at: NOW - 31.days) }
+
+        assert_nothing_written { assert_refused sync(payload(pack_token: old)), :forbidden, :expired }
       end
 
       test "CA-11 : un jeton altéré est refusé wrong_owner" do
@@ -234,7 +241,7 @@ module UseCases
           signer: @signer, exercises: Repositories::Assessment::ExerciseRepository.new, sessions:,
           gaps: Repositories::Assessment::KnowledgeGapRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
-          policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW),
+          pending: Repositories::Assessment::PendingAssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW),
           access: FakeAccess.new(false), current_digest: ->(_exercise) { "ailleurs" }
         )
 
@@ -257,13 +264,32 @@ module UseCases
         assert_equal [ false, true ], [ attempt.correct, attempt.unanswered ]
       end
 
-      test "la copie est rattachée à l'assignation active de la classe de l'élève, comme au démarrage en ligne" do
+      test "S1 : un exercice devenu devoir en attente depuis l'émission du jeton : la copie est rangée sans rattachement, le devoir reste à rendre" do
         classroom = Orm::ClassroomStudent.find_by!(student_id: @student.id).classroom
-        assignment = create_assignment(classroom:, assignable: @exercise)
+        create_assignment(classroom:, assignable: @exercise)
+        attrs = payload(pack_token: token(issued_at: NOW - 2.days))
 
-        sync
+        result = sync(attrs)
 
-        assert_equal assignment.id, Orm::ExerciseSession.find_by!(client_copy_id: UUID).classroom_assignment_id
+        assert_predicate result, :success?
+        assert_not result.value.already_synced
+        assert_nil Orm::ExerciseSession.find_by!(client_copy_id: UUID).classroom_assignment_id
+        pending = Repositories::Assessment::PendingAssignmentRepository.new
+        assert_includes pending.pending_exercise_public_ids(student_id: @student.id, exercise_public_ids: [ @exercise.public_id ]), @exercise.public_id
+      end
+
+      test "S2 : la pause est relue sous le verrou de l'élève et de l'exercice, dans la transaction de l'écriture" do
+        calls = []
+        locking = Class.new(SimpleDelegator) do
+          define_method(:lock_restart_window) { |**args| calls << [ :lock, args ]; super(**args) }
+          define_method(:recent_completions) { |**args| calls << [ :read, args ]; super(**args) }
+        end
+
+        assert_predicate sync(sessions: locking.new(Repositories::Assessment::ExerciseSessionRepository.new)), :success?
+
+        assert_equal :lock, calls.first.first
+        assert_equal({ student_id: @student.id, exercise_id: @exercise.id }, calls.first.last)
+        assert_equal :read, calls.last.first
       end
 
       # Les autres types : numérique, ordre, réponse rédigée, cahier, trous, listes à plusieurs cases (même correction qu'en ligne).

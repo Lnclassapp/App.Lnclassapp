@@ -27,9 +27,9 @@ function fakeNode() {
 
 function build() {
   const controller = Object.create(OfflineQueueController.prototype)
-  const targets = { pending: fakeNode(), pendingText: fakeNode(), synced: fakeNode(), rejected: fakeNode(), rejectedRow: { content: { firstElementChild: fakeNode() } } }
+  const targets = { error: fakeNode(), pending: fakeNode(), pendingText: fakeNode(), synced: fakeNode(), rejected: fakeNode(), rejectedRow: { content: { firstElementChild: fakeNode() } } }
   const values = {
-    pendingOne: "1 copie à envoyer", pendingOther: "%{count} copies à envoyer", sending: "Envoi…", synced: "Copie envoyée · %{percent} %",
+    pendingOne: "1 copie à envoyer", pendingOther: "%{count} copies à envoyer", sending: "Envoi…", failed: "Envoi impossible, nouvel essai plus tard.", synced: "Copie envoyée · %{percent} %",
     rejected: { stale: "Exercice modifié depuis : copie non comptée.", invalid: "Copie refusée par le serveur." }
   }
   for (const [name, value] of Object.entries(values)) Object.defineProperty(controller, `${name}Value`, { value })
@@ -135,4 +135,31 @@ test("disconnect retire les écouteurs", () => {
   controller.disconnect()
 
   assert.deepEqual(Object.keys(listeners), [])
+})
+
+test("F1 : un envoi en échec dit « Envoi impossible, nouvel essai plus tard. » tant que des copies attendent", async () => {
+  await store.putCopy(KEY, copy("a"))
+  const { controller, targets } = build()
+  controller.connect()
+  await listeners["lnclass:offline-queue"]({ detail: { error: "http_500" } })
+
+  assert.equal(targets.error.hidden, false)
+  assert.equal(targets.error.textContent, "Envoi impossible, nouvel essai plus tard.")
+
+  await listeners["lnclass:offline-sending"]()
+  assert.equal(targets.error.hidden, true)
+  await listeners["lnclass:offline-queue"]({ detail: { error: null } })
+  assert.equal(targets.error.hidden, true)
+})
+
+test("F6 : un rafraîchissement non attendu qui échoue est écrit en console, pas perdu", async () => {
+  const errors = []
+  const original = console.error
+  console.error = (...args) => errors.push(args)
+  const { controller } = build()
+  controller.refresh = async () => { throw new Error("boum") }
+  await controller.safeRefresh()
+  console.error = original
+
+  assert.equal(errors.length, 1)
 })

@@ -27,7 +27,7 @@
 
 - [ ] 2026-11-12 · hors-connexion · Quelle heure fait foi pour une copie rendue hors ligne ? — appliqué : heure du téléphone bornée dans [émission du paquet, réception], 30 jours au plus, heure de réception gardée et montrée à l'enseignant ; autres : heure de réception seule, heure du téléphone sans borne ; recommandé : appliqué
 - [ ] 2026-11-12 · hors-connexion · Exercice modifié entre l'ouverture et l'envoi : que devient la copie ? — appliqué : refusée, montrée « non comptée » ; autres : corriger les seules questions encore présentes ; recommandé : appliqué
-- [ ] 2026-11-12 · hors-connexion lot B · Le corrigé hors ligne d'un devoir assigné : le servir ? — appliqué : refusé pour un devoir en attente (devoirs non faisables hors ligne) ; autres : servi et la copie en ligne commencée après la remise du paquet est marquée pour l'enseignant (une table de remises), servi sans marque (risque accepté) ; recommandé : servi avec marque côté enseignant
+- [ ] 2026-11-12 · hors-connexion lot B · Le corrigé hors ligne d'un devoir assigné : le servir ? — appliqué : refusé pour un devoir en attente (devoirs non faisables hors ligne ; à la synchro, une copie d'un devoir en attente est rangée comme entraînement, non rattachée) ; autres : servi et la copie en ligne commencée après la remise du paquet est marquée pour l'enseignant (une table de remises), servi sans marque (risque accepté) ; recommandé : servi avec marque côté enseignant
 - [ ] 2026-11-12 · hors-connexion · Accès (bêta, abonnement) évalué quand ? — appliqué : à la réception, copie `locked` gardée en file 30 jours ; autres : à l'heure d'origine (horloge non fiable) ; recommandé : appliqué
 - [ ] 2026-11-12 · hors-connexion · L'enseignant peut-il écrire hors ligne ? — appliqué : non, lecture seule (rien à corriger aujourd'hui) ; autres : file d'écritures enseignant avec résolution de conflits ; recommandé : appliqué
 - [ ] 2026-11-12 · hors-connexion · Combien garder ? — appliqué : 60 pages par compte, 30 jours ; autres : 30 pages, 7 jours ; recommandé : appliqué
@@ -87,3 +87,12 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+## Lot C — correctifs des revues (sécurité, pannes silencieuses)
+
+- S1 : `SyncOfflineCopy` reçoit `pending:` (`PendingAssignmentRepository`, port existant) ; un devoir en attente à la réception range la copie sans rattachement. Le test « rattachée à l'assignation active » est remplacé : pour un exercice assigné et non rendu, il n'y a plus de rattachement hors ligne.
+- S2 : verrou `pg_advisory_xact_lock` via la méthode additive `lock_restart_window` du port ; la pause est relue sous le verrou, dans la transaction. Écart : pas de test de concurrence réel (transactions de test) ; test que le verrou est pris, et l'ordre verrou puis relecture.
+- F4 : le jeton porte `expires_at` (signature + 30 j) ; l'enveloppe chiffrée vit 365 j pour que `expired?` (ajout au port) distingue « expiré » d'« altéré » sans changer `verify`. L'appareil n'expire plus rien.
+- F5 : écart assumé : la déconnexion est bloquée aussi quand des copies `locked` / `paused` restent en attente (`pending > 0`), comme demandé.
+- F6 : `safeRefresh` dans le contrôleur de la file ; message « Envoi impossible » affiché tant que des copies attendent.
+

@@ -75,3 +75,47 @@ test("un échec d'envoi est dit dans la console, pas avalé", async () => {
   assert.equal(errors.length, 1)
   controller.disconnect()
 })
+
+test("F1 : un envoi qui échoue (500) est écrit en console.warn, pas avalé", async () => {
+  await store.putCopy(KEY, copy("a"))
+  globalThis.fetch = async () => ({ ok: false, status: 500, json: async () => ({}) })
+  const warnings = []
+  const original = console.warn
+  console.warn = (...args) => warnings.push(args)
+  const controller = Object.create(OfflineSyncController.prototype)
+  controller.connect()
+  await settle()
+  console.warn = original
+
+  assert.equal(warnings.length, 1)
+  assert.equal(warnings[0][1], "http_500")
+  controller.disconnect()
+})
+
+test("F5 : la purge est bloquée tant que l'envoi échoue ou que des copies attendent", async () => {
+  globalThis.fetch = async () => ({ ok: false, status: 500, json: async () => ({}) })
+  const quiet = console.warn
+  console.warn = () => {}
+  const controller = Object.create(OfflineSyncController.prototype)
+  controller.connect()
+  await settle()
+  await store.putCopy(KEY, copy("a"))
+
+  await assert.rejects(store.runBeforePurge(), { code: "before_purge" })
+
+  globalThis.fetch = async (url, options) => ({ ok: true, status: 200, json: async () => ({ results: JSON.parse(options.body).copies.map((c) => ({ client_copy_id: c.client_copy_id, status: "rejected", reason: "locked" })) }) })
+  await assert.rejects(store.runBeforePurge(), { code: "before_purge" })
+  console.warn = quiet
+  controller.disconnect()
+})
+
+test("F5 : la purge passe quand tout est envoyé", async () => {
+  const controller = Object.create(OfflineSyncController.prototype)
+  controller.connect()
+  await settle()
+  await store.putCopy(KEY, copy("a"))
+
+  await store.runBeforePurge()
+  assert.equal(sent, 1)
+  controller.disconnect()
+})

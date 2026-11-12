@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::SyncOfflineCopy
 # Rôle : le serveur reçoit une copie rendue hors ligne, la vérifie (jeton, version, droits, pause), la recorrige seul et la range terminée ; une copie refusée n'écrit rien
-# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.5 ; menace P4, R1 à R6), 0026, 0033, 0043, 0054, 0115, 0120-questions-a-plusieurs-cases-et-indice (cases), 0121 (assignation en attente), 0126 (garde d'accès)
+# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.5 ; menace P4, R1 à R6), 0026, 0033, 0043, 0054, 0115, 0120-questions-a-plusieurs-cases-et-indice (cases), 0121 (assignation en attente : copie rangée sans rattachement), 0126 (garde d'accès)
 module UseCases
   module Assessment
     class SyncOfflineCopy
@@ -15,7 +15,7 @@ module UseCases
       BLANK_SEPARATOR = " ; ".freeze
       INVALID_PICK = :invalid_pick
 
-      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, policy:, transaction:, clock:, access:, current_digest:)
+      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, pending:, policy:, transaction:, clock:, access:, current_digest:)
         @current_digest = current_digest
         @signer = signer
         @exercises = exercises
@@ -24,6 +24,7 @@ module UseCases
         @badges = badges
         @memberships = memberships
         @assignments = assignments
+        @pending = pending
         @policy = policy
         @transaction = transaction
         @clock = clock
@@ -61,6 +62,7 @@ module UseCases
       def owned_pack(actor, dto)
         pack = @signer.verify(dto.pack_token)
         return pack if pack && pack.fetch(:student_id) == actor.user_id
+        return Shared::Result.failure(:forbidden, errors: { base: [ :expired ] }) if pack.nil? && @signer.expired?(dto.pack_token)
 
         Shared::Result.failure(:forbidden, errors: { base: [ :wrong_owner ] })
       end
@@ -76,12 +78,21 @@ module UseCases
         now = @clock.now
         return Shared::Result.failure(:locked, errors: { base: [ :subscription_required ] }) if @access.call(student_id: actor.user_id, at: now).blocked?
 
+        nil
+      end
+
+      # La pause des 3 copies, relue sous le verrou (élève, exercice) : deux envois en même temps ne passent pas tous deux la 3e copie.
+      def pause_refusal(actor, exercise, now)
+        @sessions.lock_restart_window(student_id: actor.user_id, exercise_id: exercise.id)
         completions = @sessions.recent_completions(student_id: actor.user_id, exercise_id: exercise.id)
         resume_at = Entities::Assessment::RestartPause.resume_at(completions:, now:)
         Shared::Result.failure(:conflict, errors: { base: [ :paused ], resume_at: }) if resume_at
       end
 
       def store(actor, exercise, pack, dto)
+        paused = pause_refusal(actor, exercise, @clock.now)
+        return paused if paused
+
         attempts = grade(exercise, dto)
         return attempts if attempts.failure?
 
@@ -120,8 +131,12 @@ module UseCases
         Entities::Assessment::Grading.points_percent(graded)
       end
 
-      # Rattachée à l'assignation active de l'exercice dans la classe principale de l'élève (ADR-0048), comme au démarrage en ligne.
+      # Rattachée à l'assignation active de l'exercice dans la classe principale de l'élève (ADR-0048), comme au démarrage en ligne,
+      # sauf si c'est un devoir encore à rendre : le corrigé était en main (le paquet est refusé pour un devoir en attente, l'assignation
+      # est venue après), la copie est rangée comme un entraînement, sans rattachement (menace C1).
       def assignment_id(actor, exercise)
+        return if @pending.pending_exercise_public_ids(student_id: actor.user_id, exercise_public_ids: [ exercise.public_id ]).include?(exercise.public_id)
+
         membership = @memberships.primary_for(student_id: actor.user_id)
         return unless membership && membership.classroom_active?
 

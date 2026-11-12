@@ -7,10 +7,16 @@ import { flush } from "../offline/sync.js"
 
 export default class extends Controller {
   connect() {
-    this.send = () => flush().catch((error) => console.error("Envoi des copies hors ligne", error))
+    this.send = () => flush().then((summary) => {
+      if (summary?.error) console.warn("Envoi des copies hors ligne impossible", summary.error)
+    }).catch((error) => console.error("Envoi des copies hors ligne", error))
     window.addEventListener("online", this.send)
     // La déconnexion attend l'envoi (store.runBeforePurge) : la file part avant que l'appareil soit vidé.
-    this.unregister = registerBeforePurge(() => flush())
+    // Elle bloque la déconnexion si l'envoi a échoué ou si des copies restent en attente : mieux vaut rester connecté que perdre une copie.
+    this.unregister = registerBeforePurge(async () => {
+      const summary = await flush()
+      if (summary.error || summary.pending > 0) throw new Error(`Copies hors ligne non envoyées (${summary.error || `${summary.pending} en attente`})`)
+    })
     this.send()
   }
 

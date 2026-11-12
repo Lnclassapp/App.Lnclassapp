@@ -71,6 +71,12 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #record_offline_copy"
       end
 
+      # Prend, pour la transaction courante, un verrou sur (élève, exercice) : un autre appel attend la fin de la transaction. À appeler avant
+      # de relire recent_completions pour décider de la pause (deux copies hors ligne en même temps). → nil
+      def lock_restart_window(student_id:, exercise_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #lock_restart_window"
+      end
+
       # La copie hors ligne déjà enregistrée de l'élève sous cet identifiant. → ExerciseSession | nil
       def find_by_client_copy_id(student_id:, client_copy_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_client_copy_id"

@@ -6,22 +6,28 @@ import { currentKey, listCopies, deleteCopy, getPack } from "../offline/store.js
 import { QUEUE_EVENT, SENDING_EVENT } from "../offline/sync.js"
 
 export default class extends Controller {
-  static targets = [ "pending", "pendingText", "synced", "rejected", "rejectedRow" ]
-  static values = { pendingOne: String, pendingOther: String, sending: String, synced: String, rejected: Object }
+  static targets = [ "pending", "pendingText", "synced", "rejected", "rejectedRow", "error" ]
+  static values = { pendingOne: String, pendingOther: String, sending: String, synced: String, failed: String, rejected: Object }
 
   connect() {
     this.sent = []
     this.sending = false
-    this.onSending = () => { this.sending = true; return this.refresh() }
-    this.onQueue = () => { this.sending = false; return this.refresh() }
+    this.failed = false
+    this.onSending = () => { this.sending = true; this.failed = false; return this.safeRefresh() }
+    this.onQueue = (event) => { this.sending = false; this.failed = Boolean(event?.detail?.error); return this.safeRefresh() }
     window.addEventListener(SENDING_EVENT, this.onSending)
     window.addEventListener(QUEUE_EVENT, this.onQueue)
-    this.refresh()
+    this.safeRefresh()
   }
 
   disconnect() {
     window.removeEventListener(SENDING_EVENT, this.onSending)
     window.removeEventListener(QUEUE_EVENT, this.onQueue)
+  }
+
+  // Un rafraîchissement que personne n'attend : son échec est écrit dans la console, jamais perdu.
+  safeRefresh() {
+    return this.refresh().catch((error) => console.error("File des copies hors ligne : affichage impossible", error))
   }
 
   async refresh() {
@@ -41,6 +47,7 @@ export default class extends Controller {
 
     this.showPending(pending.length)
     this.showSent()
+    this.showFailure(pending.length)
     await this.showRejected(key, rejected)
     this.element.hidden = pending.length + rejected.length + this.sent.length === 0
   }
@@ -59,6 +66,14 @@ export default class extends Controller {
 
     const text = this.sending ? this.sendingValue : (count === 1 ? this.pendingOneValue : this.pendingOtherValue.replace("%{count}", count))
     this.pendingTextTarget.textContent = text
+  }
+
+  // « Envoi impossible » reste dit tant que des copies attendent : l'élève sait que rien n'est perdu et que l'envoi sera retenté.
+  showFailure(pendingCount) {
+    if (!this.hasErrorTarget) return
+
+    this.errorTarget.hidden = !(this.failed && pendingCount > 0)
+    this.errorTarget.textContent = this.failedValue
   }
 
   showSent() {
@@ -83,7 +98,7 @@ export default class extends Controller {
     row.querySelector("[data-role='title']").textContent = await this.titleOf(key, copy)
     row.querySelector("button").onclick = async () => {
       await deleteCopy(key, copy.client_copy_id)
-      await this.refresh()
+      await this.safeRefresh()
     }
     return row
   }

@@ -8,8 +8,8 @@ module Assessment
     MAX_COPIES = 20
     MAX_BYTES = 256.kilobytes
     FIELDS = %i[client_copy_id exercise_public_id pack_token started_at submitted_at answers].freeze
-    # Le motif montré à l'appareil : le premier fait du refus, ramené aux six motifs de la file (UDR hors-connexion §3.6).
-    REASONS = { wrong_owner: "wrong_owner", stale: "stale", paused: "paused", subscription_required: "locked", not_published: "forbidden" }.freeze
+    # Le motif montré à l'appareil : le premier fait du refus, ramené aux motifs de la file (UDR hors-connexion §3.6).
+    REASONS = { wrong_owner: "wrong_owner", expired: "expired", stale: "stale", paused: "paused", subscription_required: "locked", not_published: "forbidden" }.freeze
 
     # La taille est jugée avant que Rails lise le corps (et avant le jeton CSRF, qui le lit).
     prepend_before_action :refuse_large_body, only: :create
@@ -20,7 +20,7 @@ module Assessment
       copies = posted_copies
       return render json: { error: "invalid" }, status: :unprocessable_entity if copies.nil? || copies.size > MAX_COPIES
 
-      render json: { results: copies.map { sync(it) } }
+      render json: { results: copies.map { sync_isolated(it) } }
     end
 
     private
@@ -37,6 +37,14 @@ module Assessment
       return unless raw.is_a?(Array) && raw.all?(ActionController::Parameters)
 
       raw.map { |copy| copy.to_unsafe_h.symbolize_keys.slice(*FIELDS) }
+    end
+
+    # Une exception sur une copie ne bloque pas le lot : elle est signalée, la copie est rendue rejected/error (l'appareil la retente).
+    def sync_isolated(attributes)
+      sync(attributes)
+    rescue StandardError => e
+      Rails.error.report(e, handled: true, context: { client_copy_id: attributes[:client_copy_id], exercise_public_id: attributes[:exercise_public_id] })
+      { client_copy_id: attributes[:client_copy_id], status: "rejected", reason: "error" }
     end
 
     def sync(attributes)
@@ -68,7 +76,8 @@ module Assessment
         signer: Repositories::Assessment::OfflinePackSigner.new, exercises: Repositories::Assessment::ExerciseRepository.new,
         sessions: Repositories::Assessment::ExerciseSessionRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
         badges: Repositories::Assessment::BadgeRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
-        assignments: Repositories::Classroom::AssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new,
+        assignments: Repositories::Classroom::AssignmentRepository.new,
+        pending: Repositories::Assessment::PendingAssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new,
         transaction: Repositories::Shared::Transaction.new, clock: Time.zone, access: Queries::Billing::StudentAccessQuery.new,
         current_digest: current_digest
       )

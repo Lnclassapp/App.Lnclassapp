@@ -160,15 +160,83 @@ test("sans jeton CSRF dans la page : rien n'est envoyé", async () => {
   assert.equal(summary.error, "no_csrf")
 })
 
-test("30 jours : une copie en attente plus vieille est refusée « expired », jamais envoyée, et dite par un événement", async () => {
+test("F4 : l'horloge de l'appareil n'empêche jamais l'envoi : une copie « de plus de 30 jours » part, le serveur décide", async () => {
   await store.putCopy(KEY, copy("old", { submitted_at: new Date(NOW - 31 * DAY).toISOString() }))
-  await store.putCopy(KEY, copy("new"))
+  const summary = await run({ now: () => NOW + 400 * DAY })
+
+  assert.deepEqual(requests.flatMap((r) => r.body.copies.map((c) => c.client_copy_id)), [ "old" ])
+  assert.equal(summary.synced, 1)
+})
+
+test("F4 : un motif expired du serveur range la copie refusée et la compte", async () => {
+  answer = (copies) => ({ results: copies.map((c) => ({ client_copy_id: c.client_copy_id, status: "rejected", reason: "expired" })) })
+  await store.putCopy(KEY, copy("old"))
   const summary = await run()
 
-  assert.deepEqual(requests.flatMap((r) => r.body.copies.map((c) => c.client_copy_id)), [ "new" ])
-  const old = (await store.listCopies(KEY)).find((c) => c.client_copy_id === "old")
-  assert.deepEqual([ old.status, old.reason ], [ "rejected", "expired" ])
-  assert.equal(summary.expired, 1)
+  const [ stored ] = await store.listCopies(KEY)
+  assert.deepEqual([ stored.status, stored.reason, summary.expired, summary.rejected ], [ "rejected", "expired", 1, 1 ])
+})
+
+test("F2 : un motif error du serveur laisse la copie en attente (retentée)", async () => {
+  answer = (copies) => ({ results: copies.map((c) => ({ client_copy_id: c.client_copy_id, status: "rejected", reason: "error" })) })
+  await store.putCopy(KEY, copy("a"))
+  const summary = await run()
+
+  assert.equal((await store.listCopies(KEY))[0].status, "pending")
+  assert.equal(summary.pending, 1)
+})
+
+test("F1 : une réponse 500 est un échec visible (http_500), la copie reste en attente, la page est prévenue", async () => {
+  await store.putCopy(KEY, copy("a"))
+  const summary = await flush({ fetchImpl: async () => ({ ok: false, status: 500, json: async () => ({}) }) })
+
+  assert.equal(summary.error, "http_500")
+  assert.equal((await store.listCopies(KEY))[0].status, "pending")
+  assert.equal(events.at(-1).detail.error, "http_500")
+})
+
+test("F1 : une réponse redirigée (session perdue, page de connexion) est le motif auth", async () => {
+  await store.putCopy(KEY, copy("a"))
+  const summary = await flush({ fetchImpl: async () => ({ ok: true, status: 200, redirected: true, json: async () => { throw new Error("html") } }) })
+
+  assert.equal(summary.error, "auth")
+  assert.equal((await store.listCopies(KEY))[0].status, "pending")
+})
+
+test("F1 : une réponse HTML est le motif auth", async () => {
+  await store.putCopy(KEY, copy("a"))
+  const summary = await flush({ fetchImpl: async () => ({ ok: true, status: 200, headers: { get: () => "text/html; charset=utf-8" }, json: async () => ({}) }) })
+
+  assert.equal(summary.error, "auth")
+})
+
+test("F3 : une panne de la file locale n'empêche pas l'événement de fin (« Envoi… » ne reste pas affiché)", async () => {
+  await store.putCopy(KEY, copy("a"))
+  const original = globalThis.indexedDB
+  const realFetch = fetchImpl
+  const broken = async (url, options) => { globalThis.indexedDB = { open: () => { throw new Error("IndexedDB cassé") } }; return realFetch(url, options) }
+  const quiet = console.error
+  console.error = () => {}
+  const summary = await flush({ fetchImpl: broken })
+  console.error = quiet
+  globalThis.indexedDB = original
+
+  assert.equal(events.at(-1).type, "lnclass:offline-queue")
+  assert.equal(summary.error, "store")
+})
+
+test("F3 : l'échec de mise à jour d'une copie n'arrête pas les suivantes", async () => {
+  await store.putCopy(KEY, copy("a"))
+  await store.putCopy(KEY, copy("b"))
+  // La copie « a » disparaît pendant l'envoi : sa mise à jour échoue, celle de « b » doit passer.
+  const vanishing = async (url, options) => { await store.deleteCopy(KEY, "a"); return fetchImpl(url, options) }
+  const quiet = console.error
+  console.error = () => {}
+  const summary = await flush({ fetchImpl: vanishing })
+  console.error = quiet
+
+  assert.equal((await store.listCopies(KEY)).find((c) => c.client_copy_id === "b").status, "synced")
+  assert.equal(summary.error, "store")
 })
 
 test("un événement dit à la page que la file a changé", async () => {

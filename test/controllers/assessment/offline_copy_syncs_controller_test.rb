@@ -88,6 +88,48 @@ class Assessment::OfflineCopySyncsControllerTest < ActionDispatch::IntegrationTe
     assert_equal [ "rejected", "stale" ], results.first.values_at("status", "reason")
   end
 
+  # F2 : une exception sur une copie ne bloque pas le lot ; elle est signalée avec le contexte, la copie est rendue rejected/error.
+  test "F2 : la 2e copie lève : la 1re et la 3e sont rangées, la 2e est rejected/error, l'erreur est signalée" do
+    sign_in_as @student
+    reports = []
+    subscriber = Class.new { define_method(:report) { |error, handled:, severity:, context:, source: nil| reports << [ error, context ] } }.new
+    original = UseCases::Assessment::SyncOfflineCopy.method(:new)
+    calls = 0
+    wrap = lambda do |**deps|
+      use_case = original.call(**deps)
+      Class.new(SimpleDelegator) do
+        define_method(:call) do |**args|
+          calls += 1
+          raise "boum" if calls == 2
+
+          super(**args)
+        end
+      end.new(use_case)
+    end
+
+    Rails.error.subscribe(subscriber)
+    UseCases::Assessment::SyncOfflineCopy.singleton_class.send(:define_method, :new) { |**deps| wrap.call(**deps) }
+    send_copies copy(0), copy(1), copy(2)
+
+    assert_response :ok
+    assert_equal [ [ "synced", nil ], [ "rejected", "error" ], [ "synced", nil ] ], results.map { it.values_at("status", "reason") }
+    assert_equal [ UUIDS[0], UUIDS[2] ].sort, Orm::ExerciseSession.where(student: @student).pluck(:client_copy_id).sort
+    assert_equal [ [ "boum", { client_copy_id: UUIDS[1], exercise_public_id: @exercise.public_id } ] ], reports.map { [ it[0].message, it[1].slice(:client_copy_id, :exercise_public_id) ] }
+  ensure
+    UseCases::Assessment::SyncOfflineCopy.singleton_class.send(:remove_method, :new)
+    Rails.error.unsubscribe(subscriber) if subscriber
+  end
+
+  test "F4 : un jeton de plus de 30 jours donne le motif expired" do
+    sign_in_as @student
+    old = nil
+    travel_to(Time.current - 31.days) { old = token }
+
+    send_copies copy(pack_token: old)
+
+    assert_equal [ "rejected", "expired" ], results.first.values_at("status", "reason")
+  end
+
   test "plus de 20 copies : 422, rien n'est écrit" do
     sign_in_as @student
 

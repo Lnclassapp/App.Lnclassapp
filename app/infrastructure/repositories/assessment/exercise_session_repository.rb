@@ -92,6 +92,14 @@ module Repositories
         find_by_client_copy_id(student_id: session.student_id, client_copy_id:) ? :duplicate : raise
       end
 
+      # Verrou consultatif de transaction (pg_advisory_xact_lock) sur (élève, exercice) : jusqu'à la fin de la transaction courante, un
+      # autre envoi attend, puis relit les copies terminées (la pause des 3 copies). Aucune ligne n'est verrouillée.
+      def lock_restart_window(student_id:, exercise_id:)
+        key = Orm::ExerciseSession.sanitize_sql_array([ "SELECT pg_advisory_xact_lock(hashtextextended(?, 0))", "restart_window:#{student_id}:#{exercise_id}" ])
+        Orm::ExerciseSession.connection.execute(key)
+        nil
+      end
+
       def find_by_client_copy_id(student_id:, client_copy_id:)
         record = Orm::ExerciseSession.find_by(student_id:, client_copy_id:)
         record && map_to_entity(record)
