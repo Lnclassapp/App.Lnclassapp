@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::ComprehensionDetailQuery
 # Rôle : section « Compréhension » du suivi : cases par badge, justes par question et élèves d'un badge, du meilleur score au plus faible (UDR enseignant §3.8)
-# ADR  : 0026, 0072, 0079, 0097 (§4.5, §4.9), XXXX-medailles-lues-a-la-cloture · UDR : 0072, enseignant §3.8 · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
+# ADR  : 0026, 0072, 0079, 0097 (§4.5, §4.9), 0129-medailles-lues-a-la-cloture · UDR : 0072, enseignant §3.8 · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
 module Queries
   module Assessment
     class ComprehensionDetailQuery

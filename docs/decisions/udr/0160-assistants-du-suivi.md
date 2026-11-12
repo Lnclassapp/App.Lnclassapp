@@ -1,8 +1,8 @@
-# UDR-XXXX : Les assistants du suivi (briefing, compte rendu dicté, brouillon WhatsApp, rapport pédagogique)
+# UDR-0160 : Les assistants du suivi (briefing, compte rendu dicté, brouillon WhatsApp, rapport pédagogique)
 <!-- index
 titre: Assistants du suivi
 statut: Accepté
-adr-lie: [XXXX](../adr/XXXX-modeles-de-langage-par-openrouter.md)
+adr-lie: [0130](../adr/0130-modeles-de-langage-par-openrouter.md)
 problematique: Comment présenter des générations de modèle qui prennent plusieurs secondes, peuvent échouer et ne doivent jamais agir sans validation humaine
 -->
 
@@ -11,7 +11,7 @@ problematique: Comment présenter des générations de modèle qui prennent plus
 | **Statut** | Accepté |
 | **Date** | 2026-11-04 |
 | **Chantier** | `docs/chantiers/crm-ecoles` |
-| **ADR lié** | ADR-XXXX-modeles-de-langage-par-openrouter |
+| **ADR lié** | ADR-0130 |
 | **Remplacé par** | — |
 
 ---
@@ -28,7 +28,7 @@ Quatre assistants servent le membre `admin` ou `field` : préparer un appel, not
 
 ## 3. Règles d'implémentation
 
-**Carte « Assistants »** (`app/views/teams/crm/assistants/_card.html.erb`, cible `school_crm_assistants` de UDR-XXXX-bloc-suivi-de-la-fiche-etablissement)
+**Carte « Assistants »** (`app/views/teams/crm/assistants/_card.html.erb`, cible `school_crm_assistants` de UDR-0162)
 
 - `ui_card(title: "Assistants", icon: "sparkles", heading: :h3)`.
 - Trois `ui_button(variant: :secondary, size: :md)`, pleine largeur, empilés : « Préparer l'appel » (`sparkles`), « Dicter un compte rendu » (`microphone`), « Rapport pédagogique » (`document-chart-bar`).
@@ -55,7 +55,7 @@ Quatre assistants servent le membre `admin` ou `field` : préparer un appel, not
 - Format : `MediaRecorder` avec `audio/webm;codecs=opus`, sinon `audio/mp4` (Safari), sinon `audio/ogg`. Navigateur sans `MediaRecorder` : cible `fallback` visible, `<input type="file" accept="audio/*" capture>`.
 - Micro refusé : cible `error` « Autorisez le micro dans votre navigateur, ou importez un enregistrement. » + le `fallback`.
 - Refus serveur (CA-26) : 422, message dans la modale « Enregistrement trop long ou format non pris en charge (3 min, 10 Mo, webm/ogg/mp4). ».
-- Prête : la modale affiche le formulaire « Noter un échange » de UDR-XXXX-bloc-suivi-de-la-fiche-etablissement, pré-rempli, `source=dictation`, avec en tête un bandeau `bg-info-soft text-info rounded` « Pré-rempli par l'assistant : vérifiez avant d'enregistrer. ». Réponse inexploitable (CA-27) : bandeau `bg-warning-soft text-warning` « L'assistant n'a pas su structurer : la transcription est dans la note. ». Échec : `ui_error_state` + lien « Saisir à la main » (formulaire vide).
+- Prête : la modale affiche le formulaire « Noter un échange » de UDR-0162, pré-rempli, `source=dictation`, avec en tête un bandeau `bg-info-soft text-info rounded` « Pré-rempli par l'assistant : vérifiez avant d'enregistrer. ». Réponse inexploitable (CA-27) : bandeau `bg-warning-soft text-warning` « L'assistant n'a pas su structurer : la transcription est dans la note. ». Échec : `ui_error_state` + lien « Saisir à la main » (formulaire vide).
 
 **Brouillon WhatsApp** (`app/views/teams/crm/whatsapp_drafts/_draft.html.erb`, dans une `ui_modal(title: "Message de relance")`)
 

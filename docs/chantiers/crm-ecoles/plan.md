@@ -2,7 +2,7 @@
 
 > Graphe des dépendances ci-dessous ; l’ordre réel (3 lots en parallèle au plus, 2 sessions) est dans « Dispatch ».
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Specs : [`prd.md`](prd.md) · Décisions : ADR-XXXX-contexte-crm-suivi-des-ecoles, ADR-XXXX-modeles-de-langage-par-openrouter, UDR-XXXX-bloc-suivi-de-la-fiche-etablissement, UDR-XXXX-pipeline-et-relances, UDR-XXXX-assistants-du-suivi.
+> Specs : [`prd.md`](prd.md) · Décisions : ADR-0128, ADR-0130, UDR-0162, UDR-0168, UDR-0160.
 
 ## Graphe
 
@@ -23,7 +23,7 @@ Lot 0 — SOCLE : tables, entités, ports, policy, routes, hôtes des frames, us
   Lot C + Lot G ──► Lot K  Compte rendu dicté                            ┘
 ```
 
-**Pourquoi chaque sous-bloc de la fiche est un frame à part** (UDR-XXXX-bloc-suivi-de-la-fiche-etablissement) : le Lot 0 pose une coquille statique avec six `turbo-frame` paresseux ; chaque lot sert le sien par son propre contrôleur. Aucun lot ne touche le fichier d'un autre, et un sous-bloc en erreur ne casse pas les autres.
+**Pourquoi chaque sous-bloc de la fiche est un frame à part** (UDR-0162) : le Lot 0 pose une coquille statique avec six `turbo-frame` paresseux ; chaque lot sert le sien par son propre contrôleur. Aucun lot ne touche le fichier d'un autre, et un sous-bloc en erreur ne casse pas les autres.
 
 **Ordre de coupe** si le délai glisse : Lot K, puis Lot J. Le Lot H ne se coupe pas.
 
@@ -107,7 +107,7 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
                      `app/views/teams/crm/stages/show.html.erb` · `usages/show.html.erb` · `contacts/index.html.erb` · `interactions/index.html.erb` · `follow_ups/school.html.erb` · `follow_ups/index.html.erb` · `home_follow_ups/show.html.erb` · `assistants/show.html.erb`
                      *Adaptateurs squelettes (chaque méthode a la signature du port et lève `NotImplementedError, "Lot X"`, pour que `port_contracts_test` reste vert)* :
                      `app/infrastructure/repositories/crm/account_repository.rb` (Lot A) · `contact_repository.rb` (Lot B) · `interaction_repository.rb` (Lot C) · `generation_repository.rb` (Lot G) · `app/infrastructure/crm/open_router_language_model.rb` (Lot G)
-                     `test/db/schema_constraints_test.rb` *(liste fermée `CRM_CASCADES`)* · `docs/guide/architecture.md` §5 *(sept contextes)* · `docs/decisions/adr/XXXX-modeles-de-langage-par-openrouter.md` *(échecs du port : `:unavailable` + `errors[:reason]` ; `mark_failed`)*
+                     `test/db/schema_constraints_test.rb` *(liste fermée `CRM_CASCADES`)* · `docs/guide/architecture.md` §5 *(sept contextes)* · `docs/decisions/adr/0130-modeles-de-langage-par-openrouter.md` *(échecs du port : `:unavailable` + `errors[:reason]` ; `mark_failed`)*
 - **Dépend de**    : —
 - **Test associé** : `test/domain/entities/crm/stage_test.rb` (CA-03, CA-04, CA-05) · `test/domain/policies/crm/manage_crm_policy_test.rb` · `test/infrastructure/queries/crm/school_usage_query_test.rb` · `test/infrastructure/queries/crm/assignable_members_query_test.rb` · `test/infrastructure/repositories/crm/follow_up_repository_test.rb` · `test/controllers/teams/crm/accounts_controller_test.rb` (CA-01, CA-02 : 403 pour `content` et enseignant ; frame absent de la fiche pour `content`)
 - **Done quand**   : après le seed, on se connecte avec `0700000001` (`field`) et `0700000002` (`content`) ; un membre `field` ouvre une fiche établissement et voit le bloc « Suivi » et ses six squelettes ; un membre `content` ne le voit pas et reçoit 403 sur `/teams/schools/:id/follow-up` ; `bin/rails runner "puts Ports::Crm::LanguageModelPort.name"` passe ; les ports sont gelés
@@ -127,7 +127,7 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
                      `app/helpers/components_helper.rb` · `app/views/components/_error_state.html.erb` *(`retry_method:`)*
                      `app/controllers/teams/crm/generations_controller.rb` *(table type → route de relance, partial prêt)* · `app/views/teams/crm/generations/{show,_generation}.html.erb`
                      `app/views/teams/crm/briefings/_briefing.html.erb` · `config/locales/teams/crm/briefings.fr.yml` *(« Préparée il y a X »)*
-                     `docs/decisions/adr/XXXX-contexte-crm-suivi-des-ecoles.md` · `docs/decisions/udr/XXXX-assistants-du-suivi.md`
+                     `docs/decisions/adr/0128-contexte-crm-suivi-des-ecoles.md` · `docs/decisions/udr/0160-assistants-du-suivi.md`
 - **Dépend de**    : Lots 0, C, D, G, H
 - **Test associé** : `test/domain/use_cases/crm/record_interaction_test.rb` · `test/infrastructure/repositories/crm/{interaction,follow_up,generation}_repository_test.rb` · `test/controllers/teams/crm/generations_controller_test.rb` · `test/helpers/components_helper_test.rb` · `test/jobs/crm/generation_job_test.rb`
 - **Done quand**   : un échange noté avec un contact a son `contact_id` ; la relance proposée a son `interaction_id` ; un identifiant public inconnu est refusé (`:not_found`) ; « Réessayer » relance réellement une génération (POST) ; la fiche prête d'un briefing, relue par le sondage, montre la liste et « Régénérer » ; « Préparée il y a X » ; une réponse vide est `invalid_response`

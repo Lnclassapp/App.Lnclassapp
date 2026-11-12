@@ -28,4 +28,4 @@ Scénario: l'enseignant ouvre le résultat d'un élève
 
 ## Architecture
 
-Aucun port, aucune table : un use case n'est pas ajouté. `Grading.badge_for` donne au moins Bronze. Les vues lisent la médaille par `medal_tag`. ADR : non. UDR : `XXXX-medailles-ecrans-eleve`.
+Aucun port, aucune table : un use case n'est pas ajouté. `Grading.badge_for` donne au moins Bronze. Les vues lisent la médaille par `medal_tag`. ADR : non. UDR : `0165-medailles-ecrans-eleve`.

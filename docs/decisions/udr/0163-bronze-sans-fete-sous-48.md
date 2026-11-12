@@ -1,4 +1,4 @@
-# UDR-XXXX : Résultat — Bronze sans fête sous 48 %, « Pas encore » quand rien n'est médaillé
+# UDR-0163 : Résultat — Bronze sans fête sous 48 %, « Pas encore » quand rien n'est médaillé
 <!-- index
 titre: Bronze sans fête sous 48 % sur le résultat
 statut: Accepté
@@ -11,8 +11,8 @@ problematique: Une première médaille Bronze obtenue sous 48 % ne doit pas êtr
 | **Statut** | Accepté (porteur, 2026-11-08) |
 | **Date** | 2026-11-08 |
 | **Chantier** | `docs/chantiers/medailles-grading-bronze` |
-| **ADR lié** | ADR-XXXX-medailles-lues-a-la-cloture |
-| **Amende** | UDR-XXXX-medailles-remplacent-notes-et-moyennes §2.5 |
+| **ADR lié** | ADR-0129 |
+| **Amende** | UDR-0167 §2.5 |
 | **Remplacé par** | — |
 
 ---

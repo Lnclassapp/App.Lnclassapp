@@ -1,4 +1,4 @@
-# ADR-XXXX : La médaille d'un exercice se lit dans la médaille enregistrée à la clôture
+# ADR-0129 : La médaille d'un exercice se lit dans la médaille enregistrée à la clôture
 <!-- index
 titre: Médaille d'exercice lue à la clôture, Bronze dès une réponse
 statut: Accepté

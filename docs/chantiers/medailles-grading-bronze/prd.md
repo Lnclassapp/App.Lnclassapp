@@ -88,8 +88,8 @@ Scénario: Médaille de classe
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-medailles-lues-a-la-cloture
-- UDR-XXXX-bronze-sans-fete-sous-48
+- ADR-0129
+- UDR-0163
 - Pas de seuil de rendu (retiré du périmètre).
 
 ## 7. Mesures
