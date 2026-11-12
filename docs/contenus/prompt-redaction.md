@@ -303,16 +303,20 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
       "name": "…", "remember": "…", "method": [ "…", "…" ],
       "example": { "statement": "…", "steps": [ "…", "…" ] },
       "pitfall": "…", "figure": null,
-      "exercise": { "title": "…", "statement": "…", "exercise_type": "fixation", "figure": null,
-                    "questions": [ { "content": "…", "question_type": "single_choice", "explanation": "…",
-                                     "answers": [ { "content": "…", "correct": true }, { "content": "…", "correct": false }, { "content": "…", "correct": false } ] } ] }
+      "exercise": [
+        { "title": "…", "statement": "…", "exercise_type": "fixation", "figure": null,
+          "questions": [ { "content": "…", "question_type": "single_choice", "explanation": "…",
+                           "answers": [ { "content": "…", "correct": true }, { "content": "…", "correct": false }, { "content": "…", "correct": false } ] } ] },
+        { "title": "…", "statement": "Dans cet exercice, tu …", "hint": "…", "exercise_type": "fixation", "figure": null,
+          "questions": [ "… 6 questions d'au moins 4 types différents …" ] }
+      ]
     } ],
     "exercises": [ "… exactement 4 problèmes, même forme que « exercise » …" ],
     "subjects": [ { "title": "Sujet 1 · …", "notions": "…", "exercises": [ "… 4 exercices « Exercice 1 » à « Exercice 4 » …" ] } ]
   }] }
 ```
 
-- `exercise` d'une notion : un objet (un exercice), ou, depuis le 2026-10-31 (ADR-0116), une **liste de 1 à 2 objets** de même forme (`"exercise": [ { … }, { … } ]`). Une liste vide, ou 3 exercices et plus, est refusé (`essential_exercise_count`). Chaque exercice a 5 questions au moins ; mélange les types (QCM, vrai ou faux, complète, calcul…) et reste dans le niveau du premier exercice. Les chemins d'erreur sont `notions[i].exercise[j]…`.
+- `exercise` d'une notion : une **liste de 2 objets** de même forme (`"exercise": [ { … }, { … } ]`), comme dans l'exemple. L'import accepte encore un objet seul ou une liste d'un exercice (ADR-0116, fichiers anciens), mais une nouvelle leçon en porte toujours 2. Une liste vide, ou 3 exercices et plus, est refusé (`essential_exercise_count`). Chaque exercice a 5 questions au moins ; mélange les types (QCM, vrai ou faux, complète, calcul…) et reste dans le niveau du premier exercice. Les chemins d'erreur sont `notions[i].exercise[j]…`.
 
 - `name` : l'intitulé exact de la leçon dans la progression. `subtitle` : « Leçon N — progression DPFC 2026-2027 ». `level_name` : `6ème` … `Tle`. `material_name` : exactement « Mathématiques », « Français », « Histoire-Géographie », « SVT », « Physique-Chimie », « EDHC » (1er cycle seulement) ou « Philosophie » (1ère et Tle). `series_name` : seulement à partir de la 2nde.
 - `theme` (facultatif) : `blue`, `teal` ou `burgundy` ; absent = `blue`. Varie les thèmes d'une leçon à l'autre.
@@ -333,7 +337,7 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
 ## Après la rédaction : script puis relecture IA indépendante
 
 1. **Script.** Lance `ruby script/contenus/valider.rb <fichier>`. Il refuse le fichier avec les mêmes raisons que l'import (`example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`, `too_short`, `blank`…) et avertit des défauts de rédaction (correction qui ne cite pas la méthode, mots interdits, questions dépendantes, moins de 50 % de questions corrigées automatiquement). Les règles de chaque type de question sont celles de l'import (`question_structure`). Corrige toutes les erreurs et tous les avertissements, jusqu'à un fichier sans erreur (3 tours au plus).
-2. **Relecture IA indépendante.** Un **autre** modèle (jamais l'auteur), qui n'a pas vu la rédaction, ouvre le fichier et **refait chaque calcul et chaque analyse** : chaque exemple, chaque question, chaque correction. Il vérifie que la bonne proposition est la bonne, que chaque correction suit les étapes de la méthode, que les propositions fausses le sont, que rien n'est hors programme, que chaque fait, date et citation est exact et correctement attribué, qu'aucun extrait long d'œuvre protégée n'apparaît, et que chaque corrigé modèle mérite ses critères. Il rend la liste des défauts avec leur chemin (`courses[0].notions[1].exercise.questions[3]`), sans réécrire. L'auteur corrige, puis le script est relancé.
+2. **Relecture IA indépendante.** Un **autre** modèle (jamais l'auteur), qui n'a pas vu la rédaction, ouvre le fichier et **refait chaque calcul et chaque analyse** : chaque exemple, chaque question, chaque correction. Il vérifie que la bonne proposition est la bonne, que chaque correction suit les étapes de la méthode, que les propositions fausses le sont, que rien n'est hors programme, que chaque fait, date et citation est exact et correctement attribué, qu'aucun extrait long d'œuvre protégée n'apparaît, et que chaque corrigé modèle mérite ses critères. Il rend la liste des défauts avec leur chemin (`courses[0].notions[1].exercise[0].questions[3]`), sans réécrire. L'auteur corrige, puis le script est relancé.
 3. Le fichier est alors importé en brouillon, relu dans l'application par l'équipe, puis publié.
 
 ---
