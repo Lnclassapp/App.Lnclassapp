@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/crm/follow_ups/reassign — succès de « Réattribuer », rendu par FollowUpAssigneesController#update %>
+<%# Rôle : toast, relance retirée de la liste où elle était (elle appartient à un autre destinataire), sous-bloc de la fiche remplacé ; la modale se ferme %>
+<%# UDR  : 0162 (bloc « Suivi »), 0168 (pipeline et relances) %>
+<%= turbo_stream_toast t(".done", name: @assignee_name), type: :success %>
+<%= turbo_stream.remove "follow_up_row_#{@public_id}" %>
+<%= turbo_stream.remove "follow_up_card_#{@public_id}" %>
+<%= turbo_stream.replace "school_crm_follow_ups", template: "teams/crm/follow_ups/school", formats: [ :html ] %>

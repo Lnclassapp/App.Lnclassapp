@@ -52,7 +52,9 @@ module Repositories
         request = create_join_request(school: @school, teacher: @teacher)
         Orm::TeacherSchool.create!(teacher: @teacher, school: create_school, primary: true)
 
-        assert_equal :conflict, @repository.approve(id: request.id, decided_by_id: @team.id, via: "team", at: NOW).code
+        refused = @repository.approve(id: request.id, decided_by_id: @team.id, via: "team", at: NOW)
+
+        assert_equal [ :conflict, { base: [ :already_attached ] } ], [ refused.code, refused.errors ]
         assert_equal "pending", request.reload.status
       end
 

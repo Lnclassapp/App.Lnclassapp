@@ -260,4 +260,13 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
   end
+
+  # B-008 (audit 2026-11-08): a forged `profile_materials=text` is a refusal (422), not a 500.
+  test "a materials parameter that is a string is refused in 422, not a server error" do
+    sign_in_as @teacher
+
+    patch profile_materials_path, params: { profile_materials: "forged" }
+
+    assert_response :unprocessable_entity
+  end
 end

@@ -69,7 +69,9 @@ module UseCases
         now = @clock.now
         created = @transaction.call do
           require_days!(actor, classroom, weekdays)
-          @session_days.replace(teacher_id: actor.user_id, classroom_id: classroom.id, weekdays:, at: now) if weekdays
+          kept = weekdays.nil? || @session_days.replace(teacher_id: actor.user_id, classroom_id: classroom.id, weekdays:, at: now)
+          raise Refused, Shared::Result.failure(:forbidden) unless kept
+
           write(actor, classroom, assignable, now).tap { raise Refused, it if it.failure? }
         end
         Shared::Result.success(Assigned.new(assignment: created.value, classroom:))

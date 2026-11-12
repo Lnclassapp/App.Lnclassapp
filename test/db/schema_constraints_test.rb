@@ -85,6 +85,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   CASCADES = %w[sessions login_attempts totp_credentials backup_codes pin_recovery_codes].freeze
   # ADR-0078 §4.1 : the targeted classrooms and the dismissals of an announcement go with it.
   MESSAGE_CASCADES = %w[message_classrooms message_dismissals].freeze
+  # ADR-XXXX (contexte crm) §4 : une école supprimée emporte son suivi ; seules les clés vers `schools` cascadent.
+  CRM_CASCADES = %w[crm_accounts crm_contacts crm_interactions crm_follow_ups crm_generations].freeze
   # ADR-0090 §4.1 : the reads of an essential go with it (never its student, who is erased first, ADR-0036).
   ESSENTIAL_CASCADES = %w[essential_reads].freeze
   # ADR-0094 §4.1 : the current school of a session is only a display choice; a deleted school puts it back on the primary.
@@ -582,7 +584,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
       connection.foreign_keys(table).each do |foreign_key|
         cascade = (CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id") ||
                   (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages") ||
-                  (ESSENTIAL_CASCADES.include?(table) && foreign_key.to_table == "essentials")
+                  (ESSENTIAL_CASCADES.include?(table) && foreign_key.to_table == "essentials") ||
+                  (CRM_CASCADES.include?(table) && foreign_key.to_table == "schools")
         expected = cascade ? :cascade : :restrict
         expected = :nullify if NULLIFIES.include?([ table, foreign_key.column ])
 

@@ -1,6 +1,6 @@
-<%# 🌐 UI · assessment/session_results/_badge — palier obtenu par la session : Bronze, Argent, Or, Diamant ou « Pas encore de badge » %>
-<%# Rôle : médaillon et nom du palier, nommé en toutes lettres pour les lecteurs d'écran ; « Nouveau badge ! » si earned_now %>
-<%# ADR  : 0033 · UDR : 0007, 0023, 0054 · les seuils des paliers en infobulle, juste après le nom %>
+<%# 🌐 UI · assessment/session_results/_badge — médaille de cette session (Grading.session_medal) : Bronze, Argent, Or, Diamant ou « Pas encore » (copie vide) %>
+<%# Rôle : médaillon et nom du palier, nommé en toutes lettres pour les lecteurs d'écran ; « Nouveau badge ! » si earned_now (jamais pour un Bronze sous 48 %) %>
+<%# ADR  : 0033, médailles lues à la clôture · UDR : 0007, 0023, 0054, bronze-sans-fete-sous-48 · les seuils des paliers en infobulle, juste après le nom %>
 <%# Sans palier, un but à atteindre (drapeau) et non « Non acquis » sous un cadenas : à côté de la maîtrise « En difficulté »,
     deux mots pour le même échec (2026-10-06). %>
 <% name = level ? badge_label(level) : t(".none") %>

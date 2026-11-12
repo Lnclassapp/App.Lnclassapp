@@ -5,10 +5,10 @@ module Queries
   module Classroom
     class TeacherFollowUpsQuery
       # pending : élèves présents qui ne l'ont pas encore fait ; done : ceux qui l'ont fait ; present : élèves présents de la classe ;
-      # average_percent : moyenne de la classe des meilleurs scores, nil si personne ne l'a fait ; material_* : la matière de
+      # medals : la répartition de médailles du devoir ({ bronze: 8, silver: 6 }, vide si personne n'a de médaille), jamais une moyenne ; material_* : la matière de
       # l'exercice (badge de l'enseignant de plusieurs matières, UDR-0126 §3.4 ; rond de la ligne par son slug).
       Row = Data.define(:public_id, :exercise_title, :classroom_public_id, :classroom_name, :due_on, :pending, :done, :present,
-                        :average_percent, :material_name, :material_slug, :material_category)
+                        :medals, :material_name, :material_slug, :material_category)
       # week : « Cette semaine », échéance croissante ; history : « Historique », échéance décroissante.
       Result = Data.define(:week, :history)
 
@@ -31,6 +31,7 @@ module Queries
 
         present = present_counts(rows.map { it[3] }.uniq)
         bests = best_scores(rows.map(&:first))
+        medals = Queries::Assessment::Medals.distribution_by_assignment(assignment_ids: rows.map(&:first))
         week = []
         history = []
         rows.each do |id, public_id, exercise_title, classroom_id, classroom_public_id, classroom_name, due_on, *material|
@@ -39,7 +40,7 @@ module Queries
 
           scores = bests.fetch(id, [])
           row = Row.new(public_id:, exercise_title:, classroom_public_id:, classroom_name:, due_on:, pending: count - scores.size,
-                        done: scores.size, present: count, average_percent: (scores.sum.fdiv(scores.size).round if scores.any?),
+                        done: scores.size, present: count, medals: medals.fetch(id, {}),
                         material_name: material[0], material_slug: material[1], material_category: material[2])
           if week?(row.pending, due_on, today)
             week << row

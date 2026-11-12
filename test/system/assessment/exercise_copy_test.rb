@@ -36,7 +36,7 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
         click_on I18n.t("#{SCOPE}.show.confirm")
       end
 
-      assert_selector "#session_grade"
+      assert_selector "#session_badge"
       # CA-20 : le brouillon est effacé une fois la copie rendue.
       assert_nil page.evaluate_script("localStorage.getItem(#{draft_key.to_json})")
       click_on I18n.t("components.reveal.more")
@@ -58,7 +58,7 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
       click_on "Vérifier quand même"
     end
 
-    assert_selector "#session_grade"
+    assert_selector "#session_badge"
     assert_selector "h1", text: I18n.t("assessment.session_results.show.headline.good")
     assert_selector "#session_to_review", text: /À revoir.*questions 4 et 5/
     click_on I18n.t("components.reveal.more")
@@ -85,7 +85,7 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
 
     answer(@questions.first, true)
     click_on "Vérifier ma copie"
-    assert_selector "#session_grade"
+    assert_selector "#session_badge"
   end
 
   test "« Continuer ma copie » referme la confirmation et ne rend rien ; Échap fait de même" do

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::TeacherHomeQuery
 # Rôle : accueil enseignant (TR-05) : établissement courant et son sigle, ses matières, classes déclarées de l'année (code, badges), niveaux enseignés
-# ADR  : 0026, 0041, 0048, 0094, 0103 · UDR : 0026, 0069, 0098, 0126 (§3.2 à §3.4), écrans enseignant (§3.2 badges, §3.3 carte de classe)
+# ADR  : 0026, 0041, 0048, 0094, 0097 (§4.5), 0103, médailles lues à la clôture · UDR : 0026, 0069, 0098, 0126 (§3.2 à §3.4), écrans enseignant (§3.2 badges, §3.3 carte de classe)
 module Queries
   module Classroom
     class TeacherHomeQuery
@@ -74,12 +74,22 @@ module Queries
                                     .group(:student_id, :classroom_assignment_id, "classroom_assignments.classroom_id")
                                     .pluck(:student_id, "classroom_assignments.classroom_id", Arel.sql("MAX(exercise_sessions.score_percent)"))
         scores = bests.group_by { |student_id, classroom_id, _| [ classroom_id, student_id ] }
+        medals = medal_holders(members)
         members.each do |classroom_id, student_id|
           best = scores.fetch([ classroom_id, student_id ], []).map(&:last)
-          badge = Entities::Assessment::Grading.class_badge_for(scores: best, all_perfect: best.all? { Entities::Assessment::Grading.perfect?(it) })
+          badge = Entities::Assessment::Grading.class_badge_for(scores: best, all_perfect: best.all? { Entities::Assessment::Grading.perfect?(it) },
+                                                                    has_medal: medals.include?([ classroom_id, student_id ]))
           counts[classroom_id][badge] += 1 if badge
         end
         counts
+      end
+
+      # Les médailles gagnées par une session d'une assignation active de la classe (ADR-0097 §4.5, Assessment::Medals) : la
+      # règle de la liste de la classe, deux requêtes. → Set de [classroom_id, student_id]
+      def medal_holders(members)
+        classrooms = Orm::ClassroomAssignment.where(classroom_id: members.map(&:first).uniq, status: "active").pluck(:id, :classroom_id).to_h
+        Queries::Assessment::Medals.by_assignment(assignment_ids: classrooms.keys, student_ids: members.map(&:last).uniq)
+                                   .flat_map { |id, students| students.keys.map { [ classrooms.fetch(id), it ] } }.to_set
       end
 
       # « 6ème 2 » avant « 6ème 10 », comme la déclaration des classes (TeachingSelectionQuery).

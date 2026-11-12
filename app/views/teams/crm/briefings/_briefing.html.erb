@@ -1,0 +1,14 @@
+<%# 🌐 UI · teams/crm/briefings/_briefing — la fiche de briefing prête : 5 lignes au plus, texte échappé %>
+<%# Rôle : une ligne par ligne du modèle (jamais de HTML), puis « Régénérer » (un clic sans changement réaffiche la même fiche, CA-22) %>
+<%# UDR  : 0160 (assistants du suivi, « Fiche de briefing ») %>
+<%= turbo_frame_tag "generation_#{generation.public_id}" do %>
+  <ul role="list" class="space-y-2 text-sm">
+    <% generation.content.to_s.lines.map(&:strip).reject(&:empty?).first(5).each do |line| %>
+      <li class="whitespace-pre-line"><%= line %></li>
+    <% end %>
+  </ul>
+  <div class="mt-3 flex items-center justify-between gap-3">
+    <p class="text-xs text-mute"><%= t(".prepared", time: time_ago_in_words(generation.created_at || Time.current)) %></p>
+    <%= ui_button t(".regenerate"), href: teams_school_briefing_path(school_public_id), method: :post, variant: :ghost, size: :sm, icon: "arrow-path" %>
+  </div>
+<% end %>

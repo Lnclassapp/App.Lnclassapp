@@ -7,7 +7,7 @@ require "tmpdir"
 # base de test, publié, puis lu par un élève de la bonne classe à 390 px puis sur ordinateur. Échecs, avec fichier, largeur et défaut :
 # import refusé (code du refus), page plus large que l'écran, « ** » dans le texte rendu, figure du fichier absente de la page.
 #
-# Quels fichiers : LECONS=<chemins séparés par des virgules> ; sinon LECONS=tout (LECONS_PART=i/n pour découper, tâche `lecons`
+# Quels fichiers : LECONS=<chemins séparés par des virgules> (LECONS_PART=i/n les découpe, comme au train) ; sinon LECONS=tout (LECONS_PART=i/n pour découper, tâche `lecons`
 # du train) ; sinon les fichiers v3 de docs/contenus/lecons-traitees changés depuis origin/Develop (hors CI, où le train a sa tâche).
 # Aucun fichier : aucun test de leçon, et pas d'échec. Dérogation au budget système : script/ci/system_budget.rb.
 module LessonRendering
@@ -52,6 +52,11 @@ module LessonRendering
       loads.fetch(index - 1).last.sort
     end
 
+    # Les leçons témoins du train quand aucune leçon ne change : un chemin par ligne, sans commentaire (#) ni ligne vide.
+    def witnesses(root = Rails.root)
+      root.join("script/ci/lecons_temoins.txt").read.lines.map(&:strip).reject { it.empty? || it.start_with?("#") }
+    end
+
     def named(list, root = Rails.root)
       list.split(",").map(&:strip).reject(&:empty?).map do |name|
         path = [ name, File.join(DIRECTORY, name) ].find { root.join(it).file? }
@@ -78,7 +83,7 @@ module LessonRendering
     def call(env = ENV)
       chosen = env["LECONS"].to_s.strip
       return part(all, env["LECONS_PART"]) if chosen == "tout"
-      return named(chosen) unless chosen.empty?
+      return part(named(chosen), env["LECONS_PART"]) unless chosen.empty?
 
       env["CI"].present? ? [] : changed
     end
@@ -362,5 +367,39 @@ class Catalog::LessonSelectionTest < ActiveSupport::TestCase
 
     assert_empty result
     assert_match(%r{origin/branche-inconnue introuvable}, error)
+  end
+
+  test "LECONS_PART découpe aussi une liste nommée, chaque fichier dans une seule part" do
+    root = lessons_root
+    folder = root.join(LessonRendering::DIRECTORY, "tle-c", "svt")
+    folder.join("gros.json").write("x" * 500)
+    list = "tle-c/svt/v3.json,tle-c/svt/gros.json,tle-c/svt/casse.json"
+    pick = ->(label) { LessonRendering::Selection.part(LessonRendering::Selection.named(list, root), label, root) }
+
+    assert_equal %w[gros.json], pick.("1/2").map { File.basename(it) }
+    assert_equal %w[casse.json v3.json], pick.("2/2").map { File.basename(it) }
+    assert_equal 3, pick.(nil).size
+    assert_equal 3, pick.("1/1").size
+    assert_raises(ArgumentError) { pick.("3/2") }
+  ensure
+    FileUtils.rm_rf(root) if root
+  end
+
+  test "Selection.call applique LECONS_PART à une liste nommée" do
+    names = LessonRendering::Selection.witnesses
+    parts = (1..2).map { LessonRendering::Selection.call("LECONS" => names.join(","), "LECONS_PART" => "#{it}/2") }
+
+    assert_equal names.sort, parts.flatten.sort
+    assert(parts.all? { it.size == 1 })
+  end
+
+  test "les leçons témoins du train existent et sont au format v3" do
+    witnesses = LessonRendering::Selection.witnesses
+
+    assert_equal 2, witnesses.size
+    witnesses.each do |path|
+      assert Rails.root.join(path).file?, "témoin introuvable : #{path}"
+      assert LessonRendering::Selection.v3?(Rails.root.join(path)), "témoin qui n'est pas en v3 : #{path}"
+    end
   end
 end

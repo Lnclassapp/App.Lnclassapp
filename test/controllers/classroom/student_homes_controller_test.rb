@@ -34,11 +34,16 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     exercise
   end
 
-  def complete(exercise, score: 80) = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score)
+  # One answer given (the copy is treated, it has a medal); blank: a copy without any answer, which has none.
+  def complete(exercise, score: 80, blank: false)
+    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score)
+      .tap { create_attempt(session: it) unless blank }
+  end
 
   def card_buttons = css_select("#{CARD} .ui-button-primary, #{CARD} .ui-button-secondary")
 
-  test "CA-D1: the band, the card, the grid, the history in this order; no bottom bar, no « À faire ensuite », no « Paiement »" do
+  # Amendement eleve-sans-prof (porteur, 2026-11-12) : « À faire » revient entre les annonces et l'historique.
+  test "CA-D1: the band, the card, the grid, the announcements, « À faire », the history in this order; no bottom bar, no « Paiement »" do
     assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
     create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
     sign_in_as @student
@@ -47,13 +52,14 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1.sr-only", text: tl("show.page_title")
-    assert_equal %w[student_next_step student_subjects student_home_announcements student_history],
+    assert_equal %w[student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     # The band is the shell's, above the column, and the page title is not repeated.
     assert_select "main > div.lg\\:hidden > header.student-band.bg-brand.text-band-ink"
     assert_select "header.sticky.max-lg\\:hidden"
     assert_select "[class*='fixed bottom-0'], nav.fixed", 0
     assert_no_match(/À faire ensuite|Paiement/, response.body)
+    assert_select "#student_to_do p", text: tl("to_do.empty")
     assert_no_match "Bonjour", css_select("#main").text
     assert_select "#student_next_step_title", text: "Méiose, les étapes"
   end
@@ -76,7 +82,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#student_home.lg\\:max-w-228.mx-auto.w-full"
     assert_select "nav#student_subjects" do
-      assert_select "h2.hidden.lg\\:block", text: tl("subjects.label")
+      assert_select "h2", text: tl("subjects.label")
+      assert_select "h2.hidden", 0
       assert_select "ul.grid-cols-4.lg\\:grid-cols-7"
     end
     assert_select "section#student_home_announcements.lg\\:bg-paper.lg\\:border.lg\\:border-line"
@@ -162,7 +169,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{CARD}[data-state=review]" do
       assert_select "#student_next_step_title", text: "Ancienne fiche"
       assert_select "span", text: tl("next_step.review.badge")
-      assert_select "p", text: tl("next_step.review.note", grade: "8/20")
+      assert_select "p", text: tl("next_step.review.note", medal: "Bronze")
       assert_select "a.ui-button-primary[href=?][data-turbo-prefetch=false]", course_path(@course.slug, anchor: "notion-#{Orm::Essential.find_by!(name: "Ancienne fiche").slug}"),
                     text: tl("next_step.review.open")
     end
@@ -320,6 +327,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a#student_next_step_no_code[href=?]", new_student_classroom_choice_path, text: tl("no_classroom.no_code")
       assert_select "a[href=?]", student_classroom_path, 0
     end
+    # Sa classe archivée est d'un niveau sans cours publié : rien sous la carte (eleve-sans-prof CA-3).
     assert_select "#student_subjects, #student_history, #student_home_announcements, turbo-frame#student_home_recent_activity", 0
     assert_select "header.sticky.max-lg\\:hidden"
   end
@@ -426,7 +434,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "h3", text: tl("history.today")
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}']", text: including("Méiose")
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}'] img[src*='subjects/svt'][alt='']", 1
-      assert_select "*", text: including(I18n.t("assessment.badges.grade", grade: 18))
+      assert_select "[data-medal]", text: including("Or")
+      assert_select "*", text: %r{\d+\s*/\s*20|%}, count: 0
       assert_select "a", text: tl("history.more"), count: 0
     end
   end
@@ -448,7 +457,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "a grade of 14/20 or more is green, a lower one in ink, never red; under 10/20, « Refaire » starts the exercise again" do
+  test "the history shows a medal per line, never a grade or red; under Argent, « Refaire » starts the exercise again" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
     # Les trois dernières copies ne tiennent pas dans 30 minutes : pas de pause, le bouton reste.
     [ 70, 65, 20, 68 ].zip([ 1, 2, 40, 50 ]).each { |score, minutes| complete(exercise, score:).update!(completed_at: minutes.minutes.ago) }
@@ -456,12 +465,22 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
 
-    grades = css_select("turbo-frame#student_home_recent_activity li [data-grade]")
-    assert_equal [ "14/20", "13/20", "4/20" ], grades.map { it.text.squish }
-    assert_equal [ true, false, false ], grades.map { it["class"].split.include?("text-success") }
-    assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=warning]", 0
+    medals = css_select("turbo-frame#student_home_recent_activity li [data-medal]")
+    assert_equal [ "Argent Médaille Argent", "Bronze Médaille Bronze", "Bronze Médaille Bronze" ], medals.map { it.text.squish }
+    assert_select "turbo-frame#student_home_recent_activity", text: %r{\d+\s*/\s*20|%}, count: 0
+    assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=bg-warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
-                  text: tl("history.redo"), count: 1
+                  text: tl("history.redo"), count: 2
+  end
+
+  # ADR médailles lues à la clôture : une copie vide n'a pas de médaille ; l'historique le dit, « Pas encore », comme le résultat.
+  test "the history: a blank copy shows « Pas encore », never Bronze" do
+    complete(create_exercise(essential: @essential, title: "Méiose"), score: 0, blank: true)
+    sign_in_as @student
+
+    get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
+
+    assert_equal [ "Pas encore" ], css_select("turbo-frame#student_home_recent_activity li [data-medal]").map { it.text.squish }
   end
 
   test "pause: 3 copies rendered within 30 minutes hide « Refaire » for that exercise only, and it returns once the pause is over" do
@@ -554,7 +573,80 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{new_student_classroom_choice_path}']", text: tl("no_classroom.no_code")
     end
     assert_equal [ "Choisis ta classe", "Je n'ai pas de code" ], [ tl("no_classroom.title"), tl("no_classroom.no_code") ]
-    assert_select "#student_subjects, #student_history, turbo-frame#student_home_recent_activity", 0
+    assert_select "#student_history, turbo-frame#student_home_recent_activity", 0
+  end
+
+  # Chantier eleve-sans-prof, PRD CA-1 à CA-3 : sans classe active, les matières et l'exercice du jour de son dernier niveau.
+  test "eleve-sans-prof CA-1: removed from a class, the grid of its last level without « Inviter », and the exercise of the day under « Rejoindre »" do
+    daily = create_exercise(essential: @essential, title: "La méiose en bref")
+    remove(@student, @classroom, at: 10.days.ago)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_choose_your_classroom
+    assert_select "nav#student_subjects a#subject_svt[href=?]", courses_path(material: "svt"), text: "SVT"
+    assert_select "#subject_invite", 0
+    assert_select "#{CARD}[data-state=no_classroom]" do
+      assert_select "button.ui-button-primary[type=submit]", text: tl("no_classroom.submit")
+      assert_select "#student_next_step_daily_block", text: including("La méiose en bref")
+      assert_select "form[action=?] button.ui-button-secondary", exercise_sessions_path(daily.public_id), text: tl("next_step.no_classroom.start")
+    end
+    assert_equal %w[student_next_step student_subjects], css_select("#student_next_step, #student_subjects").map { it["id"] }
+  end
+
+  test "eleve-sans-prof CA-2: the subject and the exercise of the day of the last level open; another level stays closed" do
+    daily = create_exercise(essential: @essential, title: "La méiose en bref")
+    other = create_course(name: "Fractions", material: create_material(name: "Mathématiques"), level: create_level(name: "6e"))
+    remove(@student, @classroom, at: 10.days.ago)
+    sign_in_as @student
+
+    get courses_path(material: "svt")
+    assert_select "a[href=?]", course_path(@course.slug)
+    get course_path(@course.slug)
+    assert_response :success
+    get course_path(other.slug)
+    assert_response :not_found
+    post exercise_sessions_path(daily.public_id)
+    assert_response :redirect
+    assert_equal 1, Orm::ExerciseSession.where(student: @student).count
+  end
+
+  test "eleve-sans-prof CA-5: « À faire » lists the open assigned exercises after the card's, by due date, 3 at most, then « Tout voir »" do
+    now = 1.hour.ago
+    first = assign_exercise("Un", due_on: Date.current + 1, assigned_at: now)
+    others = [ [ "Deux", 2 ], [ "Trois", 3 ], [ "Quatre", 4 ], [ "Cinq", 5 ] ].map do |title, days|
+      assign_exercise(title, due_on: Date.current + days, assigned_at: now)
+    end
+    complete(assign_exercise("Fait", due_on: Date.current + 1, assigned_at: now))
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#student_next_step_title", text: "Un"
+    assert_equal %w[Deux Trois Quatre], css_select("#student_to_do li a").map { it.text.strip }
+    assert_select "#student_to_do a[href=?]", exercise_path(others.first.public_id)
+    assert_select "#student_to_do a#student_to_do_all[href=?]", student_classroom_path, text: tl("to_do.all")
+    assert_no_match first.public_id, css_select("#student_to_do").to_s
+  end
+
+  test "eleve-sans-prof CA-6: without a classroom, the announcements show; « À faire » and the history do not" do
+    create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
+    remove(@student, @classroom, at: 10.days.ago)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal %w[student_next_step student_subjects student_home_announcements], css_select("#student_home > [id]").map { it["id"] }
+  end
+
+  test "eleve-sans-prof CA-3: never had a classroom: « Choisis ta classe » alone, no grid, no exercise of the day" do
+    sign_in_as create_student
+
+    get student_home_path
+
+    assert_select "#{CARD}[data-state=no_classroom]"
+    assert_select "#student_subjects, #student_next_step_daily_block, #student_next_step_daily", 0
   end
 
   test "IL-17: a student whose classroom is archived sees « Choisis ta classe » on the home, without any warning" do
@@ -672,7 +764,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_equal %w[student_next_step student_subjects student_home_announcements student_history],
+    assert_equal %w[student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     assert_equal [ "Devoirs communs", "Fiches 3", "Fiches 2", "Fiches 1", "Rentrée numérique" ], announcement_titles
   end

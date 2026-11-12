@@ -40,7 +40,7 @@ module UseCases
 
       def withdraw(public_id, actor: @teacher)
         WithdrawTeaching.new(classrooms: FakeClassrooms.new(@sixth, @other_school, @archived), teachings: @teachings,
-                             policy: Policies::Classroom::DeclareTeachingPolicy.new)
+                             policy: Policies::Classroom::WithdrawTeachingPolicy.new)
                         .call(actor:, classroom_public_id: public_id)
       end
 
@@ -59,10 +59,15 @@ module UseCases
         assert_equal [ [ 5, 12 ], [ 5, 13 ], [ 6, 11 ] ], @teachings.pairs
       end
 
-      test "une classe d'une autre école ou archivée : refus, la déclaration reste" do
+      test "une classe d'une autre école : refus, la déclaration reste" do
         assert_equal :forbidden, withdraw("cls-autre").code
-        assert_equal :forbidden, withdraw("cls-arch").code
         assert_equal [ [ 5, 11 ], [ 5, 12 ], [ 5, 13 ], [ 6, 11 ] ], @teachings.pairs
+      end
+
+      # Audit B-013 : l'enseignant peut quitter une classe archivée.
+      test "une classe archivée : l'enseignant s'en retire" do
+        assert withdraw("cls-arch").success?
+        assert_equal [ [ 5, 11 ], [ 5, 12 ], [ 6, 11 ] ], @teachings.pairs
       end
 
       test "hors du rôle enseignant : refus" do

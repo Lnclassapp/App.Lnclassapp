@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_08_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -291,6 +291,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_090000) do
     t.bigint "removed_by_id"
     t.index ["classroom_id", "student_id"], name: "index_classroom_students_on_classroom_id_and_student_id", unique: true
     t.index ["removed_by_id"], name: "index_classroom_students_on_removed_by_id", where: "(removed_by_id IS NOT NULL)"
+    t.index ["student_id"], name: "index_classroom_students_on_student_id"
     t.index ["student_id"], name: "index_classroom_students_one_active_primary", unique: true, where: "(\"primary\" AND (left_at IS NULL))"
     t.check_constraint "(removed_at IS NULL) = (removed_by_id IS NULL)", name: "classroom_students_removed_by_iff_removed"
     t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying, 'link'::character varying, 'code'::character varying]::text[])", name: "classroom_students_joined_via_values"
@@ -351,6 +352,115 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_090000) do
     t.check_constraint "jsonb_typeof(figures) = 'array'::text", name: "courses_figures_array"
     t.check_constraint "sheet_theme::text = ANY (ARRAY['blue'::character varying, 'teal'::character varying, 'burgundy'::character varying]::text[])", name: "courses_sheet_theme_known"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'published'::character varying, 'archived'::character varying]::text[])", name: "courses_status_values"
+  end
+
+  create_table "crm_accounts", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.string "stage", default: "prospect", null: false
+    t.bigint "owner_id"
+    t.string "lost_reason"
+    t.datetime "stage_changed_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_crm_accounts_on_owner_id"
+    t.index ["school_id"], name: "index_crm_accounts_on_school_id", unique: true
+    t.check_constraint "lost_reason IS NULL OR (lost_reason::text = ANY (ARRAY['price'::character varying, 'equipment'::character varying, 'network'::character varying, 'calendar'::character varying, 'competitor'::character varying, 'no_interest'::character varying, 'other'::character varying]::text[]))", name: "crm_accounts_lost_reason_values"
+    t.check_constraint "stage::text <> 'lost'::text OR lost_reason IS NOT NULL", name: "crm_accounts_lost_has_reason"
+    t.check_constraint "stage::text = ANY (ARRAY['prospect'::character varying, 'demo_done'::character varying, 'subscribed'::character varying, 'lost'::character varying]::text[])", name: "crm_accounts_stage_values"
+  end
+
+  create_table "crm_contacts", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "school_id", null: false
+    t.string "full_name", limit: 80, null: false
+    t.string "position", null: false
+    t.string "phone", limit: 10
+    t.string "note", limit: 500
+    t.bigint "created_by_id", null: false
+    t.datetime "archived_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_crm_contacts_on_created_by_id"
+    t.index ["public_id"], name: "index_crm_contacts_on_public_id", unique: true
+    t.index ["school_id", "archived_at"], name: "index_crm_contacts_on_school_and_archived"
+    t.index ["school_id"], name: "index_crm_contacts_on_school_id"
+    t.check_constraint "\"position\"::text = ANY (ARRAY['director'::character varying, 'censor'::character varying, 'educator'::character varying, 'teacher'::character varying, 'founder'::character varying, 'other'::character varying]::text[])", name: "crm_contacts_position_values"
+    t.check_constraint "btrim(full_name::text) <> ''::text", name: "crm_contacts_name_present"
+    t.check_constraint "phone IS NULL OR phone::text ~ '^0[157][0-9]{8}$'::text", name: "crm_contacts_phone_format"
+  end
+
+  create_table "crm_follow_ups", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "school_id", null: false
+    t.bigint "assignee_id", null: false
+    t.date "due_on", null: false
+    t.string "reason", limit: 200, null: false
+    t.string "status", default: "open", null: false
+    t.datetime "done_at"
+    t.bigint "done_by_id"
+    t.bigint "created_by_id", null: false
+    t.bigint "interaction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignee_id", "status", "due_on"], name: "index_crm_follow_ups_on_assignee_status_due"
+    t.index ["assignee_id"], name: "index_crm_follow_ups_on_assignee_id"
+    t.index ["created_by_id"], name: "index_crm_follow_ups_on_created_by_id"
+    t.index ["done_by_id"], name: "index_crm_follow_ups_on_done_by_id"
+    t.index ["interaction_id"], name: "index_crm_follow_ups_on_interaction_id"
+    t.index ["public_id"], name: "index_crm_follow_ups_on_public_id", unique: true
+    t.index ["school_id"], name: "index_crm_follow_ups_on_school_id"
+    t.check_constraint "(status::text = 'done'::text) = (done_at IS NOT NULL AND done_by_id IS NOT NULL) AND (done_at IS NULL) = (done_by_id IS NULL)", name: "crm_follow_ups_done_together"
+    t.check_constraint "status::text = ANY (ARRAY['open'::character varying, 'done'::character varying]::text[])", name: "crm_follow_ups_status_values"
+  end
+
+  create_table "crm_generations", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "school_id", null: false
+    t.string "kind", null: false
+    t.string "status", default: "pending", null: false
+    t.bigint "requested_by_id", null: false
+    t.bigint "follow_up_id"
+    t.string "input_fingerprint", limit: 64
+    t.text "content"
+    t.string "error_code"
+    t.string "model"
+    t.integer "input_tokens"
+    t.integer "output_tokens"
+    t.integer "duration_ms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_up_id"], name: "index_crm_generations_on_follow_up_id"
+    t.index ["public_id"], name: "index_crm_generations_on_public_id", unique: true
+    t.index ["requested_by_id"], name: "index_crm_generations_on_requested_by_id"
+    t.index ["school_id", "kind", "created_at"], name: "index_crm_generations_on_school_kind_created"
+    t.index ["school_id", "kind"], name: "index_crm_generations_one_pending", unique: true, where: "((status)::text = 'pending'::text)"
+    t.index ["school_id"], name: "index_crm_generations_on_school_id"
+    t.check_constraint "kind::text = ANY (ARRAY['briefing'::character varying, 'dictation'::character varying, 'whatsapp_draft'::character varying, 'pedagogy_report'::character varying]::text[])", name: "crm_generations_kind_values"
+    t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'done'::character varying, 'failed'::character varying]::text[])", name: "crm_generations_status_values"
+  end
+
+  create_table "crm_interactions", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "school_id", null: false
+    t.bigint "author_id", null: false
+    t.string "kind", null: false
+    t.datetime "occurred_at", null: false
+    t.bigint "contact_id"
+    t.string "contact_name", limit: 80
+    t.string "outcome", null: false
+    t.string "next_step", limit: 200
+    t.string "note", limit: 2000
+    t.string "source", default: "manual", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_crm_interactions_on_author_id"
+    t.index ["contact_id"], name: "index_crm_interactions_on_contact_id"
+    t.index ["public_id"], name: "index_crm_interactions_on_public_id", unique: true
+    t.index ["school_id", "occurred_at"], name: "index_crm_interactions_on_school_and_occurred_at"
+    t.index ["school_id"], name: "index_crm_interactions_on_school_id"
+    t.check_constraint "kind::text = ANY (ARRAY['call'::character varying, 'whatsapp'::character varying, 'visit'::character varying, 'demo'::character varying, 'other'::character varying]::text[])", name: "crm_interactions_kind_values"
+    t.check_constraint "outcome::text = ANY (ARRAY['positive'::character varying, 'neutral'::character varying, 'negative'::character varying]::text[])", name: "crm_interactions_outcome_values"
+    t.check_constraint "source::text = ANY (ARRAY['manual'::character varying, 'dictation'::character varying]::text[])", name: "crm_interactions_source_values"
   end
 
   create_table "drenas", force: :cascade do |t|
@@ -1174,6 +1284,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_090000) do
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict
   add_foreign_key "courses", "users", column: "author_id", on_delete: :restrict
+  add_foreign_key "crm_accounts", "schools", on_delete: :cascade
+  add_foreign_key "crm_accounts", "users", column: "owner_id", on_delete: :restrict
+  add_foreign_key "crm_contacts", "schools", on_delete: :cascade
+  add_foreign_key "crm_contacts", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "crm_follow_ups", "crm_interactions", column: "interaction_id", on_delete: :restrict
+  add_foreign_key "crm_follow_ups", "schools", on_delete: :cascade
+  add_foreign_key "crm_follow_ups", "users", column: "assignee_id", on_delete: :restrict
+  add_foreign_key "crm_follow_ups", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "crm_follow_ups", "users", column: "done_by_id", on_delete: :restrict
+  add_foreign_key "crm_generations", "crm_follow_ups", column: "follow_up_id", on_delete: :restrict
+  add_foreign_key "crm_generations", "schools", on_delete: :cascade
+  add_foreign_key "crm_generations", "users", column: "requested_by_id", on_delete: :restrict
+  add_foreign_key "crm_interactions", "crm_contacts", column: "contact_id", on_delete: :restrict
+  add_foreign_key "crm_interactions", "schools", on_delete: :cascade
+  add_foreign_key "crm_interactions", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "essential_reads", "essentials", on_delete: :cascade
   add_foreign_key "essential_reads", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "essentials", "courses", on_delete: :restrict

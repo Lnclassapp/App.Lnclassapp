@@ -2,7 +2,9 @@ require "test_helper"
 
 # ADR 0126 §4.3 et §4.4, PRD §4 « Activation » : le code est normalisé, la carte verrouillée, les essais freinés.
 class Billing::ActivationsControllerTest < ActionDispatch::IntegrationTest
+  # acces-beta : ces écrans décrivent l'après-bêta (gratuit, bloqué, abonné) ; la bêta est fermée par Offer::BETA_ENDS_ON.
   setup do
+    close_beta_for_this_test
     travel_to Time.utc(2026, 11, 9, 8)
     @school = create_school
     @student = create_student(classroom: create_classroom(school: @school))

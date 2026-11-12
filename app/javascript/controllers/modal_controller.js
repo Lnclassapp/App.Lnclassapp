@@ -70,8 +70,12 @@ export default class extends Controller {
   }
 
   // Envoi réussi (réponse Turbo Stream) : on ferme. Un 422 re-rend la modale dans le frame, qui se rouvre avec ses erreurs.
+  // Exception opt-in : un formulaire sous `[data-modal-keep-open]` (ex. « Rédiger le message » WhatsApp) remplit la modale
+  // au lieu de la quitter ; la réponse doit rester visible.
   submitEnd(event) {
-    if (event.detail.success) this.close()
+    if (!event.detail.success || event.target.closest?.("[data-modal-keep-open]")) return
+
+    this.close()
   }
 
   // Chargée dans le frame « modal », la modale fermée libère le frame : le même lien pourra la recharger.
@@ -81,7 +85,10 @@ export default class extends Controller {
     this.refreshPage()
     const frame = this.element.closest("turbo-frame#modal")
     // Une boîte déjà rouverte (open() juste après son arrivée) n'est pas fermée : le frame garde son contenu.
-    if (!frame || this.dialogTarget.open) return
+    // L'événement `close` arrive une tâche après dialog.close() : si une autre modale a commencé à se charger dans le frame
+    // entre-temps (frame `busy`), retirer `src` annulerait sa requête et vider le frame l'effacerait. Sa réponse remplacera
+    // cette boîte fermée.
+    if (!frame || this.dialogTarget.open || frame.hasAttribute("busy")) return
 
     frame.removeAttribute("src")
     frame.replaceChildren()

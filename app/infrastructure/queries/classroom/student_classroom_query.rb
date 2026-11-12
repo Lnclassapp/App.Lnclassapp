@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentClassroomQuery
 # Rôle : « Ma classe » (CL-22) : la classe principale active, les cours de ses exercices assignés, les fiches à revoir et les exercices traités
-# ADR  : 0026, 0035, 0048, 0067, 0072 · UDR : 0011, 0076 §3.2, 0086 §3.3 (has_teacher) · le code de la classe vient de ClassroomHeaderQuery, sous ReadClassroomPolicy
+# ADR  : 0026, 0035, 0048, 0067, 0072, médailles lues à la clôture · UDR : 0011, 0076 §3.2, 0086 §3.3 (has_teacher) · le code de la classe vient de ClassroomHeaderQuery, sous ReadClassroomPolicy
 module Queries
   module Classroom
     class StudentClassroomQuery
@@ -12,9 +12,10 @@ module Queries
       # assigned_count : les exercices du cours assignés à la classe (ADR-0072 : un cours ne s'assigne plus).
       CourseRow = Data.define(:slug, :name, :material_name, :material_slug, :material_category, :assigned_count)
       # best_score_percent : le meilleur score de l'élève ; last_session_public_id : sa dernière session terminée ;
-      # material_slug : la pastille de la matière (UDR-0086 §3.4) ; exercise_type : « fixation » ou « evaluation ».
+      # material_slug : la pastille de la matière (UDR-0086 §3.4) ; exercise_type : « fixation » ou « evaluation » ;
+      # badge_level : sa médaille enregistrée sur l'exercice (exercise_badges), nil sans elle (copies vides seulement).
       TreatedRow = Data.define(:exercise_public_id, :title, :material_name, :material_slug, :material_category, :best_score_percent,
-                               :last_session_public_id, :last_completed_at, :exercise_type)
+                               :last_session_public_id, :last_completed_at, :exercise_type, :badge_level)
 
       # has_teacher se lit dans la même requête que l'en-tête : pas de requête de plus (ADR-0067). Un enseignant anonymisé
       # n'est plus sur Lnclass : il ne masque pas « Inviter mon enseignant ».
@@ -29,7 +30,9 @@ module Queries
       TREATED_COLUMNS = [ Arel.sql("DISTINCT ON (exercise_sessions.exercise_id) exercises.public_id"), "exercises.title",
                           "materials.name", "materials.slug", "materials.category",
                           Arel.sql("MAX(exercise_sessions.score_percent) OVER (PARTITION BY exercise_sessions.exercise_id)"),
-                          "exercise_sessions.public_id", "exercise_sessions.completed_at", "exercises.exercise_type" ].freeze
+                          "exercise_sessions.public_id", "exercise_sessions.completed_at", "exercises.exercise_type",
+                          Arel.sql("(SELECT exercise_badges.level FROM exercise_badges WHERE exercise_badges.student_id = exercise_sessions.student_id " \
+                                   "AND exercise_badges.exercise_id = exercise_sessions.exercise_id)") ].freeze
 
       # → Row | nil (aucune classe principale active : l'élève n'a pas de classe à ouvrir)
       def call(student_id:)
@@ -76,7 +79,7 @@ module Queries
                             .where(student_id:, status: "completed").merge(own_level(student_id))
                             .order("exercise_sessions.exercise_id", completed_at: :desc, id: :desc)
                             .pluck(*TREATED_COLUMNS)
-                            .map { |values| TreatedRow.new(*values) }
+                            .map { |*values, level| TreatedRow.new(*values, level&.to_sym) }
                             .sort_by { -it.last_completed_at.to_f }
       end
     end

@@ -7,7 +7,7 @@ module Queries
       # school_rows : sous un filtre DRENA, les lignes de tous ses établissements (DrenaSchoolsQuery#rows), lues avec les
       # chiffres ; nil en vue nationale.
       Row = Data.define(:period, :school_year, :drena, :accounts, :signups_count, :active_students_count,
-                        :completed_sessions_count, :average_score, :assignments_count, :app_openers, :schools, :classrooms_count,
+                        :completed_sessions_count, :medals, :assignments_count, :app_openers, :schools, :classrooms_count,
                         :levels, :placed_students_count, :unplaced_students_count, :drenas, :school_rows, :recent_signups)
       Filter = Data.define(:public_id, :name)
       # team : nil sous un filtre DRENA, l'équipe n'ayant pas de territoire.
@@ -30,10 +30,10 @@ module Queries
       # lus en direct. Changer une définition ou la forme des chiffres, c'est changer CACHE_VERSION (2 : les lignes
       # d'établissements sous filtre, amendement du 2026-10-04 ; 3 : les ouvertures depuis l'app installée, ADR-0082 ;
       # 4 : l'app Android, ADR-0084 ; 5 : la part Android des enseignants, ADR-0086 ; 6 : sous un filtre, les comptes
-      # enseignants distincts, ADR-0094 §4.6).
+      # enseignants distincts, ADR-0094 §4.6 ; 7 : les médailles décernées remplacent la réussite moyenne, UDR médailles).
       CACHED_PERIODS = %w[year].freeze
       CACHE_TTL = 5.minutes
-      CACHE_VERSION = 6
+      CACHE_VERSION = 7
 
       # Une seule lecture : les établissements actifs, et combien ont une classe, un enseignant, un élève (élève placé :
       # ADR-0062). SQL constant : seule l'année scolaire est liée.
@@ -133,13 +133,22 @@ module Queries
       end
 
       def flows
-        completed_count, average = sessions.where(status: "completed", completed_at: @since..)
-                                           .pick(Arel.sql("COUNT(*)"), Arel.sql("ROUND(AVG(score_percent))"))
+        completed_count = sessions.where(status: "completed", completed_at: @since..).count
         { signups_count: territorial_users.where(created_at: @since..).count,
           active_students_count: sessions.where(started_at: @since..).distinct.count(:student_id),
-          completed_sessions_count: completed_count, average_score: average&.to_i,
+          completed_sessions_count: completed_count, medals: medals_awarded,
           assignments_count: in_drena(Orm::ClassroomAssignment.joins(classroom: :school).where(assigned_at: @since..)).count,
           app_openers: }
+      end
+
+      # UDR médailles : la médaille remplace la moyenne. Les médailles décernées dans la période (exercise_badges.awarded_at), une par
+      # élève et exercice, à leur palier du moment ; élèves non anonymisés, placés sous un filtre DRENA. Une répartition, jamais une moyenne.
+      # → { bronze: n, silver: n, gold: n, diamond: n }
+      def medals_awarded
+        scope = Orm::ExerciseBadge.joins(:student).where(users: { anonymized_at: nil }, awarded_at: @since..)
+        scope = scope.where(student_id: placements.select(:student_id)) if @drena_id
+        counts = scope.group(:level).count
+        Entities::Assessment::Grading::BADGE_ORDER.index_with { |level| counts.fetch(level.to_s, 0) }
       end
 
       # ADR-0082 §4.4, ADR-0084 §4.6, ADR-0086 §4.6 : une seule lecture groupée par rôle, sur les comptes du territoire (non anonymisés),

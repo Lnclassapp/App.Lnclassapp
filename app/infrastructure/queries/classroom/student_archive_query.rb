@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentArchiveQuery
 # Rôle : « Mon historique » de l'élève, même sans classe active : ses classes, quittées ou non, et ses exercices terminés
-# ADR  : 0036, 0040, 0041, 0095 · UDR : 0057, 0090, 0103 · trois requêtes, quel que soit le volume ; aucun filtre de niveau : c'est son archive
+# ADR  : 0036, 0040, 0041, 0095, médailles lues à la clôture · UDR : 0057, 0090, 0103 · trois requêtes, quel que soit le volume ; aucun filtre de niveau : c'est son archive
 module Queries
   module Classroom
     class StudentArchiveQuery
@@ -9,14 +9,15 @@ module Queries
       # UDR-0103 §3.1 : la période de l'adhésion ; current : non quittée et classe active (la classe d'aujourd'hui).
       ClassroomRow = Data.define(:name, :level_name, :school_name, :school_year, :joined_at, :left_at, :current)
       # material_slug : slug figé de la matière, qui choisit son illustration (UDR-0069 §3.3, UDR-0090 §3.2).
-      ResultRow = Data.define(:exercise_title, :material_name, :material_slug, :material_category, :score_percent, :completed_at)
+      # medal : la médaille de la session (Grading.session_medal), nil pour une copie vide.
+      ResultRow = Data.define(:exercise_title, :material_name, :material_slug, :material_category, :score_percent, :completed_at, :medal)
 
       # Les plus récents : la page reste légère après plusieurs années d'exercices.
       RESULTS_LIMIT = 200
       CLASSROOM_COLUMNS = [ "classrooms.name", "levels.name", "schools.name", "classrooms.school_year", :joined_at, :left_at,
                             "classrooms.status" ].freeze
       RESULT_COLUMNS = [ "exercises.title", "materials.name", "materials.slug", "materials.category", :score_percent,
-                         :completed_at ].freeze
+                         :completed_at, Arel.sql(Queries::Assessment::Medals::TREATED_SQL) ].freeze
 
       def initialize(results_limit: RESULTS_LIMIT)
         @results_limit = results_limit
@@ -44,7 +45,7 @@ module Queries
       def results(student_id)
         completed(student_id).joins(exercise: { course: :material })
                              .order(completed_at: :desc, id: :desc).limit(@results_limit).pluck(*RESULT_COLUMNS)
-                             .map { ResultRow.new(*it) }
+                             .map { |*values, treated| ResultRow.new(*values, Entities::Assessment::Grading.session_medal(values[4], treated:)) }
       end
 
       def completed(student_id) = Orm::ExerciseSession.where(student_id:, status: "completed")

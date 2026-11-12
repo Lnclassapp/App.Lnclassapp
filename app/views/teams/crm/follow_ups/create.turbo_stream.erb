@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/crm/follow_ups/create — succès de la création %>
+<%# Rôle : toast et sous-bloc « Relances ouvertes » remplacé ; la modale se ferme sur l'envoi réussi %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) %>
+<%= turbo_stream_toast t(".done"), type: :success %>
+<%= turbo_stream.replace "school_crm_follow_ups", template: "teams/crm/follow_ups/school", formats: [ :html ] %>

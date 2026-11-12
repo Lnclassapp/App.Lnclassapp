@@ -256,7 +256,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     svt = create_material(name: "SVT", category: "science")
     exercise = create_exercise(essential: create_essential(course: create_course(material: svt)), title: "La méiose")
     assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-    best = create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 90, classroom_assignment: assignment)
+    best = create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 90, classroom_assignment: assignment).tap { record_medal(it) }
     create_assignment(classroom: @classroom, assignable: create_exercise(title: "Les volcans"), by: @teacher)
     alone = create_exercise_session(student: @koffi, exercise: create_exercise(title: "Les fractions"), status: "completed",
                                     score_percent: 75)
@@ -276,15 +276,16 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     # « 1 fait sur 2 », « Moyenne 18/20 · Or » (90 % : Or), puis les badges obtenus, nommés et comptés, zéro caché.
     assert_select "#student_file_summary" do
       assert_select "#student_file_counts", text: ft("summary.done_of", count: 1, assigned: 2)
-      assert_select "#student_file_average", text: ft("summary.average", grade: 18, badge: "Or")
+      assert_select "#student_file_average", 0
       assert_select "ul[aria-label=?]", ft("summary.badges_label") do
-        assert_select "li", 2
+        assert_select "li", 1
         assert_select "li", text: /Or\s+1/
       end
     end
     assert_no_match(/Fragile|Acquis|En progrès|Pas encore lisible/, response.body)
     assert_select "section#student_file_assignments[aria-labelledby=student_file_assignments_title]" do
-      assert_select "li#assignment_#{assignment.public_id}", text: /18\/20/
+      assert_select "li#assignment_#{assignment.public_id}", text: /Or/
+      assert_select "li#assignment_#{assignment.public_id}", text: /18\/20/, count: 0
       assert_select "li#assignment_#{assignment.public_id} a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']",
                     text: "La méiose"
       assert_select "li#assignment_#{assignment.public_id} a[href='#{exercise_session_result_path(best.public_id)}']",
@@ -293,6 +294,8 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     end
     assert_select "section#student_file_self_practice h2", text: ft("self_practice.title", days: 30)
     assert_select "section#student_file_self_practice a[href='#{exercise_session_result_path(alone.public_id)}']"
+    assert_select "section#student_file_self_practice li", text: %r{\d+ ?%}, count: 0
+    assert_select "section#student_file_self_practice li", text: /Pas encore|Bronze|Argent|Or|Diamant/
     assert_select "section#student_file_manage" do
       assert_select "form[action='#{account_pin_recovery_codes_path(@koffi.public_id)}'][method=post][data-turbo-frame=_top] button",
                     text: ft("manage.issue_code")
@@ -307,20 +310,34 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     scores.each_with_index do |score, index|
       exercise = create_exercise(title: "Exercice #{index}")
       assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-      create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: score, classroom_assignment: assignment)
+      create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: score, classroom_assignment: assignment).tap { record_medal(it) }
     end
     sign_in_as @teacher
 
     show_file
 
-    assert_select "#student_file_summary ul[aria-label] li", 3
+    assert_select "#student_file_summary ul[aria-label] li", 2
     assert_select "#student_file_summary ul[aria-label] li", text: /Bronze\s+2/
     assert_select "#student_file_summary ul[aria-label] li", text: /Argent\s+1/
-    # (55 + 60 + 75) / 3 = 63 % : 13 sur 20, Bronze.
-    assert_select "#student_file_average", text: ft("summary.average", grade: 13, badge: "Bronze")
+    assert_select "#student_file_summary", text: %r{Moyenne|/20}, count: 0
     assert_select "#student_file_counts", text: ft("summary.done_of", count: 3, assigned: 3)
     assert_select "#student_file_summary .ui-badge", text: /en retard/, count: 0
     assert_select "#student_file_summary", text: /en retard/, count: 0
+  end
+
+  # ADR médailles lues à la clôture : une copie vide ne médaille pas ; sa ligne garde la note, sans trophée, et la fiche dit « Pas encore ».
+  test "une copie vide : la ligne du devoir sans trophée, aucun badge compté" do
+    exercise = create_exercise(title: "Vide")
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 0, classroom_assignment: assignment)
+    sign_in_as @teacher
+
+    show_file
+
+    assert_select "#assignment_#{assignment.public_id} p.ui-badge", text: /Pas encore/
+    assert_select "#assignment_#{assignment.public_id}", text: %r{/20}, count: 0
+    assert_select "#assignment_#{assignment.public_id} p.ui-badge svg", 0
+    assert_select "#student_file_summary ul[aria-label] li", 0
   end
 
   # PRD CA-I3, ADR-0097 §4.3 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule ;
@@ -332,7 +349,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     late = assign.("La méiose")
     overdue = assign.("Les volcans")
     create_exercise_session(student: @koffi, exercise: Orm::Exercise.find(late.assignable_id), status: "completed", score_percent: 60,
-                            classroom_assignment: late, completed_at: 1.day.ago)
+                            classroom_assignment: late, completed_at: 1.day.ago).tap { record_medal(it) }
     sign_in_as @teacher
 
     show_file
@@ -391,9 +408,9 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_file_manage a", text: ft("manage.remove")
   end
 
-  test "refus : un élève de la classe, un enseignant d'une autre classe, la direction reçoivent 403 ; le nom ne sort pas" do
+  test "refus : un élève de la classe, un enseignant d'une autre classe, la direction d'une autre école reçoivent 403 ; le nom ne sort pas" do
     other_teacher = create_teacher(school: @school, classrooms: [ create_classroom(school: @school) ])
-    [ @awa, other_teacher, create_school_admin(school: @school) ].each do |user|
+    [ @awa, other_teacher, create_school_admin(school: create_school) ].each do |user|
       sign_in_as user
       show_file
 
@@ -401,6 +418,22 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
       assert_no_match(/Koffi/, response.body)
       sign_out
     end
+  end
+
+  # Audit B-011 : la direction de l'école lit la fiche en lecture seule : retour vers sa page de classe, pas de « Gérer »,
+  # pas de lien vers les pages de l'enseignant (assignation, résultat de séance).
+  test "B-011 : la direction de l'école ouvre la fiche en lecture seule" do
+    create_assignment(classroom: @classroom, by: @teacher)
+    sign_in_as create_school_admin(school: @school)
+
+    show_file
+
+    assert_response :success
+    assert_select "h1", text: "Koffi Yao"
+    assert_select "a[href=?]", school_admin_classroom_path(@classroom.public_id)
+    assert_select "li[id^=assignment_]", count: 1
+    assert_select "#student_file_manage", count: 0
+    assert_select "a[href^=?]", "/classrooms/#{@classroom.public_id}/assignments", count: 0
   end
 
   # ADR-0097 §4.2 : la policy passe avant toute lecture de l'élève ; un élève parti ou inconnu donne le même 403.

@@ -1,0 +1,10 @@
+<%# 🌐 UI · teams/crm/dictations/new — « Dicter un compte rendu », servie dans le frame « modal » %>
+<%# Rôle : sans paramètre, la modale d'enregistrement ; avec `generation`, le formulaire « Noter un échange » pré-rempli par la dictée terminée %>
+<%# UDR  : 0160 (assistants du suivi, « Compte rendu dicté ») %>
+<% if @form %>
+  <%= render "teams/crm/dictations/prefilled", generation: @generation, input: @form, structured: @structured %>
+<% else %>
+  <%= turbo_frame_tag "modal" do %>
+    <%= render "teams/crm/dictations/recorder", school_public_id: @school.public_id, error: nil, generation: nil %>
+  <% end %>
+<% end %>

@@ -1,8 +1,8 @@
 <%# 🌐 UI · billing/subscriptions/_home_notice — le bandeau de l'accueil élève : jours gratuits restants, ou période terminée %>
-<%# Rôle : une ligne info (plus de 3 jours), puis avertissement (3 derniers jours, ou bloqué) ; rien pour l'abonné ni pour un non-élève %>
+<%# Rôle : une ligne info (plus de 3 jours), puis avertissement (3 derniers jours, ou bloqué) ; rien pour l'abonné, en bêta (UDR acces-beta) ni pour un non-élève %>
 <%# ADR  : 0126 (contexte billing, §4.5) · UDR : 0158 (§3, bandeau de l'accueil) %>
 <%# access : Entities::Billing::Access (nil si l'acteur n'est pas un élève) %>
-<% unless access.nil? || access.status == :subscribed %>
+<% if access&.subscription_pending? %>
   <% urgent = access.blocked? || access.days_left <= 3 %>
   <section aria-label="<%= t(".label") %>">
     <p class="<%= class_names("flex items-center gap-3 rounded-ln px-4 py-3 text-sm", "bg-info-soft text-info" => !urgent, "bg-warning-soft text-warning" => urgent) %>">

@@ -59,8 +59,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     end
   end
 
-  def complete(exercise, score, at:)
-    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score).tap { it.update!(completed_at: at) }
+  # The medal that closing records for a copy with an answer (record_medal); blank: a copy without any answer, which has none.
+  def complete(exercise, score, at:, blank: false)
+    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score)
+      .tap { it.update!(completed_at: at) }.tap { record_medal(it) unless blank }
   end
 
   # CA-13, CA-16 (prepare-interros-cahier, Lot F) : un exercice assigné se lit sur une feuille, avec « Rendre à l'enseignant » ;
@@ -281,7 +283,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
   end
 
   # CA-6 : une ligne par exercice traité, au meilleur score sur 20, vers le résultat de sa dernière session.
-  test "the treated exercises: best grade out of 20, newest first, to the result of the last session, 3 lines then « Voir plus »" do
+  test "the treated exercises: best medal, newest first, to the result of the last session, 3 lines then « Voir plus »" do
     genetics = course_named("Génétique")
     redone = create_exercise(essential: create_essential(course: genetics), title: "Refait")
     complete(redone, 40, at: 3.hours.ago)
@@ -296,36 +298,37 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_classroom_treated[data-controller=reveal]" do
       assert_select "li", 4
       assert_select "li:not([hidden])", 3
-      # UDR-0145 : la carte entière mène au résultat ; la note et « Voir ma copie » y sont écrits.
+      # UDR-0145 : la carte entière mène au résultat ; la médaille et « Voir ma copie » y sont écrits.
       assert_select "li:first-child a[href=?]", exercise_session_result_path(last.public_id), text: "Refait"
-      assert_select "li:first-child", text: including("16/20")
+      assert_select "li:first-child", text: including("Or")
+      assert_select "#student_classroom_treated", text: %r{\d+\s*/\s*20|%}, count: 0
       assert_select "li:first-child", text: including("Voir ma copie")
       assert_select "button[data-action='reveal#more']"
     end
     assert_no_match "Autre élève", response.body
   end
 
-  # CA-6 (UDR-0086 §3.4) : la note en vert à partir de 14/20, en encre en dessous, jamais en rouge. Les devoirs reçus sont des feuilles
-  # noir et blanc (prepare-interros-cahier) : plus d'orange d'échéance, « À rendre le … » s'écrit sous le titre.
-  test "the grades green from 14/20, never red" do
+  # CA-6 (UDR-0086 §3.4, amendé par l'UDR médailles) : la médaille enregistrée de chaque exercice traité, Bronze dès une réponse,
+  # « Pas encore » pour des copies vides seulement, jamais de note ni de rouge.
+  test "each treated exercise shows its medal, Bronze at least, never a grade or red" do
     genetics = course_named("Génétique")
     complete(create_exercise(essential: create_essential(course: genetics), title: "Réussi"), 75, at: 2.hours.ago)
     complete(create_exercise(essential: create_essential(course: genetics), title: "À revoir"), 45, at: 1.hour.ago)
-    # UDR-0090 §4 : la règle de l'historique, sur la note affichée (grade_on_20 >= 14) : 68 % s'affiche 14/20, en vert.
+    # UDR-0090 §4 : la règle se lit sur la note affichée : 68 % s'affiche 14/20 (Argent), 66 % 13/20 (Bronze).
     complete(create_exercise(essential: create_essential(course: genetics), title: "Juste"), 68, at: 3.hours.ago)
-    # Le seuil bas : 66 % s'affiche 13/20, à l'encre.
     complete(create_exercise(essential: create_essential(course: genetics), title: "Presque"), 66, at: 4.hours.ago)
+    complete(create_exercise(essential: create_essential(course: genetics), title: "Vide"), 0, at: 5.hours.ago, blank: true)
     sign_in_as @student
 
     get student_classroom_path
 
     assert_select "#student_classroom_treated" do
-      assert_select "li .text-success", text: "15/20"
-      assert_select "li .text-success", text: "14/20"
-      assert_select "li .text-ink", text: "9/20"
-      assert_select "li .text-success", text: "9/20", count: 0
-      assert_select "li .text-ink", text: "13/20"
-      assert_select "li .text-success", text: "13/20", count: 0
+      assert_select "li:nth-child(1)", text: including("Bronze Médaille Bronze")
+      assert_select "li", text: including("Argent Médaille Argent"), count: 2
+      assert_select "li", text: including("Bronze Médaille Bronze"), count: 2
+      # Une copie vide n'a pas de médaille : « Pas encore », comme son résultat.
+      assert_select "li", text: including("Pas encore"), count: 1
+      assert_select "li", text: %r{\d+\s*/\s*20|%|Acquis|Fragile|difficulté}, count: 0
     end
     assert_select "#student_classroom_treated [class*=red], #student_classroom_treated [class*=error], #student_classroom_treated [class*=danger]", 0
   end

@@ -1,13 +1,8 @@
 <%# 🌐 UI · school_admin/departed_students/index — « Anciens élèves » de la direction (lot R de fonctions-espace-eleve) %>
-<%# Rôle : chaque élève passé par l'établissement et absent de ses classes de l'année : dernière classe, devoirs rendus, score moyen %>
+<%# Rôle : chaque élève passé par l'établissement et absent de ses classes de l'année : dernière classe, devoirs rendus, médailles %>
 <%# ADR  : 0036, 0065 · UDR : 0052, 0054 (§3.2, §3.9), 0074 · aucun identifiant d'élève dans le HTML : les lignes sont numérotées %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "home" %>
-<% percent = lambda do |value|
-     next t("school_admin.classrooms.percent", value:) unless value.nil?
-
-     safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
-   end %>
 <%= ui_page_header title: t(".title"), subtitle: @overview.school_name, back: { label: t(".back"), href: school_admin_classrooms_path } %>
 
 <%= ui_card id: "departed_students" do %>
@@ -45,8 +40,8 @@
               <th scope="col" class="px-2 py-3 font-medium"><%= t(".columns.classroom") %></th>
               <th scope="col" class="px-2 py-3 text-right align-top font-medium"><%= t(".columns.submitted") %></th>
               <th scope="col" class="px-2 py-3 text-right align-top font-medium">
-                <%= t(".columns.average") %>
-                <%= ui_info_tip t(".average_tip"), label: t(".columns.average") %>
+                <%= t(".columns.medals") %>
+                <%= ui_info_tip badges_tip, label: t(".columns.medals") %>
               </th>
             </tr>
           </thead>
@@ -59,7 +54,7 @@
                   <span class="block text-xs text-mute"><%= t(".classroom_detail", level: student.level_name, year: student.school_year) %></span>
                 </td>
                 <td class="px-2 py-3 text-right tabular-nums"><%= student.submitted_count %></td>
-                <td class="px-2 py-3 text-right tabular-nums"><%= percent.call(student.average_percent) %></td>
+                <td class="px-2 py-3 text-right"><%= medal_counts(student.medals) %></td>
               </tr>
             <% end %>
           </tbody>

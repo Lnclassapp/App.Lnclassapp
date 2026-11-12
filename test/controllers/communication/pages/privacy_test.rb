@@ -74,7 +74,7 @@ class Communication::PrivacyPageTest < ActionDispatch::IntegrationTest
     get privacy_path
 
     conservation = "section[aria-labelledby='conservation']"
-    assert_select "#{conservation} li", text: /30 jours.*vos résultats aussi : exercices faits, réponses, notes, badges et fiches à revoir/m
+    assert_select "#{conservation} li", text: /30 jours.*vos résultats aussi : exercices faits, réponses, notes, médailles et fiches à revoir/m
     assert_select "#{conservation} li", text: /n'apparaissez plus dans aucun chiffre de vos classes ni de l'établissement/
     assert_select "#{conservation} li", text: /‹/, count: 0
   end

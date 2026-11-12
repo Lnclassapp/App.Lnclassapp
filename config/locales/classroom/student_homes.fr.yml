@@ -32,7 +32,7 @@ fr:
           resume_label: "Reprendre l'exercice « %{title} »"
         review:
           badge: "À revoir"
-          note: "Tu as eu %{grade}. Relis la fiche, puis refais un exercice."
+          note: "Ta médaille est %{medal}. Relis la fiche, puis refais un exercice."
           open: "Revoir la fiche"
           open_label: "Revoir la fiche « %{title} »"
           meta: "%{material} · Fiche de révision"
@@ -55,6 +55,14 @@ fr:
           tomorrow: "Demain : %{subject}"
           none: "Rien à te proposer aujourd'hui."
           invite: "Ton enseignant n'est pas sur Lnclass ? Invite-le"
+        # Chantier eleve-sans-prof : sans classe, l'exercice du jour de son dernier niveau, sous « Rejoindre ».
+        no_classroom:
+          daily: "Exercice du jour"
+          start: "Faire l'exercice du jour"
+          start_label: "Faire l'exercice du jour « %{title} »"
+          done_today: "Exercice du jour fait. Reviens demain !"
+          tomorrow: "Demain : %{subject}"
+          none: "Rien à te proposer aujourd'hui."
       # UDR accueil élève §3.3 état 6 : l'élève sans classe active (archivée, ou retiré) ; le code, ou la cascade.
       no_classroom:
         title: "Choisis ta classe"
@@ -63,10 +71,16 @@ fr:
         submit: "Rejoindre"
         no_code: "Je n'ai pas de code"
         archive: "Voir mon historique"
+      # Amendement eleve-sans-prof : « À faire », les exercices assignés non terminés après celui de la carte.
+      to_do:
+        title: "À faire"
+        all: "Tout voir"
+        empty: "Rien d'autre à faire pour l'instant."
       # UDR accueil élève §3.4 : la grille de 7 cases, 6 matières puis « Inviter ».
       subjects:
         label: "Mes matières"
-        empty: "Aucune matière pour l'instant"
+        # Chantier eleve-sans-prof : un niveau sans leçon publiée (6e à 4e, 2nde) ; dire que ça vient, pas « aucune ».
+        empty: "Les cours de ton niveau arrivent bientôt."
         late: ", exercice en retard"
         invite: "Inviter"
       # UDR accueil élève §3.5 : l'Historique, dans le cadre différé.

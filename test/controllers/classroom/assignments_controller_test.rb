@@ -8,7 +8,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     @course = create_course(name: "Génétique")
     # UDR-0013, amendement du 2026-10-01 : la classe est du niveau du cours, seul assignable.
     @classroom = create_classroom(name: "6ème 1", level: @course.level)
-    @teacher = create_teacher(classrooms: [ @classroom ])
+    @teacher = create_teacher(material: @course.material, classrooms: [ @classroom ])
     @essential = create_essential(course: @course, name: "La méiose")
     @exercise = create_exercise(essential: @essential, title: "Méiose")
   end
@@ -382,7 +382,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     school = create_school
     with_days = create_classroom(school:, name: "6ème 2", level: @course.level, series: @course.series)
     without_days = create_classroom(school:, name: "6ème 3", level: @course.level, series: @course.series)
-    teacher = create_teacher(school:, classrooms: [ with_days, without_days ])
+    teacher = create_teacher(school:, material: @course.material, classrooms: [ with_days, without_days ])
     Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: teacher.id, classroom_id: with_days.id, weekdays: [ 1, 4 ],
                                                                 at: Time.current)
     [ @exercise, bilan ].each { create_assignment(classroom: with_days, assignable: it, by: teacher, due_on: Date.new(2026, 10, 8)) }

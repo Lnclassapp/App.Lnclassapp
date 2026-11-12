@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/crm/stages/update — succès de « Changer l'étape » %>
+<%# Rôle : toast et sous-bloc « Étape et responsable » remplacé ; la modale se ferme avec lui %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) %>
+<%= turbo_stream_toast t(".done"), type: :success %>
+<%= turbo_stream.replace "school_crm_stage", template: "teams/crm/stages/show", formats: [ :html ] %>

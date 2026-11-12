@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_teacher_course — la carte d'une fiche de cours dans le Cours de l'enseignant %>
 <%# Rôle : « LEÇON 2 », titre et chevron, le tout lien vers la fiche de cours ; dessous, « Révisions de la leçon » et une ligne par fiche de révision publiée %>
-<%# ADR  : 0035 · UDR : XXXX écrans enseignant sans répétition §3.7 (amendement du 2026-10-24), 0130 (exception 2) %>
+<%# ADR  : 0035 · UDR : 0134 écrans enseignant sans répétition §3.7 (amendement du 2026-10-24), 0130 (exception 2) %>
 <%# locals: (course:) -%>
 <%# « Progression DPFC 2026-2027 » est écrit une fois, sous la recherche ; la carte ne garde que la leçon. %>
 <% lesson = course.subtitle.to_s.split(/\s+[·–—-]\s+/).grep_v(/\AProgression DPFC/i).join(" · ").presence %>

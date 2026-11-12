@@ -15,7 +15,9 @@ class SchoolAdmin::DepartedStudentsTest < ApplicationSystemTestCase
       student = create_student(classroom:, first_name:, last_name:)
       exercise = create_exercise
       assignment = create_assignment(classroom:, assignable: exercise, by: teacher)
-      create_exercise_session(student:, exercise:, status: "completed", score_percent: score, classroom_assignment_id: assignment.id)
+      # ADR médailles lues à la clôture : l'écran lit la médaille enregistrée (80 % : Or ; 40 % : Bronze), jamais le score.
+      record_medal(create_exercise_session(student:, exercise:, status: "completed", score_percent: score,
+                                           classroom_assignment_id: assignment.id))
     end
   end
 
@@ -45,7 +47,9 @@ class SchoolAdmin::DepartedStudentsTest < ApplicationSystemTestCase
       end
       within("#departed_student_0") do
         assert_selector "th", text: "Awa Koné"
-        assert_text "80 %"
+        # UDR médailles direction : « Médailles » gagnées dans l'établissement, plus de score moyen.
+        assert_text "Or"
+        assert_no_text "%"
       end
     end
   end

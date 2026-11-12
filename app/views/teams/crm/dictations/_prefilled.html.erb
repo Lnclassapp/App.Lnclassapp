@@ -1,0 +1,15 @@
+<%# 🌐 UI · teams/crm/dictations/_prefilled — « Noter un échange » pré-rempli par la dictée, à vérifier avant d'enregistrer %>
+<%# Rôle : bandeau (pré-rempli, ou repli sur la transcription), puis le formulaire du journal (interactions/_form, inchangé, source=dictation) ; rien n'est enregistré avant « Noter l'échange » %>
+<%# UDR  : 0160 (assistants du suivi, « Compte rendu dicté ») · CA-25, CA-27 %>
+<%= turbo_frame_tag "dictation_prefill_#{generation.public_id}", target: "modal", data: { prefilled: true } do %>
+  <% if structured %>
+    <p role="status" class="mb-4 rounded-ln bg-info-soft px-4 py-3 text-sm text-info"><%= t(".prefilled") %></p>
+  <% else %>
+    <p role="status" class="mb-4 rounded-ln bg-warning-soft px-4 py-3 text-sm text-warning"><%= t(".fallback") %></p>
+  <% end %>
+  <%= render "teams/crm/interactions/form", input: %>
+  <div class="mt-5 flex flex-col-reverse gap-3 border-t border-line pt-4 sm:flex-row sm:justify-end">
+    <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+    <%= ui_button t(".submit"), type: :submit, form: "interaction-form", icon: "pencil-square" %>
+  </div>
+<% end %>

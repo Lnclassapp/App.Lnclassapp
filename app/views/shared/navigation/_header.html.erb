@@ -1,6 +1,6 @@
 <%# 🌐 UI · shared/navigation/_header — en-tête du shell : élève (logo, aide, menu de l'avatar) ; enseignant (avatar, aide ; dès lg filet jaune, logo, « Lnclass », aide, avatar) ; sinon logo, rôle, (aide de la direction), menu du compte %>
 <%# Rôle : filet de couleur du rôle en haut (pour l'enseignant : dès lg seulement) ; ni l'élève ni l'enseignant n'ont la lune : le mode sombre est dans « Mon compte » ; la direction et l'équipe gardent l'en-tête d'origine, la direction y gagne « Besoin d'aide ? » %>
-<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar : direction et équipe, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1, 0128, XXXX écrans enseignant §3.1, §3.14 et élève §3.1, XXXX accueil élève §3.1 (sous lg, le bandeau remplace l'en-tête) %>
+<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar : direction et équipe, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1, 0128, 0134 écrans enseignant §3.1, §3.14 et 0133 élève §3.1, 0132 accueil élève §3.1 (sous lg, le bandeau remplace l'en-tête) %>
 <%# user nil : la barre de l'enseignant à l'inscription (UDR enseignant §3.14), dès lg seulement, sans avatar. %>
 <%# UDR accueil élève §3.1 : une page qui porte le bandeau bleu (content_for :home_band) a déjà l'avatar et l'aide sous lg : l'en-tête n'y paraît qu'à partir de lg. %>
 <header class="<%= class_names("sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur", "max-lg:hidden" => content_for?(:home_band) || user.nil?) %>">

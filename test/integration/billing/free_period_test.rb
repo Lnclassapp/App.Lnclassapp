@@ -3,12 +3,14 @@ require "test_helper"
 # cartes-activation, Lot B (PRD §4 « Période gratuite et blocage », ADR contexte billing §4.5 et §4.6, UDR-0158 §3) :
 # 7 jours gratuits à partir du 2026-11-09, puis « Commencer » et la vérification d'une fiche mènent à Mon abonnement sans rien écrire ;
 # leçons, exercices et historique restent lisibles ; un enseignant n'est jamais bloqué.
+# acces-beta : cette règle est celle d'après la bêta ; ces tests ferment la bêta au jour de la mise en ligne (BillingBetaHelper).
 class BillingFreePeriodTest < ActionDispatch::IntegrationTest
   CREATED_ON = Time.zone.local(2026, 11, 9, 10)
   LAST_FREE_DAY = Time.zone.local(2026, 11, 15, 12)
   BLOCKED_DAY = Time.zone.local(2026, 11, 16, 12)
 
   setup do
+    close_beta_for_this_test
     @exercise = create_exercise(title: "Méiose", questions: 2)
     @course = @exercise.essential.course
     @classroom = create_classroom(level: @course.level, series: @course.series)
@@ -211,6 +213,110 @@ class BillingFreePeriodTest < ActionDispatch::IntegrationTest
 
       assert_response :success
       assert_equal :subscribed, Queries::Billing::StudentAccessQuery.new.call(student_id: teacher.id, at: Time.current).status
+    end
+  end
+end
+
+# acces-beta (PRD §4) : pendant la bêta, réglage ouvert, l'élève a l'accès complet gratuit : ni bandeau, ni blocage, ni redirection.
+class BillingBetaAccessTest < ActionDispatch::IntegrationTest
+  CREATED_ON = BillingFreePeriodTest::CREATED_ON
+  LONG_AFTER = Time.zone.local(2027, 1, 16, 12)
+
+  setup do
+    @exercise = create_exercise(title: "Méiose", questions: 2)
+    @classroom = create_classroom(level: @exercise.essential.course.level, series: @exercise.essential.course.series)
+    @student = travel_to(CREATED_ON) { create_student(classroom: @classroom) }
+  end
+
+  def notice = "section[aria-label='#{I18n.t('billing.subscriptions.home_notice.label')}']"
+
+  test "le réglage livré est ouvert : aucune date de fin de bêta" do
+    assert_nil Entities::Billing::Offer::BETA_ENDS_ON
+  end
+
+  test "deux mois après la création du compte : aucun bandeau ni lien vers Mon abonnement sur l'accueil" do
+    travel_to(LONG_AFTER) do
+      sign_in_as @student
+
+      get student_home_path
+
+      assert_response :success
+      assert_select notice, count: 0
+      assert_select "a[href='#{billing_subscription_path}']", count: 0
+      assert_no_match(/Abonne-toi|M'abonner/, response.body)
+    end
+  end
+
+  test "deux mois après : la séance démarre, sans redirection vers Mon abonnement" do
+    travel_to(LONG_AFTER) do
+      sign_in_as @student
+
+      assert_difference -> { Orm::ExerciseSession.count }, 1 do
+        post exercise_sessions_path(@exercise.public_id)
+      end
+      assert_redirected_to exercise_session_path(Orm::ExerciseSession.sole.public_id)
+      assert_nil session[RedirectsSubscriptionRequired::RETURN_KEY]
+    end
+  end
+
+  test "deux mois après : l'entraînement d'une notion est jugé, jamais refusé" do
+    course = create_course(name: "Racines carrées", content: "")
+    notion = create_practice_notion(course:, questions: [ numeric_question ])
+    student = travel_to(CREATED_ON) { create_student_for(course) }
+    digest = Entities::Catalog::NotionPractice.from_raw(raw_practice(numeric_question)).digest
+    travel_to(LONG_AFTER) do
+      sign_in_as student
+
+      post practice_check_path(course_slug: course.slug, slug: notion.slug), params: { digest:, answers: {} },
+                                                                           headers: { "Turbo-Frame" => "practice_#{notion.slug}" }
+
+      assert_response :success
+      assert_select "a[href='#{billing_subscription_path}']", count: 0
+    end
+  end
+
+  test "Mon abonnement, ouvert à la main, dit l'accès bêta sans compte à rebours" do
+    travel_to(LONG_AFTER) do
+      sign_in_as @student
+
+      get billing_subscription_path
+
+      assert_response :success
+      assert_select "h2", text: I18n.t("billing.subscriptions.status.beta.title")
+      assert_no_match(/période gratuite est terminée|jours? gratuits?/, response.body)
+    end
+  end
+
+  test "fin de bêta posée : le même élève compte ses 7 jours gratuits à partir de la fin de bêta, puis il est bloqué" do
+    close_beta_for_this_test(on: Date.new(2027, 1, 10))
+
+    travel_to(Time.zone.local(2027, 1, 9, 12)) do
+      sign_in_as @student
+      get student_home_path
+      assert_select notice, count: 0
+    end
+    travel_to(Time.zone.local(2027, 1, 16, 12)) do
+      sign_in_as @student
+      get student_home_path
+      assert_select notice, text: /Il te reste 1 jour gratuit/
+      assert_difference(-> { Orm::ExerciseSession.count }, 1) { post exercise_sessions_path(@exercise.public_id) }
+    end
+    travel_to(Time.zone.local(2027, 1, 17, 12)) do
+      sign_in_as @student
+      assert_no_difference(-> { Orm::ExerciseSession.count }) { post exercise_sessions_path(@exercise.public_id) }
+      assert_redirected_to billing_subscription_path
+    end
+  end
+
+  test "réversible en un point : le réglage fermé, le même élève est de nouveau bloqué" do
+    close_beta_for_this_test
+    travel_to(LONG_AFTER) do
+      sign_in_as @student
+
+      assert_no_difference -> { Orm::ExerciseSession.count } do
+        post exercise_sessions_path(@exercise.public_id)
+      end
+      assert_redirected_to billing_subscription_path
     end
   end
 end

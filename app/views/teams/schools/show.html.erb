@@ -1,11 +1,17 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
 <%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année, « Direction » et « Directions retirées », enseignants et leur voie %>
-<%# ADR  : 0030, 0041, 0059, 0063, 0077, 0083, 0088 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070, 0079 (§3.8), 0083 · retour vers la liste filtrée · UDR-0127 §3.5 (matières) %>
+<%# ADR  : 0030, 0041, 0059, 0063, 0077, 0083, 0088, 0128 (contexte crm) · UDR : 0162 (bloc « Suivi »), 0006, 0036, 0046, 0050, 0054, 0056, 0070, 0079 (§3.8), 0083 · retour vers la liste filtrée · UDR-0127 §3.5 (matières) %>
 <% page_title @school.name %>
 <% content_for :nav_key, "schools" %>
 <%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
 <%= ui_back_link t(".back"), href: back_href(schools_path, from: schools_path) %>
 <%= render "header", school: @school %>
+<%# UDR-0162 (bloc « Suivi ») : juste sous l'en-tête, chargé à la demande ; rien n'est rendu pour `content` (CA-01). %>
+<% if @can_manage_crm %>
+  <%= turbo_frame_tag "school_crm", src: teams_school_follow_up_path(@school.public_id), loading: :lazy do %>
+    <%= ui_loading_state variant: :skeleton, lines: 4 %>
+  <% end %>
+<% end %>
 
 <%# Classes, directions et enseignants répètent leurs icônes : dessinées une fois pour la page, reprises par <use> (ADR-0067). %>
 <%= ui_icon_sprite do %>

@@ -42,7 +42,7 @@
         <% exercise.questions.each do |question| %>
           <li>
             <p class="font-medium whitespace-pre-line text-ink">
-              <span class="tabular-nums"><%= t(".question_heading", number: question.position, points: number_with_precision(question.points, precision: 1, strip_insignificant_zeros: true)) %></span>
+              <span class="tabular-nums"><%= t(".question_heading", number: question.position) %></span>
               <span class="block font-normal"><%= question.content %></span>
             </p>
             <%# ADR cases §4 : une question à plusieurs cases montre chaque case avec ses réponses acceptées (UDR je-m-entraine §3.9). %>
@@ -116,7 +116,7 @@
         <% end %>
       </ol>
     <% end %>
-    <%# Lot C : le partial teams/answer_keys/practice (« Je m'entraîne (non noté) », local notion:) se rend ici, sous l'exercice noté de la notion. %>
+    <%# Lot C : le partial teams/answer_keys/practice (« Je m'entraîne (sans médaille) », local notion:) se rend ici, sous l'exercice de la notion. %>
     </section>
   <% end %>
 </div>

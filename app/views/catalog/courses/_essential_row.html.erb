@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_essential_row — une notion de la leçon dans une liste (carte de l'enseignant, carte de leçon de l'élève) %>
 <%# Rôle : lien vers la leçon, ancré sur la notion dans « Prépare interros » (la notion n'a plus de page) ; enseignant : ligne de 44 px ; élève sur ordinateur (lesson) : ligne d'une carte de leçon, « À revoir » si une lacune est en attente %>
-<%# ADR  : 0035, 0113 (§4) · UDR : 0007, 0013, 0057, 0139 (§3.7), XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis %>
+<%# ADR  : 0035, 0113 (§4) · UDR : 0007, 0013, 0057, 0139 (§3.7), 0134 écrans enseignant sans répétition §3.7, 0133 écrans élève sans répétition §3.6 bis %>
 <%# locals: (essential:, course_slug:, show_status:, student: false, folded: false, teacher: false, lesson: false) -%>
 <% href = course_path(course_slug, anchor: "notion-#{essential.slug}") %>
 <% if teacher %>

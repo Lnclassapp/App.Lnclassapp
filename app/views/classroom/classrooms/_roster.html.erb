@@ -57,15 +57,6 @@
               <%= t(".count", count: students.size) %>
             <% end %>
           </p>
-          <div class="flex items-center gap-3">
-            <%# UDR-0084 §3.7 : « Fait seul (7 j) », colonne de l'ordinateur ; au téléphone, une ligne sous le nom. %>
-            <div id="self_practice_heading" class="hidden items-center gap-1 text-sm text-mute sm:flex">
-              <%= t(".self_practice") %><%= ui_info_tip t(".self_practice_tip"), label: t(".self_practice") %>
-            </div>
-            <p class="hidden items-center gap-1 text-sm text-mute sm:flex">
-              <%= t(".last_score") %><%= ui_info_tip t(".last_score_tip"), label: t(".last_score") %>
-            </p>
-          </div>
         </div>
         <% if students.empty? && badge_filter && search.blank? %>
           <%= ui_empty_state title: t(".empty_badge"), icon: "user-group" %>
@@ -78,7 +69,7 @@
           <% first_added = per_page * (page - 1) if page > 1 %>
           <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
             <% students.each_with_index do |student, index| %>
-              <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3 lg:grid lg:grid-cols-content-action lg:gap-y-2">
+              <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3 ">
                 <%# UDR-0108 §3.2 : la photo et le nom forment un seul lien vers la fiche ; après « Voir les suivants », le focus
                     va au lien de la première ligne ajoutée, par le contrôleur autofocus (UDR-0054 §3.3 : jamais l'attribut). %>
                 <% focus = { controller: "autofocus", autofocus_target: "field" } if index == first_added %>
@@ -96,38 +87,11 @@
                   </div>
                 <% end %>
                 <div class="flex shrink-0 items-center gap-1 sm:gap-3 lg:justify-self-end">
-                  <%# UDR enseignant §3.2, §3.5 : « Moyenne 15/20 · Or » (trophée du palier sur une pastille neutre), « Moyenne 7/20 · Pas encore » en text-mute
-                      sous le seuil, « Pas encore » seul sans exercice fait : la pastille dit qu'elle vient de la moyenne de la classe (amendement 2026-10-29). %>
-                  <% if student.badge %>
-                    <p id="badge_<%= student.public_id %>" class="<%= Assessment::BadgesHelper::BADGE_PILL %> shrink-0">
-                      <%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(student.badge)) %>
-                      <%= t(".badge_grade", badge: badge_label(student.badge), grade: student.grade) %>
-                    </p>
-                  <% else %>
-                    <p id="badge_<%= student.public_id %>" class="ui-badge ui-badge-md shrink-0 bg-mist text-mute"><%= student.grade ? t(".average_none", grade: student.grade, badge: comprehension_box_label(:none)) : comprehension_box_label(:none) %></p>
-                  <% end %>
-                </div>
-                <%# ≥ lg : la colonne est étroite (UDR enseignant §3.5), « Fait seul » et le dernier score passent sur une seconde ligne, sous le nom ;
-                    en dessous, `contents` laisse ces deux cellules en ligne avec le badge, comme avant. %>
-                <div class="contents lg:col-span-2 lg:flex lg:flex-wrap lg:justify-between lg:gap-x-4 lg:gap-y-1">
-                  <p id="self_practice_<%= student.public_id %>" class="hidden w-24 text-right text-sm sm:block lg:flex lg:w-auto lg:items-baseline lg:gap-x-2 lg:text-left">
-                    <span class="block text-xs text-mute"><%= t(".self_practice") %></span>
-                    <% if student.self_practice_count.zero? %>
-                      <span class="text-mute">—</span>
-                    <% else %>
-                      <span class="font-medium tabular-nums"><%= student.self_practice_count %></span>
-                    <% end %>
-                  </p>
-                  <p class="hidden text-right text-sm sm:block lg:flex lg:flex-wrap lg:items-baseline lg:justify-end lg:gap-x-2">
-                    <span class="block text-xs text-mute"><%= t(".last_score") %></span>
-                    <% if student.last_score_percent %>
-                      <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
-                      <%# Décision du porteur (2026-09-27) : le score mène au résultat détaillé (note, revue, propositions correctes) %>
-                      <%= link_to t(".see_result"), exercise_session_result_path(student.last_session_public_id), data: { turbo_frame: "_top" },
-                                  class: "block text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-                    <% else %>
-                      <span class="text-mute"><%= t(".no_score") %></span>
-                    <% end %>
+                  <%# UDR médailles : la médaille de l'élève dans la classe, seule (trophée du palier, nom en toutes lettres) ; « Pas encore » en
+                      text-mute sans exercice fait, jamais en rouge. Plus de moyenne ni de note : le chiffre reste en base. %>
+                  <p id="badge_<%= student.public_id %>" class="<%= student.badge ? Assessment::BadgesHelper::BADGE_PILL : "ui-badge ui-badge-md bg-mist text-mute" %> shrink-0">
+                    <% if student.badge %><%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(student.badge)) %><% end %>
+                    <%= comprehension_box_label(student.badge || :none) %>
                   </p>
                 </div>
               </li>

@@ -60,20 +60,24 @@ module Repositories
         assert_equal [ 1 ], @repository.for(teacher_id: @teacher.id, classroom_id: @classroom.id).weekdays
       end
 
-      test "une classe non déclarée par l'enseignant n'a pas de jours : la base refuse, rien n'est écrit" do
-        undeclared = create_classroom(school: @classroom.school)
-
-        assert_raises(ActiveRecord::InvalidForeignKey) do
-          @repository.replace(teacher_id: @teacher.id, classroom_id: undeclared.id, weekdays: [ 1 ], at: @at)
-        end
-      end
-
       test "le modèle nomme son enseignant et sa classe" do
         @repository.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 5 ], at: @at)
 
         row = rows.sole
 
         assert_equal [ @teacher, @classroom, 5 ], [ row.teacher, row.classroom, row.weekday ]
+      end
+
+      # B-021 (audit 2026-11-08): the teacher stops teaching the class between the policy and the write — a refusal, not a 500.
+      test "B-021: une classe que l'enseignant ne déclare plus rend false, sans abîmer la transaction de l'appelant" do
+        undeclared = create_classroom(school: @classroom.school)
+        @repository.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 2 ], at: @at)
+
+        Orm::ClassroomSessionDay.transaction do
+          assert_equal false, @repository.replace(teacher_id: @teacher.id, classroom_id: undeclared.id, weekdays: [ 1 ], at: @at)
+          assert_equal 0, Orm::ClassroomSessionDay.where(classroom_id: undeclared.id).count
+        end
+        assert_equal [ 2 ], @repository.for(teacher_id: @teacher.id, classroom_id: @classroom.id).weekdays
       end
     end
   end

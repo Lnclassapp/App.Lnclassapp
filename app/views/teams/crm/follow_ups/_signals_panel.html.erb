@@ -1,0 +1,38 @@
+<%# 🌐 UI · teams/crm/follow_ups/_signals_panel — panneau « À relancer » de la page « Relances » %>
+<%# Rôle : mes écoles avec au moins un signal (ou toute l'équipe), tableau au bureau, cartes à 390 px, un vide %>
+<%# UDR  : 0168 (pipeline et relances) · locals: (page:, all_schools:) %>
+<nav class="mb-4 flex gap-2" aria-label="<%= t("teams.crm.signals.scope_label") %>">
+  <% { mine: false, all: true }.each do |key, value| %>
+    <%= link_to t("teams.crm.signals.scope.#{key}"), teams_follow_ups_path(tab: "signals", scope: (key.to_s if value)),
+                class: class_names("rounded-full px-3 py-2 text-sm", value == all_schools ? "bg-brand text-ink" : "text-mute hover:text-ink"),
+                "aria-current": ("true" if value == all_schools) %>
+  <% end %>
+</nav>
+<% if page.rows.empty? %>
+  <%= ui_empty_state title: t("teams.crm.signals.empty"), icon: "check-circle" %>
+<% else %>
+  <div class="hidden md:block">
+    <table class="w-full text-left text-sm">
+      <caption class="sr-only"><%= t("teams.crm.signals.tabs.signals") %></caption>
+      <thead class="text-mute">
+        <tr>
+          <% columns = all_schools ? %i[school owner reasons] : %i[school reasons] %>
+          <% columns.each do |column| %>
+            <th scope="col" class="pb-2 pr-4 font-medium"><%= t("teams.crm.signals.columns.#{column}") %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% page.rows.each do |row| %>
+          <%= render "teams/crm/follow_ups/signal_row", row:, layout: :row, owner: all_schools %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="space-y-3 md:hidden">
+    <% page.rows.each do |row| %>
+      <%= render "teams/crm/follow_ups/signal_row", row:, layout: :card, owner: all_schools %>
+    <% end %>
+  </div>
+  <%= ui_pagination page: page.page, pages: page.pages, param: "signals_page" %>
+<% end %>

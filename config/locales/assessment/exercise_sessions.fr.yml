@@ -31,23 +31,16 @@ fr:
       show:
         page_title: "Copie · %{title}"
         counter: "%{answered}/%{total} répondues"
-        # UDR-0157 §3 : le cartouche de la feuille et la consigne (« · barème : 7 points » si une question ne vaut pas 1 point).
+        # UDR-0157 §3 : le cartouche de la feuille et la consigne.
         exam_kind: "Interrogation"
         exam_brand: "Lnclass"
         questions:
           zero: "Aucune question"
           one: "1 question"
           other: "%{count} questions"
-        scale:
-          one: " · barème : %{points} point"
-          other: " · barème : %{points} points"
         statement: "Sujet"
         review_statement: "Revoir le sujet"
         question: "Question %{number}"
-        # UDR-0140 §3 : « (2 points) », « (1,5 point) » ; seulement quand l'exercice n'est pas tout à 1 point.
-        points:
-          one: "(%{points} point)"
-          other: "(%{points} points)"
         submit: "Vérifier ma copie"
         submitting: "Vérification…"
         # UDR-0140 : la phrase juste au-dessus du bouton ; la copie part d'un seul envoi.

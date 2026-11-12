@@ -30,10 +30,16 @@ module Policies
         assert_equal({}, call(:teacher, 3, school_id: 8).errors)
       end
 
+      # Audit B-011 : la direction lit, sans rien gérer, les classes de son école seulement.
+      test "la direction de l'école de la classe la lit, avec la liste ; une autre école ou sans école, non" do
+        assert call(:school_admin, 9).value.show_roster
+        assert_equal :forbidden, call(:school_admin, 9, school_id: 8).code
+        assert_equal :forbidden, call(:school_admin, 9, school_id: nil).code
+      end
+
       test "refuse les autres" do
         assert_equal :forbidden, call(:teacher, 3).code
         assert_equal :forbidden, call(:student, 3).code
-        assert_equal :forbidden, call(:school_admin, 1).code
         assert_equal :forbidden, ReadClassroomPolicy.new.call(actor: nil, classroom: Header.new([], [], 7)).code
       end
     end

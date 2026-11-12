@@ -44,6 +44,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
   test "FU-07 : l'équipe ouvre la classe depuis la fiche de l'établissement et y revient par son nom" do
     sign_in_as create_team_member
     visit school_path(@school.public_id)
+    wait_for_lazy_frames # the Suivi block loads above the classrooms and moves « 3e A » under the cursor
 
     click_on "3e A"
 

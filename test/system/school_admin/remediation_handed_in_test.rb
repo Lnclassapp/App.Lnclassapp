@@ -3,7 +3,7 @@ require "application_system_test_case"
 # Challenger of remediation-comptee-faite (bugfix, phase 5): the memo's reproduction, replayed in the browser. In 3ème B,
 # Aya fails X at 33 % in the interface, which opens a gap on the fiche (ADR-0043); she then starts Y, which opens a
 # remediation session on Y's assignment, and passes it at 100 %. The school management opens the 3ème level from its home,
-# then 3ème B: Y is handed in and its 100 % is in the averages. A remediation started but not finished, and a student of
+# then 3ème B: Y is handed in and its Diamant is in the classroom's medals (UDR médailles direction: no rate, no average). A remediation started but not finished, and a student of
 # another classroom, change nothing to the figures of 3ème B. The rest of the classroom is set up by the factories.
 # The memo's 25 % and 80 % need 9 questions to play; 3 and 2 keep the scenario within the system budget (≤ 10 s).
 class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
@@ -21,11 +21,11 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
     @klass = create_classroom(school:, level:, name: "3ème B")
     @given_x, @given_y = [ @x, @y ].map { create_assignment(classroom: @klass, assignable: it, by: teacher) }
     @aya = create_student(classroom: @klass, first_name: "Aya", last_name: "Bamba")
-    # The classroom average shows from 5 students who handed in: four classmates hand X in at 60 %.
+    # Four classmates hand X in at 60 %: closing writes their Bronze (ADR médailles lues à la clôture).
     4.times do |index|
       classmate = create_student(classroom: @klass, first_name: "Élève", last_name: "Zz#{index}")
-      create_exercise_session(student: classmate, exercise: @x, status: "completed", score_percent: 60,
-                              classroom_assignment_id: @given_x.id)
+      record_medal(create_exercise_session(student: classmate, exercise: @x, status: "completed", score_percent: 60,
+                                           classroom_assignment_id: @given_x.id))
     end
     # Error path 1: Moussa has a gap on the fiche (from an unassigned exercise) and has only started Y in remediation.
     moussa = create_student(classroom: @klass, first_name: "Moussa", last_name: "Coulibaly")
@@ -39,12 +39,12 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
     koffi_gap = create_gap(student: koffi, essential: @essential)
     given_y_other = create_assignment(classroom: @other, assignable: @y, by: teacher)
     [ given_y_other, @given_y ].each do |given|
-      create_exercise_session(student: koffi, exercise: @y, status: "completed", score_percent: 100, gap: koffi_gap,
-                              classroom_assignment_id: given.id)
+      record_medal(create_exercise_session(student: koffi, exercise: @y, status: "completed", score_percent: 100, gap: koffi_gap,
+                                           classroom_assignment_id: given.id))
     end
   end
 
-  test "memo: Y done in remediation is handed in and counts in the averages; started or foreign sessions do not" do
+  test "memo: Y done in remediation is handed in and counts in the medals; started or foreign sessions do not" do
     sign_in_as @aya
     assert_selector "main#main", wait: SIGN_IN_WAIT
 
@@ -67,23 +67,22 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
     find("#level_3eme").click
     assert_current_path school_admin_level_path("3eme")
 
-    # 3ème B: 6 students × 2 assignments; handed in: Aya 2, four classmates 1 → 6 / 12 = 50 %.
-    # Average of the handed-in sessions: (33 + 100 + 4 × 60) / 6 = 62,2 → 62 %. Before the fix: 5 / 12 = 42 %, 273 / 5 = 55 %.
-    assert_equal [ "6 élèves", "2 devoirs donnés", "Taux de rendu : 50 %", "Moyenne : 62 %" ], figures(@klass)
-    # 3ème A: Koffi's remediation counts for his own classroom; fewer than 5 students handed in, no average.
-    other = figures(@other)
-    assert_equal [ "1 élève", "1 devoir donné", "Taux de rendu : 100 %" ], other.first(3)
-    assert_match(/\AMoyenne : —/, other.last)
+    # 3ème B: 6 students × 2 assignments; handed in: Aya 2, four classmates 1 → 6 on 12 (before the fix: 5 on 12).
+    # Medals: Aya's X (33 %) and the four classmates' X are Bronze, Aya's Y in remediation (100 %) is Diamant.
+    assert_equal [ "6 élèves", "2 devoirs donnés", "6 devoirs rendus sur 12", "5 Bronze 1 Diamant" ], figures(@klass)
+    # 3ème A: Koffi's remediation counts for his own classroom, with its medal; no threshold of students (UDR médailles direction).
+    assert_equal [ "1 élève", "1 devoir donné", "1 devoir rendu sur 1", "1 Diamant" ], figures(@other)
 
     find("#classroom_#{@klass.public_id} a").click
 
     assert_current_path school_admin_classroom_path(@klass.public_id)
-    assert_equal [ "2", "50 %", "62 %" ], all("#classroom_figures li > span:first-child").map(&:text)
+    # UDR médailles direction, page d'une classe : « Devoirs rendus : N sur M », puis la répartition des médailles de la classe.
+    assert_equal [ "2", "6 sur 12", "5 Bronze 1 Diamant" ], all("#classroom_figures li > span:first-child").map { it.text.squish }
     # UDR-0081 §3.7 : sous le nom, la pastille « Nouveau » et la voie d'arrivée ; une 4e colonne porte le menu ⋮.
-    rows = all("#classroom_students tbody tr").to_h { |row| [ row.find("th p", match: :first).text, row.all("td").first(2).map(&:text) ] }
-    assert_equal [ "2 / 2", "67 %" ], rows.fetch("Aya Bamba"), "Y rendu ; (33 + 100) / 2 = 66,5 → 67 %"
+    rows = all("#classroom_students tbody tr").to_h { |row| [ row.find("th p", match: :first).text, row.all("td").first(2).map { it.text.squish } ] }
+    assert_equal [ "2 / 2", "1 Bronze 1 Diamant" ], rows.fetch("Aya Bamba"), "Y rendu ; ses médailles : Bronze (X) et Diamant (Y)"
     assert_equal "0 / 2", rows.fetch("Moussa Coulibaly").first, "une remédiation commencée, non terminée, n'est pas rendue"
-    assert_match(/\A—/, rows.fetch("Moussa Coulibaly").last)
+    assert_equal I18n.t("badges.none"), rows.fetch("Moussa Coulibaly").last, "aucune médaille : « Pas encore »"
     assert_equal 6, rows.size
     assert_no_text "Koffi"
   end

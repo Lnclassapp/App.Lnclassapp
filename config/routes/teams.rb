@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, illustrations d'annonce, imports, invitations, comptes, jobs
-# ADR  : 0126, 0031, 0034, 0113, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096 · UDR : 0067, 0068, 0070, 0075, 0092, 0104
+# ADR  : 0126, 0031, 0034, 0113, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096, XXXX (contexte crm), XXXX (modèles de langage) · UDR : 0067, 0068, 0070, 0075, 0092, 0104, XXXX (bloc « Suivi »), XXXX (pipeline et relances)
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -101,6 +101,36 @@ namespace :teams do
   resource :growth, only: :show, controller: "growth"
   post "members/:user_public_id/second-factor-reset", to: "second_factor_resets#create", as: :member_second_factor_reset
 
+  # Chantier crm-ecoles, Lot 0 : toutes les adresses du suivi des écoles, gelées ici (Teams::Crm::*, ManageCrmPolicy : admin et field).
+  # Chaque lot en sert quelques-unes par son contrôleur ; aucun lot ne touche ce fichier. Ni `edit`, ni `update`, ni `destroy`
+  # sur les échanges : le journal est en ajout seul (CA-12). ADR-XXXX (contexte crm), UDR-XXXX (bloc « Suivi »).
+  resources :schools, only: [], param: :public_id, module: :crm do
+    resource :follow_up, only: :show, path: "follow-up", controller: "accounts"
+    resource :stage, only: %i[show update]
+    resource :owner, only: %i[edit update]
+    resource :usage, only: :show
+    resources :contacts, only: %i[index new create destroy], param: :public_id do
+      get :archive, on: :member
+    end
+    resources :interactions, only: %i[index new create]
+    # Les relances ouvertes de l'école (frame de la fiche), puis la création d'une relance.
+    get "follow-ups", to: "follow_ups#school", as: :open_follow_ups
+    resources :follow_ups, only: %i[new create], path: "follow-ups"
+    resource :assistant, only: :show
+    resource :briefing, only: :create
+    resource :dictation, only: %i[new create]
+    resources :pedagogy_reports, only: :create, path: "pedagogy-reports"
+  end
+  # UDR-XXXX (pipeline et relances) : la page « Relances », puis terminer, réattribuer et rédiger un message pour une relance.
+  resources :follow_ups, only: :index, path: "follow-ups", param: :public_id, controller: "crm/follow_ups" do
+    resource :completion, only: :update, controller: "crm/follow_up_completions"
+    resource :assignee, only: %i[edit update], controller: "crm/follow_up_assignees"
+    resource :whatsapp_draft, only: %i[new create], path: "whatsapp-draft", controller: "crm/whatsapp_drafts"
+  end
+  resource :home_follow_up, only: :show, path: "home-follow-ups", controller: "crm/home_follow_ups"
+  # ADR-XXXX (modèles de langage) : l'état d'une génération (sondage toutes les 2 s) et le rapport pédagogique imprimable.
+  resources :generations, only: :show, param: :public_id, controller: "crm/generations"
+  resources :pedagogy_reports, only: :show, path: "pedagogy-reports", param: :public_id, controller: "crm/pedagogy_reports"
   # ADR 0126, UDR-0159 §3 : points relais, lots de cartes, caisse, annulation et versements.
   # Chemins en français sous /teams, sans le segment « billing » ; contrôleurs Teams::Billing::*, Lots A et C.
   namespace :billing, path: "" do

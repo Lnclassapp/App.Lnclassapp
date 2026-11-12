@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_course_card — carte-vitrine d'un cours du catalogue (UDR-0001, CA-26) %>
 <%# Rôle : toute la carte mène au cours ; matière, niveau et série (sauf élève), titre, sous-titre, pied « Ouvrir le cours → » ; statut pour l'équipe, sauf « Publié » ; élève : ligne compacte entière cliquable, leçon et pastille « En cours » ; élève sur ordinateur (lesson_card) : la carte de la leçon, ses fiches en lignes (3 puis « Voir les N fiches ») ; enseignant : _teacher_course %>
-<%# ADR  : 0035, 0090 · UDR : 0001, 0005, 0013 (amendement du 2026-10-05 ter), 0057, 0085 (§3.3 : « Reprendre » rouvre la dernière fiche lue), XXXX écrans élève sans répétition §3.6 et §3.6 bis (exception à UDR-0013 : fiches listées sur la carte de la leçon, élève sur ordinateur seulement) · aucune liste de fiches essentielles sur les autres cartes %>
+<%# ADR  : 0035, 0090 · UDR : 0001, 0005, 0013 (amendement du 2026-10-05 ter), 0057, 0085 (§3.3 : « Reprendre » rouvre la dernière fiche lue), 0133 écrans élève sans répétition §3.6 et §3.6 bis (exception à UDR-0013 : fiches listées sur la carte de la leçon, élève sur ordinateur seulement) · aucune liste de fiches essentielles sur les autres cartes %>
 <%# locals: (course:, show_status:, student: false, lesson_card: false) -%>
 <%# UDR enseignant §3.7 : la carte de l'enseignant (lien vers la fiche de cours et ses fiches de révision) vit à part. %>
 <% teacher = !student && current_actor.teacher? %>

@@ -280,6 +280,37 @@
   object-position: 30% 50%;
 }
 
+/* Page d'accueil publique (UDR-0059 §3) — la photo des deux élèves : cadrée par le bas et un peu à droite pour garder les
+   deux visages et les deux téléphones au-dessus de la feuille ; sur ordinateur, elle occupe sa moitié d'écran à bord droit. */
+@utility home-photo {
+  width: 100%;
+  height: 100%;
+  object-position: 60% 100%;
+}
+
+/* Le macaron étoilé : 136 px sous 341 px, 146 px jusqu'à 380 px, 160 px au-delà (UDR-0059 §3, 2.) ; texte de 12 à 14 px,
+   « 6ème » de 30 à 36 px. */
+@utility home-badge {
+  width: 8.5rem;
+  height: 8.5rem;
+  font-size: var(--text-xs);
+  @media (width >= 341px) {
+    width: 9.125rem;
+    height: 9.125rem;
+  }
+  @media (width >= 381px) {
+    width: 10rem;
+    height: 10rem;
+    font-size: var(--text-sm);
+  }
+}
+@utility home-badge-grade {
+  font-size: var(--text-3xl);
+  @media (width >= 381px) {
+    font-size: var(--text-4xl);
+  }
+}
+
 /* Page à deux colonnes : le contenu, puis un panneau latéral de 20 rem (fiche d'un établissement). */
 @utility grid-cols-main-aside {
   grid-template-columns: minmax(0, 1fr) 20rem;
@@ -380,6 +411,26 @@
    de ses lignes n'est révélée ; son titre apparaît avec la première, sans JavaScript à lui. */
 @utility ui-reveal-group {
   &:not(:has(li:not([hidden]))) {
+    display: none;
+  }
+}
+
+/* Chantier crm-ecoles : « Relances ». Le vide et la liste sont tous deux rendus ; le vide s'efface dès qu'une ligne
+   `[data-follow-up]` existe, la liste dès qu'il n'en reste aucune (« Faite » ou « Réattribuer » retire la dernière). */
+@utility ui-follow-ups {
+  &:has([data-follow-up]) [data-follow-ups-empty] {
+    display: none;
+  }
+
+  &:not(:has([data-follow-up])) [data-follow-ups-list] {
+    display: none;
+  }
+}
+
+/* Chantier crm-ecoles : modale de dictée. « Noter un échange » à la main se masque quand le formulaire pré-rempli
+   (`[data-prefilled]`) est chargé dans la modale. */
+@utility ui-dictation {
+  &:has([data-prefilled]) [data-hide-if-prefilled] {
     display: none;
   }
 }

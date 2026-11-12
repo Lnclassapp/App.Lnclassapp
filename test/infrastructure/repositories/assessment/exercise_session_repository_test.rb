@@ -62,6 +62,7 @@ module Repositories
         assert_equal [ [ [ 1 ], nil, true ], [ [], "-3,5", false ], [ [], nil, false ] ],
                      @repository.attempts(session_id: started.id).map { [ it.selected_answer_ids, it.response_text, it.correct ] }
         assert_equal [ false, false, true ], Orm::QuestionAttempt.where(exercise_session_id: started.id).order(:id).pluck(:unanswered)
+        assert_equal [ false, false, true ], @repository.attempts(session_id: started.id).map(&:unanswered)
       end
 
       test "record_copy : une question sans réponse ni marque unanswered est refusée par la base" do

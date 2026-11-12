@@ -1,0 +1,27 @@
+<%# 🌐 UI · teams/crm/accounts/show — coquille du bloc « Suivi » de la fiche : section, grille, six sous-blocs en frames paresseux %>
+<%# Rôle : chaque sous-bloc est servi, rafraîchi et en erreur seul (id stable = cible des Turbo Streams) ; aucun lot ne touche le frame d'un autre %>
+<%# ADR  : 0128 (contexte crm) · UDR : 0162 (bloc « Suivi » de la fiche établissement) %>
+<% school = @school.public_id %>
+<%# Colonne de droite d'abord dans le DOM : à 390 px l'action passe avant l'historique ; dès lg, la gauche reprend la première rangée. %>
+<%= turbo_frame_tag "school_crm" do %>
+  <section aria-labelledby="school_crm_title" class="mb-8">
+    <h2 id="school_crm_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
+    <div class="grid gap-6 lg:grid-cols-3">
+      <div class="min-w-0 space-y-6 lg:col-span-1">
+        <% { school_crm_stage: teams_school_stage_path(school), school_crm_assistants: teams_school_assistant_path(school),
+             school_crm_follow_ups: teams_school_open_follow_ups_path(school), school_crm_contacts: teams_school_contacts_path(school) }.each do |id, src| %>
+          <%= turbo_frame_tag id, src:, loading: :lazy do %>
+            <%= ui_loading_state variant: :skeleton, lines: 2 %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="min-w-0 space-y-6 lg:col-span-2 lg:col-start-1 lg:row-start-1">
+        <% { school_crm_usage: teams_school_usage_path(school), school_crm_journal: teams_school_interactions_path(school) }.each do |id, src| %>
+          <%= turbo_frame_tag id, src:, loading: :lazy do %>
+            <%= ui_loading_state variant: :skeleton, lines: 2 %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>
