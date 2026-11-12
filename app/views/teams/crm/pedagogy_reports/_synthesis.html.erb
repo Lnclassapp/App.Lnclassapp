@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/pedagogy_reports/_synthesis — la synthèse prête : texte du modèle échappé, une ligne par ligne, et « Copier la synthèse » %>
 <%# Rôle : rendue par la page et par le sondage (generations#show) dans le même frame generation_<id> ; le bouton de copie ne s'imprime pas %>
-<%# UDR  : XXXX (assistants du suivi, « Rapport pédagogique ») %>
+<%# UDR  : 0160 (assistants du suivi, « Rapport pédagogique ») %>
 <%= turbo_frame_tag "generation_#{generation.public_id}" do %>
   <% lines = generation.content.to_s.lines.map(&:strip).reject(&:empty?) %>
   <div class="space-y-2">

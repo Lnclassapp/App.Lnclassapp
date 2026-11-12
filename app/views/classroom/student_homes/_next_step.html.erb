@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_next_step — la carte du prochain exercice, un état à la fois %>
 <%# Rôle : lien de classe, puis l'état (next_step/<état>) à gauche, l'icône de la matière à droite ; sans classe, « Choisis ta classe » %>
-<%# UDR  : XXXX accueil élève §3.2 (carte), §3.3 (six états), §3.7, §3.8 (section nommée par son titre) %>
+<%# UDR  : 0132 accueil élève §3.2 (carte), §3.3 (six états), §3.7, §3.8 (section nommée par son titre) %>
 <%# locals: (home:, daily:, form:, archived:, invite_href:) -%>
 <% step = home&.next_step %>
 <% state = step ? step.state : :no_classroom %>

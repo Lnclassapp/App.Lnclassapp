@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/interactions/new — modale « Noter un échange », servie dans le frame « modal » %>
 <%# Rôle : ouverte dès son arrivée depuis le journal ; un échec la re-rend en 422 avec la saisie ; le compte rendu dicté (Lot K) rend le même formulaire %>
-<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# ADR  : 0128 (contexte crm) · UDR : 0162 (bloc « Suivi » de la fiche établissement) %>
 <%= turbo_frame_tag "modal" do %>
   <%= ui_modal title: t(".title"), id: "interaction-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
     <% modal.footer do %>

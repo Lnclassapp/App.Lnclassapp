@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/accounts/show — coquille du bloc « Suivi » de la fiche : section, grille, six sous-blocs en frames paresseux %>
 <%# Rôle : chaque sous-bloc est servi, rafraîchi et en erreur seul (id stable = cible des Turbo Streams) ; aucun lot ne touche le frame d'un autre %>
-<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# ADR  : 0128 (contexte crm) · UDR : 0162 (bloc « Suivi » de la fiche établissement) %>
 <% school = @school.public_id %>
 <%# Colonne de droite d'abord dans le DOM : à 390 px l'action passe avant l'historique ; dès lg, la gauche reprend la première rangée. %>
 <%= turbo_frame_tag "school_crm" do %>

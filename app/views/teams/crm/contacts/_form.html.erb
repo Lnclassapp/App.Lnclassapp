@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/contacts/_form — ajouter un contact : nom (80), fonction, numéro (10 chiffres), note (500) %>
 <%# Rôle : formulaire de la modale « Ajouter un contact » ; erreurs sous les champs, saisie conservée %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) §Contacts %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) §Contacts %>
 <%= form_with model: @form, scope: :contact, url: teams_school_contacts_path(@school.public_id), method: :post, id: "contact-form", class: "space-y-5" do |form| %>
   <%= ui_field form, :full_name, required: true, label: t(".full_name"), maxlength: Entities::Crm::Contact::NAME_MAX, autocomplete: "off" %>
   <%= ui_field form, :position, as: :select, required: true, label: t(".position"),

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/follow_ups/_signals_panel — panneau « À relancer » de la page « Relances » %>
 <%# Rôle : mes écoles avec au moins un signal (ou toute l'équipe), tableau au bureau, cartes à 390 px, un vide %>
-<%# UDR  : XXXX (pipeline et relances) · locals: (page:, all_schools:) %>
+<%# UDR  : 0168 (pipeline et relances) · locals: (page:, all_schools:) %>
 <nav class="mb-4 flex gap-2" aria-label="<%= t("teams.crm.signals.scope_label") %>">
   <% { mine: false, all: true }.each do |key, value| %>
     <%= link_to t("teams.crm.signals.scope.#{key}"), teams_follow_ups_path(tab: "signals", scope: (key.to_s if value)),

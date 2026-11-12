@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/pedagogy_reports/_figures — les quatre chiffres : élèves actifs, devoirs donnés, taux de rendu, réussite moyenne %>
 <%# Rôle : deux colonnes à 390 px, quatre dès lg ; un chiffre inconnu s'écrit « — », jamais 0 % %>
-<%# UDR  : XXXX (assistants du suivi, « Rapport pédagogique ») %>
+<%# UDR  : 0160 (assistants du suivi, « Rapport pédagogique ») %>
 <% figures = { active: report.active_students_count, assignments: report.assignments_count,
                submission: (t(".percent", value: report.submission_rate) if report.submission_rate),
                success: (t(".percent", value: report.average_percent) if report.average_percent) } %>

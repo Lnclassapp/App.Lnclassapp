@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/interactions/create — succès : l'échange est noté %>
 <%# Rôle : toast, modale refermée, journal rechargé en tête de liste ; les relances de la fiche se rechargent si une relance a été créée %>
-<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# ADR  : 0128 (contexte crm) · UDR : 0162 (bloc « Suivi » de la fiche établissement) %>
 <%= turbo_stream_toast t(".created"), type: :success %>
 <%= turbo_stream.update "modal" %>
 <%= turbo_stream.replace "school_crm_journal", template: "teams/crm/interactions/index" %>

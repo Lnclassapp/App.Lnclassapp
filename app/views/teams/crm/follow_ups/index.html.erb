@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/follow_ups/index — page « Relances » (menu « Plus »), onglets « À relancer » (défaut), « Mes relances » et « Sans destinataire » (admin) %>
 <%# Rôle : tableau au bureau, cartes empilées à 390 px, 25 lignes par page, un vide par onglet  %>
-<%# UDR  : XXXX (pipeline et relances) %>
+<%# UDR  : 0168 (pipeline et relances) %>
 <% page_title t(".title") %>
 <% panels = { "signals" => @signals, "mine" => @mine, "orphans" => @orphans }.compact %>
 <% tab_label = ->(key) { key == "signals" ? t("teams.crm.signals.tabs.signals") : t(".tabs.#{key}") } %>

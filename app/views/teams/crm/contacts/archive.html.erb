@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/contacts/archive — confirmation « Retirer <nom> ? », lue à la demande en GET %>
 <%# Rôle : servie dans le frame « modal » depuis le menu ⋮ du contact ; le contact est archivé, ses échanges gardent son nom ; sans frame, page complète utilisable %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) §Contacts · patron de teams/schools/deactivation %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) §Contacts · patron de teams/schools/deactivation %>
 <% page_title t(".title", name: @contact.full_name) %>
 <% form_id = "archive-contact-form-#{@contact.public_id}" %>
 <% unless turbo_frame_request? %>

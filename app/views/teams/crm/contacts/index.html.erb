@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/contacts/index — sous-bloc « Contacts » de la fiche établissement %>
 <%# Rôle : le frame school_crm_contacts (cible des Turbo Streams), contacts par nom avec « Appeler » et WhatsApp ; « Ajouter un contact » en modale ; vide = état vide %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) %>
 <%= turbo_frame_tag "school_crm_contacts" do %>
   <%= ui_card title: t(".title"), heading: :h3 do |card| %>
     <% if @contacts.empty? %>

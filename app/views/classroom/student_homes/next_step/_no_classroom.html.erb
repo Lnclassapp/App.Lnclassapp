@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/next_step/_no_classroom — état 6 : l'élève sans classe active (archivée, ou retiré) : « Choisis ta classe » %>
 <%# Rôle : le champ du code de classe et « Rejoindre » ; « Je n'ai pas de code » ouvre la cascade ; son historique s'il en a un %>
-<%# UDR  : XXXX accueil élève §3.3 (état 6), 0081 (§3.5) · ADR : XXXX code de classe (§4.7) %>
+<%# UDR  : 0132 accueil élève §3.3 (état 6), 0081 (§3.5) · ADR : 0109 code de classe (§4.7) %>
 <%# locals: (home:, step:, daily:, form:, archived:, invite_href:) -%>
 <h2 id="student_next_step_title" class="font-display text-lg leading-snug font-medium text-ink"><%= t("classroom.student_homes.no_classroom.title") %></h2>
 <%= form_with model: form, scope: :student_classroom_choice, url: student_classroom_choices_path, id: "student-home-code-form", class: "space-y-3" do |f| %>

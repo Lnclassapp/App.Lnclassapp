@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/stages/_form — saisir l'étape : Prospect, Démo faite, Abonnée, Perdue (jamais Inscrite ni Active) et le motif %>
 <%# Rôle : formulaire de la modale « Changer l'étape » ; erreurs sous les champs, saisie conservée %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) %>
 <%= form_with model: stage_form, scope: :stage, url: teams_school_stage_path(@school.public_id), method: :patch, id: "crm-stage-form", class: "space-y-5" do |form| %>
   <% if stage_form.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">

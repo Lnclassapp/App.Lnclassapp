@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/follow_ups/_follow_up — une relance ouverte, en trois dispositions (layout) %>
 <%# Rôle : :school (<li> de la fiche), :row (<tr> du bureau) et :card (carte à 390 px) ; « Faite » en Turbo Stream, ⋮ « Rédiger un message » (Lot I) et « Réattribuer » en modale pour qui le peut %>
-<%# UDR  : XXXX (bloc « Suivi »), XXXX (pipeline et relances) · le badge dit « Échue » en texte, jamais la couleur seule %>
+<%# UDR  : 0162 (bloc « Suivi »), 0168 (pipeline et relances) · le badge dit « Échue » en texte, jamais la couleur seule %>
 <% today = Date.current %>
 <% due_label = if row.due_on == today then t(".today") elsif row.due_on == today + 1 then t(".tomorrow") else l(row.due_on, format: :short) end %>
 <% due = capture do %>

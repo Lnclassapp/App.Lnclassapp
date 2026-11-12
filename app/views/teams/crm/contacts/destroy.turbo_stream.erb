@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/contacts/destroy — succès du retrait %>
 <%# Rôle : toast, confirmation refermée, sous-bloc « Contacts » remplacé (le contact archivé n'y figure plus) %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) %>
 <%= turbo_stream_toast t(".done"), type: :success %>
 <%= turbo_stream.update "modal" %>
 <%= turbo_stream.replace "school_crm_contacts", template: "teams/crm/contacts/index", formats: [ :html ] %>

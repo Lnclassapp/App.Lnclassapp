@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/contacts/new — « Ajouter un contact », servie dans le frame « modal » %>
 <%# Rôle : hors frame, la même modale s'ouvre sur le shell ; échec re-rendu en 422 avec les erreurs et la saisie %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) §Contacts %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) §Contacts %>
 <%= turbo_frame_tag "modal" do %>
   <%= ui_modal title: t(".title"), id: "contact-modal", size: :md, open: true, document_title: page_title(t(".title")) do |modal| %>
     <% modal.footer do %>

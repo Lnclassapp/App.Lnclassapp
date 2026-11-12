@@ -2,7 +2,7 @@
 <%# Rôle : formulaire GET qui vise le frame « schools » : la frappe part après une pause (URL remplacée), une liste au changement %>
 <%# ADR  : 0030, 0083 · UDR : 0006, 0036, 0054, 0079 · Stimulus : search · recherche par nom ou sigle (IE-21) ; sans JavaScript, « Filtrer » %>
 <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
-<%# UDR-XXXX (pipeline et relances) : « Étape » et « Responsable » s'ajoutent après les filtres existants, pour admin/field seulement. %>
+<%# UDR-0168 (pipeline et relances) : « Étape » et « Responsable » s'ajoutent après les filtres existants, pour admin/field seulement. %>
 <% selects = {
      drena: drena_options.map { [ it.name, it.public_id ] },
      school_type: Entities::School::School::SCHOOL_TYPES.map { [ t("school_types.#{it}"), it ] },
