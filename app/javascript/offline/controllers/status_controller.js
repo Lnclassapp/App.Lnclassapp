@@ -1,7 +1,7 @@
 // ⚡ FRONT · offline-status — affiche le bandeau « Hors ligne » (page gardée) et la date où elle a été gardée
 // Rôle : visible hors ligne, ou si le programme d'arrière-plan a servi la page du cache (meta lnclass-offline-served) ; caché au retour du réseau
 // UDR  : hors-connexion §3.1 · ADR : hors-connexion §4.3
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "../controller_base.js"
 
 export default class extends Controller {
   static targets = ["text"]

@@ -1,9 +1,9 @@
 // ⚡ FRONT · offline-copy — la copie faite hors ligne : corrige sur le téléphone, range la copie en file, affiche la note PROVISOIRE
 // Rôle : au rendu, lit les champs (mêmes noms que la copie en ligne), corrige avec offline/grader.js, range { client_copy_id, started_at, submitted_at, answers, provisional_percent, pack_token } dans la base locale ; jamais une note envoyée au serveur
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4, §4.5, menace R1, R3) · UDR : hors-connexion §3.4 (stockage plein : message, jamais avalé), §3.5 (note provisoire) · contrats store.js et grader.js gelés
-import { Controller } from "@hotwired/stimulus"
-import { currentKey, getPack, listCopies, putCopy } from "../offline/store.js"
-import { gradeCopy } from "../offline/grader.js"
+import { Controller } from "../controller_base.js"
+import { currentKey, getPack, listCopies, putCopy } from "../store.js"
+import { gradeCopy } from "../grader.js"
 
 const STREAK = 3
 const PAUSE_WINDOW_MS = 30 * 60 * 1000

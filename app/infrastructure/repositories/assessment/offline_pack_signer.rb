@@ -28,7 +28,7 @@ module Repositories
                                                purpose: PURPOSE, expires_in: ENVELOPE_LIFETIME)
       end
 
-      def verify(token)
+      def verify(token:)
         payload = read(token)
         return nil if payload.nil? || expired_payload?(payload)
 
@@ -38,7 +38,7 @@ module Repositories
       end
 
       # Vrai pour un jeton authentique dont les 30 jours sont passés (verify rend alors nil) ; faux pour un jeton altéré ou valable.
-      def expired?(token)
+      def expired?(token:)
         payload = read(token)
         !payload.nil? && expired_payload?(payload)
       rescue ArgumentError, TypeError

@@ -1,10 +1,11 @@
 // hors-connexion Lot B, CA-7 : la copie rendue hors ligne est rangée en file (UUID, heures de l'appareil, réponses, note provisoire, jeton), sans note envoyée.
 // Lancer : node --test test/javascript/offline/offline_copy_controller.test.js (IndexedDB, DOM et Stimulus simulés).
+import "./stimulus_base.js"
 import { test, beforeEach } from "node:test"
 import assert from "node:assert/strict"
 import { createFakeIndexedDB } from "./fake_indexeddb.js"
 import * as store from "../../../app/javascript/offline/store.js"
-import OfflineCopyController, { parseFields, resumeAt, solutionText, resultRows } from "../../../app/javascript/controllers/offline_copy_controller.js"
+import OfflineCopyController, { parseFields, resumeAt, solutionText, resultRows } from "../../../app/javascript/offline/controllers/copy_controller.js"
 
 const KEY = "0123456789abcdef"
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/

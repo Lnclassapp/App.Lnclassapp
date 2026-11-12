@@ -1,8 +1,8 @@
 // ⚡ FRONT · offline-start — le bouton « Commencer » d'un exercice : en ligne il range le paquet de corrigé, hors ligne il mène à la copie ou se désactive
 // Rôle : en ligne, GET du paquet (même origine) rangé dans la base locale de la clé, puis la copie hors ligne est demandée une fois pour que le programme d'arrière-plan la garde ; hors ligne, paquet présent → visite de la copie, absent → bouton désactivé et message
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4) · UDR : hors-connexion §3.3 · contrat store.js gelé · sans JavaScript ou en ligne, le formulaire part tel quel
-import { Controller } from "@hotwired/stimulus"
-import { currentKey, deletePack, getPack, putPack } from "../offline/store.js"
+import { Controller } from "../controller_base.js"
+import { currentKey, deletePack, getPack, putPack } from "../store.js"
 
 const REFUSALS = [ 402, 403, 404 ]
 

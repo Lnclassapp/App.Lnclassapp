@@ -1,9 +1,9 @@
 // ⚡ FRONT · offline-queue — « N copies à envoyer », « Envoi… », copies refusées (« J'ai compris »), « Copie envoyée · N % » sur l'accueil élève
 // Rôle : lit la file de la clé de la page (jamais d'une autre) ; une copie envoyée est dite une fois puis retirée de la file ; tout texte est posé en textContent
 // UDR  : hors-connexion §3.6 · ADR : hors-connexion §4.5
-import { Controller } from "@hotwired/stimulus"
-import { currentKey, listCopies, deleteCopy, getPack } from "../offline/store.js"
-import { QUEUE_EVENT, SENDING_EVENT } from "../offline/sync.js"
+import { Controller } from "../controller_base.js"
+import { currentKey, listCopies, deleteCopy, getPack } from "../store.js"
+import { QUEUE_EVENT, SENDING_EVENT } from "../sync.js"
 
 export default class extends Controller {
   static targets = [ "pending", "pendingText", "synced", "rejected", "rejectedRow", "error" ]

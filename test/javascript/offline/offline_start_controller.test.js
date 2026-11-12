@@ -1,10 +1,11 @@
 // hors-connexion Lot B (UDR §3.3, ADR §4.4) : « Commencer » range le paquet en ligne, mène à la copie hors ligne quand le paquet est là, sinon se désactive.
 // Lancer : node --test test/javascript/offline/offline_start_controller.test.js (IndexedDB, fetch, DOM et Stimulus simulés).
+import "./stimulus_base.js"
 import { test, beforeEach } from "node:test"
 import assert from "node:assert/strict"
 import { createFakeIndexedDB } from "./fake_indexeddb.js"
 import * as store from "../../../app/javascript/offline/store.js"
-import OfflineStartController from "../../../app/javascript/controllers/offline_start_controller.js"
+import OfflineStartController from "../../../app/javascript/offline/controllers/start_controller.js"
 
 const KEY = "0123456789abcdef"
 const PACK = { exercise_public_id: "EX1", token: "jeton", digest: "0123456789abcdef", issued_at: "2026-11-12T09:00:00Z", questions: [] }
