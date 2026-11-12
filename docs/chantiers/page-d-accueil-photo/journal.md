@@ -41,7 +41,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 > Format : `- AAAA-MM-JJ · #<PR> · <ce qui change, en une phrase>`
 
-- 2026-11-12 · #PR · Une seule version de l'accueil (capture 5 du porteur) : la photo des deux élèves de la maquette, recadrée sans le filigrane et éclaircie (`students.webp`, 40 Ko), le macaron étoilé « De la 6ème à la Terminale, même sans internet » en haut à droite, les téléphones visibles au-dessus de la feuille à 320 et 390 px, la photo qui ne passe plus sous la feuille sur ordinateur ; `student.webp` et `student-portrait.webp` retirés.
+- 2026-11-12 · #547 · Une seule version de l'accueil (capture 5 du porteur) : la photo des deux élèves de la maquette, recadrée sans le filigrane et éclaircie (`students.webp`, 40 Ko), le macaron étoilé « De la 6ème à la Terminale, même sans internet » en haut à droite, les téléphones visibles au-dessus de la feuille à 320 et 390 px, la photo qui ne passe plus sous la feuille sur ordinateur ; `student.webp` et `student-portrait.webp` retirés.
 
 ## À trancher
 
