@@ -176,6 +176,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
 | [`historique-eleve`](historique-eleve/memo.md) | livré | feature | 2026-10-15 | Historique de l'élève aux couleurs Wave et Djamo |
 | [`hitl-refs-adr-obsoletes`](hitl-refs-adr-obsoletes/memo.md) | abandonné | refactoring | 2026-09-18 | En-têtes HITL citant des numéros d'ADR périmés |
+| [`hors-connexion`](hors-connexion/memo.md) | planifié | feature | 2026-11-12 | Lnclass hors connexion |
 | [`images-dans-les-cours`](images-dans-les-cours/memo.md) | livré | feature | 2026-10-10 | Des images dans les fiches de cours |
 | [`import-cours-multiple`](import-cours-multiple/memo.md) | livré | feature | 2026-09-29 | Importer plusieurs fichiers de cours en une fois |
 | [`import-drenas`](import-drenas/memo.md) | planifié | feature | 2026-09-29 | Import des DRENA par fichier |
@@ -192,6 +193,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`interface-epuree`](interface-epuree/memo.md) | planifié | feature | 2026-09-30 | Interface épurée |
 | [`interrupteur-theme`](interrupteur-theme/memo.md) | en cours | feature | 2026-10-03 | Interrupteur clair / sombre |
 | [`je-m-entraine-dans-la-fiche`](je-m-entraine-dans-la-fiche/memo.md) | livré | feature | 2026-10-30 | « Je m’entraîne » dans la fiche de révision |
+| [`lecons-1ere-2nde-debut`](lecons-1ere-2nde-debut/memo.md) | en cours | feature | 2026-11-12 | Les trois premières leçons de 1ère et de 2nde, comme Thalès |
 | [`lecons-3eme-comme-thales`](lecons-3eme-comme-thales/memo.md) | PR prête | feature | 2026-11-05 | Les leçons de 3ème préparées comme Thalès |
 | [`lecons-defauts-affichage`](lecons-defauts-affichage/memo.md) | décision | bugfix | 2026-11-02 | Leçons v3 en défaut d'affichage |
 | [`lecons-tle-a1-comme-thales`](lecons-tle-a1-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale A1 préparées comme Thalès |

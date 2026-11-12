@@ -2,7 +2,8 @@ require "test_helper"
 
 # installation-pwa, Lot A (ADR-0082 §4.1 and §4.2, UDR-0078 §3.2). CA-1: the manifest makes the site installable as
 # « Lnclass », with the brand colours of config.x.pwa and three icons that exist in public/. CA-2: the service worker is
-# JavaScript the browser revalidates at each visit, keeps only the three offline files and never stores a response.
+# JavaScript the browser revalidates at each visit. ADR-0082 §4.2 is amended by hors-connexion (ADR §4.3, Lot A): the only
+# responses it stores are the digested assets and the pages the server marks `Lnclass-Offline: keep`.
 # The offline page is static, without script, and the same for everyone: no account data, even for a signed-in student.
 class PwaTest < ActionDispatch::IntegrationTest
   OFFLINE_FILES = %w[/offline.html /offline.css /icon-192.png].freeze
@@ -63,16 +64,20 @@ class PwaTest < ActionDispatch::IntegrationTest
            "Cache-Control « #{response.headers['Cache-Control']} » laisse resservir le programme sans revalidation"
   end
 
-  test "CA-2 — the service worker keeps exactly the three offline files and never puts a response in its cache" do
+  test "CA-2 — the service worker precaches exactly the three offline files and stores a page only when the server says keep" do
     get "/service-worker.js"
 
     list = response.body[/^const OFFLINE_FILES = \[([^\]]*)\]/, 1]
 
     assert list, "constante OFFLINE_FILES introuvable"
     assert_equal OFFLINE_FILES, list.scan(/"([^"]*)"/).flatten
-    assert_no_match(/\.put\(/, response.body, "une réponse du réseau n'est jamais mise en cache (ADR-0082 §4.2)")
     assert_match(/addEventListener\("fetch"/, response.body, "Chrome n'installe qu'un site dont le programme répond aux navigations")
     assert_no_match(/addEventListener\("(push|sync)"/, response.body)
+    assert_match(/"Lnclass-Offline"/, response.body, "une page n'est gardée que sur l'en-tête du serveur (hors-connexion §4.1)")
+    assert_match(/=== "keep"/, response.body)
+    assert_match(/no-store/, response.body, "une réponse no-store n'est jamais gardée")
+    assert_match(/^const CACHE = "lnclass-offline-v[2-9]\d*"$/, response.body, "le numéro du cache augmente avec public/offline.html")
+    assert_no_match(/\bimport\b|importScripts/, response.body, "le programme reste sans dépendance et non bundlé")
   end
 
   test "CA-3 — the offline page is static French, without script, and shows no account data to a signed-in student" do
@@ -86,6 +91,7 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "Pas de connexion · Lnclass"
     assert_select "h1", text: "Pas de connexion"
     assert_select "main.offline p", text: "Lnclass a besoin d'internet pour s'ouvrir. Vérifie ton réseau ou tes données mobiles, puis réessaie."
+    assert_select "main.offline p.offline-note", text: "Les leçons et exercices que tu as déjà ouverts restent lisibles sans connexion. Celle-ci n'a pas encore été ouverte sur ce téléphone."
     assert_select "a.offline-retry[href='']", text: "Réessayer"
     assert_select "link[rel=stylesheet]", count: 1
     assert_select "link[rel=stylesheet][href='/offline.css']"

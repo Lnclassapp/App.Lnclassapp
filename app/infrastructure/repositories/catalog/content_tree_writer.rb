@@ -204,6 +204,7 @@ module Repositories
         deleted[:exercise_badges] = Orm::ExerciseBadge.where(exercise_id: exercise_ids).delete_all
         deleted[:question_attempts] = Orm::QuestionAttempt.where(exercise_session_id: session_ids).or(Orm::QuestionAttempt.where(question_id: question_ids)).delete_all
         deleted[:exercise_sessions] = Orm::ExerciseSession.where(id: session_ids).delete_all
+        deleted[:offline_pack_deliveries] = Orm::OfflinePackDelivery.where(exercise_id: exercise_ids).delete_all
         deleted[:classroom_assignments] = Orm::ClassroomAssignment.where(assignable_type: "Exercise", assignable_id: exercise_ids).delete_all
         images = Orm::QuestionImage.where(question_id: question_ids)
         deleted[:question_images] = images.count

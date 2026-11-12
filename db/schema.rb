@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -540,6 +540,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "hinted_question_ids", default: [], null: false, array: true
+    t.uuid "client_copy_id"
+    t.datetime "received_at"
     t.index ["classroom_assignment_id", "student_id"], name: "index_exercise_sessions_handed_in", where: "((status)::text = 'completed'::text)", include: ["score_percent"]
     t.index ["classroom_assignment_id"], name: "index_exercise_sessions_on_classroom_assignment_id"
     t.index ["completed_at"], name: "index_exercise_sessions_completed_on_completed_at", where: "((status)::text = 'completed'::text)", include: ["student_id", "score_percent"]
@@ -547,6 +549,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
     t.index ["knowledge_gap_id"], name: "index_exercise_sessions_on_knowledge_gap_id"
     t.index ["public_id"], name: "index_exercise_sessions_on_public_id", unique: true
     t.index ["started_at", "student_id"], name: "index_exercise_sessions_on_started_at_and_student_id"
+    t.index ["student_id", "client_copy_id"], name: "index_exercise_sessions_on_student_and_client_copy", unique: true
     t.index ["student_id", "completed_at"], name: "index_exercise_sessions_on_student_id_and_completed_at"
     t.index ["student_id", "exercise_id"], name: "index_exercise_sessions_one_started", unique: true, where: "((status)::text = 'started'::text)"
     t.check_constraint "(kind::text = 'remediation'::text) = (knowledge_gap_id IS NOT NULL)", name: "exercise_sessions_remediation_iff_gap"
@@ -778,6 +781,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
     t.check_constraint "num_nonnulls(illustration, illustration_id) = 1", name: "messages_one_illustration"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'scheduled'::character varying, 'published'::character varying, 'archived'::character varying, 'withdrawn'::character varying]::text[])", name: "messages_status_values"
     t.check_constraint "theme::text = ANY (ARRAY['ciel'::character varying, 'lagune'::character varying, 'menthe'::character varying, 'citron'::character varying, 'mangue'::character varying, 'corail'::character varying, 'hibiscus'::character varying, 'lavande'::character varying, 'indigo'::character varying, 'nuit'::character varying]::text[])", name: "messages_theme_values"
+  end
+
+  create_table "offline_pack_deliveries", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "exercise_id", null: false
+    t.datetime "first_delivered_at", null: false
+    t.datetime "last_delivered_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "index_offline_pack_deliveries_on_exercise_id"
+    t.index ["student_id", "exercise_id"], name: "index_offline_pack_deliveries_on_student_and_exercise", unique: true
   end
 
   create_table "pin_recovery_codes", force: :cascade do |t|
@@ -1334,6 +1348,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
   add_foreign_key "messages", "schools", on_delete: :restrict
   add_foreign_key "messages", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "messages", "users", column: "withdrawn_by_id", on_delete: :restrict
+  add_foreign_key "offline_pack_deliveries", "exercises", on_delete: :restrict
+  add_foreign_key "offline_pack_deliveries", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", column: "issued_by_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", on_delete: :cascade
   add_foreign_key "question_attempts", "exercise_sessions", on_delete: :restrict

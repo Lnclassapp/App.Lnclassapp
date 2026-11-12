@@ -1,10 +1,11 @@
 # 🌐 DELIVERY · ApplicationController
 # Rôle : contrôleur parent ; authentifie par défaut, traduit les résultats, signale un navigateur ancien, ferme aux moteurs tout hôte hors production, reconnaît l'app Android
-# ADR  : 0026, 0031, 0050, 0051, 0074 (amendement du 2026-10-07), 0084, 0086
+# ADR  : 0026, 0031, 0050, 0051, 0074 (amendement du 2026-10-07), 0084, 0086, hors-connexion (OfflineKeepable)
 class ApplicationController < ActionController::Base
   include Authentication
   include RendersResult
   include SecretResponse
+  include OfflineKeepable
 
   # ADR-0051 : Tailwind v4 floor, never blocking — an old browser gets the page and a banner.
   SUPPORTED_BROWSERS = { chrome: 111, safari: 16.4, firefox: 128, ie: false }.freeze

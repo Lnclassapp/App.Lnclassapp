@@ -1,6 +1,6 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
 <%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile, direction et équipe seulement) ; coque Android ou mode concentré : le contenu seul %>
-<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg) · ADR : 0084 (§4.2), 0086 (§4.2) ; exige helper_method :shell_user %>
+<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg), hors-connexion §3.1 · ADR : 0084 (§4.2), 0086 (§4.2), hors-connexion (§4.2) ; exige helper_method :shell_user %>
 <% in_app = lnclass_app? %>
 <%# UDR-0087 §3.2 : une page qui pose content_for :focus (la séance d'exercice) n'a ni en-tête, ni menus, ni barre du bas,
     pour tous les rôles ; elle rend elle-même tout son cadre, sans le conteneur de page. %>
@@ -26,8 +26,12 @@
     <%= render "shared/navigation/header", user: shell_user %>
     <%= render "shared/navigation/sidebar", user: shell_user %>
   <% end %>
+  <%# ADR hors-connexion §4.2 : les contrôleurs d'arrière-plan (clé d'appareil, envoi des copies) ; Stimulus ignore un identifiant absent. %>
+  <%= tag.div hidden: true, data: { controller: "offline-session offline-sync" } %>
   <main id="main" tabindex="-1" class="<%= class_names("focus:outline-none", "pb-28 lg:pb-12" => bottom_bar,
                                                        "pb-12" => !in_app && !focus && !bottom_bar, "lg:pl-rail" => !in_app && !focus) %>">
+    <%# UDR hors-connexion §3.1 : le bandeau « Hors ligne », premier enfant de main, pour l'élève et l'enseignant. %>
+    <%= render "shared/offline/status_banner", role: shell_user.role %>
     <% if focus %>
       <%= yield %>
     <% else %>

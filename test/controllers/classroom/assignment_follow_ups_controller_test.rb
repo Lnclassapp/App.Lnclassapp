@@ -544,4 +544,31 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
     assert_redirected_to new_session_path
   end
+
+  # hors-connexion, Lot B2 (UDR-0170 §3.8) : « Corrigé reçu avant » sur la ligne de l'élève dont une copie du devoir est rendue après la remise du corrigé ou faite hors ligne.
+  test "B2 : la ligne de l'élève porte « Corrigé reçu avant » quand sa copie est rendue après la remise du corrigé, et elle seule" do
+    delivered = Time.zone.local(2026, 10, 3, 9)
+    [ @on_time, @late.first ].each do |student|
+      Orm::OfflinePackDelivery.create!(student:, exercise: @exercise, first_delivered_at: delivered, last_delivered_at: delivered)
+    end
+    Orm::ExerciseSession.where(student_id: @on_time.id).update_all(completed_at: delivered + 1.hour)
+    Orm::ExerciseSession.where(student_id: @late.first.id).update_all(completed_at: delivered - 1.hour)
+    sign_in_as @teacher
+
+    travel_to(Time.zone.local(2026, 10, 12, 9)) { get follow_up_path }
+
+    assert_response :success
+    assert_select "span[data-pack-mark]", count: 1
+    assert_select "span[data-pack-mark]", text: I18n.t("offline.teacher.pack_before_short")
+    assert_select "span[data-pack-mark][title='#{I18n.t('offline.teacher.pack_before', delivered: I18n.l(delivered, format: :short))}']"
+    assert_select "li", text: /Jean Kouassi.*#{Regexp.escape(I18n.t('offline.teacher.pack_before_short'))}/m
+  end
+
+  test "B2 : sans remise du corrigé, aucune marque dans le suivi" do
+    sign_in_as @teacher
+
+    travel_to(Time.zone.local(2026, 10, 12, 9)) { get follow_up_path }
+
+    assert_select "span[data-pack-mark]", 0
+  end
 end

@@ -1,0 +1,3319 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Généralités sur les fonctions",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "A1",
+      "theme": "burgundy",
+      "figures": [],
+      "notions": [
+        {
+          "name": "Déterminer l'ensemble de définition d'une fonction",
+          "remember": "Une fonction $f$ associe à un réel $x$ au plus un réel $f(x)$, appelé son **image**. Si $f(a)=b$, on dit que $a$ est un **antécédent** de $b$. L'**ensemble de définition** $D_f$ est l'ensemble des réels $x$ pour lesquels $f(x)$ existe. Règles : un polynôme est défini sur $\\mathbb{R}$ ; $\\dfrac{1}{v(x)}$ exige $v(x)\\neq0$ ; $\\sqrt{u(x)}$ exige $u(x)\\geq0$. Quand il y a plusieurs conditions, $x$ doit toutes les vérifier.",
+          "method": [
+            "Repérer les opérations interdites dans l'expression de $f(x)$ : un dénominateur, une racine carrée.",
+            "Écrire les conditions : dénominateur $\\neq0$, expression sous la racine $\\geq0$.",
+            "Résoudre chaque condition dans $\\mathbb{R}$ (équation ou inéquation du premier degré).",
+            "Conclure : $D_f$ est l'ensemble des réels qui vérifient toutes les conditions, écrit avec des intervalles."
+          ],
+          "example": {
+            "statement": "Un opérateur utilise la fonction $f(x)=\\dfrac{\\sqrt{x-1}}{x-4}$ pour calculer un bonus. Déterminer son ensemble de définition.",
+            "steps": [
+              "Repérer : il y a une racine carrée, $\\sqrt{x-1}$, et un dénominateur, $x-4$.",
+              "Écrire les conditions : $x-1\\geq0$ et $x-4\\neq0$.",
+              "Résoudre : $x-1\\geq0$ donne $x\\geq1$ ; $x-4\\neq0$ donne $x\\neq4$.",
+              "Conclure : $D_f=[1\\,;4[\\,\\cup\\,]4\\,;+\\infty[$."
+            ]
+          },
+          "pitfall": "Ne pas oublier une condition quand il y en a deux. Contre-exemple : pour $f(x)=\\dfrac{\\sqrt{x}}{x-2}$, si tu ne gardes que $x\\geq0$, tu crois que $2$ est dans $D_f$ ; or $f(2)=\\dfrac{\\sqrt2}{0}$ n'existe pas. Garde toutes les conditions, puis retiens les nombres qui les vérifient toutes en même temps.",
+          "figure": null,
+          "practice": {
+            "statement": "Léa étudie quelques fonctions utilisées par un opérateur téléphonique.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=\\dfrac{300}{x-4}$, la valeur interdite est $x=$ ___. Pour $g(x)=\\sqrt{x-9}$, il faut $x\\geq$ ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $f$ a un dénominateur, $g$ a une racine. Étape 2 — Écrire les conditions : $x-4\\neq0$ pour $f$, $x-9\\geq0$ pour $g$. Étape 3 — Résoudre : $x\\neq4$ et $x\\geq9$. Étape 4 — Conclure : la valeur interdite est $4$ et il faut $x\\geq9$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour le dénominateur, cherche la valeur qui l'annule ; pour la racine, l'expression doit être positive ou nulle."
+              },
+              {
+                "content": "Pour que $\\sqrt{u(x)}$ existe, il faut que $u(x)$ soit ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Écrire les conditions : une racine carrée n'existe que pour un nombre positif ou nul. « Différent de $0$ » est la condition d'un dénominateur, pas d'une racine. « Inférieur ou égal à $0$ » inverse l'inégalité : $\\sqrt{-4}$ n'existe pas.",
+                "answers": [
+                  {
+                    "content": "supérieur ou égal à 0",
+                    "correct": true
+                  },
+                  {
+                    "content": "différent de 0",
+                    "correct": false
+                  },
+                  {
+                    "content": "inférieur ou égal à 0",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=2x+1$. Quel est l'antécédent de $9$ par $f$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Un antécédent de $9$ est un $x$ tel que $f(x)=9$. On résout $2x+1=9$, donc $2x=8$ et $x=4$. Vérification : $f(4)=9$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "Résous l'équation $2x+1=9$."
+              },
+              {
+                "content": "Pour $f(x)=3x+5$, le réel $f(2)=11$ s'appelle l'image de $2$.",
+                "question_type": "true_false",
+                "explanation": "L'image de $2$ est $f(2)=3\\times2+5=11$ : l'affirmation est vraie. Le nombre $2$ est l'antécédent de $11$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Déterminer des ensembles de définition avec la méthode",
+              "statement": "Dans cet exercice, tu détermines l'ensemble de définition de fonctions rencontrées avec un téléphone et un service de mobile money, avec les quatre étapes de la méthode.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une application de transfert d'argent utilise la fonction $f(x)=\\dfrac{4\\,000}{x-3}$. Quel est son ensemble de définition $D_f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il y a un dénominateur, $x-3$, et aucune racine carrée. Étape 2 — Écrire les conditions : $x-3\\neq0$. Étape 3 — Résoudre : $x\\neq3$. Étape 4 — Conclure : $D_f$ est l'ensemble des réels différents de $3$, soit $]-\\infty\\,;3[\\,\\cup\\,]3\\,;+\\infty[$. $[3\\,;+\\infty[$ et $]3\\,;+\\infty[$ confondent le dénominateur avec une racine carrée : ici, $x=2$ convient très bien ($f(2)=-4\\,000$). $\\mathbb{R}$ oublie que $x=3$ annule le dénominateur.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;3[\\,\\cup\\,]3\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[3\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un opérateur calcule un indice avec $f(x)=\\sqrt{x-4}$. Quel est son ensemble de définition ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il y a une racine carrée, $\\sqrt{x-4}$, et pas de dénominateur. Étape 2 — Écrire les conditions : l'expression sous la racine doit vérifier $x-4\\geq0$. Étape 3 — Résoudre : $x\\geq4$. Étape 4 — Conclure : $D_f=[4\\,;+\\infty[$. $]4\\,;+\\infty[$ exclut $4$ à tort : $\\sqrt{0}=0$ existe, donc $4\\in D_f$. $]-\\infty\\,;4]$ inverse l'inégalité. $\\mathbb{R}\\setminus\\{4\\}$ traite la racine comme un dénominateur.",
+                  "answers": [
+                    {
+                      "content": "$[4\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]4\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}\\setminus\\{4\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x)=\\dfrac{1}{x-6}$, quelle est la seule valeur de $x$ qui n'appartient pas à $D_f$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : il y a un dénominateur, $x-6$. Étape 2 — Écrire les conditions : $x-6\\neq0$. Étape 3 — Résoudre : $x\\neq6$. Étape 4 — Conclure : $D_f=\\mathbb{R}\\setminus\\{6\\}$, donc la valeur interdite est $6$. La valeur $-6$ serait celle de $\\frac{1}{x+6}$ : on cherche ce qui annule $x-6$, c'est-à-dire $x=6$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un agent mobile money utilise $f(x)=\\dfrac{\\sqrt{x+3}}{x-1}$. Quel est son ensemble de définition ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il y a une racine carrée, $\\sqrt{x+3}$, et un dénominateur, $x-1$. Étape 2 — Écrire les conditions : $x+3\\geq0$ et $x-1\\neq0$. Étape 3 — Résoudre : $x\\geq-3$ et $x\\neq1$. Étape 4 — Conclure : $D_f=[-3\\,;1[\\,\\cup\\,]1\\,;+\\infty[$. $[-3\\,;+\\infty[$ oublie le dénominateur : $f(1)$ n'existe pas. $\\mathbb{R}\\setminus\\{1\\}$ oublie la racine : $f(-5)$ n'existe pas. $]-3\\,;1[\\,\\cup\\,]1\\,;+\\infty[$ exclut $-3$ à tort, car $\\sqrt{0}=0$ existe.",
+                  "answers": [
+                    {
+                      "content": "$[-3\\,;1[\\,\\cup\\,]1\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-3\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}\\setminus\\{1\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;1[\\,\\cup\\,]1\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=\\dfrac{\\sqrt{x-2}}{x-5}$. Quels sont les deux nombres, parmi ceux proposés, qui appartiennent à $D_f$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : une racine carrée $\\sqrt{x-2}$ et un dénominateur $x-5$. Étape 2 — Écrire les conditions : $x-2\\geq0$ et $x-5\\neq0$. Étape 3 — Résoudre : $x\\geq2$ et $x\\neq5$. Étape 4 — Conclure : $D_f=[2\\,;5[\\,\\cup\\,]5\\,;+\\infty[$. Donc $2$ et $6$ conviennent. $1$ et $0$ sont plus petits que $2$ : $x-2<0$, la racine n'existe pas. $5$ annule le dénominateur.",
+                  "answers": [
+                    {
+                      "content": "$x=2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x)=\\dfrac{\\sqrt{x}}{x-2}$, on a $D_f=[0\\,;+\\infty[$. Cette affirmation est-elle vraie ?",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : une racine carrée $\\sqrt{x}$ et un dénominateur $x-2$. Étape 2 — Écrire les conditions : $x\\geq0$ et $x-2\\neq0$. Étape 3 — Résoudre : $x\\geq0$ et $x\\neq2$. Étape 4 — Conclure : $D_f=[0\\,;2[\\,\\cup\\,]2\\,;+\\infty[$. L'affirmation est fausse : elle oublie la condition du dénominateur. Contre-exemple : $f(2)=\\frac{\\sqrt2}{0}$ n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Déterminer des ensembles de définition avec la méthode",
+              "statement": "Dans cet exercice, tu détermines l'ensemble de définition de fonctions avec les étapes de la fiche : repérer les opérations interdites, écrire les conditions, les résoudre, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche d'abord ce qui est interdit : une division par $0$, une racine carrée d'un nombre négatif. Écris une condition pour chaque interdit, puis garde les $x$ qui les vérifient toutes.",
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble de définition de la fonction $f$ définie par $f(x) = \\dfrac{1}{x - 3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il y a un dénominateur, $x - 3$. Étape 2 — Écrire les conditions : $x - 3 \\neq 0$. Étape 3 — Résoudre : $x \\neq 3$. Étape 4 — Conclure : $D_f = ]-\\infty\\,;\\,3[ \\cup ]3\\,;\\,+\\infty[$. Dire que $D_f = \\mathbb{R}$ oublie la condition du dénominateur : $f(3) = \\dfrac{1}{0}$ n'existe pas. Les intervalles $[3\\,;\\,+\\infty[$ et $]-\\infty\\,;\\,3[$ ne gardent qu'un seul côté de $3$, alors que tous les réels différents de $3$ conviennent.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,3[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble de définition de la fonction $f$ définie par $f(x) = \\sqrt{x + 2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il y a une racine carrée, $\\sqrt{x + 2}$. Étape 2 — Écrire les conditions : $x + 2 \\geq 0$. Étape 3 — Résoudre : $x \\geq -2$. Étape 4 — Conclure : $D_f = [-2\\,;\\,+\\infty[$. Le crochet est fermé en $-2$ car $f(-2) = \\sqrt{0} = 0$ existe. Les intervalles $[2\\,;\\,+\\infty[$ et $]-\\infty\\,;\\,-2]$ viennent d'une erreur de signe ou de sens.",
+                  "answers": [
+                    {
+                      "content": "$[-2\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-2]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ est définie par $f(x) = \\sqrt{3x - 12}$. Quelle est la plus petite valeur de $x$ dans son ensemble de définition ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : il y a une racine carrée, $\\sqrt{3x - 12}$. Étape 2 — Écrire les conditions : $3x - 12 \\geq 0$. Étape 3 — Résoudre : $3x \\geq 12$, donc $x \\geq 4$. Étape 4 — Conclure : $D_f = [4\\,;\\,+\\infty[$, dont la plus petite valeur est $4$ (pour $x = 4$, $f(4) = \\sqrt{0} = 0$ existe).",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ définie par $f(x) = x^2 + 5x$ a pour ensemble de définition $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : il n'y a ni dénominateur ni racine carrée, car $x^2 + 5x$ est un polynôme. Étape 2 — Écrire les conditions : il n'y en a aucune. Étape 3 — Résoudre : rien à résoudre. Étape 4 — Conclure : $D_f = \\mathbb{R}$. L'affirmation est vraie : un polynôme est défini sur $\\mathbb{R}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : la fonction $f$ définie par $f(x) = \\dfrac{5}{x + 4}$ n'est pas définie pour $x = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : il y a un dénominateur, $x + 4$. Étape 2 — Écrire les conditions : $x + 4 \\neq 0$. Étape 3 — Résoudre : $x \\neq -4$. Étape 4 — Conclure : $D_f = \\mathbb{R} \\setminus \\{-4\\}$, donc $f$ n'existe pas pour $x = -4$ car $\\dfrac{5}{0}$ est impossible.",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ est définie par $f(x) = \\dfrac{\\sqrt{x}}{x - 2}$. Quels nombres n'appartiennent pas à son ensemble de définition ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : il y a une racine carrée, $\\sqrt{x}$, et un dénominateur, $x - 2$. Étape 2 — Écrire les conditions : $x \\geq 0$ et $x - 2 \\neq 0$. Étape 3 — Résoudre : $x \\geq 0$ et $x \\neq 2$. Étape 4 — Conclure : $D_f = [0\\,;\\,2[ \\cup ]2\\,;\\,+\\infty[$. Le nombre $-1$ est exclu par la racine, le nombre $2$ par le dénominateur. Les nombres $0$, $1$ et $5$ vérifient les deux conditions : $f(0) = 0$, $f(1) = -1$ et $f(5) = \\dfrac{\\sqrt{5}}{3}$ existent.",
+                  "answers": [
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Étudier la parité d'une fonction",
+          "remember": "Une fonction $f$ est **paire** si son ensemble de définition $D_f$ est symétrique par rapport à $0$ (si $x\\in D_f$, alors $-x\\in D_f$) et si $f(-x)=f(x)$ pour tout $x\\in D_f$ : sa courbe est symétrique par rapport à l'axe des ordonnées. Elle est **impaire** si $D_f$ est symétrique et si $f(-x)=-f(x)$ : sa courbe est symétrique par rapport à l'origine. Une fonction peut n'être ni paire ni impaire.",
+          "method": [
+            "Vérifier que $D_f$ est symétrique par rapport à $0$ : si $x\\in D_f$, alors $-x\\in D_f$.",
+            "Calculer $f(-x)$ en remplaçant $x$ par $-x$ dans l'expression.",
+            "Comparer $f(-x)$ à $f(x)$ et à $-f(x)$.",
+            "Conclure : paire, impaire, ou ni l'une ni l'autre, puis donner la symétrie de la courbe."
+          ],
+          "example": {
+            "statement": "Étudier la parité de $f(x)=2x^3-x$.",
+            "steps": [
+              "Vérifier : $D_f=\\mathbb{R}$, donc si $x\\in D_f$, alors $-x\\in D_f$ : $D_f$ est symétrique par rapport à $0$.",
+              "Calculer : $f(-x)=2(-x)^3-(-x)=-2x^3+x$.",
+              "Comparer : $-2x^3+x=-(2x^3-x)=-f(x)$.",
+              "Conclure : $f$ est impaire ; sa courbe est symétrique par rapport à l'origine."
+            ]
+          },
+          "pitfall": "Ne pas oublier de vérifier d'abord que l'ensemble de définition est symétrique. Contre-exemple : $f(x)=x^2$ sur $[0\\,;+\\infty[$ donne $f(-x)=x^2=f(x)$ quand on calcule sans réfléchir ; pourtant $2\\in D_f$ et $-2\\notin D_f$, donc $f$ n'est ni paire ni impaire. Commence toujours par l'ensemble de définition.",
+          "figure": null,
+          "practice": {
+            "statement": "Moussa compare des fonctions qui décrivent des frais d'envoi d'argent.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=x^2$, calcule $f(3)=$ ___ et $f(-3)=$ ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer : $f(3)=3^2=9$ et $f(-3)=(-3)^2=9$. Étape 3 — Comparer : $f(-3)=f(3)$, ce qui est le signe d'une fonction paire.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un nombre négatif au carré est positif."
+              },
+              {
+                "content": "La fonction $f(x)=x^3$ est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Calculer : $f(-x)=(-x)^3=-x^3$. Étape 3 — Comparer : $f(-x)=-f(x)$. Étape 4 — Conclure : $f$ est impaire. Elle n'est pas paire : $f(-1)=-1$ et $f(1)=1$ sont différents.",
+                "answers": [
+                  {
+                    "content": "impaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "paire",
+                    "correct": false
+                  },
+                  {
+                    "content": "ni paire ni impaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'ensemble $[-5\\,;5]$ est symétrique par rapport à $0$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : si $x$ est dans $[-5\\,;5]$, alors $-x$ y est aussi (par exemple $3$ et $-3$). L'ensemble est symétrique par rapport à $0$ : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Étudier la parité de fonctions avec la méthode",
+              "statement": "Dans cet exercice, tu étudies la parité de fonctions simples avec les quatre étapes de la méthode : vérifier, calculer, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un opérateur modélise un coût par $f(x)=x^2+5$. Que peut-on dire de la parité de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$, symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=(-x)^2+5=x^2+5$. Étape 3 — Comparer : $f(-x)=f(x)$. Étape 4 — Conclure : $f$ est paire, sa courbe est symétrique par rapport à l'axe des ordonnées. « Impaire » demanderait $f(-x)=-f(x)=-x^2-5$, ce qui est faux. « Ni paire ni impaire » est faux puisque $f(-x)=f(x)$. « À la fois paire et impaire » est faux : $f(1)=6$ n'est pas égal à $-6$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est paire",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est ni paire ni impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est à la fois paire et impaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=x^3+x$. Que peut-on dire de la parité de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$, symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=(-x)^3+(-x)=-x^3-x$. Étape 3 — Comparer : $-x^3-x=-(x^3+x)=-f(x)$. Étape 4 — Conclure : $f$ est impaire, sa courbe est symétrique par rapport à l'origine. Elle n'est pas paire : $f(1)=2$ et $f(-1)=-2$ sont différents ; la présence de puissances de $x$ ne rend pas une fonction paire. Elle n'est donc pas « ni paire ni impaire » : elle est impaire.",
+                  "answers": [
+                    {
+                      "content": "$f$ est impaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est paire",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est ni paire ni impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est paire car $x^3+x$ contient des puissances de $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=x^2+x$. Que peut-on dire de la parité de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$, symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=(-x)^2+(-x)=x^2-x$. Étape 3 — Comparer : $x^2-x$ est différent de $f(x)=x^2+x$ et de $-f(x)=-x^2-x$. Étape 4 — Conclure : ni paire ni impaire. Contre-exemple : $f(1)=2$, $f(-1)=0$ : on n'a ni $f(-1)=f(1)$, ni $f(-1)=-f(1)$. Un seul terme pair ($x^2$) ne rend pas toute la fonction paire.",
+                  "answers": [
+                    {
+                      "content": "$f$ n'est ni paire ni impaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est paire",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est paire car $x^2$ est pair",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=\\sqrt{x}$. Que peut-on dire de la parité de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $D_f=[0\\,;+\\infty[$. Le nombre $4$ est dans $D_f$ mais $-4$ n'y est pas : $D_f$ n'est pas symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)$ n'existe pas pour $x>0$. Étape 3 — Comparer : la comparaison est impossible. Étape 4 — Conclure : ni paire ni impaire. On peut conclure, grâce à la première étape seule.",
+                  "answers": [
+                    {
+                      "content": "$f$ n'est ni paire ni impaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est paire",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $g$ est impaire et $g(3)=-7$. Quelle est la valeur de $g(-3)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $g$ est impaire, donc son ensemble de définition est symétrique et contient $3$ et $-3$. Étape 2 — Calculer : on cherche $g(-3)$. Étape 3 — Comparer : pour une fonction impaire, $g(-x)=-g(x)$. Étape 4 — Conclure : $g(-3)=-g(3)=-(-7)=7$. Écrire $-7$ confond avec une fonction paire, pour laquelle $g(-3)=g(3)$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les fonctions suivantes, définies sur $\\mathbb{R}$, lesquelles sont paires ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : toutes ont $D_f=\\mathbb{R}$, symétrique. Étape 2 — Calculer $f(-x)$ : $(-x)^2+1=x^2+1$ et $(-x)^4-3=x^4-3$. Étape 3 — Comparer : ces deux résultats sont égaux à $f(x)$. Étape 4 — Conclure : $x^2+1$ et $x^4-3$ sont paires. $x^3$ donne $-x^3=-f(x)$ : elle est impaire. $2x+1$ donne $-2x+1$ : ni paire ni impaire. $x^2+x$ donne $x^2-x$ : ni paire ni impaire.",
+                  "answers": [
+                    {
+                      "content": "$f(x)=x^2+1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x)=x^4-3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x)=x^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x)=2x+1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x)=x^2+x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x)=x^2$ définie seulement sur $[0\\,;+\\infty[$ est paire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $D_f=[0\\,;+\\infty[$. Le nombre $2$ est dans $D_f$ mais $-2$ n'y est pas : $D_f$ n'est pas symétrique par rapport à $0$. Étape 2 — Calculer : $f(-2)$ n'existe pas. Étape 4 — Conclure : $f$ n'est ni paire ni impaire, même si $(-x)^2=x^2$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Étudier la parité de fonctions avec la méthode",
+              "statement": "Dans cet exercice, tu étudies la parité de fonctions avec les étapes de la fiche : vérifier l'ensemble de définition, calculer $f(-x)$, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Commence par vérifier que si $x$ est dans $D_f$, alors $-x$ y est aussi. Remplace $x$ par $-x$, puis compare avec $f(x)$ et avec $-f(x)$.",
+              "questions": [
+                {
+                  "content": "Quelle est la parité de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = x^2 + 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $D_f = \\mathbb{R}$ est symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x) = (-x)^2 + 3 = x^2 + 3$. Étape 3 — Comparer : $f(-x) = f(x)$. Étape 4 — Conclure : $f$ est paire, et sa courbe est symétrique par rapport à l'axe des ordonnées. Elle n'est pas impaire : $-f(x) = -x^2 - 3$ est différent de $f(-x)$.",
+                  "answers": [
+                    {
+                      "content": "Paire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni paire ni impaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = 3x^3 + x$ est impaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $D_f = \\mathbb{R}$ est symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x) = 3(-x)^3 + (-x) = -3x^3 - x$. Étape 3 — Comparer : $-3x^3 - x = -(3x^3 + x) = -f(x)$. Étape 4 — Conclure : $f$ est impaire, et sa courbe est symétrique par rapport à l'origine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction impaire $f$ vérifie $f(2) = 5$. Quelle est la valeur de $f(-2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $f$ est impaire, donc son ensemble de définition est symétrique et $-2$ y appartient puisque $2$ y appartient. Étape 2 — Calculer : $f(-2)$ est à relier à $f(2)$. Étape 3 — Comparer : pour une fonction impaire, $f(-x) = -f(x)$, donc $f(-2) = -f(2) = -5$. Étape 4 — Conclure : $f(-2) = -5$. Répondre $5$ serait traiter $f$ comme une fonction paire.",
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : la courbe d'une fonction paire est symétrique par rapport à ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : $f$ est paire, donc $D_f$ est symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x) = f(x)$, donc les points $(x\\,;\\,f(x))$ et $(-x\\,;\\,f(x))$ sont sur la courbe. Étape 3 — Comparer : ils ont la même ordonnée et des abscisses opposées. Étape 4 — Conclure : la courbe est symétrique par rapport à l'axe des ordonnées. La symétrie par rapport à l'origine est celle des fonctions impaires.",
+                  "answers": [
+                    {
+                      "content": "l'axe des ordonnées",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'origine",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'axe des abscisses",
+                      "correct": false
+                    },
+                    {
+                      "content": "la droite $y = x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète avec « paire » ou « impaire » : pour $f(x) = 2x^2 - 3$ sur $\\mathbb{R}$, on obtient $f(-x) = f(x)$, donc $f$ est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : $D_f = \\mathbb{R}$ est symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x) = 2(-x)^2 - 3 = 2x^2 - 3$. Étape 3 — Comparer : $f(-x) = f(x)$. Étape 4 — Conclure : $f$ est paire.",
+                  "answers": [
+                    {
+                      "content": "paire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles fonctions définies sur $\\mathbb{R}$ sont paires ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : $D_f = \\mathbb{R}$ dans les cinq cas. Étape 2 — Calculer $f(-x)$ : $(-x)^4 + 2 = x^4 + 2$ ; $5(-x)^2 - (-x)^4 = 5x^2 - x^4$ ; $(-x)^3 = -x^3$ ; $(-x)^2 + (-x) = x^2 - x$ ; $(-x)^3 + (-x) = -x^3 - x$. Étape 3 — Comparer : $x^4 + 2$ et $5x^2 - x^4$ donnent $f(-x) = f(x)$. Étape 4 — Conclure : seules $x^4 + 2$ et $5x^2 - x^4$ sont paires. $x^3$ et $x^3 + x$ sont impaires ; $x^2 + x$ n'est ni paire ni impaire.",
+                  "answers": [
+                    {
+                      "content": "$f(x) = x^4 + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x) = 5x^2 - x^4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x) = x^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x) = x^2 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x) = x^3 + x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Étudier le sens de variation et les extremums",
+          "remember": "Soit $I$ un intervalle inclus dans $D_f$. $f$ est **croissante** sur $I$ si, pour tous $a< b$ de $I$, $f(a)\\leq f(b)$ ; elle est **décroissante** si $f(a)\\geq f(b)$. Elle est **strictement** croissante (ou décroissante) si l'inégalité est stricte. Le **maximum** (ou **minimum**) de $f$ sur $I$ est la plus grande (ou la plus petite) valeur de $f$ sur $I$, atteinte en un point de $I$.",
+          "method": [
+            "Choisir deux réels $a< b$ dans l'intervalle $I$ étudié.",
+            "Calculer la différence $f(b)-f(a)$ et la factoriser.",
+            "Étudier le signe de cette différence, d'après le signe de chaque facteur sur $I$.",
+            "Conclure : sens de variation de $f$ sur $I$ (différence positive : croissante ; négative : décroissante), puis en déduire les extremums."
+          ],
+          "example": {
+            "statement": "Étudier le sens de variation de $f(x)=x^2-4x$ sur $[2\\,;+\\infty[$ et donner son minimum.",
+            "steps": [
+              "Choisir : soient $a< b$ dans $[2\\,;+\\infty[$.",
+              "Calculer la différence : $f(b)-f(a)=(b^2-a^2)-4(b-a)=(b-a)(b+a-4)$.",
+              "Étudier le signe : $b-a>0$ ; et $a\\geq2$, $b>2$ donnent $a+b>4$, donc $b+a-4>0$ ; le produit est positif.",
+              "Conclure : $f(b)>f(a)$, donc $f$ est strictement croissante sur $[2\\,;+\\infty[$ ; son minimum est $f(2)=4-8=-4$, atteint en $x=2$."
+            ]
+          },
+          "pitfall": "Ne pas conclure sur quelques valeurs seulement. Contre-exemple : $f(x)=(x-3)^2$ donne $f(3)=0< f(4)=1< f(5)=4$, mais $f(1)=4>f(3)=0$ : $f$ n'est pas croissante sur $[1\\,;5]$. Pour prouver une variation, compare $f(a)$ et $f(b)$ pour tous les $a< b$ de l'intervalle.",
+          "figure": null,
+          "practice": {
+            "statement": "Aya suit le prix d'un forfait selon le nombre de gigaoctets achetés.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=3x+1$, calcule $f(1)=$ ___ et $f(2)=$ ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : $a=1$ et $b=2$. Étape 2 — Calculer : $f(1)=3+1=4$ et $f(2)=6+1=7$. Étape 3 — Étudier le signe : $f(2)-f(1)=3>0$. Étape 4 — Conclure : les valeurs augmentent, ce qui va avec une fonction croissante.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Remplace $x$ par $1$, puis par $2$."
+              },
+              {
+                "content": "Si $f(b)-f(a)>0$ pour tous $a< b$ d'un intervalle, alors $f$ est ___ sur cet intervalle.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Étudier le signe : une différence positive signifie $f(b)>f(a)$ quand $b>a$, donc $f$ est croissante. Décroissante demanderait une différence négative ; constante, une différence nulle.",
+                "answers": [
+                  {
+                    "content": "croissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "décroissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^2$ sur $[0\\,;+\\infty[$, croissante. Quel est son minimum sur $[0\\,;+\\infty[$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Conclure : $f$ est croissante, donc sa plus petite valeur est atteinte au début de l'intervalle, en $x=0$ : $f(0)=0$.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une fonction croissante est la plus petite à gauche de l'intervalle."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Étudier un sens de variation avec la méthode",
+              "statement": "Dans cet exercice, tu étudies le sens de variation de fonctions simples et tu en déduis leurs extremums, avec les quatre étapes de la méthode.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un opérateur facture un forfait selon $f(x)=3x+2$ (en centaines de FCFA). Quel est le sens de variation de $f$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : soient $a< b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b)-f(a)=(3b+2)-(3a+2)=3(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $3>0$, donc la différence est positive. Étape 4 — Conclure : $f(b)>f(a)$, $f$ est strictement croissante sur $\\mathbb{R}$. « Décroissante » correspondrait à un coefficient négatif. « Constante » demanderait une différence nulle. « Croissante puis décroissante » est exclu : la différence $3(b-a)$ est positive pour tous les $a< b$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est strictement croissante",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est strictement décroissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante puis décroissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solde diminue selon $f(x)=-2x+5$. Quel est le sens de variation de $f$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : soient $a< b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b)-f(a)=(-2b+5)-(-2a+5)=-2(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $-2<0$, donc la différence est négative. Étape 4 — Conclure : $f(b)< f(a)$, $f$ est strictement décroissante. « Croissante » oublie le signe de $-2$. « Constante » demanderait une différence nulle, or $-2(b-a)\\neq0$. On peut conclure par le calcul de la différence.",
+                  "answers": [
+                    {
+                      "content": "$f$ est strictement décroissante",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est strictement croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=x^2$ sur l'intervalle $[0\\,;+\\infty[$. Quel est son sens de variation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : soient $0\\leq a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=b^2-a^2=(b-a)(b+a)$. Étape 3 — Étudier le signe : $b-a>0$ et $b+a>0$ car $b>0$ et $a\\geq0$, donc le produit est positif. Étape 4 — Conclure : $f$ est strictement croissante sur $[0\\,;+\\infty[$. « Décroissante » et « constante » sont contredites par $f(1)=1< f(2)=4$. « D'abord croissante puis décroissante » est exclu : la différence est positive pour tous les $a< b$ de l'intervalle.",
+                  "answers": [
+                    {
+                      "content": "$f$ est strictement croissante sur $[0\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est strictement décroissante sur $[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est constante sur $[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est d'abord croissante puis décroissante sur $[0\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x)=x^2-2x$ sur $[1\\,;+\\infty[$. On montre que $f$ y est strictement croissante. Quel est son minimum sur $[1\\,;+\\infty[$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : soient $1\\leq a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=(b-a)(b+a-2)$. Étape 3 — Étudier le signe : $b-a>0$ et $a+b>2$, donc la différence est positive. Étape 4 — Conclure : $f$ est strictement croissante ; son minimum est atteint en $x=1$ : $f(1)=1-2=-1$. La valeur $0$ serait celle de $f(2)$ : le minimum est la plus petite valeur, atteinte en $x=1$.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x)=-x^2$ sur $[0\\,;+\\infty[$. On a $f(b)-f(a)=-(b-a)(b+a)$ pour $0\\leq a< b$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir : $0\\leq a< b$. Étape 2 — Calculer la différence : $-(b-a)(b+a)$. Étape 3 — Étudier le signe : $b-a>0$ et $b+a>0$, donc la différence est négative. Étape 4 — Conclure : $f$ est strictement décroissante, son maximum est $f(0)=0$. « Croissante » est faux. « Minimum $0$ » est faux : $f(2)=-4$ est plus petit. $f(2)=-4$ et $f(1)=-1$ : $f(2)>f(1)$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$f$ est strictement décroissante sur $[0\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ a pour maximum $0$, atteint en $x=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est strictement croissante sur $[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ a pour minimum $0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(2)>f(1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x)=(x-1)^2$. On a $f(1)=0$, $f(2)=1$ et $f(3)=4$. Donc $f$ est croissante sur $[0\\,;3]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : on prend $a=0$ et $b=1$. Étape 2 — Calculer la différence : $f(1)-f(0)=0-1=-1$. Étape 3 — Étudier le signe : elle est négative, alors que $0<1$. Étape 4 — Conclure : $f$ n'est pas croissante sur $[0\\,;3]$. Trois valeurs qui augmentent ne suffisent pas ; il faut comparer tous les $a< b$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Étudier un sens de variation avec la méthode",
+              "statement": "Dans cet exercice, tu étudies le sens de variation de fonctions avec les étapes de la fiche : choisir $a < b$, calculer $f(b) - f(a)$, étudier son signe, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Choisis $a < b$, calcule $f(b) - f(a)$ et factorise-la. Un produit positif donne une fonction croissante ; un produit négatif, une fonction décroissante.",
+              "questions": [
+                {
+                  "content": "Quel est le sens de variation de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = 3x + 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : soient $a < b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b) - f(a) = (3b + 1) - (3a + 1) = 3(b - a)$. Étape 3 — Étudier le signe : $3 > 0$ et $b - a > 0$, donc le produit est positif. Étape 4 — Conclure : $f(b) > f(a)$, donc $f$ est strictement croissante sur $\\mathbb{R}$. Elle n'est ni décroissante ni constante : $f(0) = 1$ et $f(1) = 4$.",
+                  "answers": [
+                    {
+                      "content": "Strictement croissante sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement décroissante sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Constante sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = -2x + 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : soient $a < b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b) - f(a) = (-2b + 5) - (-2a + 5) = -2(b - a)$. Étape 3 — Étudier le signe : $-2 < 0$ et $b - a > 0$, donc le produit est négatif. Étape 4 — Conclure : $f(b) < f(a)$, donc $f$ est strictement décroissante sur $\\mathbb{R}$. Croire qu'elle croît parce que $5$ est positif est une erreur : c'est le signe du coefficient de $x$ qui compte.",
+                  "answers": [
+                    {
+                      "content": "Strictement décroissante sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Constante sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ est définie sur $[3\\,;\\,+\\infty[$ par $f(x) = x^2 - 6x$. Elle est croissante sur cet intervalle. Quel est son minimum ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : soient $3 \\leq a < b$. Étape 2 — Calculer la différence : $f(b) - f(a) = (b - a)(b + a - 6)$. Étape 3 — Étudier le signe : $b - a > 0$ et $a + b > 6$, donc $b + a - 6 > 0$ et le produit est positif. Étape 4 — Conclure : $f$ est croissante sur $[3\\,;\\,+\\infty[$, donc son minimum est atteint en $x = 3$ : $f(3) = 9 - 18 = -9$.",
+                  "answers": [
+                    {
+                      "content": "-9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ définie sur $[0\\,;\\,+\\infty[$ par $f(x) = -x^2 + 9$ est décroissante sur cet intervalle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : soient $0 \\leq a < b$. Étape 2 — Calculer la différence : $f(b) - f(a) = -(b^2 - a^2) = -(b - a)(b + a)$. Étape 3 — Étudier le signe : $b - a > 0$ et $b + a > 0$, donc $-(b - a)(b + a) < 0$. Étape 4 — Conclure : $f(b) < f(a)$, donc $f$ est décroissante sur $[0\\,;\\,+\\infty[$, et son maximum est $f(0) = 9$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète avec « croissante » ou « décroissante » : la fonction $f$ définie sur $]-\\infty\\,;\\,0]$ par $f(x) = x^2$ est ___ sur cet intervalle.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Choisir : soient $a < b \\leq 0$. Étape 2 — Calculer la différence : $f(b) - f(a) = b^2 - a^2 = (b - a)(b + a)$. Étape 3 — Étudier le signe : $b - a > 0$ et $b + a < 0$ car $a$ et $b$ sont négatifs, donc le produit est négatif. Étape 4 — Conclure : $f(b) < f(a)$, donc $f$ est décroissante. Vérification : $f(-3) = 9 > f(-1) = 1$.",
+                  "answers": [
+                    {
+                      "content": "décroissante",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour montrer que $f(x) = x^2 + 2$ est croissante sur $[0\\,;\\,+\\infty[$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Choisir : on fixe $a < b$ dans l'intervalle. Étape 2 — Calculer la différence $f(b) - f(a)$ et la factoriser. Étape 3 — Étudier le signe de chaque facteur. Étape 4 — Conclure seulement à la fin. On ne peut pas conclure sans avoir étudié le signe de la différence.",
+                  "answers": [
+                    {
+                      "content": "Choisir : soient $a$ et $b$ avec $0 \\leq a < b$."
+                    },
+                    {
+                      "content": "Calculer la différence : $f(b) - f(a) = b^2 - a^2 = (b - a)(b + a)$."
+                    },
+                    {
+                      "content": "Étudier le signe : $b - a > 0$ et $b + a > 0$, donc le produit est positif."
+                    },
+                    {
+                      "content": "Conclure : $f(b) > f(a)$, donc $f$ est croissante sur $[0\\,;\\,+\\infty[$."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Opérer sur des fonctions et les composer",
+          "remember": "Pour deux fonctions $f$ et $g$ : $(f+g)(x)=f(x)+g(x)$ et $(f\\times g)(x)=f(x)\\times g(x)$ sont définies sur $D_f\\cap D_g$ ; le quotient $\\left(\\dfrac fg\\right)(x)=\\dfrac{f(x)}{g(x)}$ l'est en plus avec $g(x)\\neq0$. La **composée** $g\\circ f$ est la fonction $x\\mapsto g(f(x))$ : on calcule $f$ d'abord, puis $g$. Elle est définie pour les $x\\in D_f$ tels que $f(x)\\in D_g$. En général, $g\\circ f\\neq f\\circ g$.",
+          "method": [
+            "Identifier les fonctions $f$ et $g$ avec leurs ensembles de définition, et l'opération demandée (somme, produit, quotient ou composée $g\\circ f$).",
+            "Calculer l'expression : pour $g\\circ f$, remplacer $x$ par $f(x)$ dans $g$.",
+            "Déterminer l'ensemble de définition : $D_f\\cap D_g$ pour une somme ou un produit, avec $g(x)\\neq0$ pour un quotient, et $x\\in D_f$ avec $f(x)\\in D_g$ pour une composée.",
+            "Conclure : écrire l'expression obtenue et son ensemble de définition."
+          ],
+          "example": {
+            "statement": "On donne $f(x)=x-5$ et $g(x)=\\sqrt{x}$. Déterminer $g\\circ f(x)$ et son ensemble de définition.",
+            "steps": [
+              "Identifier : $f$ agit d'abord, avec $D_f=\\mathbb{R}$ ; $g$ agit ensuite, avec $D_g=[0\\,;+\\infty[$ ; l'opération est la composée $g\\circ f$.",
+              "Calculer : $g(f(x))=\\sqrt{f(x)}=\\sqrt{x-5}$.",
+              "Déterminer : $x\\in\\mathbb{R}$ et $f(x)\\in[0\\,;+\\infty[$, soit $x-5\\geq0$, donc $x\\geq5$.",
+              "Conclure : $g\\circ f(x)=\\sqrt{x-5}$ et $D_{g\\circ f}=[5\\,;+\\infty[$."
+            ]
+          },
+          "pitfall": "Ne pas inverser l'ordre : $g\\circ f$ n'est pas $f\\circ g$. Contre-exemple : avec $f(x)=x+2$ et $g(x)=3x$, on a $g\\circ f(1)=g(3)=9$ mais $f\\circ g(1)=f(3)=5$. Dans $g\\circ f$, c'est $f$ qui agit en premier.",
+          "figure": null,
+          "practice": {
+            "statement": "Karim compose des fonctions qui décrivent le prix d'un crédit téléphonique.",
+            "questions": [
+              {
+                "content": "On donne $f(x)=x+1$ et $g(x)=2x$. Calcule $g\\circ f(2)=$ ___ et $f\\circ g(2)=$ ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $g\\circ f$ calcule $f$ d'abord, $f\\circ g$ calcule $g$ d'abord. Étape 2 — Calculer : $g\\circ f(2)=g(3)=6$ et $f\\circ g(2)=f(4)=5$. Étape 4 — Conclure : $6\\neq5$, l'ordre compte.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Calcule d'abord la fonction de droite, puis celle de gauche."
+              },
+              {
+                "content": "Pour deux fonctions $f$ et $g$, $(f+g)(x)=f(x)$ ___ $g(x)$.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : la somme de deux fonctions additionne leurs images. « × » est le produit $(f\\times g)(x)$. « ∘ » est la composée, qui applique $g$ à $f(x)$.",
+                "answers": [
+                  {
+                    "content": "+",
+                    "correct": true
+                  },
+                  {
+                    "content": "×",
+                    "correct": false
+                  },
+                  {
+                    "content": "∘",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour $f(x)=x-1$ et $g(x)=\\dfrac1x$, le quotient $\\dfrac gf$ est défini en $x=1$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Déterminer l'ensemble de définition : pour $\\frac gf$, il faut $f(x)\\neq0$. Or $f(1)=0$ ; la fonction $\\frac gf$ n'est pas définie en $1$ : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Opérer sur des fonctions et les composer avec la méthode",
+              "statement": "Dans cet exercice, tu calcules des sommes, des produits, des quotients et des composées de fonctions, avec les quatre étapes de la méthode.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "On donne $f(x)=2x+1$ et $g(x)=x^2$. Quelle est l'expression de $(f+g)(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $f(x)=2x+1$, $g(x)=x^2$, l'opération est la somme. Étape 2 — Calculer l'expression : $(f+g)(x)=f(x)+g(x)=2x+1+x^2=x^2+2x+1$. Étape 3 — Déterminer l'ensemble de définition : $D_f\\cap D_g=\\mathbb{R}$. Étape 4 — Conclure : $(f+g)(x)=x^2+2x+1$ sur $\\mathbb{R}$. $2x^3+x^2$ est le produit, pas la somme. $2x^3+1$ multiplie $2x$ par $x^2$ au lieu d'ajouter $x^2$. $2x^2+2x+1$ compte $x^2$ deux fois.",
+                  "answers": [
+                    {
+                      "content": "$x^2+2x+1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^3+x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^3+1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2+2x+1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=2x+1$ et $g(x)=x^2$. Quelle est l'expression de $(f\\times g)(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $f(x)=2x+1$, $g(x)=x^2$, l'opération est le produit. Étape 2 — Calculer l'expression : $(f\\times g)(x)=(2x+1)\\times x^2=2x^3+x^2$. Étape 3 — Déterminer l'ensemble de définition : $\\mathbb{R}$. Étape 4 — Conclure : $(f\\times g)(x)=2x^3+x^2$. $x^2+2x+1$ est la somme. $2x^3+1$ oublie de multiplier le $1$ par $x^2$. $2x^2+1$ multiplie $2x$ par $x$ au lieu de $x^2$ et oublie aussi $1\\times x^2$.",
+                  "answers": [
+                    {
+                      "content": "$2x^3+x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2+2x+1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^3+1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2+1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=2x+1$ et $g(x)=x^2$. Calcule $g\\circ f(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : la composée $g\\circ f$ calcule $f$ d'abord, puis $g$. Étape 2 — Calculer l'expression : $g\\circ f(1)=g(f(1))$, avec $f(1)=2\\times1+1=3$ puis $g(3)=3^2=9$. Étape 3 — Déterminer l'ensemble de définition : $1\\in D_f$ et $f(1)=3\\in D_g$. Étape 4 — Conclure : $g\\circ f(1)=9$. La valeur $3$ est seulement $f(1)$ ; la valeur $1$ serait $g(1)$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=x-3$ et $g(x)=\\sqrt{x}$. Quel est l'ensemble de définition de $g\\circ f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $f$ agit d'abord ($D_f=\\mathbb{R}$), puis $g$ ($D_g=[0\\,;+\\infty[$). Étape 2 — Calculer l'expression : $g\\circ f(x)=\\sqrt{x-3}$. Étape 3 — Déterminer l'ensemble de définition : il faut $x\\in D_f$ et $f(x)\\in D_g$, soit $x-3\\geq0$, donc $x\\geq3$. Étape 4 — Conclure : $D_{g\\circ f}=[3\\,;+\\infty[$. $[0\\,;+\\infty[$ est $D_g$ seulement. $]3\\,;+\\infty[$ exclut $3$ à tort. $\\mathbb{R}$ est $D_f$.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x)=x+1$ et $g(x)=x-2$. Quel est l'ensemble de définition du quotient $\\dfrac fg$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'opération est le quotient $\\frac fg$ ; $D_f=D_g=\\mathbb{R}$. Étape 2 — Calculer l'expression : $\\frac{f(x)}{g(x)}=\\frac{x+1}{x-2}$. Étape 3 — Déterminer l'ensemble de définition : $x\\in D_f\\cap D_g$ avec $g(x)\\neq0$, donc $x-2\\neq0$ et $x\\neq2$. Étape 4 — Conclure : $\\mathbb{R}\\setminus\\{2\\}$. $\\mathbb{R}$ oublie la condition $g(x)\\neq0$. $\\mathbb{R}\\setminus\\{-1\\}$ annule le numérateur, non le dénominateur. $[2\\,;+\\infty[$ traite le dénominateur comme une racine carrée : $x=0$ convient pourtant, car $\\frac{0+1}{0-2}=-\\frac12$ existe.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{R}\\setminus\\{2\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}\\setminus\\{-1\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x)=x+2$ et $g(x)=3x$, on a $g\\circ f(1)=f\\circ g(1)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $g\\circ f$ calcule $f$ d'abord ; $f\\circ g$ calcule $g$ d'abord. Étape 2 — Calculer : $g\\circ f(1)=g(3)=9$ et $f\\circ g(1)=f(3)=5$. Étape 4 — Conclure : $9\\neq5$, l'affirmation est fausse. En général, $g\\circ f$ et $f\\circ g$ sont différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Opérer sur des fonctions et les composer avec la méthode",
+              "statement": "Dans cet exercice, tu opères sur des fonctions et tu les composes avec les étapes de la fiche : identifier, calculer l'expression, déterminer l'ensemble de définition, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour $g \\circ f$, calcule $f$ d'abord puis $g$. L'ensemble de définition d'une composée demande $x \\in D_f$ et $f(x) \\in D_g$ ; celui d'un quotient demande $g(x) \\neq 0$.",
+              "questions": [
+                {
+                  "content": "On donne $f(x) = x + 1$ et $g(x) = x^2$. Quelle est l'expression de $g \\circ f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $f$ agit d'abord ($f(x) = x + 1$), puis $g$ ($g(x) = x^2$) ; l'opération est la composée $g \\circ f$. Étape 2 — Calculer : on remplace $x$ par $f(x)$ dans $g$, soit $g(f(x)) = (x + 1)^2$. Étape 3 — Déterminer : les deux fonctions sont définies sur $\\mathbb{R}$, donc $D_{g \\circ f} = \\mathbb{R}$. Étape 4 — Conclure : $g \\circ f(x) = (x + 1)^2$. La proposition $x^2 + 1$ est $f \\circ g$ : l'ordre est inversé. Les propositions $x^2 + x$ et $x^2 + x + 1$ oublient le double produit du carré.",
+                  "answers": [
+                    {
+                      "content": "$(x + 1)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + x + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x) = 2x + 3$ et $g(x) = x^2$. Quelle est la valeur de $g \\circ f(1)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $f$ agit d'abord, puis $g$ ; l'opération est $g \\circ f$. Étape 2 — Calculer : $g(f(1)) = g(2 \\times 1 + 3) = g(5) = 5^2$. Étape 3 — Déterminer : les deux fonctions sont définies sur $\\mathbb{R}$, donc $1$ convient. Étape 4 — Conclure : $g \\circ f(1) = 25$. Calculer $f(g(1)) = f(1) = 5$ serait inverser l'ordre.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x + 2$ et $g(x) = 3x$, on a $g \\circ f = f \\circ g$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $f(x) = x + 2$ et $g(x) = 3x$. Étape 2 — Calculer : $g \\circ f(x) = g(x + 2) = 3(x + 2) = 3x + 6$, et $f \\circ g(x) = f(3x) = 3x + 2$. Étape 3 — Déterminer : les deux sont définies sur $\\mathbb{R}$. Étape 4 — Conclure : $3x + 6 \\neq 3x + 2$, donc $g \\circ f \\neq f \\circ g$. En général, l'ordre de la composée compte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : pour $f(x) = x - 1$ et $g(x) = \\sqrt{x}$, l'ensemble de définition de $g \\circ f$ est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : $f$ agit d'abord ($D_f = \\mathbb{R}$), puis $g$ ($D_g = [0\\,;\\,+\\infty[$). Étape 2 — Calculer : $g \\circ f(x) = \\sqrt{x - 1}$. Étape 3 — Déterminer : il faut $f(x) \\in D_g$, soit $x - 1 \\geq 0$, donc $x \\geq 1$. Étape 4 — Conclure : $D_{g \\circ f} = [1\\,;\\,+\\infty[$. L'intervalle $[0\\,;\\,+\\infty[$ est $D_g$, pas celui de la composée. L'intervalle $]1\\,;\\,+\\infty[$ exclut $1$, où $\\sqrt{0} = 0$ existe. L'ensemble $\\mathbb{R}$ oublie la racine.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : pour $f(x) = x^2$ et $g(x) = 3x$, la somme $f + g$ vérifie $(f + g)(2) = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : l'opération est la somme $f + g$, avec $(f + g)(x) = f(x) + g(x)$. Étape 2 — Calculer : $(f + g)(2) = 2^2 + 3 \\times 2 = 4 + 6$. Étape 3 — Déterminer : $f$ et $g$ sont définies sur $\\mathbb{R}$, donc $2$ convient. Étape 4 — Conclure : $(f + g)(2) = 10$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x) = x^2 + 1$ et $g(x) = x^2 - 4$. Quels nombres n'appartiennent pas à l'ensemble de définition du quotient $\\dfrac{f}{g}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : l'opération est le quotient $\\dfrac{f}{g}$, avec $D_f = D_g = \\mathbb{R}$. Étape 2 — Calculer : $\\dfrac{f}{g}(x) = \\dfrac{x^2 + 1}{x^2 - 4}$. Étape 3 — Déterminer : il faut $g(x) \\neq 0$, soit $x^2 - 4 \\neq 0$, donc $x \\neq 2$ et $x \\neq -2$. Étape 4 — Conclure : $D_{f/g} = \\mathbb{R} \\setminus \\{-2\\,;\\,2\\}$. Les nombres $0$, $1$ et $4$ donnent $g(0) = -4$, $g(1) = -3$ et $g(4) = 12$, non nuls : ils appartiennent à l'ensemble de définition.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le coût d'un appel téléphonique",
+          "statement": "Un opérateur facture chaque appel avec des frais de connexion fixes et un prix par minute. Tu étudies la fonction qui donne le coût d'un appel selon sa durée.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un opérateur facture un appel de $x$ minutes par $f(x)=30x+200$ (en FCFA), dont $200$ FCFA de frais de connexion. Calcule le coût d'un appel de $5$ minutes.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer la formule : le coût de $x$ minutes est $f(x)=30x+200$. Étape 2 — Remplacer $x$ par $5$ : $f(5)=30\\times5+200$. Étape 3 — Calculer : $150+200=350$. Conclusion : l'appel coûte $350$ FCFA. Le nombre $150$ oublie les frais de connexion de $200$ FCFA.",
+              "answers": [
+                {
+                  "content": "350",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Un opérateur facture un appel de $x$ minutes par $f(x)=30x+200$ (en FCFA). Un appel a coûté $500$ FCFA. Quelle est sa durée ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on cherche l'antécédent de $500$, c'est-à-dire $x$ tel que $f(x)=500$. Étape 2 — Écrire l'équation : $30x+200=500$. Étape 3 — Résoudre : $30x=300$, donc $x=10$. Conclusion : l'appel a duré $10$ minutes. Vérification : $30\\times10+200=500$.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "min"
+            },
+            {
+              "content": "Un opérateur facture un appel de $x$ minutes par $f(x)=30x+200$ (en FCFA), pour $x\\geq0$. Quel est le sens de variation de $f$ sur $[0\\,;+\\infty[$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : soient $0\\leq a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=30b+200-30a-200=30(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $30>0$, donc la différence est positive. Étape 4 — Conclure : $f$ est strictement croissante : plus l'appel est long, plus il coûte. « Décroissante » est contredit par $f(5)=350>f(2)=260$. « Constante » demanderait un prix indépendant de la durée. « D'abord croissante puis décroissante » est exclu : $30(b-a)>0$ pour tous les $a< b$.",
+              "answers": [
+                {
+                  "content": "$f$ est strictement croissante",
+                  "correct": true
+                },
+                {
+                  "content": "$f$ est strictement décroissante",
+                  "correct": false
+                },
+                {
+                  "content": "$f$ est constante",
+                  "correct": false
+                },
+                {
+                  "content": "$f$ est d'abord croissante puis décroissante",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un opérateur facture un appel de $x$ minutes par $f(x)=30x+200$ (en FCFA), pour $x\\geq0$. Quel est le coût minimal d'un appel ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 à 3 — La fonction $f$ est strictement croissante sur $[0\\,;+\\infty[$ (différence $f(b)-f(a)=30(b-a)>0$). Étape 4 — Conclure : son minimum est atteint au début de l'intervalle, en $x=0$ : $f(0)=30\\times0+200=200$. Le coût minimal est $200$ FCFA, les frais de connexion seuls.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "La fonction $f(x)=30x+200$, définie sur $\\mathbb{R}$, est impaire.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$ est symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=-30x+200$. Étape 3 — Comparer : $-30x+200$ est différent de $f(x)=30x+200$ et de $-f(x)=-30x-200$. Étape 4 — Conclure : $f$ n'est ni paire ni impaire. Contre-exemple : $f(-1)=170$, alors que $-f(1)=-230$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est l'ensemble de définition de l'expression $f(x)=30x+200$, vue comme une fonction de $x$ réel ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'expression est un polynôme, sans dénominateur ni racine carrée. Étape 2 — Écrire les conditions : aucune. Étape 3 — Résoudre : rien à résoudre. Étape 4 — Conclure : $D_f=\\mathbb{R}$. $[0\\,;+\\infty[$ est le domaine du contexte (une durée est positive), pas celui de l'expression. $\\mathbb{R}\\setminus\\{0\\}$ et $]0\\,;+\\infty[$ imaginent un dénominateur qui n'existe pas.",
+              "answers": [
+                {
+                  "content": "$\\mathbb{R}$",
+                  "correct": true
+                },
+                {
+                  "content": "$[0\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{R}\\setminus\\{0\\}$",
+                  "correct": false
+                },
+                {
+                  "content": "$]0\\,;+\\infty[$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le prix moyen d'un forfait internet",
+          "statement": "Un forfait internet a un abonnement fixe et un prix par gigaoctet. Tu étudies le prix moyen par Go selon le nombre de Go achetés.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un forfait coûte $1\\,000$ FCFA d'abonnement plus $500$ FCFA par Go. Pour $x$ Go, le prix moyen par Go est $m(x)=\\dfrac{500x+1\\,000}{x}$. Quel est l'ensemble de définition de l'expression $m(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : il y a un dénominateur, $x$. Étape 2 — Écrire les conditions : $x\\neq0$. Étape 3 — Résoudre : $x\\neq0$. Étape 4 — Conclure : $D_m=]-\\infty\\,;0[\\,\\cup\\,]0\\,;+\\infty[$. $\\mathbb{R}$ oublie que $x=0$ annule le dénominateur. $[0\\,;+\\infty[$ garde $0$ et inclut seulement les positifs. $]-\\infty\\,;0]$ garde $0$ à tort.",
+              "answers": [
+                {
+                  "content": "$]-\\infty\\,;0[\\,\\cup\\,]0\\,;+\\infty[$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathbb{R}$",
+                  "correct": false
+                },
+                {
+                  "content": "$[0\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$]-\\infty\\,;0]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un forfait coûte $1\\,000$ FCFA d'abonnement plus $500$ FCFA par Go. Pour $x$ Go, le prix moyen par Go est $m(x)=\\dfrac{500x+1\\,000}{x}$ (en FCFA). Calcule $m(2)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer la formule : $m(x)=\\frac{500x+1\\,000}{x}$. Étape 2 — Remplacer $x$ par $2$ : $m(2)=\\frac{500\\times2+1\\,000}{2}$. Étape 3 — Calculer : $\\frac{1\\,000+1\\,000}{2}=1\\,000$. Conclusion : le prix moyen est de $1\\,000$ FCFA par Go. Le nombre $2\\,000$ est le prix total, non le prix moyen.",
+              "answers": [
+                {
+                  "content": "1000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Un forfait coûte $1\\,000$ FCFA d'abonnement plus $500$ FCFA par Go. Pour $x$ Go, le prix moyen par Go est $m(x)=\\dfrac{500x+1\\,000}{x}$ (en FCFA). Calcule $m(4)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer la formule : $m(x)=\\frac{500x+1\\,000}{x}$. Étape 2 — Remplacer $x$ par $4$ : $m(4)=\\frac{500\\times4+1\\,000}{4}$. Étape 3 — Calculer : $\\frac{2\\,000+1\\,000}{4}=\\frac{3\\,000}{4}=750$. Conclusion : le prix moyen est de $750$ FCFA par Go. On remarque qu'il baisse quand on achète plus de Go.",
+              "answers": [
+                {
+                  "content": "750",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Pour $x$ Go, le prix moyen par Go est $m(x)=\\dfrac{500x+1\\,000}{x}$ (en FCFA). Pour quel nombre de Go $x$ a-t-on $m(x)=600$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on cherche l'antécédent de $600$, avec $x\\neq0$. Étape 2 — Écrire l'équation : $\\frac{500x+1\\,000}{x}=600$, donc $500x+1\\,000=600x$. Étape 3 — Résoudre : $1\\,000=100x$, donc $x=10$. Conclusion : $x=10$ Go, valeur différente de $0$, donc acceptable. Vérification : $m(10)=\\frac{6\\,000}{10}=600$.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "Go"
+            },
+            {
+              "content": "Pour $x>0$, on a $m(x)=\\dfrac{500x+1\\,000}{x}=500+\\dfrac{1\\,000}{x}$. Pour $0< a< b$, on admet $m(b)-m(a)=1\\,000\\left(\\dfrac1b-\\dfrac1a\\right)=\\dfrac{1\\,000(a-b)}{ab}$. Quel est le sens de variation de $m$ sur $]0\\,;+\\infty[$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : soient $0< a< b$. Étape 2 — Calculer la différence : $m(b)-m(a)=\\frac{1\\,000(a-b)}{ab}$. Étape 3 — Étudier le signe : $1\\,000>0$, $ab>0$ et $a-b<0$, donc la différence est négative. Étape 4 — Conclure : $m(b)< m(a)$, $m$ est strictement décroissante sur $]0\\,;+\\infty[$ : le prix moyen baisse quand on achète plus. Cela est confirmé par $m(2)=1\\,000>m(4)=750$. « Croissante » ignore le signe de $a-b$. « Constante » demanderait une différence nulle et « croissante puis décroissante » un changement de signe : or la différence est négative pour tous les $0< a< b$.",
+              "answers": [
+                {
+                  "content": "$m$ est strictement décroissante",
+                  "correct": true
+                },
+                {
+                  "content": "$m$ est strictement croissante",
+                  "correct": false
+                },
+                {
+                  "content": "$m$ est constante",
+                  "correct": false
+                },
+                {
+                  "content": "$m$ est croissante puis décroissante",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $m(x)=\\dfrac{500x+1\\,000}{x}$ pour $x\\neq0$, avec $m(1)=1\\,500$ et $m(-1)=-500$. Que peut-on dire de la parité de $m$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Vérifier : $D_m=\\mathbb{R}\\setminus\\{0\\}$ est symétrique par rapport à $0$. Étape 2 — Calculer : $m(-1)=\\frac{-500+1\\,000}{-1}=-500$. Étape 3 — Comparer : $m(-1)=-500$ n'est égal ni à $m(1)=1\\,500$ (pas paire), ni à $-m(1)=-1\\,500$ (pas impaire). Étape 4 — Conclure : ni paire ni impaire. Un seul contre-exemple suffit pour l'affirmer.",
+              "answers": [
+                {
+                  "content": "$m$ n'est ni paire ni impaire",
+                  "correct": true
+                },
+                {
+                  "content": "$m$ est paire",
+                  "correct": false
+                },
+                {
+                  "content": "$m$ est impaire",
+                  "correct": false
+                },
+                {
+                  "content": "$m$ est paire et impaire",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le gain d'un agent de dépôt",
+          "statement": "Un agent de mobile money note son gain selon le nombre d'heures d'ouverture. Tu étudies la fonction qui modélise ce gain, ses variations et son maximum.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA) pour $x$ heures d'ouverture, avec $0\\leq x\\leq8$. Calcule $G(2)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer la formule : $G(x)=-x^2+8x$. Étape 2 — Remplacer $x$ par $2$ : $G(2)=-2^2+8\\times2$. Étape 3 — Calculer : $-4+16=12$. Conclusion : $G(2)=12$ milliers de FCFA, soit $12\\,000$ FCFA. Attention : $-2^2$ vaut $-4$, pas $4$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA) pour $x$ heures d'ouverture, avec $0\\leq x\\leq8$. Quelles sont les deux valeurs de $x$ pour lesquelles $G(x)=0$ ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : on cherche les antécédents de $0$. Étape 2 — Écrire l'équation : $-x^2+8x=0$, soit $x(8-x)=0$. Étape 3 — Résoudre : un produit est nul si l'un des facteurs est nul, donc $x=0$ ou $x=8$. Conclusion : $x=0$ et $x=8$. Contrôle des autres : $G(4)=16$, $G(2)=12$ et $G(16)=-256+128=-128$, qui ne sont pas nuls.",
+              "answers": [
+                {
+                  "content": "$x=0$",
+                  "correct": true
+                },
+                {
+                  "content": "$x=8$",
+                  "correct": true
+                },
+                {
+                  "content": "$x=4$",
+                  "correct": false
+                },
+                {
+                  "content": "$x=2$",
+                  "correct": false
+                },
+                {
+                  "content": "$x=16$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA) pour $x\\in[0\\,;8]$. Pour $0\\leq a< b\\leq4$, on a $G(b)-G(a)=(b-a)(8-a-b)$. Quel est le sens de variation de $G$ sur $[0\\,;4]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : soient $0\\leq a< b\\leq4$. Étape 2 — Calculer la différence : $G(b)-G(a)=(b-a)(8-a-b)$. Étape 3 — Étudier le signe : $b-a>0$, et $a< b\\leq4$ donne $a+b<8$, donc $8-a-b>0$ ; le produit est positif. Étape 4 — Conclure : $G$ est strictement croissante sur $[0\\,;4]$. Vérification : $G(2)=12< G(4)=16$, ce qui exclut « décroissante » et « constante ». On peut conclure grâce au signe des deux facteurs.",
+              "answers": [
+                {
+                  "content": "$G$ est strictement croissante",
+                  "correct": true
+                },
+                {
+                  "content": "$G$ est strictement décroissante",
+                  "correct": false
+                },
+                {
+                  "content": "$G$ est constante",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas conclure",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA) pour $x\\in[0\\,;8]$. Pour $4\\leq a< b\\leq8$, on a $G(b)-G(a)=(b-a)(8-a-b)$. Quel est le sens de variation de $G$ sur $[4\\,;8]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : soient $4\\leq a< b\\leq8$. Étape 2 — Calculer la différence : $(b-a)(8-a-b)$. Étape 3 — Étudier le signe : $b-a>0$, et $a\\geq4$, $b>4$ donnent $a+b>8$, donc $8-a-b<0$ ; le produit est négatif. Étape 4 — Conclure : $G$ est strictement décroissante sur $[4\\,;8]$. Vérification : $G(4)=16>G(6)=12$. « Croissante » et « constante » sont faux : le gain baisse après $4$ heures ($G(6)=12< G(4)$). « Croissante puis décroissante » décrit $[0\\,;8]$ tout entier, pas $[4\\,;8]$.",
+              "answers": [
+                {
+                  "content": "$G$ est strictement décroissante",
+                  "correct": true
+                },
+                {
+                  "content": "$G$ est strictement croissante",
+                  "correct": false
+                },
+                {
+                  "content": "$G$ est constante",
+                  "correct": false
+                },
+                {
+                  "content": "$G$ est croissante puis décroissante",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA) pour $x\\in[0\\,;8]$. La fonction $G$ est strictement croissante sur $[0\\,;4]$ puis strictement décroissante sur $[4\\,;8]$. Quel est son maximum ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 à 3 — Le sens de variation est donné : la fonction monte jusqu'à $x=4$ puis redescend. Étape 4 — Conclure : le maximum est atteint en $x=4$ : $G(4)=-16+32=16$. Le gain maximal est de $16$ milliers de FCFA, soit $16\\,000$ FCFA, pour $4$ heures d'ouverture. La valeur $G(8)=0$ est la plus petite sur $[4\\,;8]$, non le maximum.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La fonction $G(x)=-x^2+8x$, définie sur $\\mathbb{R}$, est paire.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Vérifier : $D_G=\\mathbb{R}$ est symétrique. Étape 2 — Calculer : $G(-x)=-x^2-8x$. Étape 3 — Comparer : $-x^2-8x$ est différent de $G(x)=-x^2+8x$. Étape 4 — Conclure : $G$ n'est pas paire. Contre-exemple : $G(1)=7$ et $G(-1)=-9$. Elle n'est pas impaire non plus, car $-G(1)=-7\\neq G(-1)$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA). Démontre que $G$ est strictement croissante sur $[0\\,;4]$ : choisis $0\\leq a< b\\leq4$, calcule $G(b)-G(a)$, factorise, étudie le signe et conclus.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Calculer correctement G(b) − G(a) = −(b² − a²) + 8(b − a)",
+                "Factoriser en (b − a)(8 − a − b)",
+                "Justifier le signe de chaque facteur (b − a > 0 et a + b < 8)",
+                "Conclure que G est strictement croissante sur [0 ; 4]"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Choisir : soient $a< b$ dans $[0\\,;4]$. Étape 2 — Calculer la différence : $G(b)-G(a)=-b^2+8b+a^2-8a=-(b-a)(b+a)+8(b-a)=(b-a)(8-a-b)$. Étape 3 — Étudier le signe : $b-a>0$ ; comme $a< b\\leq4$, on a $a+b<8$, donc $8-a-b>0$ ; le produit est positif. Étape 4 — Conclure : $G(b)>G(a)$, donc $G$ est strictement croissante sur $[0\\,;4]$. Barème : 1 point pour le calcul et la factorisation, 1 point pour l'étude du signe, 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "Soient $a< b$ dans $[0 ; 4]$. Alors $G(b)-G(a)=$"
+            }
+          ]
+        },
+        {
+          "title": "Une recharge avec bonus",
+          "statement": "Un opérateur offre un bonus lors d'une recharge, puis convertit le crédit en minutes d'appel. Tu composes les fonctions qui décrivent ces étapes.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pour une recharge de $x$ FCFA, un opérateur offre $500$ FCFA de bonus : le crédit obtenu est $f(x)=x+500$ (en FCFA). Calcule le crédit obtenu pour une recharge de $2\\,000$ FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier la fonction : $f(x)=x+500$. Étape 2 — Calculer : $f(2\\,000)=2\\,000+500=2\\,500$. Conclusion : le crédit obtenu est de $2\\,500$ FCFA. Le nombre $2\\,000$ oublie le bonus.",
+              "answers": [
+                {
+                  "content": "2500",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Une recharge de $x$ FCFA donne le crédit $f(x)=x+500$ ; un crédit $c$ permet $g(c)=\\dfrac{c}{25}$ minutes d'appel. Calcule $g\\circ f(4\\,500)$, le nombre de minutes obtenues avec une recharge de $4\\,500$ FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : $g\\circ f$ calcule $f$ d'abord, puis $g$. Étape 2 — Calculer l'expression : $f(4\\,500)=4\\,500+500=5\\,000$, puis $g(5\\,000)=\\frac{5\\,000}{25}=200$. Étape 3 — Déterminer l'ensemble de définition : $x=4\\,500\\in D_f$ et $f(x)\\in D_g$. Étape 4 — Conclure : $g\\circ f(4\\,500)=200$ minutes. Calculer $g$ puis $f$ donnerait $\\frac{4\\,500}{25}+500=680$, qui est $f\\circ g(4\\,500)$ : c'est l'ordre inverse.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ],
+              "unit": "min"
+            },
+            {
+              "content": "Un opérateur calcule l'indice $h(c)=\\sqrt{c-1\\,000}$ pour un crédit $c$ en FCFA. Quel est l'ensemble de définition de $h$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : une racine carrée, $\\sqrt{c-1\\,000}$. Étape 2 — Écrire les conditions : $c-1\\,000\\geq0$. Étape 3 — Résoudre : $c\\geq1\\,000$. Étape 4 — Conclure : $D_h=[1\\,000\\,;+\\infty[$. $]1\\,000\\,;+\\infty[$ exclut $1\\,000$ à tort : $\\sqrt0=0$ existe. $[0\\,;+\\infty[$ est le domaine de $\\sqrt{c}$, pas de $\\sqrt{c-1\\,000}$. $]-\\infty\\,;1\\,000]$ inverse l'inégalité.",
+              "answers": [
+                {
+                  "content": "$[1\\,000\\,;+\\infty[$",
+                  "correct": true
+                },
+                {
+                  "content": "$]1\\,000\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[0\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$]-\\infty\\,;1\\,000]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une recharge de $x$ FCFA donne le crédit $f(x)=x+500$ ; l'indice d'un crédit $c$ est $h(c)=\\sqrt{c-1\\,000}$. Quelle est l'expression de $h\\circ f(x)$ et son ensemble de définition ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $f$ agit d'abord ($D_f=\\mathbb{R}$), puis $h$ ($D_h=[1\\,000\\,;+\\infty[$). Étape 2 — Calculer l'expression : $h(f(x))=\\sqrt{x+500-1\\,000}=\\sqrt{x-500}$. Étape 3 — Déterminer l'ensemble de définition : il faut $f(x)\\in D_h$, soit $x+500\\geq1\\,000$, donc $x\\geq500$. Étape 4 — Conclure : $\\sqrt{x-500}$ sur $[500\\,;+\\infty[$. La proposition avec $[1\\,000\\,;+\\infty[$ confond $D_h$ et $D_{h\\circ f}$. La proposition avec $+500$ hors de la racine place $f$ après $h$. La proposition avec $1\\,500$ ajoute au lieu de soustraire.",
+              "answers": [
+                {
+                  "content": "$h\\circ f(x)=\\sqrt{x-500}$ sur $[500\\,;+\\infty[$",
+                  "correct": true
+                },
+                {
+                  "content": "$h\\circ f(x)=\\sqrt{x-500}$ sur $[1\\,000\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$h\\circ f(x)=\\sqrt{x-1\\,000}+500$ sur $[1\\,000\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$h\\circ f(x)=\\sqrt{x-1\\,500}$ sur $[1\\,500\\,;+\\infty[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $f(x)=x+500$ et $g(c)=\\dfrac{c}{25}$, on a $g\\circ f(25)=f\\circ g(25)$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : $g\\circ f$ applique $f$ d'abord ; $f\\circ g$ applique $g$ d'abord. Étape 2 — Calculer : $g\\circ f(25)=g(525)=\\frac{525}{25}=21$ et $f\\circ g(25)=f(1)=501$. Étape 4 — Conclure : $21\\neq501$, l'affirmation est fausse : l'ordre de composition compte.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une recharge de $x$ FCFA donne le crédit $f(x)=x+500$. Pour $a< b$, on a $f(b)-f(a)=b-a$. Quel est le sens de variation de $f$ sur $\\mathbb{R}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : soient $a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=b-a$. Étape 3 — Étudier le signe : $b-a>0$. Étape 4 — Conclure : $f$ est strictement croissante : plus on recharge, plus le crédit est grand. « Décroissante » ou « constante » contredisent $f(1\\,000)=1\\,500< f(2\\,000)=2\\,500$. La parité n'est pas un sens de variation : $f$ n'est d'ailleurs pas paire ($f(-1)=499\\neq f(1)=501$).",
+              "answers": [
+                {
+                  "content": "$f$ est strictement croissante",
+                  "correct": true
+                },
+                {
+                  "content": "$f$ est strictement décroissante",
+                  "correct": false
+                },
+                {
+                  "content": "$f$ est constante",
+                  "correct": false
+                },
+                {
+                  "content": "$f$ est paire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une recharge de $x$ FCFA donne le crédit $f(x)=x+500$ ; l'indice d'un crédit $c$ est $h(c)=\\sqrt{c-1\\,000}$, défini pour $c\\geq1\\,000$. Un client recharge $400$ FCFA. L'indice $h\\circ f(400)$ existe-t-il ? Justifie en calculant $f(400)$ puis en vérifiant la condition de $h$.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Calculer f(400) = 900",
+                "Rappeler la condition c ≥ 1 000 de h",
+                "Conclure que 900 < 1 000, donc h(f(400)) n'existe pas"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : $h\\circ f(400)=h(f(400))$, $f$ agit d'abord. Étape 2 — Calculer : $f(400)=400+500=900$. Étape 3 — Déterminer : $h$ exige $c\\geq1\\,000$ ; or $900<1\\,000$, donc $900\\notin D_h$ ($900-1\\,000=-100<0$). Étape 4 — Conclure : $h\\circ f(400)$ n'existe pas. Cela correspond à $400<500$, hors de $D_{h\\circ f}=[500\\,;+\\infty[$. Barème : 1 point pour $f(400)$, 1 point pour la condition et la conclusion.",
+              "answers": [],
+              "starter": "On calcule d'abord $f(400)=$"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Image et antécédent ; ensemble de définition (dénominateur, racine carrée) ; parité d'une fonction ; sens de variation et minimum ; composée de deux fonctions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On considère la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = 2x - 3$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est l'image de $4$ par $f$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Rappel : l'image de $4$ est $f(4)$. 2) Remplacer $x$ par $4$ : $f(4) = 2 \\times 4 - 3$. 3) Calculer : $8 - 3 = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel nombre a pour image $7$ par $f$ ? (C'est l'antécédent de $7$.)",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Un antécédent de $7$ est un nombre $x$ tel que $f(x) = 7$. 2) Écrire l'équation : $2x - 3 = 7$. 3) Résoudre : $2x = 10$, donc $x = 5$. 4) Vérifier : $f(5) = 10 - 3 = 7$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'image de $0$ par $f$ est $3$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $0$ : $f(0) = 2 \\times 0 - 3$. 2) Calculer : $f(0) = -3$ et non $3$. L'erreur est d'oublier le signe moins devant le $3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $f(-1) = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Remplacer $x$ par $-1$ : $f(-1) = 2 \\times (-1) - 3$. 2) Calculer : $2 \\times (-1) = -2$, puis $-2 - 3 = -5$.",
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : si $f(a) = b$, alors $a$ est ___ de $b$.",
+                  "question_type": "select",
+                  "explanation": "1) Par définition, si $f(a) = b$, alors $b$ est l'image de $a$. 2) Et $a$ est un antécédent de $b$. Exemple avec $f(x) = 2x - 3$ : $f(5) = 7$, donc $7$ est l'image de $5$ et $5$ est un antécédent de $7$.",
+                  "answers": [
+                    {
+                      "content": "un antécédent",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'image",
+                      "correct": false
+                    },
+                    {
+                      "content": "un extremum",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'ensemble de définition",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "L'image de $a$ est $f(a)$ : remplace $x$ par $a$. Un antécédent de $b$ se trouve en résolvant $f(x) = b$."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On détermine l'ensemble de définition de fonctions $f$ en cherchant ce qui est interdit : une division par $0$ ou une racine carrée d'un nombre négatif.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble de définition de $f(x) = \\dfrac{1}{x - 5}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Repérer : il y a un dénominateur, $x - 5$. 2) Condition : $x - 5 \\neq 0$. 3) Résoudre : $x \\neq 5$. 4) Conclure : $D_f = ]-\\infty\\,;\\,5[ \\cup ]5\\,;\\,+\\infty[$. Dire $\\mathbb{R}$ oublie que $f(5) = \\dfrac{1}{0}$ n'existe pas. Les autres intervalles n'en gardent qu'un côté, alors que tous les réels différents de $5$ conviennent.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,5[\\,\\cup\\,]5\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[5\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,5[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble de définition de $f(x) = \\sqrt{x - 3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Repérer : il y a une racine carrée. 2) Condition : $x - 3 \\geq 0$. 3) Résoudre : $x \\geq 3$. 4) Conclure : $D_f = [3\\,;\\,+\\infty[$, avec un crochet fermé en $3$ car $f(3) = \\sqrt{0} = 0$ existe. Le sens $]-\\infty\\,;\\,3]$ est inversé, et $[-3\\,;\\,+\\infty[$ vient d'une erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x) = x^3 - x + 1$ est définie pour tout nombre réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Repérer : il n'y a ni dénominateur ni racine carrée. 2) Condition : aucune. 3) Conclure : $D_f = \\mathbb{R}$, car un polynôme est défini sur $\\mathbb{R}$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ est définie par $f(x) = \\dfrac{1}{2x - 8}$. Pour quelle valeur de $x$ n'est-elle pas définie ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Repérer : il y a un dénominateur, $2x - 8$. 2) Condition : $2x - 8 \\neq 0$. 3) Résoudre : $2x \\neq 8$, donc $x \\neq 4$. 4) Conclure : $f$ n'est pas définie pour $x = 4$, car $\\dfrac{1}{0}$ est impossible.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble de définition de $f(x) = \\dfrac{\\sqrt{x - 1}}{x - 5}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Repérer : il y a une racine carrée, $\\sqrt{x - 1}$, et un dénominateur, $x - 5$. 2) Conditions : $x - 1 \\geq 0$ et $x - 5 \\neq 0$. 3) Résoudre : $x \\geq 1$ et $x \\neq 5$. 4) Conclure : $D_f = [1\\,;\\,5[ \\cup ]5\\,;\\,+\\infty[$. L'intervalle $[1\\,;\\,+\\infty[$ oublie la condition du dénominateur ; $\\mathbb{R} \\setminus \\{5\\}$ oublie la racine ; $]1\\,;\\,+\\infty[$ exclut $1$, où $\\sqrt{0} = 0$ existe.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;\\,5[\\,\\cup\\,]5\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[1\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,5[\\,\\cup\\,]5\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un dénominateur ne doit pas être nul ; sous une racine carrée, le nombre doit être positif ou nul. Écris une condition par interdit."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie la parité de fonctions : on vérifie que l'ensemble de définition est symétrique par rapport à $0$, puis on compare $f(-x)$ à $f(x)$ et à $-f(x)$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la parité de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = x^4 - x^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Vérifier : $D_f = \\mathbb{R}$ est symétrique par rapport à $0$. 2) Calculer : $f(-x) = (-x)^4 - (-x)^2 = x^4 - x^2$. 3) Comparer : $f(-x) = f(x)$. 4) Conclure : $f$ est paire ; sa courbe est symétrique par rapport à l'axe des ordonnées.",
+                  "answers": [
+                    {
+                      "content": "Paire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni paire ni impaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la parité de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = x^3 + 2x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Vérifier : $D_f = \\mathbb{R}$ est symétrique par rapport à $0$. 2) Calculer : $f(-x) = (-x)^3 + 2(-x) = -x^3 - 2x$. 3) Comparer : $-x^3 - 2x = -(x^3 + 2x) = -f(x)$. 4) Conclure : $f$ est impaire ; sa courbe est symétrique par rapport à l'origine.",
+                  "answers": [
+                    {
+                      "content": "Impaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Paire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni paire ni impaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = x^2 + x$ est paire.",
+                  "question_type": "true_false",
+                  "explanation": "1) Vérifier : $D_f = \\mathbb{R}$ est symétrique. 2) Calculer : $f(-x) = (-x)^2 + (-x) = x^2 - x$. 3) Comparer : $x^2 - x$ est différent de $f(x) = x^2 + x$ et de $-f(x) = -x^2 - x$. Par exemple $f(1) = 2$ et $f(-1) = 0$. 4) Conclure : $f$ n'est ni paire ni impaire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : si $f$ est une fonction paire et si $f(3) = 7$, alors $f(-3) = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Vérifier : $f$ est paire, donc $D_f$ est symétrique et contient $-3$. 2) Calculer : $f(-3)$ se déduit de $f(3)$. 3) Comparer : pour une fonction paire, $f(-x) = f(x)$, donc $f(-3) = f(3) = 7$. 4) Conclure : $f(-3) = 7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ définie sur $[0\\,;\\,+\\infty[$ par $f(x) = x^2$ n'est ni paire ni impaire.",
+                  "question_type": "true_false",
+                  "explanation": "1) Vérifier : $D_f = [0\\,;\\,+\\infty[$ n'est pas symétrique par rapport à $0$, car $2 \\in D_f$ mais $-2 \\notin D_f$. 2) Conclure : sans ensemble de définition symétrique, $f$ ne peut être ni paire ni impaire, même si $x^2$ vérifie $(-x)^2 = x^2$ quand on calcule sans réfléchir. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Vérifie d'abord que $D_f$ est symétrique par rapport à $0$, puis compare $f(-x)$ avec $f(x)$ et avec $-f(x)$."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie des variations, des extremums et des composées de fonctions simples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le sens de variation de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = -3x + 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir : soient $a < b$ dans $\\mathbb{R}$. 2) Calculer : $f(b) - f(a) = -3b + 3a = -3(b - a)$. 3) Étudier le signe : $-3 < 0$ et $b - a > 0$, donc la différence est négative. 4) Conclure : $f(b) < f(a)$, donc $f$ est strictement décroissante sur $\\mathbb{R}$.",
+                  "answers": [
+                    {
+                      "content": "Strictement décroissante sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Constante sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ est définie sur $[1\\,;\\,+\\infty[$ par $f(x) = x^2 - 2x$. Elle est croissante sur cet intervalle. Quel est son minimum ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Choisir : soient $1 \\leq a < b$. 2) Calculer : $f(b) - f(a) = (b - a)(b + a - 2)$. 3) Étudier le signe : $b - a > 0$ et $a + b > 2$, donc la différence est positive. 4) Conclure : $f$ est croissante, donc son minimum est $f(1) = 1 - 2 = -1$, atteint en $x = 1$.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x) = x - 2$ et $g(x) = x^2$. Quelle est l'expression de $g \\circ f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Identifier : $f$ agit d'abord, puis $g$. 2) Calculer : $g(f(x)) = (x - 2)^2$. 3) Déterminer : les deux fonctions sont définies sur $\\mathbb{R}$. 4) Conclure : $g \\circ f(x) = (x - 2)^2$. La proposition $x^2 - 2$ est $f \\circ g$. La proposition $x^2 - 4$ oublie le double produit ($(x-2)^2 = x^2 - 4x + 4$). La proposition $x - 4$ applique $f$ deux fois.",
+                  "answers": [
+                    {
+                      "content": "$(x - 2)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x - 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $f(x) = x - 2$ et $g(x) = x^2$. Quelle est la valeur de $g \\circ f(5)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Identifier : $f$ agit d'abord, puis $g$. 2) Calculer : $f(5) = 3$, puis $g(3) = 9$. 3) Conclure : $g \\circ f(5) = 9$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x - 2$ et $g(x) = x^2$, on a $g \\circ f = f \\circ g$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Identifier : $f(x) = x - 2$ et $g(x) = x^2$. 2) Calculer : $g \\circ f(x) = (x - 2)^2$ et $f \\circ g(x) = x^2 - 2$. 3) Comparer : pour $x = 5$, $(5 - 2)^2 = 9$ et $5^2 - 2 = 23$. 4) Conclure : $g \\circ f \\neq f \\circ g$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour les variations : $a < b$, puis le signe de $f(b) - f(a)$. Pour $g \\circ f$ : calcule $f$ d'abord, puis $g$."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Prix d'une course de taxi (image, antécédent, croissance, minimum) ; bénéfice d'une vendeuse (sens de variation, maximum) ; prix par élève d'une sortie (ensemble de définition, antécédent) ; composée d'une réduction et d'un bon d'achat.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour une course en taxi, le prix en FCFA est donné par la fonction $P$ définie par $P(x) = 500 + 200x$, où $x$ est le nombre de kilomètres parcourus.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le prix, en FCFA, d'une course de $5$ kilomètres ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $5$ dans $P(x) = 500 + 200x$. 2) Calculer : $P(5) = 500 + 200 \\times 5 = 500 + 1\\,000 = 1\\,500$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "1500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Un client a payé $2\\,100$ FCFA. Combien de kilomètres a-t-il parcourus ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Il s'agit de trouver l'antécédent de $2\\,100$ : on cherche $x$ tel que $P(x) = 2\\,100$. 2) Écrire l'équation : $500 + 200x = 2\\,100$. 3) Résoudre : $200x = 1\\,600$, donc $x = 8$. 4) Vérifier : $500 + 200 \\times 8 = 2\\,100$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "km"
+                },
+                {
+                  "content": "La fonction $P$ est croissante sur $[0\\,;\\,+\\infty[$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Choisir : soient $0 \\leq a < b$. 2) Calculer : $P(b) - P(a) = 200(b - a)$. 3) Étudier le signe : $200 > 0$ et $b - a > 0$, donc la différence est positive. 4) Conclure : $P$ est croissante : plus on roule, plus on paie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : pour une course de $0$ kilomètre, le prix est $P(0) = ___$ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Remplacer $x$ par $0$ dans $P(x) = 500 + 200x$. 2) Calculer : $P(0) = 500 + 0 = 500$ FCFA, c'est la prise en charge.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le prix minimum d'une course, c'est-à-dire le minimum de $P$ sur $[0\\,;\\,+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) La fonction $P$ est croissante sur $[0\\,;\\,+\\infty[$. 2) Son minimum est donc atteint au début de l'intervalle, en $x = 0$. 3) Calculer : $P(0) = 500$ FCFA. Le prix de $0$ FCFA oublie la prise en charge. Le prix de $200$ FCFA est celui d'un seul kilomètre sans la prise en charge. Le minimum existe, car l'intervalle est fermé en $0$.",
+                  "answers": [
+                    {
+                      "content": "$500$ FCFA, atteint pour $x = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$ FCFA, atteint pour $x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200$ FCFA, atteint pour $x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de minimum",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "L'image de $x$ se calcule en remplaçant $x$ dans $P(x)$. Pour retrouver $x$ à partir du prix, résous $P(x) = $ prix."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le bénéfice d'une vendeuse de jus, en milliers de FCFA, est donné par la fonction $B$ définie par $B(x) = -x^2 + 8x - 12$, où $x$ est le nombre de dizaines de bouteilles vendues. On étudie $B$ pour $x \\geq 4$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le bénéfice, en milliers de FCFA, pour $x = 4$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $4$ : $B(4) = -4^2 + 8 \\times 4 - 12$. 2) Calculer : $-16 + 32 - 12 = 4$ milliers de FCFA. Attention : $-4^2$ vaut $-16$ car le carré s'applique à $4$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de $B$ sur $[4\\,;\\,+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir : soient $4 \\leq a < b$. 2) Calculer : $B(b) - B(a) = -(b^2 - a^2) + 8(b - a) = (b - a)(8 - b - a)$. 3) Étudier le signe : $b - a > 0$ et $a + b > 8$, donc $8 - a - b < 0$ et la différence est négative. 4) Conclure : $B$ est strictement décroissante sur $[4\\,;\\,+\\infty[$. Plus on dépasse $4$ dizaines de bouteilles, plus le bénéfice baisse.",
+                  "answers": [
+                    {
+                      "content": "Strictement décroissante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante puis décroissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur $[4\\,;\\,+\\infty[$, le maximum de $B$ est $4$.",
+                  "question_type": "true_false",
+                  "explanation": "1) $B$ est décroissante sur $[4\\,;\\,+\\infty[$. 2) Son maximum est donc atteint au début de l'intervalle, en $x = 4$. 3) Calculer : $B(4) = 4$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le bénéfice pour $x = 2$ est $B(2) = ___$ millier de FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Remplacer $x$ par $2$ : $B(2) = -2^2 + 8 \\times 2 - 12$. 2) Calculer : $-4 + 16 - 12 = 0$. Le bénéfice est nul.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 10$, le bénéfice $B(10)$ est négatif.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $10$ : $B(10) = -100 + 80 - 12$. 2) Calculer : $-32$. 3) Conclure : $-32 < 0$, donc le bénéfice est négatif, c'est une perte. Cela est cohérent avec la décroissance de $B$ sur $[4\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Remplace $x$ pour obtenir une valeur. Pour le sens de variation, étudie le signe de $B(b) - B(a)$ avec $4 \\leq a < b$."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour une sortie scolaire, le prix par élève, en FCFA, est donné par la fonction $P$ définie par $P(x) = \\dfrac{6000}{x - 2}$, où $x$ est le nombre d'élèves inscrits.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble de définition de l'expression $P(x) = \\dfrac{6000}{x - 2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Repérer : il y a un dénominateur, $x - 2$. 2) Condition : $x - 2 \\neq 0$. 3) Résoudre : $x \\neq 2$. 4) Conclure : $D_P = ]-\\infty\\,;\\,2[ \\cup ]2\\,;\\,+\\infty[$. Dans la réalité, $x$ est un nombre d'élèves entier supérieur à $2$. L'expression seule est définie pour tout réel différent de $2$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,2[\\,\\cup\\,]2\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le prix par élève, en FCFA, quand $5$ élèves sont inscrits ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $5$ : $P(5) = \\dfrac{6000}{5 - 2}$. 2) Calculer : $\\dfrac{6000}{3} = 2\\,000$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Complète : quand $8$ élèves sont inscrits, le prix par élève est de $___$ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Remplacer $x$ par $8$ : $P(8) = \\dfrac{6000}{8 - 2}$. 2) Calculer : $\\dfrac{6000}{6} = 1\\,000$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $2$ appartient à l'ensemble de définition de l'expression de $P$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $2$ : $P(2) = \\dfrac{6000}{2 - 2} = \\dfrac{6000}{0}$. 2) Une division par $0$ est impossible. 3) Conclure : $2$ n'appartient pas à l'ensemble de définition.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prix par élève est de $1\\,500$ FCFA. Combien d'élèves sont inscrits ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) On cherche l'antécédent de $1\\,500$ : $P(x) = 1\\,500$. 2) Écrire : $\\dfrac{6000}{x - 2} = 1\\,500$, donc $x - 2 = \\dfrac{6000}{1500} = 4$. 3) Résoudre : $x = 6$. 4) Vérifier : $P(6) = \\dfrac{6000}{4} = 1\\,500$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un dénominateur ne doit pas être nul. Pour trouver $x$ à partir d'un prix, résous l'équation $P(x) = $ prix."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans une boutique de Cocody, un article coûte $x$ FCFA. Le magasin offre une réduction de $10\\,\\%$, notée $f(x) = \\dfrac{9}{10}x$, et un bon de réduction de $500$ FCFA, noté $g(x) = x - 500$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Awa applique d'abord la réduction de $10\\,\\%$, puis le bon de $500$ FCFA, c'est-à-dire $g \\circ f$. Que paie-t-elle, en FCFA, pour un article de $10\\,000$ FCFA ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Identifier : $f$ agit d'abord, puis $g$ ; l'opération est $g \\circ f$. 2) Calculer : $f(10000) = \\dfrac{9}{10} \\times 10\\,000 = 9\\,000$, puis $g(9000) = 9\\,000 - 500 = 8\\,500$. 3) Conclure : elle paie $8\\,500$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "8500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Yao applique d'abord le bon de $500$ FCFA, puis la réduction de $10\\,\\%$, c'est-à-dire $f \\circ g$. Que paie-t-il, en FCFA, pour un article de $10\\,000$ FCFA ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Identifier : $g$ agit d'abord, puis $f$ ; l'opération est $f \\circ g$. 2) Calculer : $g(10000) = 9\\,500$, puis $f(9500) = \\dfrac{9}{10} \\times 9\\,500 = 8\\,550$. 3) Conclure : il paie $8\\,550$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "8550",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Pour toute valeur de $x$, on a $g \\circ f(x) = f \\circ g(x)$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer : $g \\circ f(x) = \\dfrac{9}{10}x - 500$ et $f \\circ g(x) = \\dfrac{9}{10}(x - 500) = \\dfrac{9}{10}x - 450$. 2) Comparer : ces deux expressions diffèrent de $50$. 3) Conclure : $g \\circ f \\neq f \\circ g$. Pour $10\\,000$ FCFA, on trouve $8\\,500$ et $8\\,550$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel ordre le client paie-t-il le moins cher pour un article de $10\\,000$ FCFA ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Calculer $g \\circ f(10000) = 9\\,000 - 500 = 8\\,500$ FCFA (réduction puis bon). 2) Calculer $f \\circ g(10000) = \\dfrac{9}{10} \\times 9\\,500 = 8\\,550$ FCFA (bon puis réduction). 3) Comparer : $8\\,500 < 8\\,550$. La réduction d'abord est donc plus avantageuse. Dire que l'ordre ne change rien est faux : $g \\circ f \\neq f \\circ g$.",
+                  "answers": [
+                    {
+                      "content": "La réduction d'abord, puis le bon : il paie $8\\,500$ FCFA.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bon d'abord, puis la réduction : il paie $8\\,500$ FCFA.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réduction d'abord, puis le bon : il paie $8\\,550$ FCFA.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ordre ne change rien au prix.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $g \\circ f(x) = \\dfrac{9}{10}x - ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Identifier : $f$ agit d'abord, puis $g$. 2) Calculer : $g(f(x)) = f(x) - 500 = \\dfrac{9}{10}x - 500$. 3) Conclure : le nombre manquant est $500$. Le résultat $450$ correspond à $f \\circ g$.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Dans $g \\circ f$, on calcule $f$ d'abord puis $g$. Dans $f \\circ g$, c'est l'inverse. Compare les deux résultats."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Repérer et corriger une erreur d'ensemble de définition ; justifier une parité en vérifiant la symétrie de l'ensemble de définition ; démontrer un sens de variation par la différence $f(b) - f(a)$ ; composée de deux fonctions et son ensemble de définition.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Awa affirme que la fonction $f$ définie par $f(x) = \\dfrac{\\sqrt{x}}{x - 2}$ a pour ensemble de définition $[0\\,;\\,+\\infty[$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est l'erreur d'Awa ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Repérer : il y a une racine carrée, $\\sqrt{x}$, et un dénominateur, $x - 2$. 2) Conditions : $x \\geq 0$ et $x - 2 \\neq 0$. Awa n'a gardé que $x \\geq 0$. 3) Résoudre : $x \\geq 0$ et $x \\neq 2$. 4) Conclure : $D_f = [0\\,;\\,2[ \\cup ]2\\,;\\,+\\infty[$. La condition de la racine, $x \\geq 0$, est bien celle qu'elle a écrite.",
+                  "answers": [
+                    {
+                      "content": "Elle a oublié que le dénominateur $x - 2$ ne doit pas être nul.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a oublié que la racine carrée exige $x \\geq 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a oublié que $x$ doit être négatif.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne s'est pas trompée.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le bon ensemble de définition de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Conditions : $x \\geq 0$ et $x \\neq 2$. 2) Les deux doivent être vérifiées en même temps : on garde les nombres positifs ou nuls, sauf $2$. 3) Conclure : $D_f = [0\\,;\\,2[ \\cup ]2\\,;\\,+\\infty[$. L'ensemble d'Awa, $[0\\,;\\,+\\infty[$, contient $2$. L'ensemble $\\mathbb{R} \\setminus \\{2\\}$ contient des nombres négatifs, interdits sous la racine. L'intervalle $]0\\,;\\,2[ \\cup ]2\\,;\\,+\\infty[$ exclut $0$, où $f(0) = 0$ existe.",
+                  "answers": [
+                    {
+                      "content": "$[0\\,;\\,2[\\,\\cup\\,]2\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,2[\\,\\cup\\,]2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ existe pour $x = 2$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $2$ : $f(2) = \\dfrac{\\sqrt{2}}{2 - 2} = \\dfrac{\\sqrt{2}}{0}$. 2) Une division par $0$ est impossible. 3) Conclure : $2 \\notin D_f$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ existe pour $x = 0$ et $f(0) = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $0$ : $f(0) = \\dfrac{\\sqrt{0}}{0 - 2} = \\dfrac{0}{-2}$. 2) Calculer : $0$ divisé par un nombre non nul vaut $0$. 3) Conclure : $0 \\in D_f$ et $f(0) = 0$. L'affirmation est vraie ; le crochet est fermé en $0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $f(4)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $4$ : $f(4) = \\dfrac{\\sqrt{4}}{4 - 2}$. 2) Calculer : $\\sqrt{4} = 2$ et $4 - 2 = 2$. 3) Conclure : $f(4) = \\dfrac{2}{2} = 1$. Le nombre $4$ est bien dans $D_f$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Écris une condition pour chaque interdit (racine, dénominateur) : $x$ doit vérifier toutes les conditions en même temps."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On justifie la parité de fonctions avec la méthode : ensemble de définition symétrique, calcul de $f(-x)$, comparaison.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la parité de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = x^2 - 2x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Vérifier : $D_f = \\mathbb{R}$ est symétrique par rapport à $0$. 2) Calculer : $f(-x) = (-x)^2 - 2(-x) = x^2 + 2x$. 3) Comparer : $x^2 + 2x$ est différent de $f(x) = x^2 - 2x$ et de $-f(x) = -x^2 + 2x$. Exemple : $f(1) = -1$, $f(-1) = 3$. 4) Conclure : $f$ n'est ni paire ni impaire. Un seul terme pair ou impair ne suffit pas : toute l'expression compte.",
+                  "answers": [
+                    {
+                      "content": "Ni paire ni impaire, car $f(-x) = x^2 + 2x$ n'est égal ni à $f(x)$ ni à $-f(x)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Paire, car $x^2$ est pair.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Impaire, car $-2x$ est impair.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Paire, car $f(-x) = f(x)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ définie sur $\\mathbb{R} \\setminus \\{0\\}$ par $f(x) = \\dfrac{1}{x}$ est impaire.",
+                  "question_type": "true_false",
+                  "explanation": "1) Vérifier : $D_f = \\mathbb{R} \\setminus \\{0\\}$ est symétrique par rapport à $0$ : si $x \\neq 0$, alors $-x \\neq 0$. 2) Calculer : $f(-x) = \\dfrac{1}{-x} = -\\dfrac{1}{x}$. 3) Comparer : $f(-x) = -f(x)$. 4) Conclure : $f$ est impaire ; sa courbe est symétrique par rapport à l'origine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ définie sur $[0\\,;\\,+\\infty[$ par $f(x) = \\sqrt{x}$ est paire.",
+                  "question_type": "true_false",
+                  "explanation": "1) Vérifier : $D_f = [0\\,;\\,+\\infty[$ n'est pas symétrique par rapport à $0$ : $4 \\in D_f$ mais $-4 \\notin D_f$. 2) Sans ensemble de définition symétrique, $f(-x)$ n'existe pas pour $x > 0$. 3) Conclure : $f$ n'est ni paire ni impaire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction impaire $f$ vérifie $f(-4) = -3$. Quelle est la valeur de $f(4)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Vérifier : $f$ est impaire, donc $D_f$ est symétrique et contient $4$ puisqu'il contient $-4$. 2) Comparer : pour une fonction impaire, $f(-x) = -f(x)$, donc $f(4) = -f(-4)$. 3) Calculer : $f(4) = -(-3) = 3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi vérifie-t-on d'abord que l'ensemble de définition est symétrique par rapport à $0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Pour comparer $f(-x)$ à $f(x)$, il faut que $-x$ appartienne à $D_f$ chaque fois que $x$ y appartient. 2) Si ce n'est pas le cas, la fonction ne peut être ni paire ni impaire (exemple : $\\sqrt{x}$). 3) Cette vérification ne donne pas la parité, qui demande le calcul de $f(-x)$. 4) Beaucoup de fonctions ne sont ni paires ni impaires, comme $x^2 - 2x$.",
+                  "answers": [
+                    {
+                      "content": "Parce que $f(-x)$ doit exister chaque fois que $f(x)$ existe.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que cela donne directement la parité.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que toutes les fonctions sont paires ou impaires.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que l'ensemble de définition est toujours égal à $\\mathbb{R}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Vérifie d'abord que $D_f$ est symétrique par rapport à $0$ ; calcule ensuite $f(-x)$ et compare avec $f(x)$ et $-f(x)$."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = x^2 - 6x$. Pour $a < b$, on a $f(b) - f(a) = (b - a)(b + a - 6)$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Comment obtient-on la factorisation $f(b) - f(a) = (b - a)(b + a - 6)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Calculer la différence : $f(b) - f(a) = b^2 - 6b - a^2 + 6a = (b^2 - a^2) - 6(b - a)$. 2) Factoriser : $b^2 - a^2 = (b - a)(b + a)$, donc la différence vaut $(b - a)(b + a) - 6(b - a) = (b - a)(b + a - 6)$. L'égalité $b^2 - a^2 = (b - a)^2$ est fausse : par exemple $3^2 - 1^2 = 8$ et $(3 - 1)^2 = 4$.",
+                  "answers": [
+                    {
+                      "content": "En écrivant $b^2 - a^2 - 6(b - a)$ puis en factorisant par $(b - a)$ avec $b^2 - a^2 = (b - a)(b + a)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "En remplaçant $a$ et $b$ par $0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "En écrivant $b^2 - a^2 = (b - a)^2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "En additionnant $f(a)$ et $f(b)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $3 \\leq a < b$, le facteur $b + a - 6$ est strictement positif.",
+                  "question_type": "true_false",
+                  "explanation": "1) On a $a \\geq 3$ et $b > a \\geq 3$, donc $b > 3$. 2) Additionner : $a + b > 3 + 3 = 6$. 3) Conclure : $b + a - 6 > 0$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de $f$ sur $[3\\,;\\,+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir : soient $3 \\leq a < b$. 2) Calculer : $f(b) - f(a) = (b - a)(b + a - 6)$. 3) Étudier le signe : $b - a > 0$ et $b + a - 6 > 0$, donc la différence est positive. 4) Conclure : $f(b) > f(a)$, donc $f$ est strictement croissante sur $[3\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Strictement croissante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement décroissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante puis décroissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le minimum de $f$ sur $[3\\,;\\,+\\infty[$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f$ est croissante sur $[3\\,;\\,+\\infty[$, donc son minimum est atteint en $x = 3$. 2) Calculer : $f(3) = 9 - 18 = -9$. 3) Conclure : le minimum est $-9$.",
+                  "answers": [
+                    {
+                      "content": "-9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ est croissante sur l'intervalle $[0\\,;\\,6]$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer deux valeurs : $f(0) = 0$ et $f(3) = 9 - 18 = -9$. 2) Comparer : $0 < 3$ mais $f(0) = 0 > f(3) = -9$. 3) Conclure : une fonction croissante vérifie $f(a) \\leq f(b)$ pour $a < b$, ce qui n'est pas le cas ici. L'affirmation est fausse : $f$ est croissante sur $[3\\,;\\,+\\infty[$ seulement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour $a < b$, le signe de $f(b) - f(a)$ donne le sens de variation. Pour montrer qu'une fonction n'est pas croissante, une paire de valeurs suffit."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On donne les fonctions $f(x) = x - 3$ et $g(x) = \\sqrt{x}$. On étudie les composées $g \\circ f$ et $f \\circ g$ et leurs ensembles de définition.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est l'expression de $g \\circ f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Identifier : $f$ agit d'abord ($f(x) = x - 3$), puis $g$ ($g(x) = \\sqrt{x}$). 2) Calculer : on remplace $x$ par $f(x)$ dans $g$, soit $g(f(x)) = \\sqrt{x - 3}$. La proposition $\\sqrt{x} - 3$ est $f \\circ g$ : l'ordre est inversé. Les autres propositions ne correspondent à aucune des deux composées.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{x - 3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{x} - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{x} + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x - \\sqrt{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble de définition de $g \\circ f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Condition d'une composée : $x \\in D_f$ et $f(x) \\in D_g$. 2) Ici $D_f = \\mathbb{R}$ et $D_g = [0\\,;\\,+\\infty[$, donc il faut $x - 3 \\geq 0$. 3) Résoudre : $x \\geq 3$. 4) Conclure : $D_{g \\circ f} = [3\\,;\\,+\\infty[$. L'intervalle $[0\\,;\\,+\\infty[$ est $D_g$ et non celui de la composée. L'intervalle $]3\\,;\\,+\\infty[$ exclut $3$ où $\\sqrt{0}$ existe.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $g \\circ f(12)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Calculer $f(12) = 12 - 3 = 9$. 2) Calculer $g(9) = \\sqrt{9} = 3$. 3) Conclure : $g \\circ f(12) = 3$. Le nombre $12$ est bien dans $[3\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $g \\circ f(1)$ existe.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer $f(1) = 1 - 3 = -2$. 2) Calculer $g(-2) = \\sqrt{-2}$, impossible dans $\\mathbb{R}$. 3) Conclure : $1 \\notin D_{g \\circ f}$, ce qui est cohérent avec $D_{g \\circ f} = [3\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $f \\circ g(16)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Identifier : $g$ agit d'abord, puis $f$. 2) Calculer $g(16) = \\sqrt{16} = 4$. 3) Calculer $f(4) = 4 - 3 = 1$. 4) Conclure : $f \\circ g(16) = 1$, alors que $g \\circ f(16) = \\sqrt{13}$ : les deux composées sont différentes.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour $g \\circ f$ : calcule $f$ d'abord, puis $g$. Il faut $x \\in D_f$ et $f(x) \\in D_g$ (ici, sous la racine carrée : un nombre positif ou nul)."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Ensemble de définition avec racine et dénominateur ; image ; parité et symétrie de la courbe ; sens de variation par la différence $f(b) - f(a)$ et minimum ; composées $g \\circ f$ et $f \\circ g$.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie la fonction $f$ définie par $f(x) = \\dfrac{\\sqrt{x + 1}}{x - 3}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble de définition de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Repérer : une racine carrée, $\\sqrt{x + 1}$, et un dénominateur, $x - 3$. 2) Conditions : $x + 1 \\geq 0$ et $x - 3 \\neq 0$. 3) Résoudre : $x \\geq -1$ et $x \\neq 3$. 4) Conclure : $D_f = [-1\\,;\\,3[ \\cup ]3\\,;\\,+\\infty[$. Le crochet est fermé en $-1$ car $f(-1) = \\dfrac{0}{-4} = 0$ existe. Garder une seule condition est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "$[-1\\,;\\,3[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-1\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-1\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $f(8)$ sous forme décimale ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $8$ : $f(8) = \\dfrac{\\sqrt{9}}{8 - 3}$. 2) Calculer : $\\sqrt{9} = 3$ et $8 - 3 = 5$. 3) Conclure : $f(8) = \\dfrac{3}{5} = 0{,}6$.",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $-1$ appartient à l'ensemble de définition de $f$ et $f(-1) = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $-1$ : $f(-1) = \\dfrac{\\sqrt{0}}{-1 - 3} = \\dfrac{0}{-4}$. 2) Calculer : $0$ divisé par un nombre non nul vaut $0$. 3) Conclure : $-1 \\in D_f$ et $f(-1) = 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : la fonction $f$ n'est pas définie pour $x = ___$ à cause du dénominateur.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Repérer : le dénominateur est $x - 3$. 2) Condition : $x - 3 \\neq 0$. 3) Résoudre : $x \\neq 3$. 4) Conclure : $f$ n'est pas définie pour $x = 3$, car $\\dfrac{\\sqrt{4}}{0}$ est impossible.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $-2$ appartient à l'ensemble de définition de $f$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $-2$ : le numérateur est $\\sqrt{-2 + 1} = \\sqrt{-1}$, impossible dans $\\mathbb{R}$. 2) Conclure : $-2 \\notin D_f$, ce qui est cohérent avec la condition $x \\geq -1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Écris une condition pour la racine ($\\geq 0$) et une pour le dénominateur ($\\neq 0$), puis garde les $x$ qui vérifient les deux."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie la parité de plusieurs fonctions définies sur $\\mathbb{R}$, dont $f(x) = x^4 - 3x^2$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la parité de $f(x) = x^4 - 3x^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Vérifier : $D_f = \\mathbb{R}$ est symétrique par rapport à $0$. 2) Calculer : $f(-x) = (-x)^4 - 3(-x)^2 = x^4 - 3x^2$. 3) Comparer : $f(-x) = f(x)$. 4) Conclure : $f$ est paire.",
+                  "answers": [
+                    {
+                      "content": "Paire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni paire ni impaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $f(-2)$ pour $f(x) = x^4 - 3x^2$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $-2$ : $f(-2) = (-2)^4 - 3 \\times (-2)^2 = 16 - 12 = 4$. 2) Vérifier avec la parité : $f$ est paire, donc $f(-2) = f(2) = 16 - 12 = 4$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La courbe de $f(x) = x^4 - 3x^2$ est symétrique par rapport à l'axe des ordonnées.",
+                  "question_type": "true_false",
+                  "explanation": "1) $f$ est paire : $f(-x) = f(x)$ pour tout réel $x$. 2) Les points $(x\\,;\\,f(x))$ et $(-x\\,;\\,f(x))$ sont sur la courbe et sont symétriques par rapport à l'axe des ordonnées. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $g$ définie sur $\\mathbb{R}$ par $g(x) = x^3 - x$ est impaire.",
+                  "question_type": "true_false",
+                  "explanation": "1) Vérifier : $D_g = \\mathbb{R}$ est symétrique. 2) Calculer : $g(-x) = (-x)^3 - (-x) = -x^3 + x$. 3) Comparer : $-x^3 + x = -(x^3 - x) = -g(x)$. 4) Conclure : $g$ est impaire, et sa courbe est symétrique par rapport à l'origine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la parité de la fonction $h$ définie sur $\\mathbb{R}$ par $h(x) = x^2 + x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Vérifier : $D_h = \\mathbb{R}$ est symétrique. 2) Calculer : $h(-x) = x^2 - x$. 3) Comparer : $x^2 - x$ est différent de $h(x) = x^2 + x$ et de $-h(x) = -x^2 - x$. Exemple : $h(1) = 2$ et $h(-1) = 0$. 4) Conclure : $h$ n'est ni paire ni impaire.",
+                  "answers": [
+                    {
+                      "content": "Ni paire ni impaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Paire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Impaire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque fonction, vérifie d'abord $D_f$, puis compare $f(-x)$ avec $f(x)$ et avec $-f(x)$."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie la fonction $f$ définie sur $[-2\\,;\\,+\\infty[$ par $f(x) = x^2 + 4x$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour $-2 \\leq a < b$, quelle est la factorisation de $f(b) - f(a)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Calculer la différence : $f(b) - f(a) = b^2 + 4b - a^2 - 4a = (b^2 - a^2) + 4(b - a)$. 2) Factoriser : $(b - a)(b + a) + 4(b - a) = (b - a)(b + a + 4)$. Le signe $-4$ viendrait d'un terme $-4x$ dans $f$. La forme $(b - a)^2 + 4$ n'est pas égale à la différence. La forme $(b + a)(b - a + 4)$ mélange les rôles de $b - a$ et $b + a$.",
+                  "answers": [
+                    {
+                      "content": "$(b - a)(b + a + 4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(b - a)(b + a - 4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(b - a)^2 + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(b + a)(b - a + 4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de $f$ sur $[-2\\,;\\,+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir : soient $-2 \\leq a < b$. 2) Calculer : $f(b) - f(a) = (b - a)(b + a + 4)$. 3) Étudier le signe : $b - a > 0$, et $a + b > -4$ donc $b + a + 4 > 0$. La différence est positive. 4) Conclure : $f$ est strictement croissante sur $[-2\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Strictement croissante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement décroissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante puis croissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le minimum de $f$ sur $[-2\\,;\\,+\\infty[$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f$ est croissante sur $[-2\\,;\\,+\\infty[$, donc son minimum est atteint en $x = -2$. 2) Calculer : $f(-2) = (-2)^2 + 4 \\times (-2) = 4 - 8 = -4$. 3) Conclure : le minimum est $-4$.",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $f(-2) < f(0)$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer : $f(-2) = 4 - 8 = -4$ et $f(0) = 0$. 2) Comparer : $-4 < 0$. 3) Conclure : l'affirmation est vraie, ce qui est cohérent avec la croissance de $f$ sur $[-2\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $f(1) = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Remplacer $x$ par $1$ : $f(1) = 1^2 + 4 \\times 1$. 2) Calculer : $1 + 4 = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour $a < b$, factorise $f(b) - f(a)$ et étudie le signe de chaque facteur sur l'intervalle. Une fonction croissante a son minimum au début de l'intervalle."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On donne les fonctions $f(x) = 2x + 1$ et $g(x) = x^2$, définies sur $\\mathbb{R}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est l'expression de $g \\circ f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Identifier : $f$ agit d'abord, puis $g$. 2) Calculer : $g(f(x)) = (2x + 1)^2$. 3) Déterminer : les deux fonctions sont définies sur $\\mathbb{R}$, donc $D_{g \\circ f} = \\mathbb{R}$. La proposition $2x^2 + 1$ est $f \\circ g$. La proposition $4x^2 + 1$ oublie le double produit $4x$ du carré.",
+                  "answers": [
+                    {
+                      "content": "$(2x + 1)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2 + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'expression de $f \\circ g(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Identifier : $g$ agit d'abord, puis $f$. 2) Calculer : $f(g(x)) = 2g(x) + 1 = 2x^2 + 1$. 3) Déterminer : $D_{f \\circ g} = \\mathbb{R}$. La proposition $(2x + 1)^2$ est $g \\circ f$. La proposition $2x^2 + 2$ ajoute $1$ deux fois.",
+                  "answers": [
+                    {
+                      "content": "$2x^2 + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2x + 1)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $g \\circ f(1)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Calculer $f(1) = 2 \\times 1 + 1 = 3$. 2) Calculer $g(3) = 3^2 = 9$. 3) Conclure : $g \\circ f(1) = 9$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $f \\circ g(3)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Calculer $g(3) = 3^2 = 9$. 2) Calculer $f(9) = 2 \\times 9 + 1 = 19$. 3) Conclure : $f \\circ g(3) = 19$.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$, on a $g \\circ f(x) = f \\circ g(x)$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer : $g \\circ f(x) = (2x + 1)^2 = 4x^2 + 4x + 1$ et $f \\circ g(x) = 2x^2 + 1$. 2) Comparer : pour $x = 1$, on obtient $9$ et $3$. 3) Conclure : $g \\circ f \\neq f \\circ g$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "$g \\circ f(x) = g(f(x))$ : on calcule $f$ d'abord. Développe $(2x + 1)^2 = 4x^2 + 4x + 1$ pour comparer avec $f \\circ g$."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/show — le sujet d'un exercice : la feuille telle qu'on la distribuerait en classe (AS-02) %>
 <%# Rôle : énoncé et questions numérotées, rien à remplir ; « Faire l'exercice » pour l'élève, bascules d'assignation pour l'enseignant, statut et transitions pour l'équipe (plus de « Modifier » : l'exercice se réimporte, ADR-0113 §4.6) %>
-<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113, 0115 · UDR : 0157-sujets-cahier-noir-blanc (§3 : feuille noir et blanc, cartouche), 0006, 0007, 0021, 0069, 0138 §3.1, 0145 (§3.3 : une carte par question) · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
+<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113, 0115, hors-connexion pages ouvertes et copies synchronisées (§4.4) · UDR : 0157-sujets-cahier-noir-blanc (§3 : feuille noir et blanc, cartouche), 0006, 0007, 0021, 0069, 0138 §3.1, 0145 (§3.3 : une carte par question), hors-connexion §3.3 · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
@@ -108,12 +108,18 @@
         <% end %>
       <% else %>
         <% unless @resume_at %>
-          <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "start-exercise-form" do %>
+          <%# hors-connexion UDR §3.3 : en ligne, offline-start range le paquet de corrigé ; hors ligne, il mène à la copie sans réseau ou désactive le bouton. %>
+          <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "start-exercise-form",
+                        data: { controller: "offline-start", offline_start_exercise_value: exercise.public_id,
+                                offline_start_pack_url_value: offline_pack_exercise_path(exercise.public_id),
+                                offline_start_copy_url_value: offline_copy_exercise_path(exercise.public_id),
+                                action: "submit->offline-start#go" } do %>
             <% if @progress.completed_count.positive? %>
-              <%= ui_button t(".redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
+              <%= ui_button t(".redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path", data: { offline_start_target: "button" } %>
             <% else %>
-              <%= ui_button t(".start"), type: :submit, variant: :brand, size: :lg, full: true, icon_end: "arrow-right" %>
+              <%= ui_button t(".start"), type: :submit, variant: :brand, size: :lg, full: true, icon_end: "arrow-right", data: { offline_start_target: "button" } %>
             <% end %>
+            <p hidden id="offline-start-unavailable" class="mt-2 text-sm text-mute" data-offline-start-target="unavailable"><%= t("offline.start.unavailable") %></p>
           <% end %>
         <% end %>
         <% if @progress.best_score_percent %>

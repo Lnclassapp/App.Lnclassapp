@@ -1070,4 +1070,73 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#restart_pause", 0
   end
+
+  # hors-connexion, Lot C (CA-16, UDR §3.7) : l'enseignant de l'élève lit « Rendue hors ligne le … · reçue le … » sous l'en-tête.
+  def offline_mention(session) = I18n.t("offline.teacher.received", completed: I18n.l(session.completed_at, format: :short), received: I18n.l(session.received_at, format: :short))
+
+  test "CA-16 : l'enseignant de l'élève lit « Rendue hors ligne le … · reçue le … » quand la copie vient d'un envoi différé" do
+    @session.update_columns(completed_at: Time.zone.local(2026, 11, 10, 18, 5), received_at: Time.zone.local(2026, 11, 12, 8, 30))
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_response :success
+    assert_select "#session_offline_received", text: offline_mention(@session.reload)
+    assert_select "#session_offline_received svg"
+    assert_select "#session_offline_received.text-sm.text-mute"
+  end
+
+  test "CA-16 : une copie rendue en ligne n'a pas la mention" do
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_select "#session_offline_received", 0
+  end
+
+  test "CA-16 : l'élève qui a rendu la copie ne lit pas la mention de l'enseignant" do
+    @session.update_columns(received_at: Time.current)
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_offline_received", 0
+  end
+
+  # hors-connexion, Lot B2 (UDR-0170 §3.8) : « Corrigé reçu sur le téléphone le … » pour l'enseignant, jamais pour l'élève propriétaire.
+  def deliver_pack_before_session(delivered_at: Time.zone.local(2026, 11, 10, 9))
+    assignment = create_assignment(classroom: @classroom, assignable: @exercise)
+    @session.update_columns(classroom_assignment_id: assignment.id, completed_at: delivered_at + 2.hours)
+    Orm::OfflinePackDelivery.create!(student: @student, exercise: @exercise, first_delivered_at: delivered_at, last_delivered_at: delivered_at)
+    delivered_at
+  end
+
+  test "B2 : l'enseignant lit « Corrigé reçu sur le téléphone le … » sur une copie de devoir commencée après la remise du corrigé" do
+    delivered = deliver_pack_before_session
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_response :success
+    assert_select "#session_offline_pack_marker", text: I18n.t("offline.teacher.pack_before", delivered: I18n.l(delivered, format: :short))
+    assert_select "#session_offline_pack_marker svg"
+    assert_select "#session_offline_pack_marker.text-sm.text-warning"
+  end
+
+  test "B2 : l'élève propriétaire ne lit jamais la marque" do
+    deliver_pack_before_session
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_offline_pack_marker", 0
+  end
+
+  test "B2 : sans remise du corrigé avant la copie, l'enseignant ne lit pas la marque" do
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_select "#session_offline_pack_marker", 0
+  end
 end

@@ -1,0 +1,14 @@
+<%# 🌐 UI · shared/offline/_status_banner — bandeau « Hors ligne », caché tant que le réseau répond et que la page n'est pas servie du cache %>
+<%# Rôle : dit à l'élève ou à l'enseignant qu'il lit une page gardée sur son téléphone ; le contrôleur offline-status l'affiche %>
+<%# UDR  : hors-connexion §3.1 · ADR : hors-connexion §4.3 · locals : role (student ou teacher, tout autre rôle : rien) %>
+<% role = role.to_s %>
+<% if %w[student teacher].include?(role) %>
+  <%= tag.div id: "offline_status", hidden: true, role: "status",
+              class: "mx-gutter mt-4 mb-4 flex items-center gap-2 rounded-card bg-mist px-4 py-2 text-sm text-ink lg:mx-8",
+              data: { controller: "offline-status", offline_status_offline_text_value: t("offline.banner.#{role}.offline"),
+                      offline_status_saved_on_template_value: t("offline.banner.saved_on"),
+                      offline_status_date_format_value: t("offline.banner.date_format") } do %>
+    <%= ui_icon "signal-slash", size: :sm %>
+    <span data-offline-status-target="text"></span>
+  <% end %>
+<% end %>
