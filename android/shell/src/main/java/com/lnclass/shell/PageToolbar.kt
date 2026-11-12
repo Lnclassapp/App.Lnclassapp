@@ -9,7 +9,7 @@ import com.google.android.material.appbar.MaterialToolbar
 class PageToolbar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = com.google.android.material.R.attr.toolbarStyle
+    defStyleAttr: Int = androidx.appcompat.R.attr.toolbarStyle // attribut d'AppCompat, plus réexporté par le R de Material 1.14
 ) : MaterialToolbar(context, attrs, defStyleAttr) {
     override fun setTitle(title: CharSequence?) {
         super.setTitle(title?.toString()?.substringBefore(TITLE_SEPARATOR))
