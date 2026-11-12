@@ -110,6 +110,11 @@ export async function getPack(key, exercisePublicId) {
   return null
 }
 
+// Retire le paquet d'un exercice (accès refusé par le serveur) ; absent : sans effet. Ajout au contrat : n'altère aucune autre fonction.
+export function deletePack(key, exercisePublicId) {
+  return inTransaction(key, [ "packs" ], "readwrite", ({ packs }) => asPromise(packs.delete(exercisePublicId))).then(() => undefined)
+}
+
 // copy : { client_copy_id, exercise_public_id, pack_token, started_at, submitted_at, answers, provisional_percent, status?, reason? }
 export function putCopy(key, copy) {
   if (!copy?.client_copy_id) return Promise.reject(new OfflineStoreError("invalid", "Copie sans identifiant"))

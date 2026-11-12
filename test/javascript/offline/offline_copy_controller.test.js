@@ -27,11 +27,13 @@ beforeEach(() => {
   fake = createFakeIndexedDB()
   globalThis.indexedDB = fake
   globalThis.document = { querySelector: () => ({ content: KEY }) }
-  shown = { result: null, paused: null, notSaved: { hidden: true } }
+  shown = { result: null, paused: null, notSaved: { hidden: true }, resultFailed: { hidden: true }, submitButton: { hidden: false, disabled: false } }
   controller = Object.create(OfflineCopyController.prototype)
   Object.defineProperties(controller, {
     exerciseValue: { value: "EX1" }, totalValue: { value: 1, configurable: true }, counterValue: { value: "%{answered}/%{total} répondues" },
-    timeFormatValue: { value: "%H h %M" }, hasCounterTarget: { value: false, configurable: true }, notSavedTarget: { value: shown.notSaved }
+    timeFormatValue: { value: "%H h %M" }, hasCounterTarget: { value: false, configurable: true }, notSavedTarget: { value: shown.notSaved },
+    hasResultFailedTarget: { value: true }, hasSubmitButtonTarget: { value: true },
+    resultFailedTarget: { value: shown.resultFailed }, submitButtonTarget: { value: shown.submitButton }
   })
   controller.fields = () => FIELDS
   controller.showResult = (pack, graded) => { shown.result = { pack, graded } }
@@ -69,14 +71,51 @@ test("rendre la copie : rangée en file avec UUID v4, heures de l'appareil, rép
   assert.equal(shown.notSaved.hidden, true)
 })
 
-test("deux copies rendues ont deux identifiants", async () => {
+test("deux appuis sans attendre : une seule copie rangée (verrou)", async () => {
+  await store.putPack(KEY, PACK)
+  await controller.connect()
+  await Promise.all([ submit(), submit() ])
+
+  assert.equal((await copies()).length, 1)
+})
+
+test("deux rendus distincts successifs ont deux identifiants", async () => {
   await store.putPack(KEY, PACK)
   await controller.connect()
   await submit()
+  controller.storing = false
   await submit()
 
   const ids = (await copies()).map((copy) => copy.client_copy_id)
   assert.equal(new Set(ids).size, 2)
+})
+
+test("échec du rangement : le verrou est libéré, un nouvel essai est possible", async () => {
+  await store.putPack(KEY, PACK)
+  await controller.connect()
+  fake.failNextPut = new DOMException("plein", "QuotaExceededError")
+  const original = console.error
+  console.error = () => {}
+  try { await submit() } finally { console.error = original }
+  await submit()
+
+  assert.equal((await copies()).length, 1)
+  assert.equal(controller.storing, true)
+})
+
+test("note impossible à afficher : copie gardée, console.error, message neutre, bouton masqué", async () => {
+  await store.putPack(KEY, PACK)
+  await controller.connect()
+  controller.showResult = () => { throw new Error("gabarit cassé") }
+  const errors = []
+  const original = console.error
+  console.error = (...args) => errors.push(args)
+  try { await submit() } finally { console.error = original }
+
+  assert.equal((await copies()).length, 1)
+  assert.equal(errors.length, 1)
+  assert.equal(shown.resultFailed.hidden, false)
+  assert.equal(shown.submitButton.hidden, true)
 })
 
 test("started_at est l'heure d'ouverture de la page, avant le rendu", async () => {

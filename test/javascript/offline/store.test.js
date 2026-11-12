@@ -151,3 +151,13 @@ test("runBeforePurge joue les fonctions dans l'ordre ; une qui échoue remonte a
   await assert.rejects(store.runBeforePurge())
   assert.deepEqual(calls, [ "deux", "trois" ])
 })
+
+test("deletePack retire le paquet d'un exercice, sans toucher aux autres ; absent : sans erreur", async () => {
+  await store.putPack(KEY, { exercise_public_id: "ex1", token: "a", questions: [] })
+  await store.putPack(KEY, { exercise_public_id: "ex2", token: "b", questions: [] })
+  await store.deletePack(KEY, "ex1")
+  await store.deletePack(KEY, "absent")
+
+  assert.equal(await store.getPack(KEY, "ex1"), null)
+  assert.equal((await store.getPack(KEY, "ex2")).token, "b")
+})

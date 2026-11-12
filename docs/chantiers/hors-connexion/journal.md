@@ -9,6 +9,7 @@
 | 2026-11-12 | Jeton signé du paquet (pas de table d'ouverture) | Borne l'heure et lie la copie à l'élève sans écrire en base | ADR §4.4 |
 | 2026-11-12 | Synchro dans un contrôleur distinct de la copie hors ligne | Lots B et C parallèles sans fichier commun | Non (plan) |
 | 2026-11-12 | Jeton du paquet chiffré (MessageEncryptor) et `OfflineKeepable` refuse `secret_response` / `no-store` | Revue sécurité du Lot 0 : identifiants internes lisibles (ADR-0029), garde P6 côté serveur | ADR §4.4 inchangé (contrat identique) |
+| 2026-11-12 | Contrat store.js étendu : deletePack, additif | Un refus du serveur (402, 403, 404) doit retirer le paquet déjà rangé (revue « pannes silencieuses », Lot B) | Non |
 | 2026-11-12 | Enseignant en lecture seule | Aucune correction manuelle n'existe (ADR-0115 option E) | ADR §4.6 |
 | 2026-11-12 | Lot 0 : les deux méthodes du port des sessions (`record_offline_copy`, `find_by_client_copy_id`) sont **implémentées** dans l'adaptateur dès le Lot 0, pas laissées au Lot C | `test/architecture/port_contracts_test.rb` exige que l'adaptateur définisse toute méthode du port : un port gelé sans adaptateur casse la CI. Le Lot C n'a plus qu'à les appeler (et à compléter les tests de rejeu concurrent) | Non |
 | 2026-11-12 | Lot 0 : étape Node `Tests: Node (JavaScript)` placée dans le groupe `lint`, entrées limitées à `test/javascript/`, `app/javascript/`, `package.json`, `config/ci.rb` | Pas de base de données ni de navigateur ; rejouée seulement quand le JavaScript bouge | Non |
