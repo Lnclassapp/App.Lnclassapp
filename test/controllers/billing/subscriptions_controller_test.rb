@@ -2,7 +2,9 @@ require "test_helper"
 
 # UDR-0158 §3: Mon abonnement, une seule page pour l'invitation (gratuit, bloqué), la saisie du code et le reçu.
 class Billing::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
+  # acces-beta : ces écrans décrivent l'après-bêta (gratuit, bloqué, abonné) ; la bêta est fermée par Offer::BETA_ENDS_ON.
   setup do
+    close_beta_for_this_test
     travel_to Time.utc(2026, 11, 9, 8)
     @school = create_school
     @student = create_student(classroom: create_classroom(school: @school))
