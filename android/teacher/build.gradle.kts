@@ -5,7 +5,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 // Clé d'envoi hors dépôt (ADR-0084 §4.8), la même que celle de l'app élèves : variables d'environnement, ou
@@ -34,6 +33,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        resValues = true // désactivé par défaut depuis AGP 9 ; les variantes posent app_name
     }
 
     signingConfigs {
