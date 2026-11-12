@@ -1,0 +1,3390 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Étude d'un dipôle passif : cas d'un résistor",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "A1",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "caracteristique-resistor",
+          "kind": "coordinate_plane",
+          "description": "Caractéristique d'un dipôle : l'intensité I est en abscisse (en mA) et la tension U en ordonnée (en V). Les points O(0 ; 0), A(10 ; 2), B(20 ; 4), C(30 ; 6) et D(40 ; 8) sont alignés sur une droite qui passe par l'origine : c'est la caractéristique d'un résistor. Le quotient U/I est le même en chaque point.",
+          "params": {
+            "xmin": -5,
+            "xmax": 50,
+            "ymin": -1,
+            "ymax": 10,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 10,
+                "y": 2
+              },
+              {
+                "id": "B",
+                "x": 20,
+                "y": 4
+              },
+              {
+                "id": "C",
+                "x": 30,
+                "y": 6
+              },
+              {
+                "id": "D",
+                "x": 40,
+                "y": 8
+              }
+            ],
+            "lines": [
+              {
+                "a": 0.2,
+                "b": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "caracteristique-non-lineaire",
+          "kind": "coordinate_plane",
+          "description": "Caractéristique d'un dipôle D : l'intensité I est en abscisse (en mA) et la tension U en ordonnée (en V). Les points O(0 ; 0), A(10 ; 1), B(20 ; 3), C(30 ; 6) et E(40 ; 10) sont reliés par des segments : la courbe monte de plus en plus vite, ce n'est pas une droite. Le quotient U/I change d'un point à l'autre.",
+          "params": {
+            "xmin": -5,
+            "xmax": 50,
+            "ymin": -1,
+            "ymax": 12,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 10,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 20,
+                "y": 3
+              },
+              {
+                "id": "C",
+                "x": 30,
+                "y": 6
+              },
+              {
+                "id": "E",
+                "x": 40,
+                "y": 10
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 10,
+                "y2": 1
+              },
+              {
+                "x1": 10,
+                "y1": 1,
+                "x2": 20,
+                "y2": 3
+              },
+              {
+                "x1": 20,
+                "y1": 3,
+                "x2": 30,
+                "y2": 6
+              },
+              {
+                "x1": 30,
+                "y1": 6,
+                "x2": 40,
+                "y2": 10
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "deux-dipoles-d1-d2",
+          "kind": "coordinate_plane",
+          "description": "Caractéristiques de deux dipôles, D1 et D2 : l'intensité I est en abscisse (en mA) et la tension U en ordonnée (en V). D1 est la droite qui passe par l'origine et par les points A1(10 ; 1), A2(20 ; 2) et A3(30 ; 3). D2 passe par l'origine et par les points B1(10 ; 0,5), B2(20 ; 1,5) et B3(30 ; 3) : ses segments se redressent, ce n'est pas une droite.",
+          "params": {
+            "xmin": -5,
+            "xmax": 40,
+            "ymin": -1,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "A1",
+                "x": 10,
+                "y": 1
+              },
+              {
+                "id": "A2",
+                "x": 20,
+                "y": 2
+              },
+              {
+                "id": "A3",
+                "x": 30,
+                "y": 3
+              },
+              {
+                "id": "B1",
+                "x": 10,
+                "y": 0.5
+              },
+              {
+                "id": "B2",
+                "x": 20,
+                "y": 1.5
+              },
+              {
+                "id": "B3",
+                "x": 30,
+                "y": 3
+              }
+            ],
+            "lines": [
+              {
+                "a": 0.1,
+                "b": 0
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 10,
+                "y2": 0.5
+              },
+              {
+                "x1": 10,
+                "y1": 0.5,
+                "x2": 20,
+                "y2": 1.5
+              },
+              {
+                "x1": 20,
+                "y1": 1.5,
+                "x2": 30,
+                "y2": 3
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Caractéristique d'un dipôle passif : reconnaître un résistor",
+          "remember": "Un **dipôle** est un composant électrique à **deux bornes**. Un dipôle **passif** ne produit pas d'énergie électrique : il en reçoit (un résistor, une lampe). La **caractéristique** d'un dipôle est la courbe $U = f(I)$ : la tension $U$ (en volts, V) est en ordonnée, l'intensité $I$ (en ampères, A) est en abscisse. Pour la mesurer, on place un ampèremètre **en série** avec le dipôle et un voltmètre **en dérivation** à ses bornes. La caractéristique d'un **résistor** est une **droite qui passe par l'origine** : le quotient $\\dfrac{U}{I}$ est constant. Ce quotient est la **résistance** $R$ du résistor, en **ohms** (Ω). Si le quotient change, le dipôle n'est pas un résistor.",
+          "method": [
+            "Relever les couples $(I ; U)$ du tableau ou de la courbe, en convertissant $I$ en ampères (1 mA $= 0{,}001$ A).",
+            "Calculer pour chaque couple le quotient $\\dfrac{U}{I}$.",
+            "Comparer les quotients : s'ils sont tous égaux, la caractéristique est une droite qui passe par l'origine.",
+            "Conclure : donner la résistance $R = \\dfrac{U}{I}$ en ohms si le dipôle est un résistor, sinon dire que ce n'est pas un résistor."
+          ],
+          "example": {
+            "statement": "On mesure aux bornes d'un dipôle les couples suivants : $I = 10$ mA et $U = 2$ V ; $I = 20$ mA et $U = 4$ V ; $I = 30$ mA et $U = 6$ V ; $I = 40$ mA et $U = 8$ V. Ce dipôle est-il un résistor ? Quelle est sa résistance ?",
+            "steps": [
+              "Relever : $(0{,}010 \\text{ A} ; 2 \\text{ V})$, $(0{,}020 \\text{ A} ; 4 \\text{ V})$, $(0{,}030 \\text{ A} ; 6 \\text{ V})$ et $(0{,}040 \\text{ A} ; 8 \\text{ V})$.",
+              "Calculer les quotients : $\\dfrac{2}{0{,}010} = 200$, $\\dfrac{4}{0{,}020} = 200$, $\\dfrac{6}{0{,}030} = 200$ et $\\dfrac{8}{0{,}040} = 200$.",
+              "Comparer : les quatre quotients sont égaux (200), donc les points sont alignés avec l'origine.",
+              "Conclure : le dipôle est un résistor, de résistance $R = 200\\ \\Omega$."
+            ]
+          },
+          "pitfall": "Ne conclus pas qu'un dipôle est un résistor parce que la tension **augmente** avec l'intensité, et n'oublie pas de convertir les mA en A. Contre-exemple : $(10 \\text{ mA} ; 1 \\text{ V})$, $(20 \\text{ mA} ; 3 \\text{ V})$, $(30 \\text{ mA} ; 6 \\text{ V})$. La tension augmente, mais les quotients valent $100\\ \\Omega$, $150\\ \\Omega$ et $200\\ \\Omega$ : ils ne sont pas constants, ce n'est pas un résistor. Enfin $\\dfrac{6}{30} = 0{,}2$ est faux : il faut calculer $\\dfrac{6}{0{,}030} = 200\\ \\Omega$.",
+          "figure": "caracteristique-resistor",
+          "exercise": [
+            {
+              "title": "Reconnaître un résistor sur une caractéristique",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever les couples, calculer les quotients, les comparer, conclure. Une figure montre la caractéristique d'un dipôle D non linéaire ; les données utiles sont rappelées dans chaque question.",
+              "exercise_type": "fixation",
+              "figure": "caracteristique-non-lineaire",
+              "questions": [
+                {
+                  "content": "Un dipôle dont la caractéristique est une droite qui passe par l'origine est un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : une droite passant par l'origine veut dire que le quotient $\\dfrac{U}{I}$ est le même en chaque point. C'est la définition de la résistance d'un résistor. L'affirmation est vraie. Une droite qui ne passe pas par l'origine ne convient pas : le quotient changerait.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'allure de la caractéristique d'un résistor ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer : pour un résistor, $\\dfrac{U}{I}$ est constant, donc $U$ est proportionnel à $I$ : la caractéristique est une droite qui passe par l'origine. Une courbe qui monte de plus en plus vite a un quotient qui change, comme celle d'un dipôle non résistor.",
+                  "answers": [
+                    {
+                      "content": "Une droite qui passe par l'origine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une droite horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une droite qui ne passe pas par l'origine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une courbe qui monte de plus en plus vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un dipôle est traversé par un courant de 30 mA quand la tension à ses bornes vaut 6 V. S'il se comporte en résistor, quelle est sa résistance ?",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $U = 6$ V et $I = 30$ mA $= 0{,}030$ A. Étape 2 — Calculer le quotient : $\\dfrac{U}{I} = \\dfrac{6}{0{,}030} = 200$. Étape 4 — Conclure : $R = 200\\ \\Omega$. Écrire $\\dfrac{6}{30} = 0{,}2$ sans convertir les mA en A est la faute du piège.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On mesure $(20 \\text{ mA} ; 3 \\text{ V})$, $(40 \\text{ mA} ; 6 \\text{ V})$ et $(60 \\text{ mA} ; 9 \\text{ V})$ aux bornes d'un dipôle. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : $(0{,}020 \\text{ A} ; 3 \\text{ V})$, $(0{,}040 \\text{ A} ; 6 \\text{ V})$, $(0{,}060 \\text{ A} ; 9 \\text{ V})$. Étape 2 — Calculer : $\\dfrac{3}{0{,}020} = 150$, $\\dfrac{6}{0{,}040} = 150$, $\\dfrac{9}{0{,}060} = 150$. Étape 3 — Comparer : les trois quotients sont égaux. Étape 4 — Conclure : résistor de $150\\ \\Omega$. Le résultat 0,15 vient d'un calcul fait avec les mA sans conversion ; l'augmentation de la tension ne prouve rien à elle seule.",
+                  "answers": [
+                    {
+                      "content": "C'est un résistor de résistance 150 Ω",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un résistor de résistance 0,15 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est pas un résistor, car la tension augmente",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un résistor de résistance 1,5 Ω",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si un dipôle est un résistor.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever les couples en ampères. Étape 2 — Calculer le quotient pour chaque couple. Étape 3 — Comparer les quotients. Étape 4 — Conclure. On ne peut pas comparer avant d'avoir calculé, ni conclure avant d'avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Relever les couples $(I ; U)$ en convertissant $I$ en ampères."
+                    },
+                    {
+                      "content": "Calculer le quotient $\\dfrac{U}{I}$ pour chaque couple."
+                    },
+                    {
+                      "content": "Comparer les quotients entre eux."
+                    },
+                    {
+                      "content": "Conclure en donnant la résistance ou en refusant le mot résistor."
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la tension aux bornes d'un dipôle augmente quand l'intensité augmente, ce dipôle est forcément un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer : avec $(10 \\text{ mA} ; 1 \\text{ V})$ et $(20 \\text{ mA} ; 3 \\text{ V})$, les quotients valent $\\dfrac{1}{0{,}010} = 100\\ \\Omega$ et $\\dfrac{3}{0{,}020} = 150\\ \\Omega$. Étape 3 — Comparer : ils sont différents. La tension augmente mais le dipôle n'est pas un résistor. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'un dipôle D passe par $(10 \\text{ mA} ; 1 \\text{ V})$, $(20 \\text{ mA} ; 3 \\text{ V})$, $(30 \\text{ mA} ; 6 \\text{ V})$ et $(40 \\text{ mA} ; 10 \\text{ V})$. Que peux-tu dire de D ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : $0{,}010$ A, $0{,}020$ A, $0{,}030$ A et $0{,}040$ A. Étape 2 — Calculer : $\\dfrac{1}{0{,}010} = 100$, $\\dfrac{3}{0{,}020} = 150$, $\\dfrac{6}{0{,}030} = 200$, $\\dfrac{10}{0{,}040} = 250$. Étape 3 — Comparer : les quotients sont tous différents. Étape 4 — Conclure : ce n'est pas un résistor. Choisir 100 ou 250 revient à ne regarder qu'un seul point.",
+                  "answers": [
+                    {
+                      "content": "Ce n'est pas un résistor : les quotients $U/I$ valent 100, 150, 200 et 250 Ω",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un résistor de résistance 250 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un résistor de résistance 100 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un résistor, car les quatre points sont croissants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor a une caractéristique droite qui passe par l'origine et par le point $(40 \\text{ mA} ; 8 \\text{ V})$. Quelle est sa résistance ?",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : le point donne $I = 40$ mA $= 0{,}040$ A et $U = 8$ V. Étape 2 — Calculer : $\\dfrac{U}{I} = \\dfrac{8}{0{,}040} = 200$. Étape 3 — Comparer : l'origine $(0 ; 0)$ donne $0/0$, on s'appuie donc sur ce point de la droite. Étape 4 — Conclure : $R = 200\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Tester un dipôle avec des mesures en mA et en V",
+              "statement": "Dans cet exercice, tu relèves des couples $(I ; U)$, tu calcules les quotients $\\dfrac{U}{I}$ puis tu conclus : le dipôle est-il un résistor ?",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis toujours les mA en A avant de calculer : 1 mA $= 0{,}001$ A. Un résistor a le même quotient $\\dfrac{U}{I}$ pour tous les couples.",
+              "questions": [
+                {
+                  "content": "Un dipôle est traversé par un courant de 25 mA quand la tension à ses bornes vaut 5 V. Calcule le quotient $\\dfrac{U}{I}$ en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $I = 25$ mA $= 0{,}025$ A et $U = 5$ V. Étape 2 — Calculer : $\\dfrac{U}{I} = \\dfrac{5}{0{,}025} = 200\\ \\Omega$. Si tu oublies la conversion, tu trouves $\\dfrac{5}{25} = 0{,}2$ : c'est faux, car l'intensité doit être en ampères.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On mesure $(10 \\text{ mA} ; 3 \\text{ V})$, $(20 \\text{ mA} ; 6 \\text{ V})$ et $(30 \\text{ mA} ; 9 \\text{ V})$ aux bornes d'un dipôle. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : les intensités sont $0{,}010$ A, $0{,}020$ A et $0{,}030$ A. Étape 2 — Calculer : $\\dfrac{3}{0{,}010} = 300$, $\\dfrac{6}{0{,}020} = 300$ et $\\dfrac{9}{0{,}030} = 300$ ohms. Étape 3 — Comparer : les trois quotients sont égaux. Étape 4 — Conclure : c'est un résistor de $300\\ \\Omega$. Le résultat $0{,}3\\ \\Omega$ vient d'une intensité laissée en mA ; il n'y a aucune raison que $U$ soit égale à $I$ ; et les quotients sont bien égaux.",
+                  "answers": [
+                    {
+                      "content": "C'est un résistor de résistance $300\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un résistor de résistance $0{,}3\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est pas un résistor, car la tension n'est pas égale à l'intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est pas un résistor, car les quotients sont différents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mesures $(10 \\text{ mA} ; 1 \\text{ V})$, $(20 \\text{ mA} ; 3 \\text{ V})$ et $(30 \\text{ mA} ; 6 \\text{ V})$ montrent que le dipôle est un résistor, puisque la tension augmente avec l'intensité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : $I = 0{,}010$ A, $0{,}020$ A et $0{,}030$ A. Étape 2 — Calculer : $\\dfrac{1}{0{,}010} = 100$, $\\dfrac{3}{0{,}020} = 150$ et $\\dfrac{6}{0{,}030} = 200$ ohms. Étape 3 — Comparer : les quotients sont différents. Étape 4 — Conclure : ce n'est pas un résistor. L'erreur est de croire qu'une tension qui augmente suffit : il faut un quotient constant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : la caractéristique d'un résistor est une droite qui passe par l'___ du repère.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer : si les quotients $\\dfrac{U}{I}$ sont tous égaux, la caractéristique est une droite qui passe par l'origine du repère, car $U = 0$ quand $I = 0$. Une droite qui ne passe pas par l'origine ne correspond pas à un résistor.",
+                  "answers": [
+                    {
+                      "content": "origine",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On trace la caractéristique d'un dipôle. Quelles affirmations sur le montage sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever : les couples $(I ; U)$ viennent de deux mesures. L'ampèremètre mesure l'intensité qui traverse le dipôle : il se place en série. Le voltmètre mesure la tension à ses bornes : il se place en dérivation. Inverser les deux appareils fausse les mesures et donc tous les quotients de l'étape 2.",
+                  "answers": [
+                    {
+                      "content": "L'ampèremètre se place en série avec le dipôle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le voltmètre se place en dérivation aux bornes du dipôle",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampèremètre se place en dérivation aux bornes du dipôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre se place en série avec le dipôle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque série de mesures à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever : convertir les mA en A. Étape 2 — Calculer : $\\dfrac{2}{0{,}010} = \\dfrac{4}{0{,}020} = 200$ ; $\\dfrac{5}{0{,}050} = \\dfrac{10}{0{,}100} = 100$ ; $\\dfrac{5}{0{,}010} = 500$ et $\\dfrac{5}{0{,}020} = 250$ ; $\\dfrac{1}{0{,}020} = 50$ et $\\dfrac{4}{0{,}040} = 100$. Étape 3 — Comparer : les quotients sont égaux dans les deux premiers cas seulement. Étape 4 — Conclure : résistor de $200\\ \\Omega$, résistor de $100\\ \\Omega$, et deux dipôles qui ne sont pas des résistors.",
+                  "answers": [
+                    {
+                      "content": "$(10 \\text{ mA} ; 2 \\text{ V})$ et $(20 \\text{ mA} ; 4 \\text{ V})$",
+                      "match": "Résistor de $200\\ \\Omega$"
+                    },
+                    {
+                      "content": "$(50 \\text{ mA} ; 5 \\text{ V})$ et $(100 \\text{ mA} ; 10 \\text{ V})$",
+                      "match": "Résistor de $100\\ \\Omega$"
+                    },
+                    {
+                      "content": "$(10 \\text{ mA} ; 5 \\text{ V})$ et $(20 \\text{ mA} ; 5 \\text{ V})$",
+                      "match": "Pas un résistor : quotients $500\\ \\Omega$ puis $250\\ \\Omega$"
+                    },
+                    {
+                      "content": "$(20 \\text{ mA} ; 1 \\text{ V})$ et $(40 \\text{ mA} ; 4 \\text{ V})$",
+                      "match": "Pas un résistor : quotients $50\\ \\Omega$ puis $100\\ \\Omega$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un technicien de Korhogo teste un résistor sur son banc de mesure.",
+            "questions": [
+              {
+                "content": "Il mesure $U = 4{,}5$ V pour $I = 15$ mA. Calcule la résistance du résistor.",
+                "question_type": "numeric",
+                "unit": "Ω",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $U = 4{,}5$ V et $I = 15$ mA $= 0{,}015$ A. Étape 2 — Calculer : $\\dfrac{4{,}5}{0{,}015} = 300$. Étape 4 — Conclure : $R = 300\\ \\Omega$.",
+                "answers": [
+                  {
+                    "content": "300",
+                    "correct": true
+                  }
+                ],
+                "hint": "Convertis d'abord 15 mA en ampères."
+              },
+              {
+                "content": "Un dipôle dont le quotient $U/I$ change d'un point à l'autre n'est pas un résistor.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : pour un résistor, le quotient est constant. S'il change, la caractéristique n'est pas une droite passant par l'origine. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les mesures $(10 \\text{ mA} ; 3 \\text{ V})$ et $(20 \\text{ mA} ; 6 \\text{ V})$ donnent quel résultat ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $0{,}010$ A et $0{,}020$ A. Étape 2 — Calculer : $\\dfrac{3}{0{,}010} = 300$ et $\\dfrac{6}{0{,}020} = 300$. Étape 3 — Comparer : égaux. Étape 4 — Conclure : résistor de $300\\ \\Omega$. Sans conversion, on trouverait 0,3 : c'est le piège.",
+                "answers": [
+                  {
+                    "content": "Un résistor de 300 Ω",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un résistor de 0,3 Ω",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un dipôle qui n'est pas un résistor",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Appliquer la loi d'Ohm",
+          "remember": "**Loi d'Ohm** : aux bornes d'un résistor de résistance $R$, la tension $U$ est proportionnelle à l'intensité $I$ qui le traverse : $U = R \\times I$. On en déduit $I = \\dfrac{U}{R}$ et $R = \\dfrac{U}{I}$. Unités du système international : $U$ en **volts** (V), $I$ en **ampères** (A), $R$ en **ohms** (Ω). Conversions : 1 mA $= 0{,}001$ A ; 1 kΩ $= 1\\,000\\ \\Omega$. Si on double la tension, l'intensité double aussi.",
+          "method": [
+            "Relever les données et les convertir en V, A et Ω.",
+            "Choisir la forme de la loi d'Ohm qui donne l'inconnue : $U = R \\times I$, $I = \\dfrac{U}{R}$ ou $R = \\dfrac{U}{I}$.",
+            "Remplacer les lettres par les valeurs numériques.",
+            "Calculer et donner le résultat avec son unité."
+          ],
+          "example": {
+            "statement": "Un résistor de résistance $R = 2$ kΩ est traversé par un courant d'intensité $I = 5$ mA. Calculer la tension $U$ à ses bornes.",
+            "steps": [
+              "Relever : $R = 2$ kΩ $= 2\\,000\\ \\Omega$ et $I = 5$ mA $= 0{,}005$ A ; l'inconnue est $U$.",
+              "Choisir : l'inconnue est la tension, donc $U = R \\times I$.",
+              "Remplacer : $U = 2\\,000 \\times 0{,}005$.",
+              "Calculer : $U = 10$ V."
+            ]
+          },
+          "pitfall": "Ne mélange pas les unités : ne multiplie pas des ohms par des milliampères. Contre-exemple : $R = 100\\ \\Omega$ et $I = 20$ mA. Écrire $U = 100 \\times 20 = 2\\,000$ V est absurde. Il faut convertir : $U = 100 \\times 0{,}020 = 2$ V. Attention aussi à ne pas écrire $U = \\dfrac{R}{I}$ : si $I$ double, $U$ double, il ne diminue pas.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer une tension, une intensité ou une résistance",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever et convertir, choisir la forme de la loi d'Ohm, remplacer, calculer avec l'unité.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est l'unité de la résistance dans le système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever et convertir : chaque grandeur a son unité du système international. La résistance se mesure en ohms (Ω), la tension en volts, l'intensité en ampères. Le watt n'est pas une unité de la loi d'Ohm.",
+                  "answers": [
+                    {
+                      "content": "l'ohm (Ω)",
+                      "correct": true
+                    },
+                    {
+                      "content": "le volt (V)",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'ampère (A)",
+                      "correct": false
+                    },
+                    {
+                      "content": "le watt (W)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $50\\ \\Omega$ est traversé par un courant de 0,2 A. Calcule la tension à ses bornes.",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $R = 50\\ \\Omega$ et $I = 0{,}2$ A, déjà en unités SI ; l'inconnue est $U$. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 50 \\times 0{,}2$. Étape 4 — Calculer : $U = 10$ V.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aux bornes d'un résistor de $60\\ \\Omega$, la tension vaut 12 V. Calcule l'intensité du courant en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $U = 12$ V et $R = 60\\ \\Omega$ ; l'inconnue est $I$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{60}$. Étape 4 — Calculer : $I = 0{,}2$ A.",
+                  "answers": [
+                    {
+                      "content": "0,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor est soumis à une tension de 9 V et traversé par un courant de 30 mA. Calcule sa résistance.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever et convertir : $U = 9$ V et $I = 30$ mA $= 0{,}030$ A. Étape 2 — Choisir : $R = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R = \\dfrac{9}{0{,}030}$. Étape 4 — Calculer : $R = 300\\ \\Omega$. Écrire $9/30 = 0{,}3$ est le piège de la conversion oubliée.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de 1,5 kΩ est traversé par un courant de 4 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever et convertir : $R = 1{,}5$ kΩ $= 1\\,500\\ \\Omega$ et $I = 4$ mA $= 0{,}004$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 1\\,500 \\times 0{,}004$. Étape 4 — Calculer : $U = 6$ V.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 2 kΩ = ___ Ω.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever et convertir : 1 kΩ vaut $1\\,000\\ \\Omega$, donc $2$ kΩ $= 2 \\times 1\\,000 = 2\\,000\\ \\Omega$. Cette conversion se fait avant d'appliquer la loi d'Ohm.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ traversé par un courant de 20 mA a une tension de 2 000 V à ses bornes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever et convertir : $I = 20$ mA $= 0{,}020$ A. Étape 3 — Remplacer : $U = 100 \\times 0{,}020$. Étape 4 — Calculer : $U = 2$ V. Le résultat 2 000 vient de $100 \\times 20$ avec les mA non convertis : c'est la faute du piège. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles relations sont exactes pour un résistor de résistance $R$, de tension $U$ et d'intensité $I$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Choisir : la loi d'Ohm s'écrit $U = R \\times I$ ; on en déduit $I = \\dfrac{U}{R}$ et $R = \\dfrac{U}{I}$. La relation $R = U \\times I$ est fausse : la résistance est un quotient. La relation $U = \\dfrac{R}{I}$ est fausse aussi : si $I$ double, $U$ double, il ne diminue pas.",
+                  "answers": [
+                    {
+                      "content": "$U = R \\times I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I = \\dfrac{U}{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R = U \\times I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = \\dfrac{R}{I}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On double la tension aux bornes d'un résistor. Que devient l'intensité qui le traverse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Choisir : $I = \\dfrac{U}{R}$ avec $R$ constante. Étape 3 — Remplacer : si $U$ devient $2U$, alors $I' = \\dfrac{2U}{R} = 2I$. L'intensité double : $U$ et $I$ sont proportionnelles. Elle ne diminue pas : ce serait le cas si on confondait avec $U = \\dfrac{R}{I}$.",
+                  "answers": [
+                    {
+                      "content": "Elle double",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est divisée par 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne change pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est multipliée par 4",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Utiliser la loi d'Ohm avec des kΩ et des mA",
+              "statement": "Dans cet exercice, tu appliques la loi d'Ohm en convertissant d'abord les données en V, A et Ω.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis avant de calculer : 1 mA $= 0{,}001$ A et 1 kΩ $= 1000\\ \\Omega$. Puis choisis la bonne forme : $U = R \\times I$, $I = \\dfrac{U}{R}$ ou $R = \\dfrac{U}{I}$.",
+              "questions": [
+                {
+                  "content": "Un résistor de 2 kΩ est traversé par un courant de 3 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 2$ kΩ $= 2000\\ \\Omega$ et $I = 3$ mA $= 0{,}003$ A. Étape 2 — Choisir : l'inconnue est $U$, donc $U = R \\times I$. Étape 3 — Remplacer : $U = 2000 \\times 0{,}003$. Étape 4 — Calculer : $U = 6$ V. Convertir d'abord évite l'erreur d'un facteur 1000 : calculer avec des kΩ et des mA sans les convertir donne une valeur fausse dès que les nombres changent.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aux bornes d'un résistor de 4 kΩ, la tension vaut 24 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $U = 24$ V et $R = 4$ kΩ $= 4000\\ \\Omega$. Étape 2 — Choisir : l'inconnue est $I$, donc $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{24}{4000}$. Étape 4 — Calculer : $I = 0{,}006$ A $= 6$ mA. Répondre $6$ A vient de la division $\\dfrac{24}{4}$ faite sans convertir les kΩ.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor soumis à une tension de 4,5 V est traversé par un courant de 15 mA. Quelle est sa résistance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever et convertir : $U = 4{,}5$ V et $I = 15$ mA $= 0{,}015$ A. Étape 2 — Choisir : $R = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R = \\dfrac{4{,}5}{0{,}015}$. Étape 4 — Calculer : $R = 300\\ \\Omega$. La valeur $0{,}3\\ \\Omega$ vient de l'intensité laissée en mA ; $67{,}5\\ \\Omega$ vient du produit $U \\times I$ au lieu du quotient.",
+                  "answers": [
+                    {
+                      "content": "$300\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}3\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$67{,}5\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 3 kΩ = ___ Ω (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever et convertir : 1 kΩ $= 1000\\ \\Omega$, donc 3 kΩ $= 3 \\times 1000 = 3000\\ \\Omega$. Écrire $30\\ \\Omega$ ou $300\\ \\Omega$ vient d'une erreur de zéros dans la conversion.",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer la tension aux bornes d'un résistor de $500\\ \\Omega$ traversé par 20 mA.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever et convertir : 20 mA $= 0{,}02$ A, avant tout calcul. Étape 2 — Choisir : l'inconnue est $U$, donc $U = R \\times I$. Étape 3 — Remplacer : $U = 500 \\times 0{,}02$. Étape 4 — Calculer : $U = 10$ V. On ne remplace jamais avant d'avoir converti.",
+                  "answers": [
+                    {
+                      "content": "Convertir : 20 mA $= 0{,}02$ A"
+                    },
+                    {
+                      "content": "Choisir la forme $U = R \\times I$"
+                    },
+                    {
+                      "content": "Remplacer : $U = 500 \\times 0{,}02$"
+                    },
+                    {
+                      "content": "Calculer : $U = 10$ V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on triple la tension aux bornes d'un résistor, l'intensité qui le traverse est aussi multipliée par 3.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Choisir : $I = \\dfrac{U}{R}$ avec $R$ constante. Étape 3 — Remplacer : si $U$ devient $3U$, alors $I$ devient $\\dfrac{3U}{R} = 3I$. La tension et l'intensité sont proportionnelles. Penser que l'intensité diminue vient de la confusion avec $U = \\dfrac{R}{I}$, qui est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un élève de Bouaké alimente un résistor de $100\\ \\Omega$ en laboratoire.",
+            "questions": [
+              {
+                "content": "Le courant vaut 30 mA. Complète : $I$ = ___ A, puis $U$ = ___ V.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever et convertir : $I = 30$ mA $= 0{,}03$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 100 \\times 0{,}03$. Étape 4 — Calculer : $U = 3$ V.",
+                "answers": [
+                  {
+                    "content": "0,03",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "1 mA = 0,001 A."
+              },
+              {
+                "content": "La tension aux bornes du résistor de $100\\ \\Omega$ vaut 5 V. Calcule l'intensité en ampères.",
+                "question_type": "numeric",
+                "unit": "A",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $U = 5$ V et $R = 100\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{5}{100}$. Étape 4 — Calculer : $I = 0{,}05$ A.",
+                "answers": [
+                  {
+                    "content": "0,05",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un résistor est traversé par 0,5 A sous 10 V. Quelle est sa résistance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $U = 10$ V et $I = 0{,}5$ A. Étape 2 — Choisir : $R = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R = \\dfrac{10}{0{,}5}$. Étape 4 — Calculer : $R = 20\\ \\Omega$. Le résultat 5 vient du produit $U \\times I$, qui n'est pas la résistance.",
+                "answers": [
+                  {
+                    "content": "20 Ω",
+                    "correct": true
+                  },
+                  {
+                    "content": "5 Ω",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,05 Ω",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résistors associés en série",
+          "remember": "Des résistors sont **en série** quand ils se suivent sans dérivation : ils sont traversés par la **même intensité** $I$. Les tensions s'**additionnent** : $U = U_1 + U_2 + \\dots$. L'ensemble se comporte comme un seul résistor, de **résistance équivalente** $R_s = R_1 + R_2 + \\dots$ Elle est toujours **plus grande** que chacune des résistances. On applique ensuite la loi d'Ohm à l'ensemble : $U = R_s \\times I$.",
+          "method": [
+            "Identifier les résistors montés en série (même intensité, aucune dérivation entre eux) et relever leurs résistances en ohms.",
+            "Écrire la formule $R_s = R_1 + R_2 + \\dots$",
+            "Remplacer les résistances par leurs valeurs.",
+            "Calculer la somme en ohms ; si on connaît la tension, appliquer la loi d'Ohm $I = \\dfrac{U}{R_s}$."
+          ],
+          "example": {
+            "statement": "Deux résistors $R_1 = 120\\ \\Omega$ et $R_2 = 180\\ \\Omega$ sont montés en série aux bornes d'un générateur de tension 12 V. Calculer la résistance équivalente puis l'intensité du courant.",
+            "steps": [
+              "Identifier : $R_1 = 120\\ \\Omega$ et $R_2 = 180\\ \\Omega$ sont en série, donc traversés par la même intensité.",
+              "Écrire : $R_s = R_1 + R_2$.",
+              "Remplacer : $R_s = 120 + 180$.",
+              "Calculer : $R_s = 300\\ \\Omega$, puis $I = \\dfrac{U}{R_s} = \\dfrac{12}{300} = 0{,}04$ A, soit 40 mA."
+            ]
+          },
+          "pitfall": "Ne confonds pas la série et la dérivation. En série, les résistances **s'additionnent** : le résultat est plus grand que chacune d'elles. Contre-exemple : deux résistors de $100\\ \\Omega$ en série donnent $100 + 100 = 200\\ \\Omega$, pas $50\\ \\Omega$. Si ton résultat est plus petit qu'une des résistances, tu as utilisé la formule de la dérivation.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer une résistance équivalente en série",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : identifier les résistors en série, écrire la somme, remplacer, calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Des résistors montés en série sont traversés par la même intensité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : en série, il n'y a aucune dérivation entre les résistors, donc le courant n'a qu'un chemin. L'intensité est la même dans chacun. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $100\\ \\Omega$ et $250\\ \\Omega$ sont montés en série. Calcule la résistance équivalente.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $R_1 = 100\\ \\Omega$ et $R_2 = 250\\ \\Omega$ en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 100 + 250$. Étape 4 — Calculer : $R_s = 350\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "350",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois résistors de $10\\ \\Omega$, $20\\ \\Omega$ et $30\\ \\Omega$ sont montés en série. Calcule la résistance équivalente.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : trois résistors en série. Étape 2 — Écrire : $R_s = R_1 + R_2 + R_3$. Étape 3 — Remplacer : $R_s = 10 + 20 + 30$. Étape 4 — Calculer : $R_s = 60\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de 1 kΩ et un résistor de $500\\ \\Omega$ sont en série. Calcule la résistance équivalente en ohms.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier et convertir : $R_1 = 1$ kΩ $= 1\\,000\\ \\Omega$ et $R_2 = 500\\ \\Omega$. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 1\\,000 + 500$. Étape 4 — Calculer : $R_s = 1\\,500\\ \\Omega$. Il faut des ohms des deux côtés avant d'additionner.",
+                  "answers": [
+                    {
+                      "content": "1500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $40\\ \\Omega$ et $60\\ \\Omega$ sont en série aux bornes d'un générateur de 20 V. Calcule l'intensité du courant en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $R_1 = 40\\ \\Omega$ et $R_2 = 60\\ \\Omega$ en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 40 + 60 = 100\\ \\Omega$. Étape 4 — Calculer : $I = \\dfrac{U}{R_s} = \\dfrac{20}{100} = 0{,}2$ A.",
+                  "answers": [
+                    {
+                      "content": "0,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors en série sont aux bornes d'un générateur de 12 V et le courant vaut 0,1 A. Le premier résistor vaut $50\\ \\Omega$. Quelle est la valeur du second ?",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $R_1 = 50\\ \\Omega$, $U = 12$ V et $I = 0{,}1$ A. Étape 4 — Calculer d'abord avec la loi d'Ohm : $R_s = \\dfrac{U}{I} = \\dfrac{12}{0{,}1} = 120\\ \\Omega$. Étapes 2 et 3 — Écrire et remplacer : $R_s = R_1 + R_2$, donc $120 = 50 + R_2$. Étape 4 — Calculer : $R_2 = 120 - 50 = 70\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "70",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ sont montés en série. Quelle est la résistance équivalente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : deux résistors de $30\\ \\Omega$ en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 30 + 30$. Étape 4 — Calculer : $R_s = 60\\ \\Omega$. La valeur 15 vient de la formule de la dérivation : c'est le piège. La valeur 900 vient d'un produit.",
+                  "answers": [
+                    {
+                      "content": "60 Ω",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "900 Ω",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies pour deux résistors $R_1$ et $R_2$ en série ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : en série, l'intensité est la même (pas de $I_1 + I_2$, qui est la règle de la dérivation). Les tensions s'additionnent : $U = U_1 + U_2$. Étape 4 — Calculer : $R_s = R_1 + R_2$ est plus grande que $R_1$, jamais plus petite.",
+                  "answers": [
+                    {
+                      "content": "La même intensité les traverse",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension aux bornes de l'ensemble est $U_1 + U_2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité totale est $I_1 + I_2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance équivalente est plus petite que $R_1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Résistance équivalente et intensité d'une association en série",
+              "statement": "Dans cet exercice, tu additionnes des résistances en série puis tu appliques la loi d'Ohm à l'ensemble.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "En série : même intensité, les tensions et les résistances s'additionnent. La résistance équivalente est plus grande que chacune des résistances.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $47\\ \\Omega$ et $33\\ \\Omega$ sont montés en série. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors se suivent sans dérivation, ils sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 47 + 33$. Étape 4 — Calculer : $R_s = 80\\ \\Omega$. Le résultat est plus grand que chacune des deux résistances, comme il se doit en série.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois résistors de $100\\ \\Omega$, $220\\ \\Omega$ et $180\\ \\Omega$ sont montés en série. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : trois résistors montés l'un après l'autre sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2 + R_3$. Étape 3 — Remplacer : $R_s = 100 + 220 + 180$. Étape 4 — Calculer : $R_s = 500\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $200\\ \\Omega$ et $300\\ \\Omega$ sont montés en série aux bornes d'un générateur de 10 V. Quelle est l'intensité du courant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 200 + 300 = 500\\ \\Omega$. Étape 4 — Calculer : $I = \\dfrac{U}{R_s} = \\dfrac{10}{500} = 0{,}02$ A $= 20$ mA. La valeur 50 mA utilise seulement $R_1$ ($\\dfrac{10}{200}$) ; 2 mA est une erreur de virgule ; 5000 mA vient du produit $10 \\times 500$.",
+                  "answers": [
+                    {
+                      "content": "20 mA",
+                      "correct": true
+                    },
+                    {
+                      "content": "50 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "5000 mA",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $100\\ \\Omega$ montés en série ont une résistance équivalente de $50\\ \\Omega$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire : en série, $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 100 + 100$. Étape 4 — Calculer : $R_s = 200\\ \\Omega$. Le résultat $50\\ \\Omega$ vient de la formule de la dérivation : il est plus petit qu'une des résistances, ce qui est impossible en série.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors sont montés en série. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : en série, aucune dérivation ne sépare les résistors, donc l'intensité est la même, et la tension totale est la somme des tensions : $U = U_1 + U_2$. Avoir la même tension et additionner les intensités sont des propriétés de la dérivation, pas de la série.",
+                  "answers": [
+                    {
+                      "content": "Ils sont traversés par la même intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les tensions à leurs bornes s'additionnent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils ont la même tension à leurs bornes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les intensités qui les traversent s'additionnent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois résistors de $10\\ \\Omega$, $20\\ \\Omega$ et $30\\ \\Omega$ sont montés en série. Complète : $R_s = $ ___ Ω (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Écrire : $R_s = R_1 + R_2 + R_3$. Étape 3 — Remplacer : $R_s = 10 + 20 + 30$. Étape 4 — Calculer : $R_s = 60\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un élève d'Aboisso monte des résistors en série sur une plaquette.",
+            "questions": [
+              {
+                "content": "Il associe en série $R_1 = 220\\ \\Omega$ et $R_2 = 330\\ \\Omega$. Calcule la résistance équivalente.",
+                "question_type": "numeric",
+                "unit": "Ω",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $R_1 = 220\\ \\Omega$ et $R_2 = 330\\ \\Omega$ en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 220 + 330$. Étape 4 — Calculer : $R_s = 550\\ \\Omega$.",
+                "answers": [
+                  {
+                    "content": "550",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Cet ensemble de $R_s = 400\\ \\Omega$ est branché sous 12 V. Calcule l'intensité en ampères.",
+                "question_type": "numeric",
+                "unit": "A",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : l'ensemble équivaut à un résistor de $400\\ \\Omega$. Étape 4 — Calculer avec la loi d'Ohm : $I = \\dfrac{U}{R_s} = \\dfrac{12}{400} = 0{,}03$ A, soit 30 mA.",
+                "answers": [
+                  {
+                    "content": "0,03",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise la tension par la résistance équivalente."
+              },
+              {
+                "content": "Deux résistors en série ont une résistance équivalente plus petite que chacun d'eux.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 4 — Calculer : une somme de nombres positifs est plus grande que chacun d'eux ; par exemple $100 + 100 = 200\\ \\Omega$. C'est en dérivation que la résistance équivalente est plus petite. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résistors associés en dérivation",
+          "remember": "Des résistors sont **en dérivation** (en parallèle) quand ils sont reliés aux **mêmes bornes** : ils ont la **même tension** $U$. Les intensités s'**additionnent** (loi des nœuds) : $I = I_1 + I_2 + \\dots$ La **résistance équivalente** $R_p$ vérifie $\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\dots$ Pour deux résistors : $R_p = \\dfrac{R_1 \\times R_2}{R_1 + R_2}$. Elle est toujours **plus petite** que la plus petite des résistances. Pour $n$ résistors identiques de résistance $R$ : $R_p = \\dfrac{R}{n}$.",
+          "method": [
+            "Identifier les résistors en dérivation (mêmes bornes, donc même tension) et relever leurs résistances en ohms.",
+            "Écrire la formule $\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\dots$",
+            "Remplacer les résistances par leurs valeurs et réduire les fractions au même dénominateur.",
+            "Calculer $\\dfrac{1}{R_p}$, puis retourner la fraction pour obtenir $R_p$ en ohms."
+          ],
+          "example": {
+            "statement": "Deux résistors $R_1 = 30\\ \\Omega$ et $R_2 = 60\\ \\Omega$ sont montés en dérivation. Calculer la résistance équivalente $R_p$.",
+            "steps": [
+              "Identifier : $R_1 = 30\\ \\Omega$ et $R_2 = 60\\ \\Omega$ sont aux mêmes bornes, donc en dérivation.",
+              "Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$.",
+              "Remplacer : $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60} = \\dfrac{2}{60} + \\dfrac{1}{60}$.",
+              "Calculer : $\\dfrac{1}{R_p} = \\dfrac{3}{60} = \\dfrac{1}{20}$, donc en retournant, $R_p = 20\\ \\Omega$."
+            ]
+          },
+          "pitfall": "Ne t'arrête pas à $\\dfrac{1}{R_p}$ et n'additionne pas les résistances. Contre-exemple : pour $30\\ \\Omega$ et $60\\ \\Omega$, additionner donne $90\\ \\Omega$, ce qui est impossible car $R_p$ doit être plus petite que $30\\ \\Omega$. Et $\\dfrac{1}{R_p} = \\dfrac{1}{20}$ ne veut pas dire $R_p = \\dfrac{1}{20}\\ \\Omega$ : en retournant, $R_p = 20\\ \\Omega$. Vérifie toujours que $R_p$ est plus petite que la plus petite résistance.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer une résistance équivalente en dérivation",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : identifier les résistors en dérivation, écrire la formule des inverses, remplacer, calculer puis retourner la fraction.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Des résistors montés en dérivation ont la même tension à leurs bornes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : des résistors en dérivation sont reliés aux mêmes deux points du circuit, donc la tension entre ces points est la même pour tous. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $20\\ \\Omega$ sont montés en dérivation. Calcule la résistance équivalente.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $R_1 = R_2 = 20\\ \\Omega$ en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$. Étape 3 — Remplacer : $\\dfrac{1}{20} + \\dfrac{1}{20} = \\dfrac{2}{20}$. Étape 4 — Calculer : $\\dfrac{1}{R_p} = \\dfrac{1}{10}$, donc $R_p = 10\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $6\\ \\Omega$ et $12\\ \\Omega$ sont montés en dérivation. Calcule la résistance équivalente.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $R_1 = 6\\ \\Omega$ et $R_2 = 12\\ \\Omega$ en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$. Étape 3 — Remplacer : $\\dfrac{1}{6} + \\dfrac{1}{12} = \\dfrac{2}{12} + \\dfrac{1}{12}$. Étape 4 — Calculer : $\\dfrac{1}{R_p} = \\dfrac{3}{12} = \\dfrac{1}{4}$, donc $R_p = 4\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre résistors identiques de $100\\ \\Omega$ sont montés en dérivation. Calcule la résistance équivalente.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : quatre résistors de $100\\ \\Omega$ en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = 4 \\times \\dfrac{1}{100}$. Étape 3 — Remplacer : $\\dfrac{1}{R_p} = \\dfrac{4}{100}$. Étape 4 — Calculer : $\\dfrac{1}{R_p} = \\dfrac{1}{25}$, donc $R_p = 25\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$ sont en dérivation aux bornes d'un générateur de 12 V. Calcule l'intensité totale débitée, en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $R_1 = 30\\ \\Omega$ et $R_2 = 60\\ \\Omega$ en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60}$. Étape 3 — Remplacer : $\\dfrac{2}{60} + \\dfrac{1}{60} = \\dfrac{3}{60}$. Étape 4 — Calculer : $R_p = 20\\ \\Omega$, puis la loi d'Ohm donne $I = \\dfrac{U}{R_p} = \\dfrac{12}{20} = 0{,}6$ A.",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $60\\ \\Omega$ est en dérivation avec un résistor de $30\\ \\Omega$, sous une tension de 12 V. Quelle est l'intensité qui traverse le résistor de $60\\ \\Omega$, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en dérivation, donc chacun reçoit la même tension de 12 V. Il n'y a pas besoin de $R_p$ pour une branche seule. Étape 4 — Calculer avec la loi d'Ohm : $I_2 = \\dfrac{U}{R_2} = \\dfrac{12}{60} = 0{,}2$ A.",
+                  "answers": [
+                    {
+                      "content": "0,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la résistance équivalente de $30\\ \\Omega$ et $60\\ \\Omega$ en dérivation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60}$. Étape 3 — Remplacer : $\\dfrac{2}{60} + \\dfrac{1}{60} = \\dfrac{3}{60} = \\dfrac{1}{20}$. Étape 4 — Calculer : en retournant, $R_p = 20\\ \\Omega$. La valeur 90 est la somme (série) ; 45 est la moyenne, qui n'a pas de sens ; 1/20 oublie de retourner la fraction.",
+                  "answers": [
+                    {
+                      "content": "20 Ω",
+                      "correct": true
+                    },
+                    {
+                      "content": "90 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "45 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "1/20 Ω",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour des résistors en dérivation, la résistance équivalente est ___ que la plus petite des résistances.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Calculer : par exemple $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60}$ donne $R_p = 20\\ \\Omega$, plus petit que $30\\ \\Omega$. Ajouter une branche offre un chemin de plus au courant : la résistance équivalente diminue. Elle n'est jamais plus grande.",
+                  "answers": [
+                    {
+                      "content": "plus petite",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus grande",
+                      "correct": false
+                    },
+                    {
+                      "content": "égale",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Résistance équivalente et courant total en dérivation",
+              "statement": "Dans cet exercice, tu utilises la formule des inverses pour des résistors en dérivation, puis la loi d'Ohm.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "En dérivation : même tension, les intensités s'additionnent, et $R_p$ est plus petite que la plus petite résistance. N'oublie pas de retourner la fraction à la fin.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $20\\ \\Omega$ et $5\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont reliés aux mêmes bornes, ils sont en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$. Étape 3 — Remplacer : $\\dfrac{1}{R_p} = \\dfrac{1}{20} + \\dfrac{1}{5} = \\dfrac{1}{20} + \\dfrac{4}{20} = \\dfrac{5}{20}$. Étape 4 — Calculer : $R_p = \\dfrac{20}{5} = 4\\ \\Omega$, plus petite que $5\\ \\Omega$, donc plausible.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre résistors identiques de $100\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : quatre résistors identiques reliés aux mêmes bornes sont en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = 4 \\times \\dfrac{1}{100}$. Étape 3 — Remplacer : $\\dfrac{1}{R_p} = \\dfrac{4}{100}$. Étape 4 — Calculer : $R_p = \\dfrac{100}{4} = 25\\ \\Omega$. C'est la formule $R_p = \\dfrac{R}{n}$ des résistors identiques.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $12\\ \\Omega$ et $6\\ \\Omega$ sont montés en dérivation. Quelle est la résistance équivalente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{12} + \\dfrac{1}{6}$. Étape 3 — Remplacer : $\\dfrac{1}{12} + \\dfrac{2}{12} = \\dfrac{3}{12} = \\dfrac{1}{4}$. Étape 4 — Calculer : $R_p = 4\\ \\Omega$. $18\\ \\Omega$ additionne les résistances (formule de la série) ; $0{,}25\\ \\Omega$ oublie de retourner la fraction ; $72\\ \\Omega$ prend le produit.",
+                  "answers": [
+                    {
+                      "content": "$4\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$18\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}25\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$72\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La résistance équivalente de deux résistors en dérivation est plus grande que chacune des deux résistances.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Calculer et vérifier : en dérivation, $R_p$ est toujours plus petite que la plus petite des résistances. Par exemple, $30\\ \\Omega$ et $60\\ \\Omega$ donnent $R_p = 20\\ \\Omega$. Une résistance équivalente plus grande vient de la formule de la série.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : des résistors en dérivation ont tous la même ___ à leurs bornes (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : des résistors en dérivation sont reliés aux mêmes bornes, donc ils ont la même tension. Ce sont les intensités qui se partagent, et qui s'additionnent : $I = I_1 + I_2$.",
+                  "answers": [
+                    {
+                      "content": "tension",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$ en dérivation sont alimentés par un générateur de 12 V. Calcule l'intensité totale du courant en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60}$. Étape 3 — Remplacer : $\\dfrac{2}{60} + \\dfrac{1}{60} = \\dfrac{3}{60} = \\dfrac{1}{20}$. Étape 4 — Calculer : $R_p = 20\\ \\Omega$, puis $I = \\dfrac{U}{R_p} = \\dfrac{12}{20} = 0{,}6$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un électricien d'Adjamé associe des résistors en dérivation.",
+            "questions": [
+              {
+                "content": "Il associe en dérivation deux résistors de $10\\ \\Omega$ et $40\\ \\Omega$. Calcule la résistance équivalente.",
+                "question_type": "numeric",
+                "unit": "Ω",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $R_1 = 10\\ \\Omega$ et $R_2 = 40\\ \\Omega$ en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{10} + \\dfrac{1}{40}$. Étape 3 — Remplacer : $\\dfrac{4}{40} + \\dfrac{1}{40} = \\dfrac{5}{40}$. Étape 4 — Calculer : $\\dfrac{1}{R_p} = \\dfrac{1}{8}$, donc $R_p = 8\\ \\Omega$.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le dénominateur commun de 10 et 40 est 40."
+              },
+              {
+                "content": "Deux résistors de $50\\ \\Omega$ en dérivation ont une résistance équivalente de $100\\ \\Omega$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{50} + \\dfrac{1}{50} = \\dfrac{2}{50} = \\dfrac{1}{25}$. Étape 4 — Calculer : $R_p = 25\\ \\Omega$. La valeur 100 est la somme, valable en série seulement. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle propriété est vraie pour deux résistors en dérivation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : en dérivation, les résistors sont reliés aux mêmes bornes, donc la tension est la même. Ce sont les intensités qui s'additionnent ($I = I_1 + I_2$), et ce sont les résistances en série qui s'additionnent.",
+                "answers": [
+                  {
+                    "content": "Ils ont la même tension à leurs bornes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils sont traversés par la même intensité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Leurs résistances s'additionnent",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les mesures d'un résistor au laboratoire de Man",
+          "statement": "Au laboratoire du lycée de Man, un élève relève la caractéristique d'un dipôle D. Il mesure la tension à ses bornes pour plusieurs intensités : 10 mA et 2 V, 20 mA et 4 V, 30 mA et 6 V, 40 mA et 8 V. Les points sont alignés avec l'origine. Les explications reprennent la méthode de la fiche sur la caractéristique et sur la loi d'Ohm.",
+          "exercise_type": "fixation",
+          "figure": "caracteristique-resistor",
+          "questions": [
+            {
+              "content": "La caractéristique de D est une droite qui passe par l'origine.",
+              "question_type": "true_false",
+              "explanation": "Méthode : on relève les couples $(I ; U)$ puis on compare les quotients. Étape 1 — Relever : $(0{,}010 \\text{ A} ; 2 \\text{ V})$, $(0{,}020 \\text{ A} ; 4 \\text{ V})$, $(0{,}030 \\text{ A} ; 6 \\text{ V})$, $(0{,}040 \\text{ A} ; 8 \\text{ V})$. Étape 2 — Calculer : tous les quotients $\\dfrac{U}{I}$ valent 200. Étape 3 — Comparer : ils sont égaux, donc la droite passe par l'origine. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule la résistance de D, en ohms.",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode : on convertit puis on calcule $\\dfrac{U}{I}$. Étape 1 — Relever : prends un couple, par exemple $U = 8$ V et $I = 40$ mA $= 0{,}040$ A. Étape 2 — Calculer : $R = \\dfrac{8}{0{,}040} = 200$. Étape 4 — Conclure : $R = 200\\ \\Omega$. Sans conversion on trouverait 0,2 : c'est la faute du piège.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On impose maintenant à D une intensité de 25 mA. Calcule la tension à ses bornes, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm $U = R \\times I$ avec des unités SI. Étape 1 — Relever et convertir : $R = 200\\ \\Omega$ et $I = 25$ mA $= 0{,}025$ A. Étape 2 — Choisir : l'inconnue est $U$, donc $U = R \\times I$. Étape 3 — Remplacer : $U = 200 \\times 0{,}025$. Étape 4 — Calculer : $U = 5$ V. Écrire $200 \\times 25 = 5\\,000$ V serait la faute des unités mélangées.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On applique à D une tension de 9 V. Calcule l'intensité du courant en milliampères.",
+              "question_type": "numeric",
+              "unit": "mA",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm $I = \\dfrac{U}{R}$. Étape 1 — Relever : $U = 9$ V et $R = 200\\ \\Omega$. Étape 2 — Choisir : l'inconnue est $I$, donc $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{9}{200}$. Étape 4 — Calculer : $I = 0{,}045$ A, soit 45 mA (on multiplie les ampères par 1 000).",
+              "answers": [
+                {
+                  "content": "45",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour mesurer la tension aux bornes de D, comment branche-t-on le voltmètre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du montage : l'ampèremètre mesure l'intensité qui traverse le dipôle, donc il se place en série. Le voltmètre mesure une différence de potentiel entre deux points, donc il se place en dérivation, aux deux bornes de D. Un voltmètre en série empêcherait le courant de passer, et branché aux bornes de l'ampèremètre il ne mesurerait pas la tension de D.",
+              "answers": [
+                {
+                  "content": "En dérivation, aux bornes de D",
+                  "correct": true
+                },
+                {
+                  "content": "En série avec D",
+                  "correct": false
+                },
+                {
+                  "content": "Après le générateur, sans lien avec D",
+                  "correct": false
+                },
+                {
+                  "content": "En dérivation, mais aux bornes de l'ampèremètre seulement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque grandeur à son unité du système international.",
+              "question_type": "matching",
+              "explanation": "Méthode de la loi d'Ohm, étape 1 : relever les données en unités SI. La tension $U$ se mesure en volts, l'intensité $I$ en ampères, la résistance $R$ en ohms. Ces trois unités sont liées par $U = R \\times I$.",
+              "answers": [
+                {
+                  "content": "La tension",
+                  "match": "le volt (V)"
+                },
+                {
+                  "content": "L'intensité",
+                  "match": "l'ampère (A)"
+                },
+                {
+                  "content": "La résistance",
+                  "match": "l'ohm (Ω)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux résistors en série pour une maquette à Bouaké",
+          "statement": "Aminata construit une maquette à Bouaké. Elle monte en série deux résistors, $R_1 = 150\\ \\Omega$ et $R_2 = 350\\ \\Omega$, aux bornes d'un générateur de tension continue 10 V. Les explications reprennent la méthode des résistors en série puis celle de la loi d'Ohm.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule la résistance équivalente de l'association.",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode des résistors en série. Étape 1 — Identifier : $R_1 = 150\\ \\Omega$ et $R_2 = 350\\ \\Omega$ sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 150 + 350$. Étape 4 — Calculer : $R_s = 500\\ \\Omega$.",
+              "answers": [
+                {
+                  "content": "500",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'intensité du courant dans le circuit, en milliampères.",
+              "question_type": "numeric",
+              "unit": "mA",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm appliquée à l'ensemble. Étape 1 — Relever : $U = 10$ V et $R_s = 500\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R_s}$. Étape 3 — Remplacer : $I = \\dfrac{10}{500}$. Étape 4 — Calculer : $I = 0{,}02$ A, soit 20 mA.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la tension aux bornes de $R_1$, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm sur un seul résistor. Étape 1 — Relever : en série, l'intensité est la même partout : $I = 0{,}02$ A, et $R_1 = 150\\ \\Omega$. Étape 2 — Choisir : $U_1 = R_1 \\times I$. Étape 3 — Remplacer : $U_1 = 150 \\times 0{,}02$. Étape 4 — Calculer : $U_1 = 3$ V.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la tension aux bornes de $R_2$, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm sur un seul résistor. Étape 1 — Relever : $I = 0{,}02$ A et $R_2 = 350\\ \\Omega$. Étape 2 — Choisir : $U_2 = R_2 \\times I$. Étape 3 — Remplacer : $U_2 = 350 \\times 0{,}02$. Étape 4 — Calculer : $U_2 = 7$ V. Contrôle : $U_1 + U_2 = 3 + 7 = 10$ V, la tension du générateur.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La somme des tensions $U_1 + U_2$ est égale à la tension du générateur.",
+              "question_type": "true_false",
+              "explanation": "Dans un montage en série, les tensions s'additionnent. Étape 1 — Relever : $U_1 = 3$ V et $U_2 = 7$ V. Étape 4 — Calculer : $3 + 7 = 10$ V, qui est la tension du générateur. L'affirmation est vraie. Cette vérification permet de repérer une erreur de calcul.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aminata trouve par erreur une résistance équivalente de $105\\ \\Omega$. Quelle erreur a-t-elle faite ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : les résistors sont en série, donc $R_s = 150 + 350 = 500\\ \\Omega$. La valeur 105 correspond à $\\dfrac{150 \\times 350}{150 + 350} = 105$, c'est-à-dire à la formule de la dérivation, qui donne un résultat plus petit que chaque résistance. En série, le résultat doit être plus grand que 350 Ω. Additionner serait la bonne méthode.",
+              "answers": [
+                {
+                  "content": "Elle a utilisé la formule des résistors en dérivation",
+                  "correct": true
+                },
+                {
+                  "content": "Elle a additionné les deux résistances",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a oublié de convertir des mA en A",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a appliqué $U = \\dfrac{R}{I}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un montage mixte dans un atelier de Treichville",
+          "statement": "Dans un atelier de réparation de Treichville, un technicien alimente par un générateur de 12 V deux branches placées en dérivation. La branche A contient un seul résistor de $60\\ \\Omega$. La branche B contient deux résistors en série, de $10\\ \\Omega$ et de $20\\ \\Omega$. Les justifications reprennent les méthodes de la série, de la dérivation et de la loi d'Ohm.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule la résistance de la branche B, en ohms.",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode des résistors en série. Étape 1 — Identifier : $10\\ \\Omega$ et $20\\ \\Omega$ sont dans la même branche, sans dérivation entre eux : ils sont en série. Étape 2 — Écrire : $R_B = R_1 + R_2$. Étape 3 — Remplacer : $R_B = 10 + 20$. Étape 4 — Calculer : $R_B = 30\\ \\Omega$.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'intensité qui traverse la branche A, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm. Étape 1 — Relever : en dérivation, chaque branche reçoit la tension du générateur, $U = 12$ V ; $R_A = 60\\ \\Omega$. Étape 2 — Choisir : $I_A = \\dfrac{U}{R_A}$. Étape 3 — Remplacer : $I_A = \\dfrac{12}{60}$. Étape 4 — Calculer : $I_A = 0{,}2$ A.",
+              "answers": [
+                {
+                  "content": "0,2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'intensité qui traverse la branche B, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm. Étape 1 — Relever : $U = 12$ V (même tension que la branche A) et $R_B = 30\\ \\Omega$. Étape 2 — Choisir : $I_B = \\dfrac{U}{R_B}$. Étape 3 — Remplacer : $I_B = \\dfrac{12}{30}$. Étape 4 — Calculer : $I_B = 0{,}4$ A.",
+              "answers": [
+                {
+                  "content": "0,4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'intensité totale débitée par le générateur, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode : loi des nœuds. En dérivation, les intensités des branches s'additionnent. Étape 1 — Relever : $I_A = 0{,}2$ A et $I_B = 0{,}4$ A. Étape 2 — Écrire : $I = I_A + I_B$. Étape 3 — Remplacer : $I = 0{,}2 + 0{,}4$. Étape 4 — Calculer : $I = 0{,}6$ A.",
+              "answers": [
+                {
+                  "content": "0,6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la tension aux bornes du résistor de $10\\ \\Omega$ de la branche B, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm sur un résistor. Étape 1 — Relever : dans la branche B, l'intensité est la même dans les deux résistors en série : $I_B = 0{,}4$ A, et $R = 10\\ \\Omega$. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 10 \\times 0{,}4$. Étape 4 — Calculer : $U = 4$ V. Le résistor de $20\\ \\Omega$ a $8$ V, et $4 + 8 = 12$ V.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la résistance équivalente des branches A et B en dérivation, en ohms.",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode des résistors en dérivation. Étape 1 — Identifier : $R_A = 60\\ \\Omega$ et $R_B = 30\\ \\Omega$ sont aux mêmes bornes. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{60} + \\dfrac{1}{30}$. Étape 3 — Remplacer : $\\dfrac{1}{60} + \\dfrac{2}{60} = \\dfrac{3}{60}$. Étape 4 — Calculer : $\\dfrac{1}{R_p} = \\dfrac{1}{20}$, donc $R_p = 20\\ \\Omega$.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Vérifie que la valeur de $R_p$ est cohérente avec l'intensité totale et la tension du générateur.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Applique la loi d'Ohm à l'ensemble avec $R_p$",
+                "Remplace par les valeurs numériques (12 V et 20 Ω)",
+                "Retrouve 0,6 A et conclut à la cohérence"
+              ],
+              "explanation": "Corrigé modèle : on applique la loi d'Ohm à l'ensemble, $I = \\dfrac{U}{R_p}$. On remplace : $I = \\dfrac{12}{20} = 0{,}6$ A. On retrouve l'intensité totale trouvée avec la loi des nœuds ($0{,}2 + 0{,}4 = 0{,}6$ A) : la valeur $R_p = 20\\ \\Omega$ est cohérente. Barème : loi d'Ohm écrite avec $R_p$ (0,5), application numérique (1), conclusion (0,5).",
+              "answers": [],
+              "starter": "On applique la loi d'Ohm à l'ensemble : "
+            }
+          ]
+        },
+        {
+          "title": "Deux dipôles étudiés au lycée de Daloa",
+          "statement": "Fatou, élève au lycée de Daloa, relève les caractéristiques de deux dipôles D1 et D2. Pour D1 : $(10 \\text{ mA} ; 1 \\text{ V})$, $(20 \\text{ mA} ; 2 \\text{ V})$, $(30 \\text{ mA} ; 3 \\text{ V})$. Pour D2 : $(10 \\text{ mA} ; 0{,}5 \\text{ V})$, $(20 \\text{ mA} ; 1{,}5 \\text{ V})$, $(30 \\text{ mA} ; 3 \\text{ V})$. Ensuite, elle associe D1 avec un résistor $R' = 300\\ \\Omega$ sous un générateur de 12 V. Les justifications reprennent les méthodes de la leçon.",
+          "exercise_type": "evaluation",
+          "figure": "deux-dipoles-d1-d2",
+          "questions": [
+            {
+              "content": "Lequel de ces deux dipôles peut être un résistor ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la caractéristique. Étape 1 — Relever : D1 et D2 : $0{,}010$, $0{,}020$, $0{,}030$ A. Étape 2 — Calculer : D1 : $\\dfrac{1}{0{,}010} = \\dfrac{2}{0{,}020} = \\dfrac{3}{0{,}030} = 100$ ; D2 : $\\dfrac{0{,}5}{0{,}010} = 50$, $\\dfrac{1{,}5}{0{,}020} = 75$, $\\dfrac{3}{0{,}030} = 100$. Étape 3 — Comparer : les quotients de D1 sont égaux, ceux de D2 non. Étape 4 — Conclure : seul D1 est un résistor. D2 a un quotient égal à 100 au dernier point seulement.",
+              "answers": [
+                {
+                  "content": "D1 seulement",
+                  "correct": true
+                },
+                {
+                  "content": "D2 seulement",
+                  "correct": false
+                },
+                {
+                  "content": "D1 et D2",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun des deux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule la résistance de D1, en ohms.",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode de la caractéristique, puis loi d'Ohm. Étape 1 — Relever : $U = 3$ V et $I = 30$ mA $= 0{,}030$ A. Étape 2 — Calculer : $R = \\dfrac{U}{I} = \\dfrac{3}{0{,}030} = 100$. Étape 4 — Conclure : $R_1 = 100\\ \\Omega$.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi D2 n'est pas un résistor, en utilisant les quotients $U/I$.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Convertit les intensités en ampères",
+                "Calcule les quotients 50, 75 et 100 Ω",
+                "Conclut que les quotients ne sont pas constants"
+              ],
+              "explanation": "Corrigé modèle : je convertis les intensités en ampères : 0,010 A, 0,020 A et 0,030 A. Je calcule les quotients : $\\dfrac{0{,}5}{0{,}010} = 50\\ \\Omega$, $\\dfrac{1{,}5}{0{,}020} = 75\\ \\Omega$ et $\\dfrac{3}{0{,}030} = 100\\ \\Omega$. Ces quotients ne sont pas égaux : D2 n'est pas un résistor, car sa caractéristique n'est pas une droite passant par l'origine. Barème : conversion (0,5), trois quotients (1), conclusion (0,5).",
+              "answers": [],
+              "starter": "Je convertis les intensités en ampères, puis je calcule "
+            },
+            {
+              "content": "D1 et le résistor $R' = 300\\ \\Omega$ sont montés en série sous 12 V. Calcule l'intensité du courant, en milliampères.",
+              "question_type": "numeric",
+              "unit": "mA",
+              "tolerance": 0,
+              "explanation": "Méthode des résistors en série puis loi d'Ohm. Étape 1 — Identifier : $R_1 = 100\\ \\Omega$ et $R' = 300\\ \\Omega$ en série. Étape 2 — Écrire : $R_s = R_1 + R'$. Étape 3 — Remplacer : $R_s = 100 + 300 = 400\\ \\Omega$. Étape 4 — Calculer : $I = \\dfrac{U}{R_s} = \\dfrac{12}{400} = 0{,}03$ A, soit 30 mA.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce montage en série, calcule la tension aux bornes de D1, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode : loi d'Ohm. Étape 1 — Relever : en série, l'intensité est la même, $I = 0{,}03$ A, et $R_1 = 100\\ \\Omega$. Étape 2 — Choisir : $U_1 = R_1 \\times I$. Étape 3 — Remplacer : $U_1 = 100 \\times 0{,}03$. Étape 4 — Calculer : $U_1 = 3$ V. La tension aux bornes de $R'$ est $300 \\times 0{,}03 = 9$ V et $3 + 9 = 12$ V.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On monte maintenant D1 et $R' = 300\\ \\Omega$ en dérivation. Calcule la résistance équivalente, en ohms.",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode des résistors en dérivation. Étape 1 — Identifier : $100\\ \\Omega$ et $300\\ \\Omega$ aux mêmes bornes. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{100} + \\dfrac{1}{300}$. Étape 3 — Remplacer : $\\dfrac{3}{300} + \\dfrac{1}{300} = \\dfrac{4}{300}$. Étape 4 — Calculer : $\\dfrac{1}{R_p} = \\dfrac{1}{75}$, donc $R_p = 75\\ \\Omega$.",
+              "answers": [
+                {
+                  "content": "75",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel montage fait débiter la plus grande intensité au générateur de 12 V ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : loi d'Ohm pour chaque montage. Étape 1 — Relever : $U = 12$ V ; $R_s = 400\\ \\Omega$ et $R_p = 75\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $\\dfrac{12}{400} = 0{,}03$ A en série ; $\\dfrac{12}{75} = 0{,}16$ A en dérivation. Étape 4 — Comparer : la plus petite résistance donne la plus grande intensité, donc la dérivation. D2 n'intervient pas dans ces montages.",
+              "answers": [
+                {
+                  "content": "Le montage en dérivation (75 Ω → 0,16 A)",
+                  "correct": true
+                },
+                {
+                  "content": "Le montage en série (400 Ω → 0,03 A)",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux débitent la même intensité",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas le savoir sans connaître D2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fatou affirme : « Si la tension double aux bornes de D1, l'intensité double aussi. » A-t-elle raison ? Justifie avec la loi d'Ohm et donne un exemple chiffré.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit qu'elle a raison (D1 est un résistor)",
+                "Utilise $I = \\dfrac{U}{R}$ avec $R$ constante",
+                "Donne un exemple chiffré cohérent (ex. 3 V puis 6 V)",
+                "Fait le lien avec la caractéristique en droite"
+              ],
+              "explanation": "Corrigé modèle : oui, Fatou a raison. D1 est un résistor de résistance $R = 100\\ \\Omega$ constante, donc $I = \\dfrac{U}{R}$ : si $U$ double, $I$ double. Exemple : sous 3 V, $I = \\dfrac{3}{100} = 0{,}03$ A ; sous 6 V, $I = \\dfrac{6}{100} = 0{,}06$ A, soit le double. C'est ce que montre la droite passant par l'origine de la caractéristique de D1. Barème : conclusion (0,5), loi d'Ohm avec $R$ constante (1), exemple chiffré (1), lien avec la droite (0,5).",
+              "answers": [],
+              "starter": "Oui ou non : D1 est un résistor, donc "
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur le résistor",
+          "notions": "caractéristique d'un dipôle passif et reconnaissance d'un résistor ; loi d'Ohm et conversions (mA, kΩ) ; résistance équivalente de résistors en série ; résistance équivalente de résistors en dérivation ; intensité totale et loi des nœuds.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève relève les mesures d'un dipôle D : $(10 \\text{ mA} ; 4 \\text{ V})$, $(20 \\text{ mA} ; 8 \\text{ V})$, $(30 \\text{ mA} ; 12 \\text{ V})$ et $(40 \\text{ mA} ; 16 \\text{ V})$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis les mA en A avant de calculer le quotient $\\dfrac{U}{I}$ : 1 mA $= 0{,}001$ A.",
+              "questions": [
+                {
+                  "content": "Un dipôle D est traversé par 20 mA quand la tension à ses bornes est 8 V. Calcule le quotient $\\dfrac{U}{I}$ en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $I = 20$ mA $= 0{,}020$ A et $U = 8$ V. Étape 2 — Calculer : $\\dfrac{U}{I} = \\dfrac{8}{0{,}020} = 400\\ \\Omega$. Sans conversion, on trouverait $0{,}4$, une valeur fausse d'un facteur 1000.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mesures $(10 \\text{ mA} ; 4 \\text{ V})$, $(20 \\text{ mA} ; 8 \\text{ V})$, $(30 \\text{ mA} ; 12 \\text{ V})$ et $(40 \\text{ mA} ; 16 \\text{ V})$ sont celles d'un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : intensités $0{,}010$, $0{,}020$, $0{,}030$ et $0{,}040$ A. Étape 2 — Calculer : $\\dfrac{4}{0{,}010} = \\dfrac{8}{0{,}020} = \\dfrac{12}{0{,}030} = \\dfrac{16}{0{,}040} = 400\\ \\Omega$. Étape 3 — Comparer : les quotients sont égaux. Étape 4 — Conclure : c'est un résistor de $400\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour relever la caractéristique d'un dipôle, comment place-t-on l'ampèremètre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : l'ampèremètre mesure l'intensité du courant qui traverse le dipôle, donc il doit être traversé par le même courant : il se place en série. En dérivation, il court-circuiterait le dipôle.",
+                  "answers": [
+                    {
+                      "content": "En série avec le dipôle",
+                      "correct": true
+                    },
+                    {
+                      "content": "En dérivation aux bornes du dipôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "N'importe où dans le circuit, sans importance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aux bornes du générateur seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'unité de la résistance est l'___ (nom de l'unité, au singulier, en toutes lettres).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : la résistance $R = \\dfrac{U}{I}$ s'exprime en ohms, de symbole Ω. Le volt est l'unité de la tension et l'ampère celle de l'intensité.",
+                  "answers": [
+                    {
+                      "content": "ohm",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $400\\ \\Omega$ est traversé par un courant de 25 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 400\\ \\Omega$ et $I = 25$ mA $= 0{,}025$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 400 \\times 0{,}025$. Étape 4 — Calculer : $U = 10$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au lycée de Bouaké, on étudie un résistor soumis à différentes tensions. On utilise la loi d'Ohm $U = R \\times I$ et ses deux autres formes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Choisis la forme de la loi d'Ohm qui donne l'inconnue, après avoir converti en V, A et Ω.",
+              "questions": [
+                {
+                  "content": "Un résistor de $220\\ \\Omega$ est traversé par un courant de 0,05 A. Calcule la tension à ses bornes.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $R = 220\\ \\Omega$ et $I = 0{,}05$ A (déjà en ampères). Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 220 \\times 0{,}05$. Étape 4 — Calculer : $U = 11$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $450\\ \\Omega$ est soumis à une tension de 9 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 9$ V et $R = 450\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{9}{450}$. Étape 4 — Calculer : $I = 0{,}02$ A $= 20$ mA.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor soumis à une tension de 6 V est traversé par un courant de 15 mA. Calcule sa résistance.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $U = 6$ V et $I = 15$ mA $= 0{,}015$ A. Étape 2 — Choisir : $R = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R = \\dfrac{6}{0{,}015}$. Étape 4 — Calculer : $R = 400\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles relations sont exactes pour un résistor de résistance $R$, de tension $U$ et d'intensité $I$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Choisir : la loi d'Ohm s'écrit $U = R \\times I$, d'où $R = \\dfrac{U}{I}$ et $I = \\dfrac{U}{R}$. $I = U \\times R$ et $U = \\dfrac{R}{I}$ sont fausses : la seconde ferait diminuer $U$ quand $I$ augmente, alors que $U$ et $I$ sont proportionnelles.",
+                  "answers": [
+                    {
+                      "content": "$U = R \\times I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R = \\dfrac{U}{I}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I = U \\times R$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = \\dfrac{R}{I}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On double la tension aux bornes d'un résistor. Que devient l'intensité qui le traverse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Choisir : $I = \\dfrac{U}{R}$ avec $R$ constante. Étape 3 — Remplacer : $U$ devient $2U$, donc $I$ devient $\\dfrac{2U}{R} = 2I$. Elle double : l'intensité est proportionnelle à la tension.",
+                  "answers": [
+                    {
+                      "content": "Elle double",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est divisée par 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne change pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est multipliée par 4",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Deux résistors, $R_1 = 150\\ \\Omega$ et $R_2 = 250\\ \\Omega$, sont montés en série aux bornes d'un générateur de tension 12 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En série : $R_s = R_1 + R_2$ puis $I = \\dfrac{U}{R_s}$. Les tensions s'additionnent.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $150\\ \\Omega$ et $250\\ \\Omega$ sont montés en série. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 150 + 250$. Étape 4 — Calculer : $R_s = 400\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $150\\ \\Omega$ et $250\\ \\Omega$ sont montés en série aux bornes d'un générateur de 12 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2 = 400\\ \\Omega$. Étape 3 — Remplacer : $I = \\dfrac{U}{R_s} = \\dfrac{12}{400}$. Étape 4 — Calculer : $I = 0{,}03$ A $= 30$ mA.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce montage en série, la résistance équivalente $400\\ \\Omega$ est plus grande que chacune des deux résistances $150\\ \\Omega$ et $250\\ \\Omega$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier : en série, $R_s = R_1 + R_2$ est toujours plus grande que chaque résistance. Ici $400 > 250 > 150$. Un résultat plus petit que $150\\ \\Omega$ signalerait l'emploi de la formule de la dérivation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $150\\ \\Omega$ est traversé par un courant de 30 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 150\\ \\Omega$ et $I = 30$ mA $= 0{,}03$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 150 \\times 0{,}03$. Étape 4 — Calculer : $U = 4{,}5$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors sont montés en série. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : en série, le courant n'a qu'un chemin, donc l'intensité est la même, et $U = U_1 + U_2$. Additionner les intensités et avoir la même tension sont des propriétés de la dérivation.",
+                  "answers": [
+                    {
+                      "content": "Ils sont traversés par la même intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension totale est la somme des tensions de chacun",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les intensités s'additionnent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont la même tension à leurs bornes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux résistors, $R_1 = 30\\ \\Omega$ et $R_2 = 60\\ \\Omega$, sont montés en dérivation aux bornes d'un générateur de tension 12 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En dérivation : $\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$. Retourne la fraction à la fin et vérifie que $R_p$ est plus petite que $30\\ \\Omega$.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont reliés aux mêmes bornes. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60}$. Étape 3 — Remplacer : $\\dfrac{2}{60} + \\dfrac{1}{60} = \\dfrac{3}{60} = \\dfrac{1}{20}$. Étape 4 — Calculer : $R_p = 20\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $30\\ \\Omega$ est soumis à une tension de 12 V. Calcule l'intensité qui le traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 12$ V et $R = 30\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{30}$. Étape 4 — Calculer : $I = 0{,}4$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $60\\ \\Omega$ est soumis à une tension de 12 V. Calcule l'intensité qui le traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 12$ V et $R = 60\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{60}$. Étape 4 — Calculer : $I = 0{,}2$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux branches en dérivation sont traversées par 0,4 A et 0,2 A. Calcule l'intensité totale qui sort du générateur, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en dérivation. Étape 2 — Écrire : loi des nœuds, $I = I_1 + I_2$. Étape 3 — Remplacer : $I = 0{,}4 + 0{,}2$. Étape 4 — Calculer : $I = 0{,}6$ A, ce qui correspond à $\\dfrac{12}{20} = 0{,}6$ A avec $R_p = 20\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Des résistors en dérivation sont alimentés par un générateur. Quelle grandeur est la même pour tous les résistors ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : des résistors en dérivation sont reliés aux mêmes bornes, donc ils ont la même tension. Les intensités diffèrent (elles se partagent) et les résistances peuvent être différentes.",
+                  "answers": [
+                    {
+                      "content": "La tension à leurs bornes",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité qui les traverse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance du générateur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Le résistor dans la vie courante",
+          "notions": "situations ivoiriennes : réparation d'une radio à Yamoussoukro (conversion kΩ et mA, loi d'Ohm), circuit en série à Abobo (résistance équivalente, tensions partielles), réchaud en dérivation à Korhogo (courants, loi des nœuds), mesures d'un dipôle au lycée de Daloa (caractéristique).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Yamoussoukro, un électricien répare une radio. Un résistor de 2,2 kΩ est soumis à une tension de 11 V. Les valeurs de cette situation sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis 2,2 kΩ en ohms et le résultat en milliampères : 1 kΩ $= 1000\\ \\Omega$ et 1 A $= 1000$ mA.",
+              "questions": [
+                {
+                  "content": "Un résistor porte l'inscription 2,2 kΩ. Quelle est sa résistance en ohms ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 2{,}2$ kΩ. Étape 2 — Calculer : $2{,}2 \\times 1000 = 2200\\ \\Omega$. Oublier la conversion donnerait $2{,}2\\ \\Omega$, mille fois trop petit.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "2200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $2200\\ \\Omega$ est soumis à une tension de 11 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 11$ V et $R = 2200\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{11}{2200}$. Étape 4 — Calculer : $I = 0{,}005$ A $= 5$ mA.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'électricien mesure 5 mA dans le résistor de $2200\\ \\Omega$. Quelle est cette intensité en ampères ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever et convertir : 1 mA $= 0{,}001$ A, donc 5 mA $= 5 \\times 0{,}001 = 0{,}005$ A. Les valeurs 0,5 A et 0,05 A décalent la virgule d'un ou deux rangs de trop ; 5000 A multiplie au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "0,005 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "5000 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,05 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'électricien double la tension de 11 V à 22 V aux bornes du même résistor de $2200\\ \\Omega$, l'intensité devient 10 mA.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Choisir : $I = \\dfrac{U}{R}$ avec $R = 2200\\ \\Omega$ constante. Étape 3 — Remplacer : $I = \\dfrac{22}{2200}$. Étape 4 — Calculer : $I = 0{,}01$ A $= 10$ mA, le double de 5 mA : l'intensité est proportionnelle à la tension.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor est traversé par un courant de 5 mA quand la tension vaut 11 V. Calcule le quotient $\\dfrac{U}{I}$ en kΩ.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $U = 11$ V et $I = 5$ mA $= 0{,}005$ A. Étape 2 — Choisir : $R = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R = \\dfrac{11}{0{,}005}$. Étape 4 — Calculer : $R = 2200\\ \\Omega = 2{,}2$ kΩ.",
+                  "tolerance": 0,
+                  "unit": "kΩ",
+                  "answers": [
+                    {
+                      "content": "2,2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Abobo, Aminata monte en série deux résistors de $100\\ \\Omega$ et $150\\ \\Omega$ dans un petit circuit alimenté par une pile qui donne 5 V. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En série : $R_s = R_1 + R_2$, $I = \\dfrac{U}{R_s}$, puis $U_1 = R_1 \\times I$ et $U_2 = R_2 \\times I$.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $100\\ \\Omega$ et $150\\ \\Omega$ sont montés en série. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 100 + 150$. Étape 4 — Calculer : $R_s = 250\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aux bornes de deux résistors en série de résistance équivalente $250\\ \\Omega$, la tension est 5 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 5$ V et $R_s = 250\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R_s}$. Étape 3 — Remplacer : $I = \\dfrac{5}{250}$. Étape 4 — Calculer : $I = 0{,}02$ A $= 20$ mA.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ est traversé par un courant de 20 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 100\\ \\Omega$ et $I = 20$ mA $= 0{,}02$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 100 \\times 0{,}02$. Étape 4 — Calculer : $U = 2$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $150\\ \\Omega$ est traversé par un courant de 20 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 150\\ \\Omega$ et $I = 20$ mA $= 0{,}02$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 150 \\times 0{,}02$. Étape 4 — Calculer : $U = 3$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les tensions $2$ V et $3$ V mesurées aux bornes des deux résistors en série s'additionnent et retrouvent la tension de la pile, 5 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier : en série, $U = U_1 + U_2$. Ici $2 + 3 = 5$ V, c'est bien la tension de la pile. Si la somme n'était pas égale à la tension du générateur, un calcul précédent serait faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À Korhogo, un artisan fabrique un réchaud électrique avec deux résistances chauffantes de $40\\ \\Omega$ et $60\\ \\Omega$ montées en dérivation aux bornes d'un générateur de 12 V. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En dérivation, chaque résistor reçoit la tension 12 V : $I_1 = \\dfrac{U}{R_1}$ et $I_2 = \\dfrac{U}{R_2}$, puis $I = I_1 + I_2$.",
+              "questions": [
+                {
+                  "content": "Un résistor de $40\\ \\Omega$ est soumis à une tension de 12 V. Calcule l'intensité qui le traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 12$ V et $R = 40\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{40}$. Étape 4 — Calculer : $I = 0{,}3$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $60\\ \\Omega$ est soumis à une tension de 12 V. Calcule l'intensité qui le traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 12$ V et $R = 60\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{60}$. Étape 4 — Calculer : $I = 0{,}2$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $40\\ \\Omega$ et $60\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en dérivation. Étape 2 — Écrire : $R_p = \\dfrac{R_1 \\times R_2}{R_1 + R_2}$. Étape 3 — Remplacer : $R_p = \\dfrac{40 \\times 60}{40 + 60} = \\dfrac{2400}{100}$. Étape 4 — Calculer : $R_p = 24\\ \\Omega$, plus petite que $40\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux branches en dérivation sont traversées par 0,3 A et 0,2 A. Calcule l'intensité totale délivrée par le générateur, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : deux branches en dérivation. Étape 2 — Écrire : loi des nœuds, $I = I_1 + I_2$. Étape 3 — Remplacer : $I = 0{,}3 + 0{,}2$. Étape 4 — Calculer : $I = 0{,}5$ A, ce qui correspond à $\\dfrac{12}{24} = 0{,}5$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'artisan voudrait que le réchaud ait une résistance équivalente de $24\\ \\Omega$ avec ses deux résistances de $40\\ \\Omega$ et $60\\ \\Omega$. Comment doit-il les monter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : en dérivation, $R_p = \\dfrac{40 \\times 60}{100} = 24\\ \\Omega$. En série, on aurait $R_s = 40 + 60 = 100\\ \\Omega$. Les deux montages ne donnent donc pas le même résultat.",
+                  "answers": [
+                    {
+                      "content": "En dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "En série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au choix, le résultat est le même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avec un seul des deux résistors",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au lycée de Daloa, une élève mesure un dipôle D avec un ampèremètre et un voltmètre. Elle relève $(50 \\text{ mA} ; 2{,}5 \\text{ V})$, $(100 \\text{ mA} ; 5 \\text{ V})$ et $(150 \\text{ mA} ; 7{,}5 \\text{ V})$. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis les mA en A, calcule $\\dfrac{U}{I}$ pour chaque couple, compare puis conclus.",
+              "questions": [
+                {
+                  "content": "Un dipôle est traversé par 100 mA quand la tension à ses bornes vaut 5 V. Calcule le quotient $\\dfrac{U}{I}$ en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $I = 100$ mA $= 0{,}1$ A et $U = 5$ V. Étape 2 — Calculer : $\\dfrac{U}{I} = \\dfrac{5}{0{,}1} = 50\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mesures $(50 \\text{ mA} ; 2{,}5 \\text{ V})$, $(100 \\text{ mA} ; 5 \\text{ V})$ et $(150 \\text{ mA} ; 7{,}5 \\text{ V})$ sont celles d'un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : intensités $0{,}05$, $0{,}1$ et $0{,}15$ A. Étape 2 — Calculer : $\\dfrac{2{,}5}{0{,}05} = \\dfrac{5}{0{,}1} = \\dfrac{7{,}5}{0{,}15} = 50\\ \\Omega$. Étape 3 — Comparer : les quotients sont égaux. Étape 4 — Conclure : c'est un résistor de $50\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $50\\ \\Omega$ est traversé par un courant de 80 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 50\\ \\Omega$ et $I = 80$ mA $= 0{,}08$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 50 \\times 0{,}08$. Étape 4 — Calculer : $U = 4$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour relever les mesures de la caractéristique, l'élève place deux appareils. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever : l'ampèremètre mesure l'intensité qui traverse le dipôle, donc il se place en série ; le voltmètre mesure la tension à ses bornes, donc il se place en dérivation. Les inverser donne des mesures fausses.",
+                  "answers": [
+                    {
+                      "content": "L'ampèremètre est en série avec le dipôle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le voltmètre est en dérivation aux bornes du dipôle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le voltmètre est en série avec le dipôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ampèremètre est en dérivation aux bornes du dipôle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que représente le quotient $\\dfrac{U}{I}$ constant d'un résistor ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : le quotient constant $\\dfrac{U}{I}$ est la résistance $R$ du résistor, en ohms. La tension et l'intensité sont les deux grandeurs mesurées, pas leur quotient.",
+                  "answers": [
+                    {
+                      "content": "Sa résistance, en ohms",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa tension, en volts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son intensité, en ampères",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance du générateur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier avec les dipôles passifs",
+          "notions": "comparaison d'un résistor et d'un dipôle qui n'en est pas un, justification par le calcul de $\\dfrac{U}{I}$ ; repérage d'une erreur de conversion des mA ; contrôle de plausibilité des résistances équivalentes en série et en dérivation ; montage mixte et loi des nœuds.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Deux dipôles sont étudiés. Pour D1, les mesures sont $(10 \\text{ mA} ; 2 \\text{ V})$, $(20 \\text{ mA} ; 4 \\text{ V})$ et $(30 \\text{ mA} ; 6 \\text{ V})$. Pour D2, elles sont $(10 \\text{ mA} ; 1 \\text{ V})$, $(20 \\text{ mA} ; 3 \\text{ V})$ et $(30 \\text{ mA} ; 6 \\text{ V})$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule $\\dfrac{U}{I}$ pour chaque couple, avec l'intensité en ampères, puis compare les quotients de chaque dipôle.",
+              "questions": [
+                {
+                  "content": "Les mesures de D1 sont $(10 \\text{ mA} ; 2 \\text{ V})$, $(20 \\text{ mA} ; 4 \\text{ V})$ et $(30 \\text{ mA} ; 6 \\text{ V})$. Quelle est la résistance de D1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : intensités $0{,}010$, $0{,}020$ et $0{,}030$ A. Étape 2 — Calculer : $\\dfrac{2}{0{,}010} = \\dfrac{4}{0{,}020} = \\dfrac{6}{0{,}030} = 200\\ \\Omega$. Étape 3 — Comparer : tous égaux. Étape 4 — Conclure : $R = 200\\ \\Omega$. La valeur $0{,}2\\ \\Omega$ oublie la conversion des mA.",
+                  "answers": [
+                    {
+                      "content": "$200\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}2\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$300\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mesures de D2, $(10 \\text{ mA} ; 1 \\text{ V})$, $(20 \\text{ mA} ; 3 \\text{ V})$ et $(30 \\text{ mA} ; 6 \\text{ V})$, sont celles d'un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer : $\\dfrac{1}{0{,}010} = 100$, $\\dfrac{3}{0{,}020} = 150$ et $\\dfrac{6}{0{,}030} = 200$ ohms. Étape 3 — Comparer : les quotients sont différents. Étape 4 — Conclure : D2 n'est pas un résistor, même si sa tension augmente avec l'intensité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Justifie par un calcul que le dipôle D2, de mesures $(10 \\text{ mA} ; 1 \\text{ V})$, $(20 \\text{ mA} ; 3 \\text{ V})$ et $(30 \\text{ mA} ; 6 \\text{ V})$, n'est pas un résistor.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : Étape 1 — Relever : je convertis $10$, $20$ et $30$ mA en $0{,}010$, $0{,}020$ et $0{,}030$ A. Étape 2 — Calculer : $\\dfrac{1}{0{,}010} = 100\\ \\Omega$, $\\dfrac{3}{0{,}020} = 150\\ \\Omega$, $\\dfrac{6}{0{,}030} = 200\\ \\Omega$. Étape 3 — Comparer : les trois quotients ne sont pas égaux. Étape 4 — Conclure : D2 n'est pas un résistor. Barème : conversion (0,5 point), trois quotients (1 point), comparaison (1 point), conclusion (0,5 point).",
+                  "points": 3,
+                  "criteria": [
+                    "Conversion des mA en A avant le calcul",
+                    "Calcul des trois quotients : 100, 150 et 200 ohms",
+                    "Comparaison : les quotients ne sont pas égaux",
+                    "Conclusion : ce n'est pas un résistor"
+                  ],
+                  "answers": [],
+                  "starter": "Je convertis les intensités en ampères, puis je calcule…"
+                },
+                {
+                  "content": "D1 a pour résistance $200\\ \\Omega$. Quelle tension, en volts, apparaît à ses bornes pour un courant de 50 mA ? Réponse : ___ V (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 200\\ \\Omega$ et $I = 50$ mA $= 0{,}05$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 200 \\times 0{,}05$. Étape 4 — Calculer : $U = 10$ V.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « D2 est un résistor, puisque sa tension augmente avec l'intensité. » Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer : un résistor demande un quotient $\\dfrac{U}{I}$ constant, pas seulement une tension qui augmente. Pour D2, les quotients valent $100$, $150$ et $200\\ \\Omega$ : ils changent. L'élève n'a pas fait d'erreur de conversion, qui serait une autre faute.",
+                  "answers": [
+                    {
+                      "content": "Il oublie que le quotient $\\dfrac{U}{I}$ doit rester constant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a converti les mA en A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a confondu volts et ampères",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas d'erreur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève calcule la tension aux bornes d'un résistor de $100\\ \\Omega$ traversé par un courant de 20 mA. Il écrit : $U = 100 \\times 20 = 2000$ V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare l'unité de chaque grandeur avec celles du système international avant de remplacer dans la formule.",
+              "questions": [
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ est traversé par un courant de 20 mA. Quelle est la tension à ses bornes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 100\\ \\Omega$ et $I = 20$ mA $= 0{,}02$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 100 \\times 0{,}02$. Étape 4 — Calculer : $U = 2$ V. La valeur 2000 V est l'erreur de l'élève : il multiplie des ohms par des milliampères.",
+                  "answers": [
+                    {
+                      "content": "2 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "2000 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le résultat $U = 2000$ V est plausible pour un petit résistor parcouru par 20 mA.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier : avec $R = 100\\ \\Omega$ et $I = 0{,}02$ A, la tension vaut 2 V. 2000 V serait dangereux et absurde pour un petit montage : un résultat invraisemblable signale une conversion oubliée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique l'erreur de l'élève qui écrit $U = 100 \\times 20 = 2000$ V, puis donne le calcul correct.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : l'élève a multiplié des ohms par des milliampères. Étape 1 — Relever et convertir : $20$ mA $= 0{,}02$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 100 \\times 0{,}02$. Étape 4 — Calculer : $U = 2$ V. Barème : erreur identifiée (1 point), conversion (0,5 point), calcul (1 point), résultat avec unité (0,5 point).",
+                  "points": 3,
+                  "criteria": [
+                    "Erreur identifiée : l'intensité est utilisée en mA au lieu de A",
+                    "Conversion : 20 mA = 0,02 A",
+                    "Calcul correct : U = 100 × 0,02",
+                    "Résultat avec son unité : 2 V"
+                  ],
+                  "answers": [],
+                  "starter": "L'élève a oublié de…"
+                },
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ est traversé par un courant de 50 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 100\\ \\Omega$ et $I = 50$ mA $= 0{,}05$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 100 \\times 0{,}05$. Étape 4 — Calculer : $U = 5$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève calcule la résistance d'un résistor soumis à 6 V et traversé par 30 mA, et écrit $R = \\dfrac{6}{30} = 0{,}2\\ \\Omega$. Quelle est la résistance correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever et convertir : $I = 30$ mA $= 0{,}030$ A. Étape 2 — Choisir : $R = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R = \\dfrac{6}{0{,}030}$. Étape 4 — Calculer : $R = 200\\ \\Omega$. L'élève a oublié de convertir les mA.",
+                  "answers": [
+                    {
+                      "content": "$200\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}2\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$180\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève affirme : « En associant deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$, on obtient toujours $90\\ \\Omega$. » On veut vérifier cette affirmation pour deux montages.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque montage, demande-toi d'abord si les résistors sont en série ou en dérivation, puis vérifie que le résultat est plausible.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$ sont montés en série. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : montage en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 30 + 60$. Étape 4 — Calculer : $R_s = 90\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : montage en dérivation. Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60}$. Étape 3 — Remplacer : $\\dfrac{3}{60} = \\dfrac{1}{20}$. Étape 4 — Calculer : $R_p = 20\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affirmation de l'élève est vraie quel que soit le montage de ces deux résistors.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $90\\ \\Omega$ n'est le résultat qu'en série. En dérivation, on trouve $20\\ \\Omega$. L'élève applique la formule de la série à tous les montages.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève trouve $R_p = 90\\ \\Omega$ pour deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$ en dérivation. Pourquoi est-ce impossible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Vérifier : en dérivation, $R_p$ est toujours plus petite que la plus petite résistance. Avec $30\\ \\Omega$ et $60\\ \\Omega$, $R_p$ doit être inférieure à $30\\ \\Omega$ : elle vaut $20\\ \\Omega$. $90\\ \\Omega$ est le résultat de la série.",
+                  "answers": [
+                    {
+                      "content": "Une résistance équivalente en dérivation est plus petite que la plus petite des résistances, ici $30\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une résistance équivalente ne peut pas dépasser $60\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une résistance équivalente est toujours égale à la moyenne des résistances",
+                      "correct": false
+                    },
+                    {
+                      "content": "La dérivation donne toujours un nombre entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ et $60\\ \\Omega$ sont montés en dérivation. Montre par un calcul que leur résistance équivalente est plus petite que $30\\ \\Omega$.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : Étape 2 — Écrire : $\\dfrac{1}{R_p} = \\dfrac{1}{30} + \\dfrac{1}{60}$. Étape 3 — Remplacer : $\\dfrac{2}{60} + \\dfrac{1}{60} = \\dfrac{3}{60} = \\dfrac{1}{20}$. Étape 4 — Calculer : $R_p = 20\\ \\Omega$, et $20 < 30$. Barème : formule (0,5 point), même dénominateur (1 point), retournement (1 point), comparaison (0,5 point).",
+                  "points": 3,
+                  "criteria": [
+                    "Formule des inverses écrite",
+                    "Réduction au même dénominateur : 2/60 + 1/60",
+                    "Calcul de Rp en retournant la fraction : 20 ohms",
+                    "Comparaison avec 30 ohms"
+                  ],
+                  "answers": [],
+                  "starter": "J'écris la formule des inverses :"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un montage est alimenté par un générateur de 6 V. La branche A contient un résistor de $30\\ \\Omega$. La branche B contient deux résistors en série, de $20\\ \\Omega$ et $40\\ \\Omega$. Les branches A et B sont en dérivation. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule d'abord la résistance de la branche B (série), puis l'intensité dans chaque branche avec la loi d'Ohm, puis ajoute les intensités.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $20\\ \\Omega$ et $40\\ \\Omega$ sont montés en série dans une branche. Calcule la résistance de cette branche.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : dans la branche B, les deux résistors sont en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 20 + 40$. Étape 4 — Calculer : $R_s = 60\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $30\\ \\Omega$ est soumis à une tension de 6 V. Calcule l'intensité qui le traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 6$ V et $R = 30\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{6}{30}$. Étape 4 — Calculer : $I = 0{,}2$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une branche de résistance $60\\ \\Omega$ est soumise à une tension de 6 V. Calcule l'intensité qui la traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 6$ V et $R = 60\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{6}{60}$. Étape 4 — Calculer : $I = 0{,}1$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux branches en dérivation sont traversées par 0,2 A et 0,1 A. Calcule l'intensité totale délivrée par le générateur, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Écrire : loi des nœuds, $I = I_A + I_B$. Étape 3 — Remplacer : $I = 0{,}2 + 0{,}1$. Étape 4 — Calculer : $I = 0{,}3$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce montage, les branches A et B sont en dérivation aux bornes du générateur de 6 V. Quelle affirmation est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : deux branches en dérivation sont reliées aux mêmes bornes, donc elles ont chacune la tension 6 V. La tension se partage seulement entre résistors en série, dans une même branche. Les intensités sont différentes ($0{,}2$ A et $0{,}1$ A).",
+                  "answers": [
+                    {
+                      "content": "Les deux branches ont la même tension, 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension de 6 V se partage entre les deux branches",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux branches sont traversées par la même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "La branche B a une tension de 3 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur les dipôles passifs et les résistors",
+          "notions": "bilan de la leçon : caractéristique et reconnaissance d'un résistor, loi d'Ohm avec conversions, association en série (résistance équivalente, tensions, résistance inconnue), association en dérivation (résistance équivalente, courants, loi des nœuds), comparaison des deux montages.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au laboratoire d'un lycée de Man, un élève relève la caractéristique d'un dipôle D : $(5 \\text{ mA} ; 3 \\text{ V})$, $(10 \\text{ mA} ; 6 \\text{ V})$, $(15 \\text{ mA} ; 9 \\text{ V})$ et $(20 \\text{ mA} ; 12 \\text{ V})$. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule $\\dfrac{U}{I}$ avec l'intensité en ampères pour reconnaître le résistor, puis réutilise sa résistance dans la loi d'Ohm et dans les associations.",
+              "questions": [
+                {
+                  "content": "Un dipôle est traversé par 15 mA quand la tension à ses bornes vaut 9 V. Calcule le quotient $\\dfrac{U}{I}$ en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $I = 15$ mA $= 0{,}015$ A et $U = 9$ V. Étape 2 — Calculer : $\\dfrac{U}{I} = \\dfrac{9}{0{,}015} = 600\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mesures $(5 \\text{ mA} ; 3 \\text{ V})$, $(10 \\text{ mA} ; 6 \\text{ V})$, $(15 \\text{ mA} ; 9 \\text{ V})$ et $(20 \\text{ mA} ; 12 \\text{ V})$ sont celles d'un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer : $\\dfrac{3}{0{,}005} = \\dfrac{6}{0{,}010} = \\dfrac{9}{0{,}015} = \\dfrac{12}{0{,}020} = 600\\ \\Omega$. Étape 3 — Comparer : quotients égaux. Étape 4 — Conclure : c'est un résistor de $600\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $600\\ \\Omega$ est traversé par un courant de 30 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 600\\ \\Omega$ et $I = 30$ mA $= 0{,}03$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 600 \\times 0{,}03$. Étape 4 — Calculer : $U = 18$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $600\\ \\Omega$ et $300\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : montage en dérivation. Étape 2 — Écrire : $R_p = \\dfrac{R_1 \\times R_2}{R_1 + R_2}$. Étape 3 — Remplacer : $R_p = \\dfrac{600 \\times 300}{900} = \\dfrac{180000}{900}$. Étape 4 — Calculer : $R_p = 200\\ \\Omega$, plus petite que $300\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $600\\ \\Omega$ et $300\\ \\Omega$ sont montés en série aux bornes d'un générateur de 9 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : montage en série. Étape 2 — Écrire : $R_s = R_1 + R_2 = 900\\ \\Omega$. Étape 3 — Remplacer : $I = \\dfrac{U}{R_s} = \\dfrac{9}{900}$. Étape 4 — Calculer : $I = 0{,}01$ A $= 10$ mA.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un technicien de Bouaké dispose de deux résistors identiques de $150\\ \\Omega$ et d'un générateur de tension 12 V. Il les monte d'abord en série, puis en dérivation. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque montage : résistance équivalente, puis $I = \\dfrac{U}{R}$. À tension égale, la plus petite résistance donne le plus grand courant.",
+              "questions": [
+                {
+                  "content": "Deux résistors identiques de $150\\ \\Omega$ sont montés en série. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : montage en série. Étape 2 — Écrire : $R_s = R_1 + R_2$. Étape 3 — Remplacer : $R_s = 150 + 150$. Étape 4 — Calculer : $R_s = 300\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors identiques de $150\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : montage en dérivation, deux résistors identiques. Étape 2 — Écrire : $R_p = \\dfrac{R}{n}$. Étape 3 — Remplacer : $R_p = \\dfrac{150}{2}$. Étape 4 — Calculer : $R_p = 75\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une résistance équivalente de $300\\ \\Omega$ est alimentée sous 12 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 12$ V et $R = 300\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{300}$. Étape 4 — Calculer : $I = 0{,}04$ A $= 40$ mA.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une résistance équivalente de $75\\ \\Omega$ est alimentée sous 12 V. Calcule l'intensité du courant en milliampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 12$ V et $R = 75\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{75}$. Étape 4 — Calculer : $I = 0{,}16$ A $= 160$ mA.",
+                  "tolerance": 0,
+                  "unit": "mA",
+                  "answers": [
+                    {
+                      "content": "160",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sous 12 V, quel montage de deux résistors identiques de $150\\ \\Omega$ donne le plus grand courant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Calculer et comparer : en série $I = \\dfrac{12}{300} = 40$ mA ; en dérivation $I = \\dfrac{12}{75} = 160$ mA. La résistance équivalente la plus petite (dérivation) laisse passer le plus grand courant.",
+                  "answers": [
+                    {
+                      "content": "La dérivation, car sa résistance équivalente est plus petite",
+                      "correct": true
+                    },
+                    {
+                      "content": "La série, car sa résistance équivalente est plus grande",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux donnent le même courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La dérivation, car sa résistance équivalente est plus grande",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En dérivation, chacun des deux résistors de $150\\ \\Omega$ est traversé par un courant de 80 mA sous 12 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : en dérivation, chaque résistor reçoit la tension 12 V. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{12}{150}$. Étape 4 — Calculer : $I = 0{,}08$ A $= 80$ mA ; la somme 160 mA retrouve l'intensité totale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un circuit, un résistor de $100\\ \\Omega$ est monté en série avec un résistor inconnu $R_x$. L'ensemble est alimenté par un générateur de 9 V et l'ampèremètre indique 30 mA. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule la résistance équivalente avec $R_s = \\dfrac{U}{I}$, puis déduis $R_x = R_s - 100$. Convertis 30 mA en ampères.",
+              "questions": [
+                {
+                  "content": "Un ensemble de résistors en série est alimenté sous 9 V et traversé par 30 mA. Calcule sa résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $U = 9$ V et $I = 30$ mA $= 0{,}03$ A. Étape 2 — Choisir : $R_s = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R_s = \\dfrac{9}{0{,}03}$. Étape 4 — Calculer : $R_s = 300\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ et un résistor $R_x$ en série ont une résistance équivalente de $300\\ \\Omega$. Calcule $R_x$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les deux résistors sont en série. Étape 2 — Écrire : $R_s = 100 + R_x$. Étape 3 — Remplacer : $300 = 100 + R_x$. Étape 4 — Calculer : $R_x = 300 - 100 = 200\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ est traversé par un courant de 30 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 100\\ \\Omega$ et $I = 30$ mA $= 0{,}03$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 100 \\times 0{,}03$. Étape 4 — Calculer : $U = 3$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $200\\ \\Omega$ est traversé par un courant de 30 mA. Calcule la tension à ses bornes en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever et convertir : $R = 200\\ \\Omega$ et $I = 30$ mA $= 0{,}03$ A. Étape 2 — Choisir : $U = R \\times I$. Étape 3 — Remplacer : $U = 200 \\times 0{,}03$. Étape 4 — Calculer : $U = 6$ V.",
+                  "tolerance": 0,
+                  "unit": "V",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les tensions $3$ V et $6$ V aux bornes des deux résistors en série retrouvent la tension 9 V du générateur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier : en série, $U = U_1 + U_2 = 3 + 6 = 9$ V, la tension du générateur. Cette vérification confirme $R_x = 200\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Rédige la méthode qui permet de trouver la résistance inconnue $R_x$ montée en série avec un résistor de $100\\ \\Omega$, sous 9 V, avec un courant de 30 mA.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : Étape 1 — Relever et convertir : $U = 9$ V, $I = 0{,}03$ A. Étape 2 — Choisir : $R_s = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R_s = \\dfrac{9}{0{,}03} = 300\\ \\Omega$. Étape 4 — Calculer : en série $R_s = 100 + R_x$, donc $R_x = 200\\ \\Omega$. Barème : conversion (1 point), $R_s$ (1 point), égalité série (1 point), $R_x$ avec unité (1 point).",
+                  "points": 4,
+                  "criteria": [
+                    "Conversion : 30 mA = 0,03 A",
+                    "Rs = U / I = 300 ohms",
+                    "Rs = 100 + Rx car les résistors sont en série",
+                    "Rx = 200 ohms avec son unité"
+                  ],
+                  "answers": [],
+                  "starter": "Je convertis 30 mA en ampères, puis…"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une élève de Daloa étudie deux résistors, $R_1 = 40\\ \\Omega$ et $R_2 = 10\\ \\Omega$. Elle les monte en dérivation aux bornes d'un générateur de tension 8 V. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En dérivation : même tension, $I_1 = \\dfrac{U}{R_1}$, $I_2 = \\dfrac{U}{R_2}$ puis $I = I_1 + I_2$. Vérifie avec $R_p$ : $I = \\dfrac{U}{R_p}$.",
+              "questions": [
+                {
+                  "content": "Deux résistors de $40\\ \\Omega$ et $10\\ \\Omega$ sont montés en dérivation. Calcule leur résistance équivalente.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : montage en dérivation. Étape 2 — Écrire : $R_p = \\dfrac{R_1 \\times R_2}{R_1 + R_2}$. Étape 3 — Remplacer : $R_p = \\dfrac{40 \\times 10}{50} = \\dfrac{400}{50}$. Étape 4 — Calculer : $R_p = 8\\ \\Omega$, plus petite que $10\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "Ω",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $40\\ \\Omega$ est soumis à une tension de 8 V. Calcule l'intensité qui le traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 8$ V et $R = 40\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{8}{40}$. Étape 4 — Calculer : $I = 0{,}2$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $10\\ \\Omega$ est soumis à une tension de 8 V. Calcule l'intensité qui le traverse, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 8$ V et $R = 10\\ \\Omega$. Étape 2 — Choisir : $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{8}{10}$. Étape 4 — Calculer : $I = 0{,}8$ A.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux branches en dérivation sont traversées par 0,2 A et 0,8 A. Calcule l'intensité totale délivrée par le générateur, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Écrire : loi des nœuds, $I = I_1 + I_2$. Étape 3 — Remplacer : $I = 0{,}2 + 0{,}8$. Étape 4 — Calculer : $I = 1$ A, ce qui correspond à $\\dfrac{8}{8} = 1$ A avec $R_p = 8\\ \\Omega$.",
+                  "tolerance": 0,
+                  "unit": "A",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur le montage en dérivation de $40\\ \\Omega$ et $10\\ \\Omega$ sous 8 V, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : en dérivation, la tension est la même (8 V). Étape 2 — Comparer : $I_2 = 0{,}8$ A est plus grand que $I_1 = 0{,}2$ A, car la plus petite résistance laisse passer le plus grand courant. L'intensité totale $1$ A est la somme, donc plus grande que chaque courant de branche.",
+                  "answers": [
+                    {
+                      "content": "Les deux résistors ont la même tension, 8 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le résistor de $10\\ \\Omega$ est traversé par le plus grand courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux résistors sont traversés par la même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité totale est plus petite que celle du résistor de $40\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors en dérivation, de résistance équivalente $R_p = 8\\ \\Omega$, sont alimentés sous 8 V. Quelle est l'intensité totale délivrée par le générateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Remplacer : la loi d'Ohm s'applique à l'ensemble équivalent, $I = \\dfrac{U}{R_p} = \\dfrac{8}{8}$. Étape 4 — Calculer : $I = 1$ A, qui retrouve la somme $0{,}2 + 0{,}8$. Les valeurs 0,2 A et 0,8 A sont les courants de chaque branche, pas le total ; 64 A vient du produit $U \\times R_p$.",
+                  "answers": [
+                    {
+                      "content": "1 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "64 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,2 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,8 A",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

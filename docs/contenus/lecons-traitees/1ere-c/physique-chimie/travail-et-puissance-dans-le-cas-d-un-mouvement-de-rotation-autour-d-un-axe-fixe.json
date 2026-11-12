@@ -1,0 +1,3365 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Travail et puissance dans le cas d'un mouvement de rotation autour d'un axe fixe",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "manivelle-moulin",
+          "kind": "coordinate_plane",
+          "description": "Vue de face d'une manivelle de moulin à manioc. L'axe de rotation, perpendiculaire à la figure, passe par le point O de coordonnées (3 ; 4). La manivelle est le segment horizontal OA, avec A en (9 ; 4) : elle mesure 20 cm. La force F de 50 N part de A et descend verticalement, donc perpendiculaire à la manivelle. Sa droite d'action est verticale et passe par A : le bras de levier est la longueur OA.",
+          "params": {
+            "xmin": 0,
+            "xmax": 12,
+            "ymin": 0,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "O",
+                "x": 3,
+                "y": 4
+              },
+              {
+                "id": "A",
+                "x": 9,
+                "y": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 3,
+                "y1": 4,
+                "x2": 9,
+                "y2": 4
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F",
+                "dx": 0,
+                "dy": -3,
+                "ox": 9,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "force-oblique",
+          "kind": "coordinate_plane",
+          "description": "Vue de face d'une manivelle OA de 0,60 m (6 unités de la figure). L'axe de rotation passe par O en (3 ; 4), le point A est en (9 ; 4). La force F de 40 N part de A, vers le bas et vers la gauche, et fait 30° avec la manivelle. Sa droite d'action est tracée. Le segment OH, de O au point H (4,5 ; 1,4) de cette droite, est perpendiculaire à elle : sa longueur de 3 unités (0,30 m) est le bras de levier.",
+          "params": {
+            "xmin": 0,
+            "xmax": 12,
+            "ymin": 0,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "O",
+                "x": 3,
+                "y": 4
+              },
+              {
+                "id": "A",
+                "x": 9,
+                "y": 4
+              },
+              {
+                "id": "H",
+                "x": 4.5,
+                "y": 1.4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 3,
+                "y1": 4,
+                "x2": 9,
+                "y2": 4
+              },
+              {
+                "x1": 3,
+                "y1": 4,
+                "x2": 4.5,
+                "y2": 1.4
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F",
+                "dx": -2.6,
+                "dy": -1.5,
+                "ox": 9,
+                "oy": 4
+              }
+            ],
+            "lines": [
+              {
+                "a": 0.5774,
+                "b": -1.196
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "couple-guidon",
+          "kind": "coordinate_plane",
+          "description": "Guidon d'une moto vu de dessus. L'axe de direction, perpendiculaire à la figure, passe par O en (6 ; 4). Les mains sont en A (2 ; 4) et en B (10 ; 4), distantes de 0,60 m. En A, une force de 15 N est dirigée vers le haut ; en B, une force de même valeur est dirigée vers le bas. Les deux forces sont parallèles, de sens opposés, et leurs droites d'action sont distantes de 0,60 m : elles forment un couple.",
+          "params": {
+            "xmin": 0,
+            "xmax": 12,
+            "ymin": 0,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "O",
+                "x": 6,
+                "y": 4
+              },
+              {
+                "id": "A",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "B",
+                "x": 10,
+                "y": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 2,
+                "y1": 4,
+                "x2": 10,
+                "y2": 4
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F1",
+                "dx": 0,
+                "dy": 2,
+                "ox": 2,
+                "oy": 4
+              },
+              {
+                "label": "F2",
+                "dx": 0,
+                "dy": -2,
+                "ox": 10,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le moment d'une force par rapport à un axe fixe",
+          "remember": "Un solide est en **rotation autour d'un axe fixe** quand tous ses points décrivent des cercles centrés sur cet axe (la manivelle d'un moulin, la roue d'une poulie). Une force fait tourner le solide si sa **droite d'action** (la droite qui la porte) ne coupe pas l'axe. Pour une force $\\vec{F}$ située dans un plan perpendiculaire à l'axe, son **moment** par rapport à l'axe est $M = F \\times d$, avec $F$ en newtons (N), $d$ en mètres (m) et $M$ en newtons-mètres (N·m). La distance $d$, le **bras de levier**, est la distance entre l'axe et la droite d'action. Si la force est perpendiculaire au rayon qui part de l'axe, $d$ est ce rayon. Si la droite d'action coupe l'axe, $d = 0$ et le moment est nul. Le moment est positif si la force tend à faire tourner le solide dans le sens positif choisi, négatif sinon.",
+          "method": [
+            "Repérer l'axe de rotation, le point d'application de la force et le sens de rotation choisi comme positif.",
+            "Tracer la droite d'action de la force, c'est-à-dire la droite qui la porte.",
+            "Déterminer le bras de levier $d$ : la distance entre l'axe et cette droite d'action, convertie en mètres.",
+            "Calculer le moment $M = F \\times d$ en N·m, avec le signe + si la force tend à faire tourner dans le sens positif, − sinon."
+          ],
+          "example": {
+            "statement": "Awa tourne la manivelle d'un moulin à manioc. La manivelle mesure 20 cm de l'axe à la poignée. Awa pousse la poignée avec une force de 50 N perpendiculaire à la manivelle, dans le sens de rotation choisi comme positif. Calculer le moment de sa force par rapport à l'axe.",
+            "steps": [
+              "Repérer : l'axe est celui de la meule, la force s'applique à la poignée et elle tend à tourner dans le sens positif.",
+              "Tracer : la force est perpendiculaire à la manivelle, donc sa droite d'action passe par la poignée et est perpendiculaire à la manivelle.",
+              "Déterminer le bras de levier : $d$ est la longueur de la manivelle, $d = 20$ cm $= 0{,}20$ m.",
+              "Calculer : $M = F \\times d = 50 \\times 0{,}20 = 10$ N·m, positif car la force tend à faire tourner dans le sens positif."
+            ]
+          },
+          "pitfall": "Ne multiplie pas la force par une distance en centimètres, et ne prends pas toujours la longueur de la manivelle pour $d$. Contre-exemple 1 : $F = 60$ N et $d = 25$ cm. Le calcul $60 \\times 25 = 1500$ est faux ; il faut $d = 0{,}25$ m, donc $M = 60 \\times 0{,}25 = 15$ N·m. Contre-exemple 2 : une force de 100 N dirigée le long d'une manivelle de 50 cm a une droite d'action qui passe par l'axe. Alors $d = 0$ et $M = 0$, et non $100 \\times 0{,}5 = 50$ N·m. Le bras de levier est la distance de l'axe à la **droite d'action**.",
+          "figure": "manivelle-moulin",
+          "practice": {
+            "statement": "Un moment, c'est une force multipliée par une distance bien choisie. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Le moment d'une force se calcule avec $M = F \\times d$ : la force $F$ s'exprime en ___ et le bras de levier $d$ en ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Déterminer le bras de levier : $d$ se convertit en mètres. Étape 4 — Calculer : $M = F \\times d$ avec $F$ en newtons donne un moment en N·m. Le centimètre est le piège : $60 \\times 25$ au lieu de $60 \\times 0{,}25$ donne un résultat cent fois trop grand.",
+                "answers": [
+                  {
+                    "content": "joules",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "newtons",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "watts",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "centimètres",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "radians",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "mètres",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le moment s'exprime en N·m : de quoi sont faits les newtons-mètres ?"
+              },
+              {
+                "content": "Une force de 20 N est appliquée perpendiculairement à une manivelle de 30 cm, à son extrémité. Quel est son moment par rapport à l'axe ?",
+                "question_type": "numeric",
+                "unit": "N·m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : l'axe est celui de la manivelle. Étape 2 — Tracer : la force est perpendiculaire à la manivelle. Étape 3 — Déterminer le bras de levier : $d = 30$ cm $= 0{,}30$ m. Étape 4 — Calculer : $M = 20 \\times 0{,}30 = 6$ N·m.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "hint": "Convertis d'abord 30 cm en mètres."
+              },
+              {
+                "content": "Le bras de levier d'une force est toujours égal à la longueur de la manivelle.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Déterminer le bras de levier : c'est la distance entre l'axe et la droite d'action de la force. Elle ne vaut la longueur de la manivelle que si la force lui est perpendiculaire. Si la force est dirigée le long de la manivelle, $d = 0$ (Étape 4 : $M = F \\times 0 = 0$).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à une force qui tire la manivelle vers l'axe."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Calculer des moments de forces",
+              "statement": "Dans cet exercice, tu calcules des moments de forces par rapport à un axe fixe avec la méthode de la fiche. Les forces sont situées dans un plan perpendiculaire à l'axe de rotation.",
+              "exercise_type": "fixation",
+              "figure": "force-oblique",
+              "questions": [
+                {
+                  "content": "Quelle est l'unité du moment d'une force dans le Système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Calculer : $M = F \\times d$ avec $F$ en newtons et $d$ en mètres donne des N·m. Le newton est l'unité d'une force, le watt celle d'une puissance : ce ne sont pas des unités de moment.",
+                  "answers": [
+                    {
+                      "content": "Le newton-mètre (N·m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le newton (N)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le watt (W)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mètre par seconde (m/s)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant pousse la poignée d'une manivelle avec une force de 30 N perpendiculaire à la manivelle. La poignée est à 0,50 m de l'axe. Quel est le moment de la force par rapport à l'axe ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'axe est celui de la manivelle, la force s'applique à la poignée. Étape 2 — Tracer : la droite d'action est perpendiculaire à la manivelle. Étape 3 — Déterminer le bras de levier : $d = 0{,}50$ m. Étape 4 — Calculer : $M = F \\times d = 30 \\times 0{,}50 = 15$ N·m.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une poulie de puits, on tire la corde avec une force de 80 N tangente à la poulie, c'est-à-dire perpendiculaire au rayon. Le rayon de la poulie est de 20 cm. Quel est le moment de cette force par rapport à l'axe de la poulie ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'axe est celui de la poulie. Étape 2 — Tracer : la corde est tangente, la droite d'action est perpendiculaire au rayon. Étape 3 — Déterminer le bras de levier : $d$ est le rayon, $d = 20$ cm $= 0{,}20$ m. Étape 4 — Calculer : $M = 80 \\times 0{,}20 = 16$ N·m.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de 200 N dont la droite d'action passe par l'axe de rotation a un moment nul par rapport à cet axe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Tracer : la droite d'action coupe l'axe. Étape 3 — Déterminer le bras de levier : la distance de l'axe à cette droite est nulle, $d = 0$. Étape 4 — Calculer : $M = 200 \\times 0 = 0$ N·m. Une telle force ne fait pas tourner le solide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de 40 N s'exerce à l'extrémité A d'une manivelle OA de 0,60 m (O est sur l'axe). Elle fait un angle de 30° avec la manivelle. Dans le triangle rectangle formé par O, A et le pied de la perpendiculaire menée de O à la droite d'action, le bras de levier est d = OA × sin 30°. On donne sin 30° = 0,5. Quel est le moment de la force par rapport à l'axe ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'axe passe par O, la force s'applique en A. Étape 2 — Tracer : on trace la droite d'action de la force et la perpendiculaire à cette droite menée de O. Étape 3 — Déterminer le bras de levier : $d = OA \\times \\sin 30° = 0{,}60 \\times 0{,}5 = 0{,}30$ m. Étape 4 — Calculer : $M = F \\times d = 40 \\times 0{,}30 = 12$ N·m. On ne peut pas prendre $d = 0{,}60$ m, car la force n'est pas perpendiculaire à la manivelle.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de 100 N est exercée sur la poignée d'une manivelle de 50 cm, dans la direction de la manivelle (sa droite d'action passe par l'axe). Quel est son moment par rapport à l'axe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tracer : la force est portée par la manivelle, sa droite d'action passe par l'axe. Étape 3 — Déterminer le bras de levier : $d = 0$. Étape 4 — Calculer : $M = 100 \\times 0 = 0$ N·m. Les autres propositions viennent du piège : prendre la longueur de la manivelle pour $d$ ($100 \\times 0{,}5 = 50$), ou oublier de convertir 50 cm en mètres ($100 \\times 50 = 5000$).",
+                  "answers": [
+                    {
+                      "content": "0 N·m",
+                      "correct": true
+                    },
+                    {
+                      "content": "50 N·m",
+                      "correct": false
+                    },
+                    {
+                      "content": "5000 N·m",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,5 N·m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations donnent un moment de 12 N·m ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Déterminer le bras de levier : on convertit $d$ en mètres. Étape 4 — Calculer : $40 \\times 0{,}30 = 12$ N·m et $60 \\times 0{,}20 = 12$ N·m (20 cm $= 0{,}20$ m), donc ces deux situations conviennent. Les autres donnent $40 \\times 3 = 120$ N·m, $6 \\times 0{,}20 = 1{,}2$ N·m et $24 \\times 2 = 48$ N·m.",
+                  "answers": [
+                    {
+                      "content": "$F = 40$ N et $d = 0{,}30$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F = 60$ N et $d = 20$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F = 40$ N et $d = 3$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F = 6$ N et $d = 0{,}20$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F = 24$ N et $d = 2$ m",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Moments de forces : unités, bras de levier et cas particuliers",
+              "statement": "Dans cet exercice, tu calcules des moments de forces avec la méthode de la fiche : repérer l'axe, tracer la droite d'action, déterminer le bras de levier, calculer le moment. Les forces sont dans un plan perpendiculaire à l'axe.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis le bras de levier en mètres. Si la droite d'action de la force passe par l'axe, le bras de levier est nul.",
+              "questions": [
+                {
+                  "content": "Une clé de 30 cm est tirée par une force de 80 N perpendiculaire à la clé. Quel est le moment de cette force par rapport à l'axe de l'écrou ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'axe est celui de l'écrou, la force s'applique à l'extrémité de la clé. Étape 2 — Tracer la droite d'action : elle est perpendiculaire à la clé. Étape 3 — Déterminer le bras de levier : d = 30 cm = 0,30 m. Étape 4 — Calculer : M = 80 × 0,30 = 24 N·m. Utiliser 30 au lieu de 0,30 donnerait 2400, résultat faux.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de 100 N est dirigée le long d'une manivelle de 50 cm, de l'axe vers la poignée. Quel est son moment par rapport à l'axe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la force part de la poignée, le long de la manivelle. Étape 2 — Tracer la droite d'action : elle passe par l'axe. Étape 3 — Déterminer le bras de levier : d = 0. Étape 4 — Calculer : M = 100 × 0 = 0 N·m. 50 N·m prend la longueur de la manivelle pour d ; 5000 oublie la conversion en mètres ; 200 divise au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "0 N·m",
+                      "correct": true
+                    },
+                    {
+                      "content": "50 N·m",
+                      "correct": false
+                    },
+                    {
+                      "content": "5000 N·m",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 N·m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bras de levier est toujours égal à la longueur de la manivelle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déterminer le bras de levier : c'est la distance entre l'axe et la droite d'action de la force. Il est égal à la longueur de la manivelle seulement si la force lui est perpendiculaire. Pour une force le long de la manivelle, d = 0.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans M = F × d, la distance d doit être exprimée en ___ pour que le moment soit en N·m.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Déterminer le bras de levier et le convertir en mètres : N × m donne des newtons-mètres. Un bras de levier en centimètres donne un moment 100 fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "mètres",
+                      "correct": true
+                    },
+                    {
+                      "content": "mètre",
+                      "correct": true
+                    },
+                    {
+                      "content": "m",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque force est perpendiculaire à une manivelle. Relie chaque situation au moment de la force.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Calculer M = F × d avec d en mètres : 20 × 0,5 = 10 N·m ; 100 × 0,3 = 30 N·m ; 60 × 0,25 = 15 N·m. Les trois droites d'action sont perpendiculaires aux manivelles, donc d est leur longueur.",
+                  "answers": [
+                    {
+                      "content": "F = 20 N, d = 0,5 m",
+                      "match": "10 N·m"
+                    },
+                    {
+                      "content": "F = 100 N, d = 0,3 m",
+                      "match": "30 N·m"
+                    },
+                    {
+                      "content": "F = 60 N, d = 0,25 m",
+                      "match": "15 N·m"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux situations où le moment d'une force par rapport à l'axe est nul ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Tracer la droite d'action. Étape 3 — Déterminer le bras de levier : il est nul quand la droite d'action passe par l'axe. Étape 4 — M = F × 0 = 0. Dans les deux autres cas, d vaut 1 m et 0,10 m : le moment n'est pas nul.",
+                  "answers": [
+                    {
+                      "content": "La droite d'action de la force coupe l'axe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force s'applique en un point de l'axe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force est perpendiculaire à une manivelle de 1 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "La force vaut 500 N mais s'applique à 10 cm de l'axe, perpendiculairement",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Vitesse angulaire et fréquence de rotation",
+          "remember": "Quand un solide tourne autour d'un axe fixe, on repère sa position par l'**angle de rotation** $\\theta$, en **radians** (rad). Un tour complet correspond à $2\\pi$ rad. La **vitesse angulaire** moyenne est $\\omega = \\dfrac{\\Delta\\theta}{\\Delta t}$, en rad/s. Quand elle est constante, la rotation est **uniforme** et l'angle balayé pendant la durée $t$ est $\\theta = \\omega \\times t$. La **fréquence de rotation** $n$ est le nombre de tours par seconde (tr/s). On la donne souvent en tours par minute (tr/min) : $n_{\\text{tr/s}} = \\dfrac{n_{\\text{tr/min}}}{60}$. Elle est liée à la vitesse angulaire par $\\omega = 2\\pi \\times n$, avec $n$ en tr/s.",
+          "method": [
+            "Convertir la fréquence de rotation en tours par seconde : diviser le nombre de tours par minute par 60.",
+            "Écrire la relation $\\omega = 2\\pi \\times n$ avec $n$ en tr/s.",
+            "Calculer la vitesse angulaire $\\omega$ en rad/s.",
+            "Calculer l'angle balayé $\\theta = \\omega \\times t$ en radians, puis le nombre de tours $\\dfrac{\\theta}{2\\pi}$ si on le demande."
+          ],
+          "example": {
+            "statement": "La meule d'un moulin à manioc tourne uniformément à 300 tr/min. On prend $\\pi = 3{,}14$. Calculer sa vitesse angulaire, puis l'angle balayé en 10 s et le nombre de tours correspondant.",
+            "steps": [
+              "Convertir : $n = \\dfrac{300}{60} = 5$ tr/s.",
+              "Écrire : $\\omega = 2\\pi \\times n$ avec $n = 5$ tr/s.",
+              "Calculer : $\\omega = 2 \\times 3{,}14 \\times 5 = 31{,}4$ rad/s.",
+              "Calculer l'angle : $\\theta = \\omega \\times t = 31{,}4 \\times 10 = 314$ rad, soit $\\dfrac{314}{2 \\times 3{,}14} = 50$ tours (on retrouve 5 tr/s $\\times$ 10 s)."
+            ]
+          },
+          "pitfall": "Ne mets pas la fréquence en tr/min dans $\\omega = 2\\pi n$. Contre-exemple : pour 300 tr/min, le calcul $2 \\times 3{,}14 \\times 300 = 1884$ rad/s est faux. La meule fait 5 tr/s, donc $\\omega = 31{,}4$ rad/s. Ne confonds pas non plus tours et radians : un tour vaut $2\\pi \\approx 6{,}28$ rad, pas 1 rad.",
+          "figure": null,
+          "practice": {
+            "statement": "Passer des tours par minute aux radians par seconde demande toujours le même détour. Vérifie-le sur de petites situations (π = 3,14).",
+            "questions": [
+              {
+                "content": "Une meule qui tourne à 60 tr/min fait ___ tr/s, donc sa vitesse angulaire est d'environ ___ rad/s (π = 3,14).",
+                "question_type": "select",
+                "explanation": "Étape 1 — Convertir : $n = \\dfrac{60}{60} = 1$ tr/s. Étape 3 — Calculer : $\\omega = 2\\pi \\times n = 2 \\times 3{,}14 \\times 1 = 6{,}28$ rad/s. La valeur 377 vient du piège : $2\\pi \\times 60$ avec des tr/min.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3600",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "377",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "60",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "6,28",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Divise 60 tr/min par 60, puis multiplie par $2\\pi$."
+              },
+              {
+                "content": "Une roue tourne à 4 tr/s. Quelle est sa vitesse angulaire (π = 3,14) ?",
+                "question_type": "numeric",
+                "unit": "rad/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $n$ est déjà en tr/s, $n = 4$. Étape 2 — Écrire : $\\omega = 2\\pi \\times n$. Étape 3 — Calculer : $\\omega = 2 \\times 3{,}14 \\times 4 = 25{,}12$ rad/s.",
+                "answers": [
+                  {
+                    "content": "25,12",
+                    "correct": true
+                  }
+                ],
+                "hint": "Multiplie $2 \\times 3{,}14$ par 4."
+              },
+              {
+                "content": "Dans la relation $\\omega = 2\\pi \\times n$, comment doit s'exprimer $n$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Convertir : il faut passer en tr/s avant d'écrire la relation (Étape 2). Avec des tr/min, on obtiendrait une vitesse angulaire 60 fois trop grande.",
+                "answers": [
+                  {
+                    "content": "En tours par seconde",
+                    "correct": true
+                  },
+                  {
+                    "content": "En tours par minute",
+                    "correct": false
+                  },
+                  {
+                    "content": "En radians par seconde",
+                    "correct": false
+                  },
+                  {
+                    "content": "En tours par heure",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'unité de $\\omega$ contient des secondes."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Passer des tours par minute aux radians par seconde",
+              "statement": "Dans cet exercice, tu convertis des fréquences de rotation et tu calcules des vitesses angulaires avec la méthode de la fiche. Tu prends π = 3,14.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "À combien de radians correspond un tour complet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire : le tour complet est la base de $\\omega = 2\\pi \\times n$ : un tour par seconde vaut $2\\pi$ rad/s. Les 360 viennent des degrés (un tour vaut 360°), pas des radians ; $\\pi$ rad est un demi-tour.",
+                  "answers": [
+                    {
+                      "content": "$2\\pi$ rad, soit environ 6,28 rad",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\pi$ rad, soit environ 3,14 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "360 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 rad",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roue de poulie tourne à 120 tr/min. Quelle est sa fréquence de rotation en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : on divise le nombre de tours par minute par 60. $n = \\dfrac{120}{60} = 2$ tr/s.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une poulie tourne à la fréquence de 5 tr/s. Quelle est sa vitesse angulaire ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : $n = 5$ tr/s, aucune conversion. Étape 2 — Écrire : $\\omega = 2\\pi \\times n$. Étape 3 — Calculer : $\\omega = 2 \\times 3{,}14 \\times 5 = 31{,}4$ rad/s.",
+                  "answers": [
+                    {
+                      "content": "31,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le moteur d'une moto tourne au ralenti à 1500 tr/min. Quelle est sa vitesse angulaire ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : $n = \\dfrac{1500}{60} = 25$ tr/s. Étape 2 — Écrire : $\\omega = 2\\pi \\times n$. Étape 3 — Calculer : $\\omega = 2 \\times 3{,}14 \\times 25 = 157$ rad/s. Prendre 1500 à la place de 25 donnerait 9420 rad/s, 60 fois trop.",
+                  "answers": [
+                    {
+                      "content": "157",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une poulie tourne uniformément à la vitesse angulaire de 10 rad/s pendant 6 s. Quel angle balaie-t-elle ?",
+                  "question_type": "numeric",
+                  "unit": "rad",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer : la vitesse angulaire est donnée, $\\omega = 10$ rad/s. Étape 4 — Calculer l'angle : $\\theta = \\omega \\times t = 10 \\times 6 = 60$ rad.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une meule tourne à 2 tr/s pendant 30 s. Combien de tours fait-elle ?",
+                  "question_type": "numeric",
+                  "unit": "tr",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : $n = 2$ tr/s. Étape 2 — Écrire : $\\omega = 2\\pi \\times n$. Étape 3 — Calculer : $\\omega = 2 \\times 3{,}14 \\times 2 = 12{,}56$ rad/s. Étape 4 — Calculer l'angle : $\\theta = 12{,}56 \\times 30 = 376{,}8$ rad, soit $\\dfrac{376{,}8}{2 \\times 3{,}14} = 60$ tours.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une meule tourne à 300 tr/min. Sa vitesse angulaire vaut donc $2\\pi \\times 300 = 1884$ rad/s.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Convertir : il faut d'abord passer à $n = \\dfrac{300}{60} = 5$ tr/s. Étape 3 — Calculer : $\\omega = 2 \\times 3{,}14 \\times 5 = 31{,}4$ rad/s. Le calcul proposé utilise des tr/min dans la relation : c'est le piège de la fiche, et le résultat est 60 fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque grandeur à son unité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Convertir : la fréquence de rotation s'exprime en tr/s (ou en tr/min). Étape 2 — Écrire : $\\omega = 2\\pi \\times n$ donne des rad/s. Étape 4 — Calculer : $\\theta = \\omega \\times t$ donne des rad. Le moment d'une force $F \\times d$ s'exprime en N·m.",
+                  "answers": [
+                    {
+                      "content": "Angle de rotation",
+                      "match": "rad"
+                    },
+                    {
+                      "content": "Vitesse angulaire",
+                      "match": "rad/s"
+                    },
+                    {
+                      "content": "Fréquence de rotation",
+                      "match": "tr/s"
+                    },
+                    {
+                      "content": "Moment d'une force",
+                      "match": "N·m"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Fréquence de rotation, vitesse angulaire et angle balayé",
+              "statement": "Dans cet exercice, tu convertis des fréquences de rotation et tu calcules des vitesses angulaires avec la méthode de la fiche. Tu prends π = 3,14.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Divise les tours par minute par 60 pour obtenir des tours par seconde, puis multiplie par 2π. Un tour vaut 2π rad, soit 6,28 rad.",
+              "questions": [
+                {
+                  "content": "Une roue tourne à 600 tr/min. Quelle est sa fréquence de rotation en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : n = 600/60 = 10 tr/s. On divise par 60 car il y a 60 secondes dans une minute.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ventilateur tourne à 10 tr/s. Quelle est sa vitesse angulaire ? On prend π = 3,14.",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — La fréquence est déjà en tr/s : n = 10. Étape 2 — Écrire : ω = 2π × n. Étape 3 — Calculer : ω = 2 × 3,14 × 10 = 62,8 rad/s.",
+                  "answers": [
+                    {
+                      "content": "62,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une poulie tourne uniformément à 8 rad/s pendant 5 s. Quel angle balaie-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Calculer l'angle balayé : θ = ω × t = 8 × 5 = 40 rad. 1,6 rad divise au lieu de multiplier ; 13 rad additionne ; 251,2 rad multiplie par 2π alors que ω est déjà en rad/s.",
+                  "answers": [
+                    {
+                      "content": "40 rad",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,6 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "13 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "251,2 rad",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tour complet correspond à un angle de 1 radian.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Un tour complet correspond à 2π rad, soit environ 6,28 rad. Confondre tours et radians fausse tous les calculs d'angle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une meule fait 120 tr/min : sa fréquence de rotation est de ___ tr/s.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Convertir : n = 120/60 = 2 tr/s.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour passer de tr/min à l'angle balayé.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Convertir. Étape 2 — Écrire ω = 2π × n. Étape 3 — Calculer ω. Étape 4 — Calculer l'angle. On ne peut pas calculer ω avant d'avoir converti n en tr/s.",
+                  "answers": [
+                    {
+                      "content": "Convertir la fréquence de rotation en tr/s."
+                    },
+                    {
+                      "content": "Écrire la relation ω = 2π × n."
+                    },
+                    {
+                      "content": "Calculer la vitesse angulaire ω en rad/s."
+                    },
+                    {
+                      "content": "Calculer l'angle θ = ω × t, puis le nombre de tours."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Travail d'une force de moment constant et d'un couple",
+          "remember": "Un solide tourne autour d'un axe fixe d'un angle $\\theta$ (en radians). Le **travail** d'une force dont le moment $M$ par rapport à l'axe est constant vaut $W = M \\times \\theta$, avec $M$ en N·m, $\\theta$ en rad et $W$ en joules (J). *D'où vient la formule :* si la force, de valeur $F$ constante, reste tangente au cercle de rayon $r$, on découpe l'arc en petits déplacements presque rectilignes ; sur chacun, la force est parallèle au déplacement et de même sens, donc son travail est $F$ multiplié par la longueur du petit déplacement. En additionnant, le point d'application parcourt l'arc $r\\theta$ et $W = F \\times r\\theta = (F \\times r) \\times \\theta = M \\times \\theta$. Le travail est **moteur** ($W > 0$) si le moment tend à faire tourner dans le sens de la rotation, **résistant** ($W < 0$) s'il s'y oppose, **nul** si $M = 0$. Un **couple de forces** est formé de deux forces de même valeur $F$, de sens opposés, de droites d'action parallèles et distantes de $d$. Son moment est $M = F \\times d$ et son travail, pour une rotation de $\\theta$, est $W = M \\times \\theta$.",
+          "method": [
+            "Calculer le moment $M$ de la force (ou du couple) par rapport à l'axe, en N·m.",
+            "Exprimer l'angle de rotation $\\theta$ en radians : multiplier le nombre de tours par $2\\pi$.",
+            "Appliquer la formule $W = M \\times \\theta$ avec $M$ en N·m et $\\theta$ en rad.",
+            "Conclure sur le signe : travail moteur si le moment tend à faire tourner dans le sens de la rotation, résistant sinon."
+          ],
+          "example": {
+            "statement": "Awa tourne la manivelle de 20 cm d'un moulin à manioc avec une force de 50 N toujours perpendiculaire à la manivelle et dans le sens de la rotation. La manivelle fait 5 tours. On prend $\\pi = 3{,}14$. Calculer le travail de la force.",
+            "steps": [
+              "Calculer le moment : $M = F \\times d = 50 \\times 0{,}20 = 10$ N·m.",
+              "Exprimer l'angle : $\\theta = 5 \\times 2\\pi = 5 \\times 2 \\times 3{,}14 = 31{,}4$ rad.",
+              "Appliquer : $W = M \\times \\theta = 10 \\times 31{,}4 = 314$ J.",
+              "Conclure : la force est dans le sens de la rotation, le travail est moteur : $W = +314$ J."
+            ]
+          },
+          "pitfall": "Ne mets pas l'angle en tours ou en degrés dans $W = M \\times \\theta$. Contre-exemple : $M = 10$ N·m et 5 tours. Le calcul $10 \\times 5 = 50$ J est faux. Il faut $\\theta = 5 \\times 2\\pi = 31{,}4$ rad, donc $W = 10 \\times 31{,}4 = 314$ J. Pour un couple, la distance $d$ est celle qui sépare les deux droites d'action, pas la longueur de l'objet qui tourne.",
+          "figure": "couple-guidon",
+          "practice": {
+            "statement": "Le travail en rotation se calcule avec un moment et un angle en radians. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Dans la formule $W = M \\times \\theta$, l'angle $\\theta$ s'exprime en ___ et le travail $W$ en ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Exprimer l'angle : $\\theta$ se met en radians (1 tour $= 2\\pi$ rad). Étape 3 — Appliquer : $W = M \\times \\theta$ avec $M$ en N·m et $\\theta$ en rad donne un travail en joules. Le watt mesure une puissance, pas un travail.",
+                "answers": [
+                  {
+                    "content": "tours",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "degrés",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "radians",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "watts",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "joules",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "newtons",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La fiche dit : $\\theta$ en rad, $M$ en N·m, $W$ en J."
+              },
+              {
+                "content": "Une force de moment constant 6 N·m fait tourner un solide d'un angle de 4 rad, dans le sens de son moment. Quel est son travail ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le moment : $M = 6$ N·m est donné. Étape 2 — Exprimer l'angle : $\\theta = 4$ rad, déjà en radians. Étape 3 — Appliquer : $W = M \\times \\theta = 6 \\times 4 = 24$ J. Étape 4 — Conclure : $W > 0$, le travail est moteur.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ],
+                "hint": "Applique directement $W = M \\times \\theta$."
+              },
+              {
+                "content": "Un couple est formé de deux forces de 10 N, de sens opposés, dont les droites d'action parallèles sont distantes de 0,30 m. Quel est son moment ?",
+                "question_type": "numeric",
+                "unit": "N·m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le moment : pour un couple, $M = F \\times d$ où $d$ est la distance entre les deux droites d'action. $M = 10 \\times 0{,}30 = 3$ N·m. Le moment du couple est la somme des moments des deux forces et vaut $F \\times d$ : on ne calcule pas $2F \\times d$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une seule force dans la formule $M = F \\times d$."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Calculer le travail d'une force ou d'un couple",
+              "statement": "Dans cet exercice, tu calcules des travaux en rotation avec la méthode de la fiche. Tu prends π = 3,14. La figure montre un guidon de moto vu de dessus, sur lequel s'exerce un couple de deux forces.",
+              "exercise_type": "fixation",
+              "figure": "couple-guidon",
+              "questions": [
+                {
+                  "content": "Le moment d'une force par rapport à l'axe d'un solide est constant et vaut 8 N·m. Le solide tourne d'un angle de 10 rad dans le sens du moment. Quel est le travail de la force ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le moment : $M = 8$ N·m est donné. Étape 2 — Exprimer l'angle : $\\theta = 10$ rad. Étape 3 — Appliquer : $W = M \\times \\theta = 8 \\times 10 = 80$ J. Étape 4 — Conclure : le travail est moteur.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de moment constant 10 N·m fait faire 2 tours à un solide, dans le sens de son moment. Quel est son travail ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le moment : $M = 10$ N·m. Étape 2 — Exprimer l'angle : $\\theta = 2 \\times 2\\pi = 2 \\times 2 \\times 3{,}14 = 12{,}56$ rad. Étape 3 — Appliquer : $W = 10 \\times 12{,}56 = 125{,}6$ J. Étape 4 — Conclure : le travail est moteur. Écrire $10 \\times 2 = 20$ J serait oublier de passer des tours aux radians.",
+                  "answers": [
+                    {
+                      "content": "125,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple est formé de deux forces de 25 N chacune, de sens opposés, dont les droites d'action parallèles sont distantes de 0,20 m. Quel est le moment du couple ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le moment : $M = F \\times d$ avec $d$ la distance entre les deux droites d'action. $M = 25 \\times 0{,}20 = 5$ N·m.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le guidon d'une moto, le conducteur exerce un couple de deux forces de 15 N chacune, de sens opposés et perpendiculaires au guidon, une sur chaque poignée. Les poignées sont distantes de 0,60 m. Le guidon tourne de 0,5 rad dans le sens du couple. Quel est le travail du couple ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le moment : les forces sont perpendiculaires au guidon, donc la distance entre leurs droites d'action est celle des poignées, $d = 0{,}60$ m, et $M = F \\times d = 15 \\times 0{,}60 = 9$ N·m. Étape 2 — Exprimer l'angle : $\\theta = 0{,}5$ rad, déjà en radians. Étape 3 — Appliquer : $W = M \\times \\theta = 9 \\times 0{,}5 = 4{,}5$ J. Étape 4 — Conclure : le guidon tourne dans le sens du couple, le travail est moteur.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les frottements dans l'axe d'une roue ont un moment de 3 N·m, opposé au sens de rotation. La roue tourne de 2 rad. Que dire du travail de ces frottements ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer le moment : 3 N·m en valeur. Étape 2 — Exprimer l'angle : $\\theta = 2$ rad. Étape 3 — Appliquer : $|W| = 3 \\times 2 = 6$ J. Étape 4 — Conclure : le moment s'oppose à la rotation, le travail est résistant, donc $W = -6$ J. Diviser au lieu de multiplier ($3 / 2 = 1{,}5$) est une erreur de formule.",
+                  "answers": [
+                    {
+                      "content": "Il est résistant : $W = -6$ J",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est moteur : $W = +6$ J",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est résistant : $W = -1{,}5$ J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moment constant de 10 N·m agit pendant 5 tours : son travail vaut $10 \\times 5 = 50$ J.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Exprimer l'angle : 5 tours valent $5 \\times 2\\pi = 31{,}4$ rad. Étape 3 — Appliquer : $W = 10 \\times 31{,}4 = 314$ J. Le calcul proposé garde l'angle en tours : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour calculer le travail d'une force de moment constant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Calculer le moment $M$. Étape 2 — Exprimer l'angle $\\theta$ en radians. Étape 3 — Appliquer $W = M \\times \\theta$. Étape 4 — Conclure sur le signe. Il faut le moment et l'angle avant de multiplier, et le signe se juge à la fin.",
+                  "answers": [
+                    {
+                      "content": "Calculer le moment de la force par rapport à l'axe."
+                    },
+                    {
+                      "content": "Exprimer l'angle de rotation en radians."
+                    },
+                    {
+                      "content": "Appliquer la formule $W = M \\times \\theta$."
+                    },
+                    {
+                      "content": "Conclure sur le signe du travail."
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur le travail $W = M \\times \\theta$ d'une force de moment constant, lesquelles sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Exprimer l'angle : $\\theta$ est en radians. Étape 3 — Appliquer : $M$ en N·m et $\\theta$ en rad donnent $W$ en joules. Étape 4 — Conclure : si le moment tend à faire tourner dans le sens de la rotation, le travail est moteur (positif), pas négatif. Et $W$ est proportionnel à $\\theta$.",
+                  "answers": [
+                    {
+                      "content": "L'angle $\\theta$ s'exprime en radians.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avec $M$ en N·m et $\\theta$ en rad, $W$ s'exprime en joules.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'angle $\\theta$ s'exprime en tours.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail est négatif quand le moment tend à faire tourner dans le sens de la rotation.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail ne dépend pas de l'angle $\\theta$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Travail d'une force de moment constant ou d'un couple",
+              "statement": "Dans cet exercice, tu calcules des travaux en rotation avec la méthode de la fiche : calculer le moment, exprimer l'angle en radians, appliquer W = M × θ, conclure sur le signe. Tu prends π = 3,14.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "L'angle doit être en radians : un tour vaut 2π rad, soit 6,28 rad. Un moment qui s'oppose à la rotation donne un travail négatif.",
+              "questions": [
+                {
+                  "content": "Une manivelle de 40 cm est poussée par une force de 25 N toujours perpendiculaire à la manivelle et dans le sens de la rotation. Elle fait 2 tours. Quel est le travail de la force ? On prend π = 3,14.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le moment : M = 25 × 0,40 = 10 N·m. Étape 2 — Exprimer l'angle : θ = 2 × 2π = 2 × 6,28 = 12,56 rad. Étape 3 — Appliquer : W = M × θ = 10 × 12,56 = 125,6 J. Étape 4 — Conclure : la force est dans le sens de la rotation, le travail est moteur. Écrire 10 × 2 = 20 J oublie la conversion des tours en radians.",
+                  "answers": [
+                    {
+                      "content": "125,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple est formé de deux forces de 15 N, de droites d'action parallèles distantes de 0,2 m. Il fait tourner un solide de 10 rad dans son sens. Quel est son travail ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le moment du couple : M = F × d = 15 × 0,2 = 3 N·m, où d est la distance entre les deux droites d'action. Étape 2 — L'angle est déjà en radians : 10 rad. Étape 3 — Appliquer : W = 3 × 10 = 30 J. Étape 4 — Le moment tend à faire tourner dans le sens de la rotation : travail moteur.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moment résistant constant de 8 N·m s'oppose à une rotation d'un angle de 3 rad. Quel est le travail de ce moment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Le moment vaut 8 N·m en valeur absolue. Étape 2 — L'angle est déjà en radians : 3 rad. Étape 3 — Appliquer : W = M × θ avec M = -8 N·m (il s'oppose à la rotation), soit -24 J. Étape 4 — Conclure : le travail est résistant, donc négatif. 24 J oublie le signe.",
+                  "answers": [
+                    {
+                      "content": "-24 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "24 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans W = M × θ, l'angle θ peut être exprimé en degrés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Exprimer l'angle en radians : la formule W = M × θ n'est valable qu'avec θ en radians. En degrés ou en tours, le résultat est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide fait 3 tours. On prend π = 3,14. Quelles sont les deux écritures correctes de l'angle de rotation θ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Exprimer l'angle : θ = 3 × 2π = 6π rad = 6 × 3,14 = 18,84 rad. 3 rad confond tours et radians ; 1080 est l'angle en degrés (3 × 360), pas en radians.",
+                  "answers": [
+                    {
+                      "content": "6π rad",
+                      "correct": true
+                    },
+                    {
+                      "content": "18,84 rad",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "1080 rad",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque nombre de tours à l'angle en radians (π = 3,14).",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Exprimer l'angle en radians : θ = nombre de tours × 2π = nombre de tours × 6,28. 1 × 6,28 = 6,28 ; 2 × 6,28 = 12,56 ; 5 × 6,28 = 31,4.",
+                  "answers": [
+                    {
+                      "content": "1 tour",
+                      "match": "6,28 rad"
+                    },
+                    {
+                      "content": "2 tours",
+                      "match": "12,56 rad"
+                    },
+                    {
+                      "content": "5 tours",
+                      "match": "31,4 rad"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Puissance dans un mouvement de rotation",
+          "remember": "La **puissance moyenne** d'une force qui travaille pendant la durée $\\Delta t$ est $P = \\dfrac{W}{\\Delta t}$, avec $W$ en joules, $\\Delta t$ en secondes et $P$ en watts (W) ; 1 kW $= 1000$ W. Pour un solide en rotation autour d'un axe fixe, avec un moment $M$ constant et une vitesse angulaire $\\omega$ constante, $W = M \\times \\theta = M \\times \\omega \\times \\Delta t$, donc $P = M \\times \\omega$ ($M$ en N·m, $\\omega$ en rad/s). Avec la fréquence de rotation $n$ en tr/s : $P = M \\times 2\\pi n$. C'est l'analogue de $P = F \\times v$ en translation. Avec le moment et la vitesse angulaire d'un instant précis, $P = M \\times \\omega$ est la **puissance instantanée**.",
+          "method": [
+            "Convertir la fréquence de rotation en tr/s, puis calculer la vitesse angulaire $\\omega = 2\\pi \\times n$ en rad/s.",
+            "Déterminer le moment $M$ de la force ou du couple en N·m (ou bien le travail $W$ et la durée $\\Delta t$ en secondes).",
+            "Appliquer la formule $P = M \\times \\omega$ (ou $P = \\dfrac{W}{\\Delta t}$).",
+            "Exprimer le résultat en watts, puis en kilowatts si besoin."
+          ],
+          "example": {
+            "statement": "Le moteur d'une moto tourne à 3000 tr/min avec un moment moteur constant de 20 N·m. Calculer sa puissance. On prend $\\pi = 3{,}14$.",
+            "steps": [
+              "Convertir : $n = \\dfrac{3000}{60} = 50$ tr/s, puis $\\omega = 2 \\times 3{,}14 \\times 50 = 314$ rad/s.",
+              "Déterminer le moment : $M = 20$ N·m (donné par l'énoncé).",
+              "Appliquer : $P = M \\times \\omega = 20 \\times 314 = 6280$.",
+              "Exprimer : $P = 6280$ W, soit $6{,}28$ kW."
+            ]
+          },
+          "pitfall": "Ne mets pas la fréquence de rotation en tr/min dans $P = M \\times \\omega$. Contre-exemple : $20 \\times 3000 = 60\\,000$ W est faux, presque dix fois trop grand. La vitesse angulaire est $\\omega = 314$ rad/s, pas 3000, et $P = 6280$ W. Ne confonds pas non plus le joule, unité d'un travail, et le watt, unité d'une puissance (un travail par seconde).",
+          "figure": null,
+          "practice": {
+            "statement": "La puissance en rotation, c'est un moment multiplié par une vitesse angulaire. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Dans la formule $P = M \\times \\omega$, le moment $M$ s'exprime en ___ et la vitesse angulaire $\\omega$ en ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Convertir : $\\omega$ doit être en rad/s (pas en tr/min). Étape 2 — Déterminer le moment : $M$ est en N·m. Étape 3 — Appliquer : $P = M \\times \\omega$ donne alors des watts (Étape 4).",
+                "answers": [
+                  {
+                    "content": "joules",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "N·m",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "newtons",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "tr/min",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "radians",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "rad/s",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La fiche : $\\omega$ en rad/s, $M$ en N·m, $P$ en W."
+              },
+              {
+                "content": "Un moteur fournit un moment constant de 4 N·m et tourne à la vitesse angulaire de 25 rad/s. Quelle est sa puissance ?",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $\\omega = 25$ rad/s, déjà en rad/s. Étape 2 — Déterminer le moment : $M = 4$ N·m. Étape 3 — Appliquer : $P = M \\times \\omega = 4 \\times 25 = 100$. Étape 4 — Exprimer : $P = 100$ W.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ],
+                "hint": "Multiplie le moment par la vitesse angulaire."
+              },
+              {
+                "content": "Une force de moment constant fournit un travail de 900 J en 30 s. Quelle est sa puissance moyenne ?",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Déterminer : le travail $W = 900$ J et la durée $\\Delta t = 30$ s sont donnés. Étape 3 — Appliquer : $P = \\dfrac{W}{\\Delta t} = \\dfrac{900}{30} = 30$. Étape 4 — Exprimer : $P = 30$ W.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise le travail par la durée."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Calculer des puissances en rotation",
+              "statement": "Dans cet exercice, tu calcules des puissances de machines qui tournent avec la méthode de la fiche. Tu prends π = 3,14.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une force de moment constant fournit un travail de 600 J en 20 s. Quelle est sa puissance moyenne ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Déterminer : $W = 600$ J et $\\Delta t = 20$ s. Étape 3 — Appliquer : $P = \\dfrac{W}{\\Delta t} = \\dfrac{600}{20} = 30$. Étape 4 — Exprimer : $P = 30$ W.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une poulie tourne à la vitesse angulaire de 40 rad/s sous un moment constant de 5 N·m. Quelle est la puissance développée ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : $\\omega = 40$ rad/s, déjà en rad/s. Étape 2 — Déterminer le moment : $M = 5$ N·m. Étape 3 — Appliquer : $P = M \\times \\omega = 5 \\times 40 = 200$. Étape 4 — Exprimer : $P = 200$ W.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La meule d'un moulin à manioc tourne à 600 tr/min sous un moment constant de 10 N·m. Quelle est la puissance développée ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : $n = \\dfrac{600}{60} = 10$ tr/s, puis $\\omega = 2 \\times 3{,}14 \\times 10 = 62{,}8$ rad/s. Étape 2 — Déterminer le moment : $M = 10$ N·m. Étape 3 — Appliquer : $P = 10 \\times 62{,}8 = 628$. Étape 4 — Exprimer : $P = 628$ W.",
+                  "answers": [
+                    {
+                      "content": "628",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le moteur d'une moto tourne à 6000 tr/min avec un moment moteur constant de 10 N·m. Quelle est sa puissance, en kilowatts ?",
+                  "question_type": "numeric",
+                  "unit": "kW",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : $n = \\dfrac{6000}{60} = 100$ tr/s, puis $\\omega = 2 \\times 3{,}14 \\times 100 = 628$ rad/s. Étape 2 — Déterminer le moment : $M = 10$ N·m. Étape 3 — Appliquer : $P = 10 \\times 628 = 6280$. Étape 4 — Exprimer : $P = 6280$ W, soit $6{,}28$ kW (on divise par 1000).",
+                  "answers": [
+                    {
+                      "content": "6,28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur de puissance 2000 W tourne à la vitesse angulaire de 100 rad/s. Quel est son moment moteur, supposé constant ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : $\\omega = 100$ rad/s. Étape 2 — Déterminer le moment : il est inconnu, on utilise la formule de l'étape 3 écrite dans l'autre sens. Étape 3 — Appliquer : $P = M \\times \\omega$, donc $M = \\dfrac{P}{\\omega} = \\dfrac{2000}{100} = 20$. Étape 4 — Exprimer : $M = 20$ N·m.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité de la puissance dans le Système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Exprimer : la puissance est un travail par seconde, $P = \\dfrac{W}{\\Delta t}$, donc des J/s, c'est-à-dire des watts. Le joule est l'unité du travail, le N·m celle du moment, le rad/s celle de la vitesse angulaire.",
+                  "answers": [
+                    {
+                      "content": "Le watt (W)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le joule (J)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le newton-mètre (N·m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le radian par seconde (rad/s)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur tourne à 3000 tr/min avec un moment constant de 20 N·m. Sa puissance vaut donc $20 \\times 3000 = 60\\,000$ W.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Convertir : $n = \\dfrac{3000}{60} = 50$ tr/s et $\\omega = 2 \\times 3{,}14 \\times 50 = 314$ rad/s. Étape 3 — Appliquer : $P = 20 \\times 314 = 6280$ W. Le calcul proposé utilise des tr/min : c'est le piège de la fiche, et le résultat est presque dix fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une machine garde le même moment moteur constant, mais sa vitesse angulaire double. Que devient sa puissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Appliquer : $P = M \\times \\omega$. Avec $M$ inchangé et $\\omega$ multipliée par 2, $P$ est multipliée par 2. Elle ne reste pas la même, car $\\omega$ intervient dans la formule, et elle n'est pas multipliée par 4 : $\\omega$ apparaît une seule fois.",
+                  "answers": [
+                    {
+                      "content": "Elle double.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste la même.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est divisée par 2.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est multipliée par 4.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer la puissance de machines qui tournent",
+              "statement": "Dans cet exercice, tu calcules des puissances de machines qui tournent avec la méthode de la fiche : convertir en tr/s, calculer ω, appliquer P = M × ω, donner le résultat en watts. Tu prends π = 3,14.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "N'utilise jamais les tours par minute dans P = M × ω : convertis en tr/s, puis en rad/s.",
+              "questions": [
+                {
+                  "content": "Un moteur tourne à 1200 tr/min avec un moment moteur constant de 10 N·m. Quelle est sa puissance ? On prend π = 3,14.",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : n = 1200/60 = 20 tr/s, puis ω = 2 × 3,14 × 20 = 125,6 rad/s. Étape 2 — Déterminer le moment : M = 10 N·m. Étape 3 — Appliquer : P = M × ω = 10 × 125,6 = 1256. Étape 4 — Exprimer : P = 1256 W. Écrire 10 × 1200 = 12 000 W mettrait les tr/min dans la formule.",
+                  "answers": [
+                    {
+                      "content": "1256",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une machine fournit un travail de 600 J en 20 s. Quelle est sa puissance moyenne ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Le travail W = 600 J et la durée Δt = 20 s sont connus. Étape 3 — Appliquer : P = W/Δt = 600/20 = 30. Étape 4 — Exprimer : 30 W.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre est soumis à un moment de 4 N·m et tourne à la vitesse angulaire de 100 rad/s. Quelle est la puissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — La vitesse angulaire est déjà en rad/s : ω = 100. Étape 2 — M = 4 N·m. Étape 3 — Appliquer : P = M × ω = 4 × 100 = 400. Étape 4 — Exprimer : 400 W. 25 W divise ; 104 W additionne ; 0,04 W inverse le rapport.",
+                  "answers": [
+                    {
+                      "content": "400 W",
+                      "correct": true
+                    },
+                    {
+                      "content": "25 W",
+                      "correct": false
+                    },
+                    {
+                      "content": "104 W",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,04 W",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La puissance d'un moteur se mesure en joules.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Exprimer le résultat en watts : la puissance est un travail par seconde (1 W = 1 J/s). Le joule est l'unité du travail.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une puissance de 6280 W vaut ___ kW.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Exprimer le résultat en kilowatts : 1 kW = 1000 W, donc 6280 W = 6280/1000 = 6,28 kW.",
+                  "answers": [
+                    {
+                      "content": "6,28",
+                      "correct": true
+                    },
+                    {
+                      "content": "6.28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux relations valides pour la puissance d'un solide en rotation uniforme autour d'un axe fixe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Appliquer P = M × ω (avec ω en rad/s) ou P = W/Δt. M × θ est un travail, en joules ; M × n avec n en tr/min mélange les unités.",
+                  "answers": [
+                    {
+                      "content": "P = M × ω",
+                      "correct": true
+                    },
+                    {
+                      "content": "P = W/Δt",
+                      "correct": true
+                    },
+                    {
+                      "content": "P = M × θ",
+                      "correct": false
+                    },
+                    {
+                      "content": "P = M × n avec n en tr/min",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le moulin à manioc de maman Adjoua",
+          "statement": "Au marché de Yopougon, maman Adjoua râpe son manioc avec un moulin à manivelle. Elle tourne la manivelle, longue de 20 cm, avec une force de 50 N toujours perpendiculaire à la manivelle et dans le sens de la rotation. La manivelle fait 1 tour par seconde (60 tr/min) pendant 30 s. On prend π = 3,14.",
+          "exercise_type": "fixation",
+          "figure": "manivelle-moulin",
+          "questions": [
+            {
+              "content": "Quel est le moment de la force de maman Adjoua par rapport à l'axe de la manivelle ?",
+              "question_type": "numeric",
+              "unit": "N·m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer l'axe (celui de la meule) et le point d'application (la poignée). Étape 2 — Tracer la droite d'action : la force est perpendiculaire à la manivelle. Étape 3 — Le bras de levier est la longueur de la manivelle : $d = 20$ cm $= 0{,}20$ m. Étape 4 — $M = F \\times d = 50 \\times 0{,}20 = 10$ N·m (positif, dans le sens de la rotation).",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la vitesse angulaire de la manivelle ?",
+              "question_type": "numeric",
+              "unit": "rad/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — La fréquence de rotation vaut déjà $n = 1$ tr/s (60 tr/min divisés par 60). Étape 2 — On écrit $\\omega = 2\\pi \\times n$. Étape 3 — $\\omega = 2 \\times 3{,}14 \\times 1 = 6{,}28$ rad/s. Prendre 60 à la place de 1 donnerait 376,8 rad/s, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "6,28",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est l'angle balayé par la manivelle en 30 s ?",
+              "question_type": "numeric",
+              "unit": "rad",
+              "tolerance": 0,
+              "explanation": "Rotation uniforme : $\\theta = \\omega \\times t$ (étape 4 de la méthode sur la vitesse angulaire). $\\theta = 6{,}28 \\times 30 = 188{,}4$ rad. Contrôle : 30 tours $\\times$ $2\\pi$ $= 30 \\times 6{,}28 = 188{,}4$ rad.",
+              "answers": [
+                {
+                  "content": "188,4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le travail de la force de maman Adjoua pendant ces 30 s ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Le moment vaut $M = 10$ N·m (première question). Étape 2 — L'angle vaut $\\theta = 188{,}4$ rad, déjà en radians. Étape 3 — $W = M \\times \\theta = 10 \\times 188{,}4 = 1884$ J. Étape 4 — La force est dans le sens de la rotation : le travail est moteur. Garder 30 tours à la place de 188,4 rad donnerait 300 J, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "1884",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la puissance moyenne de maman Adjoua pendant ces 30 s ?",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Étape 2 — On connaît le travail $W = 1884$ J et la durée $\\Delta t = 30$ s. Étape 3 — $P = \\dfrac{W}{\\Delta t} = \\dfrac{1884}{30} = 62{,}8$. Étape 4 — $P = 62{,}8$ W.",
+              "answers": [
+                {
+                  "content": "62,8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La puissance obtenue avec $P = M \\times \\omega$ est la même que celle obtenue avec $P = \\dfrac{W}{\\Delta t}$ : ici, $10 \\times 6{,}28 = 62{,}8$ W dans les deux cas.",
+              "question_type": "true_false",
+              "explanation": "Méthode : $W = M \\times \\theta = M \\times \\omega \\times \\Delta t$, donc $\\dfrac{W}{\\Delta t} = M \\times \\omega$. Application : $M \\times \\omega = 10 \\times 6{,}28 = 62{,}8$ W et $\\dfrac{W}{\\Delta t} = \\dfrac{1884}{30} = 62{,}8$ W. Les deux formules donnent le même résultat quand le moment et la vitesse angulaire sont constants.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Maman Adjoua tourne deux fois plus vite avec la même force perpendiculaire. Que devient sa puissance ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : $P = M \\times \\omega$. Le moment $M = F \\times d$ ne change pas (même force, même manivelle), et $\\omega$ double. Donc $P$ double : elle passe de 62,8 W à 125,6 W. Elle n'est pas multipliée par 4, car $\\omega$ n'apparaît qu'une fois dans la formule.",
+              "answers": [
+                {
+                  "content": "Elle double.",
+                  "correct": true
+                },
+                {
+                  "content": "Elle reste la même.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est divisée par 2.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est multipliée par 4.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La poulie du chantier d'Abobo",
+          "statement": "Sur un chantier d'Abobo, un ouvrier remonte des seaux de sable avec une poulie de rayon 20 cm. Il tire la corde avec une force de 250 N tangente à la poulie (perpendiculaire au rayon), dans le sens de la rotation. La poulie fait 3 tours en 6 s, à vitesse angulaire constante. On prend π = 3,14.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le moment de la force exercée sur la corde par rapport à l'axe de la poulie ?",
+              "question_type": "numeric",
+              "unit": "N·m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer l'axe (celui de la poulie) et le point d'application (là où la corde quitte la poulie). Étape 2 — Tracer la droite d'action : la corde est tangente, donc perpendiculaire au rayon. Étape 3 — Le bras de levier est le rayon : $d = 20$ cm $= 0{,}20$ m. Étape 4 — $M = 250 \\times 0{,}20 = 50$ N·m.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel angle la poulie balaie-t-elle pendant ces 3 tours ?",
+              "question_type": "numeric",
+              "unit": "rad",
+              "tolerance": 0,
+              "explanation": "Un tour vaut $2\\pi$ rad. $\\theta = 3 \\times 2\\pi = 3 \\times 2 \\times 3{,}14 = 18{,}84$ rad. Garder « 3 » (les tours) dans la suite du calcul est l'erreur à éviter.",
+              "answers": [
+                {
+                  "content": "18,84",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le travail de la force de l'ouvrier pendant ces 3 tours ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Le moment vaut $M = 50$ N·m. Étape 2 — L'angle vaut $\\theta = 18{,}84$ rad. Étape 3 — $W = M \\times \\theta = 50 \\times 18{,}84 = 942$ J. Étape 4 — La force est dans le sens de la rotation : le travail est moteur.",
+              "answers": [
+                {
+                  "content": "942",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la longueur de corde tirée pendant ces 3 tours ? On rappelle que l'arc de cercle de rayon $r$ vu sous l'angle $\\theta$ (en radians) mesure $r \\times \\theta$.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "L'arc parcouru par un point de la corde enroulée est $d = r \\times \\theta = 0{,}20 \\times 18{,}84 = 3{,}768$ m. C'est la longueur de corde tirée. Contrôle : 3 tours d'une poulie de rayon 0,20 m ont pour longueur $3 \\times 2\\pi \\times 0{,}20 = 3{,}768$ m.",
+              "answers": [
+                {
+                  "content": "3,768",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une force de 250 N tire une corde sur 3,768 m, dans le sens du déplacement. Son travail de translation $F \\times d$ est égal au travail de rotation $M \\times \\theta$ avec $M = 50$ N·m et $\\theta = 18{,}84$ rad.",
+              "question_type": "true_false",
+              "explanation": "Travail de translation (leçon sur la translation) : la force est dans le sens du déplacement, $\\alpha = 0$, donc $W = F \\times d \\times \\cos 0 = 250 \\times 3{,}768 = 942$ J. Travail de rotation : $W = M \\times \\theta = 50 \\times 18{,}84 = 942$ J. Les deux sont égaux, car $M \\times \\theta = (F \\times r) \\times \\theta = F \\times (r\\theta) = F \\times d$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la puissance moyenne de l'ouvrier pendant ces 6 s ?",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Le travail est $W = 942$ J et la durée $\\Delta t = 6$ s. Étape 3 — $P = \\dfrac{W}{\\Delta t} = \\dfrac{942}{6} = 157$. Étape 4 — $P = 157$ W. Contrôle avec $P = M \\times \\omega$ : $\\omega = \\dfrac{18{,}84}{6} = 3{,}14$ rad/s et $50 \\times 3{,}14 = 157$ W.",
+              "answers": [
+                {
+                  "content": "157",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les frottements dans l'axe de la poulie ont un moment résistant constant de 5 N·m. Quel est leur travail pendant ces 3 tours ? (Donne un nombre négatif s'il est résistant.)",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Le moment des frottements a pour valeur 5 N·m. Étape 2 — L'angle est $\\theta = 18{,}84$ rad. Étape 3 — $|W| = 5 \\times 18{,}84 = 94{,}2$ J. Étape 4 — Le moment s'oppose à la rotation : le travail est résistant, donc $W = -94{,}2$ J.",
+              "answers": [
+                {
+                  "content": "-94,2",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le moteur d'un moto-taxi d'Abidjan",
+          "statement": "À Abidjan, le moteur d'un moto-taxi tourne à 2400 tr/min. À ce régime, le moment moteur est constant et vaut 15 N·m. On prend π = 3,14.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la fréquence de rotation du moteur en tr/s ?",
+              "question_type": "numeric",
+              "unit": "tr/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 de la méthode sur la vitesse angulaire — Convertir : on divise le nombre de tours par minute par 60. $n = \\dfrac{2400}{60} = 40$ tr/s.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la vitesse angulaire du moteur ?",
+              "question_type": "numeric",
+              "unit": "rad/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Convertir : $n = 40$ tr/s. Étape 2 — Écrire : $\\omega = 2\\pi \\times n$. Étape 3 — Calculer : $\\omega = 2 \\times 3{,}14 \\times 40 = 251{,}2$ rad/s.",
+              "answers": [
+                {
+                  "content": "251,2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la puissance du moteur, en watts ?",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Étape 1 — La vitesse angulaire est $\\omega = 251{,}2$ rad/s. Étape 2 — Le moment est $M = 15$ N·m. Étape 3 — $P = M \\times \\omega = 15 \\times 251{,}2 = 3768$. Étape 4 — $P = 3768$ W, soit $3{,}768$ kW. Avec 2400 à la place de $\\omega$, on trouverait 36 000 W : erreur d'unité.",
+              "answers": [
+                {
+                  "content": "3768",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel travail le moteur fournit-il en 10 s ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "La puissance est constante : $P = \\dfrac{W}{\\Delta t}$, donc $W = P \\times \\Delta t = 3768 \\times 10 = 37\\,680$ J.",
+              "answers": [
+                {
+                  "content": "37680",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de tours le moteur fait-il en 10 s ?",
+              "question_type": "numeric",
+              "unit": "tr",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Le moteur fait 40 tr/s. Étape 4 — En 10 s : $40 \\times 10 = 400$ tours.",
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est l'angle balayé par l'arbre du moteur en 10 s, en radians ?",
+              "question_type": "numeric",
+              "unit": "rad",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Un tour vaut $2\\pi$ rad. $\\theta = 400 \\times 2 \\times 3{,}14 = 2512$ rad. Contrôle : $\\theta = \\omega \\times t = 251{,}2 \\times 10 = 2512$ rad. Vérification avec le travail : $W = M \\times \\theta = 15 \\times 2512 = 37\\,680$ J, comme avec $P \\times \\Delta t$.",
+              "answers": [
+                {
+                  "content": "2512",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le conducteur accélère : le moteur passe à 4800 tr/min et garde la même puissance de 3768 W. Quel est alors son moment moteur ?",
+              "question_type": "numeric",
+              "unit": "N·m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — $n = \\dfrac{4800}{60} = 80$ tr/s, puis $\\omega = 2 \\times 3{,}14 \\times 80 = 502{,}4$ rad/s. Étape 3 — $P = M \\times \\omega$, donc $M = \\dfrac{P}{\\omega} = \\dfrac{3768}{502{,}4} = 7{,}5$ N·m. La vitesse angulaire a doublé, le moment a été divisé par 2.",
+              "answers": [
+                {
+                  "content": "7,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi, quand un moteur garde la même puissance, son moment moteur diminue si sa vitesse angulaire augmente.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "La puissance d'un moteur s'écrit P = M × ω, donc…",
+              "criteria": [
+                "Utilise la formule P = M × ω",
+                "Dit que P est constante donc M × ω est constant",
+                "Conclut : si ω augmente, M diminue",
+                "S'appuie sur un exemple chiffré"
+              ],
+              "explanation": "Corrigé modèle : la puissance d'un moteur qui tourne vaut $P = M \\times \\omega$. Si la puissance $P$ est constante, le produit $M \\times \\omega$ est constant, donc $M = \\dfrac{P}{\\omega}$. Quand $\\omega$ augmente, $M$ diminue dans la même proportion. Exemple de l'exercice : à 2400 tr/min ($\\omega = 251{,}2$ rad/s), $M = 15$ N·m ; à 4800 tr/min ($\\omega = 502{,}4$ rad/s), $M = 7{,}5$ N·m. Barème : formule utilisée (1 point), raisonnement sur le produit constant (1 point), conclusion avec exemple (1 point).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le moteur du moulin à manioc de la coopérative",
+          "statement": "Dans une coopérative près de Dabou, un moulin à manioc est entraîné par un moteur électrique. L'arbre du moteur tourne à 600 tr/min, à vitesse angulaire constante, et le moteur développe une puissance de 1256 W. Une courroie passe sur une poulie de rayon 10 cm montée sur l'arbre. On prend π = 3,14.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la vitesse angulaire de l'arbre du moteur ?",
+              "question_type": "numeric",
+              "unit": "rad/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Convertir : $n = \\dfrac{600}{60} = 10$ tr/s. Étape 2 — Écrire : $\\omega = 2\\pi \\times n$. Étape 3 — Calculer : $\\omega = 2 \\times 3{,}14 \\times 10 = 62{,}8$ rad/s.",
+              "answers": [
+                {
+                  "content": "62,8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le moment du moteur, supposé constant ?",
+              "question_type": "numeric",
+              "unit": "N·m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — La vitesse angulaire est $\\omega = 62{,}8$ rad/s. Étape 2 — Le moment est inconnu. Étape 3 — On écrit $P = M \\times \\omega$ dans l'autre sens : $M = \\dfrac{P}{\\omega} = \\dfrac{1256}{62{,}8} = 20$. Étape 4 — $M = 20$ N·m.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La courroie exerce sur la poulie une force tangente à la poulie, dans le sens de la rotation, dont le moment est celui du moteur. Quelle est l'intensité de cette force ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Le bras de levier d'une force tangente est le rayon : $d = 10$ cm $= 0{,}10$ m (Étape 3 de la méthode sur le moment). Étape 4 — $M = F \\times d$, donc $F = \\dfrac{M}{d} = \\dfrac{20}{0{,}10} = 200$ N. Garder 10 cm sans convertir donnerait $F = 2$ N, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel travail le moteur fournit-il en 5 minutes ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Convertir la durée en secondes : 5 min $= 300$ s. Étape 3 — $W = P \\times \\Delta t$, car $P = \\dfrac{W}{\\Delta t}$. $W = 1256 \\times 300 = 376\\,800$ J. Garder 5 min dans le calcul donnerait 6280 J : erreur d'unité.",
+              "answers": [
+                {
+                  "content": "376800",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de tours l'arbre fait-il en 5 minutes ?",
+              "question_type": "numeric",
+              "unit": "tr",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Convertir : l'arbre fait 10 tr/s, et 5 min $= 300$ s. Le nombre de tours est $10 \\times 300 = 3000$ tours (ou 600 tr/min $\\times$ 5 min).",
+              "answers": [
+                {
+                  "content": "3000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En 5 minutes, l'arbre balaie un angle de 18 840 rad. Quel travail obtient-on avec $W = M \\times \\theta$ et $M = 20$ N·m ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Appliquer : $W = M \\times \\theta = 20 \\times 18\\,840 = 376\\,800$ J. C'est le travail trouvé avec $P \\times \\Delta t$, ce qui confirme les calculs. Les autres valeurs viennent d'erreurs : $20 \\times 3000 = 60\\,000$ (tours au lieu de radians), une virgule décalée ($37\\,680$) ou la durée de 5 min non convertie en secondes ($1256 \\times 5 = 6280$).",
+              "answers": [
+                {
+                  "content": "376 800 J",
+                  "correct": true
+                },
+                {
+                  "content": "60 000 J",
+                  "correct": false
+                },
+                {
+                  "content": "37 680 J",
+                  "correct": false
+                },
+                {
+                  "content": "6 280 J",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La charge du moulin augmente : l'arbre ralentit à 300 tr/min, mais le moteur garde sa puissance de 1256 W. Quel est alors son moment ?",
+              "question_type": "numeric",
+              "unit": "N·m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — $n = \\dfrac{300}{60} = 5$ tr/s, puis $\\omega = 2 \\times 3{,}14 \\times 5 = 31{,}4$ rad/s. Étape 3 — $M = \\dfrac{P}{\\omega} = \\dfrac{1256}{31{,}4} = 40$. Étape 4 — $M = 40$ N·m : la vitesse angulaire a été divisée par 2, le moment a doublé.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le moteur entraîne la meule, qui oppose à la rotation un moment résistant. Compare le signe du travail du moment moteur et celui du travail du moment résistant de la meule pendant la rotation, et explique-le.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Le moment moteur tend à faire tourner dans le sens de la rotation, donc…",
+              "criteria": [
+                "Le travail du moment moteur est moteur (positif)",
+                "Le travail du moment de la meule est résistant (négatif)",
+                "Explication avec le sens du moment par rapport à la rotation",
+                "Cite W = M × θ"
+              ],
+              "explanation": "Corrigé modèle : le travail s'écrit $W = M \\times \\theta$. Le moment du moteur tend à faire tourner l'arbre dans le sens de la rotation : son travail est moteur, donc positif. Le moment résistant de la meule s'oppose au sens de la rotation : son travail est résistant, donc négatif. Les deux travaux sont donc de signes opposés. Barème : formule (1 point), travail moteur positif expliqué (1 point), travail résistant négatif expliqué (1 point).",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Moment d'une force par rapport à un axe fixe et bras de levier ; fréquence de rotation, vitesse angulaire et angle balayé ; travail W = M × θ ; puissance P = M × ω ; conversions d'unités.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "La manivelle d'un moulin, de 40 cm, tourne autour d'un axe fixe. Les forces étudiées sont dans un plan perpendiculaire à l'axe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Moment = force × bras de levier, avec le bras de levier en mètres.",
+              "questions": [
+                {
+                  "content": "Quelle est la formule du moment d'une force par rapport à un axe fixe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Déterminer le bras de levier d. Étape 4 — Calculer M = F × d, en N·m. Les autres écritures ne donnent pas des newtons-mètres.",
+                  "answers": [
+                    {
+                      "content": "M = F × d, d étant le bras de levier",
+                      "correct": true
+                    },
+                    {
+                      "content": "M = F/d",
+                      "correct": false
+                    },
+                    {
+                      "content": "M = F + d",
+                      "correct": false
+                    },
+                    {
+                      "content": "M = d/F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de 30 N, perpendiculaire à la manivelle, est appliquée à sa poignée. Quel est son moment par rapport à l'axe ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — d = 40 cm = 0,40 m. Étape 4 — M = 30 × 0,40 = 12 N·m.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de 60 N perpendiculaire à une manivelle de 25 cm est appliquée à sa poignée. Quel est son moment ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — d = 25 cm = 0,25 m. Étape 4 — M = 60 × 0,25 = 15 N·m. Le calcul 60 × 25 = 1500 oublie la conversion en mètres.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la droite d'action d'une force coupe l'axe de rotation, son moment est nul.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Le bras de levier est la distance entre l'axe et la droite d'action : elle est nulle si la droite coupe l'axe. Étape 4 — M = F × 0 = 0.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité du moment d'une force dans le Système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le moment est le produit d'une force en newtons par une distance en mètres : son unité est le newton-mètre.",
+                  "answers": [
+                    {
+                      "content": "Le newton-mètre (N·m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le newton (N)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le watt (W)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le radian par seconde (rad/s)",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une meule de moulin tourne uniformément à 300 tr/min. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Divise les tr/min par 60, puis multiplie par 2π.",
+              "questions": [
+                {
+                  "content": "Quelle est la fréquence de rotation de la meule en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : n = 300/60 = 5 tr/s.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la vitesse angulaire de la meule ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Écrire ω = 2π × n. Étape 3 — Calculer : ω = 2 × 3,14 × 5 = 31,4 rad/s.",
+                  "answers": [
+                    {
+                      "content": "31,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel angle la meule balaie-t-elle en 10 s ?",
+                  "question_type": "numeric",
+                  "unit": "rad",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Calculer : θ = ω × t = 31,4 × 10 = 314 rad.",
+                  "answers": [
+                    {
+                      "content": "314",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de tours la meule fait-elle en 10 s ?",
+                  "question_type": "numeric",
+                  "unit": "tr",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Nombre de tours = θ/2π = 314/6,28 = 50, ce qui est cohérent avec 5 tr/s × 10 s.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle valeur correspond à un tour complet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un tour complet correspond à 2π rad (environ 6,28 rad), soit 360° ; π rad est un demi-tour.",
+                  "answers": [
+                    {
+                      "content": "2π rad",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "π rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "360 rad",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une force de 50 N, toujours perpendiculaire à une manivelle de 20 cm et dans le sens de la rotation, fait tourner la manivelle de 5 tours. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule le moment, puis l'angle en radians, puis le travail.",
+              "questions": [
+                {
+                  "content": "Quel est le moment de la force par rapport à l'axe ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le moment : M = 50 × 0,20 = 10 N·m.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'angle de rotation en radians ?",
+                  "question_type": "numeric",
+                  "unit": "rad",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Exprimer l'angle : θ = 5 × 2π = 5 × 6,28 = 31,4 rad.",
+                  "answers": [
+                    {
+                      "content": "31,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail de la force ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Appliquer : W = M × θ = 10 × 31,4 = 314 J.",
+                  "answers": [
+                    {
+                      "content": "314",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail de la force est moteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : la force est dans le sens de la rotation, donc W > 0 : le travail est moteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel résultat obtiendrait-on en oubliant de convertir les tours en radians ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec θ = 5 (tours) au lieu de 31,4 rad, on obtiendrait W = 10 × 5 = 50 J : résultat faux. Il faut exprimer l'angle en radians.",
+                  "answers": [
+                    {
+                      "content": "50 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "314 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 J",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le moteur d'une moto tourne à 3000 tr/min avec un moment moteur constant de 20 N·m. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis en tr/s, calcule ω, puis P = M × ω.",
+              "questions": [
+                {
+                  "content": "Quelle est la fréquence de rotation du moteur en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : n = 3000/60 = 50 tr/s.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la vitesse angulaire du moteur ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — ω = 2 × 3,14 × 50 = 314 rad/s.",
+                  "answers": [
+                    {
+                      "content": "314",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance du moteur ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Appliquer : P = M × ω = 20 × 314 = 6280 W.",
+                  "answers": [
+                    {
+                      "content": "6280",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Exprime cette puissance en kilowatts.",
+                  "question_type": "numeric",
+                  "unit": "kW",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — 6280 W = 6280/1000 = 6,28 kW.",
+                  "answers": [
+                    {
+                      "content": "6,28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La puissance se calcule avec la fréquence de rotation en tr/min.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Il faut convertir en tr/s puis en rad/s. Avec 3000 tr/min on obtiendrait 20 × 3000 = 60 000 W, presque dix fois trop.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Moulin à manioc, puits à poulie, moto-taxi d'Abidjan et moteur de coopérative : moment, vitesse angulaire, travail et puissance en rotation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Bouaké, maman Adjoua tourne la manivelle de 25 cm d'un moulin à manioc. Sa force, de 40 N, reste perpendiculaire à la manivelle et dans le sens de la rotation. Elle fait 4 tours en 16 s. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule le moment, l'angle en radians, le travail, puis la puissance moyenne P = W/Δt.",
+              "questions": [
+                {
+                  "content": "Quel est le moment de la force par rapport à l'axe ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — d = 25 cm = 0,25 m. Étape 4 — M = 40 × 0,25 = 10 N·m.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'angle balayé en 4 tours ?",
+                  "question_type": "numeric",
+                  "unit": "rad",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — θ = 4 × 2π = 4 × 6,28 = 25,12 rad.",
+                  "answers": [
+                    {
+                      "content": "25,12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail de la force de maman Adjoua ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — W = M × θ = 10 × 25,12 = 251,2 J, moteur.",
+                  "answers": [
+                    {
+                      "content": "251,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance moyenne de cette force ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = W/Δt = 251,2/16 = 15,7 W.",
+                  "answers": [
+                    {
+                      "content": "15,7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si maman Adjoua tourne en sens inverse de la rotation de la meule, le travail de sa force est positif.",
+                  "question_type": "true_false",
+                  "explanation": "Si le moment s'oppose à la rotation, le travail est résistant : W < 0. Un travail positif suppose un moment dans le sens de la rotation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un village près de Korhogo, on remonte un seau de 15 kg d'un puits avec une poulie de 20 cm de rayon. La corde est tangente à la poulie ; sa tension, égale au poids du seau (vitesse constante), est perpendiculaire au rayon. La poulie fait 5 tours. On prend g = 10 N/kg et π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Poids = m × g ; le bras de levier est le rayon de la poulie.",
+              "questions": [
+                {
+                  "content": "Quelle est la valeur de la tension de la corde ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer le poids : P = 15 × 10 = 150 N, égal à la tension à vitesse constante.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le moment de la tension par rapport à l'axe de la poulie ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — d = 20 cm = 0,20 m. Étape 4 — M = 150 × 0,20 = 30 N·m.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'angle de rotation de la poulie ?",
+                  "question_type": "numeric",
+                  "unit": "rad",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — θ = 5 × 6,28 = 31,4 rad.",
+                  "answers": [
+                    {
+                      "content": "31,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail de la tension pendant les 5 tours ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — W = M × θ = 30 × 31,4 = 942 J.",
+                  "answers": [
+                    {
+                      "content": "942",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le seau monte de 6,28 m. Quel autre calcul redonne ce travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour le seau en translation, W = F × h = 150 × 6,28 = 942 J, égal à W = M × θ = 30 × 31,4. Les autres calculs mélangent le moment, l'angle et la hauteur.",
+                  "answers": [
+                    {
+                      "content": "150 × 6,28 = 942 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "150 × 31,4 = 4710 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 × 6,28 = 188,4 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "150 × 0,2 = 30 J",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le moteur d'un moto-taxi d'Abidjan tourne à 3600 tr/min avec un moment moteur constant de 15 N·m. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis d'abord en tr/s.",
+              "questions": [
+                {
+                  "content": "Quelle est la fréquence de rotation du moteur en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — n = 3600/60 = 60 tr/s.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la vitesse angulaire du moteur ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — ω = 2 × 3,14 × 60 = 376,8 rad/s.",
+                  "answers": [
+                    {
+                      "content": "376,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance du moteur ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = M × ω = 15 × 376,8 = 5652 W.",
+                  "answers": [
+                    {
+                      "content": "5652",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Exprime cette puissance en kW.",
+                  "question_type": "numeric",
+                  "unit": "kW",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — 5652/1000 = 5,652 kW.",
+                  "answers": [
+                    {
+                      "content": "5,652",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le régime double à moment constant, la puissance double.",
+                  "question_type": "true_false",
+                  "explanation": "P = M × ω et ω = 2π × n est proportionnelle à n. À M constant, doubler n double ω, donc double P.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une coopérative de Daloa utilise un moteur qui entraîne un broyeur. Le moteur tourne à 1500 tr/min avec un moment constant de 40 N·m pendant 30 s. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule ω, puis P = M × ω, puis W = P × Δt.",
+              "questions": [
+                {
+                  "content": "Quelle est la fréquence de rotation du moteur en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — n = 1500/60 = 25 tr/s.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la vitesse angulaire du moteur ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — ω = 2 × 3,14 × 25 = 157 rad/s.",
+                  "answers": [
+                    {
+                      "content": "157",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance du moteur ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = M × ω = 40 × 157 = 6280 W.",
+                  "answers": [
+                    {
+                      "content": "6280",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel travail le moteur fournit-il en 30 s ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — De P = W/Δt on tire W = P × Δt = 6280 × 30 = 188 400 J.",
+                  "answers": [
+                    {
+                      "content": "188400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'angle balayé en 30 s ?",
+                  "question_type": "single_choice",
+                  "explanation": "θ = ω × t = 157 × 30 = 4710 rad. 750 est le nombre de tours (25 × 30) ; 157 est ω ; 30 est la durée.",
+                  "answers": [
+                    {
+                      "content": "4710 rad",
+                      "correct": true
+                    },
+                    {
+                      "content": "750 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "157 rad",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 rad",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Rôle du bras de levier selon la direction de la force ; détection d'une erreur d'unité ; comparaison de deux moteurs de même puissance ; moment résistant et travail négatif ; justification rédigée.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois forces de même valeur, 50 N, sont appliquées à l'extrémité A d'une manivelle OA de 40 cm (O est sur l'axe) : l'une perpendiculaire à OA, l'une dirigée le long de OA, l'une faisant un angle de 30° avec OA. Pour la dernière, le bras de levier est d = OA × sin 30°, avec sin 30° = 0,5.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Détermine d dans chaque cas, puis M = F × d.",
+              "questions": [
+                {
+                  "content": "Quel est le moment de la force perpendiculaire à OA ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — d = OA = 0,40 m. Étape 4 — M = 50 × 0,40 = 20 N·m.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le moment de la force dirigée le long de OA ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Sa droite d'action passe par l'axe. Étape 3 — d = 0. Étape 4 — M = 0 N·m.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le moment de la force qui fait 30° avec OA ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — d = 0,40 × 0,5 = 0,20 m. Étape 4 — M = 50 × 0,20 = 10 N·m.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces trois forces fait tourner le plus efficacement la manivelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour une même valeur de force, le moment dépend du bras de levier : 20 N·m, 0 N·m et 10 N·m. Le bras de levier maximal est obtenu quand la force est perpendiculaire à la manivelle.",
+                  "answers": [
+                    {
+                      "content": "La force perpendiculaire à OA",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force dirigée le long de OA",
+                      "correct": false
+                    },
+                    {
+                      "content": "La force à 30° de OA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont aussi efficaces",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force plus grande a toujours un moment plus grand.",
+                  "question_type": "true_false",
+                  "explanation": "Le moment dépend aussi du bras de levier. Une force de 100 N dirigée vers l'axe a un moment nul, alors qu'une force de 5 N perpendiculaire à une manivelle de 1 m a un moment de 5 N·m.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève calcule le moment d'une force de 60 N perpendiculaire à une manivelle de 25 cm. Il écrit : M = 60 × 25 = 1500 N·m. Il fait ensuite tourner la manivelle de 3 tours. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis le bras de levier en mètres, puis l'angle en radians.",
+              "questions": [
+                {
+                  "content": "Quelle est l'erreur de l'élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Le bras de levier doit être en mètres : 25 cm = 0,25 m. L'élève a utilisé 25, ce qui donne un moment 100 fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "Il n'a pas converti 25 cm en mètres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a oublié de diviser par le rayon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il aurait dû utiliser des degrés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas d'erreur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le bon moment ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — M = 60 × 0,25 = 15 N·m.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le résultat de l'élève est 100 fois trop grand.",
+                  "question_type": "true_false",
+                  "explanation": "1500/15 = 100 : l'élève a utilisé des centimètres au lieu de mètres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail de la force pour 3 tours dans le sens de la rotation ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — θ = 3 × 6,28 = 18,84 rad. Étape 3 — W = 15 × 18,84 = 282,6 J.",
+                  "answers": [
+                    {
+                      "content": "282,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel résultat obtiendrait-on avec 3 tours directement dans la formule ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec θ = 3 (tours) au lieu de 18,84 rad, on aurait W = 15 × 3 = 45 J : résultat faux, car l'angle doit être en radians.",
+                  "answers": [
+                    {
+                      "content": "45 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "282,6 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "1500 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 J",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le moteur A tourne à 3000 tr/min avec un moment de 20 N·m. Le moteur B tourne à 1500 tr/min avec un moment de 40 N·m. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule ω puis P = M × ω pour chaque moteur et compare.",
+              "questions": [
+                {
+                  "content": "Quelle est la puissance du moteur A ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — ω_A = 2 × 3,14 × 50 = 314 rad/s. Étape 3 — P = 20 × 314 = 6280 W.",
+                  "answers": [
+                    {
+                      "content": "6280",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la vitesse angulaire du moteur B ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — n = 25 tr/s. Étape 3 — ω_B = 2 × 3,14 × 25 = 157 rad/s.",
+                  "answers": [
+                    {
+                      "content": "157",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance du moteur B ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = 40 × 157 = 6280 W.",
+                  "answers": [
+                    {
+                      "content": "6280",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le moteur B est plus puissant, car son moment est plus grand.",
+                  "question_type": "true_false",
+                  "explanation": "Les deux puissances sont égales (6280 W) : B a un moment double mais tourne deux fois moins vite. La puissance dépend du produit M × ω.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "P_A = P_B = 6280 W. Comparer seulement les moments ou seulement les régimes ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Les deux moteurs ont la même puissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moteur A est plus puissant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moteur B est plus puissant",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un frein exerce un moment résistant constant de 12 N·m sur une roue qui fait 2 tours avant de s'arrêter. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un moment résistant s'oppose à la rotation : son travail est négatif.",
+              "questions": [
+                {
+                  "content": "Quel est l'angle balayé par la roue en radians ?",
+                  "question_type": "numeric",
+                  "unit": "rad",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — θ = 2 × 6,28 = 12,56 rad.",
+                  "answers": [
+                    {
+                      "content": "12,56",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail du frein ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — W = M × θ avec M = -12 N·m : W = -12 × 12,56 = -150,72 J.",
+                  "answers": [
+                    {
+                      "content": "-150,72",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la nature de ce travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Le moment s'oppose à la rotation et W < 0 : le travail est résistant.",
+                  "answers": [
+                    {
+                      "content": "Résistant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Moteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Impossible à dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail du frein serait positif si le moment s'opposait moins à la rotation.",
+                  "question_type": "true_false",
+                  "explanation": "Un moment qui s'oppose à la rotation, même faible, donne un travail négatif ; sa valeur change seulement la grandeur du travail.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur absolue du travail pour 2 tours avec un moment de 12 N·m ?",
+                  "question_type": "single_choice",
+                  "explanation": "|W| = 12 × 12,56 = 150,72 J. 24 J utilise 2 tours sans conversion ; 75,36 J utilise π rad par tour.",
+                  "answers": [
+                    {
+                      "content": "150,72 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "24 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "75,36 J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique en deux phrases pourquoi le travail d'un frein est négatif.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Le moment du frein s'oppose à la rotation",
+                    "Le travail W = M × θ est donc négatif (résistant)",
+                    "Phrases claires et vocabulaire exact"
+                  ],
+                  "explanation": "Corrigé modèle : Le frein exerce un moment qui s'oppose au sens de rotation de la roue. Comme W = M × θ avec un moment de signe opposé à la rotation, le travail est négatif : on dit qu'il est résistant. Barème : 1 point pour l'opposition au mouvement, 1 point pour le signe de W.",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan du chapitre",
+          "notions": "Moulin complet ; moteur de moto ; poulie de chantier ; couple de forces sur un guidon : moment, fréquence de rotation, vitesse angulaire, travail et puissance en rotation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Une manivelle de 20 cm est tournée à vitesse constante de 60 tr/min par une force de 50 N toujours perpendiculaire à la manivelle et dans le sens de la rotation. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis 60 tr/min en tr/s, puis ω ; utilise P = M × ω.",
+              "questions": [
+                {
+                  "content": "Quelle est la vitesse angulaire ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — n = 60/60 = 1 tr/s. Étape 2 — ω = 2π × 1 = 6,28 rad/s.",
+                  "answers": [
+                    {
+                      "content": "6,28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le moment de la force ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — M = 50 × 0,20 = 10 N·m.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance de la force ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = M × ω = 10 × 6,28 = 62,8 W.",
+                  "answers": [
+                    {
+                      "content": "62,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail de la force en 2 min ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — 2 min = 120 s. Étape 3 — W = P × Δt = 62,8 × 120 = 7536 J.",
+                  "answers": [
+                    {
+                      "content": "7536",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de tours fait la manivelle en 2 min ?",
+                  "question_type": "numeric",
+                  "unit": "tr",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — 1 tr/s × 120 s = 120 tours. Vérification : θ = 6,28 × 120 = 753,6 rad et W = 10 × 753,6 = 7536 J.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le moteur d'une moto tourne à 6000 tr/min avec un moment constant de 18 N·m. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis en tr/s, puis calcule ω et P.",
+              "questions": [
+                {
+                  "content": "Quelle est la fréquence de rotation en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — n = 6000/60 = 100 tr/s.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la vitesse angulaire ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — ω = 2 × 3,14 × 100 = 628 rad/s.",
+                  "answers": [
+                    {
+                      "content": "628",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance du moteur ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = 18 × 628 = 11 304 W.",
+                  "answers": [
+                    {
+                      "content": "11304",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail fourni en 10 s ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — W = P × Δt = 11 304 × 10 = 113 040 J.",
+                  "answers": [
+                    {
+                      "content": "113040",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette puissance est de 11,304 kW.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — 11 304 W/1000 = 11,304 kW.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur un chantier d'Abobo, une poulie de 15 cm de rayon tourne à 120 tr/min, entraînée par un câble tangent, de tension 400 N. On prend π = 3,14.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le bras de levier est le rayon de la poulie, en mètres.",
+              "questions": [
+                {
+                  "content": "Quelle est la fréquence de rotation de la poulie en tr/s ?",
+                  "question_type": "numeric",
+                  "unit": "tr/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — n = 120/60 = 2 tr/s.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la vitesse angulaire de la poulie ?",
+                  "question_type": "numeric",
+                  "unit": "rad/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — ω = 2 × 3,14 × 2 = 12,56 rad/s.",
+                  "answers": [
+                    {
+                      "content": "12,56",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le moment de la tension par rapport à l'axe ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — d = 15 cm = 0,15 m. M = 400 × 0,15 = 60 N·m.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la puissance de la tension ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = 60 × 12,56 = 753,6 W.",
+                  "answers": [
+                    {
+                      "content": "753,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail de la tension pendant 10 s ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — W = P × Δt = 753,6 × 10 = 7536 J.",
+                  "answers": [
+                    {
+                      "content": "7536",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un couple de deux forces de 12 N, de droites d'action parallèles distantes de 30 cm, agit sur un guidon et le fait tourner d'un quart de tour (angle π/2). On prend π = 3,14. Le moment du couple est dans le sens de la rotation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Moment d'un couple : M = F × d, d étant la distance entre les deux droites d'action.",
+              "questions": [
+                {
+                  "content": "Quel est le moment du couple ?",
+                  "question_type": "numeric",
+                  "unit": "N·m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — d = 30 cm = 0,30 m. M = 12 × 0,30 = 3,6 N·m.",
+                  "answers": [
+                    {
+                      "content": "3,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'angle de rotation en radians ?",
+                  "question_type": "numeric",
+                  "unit": "rad",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Un quart de tour vaut 2π/4 = π/2 = 3,14/2 = 1,57 rad.",
+                  "answers": [
+                    {
+                      "content": "1,57",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le travail du couple ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — W = M × θ = 3,6 × 1,57 = 5,652 J.",
+                  "answers": [
+                    {
+                      "content": "5,652",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quart de tour dure 0,5 s. Quelle est la puissance moyenne du couple ?",
+                  "question_type": "numeric",
+                  "unit": "W",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — P = W/Δt = 5,652/0,5 = 11,304 W.",
+                  "answers": [
+                    {
+                      "content": "11,304",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La distance d d'un couple est toujours la longueur de l'objet qui tourne.",
+                  "question_type": "true_false",
+                  "explanation": "Pour un couple, d est la distance qui sépare les deux droites d'action, pas la longueur de l'objet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

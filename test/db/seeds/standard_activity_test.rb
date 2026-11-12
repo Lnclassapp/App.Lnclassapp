@@ -7,7 +7,8 @@ require "test_helper"
 # La valeur attendue change à chaque évolution légitime d'un calcul (notes, lacunes, badges, devoirs) : on la met à jour sciemment.
 class StandardActivityTest < ActiveSupport::TestCase
   # #534 (ouverture-remediation) : la lacune s'ouvre sous l'Or, Bronze et Argent compris ; le nombre de lacunes change.
-  EXPECTED_FINGERPRINT = "be0ef46649".freeze
+  # lecons-1ere-2nde-debut : les 21 couples de 1ère reviennent dans le manifeste ; les 27 leçons chargées redeviennent la 1ère et la 3ème.
+  EXPECTED_FINGERPRINT = "3dc776ea12".freeze
   # 27 leçons : toute la 1ère et la 3ème du manifeste, de quoi activer des classes du lycée et du collège.
   LESSONS = 27
   SEEDS = Rails.root.join("db/seeds")
