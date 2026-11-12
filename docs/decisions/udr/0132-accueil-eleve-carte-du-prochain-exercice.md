@@ -8,7 +8,7 @@ problematique: L'accueil élève s'ouvre sur « Entrer en classe » et empile ci
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; agencement validé par le porteur le 2026-10-23, couleurs v3 validées le même jour ; amendé le 2026-10-30, §3.1, carte de profil de la barre latérale) |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; agencement validé par le porteur le 2026-10-23, couleurs v3 validées le même jour ; amendé le 2026-10-30, §3.1, carte de profil de la barre latérale ; amendé le 2026-11-12, §3.3 état 6 et §3.4, élève sans classe) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |
@@ -127,3 +127,13 @@ Couleurs, tailles et graisses : uniquement les jetons de l'UDR-0136. Rien en dur
 - La pastille « 3e B › » sous l'avatar et la lune de l'en-tête disparaissent ; le mode sombre est dans le menu de l'avatar.
 - Interdit sur l'accueil élève : un deuxième bouton principal, une liste d'exercices, une barre basse, du texte blanc sur le bandeau, du rouge sur une note.
 - Retour arrière : la carte et l'ancien accueil ne cohabitent pas. Un retour se fait en revenant au commit précédent, pas par un interrupteur (porteur, 2026-10-23).
+
+## Amendement du 2026-11-12 — l'élève sans classe voit son dernier niveau (§3.3 état 6, §3.4)
+
+*Chantier [`eleve-sans-prof`](../../chantiers/eleve-sans-prof/memo.md). Remplace, pour l'état 6, « Grille, annonces et historique masqués ».*
+
+- **État 6, avec un niveau connu** (ADR-0035, amendement du 2026-11-12) : la carte garde « Choisis ta classe », le champ code, « Rejoindre » en bouton `primary`, puis « Je n'ai pas de code » et « Voir mon historique ». Dessous, s'il y a un exercice du jour, le bloc `#student_next_step_daily_block` de l'état 4 : fond `bg-mist`, `rounded-ln`, `p-3`, étiquette 12 px majuscules `text-mute` « Exercice du jour », titre 14 px `text-ink` graisse 500, matière 13 px `text-mute`. Puis `#student_next_step_daily` (`aria-live="polite"`) : bouton `secondary` pleine largeur « Faire l'exercice du jour » (`aria-label` « Faire l'exercice du jour « titre » »), ou, fait aujourd'hui, « Exercice du jour fait. Reviens demain ! » sans bouton. Rien à proposer : ni bloc ni phrase.
+- **Sous la carte** : la grille `nav#student_subjects` du §3.4, avec les matières de ce niveau, **sans la case « Inviter »** (le message nomme une classe qu'il n'a plus) et sans point de retard. Annonces et historique restent masqués.
+- **État 6, sans niveau connu**, ou dernier niveau sans cours publié : inchangé, la carte seule.
+- **§3.4, état vide** : la phrase sous la grille devient « Les cours de ton niveau arrivent bientôt. » (13 px `text-mute`, centrée).
+- **États** : vide = carte seule ; chargement = aucun (rendu serveur, pas de cible Turbo nouvelle) ; erreur = celles du champ code, inchangées ; succès = carte, bloc du jour, grille.
