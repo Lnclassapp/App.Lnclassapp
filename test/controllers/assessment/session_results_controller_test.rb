@@ -30,6 +30,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:, gap:).tap do |session|
       create_attempt(session:, question: @first, correct: first_correct)
       create_attempt(session:, question: @second, correct: true)
+      record_medal(session)
     end
   end
 
@@ -48,8 +49,11 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   def progress(key, **) = I18n.t("#{scope}.progress.#{key}", **)
 
-  # UDR-0087 §3.6 : la note verte et les confettis à partir de 14/20 ; UDR-0140 : le titre est l'appréciation, 10/20 lit « Assez bien ».
-  test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Assez bien » à 10/20, sans score redit" do
+  # UDR médailles : l'élève lit sa médaille et la prochaine à viser ; ni note, ni score, ni maîtrise. UDR-0140 : le titre reste l'appréciation.
+  test "l'élève voit sa médaille Bronze à 10/20, « Assez bien », la prochaine à viser, sans note ni score ni maîtrise" do
+    # La médaille vient d'une copie plus ancienne : celle-ci ne la décerne pas (pas de « Nouvelle médaille ! »).
+    earlier = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: GRADING::PASS_THRESHOLD)
+    Orm::ExerciseBadge.find_by!(student: @student, exercise: @exercise).update!(exercise_session: earlier)
     sign_in_as @student
 
     show
@@ -58,16 +62,13 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: /Méiose/
     assert_select "h1", text: I18n.t("#{scope}.show.headline.fair")
     assert_select "[data-controller='assessment--confetti']", 0
-    assert_select "#session_grade.text-success", 0
-    assert_select "#session_result", text: /10\/20/
-    # UDR-0023, amendement du 2026-10-02 : la note sur 20 seule dit le résultat de l'élève — ni score, ni questions justes (R6).
-    assert_select "#session_result dl dt", 2
-    assert_select "#session_result dl dt", text: I18n.t("#{scope}.show.grade")
-    assert_select "#session_result dl dt", text: /#{I18n.t("#{scope}.show.mastery")}/
-    assert_select "#session_result dd", text: /#{GRADING::PASS_THRESHOLD} %/, count: 0
-    assert_select "#session_result dt", text: I18n.t("#{scope}.show.correct"), count: 0
-    assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.fragile")}/
+    assert_select "#session_grade", 0
+    assert_select "#session_result dl", 0
+    assert_select "#session_result", text: %r{\d+\s*/\s*20|\d+\s*%|barème}, count: 0
+    assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.fragile")}/, count: 0
+    assert_select "#session_next_medal", text: "Prochaine médaille : Argent"
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: %r{\d+\s*/\s*20|%}, count: 0
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
     assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']", text: I18n.t("#{scope}.show.back_to_lesson")
     assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}']" do
@@ -290,28 +291,32 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-08 : 16/20, « Très bien », la note verte et les confettis.
-  test "à 16/20, « Très bien », la note verte et les confettis" do
+  # CA-08 : « Très bien », les confettis (dès l'Argent) et la médaille Or ; plus de note verte.
+  test "à 16/20, « Très bien », la médaille Or et les confettis" do
     @session.update!(score_percent: 80)
+    record_medal(@session)
     sign_in_as @student
 
     show
 
     assert_select "h1", text: I18n.t("#{scope}.show.headline.very_good")
-    assert_select "#session_grade.text-success", text: "16/20"
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Or")
+    assert_select "#session_next_medal", text: "Prochaine médaille : Diamant"
+    assert_select "#session_grade", 0
     assert_select "[data-controller='assessment--confetti']", 1
   end
 
-  # UDR-0087 §3.6 : dès « 14/20 » affiché, la règle de l'historique, de « Ma classe » et de l'accueil.
-  test "70 % et 68 % s'affichent 14/20 en vert ; 67 % s'affiche 13/20 sans vert ; tous trois « Bien »" do
+  # UDR-0087 §3.6 : les confettis dès « 14/20 » affiché (Argent) ; 67 % reste Bronze, sans confettis.
+  test "70 % et 68 % sont Argent avec confettis ; 67 % est Bronze sans confettis ; tous trois « Bien »" do
     sign_in_as @student
 
-    { 70 => [ "14/20", :success ], 68 => [ "14/20", :success ], 67 => [ "13/20", :error ] }.each do |score, (grade, tone)|
+    { 70 => [ "Argent", 1 ], 68 => [ "Argent", 1 ], 67 => [ "Bronze", 0 ] }.each do |score, (medal, confetti)|
       @session.update!(score_percent: score)
+      record_medal(@session)
       show
       assert_select "h1", text: I18n.t("#{scope}.show.headline.good")
-      assert_select "#session_grade#{".text-success" if tone == :success}", text: grade
-      assert_select "#session_grade.text-success", 0 if tone == :error
+      assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: medal)
+      assert_select "[data-controller='assessment--confetti']", confetti
     end
   end
 
@@ -410,9 +415,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#session_result", text: /Mariam Traoré/
-    # Décision du porteur (2026-10-02) : l'enseignant garde le résultat inchangé — note, score, maîtrise, questions justes.
-    assert_select "#session_result dl dt", 4
-    assert_select "#session_result dd", text: "#{GRADING::PASS_THRESHOLD} %"
+    # medailles-enseignant : l'enseignant lit la médaille de la copie et « x sur y justes » ; ni note, ni score, ni maîtrise.
+    assert_select "#session_result dl dt", 1
+    assert_select "#session_result", text: %r{/20|\d+ ?%|Maîtrise|Acquis|Fragile}, count: 0
     assert_select "#session_result", text: /#{I18n.t("#{scope}.show.correct_value", count: 1, total: 2)}/
     assert_select "#session_review p", text: I18n.t("#{scope}.show.review_hint_reveal")
     assert_select "#session_review [data-reveal-target]", 0
@@ -423,9 +428,8 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     # retouche : les étiquettes passent à la ligne sous le texte, jamais de troncature
     assert_select "#question_review_#{@first.id} li[data-correct].flex-wrap > [data-answer-labels].flex-wrap", 1
     assert_select "#question_review_#{@first.id} li .truncate", 0
-    # retouche : les valeurs des tuiles ne se coupent pas (2×2 dans la colonne de 340 px) ; la tuile elle-même ne bloque
-    # pas le retour à la ligne, sinon l'infobulle de la maîtrise, ouverte, déborde à 390 px.
-    assert_select "#session_result dl:not([class~='sm:grid-cols-4']) > div > dd.whitespace-nowrap", 4
+    # retouche : la valeur de la tuile ne se coupe pas ; la tuile elle-même ne bloque pas le retour à la ligne.
+    assert_select "#session_result dl > div > dd.whitespace-nowrap", 1
     assert_select "#session_result dl > div.whitespace-nowrap", 0
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
   end
@@ -459,6 +463,20 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  # B-039 (audit 2026-11-08): the teacher or the team has no « session » page to be sent to (it answers 403): a copy still in progress
+  # is not found for them, and they are not redirected.
+  test "B-039 : l'enseignant de la classe et l'équipe n'ont pas de résultat pour une copie en cours : 404, sans redirection" do
+    started = create_exercise_session(student: @student, exercise: @exercise)
+
+    { "enseignant" => create_teacher(classrooms: [ @classroom ]), "équipe" => create_team_member }.each do |label, reader|
+      sign_in_as reader
+
+      show started
+
+      assert_response :not_found, label
+    end
+  end
+
   test "session non terminée : retour à la session" do
     started = create_exercise_session(student: @student, exercise: @exercise)
     sign_in_as @student
@@ -468,7 +486,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to exercise_session_path(started.public_id)
   end
 
-  test "sous le seuil de réussite : « À retravailler », « En difficulté », « Pas encore de badge », aucun confetti, « Refaire l'exercice »" do
+  test "sous 48 % : « À retravailler », médaille Bronze (tout exercice traité), aucun confetti, ni « En difficulté » ni « Pas encore », « Refaire l'exercice »" do
     failed = complete(score_percent: GRADING::PASS_THRESHOLD - 10, first_correct: false)
     sign_in_as @student
 
@@ -476,34 +494,72 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "h1", text: I18n.t("#{scope}.show.headline.needs_work")
     assert_select "[data-controller='assessment--confetti']", 0
-    assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.struggling")}/
-    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.none")}/
-    assert_select "#session_badge", text: /#{I18n.t("assessment.badges.levels.none")}/, count: 0
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.struggling")}|#{I18n.t("#{scope}.badge.none")}|Non acquis/, count: 0
+    assert_select "#session_result", text: %r{\d+\s*/\s*20|\d+\s*%|barème}, count: 0
     assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
   end
 
-  test "sans faute : Diamant, « Nouveau badge ! », et plus de « Recommencer »" do
+  test "20 % avec réponses : Bronze sans « Nouvelle médaille ! »" do
+    low = complete(score_percent: 20, first_correct: false)
+    sign_in_as @student
+
+    show low
+
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
+  # UDR Bronze sans fête sous 48 % : la première Bronze, enregistrée par cette session, est fêtée dès 10/20 (48 %), jamais à 9/20 (47 %).
+  test "première Bronze à 48 % : « Nouvelle médaille ! » ; à 47 %, la même médaille sans fête" do
+    first = complete(score_percent: 48, student: create_student_for(@exercise.essential.course))
+    sign_in_as Orm::User.find(first.student_id)
+
+    show first
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/
+
+    first.update!(score_percent: 47)
+    show first
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
+  # Journal, À trancher : le résultat lit la médaille de CETTE session ; un Or qui refait à 20 % lit Bronze, et la prochaine est l'Argent.
+  test "un élève Or qui refait à 20 % lit Bronze et « Prochaine médaille : Argent », pas Or ni Diamant" do
+    @session.update!(score_percent: 80)
+    record_medal(@session)
+    low = complete(score_percent: 20, first_correct: false)
+    sign_in_as @student
+
+    show low
+
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_next_medal", text: "Prochaine médaille : Argent"
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
+  test "sans faute : Diamant, « Nouvelle médaille ! », et plus de « Recommencer »" do
     perfect = complete(score_percent: GRADING::PERFECT_THRESHOLD)
-    create_badge(student: @student, exercise: @exercise, level: "diamond", session: perfect)
     sign_in_as @student
 
     show perfect
 
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Diamant")
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/
-    assert_select "#session_result", text: /20\/20/
+    assert_select "#session_next_medal", 0
+    assert_select "#session_result", text: %r{\d+\s*/\s*20|\d+\s*%|barème}, count: 0
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
   end
 
   # ADR-0106 §4.3 : le Diamant est le sans-faute, pas une note. 98 % s'affiche 20/20 mais reste Or et garde « Recommencer ».
-  test "98 % s'affiche 20/20 : Or, pas Diamant, et « Recommencer » reste" do
+  test "98 % : Or, pas Diamant, et « Recommencer » reste" do
     almost = complete(score_percent: 98)
-    create_badge(student: @student, exercise: @exercise, level: "gold", session: almost)
     sign_in_as @student
 
     show almost
 
-    assert_select "#session_result", text: /20\/20/
+    assert_select "#session_next_medal", text: "Prochaine médaille : Diamant"
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Or")
     assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
   end
@@ -516,14 +572,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_progress", 0
   end
 
-  test "progrès : 30 puis 90, l'élève lit qu'il progresse, icône verte, entre la note et le bouton" do
+  test "progrès : 30 puis 90, l'élève lit qu'il progresse, icône verte, entre la médaille et le bouton" do
     current = sessions(30, 90).last
     sign_in_as @student
 
     show current
 
-    expected = "Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui."
-    assert_equal expected, progress(:progress, first: 6, current: 18)
+    expected = "Tu passes de Bronze à Or. Bravo !"
+    assert_equal expected, progress(:progress, first: "Bronze", current: "Or")
     assert_select "#session_result + p#session_progress + form#restart-exercise-form"
     assert_select "p#session_progress.text-sm.text-ink", text: expected
     assert_select "#session_progress svg.text-success[aria-hidden=true]", 1
@@ -541,14 +597,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/stagne|baisse/i, response.body)
   end
 
-  test "progrès : 80 puis 80, il confirme sa maîtrise" do
+  test "progrès : 80 puis 80, il confirme sa médaille" do
     current = sessions(80, 80).last
     sign_in_as @student
 
     show current
 
-    expected = "Tu confirmes ta maîtrise : 16/20."
-    assert_equal expected, progress(:stable, current: 16)
+    expected = "Tu confirmes ta médaille Or."
+    assert_equal expected, progress(:stable, current: "Or")
     assert_select "#session_progress", text: expected
     assert_select "#session_progress svg.text-success", 1
   end
@@ -559,15 +615,15 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     show third
 
-    expected = "Ton meilleur résultat reste 18/20. Relis la correction, tu peux le retrouver."
-    assert_equal expected, progress(:decline, best: 18)
+    expected = "Ta meilleure médaille reste Or. Relis la correction, tu peux la retrouver."
+    assert_equal expected, progress(:decline, best: "Or")
     assert_select "#session_progress", text: expected
     assert_select "#session_progress svg.text-mute", 1
     assert_no_match(/stagne|baisse/i, response.body)
 
     show second
 
-    assert_select "#session_progress", text: progress(:progress, first: 6, current: 18)
+    assert_select "#session_progress", text: progress(:progress, first: "Bronze", current: "Or")
   end
 
   # Décision du 2026-10-04 (défaut D1 du challenger) : sous 50 %, la session suivante de la fiche est une remédiation.
@@ -578,14 +634,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     show remediation
 
-    assert_select "#session_progress", text: "Tu progresses : 5/20 à ta première session, 15/20 aujourd'hui."
+    assert_select "#session_progress", text: "Tu passes de Bronze à Argent. Bravo !"
     assert_select "#session_progress svg.text-success", 1
   end
 
-  test "progrès : 25, 75 en remédiation, 25, 75 en remédiation, 50 — la 3e et la 5e rappellent son meilleur, 15/20" do
+  test "progrès : 25, 75 en remédiation, 25, 75 en remédiation, 50 — la 3e et la 5e rappellent sa meilleure médaille, Argent" do
     _, third, _, fifth = sessions(25, 75, 25, 75, 50, remediations: [ 2, 4 ])
     sign_in_as @student
-    expected = "Ton meilleur résultat reste 15/20. Relis la correction, tu peux le retrouver."
+    expected = "Ta meilleure médaille reste Argent. Relis la correction, tu peux la retrouver."
 
     [ third, fifth ].each do |session|
       show session
@@ -628,7 +684,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     [ gap, complete(score_percent:, gap:) ]
   end
 
-  test "fiche : la session qui ouvre la lacune le dit à l'élève, avec la règle sur 20 et le lien vers la fiche" do
+  test "fiche : la session qui ouvre la lacune le dit à l'élève, avec la règle en médaille et le lien vers la fiche" do
     failed_then_remediated(70)
     sign_in_as @student
 
@@ -636,7 +692,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#session_gap_outcome.bg-warning-soft" do
       assert_select "p.font-medium", text: "Cette notion passe à revoir."
-      assert_select "p", text: "Refais l'exercice de « Division cellulaire » et vise au moins 15/20."
+      assert_select "p", text: "Refais l'exercice de « Division cellulaire » et vise l'Or."
       assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']", text: "Refaire l'exercice"
     end
     assert_no_match(/75 %/, response.body)
@@ -651,24 +707,20 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: I18n.t("#{scope}.show.headline.good")
     assert_select "[data-controller='assessment--confetti']", 1
     assert_select "#session_gap_outcome p.font-medium", text: gap_outcome("still_pending.message")
-    assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
+    assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise l'Or."
     assert_select "#session_gap_outcome a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']",
                   text: "Refaire l'exercice"
   end
 
-  # Décision du porteur (2026-10-19, ADR-0101 §4.5) : 74 % s'affiche 15/20, la note lue fait foi et lève la fiche.
-  test "fiche : une remédiation à 74 % lit 15/20 et « Notion levée ! » : la note et l'effet sur la fiche s'accordent" do
-    gap, remediation = failed_then_remediated(74)
-    decision = Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
-    assert_equal :remediated, decision
-    gap.update!(status: decision.to_s, resolved_at: Time.current, resolved_by_session: remediation)
+  # Décision du porteur (2026-11-09) : l'Argent ne lève pas la fiche ; la médaille et l'effet sur la fiche s'accordent.
+  test "fiche : une remédiation à 74 % est Argent et « Encore à revoir » : la médaille et l'effet sur la fiche s'accordent" do
+    _, remediation = failed_then_remediated(74)
     sign_in_as @student
 
     show remediation
 
-    assert_select "*", text: /15\s*\/\s*20/
-    assert_select "#session_gap_outcome.bg-success-soft p.font-medium", text: "Notion levée !"
-    assert_select "#session_gap_outcome a", 0
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Argent")
+    assert_select "#session_gap_outcome p.font-medium", text: gap_outcome("still_pending.message")
   end
 
   test "fiche : la remédiation qui lève la fiche lit « Notion levée ! », sans lien, après la phrase de progrès" do
@@ -701,7 +753,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     gap, remediation = failed_then_remediated(80)
     gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
 
-    [ create_teacher(classrooms: [ @classroom ]), create_team_member ].each do |reader|
+    { "enseignant" => create_teacher(classrooms: [ @classroom ]), "équipe" => create_team_member }.each do |label, reader|
       sign_in_as reader
 
       show remediation
@@ -776,7 +828,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # CA-15 : 11 points corrigés automatiquement, une réponse rédigée de 4 points.
-  test "CA-15 : « 6 points sur 11 corrigés automatiquement » et « 4 points à comparer au corrigé »" do
+  test "CA-15 : l'élève ne lit plus « points corrigés automatiquement » ; « 4 points à comparer au corrigé » reste, l'enseignant garde les deux" do
     session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 72)
     # @first (1 pt) et @second (1 pt) existent déjà : on porte l'exercice à 11 points corrigés, dont 6 justes (3 + 3).
     @first.update!(points: 3)
@@ -785,13 +837,21 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     create_attempt(session:, question: @second, correct: true)
     add_question(session:, points: 5, correct: false)
     add_question(session:, type: "written", points: 4, explanation: "Corrigé type.")
+    record_medal(session)
     sign_in_as @student
 
     show session
 
-    assert_select "#session_points", text: /6 points sur 11 corrigés automatiquement/
     assert_select "#session_points", text: /4 points à comparer au corrigé/
-    assert_select "#session_grade", text: "14/20"
+    assert_select "#session_points", text: /corrigés automatiquement/, count: 0
+    assert_select "#session_grade", 0
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Argent")
+
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+    show session
+    assert_select "#session_points", text: /6 points sur 11 corrigés automatiquement/
+    assert_select "#session_grade", 0
+    assert_select "#session_result", text: %r{/20}, count: 0
   end
 
   test "CA-16 : un exercice tout à 1 point n'affiche aucun point" do
@@ -802,7 +862,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_points", 0
   end
 
-  test "points décimaux : « 1,5 point » au format français" do
+  test "points décimaux : « 1,5 point » au format français, lu par l'enseignant seulement" do
     session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 60)
     @first.update!(points: 1.5)
     create_attempt(session:, question: @first, correct: true)
@@ -811,6 +871,10 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     show session
 
+    assert_select "#session_points", 0
+
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+    show session
     assert_select "#session_points", text: /1,5 point sur 2,5 corrigés automatiquement/
   end
 

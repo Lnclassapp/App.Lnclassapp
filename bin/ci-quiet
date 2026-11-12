@@ -88,6 +88,7 @@ from_plan = ->(step) {
   Step.new(title: step.title, env: plan_env, command: [ step.command ], inputs: step.inputs, unit: step.inputs == :unit ? :all : nil, extra:)
 }
 guards = CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }.map(&from_plan)
+system_tests = nil
 steps =
   case level
   when :doc then guards
@@ -175,5 +176,8 @@ unless clean
   todo = touched.empty? ? "HEAD moved during the run" : "commit #{touched}"
   abort "bin/ci: green on the work tree, not on #{head[0, 8]}: no proof line (#{todo}), then run bin/ci-quiet again."
 end
+# What the system step left to the train or could not map: said even when green (ADR-0127), never only in tmp/ci.log.
+notes = system_tests.to_s.lines.grep(/\A(⏭️|ℹ️  Hors carte)/) if level == :pr
+notes&.each { puts it }
 puts proof
 verdicts.record(fingerprint, level, proof)

@@ -65,16 +65,16 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/#{correct_mark}/, response.body)
   end
 
-  test "l'élève qui a déjà rendu une copie voit « Refaire l'exercice » et sa meilleure note sur 20" do
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85)
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40)
+  test "l'élève qui a déjà rendu une copie voit « Refaire l'exercice » et sa meilleure médaille, sans note" do
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85))
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40))
     sign_in_as @student
 
     get exercise_path(@exercise.public_id)
 
     assert_select "#start-exercise-form button[type=submit]", text: I18n.t("#{scope}.show.redo")
-    assert_select "#exercise_best", text: I18n.t("#{scope}.show.best", grade: 17)
-    assert_select "#exercise_best.text-success"
+    assert_select "#exercise_best", text: /Ta médaille :\s*Or/
+    assert_select "#exercise_best", text: %r{/20|%|barème}, count: 0
     assert_select "*", text: /85 %/, count: 0
   end
 
@@ -93,16 +93,20 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='/teams/exercises/#{@exercise.public_id}/edit']", 0
   end
 
-  test "la meilleure note est verte dès « 14/20 » affiché : 68 % oui, 67 % non" do
+  # ADR médailles lues à la clôture : la médaille enregistrée, jamais recalculée du score ; une copie vide n'en enregistre aucune.
+  test "la meilleure médaille est celle enregistrée : copie vide « Pas encore », 40 % répondu Bronze, puis 68 % Argent" do
     sign_in_as @student
-    session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 67)
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 0)
     get exercise_path(@exercise.public_id)
-    assert_select "#exercise_best.text-success", 0
-    assert_select "#exercise_best", text: I18n.t("#{scope}.show.best", grade: 13)
+    assert_select "#exercise_best", text: /Ta médaille :\s*Pas encore/
 
-    session.update!(score_percent: 68)
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40))
     get exercise_path(@exercise.public_id)
-    assert_select "#exercise_best.text-success", text: I18n.t("#{scope}.show.best", grade: 14)
+    assert_select "#exercise_best", text: /Ta médaille :\s*Bronze/
+
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 68))
+    get exercise_path(@exercise.public_id)
+    assert_select "#exercise_best", text: /Ta médaille :\s*Argent/
   end
 
   # CA-12, ADR-0091 §4.4 : la feuille de l'élève montre les nouveaux types sans solution ; l'enseignant la voit.

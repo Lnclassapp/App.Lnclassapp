@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/crm/follow_ups/complete — succès de « Faite », rendu par FollowUpCompletionsController#update %>
+<%# Rôle : toast, ligne et carte de la page « Relances » retirées, sous-bloc de la fiche remplacé (chacun ignoré s'il n'est pas sur la page) %>
+<%# UDR  : 0162 (bloc « Suivi »), 0168 (pipeline et relances) %>
+<%= turbo_stream_toast t(".done"), type: :success %>
+<%= turbo_stream.remove "follow_up_row_#{@public_id}" %>
+<%= turbo_stream.remove "follow_up_card_#{@public_id}" %>
+<%= turbo_stream.replace "school_crm_follow_ups", template: "teams/crm/follow_ups/school", formats: [ :html ] %>

@@ -1,5 +1,4 @@
 # Page d'un niveau de la direction (chantier accueil-direction, Lot B, AD-09 à AD-12, AD-22) — UDR-0074 §3.8
-# Le pourcentage et « non calculé » sont ceux de school_admin.classrooms (percent, not_computed), lus et non recopiés.
 fr:
   school_admin:
     levels:
@@ -21,6 +20,8 @@ fr:
           zero: "Aucun devoir donné"
           one: "1 devoir donné"
           other: "%{count} devoirs donnés"
-        submission_rate_html: "Taux de rendu : %{rate}"
-        average_html: "Moyenne : %{value}"
+        submitted:
+          zero: "0 devoir rendu sur %{total}"
+          one: "1 devoir rendu sur %{total}"
+          other: "%{count} devoirs rendus sur %{total}"
         open: "Ouvrir la classe"

@@ -17,7 +17,7 @@ class Teams::ClassroomGenerationsControllerTest < ActionDispatch::IntegrationTes
     assert_select "button[aria-haspopup=menu][aria-controls=schools-classrooms-menu][aria-label='Actions sur les classes']", text: /Classes/
     assert_select "#schools-classrooms-menu[role=menu]" do
       assert_select "button[role=menuitem][aria-controls=generate-classrooms-modal][aria-haspopup=dialog]", text: /Générer les classes manquantes/
-      assert_select "a[role=menuitem][href='#{classroom_plan_path}']", text: /Barème des classes/
+      assert_select "a[role=menuitem][href='#{classroom_plan_path}']", text: /Plan des classes/
     end
     import = response.body.index(ERB::Util.html_escape(new_teams_import_path(kind: "schools")))
     assert_operator import, :<, response.body.index('aria-controls="schools-classrooms-menu"'), "le menu est à droite de l'import"

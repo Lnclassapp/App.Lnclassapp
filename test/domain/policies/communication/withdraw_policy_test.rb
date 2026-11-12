@@ -29,9 +29,11 @@ module Policies
         assert call(actor(:team, school_id: nil), announcement(author_id: 60, school_id: nil), author_role: :team).success?
       end
 
-      test "AN-16 — only archived and withdrawn are frozen: a scheduled announcement or a draft may be withdrawn" do
+      # Audit B-029: only a scheduled or published announcement is withdrawn; a draft would be left frozen.
+      test "AN-16, B-029 — a scheduled announcement may be withdrawn, a draft not (conflict)" do
         assert call(actor(:team, school_id: nil), announcement(status: "scheduled")).success?
-        assert call(actor(:school_admin), announcement(status: "draft")).success?
+        assert_equal :conflict, call(actor(:school_admin), announcement(status: "draft")).code
+        assert_equal :conflict, call(actor(:team, school_id: nil), announcement(status: "draft")).code
       end
 
       test "AN-17 — the direction withdraws the announcement of a teacher of its school" do

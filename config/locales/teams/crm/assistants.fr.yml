@@ -1,0 +1,28 @@
+# Assistants du suivi (chantier crm-ecoles, Lot G) — ADR-XXXX (modèles de langage), UDR-XXXX (assistants du suivi)
+fr:
+  teams:
+    crm:
+      assistants:
+        card:
+          title: "Assistants"
+          not_configured: "Assistant non configuré"
+          not_configured_hint: "Demandez à un admin d'ajouter la clé OpenRouter."
+          briefing: "Préparer l'appel"
+          dictation: "Dicter un compte rendu"
+          pedagogy_report: "Rapport pédagogique"
+      generations:
+        generation:
+          waiting:
+            briefing: "Préparation de la fiche…"
+            dictation: "Écoute du compte rendu…"
+            whatsapp_draft: "Rédaction du message…"
+            pedagogy_report: "Rédaction de la synthèse…"
+          timed_out_title: "L'assistant n'a pas répondu"
+          timed_out_message: "Il a mis trop de temps. Réessayez dans un instant."
+          failed_title: "L'assistant n'a pas répondu"
+          failed_messages:
+            timeout: "Il a mis trop de temps."
+            provider_error: "Réessayez dans un instant."
+            invalid_response: "Réessayez dans un instant."
+            not_configured: "L'assistant n'est pas configuré."
+          retry: "Réessayer"

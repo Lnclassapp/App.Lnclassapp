@@ -231,6 +231,16 @@ module Repositories
 
         assert_not @repository.resolve_assignable(type: "Exercise", key: wide.public_id).parents_published
       end
+
+      # B-022 (audit 2026-11-08): only the « one active » index means already assigned; a public_id collision rises loud.
+      test "B-022: une collision de public_id n'est pas un exercice déjà assigné : elle monte" do
+        first = @repository.create(assignment: assignment_of(exercise_assignable)).value
+        other = exercise_assignable(create_exercise(essential: @essential))
+        clash = assignment_of(other).with(public_id: first.public_id)
+
+        error = assert_raises(ActiveRecord::RecordNotUnique) { @repository.create(assignment: clash) }
+        assert_includes error.message, "index_classroom_assignments_on_public_id"
+      end
     end
   end
 end

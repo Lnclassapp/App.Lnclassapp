@@ -1,13 +1,14 @@
 # 🔌 INFRA · Queries::School::DepartedStudentsQuery
 # Rôle : « Anciens élèves » de la direction : les élèves passés par ses classes, absents de ses classes de l'année, et leurs
-#        résultats obtenus chez elle (devoirs rendus de ses classes, score moyen)
+#        résultats obtenus chez elle (devoirs rendus de ses classes, médailles)
 # ADR  : 0036, 0040, 0041, 0065, 0072 · UDR : 0052 · deux requêtes ; rendu : standard ou remédiation ; anonymisé exclu (ADR-0036 §4)
 module Queries
   module School
     class DepartedStudentsQuery
       Overview = Data.define(:school_name, :students, :truncated)
-      # La dernière classe de l'élève dans l'établissement ; submitted_count : devoirs rendus distincts ; average_percent : nil → « — ».
-      Row = Data.define(:display_name, :classroom_name, :level_name, :school_year, :submitted_count, :average_percent)
+      # La dernière classe de l'élève dans l'établissement ; submitted_count : devoirs rendus distincts ;
+      # medals : { :bronze => n … } gagnées dans les classes de l'établissement, par exercice (UDR médailles), vide sans médaille.
+      Row = Data.define(:display_name, :classroom_name, :level_name, :school_year, :submitted_count, :medals)
 
       LIMIT = 200
       FULL_NAME = "users.first_name || ' ' || users.last_name".freeze
@@ -25,8 +26,7 @@ module Queries
         JOIN classrooms last_classroom ON last_classroom.id = passed.classroom_id JOIN levels ON levels.id = last_classroom.level_id
       SQL
       COLUMNS = [ "users.id", Arel.sql(FULL_NAME), "last_classroom.name", "levels.name", "last_classroom.school_year" ].freeze
-      TOTALS = [ :student_id, Arel.sql("COUNT(DISTINCT exercise_sessions.classroom_assignment_id)"),
-                 Arel.sql("SUM(exercise_sessions.score_percent)"), Arel.sql("COUNT(*)") ].freeze
+      TOTALS = [ :student_id, Arel.sql("COUNT(DISTINCT exercise_sessions.classroom_assignment_id)") ].freeze
 
       def initialize(limit: LIMIT)
         @limit = limit
@@ -39,10 +39,12 @@ module Queries
         rows = Queries::Shared::TextSearch.apply(departed(school_id, school_year), search, columns: [ FULL_NAME ])
                                           .order("last_classroom.school_year DESC", "users.last_name", "users.first_name", "users.id")
                                           .limit(@limit + 1).pluck(*COLUMNS)
-        totals = totals(school_id, rows.first(@limit).map(&:first))
+        ids = rows.first(@limit).map(&:first)
+        totals = totals(school_id, ids)
+        medals = Queries::Assessment::Medals.by_student_in_school(school_id:, student_ids: ids)
 
         Overview.new(school_name: Orm::School.where(id: school_id).pick(:name), truncated: rows.size > @limit,
-                     students: rows.first(@limit).map { |id, *row| row_for(row, totals[id]) })
+                     students: rows.first(@limit).map { |id, *row| row_for(row, totals[id], medals.fetch(id, {})) })
       end
 
       private
@@ -58,13 +60,13 @@ module Queries
         Orm::ExerciseSession.joins(classroom_assignment: :classroom)
                             .where(student_id: student_ids, status: "completed", classrooms: { school_id: })
                             .group(:student_id).pluck(*TOTALS)
-                            .to_h { |id, submitted, score_sum, sessions| [ id, [ submitted, (score_sum.to_f / sessions).round ] ] }
+                            .to_h
       end
 
-      def row_for(row, totals)
+      def row_for(row, submitted_count, medals)
         display_name, classroom_name, level_name, school_year = row
-        submitted_count, average_percent = totals || [ 0, nil ]
-        Row.new(display_name:, classroom_name:, level_name:, school_year:, submitted_count:, average_percent:)
+        Row.new(display_name:, classroom_name:, level_name:, school_year:, submitted_count: submitted_count || 0,
+                medals: Entities::Assessment::Grading::BADGE_ORDER.filter_map { |level| [ level, medals[level] ] if medals[level] }.to_h)
       end
     end
   end

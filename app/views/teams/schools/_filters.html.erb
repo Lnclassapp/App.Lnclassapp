@@ -2,12 +2,18 @@
 <%# Rôle : formulaire GET qui vise le frame « schools » : la frappe part après une pause (URL remplacée), une liste au changement %>
 <%# ADR  : 0030, 0083 · UDR : 0006, 0036, 0054, 0079 · Stimulus : search · recherche par nom ou sigle (IE-21) ; sans JavaScript, « Filtrer » %>
 <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
+<%# UDR-0168 (pipeline et relances) : « Étape » et « Responsable » s'ajoutent après les filtres existants, pour admin/field seulement. %>
 <% selects = {
      drena: drena_options.map { [ it.name, it.public_id ] },
      school_type: Entities::School::School::SCHOOL_TYPES.map { [ t("school_types.#{it}"), it ] },
      cycle: Entities::School::School::CYCLES.map { [ t("teams.schools.cycles.#{it}"), it ] },
      status: Entities::School::School::STATUSES.map { [ t("school_statuses.#{it}"), it ] }
-   } %>
+   }
+   if @can_manage_crm
+     selects[:stage] = Entities::Crm::Stage::DISPLAYED.map { [ t("teams.crm.common.stages.#{it}"), it.to_s ] }
+     selects[:owner] = [ [ t(".owner_me"), "me" ], [ t(".owner_none"), "none" ], *crm_owner_options ]
+   end
+   filters = filters.merge(@crm_filters) %>
 <%# role et aria-label passent par html: — form_with ignore ces options au premier niveau. %>
 <%= form_with url: schools_path, method: :get, id: "schools-filters", html: { role: "search", "aria-label": t(".label") },
               data: { controller: "search", turbo_frame: "schools", turbo_action: "advance" },

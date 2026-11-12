@@ -13,10 +13,12 @@ module Queries
 
       def archive = StudentArchiveQuery.new.call(student_id: @student.id)
 
-      def finished(title:, completed_at:, score_percent: 80, student: @student)
+      # answered: one attempt with an answer (the copy is treated, it has a medal); without it, a blank copy.
+      def finished(title:, completed_at:, score_percent: 80, student: @student, answered: false)
         course = create_course(material: @maths)
         exercise = create_exercise(essential: create_essential(course:), title:)
         create_exercise_session(student:, exercise:, status: "completed", score_percent:, completed_at:)
+          .tap { create_attempt(session: it) if answered }
       end
 
       def joined(classroom, joined_at:, left_at: nil)
@@ -56,20 +58,21 @@ module Queries
         assert_equal 1, rows.map(&:school_year).uniq.size
       end
 
+      # medal: the medal of the session (Grading.session_medal); a blank copy (no answer) has none.
       test "every finished exercise, most recent first, out of any level; neither started ones nor another student's" do
         older = Time.zone.local(2025, 3, 2, 10)
         newer = Time.zone.local(2026, 1, 15, 9)
         finished(title: "Fractions", completed_at: older, score_percent: 45)
-        finished(title: "Équations", completed_at: newer)
+        finished(title: "Équations", completed_at: newer, answered: true)
         create_exercise_session(student: @student, status: "started")
         finished(title: "Autre élève", completed_at: newer, student: create_student)
 
         assert_equal [ StudentArchiveQuery::ResultRow.new(exercise_title: "Équations", material_name: "Mathématiques",
                                                           material_slug: @maths.slug, material_category: "science",
-                                                          score_percent: 80, completed_at: newer),
+                                                          score_percent: 80, completed_at: newer, medal: :gold),
                        StudentArchiveQuery::ResultRow.new(exercise_title: "Fractions", material_name: "Mathématiques",
                                                           material_slug: @maths.slug, material_category: "science",
-                                                          score_percent: 45, completed_at: older) ],
+                                                          score_percent: 45, completed_at: older, medal: nil) ],
                      archive.results
       end
 
@@ -80,7 +83,7 @@ module Queries
 
         assert_equal [ StudentArchiveQuery::ResultRow.new(exercise_title: "Toute la leçon", material_name: "Mathématiques",
                                                           material_slug: @maths.slug, material_category: "science",
-                                                          score_percent: 70, completed_at:) ], archive.results
+                                                          score_percent: 70, completed_at:, medal: nil) ], archive.results
       end
 
       test "the most recent results only, past the limit" do

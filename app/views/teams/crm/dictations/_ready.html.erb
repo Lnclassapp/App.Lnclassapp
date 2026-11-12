@@ -1,0 +1,9 @@
+<%# 🌐 UI · teams/crm/dictations/_ready — la dictée est terminée : charge le formulaire pré-rempli à la place de l'attente %>
+<%# Rôle : rendue par le sondage (GenerationsController, hors du contexte du journal) ; le formulaire se sert depuis DictationsController, qui connaît l'école et ses contacts %>
+<%# UDR  : 0160 (assistants du suivi) %>
+<%= turbo_frame_tag "generation_#{generation.public_id}" do %>
+  <%= turbo_frame_tag "dictation_prefill_#{generation.public_id}", target: "modal",
+                      src: new_teams_school_dictation_path(school_public_id, generation: generation.public_id) do %>
+    <%= ui_loading_state label: t(".loading"), variant: :skeleton, lines: 3 %>
+  <% end %>
+<% end %>

@@ -1,0 +1,18 @@
+<%# 🌐 UI · teams/crm/pedagogy_reports/_gaps — les 5 lacunes les plus fréquentes : notion, cours, nombre d'élèves (jamais un nom d'élève) %>
+<%# Rôle : liste sans puce ; une ligne ne se coupe pas à l'impression %>
+<%# UDR  : 0160 (assistants du suivi, « Rapport pédagogique ») %>
+<% if gaps.empty? %>
+  <p class="text-sm text-mute"><%= t(".empty") %></p>
+<% else %>
+  <ol role="list" class="divide-y divide-line rounded-card border border-line">
+    <% gaps.each do |gap| %>
+      <li data-testid="gap" class="flex items-center justify-between gap-4 px-4 py-3 print:break-inside-avoid">
+        <div class="min-w-0">
+          <p class="font-medium"><%= gap[:name] %></p>
+          <p class="text-sm text-mute"><%= gap[:course_name] %></p>
+        </div>
+        <p class="shrink-0 text-sm tabular-nums"><%= t(".students", count: gap[:students_count]) %></p>
+      </li>
+    <% end %>
+  </ol>
+<% end %>

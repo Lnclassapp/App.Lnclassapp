@@ -29,7 +29,8 @@ class Assessment::NewKindsWithoutJavascriptTest < ApplicationSystemTestCase
     visit exercise_session_path(@session.public_id)
 
     assert_selector "textarea[placeholder='Non, car…']"
-    assert_selector "legend", text: "(2 points)", count: 3
+    assert_selector "legend", count: 3
+    assert_no_selector "legend", text: "(2 points)"
     assert_text I18n.t("assessment.exercise_sessions.kinds.notebook.to_do")
     select "alignés", from: "q1-display_order"
     fill_in "q2-response_text", with: "Oui, car <b>AM/AB</b> = AN/AC."

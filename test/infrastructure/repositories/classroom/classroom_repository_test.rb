@@ -358,6 +358,28 @@ module Repositories
         end
         assert_equal "6ème B", record.reload.name
       end
+
+      # B-020 (audit 2026-11-08): like create, a taken code on the change of link and code is drawn again, not a 500.
+      test "B-020: un code déjà pris au changement du lien et du code est retiré avec un nouveau tirage" do
+        record = create_classroom(school: @school).reload
+        taken = create_classroom(school: @school).reload
+        free = Entities::Classroom::JoinCode.generate_free { Orm::Classroom.exists?(join_code: it) }
+        draws = [ taken.join_code, free ]
+        join_code = Entities::Classroom::JoinCode
+        join_code.singleton_class.alias_method(:original_generate_free, :generate_free)
+        join_code.define_singleton_method(:generate_free) { |**, &_| draws.shift }
+
+        fresh = begin
+          ClassroomRepository.new.regenerate_link_and_code(id: record.id)
+        ensure
+          join_code.singleton_class.alias_method(:generate_free, :original_generate_free)
+          join_code.singleton_class.remove_method(:original_generate_free)
+        end
+
+        assert_equal free, fresh.join_code
+        assert_equal free, record.reload.join_code
+        assert_equal taken.join_code, taken.reload.join_code
+      end
     end
   end
 end

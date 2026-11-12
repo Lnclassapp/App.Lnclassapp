@@ -252,10 +252,11 @@ jobs:
   # par un élève à 390 px puis sur ordinateur, avec chacune de ses feuilles (test/system/catalog/lesson_rendering_test.rb). Une leçon rend en 8 s environ
   # avec ses feuilles (mesure du 2026-11-06 : 60 leçons en 8 min 20), soit 5 fichiers et moins d'une minute par part
   # (journal du chantier) : le découpage tient chaque part sous les cinq minutes avec son installation. Mesure du 2026-11-08 :
-  # 182 leçons à 19 s environ, 12 parts dépassaient les cinq minutes ; 24 parts en gardent 8 environ, 2 min 30 de rendu
-  # et 1 min d'installation. Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
+  # 182 leçons à 19 s environ, 12 parts dépassaient les cinq minutes ; 24 parts en gardaient 8 environ. Mesure du 2026-11-12 :
+  # 223 leçons à 20 s environ, la part 17/24 (9 leçons) dépasse les cinq minutes avec 1 min 40 d'installation ; 32 parts
+  # en gardent 7 au plus, 2 min 30 de rendu. Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
   lecons:
-    name: lecons ${{ matrix.part }}/24
+    name: lecons ${{ matrix.part }}/32
     needs: plan
     if: needs.plan.outputs.code == 'true' || needs.plan.outputs.lessons == 'true'
     runs-on: ubuntu-latest
@@ -263,7 +264,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ]
+        part: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 ]
     permissions:
       contents: read
 
@@ -281,7 +282,7 @@ jobs:
       - name: Render the lessons of this part
         env:
           LECONS: tout
-          LECONS_PART: ${{ matrix.part }}/24
+          LECONS_PART: ${{ matrix.part }}/32
           COVERAGE: "0"
         run: |
           bin/setup --skip-server

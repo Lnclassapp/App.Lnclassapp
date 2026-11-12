@@ -8,48 +8,61 @@
 #   bin/system-changed --all       toute la suite système, sur 2 processus au lieu d'un par cœur
 #   BASE=origin/main bin/system-changed
 #
-# Sélection : un test système modifié ; un test système qui visite la ressource d'une vue ou d'un contrôleur modifié
-# par son helper de route exact (app/views/classroom/student_homes → `student_home_path`) ; et, si un fichier commun
-# change (composant, shared, layout, helper, CSS, Stimulus), les parcours transverses de COMMON.
+# Sélection (script/ci/system_scope.rb, ADR-0107 amendé) : un test système modifié ; un test système qui visite la ressource
+# d'une vue ou d'un contrôleur modifié par son helper de route exact ; les parcours transverses de COMMON si un fichier
+# commun change ; et les tests que la carte (script/ci/system_map.yml) dit avoir exécuté un fichier modifié — une feuille
+# de style par ses classes, un contrôleur Stimulus par son identifiant, une locale par son dossier. Au-delà de 240 s
+# enregistrées, les tests les moins touchés partent au train, nommés.
+#
+#   HEAD_REF=<commit> BASE=<commit> bin/system-changed --list   rejoue la sélection d'une PR passée (sans l'arbre de travail)
+#   SYSTEM_SCOPE=former bin/system-changed --list               la sélection sans la carte, celle d'avant le chantier
 require "open3"
-
-COMMON = %w[test/system/design_system_test.rb test/system/role_homes_test.rb].freeze
-SHARED_PATHS = %r{\Aapp/(views/(components|shared|layouts)/|helpers/|assets/stylesheets/|javascript/)}
+require_relative "../script/ci/system_scope"
 
 base = ENV.fetch("BASE", "origin/Develop")
+head = ENV.fetch("HEAD_REF", "HEAD")
 all = ARGV.include?("--all")
 list = ARGV.include?("--list")
 
-def changed_files(base)
-  merge_base, status = Open3.capture2("git", "merge-base", base, "HEAD")
+def git(*args) = Open3.capture2("git", *args, err: File::NULL).first
+
+# The list of changed files: an empty answer from a failed git would play nothing, so a failure stops the run.
+def git!(*args)
+  out, status = Open3.capture2("git", *args)
+  abort "❌ git #{args.first} a échoué : la sélection serait vide." unless status.success?
+
+  out
+end
+
+def changed_files(base, head)
+  merge_base, status = Open3.capture2("git", "merge-base", base, head)
   abort "❌ Impossible de comparer à #{base} (git fetch ?)" unless status.success?
 
-  committed = `git diff --name-only #{merge_base.strip} HEAD`.lines
-  pending = `git diff --name-only HEAD`.lines + `git ls-files --others --exclude-standard`.lines
-  (committed + pending).map(&:strip).uniq
-end
-
-def resource_of(file)
-  case file
-  when %r{\Aapp/views/(?:[^/]+/)*([^/]+)/[^/]+\z} then Regexp.last_match(1)
-  when %r{\Aapp/controllers/(?:[^/]+/)*([^/]+)_controller\.rb\z} then Regexp.last_match(1)
-  end
-end
-
-def visiting(resource)
-  route = /(?<![\w.])#{Regexp.escape(resource.delete_suffix("s"))}s?_(?:path|url)\b/
-  Dir["test/system/**/*_test.rb"].select { File.read(it).match?(route) }
+  # --no-renames: a renamed partial keeps the tests of its former path.
+  committed = git!("diff", "--name-only", "--no-renames", merge_base.strip, head).lines
+  pending = head == "HEAD" ? git!("diff", "--name-only", "--no-renames", "HEAD").lines + git!("ls-files", "--others", "--exclude-standard").lines : []
+  [ merge_base.strip, (committed + pending).map(&:strip).uniq ]
 end
 
 tests =
   if all
     [ "test/system" ]
   else
-    files = changed_files(base)
-    selected = files.grep(%r{\Atest/system/.+_test\.rb\z}).select { File.exist?(it) }
-    selected += files.filter_map { resource_of(it) }.uniq.flat_map { visiting(it) }
-    selected += COMMON if files.any? { it.match?(SHARED_PATHS) }
-    selected.uniq.sort
+    merge_base, files = changed_files(base, head)
+    at_head = head == "HEAD" ? ->(path) { File.read(path) if File.exist?(path) } : ->(path) { git("show", "#{head}:#{path}") }
+    selection = SystemScope.new(
+      changed: files, test_files: Dir["test/system/**/*_test.rb"], map: SystemScope.load_map,
+      mapped_tests: SystemScope.load_mapped_tests, timings: SystemScope.load_timings,
+      read: at_head, read_base: ->(path) { git("show", "#{merge_base}:#{path}") },
+      diff: ->(path) { git("diff", "-U0", merge_base, *([ head ] unless head == "HEAD"), "--", path) }
+    ).then { ENV["SYSTEM_SCOPE"] == "former" ? it.former : it.select }
+    unless selection.deferred.empty?
+      puts "⏭️  #{selection.deferred.size} test(s) système touché(s) de loin, laissé(s) au train (budget #{SystemScope::BUDGET.round} s) :"
+      selection.deferred.each { puts "   #{it}" }
+    end
+    warn "⚠️  script/ci/system_map.yml absent : seule la règle d'avant choisit (script/ci/record_system_map)." if SystemScope.load_mapped_tests.nil?
+    puts "ℹ️  Hors carte (règles d'avant seulement) : #{selection.unmapped.join(', ')}" if selection.unmapped.any?
+    selection.tests
   end
 
 if tests.empty?

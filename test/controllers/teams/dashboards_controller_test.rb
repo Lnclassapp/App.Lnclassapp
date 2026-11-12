@@ -61,7 +61,8 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
   test "the key figures of the period and of the moment, national by default over 7 days" do
     classroom = create_classroom(level: create_level(name: "Tle", position: 7))
     student = create_student(classroom:)
-    create_exercise_session(student:, status: "completed", score_percent: 80)
+    session = create_exercise_session(student:, status: "completed", score_percent: 80)
+    create_badge(student:, exercise: session.exercise, session:, level: "gold")
     sign_in_as @member
 
     get team_dashboard_path
@@ -71,7 +72,9 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#team_dashboard_period" do
       assert_select "#figure_active_students", text: figure("active_students", 1)
       assert_select "#figure_completed_sessions", text: figure("completed_sessions", 1)
-      assert_select "#figure_completed_sessions", text: including(tl("key_figures.success_rate", rate: 80))
+      assert_select "#team_dashboard_medals li", 1
+      assert_select "#team_dashboard_medals li", text: /Or\s+1/
+      assert_select "#team_dashboard_period", text: %r{\d\s*%|moyenne|Réussite}i, count: 0
     end
     assert_select "#team_dashboard_now" do
       assert_select "#figure_students", text: figure("students", 1)
@@ -87,13 +90,13 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match student.contact, response.body
   end
 
-  test "an empty base: zeros, no success rate and the empty states" do
+  test "an empty base: zeros, no medals and the empty states" do
     sign_in_as @member
 
     get team_dashboard_path
 
     assert_select "#figure_active_students", text: figure("active_students", 0)
-    assert_select "#figure_completed_sessions", text: including(tl("key_figures.no_success_rate"))
+    assert_select "#figure_completed_sessions", text: including(tl("key_figures.no_medals"))
     assert_select "#team_dashboard_levels", text: including(tl("levels.empty_title"))
     assert_select "#team_dashboard_drenas", text: including(tl("drenas.empty_title"))
     assert_select "#team_dashboard_drenas table", 0

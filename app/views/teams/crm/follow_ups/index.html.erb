@@ -1,0 +1,46 @@
+<%# 🌐 UI · teams/crm/follow_ups/index — page « Relances » (menu « Plus »), onglets « À relancer » (défaut), « Mes relances » et « Sans destinataire » (admin) %>
+<%# Rôle : tableau au bureau, cartes empilées à 390 px, 25 lignes par page, un vide par onglet  %>
+<%# UDR  : 0168 (pipeline et relances) %>
+<% page_title t(".title") %>
+<% panels = { "signals" => @signals, "mine" => @mine, "orphans" => @orphans }.compact %>
+<% tab_label = ->(key) { key == "signals" ? t("teams.crm.signals.tabs.signals") : t(".tabs.#{key}") } %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: team_home_path } %>
+<%= ui_tabs id: "follow-ups", label: t(".tabs_label"), selected: @tab do |tabs| %>
+  <% panels.each do |key, page| %>
+    <% tabs.tab key, tab_label.(key) do %>
+      <% if key == "signals" %>
+        <%= render "teams/crm/follow_ups/signals_panel", page:, all_schools: @all_schools %>
+      <% else %>
+      <%# Le vide et la liste sont tous deux rendus : le CSS montre le vide quand « Faite » ou « Réattribuer » retire la dernière ligne. %>
+      <div class="ui-follow-ups">
+        <div data-follow-ups-empty><%= ui_empty_state title: t(".empty_#{key}"), icon: "check-circle" %></div>
+        <div data-follow-ups-list>
+          <div class="hidden md:block">
+            <table class="w-full text-left text-sm">
+              <caption class="sr-only"><%= tab_label.(key) %></caption>
+              <thead class="text-mute">
+                <tr>
+                  <% %i[school due assignee reason actions].each do |column| %>
+                    <th scope="col" class="pb-2 pr-4 font-medium"><%= t(".columns.#{column}") %></th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody>
+                <% page.rows.each do |row| %>
+                  <%= render "teams/crm/follow_ups/follow_up", row:, layout: :row %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="space-y-3 md:hidden">
+            <% page.rows.each do |row| %>
+              <%= render "teams/crm/follow_ups/follow_up", row:, layout: :card %>
+            <% end %>
+          </div>
+          <%= ui_pagination page: page.page, pages: page.pages, param: "#{key}_page" %>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

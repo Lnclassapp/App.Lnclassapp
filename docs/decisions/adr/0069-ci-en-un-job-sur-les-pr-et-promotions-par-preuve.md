@@ -8,7 +8,7 @@ problematique: Quota GitHub : ≈ 1 500 minutes perdues le 2026-10-01 (33 par ru
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8 ; amendé les 2026-10-02 et 2026-10-03 : dix minutes par feature, deux jobs, budget de croissance, §9* — *amendé le 2026-10-03 au soir : 20 s pour le blog* — *amendé le 2026-10-28 : 22 s pour la phase 2 de `contenu-en-blocs`* |
+| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8 ; amendé les 2026-10-02 et 2026-10-03 : dix minutes par feature, deux jobs, budget de croissance, §9* — *amendé le 2026-10-03 au soir : 20 s pour le blog* — *amendé le 2026-10-28 : 22 s pour la phase 2 de `contenu-en-blocs`* — *amendé le 2026-11-05 : 25 s, puis 26 s, pour `crm-ecoles`* |
 | **Date** | 2026-10-02 *(première version proposée le 2026-09-30 : runner auto-hébergé)* |
 | **Chantier** | `docs/chantiers/ci-quota` |
 | **Remplace** | — *(amende l'[ADR-0064](./0064-ci-parallele-par-groupes-de-bin-ci.md) : la matrice de 14 jobs, §4 précision 6 et §5 « plus de minutes facturées »)* |
@@ -175,3 +175,12 @@ Précisions qui font partie de la décision :
 - **Réduction d'abord** : le Lot F passe de 4 tests à 2 (les cas des connecteurs et le retour arrière Turbo rejoignent le parcours principal ; le test à 390 px ne visite la page qu'une fois), de 15,4 à 9,8 s, sans perdre de vérification.
 - **Décision** : les deux fichiers ont une dérogation de **22 s**, écrite dans `SystemBudget::GRANTS` sous la clé `contenu-en-blocs-phase-2` : `test/system/catalog/course_sheet_lens_test.rb` (11,5 s) et `test/system/catalog/course_sheet_argument_test.rb` (9,8 s), soit 21,3 s. Le budget général reste de 15 s.
 - **Vérification** : `test/guards/system_budget_test.rb` : 22 s pour ces deux fichiers seuls, 15 s dès qu'un autre fichier grandit avec eux, 22,1 s refusées.
+
+## Amendement du 2026-11-05 — 25 s, puis 26 s, pour `crm-ecoles`
+
+*Décision du porteur, 2026-11-05 (« ok pour 25 secondes »), chantier [`crm-ecoles`](../../chantiers/crm-ecoles/plan.md) (PR #465).*
+
+- **Pourquoi** : le suivi des écoles ajoute trois fichiers système (relances, journal, briefing) et en recale quatre (accueil de l'équipe, navigation, accueils par rôle, classes par niveau à 390 px, que le bloc Suivi pousse sous la ligne de flottaison). Croissance mesurée : 24,9 s.
+- **Décision** : dérogation de **25 s**, écrite dans `SystemBudget::GRANTS` sous la clé `crm-ecoles`, pour ces sept fichiers : `test/system/role_homes_test.rb`, `test/system/school/classrooms_by_level_test.rb`, `test/system/teams/{configuration_navigation,crm_briefing,crm_follow_ups,crm_journal,team_home}_test.rb`. Le budget général reste de 15 s.
+- **Relevé à 26 s le même jour** (porteur : « ok 26 ») : les captures ont montré que la modale « Message de relance » se fermait à l'envoi, le brouillon WhatsApp n'était jamais vu. Le test système de ce parcours (≈ 1,1 s, dans `crm_follow_ups_test.rb`) porte la croissance à 26,0 s.
+- **Vérification** : `test/guards/system_budget_test.rb` : 26 s pour ces fichiers seuls, 15 s dès qu'un autre fichier grandit avec eux, 26,1 s refusées.

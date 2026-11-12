@@ -91,8 +91,8 @@ class School::GenerateClassroomsTest < ApplicationSystemTestCase
 
       visit schools_path
       find("button[aria-controls=schools-classrooms-menu]").click
-      within("#schools-classrooms-menu") { click_on "Barème des classes" }
-      assert_selector "h1", text: "Barème des classes"
+      within("#schools-classrooms-menu") { click_on "Plan des classes" }
+      assert_selector "h1", text: "Plan des classes"
     end
   end
 end

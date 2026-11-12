@@ -8,14 +8,33 @@ module Assessment
     test "les quatre paliers de Grading, dès 48, 68, 78 et 100 %, ont leur libellé et leur teinte" do
       labels = [ 47, 48, 68, 78, 99, 100 ].map { badge_label(Grading.badge_for(it)) }
 
-      assert_equal [ "Non acquis", "Bronze", "Argent", "Or", "Or", "Diamant" ], labels
+      assert_equal [ "Bronze", "Bronze", "Argent", "Or", "Or", "Diamant" ], labels
       assert_equal [ :warning, :neutral, :gold, :info, :neutral ], [ :bronze, :silver, :gold, "diamond", nil ].map { badge_tone(it) }
+    end
+
+    # ADR médailles lues à la clôture : medal_tag rend la médaille que la query a lue, jamais recalculée d'un score.
+    test "medal_tag : trophée, nom du palier et « Médaille Or » pour les lecteurs d'écran, jamais un chiffre" do
+      html = medal_tag(:gold)
+
+      assert_equal "Or Médaille Or", Nokogiri::HTML.fragment(html).text.squish
+      assert_includes html, "text-gold"
+      assert_equal "Bronze Médaille Bronze", Nokogiri::HTML.fragment(medal_tag("bronze")).text.squish
+      assert_no_match(%r{\d+\s*/\s*20|%}, Nokogiri::HTML.fragment(medal_tag(:gold)).text)
+    end
+
+    test "medal_tag sans médaille (copie vide ou rien de fait) : « Pas encore », sans trophée" do
+      assert_equal "Pas encore", Nokogiri::HTML.fragment(medal_tag(nil)).text.squish
+      assert_no_match(/<svg/, medal_tag(nil))
+    end
+
+    test "next_medal : la médaille au-dessus, rien au Diamant ni sans médaille" do
+      assert_equal [ :silver, :gold, :diamond, nil, nil ], [ :bronze, :silver, :gold, :diamond, nil ].map { next_medal(it) }
     end
 
     test "aucun libellé de badge ne reprend un terme retiré" do
       labels = I18n.t("assessment.badges.levels").values.join(" ")
 
-      [ "Platine", "Médaille", "Trophée" ].each { assert_no_match(/#{it}/i, labels) }
+      [ "Platine", "Badge", "Trophée" ].each { assert_no_match(/#{it}/i, labels) }
     end
 
     test "la maîtrise et la note sur 20 suivent Grading" do
@@ -23,18 +42,16 @@ module Assessment
       assert_equal [ "14/20", "20/20", "0/20" ], [ 70, 100, 0 ].map { grade_label(it) }
     end
 
-    # UDR-0131 : les infobulles se lisent sur 20, calculées depuis les seuils, jamais en pourcentage.
-    test "les infobulles des badges et de la maîtrise citent des notes sur 20 tirées de Grading" do
-      assert_equal "Bronze dès 10/20, Argent dès 14/20, Or dès 16/20, Diamant : toutes les réponses justes.", badges_tip
+    # UDR médailles : l'infobulle des médailles est en mots ; celle de la maîtrise (enseignant) se lit encore sur 20 (UDR-0131).
+    test "l'infobulle des médailles est en mots, celle de la maîtrise cite des notes sur 20" do
+      assert_equal "Bronze : tout exercice terminé. Argent : environ deux réponses justes sur trois. Or : plus de trois sur quatre. Diamant : toutes les réponses justes.", badges_tip
       assert_equal "Acquis : 14/20 et plus. Fragile : de 10 à 13/20. En difficulté : moins de 10/20.", mastery_tip
-      assert_no_match(/%/, badges_tip + mastery_tip)
+      assert_no_match(%r{%|/20}, badges_tip)
+      assert_no_match(/%/, mastery_tip)
     end
-    # CA-F3 : une note est verte à 14/20 et plus, en couleur d'encre sinon, jamais rouge.
-    test "une note s'affiche en vert dès 14/20, en encre en dessous, jamais en rouge" do
-      assert_equal %w[text-ink text-ink text-success text-success text-ink], [ 0, 67, 68, 100, nil ].map { grade_class(it) }
+    test "grade_label lit encore la note sur 20 (écrans enseignant)" do
       assert_equal "13/20", grade_label(67)
       assert_equal "14/20", grade_label(68)
-      assert_no_match(/error|struggling|signal-red/, [ 0, 10, 50, 99, nil ].map { grade_class(it) }.join(" "))
     end
 
     # UDR enseignant §3.1 : trophée de la couleur du palier sur l'icône seule, pastille neutre ; un badge à zéro est caché.

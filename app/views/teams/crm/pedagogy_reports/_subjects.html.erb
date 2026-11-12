@@ -1,0 +1,28 @@
+<%# 🌐 UI · teams/crm/pedagogy_reports/_subjects — réussite par matière : matière, exercices terminés, réussite moyenne %>
+<%# Rôle : le tableau défile dans son conteneur (jamais la page à 390 px) ; une ligne ne se coupe pas à l'impression %>
+<%# UDR  : 0160 (assistants du suivi, « Rapport pédagogique ») %>
+<% if subjects.empty? %>
+  <p class="text-sm text-mute"><%= t(".empty") %></p>
+<% else %>
+  <div class="overflow-x-auto rounded-card border border-line">
+    <table class="w-full text-left text-sm">
+      <caption class="sr-only"><%= t(".caption") %></caption>
+      <thead class="bg-surface-soft text-mute">
+        <tr>
+          <th scope="col" class="px-4 py-2 font-medium"><%= t(".subject") %></th>
+          <th scope="col" class="px-4 py-2 text-right font-medium"><%= t(".sessions") %></th>
+          <th scope="col" class="px-4 py-2 text-right font-medium"><%= t(".average") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% subjects.each do |subject| %>
+          <tr class="border-t border-line print:break-inside-avoid">
+            <th scope="row" class="px-4 py-2 font-normal"><%= ui_subject_badge subject[:name], category: subject[:category], size: :sm %></th>
+            <td class="px-4 py-2 text-right tabular-nums"><%= subject[:sessions_count] %></td>
+            <td class="px-4 py-2 text-right font-medium tabular-nums"><%= t(".percent", value: subject[:average_percent]) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

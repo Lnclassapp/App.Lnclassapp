@@ -59,6 +59,28 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ 0, 2 ], [ @session.reload.score_percent, Orm::QuestionAttempt.where(unanswered: true).count ]
   end
 
+  # ADR médailles lues à la clôture, trajet complet : la vraie clôture d'une copie vide n'écrit aucune médaille, le résultat dit
+  # « Pas encore », sans « Nouvelle médaille ! » ni prochaine médaille ; une seule réponse, même fausse, donne Bronze.
+  test "copie vide : aucune ligne de médaille, « Pas encore » au résultat ; une réponse fausse donne Bronze" do
+    sign_in_as @student
+
+    post exercise_session_copy_path(@session.public_id)
+    follow_redirect!
+
+    assert_empty Orm::ExerciseBadge.where(student: @student, exercise: @exercise)
+    assert_select "#session_badge[aria-label=?]", I18n.t("assessment.session_results.badge.none")
+    assert_select "#session_badge", text: /#{I18n.t("assessment.session_results.badge.new")}/, count: 0
+    assert_select "#session_next_medal", 0
+
+    again = create_exercise_session(student: @student, exercise: @exercise)
+    copy pick(@first, wrong(@first), session: again), session: again
+    follow_redirect!
+
+    assert_equal [ [ "bronze", again.id ] ], Orm::ExerciseBadge.where(student: @student, exercise: @exercise).pluck(:level, :exercise_session_id)
+    assert_select "#session_badge[aria-label=?]", I18n.t("assessment.session_results.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("assessment.session_results.badge.new")}/, count: 0
+  end
+
   test "rendre deux fois : la seconde ne réécrit rien et mène au résultat" do
     sign_in_as @student
     copy pick(@first, right(@first))
@@ -173,6 +195,24 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     sign_out
     copy pick(@first, right(@first))
     assert_redirected_to new_session_path
+  end
+
+  # B-038 (audit 2026-11-08): a double submit (the other request won the race) is not « session replaced »: the copy is in, go to its result.
+  test "double envoi : la copie est déjà rendue, retour au résultat sans l'alerte « session remplacée »" do
+    sign_in_as @student
+    repository = Repositories::Assessment::ExerciseSessionRepository
+    repository.alias_method(:original_record_copy, :record_copy)
+    repository.define_method(:record_copy) { |**| :duplicate }
+
+    begin
+      copy pick(@first, right(@first))
+    ensure
+      repository.alias_method(:record_copy, :original_record_copy)
+      repository.remove_method(:original_record_copy)
+    end
+
+    assert_redirected_to exercise_session_result_path(@session.public_id)
+    assert_nil flash[:alert]
   end
 
   test "copie abandonnée (Recommencer dans un autre onglet) : retour à l'exercice avec l'alerte" do

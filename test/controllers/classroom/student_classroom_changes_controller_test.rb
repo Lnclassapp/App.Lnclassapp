@@ -424,7 +424,8 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     exercise = create_exercise(title: "Fractions")
     assignment_a = create_assignment(classroom: @a, assignable: exercise, by: teacher_a)
     assignment_c = create_assignment(classroom: @c, assignable: exercise, by: teacher_c)
-    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 75, classroom_assignment: assignment_a)
+    record_medal(create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 75, classroom_assignment: assignment_a)
+                   .tap { create_attempt(session: it) })
     sign_in_as @student
 
     send_change
@@ -432,7 +433,7 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
 
     assert_select "#student_archive_results li", 1 do
       assert_select "p", "Fractions"
-      assert_select "[data-grade]", text: %r{15/20}
+      assert_select "[data-medal]", text: /Argent/
     end
     rows = css_select("#student_archive_classrooms li")
     assert_select rows.first, "p", "2nde C"

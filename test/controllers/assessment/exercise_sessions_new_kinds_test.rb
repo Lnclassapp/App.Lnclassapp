@@ -92,14 +92,13 @@ class Assessment::ExerciseSessionsNewKindsTest < ActionDispatch::IntegrationTest
     assert_select "#{sheet(@notebook)} input, #{sheet(@notebook)} textarea, #{sheet(@notebook)} select", 0
   end
 
-  test "CA-17 : les points suivent chaque légende quand une question n'est pas à 1 point ; 1 point au singulier" do
+  test "CA-17 : la copie de l'élève n'affiche ni points ni barème, même quand une question ne vaut pas 1 point" do
+    @loose.update!(points: 1.5)
+
     get exercise_session_path(@session.public_id)
 
-    assert_select "#{sheet(@select)} legend", text: /\(2 points\)/
-    assert_select "#{sheet(@loose)} legend", text: /\(1 point\)/
-    @loose.update!(points: 1.5)
-    get exercise_session_path(@session.public_id)
-    assert_select "#{sheet(@loose)} legend", text: /\(1,5 point\)/
+    assert_select "legend", text: /\(\d[\d,]* points?\)/, count: 0
+    assert_select "#exam-instructions", text: /barème|points?\b/, count: 0
   end
 
   test "CA-17 : un exercice tout à 1 point n'affiche aucun point" do

@@ -384,6 +384,26 @@
   }
 }
 
+/* Chantier crm-ecoles : « Relances ». Le vide et la liste sont tous deux rendus ; le vide s'efface dès qu'une ligne
+   `[data-follow-up]` existe, la liste dès qu'il n'en reste aucune (« Faite » ou « Réattribuer » retire la dernière). */
+@utility ui-follow-ups {
+  &:has([data-follow-up]) [data-follow-ups-empty] {
+    display: none;
+  }
+
+  &:not(:has([data-follow-up])) [data-follow-ups-list] {
+    display: none;
+  }
+}
+
+/* Chantier crm-ecoles : modale de dictée. « Noter un échange » à la main se masque quand le formulaire pré-rempli
+   (`[data-prefilled]`) est chargé dans la modale. */
+@utility ui-dictation {
+  &:has([data-prefilled]) [data-hide-if-prefilled] {
+    display: none;
+  }
+}
+
 /* Lot E6 (politique-cache) : boutons, bouton icône, menu ⋮, boîte de dialogue et avatar, sur le même principe ; une
    ligne de tableau en porte plusieurs, une confirmation trois. */
 @utility ui-button {

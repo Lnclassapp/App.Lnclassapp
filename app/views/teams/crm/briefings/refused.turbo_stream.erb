@@ -1,0 +1,10 @@
+<%# 🌐 UI · teams/crm/briefings/refused — remplit le frame school_crm_briefing quand la demande est refusée %>
+<%# Rôle : 409 « déjà en cours » (code :conflict seulement) ou autre échec (503), un message visible dans la carte, comme le brouillon WhatsApp %>
+<%# UDR  : 0160 (assistants du suivi) %>
+<%= turbo_stream.update "school_crm_briefing" do %>
+  <% if @conflict %>
+    <p class="text-sm text-mute" role="status"><%= t(".busy") %></p>
+  <% else %>
+    <p class="text-sm text-error" role="alert"><%= t(".unavailable") %></p>
+  <% end %>
+<% end %>

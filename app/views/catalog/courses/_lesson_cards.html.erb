@@ -1,0 +1,21 @@
+<%# 🌐 UI · catalog/courses/_lesson_cards — une page de leçons de la vue « matière » de l'élève sur ordinateur, puis le frame différé de la suivante %>
+<%# Rôle : 24 cartes de leçon (CourseCatalogQuery::PER_PAGE) en deux colonnes ; au bas, la page suivante chargée au défilement, ou son lien « Afficher plus » sans JavaScript (audit O-C02) %>
+<%# ADR  : 0076 · UDR : 0013 (amendement du 2026-10-05), 0085 · nested : page chargée dans le frame de la précédente %>
+<%# locals: (page:, material:, nested: false) -%>
+<%# Les icônes de la carte sont dessinées une fois par page ; les pages suivantes préfixent leurs <symbol> (aucun id répété). %>
+<%= ui_icon_sprite(prefix: (nested ? "lessons-page-#{page.page}-" : "lessons-")) do %>
+  <ul id="<%= nested ? "lessons_list_page_#{page.page}" : "lessons_list" %>"
+      class="<%= class_names("grid items-start gap-5 lg:grid-cols-2", "mt-5" => nested) %>">
+    <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course,
+               locals: { show_status: false, student: true, lesson_card: true } %>
+  </ul>
+<% end %>
+<% if page.page < page.pages %>
+  <% next_page = page.page + 1 %>
+  <% next_path = courses_path(material:, q: @filters[:q].presence, page: next_page) %>
+  <%= turbo_frame_tag "lessons_page_#{next_page}", src: next_path, loading: :lazy, target: "_top", class: "mt-5 block" do %>
+    <div class="flex justify-center py-2">
+      <%= ui_button t("catalog.courses.page.more"), href: next_path, variant: :secondary, data: { turbo_frame: "lessons_page_#{next_page}" } %>
+    </div>
+  <% end %>
+<% end %>

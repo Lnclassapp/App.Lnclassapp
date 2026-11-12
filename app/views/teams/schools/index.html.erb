@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
 <%# Rôle : « Importer des établissements » (principale), menus « Classes » (génération, barème) et « Codes » (régénérations de masse, admin) ; filtres et pages dans le frame « schools » %>
-<%# ADR  : 0030, 0036, 0056, 0058, 0083, 0096 · UDR : 0006, 0036, 0043, 0045, 0054, 0079, 0104 · sans code d'établissement (IE-21) ; recherche pendant la frappe %>
+<%# ADR  : 0030, 0036, 0056, 0058, 0083, 0096 · UDR : 0006, 0036, 0043, 0045, 0054, 0079, 0104, 0168 (pipeline et relances) · sans code d'établissement (IE-21) ; recherche pendant la frappe %>
 <% page_title t(".page_title") %>
 <% unless list_frame_request? %>
   <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
@@ -16,7 +16,7 @@
         <%= ui_dropdown_item t(".classroom_plan"), href: classroom_plan_path, icon: "calculator" %>
       <% end %>
       <%# UDR-0104 : régénérations de masse de la sélection filtrée, équipe admin seulement ; la modale recompte. %>
-      <% if can_regenerate_codes_in_bulk? %>
+      <% if can_regenerate_codes_in_bulk? && @crm_filters.values.none?(&:present?) %>
         <%= render "codes_menu", filters: @filters, empty: @page.total_count.zero? %>
       <% end %>
     </div>
@@ -41,7 +41,8 @@
 
 <%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50", data: { turbo_action: "advance" } do %>
   <%# Le menu « Codes » est hors du frame : un filtre changé dans le frame le remplace, pour qu'il porte la sélection affichée. %>
-  <% if list_frame_request? && can_regenerate_codes_in_bulk? %>
+  <%# Étape et responsable ne sont pas des filtres de la sélection de masse : le menu s'efface plutôt que de viser plus que la liste. %>
+  <% if list_frame_request? && can_regenerate_codes_in_bulk? && @crm_filters.values.none?(&:present?) %>
     <%= turbo_stream.replace "schools-codes-menu-slot", partial: "teams/schools/codes_menu", locals: { filters: @filters, empty: @page.total_count.zero? } %>
   <% end %>
   <p id="schools_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
@@ -55,8 +56,9 @@
           <thead class="border-b border-line text-xs text-mute">
             <tr>
               <%# IE-21 (UDR-0079 §3.8 bis) : plus de colonne « Code d'établissement » ; le code reste sur la fiche. %>
-              <% %i[school drena type cycle status classrooms teachers].each do |column| %>
-                <th scope="col" class="px-4 py-3 font-medium">
+              <% columns = %i[school drena type cycle status classrooms teachers] + (@can_manage_crm ? %i[stage owner] : []) %>
+              <% columns.each do |column| %>
+                <th scope="col" class="px-4 py-3 font-medium<%= " hidden sm:table-cell" if %i[stage owner].include?(column) %>">
                   <%= t(".columns.#{column}") %>
                   <%# UDR-0054 §3.4 : les statuts s'expliquent une fois, dans l'en-tête, pas sur chaque ligne. %>
                   <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".columns.status") if column == :status %>
@@ -73,7 +75,7 @@
     <% end %>
   <% else %>
     <div id="schools_empty">
-      <% if @filters.values.any?(&:present?) %>
+      <% if @filters.merge(@crm_filters).values.any?(&:present?) %>
         <%= ui_empty_state title: t(".no_match_title"), description: t(".no_match_description"), icon: "magnifying-glass" do %>
           <%= ui_button t(".clear_filters"), href: schools_path, variant: :secondary, icon: "x-mark", data: { turbo_frame: "_top" } %>
         <% end %>

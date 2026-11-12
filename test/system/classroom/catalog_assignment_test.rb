@@ -19,7 +19,7 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
     school = create_school
     @tle_d1, @tle_d2 = [ "Tle D 1", "Tle D 2" ].map { |name| create_classroom(school:, level: tle, series: @course.series, name:) }
     @tle_c1 = create_classroom(school:, level: tle, series: create_series(name: "C"), name: "Tle C 1")
-    @teacher = create_teacher(school:, classrooms: [ @tle_d1, @tle_d2, @tle_c1 ])
+    @teacher = create_teacher(school:, material: @course.material, classrooms: [ @tle_d1, @tle_d2, @tle_c1 ])
     sign_in_as @teacher
     assert_current_path teacher_home_path
   end

@@ -1,0 +1,1293 @@
+# Application file → the system test files that ran it (Ruby lines run, templates and partials rendered), as their
+# positions in `tests`, so that a redraw changes a line per file, not a line per pair.
+# Written by script/ci/record_system_map, read by bin/system-changed (script/ci/system_scope.rb). Redrawn at each
+# promotion: a file missing here keeps the former rules (route of its resource, COMMON), never fewer tests.
+commit: cca607f0
+tests:
+- test/system/assessment/exam_sheet_test.rb
+- test/system/assessment/exercise_cards_test.rb
+- test/system/assessment/exercise_copy_test.rb
+- test/system/assessment/exercise_page_test.rb
+- test/system/assessment/new_kinds_without_javascript_test.rb
+- test/system/assessment/question_matching_test.rb
+- test/system/assessment/question_numeric_test.rb
+- test/system/assessment/question_ordering_test.rb
+- test/system/assessment/remediation_test.rb
+- test/system/assessment/session_result_test.rb
+- test/system/assessment/sheet_check_test.rb
+- test/system/assessment/student_progress_test.rb
+- test/system/boucle_pedagogique_test.rb
+- test/system/catalog/course_catalog_test.rb
+- test/system/catalog/figure_diagram_test.rb
+- test/system/catalog/figure_kinds_test.rb
+- test/system/catalog/figure_map_test.rb
+- test/system/catalog/figure_molecule_test.rb
+- test/system/catalog/figure_optics_test.rb
+- test/system/catalog/figure_plate_pc_test.rb
+- test/system/catalog/figure_plate_test.rb
+- test/system/catalog/figure_test.rb
+- test/system/catalog/figure_timeline_test.rb
+- test/system/catalog/import_course_tree_test.rb
+- test/system/catalog/lesson_capture_test.rb
+- test/system/catalog/lesson_rendering_test.rb
+- test/system/catalog/long_formulas_test.rb
+- test/system/catalog/next_exercise_path_test.rb
+- test/system/catalog/practice_in_sheet_test.rb
+- test/system/catalog/prepare_interros_test.rb
+- test/system/catalog/prepare_sheets_test.rb
+- test/system/catalog/public_level_pages_test.rb
+- test/system/catalog/public_material_pages_test.rb
+- test/system/catalog/revision_sheet_test.rb
+- test/system/catalog/sheet_cards_test.rb
+- test/system/catalog/student_courses_test.rb
+- test/system/catalog/teacher_courses_test.rb
+- test/system/classroom/assigned_sheet_cards_test.rb
+- test/system/classroom/assigned_sheets_test.rb
+- test/system/classroom/assignment_batch_test.rb
+- test/system/classroom/assignment_follow_up_desktop_test.rb
+- test/system/classroom/assignment_toggle_test.rb
+- test/system/classroom/catalog_assignment_test.rb
+- test/system/classroom/class_choice_test.rb
+- test/system/classroom/classroom_change_test.rb
+- test/system/classroom/classroom_desktop_test.rb
+- test/system/classroom/classroom_essential_test.rb
+- test/system/classroom/classroom_page_test.rb
+- test/system/classroom/classroom_roster_test.rb
+- test/system/classroom/comprehension_test.rb
+- test/system/classroom/daily_exercise_test.rb
+- test/system/classroom/join_test.rb
+- test/system/classroom/student_archive_test.rb
+- test/system/classroom/student_classroom_test.rb
+- test/system/classroom/student_file_test.rb
+- test/system/classroom/student_home_test.rb
+- test/system/classroom/student_removal_test.rb
+- test/system/classroom/teacher_first_path_desktop_test.rb
+- test/system/classroom/teacher_home_desktop_test.rb
+- test/system/classroom/teacher_home_test.rb
+- test/system/classroom/teaching_selection_test.rb
+- test/system/communication/announcement_audio_duration_test.rb
+- test/system/communication/announcements_journey_test.rb
+- test/system/communication/announcements_v2_journey_test.rb
+- test/system/communication/help_sheet_direction_test.rb
+- test/system/communication/help_sheet_test.rb
+- test/system/communication/help_test.rb
+- test/system/communication/student_announcements_test.rb
+- test/system/design_system_test.rb
+- test/system/error_paths_test.rb
+- test/system/finitions/account_pages_test.rb
+- test/system/finitions/catalog_and_student_test.rb
+- test/system/finitions/classroom_test.rb
+- test/system/finitions/focus_and_search_errors_test.rb
+- test/system/finitions/narrow_screens_test.rb
+- test/system/finitions/narrow_titles_test.rb
+- test/system/finitions/public_pages_test.rb
+- test/system/finitions/school_admin_test.rb
+- test/system/finitions/schools_search_test.rb
+- test/system/finitions/second_factor_test.rb
+- test/system/finitions/team_accounts_test.rb
+- test/system/finitions/team_content_test.rb
+- test/system/finitions/team_referential_test.rb
+- test/system/homepage_test.rb
+- test/system/identity/account_panel_test.rb
+- test/system/identity/cold_start_test.rb
+- test/system/identity/install_banner_test.rb
+- test/system/identity/invite_colleague_test.rb
+- test/system/identity/pin_reveal_test.rb
+- test/system/identity/profile_contact_test.rb
+- test/system/identity/profile_photo_test.rb
+- test/system/identity/profile_pin_test.rb
+- test/system/identity/profile_test.rb
+- test/system/identity/school_staff_registration_test.rb
+- test/system/identity/secret_back_navigation_test.rb
+- test/system/identity/sign_in_test.rb
+- test/system/identity/student_avatar_menu_test.rb
+- test/system/identity/student_sidebar_profile_card_test.rb
+- test/system/identity/student_signup_steps_test.rb
+- test/system/identity/teacher_materials_test.rb
+- test/system/identity/teacher_registration_desktop_test.rb
+- test/system/identity/teacher_signup_test.rb
+- test/system/identity/team_invitation_test.rb
+- test/system/imports_end_to_end_test.rb
+- test/system/pwa_offline_test.rb
+- test/system/role_homes_test.rb
+- test/system/school/classroom_settings_test.rb
+- test/system/school/classrooms_by_level_test.rb
+- test/system/school/generate_classrooms_test.rb
+- test/system/school/import_schools_test.rb
+- test/system/school/several_schools_test.rb
+- test/system/school/teacher_schools_test.rb
+- test/system/school_admin/classroom_archival_test.rb
+- test/system/school_admin/departed_students_test.rb
+- test/system/school_admin/departed_teachers_test.rb
+- test/system/school_admin/direction_home_test.rb
+- test/system/school_admin/level_classrooms_test.rb
+- test/system/school_admin/remediation_handed_in_test.rb
+- test/system/school_admin/school_life_test.rb
+- test/system/school_admin/school_link_test.rb
+- test/system/school_admin/school_test.rb
+- test/system/school_admin/staff_members_test.rb
+- test/system/school_admin/teachers_test.rb
+- test/system/shared/csp_turbo_navigation_test.rb
+- test/system/shared/math_rendering_test.rb
+- test/system/shared/reveal_test.rb
+- test/system/shared/teacher_account_panel_desktop_test.rb
+- test/system/teams/account_deletion_test.rb
+- test/system/teams/account_unlock_test.rb
+- test/system/teams/blog_management_test.rb
+- test/system/teams/classroom_archival_test.rb
+- test/system/teams/classroom_plan_test.rb
+- test/system/teams/code_regeneration_test.rb
+- test/system/teams/configuration_navigation_test.rb
+- test/system/teams/course_management_test.rb
+- test/system/teams/crm_briefing_test.rb
+- test/system/teams/crm_follow_ups_test.rb
+- test/system/teams/crm_journal_test.rb
+- test/system/teams/dashboard_test.rb
+- test/system/teams/deletion_requests_test.rb
+- test/system/teams/drena_import_test.rb
+- test/system/teams/drenas_test.rb
+- test/system/teams/growth_test.rb
+- test/system/teams/import_flow_test.rb
+- test/system/teams/levels_test.rb
+- test/system/teams/materials_test.rb
+- test/system/teams/row_actions_menu_test.rb
+- test/system/teams/school_classroom_creation_test.rb
+- test/system/teams/school_code_test.rb
+- test/system/teams/school_staff_test.rb
+- test/system/teams/schools_test.rb
+- test/system/teams/series_test.rb
+- test/system/teams/staff_invitation_test.rb
+- test/system/teams/team_home_test.rb
+files:
+  app/controllers/application_controller.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/assessment/exercise_copies_controller.rb: 2 4 5 6 7 8 11 12 50 117
+  app/controllers/assessment/exercise_sessions_controller.rb: 0 2 3 4 5 6 7 8 9 11 12 27 50 55 69 71 117
+  app/controllers/assessment/exercises_controller.rb: 0 1 2 3 8 11 71 117
+  app/controllers/assessment/session_results_controller.rb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 69 71 117
+  app/controllers/assessment/sheet_checks_controller.rb: 10 34 37 38
+  app/controllers/authenticated_controller.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/catalog/courses_controller.rb: 8 12 13 25 26 27 28 29 33 34 35 36 65 71 74 85 96 97 103 105 110 123 126 146
+  app/controllers/catalog/essentials_controller.rb: '71'
+  app/controllers/catalog/level_pages_controller.rb: '31'
+  app/controllers/catalog/material_pages_controller.rb: 31 32
+  app/controllers/catalog/practice_checks_controller.rb: '28'
+  app/controllers/catalog/prepare_sheets_controller.rb: 8 10 12 25 26 29 30 34 39 42 57
+  app/controllers/classroom/assignment_batches_controller.rb: '39'
+  app/controllers/classroom/assignment_follow_ups_controller.rb: 40 47 49 54
+  app/controllers/classroom/assignments_controller.rb: 12 29 41 42 46 57
+  app/controllers/classroom/classroom_codes_controller.rb: '98'
+  app/controllers/classroom/classroom_courses_controller.rb: 46 69 74
+  app/controllers/classroom/classroom_prepare_sheets_controller.rb: 41 46
+  app/controllers/classroom/classroom_students_controller.rb: 12 45 47 48 49 54 56 69 70 72
+  app/controllers/classroom/classrooms_controller.rb: 12 45 47 48 54 56 59 69 70 72 73 74 92 107
+  app/controllers/classroom/joins_controller.rb: 12 51 56 69 74 75 76 88 98
+  app/controllers/classroom/session_days_controller.rb: 42 46
+  app/controllers/classroom/student_archives_controller.rb: '52'
+  app/controllers/classroom/student_assigned_sheets_controller.rb: 1 37 38
+  app/controllers/classroom/student_classroom_changes_controller.rb: '44'
+  app/controllers/classroom/student_classroom_choices_controller.rb: 43 56
+  app/controllers/classroom/student_classrooms_controller.rb: 1 37 38 53 55 71 105
+  app/controllers/classroom/student_homes_controller.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/controllers/classroom/student_registrations_controller.rb: 12 31 51 69 74 76 83 88 98
+  app/controllers/classroom/teacher_homes_controller.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/controllers/classroom/teacher_onboardings_controller.rb: 12 60
+  app/controllers/classroom/teaching_selections_controller.rb: 12 57 59 60 72 74 105 110
+  app/controllers/classroom/teachings_controller.rb: 12 60
+  app/controllers/communication/article_images_controller.rb: '129'
+  app/controllers/communication/articles_controller.rb: '129'
+  app/controllers/communication/authored_messages_controller.rb: 61 62 63 105
+  app/controllers/communication/help_controller.rb: 64 65 66 95 126
+  app/controllers/communication/inboxes_controller.rb: 62 67 105 114
+  app/controllers/communication/message_dismissals_controller.rb: 62 67
+  app/controllers/communication/message_files_controller.rb: '67'
+  app/controllers/communication/message_withdrawals_controller.rb: '62'
+  app/controllers/communication/moderations_controller.rb: '62'
+  app/controllers/concerns/authentication.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/concerns/class_picker.rb: 31 43 44 51 56 69 74 76 83 98
+  app/controllers/concerns/classroom_settings_actions.rb: '106'
+  app/controllers/concerns/colleague_invitation.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/controllers/concerns/joins_school.rb: 110 114
+  app/controllers/concerns/publish_cascade.rb: 12 13
+  app/controllers/concerns/reads_own_level.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 42 50 55 57 69 71 74 103 117 146
+  app/controllers/concerns/renders_result.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 75 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/concerns/secret_response.rb: 12 47 54 69 70 72 78 79 80 94 102 128 152
+  app/controllers/concerns/shell_layout.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/concerns/teams/school_staff_block.rb: 12 72 73 74 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/controllers/concerns/tone.rb: 89 90 91
+  app/controllers/design_controller.rb: 68 74 125
+  app/controllers/homepage_controller.rb: 9 51 56 62 63 68 69 74 76 79 83 87 89 91 92 93 95 96 97 105 117 124
+  app/controllers/identity/account_photos_controller.rb: '90'
+  app/controllers/identity/invitations_controller.rb: 12 75 76 102 152
+  app/controllers/identity/pending_accounts_controller.rb: 70 111 114 126
+  app/controllers/identity/pending_school_joins_controller.rb: '114'
+  app/controllers/identity/pin_recovery_codes_controller.rb: 12 47 54 69 70 72 128
+  app/controllers/identity/pin_resets_controller.rb: 69 74 76 88 95
+  app/controllers/identity/profile_contacts_controller.rb: 70 89 92
+  app/controllers/identity/profile_materials_controller.rb: 99 126
+  app/controllers/identity/profile_names_controller.rb: 70 90 92
+  app/controllers/identity/profile_photos_controller.rb: 70 90 92
+  app/controllers/identity/profile_pins_controller.rb: 70 88 91
+  app/controllers/identity/profiles_controller.rb: 44 70 74 84 89 90 91 92 99 105 126 152
+  app/controllers/identity/referral_shares_controller.rb: 72 87
+  app/controllers/identity/referrals_controller.rb: 72 74 87
+  app/controllers/identity/school_staff_registrations_controller.rb: 75 93
+  app/controllers/identity/second_factor_enrollments_controller.rb: 12 69 79 94 102
+  app/controllers/identity/second_factors_controller.rb: 9 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/identity/sessions_controller.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/identity/teacher_registrations_controller.rb: 12 74 75 76 85 87 99 100 101 110 150
+  app/controllers/school/current_schools_controller.rb: '110'
+  app/controllers/school/drena_schools_controller.rb: 12 43 44 51 56 85 98 99 101 114
+  app/controllers/school/join_request_vouches_controller.rb: '85'
+  app/controllers/school/level_classrooms_controller.rb: 43 44 51 56 98
+  app/controllers/school/school_levels_controller.rb: 43 44 51 98
+  app/controllers/school/teacher_school_joins_controller.rb: '110'
+  app/controllers/school/teacher_schools_controller.rb: 111 126
+  app/controllers/school_admin/activities_controller.rb: 74 77 93 105 112 115 116 117 120 122
+  app/controllers/school_admin/base_controller.rb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/controllers/school_admin/classroom_archivals_controller.rb: '112'
+  app/controllers/school_admin/classrooms_controller.rb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/controllers/school_admin/departed_students_controller.rb: '113'
+  app/controllers/school_admin/departed_teachers_controller.rb: '114'
+  app/controllers/school_admin/level_archivals_controller.rb: '112'
+  app/controllers/school_admin/level_classrooms_controller.rb: '116'
+  app/controllers/school_admin/levels_controller.rb: 77 112 115 117
+  app/controllers/school_admin/schools_controller.rb: 116 118 119 120 121
+  app/controllers/school_admin/staff_members_controller.rb: '121'
+  app/controllers/school_admin/student_searches_controller.rb: '118'
+  app/controllers/school_admin/teacher_reinstatements_controller.rb: '114'
+  app/controllers/school_admin/teachers_controller.rb: 74 122
+  app/controllers/teams/account_deletions_controller.rb: 127 139
+  app/controllers/teams/account_lookups_controller.rb: 74 80 127 128 139
+  app/controllers/teams/announcement_illustration_retirements_controller.rb: '63'
+  app/controllers/teams/announcement_illustrations_controller.rb: '63'
+  app/controllers/teams/article_images_controller.rb: '129'
+  app/controllers/teams/articles_controller.rb: '129'
+  app/controllers/teams/classroom_archivals_controller.rb: '130'
+  app/controllers/teams/classroom_generations_controller.rb: 108 131
+  app/controllers/teams/classroom_plans_controller.rb: 12 74 82 108 131
+  app/controllers/teams/code_regenerations_controller.rb: '132'
+  app/controllers/teams/courses_controller.rb: 13 81 123 129 134 153
+  app/controllers/teams/crm/accounts_controller.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/controllers/teams/crm/assistants_controller.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/controllers/teams/crm/base_controller.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 94 95 102 103 105 106 107 108 109 123 127 128 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/teams/crm/briefings_controller.rb: '135'
+  app/controllers/teams/crm/contacts_controller.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 152
+  app/controllers/teams/crm/follow_up_assignees_controller.rb: '136'
+  app/controllers/teams/crm/follow_up_completions_controller.rb: '136'
+  app/controllers/teams/crm/follow_ups_controller.rb: 12 72 73 78 85 103 106 107 130 135 136 137 139 147 148 149 150 152
+  app/controllers/teams/crm/home_follow_ups_controller.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 94 95 102 103 105 106 107 108 109 123 127 128 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/teams/crm/interactions_controller.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/controllers/teams/crm/stages_controller.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/controllers/teams/crm/usages_controller.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/controllers/teams/crm/whatsapp_drafts_controller.rb: '136'
+  app/controllers/teams/dashboards_controller.rb: 74 80 105 138
+  app/controllers/teams/deletion_requests_controller.rb: 80 127 128 139
+  app/controllers/teams/drenas_controller.rb: 12 74 82 140 141 146
+  app/controllers/teams/growth_controller.rb: 74 80 142
+  app/controllers/teams/homes_controller.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/controllers/teams/imports_controller.rb: 12 23 69 74 81 103 108 109 131 132 133 134 140 143 150
+  app/controllers/teams/invitations_controller.rb: 80 102
+  app/controllers/teams/join_requests_controller.rb: '85'
+  app/controllers/teams/level_archivals_controller.rb: '130'
+  app/controllers/teams/level_classrooms_controller.rb: '107'
+  app/controllers/teams/level_series_controller.rb: 12 131 151
+  app/controllers/teams/levels_controller.rb: 12 74 82 144 146
+  app/controllers/teams/materials_controller.rb: 12 74 82 145 146
+  app/controllers/teams/referentials_controller.rb: 12 63 131 133 138
+  app/controllers/teams/school_classrooms_controller.rb: '147'
+  app/controllers/teams/school_codes_controller.rb: '148'
+  app/controllers/teams/school_staff_members_controller.rb: '149'
+  app/controllers/teams/school_staff_restorations_controller.rb: '149'
+  app/controllers/teams/schools_controller.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/controllers/teams/second_factor_resets_controller.rb: '128'
+  app/controllers/teams/series_controller.rb: 12 74 82 131 146 151
+  app/controllers/teams/staff_invitations_controller.rb: 78 152
+  app/domain/dtos/assessment/attempt_input.rb: 2 4 5 6 7 8 10 11 12 34 37 38 50 117
+  app/domain/dtos/assessment/copy_input.rb: 2 4 5 6 7 8 10 11 12 34 37 38 50 117
+  app/domain/dtos/catalog/course_input.rb: 13 81 123 129 134 153
+  app/domain/dtos/catalog/import_upload_input.rb: 12 23 25 69 103 109 140 143
+  app/domain/dtos/catalog/level_input.rb: 12 82 144
+  app/domain/dtos/catalog/series_input.rb: 12 82 151
+  app/domain/dtos/classroom/assignment_input.rb: 12 29 41 42 46
+  app/domain/dtos/classroom/classroom_input.rb: '147'
+  app/domain/dtos/classroom/classroom_plan_line_input.rb: 82 131
+  app/domain/dtos/classroom/classroom_settings_input.rb: '106'
+  app/domain/dtos/classroom/session_days_input.rb: 12 41 42 46
+  app/domain/dtos/classroom/student_registration_input.rb: 12 31 43 44 51 56 69 74 75 76 83 88 98
+  app/domain/dtos/communication/article_image_input.rb: '129'
+  app/domain/dtos/communication/article_input.rb: '129'
+  app/domain/dtos/communication/illustration_input.rb: '63'
+  app/domain/dtos/communication/message_input.rb: 61 62 63
+  app/domain/dtos/identity/contact_change_input.rb: '89'
+  app/domain/dtos/identity/credentials_input.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/dtos/identity/person_name_input.rb: 12 31 51 69 70 74 75 76 83 85 87 88 90 92 93 98 99 100 101 102 152
+  app/domain/dtos/identity/pin_reset_input.rb: '69'
+  app/domain/dtos/identity/profile_photo_input.rb: '90'
+  app/domain/dtos/identity/school_staff_invitation_input.rb: 78 152
+  app/domain/dtos/identity/school_staff_registration_input.rb: '93'
+  app/domain/dtos/identity/second_factor_code_input.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/dtos/identity/teacher_materials_input.rb: 99 126
+  app/domain/dtos/identity/teacher_registration_input.rb: 12 74 75 76 85 87 99 100 101
+  app/domain/dtos/identity/team_invitation_input.rb: 80 102
+  app/domain/dtos/school/code_regeneration_input.rb: '132'
+  app/domain/dtos/school/drena_input.rb: 12 82 141
+  app/domain/dtos/school/school_invite_join_input.rb: '110'
+  app/domain/dtos/school/school_join_input.rb: 70 111 114 126
+  app/domain/dtos/school/school_selection.rb: '132'
+  app/domain/entities/assessment/answer_shuffle.rb: 0 1 2 3 4 5 7 8 9 10 11 12 25 26 27 28 34 37 38 50 55 69 71 117
+  app/domain/entities/assessment/appreciation.rb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 71 117
+  app/domain/entities/assessment/class_success.rb: 41 46
+  app/domain/entities/assessment/comprehension.rb: 11 12 38 40 47 49 54
+  app/domain/entities/assessment/daily_rotation.rb: 0 2 3 4 5 6 7 8 9 10 11 13 25 26 27 28 29 30 33 34 35 43 44 49 50 51 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104
+  app/domain/entities/assessment/exercise.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 27 34 37 38 50 55 69 71 117
+  app/domain/entities/assessment/gap_decision.rb: 2 4 5 6 7 8 10 11 12 37 38 50 117
+  app/domain/entities/assessment/gap_outcome.rb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 71 117
+  app/domain/entities/assessment/grading.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 30 34 35 37 38 40 45 47 48 49 50 52 53 54 55 56 58 59 62 63 64 65 66 69 70 71 72 73 74 92 95 97 105 113 115 117 126
+  app/domain/entities/assessment/next_step.rb: 40 47 49 54
+  app/domain/entities/assessment/question.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 30 34 37 38 50 53 55 69 71 103 105 117
+  app/domain/entities/assessment/question_kinds/blanks.rb: 6 12 13 23 25 28 103
+  app/domain/entities/assessment/question_kinds/choice.rb: 2 8 10 11 12 13 23 25 34 37 38 50 103 117
+  app/domain/entities/assessment/question_kinds/fill_blank.rb: '25'
+  app/domain/entities/assessment/question_kinds/matching.rb: '25'
+  app/domain/entities/assessment/question_kinds/numeric.rb: 6 25 28
+  app/domain/entities/assessment/question_kinds/ordering.rb: '25'
+  app/domain/entities/assessment/question_kinds/select.rb: 4 25
+  app/domain/entities/assessment/question_kinds/written.rb: 4 25
+  app/domain/entities/assessment/remediation_pick.rb: 2 8 10 11 38 117
+  app/domain/entities/assessment/restart_pause.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 27 30 34 35 37 38 50 53 55 69 71 105 117
+  app/domain/entities/billing/access.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/domain/entities/catalog/content_node.rb: 12 23 25 103
+  app/domain/entities/catalog/course.rb: 12 13 25 71 81 103 134 146
+  app/domain/entities/catalog/essential.rb: 8 12 13 25 26 28 33 34 35 71
+  app/domain/entities/catalog/figure.rb: 23 25
+  app/domain/entities/catalog/figure_kinds.rb: 23 25
+  app/domain/entities/catalog/import_context.rb: 12 23 25 103 109 140 143
+  app/domain/entities/catalog/import_error.rb: 23 25 103 109 143
+  app/domain/entities/catalog/import_file_report.rb: 12 23 25 69 103 109 140 143
+  app/domain/entities/catalog/import_item.rb: 12 23 25 103 109 140 143
+  app/domain/entities/catalog/import_kind.rb: 12 23 25 69 81 103 109 140 143 150
+  app/domain/entities/catalog/level.rb: 9 12 13 23 25 29 43 44 51 56 62 63 72 74 80 81 82 92 98 103 105 106 107 108 109 112 116 123 127 130 131 132 133 134 138 139 144 147 150 151 153
+  app/domain/entities/catalog/level_audience.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 41 42 43 44 46 49 50 51 53 55 56 57 62 63 65 66 67 69 70 71 74 85 86 89 90 92 95 96 97 98 104 105 110 117 126
+  app/domain/entities/catalog/material.rb: 9 12 13 23 25 29 62 63 72 74 81 82 85 87 92 99 101 103 105 106 107 108 109 112 116 123 126 127 130 131 134 138 142 145 147 152 153
+  app/domain/entities/catalog/notion_practice.rb: 12 13 23 25 26 28 33 103
+  app/domain/entities/catalog/notion_sheet.rb: 12 13 23 25 26 28 33 103
+  app/domain/entities/catalog/revision_preview.rb: 12 13 25 26 28 33 103
+  app/domain/entities/catalog/series.rb: 12 23 25 74 82 103 106 107 108 109 116 130 131 133 134 147 151 153
+  app/domain/entities/catalog/slug.rb: 12 23 25 103
+  app/domain/entities/catalog/statement_blocks.rb: 12 23 25 103
+  app/domain/entities/catalog/taxonomy_lookup.rb: 9 12 13 23 25 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 112 116 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/classroom/assignable.rb: 2 3 8 9 11 12 27 29 37 38 39 41 42 46 50 55 57 69 117
+  app/domain/entities/classroom/classroom.rb: 12 29 39 41 42 43 44 46 51 54 56 57 60 61 62 63 69 98 106 107 112 116 130 147
+  app/domain/entities/classroom/classroom_numbering.rb: 12 72 74 103 106 107 116 118 120 130 147 150
+  app/domain/entities/classroom/classroom_plan.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/classroom/classroom_plan_defaults.rb: 12 131 144 151
+  app/domain/entities/classroom/default_classroom_plan.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/classroom/join_code.rb: 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 92 97 105 110
+  app/domain/entities/classroom/placement.rb: 107 116 147
+  app/domain/entities/classroom/school_year.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/classroom/session_days.rb: 12 29 39 41 42 46
+  app/domain/entities/communication/article.rb: '129'
+  app/domain/entities/communication/article_image.rb: '129'
+  app/domain/entities/communication/article_read.rb: '129'
+  app/domain/entities/communication/audio_duration.rb: 61 62 63
+  app/domain/entities/communication/audio_header.rb: 61 62 63
+  app/domain/entities/communication/illustration.rb: '63'
+  app/domain/entities/communication/message.rb: 61 62 63 67
+  app/domain/entities/crm/briefing_prompt.rb: '135'
+  app/domain/entities/crm/follow_up_signals.rb: '136'
+  app/domain/entities/crm/redaction.rb: '136'
+  app/domain/entities/crm/school_usage.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/domain/entities/crm/stage.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/domain/entities/crm/whatsapp_draft_prompt.rb: '136'
+  app/domain/entities/identity/actor.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/identity/backup_codes.rb: 12 79 94 102
+  app/domain/entities/identity/contact.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/identity/deletion_request.rb: '139'
+  app/domain/entities/identity/home_destination.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 84 85 86 87 88 89 90 91 92 94 95 96 97 99 101 104 105 110 111 112 113 114 115 116 117 118 119 120 121 122 126 150 152
+  app/domain/entities/identity/invitation.rb: 12 75 76 78 80 102 152
+  app/domain/entities/identity/lockout.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/identity/pin_recovery_code.rb: '69'
+  app/domain/entities/identity/referral_token.rb: 74 76 87 100 101
+  app/domain/entities/identity/secret_digest.rb: '69'
+  app/domain/entities/identity/session_lifetime.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/identity/teacher_materials.rb: 12 85 87 99 101 126
+  app/domain/entities/identity/user.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/entities/identity/viral_coefficient.rb: 74 80 142
+  app/domain/entities/school/direction_alerts.rb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/domain/entities/school/drena.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 75 76 77 78 80 84 85 86 87 88 89 90 91 92 93 95 96 97 98 99 100 101 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 126 127 128 130 131 132 133 135 136 137 138 139 140 141 142 146 147 148 149 150 151 152 153
+  app/domain/entities/school/national_code.rb: 12 73 103 107 109 150
+  app/domain/entities/school/reporting_period.rb: 74 80 105 138
+  app/domain/entities/school/school.rb: 3 12 13 29 36 39 40 41 42 43 44 45 46 47 48 49 51 54 56 57 58 59 60 61 62 63 69 70 72 73 74 75 76 78 84 85 86 87 88 91 92 93 95 97 98 99 101 103 105 106 107 109 110 111 112 114 116 121 122 126 130 135 136 137 147 148 149 150 152
+  app/domain/entities/school/school_code.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 75 76 77 78 80 84 85 86 88 89 90 91 92 95 96 97 98 99 100 101 103 104 105 106 107 108 109 110 111 112 113 115 116 117 118 121 122 126 127 128 130 131 132 135 136 137 138 139 141 142 146 147 148 149 150 151 152 153
+  app/domain/entities/school/staff.rb: 116 118 119 120 121
+  app/domain/entities/school/staff_position.rb: 75 78 93 116 118 119 120 121 149 152
+  app/domain/entities/school/work_signal.rb: 74 77 105 112 115 116 117 118 120 122
+  app/domain/entities/shared/content_status.rb: 12 13 25 129
+  app/domain/entities/shared/image_header.rb: 90 129
+  app/domain/policies/assessment/read_session_policy.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 27 34 37 38 50 55 69 71 117
+  app/domain/policies/assessment/reveal_answers_policy.rb: 0 1 2 3 8 9 11 12 71 117
+  app/domain/policies/assessment/reveal_correction_policy.rb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 71 117
+  app/domain/policies/assessment/start_session_policy.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 27 34 37 38 50 55 69 71 117
+  app/domain/policies/assessment/submit_attempt_policy.rb: 2 4 5 6 7 8 10 11 12 34 37 38 50 117
+  app/domain/policies/catalog/manage_content_policy.rb: 0 1 2 3 8 11 12 13 23 25 26 27 28 29 33 34 35 36 69 71 81 103 117 134 146
+  app/domain/policies/catalog/manage_taxonomy_policy.rb: 12 82 131 144 145 151
+  app/domain/policies/catalog/read_own_level_policy.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 50 55 69 71 117
+  app/domain/policies/catalog/read_own_material_policy.rb: 12 13 29 36 39 42 57 74
+  app/domain/policies/catalog/read_published_policy.rb: 0 1 2 3 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 39 42 57 71 103 117 146
+  app/domain/policies/classroom/assign_policy.rb: 12 29 39 41 42 46 57
+  app/domain/policies/classroom/declare_teaching_policy.rb: 12 60
+  app/domain/policies/classroom/follow_assignment_policy.rb: 12 40 45 47 48 49 54 56 59 69 70 72 73 74 92 107
+  app/domain/policies/classroom/join_policy.rb: 12 43 44 51 56 69 98
+  app/domain/policies/classroom/manage_classroom_members_policy.rb: 12 45 47 48 49 54 56 59 69 70 72 73 74 92 107
+  app/domain/policies/classroom/manage_classroom_plan_policy.rb: 12 74 82 108 131
+  app/domain/policies/classroom/manage_classroom_policy.rb: '147'
+  app/domain/policies/classroom/read_classroom_lesson_policy.rb: 41 46 69 74
+  app/domain/policies/classroom/read_classroom_policy.rb: 1 12 37 38 41 45 46 47 48 49 53 54 55 56 59 69 70 71 72 73 74 92 105 107
+  app/domain/policies/classroom/set_session_days_policy.rb: 12 29 39 41 42 46 57
+  app/domain/policies/classroom/teach_policy.rb: 12 29 39 41 42 46 57
+  app/domain/policies/classroom/withdraw_teaching_policy.rb: '60'
+  app/domain/policies/communication/dismiss_policy.rb: 62 67
+  app/domain/policies/communication/manage_articles_policy.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/policies/communication/manage_illustrations_policy.rb: '63'
+  app/domain/policies/communication/publish_policy.rb: 61 62 63
+  app/domain/policies/communication/read_article_policy.rb: '129'
+  app/domain/policies/communication/read_file_policy.rb: '67'
+  app/domain/policies/communication/withdraw_policy.rb: '62'
+  app/domain/policies/crm/manage_crm_policy.rb: 9 12 13 23 29 62 63 68 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/policies/identity/complete_onboarding_policy.rb: 12 60
+  app/domain/policies/identity/delete_user_policy.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/policies/identity/invite_colleague_policy.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/domain/policies/identity/invite_school_staff_policy.rb: 78 152
+  app/domain/policies/identity/invite_team_policy.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/policies/identity/issue_pin_recovery_code_policy.rb: 12 47 54 69 70 72 80 127 128 139
+  app/domain/policies/identity/manage_own_materials_policy.rb: 99 126
+  app/domain/policies/identity/read_growth_policy.rb: 74 80 142
+  app/domain/policies/identity/read_user_policy.rb: 74 80 90 105 127 128 138 139
+  app/domain/policies/identity/register_school_staff_policy.rb: '93'
+  app/domain/policies/identity/register_teacher_policy.rb: 12 85 87 99 101
+  app/domain/policies/identity/reset_second_factor_policy.rb: '128'
+  app/domain/policies/identity/second_factor_policy.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/policies/identity/session_policy.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/policies/identity/update_self_policy.rb: 89 90 91 92
+  app/domain/policies/school/join_school_with_code_policy.rb: 110 114
+  app/domain/policies/school/leave_school_policy.rb: 111 126
+  app/domain/policies/school/manage_school_policy.rb: 12 69 73 81 85 103 107 108 109 131 132 140 141 143 146 150
+  app/domain/policies/school/manage_school_structure_policy.rb: 77 106 107 112 115 116 117 118 119 120 121 130 148
+  app/domain/policies/school/manage_school_teachers_policy.rb: 74 114 122
+  app/domain/policies/school/read_indicators_policy.rb: 74 80 105 138
+  app/domain/policies/school/read_own_school_policy.rb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/domain/policies/school/regenerate_codes_in_bulk_policy.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/domain/policies/school/remove_school_staff_policy.rb: 116 118 119 120 121 149
+  app/domain/policies/school/restore_school_staff_policy.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/policies/school/set_staff_position_policy.rb: 12 72 73 74 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/domain/policies/school/switch_current_school_policy.rb: '110'
+  app/domain/policies/school/vouch_policy.rb: '85'
+  app/domain/ports/catalog/content_tree_writer_port.rb: 12 23 25 103
+  app/domain/ports/identity/invite_link_repository_port.rb: 87 100 101 110
+  app/domain/shared/result.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/use_cases/assessment/check_exercise_on_sheet.rb: 10 34 37 38
+  app/domain/use_cases/assessment/close_exercise_session.rb: 2 4 5 6 7 8 10 11 12 34 37 38 50 117
+  app/domain/use_cases/assessment/publish_exercise.rb: 12 13 25
+  app/domain/use_cases/assessment/record_essential_read.rb: 8 13 25 26 28 33 34 35 71
+  app/domain/use_cases/assessment/start_exercise_session.rb: 2 3 8 9 10 11 12 27 34 37 38 50 55 69 117
+  app/domain/use_cases/assessment/submit_exercise_copy.rb: 2 4 5 6 7 8 10 11 12 34 37 38 50 117
+  app/domain/use_cases/catalog/archive_course.rb: '13'
+  app/domain/use_cases/catalog/check_practice.rb: 25 28
+  app/domain/use_cases/catalog/create_course.rb: 13 81 134
+  app/domain/use_cases/catalog/create_level.rb: 12 82 144
+  app/domain/use_cases/catalog/create_material.rb: 12 145
+  app/domain/use_cases/catalog/create_series.rb: 12 151
+  app/domain/use_cases/catalog/delete_level.rb: '144'
+  app/domain/use_cases/catalog/delete_material.rb: '145'
+  app/domain/use_cases/catalog/delete_series.rb: '151'
+  app/domain/use_cases/catalog/import_course_tree.rb: 12 23 25 103
+  app/domain/use_cases/catalog/link_level_series.rb: 12 131 151
+  app/domain/use_cases/catalog/publish_cascade.rb: 12 13 25
+  app/domain/use_cases/catalog/publish_course.rb: 12 13 25
+  app/domain/use_cases/catalog/publish_essential.rb: 12 13 25
+  app/domain/use_cases/catalog/run_import.rb: 12 23 25 103 108 109 131 140 143
+  app/domain/use_cases/catalog/start_import.rb: 12 23 25 69 103 109 140 143
+  app/domain/use_cases/catalog/unlink_level_series.rb: '151'
+  app/domain/use_cases/catalog/update_course.rb: 13 134
+  app/domain/use_cases/catalog/update_level.rb: '144'
+  app/domain/use_cases/catalog/update_material.rb: '145'
+  app/domain/use_cases/catalog/update_series.rb: '151'
+  app/domain/use_cases/classroom/add_level_classroom.rb: 107 116
+  app/domain/use_cases/classroom/archive_assignment.rb: 29 41 46
+  app/domain/use_cases/classroom/archive_classroom.rb: 112 130
+  app/domain/use_cases/classroom/archive_level_classrooms.rb: 112 130
+  app/domain/use_cases/classroom/assign_exercise_batch.rb: '39'
+  app/domain/use_cases/classroom/assign_resource.rb: 12 29 41 42 46
+  app/domain/use_cases/classroom/change_classroom.rb: '44'
+  app/domain/use_cases/classroom/classroom_designation.rb: 12 43 44 51 56 69 76 88 98
+  app/domain/use_cases/classroom/create_classroom.rb: '147'
+  app/domain/use_cases/classroom/declare_teaching.rb: 12 60
+  app/domain/use_cases/classroom/generate_missing_classrooms.rb: 108 131
+  app/domain/use_cases/classroom/join_as_student.rb: 43 51 56
+  app/domain/use_cases/classroom/register_student.rb: 12 51 69 76 88 98
+  app/domain/use_cases/classroom/remove_level_classroom.rb: 107 116
+  app/domain/use_cases/classroom/remove_student.rb: 54 56
+  app/domain/use_cases/classroom/restore_classroom.rb: 112 130
+  app/domain/use_cases/classroom/set_session_days.rb: 42 46
+  app/domain/use_cases/classroom/show_classroom_plan.rb: 12 74 82 108 131
+  app/domain/use_cases/classroom/start_classroom_generation.rb: 108 131
+  app/domain/use_cases/classroom/update_classroom.rb: '106'
+  app/domain/use_cases/classroom/update_classroom_plan_line.rb: '131'
+  app/domain/use_cases/classroom/withdraw_teaching.rb: '60'
+  app/domain/use_cases/communication/add_illustration.rb: '63'
+  app/domain/use_cases/communication/archive_article.rb: '129'
+  app/domain/use_cases/communication/create_article.rb: '129'
+  app/domain/use_cases/communication/create_message.rb: 61 62 63
+  app/domain/use_cases/communication/dismiss_message.rb: 62 67
+  app/domain/use_cases/communication/publish_article.rb: '129'
+  app/domain/use_cases/communication/read_article_image.rb: '129'
+  app/domain/use_cases/communication/read_message_file.rb: '67'
+  app/domain/use_cases/communication/record_article_read.rb: '129'
+  app/domain/use_cases/communication/restore_message.rb: '67'
+  app/domain/use_cases/communication/retire_illustration.rb: '63'
+  app/domain/use_cases/communication/update_article.rb: '129'
+  app/domain/use_cases/communication/upload_article_image.rb: '129'
+  app/domain/use_cases/communication/withdraw_message.rb: '62'
+  app/domain/use_cases/crm/complete_follow_up.rb: '136'
+  app/domain/use_cases/crm/reassign_follow_up.rb: '136'
+  app/domain/use_cases/crm/record_interaction.rb: '137'
+  app/domain/use_cases/crm/request_briefing.rb: '135'
+  app/domain/use_cases/crm/request_whatsapp_draft.rb: '136'
+  app/domain/use_cases/crm/schedule_follow_up.rb: '136'
+  app/domain/use_cases/identity/accept_invitation.rb: 12 75 76 102 152
+  app/domain/use_cases/identity/anonymize_user.rb: 127 139
+  app/domain/use_cases/identity/authenticate.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/use_cases/identity/begin_second_factor_enrollment.rb: 12 69 79 94 102
+  app/domain/use_cases/identity/cancel_deletion_request.rb: '139'
+  app/domain/use_cases/identity/change_own_contact.rb: '89'
+  app/domain/use_cases/identity/change_own_photo.rb: '90'
+  app/domain/use_cases/identity/change_own_pin.rb: '91'
+  app/domain/use_cases/identity/complete_teacher_onboarding.rb: 12 60
+  app/domain/use_cases/identity/confirm_second_factor_enrollment.rb: 12 79 94 102
+  app/domain/use_cases/identity/invite_school_staff.rb: 78 152
+  app/domain/use_cases/identity/invite_team_member.rb: 80 102
+  app/domain/use_cases/identity/issue_pin_recovery_code.rb: 12 47 54 69 70 72 128
+  app/domain/use_cases/identity/read_account_photo.rb: '90'
+  app/domain/use_cases/identity/record_deletion_request.rb: '139'
+  app/domain/use_cases/identity/record_referral_share.rb: 72 87
+  app/domain/use_cases/identity/register_school_staff.rb: '93'
+  app/domain/use_cases/identity/register_teacher.rb: 12 85 87 99 101
+  app/domain/use_cases/identity/remove_own_photo.rb: '90'
+  app/domain/use_cases/identity/reset_pin_with_code.rb: '69'
+  app/domain/use_cases/identity/reset_second_factor.rb: '128'
+  app/domain/use_cases/identity/resolve_session.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/use_cases/identity/session_renewal.rb: 89 91
+  app/domain/use_cases/identity/sign_out.rb: 9 56 62 63 69 79 87 89 91 92 95 96 97 105 117
+  app/domain/use_cases/identity/update_own_name.rb: '92'
+  app/domain/use_cases/identity/update_teacher_materials.rb: 99 126
+  app/domain/use_cases/identity/verify_own_pin.rb: 89 91
+  app/domain/use_cases/identity/verify_second_factor.rb: 9 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/domain/use_cases/school/archive_school_staff.rb: 121 149
+  app/domain/use_cases/school/create_drena.rb: 12 141
+  app/domain/use_cases/school/deactivate_school.rb: 107 150
+  app/domain/use_cases/school/delete_drena.rb: 141 146
+  app/domain/use_cases/school/delete_school.rb: '150'
+  app/domain/use_cases/school/detach_teacher.rb: '122'
+  app/domain/use_cases/school/import_drenas.rb: '140'
+  app/domain/use_cases/school/import_schools.rb: 12 103 109
+  app/domain/use_cases/school/join_school_with_code.rb: 110 114
+  app/domain/use_cases/school/leave_school.rb: 111 126
+  app/domain/use_cases/school/regenerate_school_code.rb: '148'
+  app/domain/use_cases/school/reinstate_teacher.rb: '114'
+  app/domain/use_cases/school/restore_school_staff.rb: '149'
+  app/domain/use_cases/school/review_join_request.rb: '85'
+  app/domain/use_cases/school/start_code_regeneration.rb: '132'
+  app/domain/use_cases/school/switch_current_school.rb: '110'
+  app/domain/use_cases/school/update_drena.rb: '141'
+  app/domain/use_cases/school/update_school.rb: 73 107 150
+  app/domain/use_cases/school/vouch_for_teacher.rb: '85'
+  app/helpers/application_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/assessment/badges_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 30 34 35 37 38 40 45 47 48 49 50 52 53 54 55 56 59 69 70 71 72 73 74 77 92 105 112 113 115 117 118
+  app/helpers/assessment/blanks_helper.rb: 25 28
+  app/helpers/assessment/comprehension_helper.rb: 1 3 8 12 30 37 40 45 47 48 49 50 52 53 54 56 59 69 70 71 72 73 74 92 105 113 115 117
+  app/helpers/assessment/exercise_cards_helper.rb: 1 12 37 45 47 48 53 54 55 59 71 105
+  app/helpers/brand_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/catalog/content_status_helper.rb: 9 12 13 81 103 105 123 127 129 134 138 146 153
+  app/helpers/catalog/import_status_helper.rb: 12 23 69 81 103 105 108 109 131 132 140 143
+  app/helpers/catalog/sheet_text_helper.rb: 1 10 12 13 25 26 28 29 30 33 34 37 38 39 41 42 46 57 103
+  app/helpers/communication/article_form_helper.rb: '129'
+  app/helpers/communication/article_status_helper.rb: '129'
+  app/helpers/communication/illustrations_helper.rb: 55 58 61 62 63 67 68 74 125
+  app/helpers/communication/messages_helper.rb: 55 58 62 63 67
+  app/helpers/components_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/design_helper.rb: 68 74 125
+  app/helpers/due_date_helper.rb: 1 12 29 37 38 39 41 42 45 46 47 48 49 53 54 55 59 69 71 105 117
+  app/helpers/navigation_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/page_title_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/profile_modals_helper.rb: 70 88 89 90 91 92 99
+  app/helpers/profile_photos_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/public_pages_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/school_admin/levels_helper.rb: 74 77 105 112 115 116 117 118 120 122
+  app/helpers/school_admin/medals_helper.rb: 74 77 112 113 115 117 118
+  app/helpers/secret_response_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/support_helper.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/helpers/teams/account_lookups_helper.rb: 80 127 128 139
+  app/helpers/teams/code_regenerations_helper.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/helpers/teams/dashboards_helper.rb: 74 80 105 138
+  app/helpers/teams/imports_helper.rb: 12 23 69 81 103 108 109 131 132 140 143
+  app/helpers/tone_helper.rb: 70 88 89 90 91 92
+  app/infrastructure/communication/drawing_reader.rb: '63'
+  app/infrastructure/orm/article_image.rb: '129'
+  app/infrastructure/orm/classroom.rb: '132'
+  app/infrastructure/orm/course.rb: '34'
+  app/infrastructure/orm/crm_contact.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 152
+  app/infrastructure/orm/crm_follow_up.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 94 95 102 103 105 106 107 108 109 123 127 128 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/orm/drena.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 75 76 77 78 80 84 85 86 87 88 89 90 91 92 93 95 96 97 98 99 100 101 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 126 127 128 130 131 132 133 135 136 137 138 139 141 142 146 147 148 149 150 151 152 153
+  app/infrastructure/orm/essential.rb: 0 1 2 3 4 5 6 7 8 9 10 11 13 26 28 29 30 33 34 35 36 37 38 39 40 41 42 45 46 47 48 49 50 52 53 54 55 57 58 59 69 71 81 105 113 115 117 122 127 138
+  app/infrastructure/orm/exercise.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 29 30 34 35 37 38 39 40 41 42 45 46 47 48 49 50 52 53 54 55 57 58 59 69 71 105 113 115 117 122 127 138
+  app/infrastructure/orm/has_frozen_slug.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 75 76 77 78 80 81 82 84 85 86 87 88 89 90 91 92 93 95 96 97 98 99 100 101 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 141 142 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/orm/has_public_id.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 75 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/orm/question.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 29 30 34 35 37 38 39 40 41 42 45 46 47 48 49 50 52 53 54 55 57 58 59 69 71 105 113 115 117 122 127 138
+  app/infrastructure/orm/school.rb: 12 74 78 103 105 108 131 132 146 150
+  app/infrastructure/orm/school_staff.rb: 12 64 72 73 74 76 77 78 85 92 93 95 103 105 106 107 112 113 114 115 116 117 118 119 120 121 122 130 135 136 137 147 148 149 150 152
+  app/infrastructure/orm/teacher_school.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 65 66 67 69 70 71 72 73 74 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 114 117 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/orm/teacher_school_material.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/infrastructure/queries/assessment/assignment_scores.rb: 12 40 45 47 48 49 54 56 59 69 70 72 73 74 92 107
+  app/infrastructure/queries/assessment/class_exercise_success_query.rb: 41 46
+  app/infrastructure/queries/assessment/classroom_gaps_query.rb: 12 45 46 47 48 54 56 59 69 70 72 73 74 77 92 107 112 115 117 118
+  app/infrastructure/queries/assessment/comprehension_detail_query.rb: 40 47 49 54
+  app/infrastructure/queries/assessment/comprehension_summary_query.rb: 12 45 47 48 54 56 59 69 70 72 73 74 92 107
+  app/infrastructure/queries/assessment/daily_exercise_query.rb: 0 2 3 4 5 6 7 8 9 10 11 13 25 26 27 28 29 30 33 34 35 43 44 49 50 51 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104
+  app/infrastructure/queries/assessment/exercise_detail_query.rb: 0 1 2 3 8 10 11 71 117
+  app/infrastructure/queries/assessment/exercise_progress_query.rb: 0 1 2 3 8 11 71 117
+  app/infrastructure/queries/assessment/medals.rb: 12 39 40 45 47 48 49 54 56 58 59 62 63 69 70 72 73 74 77 92 97 105 107 112 113 115 117 118
+  app/infrastructure/queries/assessment/remediation_proposals_query.rb: 1 2 8 10 11 13 25 26 27 28 33 34 35 37 38 53 55 71 105 117
+  app/infrastructure/queries/assessment/session_play_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 29 30 34 37 38 39 41 42 46 50 53 55 57 69 71 103 105 117
+  app/infrastructure/queries/assessment/session_result_query.rb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 69 71 117
+  app/infrastructure/queries/billing/student_access_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/infrastructure/queries/catalog/audience_filter.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 43 44 49 50 51 53 55 56 62 63 65 66 67 69 70 71 74 85 86 89 90 92 95 96 97 98 104 105 110 117 126
+  app/infrastructure/queries/catalog/course_catalog_query.rb: 12 13 27 35 36 65 71 74 85 96 97 103 105 110 123 126
+  app/infrastructure/queries/catalog/course_detail_query.rb: 8 10 12 13 25 26 27 28 29 30 33 34 35 36 39 42 57 71 74 103 146
+  app/infrastructure/queries/catalog/course_level_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 50 55 69 71 117
+  app/infrastructure/queries/catalog/course_material_query.rb: 12 13 29 36 39 42 57 74
+  app/infrastructure/queries/catalog/homepage_materials_query.rb: 9 56 62 63 68 69 74 76 79 83 87 89 91 92 93 95 96 97 105 117 124
+  app/infrastructure/queries/catalog/import_report_query.rb: 12 23 69 81 103 108 109 131 132 140 143
+  app/infrastructure/queries/catalog/import_reports_query.rb: 12 23 69 74 81 103 109 133 134 143
+  app/infrastructure/queries/catalog/levels_query.rb: 12 74 82 144 146
+  app/infrastructure/queries/catalog/materials_query.rb: 12 74 82 145 146
+  app/infrastructure/queries/catalog/next_exercise_query.rb: 8 13 25 26 27 28 33 34 35 71 105
+  app/infrastructure/queries/catalog/prepare_sheets_query.rb: 1 8 10 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 41 42 46 53 55 57 71 103 105 146
+  app/infrastructure/queries/catalog/public_courses.rb: '31'
+  app/infrastructure/queries/catalog/public_levels_query.rb: '31'
+  app/infrastructure/queries/catalog/public_material_query.rb: 31 32
+  app/infrastructure/queries/catalog/referential_options_query.rb: 12 13 23 27 35 36 69 74 75 76 81 85 87 99 100 101 103 105 110 123 126 129 134 147 153
+  app/infrastructure/queries/catalog/revision_sheet_query.rb: 8 12 13 25 26 27 28 29 33 34 35 36 46 71 103 146
+  app/infrastructure/queries/catalog/series_query.rb: 12 74 82 131 146 151
+  app/infrastructure/queries/catalog/student_audience_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/infrastructure/queries/catalog/teacher_audience_query.rb: 12 13 29 36 39 42 57 74 85 105 110 126
+  app/infrastructure/queries/catalog/team_home_query.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/queries/classroom/assignment_follow_up_query.rb: 12 40 41 45 46 47 48 49 54 56 59 69 70 72 73 74 77 92 107 112 115 117 118
+  app/infrastructure/queries/classroom/catalog_assignment_targets_query.rb: 3 12 13 29 36 39 41 42 46 57
+  app/infrastructure/queries/classroom/classroom_change_preview_query.rb: 44 51 56
+  app/infrastructure/queries/classroom/classroom_course_query.rb: 41 46 74
+  app/infrastructure/queries/classroom/classroom_header_query.rb: 1 12 37 38 40 41 45 46 47 48 49 53 54 55 56 59 69 70 71 72 73 74 92 105 107
+  app/infrastructure/queries/classroom/classroom_overview_query.rb: 12 45 47 48 49 54 56 59 64 69 70 72 73 74 76 77 92 93 95 105 107 112 113 114 115 116 117 118 119 120 121 122 152
+  app/infrastructure/queries/classroom/classroom_settings_query.rb: '106'
+  app/infrastructure/queries/classroom/join_code_preview_query.rb: '98'
+  app/infrastructure/queries/classroom/join_preview_query.rb: 12 51 56 69 74 75 76 88 98
+  app/infrastructure/queries/classroom/level_classrooms_query.rb: 43 44 51 56 98
+  app/infrastructure/queries/classroom/student_archive_query.rb: 43 51 52 56 95
+  app/infrastructure/queries/classroom/student_assigned_sheets_query.rb: 1 37 38 53 55 71 105
+  app/infrastructure/queries/classroom/student_classroom_query.rb: 1 37 38 53 55 71 105
+  app/infrastructure/queries/classroom/student_file_query.rb: 12 45 47 48 49 54 56 69 70 72
+  app/infrastructure/queries/classroom/student_home_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/infrastructure/queries/classroom/teacher_follow_ups_query.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/infrastructure/queries/classroom/teacher_home_query.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/infrastructure/queries/classroom/teaching_selection_query.rb: 12 57 59 60 72 74 105 110
+  app/infrastructure/queries/communication/article_detail_query.rb: '129'
+  app/infrastructure/queries/communication/article_form_images_query.rb: '129'
+  app/infrastructure/queries/communication/authored_messages_query.rb: 61 62 63 105
+  app/infrastructure/queries/communication/illustration_library_query.rb: '63'
+  app/infrastructure/queries/communication/inbox_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 84 85 86 87 88 89 90 91 92 93 95 96 97 98 99 101 104 105 110 111 112 113 114 115 116 117 118 119 120 121 122 126 152
+  app/infrastructure/queries/communication/moderation_query.rb: '62'
+  app/infrastructure/queries/communication/published_articles_query.rb: '129'
+  app/infrastructure/queries/communication/readable_messages.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 84 85 86 87 88 89 90 91 92 93 95 96 97 98 99 101 104 105 110 111 112 113 114 115 116 117 118 119 120 121 122 126 152
+  app/infrastructure/queries/communication/team_articles_query.rb: '129'
+  app/infrastructure/queries/crm/assignable_members_query.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/infrastructure/queries/crm/briefing_inputs_query.rb: '135'
+  app/infrastructure/queries/crm/follow_up_signals_query.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 94 95 102 103 105 106 107 108 109 123 127 128 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/queries/crm/follow_ups_query.rb: 12 72 73 78 85 103 106 107 130 135 136 137 139 147 148 149 150 152
+  app/infrastructure/queries/crm/school_usage_query.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/infrastructure/queries/crm/whatsapp_draft_inputs_query.rb: '136'
+  app/infrastructure/queries/identity/account_lookup_query.rb: 80 127 128 139
+  app/infrastructure/queries/identity/account_search_query.rb: 74 80 105 138
+  app/infrastructure/queries/identity/growth_metrics_query.rb: 74 80 142
+  app/infrastructure/queries/identity/home_destination_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 84 85 86 87 88 89 90 91 92 94 95 96 97 99 101 104 105 110 111 112 113 114 115 116 117 118 119 120 121 122 126 150 152
+  app/infrastructure/queries/identity/pending_deletion_requests_query.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 94 95 102 103 105 106 107 108 109 123 127 128 130 131 132 133 134 136 138 139 140 141 142 143 144 145 146 147 148 150 151 153
+  app/infrastructure/queries/identity/photo_versions.rb: 12 45 47 48 49 54 56 59 69 70 72 73 74 80 92 107 127 128 139
+  app/infrastructure/queries/identity/profile_query.rb: 44 70 74 84 89 90 91 92 99 105 126 152
+  app/infrastructure/queries/identity/referral_query.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/infrastructure/queries/identity/shell_user_query.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/queries/identity/teacher_materials_query.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 55 56 57 58 59 60 61 62 63 67 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 112 113 114 115 117 122 126 130 152
+  app/infrastructure/queries/school/code_regeneration_preview_query.rb: '132'
+  app/infrastructure/queries/school/departed_students_query.rb: '113'
+  app/infrastructure/queries/school/departed_teachers_query.rb: '114'
+  app/infrastructure/queries/school/direction_home_query.rb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/infrastructure/queries/school/drena_schools_query.rb: 80 138
+  app/infrastructure/queries/school/drenas_query.rb: 12 74 82 140 141 146
+  app/infrastructure/queries/school/invite_join_query.rb: '110'
+  app/infrastructure/queries/school/join_requests_query.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 78 84 85 86 87 88 91 92 95 97 99 101 103 105 106 107 110 111 114 126 130 135 136 137 147 148 149 150 152
+  app/infrastructure/queries/school/level_classrooms_query.rb: 12 72 73 74 78 85 103 106 107 116 118 119 120 121 130 135 136 137 147 148 149 150 152
+  app/infrastructure/queries/school/own_school_query.rb: 74 77 112 114 115 116 117 118 119 120 121 122
+  app/infrastructure/queries/school/school_activity_query.rb: 74 77 93 105 112 115 116 117 120 122
+  app/infrastructure/queries/school/school_detail_query.rb: 12 72 73 74 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/infrastructure/queries/school/school_levels_query.rb: 43 44 51 56 98
+  app/infrastructure/queries/school/school_options_query.rb: 12 31 43 44 51 56 69 70 73 74 75 76 78 80 83 85 98 99 100 101 103 105 107 108 109 111 114 126 131 132 138 143 146 150
+  app/infrastructure/queries/school/school_preview_query.rb: 87 100 101
+  app/infrastructure/queries/school/school_staff_query.rb: 9 12 13 23 29 62 63 64 69 72 73 74 76 77 78 79 80 81 82 85 92 93 94 95 102 103 105 106 107 108 109 112 113 114 115 116 117 118 119 120 121 122 123 127 128 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/queries/school/school_teachers_query.rb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/infrastructure/queries/school/schools_query.rb: 12 72 73 74 78 85 103 105 106 107 108 130 131 132 135 136 137 146 147 148 149 150 152
+  app/infrastructure/queries/school/student_search_query.rb: '118'
+  app/infrastructure/queries/school/student_work_query.rb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/infrastructure/queries/school/teacher_schools_query.rb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/infrastructure/queries/school/team_dashboard_query.rb: 74 80 105 138
+  app/infrastructure/queries/shared/text_search.rb: 12 13 27 35 36 45 47 48 54 56 59 62 65 68 69 70 71 72 73 74 77 80 85 92 96 97 103 105 107 110 112 113 115 117 118 123 125 126 138
+  app/infrastructure/repositories/assessment/badge_repository.rb: 2 4 5 6 7 8 10 11 12 34 37 38 50 117
+  app/infrastructure/repositories/assessment/essential_read_repository.rb: 8 13 25 26 28 33 34 35 71
+  app/infrastructure/repositories/assessment/exercise_repository.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 27 34 37 38 50 55 69 71 117
+  app/infrastructure/repositories/assessment/exercise_session_repository.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 53 55 56 62 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/infrastructure/repositories/assessment/knowledge_gap_repository.rb: 2 3 4 5 6 7 8 9 10 11 12 27 34 37 38 50 55 69 117
+  app/infrastructure/repositories/assessment/learning_data_eraser.rb: 127 139
+  app/infrastructure/repositories/assessment/pending_assignment_repository.rb: 1 8 10 13 25 26 27 28 29 30 33 34 35 37 38 53 55 71 105
+  app/infrastructure/repositories/billing/card_repository.rb: '55'
+  app/infrastructure/repositories/catalog/content_tree_writer.rb: 12 23 25 103
+  app/infrastructure/repositories/catalog/course_repository.rb: 12 13 23 25 71 81 103 134 146
+  app/infrastructure/repositories/catalog/essential_repository.rb: 8 12 13 23 25 26 28 33 34 35 71 103
+  app/infrastructure/repositories/catalog/import_file_store.rb: 12 23 25 69 103 109 140 143
+  app/infrastructure/repositories/catalog/import_queue.rb: 12 23 69 103 108 109 131 132 140 143
+  app/infrastructure/repositories/catalog/import_report_repository.rb: 12 23 25 69 103 108 109 131 132 140 143
+  app/infrastructure/repositories/catalog/import_schema_validator.rb: 12 23 25 103 109 140 143
+  app/infrastructure/repositories/catalog/taxonomy_repository.rb: 9 12 13 23 25 29 43 44 51 56 62 63 69 72 73 74 78 79 80 81 82 85 87 92 94 95 98 99 101 102 103 105 106 107 108 109 112 116 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/repositories/classroom/assignment_repository.rb: 2 3 8 9 11 12 27 29 37 38 39 41 42 46 50 55 57 69 111 117 122 126
+  app/infrastructure/repositories/classroom/classroom_plan_repository.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/repositories/classroom/classroom_repository.rb: 12 29 39 41 42 43 44 46 51 54 56 57 60 61 62 63 69 98 103 106 107 108 109 112 116 130 131 132 147
+  app/infrastructure/repositories/classroom/membership_repository.rb: 2 3 8 9 11 12 27 37 38 43 44 47 50 51 54 55 56 69 70 72 98 117 127 139
+  app/infrastructure/repositories/classroom/session_days_repository.rb: 12 29 39 41 42 46
+  app/infrastructure/repositories/classroom/teaching_repository.rb: 12 47 54 60 61 62 63 69 70 72 111 122 126
+  app/infrastructure/repositories/communication/article_image_store.rb: '129'
+  app/infrastructure/repositories/communication/article_repository.rb: '129'
+  app/infrastructure/repositories/communication/attachment_store.rb: 61 62 63 67
+  app/infrastructure/repositories/communication/dismissal_repository.rb: 62 67
+  app/infrastructure/repositories/communication/illustration_repository.rb: '63'
+  app/infrastructure/repositories/communication/message_repository.rb: 61 62 63 67
+  app/infrastructure/repositories/crm/account_repository.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/infrastructure/repositories/crm/contact_repository.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 152
+  app/infrastructure/repositories/crm/follow_up_repository.rb: 136 137
+  app/infrastructure/repositories/crm/generation_repository.rb: 135 136
+  app/infrastructure/repositories/crm/interaction_repository.rb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/infrastructure/repositories/identity/audit_log_repository.rb: 12 13 23 25 44 47 54 61 62 63 69 70 72 76 78 79 80 85 87 89 90 91 92 93 94 99 101 102 103 106 107 108 109 110 111 112 114 116 121 122 126 127 128 129 130 131 139 140 141 143 144 145 146 148 149 150 151 152
+  app/infrastructure/repositories/identity/deletion_request_repository.rb: 80 127 128 139
+  app/infrastructure/repositories/identity/invitation_repository.rb: 12 75 76 78 80 102 127 139 152
+  app/infrastructure/repositories/identity/invite_link_repository.rb: 74 76 87 100 101 110
+  app/infrastructure/repositories/identity/login_attempt_repository.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/repositories/identity/pin_recovery_repository.rb: 12 47 54 69 70 72 128
+  app/infrastructure/repositories/identity/profile_photo_store.rb: 90 127 139
+  app/infrastructure/repositories/identity/referral_repository.rb: 72 85 87 101
+  app/infrastructure/repositories/identity/registration_repository.rb: 12 51 76 85 87 93 98 99 101 102 152
+  app/infrastructure/repositories/identity/second_factor_repository.rb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/repositories/identity/session_repository.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/repositories/identity/teacher_material_repository.rb: 12 85 87 99 101 110 114 126
+  app/infrastructure/repositories/identity/teacher_profile_repository.rb: 12 60
+  app/infrastructure/repositories/identity/user_repository.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/infrastructure/repositories/school/drena_repository.rb: 12 85 99 101 103 107 109 114 140 141 146 150
+  app/infrastructure/repositories/school/join_request_repository.rb: 85 110 114
+  app/infrastructure/repositories/school/school_repository.rb: 3 12 13 29 36 39 40 41 42 43 44 45 46 47 48 49 51 54 56 57 58 59 60 61 62 63 69 70 72 73 74 75 76 78 84 85 86 87 88 91 92 93 95 97 98 99 101 103 105 106 107 108 109 110 111 112 114 116 121 122 126 130 131 132 135 136 137 147 148 149 150 152
+  app/infrastructure/repositories/school/staff_repository.rb: 76 93 121 149 152
+  app/infrastructure/repositories/school/teacher_departure_repository.rb: 85 110 114 122
+  app/infrastructure/repositories/shared/rich_text_sanitizer.rb: 12 13 23 25 103 129 134
+  app/infrastructure/repositories/shared/transaction.rb: 12 23 25 103 108 109 131 137 140 143
+  app/jobs/application_job.rb: 12 23 103 108 109 131 140 143
+  app/jobs/catalog/import_course_tree_job.rb: 12 23 25 103
+  app/jobs/classroom/generate_missing_classrooms_job.rb: 108 131
+  app/jobs/crm/briefing_job.rb: '135'
+  app/jobs/crm/generation_job.rb: 135 136
+  app/jobs/crm/whatsapp_draft_job.rb: '136'
+  app/jobs/school/import_schools_job.rb: 12 103 109
+  app/jobs/shared/import_job.rb: 12 23 103 109 140 143
+  app/views/assessment/comprehension/_badge_boxes.html.erb: 40 47 49
+  app/views/assessment/comprehension/_section.html.erb: 40 47 49 54
+  app/views/assessment/comprehension/_student_row.html.erb: 40 47 49 54
+  app/views/assessment/exercise_sessions/kinds/_choice.html.erb: 0 2 3 8 9 11 12 27 50 55 69 71 117
+  app/views/assessment/exercise_sessions/kinds/_matching.html.erb: 1 5 25 26
+  app/views/assessment/exercise_sessions/kinds/_notebook.html.erb: '4'
+  app/views/assessment/exercise_sessions/kinds/_numeric.html.erb: '6'
+  app/views/assessment/exercise_sessions/kinds/_ordering.html.erb: 7 25
+  app/views/assessment/exercise_sessions/kinds/_select.html.erb: 4 25
+  app/views/assessment/exercise_sessions/kinds/_written.html.erb: 4 25
+  app/views/assessment/exercise_sessions/show.html.erb: 0 2 3 4 5 6 7 8 9 11 12 27 50 55 69 71 117
+  app/views/assessment/exercises/_card.html.erb: 1 12 37 45 47 48 53 54 55 59 71 105
+  app/views/assessment/exercises/sheet_kinds/_choice.html.erb: 0 1 2 3 8 11 71 117
+  app/views/assessment/exercises/sheet_kinds/_matching.html.erb: '1'
+  app/views/assessment/exercises/show.html.erb: 0 1 2 3 8 11 71 117
+  app/views/assessment/session_results/_badge.html.erb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 71 117
+  app/views/assessment/session_results/_gap_outcome.html.erb: 2 8 10 11 38 117
+  app/views/assessment/session_results/_progress.html.erb: 11 38
+  app/views/assessment/session_results/_question_review.html.erb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 71 117
+  app/views/assessment/session_results/kinds/_choice_review.html.erb: 0 1 2 4 8 9 10 11 12 34 37 38 50 71 117
+  app/views/assessment/session_results/kinds/_matching_review.html.erb: '5'
+  app/views/assessment/session_results/kinds/_notebook_review.html.erb: '4'
+  app/views/assessment/session_results/kinds/_numeric_review.html.erb: '6'
+  app/views/assessment/session_results/kinds/_ordering_review.html.erb: '7'
+  app/views/assessment/session_results/kinds/_select_review.html.erb: '4'
+  app/views/assessment/session_results/kinds/_written_review.html.erb: '4'
+  app/views/assessment/session_results/show.html.erb: 0 1 2 4 5 6 7 8 9 10 11 12 34 37 38 50 71 117
+  app/views/assessment/sheet_checks/_error.html.erb: '10'
+  app/views/assessment/sheet_checks/create.turbo_stream.erb: '10'
+  app/views/assessment/statement_blocks/_blocks.html.erb: '26'
+  app/views/billing/subscriptions/_home_notice.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/views/catalog/courses/_course_card.html.erb: 12 13 27 35 36 71 74 103 105
+  app/views/catalog/courses/_course_group_title.html.erb: 13 27 35 71 105
+  app/views/catalog/courses/_essential_row.html.erb: 12 13 35 36 105
+  app/views/catalog/courses/_lesson_cards.html.erb: 13 27 35 71 105
+  app/views/catalog/courses/_lessons_page_frame.html.erb: '35'
+  app/views/catalog/courses/_next_exercise.html.erb: 8 12 13 25 26 27 28 29 33 34 35 36 71 103 105 146
+  app/views/catalog/courses/_page.html.erb: 12 13 27 35 36 71 74 103 105
+  app/views/catalog/courses/_page_frame.html.erb: 13 35
+  app/views/catalog/courses/_prepare_sheets.html.erb: 8 12 13 25 26 27 28 29 33 34 35 36 46 71 103 146
+  app/views/catalog/courses/_revision_sheet.html.erb: 8 12 13 25 26 27 28 29 33 34 35 36 46 71 103 146
+  app/views/catalog/courses/_role_actions.html.erb: 8 12 13 25 26 27 28 29 33 34 35 36 71 103 146
+  app/views/catalog/courses/_teacher_course.html.erb: 12 13 36 105
+  app/views/catalog/courses/_teacher_header.html.erb: 12 13 36 74 85 105 110 126
+  app/views/catalog/courses/index.html.erb: 12 13 27 35 36 65 71 74 85 96 97 103 105 110 123 126
+  app/views/catalog/courses/sheets/_batch_bar.html.erb: 12 29 39 41 42 46 57
+  app/views/catalog/courses/sheets/_card.html.erb: 1 8 12 13 25 26 27 29 34 37 38 46 53 55 71 103 105
+  app/views/catalog/courses/sheets/_choice.html.erb: 1 8 10 25 26 29 30 34 37 38
+  app/views/catalog/courses/sheets/_exercise.html.erb: 1 8 10 25 26 29 30 34 37 38
+  app/views/catalog/courses/sheets/_paper.html.erb: 1 10 12 25 29 34 37 39 41 42 46 57
+  app/views/catalog/courses/sheets/_question.html.erb: 1 8 10 25 26 29 30 34 37 38
+  app/views/catalog/courses/sheets/_sheet.html.erb: 1 8 10 12 25 26 29 30 34 37 38 39 41 42 46 57
+  app/views/catalog/courses/sheets/_success.html.erb: 41 46
+  app/views/catalog/courses/sheets/_teacher_bar.html.erb: 12 29 39 41 42 46 57
+  app/views/catalog/courses/show.html.erb: 8 12 13 25 26 27 28 29 33 34 35 36 71 103 146
+  app/views/catalog/figures/_figure.html.erb: 14 15 16 17 18 19 20 21 22 25
+  app/views/catalog/level_pages/index.html.erb: '31'
+  app/views/catalog/level_pages/show.html.erb: '31'
+  app/views/catalog/material_pages/_page.html.erb: 31 32
+  app/views/catalog/material_pages/_page_frame.html.erb: '32'
+  app/views/catalog/material_pages/show.html.erb: 31 32
+  app/views/catalog/practice_checks/_question.html.erb: 25 28
+  app/views/catalog/practice_checks/_result.html.erb: 25 28
+  app/views/catalog/prepare_sheets/_sheet.html.erb: 8 10 12 25 26 29 30 34 39 41 42 46 57
+  app/views/catalog/prepare_sheets/fill.html.erb: 8 10 25 26 29 30 34
+  app/views/catalog/prepare_sheets/show.html.erb: 10 12 25 29 34 39 42 57
+  app/views/catalog/public/_call_to_action.html.erb: 31 32
+  app/views/catalog/public/_course_card.html.erb: 31 32
+  app/views/catalog/public/_footer.html.erb: 31 32
+  app/views/catalog/public/_head.html.erb: 31 32
+  app/views/catalog/public/_header.html.erb: 31 32
+  app/views/catalog/public/_material_group.html.erb: '31'
+  app/views/catalog/revision_sheets/_practice.html.erb: 25 28
+  app/views/catalog/revision_sheets/_sheet.html.erb: 12 13 25 26 28 33 103
+  app/views/classroom/assignment_batches/create.turbo_stream.erb: '39'
+  app/views/classroom/assignment_follow_ups/show.html.erb: 40 47 49 54
+  app/views/classroom/assignments/_toggle.html.erb: 12 29 39 41 42 46 57
+  app/views/classroom/assignments/archive.turbo_stream.erb: 29 41 46
+  app/views/classroom/assignments/create.turbo_stream.erb: 12 29 41 42 46
+  app/views/classroom/assignments/new.html.erb: 12 41 42 57
+  app/views/classroom/classroom_codes/show.html.erb: '98'
+  app/views/classroom/classroom_courses/show.html.erb: '46'
+  app/views/classroom/classroom_prepare_sheets/show.html.erb: 41 46
+  app/views/classroom/classroom_students/_assignments.html.erb: 12 45 47 48 49 54 56 69 70 72
+  app/views/classroom/classroom_students/_identity.html.erb: 12 45 47 48 49 54 56 69 70 72
+  app/views/classroom/classroom_students/_manage.html.erb: 12 45 47 48 49 54 56 69 70 72
+  app/views/classroom/classroom_students/_self_practice.html.erb: 12 45 47 48 49 54 56 69 70 72
+  app/views/classroom/classroom_students/_summary.html.erb: 12 45 47 48 49 54 56 69 70 72
+  app/views/classroom/classroom_students/show.html.erb: 12 45 47 48 49 54 56 69 70 72
+  app/views/classroom/classrooms/_assigned_exercises.html.erb: 12 45 47 48 54 56 59 69 70 72 73 74 92 107
+  app/views/classroom/classrooms/_gaps.html.erb: '117'
+  app/views/classroom/classrooms/_header.html.erb: 12 45 47 48 54 56 59 69 70 72 73 74 92 107
+  app/views/classroom/classrooms/_link.html.erb: 12 45 47 48 54 56 59 69 70 72 73 74 77 92 107 112 115 117 118
+  app/views/classroom/classrooms/_roster.html.erb: 12 45 47 48 54 56 59 69 70 72 73 74 92 107
+  app/views/classroom/classrooms/_roster_title.html.erb: 12 45 47 48 54 56 59 69 70 72 73 74 77 92 107 112 115 117 118
+  app/views/classroom/classrooms/_session_days.html.erb: 12 45 47 48 54 56 59 69 70 72 73 74 92
+  app/views/classroom/classrooms/show.html.erb: 12 45 47 48 54 56 59 69 70 72 73 74 92 107
+  app/views/classroom/joins/_classroom_preview.html.erb: 51 56
+  app/views/classroom/joins/new.html.erb: 51 56
+  app/views/classroom/session_days/edit.html.erb: 42 46
+  app/views/classroom/student_archives/_month.html.erb: '52'
+  app/views/classroom/student_archives/_result_row.html.erb: '52'
+  app/views/classroom/student_archives/show.html.erb: '52'
+  app/views/classroom/student_assigned_sheets/_sheet.html.erb: 1 37 38
+  app/views/classroom/student_assigned_sheets/fill.html.erb: 1 37 38
+  app/views/classroom/student_assigned_sheets/show.html.erb: 1 37
+  app/views/classroom/student_classroom_changes/confirm.html.erb: '44'
+  app/views/classroom/student_classroom_changes/new.html.erb: '44'
+  app/views/classroom/student_classroom_choices/new.html.erb: 43 56
+  app/views/classroom/student_classrooms/_assigned_sheets.html.erb: 1 37 38 53 55 71 105
+  app/views/classroom/student_classrooms/_classroom_card.html.erb: 1 37 38 53 55 71 105
+  app/views/classroom/student_classrooms/_course_card.html.erb: 1 37 38 53 55 71 105
+  app/views/classroom/student_classrooms/_courses.html.erb: 1 37 38 53 55 71 105
+  app/views/classroom/student_classrooms/_no_teacher.html.erb: 55 71
+  app/views/classroom/student_classrooms/_treated_exercise.html.erb: 1 37 53 55 71 105
+  app/views/classroom/student_classrooms/show.html.erb: 1 37 38 53 55 71 105
+  app/views/classroom/student_homes/_band.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/views/classroom/student_homes/_history.html.erb: 0 1 2 3 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 53 55 56 62 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/views/classroom/student_homes/_invite_teacher.html.erb: 55 71
+  app/views/classroom/student_homes/_next_step.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/views/classroom/student_homes/_subjects.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/views/classroom/student_homes/next_step/_all_done.html.erb: '71'
+  app/views/classroom/student_homes/next_step/_daily.html.erb: 0 2 3 4 5 6 7 8 9 10 11 13 25 26 27 28 29 30 33 34 35 43 44 49 50 51 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104
+  app/views/classroom/student_homes/next_step/_due.html.erb: 1 12 37 38 53 69 71 105 117
+  app/views/classroom/student_homes/next_step/_exercise.html.erb: 1 12 37 38 53 55 69 71 105 117
+  app/views/classroom/student_homes/next_step/_late.html.erb: '55'
+  app/views/classroom/student_homes/next_step/_no_classroom.html.erb: 43 51 52 56 95
+  app/views/classroom/student_homes/next_step/_progress.html.erb: 1 12 37 38 53 55 69 71 105 117
+  app/views/classroom/student_homes/next_step/_review.html.erb: 8 35
+  app/views/classroom/student_homes/next_step/_start.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 25 26 27 29 30 34 37 38 50 53 55 69 71 105 117
+  app/views/classroom/student_homes/next_step/_unassigned.html.erb: 0 2 3 4 5 6 7 8 9 10 11 13 25 26 27 28 29 30 33 34 35 43 44 49 50 51 56 62 63 65 66 67 69 70 86 89 90 92 95 96 97 98 104
+  app/views/classroom/student_homes/show.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/views/classroom/student_menus/show.html.erb: '105'
+  app/views/classroom/student_registrations/_class_picker.html.erb: 31 43 44 51 56 69 74 76 83 98
+  app/views/classroom/student_registrations/_form.html.erb: 12 31 51 69 74 75 76 83 88 98
+  app/views/classroom/student_registrations/_step_alerts.html.erb: 12 31 51 69 74 75 76 83 88 98
+  app/views/classroom/student_registrations/new.html.erb: 12 31 51 69 74 75 76 83 88 98
+  app/views/classroom/teacher_homes/_add_classroom_card.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/views/classroom/teacher_homes/_choose_materials.html.erb: '114'
+  app/views/classroom/teacher_homes/_classroom_card.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/views/classroom/teacher_homes/_course_levels.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 126
+  app/views/classroom/teacher_homes/_follow_ups.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/views/classroom/teacher_homes/_history.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/views/classroom/teacher_homes/_pending_colleagues.html.erb: '85'
+  app/views/classroom/teacher_homes/show.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/views/classroom/teacher_menus/show.html.erb: 110 126
+  app/views/classroom/teaching_selections/_level_group.html.erb: 12 57 59 60 72 74 105
+  app/views/classroom/teaching_selections/index.html.erb: 12 57 59 60 72 74 105 110
+  app/views/classroom/teachings/_counter.html.erb: 12 57 59 60 72 74 105
+  app/views/classroom/teachings/_toggle.html.erb: 12 57 59 60 72 74 105
+  app/views/classroom/teachings/create.turbo_stream.erb: 12 60
+  app/views/classroom/teachings/destroy.turbo_stream.erb: '60'
+  app/views/communication/articles/_article_card.html.erb: '129'
+  app/views/communication/articles/_body_image.html.erb: '129'
+  app/views/communication/articles/_head.html.erb: '129'
+  app/views/communication/articles/_masthead.html.erb: '129'
+  app/views/communication/articles/gone.html.erb: '129'
+  app/views/communication/articles/index.html.erb: '129'
+  app/views/communication/articles/show.html.erb: '129'
+  app/views/communication/authored_messages/_form.html.erb: 61 62 63
+  app/views/communication/authored_messages/_row.html.erb: 61 62 63
+  app/views/communication/authored_messages/index.html.erb: 61 62 63 105
+  app/views/communication/authored_messages/new.html.erb: 61 62 63
+  app/views/communication/help/_questions.html.erb: 64 65 66 95 126
+  app/views/communication/help/show.html.erb: 64 65 66 95 126
+  app/views/communication/inboxes/show.html.erb: 62 67 105 114
+  app/views/communication/message_dismissals/create.turbo_stream.erb: 62 67
+  app/views/communication/message_dismissals/destroy.turbo_stream.erb: '67'
+  app/views/communication/message_withdrawals/create.turbo_stream.erb: '62'
+  app/views/communication/messages/_card.html.erb: 55 58 62 63 67
+  app/views/communication/messages/_carousel.html.erb: 55 58 62 63 67
+  app/views/communication/messages/illustrations/_calendar.html.erb: 61 62 63 68 74 125
+  app/views/communication/messages/illustrations/_celebration.html.erb: 61 62 63 68 74 125
+  app/views/communication/messages/illustrations/_exam.html.erb: 61 62 63 68 74 125
+  app/views/communication/messages/illustrations/_holidays.html.erb: 61 62 63 68 74 125
+  app/views/communication/messages/illustrations/_homework.html.erb: 61 62 63 68 74 125
+  app/views/communication/messages/illustrations/_info.html.erb: 55 58 61 62 63 67 68 74 125
+  app/views/communication/messages/illustrations/_meeting.html.erb: 61 62 63 68 74 125
+  app/views/communication/messages/illustrations/_sheets.html.erb: 61 62 63 68 74 125
+  app/views/communication/moderations/_moderated_message.html.erb: '62'
+  app/views/communication/moderations/index.html.erb: '62'
+  app/views/communication/shared/_tabs.html.erb: 61 62 63 67 105 114
+  app/views/components/_back_link.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 48 49 50 52 54 55 56 57 59 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 80 81 82 84 85 87 88 89 90 91 92 95 99 103 105 106 107 108 110 111 112 113 115 117 118 125 126 127 128 129 130 131 132 135 136 137 139 140 141 142 143 144 145 146 147 148 149 150 151 152
+  app/views/components/_button.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_card.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_checkbox_group.html.erb: 61 62 63 68 74 99 125
+  app/views/components/_copy_button.html.erb: 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 68 69 70 72 73 74 77 78 79 80 85 87 92 94 97 102 103 105 106 107 110 112 115 116 117 118 119 120 121 125 130 135 136 137 147 148 149 150 152
+  app/views/components/_dropdown.html.erb: 9 12 13 23 29 45 47 48 54 56 59 61 62 63 64 68 69 70 72 73 74 76 77 78 79 80 81 82 85 92 93 94 95 102 103 105 106 107 108 109 112 113 114 115 116 117 118 119 120 121 122 123 125 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_empty_state.html.erb: 8 12 13 23 27 28 29 33 34 35 36 37 38 46 47 48 49 51 54 56 62 64 65 68 69 70 71 72 73 74 76 78 80 81 82 85 92 93 95 96 97 102 103 105 106 107 109 110 112 113 114 115 116 119 120 121 123 125 126 127 128 129 130 133 134 135 136 137 139 140 141 143 144 145 146 147 148 149 150 152
+  app/views/components/_error_state.html.erb: 12 13 27 31 35 36 43 44 45 47 48 51 54 56 59 62 65 68 69 70 71 72 73 74 76 77 78 83 85 92 96 97 98 103 105 108 110 113 115 117 118 123 125 126 131 132 135 146 150
+  app/views/components/_field.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_info_tip.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_loading_state.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 53 55 56 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 85 86 89 90 92 93 94 95 96 97 98 102 103 104 105 106 107 108 109 112 113 114 115 116 117 118 119 120 121 122 123 125 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_modal.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_page_header.html.erb: 1 9 12 13 23 29 37 38 43 44 52 53 55 56 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 87 89 90 91 92 93 94 95 99 102 103 105 106 107 108 109 110 112 113 114 115 116 117 118 119 120 121 122 123 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/components/_pagination.html.erb: 68 74 125
+  app/views/components/_radio_group.html.erb: 12 68 72 73 74 78 82 85 103 106 107 125 129 130 135 136 137 144 147 148 149 150 152
+  app/views/components/_spinner.html.erb: 68 74 125 129
+  app/views/components/_subject_bubble.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 69 70 72 73 74 77 84 85 86 87 88 91 92 95 97 99 101 105 110 111 112 115 116 117 118 120 122 126
+  app/views/components/_tabs.html.erb: 68 74 125 136 139
+  app/views/components/_toast.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/design/frame.html.erb: 68 74 125
+  app/views/design/index.html.erb: 68 74 125
+  app/views/design/modal.html.erb: '68'
+  app/views/design/shell.html.erb: '68'
+  app/views/errors/forbidden.html.erb: 49 69
+  app/views/errors/not_found.html.erb: 73 74 112 115 126
+  app/views/homepage/_role_modal.html.erb: 9 56 62 63 68 69 74 76 79 83 87 89 91 92 93 95 96 97 105 117 124
+  app/views/homepage/index.html.erb: 9 56 62 63 68 69 74 76 79 83 87 89 91 92 93 95 96 97 105 117 124
+  app/views/identity/invitations/show.html.erb: 12 75 76 102 152
+  app/views/identity/pending_accounts/show.html.erb: 70 114
+  app/views/identity/pin_recovery_codes/_code.html.erb: 12 47 54 69 70 72 128
+  app/views/identity/pin_recovery_codes/create.turbo_stream.erb: 12 47 54 69 70 72 128
+  app/views/identity/pin_resets/new.html.erb: 69 74 76 88 95
+  app/views/identity/profile_contacts/edit.html.erb: 70 89 92
+  app/views/identity/profile_materials/edit.html.erb: '99'
+  app/views/identity/profile_materials/show.html.erb: '126'
+  app/views/identity/profile_materials/update.turbo_stream.erb: '99'
+  app/views/identity/profile_names/edit.html.erb: 70 90 92
+  app/views/identity/profile_names/update.turbo_stream.erb: '92'
+  app/views/identity/profile_photos/edit.html.erb: 70 90 92
+  app/views/identity/profile_pins/edit.html.erb: 70 88 91
+  app/views/identity/profiles/_information.html.erb: 70 74 84 91 92 99 105 126 152
+  app/views/identity/profiles/_student.html.erb: 44 70 89 90 92 105
+  app/views/identity/profiles/_student_identity.html.erb: 44 70 89 90 92 105
+  app/views/identity/profiles/_student_information.html.erb: 44 70 89 90 92 105
+  app/views/identity/profiles/_student_row.html.erb: 44 70 89 90 92 105
+  app/views/identity/profiles/show.html.erb: 44 70 74 84 89 90 91 92 99 105 126 152
+  app/views/identity/referrals/_invite.html.erb: 72 74 87
+  app/views/identity/referrals/_sponsor.html.erb: 72 74 87
+  app/views/identity/referrals/show.html.erb: 72 74 87
+  app/views/identity/school_staff_registrations/_form.html.erb: 75 93
+  app/views/identity/school_staff_registrations/new.html.erb: 75 93
+  app/views/identity/second_factor_enrollments/backup_codes.html.erb: 12 79 94 102
+  app/views/identity/second_factor_enrollments/new.html.erb: 12 69 79 94 102
+  app/views/identity/second_factors/new.html.erb: 9 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/identity/sessions/new.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/identity/teacher_registrations/_form.html.erb: 12 74 75 76 85 87 99 100 101
+  app/views/identity/teacher_registrations/_school_fields.html.erb: 12 74 75 76 85 99 100 101
+  app/views/identity/teacher_registrations/_school_preview.html.erb: 87 100 101
+  app/views/identity/teacher_registrations/new.html.erb: 12 74 75 76 85 87 99 100 101
+  app/views/layouts/application.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/layouts/shell.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/layouts/turbo_rails/frame.html.erb: 9 12 13 23 29 35 36 41 42 43 44 46 48 49 51 56 57 62 63 68 69 70 71 72 73 74 77 78 79 80 81 82 85 88 89 90 91 92 94 95 98 99 101 102 103 105 106 107 108 109 113 114 122 123 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/pwa/manifest.json.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/pwa/service-worker.js: 2 5 8 10 11 12 13 20 25 29 36 38 39 49 50 51 52 65 66 68 69 71 72 73 74 80 81 86 89 91 92 102 105 115 116 117 129 136 138 139 146 150 152
+  app/views/school/drena_schools/index.html.erb: 12 31 43 44 51 56 69 70 74 75 76 83 85 98 99 100 101 111 114 126
+  app/views/school/join_request_vouches/create.turbo_stream.erb: '85'
+  app/views/school/level_classrooms/index.html.erb: 31 43 44 51 56 69 74 76 83 98
+  app/views/school/school_levels/index.html.erb: 31 43 44 51 56 69 74 76 83 98
+  app/views/school/teacher_school_joins/new.html.erb: '110'
+  app/views/school/teacher_schools/_join_fields.html.erb: 70 111 114 126
+  app/views/school/teacher_schools/index.html.erb: 111 126
+  app/views/school_admin/activities/_activity.html.erb: 74 77 93 105 112 115 116 117 120 122
+  app/views/school_admin/classroom_archivals/archive.turbo_stream.erb: '112'
+  app/views/school_admin/classroom_archivals/restore.turbo_stream.erb: '112'
+  app/views/school_admin/classrooms/_levels.html.erb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/views/school_admin/classrooms/_school_card.html.erb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/views/school_admin/classrooms/index.html.erb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/views/school_admin/classrooms/show.html.erb: 74 77 112 115 117 118
+  app/views/school_admin/departed_students/index.html.erb: '113'
+  app/views/school_admin/departed_teachers/index.html.erb: '114'
+  app/views/school_admin/level_archivals/create.turbo_stream.erb: '112'
+  app/views/school_admin/level_classrooms/update.turbo_stream.erb: '116'
+  app/views/school_admin/levels/_classroom_card.html.erb: 77 112 115 117
+  app/views/school_admin/levels/show.html.erb: 77 112 115 117
+  app/views/school_admin/schools/_link.html.erb: 116 118 119 120 121
+  app/views/school_admin/schools/show.html.erb: 116 118 119 120 121
+  app/views/school_admin/shared/_rank_note.html.erb: 74 77 112 114 115 116 117 118 119 120 121 122
+  app/views/school_admin/shared/_signal_legend.html.erb: 105 115 117
+  app/views/school_admin/staff_members/destroy.turbo_stream.erb: '121'
+  app/views/school_admin/student_searches/_form.html.erb: 64 74 76 77 92 93 95 105 112 113 114 115 116 117 118 119 120 121 122 152
+  app/views/school_admin/student_searches/show.html.erb: '118'
+  app/views/school_admin/teacher_reinstatements/create.turbo_stream.erb: '114'
+  app/views/school_admin/teachers/destroy.turbo_stream.erb: '122'
+  app/views/school_admin/teachers/index.html.erb: 74 122
+  app/views/school_admin/teachers/removal.html.erb: '122'
+  app/views/shared/_archives_toggle.html.erb: 77 112 115 117 130
+  app/views/shared/_auth_help.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/_auth_welcome.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 94 95 96 97 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/_classroom_archive_menu.html.erb: 12 72 74 77 103 106 107 112 115 117 130 147 150
+  app/views/shared/_classroom_settings_form.html.erb: '106'
+  app/views/shared/_help_sheet.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/_level_archive_menu.html.erb: 12 72 74 77 103 106 107 112 115 117 130 147 150
+  app/views/shared/_level_classrooms.html.erb: 12 72 73 74 78 85 103 106 107 116 118 119 120 121 130 135 136 137 147 148 149 150 152
+  app/views/shared/_school_staff.html.erb: 12 72 73 74 78 85 103 106 107 116 118 119 120 121 130 135 136 137 147 148 149 150 152
+  app/views/shared/_school_staff_places.html.erb: 12 72 73 74 78 85 103 106 107 116 118 119 120 121 130 135 136 137 147 148 149 150 152
+  app/views/shared/_school_staff_row.html.erb: 116 118 119 120 121 149
+  app/views/shared/_staff_position_fieldset.html.erb: 75 78 93 152
+  app/views/shared/_theme_switch.html.erb: 9 12 13 23 29 62 63 64 68 69 70 72 73 74 76 77 78 79 80 81 82 84 85 91 92 93 94 95 99 102 103 105 106 107 108 109 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/_toasts.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/home/_skeleton.html.erb: '68'
+  app/views/shared/navigation/_account_panel.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 68 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/views/shared/navigation/_avatar_menu.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 37 38 43 44 49 50 51 52 53 55 56 62 63 65 66 67 68 69 70 71 86 89 90 92 95 96 97 98 104 105 117
+  app/views/shared/navigation/_bottom_bar.html.erb: 9 12 13 23 29 62 63 64 68 69 72 73 74 76 77 78 79 80 81 82 85 92 93 94 95 102 103 105 106 107 108 109 112 113 114 115 116 117 118 119 120 121 122 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/navigation/_header.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/navigation/_home_band.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 65 66 67 69 70 71 72 73 74 84 85 86 87 88 89 90 91 92 95 96 97 98 99 101 104 105 110 111 114 117 126
+  app/views/shared/navigation/_install_banner.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 65 66 67 69 70 71 72 73 74 84 85 86 87 88 89 90 91 92 95 96 97 98 99 101 104 105 110 111 114 117 126
+  app/views/shared/navigation/_link.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/navigation/_more_menu.html.erb: 9 12 13 23 29 62 63 68 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/shared/navigation/_panel_request_failed.html.erb: 3 12 13 29 36 39 40 41 42 45 46 47 48 49 54 56 57 58 59 60 61 62 63 68 69 70 72 73 74 84 85 86 87 88 91 92 95 97 99 101 105 110 111 114 126
+  app/views/shared/navigation/_sidebar.html.erb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 23 25 26 27 28 29 30 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 76 77 78 79 80 81 82 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/teams/account_deletions/create.turbo_stream.erb: 127 139
+  app/views/teams/account_deletions/new.html.erb: 127 139
+  app/views/teams/account_lookups/_result.html.erb: 80 127 128 139
+  app/views/teams/account_lookups/show.html.erb: 74 80 127 128 139
+  app/views/teams/announcement_illustrations/_illustration.html.erb: '63'
+  app/views/teams/announcement_illustrations/index.html.erb: '63'
+  app/views/teams/articles/_article_row.html.erb: '129'
+  app/views/teams/articles/_edit_modal.html.erb: '129'
+  app/views/teams/articles/_form.html.erb: '129'
+  app/views/teams/articles/_image_alt_row.html.erb: '129'
+  app/views/teams/articles/create.turbo_stream.erb: '129'
+  app/views/teams/articles/index.html.erb: '129'
+  app/views/teams/articles/new.html.erb: '129'
+  app/views/teams/articles/publish_refused.turbo_stream.erb: '129'
+  app/views/teams/articles/transition.turbo_stream.erb: '129'
+  app/views/teams/articles/update.turbo_stream.erb: '129'
+  app/views/teams/classroom_archivals/archive.turbo_stream.erb: '130'
+  app/views/teams/classroom_archivals/restore.turbo_stream.erb: '130'
+  app/views/teams/classroom_plans/_line_row.html.erb: 12 74 82 108 131
+  app/views/teams/classroom_plans/_totals.html.erb: 12 74 82 108 131
+  app/views/teams/classroom_plans/_undefined.html.erb: 12 74 82 108 131
+  app/views/teams/classroom_plans/edit.html.erb: 82 131
+  app/views/teams/classroom_plans/show.html.erb: 12 74 82 108 131
+  app/views/teams/classroom_plans/update.turbo_stream.erb: '131'
+  app/views/teams/classroom_settings/edit.html.erb: '106'
+  app/views/teams/classroom_settings/update.turbo_stream.erb: '106'
+  app/views/teams/code_regenerations/_form.html.erb: '132'
+  app/views/teams/code_regenerations/new.html.erb: '132'
+  app/views/teams/courses/_form.html.erb: 13 81 123 129 134 153
+  app/views/teams/courses/create.turbo_stream.erb: '134'
+  app/views/teams/courses/edit.html.erb: 13 81 134
+  app/views/teams/courses/new.html.erb: 81 123 129 134 153
+  app/views/teams/courses/transition.turbo_stream.erb: '13'
+  app/views/teams/courses/update.turbo_stream.erb: 13 134
+  app/views/teams/crm/accounts/show.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/assistants/_card.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/assistants/show.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/briefings/_briefing.html.erb: '135'
+  app/views/teams/crm/briefings/create.turbo_stream.erb: '135'
+  app/views/teams/crm/contacts/index.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 152
+  app/views/teams/crm/follow_ups/_assignee_form.html.erb: '136'
+  app/views/teams/crm/follow_ups/_follow_up.html.erb: '136'
+  app/views/teams/crm/follow_ups/_form.html.erb: '136'
+  app/views/teams/crm/follow_ups/_signal_row.html.erb: '136'
+  app/views/teams/crm/follow_ups/_signals_panel.html.erb: 136 139
+  app/views/teams/crm/follow_ups/complete.turbo_stream.erb: '136'
+  app/views/teams/crm/follow_ups/create.turbo_stream.erb: '136'
+  app/views/teams/crm/follow_ups/edit.html.erb: '136'
+  app/views/teams/crm/follow_ups/index.html.erb: 136 139
+  app/views/teams/crm/follow_ups/new.html.erb: '136'
+  app/views/teams/crm/follow_ups/reassign.turbo_stream.erb: '136'
+  app/views/teams/crm/follow_ups/school.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/generations/_generation.html.erb: '135'
+  app/views/teams/crm/home_follow_ups/show.html.erb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 94 95 102 103 105 106 107 108 109 123 127 128 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/teams/crm/interactions/_form.html.erb: '137'
+  app/views/teams/crm/interactions/_interaction.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/interactions/create.turbo_stream.erb: '137'
+  app/views/teams/crm/interactions/index.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/interactions/new.html.erb: '137'
+  app/views/teams/crm/owners/_form.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/stages/_form.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/stages/_stage.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/stages/show.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/usages/show.html.erb: 12 72 73 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/crm/whatsapp_drafts/_draft.html.erb: '136'
+  app/views/teams/crm/whatsapp_drafts/create.turbo_stream.erb: '136'
+  app/views/teams/crm/whatsapp_drafts/new.html.erb: '136'
+  app/views/teams/dashboards/_drenas.html.erb: 74 80 105 138
+  app/views/teams/dashboards/_figure.html.erb: 74 80 105 138
+  app/views/teams/dashboards/_filters.html.erb: 74 80 105 138
+  app/views/teams/dashboards/_key_figures.html.erb: 74 80 105 138
+  app/views/teams/dashboards/_levels.html.erb: 74 80 105 138
+  app/views/teams/dashboards/_recent_signups.html.erb: 74 80 105 138
+  app/views/teams/dashboards/_schools.html.erb: 80 138
+  app/views/teams/dashboards/_search.html.erb: 74 80 105 138
+  app/views/teams/dashboards/_search_results.html.erb: 74 80 105 138
+  app/views/teams/dashboards/show.html.erb: 74 80 105 138
+  app/views/teams/deletion_requests/_account_block.html.erb: 80 127 128 139
+  app/views/teams/deletion_requests/_due.html.erb: '139'
+  app/views/teams/deletion_requests/create.turbo_stream.erb: '139'
+  app/views/teams/deletion_requests/destroy.turbo_stream.erb: '139'
+  app/views/teams/deletion_requests/index.html.erb: '139'
+  app/views/teams/deletion_requests/new.html.erb: '139'
+  app/views/teams/deletion_requests/show.html.erb: 80 127 128 139
+  app/views/teams/drenas/_drena_row.html.erb: 12 74 82 140 141 146
+  app/views/teams/drenas/_form.html.erb: 12 82 141
+  app/views/teams/drenas/create.turbo_stream.erb: 12 141
+  app/views/teams/drenas/deletion.html.erb: 141 146
+  app/views/teams/drenas/destroy.turbo_stream.erb: 141 146
+  app/views/teams/drenas/edit.html.erb: '141'
+  app/views/teams/drenas/index.html.erb: 12 74 82 140 141 146
+  app/views/teams/drenas/new.html.erb: 12 82 141
+  app/views/teams/drenas/update.turbo_stream.erb: '141'
+  app/views/teams/growth/show.html.erb: 74 80 142
+  app/views/teams/homes/_deletion_requests.html.erb: '139'
+  app/views/teams/homes/_recent_content.html.erb: 9 12 13 23 69 73 78 79 80 81 82 85 92 95 102 103 105 106 107 108 123 127 129 130 131 132 133 134 135 136 137 138 139 140 141 143 144 145 146 147 148 149 150 151 152 153
+  app/views/teams/homes/_shortcuts.html.erb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/teams/homes/show.html.erb: 9 12 13 23 29 62 63 69 72 73 74 78 79 80 81 82 85 92 94 95 102 103 105 106 107 108 109 123 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  app/views/teams/imports/_counters.html.erb: 12 23 81 103 108 109 131 140 143
+  app/views/teams/imports/_files.html.erb: 12 23 103 109 140 143
+  app/views/teams/imports/_import_errors.html.erb: 23 103 109 143
+  app/views/teams/imports/_import_row.html.erb: 12 23 69 74 81 103 109 133 134 140 143
+  app/views/teams/imports/_question_examples.html.erb: 12 23 69 81 103
+  app/views/teams/imports/_status.html.erb: 12 23 69 81 103 108 109 131 132 140 143
+  app/views/teams/imports/create.turbo_stream.erb: 12 23 69 103 109 140 143
+  app/views/teams/imports/index.html.erb: 12 23 69 74 81 103 109 133 134 143
+  app/views/teams/imports/kinds/_course_tree.html.erb: 12 23 69 81 103
+  app/views/teams/imports/kinds/_drenas.html.erb: 81 140
+  app/views/teams/imports/kinds/_fill_blank_example.html.erb: 12 23 69 81 103
+  app/views/teams/imports/kinds/_matching_example.html.erb: 12 23 69 81 103
+  app/views/teams/imports/kinds/_notebook_example.html.erb: 12 23 69 81 103
+  app/views/teams/imports/kinds/_numeric_example.html.erb: 12 23 69 81 103
+  app/views/teams/imports/kinds/_ordering_example.html.erb: 12 23 69 81 103
+  app/views/teams/imports/kinds/_schools.html.erb: 12 69 103 109 143 150
+  app/views/teams/imports/kinds/_select_example.html.erb: 12 23 69 81 103
+  app/views/teams/imports/kinds/_written_example.html.erb: 12 23 69 81 103
+  app/views/teams/imports/new.html.erb: 12 23 69 81 103 109 140 143 150
+  app/views/teams/imports/show.html.erb: 81 108 131 132 143
+  app/views/teams/invitations/_created.html.erb: 80 102
+  app/views/teams/invitations/create.turbo_stream.erb: 80 102
+  app/views/teams/invitations/new.html.erb: 80 102
+  app/views/teams/level_archivals/create.turbo_stream.erb: '130'
+  app/views/teams/level_classrooms/update.turbo_stream.erb: '107'
+  app/views/teams/level_series/_cell.html.erb: 12 74 82 131 146 151
+  app/views/teams/level_series/create.turbo_stream.erb: 12 131 151
+  app/views/teams/level_series/destroy.turbo_stream.erb: '151'
+  app/views/teams/levels/_form.html.erb: 12 82 144
+  app/views/teams/levels/_level_row.html.erb: 12 74 82 144 146
+  app/views/teams/levels/create.turbo_stream.erb: 12 144
+  app/views/teams/levels/destroy.turbo_stream.erb: '144'
+  app/views/teams/levels/edit.html.erb: 82 144
+  app/views/teams/levels/index.html.erb: 12 74 82 144 146
+  app/views/teams/levels/new.html.erb: 12 82 144
+  app/views/teams/levels/update.turbo_stream.erb: '144'
+  app/views/teams/materials/_form.html.erb: 12 82 145
+  app/views/teams/materials/_material_row.html.erb: 12 74 82 145 146
+  app/views/teams/materials/create.turbo_stream.erb: 12 145
+  app/views/teams/materials/destroy.turbo_stream.erb: '145'
+  app/views/teams/materials/edit.html.erb: '145'
+  app/views/teams/materials/index.html.erb: 12 74 82 145 146
+  app/views/teams/materials/new.html.erb: 12 82 145
+  app/views/teams/materials/update.turbo_stream.erb: '145'
+  app/views/teams/referentials/_summary.html.erb: 12 63 131 133 138
+  app/views/teams/referentials/show.html.erb: 12 63 131 133 138
+  app/views/teams/school_classrooms/_form.html.erb: '147'
+  app/views/teams/school_classrooms/create.turbo_stream.erb: '147'
+  app/views/teams/school_classrooms/new.html.erb: '147'
+  app/views/teams/school_codes/update.turbo_stream.erb: '148'
+  app/views/teams/school_staff_members/destroy.turbo_stream.erb: '149'
+  app/views/teams/school_staff_restorations/create.turbo_stream.erb: '149'
+  app/views/teams/schools/_archived_staff.html.erb: '149'
+  app/views/teams/schools/_classroom_group.html.erb: 12 72 74 103 106 107 130 147 150
+  app/views/teams/schools/_codes_menu.html.erb: 12 74 78 103 105 108 131 132 146 150
+  app/views/teams/schools/_filters.html.erb: 12 74 78 103 105 108 131 132 146 150
+  app/views/teams/schools/_form.html.erb: 73 107 150
+  app/views/teams/schools/_header.html.erb: 12 72 73 74 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/schools/_join_requests.html.erb: '85'
+  app/views/teams/schools/_school_row.html.erb: 12 74 78 103 105 107 108 131 132 146 150
+  app/views/teams/schools/deactivate.turbo_stream.erb: 107 150
+  app/views/teams/schools/deletion.html.erb: '150'
+  app/views/teams/schools/destroy.turbo_stream.erb: '150'
+  app/views/teams/schools/edit.html.erb: 73 107 150
+  app/views/teams/schools/index.html.erb: 12 74 78 103 105 108 131 132 146 150
+  app/views/teams/schools/show.html.erb: 12 72 73 74 78 85 103 106 107 130 135 136 137 147 148 149 150 152
+  app/views/teams/schools/update.turbo_stream.erb: 107 150
+  app/views/teams/second_factor_resets/create.turbo_stream.erb: '128'
+  app/views/teams/series/_form.html.erb: 12 82 151
+  app/views/teams/series/_matrix.html.erb: 12 74 82 131 146 151
+  app/views/teams/series/_series_row.html.erb: 12 74 82 131 146 151
+  app/views/teams/series/create.turbo_stream.erb: 12 151
+  app/views/teams/series/destroy.turbo_stream.erb: '151'
+  app/views/teams/series/edit.html.erb: '151'
+  app/views/teams/series/index.html.erb: 12 74 82 131 146 151
+  app/views/teams/series/new.html.erb: 12 82 151
+  app/views/teams/series/update.turbo_stream.erb: '151'
+  app/views/teams/staff_invitations/_created.html.erb: 78 152
+  app/views/teams/staff_invitations/create.turbo_stream.erb: 78 152
+  app/views/teams/staff_invitations/new.html.erb: 78 152
+  config/initializers/content_security_policy.rb: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+  config/pr_environment.rb: '105'

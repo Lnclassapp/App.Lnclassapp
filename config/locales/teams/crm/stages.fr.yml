@@ -1,0 +1,62 @@
+# Suivi des écoles (chantier crm-ecoles, Lot A) — ADR-XXXX (contexte crm), UDR-XXXX (bloc « Suivi » de la fiche établissement)
+# Étape, responsable et usage : sous-blocs « Étape et responsable » et « Usage » de la fiche.
+fr:
+  activemodel:
+    attributes:
+      stage_form:
+        stage: "Étape"
+        lost_reason: "Motif"
+      owner_form:
+        owner_public_id: "Responsable"
+    errors:
+      models:
+        stage_form:
+          attributes:
+            stage:
+              inclusion: "n'est pas une étape que l'on peut saisir"
+            lost_reason:
+              blank: "est obligatoire pour une école perdue"
+              inclusion: "n'est pas un motif connu"
+        owner_form:
+          attributes:
+            owner_public_id:
+              invalid: "n'est pas un membre à qui l'on peut confier une école"
+  teams:
+    crm:
+      stages:
+        conflict: "Quelqu'un vient de modifier cette école, réessayez."
+        stage:
+          title: "Étape et responsable"
+          computed_label: "Pourquoi cette étape est calculée"
+          computed_tip: "Étape calculée d'après l'usage réel"
+          lost_reason: "Motif : %{reason}"
+          owner: "Responsable"
+          no_owner: "Aucun"
+          owner_unavailable: "Responsable indisponible"
+          change_stage: "Changer l'étape"
+          change_owner: "Changer le responsable"
+          cancel: "Annuler"
+          submit: "Enregistrer"
+        form:
+          stage: "Étape"
+          lost_reason: "Motif"
+          lost_reason_hint: "Obligatoire si Perdue"
+          prompt: "Choisir un motif"
+        update:
+          done: "Étape mise à jour"
+      owners:
+        form:
+          owner: "Responsable"
+          me: "Moi (%{name})"
+          none: "Aucun"
+        update:
+          done: "Responsable mis à jour"
+      usages:
+        show:
+          title: "Usage"
+          accounts: "Comptes rattachés"
+          active_students: "Élèves actifs (14 j)"
+          last_activity: "Dernière activité"
+          never: "Jamais"
+          today: "Aujourd'hui"
+          days_ago: "il y a %{count} j"

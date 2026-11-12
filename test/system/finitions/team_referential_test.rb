@@ -16,7 +16,7 @@ class FinitionsTeamReferentialTest < ApplicationSystemTestCase
   # FU-10, amended by UDR-0068 (« Retour des écrans du référentiel »): the back link « Référentiel » is the first link of the main content, above the title.
   test "the referential screens lead back to the referential page, above their title" do
     { levels_path => "Niveaux", series_index_path => "Séries", materials_path => "Matières", drenas_path => "DRENA",
-      classroom_plan_path => "Barème des classes" }.each do |path, name|
+      classroom_plan_path => "Plan des classes" }.each do |path, name|
       visit path
 
       assert_title title(name)
@@ -76,7 +76,7 @@ class FinitionsTeamReferentialTest < ApplicationSystemTestCase
       [ drenas_path, -> { click_on "Nouvelle DRENA" }, "drena-modal", "drena_name", "Nouvelle DRENA" ],
       [ levels_path, -> { click_menu_action "#level_6eme", "Modifier" }, "level-modal", "level_name", "Modifier le niveau" ],
       [ classroom_plan_path, -> { click_menu_action "#classroom_plan_line_6eme", "Modifier" }, "classroom-plan-line-modal",
-        "classroom_plan_line_public_count", "Barème de « 6ème »" ] ].each do |path, open, modal, field, name|
+        "classroom_plan_line_public_count", "Plan de « 6ème »" ] ].each do |path, open, modal, field, name|
       visit path
       open.call
 
@@ -97,14 +97,14 @@ class FinitionsTeamReferentialTest < ApplicationSystemTestCase
     end
   end
 
-  # FU-22: the « Hors barème » badge loses its title and gets an info tip named after it.
+  # FU-22: the « Hors plan » badge loses its title and gets an info tip named after it.
   test "the badge of a level outside the generation has an info tip, and no title" do
     Orm::ClassroomPlanEntry.where(level: Orm::Level.find_by!(slug: "6eme")).delete_all
     visit levels_path
 
     within "#level_6eme" do
       assert_no_selector "[title]"
-      find("summary", text: "Aide : Hors barème", visible: :all).click
+      find("summary", text: "Aide : Hors plan", visible: :all).click
       assert_text "Ce niveau n'est pas utilisé pour générer les classes des établissements."
     end
   end

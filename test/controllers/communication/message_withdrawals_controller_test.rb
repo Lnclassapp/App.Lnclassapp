@@ -129,6 +129,17 @@ module Communication
       assert_equal "published", colleague.reload.status
     end
 
+    test "B-029 — a draft of a teacher is not withdrawable, even by the team: 404, nothing written" do
+      draft = create_message(author: @kouassi, audience: "classrooms", classrooms: [ @b3 ], status: "draft")
+      sign_in_as @fatou
+
+      withdraw(draft, as: :turbo_stream)
+
+      assert_response :not_found
+      assert_equal "draft", draft.reload.status
+      assert_empty withdrawn_events
+    end
+
     test "already withdrawn, the announcement is no longer withdrawable: 404 and an error toast, nothing more is journaled" do
       sign_in_as @fatou
       withdraw(as: :turbo_stream)
