@@ -39,7 +39,7 @@ Contrats JavaScript gelés au Lot 0 (les lots les utilisent, ne les changent pas
                      `app/controllers/concerns/offline_keepable.rb` · `app/controllers/application_controller.rb` (inclut le concern)
                      `app/helpers/offline_helper.rb` (clé d'appareil HMAC)
                      `app/views/layouts/application.html.erb` (meta `lnclass-offline-key`) · `app/views/layouts/shell.html.erb` (bandeau + div `offline-session offline-sync`)
-                     `app/views/shared/offline/_status_banner.html.erb` · `app/javascript/controllers/offline_status_controller.js`
+                     `app/views/shared/offline/_status_banner.html.erb` · `app/javascript/offline/controllers/status_controller.js`
                      `app/javascript/offline/store.js`
                      `config/routes/assessment.rb` (`offline_pack`, `offline_copy`, `POST /offline_copies` → `assessment/offline_copy_syncs#create`)
                      `config/locales/shared/offline.fr.yml` (toutes les clés `offline.*` de l'UDR)
@@ -54,7 +54,7 @@ Contrats JavaScript gelés au Lot 0 (les lots les utilisent, ne les changent pas
 
 - **Couche**       : delivery + ui
 - **Fichiers**     : `app/views/pwa/service-worker.js` · `app/javascript/pwa.js`
-                     `app/javascript/controllers/offline_session_controller.js` (clé → programme, changement de clé → purge, déconnexion → `runBeforePurge` puis purge)
+                     `app/javascript/offline/controllers/session_controller.js` (clé → programme, changement de clé → purge, déconnexion → `runBeforePurge` puis purge)
                      `public/offline.html` · `public/offline.css`
                      `app/controllers/catalog/courses_controller.rb` · `app/controllers/assessment/exercises_controller.rb` · `app/controllers/classroom/student_homes_controller.rb` (`keep_offline only: :show`)
                      `app/controllers/identity/sessions_controller.rb` (`Clear-Site-Data: "cache"` sur `destroy`)
@@ -73,8 +73,8 @@ Contrats JavaScript gelés au Lot 0 (les lots les utilisent, ne les changent pas
                      `app/views/assessment/offline_copies/new.html.erb` · `app/views/assessment/offline_copies/_result.html.erb`
                      `app/views/assessment/exercises/show.html.erb` (bouton « Commencer » : `offline-start`)
                      `app/javascript/offline/grader.js`
-                     `app/javascript/controllers/offline_start_controller.js` (range le paquet en ligne ; mène à la copie hors ligne)
-                     `app/javascript/controllers/offline_copy_controller.js`
+                     `app/javascript/offline/controllers/start_controller.js` (range le paquet en ligne ; mène à la copie hors ligne)
+                     `app/javascript/offline/controllers/copy_controller.js`
                      `test/fixtures/files/offline/grading_cases.json`
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/controllers/assessment/offline_packs_controller_test.rb` (CA-5) · `test/infrastructure/queries/assessment/offline_pack_query_test.rb` · `test/domain/entities/assessment/offline_grading_parity_test.rb` + `test/javascript/offline/grader.test.js` (CA-6) · `test/controllers/assessment/offline_copies_controller_test.rb` · `test/javascript/offline/offline_copy_controller.test.js` (CA-7)
@@ -88,7 +88,7 @@ Contrats JavaScript gelés au Lot 0 (les lots les utilisent, ne les changent pas
 - **Fichiers**     : `app/domain/use_cases/assessment/sync_offline_copy.rb`
                      `app/infrastructure/repositories/assessment/exercise_session_repository.rb` (implémente `record_offline_copy`, `find_by_client_copy_id`)
                      `app/controllers/assessment/offline_copy_syncs_controller.rb` (JSON, 20 copies, 256 Kio, 30/min)
-                     `app/javascript/offline/sync.js` · `app/javascript/controllers/offline_sync_controller.js` · `app/javascript/controllers/offline_queue_controller.js`
+                     `app/javascript/offline/sync.js` · `app/javascript/offline/controllers/sync_controller.js` · `app/javascript/offline/controllers/queue_controller.js`
                      `app/views/shared/offline/_pending_copies.html.erb` · `app/views/classroom/student_homes/show.html.erb` (rend le partial)
                      `app/infrastructure/queries/assessment/session_result_query.rb` (+ `received_at`) · `app/views/assessment/session_results/show.html.erb` (mention enseignant)
 - **Dépend de**    : Lot 0

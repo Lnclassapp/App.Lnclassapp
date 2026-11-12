@@ -1,10 +1,11 @@
 // hors-connexion, Lot C (UDR §3.6, CA-15) : « N copies à envoyer », « Envoi… », copie refusée avec « J'ai compris », « Copie envoyée · N % » une fois.
 // Lancer : node --test test/javascript/offline/offline_queue_controller.test.js (Stimulus, DOM, IndexedDB et window simulés).
+import "./stimulus_base.js"
 import { test, beforeEach } from "node:test"
 import assert from "node:assert/strict"
 import { createFakeIndexedDB } from "./fake_indexeddb.js"
 import * as store from "../../../app/javascript/offline/store.js"
-import OfflineQueueController from "../../../app/javascript/controllers/offline_queue_controller.js"
+import OfflineQueueController from "../../../app/javascript/offline/controllers/queue_controller.js"
 
 const KEY = "0123456789abcdef"
 let listeners

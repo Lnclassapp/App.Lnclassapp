@@ -60,9 +60,9 @@ module UseCases
 
       # → le contenu du jeton, ou un refus wrong_owner : signature fausse, autre élève, autre exercice.
       def owned_pack(actor, dto)
-        pack = @signer.verify(dto.pack_token)
+        pack = @signer.verify(token: dto.pack_token)
         return pack if pack && pack.fetch(:student_id) == actor.user_id
-        return Shared::Result.failure(:forbidden, errors: { base: [ :expired ] }) if pack.nil? && @signer.expired?(dto.pack_token)
+        return Shared::Result.failure(:forbidden, errors: { base: [ :expired ] }) if pack.nil? && @signer.expired?(token: dto.pack_token)
 
         Shared::Result.failure(:forbidden, errors: { base: [ :wrong_owner ] })
       end

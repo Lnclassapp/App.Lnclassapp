@@ -1,8 +1,9 @@
 // hors-connexion, Lot 0 (UDR §3.1) : le bandeau est visible hors ligne ou sur une page servie du cache, avec la date gardée.
 // Lancer : node --test test/javascript/offline/offline_status_controller.test.js (valeurs Stimulus, DOM et window simulés).
+import "./stimulus_base.js"
 import { test, beforeEach } from "node:test"
 import assert from "node:assert/strict"
-import OfflineStatusController from "../../../app/javascript/controllers/offline_status_controller.js"
+import OfflineStatusController from "../../../app/javascript/offline/controllers/status_controller.js"
 
 let served, listeners
 

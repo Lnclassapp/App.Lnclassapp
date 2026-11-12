@@ -10,12 +10,12 @@ module Ports
       end
 
       # → { student_id:, exercise_id:, digest:, issued_at: (Time) } ou nil (jeton falsifié, expiré, d'un autre but, illisible).
-      def verify(token)
+      def verify(token:)
         raise NotImplementedError, "#{self.class} doit implémenter #verify"
       end
 
       # → true si le jeton est authentique mais passé les 30 jours (verify rend alors nil) ; false s'il est altéré, d'un autre but ou encore valable.
-      def expired?(token)
+      def expired?(token:)
         raise NotImplementedError, "#{self.class} doit implémenter #expired?"
       end
     end

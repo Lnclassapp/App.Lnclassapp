@@ -1,10 +1,11 @@
 // hors-connexion, Lot C (ADR §4.5) : la page envoie la file à l'ouverture, au retour du réseau et avant la déconnexion (registerBeforePurge).
 // Lancer : node --test test/javascript/offline/offline_sync_controller.test.js
+import "./stimulus_base.js"
 import { test, beforeEach } from "node:test"
 import assert from "node:assert/strict"
 import { createFakeIndexedDB } from "./fake_indexeddb.js"
 import * as store from "../../../app/javascript/offline/store.js"
-import OfflineSyncController from "../../../app/javascript/controllers/offline_sync_controller.js"
+import OfflineSyncController from "../../../app/javascript/offline/controllers/sync_controller.js"
 
 const KEY = "0123456789abcdef"
 let listeners, sent
