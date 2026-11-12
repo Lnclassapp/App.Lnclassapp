@@ -11,10 +11,10 @@ module BillingBetaHelper
     previous
   end
 
-  # Ferme la bêta pour tout le test courant ; le réglage d'origine revient au teardown.
+  # Ferme la bêta pour tout le test courant ; le réglage d'origine (retenu au premier appel seulement) revient au teardown.
   def close_beta_for_this_test
     previous = set_beta_open_access(false)
-    @_billing_beta_restore = previous
+    @_billing_beta_restore = previous if @_billing_beta_restore.nil?
   end
 
   def after_teardown
