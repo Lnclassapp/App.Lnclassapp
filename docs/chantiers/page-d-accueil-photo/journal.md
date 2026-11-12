@@ -46,7 +46,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 ## À trancher
 
 - **Pourquoi quatre versions ?** Le code n'en a qu'une : aucune condition (application installée, user-agent, PWA, Stimulus, cache). Les captures 3 et 4 (ligne « application mobile », voile sombre, poignée) sont des maquettes (`interface-epuree/maquettes/homepage-telephone.html` et ses variantes), pas l'application. L'application, elle, montrait une seule élève et une pastille « Même sans internet ». Rien à corriger côté comportement.
-- **Bleu du macaron** : `brand-strong` (#0070b3), le bleu des boutons et de « chap chap », et non `brand` (#00a0ff) écrit à l'UDR-0059 §3 : le texte blanc sur `brand` tombe à 2,8:1. Option prudente appliquée ; revenir à `brand` est une ligne.
+- **Bleu du macaron** : tranché par le porteur (2026-11-12) : le bleu clair `brand` (#00a0ff), comme à l'UDR-0059 §3, avec « 6ème » en `ink`. Le reste du texte, blanc et gras, n'est qu'à 2,8:1 sur ce bleu, sous le minimum de 3:1 pour un texte large : c'est le choix du porteur, il est écrit ici.
 - **Éclairage** : appliqué dans l'image (luminosité + 20 %, contraste + 5 %), pas en filtre CSS : plus léger et identique partout.
 - **Macaron sur ordinateur** : posé aussi sur la photo, en haut à droite ; la pastille de la colonne de texte disparaît (une seule version).
 - **Taille de la retouche** : 4 fichiers hors tests (vue, locale, feuille de style pour deux utilitaires `home-photo` / `home-badge` qu'exige le garde des valeurs arbitraires, photo), un de plus que la limite d'une retouche ; aucune règle ni droit touché.
