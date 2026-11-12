@@ -581,6 +581,41 @@ module Queries
 
         assert_equal [ numeric, select ].map { |orm| questions.find { it.id == orm.id } }.map { Entities::Assessment::Grading.share(it, attempts[it.id]) }, shares
       end
+
+      # hors-connexion Lot B2 (UDR-0170 §3.8) : la marque « corrigé reçu avant la copie », calculée à la lecture.
+      def deliver_pack(student: @student, at:)
+        Orm::OfflinePackDelivery.create!(student:, exercise: @exercise, first_delivered_at: at, last_delivered_at: at)
+      end
+
+      def assigned_session(started_at:)
+        classroom = create_classroom
+        assignment = create_assignment(classroom:, assignable: @exercise)
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 50,
+                                classroom_assignment: assignment, started_at:)
+      end
+
+      test "pack_delivered_at : copie d'un devoir commencée après la première remise du corrigé" do
+        delivered = Time.zone.local(2026, 11, 10, 9)
+        deliver_pack(at: delivered)
+
+        assert_equal delivered, result(session: assigned_session(started_at: delivered + 1.hour)).pack_delivered_at
+      end
+
+      test "pack_delivered_at est nil : copie commencée avant la remise, sans remise, ou non rattachée à un devoir" do
+        delivered = Time.zone.local(2026, 11, 10, 9)
+        assert_nil result(session: assigned_session(started_at: delivered + 1.hour)).pack_delivered_at
+
+        deliver_pack(at: delivered)
+        assert_nil result(session: assigned_session(started_at: delivered - 1.hour)).pack_delivered_at
+        assert_nil result.pack_delivered_at
+      end
+
+      test "pack_delivered_at est nil quand la remise concerne un autre élève" do
+        delivered = Time.zone.local(2026, 11, 10, 9)
+        deliver_pack(student: create_student, at: delivered)
+
+        assert_nil result(session: assigned_session(started_at: delivered + 1.hour)).pack_delivered_at
+      end
     end
   end
 end

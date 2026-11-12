@@ -23,8 +23,9 @@ module Queries
       QuestionRate = Data.define(:number, :content, :rate, :correct, :answered)
       # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9) ; best : son meilleur score (sur 100) ;
       # grade : ce score ramené sur 20 (Grading.grade_on_20, ADR-0106) ; badge : sa médaille enregistrée, :none sans médaille ;
-      # done_on : la date locale de sa première session faite (« Fait le 22 oct. »).
-      StudentRow = Data.define(:public_id, :display_name, :best, :grade, :badge, :done_on)
+      # done_on : la date locale de sa première session faite (« Fait le 22 oct. ») ; pack_delivered_at : la première remise du corrigé hors ligne
+      # quand une copie de ce devoir l'a suivie, nil sinon (UDR-0170 §3.8).
+      StudentRow = Data.define(:public_id, :display_name, :best, :grade, :badge, :done_on, :pack_delivered_at)
 
       # « Sans évolution » regroupe stable et stagne ; les élèves sans signe n'entrent pas dans la synthèse (ADR-0079 §4.3).
       TREND_GROUPS = { progress: :progress, stable: :flat, stagnant: :flat, decline: :decline }.freeze
@@ -86,11 +87,12 @@ module Queries
       def students(members, medals, classroom_id, id)
         by_student = members.index_by(&:student_id)
         done_on = Queries::Classroom::AssignmentFollowUpQuery.first_done(classroom_id, [ id ]).to_h { [ it.student_id, it.done_on ] }
+        delivered = OfflinePackMark.by_student(id)
         Orm::User.where(id: by_student.keys).order(:last_name, :first_name, :id).pluck(:id, :public_id, :first_name, :last_name)
                  .map do |student_id, public_id, first_name, last_name|
                    best = by_student.fetch(student_id).scores.max
                    StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", best:, grade: Grading.grade_on_20(best),
-                                  badge: medals.fetch(student_id, :none), done_on: done_on.fetch(student_id))
+                                  badge: medals.fetch(student_id, :none), done_on: done_on.fetch(student_id), pack_delivered_at: delivered[student_id])
                  end
       end
     end

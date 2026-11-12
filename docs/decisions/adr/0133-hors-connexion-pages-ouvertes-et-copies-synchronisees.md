@@ -75,6 +75,8 @@ Trois faits du code pèsent : une visite Turbo est un `fetch`, pas une navigatio
 - **Correcteur JavaScript** `app/javascript/offline/grader.js` : rejoue `Question#correct?` et `Grading.points_percent` pour les types notés (`true_false`, `single_choice`, `multiple_correct_2/3`, `fill_blank`, `numeric`, `ordering`, `matching`, `select`) ; `written` et `notebook` jamais notés. **Table de cas partagée** `test/fixtures/files/offline/grading_cases.json`, jouée par `test/domain/entities/assessment/offline_grading_parity_test.rb` (Ruby) et `test/javascript/offline/grader.test.js` (Node) : un écart casse la CI.
 - La note locale est affichée **« provisoire »** jusqu'à la réponse du serveur.
 
+- **Devoir à rendre (amendement du 2026-11-12, décision du porteur)** : le paquet est servi aussi pour un exercice assigné en devoir. Chaque remise est enregistrée dans la table `offline_pack_deliveries` (`student_id`, `exercise_id`, `first_delivered_at`, `last_delivered_at` ; index unique élève + exercice ; la première remise n'est jamais avancée) via le port `Ports::Assessment::OfflinePackDeliveryRepositoryPort`. Une copie rattachée à une assignation dont `started_at` est postérieur à `first_delivered_at` porte la marque « corrigé reçu » : calculée à la lecture (requêtes de résultat et de suivi d'assignation), sans colonne sur la session. Une copie hors ligne d'un devoir est rattachée au devoir comme en ligne.
+
 ### 4.5 File et synchronisation
 
 - Base IndexedDB `lnclass-offline-<clé>`, magasins `packs` (clé `exercise_public_id`) et `copies` (clé `client_copy_id`). Une copie en file : `{ client_copy_id (UUID v4), exercise_public_id, pack_token, started_at, submitted_at, answers, provisional_percent, status: pending|synced|rejected, reason }`.

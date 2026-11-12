@@ -77,7 +77,7 @@ module Assessment
         sessions: Repositories::Assessment::ExerciseSessionRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
         badges: Repositories::Assessment::BadgeRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
         assignments: Repositories::Classroom::AssignmentRepository.new,
-        pending: Repositories::Assessment::PendingAssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new,
+        policy: Policies::Assessment::StartSessionPolicy.new,
         transaction: Repositories::Shared::Transaction.new, clock: Time.zone, access: Queries::Billing::StudentAccessQuery.new,
         current_digest: current_digest
       )

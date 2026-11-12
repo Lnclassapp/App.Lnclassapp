@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_12_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -783,6 +783,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_120000) do
     t.check_constraint "theme::text = ANY (ARRAY['ciel'::character varying, 'lagune'::character varying, 'menthe'::character varying, 'citron'::character varying, 'mangue'::character varying, 'corail'::character varying, 'hibiscus'::character varying, 'lavande'::character varying, 'indigo'::character varying, 'nuit'::character varying]::text[])", name: "messages_theme_values"
   end
 
+  create_table "offline_pack_deliveries", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "exercise_id", null: false
+    t.datetime "first_delivered_at", null: false
+    t.datetime "last_delivered_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "index_offline_pack_deliveries_on_exercise_id"
+    t.index ["student_id", "exercise_id"], name: "index_offline_pack_deliveries_on_student_and_exercise", unique: true
+  end
+
   create_table "pin_recovery_codes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "issued_by_id", null: false
@@ -1337,6 +1348,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_120000) do
   add_foreign_key "messages", "schools", on_delete: :restrict
   add_foreign_key "messages", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "messages", "users", column: "withdrawn_by_id", on_delete: :restrict
+  add_foreign_key "offline_pack_deliveries", "exercises", on_delete: :cascade
+  add_foreign_key "offline_pack_deliveries", "users", column: "student_id", on_delete: :cascade
   add_foreign_key "pin_recovery_codes", "users", column: "issued_by_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", on_delete: :cascade
   add_foreign_key "question_attempts", "exercise_sessions", on_delete: :restrict

@@ -80,7 +80,7 @@ module UseCases
           signer: Repositories::Assessment::OfflinePackSigner.new, exercises: Repositories::Assessment::ExerciseRepository.new,
           sessions: Repositories::Assessment::ExerciseSessionRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
           badges: Repositories::Assessment::BadgeRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
-          assignments: Repositories::Classroom::AssignmentRepository.new, pending: Repositories::Assessment::PendingAssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new,
+          assignments: Repositories::Classroom::AssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new,
           transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW), access: OpenAccess.new,
           current_digest: ->(model) { Queries::Assessment::OfflinePackQuery.new.call(public_id: model.public_id).digest }
         )

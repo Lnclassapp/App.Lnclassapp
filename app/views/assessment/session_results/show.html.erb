@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
 <%# Rôle : badge, appréciation (« Très bien » à « À retravailler »), note (verte dès 14/20), points, « À revoir », maîtrise, progrès, effet sur la fiche, « Refaire l'exercice » (caché au sans-faute, Grading.perfect?) ou l'heure de reprise, correction complète %>
-<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0157-sujets-cahier-noir-blanc (§3 : enveloppe noir et blanc), 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, 0153 refaire-ou-continuer §3, 0133 écrans élève sans répétition §3.5 et §3.6 bis, hors-connexion-bandeau-copie-provisoire-et-file §3.7 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0157-sujets-cahier-noir-blanc (§3 : enveloppe noir et blanc), 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, 0153 refaire-ou-continuer §3, 0133 écrans élève sans répétition §3.5 et §3.6 bis, hors-connexion-bandeau-copie-provisoire-et-file §3.7 et §3.8 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% content_for :head do %><%= stylesheet_link_tag "exam_sheet" %><% end %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
@@ -58,6 +58,13 @@
             <p id="session_offline_received" class="flex items-center justify-center gap-2 text-sm text-mute">
               <%= ui_icon "cloud-arrow-up", size: :sm %>
               <span><%= t("offline.teacher.received", completed: l(result.completed_at, format: :short), received: l(result.received_at, format: :short)) %></span>
+            </p>
+          <% end %>
+          <%# UDR hors-connexion §3.8 : copie d'un devoir commencée après la remise du corrigé sur le téléphone, pour l'enseignant seulement. %>
+          <% if result.pack_delivered_at && !@owner %>
+            <p id="session_offline_pack_marker" class="flex items-center justify-center gap-2 text-sm text-warning">
+              <%= ui_icon "exclamation-triangle", size: :sm %>
+              <span><%= t("offline.teacher.pack_before", delivered: l(result.pack_delivered_at, format: :short)) %></span>
             </p>
           <% end %>
         </div>
