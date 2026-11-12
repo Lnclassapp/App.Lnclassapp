@@ -54,6 +54,9 @@ jobs:
       tested: ${{ steps.proof.outputs.tested }}
       code: ${{ steps.changes.outputs.code }}
       lessons: ${{ steps.changes.outputs.lessons }}
+      lecons_files: ${{ steps.changes.outputs.lecons_files }}
+      lecons_parts: ${{ steps.changes.outputs.lecons_parts }}
+      lecons_n: ${{ steps.changes.outputs.lecons_n }}
       tree: ${{ steps.tree.outputs.sha }}
 
     steps:
@@ -102,16 +105,45 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
         run: |
+          # Les écrans : ce qui peut changer le rendu d'une leçon (vues, JavaScript, styles, aides, le catalogue qui la lit, les
+          # dépendances front, le test de rendu). Un fichier de cette liste dans la PR = rendu de toutes les leçons.
+          screens='^(app/(views|javascript|assets|helpers)/|app/controllers/catalog/|app/infrastructure/(queries|repositories)/catalog/|app/domain/(entities|use_cases|dtos)/catalog/|package\.json$|yarn\.lock$|test/system/catalog/lesson_rendering_test\.rb$)'
           code=true
           lessons=true
+          changed=
+          files=
           if files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)') && [ -n "$files" ]; then
             echo "$files"
             echo "$files" | grep -qvE '^docs/|\.md$' || code=false
             # standard-de-test, Lot D : des leçons v3 qui bougent se rendent même si elles sont des documents (docs/contenus).
             echo "$files" | grep -qE '^docs/contenus/lecons-traitees/.*\.json$' || lessons=false
+            # chantier ci-lecons-rendu : seules les leçons de la PR présentes dans l'arbre (un fichier supprimé ou renommé ne se rend pas).
+            while IFS= read -r file; do
+              [ -f "$file" ] && changed="$changed$file"$'\n'
+            done < <(echo "$files" | grep -E '^docs/contenus/lecons-traitees/[^/]+/[^/]+/[^/]+\.json$' | sort -u)
+          else
+            echo "::warning::Diff de la PR illisible : la tâche lecons rend les leçons témoins seulement (script/ci/lecons_temoins.txt)."
           fi
+          lecons_files=$(printf '%s' "$changed" | paste -sd, -)
+          if [ -z "$lecons_files" ]; then
+            # Aucune leçon changée (ou diff illisible) : les témoins, un chemin par ligne, sans commentaire ni ligne vide.
+            lecons_files=$(grep -vE '^[[:space:]]*(#|$)' script/ci/lecons_temoins.txt | paste -sd, -)
+            [ -n "$lecons_files" ] || { echo "::error::script/ci/lecons_temoins.txt ne liste aucune leçon témoin"; exit 1; }
+          fi
+          # chantier ci-lecons-rendu, lot B : un train qui touche aux écrans rend les leçons toutes ; le premier fichier trouvé est cité.
+          if [ -n "$files" ] && screen=$(echo "$files" | grep -m1 -E "$screens"); then
+            echo "Rendu complet des leçons : la PR touche aux écrans (premier fichier : $screen)."
+            lecons_files=tout
+            count=$(ls docs/contenus/lecons-traitees/*/*/*.json | wc -l)
+          else
+            count=$(echo "$lecons_files" | tr ',' '\n' | wc -l)
+          fi
+          parts=$(( (count + 9) / 10 ))
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
           echo "lessons=$lessons" | tee -a "$GITHUB_OUTPUT"
+          echo "lecons_files=$lecons_files" | tee -a "$GITHUB_OUTPUT"
+          echo "lecons_n=$parts" | tee -a "$GITHUB_OUTPUT"
+          echo "lecons_parts=$(seq -s, 1 "$parts" | sed 's/.*/[&]/')" | tee -a "$GITHUB_OUTPUT"
 
       # The tree the jobs below test, read here: the proof is the tree, not the commit (ADR-0069 §4.3).
       - id: tree
@@ -248,15 +280,16 @@ jobs:
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
-  # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : chaque leçon v3 est importée dans la base de test, publiée et lue
-  # par un élève à 390 px puis sur ordinateur, avec chacune de ses feuilles (test/system/catalog/lesson_rendering_test.rb). Une leçon rend en 8 s environ
-  # avec ses feuilles (mesure du 2026-11-06 : 60 leçons en 8 min 20), soit 5 fichiers et moins d'une minute par part
-  # (journal du chantier) : le découpage tient chaque part sous les cinq minutes avec son installation. Mesure du 2026-11-08 :
-  # 182 leçons à 19 s environ, 12 parts dépassaient les cinq minutes ; 24 parts en gardaient 8 environ. Mesure du 2026-11-12 :
-  # 223 leçons à 20 s environ, la part 17/24 (9 leçons) dépasse les cinq minutes avec 1 min 40 d'installation ; 32 parts
-  # en gardent 7 au plus, 2 min 30 de rendu. Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
+  # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : une leçon v3 est importée dans la base de test, publiée et lue
+  # par un élève à 390 px puis sur ordinateur, avec chacune de ses feuilles (test/system/catalog/lesson_rendering_test.rb).
+  # Règle (chantier ci-lecons-rendu) : le train ne rend que les leçons v3 nouvelles ou modifiées de la PR, 10 au plus par part
+  # (≈ 20 s par leçon + ≈ 50 s d'installation, sous les 5 minutes), soit ⌈N/10⌉ parts calculées par « plan ». Sans leçon changée
+  # (ou diff illisible, avec un avertissement), les 2 leçons témoins de script/ci/lecons_temoins.txt, en 1 part. Exception (lot B) :
+  # quand la PR touche aux écrans (expression « screens » de l'étape changes), « plan » passe LECONS=tout et rend toutes les
+  # leçons, ⌈nombre/10⌉ parts. Avant : les 223 leçons en 32 parts, 98,7 min de machine par train (#541). À la main : LECONS=tout.
+  # Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
   lecons:
-    name: lecons ${{ matrix.part }}/32
+    name: lecons ${{ matrix.part }}/${{ needs.plan.outputs.lecons_n }}
     needs: plan
     if: needs.plan.outputs.code == 'true' || needs.plan.outputs.lessons == 'true'
     runs-on: ubuntu-latest
@@ -264,7 +297,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 ]
+        part: ${{ fromJSON(needs.plan.outputs.lecons_parts) }}
     permissions:
       contents: read
 
@@ -281,8 +314,8 @@ jobs:
 
       - name: Render the lessons of this part
         env:
-          LECONS: tout
-          LECONS_PART: ${{ matrix.part }}/32
+          LECONS: ${{ needs.plan.outputs.lecons_files }}
+          LECONS_PART: ${{ matrix.part }}/${{ needs.plan.outputs.lecons_n }}
           COVERAGE: "0"
         run: |
           bin/setup --skip-server
