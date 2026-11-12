@@ -49,9 +49,11 @@ Même protocole (`gh api …/check-runs`, somme et maximum des check runs `lecon
 |---|---|---|---|---|---|
 | #541 (`cf0483e70`), avant | 223 leçons, 7 par part | 32 | 98,7 | 213 s | 188 s |
 | #545 (`bd1d61bd`) | écrans touchés : rendu complet, 10 par part | 23 | 91,4 | **283 s** | 239 s |
+| #549 (`665bb01b`) | écrans touchés : rendu complet, 8 par part | 28 | 100,1 | **269 s** | 211 s |
 
 - Le rendu complet coûte presque autant qu'avant : le gain vient des trains sans écran touché (1 part de 2 témoins, ou ⌈N/8⌉ parts).
 - 10 par part est trop près du plafond de 300 s : passage à 8 (décision du porteur).
+- 8 par part : médiane en baisse, mais la part la plus longue reste à 269 s (installation variable d'une machine à l'autre). Repasser à 6 si une part dépasse 280 s.
 - À relever : le premier train sans écran touché (attendu : 1 part, ≤ 3 min).
 
 ## Hors périmètre
