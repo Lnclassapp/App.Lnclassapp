@@ -177,7 +177,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0166](./0166-medailles-ecrans-enseignant.md) | Médailles dans les écrans de l'enseignant | Accepté | 2026-11-09 | [0106](../adr/0106-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md) | L'enseignant lit encore moyenne sur 20, dernier score en %, notes par copie et classement des élèves à côté des médailles. |
 | [0167](./0167-medailles-remplacent-notes-et-moyennes.md) | Médailles à la place des notes, pourcentages et moyennes | Accepté | 2026-11-08 | [0106](../adr/0106-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md), [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) | L'interface dit « badge », « note sur 20 », « moyenne » et « % » pour la même chose ; le porteur veut que la médaille (Bronze, Argent, Or, Diamant) soit la seule mesure lue par l'utilisateur. |
 | [0168](./0168-pipeline-et-relances.md) | Pipeline et relances | Accepté | 2026-11-04 | [0128](../adr/0128-contexte-crm-suivi-des-ecoles.md) | Comment l'équipe voit son pipeline et ses relances du jour sans nouvelle entrée dans la barre de navigation |
-| [0169](./0169-acces-beta-sans-abonnement.md) | Bêta sans invitation à s'abonner | Accepté | 2026-11-12 | XXXX (acces-beta-reglage-unique) | un bêta-testeur ne doit voir ni compte à rebours ni appel à l'abonnement |
+| [0169](./0169-acces-beta-sans-abonnement.md) | Bêta sans invitation à s'abonner | Accepté | 2026-11-12 | [0132](../adr/0132-acces-beta-reglage-unique.md) | un bêta-testeur ne doit voir ni compte à rebours ni appel à l'abonnement |
 <!-- index:end -->
 
 ---

@@ -3,7 +3,7 @@
 <!-- index
 titre: Bêta sans invitation à s'abonner
 statut: Accepté
-adr-lie: XXXX (acces-beta-reglage-unique)
+adr-lie: [0132](../adr/0132-acces-beta-reglage-unique.md)
 problematique: un bêta-testeur ne doit voir ni compte à rebours ni appel à l'abonnement
 -->
 
