@@ -1,0 +1,3401 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Équations et inéquations",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "A2",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "solution-premier-degre",
+          "kind": "number_line",
+          "description": "Droite graduée de -2 à 8 qui montre la solution de l'exemple de la fiche, l'inéquation 5x + 3 ≤ 2x + 18. Le point 5 est marqué. L'intervalle des solutions part de la gauche de la droite et s'arrête en 5, nombre 5 compris. Tout nombre à gauche de 5 vérifie l'inéquation, tout nombre à droite ne la vérifie pas.",
+          "params": {
+            "min": -2,
+            "max": 8,
+            "step": 1,
+            "points": [
+              {
+                "value": 5,
+                "label": "5"
+              }
+            ],
+            "intervals": [
+              {
+                "to": 5,
+                "to_open": false
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "signe-trinome-exemple",
+          "kind": "number_line",
+          "description": "Droite graduée de 0 à 5 qui montre la solution de l'exemple de la fiche, l'inéquation x² - 5x + 6 < 0. Les racines 2 et 3 sont marquées. L'intervalle des solutions va de 2 à 3, les deux bornes étant exclues. Les nombres à gauche de 2 et à droite de 3 ne sont pas solutions : le trinôme y est positif.",
+          "params": {
+            "min": 0,
+            "max": 5,
+            "step": 1,
+            "points": [
+              {
+                "value": 2,
+                "label": "2"
+              },
+              {
+                "value": 3,
+                "label": "3"
+              }
+            ],
+            "intervals": [
+              {
+                "from": 2,
+                "to": 3,
+                "from_open": true,
+                "to_open": true
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Équations et inéquations du premier degré",
+          "remember": "Une **équation** est une égalité qui contient une inconnue $x$ : la résoudre, c'est trouver les valeurs de $x$ qui la rendent vraie. On garde l'égalité en faisant la même opération des deux côtés. Un terme qui traverse le signe $=$ **change de signe**. Pour $ax + b = c$ avec $a \\neq 0$ : $x = \\dfrac{c - b}{a}$. Une **inéquation** compare avec $<$, $\\le$, $>$ ou $\\ge$ ; on la résout de la même façon, avec une règle en plus : si on multiplie ou si on divise par un nombre **négatif**, on **inverse le sens**. La solution s'écrit en intervalle : $x \\le 4$ s'écrit $]-\\infty\\,;\\,4]$. Le crochet est fermé pour $\\le$ ou $\\ge$, ouvert pour $<$ ou $>$.",
+          "method": [
+            "Regrouper les termes en $x$ d'un côté et les nombres de l'autre, en changeant le signe de chaque terme qui traverse.",
+            "Réduire chaque côté pour obtenir la forme $ax = \\text{nombre}$ (ou $ax \\le \\text{nombre}$, etc.).",
+            "Diviser les deux côtés par $a$ ; si $a$ est négatif dans une inéquation, inverser le sens.",
+            "Conclure : écrire la solution (un nombre ou un intervalle) et la vérifier avec une valeur."
+          ],
+          "example": {
+            "statement": "Résoudre l'inéquation $5x + 3 \\le 2x + 18$.",
+            "steps": [
+              "Regrouper : $5x - 2x \\le 18 - 3$.",
+              "Réduire : $3x \\le 15$.",
+              "Diviser par $3$ (positif, le sens ne change pas) : $x \\le 5$.",
+              "Conclure : $S = ]-\\infty\\,;\\,5]$. Vérification : pour $x = 0$, $3 \\le 18$ est vrai ; pour $x = 6$, $33 \\le 30$ est faux."
+            ]
+          },
+          "pitfall": "Ne pas oublier d'**inverser le sens** quand on divise par un nombre négatif. Contre-exemple : $-2x \\le 6$. Si tu écris $x \\le -3$, tu te trompes : pour $x = 0$, $-2 \\times 0 = 0 \\le 6$ est vrai, mais $0 \\le -3$ est faux. Il faut écrire $x \\ge -3$ : pour $x = 0$, $0 \\ge -3$ est vrai ; pour $x = -5$, $10 \\le 6$ est faux et $-5 \\ge -3$ est faux aussi.",
+          "figure": "solution-premier-degre",
+          "exercise": [
+            {
+              "title": "Résoudre des équations et des inéquations du premier degré",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : regrouper, réduire, diviser, conclure. Les situations se passent au marché.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Tantie Awa partage ses oranges en tas égaux. Elle trouve l'équation $3x + 2 = 14$, où $x$ est le nombre d'oranges d'un tas. Quelle est la solution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Regrouper : on passe le $2$ à droite en changeant son signe, $3x = 14 - 2$. Étape 2 — Réduire : $3x = 12$. Étape 3 — Diviser par $3$ : $x = 4$. Étape 4 — Conclure : $S = \\{4\\}$. Vérification : $3 \\times 4 + 2 = 14$. L'erreur $x = \\frac{16}{3}$ vient d'un $2$ passé à droite sans changer de signe ($14 + 2$). L'erreur $x = 12$ s'arrête avant de diviser par $3$. L'erreur $x = \\frac{14}{3}$ oublie de regrouper le $2$.",
+                  "answers": [
+                    {
+                      "content": "$x = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = \\dfrac{16}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = \\dfrac{14}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous l'équation $7x - 5 = 3x + 11$. Écris la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Regrouper : les termes en $x$ à gauche, les nombres à droite, en changeant les signes : $7x - 3x = 11 + 5$. Étape 2 — Réduire : $4x = 16$. Étape 3 — Diviser par $4$ : $x = 4$. Étape 4 — Conclure : $S = \\{4\\}$. Vérification : à gauche $7 \\times 4 - 5 = 23$, à droite $3 \\times 4 + 11 = 23$. L'erreur classique est d'écrire $7x + 3x$ : un terme qui traverse le signe $=$ change de signe.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $x = 5$ est une solution de l'équation $4x - 3 = 2x + 7$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Regrouper : $4x - 2x = 7 + 3$. Étape 2 — Réduire : $2x = 10$. Étape 3 — Diviser par $2$ : $x = 5$. Étape 4 — Conclure : $5$ est bien la solution, donc l'affirmation est vraie. Vérification : $4 \\times 5 - 3 = 17$ et $2 \\times 5 + 7 = 17$. Dire « Faux » vient d'une erreur de signe en regroupant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant résout l'inéquation $2x + 7 \\le 15$. Quel est son ensemble de solutions ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Regrouper : $2x \\le 15 - 7$. Étape 2 — Réduire : $2x \\le 8$. Étape 3 — Diviser par $2$ (positif, le sens ne change pas) : $x \\le 4$. Étape 4 — Conclure : $S = ]-\\infty\\,;\\,4]$, le crochet est fermé car l'inégalité est large ($\\le$). Le leurre $[4\\,;\\,+\\infty[$ inverse le sens alors que $2$ est positif. Le leurre $]-\\infty\\,;\\,4[$ exclut $4$ alors que $2 \\times 4 + 7 = 15$ convient. Le leurre $]-\\infty\\,;\\,8]$ oublie de diviser par $2$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,4]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[4\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,4[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,8]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On résout $-3x \\ge 12$. Après la division par $-3$, on obtient : $x$ ___ $-4$.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Regrouper : rien à déplacer, l'inéquation est déjà $-3x \\ge 12$. Étape 2 — Réduire : rien à réduire. Étape 3 — Diviser par $-3$ : le nombre est négatif, donc on inverse le sens : $x \\le -4$. Étape 4 — Conclure : $S = ]-\\infty\\,;\\,-4]$. Vérification avec $x = -5$ : $-3 \\times (-5) = 15 \\ge 12$, vrai ; et $-5 \\le -4$, vrai. Garder $\\ge$ est l'erreur du piège : avec $x = 0$, $0 \\ge -4$ est vrai, mais $-3 \\times 0 = 0 \\ge 12$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\le$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ge$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$<$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$>$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi a $5\\,000$ FCFA. Un sac coûte $200$ FCFA et le kilo de mangues $600$ FCFA. Pour $x$ kilos, la dépense est $600x + 200 \\le 5\\,000$. Kofi peut acheter au plus ___ kilos de mangues.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Regrouper : $600x \\le 5\\,000 - 200$. Étape 2 — Réduire : $600x \\le 4\\,800$. Étape 3 — Diviser par $600$ (positif) : $x \\le 8$. Étape 4 — Conclure : Kofi peut acheter au plus $8$ kilos. Vérification : $600 \\times 8 + 200 = 5\\,000$, il dépense exactement son argent. Avec $9$ kilos, il paierait $5\\,600$ FCFA, c'est trop.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Résoudre des équations et des inéquations avec la méthode",
+              "statement": "Dans cet exercice, tu résous des équations et des inéquations du premier degré avec les étapes de la fiche : regrouper, réduire, diviser, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Garde les termes en $x$ d'un côté et les nombres de l'autre : un terme qui traverse le signe change de signe. Divise par un nombre négatif seulement en inversant le sens.",
+              "questions": [
+                {
+                  "content": "Quelle est la solution de l'équation $4x - 5 = x + 7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Regrouper : $4x - x = 7 + 5$ ; le $x$ passe à gauche en devenant $-x$ et le $-5$ passe à droite en devenant $+5$. Étape 2 — Réduire : $3x = 12$. Étape 3 — Diviser par $3$ : $x = 4$. Étape 4 — Conclure : $S = \\{4\\}$. Vérification : $4 \\times 4 - 5 = 11$ et $4 + 7 = 11$. La proposition $\\dfrac{2}{3}$ vient d'un $5$ passé à droite sans changer de signe ($7 - 5$). La proposition $\\dfrac{12}{5}$ vient d'un $x$ passé à gauche sans changer de signe ($4x + x$). La proposition $-4$ vient d'une erreur de signe sur le second membre.",
+                  "answers": [
+                    {
+                      "content": "$x = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = \\dfrac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = \\dfrac{12}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous l'équation $7x - 4 = 3x + 20$. Quelle est la valeur de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Regrouper : $7x - 3x = 20 + 4$. Étape 2 — Réduire : $4x = 24$. Étape 3 — Diviser par $4$ : $x = 6$. Étape 4 — Conclure : $S = \\{6\\}$. Vérification : $7 \\times 6 - 4 = 38$ et $3 \\times 6 + 20 = 38$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $-2x + 6 \\le 10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Regrouper : $-2x \\le 10 - 6$. Étape 2 — Réduire : $-2x \\le 4$. Étape 3 — Diviser par $-2$ : le nombre est négatif, donc on inverse le sens : $x \\ge -2$. Étape 4 — Conclure : $S = [-2\\,;\\,+\\infty[$, crochet fermé car l'inégalité est large. Vérification : pour $x = 0$, $6 \\le 10$ est vrai. L'intervalle $]-\\infty\\,;\\,-2]$ oublie d'inverser le sens. L'intervalle $]-2\\,;\\,+\\infty[$ exclut $-2$ alors que $-2 \\times (-2) + 6 = 10 \\le 10$. L'intervalle $[2\\,;\\,+\\infty[$ vient d'une erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "$[-2\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour l'inéquation $-3x > 12$, on trouve $x > -4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Regrouper : rien à déplacer, $-3x > 12$. Étape 2 — Réduire : c'est déjà de la forme $ax > \\text{nombre}$. Étape 3 — Diviser par $-3$ : le nombre est négatif, donc on inverse le sens : $x < -4$. Étape 4 — Conclure : $S = ]-\\infty\\,;\\,-4[$. Vérification : pour $x = -5$, $-3 \\times (-5) = 15 > 12$ est vrai ; pour $x = 0$, $0 > 12$ est faux. Écrire $x > -4$ oublie d'inverser le sens.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'inéquation $2x - 3 < 7$ a pour solutions les nombres $x < ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Regrouper : $2x < 7 + 3$. Étape 2 — Réduire : $2x < 10$. Étape 3 — Diviser par $2$ (positif, le sens ne change pas) : $x < 5$. Étape 4 — Conclure : $S = ]-\\infty\\,;\\,5[$. Vérification : pour $x = 4$, $5 < 7$ est vrai ; pour $x = 5$, $7 < 7$ est faux.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la résolution de l'inéquation $4x + 1 \\ge x + 10$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Regrouper : on met les termes en $x$ à gauche et les nombres à droite, $4x - x \\ge 10 - 1$. Étape 2 — Réduire : $3x \\ge 9$. Étape 3 — Diviser par $3$ : $x \\ge 3$. Étape 4 — Conclure : $S = [3\\,;\\,+\\infty[$. On ne peut pas conclure avant d'avoir réduit puis divisé : l'ordre des étapes est celui de la méthode.",
+                  "answers": [
+                    {
+                      "content": "Regrouper : $4x - x \\ge 10 - 1$."
+                    },
+                    {
+                      "content": "Réduire : $3x \\ge 9$."
+                    },
+                    {
+                      "content": "Diviser par $3$ (positif, le sens ne change pas) : $x \\ge 3$."
+                    },
+                    {
+                      "content": "Conclure : $S = [3\\,;\\,+\\infty[$."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Awa prépare ses comptes au marché.",
+            "questions": [
+              {
+                "content": "Awa résout $2x + 3 = 11$. Complète : $2x =$ ___ puis $x =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Regrouper : $2x = 11 - 3$. Étape 2 — Réduire : $2x = 8$. Étape 3 — Diviser par $2$ : $x = 4$. Étape 4 — Conclure : $S = \\{4\\}$.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "On passe le 3 de l'autre côté en changeant son signe."
+              },
+              {
+                "content": "Dans l'inéquation $-2x < 10$, après la division par $-2$ on obtient : $x$ ___ $-5$.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Regrouper : rien à déplacer. Étape 2 — Réduire : rien à réduire. Étape 3 — Diviser par $-2$ : le nombre est négatif, donc le sens s'inverse : $x > -5$. Étape 4 — Conclure : $S = ]-5\\,;\\,+\\infty[$.",
+                "answers": [
+                  {
+                    "content": "$>$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$<$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$=$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous l'équation $5x - 4 = 2x + 11$. Écris la valeur de $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Regrouper : $5x - 2x = 11 + 4$. Étape 2 — Réduire : $3x = 15$. Étape 3 — Diviser par $3$ : $x = 5$. Étape 4 — Conclure : $S = \\{5\\}$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Équation du second degré dans ℝ",
+          "remember": "Une équation du second degré s'écrit $ax^2 + bx + c = 0$ avec $a \\neq 0$. Son **discriminant** est $\\Delta = b^2 - 4ac$. Trois cas : si $\\Delta < 0$, **aucune** solution réelle ; si $\\Delta = 0$, **une** solution double $x = -\\dfrac{b}{2a}$ ; si $\\Delta > 0$, **deux** solutions $x_1 = \\dfrac{-b - \\sqrt{\\Delta}}{2a}$ et $x_2 = \\dfrac{-b + \\sqrt{\\Delta}}{2a}$.",
+          "method": [
+            "Mettre l'équation sous la forme $ax^2 + bx + c = 0$ et lire $a$, $b$, $c$ avec leurs signes.",
+            "Calculer le discriminant $\\Delta = b^2 - 4ac$.",
+            "Comparer $\\Delta$ à $0$ pour savoir combien l'équation a de solutions.",
+            "Déterminer les solutions avec la formule du cas obtenu, puis écrire l'ensemble $S$."
+          ],
+          "example": {
+            "statement": "Résoudre l'équation $x^2 - 5x + 6 = 0$.",
+            "steps": [
+              "Mettre sous la forme : elle l'est déjà, avec $a = 1$, $b = -5$, $c = 6$.",
+              "Calculer : $\\Delta = (-5)^2 - 4 \\times 1 \\times 6 = 25 - 24 = 1$.",
+              "Comparer : $\\Delta = 1 > 0$, donc il y a deux solutions.",
+              "Déterminer : $x_1 = \\frac{5 - 1}{2} = 2$ et $x_2 = \\frac{5 + 1}{2} = 3$, donc $S = \\{2\\,;\\,3\\}$. Vérification : $2^2 - 5 \\times 2 + 6 = 0$."
+            ]
+          },
+          "pitfall": "Attention aux **signes** de $b$ et de $c$. Pour $x^2 - 5x + 6 = 0$, on a $b = -5$, donc $-b = +5$ et $b^2 = (-5)^2 = 25$ (et non $-25$). Contre-exemple : si tu prends $-b = -5$, tu trouves $\\frac{-5 - 1}{2} = -3$ et $\\frac{-5 + 1}{2} = -2$ ; or $(-2)^2 - 5 \\times (-2) + 6 = 4 + 10 + 6 = 20 \\neq 0$. Mets toujours $b$ entre parenthèses dans $b^2$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Résoudre une équation du second degré avec le discriminant",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : mettre sous la forme $ax^2 + bx + c = 0$, calculer $\\Delta$, comparer à $0$, déterminer les solutions.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "On étudie l'équation $x^2 + 2x - 3 = 0$. Quel est son discriminant $\\Delta$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre sous la forme $ax^2 + bx + c = 0$ : l'équation l'est déjà, avec $a = 1$, $b = 2$, $c = -3$. Étape 2 — Calculer : $\\Delta = b^2 - 4ac = 2^2 - 4 \\times 1 \\times (-3) = 4 + 12 = 16$. Le leurre $-8$ prend $c = +3$. Le leurre $4$ oublie le terme $-4ac$. Le leurre $10$ utilise $2ac$ au lieu de $4ac$.",
+                  "answers": [
+                    {
+                      "content": "$16$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous l'équation $x^2 - 7x + 10 = 0$. Écris la plus petite des deux solutions.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme : $a = 1$, $b = -7$, $c = 10$. Étape 2 — Calculer : $\\Delta = (-7)^2 - 4 \\times 1 \\times 10 = 49 - 40 = 9$. Étape 3 — Comparer : $\\Delta = 9 > 0$, il y a deux solutions. Étape 4 — Déterminer : $x_1 = \\frac{7 - 3}{2} = 2$ et $x_2 = \\frac{7 + 3}{2} = 5$. La plus petite est $2$. Vérification : $2^2 - 7 \\times 2 + 10 = 0$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque équation au nombre de solutions réelles qu'elle possède.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Mettre sous la forme : $a$, $b$, $c$ sont lisibles dans chaque équation. Étape 2 — Calculer : $\\Delta = 1 - 4 = -3$ pour la première ; $\\Delta = 16 - 16 = 0$ pour la deuxième ; $\\Delta = 1 + 8 = 9$ pour la troisième. Étape 3 — Comparer : $-3 < 0$ donne aucune solution, $0$ donne une solution double, $9 > 0$ donne deux solutions.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + x + 1 = 0$",
+                      "match": "Aucune solution"
+                    },
+                    {
+                      "content": "$x^2 - 4x + 4 = 0$",
+                      "match": "Une solution double"
+                    },
+                    {
+                      "content": "$x^2 - x - 2 = 0$",
+                      "match": "Deux solutions"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $x^2 + 4 = 0$ n'a aucune solution réelle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre sous la forme : $a = 1$, $b = 0$, $c = 4$. Étape 2 — Calculer : $\\Delta = 0^2 - 4 \\times 1 \\times 4 = -16$. Étape 3 — Comparer : $\\Delta < 0$, donc aucune solution réelle. Étape 4 — Déterminer : $S = \\varnothing$. On le voit aussi directement : $x^2 \\ge 0$, donc $x^2 + 4 \\ge 4$ ne vaut jamais $0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $x^2 - 6x + 9 = 0$. L'unique solution est $x =$ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Mettre sous la forme : $a = 1$, $b = -6$, $c = 9$. Étape 2 — Calculer : $\\Delta = 36 - 36 = 0$. Étape 3 — Comparer : $\\Delta = 0$, il y a une solution double. Étape 4 — Déterminer : $x = -\\frac{b}{2a} = \\frac{6}{2} = 3$. Vérification : $3^2 - 6 \\times 3 + 9 = 0$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous l'équation $2x^2 - 5x + 2 = 0$ (ici $a = 2$, $b = -5$, $c = 2$).",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre sous la forme : $a = 2$, $b = -5$, $c = 2$. Étape 2 — Calculer : $\\Delta = (-5)^2 - 4 \\times 2 \\times 2 = 25 - 16 = 9$. Étape 3 — Comparer : $\\Delta > 0$, deux solutions. Étape 4 — Déterminer : $x_1 = \\frac{5 - 3}{4} = \\frac{1}{2}$ et $x_2 = \\frac{5 + 3}{4} = 2$. Le leurre $\\{-2\\,;\\,-\\frac12\\}$ prend $-b = -5$ au lieu de $+5$. Le leurre $\\{1\\,;\\,4\\}$ divise par $2$ au lieu de $2a = 4$. Le leurre $\\varnothing$ est faux car $\\Delta = 9$ est positif.",
+                  "answers": [
+                    {
+                      "content": "$S = \\left\\{\\dfrac{1}{2}\\,;\\,2\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S = \\left\\{-2\\,;\\,-\\dfrac{1}{2}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\{1\\,;\\,4\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\varnothing$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Résoudre des équations du second degré avec le discriminant",
+              "statement": "Dans cet exercice, tu résous des équations du second degré avec les étapes de la fiche : mettre sous la forme $ax^2 + bx + c = 0$, calculer $\\Delta$, le comparer à $0$, déterminer les solutions.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule d'abord $\\Delta = b^2 - 4ac$ en gardant les signes de $a$, $b$ et $c$ (mets $b$ entre parenthèses dans $b^2$). Le signe de $\\Delta$ donne le nombre de solutions.",
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de l'équation $x^2 - 6x + 8 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre sous la forme : elle l'est, avec $a = 1$, $b = -6$, $c = 8$. Étape 2 — Calculer : $\\Delta = (-6)^2 - 4 \\times 1 \\times 8 = 36 - 32 = 4$. Étape 3 — Comparer : $\\Delta = 4 > 0$, donc deux solutions. Étape 4 — Déterminer : $x_1 = \\dfrac{6 - 2}{2} = 2$ et $x_2 = \\dfrac{6 + 2}{2} = 4$, donc $S = \\{2\\,;\\,4\\}$. Vérification : $2^2 - 6 \\times 2 + 8 = 0$. L'ensemble $\\{-4\\,;\\,-2\\}$ vient de $-b = -6$ au lieu de $+6$. Une seule solution suppose $\\Delta = 0$, et aucune solution suppose $\\Delta < 0$ : ce n'est pas le cas ici.",
+                  "answers": [
+                    {
+                      "content": "$S = \\{2\\,;\\,4\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S = \\{-4\\,;\\,-2\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\{2\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\varnothing$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le discriminant $\\Delta$ de l'équation $2x^2 + 3x - 5 = 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme : elle l'est, avec $a = 2$, $b = 3$, $c = -5$. Étape 2 — Calculer : $\\Delta = 3^2 - 4 \\times 2 \\times (-5) = 9 + 40 = 49$. Le signe de $c$ est négatif, donc $-4ac$ devient $+40$ : oublier ce signe donne $9 - 40 = -31$, qui est faux. Étapes 3 et 4 : comme $\\Delta > 0$, l'équation a deux solutions, $x = 1$ et $x = -\\dfrac{5}{2}$.",
+                  "answers": [
+                    {
+                      "content": "49",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $x^2 + x + 3 = 0$ n'a aucune solution réelle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre sous la forme : elle l'est, avec $a = 1$, $b = 1$, $c = 3$. Étape 2 — Calculer : $\\Delta = 1^2 - 4 \\times 1 \\times 3 = 1 - 12 = -11$. Étape 3 — Comparer : $\\Delta = -11 < 0$, donc il n'y a aucune solution réelle. Étape 4 — Déterminer : $S = \\varnothing$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces équations, lesquelles ont exactement deux solutions réelles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Mettre sous la forme et lire $a$, $b$, $c$. Étape 2 — Calculer $\\Delta$ pour chacune : $x^2 - 9 = 0$ donne $\\Delta = 36$ ; $x^2 + 2x - 3 = 0$ donne $\\Delta = 4 + 12 = 16$ ; $x^2 + 4 = 0$ donne $\\Delta = -16$ ; $x^2 - 4x + 4 = 0$ donne $\\Delta = 16 - 16 = 0$ ; $x^2 + x + 1 = 0$ donne $\\Delta = -3$. Étape 3 — Comparer : deux solutions seulement si $\\Delta > 0$. Étape 4 — Déterminer : ce sont $x^2 - 9 = 0$ (solutions $-3$ et $3$) et $x^2 + 2x - 3 = 0$ (solutions $-3$ et $1$). L'équation $x^2 - 4x + 4 = 0$ n'a qu'une solution double, $2$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 9 = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 2x - 3 = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 4 = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 4x + 4 = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + x + 1 = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'équation $x^2 - 10x + 25 = 0$ a une solution double $x = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Mettre sous la forme : $a = 1$, $b = -10$, $c = 25$. Étape 2 — Calculer : $\\Delta = 100 - 100 = 0$. Étape 3 — Comparer : $\\Delta = 0$, donc une solution double. Étape 4 — Déterminer : $x = -\\dfrac{b}{2a} = \\dfrac{10}{2} = 5$. Vérification : $5^2 - 10 \\times 5 + 25 = 0$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque équation au nombre de solutions réelles qu'elle admet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Mettre sous la forme : $a = 1$, $b = -2$ dans les trois cas. Étape 2 — Calculer $\\Delta$ : pour $c = 1$, $\\Delta = 4 - 4 = 0$ ; pour $c = -3$, $\\Delta = 4 + 12 = 16$ ; pour $c = 3$, $\\Delta = 4 - 12 = -8$. Étape 3 — Comparer à $0$ : $\\Delta = 0$ donne une solution double ($x = 1$), $\\Delta > 0$ donne deux solutions ($-1$ et $3$), $\\Delta < 0$ n'en donne aucune. Étape 4 — Déterminer : l'appariement ci-dessus.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 2x + 1 = 0$",
+                      "match": "Une solution (double)"
+                    },
+                    {
+                      "content": "$x^2 - 2x - 3 = 0$",
+                      "match": "Deux solutions"
+                    },
+                    {
+                      "content": "$x^2 - 2x + 3 = 0$",
+                      "match": "Aucune solution"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Mariam révise le discriminant.",
+            "questions": [
+              {
+                "content": "Pour l'équation $x^2 - 3x - 4 = 0$, donne $a$, $b$ et $c$ : $a =$ ___ , $b =$ ___ , $c =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Mettre sous la forme $ax^2 + bx + c = 0$ : l'équation l'est déjà. On lit $a = 1$ (coefficient de $x^2$), $b = -3$ (coefficient de $x$) et $c = -4$ (le nombre seul). Attention : on garde le signe devant chaque coefficient.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-3",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "-4",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ],
+                "hint": "Le signe qui est devant le coefficient fait partie du coefficient."
+              },
+              {
+                "content": "Calcule le discriminant $\\Delta$ de l'équation $x^2 - 4x + 3 = 0$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Mettre sous la forme : $a = 1$, $b = -4$, $c = 3$. Étape 2 — Calculer : $\\Delta = (-4)^2 - 4 \\times 1 \\times 3 = 16 - 12 = 4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Si le discriminant d'une équation vaut $\\Delta = -7$, l'équation a ___ solution réelle.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Comparer : $\\Delta = -7 < 0$. Quand $\\Delta$ est négatif, il n'existe aucun réel dont le carré vaut $\\Delta$ : l'équation n'a aucune solution réelle.",
+                "answers": [
+                  {
+                    "content": "aucune",
+                    "correct": true
+                  },
+                  {
+                    "content": "une",
+                    "correct": false
+                  },
+                  {
+                    "content": "deux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous $x^2 - 4x + 3 = 0$ (on a trouvé $\\Delta = 4$). Donne la plus petite solution puis la plus grande : $x_1 =$ ___ et $x_2 =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Comparer : $\\Delta = 4 > 0$, deux solutions. Étape 4 — Déterminer : $x_1 = \\frac{4 - 2}{2} = 1$ et $x_2 = \\frac{4 + 2}{2} = 3$. Vérification : $1 - 4 + 3 = 0$ et $9 - 12 + 3 = 0$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Utilise $x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$ avec $-b = 4$ et $\\sqrt{\\Delta} = 2$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Signe d'un trinôme et inéquations du second degré",
+          "remember": "Le **trinôme** $ax^2 + bx + c$ (avec $a \\neq 0$) a un signe qui dépend de $\\Delta = b^2 - 4ac$ et de $a$. Si $\\Delta < 0$ : il a **partout le signe de $a$**. Si $\\Delta = 0$ : il a le signe de $a$ partout, sauf en $x = -\\dfrac{b}{2a}$ où il vaut $0$. Si $\\Delta > 0$ : il a deux racines $x_1 < x_2$ ; il a le **signe de $a$ à l'extérieur** des racines, le **signe contraire entre** les racines, et il vaut $0$ en $x_1$ et en $x_2$. Pour une inéquation, on lit les valeurs de $x$ où le signe demandé est obtenu. Les racines sont comprises pour $\\le$ et $\\ge$, exclues pour $<$ et $>$.",
+          "method": [
+            "Mettre l'inéquation face à $0$ (le trinôme $ax^2 + bx + c$ d'un côté, $0$ de l'autre) et lire $a$, $b$, $c$.",
+            "Calculer le discriminant $\\Delta$ puis, si $\\Delta > 0$, les deux racines.",
+            "Appliquer la règle du signe : signe de $a$ à l'extérieur des racines, signe contraire entre elles (partout le signe de $a$ si $\\Delta < 0$).",
+            "Conclure : garder les valeurs de $x$ où le signe demandé est obtenu et écrire $S$ en intervalles."
+          ],
+          "example": {
+            "statement": "Résoudre l'inéquation $x^2 - 5x + 6 < 0$.",
+            "steps": [
+              "Mettre face à $0$ : elle l'est déjà, avec $a = 1$, $b = -5$, $c = 6$.",
+              "Calculer : $\\Delta = 25 - 24 = 1 > 0$, donc les racines sont $x_1 = 2$ et $x_2 = 3$.",
+              "Appliquer la règle : $a = 1 > 0$, donc signe $+$ à l'extérieur de $2$ et $3$, signe $-$ entre $2$ et $3$.",
+              "Conclure : on veut $< 0$, donc entre les racines, bornes exclues : $S = ]2\\,;\\,3[$. Vérification : pour $x = 2{,}5$, $6{,}25 - 12{,}5 + 6 = -0{,}25 < 0$."
+            ]
+          },
+          "pitfall": "Ne pas croire que le signe $+$ est toujours à l'extérieur : c'est le **signe de $a$**. Contre-exemple : $-x^2 + 4x - 3 \\ge 0$ a $a = -1$, $\\Delta = 16 - 12 = 4$ et pour racines $1$ et $3$. Ici l'extérieur est négatif et l'intérieur positif : $S = [1\\,;\\,3]$. Si tu choisis l'extérieur, le test échoue : pour $x = 0$, $-0 + 0 - 3 = -3 < 0$. Pense aussi aux bornes : elles sont exclues pour $<$ et $>$.",
+          "figure": "signe-trinome-exemple",
+          "exercise": [
+            {
+              "title": "Lire le signe d'un trinôme et résoudre une inéquation du second degré",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : mettre l'inéquation face à $0$, calculer $\\Delta$ et les racines, appliquer la règle du signe, conclure en intervalles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Résous l'inéquation $x^2 - 4x + 3 < 0$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre face à $0$ : l'inéquation l'est déjà, $a = 1$, $b = -4$, $c = 3$. Étape 2 — Calculer : $\\Delta = 16 - 12 = 4$, racines $\\frac{4 - 2}{2} = 1$ et $\\frac{4 + 2}{2} = 3$. Étape 3 — Appliquer la règle : $a = 1 > 0$, signe $+$ à l'extérieur de $1$ et $3$, signe $-$ entre les deux. Étape 4 — Conclure : on veut $< 0$, donc entre les racines, bornes exclues : $S = ]1\\,;\\,3[$. Le leurre avec la réunion est la zone positive. Le leurre $[1\\,;\\,3]$ garde les racines alors que l'inégalité est stricte (en $x = 1$, le trinôme vaut $0$, pas moins que $0$). Le leurre $\\{1\\,;\\,3\\}$ ne garde que les racines, où le trinôme vaut $0$ : c'est la solution de l'équation $= 0$, pas de l'inéquation.",
+                  "answers": [
+                    {
+                      "content": "$]1\\,;\\,3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,1[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[1\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{1\\,;\\,3\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous l'inéquation $x^2 - 9 \\ge 0$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre face à $0$ : $x^2 - 9 \\ge 0$, avec $a = 1$, $b = 0$, $c = -9$. Étape 2 — Calculer : $\\Delta = 0 - 4 \\times 1 \\times (-9) = 36$, racines $\\frac{0 - 6}{2} = -3$ et $\\frac{0 + 6}{2} = 3$. Étape 3 — Appliquer la règle : $a > 0$, signe $+$ à l'extérieur de $-3$ et $3$. Étape 4 — Conclure : on veut $\\ge 0$, donc à l'extérieur, racines comprises : $]-\\infty\\,;\\,-3]\\,\\cup\\,[3\\,;\\,+\\infty[$. Le leurre $[-3\\,;\\,3]$ est la zone négative. Le leurre à crochets ouverts oublie que $0 \\ge 0$ est vrai. Le leurre $[3\\,;\\,+\\infty[$ oublie la partie à gauche de $-3$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,-3]\\,\\cup\\,[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-3\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-3[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $x^2 + x + 1$ est strictement positif pour tout nombre réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = 1$, $b = 1$, $c = 1$. Étape 2 — Calculer : $\\Delta = 1 - 4 = -3$, il n'y a pas de racine. Étape 3 — Appliquer la règle : quand $\\Delta < 0$, le trinôme a partout le signe de $a$, ici $+$. Étape 4 — Conclure : $x^2 + x + 1 > 0$ pour tout réel $x$. Par exemple, pour $x = -1$ on trouve $1 - 1 + 1 = 1 > 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $x^2 - 6x + 5 \\le 0$. Combien de nombres entiers $x$ vérifient cette inéquation ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = 1$, $b = -6$, $c = 5$. Étape 2 — Calculer : $\\Delta = 36 - 20 = 16$, racines $\\frac{6 - 4}{2} = 1$ et $\\frac{6 + 4}{2} = 5$. Étape 3 — Appliquer la règle : $a > 0$, signe $-$ entre $1$ et $5$. Étape 4 — Conclure : $\\le 0$ donne $S = [1\\,;\\,5]$, racines comprises. Les entiers sont $1$, $2$, $3$, $4$, $5$ : cela fait $5$. Si on oubliait les bornes, on n'en compterait que $3$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On résout $-x^2 + 5x - 6 \\ge 0$. Parmi ces nombres, lesquels sont solutions ? Choisis-en deux.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = -1$, $b = 5$, $c = -6$. Étape 2 — Calculer : $\\Delta = 25 - 24 = 1$, racines $\\frac{-5 - 1}{-2} = 3$ et $\\frac{-5 + 1}{-2} = 2$. Étape 3 — Appliquer la règle : $a = -1 < 0$, signe $-$ à l'extérieur de $2$ et $3$, signe $+$ entre les deux. Étape 4 — Conclure : $\\ge 0$ donne $S = [2\\,;\\,3]$. Donc $2$ et $3$ conviennent. Test : $x = 0$ donne $-6 < 0$ et $x = 4$ donne $-16 + 20 - 6 = -2 < 0$, donc ils ne conviennent pas.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'inéquation $x^2 + 2x + 5 < 0$ a pour ensemble de solutions : ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = 1$, $b = 2$, $c = 5$. Étape 2 — Calculer : $\\Delta = 4 - 20 = -16 < 0$, pas de racine. Étape 3 — Appliquer la règle : le trinôme a partout le signe de $a$, donc il est positif. Étape 4 — Conclure : il n'est jamais $< 0$, donc $S = \\varnothing$. « Tous les nombres réels » serait vrai pour l'inéquation $> 0$, pas pour $< 0$. « Un intervalle borné » supposerait deux racines, or ici $\\Delta < 0$.",
+                  "answers": [
+                    {
+                      "content": "l'ensemble vide",
+                      "correct": true
+                    },
+                    {
+                      "content": "tous les nombres réels",
+                      "correct": false
+                    },
+                    {
+                      "content": "un intervalle borné",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire le signe d'un trinôme et résoudre une inéquation",
+              "statement": "Dans cet exercice, tu résous des inéquations du second degré avec les étapes de la fiche : mettre face à $0$, calculer $\\Delta$ et les racines, appliquer la règle du signe, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le signe à l'extérieur des racines est celui de $a$, pas toujours $+$. Les bornes sont comprises pour $\\le$ et $\\ge$, exclues pour $<$ et $>$.",
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $x^2 - 4x + 3 \\ge 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre face à $0$ : l'inéquation l'est déjà, avec $a = 1$, $b = -4$, $c = 3$. Étape 2 — Calculer : $\\Delta = 16 - 12 = 4 > 0$, donc les racines sont $x_1 = \\dfrac{4 - 2}{2} = 1$ et $x_2 = \\dfrac{4 + 2}{2} = 3$. Étape 3 — Appliquer la règle : $a = 1 > 0$, donc signe $+$ à l'extérieur des racines et signe $-$ entre elles. Étape 4 — Conclure : on veut $\\ge 0$, donc l'extérieur, bornes comprises : $S = ]-\\infty\\,;\\,1] \\cup [3\\,;\\,+\\infty[$. L'intervalle $[1\\,;\\,3]$ est la zone où le trinôme est négatif. Les bornes ouvertes conviendraient pour $> 0$, pas pour $\\ge 0$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,1]\\,\\cup\\,[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[1\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,1[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;\\,3[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $x^2 + 2x + 5$ est strictement positif pour tout nombre réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = 1$, $b = 2$, $c = 5$. Étape 2 — Calculer : $\\Delta = 4 - 20 = -16 < 0$, donc pas de racine. Étape 3 — Appliquer la règle : si $\\Delta < 0$, le trinôme a partout le signe de $a$, ici $+$. Étape 4 — Conclure : $x^2 + 2x + 5 > 0$ pour tout réel $x$. Vérification : pour $x = -1$, $1 - 2 + 5 = 4 > 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de nombres entiers $x$ vérifient $x^2 - 5x + 4 < 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = 1$, $b = -5$, $c = 4$. Étape 2 — Calculer : $\\Delta = 25 - 16 = 9 > 0$, donc les racines sont $x_1 = 1$ et $x_2 = 4$. Étape 3 — Appliquer la règle : $a > 0$, donc le signe $-$ est entre les racines. Étape 4 — Conclure : $S = ]1\\,;\\,4[$, bornes exclues puisque l'inégalité est stricte. Les entiers de cet intervalle sont $2$ et $3$ : il y en a $2$. Compter $1$ et $4$ serait oublier que les bornes sont exclues.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : les solutions de $-x^2 + 9 \\ge 0$ sont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = -1$, $b = 0$, $c = 9$. Étape 2 — Calculer : $\\Delta = 0 - 4 \\times (-1) \\times 9 = 36 > 0$, donc les racines sont $-3$ et $3$. Étape 3 — Appliquer la règle : $a = -1 < 0$, donc signe $-$ à l'extérieur et signe $+$ entre les racines. Étape 4 — Conclure : on veut $\\ge 0$, donc entre les racines, bornes comprises : $S = [-3\\,;\\,3]$. L'extérieur est la réponse de celui qui croit que le signe $+$ est toujours à l'extérieur.",
+                  "answers": [
+                    {
+                      "content": "$[-3\\,;\\,3]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-3]\\,\\cup\\,[3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;\\,3[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;\\,3]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le trinôme $x^2 - 6x + 9$ s'annule seulement en $x = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Mettre face à $0$ : $a = 1$, $b = -6$, $c = 9$. Étape 2 — Calculer : $\\Delta = 36 - 36 = 0$, donc une racine double $x = -\\dfrac{b}{2a} = 3$. Étape 3 — Appliquer la règle : le trinôme a le signe de $a$ (positif) partout, sauf en $x = 3$ où il vaut $0$. Étape 4 — Conclure : il s'annule seulement en $3$. Vérification : $3^2 - 6 \\times 3 + 9 = 0$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la résolution de $-x^2 + 2x + 3 > 0$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Mettre face à $0$ : on lit $a = -1$, $b = 2$, $c = 3$. Étape 2 — Calculer : $\\Delta = 4 + 12 = 16$, racines $\\dfrac{-2 - 4}{-2} = 3$ et $\\dfrac{-2 + 4}{-2} = -1$. Étape 3 — Appliquer la règle du signe de $a$. Étape 4 — Conclure : $S = ]-1\\,;\\,3[$. On ne choisit l'intervalle qu'à la fin, quand on connaît le signe de chaque zone.",
+                  "answers": [
+                    {
+                      "content": "Mettre face à $0$ : $a = -1$, $b = 2$, $c = 3$."
+                    },
+                    {
+                      "content": "Calculer : $\\Delta = 16 > 0$, donc les racines sont $-1$ et $3$."
+                    },
+                    {
+                      "content": "Appliquer la règle : $a < 0$, donc signe $-$ à l'extérieur et signe $+$ entre $-1$ et $3$."
+                    },
+                    {
+                      "content": "Conclure : on veut $> 0$, donc $S = ]-1\\,;\\,3[$."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un commerçant étudie le signe d'un trinôme.",
+            "questions": [
+              {
+                "content": "Pour résoudre $x^2 - 3x + 2 > 0$, calcule les racines (le discriminant vaut $1$). La plus petite est $x_1 =$ ___ et la plus grande $x_2 =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Mettre face à $0$ : $a = 1$, $b = -3$, $c = 2$. Étape 2 — Calculer : $\\Delta = 9 - 8 = 1$, donc $x_1 = \\frac{3 - 1}{2} = 1$ et $x_2 = \\frac{3 + 1}{2} = 2$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Utilise $x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$ avec $-b = 3$."
+              },
+              {
+                "content": "Le trinôme $x^2 - 3x + 2$, de racines $1$ et $2$, est négatif ___ les racines.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Appliquer la règle : $a = 1 > 0$, donc le signe de $a$ ($+$) est à l'extérieur des racines et le signe contraire ($-$) est entre les racines. Le trinôme est donc négatif entre $1$ et $2$.",
+                "answers": [
+                  {
+                    "content": "entre",
+                    "correct": true
+                  },
+                  {
+                    "content": "à l'extérieur de",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous l'inéquation $x^2 - 3x + 2 > 0$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Mettre face à $0$ : déjà fait. Étape 2 — Calculer : racines $1$ et $2$. Étape 3 — Appliquer la règle : $a > 0$, signe $+$ à l'extérieur. Étape 4 — Conclure : on veut $> 0$, donc à l'extérieur, bornes exclues : $]-\\infty\\,;\\,1[\\,\\cup\\,]2\\,;\\,+\\infty[$.",
+                "answers": [
+                  {
+                    "content": "$]-\\infty\\,;\\,1[\\,\\cup\\,]2\\,;\\,+\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]1\\,;\\,2[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[1\\,;\\,2]$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le trinôme $-x^2 - 4$ est négatif pour tout nombre réel $x$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Mettre face à $0$ : $a = -1$, $b = 0$, $c = -4$. Étape 2 — Calculer : $\\Delta = 0 - 4 \\times (-1) \\times (-4) = -16 < 0$. Étape 3 — Appliquer la règle : le trinôme a partout le signe de $a$, ici $-$. Étape 4 — Conclure : il est négatif pour tout réel $x$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mettre un problème en équation ou en inéquation",
+          "remember": "Pour résoudre un problème, on le **traduit** en mathématiques. On choisit une inconnue $x$ et on dit ce qu'elle représente. Les mots du texte donnent le signe : « exactement » donne $=$ ; « au plus » et « au maximum » donnent $\\le$ ; « au moins » et « au minimum » donnent $\\ge$ ; « moins de » donne $<$ ; « plus de » donne $>$. On résout ensuite avec la méthode du premier ou du second degré. Il faut enfin **vérifier que la solution a un sens** : une longueur ou un nombre d'objets n'est jamais négatif, et un nombre d'objets est entier.",
+          "method": [
+            "Choisir l'inconnue $x$ et dire ce qu'elle représente, avec son unité.",
+            "Traduire les phrases du texte en une équation ou une inéquation (« au plus » donne $\\le$, « au moins » donne $\\ge$).",
+            "Résoudre l'équation ou l'inéquation avec la méthode du chapitre.",
+            "Vérifier que la solution a un sens dans le problème, puis la tester.",
+            "Répondre par une phrase avec l'unité."
+          ],
+          "example": {
+            "statement": "Mariam vend des beignets à $100$ FCFA pièce. Elle a $3\\,000$ FCFA de frais. Elle veut un bénéfice d'au moins $2\\,000$ FCFA. Combien de beignets doit-elle vendre au minimum ?",
+            "steps": [
+              "Choisir : $x$ est le nombre de beignets vendus.",
+              "Traduire : bénéfice $= 100x - 3\\,000$, et « au moins $2\\,000$ » donne $100x - 3\\,000 \\ge 2\\,000$.",
+              "Résoudre : $100x \\ge 5\\,000$, donc $x \\ge 50$.",
+              "Vérifier : $x$ est un entier positif. Avec $50$ beignets, le bénéfice est $5\\,000 - 3\\,000 = 2\\,000$ ; avec $49$, il est de $1\\,900$, ce qui ne suffit pas.",
+              "Répondre : Mariam doit vendre au moins $50$ beignets."
+            ]
+          },
+          "pitfall": "Ne pas oublier l'étape **Vérifier**. Une équation du second degré a souvent deux solutions, mais le problème n'en accepte qu'une. Contre-exemple : un étal de largeur $x$ et de longueur $x + 2$ a une aire de $8$ m², donc $x^2 + 2x - 8 = 0$. On trouve $\\Delta = 4 + 32 = 36$, puis $x = -4$ ou $x = 2$. Une largeur de $-4$ m n'existe pas : la seule réponse est $2$ m. Autre piège : « au moins » se traduit par $\\ge$, jamais par $\\le$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Mettre un problème du marché en équation ou en inéquation",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : choisir l'inconnue, traduire, résoudre, vérifier, répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un commerçant achète $x$ kilos de tomates à $400$ FCFA le kilo. Il dispose d'au plus $6\\,000$ FCFA. Quelle inéquation traduit cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $x$ est le nombre de kilos achetés. Étape 2 — Traduire : la dépense est $400x$, et « au plus $6\\,000$ » signifie $\\le 6\\,000$, donc $400x \\le 6\\,000$. Étape 3 — Résoudre : $x \\le 15$. Étape 4 — Vérifier : avec $15$ kilos, on paie exactement $6\\,000$ FCFA. Étape 5 — Répondre : au plus $15$ kilos. Le leurre avec $\\ge$ confond « au plus » et « au moins ». Le leurre avec $<$ interdit de dépenser exactement $6\\,000$. Le leurre $400 + x$ ajoute au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "$400x \\le 6\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$400x \\ge 6\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400x < 6\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400 + x \\le 6\\,000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou vend des pagnes à $2\\,500$ FCFA pièce. Elle a $10\\,000$ FCFA de frais. Elle veut un bénéfice d'exactement $25\\,000$ FCFA. Combien de pagnes doit-elle vendre ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : $x$ est le nombre de pagnes vendus. Étape 2 — Traduire : bénéfice $= 2\\,500x - 10\\,000 = 25\\,000$. Étape 3 — Résoudre : $2\\,500x = 35\\,000$, donc $x = 14$. Étape 4 — Vérifier : $x$ est un entier positif, et $2\\,500 \\times 14 - 10\\,000 = 25\\,000$. Étape 5 — Répondre : Fatou doit vendre $14$ pagnes.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa veut gagner au moins $5\\,000$ FCFA. Son bénéfice est $200x - 1\\,000$. L'inéquation qui traduit sa situation est $200x - 1\\,000 \\le 5\\,000$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : $x$ est le nombre d'articles vendus. Étape 2 — Traduire : « au moins $5\\,000$ » signifie « $5\\,000$ ou plus », donc $\\ge$ et non $\\le$ : $200x - 1\\,000 \\ge 5\\,000$. Étape 3 — Résoudre : $200x \\ge 6\\,000$, donc $x \\ge 30$. Étape 4 — Vérifier : avec $30$ articles, $6\\,000 - 1\\,000 = 5\\,000$. Étape 5 — Répondre : au moins $30$ articles. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour mettre un problème en inéquation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Choisir l'inconnue : on ne peut rien écrire avant de savoir ce que représente $x$. Étape 2 — Traduire le texte en inéquation. Étape 3 — Résoudre. Étape 4 — Vérifier que la solution est possible (positive, entière si on compte des objets). Étape 5 — Répondre par une phrase. Résoudre avant d'avoir traduit, ou répondre sans vérifier, sont les erreurs fréquentes.",
+                  "answers": [
+                    {
+                      "content": "Choisir l'inconnue et dire ce qu'elle représente."
+                    },
+                    {
+                      "content": "Traduire les phrases du texte en inéquation."
+                    },
+                    {
+                      "content": "Résoudre l'inéquation."
+                    },
+                    {
+                      "content": "Vérifier que la solution a un sens dans le problème."
+                    },
+                    {
+                      "content": "Répondre par une phrase avec l'unité."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un étal rectangulaire a une largeur de $x$ mètres et une longueur de $x + 3$ mètres. Son aire est de $10$ m². On trouve $x^2 + 3x - 10 = 0$. Quelle est la largeur de l'étal ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $x$ est la largeur en mètres. Étape 2 — Traduire : $x(x + 3) = 10$, soit $x^2 + 3x - 10 = 0$. Étape 3 — Résoudre : $\\Delta = 9 + 40 = 49$, donc $x_1 = \\frac{-3 - 7}{2} = -5$ et $x_2 = \\frac{-3 + 7}{2} = 2$. Étape 4 — Vérifier : une largeur ne peut pas être négative, on rejette $-5$. Avec $x = 2$, la longueur est $5$ et l'aire $2 \\times 5 = 10$. Étape 5 — Répondre : la largeur est $2$ m. Le leurre « $2$ m ou $-5$ m » oublie de vérifier le sens. Le leurre $5$ m est la longueur, pas la largeur.",
+                  "answers": [
+                    {
+                      "content": "$2$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-5$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$ m ou $-5$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cliente a $10\\,000$ FCFA. Elle achète 2 pagnes à $3\\,000$ FCFA et $x$ foulards à $500$ FCFA. Combien de foulards entiers peut-elle acheter au maximum ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : $x$ est le nombre de foulards. Étape 2 — Traduire : la dépense est $2 \\times 3\\,000 + 500x \\le 10\\,000$, soit $6\\,000 + 500x \\le 10\\,000$. Étape 3 — Résoudre : $500x \\le 4\\,000$, donc $x \\le 8$. Étape 4 — Vérifier : avec $8$ foulards, $6\\,000 + 4\\,000 = 10\\,000$, ce qui est permis. Étape 5 — Répondre : au maximum $8$ foulards.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "foulards"
+                }
+              ]
+            },
+            {
+              "title": "Traduire un problème du quotidien en équation ou inéquation",
+              "statement": "Dans cet exercice, tu mets des situations de la vie courante en équation ou en inéquation avec les étapes de la fiche : choisir l'inconnue, traduire, résoudre, vérifier, répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Dis d'abord ce que représente $x$. « Au plus » donne $\\le$, « au moins » donne $\\ge$. Après avoir résolu, vérifie que la solution a un sens (nombre entier, positif).",
+              "questions": [
+                {
+                  "content": "Un taxi facture $500$ FCFA de prise en charge, puis $200$ FCFA par kilomètre. Awa ne veut pas dépasser $3\\,000$ FCFA. Avec $x$ le nombre de kilomètres, quelle inéquation traduit ce problème ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de kilomètres parcourus. Étape 2 — Traduire : le prix est $500 + 200x$ (prise en charge plus $200$ FCFA par kilomètre) et « ne pas dépasser » signifie « au plus », donc $\\le$ : $500 + 200x \\le 3\\,000$. Les étapes suivantes résoudraient cette inéquation. La proposition avec $\\ge$ traduit « au moins ». La proposition $700x$ additionne $500$ et $200$ alors que les kilomètres ne multiplient que les $200$. La proposition $500x + 200$ intervertit les deux montants.",
+                  "answers": [
+                    {
+                      "content": "$500 + 200x \\le 3\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$500 + 200x \\ge 3\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$700x \\le 3\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500x + 200 \\le 3\\,000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi facture $500$ FCFA de prise en charge, puis $200$ FCFA par kilomètre. Awa ne veut pas dépasser $3\\,000$ FCFA. Quel est le nombre maximal de kilomètres entiers qu'elle peut parcourir ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de kilomètres. Étape 2 — Traduire : $500 + 200x \\le 3\\,000$. Étape 3 — Résoudre : $200x \\le 2\\,500$, donc $x \\le 12{,}5$. Étape 4 — Vérifier : le nombre de kilomètres entiers doit être au plus $12{,}5$, donc $12$ ; avec $13$ km, le prix serait $3\\,100$ FCFA, trop cher. Étape 5 — Répondre : Awa peut parcourir au plus $12$ km. Arrondir à $13$ est l'erreur de celui qui oublie la vérification.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "km"
+                },
+                {
+                  "content": "Dans un problème, l'expression « au moins $30$ élèves » se traduit par $x \\le 30$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre d'élèves. Étape 2 — Traduire : « au moins $30$ » signifie $30$ ou plus, donc $x \\ge 30$. « Au plus $30$ » donnerait $x \\le 30$. L'affirmation est donc fausse : c'est le piège de la fiche, qui rappelle que « au moins » se traduit par $\\ge$, jamais par $\\le$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : un enclos rectangulaire a pour largeur $x$ mètres et pour longueur $x + 3$ mètres ; son aire est $40$ m². Sa largeur vaut $___$ mètres.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Choisir l'inconnue : $x$ est la largeur en mètres. Étape 2 — Traduire : l'aire est $x(x + 3) = 40$, soit $x^2 + 3x - 40 = 0$. Étape 3 — Résoudre : $\\Delta = 9 + 160 = 169$, donc $x = \\dfrac{-3 - 13}{2} = -8$ ou $x = \\dfrac{-3 + 13}{2} = 5$. Étape 4 — Vérifier : une largeur est positive, donc on rejette $-8$ ; avec $x = 5$, l'aire vaut $5 \\times 8 = 40$. Étape 5 — Répondre : la largeur est $5$ mètres.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque expression du texte au symbole qui la traduit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre d'élèves. Étape 2 — Traduire avec la règle de la fiche : « au plus » donne $\\le$, « au moins » donne $\\ge$, « moins de » donne $<$, « plus de » donne $>$. Les symboles larges $\\le$ et $\\ge$ acceptent $20$ lui-même ; les symboles stricts $<$ et $>$ l'excluent.",
+                  "answers": [
+                    {
+                      "content": "au plus $20$ élèves",
+                      "match": "$x \\le 20$"
+                    },
+                    {
+                      "content": "au moins $20$ élèves",
+                      "match": "$x \\ge 20$"
+                    },
+                    {
+                      "content": "moins de $20$ élèves",
+                      "match": "$x < 20$"
+                    },
+                    {
+                      "content": "plus de $20$ élèves",
+                      "match": "$x > 20$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam vend des beignets à $100$ FCFA pièce et paie $3\\,000$ FCFA de frais. Elle veut un bénéfice d'au moins $4\\,000$ FCFA. Quels nombres de beignets vendus lui conviennent ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de beignets vendus. Étape 2 — Traduire : le bénéfice est $100x - 3\\,000$ et « au moins $4\\,000$ » donne $100x - 3\\,000 \\ge 4\\,000$. Étape 3 — Résoudre : $100x \\ge 7\\,000$, donc $x \\ge 70$. Étape 4 — Vérifier : $70$ beignets donnent exactement $4\\,000$ FCFA et $75$ donnent $4\\,500$ FCFA ; avec $69$, le bénéfice est $3\\,900$ ; avec $60$, $3\\,000$ ; avec $50$, $2\\,000$ : trop peu. Étape 5 — Répondre : $70$ et $75$ conviennent.",
+                  "answers": [
+                    {
+                      "content": "$70$ beignets",
+                      "correct": true
+                    },
+                    {
+                      "content": "$75$ beignets",
+                      "correct": true
+                    },
+                    {
+                      "content": "$69$ beignets",
+                      "correct": false
+                    },
+                    {
+                      "content": "$60$ beignets",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50$ beignets",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Moussa fait ses achats pour sa boutique.",
+            "questions": [
+              {
+                "content": "Moussa a $7\\,200$ FCFA et achète $x$ sacs de riz à $1\\,200$ FCFA. Complète sans espace : $1200x \\le$ ___ donc $x \\le$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : $x$ est le nombre de sacs. Étape 2 — Traduire : $1\\,200x \\le 7\\,200$. Étape 3 — Résoudre : $x \\le 7\\,200 \\div 1\\,200 = 6$. Étape 4 — Vérifier : avec $6$ sacs, il paie exactement $7\\,200$ FCFA. Étape 5 — Répondre : au plus $6$ sacs.",
+                "answers": [
+                  {
+                    "content": "7200",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "« Au plus » se traduit par ≤ : la dépense ne dépasse pas la somme que Moussa a."
+              },
+              {
+                "content": "« Elle veut gagner au moins $3\\,000$ FCFA » se traduit par : bénéfice ___ $3\\,000$.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Traduire : « au moins $3\\,000$ » veut dire « $3\\,000$ ou plus ». On écrit donc $\\ge$. Le signe $\\le$ voudrait dire « au plus » et $=$ voudrait dire « exactement ».",
+                "answers": [
+                  {
+                    "content": "$\\ge$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\le$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$=$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un commerçant vend ses ananas $600$ FCFA pièce et a $4\\,200$ FCFA de frais. Combien d'ananas doit-il vendre pour que son bénéfice soit exactement nul ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : $x$ est le nombre d'ananas vendus. Étape 2 — Traduire : bénéfice nul donne $600x - 4\\,200 = 0$. Étape 3 — Résoudre : $600x = 4\\,200$, donc $x = 7$. Étape 4 — Vérifier : $600 \\times 7 = 4\\,200$. Étape 5 — Répondre : il doit vendre $7$ ananas.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les comptes d'Awa au marché de Treichville",
+          "statement": "Au marché de Treichville, Awa vend des mangues. Elle paie $2\\,000$ FCFA pour sa place et achète ses mangues $150$ FCFA l'unité. Elle les revend $250$ FCFA l'unité. On note $x$ le nombre de mangues achetées puis toutes vendues.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Awa paie $2\\,000$ FCFA de place, achète chaque mangue $150$ FCFA et la revend $250$ FCFA. Pour $x$ mangues achetées puis toutes vendues, quel est son bénéfice ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est le nombre de mangues vendues. Étape 2 — Traduire : la recette est $250x$, les dépenses sont $150x + 2\\,000$, donc bénéfice $= 250x - (150x + 2\\,000) = 100x - 2\\,000$. Le leurre $250x - 2\\,000$ oublie le prix d'achat des mangues. Le leurre $400x - 2\\,000$ additionne les deux prix. Le leurre $100x + 2\\,000$ ajoute les frais de place au lieu de les retirer.",
+              "answers": [
+                {
+                  "content": "$100x - 2\\,000$",
+                  "correct": true
+                },
+                {
+                  "content": "$250x - 2\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$400x - 2\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$100x + 2\\,000$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice d'Awa est $100x - 2\\,000$ (en FCFA). Pour quel nombre $x$ de mangues le bénéfice est-il exactement nul ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est le nombre de mangues vendues. Étape 2 — Traduire : bénéfice nul donne $100x - 2\\,000 = 0$. Étape 3 — Résoudre : $100x = 2\\,000$, donc $x = 20$. Étape 4 — Vérifier : $100 \\times 20 - 2\\,000 = 0$. Étape 5 — Répondre : à $20$ mangues, Awa ne gagne ni ne perd.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice d'Awa est $100x - 2\\,000$ (en FCFA). Elle veut gagner au moins $5\\,000$ FCFA. Combien de mangues doit-elle vendre au minimum ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est le nombre de mangues vendues. Étape 2 — Traduire : « au moins $5\\,000$ » donne $100x - 2\\,000 \\ge 5\\,000$. Étape 3 — Résoudre : $100x \\ge 7\\,000$, donc $x \\ge 70$ (on divise par $100$, positif, le sens ne change pas). Étape 4 — Vérifier : avec $70$ mangues, $7\\,000 - 2\\,000 = 5\\,000$ ; avec $69$, on a $4\\,900$, ce qui ne suffit pas. Étape 5 — Répondre : au moins $70$ mangues.",
+              "answers": [
+                {
+                  "content": "70",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice d'Awa est $100x - 2\\,000$ (en FCFA). Si elle vend seulement $15$ mangues, elle gagne de l'argent.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Remplacer $x$ par $15$ dans le bénéfice. Étape 2 — Calculer : $100 \\times 15 - 2\\,000 = 1\\,500 - 2\\,000 = -500$. Étape 3 — Conclure : le bénéfice est négatif, Awa perd $500$ FCFA. L'affirmation est fausse. Elle ne gagne de l'argent qu'au-delà de $20$ mangues.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice d'Awa est $100x - 2\\,000$ FCFA pour $x$ mangues vendues. Relie chaque nombre de mangues à son bénéfice.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Remplacer $x$ dans $100x - 2\\,000$. Étape 2 — Calculer : $x = 10$ donne $1\\,000 - 2\\,000 = -1\\,000$ ; $x = 20$ donne $2\\,000 - 2\\,000 = 0$ ; $x = 30$ donne $3\\,000 - 2\\,000 = 1\\,000$ ; $x = 40$ donne $4\\,000 - 2\\,000 = 2\\,000$. Étape 3 — Conclure : chaque tranche de $10$ mangues de plus rapporte $1\\,000$ FCFA.",
+              "answers": [
+                {
+                  "content": "10 mangues",
+                  "match": "-1 000 FCFA"
+                },
+                {
+                  "content": "20 mangues",
+                  "match": "0 FCFA"
+                },
+                {
+                  "content": "30 mangues",
+                  "match": "1 000 FCFA"
+                },
+                {
+                  "content": "40 mangues",
+                  "match": "2 000 FCFA"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'étal rectangulaire de Kofi",
+          "statement": "Kofi loue un étal rectangulaire au marché. Sa largeur est de $x$ mètres et sa longueur de $x + 2$ mètres. Son aire est de $15$ m². La place coûte $1\\,500$ FCFA par mètre carré.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un étal rectangulaire a une largeur de $x$ mètres, une longueur de $x + 2$ mètres et une aire de $15$ m². Quelle équation traduit cette situation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est la largeur en mètres. Étape 2 — Traduire : aire $=$ largeur $\\times$ longueur, donc $x(x + 2) = 15$, soit $x^2 + 2x = 15$ et enfin $x^2 + 2x - 15 = 0$. Le leurre $+ 15$ oublie de passer $15$ de l'autre côté en changeant son signe. Le leurre $2x + 2 = 15$ additionne au lieu de multiplier. Le leurre $x^2 + 2 = 15$ oublie de développer $x \\times 2$.",
+              "answers": [
+                {
+                  "content": "$x^2 + 2x - 15 = 0$",
+                  "correct": true
+                },
+                {
+                  "content": "$x^2 + 2x + 15 = 0$",
+                  "correct": false
+                },
+                {
+                  "content": "$2x + 2 = 15$",
+                  "correct": false
+                },
+                {
+                  "content": "$x^2 + 2 = 15$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour l'équation $x^2 + 2x - 15 = 0$, calcule le discriminant $\\Delta$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Mettre sous la forme $ax^2 + bx + c = 0$ : $a = 1$, $b = 2$, $c = -15$. Étape 2 — Calculer : $\\Delta = 2^2 - 4 \\times 1 \\times (-15) = 4 + 60 = 64$. Étape 3 — Comparer : $\\Delta > 0$, deux solutions.",
+              "answers": [
+                {
+                  "content": "64",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'étal de Kofi a une largeur de $x$ m, une longueur de $x + 2$ m et une aire de $15$ m², donc $x^2 + 2x - 15 = 0$ (avec $\\Delta = 64$). Quelle est sa largeur ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Mettre sous la forme : $a = 1$, $b = 2$, $c = -15$. Étape 2 — Calculer : $\\Delta = 64$. Étape 3 — Comparer : $\\Delta > 0$, deux solutions. Étape 4 — Déterminer : $x_1 = \\frac{-2 - 8}{2} = -5$ et $x_2 = \\frac{-2 + 8}{2} = 3$. On rejette $-5$ car une largeur est positive. Vérification : largeur $3$, longueur $5$, aire $15$. La largeur est $3$ m.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "L'étal de Kofi a une largeur de $3$ m et une longueur de $5$ m. Quel est son périmètre ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire : largeur $3$ m et longueur $5$ m. Étape 2 — Appliquer : périmètre $= 2 \\times (\\text{largeur} + \\text{longueur})$. Étape 3 — Calculer : $2 \\times (3 + 5) = 16$. Le périmètre est $16$ m. Ne pas confondre avec l'aire $3 \\times 5 = 15$ m².",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "L'équation $x^2 + 2x - 15 = 0$ a pour solutions $-5$ et $3$. La solution $-5$ peut être retenue comme largeur de l'étal.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Résoudre : les solutions sont bien $-5$ et $3$ (car $(-5)^2 + 2 \\times (-5) - 15 = 0$). Étape 2 — Vérifier le sens : une largeur est une longueur, donc elle est positive. Étape 3 — Répondre : on rejette $-5$ et on retient $3$. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La place coûte $1\\,500$ FCFA par mètre carré. Kofi loue un étal de $15$ m². Combien paie-t-il en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire : $15$ m² à $1\\,500$ FCFA le m². Étape 2 — Appliquer : prix total $=$ prix au m² $\\times$ aire. Étape 3 — Calculer : $1\\,500 \\times 15 = 22\\,500$. Kofi paie $22\\,500$ FCFA.",
+              "answers": [
+                {
+                  "content": "22500",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            }
+          ]
+        },
+        {
+          "title": "Le bénéfice d'une vendeuse de jus",
+          "statement": "Une vendeuse de jus au marché modélise son bénéfice quotidien, en milliers de FCFA, par $B(x) = -x^2 + 10x - 16$, où $x$ est le nombre de dizaines de bouteilles vendues ($x$ entier de $0$ à $10$). Un bénéfice négatif est une perte.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pour $B(x) = -x^2 + 10x - 16$, on résout $-x^2 + 10x - 16 = 0$ avec $a = -1$, $b = 10$, $c = -16$. Calcule le discriminant $\\Delta$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Mettre sous la forme $ax^2 + bx + c$ : $a = -1$, $b = 10$, $c = -16$. Étape 2 — Calculer : $\\Delta = 10^2 - 4 \\times (-1) \\times (-16) = 100 - 64 = 36$. Attention : $4ac = 4 \\times (-1) \\times (-16) = +64$.",
+              "answers": [
+                {
+                  "content": "36",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x) = -x^2 + 10x - 16$ (en milliers de FCFA). Pour quelles valeurs entières de $x$ le bénéfice est-il exactement nul ? Choisis-en deux.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Mettre sous la forme : $a = -1$, $b = 10$, $c = -16$. Étape 2 — Calculer : $\\Delta = 36$. Étape 3 — Comparer : $\\Delta > 0$, deux solutions. Étape 4 — Déterminer : $x_1 = \\frac{-10 - 6}{-2} = 8$ et $x_2 = \\frac{-10 + 6}{-2} = 2$. Vérification : $B(2) = -4 + 20 - 16 = 0$ et $B(8) = -64 + 80 - 16 = 0$. Les leurres : $B(5) = 9 \\neq 0$ et $B(10) = -100 + 100 - 16 = -16 \\neq 0$.",
+              "answers": [
+                {
+                  "content": "$2$",
+                  "correct": true
+                },
+                {
+                  "content": "$8$",
+                  "correct": true
+                },
+                {
+                  "content": "$5$",
+                  "correct": false
+                },
+                {
+                  "content": "$10$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une vendeuse a un bénéfice $B(x) = -x^2 + 10x - 16$ (en milliers de FCFA), de racines $2$ et $8$. Pour quelles valeurs de $x$ réalise-t-elle un bénéfice strictement positif, $B(x) > 0$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Mettre face à $0$ : $-x^2 + 10x - 16 > 0$, avec $a = -1$. Étape 2 — Calculer : les racines sont $2$ et $8$. Étape 3 — Appliquer la règle : $a = -1 < 0$, donc signe $-$ à l'extérieur de $2$ et $8$, signe $+$ entre les deux. Étape 4 — Conclure : $> 0$ donne $S = ]2\\,;\\,8[$, bornes exclues car l'inégalité est stricte. Le leurre avec la réunion est la zone de perte. Le leurre $[2\\,;\\,8]$ garde les bornes où $B = 0$, donc pas de bénéfice strictement positif. Le leurre $]0\\,;\\,2[$ est une zone de perte : $B(1) = -1 + 10 - 16 = -7 < 0$.",
+              "answers": [
+                {
+                  "content": "$]2\\,;\\,8[$",
+                  "correct": true
+                },
+                {
+                  "content": "$]-\\infty\\,;\\,2[\\,\\cup\\,]8\\,;\\,+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[2\\,;\\,8]$",
+                  "correct": false
+                },
+                {
+                  "content": "$]0\\,;\\,2[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice $B(x) = -x^2 + 10x - 16$ est strictement positif pour $x$ compris entre $2$ et $8$ (bornes exclues). Combien de valeurs entières de $x$ donnent un bénéfice strictement positif ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire : $S = ]2\\,;\\,8[$. Étape 2 — Lister les entiers strictement entre $2$ et $8$ : $3$, $4$, $5$, $6$, $7$. Étape 3 — Compter : il y en a $5$. Piège : compter aussi $2$ et $8$ donnerait $7$, mais ces deux valeurs donnent un bénéfice nul, pas strictement positif.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec $B(x) = -x^2 + 10x - 16$ (en milliers de FCFA), la vendeuse est en perte quand elle vend $1$ dizaine de bouteilles.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Remplacer $x$ par $1$. Étape 2 — Calculer : $B(1) = -1 + 10 - 16 = -7$. Étape 3 — Conclure : $B(1) < 0$, donc c'est une perte de $7$ milliers de FCFA. Cela correspond aussi à $1 < 2$, valeurs situées à l'extérieur des racines où le signe est $-$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $B(x) = -x^2 + 10x - 16$ (en milliers de FCFA), calcule le bénéfice $B(5)$ pour $5$ dizaines de bouteilles vendues. Écris le nombre de milliers de FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Remplacer $x$ par $5$. Étape 2 — Calculer : $B(5) = -5^2 + 10 \\times 5 - 16 = -25 + 50 - 16 = 9$. Attention : $-5^2 = -25$, et non $+25$. Étape 3 — Conclure : le bénéfice est de $9$ milliers de FCFA, soit $9\\,000$ FCFA, valeur bien dans $]2\\,;\\,8[$ donc positive.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ],
+              "unit": "milliers"
+            }
+          ]
+        },
+        {
+          "title": "Choisir un fournisseur de riz et ranger le stock",
+          "statement": "Mamadou achète du riz pour sa boutique. Le fournisseur A demande un abonnement de $4\\,000$ FCFA plus $500$ FCFA par kilo. Le fournisseur B demande $900$ FCFA par kilo, sans abonnement. Mamadou achète $x$ kilos (nombre entier positif). Il range ensuite son stock dans un magasin rectangulaire de largeur $\\ell$ mètres et de longueur $\\ell + 4$ mètres, dont l'aire est de $45$ m².",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le fournisseur A demande $4\\,000$ FCFA d'abonnement plus $500$ FCFA par kilo. Quel est le prix, en FCFA, de $x$ kilos chez A ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est le nombre de kilos. Étape 2 — Traduire : l'abonnement est un montant fixe, $4\\,000$ ; les kilos coûtent $500$ chacun, donc $500x$. Le prix total est $4\\,000 + 500x$. Le leurre $4\\,500x$ multiplie aussi l'abonnement. Le leurre $4\\,000x + 500$ inverse les rôles. Le leurre $500x$ oublie l'abonnement.",
+              "answers": [
+                {
+                  "content": "$4\\,000 + 500x$",
+                  "correct": true
+                },
+                {
+                  "content": "$4\\,500x$",
+                  "correct": false
+                },
+                {
+                  "content": "$4\\,000x + 500$",
+                  "correct": false
+                },
+                {
+                  "content": "$500x$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le fournisseur A coûte $4\\,000 + 500x$ FCFA et le fournisseur B coûte $900x$ FCFA pour $x$ kilos. Quelle inéquation traduit « A est strictement moins cher que B » ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est le nombre de kilos. Étape 2 — Traduire : « moins cher » veut dire un prix plus petit, donc $4\\,000 + 500x < 900x$. Le leurre avec $>$ traduit « A plus cher que B ». Le leurre $< 900$ oublie le $x$ chez B. Le leurre $4\\,000 + 900x < 500x$ mélange les deux fournisseurs.",
+              "answers": [
+                {
+                  "content": "$4\\,000 + 500x < 900x$",
+                  "correct": true
+                },
+                {
+                  "content": "$4\\,000 + 500x > 900x$",
+                  "correct": false
+                },
+                {
+                  "content": "$4\\,000 + 500x < 900$",
+                  "correct": false
+                },
+                {
+                  "content": "$4\\,000 + 900x < 500x$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le fournisseur A coûte $4\\,000 + 500x$ FCFA et le fournisseur B coûte $900x$ FCFA. Pour combien de kilos les deux prix sont-ils égaux ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est le nombre de kilos. Étape 2 — Traduire : prix égaux donne $4\\,000 + 500x = 900x$. Étape 3 — Résoudre : on regroupe $4\\,000 = 900x - 500x$, soit $4\\,000 = 400x$, donc $x = 10$. Étape 4 — Vérifier : A coûte $4\\,000 + 5\\,000 = 9\\,000$ et B coûte $9\\,000$. Étape 5 — Répondre : à $10$ kilos, les prix sont égaux.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "kg"
+            },
+            {
+              "content": "Le fournisseur A coûte $4\\,000 + 500x$ FCFA et le fournisseur B coûte $900x$ FCFA. À partir de combien de kilos entiers A est-il strictement moins cher que B ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Choisir : $x$ est le nombre de kilos. Étape 2 — Traduire : $4\\,000 + 500x < 900x$. Étape 3 — Résoudre : $4\\,000 < 400x$, donc $x > 10$ (on divise par $400$, positif, le sens ne change pas). Étape 4 — Vérifier : pour $x = 10$, les prix sont égaux ($9\\,000$ et $9\\,000$), donc $10$ ne convient pas ; pour $x = 11$, A coûte $9\\,500$ et B coûte $9\\,900$. Étape 5 — Répondre : à partir de $11$ kilos.",
+              "answers": [
+                {
+                  "content": "11",
+                  "correct": true
+                }
+              ],
+              "unit": "kg"
+            },
+            {
+              "content": "Le fournisseur A coûte $4\\,000 + 500x$ FCFA et le fournisseur B coûte $900x$ FCFA. Pour $x = 8$ kilos, B est moins cher que A.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Remplacer $x$ par $8$. Étape 2 — Calculer : chez A, $4\\,000 + 500 \\times 8 = 8\\,000$ ; chez B, $900 \\times 8 = 7\\,200$. Étape 3 — Comparer : $7\\,200 < 8\\,000$, donc B est moins cher. L'affirmation est vraie, ce qui est cohérent avec le seuil $x > 10$ : sous $10$ kilos, B est moins cher.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mamadou range son riz dans un magasin de largeur $\\ell$ m, de longueur $\\ell + 4$ m et d'aire $45$ m². On trouve $\\ell^2 + 4\\ell - 45 = 0$. Calcule le discriminant $\\Delta$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Mettre sous la forme $a\\ell^2 + b\\ell + c = 0$ : $a = 1$, $b = 4$, $c = -45$. Étape 2 — Calculer : $\\Delta = 4^2 - 4 \\times 1 \\times (-45) = 16 + 180 = 196$. Étape 3 — Comparer : $\\Delta > 0$, deux solutions (et $\\sqrt{196} = 14$).",
+              "answers": [
+                {
+                  "content": "196",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un magasin rectangulaire a une largeur de $\\ell$ m, une longueur de $\\ell + 4$ m et une aire de $45$ m². Les solutions de $\\ell^2 + 4\\ell - 45 = 0$ sont à chercher avec $\\Delta = 196$. Quelle est la largeur du magasin ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Mettre sous la forme : $a = 1$, $b = 4$, $c = -45$. Étape 2 — Calculer : $\\Delta = 196$. Étape 3 — Comparer : $\\Delta > 0$, deux solutions. Étape 4 — Déterminer : $\\ell_1 = \\frac{-4 - 14}{2} = -9$ et $\\ell_2 = \\frac{-4 + 14}{2} = 5$. Étape 5 — Vérifier le sens : une largeur est positive, on rejette $-9$. Avec $\\ell = 5$, la longueur est $9$ et l'aire $5 \\times 9 = 45$. La largeur est $5$ m.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Équations et inéquations du premier degré (sens de l'inégalité, intervalles) ; équation du second degré avec le discriminant ; signe d'un trinôme et inéquations du second degré ; traduction des mots « au plus » et « au moins ».",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On résout des équations du premier degré. Dans chaque question, $x$ désigne un nombre réel.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la solution de l'équation $6x - 7 = 2x + 13$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Regrouper : $6x - 2x = 13 + 7$, le $2x$ et le $-7$ changent de signe en traversant le signe $=$. 2) Réduire : $4x = 20$. 3) Diviser par $4$ : $x = 5$. 4) Conclure : $S = \\{5\\}$ ; vérification : $6 \\times 5 - 7 = 23$ et $2 \\times 5 + 13 = 23$. La valeur $\\dfrac{3}{2}$ vient du $-7$ passé à droite sans changer de signe ($13 - 7$, donc $4x = 6$). La valeur $\\dfrac{3}{4}$ vient du $2x$ passé à gauche sans changer de signe ($6x + 2x = 13 - 7$, donc $8x = 6$). La valeur $-5$ est une erreur de signe à la fin.",
+                  "answers": [
+                    {
+                      "content": "$x = 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = \\dfrac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = \\dfrac{3}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous l'équation $3x + 8 = 29$. Quelle est la valeur de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Regrouper : $3x = 29 - 8$. 2) Réduire : $3x = 21$. 3) Diviser par $3$ : $x = 7$. 4) Conclure : $S = \\{7\\}$ ; vérification : $3 \\times 7 + 8 = 29$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $-2$ est solution de l'équation $4x + 3 = -5$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $-2$ dans le membre de gauche : $4 \\times (-2) + 3 = -8 + 3 = -5$. 2) Comparer avec le membre de droite : $-5 = -5$. 3) Conclure : l'égalité est vraie, donc $-2$ est bien solution. On peut aussi résoudre : $4x = -8$, donc $x = -2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'équation $5x - 10 = 0$ a pour solution $x = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Regrouper : $5x = 10$ ($-10$ passe à droite et devient $+10$). 2) Réduire : c'est déjà fait. 3) Diviser par $5$ : $x = 2$. 4) Conclure : $S = \\{2\\}$ ; vérification : $5 \\times 2 - 10 = 0$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces équations, lesquelles ont pour solution $x = 3$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Pour chaque équation, on remplace $x$ par $3$. 2) $2 \\times 3 + 1 = 7$ est vrai et $3 - 5 = -2$ est vrai. 3) $3 \\times 3 = 9 \\ne 6$ : la solution de $3x = 6$ est $2$. 4) $4 \\times 3 - 3 = 9 \\ne 5$ : la solution de $4x - 3 = 5$ est $2$. Seules $2x + 1 = 7$ et $x - 5 = -2$ admettent $3$ pour solution.",
+                  "answers": [
+                    {
+                      "content": "$2x + 1 = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x - 5 = -2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x = 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x - 3 = 5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Regroupe les termes en $x$ d'un côté et les nombres de l'autre : un terme qui traverse le signe $=$ change de signe. Pour vérifier une valeur, remplace $x$ par elle."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On résout des inéquations du premier degré. Attention au sens de l'inégalité quand on divise par un nombre négatif.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $3x - 4 \\ge 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Regrouper : $3x \\ge 5 + 4$. 2) Réduire : $3x \\ge 9$. 3) Diviser par $3$ (positif, le sens ne change pas) : $x \\ge 3$. 4) Conclure : $S = [3\\,;\\,+\\infty[$, crochet fermé car l'inégalité est large. L'intervalle $]-\\infty\\,;\\,3]$ inverse le sens à tort. L'intervalle $]3\\,;\\,+\\infty[$ exclut $3$, qui vérifie pourtant $3 \\times 3 - 4 = 5 \\ge 5$. L'intervalle $\\left[\\dfrac{1}{3}\\,;\\,+\\infty\\right[$ vient d'un $4$ qui n'a pas changé de signe : $3x \\ge 1$.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[\\dfrac{1}{3}\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $-x + 2 > 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Regrouper : $-x > 5 - 2$. 2) Réduire : $-x > 3$. 3) Diviser par $-1$ : le nombre est négatif, donc on inverse le sens : $x < -3$. 4) Conclure : $S = ]-\\infty\\,;\\,-3[$ ; vérification : pour $x = -4$, $4 + 2 = 6 > 5$ est vrai. Écrire $x > -3$ oublie d'inverser le sens ; écrire $x > 3$ ou $x < 3$ oublie de changer le signe du nombre.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,-3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $0$ est solution de l'inéquation $2x + 1 < 0$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $0$ : $2 \\times 0 + 1 = 1$. 2) Comparer avec la condition : $1 < 0$ est faux. 3) Conclure : $0$ n'est pas solution. En résolvant, $2x < -1$ donne $x < -\\dfrac{1}{2}$, et $0$ n'est pas inférieur à $-\\dfrac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : les solutions de $-4x \\le 20$ sont les nombres $x$ tels que $x$ ___ $-5$.",
+                  "question_type": "select",
+                  "explanation": "1) Regrouper : rien à déplacer. 2) Réduire : $-4x \\le 20$ est déjà réduite. 3) Diviser par $-4$ : le nombre est négatif, donc on inverse le sens : $x \\ge -5$. 4) Conclure : $S = [-5\\,;\\,+\\infty[$. Le symbole $>$ exclurait $-5$, qui est solution : $-4 \\times (-5) = 20 \\le 20$. Les symboles $\\le$ et $<$ gardent le sens de départ, ce qui est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "$\\ge$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\le$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$<$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$>$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le plus petit nombre entier $x$ qui vérifie $2x > 7$ est $___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Regrouper : rien à déplacer. 2) Réduire : $2x > 7$. 3) Diviser par $2$ (positif) : $x > 3{,}5$. 4) Conclure : le plus petit entier strictement supérieur à $3{,}5$ est $4$ ; vérification : $2 \\times 4 = 8 > 7$ alors que $2 \\times 3 = 6 < 7$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque condition à l'intervalle qui l'écrit.",
+                  "question_type": "matching",
+                  "explanation": "1) Lire le sens : $\\le$ et $<$ vont vers la gauche, donc l'intervalle commence par $-\\infty$ ; $\\ge$ et $>$ vont vers la droite, donc il finit par $+\\infty$. 2) Lire la borne : le crochet est fermé pour $\\le$ et $\\ge$ (la valeur $4$ est comprise) et ouvert pour $<$ et $>$ (la valeur $4$ est exclue). L'infini est toujours ouvert.",
+                  "answers": [
+                    {
+                      "content": "$x \\le 4$",
+                      "match": "$]-\\infty\\,;\\,4]$"
+                    },
+                    {
+                      "content": "$x < 4$",
+                      "match": "$]-\\infty\\,;\\,4[$"
+                    },
+                    {
+                      "content": "$x \\ge 4$",
+                      "match": "$[4\\,;\\,+\\infty[$"
+                    },
+                    {
+                      "content": "$x > 4$",
+                      "match": "$]4\\,;\\,+\\infty[$"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Quand tu divises par un nombre négatif, le sens de l'inégalité s'inverse. Le crochet est fermé pour $\\le$ et $\\ge$, ouvert pour $<$ et $>$."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On résout des équations du second degré avec le discriminant $\\Delta = b^2 - 4ac$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de l'équation $x^2 - 4x + 3 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre sous la forme $ax^2 + bx + c = 0$ : $a = 1$, $b = -4$, $c = 3$. 2) Calculer : $\\Delta = (-4)^2 - 4 \\times 1 \\times 3 = 16 - 12 = 4$. 3) Comparer : $\\Delta > 0$, donc deux solutions. 4) Déterminer : $x_1 = \\dfrac{4 - 2}{2} = 1$ et $x_2 = \\dfrac{4 + 2}{2} = 3$. Vérification : $1 - 4 + 3 = 0$ et $9 - 12 + 3 = 0$. L'ensemble $\\{-3\\,;\\,-1\\}$ vient de $-b = -4$ au lieu de $+4$. L'ensemble $\\{-1\\,;\\,3\\}$ mélange les signes des deux racines.",
+                  "answers": [
+                    {
+                      "content": "$S = \\{1\\,;\\,3\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S = \\{-3\\,;\\,-1\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\{2\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\{-1\\,;\\,3\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le discriminant $\\Delta$ de l'équation $x^2 + 6x + 5 = 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Lire $a = 1$, $b = 6$, $c = 5$. 2) Calculer : $\\Delta = 6^2 - 4 \\times 1 \\times 5 = 36 - 20 = 16$. 3) Comparer : $\\Delta > 0$, donc l'équation a deux solutions, $-5$ et $-1$.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions réelles l'équation $x^2 - 6x + 9 = 0$ admet-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Lire $a = 1$, $b = -6$, $c = 9$. 2) Calculer : $\\Delta = 36 - 36 = 0$. 3) Comparer : $\\Delta = 0$, donc une solution double. 4) Déterminer : $x = -\\dfrac{b}{2a} = 3$. Deux solutions différentes demanderaient $\\Delta > 0$, et aucune demanderait $\\Delta < 0$. Une équation du second degré n'a jamais trois solutions.",
+                  "answers": [
+                    {
+                      "content": "Une seule solution (double)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux solutions différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois solutions",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $x^2 + 9 = 0$ a deux solutions, $3$ et $-3$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Lire $a = 1$, $b = 0$, $c = 9$. 2) Calculer : $\\Delta = 0 - 4 \\times 1 \\times 9 = -36$. 3) Comparer : $\\Delta < 0$, donc aucune solution réelle. Le carré d'un réel est positif ou nul, donc $x^2 = -9$ est impossible : pour $x = 3$, $3^2 + 9 = 18 \\ne 0$. Les nombres $3$ et $-3$ sont les solutions de $x^2 - 9 = 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux solutions de l'équation $x^2 - x - 6 = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Lire $a = 1$, $b = -1$, $c = -6$. 2) Calculer : $\\Delta = (-1)^2 - 4 \\times 1 \\times (-6) = 1 + 24 = 25$. 3) Comparer : $\\Delta > 0$, donc deux solutions. 4) Déterminer : $x_1 = \\dfrac{1 - 5}{2} = -2$ et $x_2 = \\dfrac{1 + 5}{2} = 3$. Les nombres $-3$ et $2$ viennent de $-b = -1$ au lieu de $+1$ ; vérification : $(-3)^2 + 3 - 6 = 6 \\ne 0$. Le nombre $6$ est le terme constant au signe près, pas une solution.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule $\\Delta = b^2 - 4ac$ avec les signes de $a$, $b$, $c$. Si $\\Delta > 0$ : $x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$ ; si $\\Delta = 0$ : $x = -\\dfrac{b}{2a}$ ; si $\\Delta < 0$ : aucune solution."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie le signe de trinômes et on résout des inéquations du second degré.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $x^2 - 9 < 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = 0$, $c = -9$. 2) Calculer : $\\Delta = 36 > 0$, racines $-3$ et $3$. 3) Appliquer la règle : $a > 0$, donc signe $-$ entre les racines. 4) Conclure : on veut $< 0$, donc $S = ]-3\\,;\\,3[$, bornes exclues. L'extérieur est le signe $+$. Le crochet fermé de $[-3\\,;\\,3]$ conviendrait pour $\\le 0$, pas pour $< 0$ : en $x = 3$, $9 - 9 = 0$ n'est pas strictement négatif. L'intervalle $]-\\infty\\,;\\,3[$ oublie la borne $-3$ : pour $x = -5$, $25 - 9 = 16 > 0$.",
+                  "answers": [
+                    {
+                      "content": "$]-3\\,;\\,3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-3[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $x^2 - 2x - 3 \\ge 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = -2$, $c = -3$. 2) Calculer : $\\Delta = 4 + 12 = 16 > 0$, racines $\\dfrac{2 - 4}{2} = -1$ et $\\dfrac{2 + 4}{2} = 3$. 3) Appliquer la règle : $a > 0$, donc signe $+$ à l'extérieur. 4) Conclure : $S = ]-\\infty\\,;\\,-1] \\cup [3\\,;\\,+\\infty[$. L'intervalle $[-1\\,;\\,3]$ est la zone négative. Les bornes ouvertes conviendraient pour $> 0$. L'union avec $1$ vient d'une erreur de signe sur la racine $-1$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,-1]\\,\\cup\\,[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-1\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-1[\\,\\cup\\,]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,1]\\,\\cup\\,[3\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $x^2 + 1$ est strictement positif pour tout nombre réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = 0$, $c = 1$. 2) Calculer : $\\Delta = -4 < 0$, donc pas de racine. 3) Appliquer la règle : le trinôme a partout le signe de $a$, ici $+$. 4) Conclure : $x^2 + 1 > 0$ pour tout réel $x$. On le voit aussi directement : $x^2 \\ge 0$, donc $x^2 + 1 \\ge 1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de nombres entiers $x$ vérifient $x^2 - 3x - 4 \\le 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = -3$, $c = -4$. 2) Calculer : $\\Delta = 9 + 16 = 25 > 0$, racines $\\dfrac{3 - 5}{2} = -1$ et $\\dfrac{3 + 5}{2} = 4$. 3) Appliquer la règle : $a > 0$, donc signe $-$ entre les racines. 4) Conclure : $S = [-1\\,;\\,4]$, bornes comprises car l'inégalité est large. Les entiers sont $-1$, $0$, $1$, $2$, $3$ et $4$ : il y en a $6$. En exclure les bornes donnerait $4$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'inéquation $-x^2 + 1 \\ge 0$ a pour solutions $S = [-1\\,;\\,___]$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Mettre face à $0$ : $a = -1$, $b = 0$, $c = 1$. 2) Calculer : $\\Delta = 4 > 0$, racines $-1$ et $1$. 3) Appliquer la règle : $a < 0$, donc signe $+$ entre les racines. 4) Conclure : $S = [-1\\,;\\,1]$, bornes comprises. Vérification : pour $x = 0$, $1 \\ge 0$ est vrai ; pour $x = 2$, $-3 \\ge 0$ est faux.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le trinôme a le signe de $a$ à l'extérieur des racines et le signe contraire entre elles. Si $\\Delta < 0$, il a partout le signe de $a$."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Mise en inéquation d'un forfait téléphonique et d'une vente de jus ; équation du second degré pour l'aire d'un terrain ; signe d'un trinôme pour le bénéfice d'un maquis ; vérification qu'une solution a un sens.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Adjoua utilise un forfait téléphonique qui coûte $500$ FCFA par mois, plus $25$ FCFA par minute d'appel. Elle ne veut pas dépenser plus de $2\\,000$ FCFA ce mois-ci. On note $x$ le nombre de minutes d'appel.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle inéquation traduit le souhait d'Adjoua ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir l'inconnue : $x$ est le nombre de minutes. 2) Traduire : la dépense est $500 + 25x$ (forfait plus minutes) et « ne pas dépenser plus de $2\\,000$ » signifie « au plus $2\\,000$ », donc $\\le$. La proposition avec $\\ge$ traduit « au moins ». La proposition $525x$ multiplie le forfait par $x$ alors qu'il ne se paie qu'une fois. La proposition $500x + 25$ intervertit les deux prix.",
+                  "answers": [
+                    {
+                      "content": "$500 + 25x \\le 2\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$500 + 25x \\ge 2\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$525x \\le 2\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500x + 25 \\le 2\\,000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le nombre maximal de minutes d'appel qu'Adjoua peut utiliser ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Choisir : $x$ est le nombre de minutes. 2) Traduire : $500 + 25x \\le 2\\,000$. 3) Résoudre : $25x \\le 1\\,500$, donc $x \\le 60$. 4) Vérifier : avec $60$ minutes, elle paie $500 + 1\\,500 = 2\\,000$ FCFA, ce qui est permis. 5) Répondre : au plus $60$ minutes.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "min"
+                },
+                {
+                  "content": "Si Adjoua appelle pendant $70$ minutes, elle dépense plus de $2\\,000$ FCFA.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer la dépense pour $x = 70$ : $500 + 25 \\times 70 = 500 + 1\\,750 = 2\\,250$ FCFA. 2) Comparer à $2\\,000$ : $2\\,250 > 2\\,000$. L'affirmation est vraie. On le retrouve avec la solution $x \\le 60$ : $70$ dépasse $60$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : si Adjoua appelle pendant $40$ minutes, elle paie $___$ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Remplacer $x$ par $40$ dans $500 + 25x$. 2) Calculer : $25 \\times 40 = 1\\,000$, puis $500 + 1\\,000 = 1\\,500$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "1500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua a payé exactement $1\\,250$ FCFA ce mois-ci. Combien de minutes a-t-elle appelé ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Traduire : $500 + 25x = 1\\,250$. 2) Regrouper : $25x = 1\\,250 - 500 = 750$. 3) Diviser par $25$ : $x = 30$. 4) Vérifier : $500 + 25 \\times 30 = 1\\,250$. La valeur $50$ vient de $1\\,250 \\div 25$ sans retirer le forfait ; la valeur $70$ vient de $+500$ au lieu de $-500$ ; la valeur $5$ est une erreur de division.",
+                  "answers": [
+                    {
+                      "content": "$30$ minutes",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50$ minutes",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$ minutes",
+                      "correct": false
+                    },
+                    {
+                      "content": "$70$ minutes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Écris le prix en fonction de $x$ : forfait fixe plus prix par minute fois $x$. « Ne pas dépasser » signifie « au plus » : $\\le$."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tantie Rokia vend des bouteilles de jus de bissap à $250$ FCFA l'une. Elle paie $15\\,000$ FCFA de frais pour la journée. Elle veut un bénéfice d'au moins $10\\,000$ FCFA. On note $x$ le nombre de bouteilles vendues.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle inéquation traduit le souhait de Tantie Rokia ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir l'inconnue : $x$ est le nombre de bouteilles vendues. 2) Traduire : la recette est $250x$, les frais sont $15\\,000$, donc le bénéfice est $250x - 15\\,000$ ; « au moins $10\\,000$ » donne $\\ge$. La proposition avec $\\le$ traduit « au plus ». La proposition avec $+ 15\\,000$ ajoute les frais au lieu de les retirer. La dernière intervertit prix et frais.",
+                  "answers": [
+                    {
+                      "content": "$250x - 15\\,000 \\ge 10\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$250x - 15\\,000 \\le 10\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$250x + 15\\,000 \\ge 10\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15\\,000x - 250 \\ge 10\\,000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le nombre minimal de bouteilles qu'elle doit vendre ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Choisir : $x$ est le nombre de bouteilles. 2) Traduire : $250x - 15\\,000 \\ge 10\\,000$. 3) Résoudre : $250x \\ge 25\\,000$, donc $x \\ge 100$. 4) Vérifier : avec $100$ bouteilles, le bénéfice est $25\\,000 - 15\\,000 = 10\\,000$ ; avec $99$, il est de $9\\,750$, ce qui ne suffit pas. 5) Répondre : au moins $100$ bouteilles.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si Tantie Rokia vend $90$ bouteilles, son bénéfice atteint $10\\,000$ FCFA.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer le bénéfice pour $x = 90$ : $250 \\times 90 - 15\\,000 = 22\\,500 - 15\\,000 = 7\\,500$ FCFA. 2) Comparer à $10\\,000$ : $7\\,500 < 10\\,000$. L'affirmation est fausse. On le retrouve avec la solution $x \\ge 100$ : $90$ est inférieur à $100$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : si elle vend $120$ bouteilles, son bénéfice est de $___$ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Calculer la recette : $250 \\times 120 = 30\\,000$ FCFA. 2) Retirer les frais : $30\\,000 - 15\\,000 = 15\\,000$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "15000",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres de bouteilles vendues, lesquels permettent un bénéfice d'au moins $10\\,000$ FCFA ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) La condition est $250x - 15\\,000 \\ge 10\\,000$, soit $x \\ge 100$. 2) Avec $100$ bouteilles, le bénéfice est exactement $10\\,000$ ; avec $130$, il est de $17\\,500$. 3) Avec $99$ bouteilles, il est de $9\\,750$ ; avec $80$, de $5\\,000$ ; avec $60$, de $0$ : trop peu. Seuls $100$ et $130$ conviennent.",
+                  "answers": [
+                    {
+                      "content": "$100$ bouteilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "$130$ bouteilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "$99$ bouteilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "$80$ bouteilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "$60$ bouteilles",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Bénéfice = recette $-$ frais, avec recette $= 250x$. « Au moins » se traduit par $\\ge$ ; pour savoir si un nombre convient, remplace $x$ par lui."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Yao possède un terrain rectangulaire. Sa longueur dépasse sa largeur de $4$ mètres et son aire est de $96$ m². On note $x$ la largeur du terrain, en mètres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle équation traduit l'aire du terrain ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir l'inconnue : $x$ est la largeur en mètres, donc la longueur est $x + 4$. 2) Traduire : l'aire d'un rectangle est largeur $\\times$ longueur, donc $x(x + 4) = 96$. 3) Mettre sous la forme $ax^2 + bx + c = 0$ : $x^2 + 4x - 96 = 0$. La proposition avec $+ 96$ oublie de faire passer $96$ de l'autre côté en changeant de signe. La proposition $x^2 + 4 = 96$ oublie de multiplier $x$ par $4$. La proposition $2x + 4 = 96$ confond aire et périmètre.",
+                  "answers": [
+                    {
+                      "content": "$x(x + 4) = 96$, soit $x^2 + 4x - 96 = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 4x + 96 = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 4 = 96$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x + 4 = 96$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le discriminant $\\Delta$ de l'équation $x^2 + 4x - 96 = 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Lire $a = 1$, $b = 4$, $c = -96$. 2) Calculer : $\\Delta = 4^2 - 4 \\times 1 \\times (-96) = 16 + 384 = 400$. Le signe de $c$ est négatif, donc $-4ac$ devient $+384$. 3) Comparer : $\\Delta > 0$, donc deux solutions : $x = \\dfrac{-4 - 20}{2} = -12$ et $x = \\dfrac{-4 + 20}{2} = 8$.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la largeur du terrain de Yao ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Les solutions de $x^2 + 4x - 96 = 0$ sont $-12$ et $8$ (car $\\Delta = 400$). 2) Une largeur est positive : on rejette $-12$. 3) Vérification : $8 \\times 12 = 96$. La valeur $20$ est la racine carrée de $\\Delta$, pas une solution. La valeur $12$ est la longueur du terrain, pas la largeur.",
+                  "answers": [
+                    {
+                      "content": "$8$ mètres",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-12$ mètres",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20$ mètres",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$ mètres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La largeur est de $8$ mètres et la longueur dépasse la largeur de $4$ mètres. Quelle est la longueur du terrain ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) La longueur vaut $x + 4$ avec $x = 8$. 2) Calcul : $8 + 4 = 12$ mètres. 3) Vérification : $8 \\times 12 = 96$ m², l'aire donnée.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m"
+                },
+                {
+                  "content": "Le périmètre du terrain de Yao (largeur $8$ m, longueur $12$ m) est de $40$ mètres.",
+                  "question_type": "true_false",
+                  "explanation": "1) Le périmètre d'un rectangle est $2 \\times (\\text{largeur} + \\text{longueur})$. 2) Calcul : $2 \\times (8 + 12) = 2 \\times 20 = 40$ mètres. L'affirmation est vraie. Il ne faut pas calculer $8 \\times 12 = 96$, qui est l'aire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Aire du rectangle = largeur $\\times$ longueur. Une largeur est un nombre positif : une solution négative se rejette."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le bénéfice journalier d'un maquis, en milliers de FCFA, est donné par l'expression $-x^2 + 8x - 12$, où $x$ est le nombre de dizaines de plats vendus.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le discriminant $\\Delta$ du trinôme $-x^2 + 8x - 12$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Mettre face à $0$ : $a = -1$, $b = 8$, $c = -12$. 2) Calculer : $\\Delta = 8^2 - 4 \\times (-1) \\times (-12) = 64 - 48 = 16$. Le produit $4ac$ vaut $48$ car $a$ et $c$ sont tous les deux négatifs.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le bénéfice est nul pour $x = 2$ et pour $x = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Mettre face à $0$ : $-x^2 + 8x - 12 = 0$ avec $a = -1$, $b = 8$, $c = -12$. 2) Calculer : $\\Delta = 16$, donc les racines sont $\\dfrac{-8 - 4}{-2} = 6$ et $\\dfrac{-8 + 4}{-2} = 2$. Vérification : $-36 + 48 - 12 = 0$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $x$ le bénéfice est-il strictement positif ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre face à $0$ : $a = -1$, $b = 8$, $c = -12$. 2) Calculer : $\\Delta = 16 > 0$, racines $2$ et $6$. 3) Appliquer la règle : $a < 0$, donc signe $-$ à l'extérieur et signe $+$ entre les racines. 4) Conclure : on veut $> 0$, donc $S = ]2\\,;\\,6[$, bornes exclues puisque le bénéfice y est nul. L'extérieur donne un bénéfice négatif. Le crochet fermé de $[2\\,;\\,6]$ inclurait les deux valeurs où le bénéfice est nul.",
+                  "answers": [
+                    {
+                      "content": "$]2\\,;\\,6[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,2[\\,\\cup\\,]6\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;\\,6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;\\,2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le maquis ne vend que $10$ plats, c'est-à-dire $x = 1$, il fait une perte.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $1$ : $-1^2 + 8 \\times 1 - 12 = -1 + 8 - 12 = -5$ (en écrivant bien $-(1^2)$). 2) Comparer : $-5 < 0$, donc le bénéfice est négatif : c'est une perte de $5$ milliers de FCFA. On le retrouve avec la règle du signe : $1$ est à l'extérieur de $[2\\,;\\,6]$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le bénéfice, en milliers de FCFA, quand $x = 4$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $4$ : $-4^2 = -16$ (le carré s'applique à $4$ avant le signe $-$), $8 \\times 4 = 32$. 2) Calculer : $-16 + 32 - 12 = 4$ milliers de FCFA. 3) Vérifier : $4$ est entre les racines $2$ et $6$, donc le bénéfice est positif, comme prévu.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour un trinôme à $a < 0$, le signe $+$ est entre les racines. Pour une valeur donnée de $x$, remplace $x$ en gardant le carré avant le signe $-$."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Repérer et expliquer une erreur de sens dans une inéquation ; choisir la solution qui a un sens dans un problème ; justifier le signe d'un trinôme avec $a$ et $\\Delta$ ; comparer deux offres avec une inéquation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Koffi résout l'inéquation $-3x + 1 \\le 10$ et écrit : « $-3x \\le 9$, donc $x \\le -3$ ». Sa voisine Mariam pense qu'il s'est trompé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est l'erreur de Koffi ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Regrouper : $-3x \\le 10 - 1 = 9$ ; Koffi l'a bien fait. 2) Réduire : $-3x \\le 9$ ; correct aussi. 3) Diviser par $-3$ : le nombre est négatif, donc il faut inverser le sens, ce qui donne $x \\ge -3$. Koffi a gardé le sens $\\le$ : c'est son erreur. Test : pour $x = 0$, $-3 \\times 0 + 1 = 1 \\le 10$ est vrai, mais $0 \\le -3$ est faux, donc sa réponse est fausse.",
+                  "answers": [
+                    {
+                      "content": "Il a divisé par $-3$ sans inverser le sens de l'inégalité.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a oublié de passer le $1$ de l'autre côté.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a divisé par $3$ au lieu de $-3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a fait aucune erreur.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la bonne écriture des solutions de $-3x + 1 \\le 10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Regrouper : $-3x \\le 9$. 2) Réduire : c'est fait. 3) Diviser par $-3$ en inversant le sens : $x \\ge -3$. 4) Conclure : $S = [-3\\,;\\,+\\infty[$. L'intervalle $]-\\infty\\,;\\,-3]$ est l'erreur de Koffi. L'intervalle $[3\\,;\\,+\\infty[$ change le signe du nombre à tort. L'intervalle $]-3\\,;\\,+\\infty[$ exclut $-3$, alors que $-3 \\times (-3) + 1 = 10 \\le 10$ est vrai.",
+                  "answers": [
+                    {
+                      "content": "$[-3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $-3$ est solution de l'inéquation $-3x + 1 \\le 10$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $-3$ : $-3 \\times (-3) + 1 = 9 + 1 = 10$. 2) Comparer : $10 \\le 10$ est vrai, car l'inégalité est large. Le nombre $-3$ est donc solution : c'est la borne fermée de $[-3\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $-5$ est solution de l'inéquation $-3x + 1 \\le 10$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $-5$ : $-3 \\times (-5) + 1 = 15 + 1 = 16$. 2) Comparer : $16 \\le 10$ est faux. Le nombre $-5$ n'est pas solution : il est à gauche de $-3$, hors de $[-3\\,;\\,+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit nombre entier $x$ qui vérifie $-3x + 1 \\le 10$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Les solutions sont $x \\ge -3$ (division par $-3$ avec inversion du sens). 2) Le plus petit entier de $[-3\\,;\\,+\\infty[$ est $-3$, borne comprise. 3) Vérification : $-3 \\times (-3) + 1 = 10 \\le 10$ ; et pour $-4$, $12 + 1 = 13 > 10$.",
+                  "answers": [
+                    {
+                      "content": "-3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour vérifier une réponse, teste une valeur : remplace $x$ par $0$ et par une valeur de chaque côté de la borne. Diviser par un nombre négatif inverse le sens."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un enclos rectangulaire a une longueur égale à sa largeur augmentée de $5$ mètres. Son aire est de $84$ m². On note $x$ la largeur, en mètres : on obtient $x(x + 5) = 84$, soit $x^2 + 5x - 84 = 0$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le discriminant $\\Delta$ de l'équation $x^2 + 5x - 84 = 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Lire $a = 1$, $b = 5$, $c = -84$. 2) Calculer : $\\Delta = 5^2 - 4 \\times 1 \\times (-84) = 25 + 336 = 361$, et $361 = 19^2$. 3) Comparer : $\\Delta > 0$, donc deux solutions.",
+                  "answers": [
+                    {
+                      "content": "361",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux solutions de l'équation $x^2 + 5x - 84 = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Lire $a = 1$, $b = 5$, $c = -84$. 2) Calculer : $\\Delta = 361$, de racine carrée $19$. 3) Comparer : $\\Delta > 0$, donc deux solutions. 4) Déterminer : $x_1 = \\dfrac{-5 - 19}{2} = -12$ et $x_2 = \\dfrac{-5 + 19}{2} = 7$. Les nombres $12$ et $-7$ ne sont pas des solutions : $12 \\times 17 = 204 \\ne 84$ et $(-7) \\times (-2) = 14 \\ne 84$. Le nombre $19$ est $\\sqrt{\\Delta}$, pas une solution.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$19$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les deux solutions $7$ et $-12$, laquelle donne la largeur de l'enclos, et pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Vérifier que la solution a un sens : une largeur est une longueur, donc un nombre strictement positif. 2) La solution $-12$ vérifie l'équation mais ne peut pas être une largeur. 3) Donc la largeur est $7$ mètres. Le critère n'est pas « la plus grande » mais « positive » : annuler l'équation ne suffit pas, il faut aussi que la valeur ait un sens dans le problème.",
+                  "answers": [
+                    {
+                      "content": "$7$, car une largeur est un nombre positif.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-12$, car c'est la plus petite des deux solutions.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$, car c'est toujours la plus grande solution qui convient.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux conviennent, car chacune annule l'équation.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : avec une largeur de $7$ mètres, la longueur de l'enclos est de $___$ mètres.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) La longueur est la largeur augmentée de $5$ mètres. 2) Calcul : $7 + 5 = 12$ mètres. 3) Vérification : $7 \\times 12 = 84$ m², l'aire donnée.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le périmètre de l'enclos (largeur $7$ m, longueur $12$ m) est de $38$ mètres.",
+                  "question_type": "true_false",
+                  "explanation": "1) Le périmètre d'un rectangle est $2 \\times (\\text{largeur} + \\text{longueur})$. 2) Calcul : $2 \\times (7 + 12) = 2 \\times 19 = 38$ mètres. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une équation du second degré a souvent deux solutions. Garde seulement celle qui a un sens pour une largeur : un nombre positif."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour chaque affirmation sur le signe d'un trinôme, on raisonne avec $a$ et le discriminant $\\Delta$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le trinôme $x^2 - 4x + 4$ est positif ou nul pour tout nombre réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = -4$, $c = 4$. 2) Calculer : $\\Delta = 16 - 16 = 0$, racine double $x = 2$. 3) Appliquer la règle : le trinôme a le signe de $a$ (positif) partout, sauf en $x = 2$ où il vaut $0$. 4) Conclure : il est positif ou nul pour tout réel. On le voit aussi car $x^2 - 4x + 4 = (x - 2)^2$, un carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $x^2 + x + 1$ s'annule pour au moins un nombre réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = 1$, $c = 1$. 2) Calculer : $\\Delta = 1 - 4 = -3 < 0$. 3) Appliquer la règle : pas de racine, le trinôme garde partout le signe de $a$, soit $+$. 4) Conclure : il ne s'annule jamais. Vérification : pour $x = -1$, $1 - 1 + 1 = 1 \\ne 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $-x^2 - 1$ est strictement négatif pour tout nombre réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Mettre face à $0$ : $a = -1$, $b = 0$, $c = -1$. 2) Calculer : $\\Delta = 0 - 4 \\times (-1) \\times (-1) = -4 < 0$. 3) Appliquer la règle : le trinôme a partout le signe de $a$, soit $-$. 4) Conclure : il est strictement négatif pour tout réel. Vérification : $-x^2 \\le 0$, donc $-x^2 - 1 \\le -1 < 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $x^2 - 6x + 9 \\le 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = -6$, $c = 9$. 2) Calculer : $\\Delta = 36 - 36 = 0$, racine double $3$. 3) Appliquer la règle : le trinôme est positif partout sauf en $3$ où il vaut $0$. 4) Conclure : on veut $\\le 0$, donc seulement la valeur où il s'annule : $S = \\{3\\}$. Dire « aucun nombre » oublie que $3$ donne exactement $0$ ; « tous les nombres » confond avec $\\ge 0$ ; $]-\\infty\\,;\\,3]$ est faux : pour $x = 0$, $0 - 0 + 9 = 9 \\le 0$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\{3\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun nombre réel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les nombres réels",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces inéquations, lesquelles n'ont aucune solution réelle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Pour $x^2 + 1 < 0$ : $\\Delta = -4 < 0$ et $a > 0$, donc le trinôme est toujours strictement positif : aucune solution. 2) Pour $x^2 + 4x + 5 \\le 0$ : $\\Delta = 16 - 20 = -4 < 0$ et $a > 0$, donc le trinôme est toujours strictement positif : aucune solution. 3) $x^2 - 1 \\le 0$ a pour solutions $[-1\\,;\\,1]$ ; $-x^2 + 1 > 0$ a pour solutions $]-1\\,;\\,1[$ ; $x^2 \\ge 0$ est vraie pour tout réel.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 1 < 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 4x + 5 \\le 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 1 \\le 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x^2 + 1 > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 \\ge 0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule $\\Delta$. Si $\\Delta < 0$, le trinôme a partout le signe de $a$. Si $\\Delta = 0$, il vaut $0$ en une seule valeur et garde le signe de $a$ ailleurs."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un restaurateur compare deux fournisseurs de riz pour $x$ kilogrammes. Le fournisseur A demande $2\\,000$ FCFA de livraison plus $400$ FCFA par kilogramme. Le fournisseur B demande $500$ FCFA de livraison plus $450$ FCFA par kilogramme.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle inéquation traduit « le fournisseur B est moins cher que le fournisseur A » ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir l'inconnue : $x$ est le nombre de kilogrammes. 2) Traduire : le prix de B est $450x + 500$ et celui de A est $400x + 2\\,000$ ; « moins cher » donne $<$. La proposition avec $>$ traduit « plus cher ». La proposition qui échange les livraisons mélange les deux offres. La proposition $500x + 450 < 2\\,000x + 400$ échange le prix au kilo et la livraison.",
+                  "answers": [
+                    {
+                      "content": "$450x + 500 < 400x + 2\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$450x + 500 > 400x + 2\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$450x + 2\\,000 < 400x + 500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500x + 450 < 2\\,000x + 400$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À partir de quelle quantité les deux fournisseurs ont-ils exactement le même prix ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Traduire l'égalité des prix : $450x + 500 = 400x + 2\\,000$. 2) Regrouper : $450x - 400x = 2\\,000 - 500$. 3) Réduire : $50x = 1\\,500$. 4) Diviser par $50$ : $x = 30$. 5) Vérifier : B coûte $13\\,500 + 500 = 14\\,000$ FCFA et A coûte $12\\,000 + 2\\,000 = 14\\,000$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "Pour quelles quantités le fournisseur B est-il moins cher que le fournisseur A ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Traduire : $450x + 500 < 400x + 2\\,000$. 2) Regrouper : $50x < 1\\,500$. 3) Diviser par $50$ (positif, le sens ne change pas) : $x < 30$. 4) Conclure : B est moins cher pour moins de $30$ kg. Le sens inverse $x > 30$ correspond à A moins cher. La valeur $1\\,500$ est celle de la ligne précédente avant la division par $50$.",
+                  "answers": [
+                    {
+                      "content": "Pour moins de $30$ kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour plus de $30$ kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour moins de $1\\,500$ kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour toute quantité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $40$ kg de riz, le fournisseur A est moins cher que le fournisseur B.",
+                  "question_type": "true_false",
+                  "explanation": "1) Calculer le prix de A : $400 \\times 40 + 2\\,000 = 16\\,000 + 2\\,000 = 18\\,000$ FCFA. 2) Calculer le prix de B : $450 \\times 40 + 500 = 18\\,000 + 500 = 18\\,500$ FCFA. 3) Comparer : $18\\,000 < 18\\,500$, donc A est moins cher. C'est cohérent avec $x > 30$, où A devient avantageux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : pour $10$ kg de riz, le fournisseur B facture $___$ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Calculer le prix au kilo : $450 \\times 10 = 4\\,500$ FCFA. 2) Ajouter la livraison : $4\\,500 + 500 = 5\\,000$ FCFA.",
+                  "answers": [
+                    {
+                      "content": "5000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Écris le prix de chaque offre en fonction de $x$, puis compare avec le symbole du texte : « moins cher » donne $<$. Teste ensuite une valeur de chaque côté du seuil."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Équations et inéquations du premier degré ; discriminant et solutions d'une équation du second degré ; signe d'un trinôme et inéquations du second degré ; mise en inéquation d'un problème d'aire avec vérification du sens de la solution.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On mélange les trois types de résolution du cours : équation du premier degré, équation du second degré, inéquation du premier degré et signe d'un trinôme.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la solution de l'équation $2(x + 3) = x + 10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Développer puis regrouper : $2x + 6 = x + 10$, donc $2x - x = 10 - 6$. 2) Réduire : $x = 4$. 3) Conclure : $S = \\{4\\}$ ; vérification : $2 \\times 7 = 14$ et $4 + 10 = 14$. La valeur $7$ vient de $2x + 3 = x + 10$ : le $2$ n'a pas multiplié le $3$. La valeur $\\dfrac{4}{3}$ vient de $2x + x = 10 - 6$ : le $x$ n'a pas changé de signe. La valeur $-4$ est une erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "$x = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = \\dfrac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le discriminant $\\Delta$ de l'équation $3x^2 - 2x - 1 = 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Lire $a = 3$, $b = -2$, $c = -1$. 2) Calculer : $\\Delta = (-2)^2 - 4 \\times 3 \\times (-1) = 4 + 12 = 16$. Le terme $-4ac$ vaut $+12$ car $c$ est négatif.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'équation $3x^2 - 2x - 1 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Lire $a = 3$, $b = -2$, $c = -1$ ; $\\Delta = 16$, donc deux solutions. 2) Déterminer : $x_1 = \\dfrac{2 - 4}{6} = -\\dfrac{1}{3}$ et $x_2 = \\dfrac{2 + 4}{6} = 1$. Vérification : $3 \\times 1 - 2 - 1 = 0$. Les autres ensembles viennent d'erreurs de signe ou d'une division par un mauvais nombre : il faut diviser par $2a = 6$. Par exemple $3 \\times 1 - 2 - 1 = 0$ est vrai, mais pour $x = -1$ on obtient $3 + 2 - 1 = 4 \\ne 0$.",
+                  "answers": [
+                    {
+                      "content": "$S = \\left\\{-\\dfrac{1}{3}\\,;\\,1\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S = \\left\\{-1\\,;\\,\\dfrac{1}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\left\\{\\dfrac{1}{3}\\,;\\,1\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\{-1\\,;\\,1\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $-3x + 9 > 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Regrouper : $-3x > -9$. 2) Réduire : c'est fait. 3) Diviser par $-3$ : le nombre est négatif, donc on inverse le sens : $x < 3$. 4) Conclure : $S = ]-\\infty\\,;\\,3[$, bornes ouvertes car l'inégalité est stricte. L'intervalle $]3\\,;\\,+\\infty[$ oublie d'inverser le sens. Le crochet fermé de $]-\\infty\\,;\\,3]$ inclurait $3$, où $-9 + 9 = 0$ n'est pas strictement positif.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'inéquation $3x^2 - 2x - 1 \\le 0$ a pour solutions l'intervalle $\\left[-\\dfrac{1}{3}\\,;\\,1\\right]$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Mettre face à $0$ : $a = 3$, $b = -2$, $c = -1$. 2) Calculer : $\\Delta = 16$, racines $-\\dfrac{1}{3}$ et $1$. 3) Appliquer la règle : $a > 0$, donc signe $-$ entre les racines. 4) Conclure : on veut $\\le 0$, donc entre les racines bornes comprises : $\\left[-\\dfrac{1}{3}\\,;\\,1\\right]$. L'affirmation est vraie. Vérification : pour $x = 0$, $-1 \\le 0$ est vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque question, choisis la méthode du bon type : premier degré (regrouper, diviser) ou second degré ($\\Delta$ puis racines). Pense à inverser le sens en divisant par un nombre négatif."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie l'inéquation $2x^2 - 5x + 2 > 0$ et l'équation associée $2x^2 - 5x + 2 = 0$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le discriminant $\\Delta$ du trinôme $2x^2 - 5x + 2$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Mettre face à $0$ : $a = 2$, $b = -5$, $c = 2$. 2) Calculer : $\\Delta = (-5)^2 - 4 \\times 2 \\times 2 = 25 - 16 = 9$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'équation $2x^2 - 5x + 2 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Lire $a = 2$, $b = -5$, $c = 2$ ; $\\Delta = 9 > 0$, donc deux solutions. 2) Déterminer : $x_1 = \\dfrac{5 - 3}{4} = \\dfrac{1}{2}$ et $x_2 = \\dfrac{5 + 3}{4} = 2$. Vérification : $2 \\times 4 - 10 + 2 = 0$. L'ensemble $\\left\\{-2\\,;\\,-\\dfrac{1}{2}\\right\\}$ utilise $-b = -5$ au lieu de $+5$. L'ensemble $\\{1\\,;\\,4\\}$ oublie de diviser par $2a = 4$ en divisant par $2$. Une seule solution demanderait $\\Delta = 0$.",
+                  "answers": [
+                    {
+                      "content": "$S = \\left\\{\\dfrac{1}{2}\\,;\\,2\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S = \\left\\{-2\\,;\\,-\\dfrac{1}{2}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\{1\\,;\\,4\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = \\left\\{\\dfrac{1}{2}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $2x^2 - 5x + 2 > 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre face à $0$ : $a = 2$, $b = -5$, $c = 2$. 2) Calculer : $\\Delta = 9$, racines $\\dfrac{1}{2}$ et $2$. 3) Appliquer la règle : $a > 0$, donc signe $+$ à l'extérieur. 4) Conclure : on veut $> 0$, donc l'extérieur, bornes exclues : $S = \\left]-\\infty\\,;\\,\\dfrac{1}{2}\\right[ \\cup ]2\\,;\\,+\\infty[$. L'intervalle entre les racines est la zone négative. Les crochets fermés conviendraient pour $\\ge 0$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,\\dfrac{1}{2}[\\,\\cup\\,]2\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]\\dfrac{1}{2}\\,;\\,2[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,\\dfrac{1}{2}]\\,\\cup\\,[2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[\\dfrac{1}{2}\\,;\\,2]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $1$ est solution de l'inéquation $2x^2 - 5x + 2 > 0$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $1$ : $2 \\times 1 - 5 \\times 1 + 2 = -1$. 2) Comparer : $-1 > 0$ est faux. Le nombre $1$ est entre les racines $\\dfrac{1}{2}$ et $2$, où le trinôme est négatif. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les nombres entiers naturels $0$, $1$, $2$, $3$, $4$, $5$, $6$, $7$, $8$ et $9$, combien ne vérifient pas $2x^2 - 5x + 2 > 0$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Les solutions sont les nombres inférieurs à $\\dfrac{1}{2}$ ou supérieurs à $2$ (bornes exclues). 2) Parmi les entiers de $0$ à $9$, $0$ est inférieur à $\\dfrac{1}{2}$ et $3$ à $9$ sont supérieurs à $2$ : ils conviennent. 3) Les entiers $1$ et $2$ ne conviennent pas : $2 - 5 + 2 = -1$ et $8 - 10 + 2 = 0$, qui n'est pas strictement positif. Réponse : $2$ entiers.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule $\\Delta$, puis les racines. Pour $a > 0$, le trinôme est positif à l'extérieur des racines ; pour tester un nombre, remplace $x$ par lui."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "L'étal rectangulaire de Kofi a une largeur de $x$ mètres et une longueur de $x + 3$ mètres. Il veut que son aire soit d'au plus $40$ m².",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle inéquation traduit « l'aire est d'au plus $40$ m² » ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Choisir l'inconnue : $x$ est la largeur en mètres. 2) Traduire : l'aire est largeur $\\times$ longueur $= x(x + 3)$ et « au plus » donne $\\le$. 3) Mettre face à $0$ : $x^2 + 3x - 40 \\le 0$. La proposition avec $\\ge$ traduit « au moins ». La proposition $x + x + 3$ additionne au lieu de multiplier. La proposition avec $+ 40$ ne change pas le signe du $40$ en le passant à gauche.",
+                  "answers": [
+                    {
+                      "content": "$x(x + 3) \\le 40$, soit $x^2 + 3x - 40 \\le 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x(x + 3) \\ge 40$, soit $x^2 + 3x - 40 \\ge 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + x + 3 \\le 40$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 3x + 40 \\le 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le discriminant $\\Delta$ du trinôme $x^2 + 3x - 40$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Lire $a = 1$, $b = 3$, $c = -40$. 2) Calculer : $\\Delta = 9 - 4 \\times 1 \\times (-40) = 9 + 160 = 169$, et $169 = 13^2$.",
+                  "answers": [
+                    {
+                      "content": "169",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions réelles de l'inéquation $x^2 + 3x - 40 \\le 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = 3$, $c = -40$. 2) Calculer : $\\Delta = 169$, racines $\\dfrac{-3 - 13}{2} = -8$ et $\\dfrac{-3 + 13}{2} = 5$. 3) Appliquer la règle : $a > 0$, donc signe $-$ entre les racines. 4) Conclure : $S = [-8\\,;\\,5]$. L'extérieur est la zone positive. L'intervalle $[-5\\,;\\,8]$ change le signe des racines. Les bornes ouvertes conviendraient pour $< 0$.",
+                  "answers": [
+                    {
+                      "content": "$[-8\\,;\\,5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-8]\\,\\cup\\,[5\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-5\\,;\\,8]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-8\\,;\\,5[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La largeur $x$ est un nombre strictement positif. Quelles largeurs donnent une aire d'au plus $40$ m² ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Vérifier que la solution a un sens : les solutions de l'inéquation sont $[-8\\,;\\,5]$. 2) Une largeur est strictement positive, donc on garde $x > 0$ avec $x \\le 5$. 3) Conclure : $0 < x \\le 5$. L'intervalle $-8 \\le x \\le 5$ contient des largeurs négatives. L'affirmation $x \\ge 5$ inverse l'inégalité. L'intervalle $5 \\le x \\le 8$ confond $8$, la longueur, avec une largeur.",
+                  "answers": [
+                    {
+                      "content": "$0 < x \\le 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-8 \\le x \\le 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\ge 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5 \\le x \\le 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand $x = 5$, l'aire de l'étal vaut exactement $40$ m².",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $5$ : la longueur est $5 + 3 = 8$ mètres. 2) Calculer l'aire : $5 \\times 8 = 40$ m². L'affirmation est vraie : $5$ est la racine de $x^2 + 3x - 40 = 0$ qui borne l'inégalité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : quand la largeur est la plus grande possible, soit $5$ mètres, la longueur de l'étal est de $___$ mètres.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) La longueur vaut $x + 3$ avec $x = 5$. 2) Calcul : $5 + 3 = 8$ mètres. 3) Vérification : $5 \\times 8 = 40$ m².",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Aire $=$ largeur $\\times$ longueur. Résous le trinôme avec $\\Delta$, puis garde les valeurs qui ont un sens pour une largeur (nombre positif)."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie le trinôme $x^2 - 2x - 8$ : ses racines, son signe, et deux inéquations qui lui sont liées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les deux solutions de l'équation $x^2 - 2x - 8 = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Lire $a = 1$, $b = -2$, $c = -8$. 2) Calculer : $\\Delta = 4 + 32 = 36$. 3) Comparer : $\\Delta > 0$, donc deux solutions. 4) Déterminer : $x_1 = \\dfrac{2 - 6}{2} = -2$ et $x_2 = \\dfrac{2 + 6}{2} = 4$. Les nombres $2$ et $-4$ viennent de $-b = -2$ au lieu de $+2$ : $2^2 - 4 - 8 = -8 \\ne 0$. Le nombre $8$ est le terme constant au signe près.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 0$, le trinôme $x^2 - 2x - 8$ est strictement négatif.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $0$ : $0 - 0 - 8 = -8$. 2) Comparer : $-8 < 0$. L'affirmation est vraie. C'est cohérent avec la règle : $0$ est entre les racines $-2$ et $4$, où le trinôme est du signe contraire de $a = 1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $x^2 - 2x - 8 < 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Mettre face à $0$ : $a = 1$, $b = -2$, $c = -8$. 2) Calculer : $\\Delta = 36$, racines $-2$ et $4$. 3) Appliquer la règle : $a > 0$, donc signe $-$ entre les racines. 4) Conclure : on veut $< 0$, donc $S = ]-2\\,;\\,4[$. L'extérieur est la zone positive. Le crochet fermé de $[-2\\,;\\,4]$ conviendrait pour $\\le 0$. L'intervalle $]-4\\,;\\,2[$ change le signe des racines.",
+                  "answers": [
+                    {
+                      "content": "$]-2\\,;\\,4[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-2[\\,\\cup\\,]4\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-2\\,;\\,4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-4\\,;\\,2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la résolution de $x^2 - 2x - 8 \\ge 0$.",
+                  "question_type": "ordering",
+                  "explanation": "1) Mettre face à $0$ et lire $a$, $b$, $c$. 2) Calculer $\\Delta$ puis les racines. 3) Appliquer la règle du signe de $a$. 4) Conclure en gardant l'extérieur, bornes comprises : $S = ]-\\infty\\,;\\,-2] \\cup [4\\,;\\,+\\infty[$. On ne peut choisir l'intervalle qu'après avoir trouvé les racines et le signe.",
+                  "answers": [
+                    {
+                      "content": "Mettre face à $0$ : $a = 1$, $b = -2$, $c = -8$."
+                    },
+                    {
+                      "content": "Calculer : $\\Delta = 36 > 0$, donc les racines sont $-2$ et $4$."
+                    },
+                    {
+                      "content": "Appliquer la règle : $a > 0$, donc signe $+$ à l'extérieur des racines."
+                    },
+                    {
+                      "content": "Conclure : on veut $\\ge 0$, donc $S = ]-\\infty\\,;\\,-2] \\cup [4\\,;\\,+\\infty[$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le discriminant du trinôme $x^2 - 2x - 8$ est $\\Delta = ___$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Lire $a = 1$, $b = -2$, $c = -8$. 2) Calculer : $\\Delta = (-2)^2 - 4 \\times 1 \\times (-8) = 4 + 32 = 36$. Mettre $b$ entre parenthèses évite d'écrire $-4$ au lieu de $4$.",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Racines avec $\\Delta$, puis signe : $a = 1 > 0$ donc signe $+$ à l'extérieur et signe $-$ entre les racines. Les bornes sont comprises pour $\\le$ et $\\ge$ seulement."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
