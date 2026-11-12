@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | cadrage |
+| **Statut** | en cours |
 | **Ouvert le** | 2026-11-12 |
 | **Branche** | `perf/ci-lecons-rendu` |
 | **Programme** | — |

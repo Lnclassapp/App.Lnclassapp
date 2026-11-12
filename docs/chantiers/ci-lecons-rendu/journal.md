@@ -6,14 +6,17 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-11-12 | Levier « attente par leçon » non joué | Le porteur a choisi le rendu ciblé, qui ramène le coût d'un train sans leçon changée de 98,7 à environ 3 min : l'attente devient marginale. | non |
+| 2026-11-12 | Train : leçons changées seulement, sinon 2 témoins | Décision du porteur, coût en minutes de machine | oui, ADR-XXXX-ci-lecons-rendu-cible |
 
 ## À trancher
 
 > Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
-- [ ] 2026-11-12 · ci-lecons-rendu · Le train peut-il ne rendre que les leçons changées + un échantillon, le rendu complet passant la nuit sur Develop ? — appliqué : aucun (levier 1 seul, sans perte de couverture) ; autres : levier 2 ; recommandé : levier 1 d'abord, levier 2 seulement si la cible n'est pas atteinte.
+- [x] 2026-11-12 · ci-lecons-rendu · Que rend un train ? — tranché par le porteur : les leçons nouvelles ou modifiées seulement (2 ou 3 parts), sinon 2 leçons témoins.
+- [ ] 2026-11-12 · ci-lecons-rendu · Une régression des vues sur une leçon ancienne n'est plus vue au train (seulement par les 2 témoins). Ajouter un rendu complet programmé (une nuit par semaine sur Develop, rouge = issue) ? — appliqué : non ; autres : oui ; recommandé : oui, coût ≈ 99 min de machine par semaine.
+- [ ] 2026-11-12 · ci-lecons-rendu · 10 leçons par part (décision du porteur) : ≈ 250 s pour 300 s ; sur #541 une part de 9 leçons a été coupée (installation de 1 min 40). — appliqué : 10 ; autres : 7 ; recommandé : garder 10 et repasser à 7 si une part est coupée au prochain train.
 
 ## Retouches
 

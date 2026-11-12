@@ -63,11 +63,15 @@ class CiPlanTest < Minitest::Test
     lecons = jobs["lecons"]
     assert_equal "plan", lecons["needs"]
     assert_equal 5, lecons["timeout-minutes"]
-    parts = lecons.dig("strategy", "matrix", "part")
-    assert_equal (1..parts.size).to_a, parts
+    assert_equal "${{ fromJSON(needs.plan.outputs.lecons_parts) }}", lecons.dig("strategy", "matrix", "part")
+    assert_equal false, lecons.dig("strategy", "fail-fast")
+    assert_includes jobs.dig("plan", "outputs", "lecons_parts"), "steps.changes.outputs.lecons_parts"
+    assert_includes steps("plan").map { it["run"].to_s }.join("\n"), "parts=$(( (count + 9) / 10 ))", "10 leçons au plus par part"
     run = steps("lecons").map { it["run"].to_s }.join("\n")
     assert_includes run, "PARALLEL_WORKERS=1 bin/rails test test/system/catalog/lesson_rendering_test.rb"
-    assert_equal "#{'${{ matrix.part }}'}/#{parts.size}", steps("lecons").find { it.dig("env", "LECONS_PART") }.dig("env", "LECONS_PART")
+    env = steps("lecons").find { it.dig("env", "LECONS_PART") }["env"]
+    assert_equal "${{ matrix.part }}/${{ needs.plan.outputs.lecons_n }}", env["LECONS_PART"]
+    assert_equal "${{ needs.plan.outputs.lecons_files }}", env["LECONS"], "la liste vient de « plan », jamais « tout »"
   end
 
   # ADR-0069 §9 : the two jobs add up to bin/ci: on a full run (promotion, drawn pull request) every group once,

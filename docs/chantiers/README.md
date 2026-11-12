@@ -95,7 +95,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`ci-cloud-claude`](ci-cloud-claude/memo.md) | en cours | feature | 2026-10-05 | La CI rejouée dans le cloud Claude |
 | [`ci-durees-enregistrees`](ci-durees-enregistrees/memo.md) | livré | optimisation | 2026-11-06 | Durées système enregistrées par la CI |
 | [`ci-gardes-en-double`](ci-gardes-en-double/memo.md) | livré | optimisation | 2026-09-26 | Les gardes tournent deux fois dans `bin/ci` |
-| [`ci-lecons-rendu`](ci-lecons-rendu/memo.md) | cadrage | optimisation | 2026-11-12 | Rendu des leçons en CI : moins de minutes de machine par train |
+| [`ci-lecons-rendu`](ci-lecons-rendu/memo.md) | en cours | optimisation | 2026-11-12 | Rendu des leçons en CI : moins de minutes de machine par train |
 | [`ci-par-train`](ci-par-train/memo.md) | livré | optimisation | 2026-10-20 | Une CI complète par train, plus par PR |
 | [`ci-perf-a-la-demande`](ci-perf-a-la-demande/memo.md) | livré | optimisation | 2026-10-19 | La perf des imports et les CI répétées ralentissent chaque PR |
 | [`ci-quota`](ci-quota/memo.md) | en cours | optimisation | 2026-09-29 | La CI épuise le quota de minutes GitHub Actions |
