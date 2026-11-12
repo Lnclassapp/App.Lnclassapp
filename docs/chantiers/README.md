@@ -176,6 +176,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
 | [`historique-eleve`](historique-eleve/memo.md) | livré | feature | 2026-10-15 | Historique de l'élève aux couleurs Wave et Djamo |
 | [`hitl-refs-adr-obsoletes`](hitl-refs-adr-obsoletes/memo.md) | abandonné | refactoring | 2026-09-18 | En-têtes HITL citant des numéros d'ADR périmés |
+| [`hors-connexion`](hors-connexion/memo.md) | planifié | feature | 2026-11-12 | Lnclass hors connexion |
 | [`images-dans-les-cours`](images-dans-les-cours/memo.md) | livré | feature | 2026-10-10 | Des images dans les fiches de cours |
 | [`import-cours-multiple`](import-cours-multiple/memo.md) | livré | feature | 2026-09-29 | Importer plusieurs fichiers de cours en une fois |
 | [`import-drenas`](import-drenas/memo.md) | planifié | feature | 2026-09-29 | Import des DRENA par fichier |

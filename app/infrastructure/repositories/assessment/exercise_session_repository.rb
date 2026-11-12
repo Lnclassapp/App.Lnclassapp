@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseSessionRepository
 # Rôle : sessions d'exercice et tentatives immuables ; compteurs tenus en SQL, une seule session ouverte par exercice
-# ADR  : 0033, 0043, 0054, 0091, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : cases, indice ouvert)
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : cases, indice ouvert), hors-connexion (§4.5)
 module Repositories
   module Assessment
     class ExerciseSessionRepository
@@ -65,6 +65,36 @@ module Repositories
         :ok
       rescue ActiveRecord::RecordNotUnique
         :duplicate
+      end
+
+      # Hors-connexion ADR §4.5 : la session terminée, ses tentatives, l'identifiant de copie et l'heure de réception, dans un savepoint.
+      # Une violation d'unicité n'est un rejeu que si la copie existe déjà sous cet identifiant ; sinon (public_id pris) elle remonte.
+      def record_offline_copy(session:, attempts:, client_copy_id:, received_at:)
+        record = Orm::ExerciseSession.new(
+          public_id: session.public_id, student_id: session.student_id, exercise_id: session.exercise_id, status: "completed",
+          question_count: session.question_count, answered_count: session.answered_count, correct_count: session.correct_count,
+          progress_percent: session.progress_percent, score_percent: session.score_percent, kind: session.kind,
+          knowledge_gap_id: session.knowledge_gap_id, classroom_assignment_id: session.classroom_assignment_id,
+          started_at: session.started_at, completed_at: session.completed_at, client_copy_id:, received_at:
+        )
+        Orm::ExerciseSession.transaction(requires_new: true) do
+          record.save!
+          attempts.each do |attempt|
+            Orm::QuestionAttempt.create!(exercise_session_id: record.id, question_id: attempt.fetch(:question_id),
+                                         selected_answer_ids: attempt.fetch(:selected_answer_ids), response_text: attempt[:response_text],
+                                         correct: attempt.fetch(:correct), unanswered: attempt.fetch(:unanswered, false),
+                                         answered_at: session.completed_at, blank_responses: attempt.fetch(:blank_responses, []),
+                                         blank_results: attempt.fetch(:blank_results, []))
+          end
+        end
+        map_to_entity(record)
+      rescue ActiveRecord::RecordNotUnique
+        find_by_client_copy_id(student_id: session.student_id, client_copy_id:) ? :duplicate : raise
+      end
+
+      def find_by_client_copy_id(student_id:, client_copy_id:)
+        record = Orm::ExerciseSession.find_by(student_id:, client_copy_id:)
+        record && map_to_entity(record)
       end
 
       # L'ouverture d'un indice : array_append seulement si la question n'y est pas, dans un seul UPDATE (il verrouille la ligne de la

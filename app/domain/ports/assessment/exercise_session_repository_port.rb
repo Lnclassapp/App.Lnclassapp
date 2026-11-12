@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseSessionRepositoryPort
 # Rôle : contrat des sessions d'exercice et de leurs tentatives immuables
-# ADR  : 0033, 0043, 0054, 0091, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice, hors-connexion (§4.5)
 module Ports
   module Assessment
     module ExerciseSessionRepositoryPort
@@ -61,6 +61,19 @@ module Ports
       # → { exercise_id => [Time] } (un exercice sans copie terminée n'a pas de clé)
       def recent_completions_by_exercise(student_id:, exercise_ids:, limit: Entities::Assessment::RestartPause::STREAK)
         raise NotImplementedError, "#{self.class} doit implémenter #recent_completions_by_exercise"
+      end
+
+      # Enregistre en une transaction une copie rendue hors ligne : la session déjà terminée (session : ExerciseSession `completed`, avec
+      # score, compteurs, started_at et completed_at bornés), ses tentatives (même forme que record_copy), l'identifiant tiré sur l'appareil
+      # et l'heure de réception (hors-connexion ADR §4.5). L'index unique (student_id, client_copy_id) rend l'envoi rejoué sans effet.
+      # → ExerciseSession | :duplicate (cet élève a déjà cette copie : rien n'est écrit)
+      def record_offline_copy(session:, attempts:, client_copy_id:, received_at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #record_offline_copy"
+      end
+
+      # La copie hors ligne déjà enregistrée de l'élève sous cet identifiant. → ExerciseSession | nil
+      def find_by_client_copy_id(student_id:, client_copy_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_client_copy_id"
       end
 
       # UPDATE … WHERE status = 'started' : pose completed, score_percent et completed_at. → true
