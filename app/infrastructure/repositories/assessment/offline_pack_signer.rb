@@ -8,7 +8,10 @@ module Repositories
 
       PURPOSE = "offline_pack".freeze
       LIFETIME = 30.days
-      FIELDS = %w[student_id exercise_id digest issued_at].freeze
+      # L'enveloppe du chiffrement vit plus longtemps que le jeton : un jeton périmé se lit encore, ce qui permet de dire « expiré »
+      # (et non « altéré ») à l'appareil. La vraie échéance (expires_at, 30 jours après la signature) est jugée ici.
+      ENVELOPE_LIFETIME = 365.days
+      FIELDS = %w[student_id exercise_id digest issued_at expires_at].freeze
 
       def initialize(verifier: self.class.default_verifier)
         @verifier = verifier
@@ -20,20 +23,40 @@ module Repositories
       end
 
       def sign(student_id:, exercise_id:, digest:, issued_at:)
-        @verifier.encrypt_and_sign({ "student_id" => student_id, "exercise_id" => exercise_id, "digest" => digest, "issued_at" => issued_at.utc.iso8601 },
-                           purpose: PURPOSE, expires_in: LIFETIME)
+        @verifier.encrypt_and_sign({ "student_id" => student_id, "exercise_id" => exercise_id, "digest" => digest, "issued_at" => issued_at.utc.iso8601,
+                                                 "expires_at" => (Time.current + LIFETIME).utc.iso8601 },
+                                               purpose: PURPOSE, expires_in: ENVELOPE_LIFETIME)
       end
 
       def verify(token)
+        payload = read(token)
+        return nil if payload.nil? || expired_payload?(payload)
+
+        { student_id: payload["student_id"], exercise_id: payload["exercise_id"], digest: payload["digest"], issued_at: Time.iso8601(payload["issued_at"]).utc }
+      rescue ArgumentError, TypeError
+        nil
+      end
+
+      # Vrai pour un jeton authentique dont les 30 jours sont passés (verify rend alors nil) ; faux pour un jeton altéré ou valable.
+      def expired?(token)
+        payload = read(token)
+        !payload.nil? && expired_payload?(payload)
+      rescue ArgumentError, TypeError
+        false
+      end
+
+      private
+
+      def read(token)
         return nil unless token.is_a?(String) && token.present?
 
         payload = @verifier.decrypt_and_verify(token, purpose: PURPOSE)
-        return nil unless payload.is_a?(Hash) && FIELDS.all? { payload.key?(it) }
-
-        { student_id: payload["student_id"], exercise_id: payload["exercise_id"], digest: payload["digest"], issued_at: Time.iso8601(payload["issued_at"]).utc }
-      rescue ArgumentError, TypeError, ActiveSupport::MessageEncryptor::InvalidMessage
+        payload if payload.is_a?(Hash) && FIELDS.all? { payload.key?(it) }
+      rescue ActiveSupport::MessageEncryptor::InvalidMessage
         nil
       end
+
+      def expired_payload?(payload) = Time.iso8601(payload["expires_at"]) <= Time.current
     end
   end
 end

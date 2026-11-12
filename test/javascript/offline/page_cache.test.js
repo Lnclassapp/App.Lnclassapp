@@ -252,6 +252,17 @@ test("les assets digérés sont gardés à la première demande, cache d'abord e
   assert.equal((await visit("/assets/sans-empreinte.css", { accept: "text/css" })).handled, false)
 })
 
+test("les chunks esbuild déjà digérés (`chunk-XXXXXXXX.digested.js`) sont gardés aussi : sans eux, tout le JavaScript tombe hors ligne", async () => {
+  let calls = 0
+  network = async () => { calls += 1; return new Response("export{}", { status: 200, headers: { "Content-Type": "text/javascript" } }) }
+  await visit("/assets/chunk-SFIKYOA5.digested.js", { accept: "*/*" })
+  const second = await visit("/assets/chunk-SFIKYOA5.digested.js", { accept: "*/*" })
+
+  assert.equal(await second.response.text(), "export{}")
+  assert.equal(calls, 1)
+  assert.equal((await visit("/assets/chunk.digested.js", { accept: "*/*" })).handled, false)
+})
+
 test("l'activation purge les anciennes versions et garde les caches de pages", async () => {
   await caches.open("lnclass-offline-v1")
   await caches.open("lnclass-assets-v0")

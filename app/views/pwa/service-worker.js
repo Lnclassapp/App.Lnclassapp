@@ -12,7 +12,7 @@ const SAVED_AT = "X-Lnclass-Saved-At"
 const KEY_URL = "/__lnclass/key"
 const KEY_PATTERN = /^[0-9a-f]{16}$/
 const PAGE_KEY = /<meta name="lnclass-offline-key" content="([0-9a-f]{16})"/
-const DIGESTED_ASSET = /^\/assets\/.+-[0-9a-f]{7,}\.[a-z0-9]+$/
+const DIGESTED_ASSET = /^\/assets\/.+-(?:[0-9a-f]{7,}|[A-Za-z0-9]{8}\.digested)\.[a-z0-9]+$/ // Propshaft (-<hex>.ext) et chunks esbuild déjà digérés (-<HASH>.digested.js)
 const MAX_PAGES = 60
 const MAX_ASSETS = 200
 const MAX_AGE_MS = 30 * 24 * 3600 * 1000

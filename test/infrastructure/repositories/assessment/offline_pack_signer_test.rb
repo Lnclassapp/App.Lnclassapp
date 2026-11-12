@@ -41,6 +41,19 @@ module Repositories
         travel_to(ISSUED + 31.days) { assert_nil @signer.verify(signed) }
       end
 
+      test "F4 : expired? dit « expiré » d'un jeton authentique de plus de 30 jours, jamais d'un jeton altéré, étranger ou valable" do
+        signed = travel_to(ISSUED) { token }
+        foreign = OfflinePackSigner.default_verifier.encrypt_and_sign({ "student_id" => 7 }, purpose: "autre")
+
+        travel_to(ISSUED + 29.days) { assert_not @signer.expired?(signed) }
+        travel_to(ISSUED + 31.days) do
+          assert @signer.expired?(signed)
+          assert_not @signer.expired?(foreign)
+          assert_not @signer.expired?("#{signed}x")
+          assert_not @signer.expired?(nil)
+        end
+      end
+
       test "un jeton dont la charge est incomplète rend nil" do
         partial = OfflinePackSigner.default_verifier.encrypt_and_sign({ "student_id" => 7 }, purpose: "offline_pack")
 

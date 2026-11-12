@@ -1,0 +1,29 @@
+<%# 🌐 UI · shared/offline/_pending_copies — « Copies à envoyer » de l'accueil élève : N à envoyer, Envoi…, copies refusées, « Copie envoyée · N % » %>
+<%# Rôle : caché tant que la file de l'appareil est vide ; le contrôleur offline-queue la lit (jamais le serveur) et pose les textes avec textContent %>
+<%# UDR  : hors-connexion-bandeau-copie-provisoire-et-file §3.6 · ADR : hors-connexion pages ouvertes et copies synchronisées (§4.5) · aria-live pour les changements d'état %>
+<% reasons = %w[stale forbidden locked invalid wrong_owner expired].to_h { |reason| [ reason, t("offline.queue.rejected.#{reason}") ] } %>
+<%= tag.div id: "offline_queue", hidden: true, class: "space-y-3", "aria-live": "polite",
+            data: { controller: "offline-queue",
+                    offline_queue_pending_one_value: t("offline.queue.pending.one"),
+                    offline_queue_pending_other_value: t("offline.queue.pending.other", count: "%{count}"),
+                    offline_queue_sending_value: t("offline.queue.sending"),
+                    offline_queue_synced_value: t("offline.queue.synced", percent: "%{percent}"),
+                    offline_queue_failed_value: t("offline.queue.send_failed"),
+                    offline_queue_rejected_value: reasons.to_json } do %>
+  <p class="flex items-center gap-2 text-sm text-ink" data-offline-queue-target="pending" hidden>
+    <%= ui_icon "arrow-up-tray", size: :sm %>
+    <span data-offline-queue-target="pendingText"></span>
+  </p>
+  <p class="text-sm text-warning" role="alert" data-offline-queue-target="error" hidden></p>
+  <div class="space-y-1 text-sm text-ink" role="status" data-offline-queue-target="synced" hidden></div>
+  <ul class="space-y-2" data-offline-queue-target="rejected" hidden></ul>
+  <template data-offline-queue-target="rejectedRow">
+    <li class="flex flex-wrap items-center justify-between gap-3 rounded-card bg-warning-soft px-4 py-3 text-sm text-warning">
+      <div class="space-y-1">
+        <p data-role="reason"></p>
+        <p class="font-medium" data-role="title"></p>
+      </div>
+      <%= ui_button t("offline.queue.dismiss"), variant: :ghost, size: :sm, class: "min-h-tap" %>
+    </li>
+  </template>
+<% end %>
