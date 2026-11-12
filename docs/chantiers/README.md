@@ -193,7 +193,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`interface-epuree`](interface-epuree/memo.md) | planifié | feature | 2026-09-30 | Interface épurée |
 | [`interrupteur-theme`](interrupteur-theme/memo.md) | en cours | feature | 2026-10-03 | Interrupteur clair / sombre |
 | [`je-m-entraine-dans-la-fiche`](je-m-entraine-dans-la-fiche/memo.md) | livré | feature | 2026-10-30 | « Je m’entraîne » dans la fiche de révision |
-| [`lecons-1ere-2nde-debut`](lecons-1ere-2nde-debut/memo.md) | en cours | feature | 2026-11-12 | Les trois premières leçons de 1ère et de 2nde, comme Thalès |
+| [`lecons-1ere-2nde-debut`](lecons-1ere-2nde-debut/memo.md) | livré | feature | 2026-11-12 | Les trois premières leçons de 1ère et de 2nde, comme Thalès |
 | [`lecons-3eme-comme-thales`](lecons-3eme-comme-thales/memo.md) | PR prête | feature | 2026-11-05 | Les leçons de 3ème préparées comme Thalès |
 | [`lecons-defauts-affichage`](lecons-defauts-affichage/memo.md) | décision | bugfix | 2026-11-02 | Leçons v3 en défaut d'affichage |
 | [`lecons-tle-a1-comme-thales`](lecons-tle-a1-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale A1 préparées comme Thalès |

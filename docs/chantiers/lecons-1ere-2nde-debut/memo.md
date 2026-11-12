@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours (2026-11-12) |
+| **Statut** | livré (2026-11-12) : 1ère #567, 2nde en PR |
 | **Ouvert le** | 2026-11-12 |
 | **Branche** | `feature/lecons-1ere-2nde-debut` (1ère), `feature/lecons-2nde-debut` (2nde) |
 
