@@ -40,7 +40,9 @@ plan_only = ARGV.delete("--plan")
 folder = File.expand_path(ARGV.first, START)
 (warn "[preuve-vague] dossier introuvable : #{ARGV.first}"; exit 1) unless File.directory?(folder)
 # Liens suivis : la vague est un dossier SOUS docs/contenus/lecons-traitees (jamais ailleurs, jamais la racine elle-même).
-LESSONS = File.realpath("docs/contenus/lecons-traitees")
+# PREUVE_VAGUE_RACINE : racine des vagues, posée par les tests seulement (une copie jetable hors du dépôt, pour que le
+# semis, qui lit le vrai dossier, ne voie jamais une vague de test). Par défaut : le dossier du dépôt.
+LESSONS = File.realpath(ENV["PREUVE_VAGUE_RACINE"].to_s.empty? ? "docs/contenus/lecons-traitees" : ENV["PREUVE_VAGUE_RACINE"])
 folder = File.realpath(folder)
 unless folder.start_with?("#{LESSONS}/")
   warn "[preuve-vague] refusé : #{ARGV.first} n'est pas un dossier sous docs/contenus/lecons-traitees. Rien n'est joué."
