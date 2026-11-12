@@ -26,10 +26,10 @@ class KeepablePagesTest < ActionDispatch::IntegrationTest
 
   test "sans connexion, aucune page ne porte l'en-tête" do
     get new_session_path
-    assert_nil response.headers[KEEP]
+    assert_not_equal "keep", response.headers[KEEP]
 
     get course_path(@course.slug)
-    assert_nil response.headers[KEEP]
+    assert_not_equal "keep", response.headers[KEEP]
   end
 
   test "l'équipe, le profil, la connexion et la déconnexion ne le portent jamais" do

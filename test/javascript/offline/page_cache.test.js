@@ -274,3 +274,72 @@ test("l'installation range la page « Pas de connexion » et ses deux fichiers",
 
   assert.deepEqual([ ...fresh.stores.get("lnclass-offline-v2").keys() ].sort(), [ ORIGIN + "/icon-192.png", ORIGIN + "/offline.css", ORIGIN + "/offline.html" ])
 })
+
+const forget = async (key = KEY) => { const { settled } = dispatch("message", { data: { type: "lnclass:forget", key } }); await settled() }
+const storedKey = async () => { const hit = await (await caches.open("lnclass-state-v1")).match("/__lnclass/key"); return hit ? hit.text() : null }
+
+test("forget : le cache de pages disparaît, la clé rangée aussi, et hors réseau seule la page « Pas de connexion » est rendue", async () => {
+  await sendKey(KEY)
+  serve("/courses/svt", page())
+  await visit("/courses/svt")
+  await forget()
+  offlineNetwork()
+
+  assert.ok(!(await caches.keys()).includes(`lnclass-pages-${KEY}`))
+  assert.equal(await storedKey(), null)
+  assert.match(await (await visit("/courses/svt", { mode: "navigate" })).response.text(), /Pas de connexion/)
+  boot(caches)
+  assert.match(await (await visit("/courses/svt", { mode: "navigate" })).response.text(), /Pas de connexion/)
+})
+
+test("une réponse réseau « Lnclass-Offline: forget » purge comme forget, et la réponse est rendue telle quelle", async () => {
+  await sendKey(KEY)
+  serve("/courses/svt", page())
+  await visit("/courses/svt")
+  serve("/login", "<html>Connexion</html>", { keep: "forget" })
+  const { response } = await visit("/login", { mode: "navigate" })
+  offlineNetwork()
+
+  assert.match(await response.text(), /Connexion/)
+  assert.ok(!(await caches.keys()).includes(`lnclass-pages-${KEY}`))
+  assert.equal(await storedKey(), null)
+  assert.match(await (await visit("/courses/svt", { mode: "navigate" })).response.text(), /Pas de connexion/)
+})
+
+test("sans clé courante, une page déjà rangée n'est jamais servie", async () => {
+  const stale = await caches.open(`lnclass-pages-${KEY}`)
+  await stale.put(ORIGIN + "/courses/svt", new Response(page(), { headers: { "Content-Type": "text/html", "X-Lnclass-Saved-At": new Date().toISOString() } }))
+  offlineNetwork()
+
+  assert.match(await (await visit("/courses/svt", { mode: "navigate" })).response.text(), /Pas de connexion/)
+})
+
+test("course : un corps différé suivi d'un forget ne recrée pas le cache de pages", async () => {
+  await sendKey(KEY)
+  let release
+  const gate = new Promise((resolve) => { release = resolve })
+  network = async () => {
+    const response = new Response(page(), { status: 200, headers: { "Content-Type": "text/html", "Lnclass-Offline": "keep", "Cache-Control": "private" } })
+    const text = response.text.bind(response)
+    response.clone = () => ({ status: 200, redirected: false, headers: response.headers, text: async () => { await gate; return text() } })
+    return response
+  }
+  let answer
+  const { settled } = dispatch("fetch", { request: request("/courses/svt", { mode: "navigate" }), respondWith: (promise) => { answer = promise } })
+  await answer
+  await forget()
+  release()
+  await settled()
+
+  assert.ok(!(await caches.keys()).includes(`lnclass-pages-${KEY}`))
+})
+
+test("une clé reçue de nouveau après un forget est de nouveau gardée (reconnexion)", async () => {
+  await sendKey(KEY)
+  await forget()
+  await sendKey(KEY)
+  serve("/courses/svt", page())
+  await visit("/courses/svt")
+
+  assert.deepEqual(pagesOf(KEY), [ ORIGIN + "/courses/svt" ])
+})

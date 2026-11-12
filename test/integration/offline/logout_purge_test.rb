@@ -21,4 +21,18 @@ class LogoutPurgeTest < ActionDispatch::IntegrationTest
     get student_home_path
     assert_nil response.headers["Clear-Site-Data"]
   end
+
+  # Filet serveur (ADR §4.2, menace P1) : Clear-Site-Data "cache" ne vide pas le Cache Storage ; l'en-tête forget fait purger le programme.
+  test "une page HTML vue sans être connecté porte Lnclass-Offline: forget" do
+    get new_session_path
+
+    assert_equal "forget", response.headers["Lnclass-Offline"]
+  end
+
+  test "une page de compte connecté porte keep, jamais forget" do
+    sign_in_as create_student
+    get student_home_path
+
+    assert_not_equal "forget", response.headers["Lnclass-Offline"]
+  end
 end

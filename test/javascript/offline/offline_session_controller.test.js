@@ -147,6 +147,26 @@ test("déconnexion : une erreur de purge est signalée mais la déconnexion part
   assert.equal(form.submitted.length, 1)
 })
 
+test("déconnexion : le programme reçoit forget, même quand purgeKey échoue", async () => {
+  globalThis.caches = { delete: async () => { throw new Error("boom") } }
+  build().connect()
+  const form = logoutForm()
+
+  listeners.submit(submitEvent(form))
+  await settle()
+
+  assert.ok(posted.some((message) => message.type === "lnclass:forget" && message.key === KEY))
+  assert.equal(form.submitted.length, 1)
+})
+
+test("déconnexion : forget part aussi quand la purge réussit", async () => {
+  build().connect()
+  listeners.submit(submitEvent(logoutForm()))
+  await settle()
+
+  assert.deepEqual(posted.filter((message) => message.type === "lnclass:forget"), [ { type: "lnclass:forget", key: KEY } ])
+})
+
 test("déconnexion : si l'envoi de la file échoue, la file est gardée (jamais de copie perdue) et la déconnexion part", async () => {
   await store.putCopy(KEY, { client_copy_id: "c1", exercise_public_id: "ex1", submitted_at: "2026-11-12T10:00:00Z" })
   const off = store.registerBeforePurge(async () => { throw new Error("hors ligne") })

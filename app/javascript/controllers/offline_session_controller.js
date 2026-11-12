@@ -1,5 +1,5 @@
 // ⚡ FRONT · offline-session — donne la clé d'appareil au programme d'arrière-plan, purge l'ancienne clé, vide tout à la déconnexion
-// Rôle : clé → postMessage ; clé changée → purge de l'ancienne (file non envoyée gardée) ; formulaire DELETE /session → runBeforePurge puis purgeKey, puis la requête part
+// Rôle : clé → postMessage ; clé changée → purge de l'ancienne (file non envoyée gardée) ; formulaire DELETE /session → runBeforePurge puis purgeKey, puis `lnclass:forget` au programme (même si la purge échoue), puis la requête part
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, menace P1, P2, P4) · contrat du plan « Contrats JavaScript gelés »
 import { Controller } from "@hotwired/stimulus"
 import { currentKey, rememberKey, purgeKey, runBeforePurge } from "../offline/store.js"
@@ -7,6 +7,7 @@ import { currentKey, rememberKey, purgeKey, runBeforePurge } from "../offline/st
 const LOGOUT_PATH = "/session"
 // L'envoi de la file ne retient jamais la déconnexion plus longtemps.
 const BEFORE_PURGE_TIMEOUT_MS = 10_000
+const FORGET_TIMEOUT_MS = 1_000
 
 export default class extends Controller {
   connect() {
@@ -99,15 +100,29 @@ export default class extends Controller {
     } catch (error) {
       console.error("lnclass: purge à la déconnexion incomplète", error)
     }
+    // Quoi qu'il arrive à la purge : le programme oublie la clé et son cache de pages (menace P1).
+    await this.forget(key)
 
     this.leaving.delete(form)
     this.released.add(form)
     this.resubmit(form, submitter)
   }
 
-  withTimeout(promise) {
+  async forget(key) {
+    try {
+      const container = navigator.serviceWorker
+      if (!container) return
+
+      const worker = container.controller || (await this.withTimeout(container.ready, FORGET_TIMEOUT_MS)).active
+      worker?.postMessage({ type: "lnclass:forget", key })
+    } catch (error) {
+      console.error("lnclass: oubli de la clé non transmis au programme d'arrière-plan", error)
+    }
+  }
+
+  withTimeout(promise, delay = BEFORE_PURGE_TIMEOUT_MS) {
     let timer
-    const timeout = new Promise((_, reject) => { timer = setTimeout(() => reject(new Error("délai dépassé")), BEFORE_PURGE_TIMEOUT_MS) })
+    const timeout = new Promise((_, reject) => { timer = setTimeout(() => reject(new Error("délai dépassé")), delay) })
     return Promise.race([promise, timeout]).finally(() => clearTimeout(timer))
   }
 

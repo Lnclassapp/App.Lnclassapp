@@ -34,8 +34,9 @@ module Identity
 
     def destroy
       terminate_session
-      # Filet de la purge JavaScript (hors-connexion §4.2) : le navigateur vide son cache. Jamais « storage » : il désinscrirait
-      # le programme d'arrière-plan et effacerait les files d'autres comptes sur l'appareil.
+      # Vide le cache HTTP du navigateur, PAS le Cache Storage (lnclass-pages-*) : celui-ci est purgé par le JavaScript puis par
+      # le programme d'arrière-plan (message ou en-tête Lnclass-Offline: forget). Jamais « storage » : il désinscrirait
+      # le programme et effacerait les files d'autres comptes sur l'appareil.
       response.set_header("Clear-Site-Data", '"cache"')
       redirect_to main_app.root_path, notice: t(".signed_out"), status: :see_other
     end

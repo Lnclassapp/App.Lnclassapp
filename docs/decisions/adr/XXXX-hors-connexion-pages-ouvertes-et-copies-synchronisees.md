@@ -55,7 +55,7 @@ Trois faits du code pèsent : une visite Turbo est un `fetch`, pas une navigatio
 
 - Chaque page d'un compte connecté porte `<meta name="lnclass-offline-key" content="…">` : les 16 premiers caractères hexadécimaux de `HMAC-SHA256(secret_key_base dérivée « offline-key », user_id)`. Opaque, stable, différente entre comptes. Absente sans connexion.
 - Le JavaScript de page (`app/javascript/offline/`) range la clé courante. **Clé différente** de la précédente → purge du cache de pages et de la base de l'ancienne clé, **sauf sa file de copies non envoyées** (gardée 30 jours, jamais envoyée sous une autre clé).
-- **Déconnexion** : le JavaScript envoie la file (§4.5), puis purge les caches `lnclass-pages-<clé>` et la base `lnclass-offline-<clé>`, puis laisse partir la déconnexion. La réponse de `Identity::SessionsController#destroy` porte en plus `Clear-Site-Data: "cache"` (filet si le JavaScript n'a pas tourné). On n'envoie pas `"storage"` : il désinscrirait le programme et effacerait les files d'autres comptes.
+- **Déconnexion** : le JavaScript envoie la file (§4.5), puis purge les caches `lnclass-pages-<clé>` et la base `lnclass-offline-<clé>`, puis envoie `{ type: "lnclass:forget", key }` au programme (même si la purge échoue : il remet sa clé à null, efface la clé rangée, supprime `lnclass-pages-<clé>` et retient la clé comme oubliée), puis laisse partir la déconnexion. Filet si le JavaScript n'a pas tourné (cookie expiré, session révoquée) : toute réponse HTML d'un visiteur non connecté porte `Lnclass-Offline: forget` (`OfflineKeepable`) et le programme applique la même purge ; sans clé courante, il ne sert que `/offline.html`. `Clear-Site-Data: "cache"` reste posé sur `destroy` mais ne vide pas le Cache Storage : ce n'est pas le filet. On n'envoie pas `"storage"` : il désinscrirait le programme et effacerait les files d'autres comptes.
 - Toute page gardée et tout paquet expirent à **30 jours** (alignés sur `SessionLifetime`).
 
 ### 4.3 Programme d'arrière-plan (amende ADR-0082 §4.2)
@@ -140,4 +140,4 @@ const keepable = (response) => response.ok && !response.redirected &&
 - `test/javascript/offline/page_cache.test.js` : sans en-tête, `no-store`, 302, 500 → rien gardé ; 61e page → la plus ancienne sort ; 31 jours → purgée ; clé différente → rien servi.
 - `test/domain/use_cases/assessment/sync_offline_copy_test.rb` : jeton d'un autre élève, `score` ignoré, rejeu, heures bornées, accès bloqué, exercice modifié.
 - `offline_grading_parity_test.rb` et `grader.test.js` jouent la même table de cas.
-- `test/integration/offline/logout_purge_test.rb` : `Clear-Site-Data: "cache"` à la déconnexion.
+- `test/integration/offline/logout_purge_test.rb` : `Clear-Site-Data: "cache"` à la déconnexion ; `Lnclass-Offline: forget` pour un visiteur non connecté.
