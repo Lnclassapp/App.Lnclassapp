@@ -26,11 +26,13 @@ La tâche `lecons` du train rendait les 223 leçons v3 en 32 parts : 98,7 min de
 
 ## 3. Options envisagées
 
-Rendre plus vite chaque leçon, ou moins souvent (rendu complet de nuit) : gardées pour la suite du chantier. Retenu ici : rendre ce qui change (décision du porteur du 2026-11-12).
+Rendre plus vite chaque leçon : gardé pour la suite. Rendu complet de nuit : écarté par le porteur (2026-11-12), remplacé par le rendu complet quand le train touche aux écrans. Retenu ici : rendre ce qui change (décision du porteur du 2026-11-12).
 
 ## 4. Décision
 
 > **Au train vers Staging, la tâche `lecons` rend seulement les leçons v3 nouvelles ou modifiées de la PR (⌈N/10⌉ parts calculées par le job `plan`) ; s'il n'y en a aucune, ou si le diff est illisible (avec `::warning::`), 2 leçons témoins de `script/ci/lecons_temoins.txt`, en 1 part. `LECONS=tout` reste disponible à la main.**
+>
+> **Exception (lot B) : si la PR touche aux écrans (vues, JavaScript, assets, aides, catalogue qui les lit, dépendances front, test de rendu), `plan` passe `LECONS=tout` et la tâche rend toutes les leçons, ⌈nombre/10⌉ parts. Pas de rendu hebdomadaire.**
 
 ## 5. Conséquences
 
@@ -40,7 +42,7 @@ Rendre plus vite chaque leçon, ou moins souvent (rendu complet de nuit) : gard�
 
 ### 🔴 Coûts consentis
 
-- Une régression des vues sur une leçon ancienne n'est vue que par les 2 témoins (formules, figures, tableaux, feuilles), pas par les 221 autres.
+- Une PR qui ne touche pas aux écrans ne voit une régression sur une leçon ancienne que par les 2 témoins (formules, figures, tableaux, feuilles), pas par les 221 autres ; une PR qui les touche paie 23 parts.
 
 ## 6. Notes d'implémentation
 
@@ -48,4 +50,4 @@ Rendre plus vite chaque leçon, ou moins souvent (rendu complet de nuit) : gard�
 
 ## 7. Comment vérifier que la décision est respectée
 
-`test/guards/ci_plan_test.rb` (matrice issue de `plan`, 5 min, un processus) et `Catalog::LessonSelectionTest` (découpage d'une liste nommée, témoins existants et v3).
+`test/guards/ci_plan_test.rb` (matrice issue de `plan`, 5 min, un processus, expression des écrans et branche `lecons_files=tout`) et `Catalog::LessonSelectionTest` (découpage d'une liste nommée, témoins existants et v3).
