@@ -1348,8 +1348,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
   add_foreign_key "messages", "schools", on_delete: :restrict
   add_foreign_key "messages", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "messages", "users", column: "withdrawn_by_id", on_delete: :restrict
-  add_foreign_key "offline_pack_deliveries", "exercises", on_delete: :cascade
-  add_foreign_key "offline_pack_deliveries", "users", column: "student_id", on_delete: :cascade
+  add_foreign_key "offline_pack_deliveries", "exercises", on_delete: :restrict
+  add_foreign_key "offline_pack_deliveries", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", column: "issued_by_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", on_delete: :cascade
   add_foreign_key "question_attempts", "exercise_sessions", on_delete: :restrict
