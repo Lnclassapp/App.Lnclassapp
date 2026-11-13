@@ -65,3 +65,10 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **Correctif** : un `practice` de 3 ou 4 questions corrigées automatiquement, d'au moins 2 types, sur chaque notion (le même pour A et C en Français et Physique-Chimie) ; rien d'autre ne change dans les fichiers (vérifié par script contre `Develop`). `prompt-redaction.md` rend le bloc obligatoire, avec une ligne de la liste de contrôle.
 - **Rendu** : les 27 leçons de 2nde rendues à 390 px (copie du test d'affichage sans la limite de 5).
 - **À faire vérifier par un enseignant** : SVT 2nde C (Knop et carences, sol inondé, mots attendus des textes à trous) ; Mathématiques 2nde A (distracteur $2\sqrt{16}$) ; Français (lettre formelle, marge de 10 %) ; Physique-Chimie (Fe³⁺, argon (K)2(L)8(M)8, propane) ; Histoire-Géographie (distracteurs sur les devises, Grand-Bassam 2012).
+## Correctif « Je m'entraîne » (1ère)
+
+- **Constat** : en 1ère, la Philosophie (14 notions, recopiées dans les 4 séries) et l'Histoire-Géographie (12 notions) n'avaient pas le bloc « Je m'entraîne » (`practice`, UDR-0147). Les autres matières de 1ère l'avaient déjà. La règle qui le rend obligatoire est ajoutée à `prompt-redaction.md` par la PR 2nde.
+- **Correctif** : 3 ou 4 questions corrigées automatiquement, d'au moins 2 types, sur chaque notion. La Philosophie compte 48 questions par série, identiques en A1, A2, C et D ; l'Histoire-Géographie en compte 45. Hors `practice`, aucun fichier ne change (vérifié par script contre `Develop`). Les 15 leçons sont rendues à 390 px.
+- **À faire vérifier par un enseignant** :
+  - Philosophie : « travail » et « seulement » comme termes à définir ; la thèse sur l'argent et le bonheur ; paraphrase contre explication ; les synonymes acceptés dans les textes à trous (« mais » ou « cependant », « enfin » ou « finalement »).
+  - Histoire-Géographie : la vraisemblance des montants en F CFA et des taux démographiques, qui sont des valeurs d'exercice ; la réponse « La sécurité » à la question sur l'IDH ; les écarts de dates calculés à la main.
