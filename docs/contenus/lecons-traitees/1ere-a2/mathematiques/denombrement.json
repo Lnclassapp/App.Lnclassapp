@@ -313,7 +313,7 @@
             "steps": [
               "Décomposer : on choisit le 1er, le 2e, le 3e puis le 4e chiffre, soit 4 choix successifs ; l'ordre compte (1234 et 4321 sont deux codes) et les répétitions sont permises (0077 est un code).",
               "Compter : il y a 10 possibilités à chaque choix (les chiffres 0, 1, …, 9).",
-              "Multiplier : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$.",
+              "Multiplier : $10 \\times 10 \\times 10 \\times 10$ $= 10^4$ $= 10\\,000$.",
               "Contrôler : 10 000 est un entier ; les codes vont de 0000 à 9999, soit exactement 10 000 codes, chacun compté une seule fois."
             ]
           },
@@ -448,7 +448,7 @@
                 {
                   "content": "Un test comporte 5 questions. Pour chacune, on répond par Vrai ou par Faux. Le nombre de façons différentes de répondre au test est $2^5 =$ ___",
                   "question_type": "fill_blank",
-                  "explanation": "Étape 1 — Décomposer : on répond à la question 1, puis à la 2, puis à la 3, à la 4 et à la 5, soit 5 choix successifs ; l'ordre compte et on peut répondre « Vrai » plusieurs fois. Étape 2 — Compter : 2 possibilités à chaque choix (Vrai ou Faux). Étape 3 — Multiplier : $2 \\times 2 \\times 2 \\times 2 \\times 2 = 2^5 = 32$. Étape 4 — Contrôler : 32 est un entier. Écrire $2 \\times 5 = 10$ est une erreur : on multiplie 2 cinq fois, on ne multiplie pas 2 par 5.",
+                  "explanation": "Étape 1 — Décomposer : on répond à la question 1, puis à la 2, puis à la 3, à la 4 et à la 5, soit 5 choix successifs ; l'ordre compte et on peut répondre « Vrai » plusieurs fois. Étape 2 — Compter : 2 possibilités à chaque choix (Vrai ou Faux). Étape 3 — Multiplier : $2 \\times 2 \\times 2 \\times 2 \\times 2$ $= 2^5$ $= 32$. Étape 4 — Contrôler : 32 est un entier. Écrire $2 \\times 5 = 10$ est une erreur : on multiplie 2 cinq fois, on ne multiplie pas 2 par 5.",
                   "answers": [
                     {
                       "content": "32",
@@ -725,7 +725,7 @@
                   "content": "Six amis se mettent en ligne, côte à côte, pour une photo. De combien de façons différentes peuvent-ils se placer ?",
                   "question_type": "numeric",
                   "tolerance": 0,
-                  "explanation": "Étape 1 — Vérifier : l'ordre compte (Awa à gauche n'est pas Awa à droite) et chaque ami n'apparaît qu'une fois : éléments distincts. Étape 2 — Identifier : $n = 6$ amis et $p = 6$ places, c'est une permutation. Étape 3 — Écrire : $A_6^6 = 6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $6 \\times 5 = 30$, $30 \\times 4 = 120$, $120 \\times 3 = 360$, $360 \\times 2 = 720$ façons.",
+                  "explanation": "Étape 1 — Vérifier : l'ordre compte (Awa à gauche n'est pas Awa à droite) et chaque ami n'apparaît qu'une fois : éléments distincts. Étape 2 — Identifier : $n = 6$ amis et $p = 6$ places, c'est une permutation. Étape 3 — Écrire : $A_6^6$ $= 6!$ $= 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $6 \\times 5 = 30$, $30 \\times 4 = 120$, $120 \\times 3 = 360$, $360 \\times 2 = 720$ façons.",
                   "answers": [
                     {
                       "content": "720",
@@ -1263,7 +1263,7 @@
               "content": "Les 5 élèves qui ne sont inscrits à aucun club se placent en ligne pour une photo. De combien de façons différentes peuvent-ils se placer ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Vérifier : l'ordre compte (la place dans la ligne) et les 5 élèves sont distincts. Étape 2 — Identifier : $n = 5$ élèves et $p = 5$ places, c'est une permutation. Étape 3 — Écrire : $A_5^5 = 5! = 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $5 \\times 4 = 20$, $20 \\times 3 = 60$, $60 \\times 2 = 120$ façons, et $p = 5 \\leq n = 5$.",
+              "explanation": "Étape 1 — Vérifier : l'ordre compte (la place dans la ligne) et les 5 élèves sont distincts. Étape 2 — Identifier : $n = 5$ élèves et $p = 5$ places, c'est une permutation. Étape 3 — Écrire : $A_5^5$ $= 5!$ $= 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $5 \\times 4 = 20$, $20 \\times 3 = 60$, $60 \\times 2 = 120$ façons, et $p = 5 \\leq n = 5$.",
               "answers": [
                 {
                   "content": "120",
@@ -1283,7 +1283,7 @@
               "content": "Le code de la salle informatique est formé de 4 chiffres pris de 0 à 9, un chiffre pouvant se répéter. Combien de codes différents existe-t-il ? Écris le nombre sans espace.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Décomposer : on choisit le 1er, le 2e, le 3e puis le 4e chiffre, soit 4 choix successifs ; l'ordre compte et les répétitions sont permises. Étape 2 — Compter : 10 possibilités à chaque choix. Étape 3 — Multiplier : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$. Étape 4 — Contrôler : les codes vont de 0000 à 9999, soit 10 000 codes. Écrire $10 \\times 4 = 40$ est une erreur classique : on multiplie 10 quatre fois.",
+              "explanation": "Étape 1 — Décomposer : on choisit le 1er, le 2e, le 3e puis le 4e chiffre, soit 4 choix successifs ; l'ordre compte et les répétitions sont permises. Étape 2 — Compter : 10 possibilités à chaque choix. Étape 3 — Multiplier : $10 \\times 10 \\times 10 \\times 10$ $= 10^4$ $= 10\\,000$. Étape 4 — Contrôler : les codes vont de 0000 à 9999, soit 10 000 codes. Écrire $10 \\times 4 = 40$ est une erreur classique : on multiplie 10 quatre fois.",
               "answers": [
                 {
                   "content": "10000",
@@ -1764,7 +1764,7 @@
                   "content": "De combien de façons $5$ personnes différentes peuvent-elles se placer l'une derrière l'autre dans une file d'attente ?",
                   "question_type": "numeric",
                   "tolerance": 0,
-                  "explanation": "1) Vérifier : l'ordre compte et les personnes sont distinctes. 2) Identifier : $n = 5$ personnes et $p = 5$ places. 3) Écrire : c'est une permutation, $A_5^5 = 5!$. 4) Calculer : $5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$.",
+                  "explanation": "1) Vérifier : l'ordre compte et les personnes sont distinctes. 2) Identifier : $n = 5$ personnes et $p = 5$ places. 3) Écrire : c'est une permutation, $A_5^5 = 5!$. 4) Calculer : $5!$ $= 5 \\times 4 \\times 3 \\times 2 \\times 1$ $= 120$.",
                   "answers": [
                     {
                       "content": "120",
@@ -2097,7 +2097,7 @@
                   "content": "Si un chiffre peut se répéter, combien de codes différents existe-t-il ?",
                   "question_type": "numeric",
                   "tolerance": 0,
-                  "explanation": "1) Décomposer : $4$ choix successifs, l'ordre compte et les répétitions sont permises. 2) Compter : $10$ possibilités à chaque choix. 3) Multiplier : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$. 4) Contrôler : les codes vont de $0000$ à $9999$.",
+                  "explanation": "1) Décomposer : $4$ choix successifs, l'ordre compte et les répétitions sont permises. 2) Compter : $10$ possibilités à chaque choix. 3) Multiplier : $10 \\times 10 \\times 10 \\times 10$ $= 10^4$ $= 10\\,000$. 4) Contrôler : les codes vont de $0000$ à $9999$.",
                   "answers": [
                     {
                       "content": "10000",
@@ -2719,7 +2719,7 @@
                   "content": "Combien de plaques différentes existe-t-il si les lettres et les chiffres peuvent se répéter ?",
                   "question_type": "numeric",
                   "tolerance": 0,
-                  "explanation": "1) Décomposer : $4$ choix successifs : deux lettres puis deux chiffres. 2) Compter : $4$, $4$, $10$ et $10$ possibilités. 3) Multiplier : $4 \\times 4 \\times 10 \\times 10 = 16 \\times 100 = 1\\,600$. 4) Contrôler : $1\\,600$ est un entier.",
+                  "explanation": "1) Décomposer : $4$ choix successifs : deux lettres puis deux chiffres. 2) Compter : $4$, $4$, $10$ et $10$ possibilités. 3) Multiplier : $4 \\times 4 \\times 10 \\times 10$ $= 16 \\times 100$ $= 1\\,600$. 4) Contrôler : $1\\,600$ est un entier.",
                   "answers": [
                     {
                       "content": "1600",
@@ -2918,7 +2918,7 @@
                 {
                   "content": "Pour tout entier $n \\ge 1$, une permutation de $n$ éléments est un arrangement de $n$ éléments parmi $n$, et il y en a $n!$.",
                   "question_type": "true_false",
-                  "explanation": "1) Un arrangement de $p$ éléments parmi $n$ est une liste ordonnée d'éléments distincts. 2) Pour $p = n$, on range tous les éléments : c'est une permutation. 3) Leur nombre est $A_n^n = n \\times (n - 1) \\times \\cdots \\times 1 = n!$. L'affirmation est vraie.",
+                  "explanation": "1) Un arrangement de $p$ éléments parmi $n$ est une liste ordonnée d'éléments distincts. 2) Pour $p = n$, on range tous les éléments : c'est une permutation. 3) Leur nombre est $A_n^n$ $= n \\times (n - 1) \\times \\cdots \\times 1$ $= n!$. L'affirmation est vraie.",
                   "answers": [
                     {
                       "content": "Vrai",
