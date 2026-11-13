@@ -98,7 +98,7 @@
   <%= design_section(id: "buttons", title: t(".sections.buttons"), api: "ui_button(label, variant:, size:, href:, type:, icon:, icon_end:, disabled:, loading:, method:, full:, **html)") do %>
     <%= design_example(name: "button-variants", label: t(".buttons.variants")) do %>
       <div class="flex flex-wrap gap-3">
-        <% %i[primary brand secondary ghost danger].each do |variant| %>
+        <% ComponentsHelper::BUTTON_VARIANTS.each_key do |variant| %>
           <%= ui_button t(".buttons.variant_names.#{variant}"), variant:, data: { variant: } %>
         <% end %>
       </div>

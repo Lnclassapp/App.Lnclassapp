@@ -3,8 +3,8 @@ require "application_system_test_case"
 # UDR-0005 et UDR-0006 — chaque composant de /design dans ses variantes et ses états, rendu par un vrai navigateur.
 class DesignSystemTest < ApplicationSystemTestCase
   TOKENS = {
-    "ink" => "rgb(31, 33, 40)", "paper" => "rgb(255, 255, 255)", "brand" => "rgb(0, 160, 255)",
-    "brand-strong" => "rgb(0, 112, 179)", "teacher" => "rgb(255, 138, 0)", "school" => "rgb(27, 54, 93)",
+    "ink" => "rgb(31, 33, 40)", "paper" => "rgb(255, 255, 255)", "brand" => "rgb(8, 97, 225)",
+    "brand-strong" => "rgb(8, 97, 225)", "teacher" => "rgb(255, 138, 0)", "school" => "rgb(27, 54, 93)",
     "team" => "rgb(123, 58, 237)", "success" => "rgb(24, 114, 63)", "error" => "rgb(200, 50, 43)"
   }.freeze
 
@@ -28,7 +28,7 @@ test "in a dark system theme the tokens turn dark, and a printed page stays ligh
 
   assert_equal "rgb(15, 18, 24)", css(find("body"), "background-color")
   assert_equal "rgb(238, 241, 245)", css(find("body"), "color")
-  assert_equal "rgb(0, 112, 179)", css(find("[data-token='brand'] div"), "background-color")
+  assert_equal "rgb(8, 97, 225)", css(find("[data-token='brand'] div"), "background-color"), "UDR bleu unique : le fond bleu ne change pas"
 
   emulate_media(media: "print", features: [ { name: "prefers-color-scheme", value: "dark" } ])
 
@@ -47,10 +47,11 @@ end
 
   test "buttons in every variant, size and state" do
     within("[data-example=button-variants]") do
-      assert_equal "rgb(0, 112, 179)", css(find("[data-variant=primary]"), "background-color")
-      assert_equal "rgb(0, 160, 255)", css(find("[data-variant=brand]"), "background-color")
+      assert_equal "rgb(8, 97, 225)", css(find("[data-variant=primary]"), "background-color")
+      assert_equal "rgb(255, 255, 255)", css(find("[data-variant=primary]"), "color")
+      assert_no_selector "[data-variant=brand]"
       assert_equal "rgb(200, 50, 43)", css(find("[data-variant=danger]"), "background-color")
-      assert_selector "button[data-variant]", count: 5
+      assert_selector "button[data-variant]", count: 4
     end
     within("[data-example=button-sizes]") do
       heights = %w[sm md lg].map { |size| find("[data-size=#{size}]").style("height")["height"].to_f }
@@ -70,7 +71,7 @@ end
     assert_selector "[data-example=badge-tones] [data-tone]", count: ComponentsHelper::BADGE_TONES.size
     assert_selector "[data-example=badge-roles] [data-role]", count: 4
     within("[data-example=badge-subjects]") do
-      assert_equal "rgb(229, 245, 255)", css(find("[data-category=science] > span"), "background-color")
+      assert_equal "rgb(231, 240, 253)", css(find("[data-category=science] > span"), "background-color")
       assert_equal "rgb(244, 248, 251)", css(find("[data-category=unknown] > span"), "background-color")
     end
   end
@@ -115,7 +116,7 @@ end
       assert_selector "input[type=radio][aria-describedby=sample_cycle_hint]", count: 2
       option = find("label", text: t("design.index.fields.cycles").first[:label])
       assert_operator option.native.rect.height, :>=, 48
-      assert_equal "rgb(229, 245, 255)", css(option, "background-color")
+      assert_equal "rgb(231, 240, 253)", css(option, "background-color")
 
       find_field("sample_cycle_first").send_keys(:right)
       assert_checked_field "sample_cycle_second"
