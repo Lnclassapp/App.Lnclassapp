@@ -1,0 +1,3295 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Dérivabilité et étude de fonctions",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "A2",
+      "theme": "blue",
+      "figures": [],
+      "notions": [
+        {
+          "name": "Nombre dérivé et tangente",
+          "remember": "Le **taux d'accroissement** de $f$ entre $a$ et $a+h$ (avec $h \\neq 0$) est $\\dfrac{f(a+h) - f(a)}{h}$ : c'est la pente de la droite qui joint les points de la courbe d'abscisses $a$ et $a+h$. Quand $h$ devient très proche de $0$, si ce taux se rapproche d'un nombre, ce nombre est le **nombre dérivé** de $f$ en $a$, noté $f'(a)$ ; on dit que $f$ est **dérivable** en $a$. Graphiquement, $f'(a)$ est la **pente** de la **tangente** à la courbe au point d'abscisse $a$. Cette tangente a pour équation $y = f'(a)\\,(x - a) + f(a)$. Si $f'(a) > 0$, la courbe monte près du point ; si $f'(a) < 0$, elle descend ; si $f'(a) = 0$, la tangente est horizontale.",
+          "method": [
+            "Calculer $f(a)$ et $f(a+h)$, en développant $f(a+h)$.",
+            "Former et simplifier le taux d'accroissement $\\dfrac{f(a+h) - f(a)}{h}$ : le $h$ du numérateur se simplifie avec celui du dénominateur.",
+            "Lire le nombre dérivé : regarder vers quel nombre se rapproche le taux quand $h$ est très proche de $0$.",
+            "Écrire l'équation de la tangente avec $y = f'(a)\\,(x - a) + f(a)$, puis la réduire."
+          ],
+          "example": {
+            "statement": "La production d'une machine est donnée par $f(x) = x^2$ après $x$ heures de marche. Trouver le nombre dérivé de $f$ en $a = 3$, puis l'équation de la tangente à la courbe au point d'abscisse $3$.",
+            "steps": [
+              "Calculer : $f(3) = 9$ et $f(3+h) = (3+h)^2 = 9 + 6h + h^2$.",
+              "Former et simplifier : $\\dfrac{f(3+h) - f(3)}{h} = \\dfrac{6h + h^2}{h} = 6 + h$.",
+              "Lire : quand $h$ est très proche de $0$, $6 + h$ se rapproche de $6$ ; donc $f'(3) = 6$.",
+              "Écrire : $y = 6\\,(x - 3) + 9 = 6x - 18 + 9 = 6x - 9$."
+            ]
+          },
+          "pitfall": "Ne confonds pas $f(a)$ et $f'(a)$ : $f(a)$ est la **hauteur** du point sur la courbe, $f'(a)$ est la **pente** de la tangente. Contre-exemple : pour $f(x) = x^2$ et $a = 3$, on a $f(3) = 9$, mais le taux vaut $6 + h$, donc $f'(3) = 6$ et non $9$. Dans l'équation de la tangente, les deux nombres ont des rôles différents : $y = 6\\,(x - 3) + 9$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Nombre dérivé et tangente",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : calculer, former et simplifier, lire, écrire. La production d'une machine, en tonnes, est donnée par f(x) = x² après x heures de marche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2$, on cherche le taux d'accroissement entre $2$ et $2+h$ (avec $h \\neq 0$). Que vaut-il après simplification ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f(2) = 4$ et $f(2+h) = (2+h)^2 = 4 + 4h + h^2$. Étape 2 — Former et simplifier : $\\dfrac{f(2+h) - f(2)}{h} = \\dfrac{4h + h^2}{h} = 4 + h$. Étape 3 — Lire : quand $h$ est très proche de $0$, ce taux se rapproche de $4$. La proposition $4h + h^2$ oublie de diviser par $h$. La proposition $2 + h$ oublie le double produit : $(2+h)^2 = 4 + 2h + h^2$ est faux, il faut $4 + 4h + h^2$. La proposition $4$ est le nombre dérivé, pas le taux : le taux dépend de $h$.",
+                  "answers": [
+                    {
+                      "content": "$4 + h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4h + h^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 + h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La production d'une machine, en tonnes, est $f(x) = x^2$ après $x$ heures de marche. En calculant le taux d'accroissement entre $5$ et $5+h$, trouve le nombre dérivé $f'(5)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f(5) = 25$ et $f(5+h) = (5+h)^2 = 25 + 10h + h^2$. Étape 2 — Former et simplifier : $\\dfrac{f(5+h) - f(5)}{h} = \\dfrac{10h + h^2}{h} = 10 + h$. Étape 3 — Lire : quand $h$ est très proche de $0$, $10 + h$ se rapproche de $10$ ; donc $f'(5) = 10$. Ce n'est pas $25$, qui est $f(5)$ : la valeur de la fonction n'est pas la pente.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque information sur le nombre dérivé $f'(a)$ à ce qu'elle dit de la courbe de $f$ près du point d'abscisse $a$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Lire : le nombre dérivé est la pente de la tangente. Si $f'(a) > 0$, la pente est positive : la courbe monte. Si $f'(a) < 0$, la pente est négative : la courbe descend. Si $f'(a) = 0$, la pente est nulle ; Étape 4 — Écrire : la tangente est $y = f(a)$, une droite horizontale.",
+                  "answers": [
+                    {
+                      "content": "$f'(a) = 3$",
+                      "match": "La courbe monte près du point"
+                    },
+                    {
+                      "content": "$f'(a) = -2$",
+                      "match": "La courbe descend près du point"
+                    },
+                    {
+                      "content": "$f'(a) = 0$",
+                      "match": "La tangente est horizontale"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ vérifie $f(2) = 7$ et $f'(2) = 3$. Sa tangente au point d'abscisse $2$ s'écrit $y = 3x + b$. Que vaut $b$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : on connaît déjà $f(2) = 7$ et $f'(2) = 3$. Étape 2 et 3 — Le nombre dérivé donne la pente $3$. Étape 4 — Écrire : $y = 3\\,(x - 2) + 7 = 3x - 6 + 7 = 3x + 1$. Donc $b = 1$. Écrire $b = 7$ serait oublier de retirer $3 \\times 2 = 6$ : $f(2)$ n'est pas l'ordonnée à l'origine.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ vérifie $f(1) = 4$ et $f'(1) = -2$. Quelle est l'équation de la tangente à sa courbe au point d'abscisse $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f(1) = 4$. Étape 3 — Lire : $f'(1) = -2$ est la pente. Étape 4 — Écrire : $y = -2\\,(x - 1) + 4 = -2x + 2 + 4 = -2x + 6$. La proposition $y = -2x + 4$ prend $f(1)$ pour l'ordonnée à l'origine. La proposition $y = -2x + 2$ écrit $(x + 1)$ au lieu de $(x - 1)$. La proposition $y = 4x - 2$ prend la hauteur $4$ pour pente et la pente $-2$ pour ordonnée à l'origine.",
+                  "answers": [
+                    {
+                      "content": "$y = -2x + 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = -2x + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = -2x + 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 4x - 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2$ et $a = 3$, on a $f(3) = 9$. Donc le nombre dérivé $f'(3)$ vaut $9$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f(3) = 9$ et $f(3+h) = 9 + 6h + h^2$. Étape 2 — Former et simplifier : le taux vaut $6 + h$. Étape 3 — Lire : $f'(3) = 6$, pas $9$. Le nombre $9$ est la hauteur du point, le nombre $6$ est la pente de la tangente : c'est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Tangentes et nombres dérivés",
+              "statement": "Dans cet exercice, tu calcules des taux d'accroissement, des nombres dérivés et des tangentes avec la méthode de la fiche : calculer, former et simplifier, lire, écrire.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Développe $f(a+h)$, retranche $f(a)$ et simplifie par $h$ : le nombre vers lequel se rapproche le taux est le nombre dérivé. Dans la tangente $y = f'(a)\\,(x - a) + f(a)$, ne mélange pas $f(a)$ et $f'(a)$.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 + 2x$, quel est le taux d'accroissement entre $1$ et $1+h$ (avec $h \\neq 0$), après simplification ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f(1) = 1 + 2 = 3$ et $f(1+h)$ $= 1 + 2h + h^2 + 2 + 2h$ $= 3 + 4h + h^2$. Étape 2 — Former et simplifier : $\\dfrac{f(1+h) - f(1)}{h}$ $= \\dfrac{4h + h^2}{h}$ $= 4 + h$. La proposition $4h + h^2$ est le numérateur : on a oublié de diviser par $h$. $2 + h$ ne garde que le terme en $x^2$ et oublie $2x$. $3 + 4h$ divise seulement une partie du numérateur.",
+                  "answers": [
+                    {
+                      "content": "$4 + h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4h + h^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 + h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 + 4h$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2$, le taux d'accroissement entre $-2$ et $-2+h$ est $-4 + h$. Quel est le nombre dérivé $f'(-2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f(-2) = 4$ et $f(-2+h) = 4 - 4h + h^2$. Étape 2 — Former et simplifier : le taux vaut $\\dfrac{-4h + h^2}{h} = -4 + h$. Étape 3 — Lire : quand $h$ est très proche de $0$, $-4 + h$ se rapproche de $-4$ ; donc $f'(-2) = -4$. Le signe négatif est normal : la courbe de $x^2$ descend à gauche de $0$.",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre dérivé $f'(a)$ est la ___ de la tangente à la courbe au point d'abscisse $a$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Lire : le taux d'accroissement est la pente d'une droite qui joint deux points de la courbe ; quand $h$ se rapproche de $0$, cette droite devient la tangente et le nombre dérivé $f'(a)$ est sa pente (son coefficient directeur). Ce n'est pas la hauteur du point, qui est $f(a)$.",
+                  "answers": [
+                    {
+                      "content": "pente",
+                      "correct": true
+                    },
+                    {
+                      "content": "coefficient directeur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La tangente à la courbe de $f(x) = x^2$ au point d'abscisse $2$ s'écrit $y = 4x + b$ (on sait que $f'(2) = 4$). Que vaut $b$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f(2) = 4$. Étape 3 — Lire : $f'(2) = 4$. Étape 4 — Écrire : $y$ $= 4\\,(x - 2) + 4$ $= 4x - 8 + 4$ $= 4x - 4$. Donc $b = -4$. Si on prenait $b = 4$, on confondrait $f(2)$ avec l'ordonnée à l'origine : la tangente ne passerait pas par le point $(2\\,;\\,4)$.",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couple de valeurs $f(a)$ et $f'(a)$ à l'équation de la tangente en $a$ (étape 4 : $y = f'(a)\\,(x - a) + f(a)$).",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Écrire : on applique $y = f'(a)\\,(x - a) + f(a)$ puis on réduit. En $a = 1$ : $2\\,(x - 1) + 5 = 2x + 3$. En $a = 2$ : $3\\,(x - 2) + 1 = 3x - 5$. En $a = 0$ : $-1\\,(x - 0) + 4 = -x + 4$. En $a = 3$ : $2\\,(x - 3) + 0 = 2x - 6$. Chaque tangente passe bien par le point $(a\\,;\\,f(a))$.",
+                  "answers": [
+                    {
+                      "content": "$a = 1$, $f(1) = 5$, $f'(1) = 2$",
+                      "match": "$y = 2x + 3$"
+                    },
+                    {
+                      "content": "$a = 2$, $f(2) = 1$, $f'(2) = 3$",
+                      "match": "$y = 3x - 5$"
+                    },
+                    {
+                      "content": "$a = 0$, $f(0) = 4$, $f'(0) = -1$",
+                      "match": "$y = -x + 4$"
+                    },
+                    {
+                      "content": "$a = 3$, $f(3) = 0$, $f'(3) = 2$",
+                      "match": "$y = 2x - 6$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ vérifie $f(4) = 10$ et $f'(4) = 3$. La tangente en $x = 4$ a pour équation $y = 3x + 10$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Écrire : $y$ $= 3\\,(x - 4) + 10$ $= 3x - 12 + 10$ $= 3x - 2$. L'équation $y = 3x + 10$ prend $f(4) = 10$ pour ordonnée à l'origine : c'est l'erreur du piège, qui oublie le terme $x - a$. Test : en $x = 4$, $3x + 10$ donne $22$, pas $f(4) = 10$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un entraîneur étudie la fonction f(x) = x², qui donne la recette d'une buvette de stade.",
+            "questions": [
+              {
+                "content": "Pour $f(x) = x^2$, on a $f(1+h) = 1 + 2h + h^2$. Complète : $f(1) =$ ___ et le nombre dérivé $f'(1) =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $f(1) = 1$. Étape 2 — Former et simplifier : $\\dfrac{2h + h^2}{h} = 2 + h$. Étape 3 — Lire : quand $h$ est proche de $0$, le taux se rapproche de $2$, donc $f'(1) = 2$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le taux se simplifie par h, puis on regarde ce qu'il devient quand h est presque nul."
+              },
+              {
+                "content": "Si $f'(a) > 0$, la courbe de $f$ près du point d'abscisse $a$ ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Lire : $f'(a)$ est la pente de la tangente. Une pente positive veut dire que la courbe monte. Une pente négative la ferait descendre, et une pente nulle donnerait une tangente horizontale.",
+                "answers": [
+                  {
+                    "content": "monte",
+                    "correct": true
+                  },
+                  {
+                    "content": "descend",
+                    "correct": false
+                  },
+                  {
+                    "content": "est horizontale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La tangente en $a = 2$ a pour pente $4$ et passe par le point $(2\\,;\\,3)$. Elle s'écrit $y = 4x + b$. Que vaut $b$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Écrire : $y = 4\\,(x - 2) + 3 = 4x - 8 + 3 = 4x - 5$. Donc $b = -5$.",
+                "answers": [
+                  {
+                    "content": "-5",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer la dérivée d'une fonction",
+          "remember": "Dérivées usuelles : une constante $k$ a pour dérivée $0$ ; $(x)' = 1$ ; $(x^2)' = 2x$ ; $(x^3)' = 3x^2$ ; $\\left(\\dfrac{1}{x}\\right)' = -\\dfrac{1}{x^2}$ pour $x \\neq 0$. Règles : la dérivée d'une somme est la somme des dérivées, $(u + v)' = u' + v'$ ; un coefficient reste devant : $(k\\,u)' = k\\,u'$. Exemples : $(5x^2)' = 5 \\times 2x = 10x$ et $\\left(\\dfrac{3}{x}\\right)' = 3 \\times \\left(-\\dfrac{1}{x^2}\\right) = -\\dfrac{3}{x^2}$. Un quotient simple comme $\\dfrac{ax + b}{x}$ se sépare d'abord : $\\dfrac{ax + b}{x} = a + \\dfrac{b}{x}$.",
+          "method": [
+            "Séparer la fonction en termes simples : un nombre fois $x$, $x^2$, $x^3$ ou $\\dfrac{1}{x}$, ou une constante (écrire d'abord $\\dfrac{ax+b}{x}$ sous la forme $a + \\dfrac{b}{x}$).",
+            "Repérer pour chaque terme la dérivée usuelle qui lui correspond.",
+            "Dériver chaque terme : multiplier la dérivée usuelle par le coefficient du terme.",
+            "Additionner les résultats et réduire pour obtenir $f'(x)$."
+          ],
+          "example": {
+            "statement": "Calculer la dérivée de $f(x) = 2x^3 - 3x^2 + 5x - 4$.",
+            "steps": [
+              "Séparer : les termes sont $2x^3$, $-3x^2$, $5x$ et $-4$.",
+              "Repérer : $(x^3)' = 3x^2$, $(x^2)' = 2x$, $(x)' = 1$ et la dérivée d'une constante est $0$.",
+              "Dériver : $(2x^3)' = 2 \\times 3x^2 = 6x^2$ ; $(-3x^2)' = -3 \\times 2x = -6x$ ; $(5x)' = 5$ ; $(-4)' = 0$.",
+              "Additionner : $f'(x) = 6x^2 - 6x + 5$."
+            ]
+          },
+          "pitfall": "Ne dérive pas $x^3$ en $x^2$ en baissant seulement l'exposant : $(x^3)' = 3x^2$. Contre-exemple : la pente de $x^3$ en $1$ vaut $3$ (le taux est $3 + 3h + h^2$), alors que $x^2$ donnerait $1$. N'oublie pas non plus qu'une constante disparaît : $(-4)' = 0$ et non $-4$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer des dérivées",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : séparer, repérer, dériver, additionner.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = 4x^2 - 3x + 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Séparer : les termes sont $4x^2$, $-3x$ et $1$. Étape 2 — Repérer : $(x^2)' = 2x$, $(x)' = 1$, $(1)' = 0$. Étape 3 — Dériver : $(4x^2)' = 4 \\times 2x = 8x$ ; $(-3x)' = -3$ ; $(1)' = 0$. Étape 4 — Additionner : $f'(x) = 8x - 3$. La proposition $2x - 3$ oublie le coefficient $4$. La proposition $8x - 2$ dérive la constante $1$ en $1$ au lieu de $0$. La proposition $4x - 3$ dérive $x^2$ en $x$.",
+                  "answers": [
+                    {
+                      "content": "$8x - 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8x - 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x - 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction de production est $f(x) = x^3 - 3x^2 + 5x$. Calcule $f'(2)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Séparer : $x^3$, $-3x^2$, $5x$. Étape 2 — Repérer : $(x^3)' = 3x^2$, $(x^2)' = 2x$, $(x)' = 1$. Étape 3 — Dériver : $(x^3)' = 3x^2$ ; $(-3x^2)' = -6x$ ; $(5x)' = 5$. Étape 4 — Additionner : $f'(x) = 3x^2 - 6x + 5$, donc $f'(2) = 3 \\times 4 - 6 \\times 2 + 5 = 12 - 12 + 5 = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, quelle est la dérivée de $g(x) = \\dfrac{3}{x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Séparer : $g(x) = 3 \\times \\dfrac{1}{x}$. Étape 2 — Repérer : $\\left(\\dfrac{1}{x}\\right)' = -\\dfrac{1}{x^2}$. Étape 3 — Dériver : on garde le coefficient $3$, donc $g'(x) = 3 \\times \\left(-\\dfrac{1}{x^2}\\right)$. Étape 4 — Additionner : un seul terme, $g'(x) = -\\dfrac{3}{x^2}$. La proposition $\\dfrac{3}{x^2}$ oublie le signe moins. La proposition $-\\dfrac{1}{x^2}$ oublie le coefficient $3$. La proposition $-\\dfrac{3}{x}$ oublie le carré.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{3}{x^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{1}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{3}{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fonction à sa dérivée.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Séparer chaque fonction en termes. Étape 2 — Repérer les dérivées usuelles. Étape 3 — Dériver : $(x^3 + 2x)' = 3x^2 + 2$ ; $(5x^2 - x)' = 10x - 1$ ; $(7x + 4)' = 7 + 0 = 7$ ; $\\left(\\dfrac{2}{x} + x\\right)' = -\\dfrac{2}{x^2} + 1$. Étape 4 — Additionner les résultats de chaque terme.",
+                  "answers": [
+                    {
+                      "content": "$x^3 + 2x$",
+                      "match": "$3x^2 + 2$"
+                    },
+                    {
+                      "content": "$5x^2 - x$",
+                      "match": "$10x - 1$"
+                    },
+                    {
+                      "content": "$7x + 4$",
+                      "match": "$7$"
+                    },
+                    {
+                      "content": "$\\dfrac{2}{x} + x$",
+                      "match": "$-\\dfrac{2}{x^2} + 1$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, on pose $h(x) = \\dfrac{2x + 5}{x}$. Calcule $h'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Séparer : $h(x) = \\dfrac{2x}{x} + \\dfrac{5}{x} = 2 + \\dfrac{5}{x}$. Étape 2 — Repérer : la dérivée d'une constante est $0$ et $\\left(\\dfrac{1}{x}\\right)' = -\\dfrac{1}{x^2}$. Étape 3 — Dériver : $(2)' = 0$ et $\\left(\\dfrac{5}{x}\\right)' = -\\dfrac{5}{x^2}$. Étape 4 — Additionner : $h'(x) = -\\dfrac{5}{x^2}$, donc $h'(1) = -5$.",
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La dérivée de $f(x) = x^3 + 7$ est $f'(x) = 3x^2 + 7$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Séparer : $x^3$ et la constante $7$. Étape 2 — Repérer : $(x^3)' = 3x^2$ et la dérivée d'une constante est $0$. Étape 3 — Dériver : $(7)' = 0$. Étape 4 — Additionner : $f'(x) = 3x^2$. Garder $7$ dans la dérivée est l'erreur à éviter : une constante disparaît.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Dériver des fonctions de coût",
+              "statement": "Dans cet exercice, tu dérives des fonctions avec la méthode de la fiche : séparer, repérer, dériver, additionner.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Dérive terme à terme : $(x^2)' = 2x$, $(x^3)' = 3x^2$, $(x)' = 1$, une constante donne $0$. Pour $\\dfrac{ax+b}{x}$, sépare d'abord en $a + \\dfrac{b}{x}$.",
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = 3x^3 - 2x^2 + 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Séparer : les termes sont $3x^3$, $-2x^2$ et $5$. Étape 2 — Repérer : $(x^3)' = 3x^2$, $(x^2)' = 2x$ et la dérivée d'une constante est $0$. Étape 3 — Dériver : $(3x^3)' = 9x^2$ ; $(-2x^2)' = -4x$ ; $(5)' = 0$. Étape 4 — Additionner : $f'(x) = 9x^2 - 4x$. Garder $+5$ oublie que la constante disparaît ; $3x^2 - 2x$ baisse seulement l'exposant ; $9x^3 - 4x^2$ ne baisse pas l'exposant.",
+                  "answers": [
+                    {
+                      "content": "$9x^2 - 4x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9x^2 - 4x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x^2 - 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9x^3 - 4x^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coût de production est $f(x) = 2x^3 + x^2 - 3x$. Calcule $f'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Séparer : $2x^3$, $x^2$ et $-3x$. Étape 2 — Repérer : $(x^3)' = 3x^2$, $(x^2)' = 2x$, $(x)' = 1$. Étape 3 — Dériver : $(2x^3)' = 6x^2$ ; $(x^2)' = 2x$ ; $(-3x)' = -3$. Étape 4 — Additionner : $f'(x) = 6x^2 + 2x - 3$, donc $f'(1) = 6 + 2 - 3 = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, la dérivée de $f(x) = \\dfrac{4}{x}$ est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Séparer : $\\dfrac{4}{x} = 4 \\times \\dfrac{1}{x}$. Étape 2 — Repérer : $\\left(\\dfrac{1}{x}\\right)'$ $= -\\dfrac{1}{x^2}$. Étape 3 — Dériver : on multiplie par le coefficient $4$ : $4 \\times \\left(-\\dfrac{1}{x^2}\\right)$ $= -\\dfrac{4}{x^2}$. Étape 4 — Additionner : un seul terme, donc $f'(x) = -\\dfrac{4}{x^2}$. Oublier le signe moins, ou le coefficient, donne les autres propositions.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{4}{x^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{4}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{1}{4x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{4}{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour dériver $f(x) = 2x^2 + 3x - 7$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Séparer : on isole les termes. Étape 2 — Repérer : on associe à chaque terme sa dérivée usuelle. Étape 3 — Dériver : on multiplie par les coefficients. Étape 4 — Additionner : on réunit et on réduit pour obtenir $f'(x) = 4x + 3$. On ne peut pas additionner avant d'avoir dérivé chaque terme.",
+                  "answers": [
+                    {
+                      "content": "Séparer : les termes sont $2x^2$, $3x$ et $-7$."
+                    },
+                    {
+                      "content": "Repérer : $(x^2)' = 2x$, $(x)' = 1$ et la dérivée d'une constante est $0$."
+                    },
+                    {
+                      "content": "Dériver : $(2x^2)' = 4x$ ; $(3x)' = 3$ ; $(-7)' = 0$."
+                    },
+                    {
+                      "content": "Additionner : $f'(x) = 4x + 3$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, on pose $h(x) = \\dfrac{5x + 4}{x}$. Calcule $h'(2)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Séparer : $\\dfrac{5x + 4}{x} = 5 + \\dfrac{4}{x}$. Étape 2 — Repérer : la dérivée d'une constante est $0$ et $\\left(\\dfrac{1}{x}\\right)'$ $= -\\dfrac{1}{x^2}$. Étape 3 — Dériver : $(5)' = 0$ et $\\left(\\dfrac{4}{x}\\right)'$ $= -\\dfrac{4}{x^2}$. Étape 4 — Additionner : $h'(x) = -\\dfrac{4}{x^2}$, donc $h'(2) = -\\dfrac{4}{4} = -1$.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La dérivée de $f(x) = 5x^2 - 4$ est $f'(x) = 10x - 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Séparer : $5x^2$ et $-4$. Étape 2 — Repérer : $(x^2)' = 2x$ et la dérivée d'une constante est $0$. Étape 3 — Dériver : $(5x^2)' = 10x$ et $(-4)' = 0$. Étape 4 — Additionner : $f'(x) = 10x$. Garder $-4$ est l'erreur du piège : une constante disparaît.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Le trésorier d'un club de football étudie des fonctions de recette.",
+            "questions": [
+              {
+                "content": "Pour $f(x) = 3x^2 + 4x - 9$, on a $f'(x) = $ ___ $x + $ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Séparer : $3x^2$, $4x$ et $-9$. Étape 2 — Repérer : $(x^2)' = 2x$ et $(x)' = 1$. Étape 3 — Dériver : $(3x^2)' = 6x$, $(4x)' = 4$, $(-9)' = 0$. Étape 4 — Additionner : $f'(x) = 6x + 4$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La dérivée de x² est 2x : on multiplie par le coefficient 3."
+              },
+              {
+                "content": "La dérivée de $x^3$ est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Repérer : la dérivée usuelle est $(x^3)' = 3x^2$. Les propositions $x^2$ et $3x$ sont des erreurs : on multiplie par l'exposant $3$ et on baisse l'exposant à $2$.",
+                "answers": [
+                  {
+                    "content": "$3x^2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3x$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour $g(x) = x^2 - 6x$, calcule $g'(4)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Dériver : $g'(x) = 2x - 6$. Étape 4 — Additionner puis remplacer : $g'(4) = 8 - 6 = 2$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Signe de la dérivée, sens de variation et extremums",
+          "remember": "Soit $f$ dérivable sur un intervalle $I$. Si $f'(x) > 0$ pour tout $x$ de $I$, alors $f$ est **croissante** sur $I$. Si $f'(x) < 0$ pour tout $x$ de $I$, alors $f$ est **décroissante** sur $I$. Si $f'(x) = 0$ pour tout $x$ de $I$, alors $f$ est constante. Un **extremum** est un maximum ou un minimum : la plus grande ou la plus petite valeur de $f$ près d'un point. Si $f'$ s'annule en $c$ **en changeant de signe**, alors $f(c)$ est un extremum : un **maximum** si $f'$ passe de $+$ à $-$ (la courbe monte puis descend), un **minimum** si $f'$ passe de $-$ à $+$ (elle descend puis monte).",
+          "method": [
+            "Calculer la dérivée $f'(x)$.",
+            "Résoudre l'équation $f'(x) = 0$ pour trouver les valeurs où la dérivée s'annule.",
+            "Étudier le signe de $f'(x)$ sur chaque intervalle délimité par ces valeurs, en testant un nombre dans chaque intervalle.",
+            "Conclure : $f$ croît là où $f'(x) > 0$ et décroît là où $f'(x) < 0$ ; si $f'$ change de signe en $c$, calculer $f(c)$ : c'est un extremum."
+          ],
+          "example": {
+            "statement": "Le bénéfice d'un maquis est modélisé par $f(x) = x^2 - 4x + 3$. Étudier le sens de variation de $f$ sur $\\mathbb{R}$ et donner son extremum.",
+            "steps": [
+              "Calculer : $f'(x) = 2x - 4$.",
+              "Résoudre : $2x - 4 = 0$ donne $x = 2$.",
+              "Étudier : pour $x < 2$, $f'(x) < 0$ (test : $f'(0) = -4$) ; pour $x > 2$, $f'(x) > 0$ (test : $f'(3) = 2$).",
+              "Conclure : $f$ décroît sur $]-\\infty\\,;\\,2]$ et croît sur $[2\\,;\\,+\\infty[$ ; $f'$ passe de $-$ à $+$, donc $f(2) = 4 - 8 + 3 = -1$ est un minimum."
+            ]
+          },
+          "pitfall": "Ne conclus pas à un extremum dès que $f'(c) = 0$ : il faut que $f'$ **change de signe**. Contre-exemple : pour $f(x) = x^3$, $f'(x) = 3x^2$ s'annule en $0$ mais reste positive des deux côtés ; $f(-1) = -1$, $f(0) = 0$, $f(1) = 1$ : $f$ croît toujours, il n'y a pas d'extremum. Ne confonds pas non plus le signe de $f'$ (le sens de variation) et le signe de $f$ (la position par rapport à l'axe des abscisses).",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Variations et extremums",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : calculer la dérivée, résoudre, étudier le signe, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 - 6x + 5$, on a $f'(x) = 2x - 6$. Sur quel intervalle $f$ est-elle croissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 2x - 6$. Étape 2 — Résoudre : $2x - 6 = 0$ donne $x = 3$. Étape 3 — Étudier : pour $x > 3$, $f'(x) > 0$ (test : $f'(4) = 2$) ; pour $x < 3$, $f'(x) < 0$ (test : $f'(0) = -6$). Étape 4 — Conclure : $f$ est croissante sur $[3\\,;\\,+\\infty[$. L'intervalle $]-\\infty\\,;\\,3]$ est celui où $f$ décroît. L'intervalle $[-3\\,;\\,+\\infty[$ vient d'une erreur de signe en résolvant. L'intervalle $[6\\,;\\,+\\infty[$ oublie de diviser par $2$.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[6\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 6x + 5$, la dérivée $f'(x) = 2x - 6$ s'annule en $x = 3$ en passant de $-$ à $+$. Quelle est la valeur de ce minimum ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 2x - 6$. Étape 2 — Résoudre : $f'(3) = 0$. Étape 3 — Étudier : $f'$ passe de $-$ à $+$. Étape 4 — Conclure : $f$ a un minimum en $x = 3$ et sa valeur est $f(3) = 9 - 18 + 5 = -4$. Attention : le minimum est $-4$ (la valeur de $f$), pas $3$ (l'endroit où il est atteint).",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $f'(x) < 0$ pour tout $x$ de l'intervalle $[1\\,;\\,4]$, alors $f$ est décroissante sur $[1\\,;\\,4]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Étudier : le signe de $f'$ est négatif sur tout l'intervalle. Étape 4 — Conclure : $f$ décroît là où $f'(x) < 0$, donc $f$ est décroissante sur $[1\\,;\\,4]$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour étudier les variations d'une fonction $f$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Calculer la dérivée $f'(x)$. Étape 2 — Résoudre $f'(x) = 0$. Étape 3 — Étudier le signe de $f'(x)$ sur chaque intervalle. Étape 4 — Conclure sur les variations et les extremums. On ne peut pas étudier le signe avant d'avoir trouvé les valeurs qui annulent $f'$.",
+                  "answers": [
+                    {
+                      "content": "Calculer la dérivée $f'(x)$."
+                    },
+                    {
+                      "content": "Résoudre $f'(x) = 0$."
+                    },
+                    {
+                      "content": "Étudier le signe de $f'(x)$ sur chaque intervalle."
+                    },
+                    {
+                      "content": "Conclure sur les variations et les extremums."
+                    }
+                  ]
+                },
+                {
+                  "content": "La recette d'une buvette est $f(x) = -x^2 + 4x$. Que peut-on dire de $f$ en $x = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = -2x + 4$. Étape 2 — Résoudre : $-2x + 4 = 0$ donne $x = 2$. Étape 3 — Étudier : pour $x < 2$, $f'(x) > 0$ (test : $f'(0) = 4$) ; pour $x > 2$, $f'(x) < 0$ (test : $f'(3) = -2$). Étape 4 — Conclure : $f'$ passe de $+$ à $-$, donc $f(2) = -4 + 8 = 4$ est un maximum. La proposition « minimum égal à $4$ » inverse le sens du changement de signe. La proposition « maximum égal à $2$ » confond l'endroit ($x = 2$) et la valeur ($f(2) = 4$). La proposition « aucun extremum » oublie que $f'$ change de signe.",
+                  "answers": [
+                    {
+                      "content": "Elle admet un maximum égal à $4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle admet un minimum égal à $4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle admet un maximum égal à $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'admet aucun extremum",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3$, on a $f'(0) = 0$, donc $f$ admet un extremum en $x = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 3x^2$. Étape 2 — Résoudre : $3x^2 = 0$ donne $x = 0$. Étape 3 — Étudier : $f'(-1) = 3$ et $f'(1) = 3$ : $f'$ est positive des deux côtés, elle ne change pas de signe. Étape 4 — Conclure : $f$ est croissante, sans extremum en $0$. C'est le piège : $f'(c) = 0$ ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Variations d'un bénéfice",
+              "statement": "Dans cet exercice, tu étudies les variations de fonctions avec la méthode de la fiche : calculer la dérivée, résoudre, étudier le signe, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Résous $f'(x) = 0$, teste un nombre dans chaque intervalle pour trouver le signe de $f'$, puis conclus. Un extremum exige que $f'$ change de signe.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 - 8x + 7$, sur quel intervalle $f$ est-elle décroissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 2x - 8$. Étape 2 — Résoudre : $2x - 8 = 0$ donne $x = 4$. Étape 3 — Étudier : $f'(0) = -8 < 0$ et $f'(5) = 2 > 0$. Étape 4 — Conclure : $f$ décroît là où $f'(x) < 0$, c'est-à-dire sur $]-\\infty\\,;\\,4]$. L'intervalle $[4\\,;\\,+\\infty[$ est celui où $f$ croît : on a inversé le sens. Les deux autres viennent d'une erreur sur la valeur $4$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,4]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[4\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[8\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bénéfice d'un maquis, en milliers de FCFA, est $B(x) = -x^2 + 6x - 5$ pour $x$ centaines de plats vendus. Quel est le bénéfice maximal ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $B'(x) = -2x + 6$. Étape 2 — Résoudre : $-2x + 6 = 0$ donne $x = 3$. Étape 3 — Étudier : $B'(0) = 6 > 0$ et $B'(4) = -2 < 0$ : $B'$ passe de $+$ à $-$. Étape 4 — Conclure : c'est un maximum, $B(3) = -9 + 18 - 5 = 4$ milliers de FCFA.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la dérivée $f'$ passe du signe $+$ au signe $-$ en $c$, alors $f(c)$ est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Étudier : si $f'$ est positive avant $c$ et négative après, $f$ monte puis descend. Étape 4 — Conclure : $f(c)$ est un maximum. Pour un minimum, ce serait l'inverse : $f'$ passerait de $-$ à $+$.",
+                  "answers": [
+                    {
+                      "content": "maximum",
+                      "correct": true
+                    },
+                    {
+                      "content": "maximum local",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque information sur la dérivée $f'$ à sa conséquence pour $f$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Conclure : $f$ croît là où $f'(x) > 0$ et décroît là où $f'(x) < 0$. Si $f'$ change de signe en $c$, $f(c)$ est un extremum : un minimum quand $f'$ passe de $-$ à $+$ (la courbe descend puis monte), un maximum quand elle passe de $+$ à $-$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) > 0$ sur un intervalle $I$",
+                      "match": "$f$ est croissante sur $I$"
+                    },
+                    {
+                      "content": "$f'(x) < 0$ sur un intervalle $I$",
+                      "match": "$f$ est décroissante sur $I$"
+                    },
+                    {
+                      "content": "$f'$ passe de $-$ à $+$ en $c$",
+                      "match": "$f(c)$ est un minimum"
+                    },
+                    {
+                      "content": "$f'$ passe de $+$ à $-$ en $c$",
+                      "match": "$f(c)$ est un maximum"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 2x^2 - 8x$, on a $f'(x) = 4x - 8$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Résoudre : $4x - 8 = 0$ donne $x = 2$. Étape 3 — Étudier : $f'(0) = -8 < 0$ et $f'(3) = 4 > 0$. Étape 4 — Conclure : $f$ décroît sur $]-\\infty\\,;\\,2]$, puis croît ; $f'$ passe de $-$ à $+$, donc $f(2) = 8 - 16 = -8$ est un minimum. « Croissante avant 2 » et « maximum » inversent le signe de $f'$ ; « pas d'extremum » oublie que $f'$ change de signe.",
+                  "answers": [
+                    {
+                      "content": "$f$ est décroissante sur $]-\\infty\\,;\\,2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(2) = -8$ est un minimum",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est croissante sur $]-\\infty\\,;\\,2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(2) = -8$ est un maximum",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'a pas d'extremum",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 4x + 1$, on a $f(0) = 1 > 0$, donc $f$ est croissante sur $[0\\,;\\,2]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 2x - 4$. Étape 2 — Résoudre : $2x - 4 = 0$ donne $x = 2$. Étape 3 — Étudier : $f'(1) = -2 < 0$ sur $[0\\,;\\,2]$. Étape 4 — Conclure : $f$ est décroissante sur $[0\\,;\\,2]$. Le signe de $f(0)$ renseigne sur la position de la courbe, pas sur son sens de variation : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un club de football étudie le bénéfice de sa buvette avec la fonction f(x) = x² − 2x.",
+            "questions": [
+              {
+                "content": "Pour $f(x) = x^2 - 2x$, la dérivée est $f'(x) = 2x - 2$. Elle s'annule en $x =$ ___ et le minimum de $f$ vaut alors ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $f'(x) = 2x - 2$. Étape 2 — Résoudre : $2x - 2 = 0$ donne $x = 1$. Étape 3 — Étudier : $f'$ passe de $-$ à $+$. Étape 4 — Conclure : le minimum est $f(1) = 1 - 2 = -1$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Résous 2x − 2 = 0, puis remplace x par la solution dans f(x)."
+              },
+              {
+                "content": "Si $f'$ est positive sur un intervalle $I$, alors $f$ est ___ sur $I$.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Conclure : $f$ croît là où $f'(x) > 0$. Elle serait décroissante si $f'$ était négative, et constante si $f'$ était nulle.",
+                "answers": [
+                  {
+                    "content": "croissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "décroissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si $f'$ passe de $+$ à $-$ en $c$, alors $f(c)$ est un maximum.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Étudier : $f'$ positive puis négative. Étape 4 — Conclure : $f$ monte puis descend, donc $f(c)$ est un maximum.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Étudier un polynôme de degré 2 ou 3",
+          "remember": "Pour étudier une fonction polynôme $f$ de degré 2 ou 3, définie sur $\\mathbb{R}$, on calcule $f'$, on étudie son signe, puis on dresse le **tableau de variations** : une ligne pour $x$, une ligne pour le signe de $f'(x)$, une ligne pour $f$ avec des flèches qui montent ($\\nearrow$) ou descendent ($\\searrow$) et les valeurs aux extremums. Si $f$ est de degré 2, $f'$ est de degré 1. Si $f$ est de degré 3, $f'$ est un trinôme de degré 2 : on cherche ses racines ; il a le signe de son coefficient de $x^2$ à l'extérieur des racines et le signe contraire entre elles ; s'il n'a pas de racine, il garde partout le signe de ce coefficient. Un tableau se lit de gauche à droite et permet de décrire la courbe. Ici, on ne calcule pas de limites aux bornes.",
+          "method": [
+            "Dériver : donner l'ensemble de définition ($\\mathbb{R}$ pour un polynôme), puis calculer $f'(x)$.",
+            "Résoudre $f'(x) = 0$ pour trouver les racines de la dérivée.",
+            "Dresser le tableau de signes de $f'(x)$, puis le tableau de variations de $f$ (flèches montantes ou descendantes).",
+            "Calculer les valeurs de $f$ aux racines de $f'$ et conclure : sens de variation, maximum local, minimum local."
+          ],
+          "example": {
+            "statement": "Étudier les variations de $f(x) = x^3 - 3x^2 + 2$ sur $\\mathbb{R}$ et donner ses extremums.",
+            "steps": [
+              "Dériver : $f$ est définie sur $\\mathbb{R}$ et $f'(x) = 3x^2 - 6x$.",
+              "Résoudre : $3x^2 - 6x = 3x\\,(x - 2) = 0$ donne $x = 0$ ou $x = 2$.",
+              "Dresser : $f'$ a le signe de $3 > 0$ à l'extérieur des racines : $f'(-1) = 9 > 0$, $f'(1) = -3 < 0$, $f'(3) = 9 > 0$. Donc $f$ est $\\nearrow$ sur $]-\\infty\\,;\\,0]$, $\\searrow$ sur $[0\\,;\\,2]$, $\\nearrow$ sur $[2\\,;\\,+\\infty[$.",
+              "Calculer : $f(0) = 2$ et $f(2) = 8 - 12 + 2 = -2$. Conclure : maximum local $2$ en $x = 0$, minimum local $-2$ en $x = 2$."
+            ]
+          },
+          "pitfall": "Ne suppose pas que le trinôme $f'$ est positif entre ses racines : il a le signe de son coefficient de $x^2$ **à l'extérieur** des racines. Contre-exemple : $f'(x) = 3x^2 - 6x$ a pour racines $0$ et $2$ et un coefficient $3 > 0$, pourtant $f'(1) = 3 - 6 = -3 < 0$ entre les racines. Teste toujours un nombre dans chaque intervalle.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Étudier un polynôme",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche : dériver, résoudre, dresser le tableau, calculer les valeurs. Les trois premières questions portent sur f(x) = x³ − 12x, définie sur ℝ.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^3 - 12x$, quelles sont les deux solutions de l'équation $f'(x) = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Dériver : $f$ est définie sur $\\mathbb{R}$ et $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : $3x^2 = 12$, donc $x^2 = 4$, donc $x = -2$ ou $x = 2$. Les propositions $4$ et $-4$ donnent la valeur de $x^2$, pas celle de $x$. La proposition $12$ s'arrête avant de diviser par $3$ et de prendre la racine.",
+                  "answers": [
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 12x$, on a $f'(x) = 3x^2 - 12 = 3\\,(x - 2)(x + 2)$. Sur quel intervalle $f$ est-elle décroissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Dériver : $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : les racines sont $-2$ et $2$. Étape 3 — Dresser : le coefficient de $x^2$ est $3 > 0$, donc $f'$ est positive à l'extérieur des racines et négative entre elles (test : $f'(0) = -12$). Étape 4 — Conclure : $f$ est décroissante sur $[-2\\,;\\,2]$. La réunion $]-\\infty\\,;\\,-2] \\cup [2\\,;\\,+\\infty[$ est l'ensemble où $f$ croît : elle inverse le signe. L'intervalle $[0\\,;\\,+\\infty[$ contient $3$, où $f'(3) = 15 > 0$ ; l'intervalle $]-\\infty\\,;\\,2]$ contient $-3$, où $f'(-3) = 15 > 0$ : $f$ n'y décroît pas partout.",
+                  "answers": [
+                    {
+                      "content": "$[-2\\,;\\,2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-2] \\cup [2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,2]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 12x$, la dérivée passe de $+$ à $-$ en $x = -2$. Quelle est la valeur de ce maximum local, $f(-2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Dériver : $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : $x = -2$ ou $x = 2$. Étape 3 — Dresser : $f'$ est positive avant $-2$ et négative après, donc $f$ monte puis descend. Étape 4 — Calculer : $f(-2) = (-2)^3 - 12 \\times (-2) = -8 + 24 = 16$. Le maximum local est $16$.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 12x$, la fonction $f$ admet en $x = 2$ un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Dériver : $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : $f'(2) = 0$. Étape 3 — Dresser : $f'$ est négative juste avant $2$ (test : $f'(0) = -12$) et positive juste après (test : $f'(3) = 15$). Étape 4 — Calculer : $f(2) = 8 - 24 = -16$ ; $f$ descend puis monte, c'est un minimum local. Un maximum local serait atteint si $f'$ passait de $+$ à $-$, ce qui se passe en $-2$. « Aucun extremum » est faux : $f'$ change de signe en $2$.",
+                  "answers": [
+                    {
+                      "content": "minimum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "maximum local",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucun extremum",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bénéfice d'un club de football, en milliers de FCFA, pour $x$ centaines de maillots vendus, est $B(x) = -2x^2 + 12x - 10$. Quel est le bénéfice maximal ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Dériver : $B$ est définie sur $\\mathbb{R}$ et $B'(x) = -4x + 12$. Étape 2 — Résoudre : $-4x + 12 = 0$ donne $x = 3$. Étape 3 — Dresser : le coefficient de $x$ est $-4 < 0$, donc $B'$ est positive pour $x < 3$ et négative pour $x > 3$ : $B$ monte puis descend. Étape 4 — Calculer : $B(3) = -18 + 36 - 10 = 8$. Le bénéfice maximal est $8$ milliers de FCFA, atteint pour $x = 3$ : la réponse est la valeur $B(3) = 8$, pas l'abscisse $3$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f'(x) = 3x^2 - 12$, dont les racines sont $-2$ et $2$, le signe de $f'(x)$ est positif entre $-2$ et $2$, car le coefficient $3$ est positif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Résoudre : les racines sont $-2$ et $2$. Étape 3 — Dresser : un trinôme a le signe de son coefficient de $x^2$ à l'extérieur des racines, et le signe contraire entre elles. Test : $f'(0) = -12 < 0$. Donc $f'$ est négative entre $-2$ et $2$ : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Étudier une fonction polynôme",
+              "statement": "Dans cet exercice, tu étudies des polynômes avec la méthode de la fiche : dériver, résoudre, dresser le tableau, calculer les valeurs.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche les racines de $f'$, puis teste un nombre dans chaque intervalle : un trinôme a le signe de son coefficient de $x^2$ à l'extérieur des racines, le signe contraire entre elles.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = -x^3 + 3x$, quelles sont les deux solutions de $f'(x) = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Dériver : $f$ est définie sur $\\mathbb{R}$ et $f'(x) = -3x^2 + 3$. Étape 2 — Résoudre : $-3x^2 + 3 = -3\\,(x - 1)(x + 1) = 0$ donne $x = 1$ ou $x = -1$. On vérifie : $f'(0) = 3 \\neq 0$, donc $0$ n'est pas solution ; $3$ et $-3$ viennent d'une confusion avec les coefficients.",
+                  "answers": [
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La dérivée $f'(x) = -3x^2 + 3$ a pour racines $-1$ et $1$, et son coefficient de $x^2$ est $-3$. Sur quel intervalle $f'$ est-elle positive ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Dresser : le trinôme a le signe de son coefficient $-3 < 0$ à l'extérieur des racines et le signe contraire entre elles. On teste : $f'(0) = 3 > 0$ entre $-1$ et $1$ ; $f'(2) = -9 < 0$ et $f'(-2) = -9 < 0$ à l'extérieur. Donc $f'$ est positive sur $[-1\\,;\\,1]$. Choisir l'extérieur serait appliquer la règle d'un coefficient positif.",
+                  "answers": [
+                    {
+                      "content": "$[-1\\,;\\,1]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,-1] \\cup [1\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = -x^3 + 3x$, la dérivée passe de $+$ à $-$ en $x = 1$. Quelle est la valeur de ce maximum local $f(1)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Dresser : $f'$ passe de $+$ (entre $-1$ et $1$) à $-$ (après $1$), donc $f$ monte puis descend en $x = 1$. Étape 4 — Calculer : $f(1) = -1 + 3 = 2$. Conclusion : le maximum local vaut $2$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = -x^3 + 3x$, la fonction $f$ admet en $x = -1$ un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Dresser : $f'(-2) = -9 < 0$ avant $-1$ et $f'(0) = 3 > 0$ après : $f'$ passe de $-$ à $+$. Étape 4 — Calculer : $f(-1) = 1 - 3 = -2$ est un minimum local. « Aucun extremum » oublie que $f'$ change de signe ; « maximum » inverse les signes.",
+                  "answers": [
+                    {
+                      "content": "minimum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "maximum local",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucun extremum",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coût d'une imprimerie scolaire, en milliers de FCFA, est $C(x) = 2x^2 - 12x + 30$. Quel est son minimum ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Dériver : $C'(x) = 4x - 12$. Étape 2 — Résoudre : $4x - 12 = 0$ donne $x = 3$. Étape 3 — Dresser : $C'(0) = -12 < 0$ et $C'(4) = 4 > 0$ : $C$ décroît puis croît. Étape 4 — Calculer : $C(3) = 18 - 36 + 30 = 12$. Le coût minimal est $12$ milliers de FCFA.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La dérivée $f'(x) = x^2 - 9$ a pour racines $-3$ et $3$. Comme le coefficient de $x^2$ est positif, $f'(x)$ est positif entre $-3$ et $3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Résoudre : $x^2 - 9 = 0$ donne $x = -3$ ou $x = 3$. Étape 3 — Dresser : un trinôme a le signe de son coefficient de $x^2$ à l'extérieur des racines, donc le signe contraire entre elles. Test : $f'(0) = -9 < 0$ entre $-3$ et $3$. C'est l'erreur du piège : on teste toujours un nombre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "L'entraîneur d'un club de football étudie la fonction g(x) = x³ − 3x.",
+            "questions": [
+              {
+                "content": "Pour $g(x) = x^3 - 3x$, on a $g'(x) = 3x^2 - 3$. Elle s'annule en $x =$ ___ et en $x =$ ___ (donne d'abord la plus petite).",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Dériver : $g'(x) = 3x^2 - 3$. Étape 2 — Résoudre : $3x^2 = 3$, donc $x^2 = 1$, donc $x = -1$ ou $x = 1$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Résous 3x² = 3, donc x² = 1 : il y a deux solutions."
+              },
+              {
+                "content": "Pour $g(x) = x^3 - 3x$, calcule $g(1)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Calculer : $g(1) = 1^3 - 3 \\times 1 = 1 - 3 = -2$.",
+                "answers": [
+                  {
+                    "content": "-2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour $g'(x) = 3x^2 - 3$, de racines $-1$ et $1$, le signe de $g'(x)$ entre $-1$ et $1$ est ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Dresser : le coefficient de $x^2$ est $3 > 0$, donc $g'$ est positive à l'extérieur des racines et négative entre elles. Test : $g'(0) = -3 < 0$.",
+                "answers": [
+                  {
+                    "content": "négatif",
+                    "correct": true
+                  },
+                  {
+                    "content": "positif",
+                    "correct": false
+                  },
+                  {
+                    "content": "nul",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La production d'une usine de jus",
+          "statement": "Une usine de jus de fruit d'Abidjan modélise sa production par P(x) = x² + 2x, où x est le nombre d'heures de marche et P(x) la production en centaines de litres. On étudie la vitesse de variation de la production à l'heure 3.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La production d'une usine est $P(x) = x^2 + 2x$ (en centaines de litres) après $x$ heures. Calcule $P(3)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du nombre dérivé, Étape 1 — Calculer : $P(3) = 3^2 + 2 \\times 3 = 9 + 6 = 15$ centaines de litres. C'est la production après 3 heures, pas sa vitesse de variation.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(x) = x^2 + 2x$, que vaut le taux d'accroissement $\\dfrac{P(3+h) - P(3)}{h}$ après simplification (avec $h \\neq 0$) ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du nombre dérivé. Étape 1 — Calculer : $P(3) = 15$ et $P(3+h) = (3+h)^2 + 2(3+h) = 9 + 6h + h^2 + 6 + 2h = 15 + 8h + h^2$. Étape 2 — Former et simplifier : $\\dfrac{15 + 8h + h^2 - 15}{h} = \\dfrac{8h + h^2}{h} = 8 + h$. La proposition $15 + 8h$ n'est pas un taux : c'est $P(3+h)$ sans son terme $h^2$, sans retrancher $P(3)$ ni diviser par $h$. La proposition $6 + h$ oublie le terme $2x$ de la fonction. La proposition $8$ est la valeur vers laquelle le taux se rapproche, pas le taux lui-même.",
+              "answers": [
+                {
+                  "content": "$8 + h$",
+                  "correct": true
+                },
+                {
+                  "content": "$15 + 8h$",
+                  "correct": false
+                },
+                {
+                  "content": "$6 + h$",
+                  "correct": false
+                },
+                {
+                  "content": "$8$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(x) = x^2 + 2x$, le taux d'accroissement entre $3$ et $3+h$ vaut $8 + h$. Quel est le nombre dérivé $P'(3)$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du nombre dérivé, Étape 3 — Lire : quand $h$ est très proche de $0$, $8 + h$ se rapproche de $8$. Donc $P'(3) = 8$. Cela veut dire qu'à l'heure 3, la production augmente d'environ 8 centaines de litres par heure.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(x) = x^2 + 2x$, on a $P(3) = 15$ et $P'(3) = 8$. Quelle est l'équation de la tangente à la courbe de $P$ au point d'abscisse $3$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du nombre dérivé, Étape 4 — Écrire : $y = P'(3)\\,(x - 3) + P(3) = 8\\,(x - 3) + 15 = 8x - 24 + 15 = 8x - 9$. La proposition $y = 8x - 24$ oublie d'ajouter $P(3) = 15$. La proposition $y = 8x + 39$ écrit $(x + 3)$ au lieu de $(x - 3)$. La proposition $y = 8x + 15$ prend $P(3)$ pour l'ordonnée à l'origine.",
+              "answers": [
+                {
+                  "content": "$y = 8x - 9$",
+                  "correct": true
+                },
+                {
+                  "content": "$y = 8x - 24$",
+                  "correct": false
+                },
+                {
+                  "content": "$y = 8x + 39$",
+                  "correct": false
+                },
+                {
+                  "content": "$y = 8x + 15$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(x) = x^2 + 2x$, calcule la pente de la tangente au point d'abscisse $5$, en utilisant la dérivée.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du calcul de dérivée. Étape 1 — Séparer : $x^2$ et $2x$. Étape 2 — Repérer : $(x^2)' = 2x$ et $(x)' = 1$. Étape 3 — Dériver : $(x^2)' = 2x$ et $(2x)' = 2$. Étape 4 — Additionner : $P'(x) = 2x + 2$, donc $P'(5) = 10 + 2 = 12$. On retrouve bien $P'(3) = 6 + 2 = 8$, comme avec le taux d'accroissement.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(x) = x^2 + 2x$, on a $P(3) = 15$, donc la tangente au point d'abscisse $3$ a pour pente $15$.",
+              "question_type": "true_false",
+              "explanation": "Méthode du nombre dérivé. Étape 1 — Calculer : $P(3) = 15$ est la hauteur du point. Étape 3 — Lire : la pente est le nombre dérivé $P'(3) = 8$. Confondre $P(3)$ et $P'(3)$ est le piège de la notion : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le coût moyen des maillots",
+          "statement": "Un club de football de quartier à Abobo fait fabriquer des maillots. Pour x maillots fabriqués (x > 0), le coût moyen par maillot est M(x) = (5x + 20) / x, en milliers de FCFA.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le coût moyen par maillot, en milliers de FCFA, est $M(x) = \\dfrac{5x + 20}{x}$ pour $x$ maillots fabriqués ($x > 0$). Calcule $M(4)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "On remplace $x$ par $4$ : $M(4) = \\dfrac{5 \\times 4 + 20}{4} = \\dfrac{40}{4} = 10$. Le coût moyen est de $10$ milliers de FCFA par maillot.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $x > 0$, comment peut-on réécrire $M(x) = \\dfrac{5x + 20}{x}$ avant de dériver ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du calcul de dérivée, Étape 1 — Séparer : $\\dfrac{5x + 20}{x} = \\dfrac{5x}{x} + \\dfrac{20}{x} = 5 + \\dfrac{20}{x}$. La proposition $5x + 20$ oublie de diviser par $x$. La proposition $25$ simplifie $x$ à tort sur les deux termes à la fois. La proposition $5 + 20x$ transforme la division par $x$ en multiplication.",
+              "answers": [
+                {
+                  "content": "$5 + \\dfrac{20}{x}$",
+                  "correct": true
+                },
+                {
+                  "content": "$5x + 20$",
+                  "correct": false
+                },
+                {
+                  "content": "$25$",
+                  "correct": false
+                },
+                {
+                  "content": "$5 + 20x$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $x > 0$, on pose $M(x) = 5 + \\dfrac{20}{x}$. Quelle est la dérivée $M'(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du calcul de dérivée. Étape 2 — Repérer : la dérivée d'une constante est $0$ et $\\left(\\dfrac{1}{x}\\right)' = -\\dfrac{1}{x^2}$. Étape 3 — Dériver : $(5)' = 0$ et $\\left(\\dfrac{20}{x}\\right)' = 20 \\times \\left(-\\dfrac{1}{x^2}\\right)$. Étape 4 — Additionner : $M'(x) = -\\dfrac{20}{x^2}$. La proposition $\\dfrac{20}{x^2}$ oublie le signe moins. La proposition $-\\dfrac{20}{x}$ oublie le carré. La proposition $5 - \\dfrac{20}{x^2}$ garde la constante $5$ au lieu de la dériver en $0$.",
+              "answers": [
+                {
+                  "content": "$-\\dfrac{20}{x^2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{20}{x^2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-\\dfrac{20}{x}$",
+                  "correct": false
+                },
+                {
+                  "content": "$5 - \\dfrac{20}{x^2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $x > 0$, la fonction $M(x) = 5 + \\dfrac{20}{x}$ a pour dérivée $M'(x) = -\\dfrac{20}{x^2}$. Calcule le nombre dérivé $M'(4)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du calcul de dérivée, Étape 4 — remplacer $x$ par $4$ : $M'(4) = -\\dfrac{20}{4^2} = -\\dfrac{20}{16} = -1{,}25$. Le coût moyen diminue d'environ $1{,}25$ millier de FCFA par maillot supplémentaire à partir de $4$ maillots.",
+              "answers": [
+                {
+                  "content": "-1,25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $x > 0$, la dérivée de $M(x) = 5 + \\dfrac{20}{x}$ est $M'(x) = -\\dfrac{20}{x^2}$. Cette dérivée est négative pour tout $x > 0$, donc le coût moyen diminue quand le nombre de maillots augmente.",
+              "question_type": "true_false",
+              "explanation": "Méthode des variations, Étape 3 — Étudier le signe : $x^2 > 0$ pour $x > 0$, donc $-\\dfrac{20}{x^2} < 0$. Étape 4 — Conclure : $M'(x) < 0$ sur $]0\\,;\\,+\\infty[$ entraîne que $M$ est décroissante sur cet intervalle. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen par maillot est $M(x) = \\dfrac{5x + 20}{x}$ en milliers de FCFA ($x > 0$). Pour combien de maillots le coût moyen vaut-il $6$ milliers de FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Poser l'équation : $\\dfrac{5x + 20}{x} = 6$. Étape 2 — Multiplier par $x$ (non nul) : $5x + 20 = 6x$. Étape 3 — Regrouper : $20 = 6x - 5x$, donc $x = 20$. Vérification avec $M(x) = 5 + \\dfrac{20}{x}$ : $5 + \\dfrac{20}{20} = 6$. Il faut $20$ maillots.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le bénéfice d'une fabrique de ballons",
+          "statement": "Une fabrique de ballons de football modélise son bénéfice par B(x) = −x³ + 9x² − 15x, en milliers de FCFA, pour x centaines de ballons fabriqués, avec x entre 0 et 8. Un bénéfice négatif est une perte. On étudie les variations de B pour choisir la production.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le bénéfice d'une fabrique de ballons est $B(x) = -x^3 + 9x^2 - 15x$. Quelle est sa dérivée $B'(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du calcul de dérivée. Étape 1 — Séparer : $-x^3$, $9x^2$, $-15x$. Étape 2 — Repérer : $(x^3)' = 3x^2$, $(x^2)' = 2x$, $(x)' = 1$. Étape 3 — Dériver : $(-x^3)' = -3x^2$ ; $(9x^2)' = 18x$ ; $(-15x)' = -15$. Étape 4 — Additionner : $B'(x) = -3x^2 + 18x - 15$. La proposition $3x^2 + 18x - 15$ perd le signe moins du premier terme. La proposition $-3x^2 + 9x - 15$ dérive $9x^2$ en $9x$. La proposition $-3x^2 + 18x$ oublie la dérivée de $-15x$.",
+              "answers": [
+                {
+                  "content": "$-3x^2 + 18x - 15$",
+                  "correct": true
+                },
+                {
+                  "content": "$3x^2 + 18x - 15$",
+                  "correct": false
+                },
+                {
+                  "content": "$-3x^2 + 9x - 15$",
+                  "correct": false
+                },
+                {
+                  "content": "$-3x^2 + 18x$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $B(x) = -x^3 + 9x^2 - 15x$, on a $B'(x) = -3x^2 + 18x - 15$. Quelles sont les deux solutions de $B'(x) = 0$ ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode de l'étude d'un polynôme, Étape 2 — Résoudre : on divise par $-3$ : $x^2 - 6x + 5 = 0$. Le discriminant est $\\Delta = 36 - 20 = 16$, donc $x = \\dfrac{6 - 4}{2} = 1$ ou $x = \\dfrac{6 + 4}{2} = 5$. Vérification : $1 - 6 + 5 = 0$ et $25 - 30 + 5 = 0$. La proposition $3$ est l'abscisse du sommet de la parabole ($-\\dfrac{b}{2a}$), pas une racine : $9 - 18 + 5 = -4 \\neq 0$. Les propositions $-1$ et $-5$ viennent d'une erreur de signe dans la factorisation.",
+              "answers": [
+                {
+                  "content": "$1$",
+                  "correct": true
+                },
+                {
+                  "content": "$5$",
+                  "correct": true
+                },
+                {
+                  "content": "$-1$",
+                  "correct": false
+                },
+                {
+                  "content": "$-5$",
+                  "correct": false
+                },
+                {
+                  "content": "$3$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $B(x) = -x^3 + 9x^2 - 15x$ sur $[0\\,;\\,8]$, la dérivée est $B'(x) = -3\\,(x - 1)(x - 5)$. Quel est le sens de variation de $B$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de l'étude d'un polynôme. Étape 1 — Dériver : $B'(x) = -3x^2 + 18x - 15$. Étape 2 — Résoudre : les racines sont $1$ et $5$. Étape 3 — Dresser : le coefficient de $x^2$ est $-3 < 0$, donc $B'$ est négative à l'extérieur des racines et positive entre elles. Tests : $B'(0) = -15 < 0$, $B'(2) = -12 + 36 - 15 = 9 > 0$, $B'(6) = -108 + 108 - 15 = -15 < 0$. Étape 4 — Conclure : $B$ décroît sur $[0\\,;\\,1]$, croît sur $[1\\,;\\,5]$, décroît sur $[5\\,;\\,8]$. La proposition « croît, décroît, puis croît » inverse les signes, ce qui arrive quand on oublie que le coefficient $-3$ est négatif. Les deux propositions avec un seul changement en $5$ oublient la racine $1$ : $B'(0) = -15 < 0$ alors que $B'(2) = 9 > 0$.",
+              "answers": [
+                {
+                  "content": "Elle décroît sur $[0\\,;\\,1]$, croît sur $[1\\,;\\,5]$, puis décroît sur $[5\\,;\\,8]$",
+                  "correct": true
+                },
+                {
+                  "content": "Elle croît sur $[0\\,;\\,1]$, décroît sur $[1\\,;\\,5]$, puis croît sur $[5\\,;\\,8]$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle croît sur $[0\\,;\\,5]$, puis décroît sur $[5\\,;\\,8]$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle décroît sur $[0\\,;\\,5]$, puis croît sur $[5\\,;\\,8]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $B(x) = -x^3 + 9x^2 - 15x$, la dérivée change de signe de $+$ à $-$ en $x = 5$. Calcule le maximum local $B(5)$, en milliers de FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de l'étude d'un polynôme, Étape 4 — Calculer : $B(5) = -125 + 9 \\times 25 - 15 \\times 5 = -125 + 225 - 75 = 25$. Le maximum local est $25$ milliers de FCFA, pour $500$ ballons.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $B(x) = -x^3 + 9x^2 - 15x$, la dérivée change de signe de $-$ à $+$ en $x = 1$. Calcule le minimum local $B(1)$, en milliers de FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de l'étude d'un polynôme, Étape 4 — Calculer : $B(1) = -1 + 9 - 15 = -7$. Le minimum local est $-7$ : une perte de $7$ milliers de FCFA pour $100$ ballons.",
+              "answers": [
+                {
+                  "content": "-7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $B(x) = -x^3 + 9x^2 - 15x$, on a $B'(1) = 0$, donc $B$ admet un maximum local en $x = 1$.",
+              "question_type": "true_false",
+              "explanation": "Méthode des variations, Étape 3 — Étudier le signe : $B'(0) = -15 < 0$ avant $1$ et $B'(2) = 9 > 0$ après $1$. $B'$ passe de $-$ à $+$ : $B$ descend puis monte, donc $B(1) = -7$ est un minimum local, pas un maximum. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $B(x) = -x^3 + 9x^2 - 15x$, quelle est la pente de la tangente à la courbe de $B$ au point d'abscisse $0$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du nombre dérivé. Étape 3 — Lire : la pente de la tangente est le nombre dérivé $B'(0)$. Avec $B'(x) = -3x^2 + 18x - 15$, on obtient $B'(0) = -15$. Étape 4 — Écrire : la tangente est $y = -15\\,(x - 0) + B(0) = -15x$. Le bénéfice baisse au départ : on perd de l'argent sur les premiers ballons.",
+              "answers": [
+                {
+                  "content": "-15",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le lancer du ballon",
+          "statement": "Lors d'un entraînement, un joueur lance un ballon vers le haut. On modélise la hauteur du ballon par h(t) = −5t² + 10t, en mètres, où t est le temps en secondes, avec t entre 0 et 2. On utilise la dérivée pour étudier le mouvement.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La hauteur d'un ballon, en mètres, est $h(t) = -5t^2 + 10t$ après $t$ secondes. Calcule $h(0{,}5)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "On remplace $t$ par $0{,}5$ : $h(0{,}5) = -5 \\times 0{,}25 + 10 \\times 0{,}5 = -1{,}25 + 5 = 3{,}75$. Le ballon est à $3{,}75$ m après une demi-seconde.",
+              "answers": [
+                {
+                  "content": "3,75",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "La hauteur d'un ballon est $h(t) = -5t^2 + 10t$. Quelle est la dérivée $h'(t)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du calcul de dérivée. Étape 1 — Séparer : $-5t^2$ et $10t$. Étape 2 — Repérer : $(t^2)' = 2t$ et $(t)' = 1$. Étape 3 — Dériver : $(-5t^2)' = -5 \\times 2t = -10t$ et $(10t)' = 10$. Étape 4 — Additionner : $h'(t) = -10t + 10$. La proposition $-5t + 10$ dérive $t^2$ en $t$. La proposition $-10t$ oublie la dérivée de $10t$. La proposition $10t - 10$ se trompe de signe.",
+              "answers": [
+                {
+                  "content": "$-10t + 10$",
+                  "correct": true
+                },
+                {
+                  "content": "$-5t + 10$",
+                  "correct": false
+                },
+                {
+                  "content": "$-10t$",
+                  "correct": false
+                },
+                {
+                  "content": "$10t - 10$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La hauteur d'un ballon est $h(t) = -5t^2 + 10t$ (en mètres, $t$ en secondes, $0 \\leq t \\leq 2$) et $h'(t) = -10t + 10$. À quel instant $t$ la dérivée s'annule-t-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de l'étude des variations. Étape 1 — Calculer : $h'(t) = -10t + 10$. Étape 2 — Résoudre : $-10t + 10 = 0$ donne $t = 1$. Étape 3 — Étudier : $h'(0) = 10 > 0$ et $h'(2) = -10 < 0$, donc $h'$ passe de $+$ à $-$ en $t = 1$. Étape 4 — Conclure : le ballon monte jusqu'à $t = 1$ puis redescend.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ],
+              "unit": "s"
+            },
+            {
+              "content": "La hauteur d'un ballon est $h(t) = -5t^2 + 10t$ (en mètres) et $h'$ passe de $+$ à $-$ en $t = 1$. Quelle est la hauteur maximale atteinte ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de l'étude des variations, Étape 4 — Conclure : le maximum est $h(1) = -5 \\times 1 + 10 \\times 1 = 5$. La hauteur maximale est $5$ m. Attention : $1$ est l'instant (en secondes), $5$ est la hauteur (en mètres).",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "La hauteur d'un ballon est $h(t) = -5t^2 + 10t$ (en mètres, $t$ en secondes). À quel instant $t > 0$ le ballon retouche-t-il le sol, c'est-à-dire $h(t) = 0$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Poser l'équation : $-5t^2 + 10t = 0$. Étape 2 — Factoriser : $5t\\,(-t + 2) = 0$. Étape 3 — Résoudre : $t = 0$ (le départ) ou $t = 2$. Étape 4 — Conclure : le ballon retouche le sol à $t = 2$ s. On retrouve la symétrie du mouvement : montée de $0$ à $1$ s, descente de $1$ à $2$ s.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "unit": "s"
+            },
+            {
+              "content": "La hauteur d'un ballon est $h(t) = -5t^2 + 10t$ (en mètres). Au temps $t = 0{,}5$, on a $h(0{,}5) = 3{,}75$ et $h'(0{,}5) = 5$. La tangente s'écrit $y = 5t + b$. Que vaut $b$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du nombre dérivé. Étape 1 — Calculer : $h(0{,}5) = 3{,}75$. Étape 3 — Lire : la pente est $h'(0{,}5) = 5$. Étape 4 — Écrire : $y = 5\\,(t - 0{,}5) + 3{,}75 = 5t - 2{,}5 + 3{,}75 = 5t + 1{,}25$. Donc $b = 1{,}25$.",
+              "answers": [
+                {
+                  "content": "1,25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La hauteur d'un ballon est $h(t) = -5t^2 + 10t$ (en mètres, $t$ en secondes, $0 \\leq t \\leq 2$). Explique, en utilisant la dérivée, pourquoi le ballon est à sa hauteur maximale à $t = 1$ s.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "La dérivée de h est h'(t) = ...",
+              "criteria": [
+                "Calculer la dérivée : h'(t) = -10t + 10",
+                "Résoudre h'(t) = 0 : t = 1",
+                "Étudier le signe de h' : positive avant 1, négative après 1",
+                "Conclure : h monte puis descend, maximum h(1) = 5 m"
+              ],
+              "explanation": "Corrigé modèle : on calcule $h'(t) = -10t + 10$. L'équation $h'(t) = 0$ donne $t = 1$. Pour $t < 1$, $h'(t) > 0$ (par exemple $h'(0) = 10$) : le ballon monte. Pour $t > 1$, $h'(t) < 0$ (par exemple $h'(2) = -10$) : le ballon descend. Comme $h'$ passe de $+$ à $-$ en $t = 1$, la hauteur est maximale à cet instant : $h(1) = 5$ m. Barème sur $3$ points : la dérivée juste ($0{,}5$), la résolution de $h'(t) = 0$ ($0{,}5$), l'étude du signe avec un test dans chaque intervalle ($1$), la conclusion sur le maximum et sa valeur ($1$).",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Taux d'accroissement, nombre dérivé et tangente ; dérivées usuelles et dérivée d'une somme ; signe de la dérivée, sens de variation et extremums ; étude d'un polynôme de degré 2 ou 3.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Soit $f$ la fonction définie sur $\\mathbb{R}$ par $f(x) = x^2 + 3x$. On étudie son nombre dérivé en deux points.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour le taux entre $a$ et $a+h$ : calcule $f(a)$, développe $f(a+h)$, soustrais, divise par $h$. La tangente est $y = f'(a)\\,(x - a) + f(a)$.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 + 3x$, quel est le taux d'accroissement entre $2$ et $2+h$ (avec $h \\neq 0$), simplifié ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $f(2) = 4 + 6 = 10$. 2) $f(2+h)$ $= 4 + 4h + h^2 + 6 + 3h$ $= 10 + 7h + h^2$. 3) Le taux vaut $\\dfrac{7h + h^2}{h} = 7 + h$. L'expression $7h + h^2$ oublie de diviser par $h$ ; $4 + h$ ne tient pas compte de $3x$ ; $10 + 7h$ ne divise pas $10$, qui avait disparu par soustraction.",
+                  "answers": [
+                    {
+                      "content": "$7 + h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7h + h^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4 + h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10 + 7h$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 + 3x$, le taux d'accroissement entre $2$ et $2+h$ vaut $7 + h$. Quel est le nombre dérivé $f'(2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Quand $h$ est très proche de $0$, le nombre $7 + h$ se rapproche de $7$. 2) Donc $f'(2) = 7$. On ne répond pas $f(2) = 10$ : ce nombre est la hauteur du point, pas la pente de la tangente.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 + 3x$, calcule $f'(-1)$ en formant le taux d'accroissement entre $-1$ et $-1+h$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f(-1) = 1 - 3 = -2$. 2) $f(-1+h)$ $= 1 - 2h + h^2 - 3 + 3h$ $= -2 + h + h^2$. 3) Le taux vaut $\\dfrac{h + h^2}{h} = 1 + h$. 4) Quand $h$ est très proche de $0$, il se rapproche de $1$ : $f'(-1) = 1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 + 3x$, on a $f(2) = 10$ et $f'(2) = 7$. Quelle est l'équation de la tangente en $x = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Formule : $y = f'(2)\\,(x - 2) + f(2)$. 2) Application : $y$ $= 7\\,(x - 2) + 10$ $= 7x - 14 + 10$ $= 7x - 4$. L'équation $7x + 10$ oublie le terme $x - 2$ ; $7x - 14$ oublie d'ajouter $f(2)$ ; $10x + 7$ inverse $f(2)$ et $f'(2)$.",
+                  "answers": [
+                    {
+                      "content": "$y = 7x - 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 7x + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 7x - 14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 10x + 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 + 3x$, on a $f'(-1) = 1$. Donc la courbe de $f$ monte près du point d'abscisse $-1$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Le nombre dérivé $f'(-1) = 1$ est la pente de la tangente. 2) Une pente positive signifie que la courbe monte près du point. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Soit $g$ la fonction définie sur $\\mathbb{R}$ par $g(x) = 2x^3 - 5x^2 + 4x - 7$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Dérive terme à terme : $(x^3)' = 3x^2$, $(x^2)' = 2x$, $(x)' = 1$ et la dérivée d'une constante est $0$.",
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $g(x) = 2x^3 - 5x^2 + 4x - 7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Séparer : $2x^3$, $-5x^2$, $4x$, $-7$. 2) Dériver : $(2x^3)' = 6x^2$ ; $(-5x^2)' = -10x$ ; $(4x)' = 4$ ; $(-7)' = 0$. 3) Additionner : $g'(x) = 6x^2 - 10x + 4$. Garder $-7$ oublie qu'une constante disparaît ; $2x^2 - 5x + 4$ baisse seulement les exposants.",
+                  "answers": [
+                    {
+                      "content": "$6x^2 - 10x + 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x^2 - 10x + 4 - 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 - 5x + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x^3 - 10x^2 + 4x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = 2x^3 - 5x^2 + 4x - 7$, on a $g'(x) = 6x^2 - 10x + 4$. Calcule $g'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $1$ : $g'(1) = 6 \\times 1 - 10 \\times 1 + 4$. 2) Calculer : $6 - 10 + 4 = 0$. La tangente à la courbe est donc horizontale en $x = 1$.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = 2x^3 - 5x^2 + 4x - 7$, on a $g'(x) = 6x^2 - 10x + 4$. Calcule $g'(2)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $2$ : $g'(2) = 6 \\times 4 - 10 \\times 2 + 4$. 2) Calculer : $24 - 20 + 4 = 8$. L'erreur à éviter est d'écrire $6 \\times 2^2 = 12^2$ : on calcule d'abord $2^2 = 4$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, la dérivée de $u(x) = \\dfrac{5}{x}$ est ___.",
+                  "question_type": "select",
+                  "explanation": "1) Écrire $\\dfrac{5}{x} = 5 \\times \\dfrac{1}{x}$. 2) Dériver : $5 \\times \\left(-\\dfrac{1}{x^2}\\right)$ $= -\\dfrac{5}{x^2}$. Oublier le signe moins ou le coefficient $5$ donne les autres propositions.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{5}{x^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{5}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{1}{5x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{5}{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fonction à sa dérivée.",
+                  "question_type": "matching",
+                  "explanation": "1) $(x^3 + x)' = 3x^2 + 1$. 2) $(4x^2 - 7)' = 8x + 0 = 8x$. 3) $(6x + 2)' = 6$. 4) $\\left(\\dfrac{3}{x} + 2x\\right)'$ $= -\\dfrac{3}{x^2} + 2$. Chaque constante disparaît et chaque coefficient reste devant la dérivée usuelle.",
+                  "answers": [
+                    {
+                      "content": "$x^3 + x$",
+                      "match": "$3x^2 + 1$"
+                    },
+                    {
+                      "content": "$4x^2 - 7$",
+                      "match": "$8x$"
+                    },
+                    {
+                      "content": "$6x + 2$",
+                      "match": "$6$"
+                    },
+                    {
+                      "content": "$\\dfrac{3}{x} + 2x$",
+                      "match": "$-\\dfrac{3}{x^2} + 2$"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un artisan modélise son bénéfice, en milliers de FCFA, par $f(x) = x^2 - 10x + 16$ sur $\\mathbb{R}$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule $f'(x)$, résous $f'(x) = 0$, teste le signe de $f'$ de chaque côté de la solution, puis conclus.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 - 10x + 16$, on a $f'(x) = 2x - 10$. Pour quelle valeur de $x$ la dérivée s'annule-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Résoudre $2x - 10 = 0$. 2) $2x = 10$ donc $x = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 10x + 16$ (dérivée $f'(x) = 2x - 10$), sur quel intervalle $f$ est-elle croissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $f'(x) = 0$ pour $x = 5$. 2) Test : $f'(0) = -10 < 0$ et $f'(6) = 2 > 0$. 3) $f$ croît là où $f'(x) > 0$, donc sur $[5\\,;\\,+\\infty[$. L'intervalle $]-\\infty\\,;\\,5]$ est celui où $f$ décroît.",
+                  "answers": [
+                    {
+                      "content": "$[5\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-10\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[10\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 10x + 16$, la dérivée passe de $-$ à $+$ en $x = 5$. Quelle est la valeur de $f(5)$, le minimum de $f$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f'$ change de signe de $-$ à $+$ en $5$ : c'est un minimum. 2) Calculer : $f(5) = 25 - 50 + 16 = -9$.",
+                  "answers": [
+                    {
+                      "content": "-9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 10x + 16$, on a $f(0) = 16 > 0$, donc $f$ est croissante sur $[0\\,;\\,5]$.",
+                  "question_type": "true_false",
+                  "explanation": "1) $f'(x) = 2x - 10$ et $f'(1) = -8 < 0$ sur $[0\\,;\\,5]$. 2) Donc $f$ est décroissante sur $[0\\,;\\,5]$. Le signe de $f(0)$ n'indique pas le sens de variation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 10x + 16$, la dérivée passe de $-$ à $+$ en $5$ : $f(5)$ est un ___.",
+                  "question_type": "select",
+                  "explanation": "1) Si $f'$ passe de $-$ à $+$, la courbe descend puis monte. 2) Donc $f(5)$ est un minimum. Un maximum correspond à un passage de $+$ à $-$.",
+                  "answers": [
+                    {
+                      "content": "minimum",
+                      "correct": true
+                    },
+                    {
+                      "content": "maximum",
+                      "correct": false
+                    },
+                    {
+                      "content": "point où $f$ est nulle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Soit $f$ la fonction définie sur $\\mathbb{R}$ par $f(x) = x^3 - 6x^2 + 9x + 1$. On a $f'(x)$ $= 3x^2 - 12x + 9$ $= 3\\,(x - 1)(x - 3)$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Un trinôme de coefficient $3 > 0$ est positif à l'extérieur de ses racines, négatif entre elles. Teste un nombre dans chaque intervalle.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^3 - 6x^2 + 9x + 1$, quelles sont les deux solutions de $f'(x) = 0$, avec $f'(x) = 3\\,(x - 1)(x - 3)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Un produit est nul si l'un de ses facteurs l'est : $x - 1 = 0$ ou $x - 3 = 0$. 2) Donc $x = 1$ ou $x = 3$. Les valeurs $-1$ et $-3$ viennent d'une erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 6x^2 + 9x + 1$ (dérivée $f'(x) = 3\\,(x - 1)(x - 3)$), sur quel intervalle $f$ est-elle décroissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Racines de $f'$ : $1$ et $3$. 2) Test : $f'(0) = 9 > 0$, $f'(2) = -3 < 0$, $f'(4) = 9 > 0$. 3) $f$ décroît là où $f'(x) < 0$, soit sur $[1\\,;\\,3]$. L'extérieur des racines est la zone où $f$ croît.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;\\,3]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,1] \\cup [3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3\\,;\\,-1]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 6x^2 + 9x + 1$, la dérivée passe de $+$ à $-$ en $x = 1$. Quelle est la valeur du maximum local $f(1)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f'$ passe de $+$ à $-$ en $1$ : maximum local. 2) Calculer : $f(1) = 1 - 6 + 9 + 1 = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 6x^2 + 9x + 1$, la dérivée passe de $-$ à $+$ en $x = 3$. Quelle est la valeur du minimum local $f(3)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f'$ passe de $-$ à $+$ en $3$ : minimum local. 2) Calculer : $f(3) = 27 - 54 + 27 + 1 = 1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 6x^2 + 9x + 1$, que conclut-on sur les extremums ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $f'$ passe de $+$ à $-$ en $1$ : $f(1) = 5$ est un maximum local. 2) $f'$ passe de $-$ à $+$ en $3$ : $f(3) = 1$ est un minimum local. Les autres propositions inversent les natures ou les valeurs ; $f$ n'est pas croissante sur $\\mathbb{R}$ puisque $f'(2) = -3 < 0$.",
+                  "answers": [
+                    {
+                      "content": "Maximum local $5$ en $x = 1$ et minimum local $1$ en $x = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Minimum local $5$ en $x = 1$ et maximum local $1$ en $x = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Maximum local $1$ en $x = 1$ et minimum local $5$ en $x = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun extremum, car $f$ est croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Nombre dérivé et tangente dans une production de cacao ; dérivées d'un coût de restaurateur, constante et quotient simple ; sens de variation et maximum d'un bénéfice de maquis ; étude d'un polynôme de degré 3 pour le gain d'un commerçant.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Une coopérative de cacao de Daloa suit sa production. Elle a produit $P(x) = x^2 + x$ tonnes après $x$ mois de campagne.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour le taux entre $3$ et $3+h$ : calcule $P(3)$, développe $P(3+h)$, soustrais, divise par $h$. Le nombre dérivé donne la vitesse de production en tonnes par mois.",
+              "questions": [
+                {
+                  "content": "Une production est $P(x) = x^2 + x$ tonnes après $x$ mois. Quel est le taux d'accroissement entre $3$ et $3+h$ (avec $h \\neq 0$), simplifié ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $P(3) = 9 + 3 = 12$. 2) $P(3+h)$ $= 9 + 6h + h^2 + 3 + h$ $= 12 + 7h + h^2$. 3) Le taux vaut $\\dfrac{7h + h^2}{h} = 7 + h$. Avec $6 + h$, on a oublié le terme en $x$ ; $7h + h^2$ n'est pas divisé par $h$ ; $12 + 7h$ garde $P(3)$ au lieu de le soustraire.",
+                  "answers": [
+                    {
+                      "content": "$7 + h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7h + h^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6 + h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12 + 7h$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une production est $P(x) = x^2 + x$ tonnes après $x$ mois, et son taux d'accroissement entre $3$ et $3+h$ vaut $7 + h$. Quel est le nombre dérivé $P'(3)$, en tonnes par mois ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Quand $h$ est très proche de $0$, le nombre $7 + h$ se rapproche de $7$. 2) Donc $P'(3) = 7$ : à la fin du mois 3, la production augmente d'environ $7$ tonnes par mois.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "t/mois"
+                },
+                {
+                  "content": "Une production est $P(x) = x^2 + x$ tonnes après $x$ mois, avec $P(3) = 12$ et $P'(3) = 7$. Quelle est l'équation de la tangente en $x = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Formule : $y = P'(3)\\,(x - 3) + P(3)$. 2) Application : $y$ $= 7\\,(x - 3) + 12$ $= 7x - 21 + 12$ $= 7x - 9$. L'équation $7x + 12$ oublie $x - 3$ ; $7x - 21$ oublie $P(3)$ ; $12x + 7$ inverse les deux nombres.",
+                  "answers": [
+                    {
+                      "content": "$y = 7x - 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 7x + 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 7x - 21$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 12x + 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une production $P(x) = x^2 + x$ tonnes après $x$ mois, on a $P'(3) = 7 > 0$. Donc la production augmente autour du mois 3.",
+                  "question_type": "true_false",
+                  "explanation": "1) $P'(3) = 7$ est la pente de la tangente. 2) Une pente positive signifie que la courbe monte : la production augmente autour du mois 3. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre dérivé $P'(3)$ est la ___ de la tangente à la courbe de $P$ au point d'abscisse $3$.",
+                  "question_type": "fill_blank",
+                  "explanation": "1) Le taux d'accroissement est la pente d'une droite qui joint deux points de la courbe. 2) Quand $h$ se rapproche de $0$, cette droite devient la tangente et le nombre dérivé en est la pente. Ce n'est pas la hauteur $P(3) = 12$.",
+                  "answers": [
+                    {
+                      "content": "pente",
+                      "correct": true
+                    },
+                    {
+                      "content": "coefficient directeur",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un restaurateur de Bouaké suit ses coûts, en milliers de FCFA, pour $x$ centaines de brochettes préparées.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Dérive terme à terme : $(x^3)' = 3x^2$, $(x^2)' = 2x$, $(x)' = 1$ ; une constante donne $0$. Pour un quotient $\\dfrac{ax+b}{x}$, sépare d'abord en $a + \\dfrac{b}{x}$.",
+              "questions": [
+                {
+                  "content": "Le coût de préparation est $C(x) = x^3 - 3x^2 + 8x + 50$. Quelle est la dérivée $C'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Séparer : $x^3$, $-3x^2$, $8x$, $50$. 2) Dériver : $(x^3)' = 3x^2$ ; $(-3x^2)' = -6x$ ; $(8x)' = 8$ ; $(50)' = 0$. 3) Additionner : $C'(x) = 3x^2 - 6x + 8$. Avec $+58$ on a ajouté le coût fixe ; $x^2 - 3x + 8$ divise les coefficients au lieu de les multiplier ; $-3x$ oublie le facteur $2$ de $(x^2)'$.",
+                  "answers": [
+                    {
+                      "content": "$3x^2 - 6x + 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x^2 - 6x + 58$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 3x + 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x^2 - 3x + 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coût est $C(x) = x^3 - 3x^2 + 8x + 50$ et sa dérivée est $C'(x) = 3x^2 - 6x + 8$. Calcule $C'(2)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $2$ : $C'(2) = 3 \\times 4 - 6 \\times 2 + 8$. 2) Calculer : $12 - 12 + 8 = 8$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coût est $C(x) = x^3 - 3x^2 + 8x + 50$ et sa dérivée est $C'(x) = 3x^2 - 6x + 8$. Calcule $C'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $1$ : $C'(1) = 3 - 6 + 8$. 2) Calculer : $5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans $C(x) = x^3 - 3x^2 + 8x + 50$, le coût fixe $50$ ne figure pas dans $C'(x)$. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Le terme $50$ est une constante. 2) La dérivée d'une constante est $0$ : elle disparaît de $C'(x)$. Dire qu'elle reste (égale à $50$) est faux ; la taille du nombre n'intervient pas.",
+                  "answers": [
+                    {
+                      "content": "Parce que la dérivée d'une constante est $0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $50$ est trop petit devant les autres termes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la dérivée d'une constante est cette constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le coût fixe se retranche de $C(0)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, le prix moyen d'un lot est $m(x) = \\dfrac{2x + 9}{x}$. Calcule $m'(3)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Séparer : $\\dfrac{2x + 9}{x} = 2 + \\dfrac{9}{x}$. 2) Dériver : $(2)' = 0$ et $\\left(\\dfrac{9}{x}\\right)'$ $= -\\dfrac{9}{x^2}$. 3) Additionner : $m'(x) = -\\dfrac{9}{x^2}$, donc $m'(3) = -\\dfrac{9}{9} = -1$.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le bénéfice d'un maquis d'Abidjan, en milliers de FCFA, est $B(x) = -x^2 + 8x - 7$ pour $x$ centaines de plats vendus.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule $B'(x)$, résous $B'(x) = 0$, étudie le signe de $B'$ de chaque côté de la solution, puis conclus.",
+              "questions": [
+                {
+                  "content": "Le bénéfice d'un maquis est $B(x) = -x^2 + 8x - 7$ (en milliers de FCFA, $x$ en centaines de plats). Pour combien de centaines de plats le bénéfice est-il maximal ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Calculer : $B'(x) = -2x + 8$. 2) Résoudre : $-2x + 8 = 0$ donne $x = 4$. 3) Étudier : $B'(0) = 8 > 0$ et $B'(5) = -2 < 0$ : $B'$ passe de $+$ à $-$. 4) Conclure : le maximum est atteint pour $x = 4$ centaines de plats.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bénéfice d'un maquis est $B(x) = -x^2 + 8x - 7$ (en milliers de FCFA), maximal pour $x = 4$. Quel est ce bénéfice maximal, en milliers de FCFA ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $4$ : $B(4) = -16 + 32 - 7$. 2) Calculer : $9$ milliers de FCFA.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bénéfice d'un maquis est $B(x) = -x^2 + 8x - 7$, avec $B'(x) = -2x + 8$. Quel est le sens de variation de $B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $B'(x) = 0$ pour $x = 4$. 2) Test : $B'(0) = 8 > 0$ avant $4$ et $B'(5) = -2 < 0$ après. 3) $B$ monte puis descend. Inverser les deux intervalles reviendrait à confondre le signe de $B'$ avec celui de $B$.",
+                  "answers": [
+                    {
+                      "content": "Croissante sur $]-\\infty\\,;\\,4]$ puis décroissante sur $[4\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Décroissante sur $]-\\infty\\,;\\,4]$ puis croissante sur $[4\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $B(x) = -x^2 + 8x - 7$, on a $B'(5) = -2 < 0$. Donc le bénéfice diminue autour de $x = 5$.",
+                  "question_type": "true_false",
+                  "explanation": "1) $B'(x) = -2x + 8$, donc $B'(5) = -10 + 8 = -2$. 2) Une dérivée négative signifie que $B$ décroît : le bénéfice diminue. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver le bénéfice maximal de $B(x) = -x^2 + 8x - 7$.",
+                  "question_type": "ordering",
+                  "explanation": "1) On calcule d'abord la dérivée. 2) On cherche où elle s'annule. 3) On étudie son signe de chaque côté. 4) Seulement alors on conclut sur le maximum et on calcule sa valeur, $B(4) = -16 + 32 - 7 = 9$.",
+                  "answers": [
+                    {
+                      "content": "Calculer la dérivée : $B'(x) = -2x + 8$."
+                    },
+                    {
+                      "content": "Résoudre $B'(x) = 0$ : on trouve $x = 4$."
+                    },
+                    {
+                      "content": "Étudier le signe : $B'(0) = 8 > 0$ et $B'(5) = -2 < 0$."
+                    },
+                    {
+                      "content": "Conclure : $B'$ passe de $+$ à $-$, donc $B(4) = 9$ est un maximum."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le gain d'un commerçant du marché de Treichville, en milliers de FCFA, est modélisé par $G(x) = x^3 - 9x^2 + 24x$ pour $x$ mois (modèle sur $\\mathbb{R}$). On a $G'(x)$ $= 3x^2 - 18x + 24$ $= 3\\,(x - 2)(x - 4)$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche les racines de $G'$ puis teste un nombre dans chaque intervalle. Le coefficient $3$ est positif : $G'$ est positive à l'extérieur des racines.",
+              "questions": [
+                {
+                  "content": "Le gain d'un commerçant est $G(x) = x^3 - 9x^2 + 24x$, avec $G'(x) = 3\\,(x - 2)(x - 4)$. Quelles sont les deux solutions de $G'(x) = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Un produit est nul si l'un des facteurs l'est : $x - 2 = 0$ ou $x - 4 = 0$. 2) Donc $x = 2$ ou $x = 4$. Les valeurs négatives viennent d'une erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gain d'un commerçant est $G(x) = x^3 - 9x^2 + 24x$, avec $G'(x) = 3\\,(x - 2)(x - 4)$. Sur quel intervalle $G$ est-elle décroissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Racines de $G'$ : $2$ et $4$. 2) Test : $G'(3) = -3 < 0$ entre les racines ; $G'(0) = 24 > 0$ et $G'(5) = 9 > 0$ à l'extérieur. 3) $G$ décroît donc sur $[2\\,;\\,4]$.",
+                  "answers": [
+                    {
+                      "content": "$[2\\,;\\,4]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,2] \\cup [4\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;\\,2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[4\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gain d'un commerçant est $G(x) = x^3 - 9x^2 + 24x$ ; la dérivée passe de $+$ à $-$ en $x = 2$. Quelle est la valeur du maximum local $G(2)$, en milliers de FCFA ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $G'$ passe de $+$ à $-$ en $2$ : maximum local. 2) Calculer : $G(2) = 8 - 36 + 48 = 20$.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gain d'un commerçant est $G(x) = x^3 - 9x^2 + 24x$ ; la dérivée passe de $-$ à $+$ en $x = 4$. Quelle est la valeur du minimum local $G(4)$, en milliers de FCFA ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $G'$ passe de $-$ à $+$ en $4$ : minimum local. 2) Calculer : $G(4) = 64 - 144 + 96 = 16$.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $G(x) = x^3 - 9x^2 + 24x$, la fonction $G$ admet en $x = 4$ un ___.",
+                  "question_type": "select",
+                  "explanation": "1) $G'(3) = -3 < 0$ avant $4$ et $G'(5) = 9 > 0$ après : $G'$ passe de $-$ à $+$. 2) $G(4) = 16$ est donc un minimum local.",
+                  "answers": [
+                    {
+                      "content": "minimum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "maximum local",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucun extremum",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Distinguer $f(a)$ et $f'(a)$, justifier un nombre dérivé et une tangente ; justifier une dérivée (constante, $\\frac{1}{x}$) ; justifier l'existence ou non d'un extremum par le changement de signe de $f'$ ; justifier le signe d'un trinôme.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Soit $f(x) = x^2$. Le taux d'accroissement entre $4$ et $4+h$ vaut $8 + h$ (avec $h \\neq 0$). On examine des affirmations sur le nombre dérivé et la tangente en $a = 4$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le nombre dérivé est ce vers quoi se rapproche le taux quand $h$ est très proche de $0$. Ne confonds pas $f(a)$ (la hauteur) et $f'(a)$ (la pente).",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2$, on a $f(4) = 16$. Donc le nombre dérivé $f'(4)$ vaut aussi $16$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Le taux entre $4$ et $4+h$ est $\\dfrac{16 + 8h + h^2 - 16}{h} = 8 + h$. 2) Il se rapproche de $8$ : $f'(4) = 8$. Le nombre $16$ est $f(4)$, la hauteur du point, et non la pente de la tangente.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2$, le taux entre $4$ et $4+h$ vaut $8 + h$. Pourquoi peut-on dire que $f'(4) = 8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Le nombre dérivé est le nombre vers lequel se rapproche le taux. 2) Ici $8 + h$ se rapproche de $8$ quand $h$ devient très proche de $0$. $h$ n'est jamais égal à $0$ (on divise par $h$), et $8 + h$ n'est pas toujours $8$ ; diviser $16$ par $2$ n'a aucun rapport avec la méthode.",
+                  "answers": [
+                    {
+                      "content": "Parce que $8 + h$ se rapproche de $8$ quand $h$ est très proche de $0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $8 + h$ est toujours égal à $8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $f(4) = 16$ et que $16 \\div 2 = 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $h$ vaut toujours $0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2$, on a $f(4) = 16$ et $f'(4) = 8$. Quelle est l'équation de la tangente en $x = 4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Formule : $y = f'(4)\\,(x - 4) + f(4)$. 2) Application : $y$ $= 8\\,(x - 4) + 16$ $= 8x - 32 + 16$ $= 8x - 16$. L'équation $8x + 16$ oublie le terme $-32$ ; $8x - 32$ oublie d'ajouter $f(4)$ ; $16x - 56$ inverse $f(4)$ et $f'(4)$.",
+                  "answers": [
+                    {
+                      "content": "$y = 8x - 16$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 8x + 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 8x - 32$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 16x - 56$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2$, le taux d'accroissement entre $a$ et $a+h$ vaut $2a + h$. Pour quelle valeur de $a$ la tangente est-elle horizontale ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Une tangente est horizontale quand sa pente $f'(a)$ est nulle. 2) Le taux se rapproche de $2a$, donc $f'(a) = 2a$. 3) $2a = 0$ donne $a = 0$.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2$, la tangente en $x = 4$ d'équation $y = 8x - 16$ passe par le point de coordonnées $(4\\,;\\,16)$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Remplacer $x$ par $4$ : $y = 32 - 16 = 16$. 2) La tangente passe bien par $(4\\,;\\,16)$. C'est normal : $y = f'(a)\\,(x - a) + f(a)$ vaut $f(a)$ quand $x = a$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On dérive des fonctions et on justifie chaque résultat.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Rappelle-toi : $(x^3)' = 3x^2$, $(x)' = 1$, une constante donne $0$ et $\\left(\\dfrac{1}{x}\\right)'$ $= -\\dfrac{1}{x^2}$.",
+              "questions": [
+                {
+                  "content": "La dérivée de $f(x) = x^3 - 3x + 5$ est $f'(x) = 3x^2 - 3$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Séparer : $x^3$, $-3x$, $5$. 2) Dériver : $(x^3)' = 3x^2$ ; $(-3x)' = -3$ ; $(5)' = 0$. 3) Additionner : $f'(x) = 3x^2 - 3$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans $f(x) = x^3 - 3x + 5$, le terme $5$ disparaît quand on dérive. Quelle est la bonne justification ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Une constante $k$ est représentée par une droite horizontale. 2) Sa pente est $0$ partout, donc sa dérivée est $0$. Les autres justifications n'ont aucun rapport avec la définition de la dérivée.",
+                  "answers": [
+                    {
+                      "content": "La courbe de la constante $5$ est une droite horizontale, de pente $0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre $5$ est plus petit que $x^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une constante se transforme en $x$ quand on dérive",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne dérive jamais le dernier terme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 3x + 5$, on a $f'(x) = 3x^2 - 3$. Calcule $f'(2)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $2$ : $f'(2) = 3 \\times 4 - 3$. 2) Calculer : $12 - 3 = 9$. Piège : $3 \\times 2^2$ vaut $12$, pas $36$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Camille affirme que, pour $x > 0$, la dérivée de $\\dfrac{7}{x}$ est $\\dfrac{7}{x^2}$. Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $\\dfrac{7}{x} = 7 \\times \\dfrac{1}{x}$. 2) $\\left(\\dfrac{1}{x}\\right)'$ $= -\\dfrac{1}{x^2}$. 3) Donc la dérivée est $7 \\times \\left(-\\dfrac{1}{x^2}\\right)$ $= -\\dfrac{7}{x^2}$. Le signe moins ne disparaît pas, et le coefficient $7$ reste au numérateur.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : la dérivée est $-\\dfrac{7}{x^2}$, avec un signe moins",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai : la dérivée de $\\dfrac{1}{x}$ est positive",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : la dérivée est $-\\dfrac{1}{7x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : la dérivée est $0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque expression à sa dérivée.",
+                  "question_type": "matching",
+                  "explanation": "Ce sont les dérivées usuelles : $(x^3)' = 3x^2$ ; $\\left(\\dfrac{1}{x}\\right)'$ $= -\\dfrac{1}{x^2}$ ; la dérivée d'une constante est $0$ ; $(4x)' = 4 \\times 1 = 4$.",
+                  "answers": [
+                    {
+                      "content": "$x^3$",
+                      "match": "$3x^2$"
+                    },
+                    {
+                      "content": "$\\dfrac{1}{x}$ (pour $x > 0$)",
+                      "match": "$-\\dfrac{1}{x^2}$"
+                    },
+                    {
+                      "content": "$7$",
+                      "match": "$0$"
+                    },
+                    {
+                      "content": "$4x$",
+                      "match": "$4$"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie des extremums et on justifie les conclusions. Rappel : $f(c)$ est un extremum si $f'$ s'annule en $c$ en changeant de signe.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Une dérivée nulle ne suffit pas : il faut que $f'$ change de signe. Teste un nombre de chaque côté.",
+              "questions": [
+                {
+                  "content": "Pour $g(x) = x^3 + 1$, on a $g'(0) = 0$. Donc $g$ admet un extremum en $x = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "1) $g'(x) = 3x^2$ s'annule en $0$. 2) Test : $g'(-1) = 3 > 0$ et $g'(1) = 3 > 0$ : $g'$ ne change pas de signe. 3) Donc $g$ est croissante partout et n'a pas d'extremum. Une dérivée nulle ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = x^3 + 1$, on a $g'(x) = 3x^2$. Quelle est la bonne justification de l'absence d'extremum en $0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Un extremum exige un changement de signe de $g'$. 2) Ici $3x^2 \\geq 0$ des deux côtés de $0$. La valeur $g(0) = 1$ ne dit rien sur les variations, et $g'$ ne passe pas de $+$ à $-$.",
+                  "answers": [
+                    {
+                      "content": "$g'(x) = 3x^2$ est positive de part et d'autre de $0$ : elle ne change pas de signe",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g'(0) = 0$, donc $g$ est nulle en $0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g(0) = 1$ est positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g'$ passe de $+$ à $-$ en $0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 6x$, on a $f'(x) = 2x - 6$. Quelle conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $2x - 6 = 0$ donne $x = 3$. 2) Test : $f'(0) = -6 < 0$ et $f'(4) = 2 > 0$. 3) $f'$ passe de $-$ à $+$ : minimum. Les autres propositions inversent les signes ou confondent $f'(3)$ avec $f(3)$.",
+                  "answers": [
+                    {
+                      "content": "$f'$ passe de $-$ à $+$ en $x = 3$, donc $f(3)$ est un minimum",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'$ passe de $+$ à $-$ en $x = 3$, donc $f(3)$ est un maximum",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(3) = 0$, donc $f(3) = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'a pas d'extremum car $f'$ est de degré 1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 6x$, la dérivée passe de $-$ à $+$ en $x = 3$. Quelle est la valeur du minimum $f(3)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $3$ : $f(3) = 9 - 18$. 2) Calculer : $-9$.",
+                  "answers": [
+                    {
+                      "content": "-9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si une fonction $f$ est positive pour tout réel $x$ ($f(x) > 0$), alors elle est croissante sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Le sens de variation dépend du signe de $f'$, pas de celui de $f$. 2) Contre-exemple : $f(x) = x^2 + 1$ est positive pour tout $x$, mais $f'(-1) = -2 < 0$ : elle décroît sur $]-\\infty\\,;\\,0]$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Soit $f(x) = -x^3 + 12x$ sur $\\mathbb{R}$. On a $f'(x)$ $= -3x^2 + 12$ $= -3\\,(x - 2)(x + 2)$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le coefficient de $x^2$ dans $f'$ est $-3$ : $f'$ a le signe contraire de $-3$ entre les racines. Vérifie en testant $f'(0)$.",
+              "questions": [
+                {
+                  "content": "Pour $f'(x) = -3x^2 + 12$, de racines $-2$ et $2$, le coefficient $-3$ est négatif. Donc $f'(x)$ est négative entre $-2$ et $2$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Entre les racines, le trinôme a le signe contraire de son coefficient de $x^2$. 2) Le coefficient $-3$ est négatif : $f'$ est donc positive entre les racines. 3) Test : $f'(0) = 12 > 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = -x^3 + 12x$, de dérivée $f'(x) = -3x^2 + 12$ (racines $-2$ et $2$), quel est le signe de $f'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Tests : $f'(-3) = -15 < 0$, $f'(0) = 12 > 0$, $f'(3) = -15 < 0$. 2) Le signe est donc $-$, $+$, $-$. La première réponse fausse correspond à un coefficient positif.",
+                  "answers": [
+                    {
+                      "content": "Négative sur $]-\\infty\\,;\\,-2]$, positive sur $[-2\\,;\\,2]$, négative sur $[2\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Positive sur $]-\\infty\\,;\\,-2]$, négative sur $[-2\\,;\\,2]$, positive sur $[2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Positive sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Négative sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = -x^3 + 12x$, la dérivée passe de $+$ à $-$ en $x = 2$. Quelle est la valeur du maximum local $f(2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f'$ passe de $+$ à $-$ en $2$ : maximum local. 2) Calculer : $f(2) = -8 + 24 = 16$.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = -x^3 + 12x$, la dérivée passe de $-$ à $+$ en $x = -2$. Quelle est la valeur du minimum local $f(-2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f'$ passe de $-$ à $+$ en $-2$ : minimum local. 2) Calculer : $f(-2) = 8 - 24 = -16$.",
+                  "answers": [
+                    {
+                      "content": "-16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = -x^3 + 12x$, quelle conclusion sur les extremums est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $f$ décroît avant $-2$, croît entre $-2$ et $2$, puis décroît. 2) Donc minimum local en $-2$ ($-16$) et maximum local en $2$ ($16$). Les autres propositions inversent les natures ; la valeur de $f'(0)$ est sans rapport avec les extremums.",
+                  "answers": [
+                    {
+                      "content": "Maximum local $16$ en $x = 2$ et minimum local $-16$ en $x = -2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Maximum local $16$ en $x = -2$ et minimum local $-16$ en $x = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Minimum local $16$ en $x = 2$ et maximum local $-16$ en $x = -2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun extremum, car $f'(0) = 12 \\neq 0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Toutes les notions : taux d'accroissement, nombre dérivé et tangente ; dérivées usuelles, y compris le quotient simple ; signe de la dérivée, sens de variation et extremums ; tableau de variations d'un polynôme de degré 3.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Soit $f(x) = 2x^2 - 4x + 5$ sur $\\mathbb{R}$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Forme le taux entre $1$ et $1+h$, puis compare avec la dérivée $f'(x)$. Une tangente horizontale a pour équation $y = f(a)$.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = 2x^2 - 4x + 5$, quel est le taux d'accroissement entre $1$ et $1+h$ (avec $h \\neq 0$), simplifié ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) $f(1) = 2 - 4 + 5 = 3$. 2) $f(1+h)$ $= 2 + 4h + 2h^2 - 4 - 4h + 5$ $= 3 + 2h^2$. 3) Le taux vaut $\\dfrac{2h^2}{h} = 2h$. Garder $2h^2$ oublie de diviser ; $4 + 2h$ oublie le terme $-4x$ ; $0$ confond le taux avec sa limite.",
+                  "answers": [
+                    {
+                      "content": "$2h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2h^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4 + 2h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 2x^2 - 4x + 5$, le taux entre $1$ et $1+h$ vaut $2h$. Quel est le nombre dérivé $f'(1)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Quand $h$ est très proche de $0$, $2h$ se rapproche de $0$. 2) Donc $f'(1) = 0$ : la tangente est horizontale.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = 2x^2 - 4x + 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Séparer : $2x^2$, $-4x$, $5$. 2) Dériver : $(2x^2)' = 4x$ ; $(-4x)' = -4$ ; $(5)' = 0$. 3) Additionner : $f'(x) = 4x - 4$. Cohérence : $f'(1) = 0$, comme le taux l'a montré.",
+                  "answers": [
+                    {
+                      "content": "$4x - 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4x - 4 + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 - 4x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 2x^2 - 4x + 5$, on a $f(1) = 3$ et $f'(1) = 0$. Quelle est l'équation de la tangente en $x = 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Formule : $y$ $= f'(1)\\,(x - 1) + f(1)$ $= 0 \\times (x - 1) + 3$ $= 3$. 2) C'est une droite horizontale à la hauteur $3$. $y = 0$ confond $f'(1)$ et $f(1)$ ; $x = 1$ est une droite verticale.",
+                  "answers": [
+                    {
+                      "content": "$y = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 4x - 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 2x^2 - 4x + 5$, la dérivée $f'(x) = 4x - 4$ passe de $-$ à $+$ en $x = 1$. Quelle est la valeur du minimum de $f$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f'$ passe de $-$ à $+$ en $1$ : minimum. 2) Calculer : $f(1) = 2 - 4 + 5 = 3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Soit $f(x) = x^3 - 12x + 3$ sur $\\mathbb{R}$. On veut dresser son tableau de variations.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Dérive, résous $f'(x) = 0$, teste le signe de $f'$ dans chaque intervalle, puis calcule $f$ aux racines de $f'$.",
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = x^3 - 12x + 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Séparer : $x^3$, $-12x$, $3$. 2) Dériver : $(x^3)' = 3x^2$ ; $(-12x)' = -12$ ; $(3)' = 0$. 3) Additionner : $f'(x) = 3x^2 - 12$. Garder $+3$ oublie qu'une constante disparaît ; $-12x$ oublie que $(x)' = 1$.",
+                  "answers": [
+                    {
+                      "content": "$3x^2 - 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x^2 - 12 + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x^2 - 12x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 12x + 3$, quelles sont les deux solutions de $f'(x) = 0$, avec $f'(x) = 3x^2 - 12$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) $3x^2 - 12 = 0$ donne $x^2 = 4$. 2) Donc $x = 2$ ou $x = -2$. Les valeurs $4$ et $-4$ viennent d'un oubli de la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 12x + 3$, la fonction $f$ admet en $x = -2$ un ___.",
+                  "question_type": "select",
+                  "explanation": "1) $f'(-3) = 15 > 0$ avant $-2$ et $f'(0) = -12 < 0$ après : $f'$ passe de $+$ à $-$. 2) $f(-2)$ est un maximum local.",
+                  "answers": [
+                    {
+                      "content": "maximum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "minimum local",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucun extremum",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 12x + 3$, la dérivée passe de $+$ à $-$ en $x = -2$. Quelle est la valeur de $f(-2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $-2$ : $f(-2) = -8 + 24 + 3$. 2) Calculer : $19$.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 12x + 3$, la dérivée passe de $-$ à $+$ en $x = 2$. Quelle est la valeur de $f(2)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $2$ : $f(2) = 8 - 24 + 3$. 2) Calculer : $-13$.",
+                  "answers": [
+                    {
+                      "content": "-13",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour $x > 0$, on pose $h(x) = \\dfrac{3x + 2}{x}$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Sépare d'abord $\\dfrac{3x+2}{x}$ en $3 + \\dfrac{2}{x}$, puis dérive avec $\\left(\\dfrac{1}{x}\\right)'$ $= -\\dfrac{1}{x^2}$.",
+              "questions": [
+                {
+                  "content": "Pour $x > 0$, comment peut-on écrire $h(x) = \\dfrac{3x + 2}{x}$ avant de dériver ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Séparer : $\\dfrac{3x + 2}{x}$ $= \\dfrac{3x}{x} + \\dfrac{2}{x}$ $= 3 + \\dfrac{2}{x}$. 2) On ne simplifie pas $x$ avec un seul terme du numérateur : $3x + 2$ et $3 + 2x$ sont des erreurs classiques.",
+                  "answers": [
+                    {
+                      "content": "$3 + \\dfrac{2}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x + 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 + 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, quelle est la dérivée de $h(x) = \\dfrac{3x + 2}{x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Séparer : $h(x) = 3 + \\dfrac{2}{x}$. 2) Dériver : $(3)' = 0$ et $\\left(\\dfrac{2}{x}\\right)'$ $= -\\dfrac{2}{x^2}$. 3) Additionner : $h'(x) = -\\dfrac{2}{x^2}$. La constante $3$ disparaît, donc $3 - \\dfrac{2}{x^2}$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{2}{x^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 - \\dfrac{2}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{2}{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, on a $h'(x) = -\\dfrac{2}{x^2}$. Calcule $h'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $1$ : $h'(1) = -\\dfrac{2}{1}$. 2) Donc $h'(1) = -2$.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, on a $h'(x) = -\\dfrac{2}{x^2}$. Calcule $h'(2)$ (écris le résultat en nombre décimal).",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $2$ : $h'(2) = -\\dfrac{2}{4}$. 2) Calculer : $-\\dfrac{1}{2} = -0{,}5$.",
+                  "answers": [
+                    {
+                      "content": "-0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, on a $h'(x) = -\\dfrac{2}{x^2}$, qui est négatif. Donc $h$ est décroissante sur $]0\\,;\\,+\\infty[$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Pour tout $x > 0$, $x^2 > 0$ donc $-\\dfrac{2}{x^2} < 0$. 2) Si $h'(x) < 0$ sur un intervalle, $h$ est décroissante sur cet intervalle. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Soit $f(x) = x^3 - 3x + 2$ sur $\\mathbb{R}$. On a $f'(x) = 3x^2 - 3 = 3\\,(x - 1)(x + 1)$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule $f(0)$ et $f'(0)$ pour la tangente. Pour les variations, teste le signe de $f'$ dans chaque intervalle.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^3 - 3x + 2$, on a $f'(x) = 3x^2 - 3$. Calcule le nombre dérivé $f'(0)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) Remplacer $x$ par $0$ : $f'(0) = 0 - 3$. 2) Donc $f'(0) = -3$.",
+                  "answers": [
+                    {
+                      "content": "-3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 3x + 2$, on a $f(0) = 2$ et $f'(0) = -3$. Quelle est l'équation de la tangente en $x = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1) Formule : $y = f'(0)\\,(x - 0) + f(0)$. 2) Application : $y = -3x + 2$. La proposition $-3x - 3$ confond $f(0)$ et $f'(0)$ ; $2x - 3$ les inverse ; $3x + 2$ oublie le signe de la pente.",
+                  "answers": [
+                    {
+                      "content": "$y = -3x + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = -3x - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 2x - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 3x + 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 3x + 2$ (racines de $f'$ : $-1$ et $1$), quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1) Tests : $f'(-2) = 9 > 0$, $f'(0) = -3 < 0$, $f'(2) = 9 > 0$. 2) $f$ croît, décroît sur $[-1\\,;\\,1]$, puis croît. 3) $f(-1) = -1 + 3 + 2 = 4$ est un maximum local et $f(1) = 1 - 3 + 2 = 0$ est un minimum local. Les autres propositions inversent les signes de $f'$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est décroissante sur $[-1\\,;\\,1]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(-1) = 4$ est un maximum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est croissante sur $[-1\\,;\\,1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(1) = 0$ est un maximum local",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 3x + 2$, la dérivée passe de $-$ à $+$ en $x = 1$. Quelle est la valeur du minimum local $f(1)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1) $f'$ passe de $-$ à $+$ en $1$ : minimum local. 2) Calculer : $f(1) = 1 - 3 + 2 = 0$.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 3x + 2$, le minimum local est $f(1) = 0$. Donc $f(x) \\geq 0$ pour tout réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "1) Un minimum local est la plus petite valeur près d'un point, pas sur tout $\\mathbb{R}$. 2) Contre-exemple : $f(-3) = -27 + 9 + 2 = -16 < 0$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
