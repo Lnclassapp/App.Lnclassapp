@@ -1,0 +1,3286 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Énergie cinétique",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "freinage-gbaka-route",
+          "kind": "coordinate_plane",
+          "description": "Une route horizontale rectiligne, représentée par le segment AB de A(0 ; 0) à B(10 ; 0) (une unité = 5 m, donc AB = 50 m). Un gbaka roule de A vers B et freine : en A, le vecteur v (vers la droite) donne le sens du mouvement ; plus loin, le vecteur f (vers la gauche) représente la force de freinage, opposée au déplacement. Les vecteurs sont dessinés sans échelle.",
+          "params": {
+            "xmin": -1,
+            "xmax": 12,
+            "ymin": -2,
+            "ymax": 4,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 10,
+                "y": 0
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 10,
+                "y2": 0
+              }
+            ],
+            "vectors": [
+              {
+                "label": "v",
+                "dx": 3,
+                "dy": 0,
+                "ox": 0,
+                "oy": 1
+              },
+              {
+                "label": "f",
+                "dx": -3,
+                "dy": 0,
+                "ox": 6,
+                "oy": 1
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rampe-chariot",
+          "kind": "coordinate_plane",
+          "description": "Une rampe schématisée par le triangle ACB rectangle en C : A(0 ; 0), C(8 ; 0), B(8 ; 6), une unité = 1 m. La longueur de la rampe AB est 10 m, sa hauteur BC est 6 m. Un chariot descend de B vers A. Au point B, le vecteur P dirigé vers le bas représente le poids ; au milieu de AB, le vecteur f, parallèle à la rampe et dirigé vers le haut, représente le frottement. Vecteurs dessinés sans échelle.",
+          "params": {
+            "xmin": -1,
+            "xmax": 10,
+            "ymin": -1,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": 8,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 8,
+                "y": 6
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 8,
+                "y2": 6
+              },
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 8,
+                "y2": 0
+              },
+              {
+                "x1": 8,
+                "y1": 0,
+                "x2": 8,
+                "y2": 6
+              }
+            ],
+            "vectors": [
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -3,
+                "ox": 8,
+                "oy": 6
+              },
+              {
+                "label": "f",
+                "dx": 2.4,
+                "dy": 1.8,
+                "ox": 4,
+                "oy": 3
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Énergie cinétique d'un solide en translation",
+          "remember": "L'**énergie cinétique** d'un solide de masse $m$ en translation, dont tous les points ont la vitesse $v$, est $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Elle s'exprime en **joules** (J), avec $m$ en **kg** et $v$ en **m/s**. Pour passer de km/h à m/s, on divise par 3,6 : $36$ km/h $= 10$ m/s. L'énergie cinétique est toujours positive ou nulle (elle est nulle quand le solide est arrêté). Elle ne dépend ni de la direction ni du sens du mouvement. Elle est proportionnelle à la masse et au **carré** de la vitesse : si la vitesse double, l'énergie cinétique est multipliée par 4.",
+          "method": [
+            "Relever la masse $m$ en kg et la vitesse $v$ en m/s (convertir les km/h en divisant par 3,6).",
+            "Écrire la formule $E_c = \\dfrac{1}{2}\\,m\\,v^2$.",
+            "Remplacer $m$ et $v$ par leurs valeurs, en calculant d'abord $v^2$.",
+            "Calculer le produit et donner l'énergie cinétique en joules."
+          ],
+          "example": {
+            "statement": "Un gbaka de masse $m = 3\\,000$ kg roule à 36 km/h sur la route de Yopougon. Calculer son énergie cinétique.",
+            "steps": [
+              "Relever : $m = 3\\,000$ kg et $v = 36$ km/h $= \\dfrac{36}{3{,}6} = 10$ m/s.",
+              "Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$.",
+              "Remplacer : $v^2 = 10^2 = 100$, donc $E_c = \\dfrac{1}{2} \\times 3\\,000 \\times 100$.",
+              "Calculer : $E_c = 1\\,500 \\times 100 = 150\\,000$ J."
+            ]
+          },
+          "pitfall": "Ne pas oublier le carré de la vitesse, ni la conversion en m/s. Contre-exemple : $m = 2$ kg et $v = 3$ m/s. Écrire $E_c = \\dfrac{1}{2} \\times 2 \\times 3 = 3$ J est faux : $E_c = \\dfrac{1}{2} \\times 2 \\times 3^2 = 9$ J. Et si la vitesse double (de 10 à 20 m/s), l'énergie cinétique est multipliée par $2^2 = 4$, pas par 2.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer une énergie cinétique",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever les données en unités SI, écrire la formule, remplacer, calculer en joules.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans le système international, quelle est l'unité de l'énergie cinétique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Calculer : avec $m$ en kg et $v$ en m/s, le résultat de $E_c = \\frac{1}{2}\\,m\\,v^2$ s'exprime en kg·m²/s², c'est-à-dire en joules (J). Le watt est l'unité de la puissance, le newton celle d'une force.",
+                  "answers": [
+                    {
+                      "content": "le joule (J)",
+                      "correct": true
+                    },
+                    {
+                      "content": "le watt (W)",
+                      "correct": false
+                    },
+                    {
+                      "content": "le newton (N)",
+                      "correct": false
+                    },
+                    {
+                      "content": "le kilogramme (kg)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de football de masse 0,4 kg est lancé à 10 m/s. Calcule son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}4$ kg et $v = 10$ m/s, déjà en unités SI. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 100$, donc $E_c = \\frac{1}{2} \\times 0{,}4 \\times 100$. Étape 4 — Calculer : $E_c = 0{,}2 \\times 100 = 20$ J.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka de masse 2 500 kg roule à 72 km/h. Calcule son énergie cinétique en joules.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever en unités SI : $m = 2\\,500$ kg et $v = \\frac{72}{3{,}6} = 20$ m/s. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 400$. Étape 4 — Calculer : $E_c = \\frac{1}{2} \\times 2\\,500 \\times 400 = 1\\,250 \\times 400 = 500\\,000$ J. Garder 72 sans convertir donnerait un résultat faux.",
+                  "answers": [
+                    {
+                      "content": "500000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une moto et son pilote ont une masse totale de 200 kg. Ils roulent à 54 km/h. Calcule leur énergie cinétique en joules.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever en unités SI : $m = 200$ kg et $v = \\frac{54}{3{,}6} = 15$ m/s. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 225$. Étape 4 — Calculer : $E_c = \\frac{1}{2} \\times 200 \\times 225 = 100 \\times 225 = 22\\,500$ J.",
+                  "answers": [
+                    {
+                      "content": "22500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de football de masse 0,4 kg a une énergie cinétique de 80 J. Calcule sa vitesse.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "On retrouve la méthode à l'envers. Étape 1 — Relever : $m = 0{,}4$ kg et $E_c = 80$ J. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $80 = \\frac{1}{2} \\times 0{,}4 \\times v^2 = 0{,}2\\,v^2$. Étape 4 — Calculer : $v^2 = \\frac{80}{0{,}2} = 400$, donc $v = 20$ m/s.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque vitesse en km/h à sa valeur en m/s.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever en unités SI : on divise la vitesse en km/h par 3,6. $36 \\div 3{,}6 = 10$, $54 \\div 3{,}6 = 15$, $72 \\div 3{,}6 = 20$ et $90 \\div 3{,}6 = 25$. Multiplier par 3,6 au lieu de diviser est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "36 km/h",
+                      "match": "10 m/s"
+                    },
+                    {
+                      "content": "54 km/h",
+                      "match": "15 m/s"
+                    },
+                    {
+                      "content": "72 km/h",
+                      "match": "20 m/s"
+                    },
+                    {
+                      "content": "90 km/h",
+                      "match": "25 m/s"
+                    }
+                  ]
+                },
+                {
+                  "content": "La masse d'un gbaka ne change pas. Quand sa vitesse double, son énergie cinétique est multipliée par ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Remplacer : $v$ devient $2v$, donc $v^2$ devient $(2v)^2 = 4v^2$. Étape 4 — Calculer : $E_c$ est multipliée par 4, car elle dépend du carré de la vitesse. La multiplier par 2 est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    },
+                    {
+                      "content": "quatre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka passe de 10 m/s à 20 m/s. Son énergie cinétique double.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : pour $m = 1\\,000$ kg, à 10 m/s, $E_c = \\frac{1}{2} \\times 1\\,000 \\times 100 = 50\\,000$ J ; à 20 m/s, $E_c = \\frac{1}{2} \\times 1\\,000 \\times 400 = 200\\,000$ J. Étape 4 — Calculer : $200\\,000 = 4 \\times 50\\,000$. L'énergie cinétique est multipliée par 4, pas par 2 : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Énergie cinétique de camions, de scooters et de sportifs",
+              "statement": "Dans cet exercice, tu calcules des énergies cinétiques de véhicules et de sportifs : relever la masse et la vitesse en unités SI, écrire la formule, remplacer, puis calculer en joules.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis d'abord les km/h en m/s en divisant par 3,6. Calcule le carré de la vitesse avant de multiplier par la masse.",
+              "questions": [
+                {
+                  "content": "Un camion de 5 000 kg roule à 18 km/h dans la cour d'une usine de Yopougon. Calcule son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 5\\,000$ kg et $v = \\dfrac{18}{3{,}6} = 5$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 25$, donc $E_c$ $= \\dfrac{1}{2} \\times 5\\,000 \\times 25$. Étape 4 — Calculer : $E_c = 2\\,500 \\times 25 = 62\\,500$ J. Oublier la conversion donnerait $810\\,000$ J, et oublier le carré donnerait $12\\,500$ J : deux erreurs du piège.",
+                  "answers": [
+                    {
+                      "content": "62500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un footballeur de 70 kg court à 6 m/s sur le terrain du stade d'Abidjan. Calcule son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 70$ kg et $v = 6$ m/s, déjà en m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 36$, donc $E_c = \\dfrac{1}{2} \\times 70 \\times 36$. Étape 4 — Calculer : $E_c = 35 \\times 36 = 1\\,260$ J. Écrire $35 \\times 6 = 210$ J oublie le carré de la vitesse.",
+                  "answers": [
+                    {
+                      "content": "1260",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un scooter garde la même masse, mais sa vitesse passe de 5 m/s à 15 m/s. Par combien son énergie cinétique est-elle multipliée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : la masse ne change pas, la vitesse est multipliée par $\\dfrac{15}{5} = 3$. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$ est proportionnelle à $v^2$. Étape 3 — Remplacer : le facteur est $3^2 = 9$. Étape 4 — Calculer : par exemple avec $m = 2$ kg, on passe de $25$ J à $225$ J, soit $225 / 25 = 9$. Répondre « par 3 » oublie le carré, c'est l'erreur du piège ; « par 6 » additionne au lieu d'élever au carré.",
+                  "answers": [
+                    {
+                      "content": "Par 9",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par 6",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par 27",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 4 kg qui se déplace à 3 m/s a la même énergie cinétique qu'un solide de 2 kg qui se déplace à 6 m/s.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : $m = 4$ kg, $v = 3$ m/s pour le solide de 4 kg ; $m = 2$ kg, $v = 6$ m/s pour le solide de 2 kg. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $\\dfrac{1}{2} \\times 4 \\times 3^2$ et $\\dfrac{1}{2} \\times 2 \\times 6^2$. Étape 4 — Calculer : $18$ J et $36$ J. Les énergies sont différentes : le produit $m \\times v = 12$ est le même, mais ce n'est pas lui qui compte, c'est $m\\,v^2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque solide à son énergie cinétique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever : les masses et les vitesses sont déjà en unités SI. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $\\dfrac{1}{2} \\times 2 \\times 3^2 = 9$ J ; $\\dfrac{1}{2} \\times 2 \\times 6^2 = 36$ J ; $\\dfrac{1}{2} \\times 4 \\times 3^2 = 18$ J ; $\\dfrac{1}{2} \\times 1 \\times 4^2 = 8$ J. Étape 4 — Calculer et relier. Doubler la vitesse (de 3 à 6 m/s) multiplie l'énergie par 4, pas par 2.",
+                  "answers": [
+                    {
+                      "content": "$m = 2$ kg et $v = 3$ m/s",
+                      "match": "9 J"
+                    },
+                    {
+                      "content": "$m = 2$ kg et $v = 6$ m/s",
+                      "match": "36 J"
+                    },
+                    {
+                      "content": "$m = 4$ kg et $v = 3$ m/s",
+                      "match": "18 J"
+                    },
+                    {
+                      "content": "$m = 1$ kg et $v = 4$ m/s",
+                      "match": "8 J"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vitesse de 54 km/h vaut ___ m/s.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : pour convertir des km/h en m/s, on divise par 3,6. Calcul : $v = \\dfrac{54}{3{,}6} = 15$ m/s. Les étapes suivantes (formule, remplacement, calcul) utilisent cette valeur en m/s. Multiplier par 3,6 donnerait $194{,}4$, valeur absurde ici.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un cycliste roule sur une route d'Abidjan et tu calcules son énergie cinétique.",
+            "questions": [
+              {
+                "content": "Un cycliste de 80 kg (avec son vélo) roule à 18 km/h. Complète : $v$ = ___ m/s et $E_c$ = ___ J.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever en unités SI : $v = \\frac{18}{3{,}6} = 5$ m/s et $m = 80$ kg. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 25$. Étape 4 — Calculer : $E_c = \\frac{1}{2} \\times 80 \\times 25 = 40 \\times 25 = 1\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour passer de km/h à m/s, divise par 3,6."
+              },
+              {
+                "content": "L'énergie cinétique d'un solide peut être négative.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : la masse est positive et $v^2$ est positif ou nul. Étape 4 — Calculer : $E_c \\geq 0$ toujours. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un ballon de masse 0,5 kg roule à 4 m/s. Calcule son énergie cinétique.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $m = 0{,}5$ kg et $v = 4$ m/s. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 16$. Étape 4 — Calculer : $E_c = 0{,}25 \\times 16 = 4$ J.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule d'abord $v^2$ avant de multiplier."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Théorème de l'énergie cinétique",
+          "remember": "**Théorème de l'énergie cinétique** : dans le référentiel terrestre, pour un solide en translation qui passe d'une position $A$ à une position $B$, la variation de son énergie cinétique est égale à la somme des travaux des forces extérieures entre $A$ et $B$ : $\\Delta E_c = E_c(B) - E_c(A) = \\dfrac{1}{2}\\,m\\,v_B^2 - \\dfrac{1}{2}\\,m\\,v_A^2 = \\sum W_{AB}(\\vec{F}_{ext})$. Si la somme des travaux est positive, le solide accélère ; si elle est négative, il ralentit ; si elle est nulle, sa vitesse ne change pas. Une force perpendiculaire au déplacement (le poids ou la réaction normale sur une route horizontale) a un travail nul.",
+          "method": [
+            "Définir le solide étudié et les deux positions $A$ et $B$, puis relever $m$, $v_A$ et $v_B$ en unités SI.",
+            "Faire le bilan des forces extérieures qui s'exercent sur le solide entre $A$ et $B$.",
+            "Calculer le travail de chaque force entre $A$ et $B$ (zéro si elle est perpendiculaire au déplacement).",
+            "Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v_B^2 - \\dfrac{1}{2}\\,m\\,v_A^2 = \\sum W$.",
+            "Résoudre l'équation pour trouver l'inconnue, puis vérifier l'unité et le signe."
+          ],
+          "example": {
+            "statement": "Un gbaka de masse 2 000 kg roule en ligne droite sur une route horizontale. Entre $A$ et $B$, distants de 100 m, la force motrice (de même sens que le déplacement) vaut 4 000 N et le frottement (opposé au déplacement) vaut 1 000 N. En $A$, sa vitesse est 10 m/s. Calculer sa vitesse en $B$.",
+            "steps": [
+              "Définir : le solide est le gbaka, $m = 2\\,000$ kg, $v_A = 10$ m/s, $d = AB = 100$ m, et on cherche $v_B$.",
+              "Faire le bilan : le poids $\\vec{P}$, la réaction normale $\\vec{R}_N$, la force motrice $\\vec{F}$ et le frottement $\\vec{f}$.",
+              "Calculer les travaux : $W(\\vec{P}) = 0$ et $W(\\vec{R}_N) = 0$ (perpendiculaires au déplacement), $W(\\vec{F}) = 4\\,000 \\times 100 = 400\\,000$ J, $W(\\vec{f}) = -1\\,000 \\times 100 = -100\\,000$ J, donc $\\sum W = 300\\,000$ J.",
+              "Écrire : $\\dfrac{1}{2} \\times 2\\,000 \\times v_B^2 - \\dfrac{1}{2} \\times 2\\,000 \\times 10^2 = 300\\,000$.",
+              "Résoudre : $1\\,000\\,v_B^2 - 100\\,000 = 300\\,000$, donc $v_B^2 = 400$ et $v_B = 20$ m/s (soit 72 km/h)."
+            ]
+          },
+          "pitfall": "Ne pas oublier une force, ni le signe négatif du frottement. Contre-exemple (l'exemple du gbaka) : si on oublie le frottement, on trouve $\\sum W = 400\\,000$ J, donc $v_B^2 = 500$ et $v_B \\approx 22$ m/s, au lieu de 20 m/s. Si on compte le frottement avec un signe $+$, on trouve $\\sum W = 500\\,000$ J : c'est faux aussi, car le frottement s'oppose au déplacement et son travail est négatif.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Appliquer le théorème de l'énergie cinétique",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : définir le solide, faire le bilan des forces, calculer les travaux, écrire le théorème, résoudre. On prend $g = 10$ N/kg.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est l'énoncé correct du théorème de l'énergie cinétique pour un solide en translation entre $A$ et $B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Écrire le théorème : $\\frac{1}{2}\\,m\\,v_B^2 - \\frac{1}{2}\\,m\\,v_A^2 = \\sum W$. C'est la variation entre A et B qui est égale à la somme des travaux de toutes les forces extérieures, pas seulement de la force motrice : oublier le frottement est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "La variation de l'énergie cinétique entre A et B est égale à la somme des travaux des forces extérieures entre A et B.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'énergie cinétique en B est égale à la somme des travaux des forces extérieures.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La variation de l'énergie cinétique est égale au travail de la seule force motrice.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La variation de l'énergie cinétique est égale au produit de la masse par la vitesse.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot de 12 kg, initialement arrêté, reçoit des forces dont la somme des travaux vaut 600 J. Calcule sa vitesse finale.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : $m = 12$ kg, $v_A = 0$, donc $E_c(A) = 0$. Étape 4 — Écrire : $\\frac{1}{2} \\times 12 \\times v_B^2 - 0 = 600$. Étape 5 — Résoudre : $6\\,v_B^2 = 600$, donc $v_B^2 = 100$ et $v_B = 10$ m/s.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule sur une route horizontale. Sur 50 m, la force motrice vaut 3 000 N (même sens que le déplacement) et le frottement 1 000 N (sens opposé). Calcule la variation de son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Faire le bilan : le poids, la réaction normale, la force motrice et le frottement. Étape 3 — Calculer les travaux : $W(\\vec{P}) = W(\\vec{R}_N) = 0$, $W(\\vec{F}) = 3\\,000 \\times 50 = 150\\,000$ J et $W(\\vec{f}) = -1\\,000 \\times 50 = -50\\,000$ J. Étape 4 — Écrire : $\\Delta E_c = \\sum W = 150\\,000 - 50\\,000 = 100\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "100000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un joueur frappe un ballon de 0,5 kg, immobile avant le tir. Pendant le contact, le pied exerce une force constante de 250 N dans le sens du déplacement, sur 10 cm. On néglige les autres forces. Calcule la vitesse du ballon juste après le tir.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : $m = 0{,}5$ kg, $v_A = 0$ et $d = 10$ cm $= 0{,}1$ m. Étape 3 — Calculer le travail : $W(\\vec{F}) = 250 \\times 0{,}1 = 25$ J. Étape 4 — Écrire : $\\frac{1}{2} \\times 0{,}5 \\times v_B^2 - 0 = 25$. Étape 5 — Résoudre : $0{,}25\\,v_B^2 = 25$, donc $v_B^2 = 100$ et $v_B = 10$ m/s.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un véhicule de 1 000 kg roule à 10 m/s sur une route horizontale. La somme des travaux des forces sur un trajet vaut 150 000 J. Calcule sa vitesse à la fin du trajet.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : $m = 1\\,000$ kg et $v_A = 10$ m/s. Étape 4 — Écrire : $\\frac{1}{2} \\times 1\\,000 \\times v_B^2 - \\frac{1}{2} \\times 1\\,000 \\times 10^2 = 150\\,000$. Étape 5 — Résoudre : $500\\,v_B^2 - 50\\,000 = 150\\,000$, donc $v_B^2 = \\frac{200\\,000}{500} = 400$ et $v_B = 20$ m/s.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la somme des travaux des forces extérieures est négative, l'énergie cinétique du solide ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Écrire : $\\Delta E_c = E_c(B) - E_c(A) = \\sum W$. Étape 5 — Vérifier le signe : si $\\sum W < 0$, alors $\\Delta E_c < 0$, donc l'énergie cinétique diminue et le solide ralentit.",
+                  "answers": [
+                    {
+                      "content": "diminue",
+                      "correct": true
+                    },
+                    {
+                      "content": "augmente",
+                      "correct": false
+                    },
+                    {
+                      "content": "reste constante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule en ligne droite sur une route horizontale. Quelles sont les deux forces dont le travail est nul ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Calculer les travaux : le poids (vertical) et la réaction normale (perpendiculaire à la route) sont perpendiculaires au déplacement horizontal, donc $\\cos 90° = 0$ et leur travail est nul. La force motrice et le frottement sont parallèles au déplacement : leur travail n'est pas nul.",
+                  "answers": [
+                    {
+                      "content": "Le poids du gbaka",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction normale de la route",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force motrice",
+                      "correct": false
+                    },
+                    {
+                      "content": "La force de frottement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule sur une route horizontale. Sur 100 m, la force motrice vaut 3 000 N (sens du déplacement) et le frottement 1 000 N (sens opposé). Quelle est la somme des travaux des forces ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer les travaux : $W(\\vec{F}) = 3\\,000 \\times 100 = 300\\,000$ J, $W(\\vec{f}) = -1\\,000 \\times 100 = -100\\,000$ J, et le poids et la réaction normale ont un travail nul. Somme : $300\\,000 - 100\\,000 = 200\\,000$ J. 300 000 J oublie le frottement, 400 000 J compte le frottement avec un signe plus, 2 000 J oublie de multiplier par la distance.",
+                  "answers": [
+                    {
+                      "content": "200 000 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "300 000 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "400 000 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 000 J",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Théorème de l'énergie cinétique pour des véhicules",
+              "statement": "Dans cet exercice, tu appliques le théorème de l'énergie cinétique à des véhicules : définir le solide, faire le bilan des forces, calculer les travaux, écrire le théorème, puis résoudre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le poids et la réaction normale d'une route horizontale ont un travail nul. Le frottement s'oppose au déplacement : son travail est négatif.",
+              "questions": [
+                {
+                  "content": "Un pick-up de 1 000 kg roule en ligne droite sur une route horizontale. Entre A et B, distants de 100 m, la force motrice (dans le sens du déplacement) vaut 5 000 N et le frottement vaut 1 000 N. En A, la vitesse est 10 m/s. Calcule la vitesse en B.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : le solide est le pick-up, $m = 1\\,000$ kg, $v_A = 10$ m/s, $AB = 100$ m. Étape 2 — Faire le bilan : poids, réaction normale, force motrice et frottement. Étape 3 — Calculer les travaux : poids et réaction normale ont un travail nul ; $W(\\vec{F})$ $= 5\\,000 \\times 100$ $= 500\\,000$ J ; $W(\\vec{f})$ $= -1\\,000 \\times 100$ $= -100\\,000$ J ; donc $\\sum W = 400\\,000$ J. Étape 4 — Écrire : $\\dfrac{1}{2} \\times 1\\,000\\,v_B^2$ $- \\dfrac{1}{2} \\times 1\\,000$ $\\times 10^2$ $= 400\\,000$. Étape 5 — Résoudre : $500\\,v_B^2 = 450\\,000$, donc $v_B^2 = 900$ et $v_B = 30$ m/s. Oublier le frottement donnerait $v_B^2 = 1\\,100$, valeur fausse.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 800 kg, arrêtée à un feu de Cocody, démarre et atteint 15 m/s en ligne droite sur une route horizontale. Calcule la somme des travaux des forces extérieures qui s'exercent sur elle.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : le solide est la voiture, $m = 800$ kg, $v_A = 0$ et $v_B = 15$ m/s. Étape 4 — Écrire le théorème : $\\sum W$ $= \\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$. Étape 5 — Résoudre : $\\sum W$ $= \\dfrac{1}{2} \\times 800 \\times 15^2$ $- 0$ $= 400 \\times 225$ $= 90\\,000$ J. Le résultat est positif : la voiture accélère. Oublier le carré de $v_B$ donnerait $6\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "90000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 1 000 kg ralentit de 20 m/s à 10 m/s sur une route horizontale. Quelle est la somme des travaux des forces extérieures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Définir : $m = 1\\,000$ kg, $v_A = 20$ m/s, $v_B = 10$ m/s. Étape 4 — Écrire le théorème : $\\sum W$ $= \\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$. Étape 5 — Résoudre : $\\sum W$ $= 500 \\times 100$ $- 500 \\times 400$ $= 50\\,000 - 200\\,000$ $= -150\\,000$ J. Le signe est négatif, car la voiture ralentit. Le signe $+$ ignore le ralentissement ; $-200\\,000$ J oublie l'énergie finale ; $-50\\,000$ J utilise $(v_B - v_A)^2$ au lieu de la différence des carrés.",
+                  "answers": [
+                    {
+                      "content": "$-150\\,000$ J",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+150\\,000$ J",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-200\\,000$ J",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-50\\,000$ J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail d'une force perpendiculaire au déplacement est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Calculer les travaux : le travail d'une force est nul quand elle est perpendiculaire au déplacement, comme le poids et la réaction normale sur une route horizontale. Le travail est positif si la force pousse dans le sens du mouvement, négatif si elle s'y oppose ; la formule $F \\times d$ ne vaut que pour une force de même direction et de même sens que le déplacement.",
+                  "answers": [
+                    {
+                      "content": "nul",
+                      "correct": true
+                    },
+                    {
+                      "content": "positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "égal à $F \\times d$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion accélère en ligne droite sur une route horizontale. Quelles sont les deux forces dont le travail est nul ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Faire le bilan : poids, réaction normale, force motrice et frottement. Étape 3 — Calculer les travaux : le poids et la réaction normale sont perpendiculaires au déplacement, donc leur travail est nul. La force motrice est dans le sens du déplacement (travail positif) et le frottement lui est opposé (travail négatif) : ni l'un ni l'autre n'est nul.",
+                  "answers": [
+                    {
+                      "content": "Le poids du camion",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction normale de la route",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force motrice",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le frottement de la route",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode du théorème de l'énergie cinétique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Définir le solide, les positions et les données. Étape 2 — Faire le bilan des forces. Étape 3 — Calculer chaque travail. Étape 4 — Écrire le théorème. Étape 5 — Résoudre l'équation. On ne peut pas écrire le théorème avant d'avoir calculé les travaux, ni calculer les travaux avant d'avoir fait le bilan des forces.",
+                  "answers": [
+                    {
+                      "content": "Définir le solide et les positions A et B, puis relever la masse et les vitesses."
+                    },
+                    {
+                      "content": "Faire le bilan des forces extérieures."
+                    },
+                    {
+                      "content": "Calculer le travail de chaque force."
+                    },
+                    {
+                      "content": "Écrire le théorème de l'énergie cinétique."
+                    },
+                    {
+                      "content": "Résoudre l'équation et vérifier l'unité et le signe."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un solide en translation est soumis à plusieurs forces et tu appliques le théorème de l'énergie cinétique.",
+            "questions": [
+              {
+                "content": "Si la somme des travaux des forces extérieures est positive, l'énergie cinétique du solide ___ .",
+                "question_type": "select",
+                "explanation": "Étape 4 — Écrire le théorème : $\\Delta E_c = \\sum W$. Étape 5 — Vérifier le signe : $\\sum W > 0$ donne $\\Delta E_c > 0$, donc l'énergie cinétique augmente et le solide accélère.",
+                "answers": [
+                  {
+                    "content": "augmente",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "diminue",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "ne change pas",
+                    "correct": false,
+                    "blank": 0
+                  }
+                ],
+                "hint": "$\\Delta E_c$ a le même signe que $\\sum W$."
+              },
+              {
+                "content": "Un solide de masse 4 kg, initialement arrêté, reçoit des forces dont la somme des travaux vaut 18 J. Complète : $E_c(B)$ = ___ J et $v_B$ = ___ m/s.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : $m = 4$ kg et $v_A = 0$, donc $E_c(A) = 0$. Étape 4 — Écrire : $E_c(B) - 0 = 18$ J. Étape 5 — Résoudre : $\\frac{1}{2} \\times 4 \\times v_B^2 = 18$, donc $2\\,v_B^2 = 18$, $v_B^2 = 9$ et $v_B = 3$ m/s.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Au départ, le solide est arrêté : $E_c(A) = 0$."
+              },
+              {
+                "content": "Sur une route horizontale, la réaction normale de la route a un travail nul.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer le travail : la réaction normale est perpendiculaire à la route, donc au déplacement. L'angle vaut 90° et $\\cos 90° = 0$ : son travail est nul. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Distance de freinage",
+          "remember": "Un véhicule de masse $m$ roule sur une route horizontale à la vitesse $v_A$ et freine jusqu'à l'arrêt, avec une force de freinage $f$ constante, de sens opposé au déplacement. Entre le début du freinage et l'arrêt ($v_B = 0$), le poids et la réaction normale ont un travail nul et $W(\\vec{f}) = -f \\times d$. Le théorème de l'énergie cinétique donne $0 - \\dfrac{1}{2}\\,m\\,v_A^2 = -f \\times d$, donc la **distance de freinage** est $d = \\dfrac{m\\,v_A^2}{2f}$. Elle est proportionnelle à la masse et au **carré** de la vitesse : si la vitesse double, la distance est multipliée par 4.",
+          "method": [
+            "Relever $m$, la vitesse initiale $v_A$ en m/s, la vitesse finale ($0$ à l'arrêt) et la force de freinage $f$ en N.",
+            "Écrire le théorème : $0 - \\dfrac{1}{2}\\,m\\,v_A^2 = W(\\vec{f})$, car le poids et la réaction normale ont un travail nul.",
+            "Exprimer $W(\\vec{f}) = -f \\times d$ et isoler la distance : $d = \\dfrac{m\\,v_A^2}{2f}$.",
+            "Calculer $d$ en mètres (ou l'inconnue demandée : $f$ ou $v_A$)."
+          ],
+          "example": {
+            "statement": "Un gbaka de masse 2 000 kg roule à 72 km/h sur une route horizontale. Le conducteur freine : la force de freinage, constante, vaut 8 000 N. Calculer la distance de freinage.",
+            "steps": [
+              "Relever : $m = 2\\,000$ kg, $v_A = \\dfrac{72}{3{,}6} = 20$ m/s, $v_B = 0$ et $f = 8\\,000$ N.",
+              "Écrire : $0 - \\dfrac{1}{2} \\times 2\\,000 \\times 20^2 = W(\\vec{f})$, soit $W(\\vec{f}) = -400\\,000$ J.",
+              "Exprimer : $-f \\times d = -400\\,000$, donc $d = \\dfrac{400\\,000}{f}$ avec $f = 8\\,000$ N.",
+              "Calculer : $d = \\dfrac{400\\,000}{8\\,000} = 50$ m."
+            ]
+          },
+          "pitfall": "Ne pas croire que la distance de freinage est proportionnelle à la vitesse. Contre-exemple (le gbaka de l'exemple) : à 72 km/h, $d = 50$ m. À 144 km/h ($40$ m/s), $d = \\dfrac{2\\,000 \\times 40^2}{2 \\times 8\\,000} = 200$ m, et non 100 m : la vitesse a doublé, la distance a été multipliée par 4.",
+          "figure": "freinage-gbaka-route",
+          "exercise": [
+            {
+              "title": "Calculer une distance de freinage",
+              "statement": "Dans cet exercice, un véhicule freine sur une route horizontale avec une force de freinage constante. Tu appliques la méthode de la fiche : relever, écrire le théorème, exprimer le travail du freinage, calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une moto et son pilote ont une masse de 200 kg. Ils roulent à 54 km/h sur une route horizontale et freinent avec une force constante de 1 500 N jusqu'à l'arrêt. Calcule la distance de freinage.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 200$ kg, $v_A = \\frac{54}{3{,}6} = 15$ m/s, $v_B = 0$ et $f = 1\\,500$ N. Étape 2 — Écrire : $0 - \\frac{1}{2} \\times 200 \\times 15^2 = W(\\vec{f})$, soit $-22\\,500$ J. Étape 3 — Exprimer : $-f \\times d = -22\\,500$. Étape 4 — Calculer : $d = \\frac{22\\,500}{1\\,500} = 15$ m.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 1 000 kg roule à 36 km/h sur une route horizontale. La force de freinage, constante, vaut 5 000 N. Calcule la distance de freinage.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg, $v_A = \\frac{36}{3{,}6} = 10$ m/s, $f = 5\\,000$ N. Étape 2 — Écrire : $0 - \\frac{1}{2} \\times 1\\,000 \\times 10^2 = W(\\vec{f}) = -50\\,000$ J. Étape 3 — Exprimer : $d = \\frac{50\\,000}{f}$. Étape 4 — Calculer : $d = \\frac{50\\,000}{5\\,000} = 10$ m.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka de 3 000 kg roule à 20 m/s et s'arrête sur 40 m, sur une route horizontale. Calcule la valeur de la force de freinage, supposée constante.",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 3\\,000$ kg, $v_A = 20$ m/s, $v_B = 0$, $d = 40$ m. Étape 2 — Écrire : $0 - \\frac{1}{2} \\times 3\\,000 \\times 20^2 = W(\\vec{f}) = -600\\,000$ J. Étape 3 — Exprimer : $-f \\times 40 = -600\\,000$. Étape 4 — Calculer : $f = \\frac{600\\,000}{40} = 15\\,000$ N.",
+                  "answers": [
+                    {
+                      "content": "15000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 1 000 kg freine avec une force constante de 4 000 N et s'arrête au bout de 50 m, sur une route horizontale. Calcule sa vitesse au début du freinage.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg, $f = 4\\,000$ N, $d = 50$ m, $v_B = 0$. Étape 2 — Écrire : $0 - \\frac{1}{2} \\times 1\\,000 \\times v_A^2 = W(\\vec{f})$. Étape 3 — Exprimer : $W(\\vec{f}) = -4\\,000 \\times 50 = -200\\,000$ J, donc $500\\,v_A^2 = 200\\,000$. Étape 4 — Calculer : $v_A^2 = 400$ et $v_A = 20$ m/s.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un véhicule freine avec la même force constante sur une route horizontale. Sa vitesse passe de 36 km/h à 72 km/h. Par quel nombre la distance de freinage est-elle multipliée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Exprimer : $d = \\frac{m\\,v_A^2}{2f}$, donc $d$ dépend du carré de la vitesse. Étape 4 — Calculer : la vitesse est multipliée par 2, donc $d$ est multipliée par $2^2 = 4$. Penser que $d$ est multipliée par 2, c'est supposer à tort qu'elle est proportionnelle à la vitesse.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour calculer une distance de freinage.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever les données en unités SI. Étape 2 — Écrire le théorème entre le début du freinage et l'arrêt. Étape 3 — Exprimer $W(\\vec{f}) = -f \\times d$ et isoler $d$. Étape 4 — Calculer $d$ en mètres. On ne peut pas écrire le théorème avant d'avoir relevé les données.",
+                  "answers": [
+                    {
+                      "content": "Relever la masse, la vitesse initiale en m/s, la vitesse finale nulle et la force de freinage."
+                    },
+                    {
+                      "content": "Écrire le théorème de l'énergie cinétique entre le début du freinage et l'arrêt."
+                    },
+                    {
+                      "content": "Exprimer le travail du freinage $-f \\times d$ et isoler la distance $d$."
+                    },
+                    {
+                      "content": "Calculer la distance en mètres."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant un freinage sur une route horizontale, le travail du poids du véhicule n'est pas nul.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire le théorème : le poids est vertical et le déplacement horizontal, donc le poids a un travail nul. Il n'apparaît pas dans l'équation : seul le travail de la force de freinage reste, $W(\\vec{f}) = -f \\times d$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distance de freinage d'une voiture et d'un camion",
+              "statement": "Dans cet exercice, des véhicules freinent sur une route horizontale avec une force de freinage constante : relever les données, écrire le théorème, exprimer le travail du freinage, puis calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le freinage va jusqu'à l'arrêt : la vitesse finale est nulle. Utilise $d = \\dfrac{m\\,v_A^2}{2f}$ après avoir converti la vitesse en m/s.",
+              "questions": [
+                {
+                  "content": "Une voiture de 1 500 kg roule à 36 km/h sur une route horizontale. Le conducteur freine : la force de freinage, constante, vaut 7 500 N. Calcule la distance de freinage.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,500$ kg, $v_A = \\dfrac{36}{3{,}6} = 10$ m/s, $v_B = 0$ et $f = 7\\,500$ N. Étape 2 — Écrire : $0$ $- \\dfrac{1}{2} \\times 1\\,500$ $\\times 10^2$ $= W(\\vec{f})$, soit $-75\\,000$ J. Étape 3 — Exprimer : $-f \\times d = -75\\,000$, donc $d = \\dfrac{75\\,000}{7\\,500}$. Étape 4 — Calculer : $d = 10$ m. Oublier la conversion donnerait $d = 129{,}6$ m, valeur fausse.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un minibus de 2 000 kg roule à 15 m/s sur une route horizontale et s'arrête sur 45 m, avec une force de freinage constante. Calcule la valeur de cette force.",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\,000$ kg, $v_A = 15$ m/s, $v_B = 0$ et $d = 45$ m. Étape 2 — Écrire : $0$ $- \\dfrac{1}{2} \\times 2\\,000$ $\\times 15^2$ $= W(\\vec{f})$, soit $-225\\,000$ J. Étape 3 — Exprimer : $-f \\times 45 = -225\\,000$, donc $f = \\dfrac{225\\,000}{45}$. Étape 4 — Calculer : $f = 5\\,000$ N. On cherche ici la force, non la distance : on isole $f$ dans la même égalité.",
+                  "answers": [
+                    {
+                      "content": "5000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une camionnette de 1 000 kg freine sur une route horizontale avec une force constante de 5 000 N et s'arrête sur 40 m. Calcule sa vitesse initiale.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg, $f = 5\\,000$ N, $d = 40$ m et $v_B = 0$. Étape 2 — Écrire : $0$ $- \\dfrac{1}{2} \\times 1\\,000\\,v_A^2$ $= -5\\,000 \\times 40$. Étape 3 — Exprimer : $500\\,v_A^2 = 200\\,000$, donc $v_A^2 = 400$. Étape 4 — Calculer : $v_A = \\sqrt{400} = 20$ m/s, soit $72$ km/h. Oublier la racine carrée donnerait $400$ m/s.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un véhicule freine sur une route horizontale avec la même force de freinage. À vitesse égale, sa masse est doublée (chargement). La distance de freinage est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire : le théorème donne $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 3 — Exprimer : $d$ est proportionnelle à $m$, donc si $m$ est multipliée par 2, avec $v_A$ et $f$ inchangés, $d$ est multipliée par 2. La réponse « par 4 » confond la masse avec la vitesse (seule la vitesse intervient au carré). « Inchangée » oublie que la masse figure au numérateur.",
+                  "answers": [
+                    {
+                      "content": "multipliée par 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "multipliée par 4",
+                      "correct": false
+                    },
+                    {
+                      "content": "inchangée",
+                      "correct": false
+                    },
+                    {
+                      "content": "divisée par 2",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la même force de freinage, un véhicule qui roule à 90 km/h s'arrête sur une distance 4 fois plus grande que s'il roulait à 45 km/h.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : la vitesse passe de 45 km/h à 90 km/h, elle est multipliée par 2. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$ est proportionnelle au carré de la vitesse. Étape 4 — Calculer : $2^2 = 4$. L'affirmation est vraie. Croire que la distance double aussi est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La distance de freinage est proportionnelle au ___ de la vitesse initiale.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Exprimer : la distance est $d = \\dfrac{m\\,v_A^2}{2f}$. La vitesse intervient par son carré $v_A^2$ : la distance est proportionnelle au carré de la vitesse initiale. Écrire « double » ou « triple » ne répond pas à la question ; c'est l'erreur du piège de proportionnalité simple.",
+                  "answers": [
+                    {
+                      "content": "carré",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un gbaka freine sur une route horizontale d'Abidjan et tu appliques la méthode de la distance de freinage.",
+            "questions": [
+              {
+                "content": "Une voiture de 1 000 kg roule à 72 km/h. Complète : $v$ = ___ m/s et $E_c$ = ___ J.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever en unités SI : $m = 1\\,000$ kg et $v_A = \\frac{72}{3{,}6} = 20$ m/s. Étape 2 — Écrire le théorème : le freinage doit annuler le terme $\\frac{1}{2}\\,m\\,v_A^2$, l'énergie cinétique de départ. Ici $E_c = \\frac{1}{2} \\times 1\\,000 \\times 20^2 = 500 \\times 400 = 200\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "200000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Divise 72 par 3,6 avant de calculer $v^2$."
+              },
+              {
+                "content": "Une voiture dont l'énergie cinétique est de 200 000 J freine jusqu'à l'arrêt avec une force constante de 10 000 N sur route horizontale. Calcule la distance de freinage.",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Écrire : $0 - 200\\,000 = W(\\vec{f})$. Étape 3 — Exprimer : $-f \\times d = -200\\,000$ avec $f = 10\\,000$ N. Étape 4 — Calculer : $d = \\frac{200\\,000}{10\\,000} = 20$ m.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le travail du freinage est $-f \\times d$ et vaut $-200\\,000$ J."
+              },
+              {
+                "content": "Deux véhicules ont la même vitesse et la même force de freinage. Celui qui a la masse double s'arrête sur une distance double.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Exprimer : $d = \\frac{m\\,v_A^2}{2f}$. À $v_A$ et $f$ fixés, $d$ est proportionnelle à $m$. Étape 4 — Calculer : si $m$ double, $d$ double. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Chute et mouvement sur un plan incliné",
+          "remember": "Quand un solide de masse $m$ descend d'une hauteur $h$ (dénivelé **vertical**), le travail de son poids est $W(\\vec{P}) = m\\,g\\,h$, positif en descente et $-m\\,g\\,h$ en montée. Sur un plan incliné de longueur $L$ et de hauteur $h$, on a $h = L\\sin\\alpha$. La réaction normale du plan a un travail nul. Un frottement constant $f$ parallèle au plan, opposé au mouvement, a pour travail $-f \\times L$. Le théorème de l'énergie cinétique donne alors la vitesse en bas. En **chute libre** (seul le poids agit, sans vitesse initiale), $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$, donc $v^2 = 2\\,g\\,h$ : la vitesse ne dépend pas de la masse.",
+          "method": [
+            "Faire le schéma et relever la masse $m$, la hauteur verticale $h$, la longueur $L$ parcourue et les vitesses initiale et finale.",
+            "Calculer le travail du poids : $W(\\vec{P}) = m\\,g\\,h$ en descente, avec $g = 10$ N/kg.",
+            "Calculer le travail des autres forces : $0$ pour la réaction normale, $-f \\times L$ pour un frottement constant.",
+            "Écrire le théorème $\\dfrac{1}{2}\\,m\\,v_B^2 - \\dfrac{1}{2}\\,m\\,v_A^2 = \\sum W$ et isoler $v_B^2$.",
+            "Calculer la vitesse en m/s (puis en km/h si on le demande, en multipliant par 3,6)."
+          ],
+          "example": {
+            "statement": "Un chariot de 100 kg, lâché sans vitesse en haut d'une rampe, descend une rampe de longueur $L = 10$ m et de hauteur $h = 6$ m. Le frottement constant, parallèle à la rampe, vaut 100 N. On prend $g = 10$ N/kg. Calculer la vitesse du chariot en bas de la rampe.",
+            "steps": [
+              "Relever : $m = 100$ kg, $h = 6$ m, $L = 10$ m, $v_A = 0$ et $f = 100$ N.",
+              "Calculer le travail du poids : $W(\\vec{P}) = m\\,g\\,h = 100 \\times 10 \\times 6 = 6\\,000$ J.",
+              "Calculer les autres travaux : $W(\\vec{R}_N) = 0$ et $W(\\vec{f}) = -100 \\times 10 = -1\\,000$ J, donc $\\sum W = 5\\,000$ J.",
+              "Écrire : $\\dfrac{1}{2} \\times 100 \\times v_B^2 - 0 = 5\\,000$, soit $50\\,v_B^2 = 5\\,000$.",
+              "Calculer : $v_B^2 = 100$, donc $v_B = 10$ m/s, soit $10 \\times 3{,}6 = 36$ km/h."
+            ]
+          },
+          "pitfall": "Ne pas utiliser la longueur $L$ du plan à la place de la hauteur $h$ dans le travail du poids. Contre-exemple (la rampe de l'exemple) : $W(\\vec{P}) = 100 \\times 10 \\times 6 = 6\\,000$ J, et non $100 \\times 10 \\times 10 = 10\\,000$ J. Le poids est vertical : seul le dénivelé $h$ compte. Le frottement, lui, se calcule avec la longueur $L$ parcourue.",
+          "figure": "rampe-chariot",
+          "exercise": [
+            {
+              "title": "Chute libre et plan incliné",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever les données, calculer le travail du poids, calculer les autres travaux, écrire le théorème, calculer la vitesse. On prend $g = 10$ N/kg.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le travail du poids d'un solide qui descend est positif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer le travail du poids : en descente, le poids a le sens du déplacement vertical, donc $W(\\vec{P}) = m\\,g\\,h > 0$. Le poids est une force motrice en descente. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de football de masse 0,4 kg est lâché sans vitesse d'une hauteur de 45 m. On néglige l'action de l'air. Calcule sa vitesse à l'arrivée au sol.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}4$ kg, $h = 45$ m, $v_A = 0$. Étape 2 — Calculer : $W(\\vec{P}) = 0{,}4 \\times 10 \\times 45 = 180$ J. Étape 3 — Autres travaux : l'air est négligé, donc $\\sum W = 180$ J. Étape 4 — Écrire : $\\frac{1}{2} \\times 0{,}4 \\times v_B^2 = 180$, soit $0{,}2\\,v_B^2 = 180$. Étape 5 — Calculer : $v_B^2 = 900$, donc $v_B = 30$ m/s.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot de 20 kg est lâché sans vitesse en haut d'un plan incliné lisse (sans frottement) de longueur 10 m, incliné de 30° sur l'horizontale. On donne $\\sin 30° = 0{,}5$. Calcule sa vitesse en bas du plan.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 20$ kg, $L = 10$ m, $h = L\\sin 30° = 10 \\times 0{,}5 = 5$ m. Étape 2 — Calculer : $W(\\vec{P}) = 20 \\times 10 \\times 5 = 1\\,000$ J. Étape 3 — Autres travaux : la réaction normale a un travail nul et il n'y a pas de frottement, donc $\\sum W = 1\\,000$ J. Étape 4 — Écrire : $\\frac{1}{2} \\times 20 \\times v_B^2 = 1\\,000$, soit $10\\,v_B^2 = 1\\,000$. Étape 5 — Calculer : $v_B^2 = 100$, donc $v_B = 10$ m/s.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse de 20 kg est lâchée sans vitesse en haut d'un plan incliné de longueur 10 m et de hauteur 5 m. Le frottement constant, parallèle au plan, vaut 75 N. Calcule sa vitesse en bas du plan.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 20$ kg, $L = 10$ m, $h = 5$ m, $f = 75$ N, $v_A = 0$. Étape 2 — Calculer : $W(\\vec{P}) = 20 \\times 10 \\times 5 = 1\\,000$ J. Étape 3 — Autres travaux : $W(\\vec{R}_N) = 0$ et $W(\\vec{f}) = -75 \\times 10 = -750$ J, donc $\\sum W = 250$ J. Étape 4 — Écrire : $10\\,v_B^2 = 250$. Étape 5 — Calculer : $v_B^2 = 25$, donc $v_B = 5$ m/s.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de football est lâché sans vitesse d'une hauteur de 5 m, on néglige l'air. Calcule sa vitesse à l'arrivée au sol, en km/h.",
+                  "question_type": "numeric",
+                  "unit": "km/h",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $h = 5$ m, $v_A = 0$ (la masse $m$ se simplifie). Étape 2 — Calculer : $W(\\vec{P}) = m \\times 10 \\times 5 = 50\\,m$. Étape 3 — Autres travaux : l'air est négligé. Étape 4 — Écrire : $\\frac{1}{2}\\,m\\,v_B^2 = 50\\,m$, donc $v_B^2 = 100$. Étape 5 — Calculer : $v_B = 10$ m/s, soit $10 \\times 3{,}6 = 36$ km/h.",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot de 100 kg est poussé du bas vers le haut d'une rampe, jusqu'à une hauteur de 3 m. Quel est le travail de son poids pendant la montée ? On prend $g = 10$ N/kg.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer : en montée, le poids est opposé au déplacement vertical, donc $W(\\vec{P}) = -m\\,g\\,h = -100 \\times 10 \\times 3 = -3\\,000$ J. 3 000 J oublie le signe négatif de la montée ; 300 J et -300 J oublient de multiplier par $g$.",
+                  "answers": [
+                    {
+                      "content": "-3 000 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 000 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "300 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "-300 J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse de 50 kg descend un plan incliné de longueur 20 m et de hauteur 10 m. Quel est le travail de son poids ? On prend $g = 10$ N/kg.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : $m = 50$ kg et $h = 10$ m, la hauteur verticale. Étape 2 — Calculer : $W(\\vec{P}) = m\\,g\\,h = 50 \\times 10 \\times 10 = 5\\,000$ J. 10 000 J vient de $L = 20$ m utilisée à la place de $h$ (l'erreur du piège) ; -5 000 J oublie que le poids est moteur en descente ; 500 J oublie $h$.",
+                  "answers": [
+                    {
+                      "content": "5 000 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "10 000 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "-5 000 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "500 J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon et une pierre tombent sans vitesse initiale de la même hauteur, l'air étant négligé. Leur vitesse à l'arrivée ne dépend pas de la ___ du solide.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Calculer : $W(\\vec{P}) = m\\,g\\,h$. Étape 4 — Écrire : $\\frac{1}{2}\\,m\\,v^2 = m\\,g\\,h$. La masse $m$ se simplifie des deux côtés : $v^2 = 2\\,g\\,h$. La vitesse dépend de $h$ et de $g$, pas de la masse.",
+                  "answers": [
+                    {
+                      "content": "masse",
+                      "correct": true
+                    },
+                    {
+                      "content": "hauteur de chute",
+                      "correct": false
+                    },
+                    {
+                      "content": "valeur de $g$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Chute de fruits et descente d'un plan incliné",
+              "statement": "Dans cet exercice, des fruits tombent d'un arbre et des caisses descendent un plan incliné : relever les données, calculer le travail du poids et des autres forces, écrire le théorème, puis calculer la vitesse. On prend $g = 10$ N/kg.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le poids travaille avec la hauteur verticale $h$ ; le frottement travaille avec la longueur $L$ parcourue. Isole $v_B^2$ avant de prendre la racine carrée.",
+              "questions": [
+                {
+                  "content": "Une mangue de 0,4 kg tombe d'un manguier, sans vitesse initiale, d'une hauteur de 5 m. Les frottements sont négligés et on prend $g = 10$ N/kg. Calcule sa vitesse au sol.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}4$ kg, $h = 5$ m, $v_A = 0$ ; seul le poids agit. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= m\\,g\\,h$ $= 0{,}4 \\times 10 \\times 5$ $= 20$ J. Étape 3 — Calculer les autres travaux : il n'y en a pas. Étape 4 — Écrire : $\\dfrac{1}{2} \\times 0{,}4\\,v_B^2 = 20$, donc $v_B^2 = 100$. Étape 5 — Calculer : $v_B = 10$ m/s, soit $36$ km/h. La masse se simplifie : $v^2 = 2\\,g\\,h$ ne dépend pas d'elle.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse de 50 kg descend un plan incliné de longueur 8 m et de hauteur 4 m. On prend $g = 10$ N/kg. Calcule le travail de son poids.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 50$ kg, $h = 4$ m (hauteur verticale), $L = 8$ m. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= m\\,g\\,h$ $= 50 \\times 10 \\times 4$ $= 2\\,000$ J, positif car la caisse descend. Utiliser la longueur $L = 8$ m à la place de $h$ donnerait $4\\,000$ J, erreur du piège : le poids est vertical, seul le dénivelé compte.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse de 50 kg est lâchée sans vitesse en haut d'un plan incliné de longueur 8 m et de hauteur 4 m. Le frottement constant, parallèle au plan, vaut 50 N. On prend $g = 10$ N/kg. Calcule la vitesse de la caisse en bas.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 50$ kg, $h = 4$ m, $L = 8$ m, $v_A = 0$ et $f = 50$ N. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= 50 \\times 10 \\times 4$ $= 2\\,000$ J. Étape 3 — Calculer les autres travaux : $W(\\vec{R}_N) = 0$ et $W(\\vec{f}) = -50 \\times 8 = -400$ J, donc $\\sum W = 1\\,600$ J. Étape 4 — Écrire : $\\dfrac{1}{2} \\times 50\\,v_B^2$ $- 0$ $= 1\\,600$, soit $25\\,v_B^2 = 1\\,600$. Étape 5 — Calculer : $v_B^2 = 64$, donc $v_B = 8$ m/s.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux billes, l'une de 1 kg et l'autre de 4 kg, sont lâchées sans vitesse de la même hauteur, en chute libre. Que dit-on de leurs vitesses à l'arrivée au sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer le travail du poids : $W(\\vec{P}) = m\\,g\\,h$. Étape 4 — Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$. La masse $m$ se simplifie des deux côtés, donc $v^2 = 2\\,g\\,h$ : les deux billes arrivent à la même vitesse. Croire que la bille la plus lourde va plus vite confond l'énergie cinétique, qui dépend de $m$, avec la vitesse, qui n'en dépend pas.",
+                  "answers": [
+                    {
+                      "content": "Elles sont égales",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bille de 4 kg va 4 fois plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bille de 4 kg va 2 fois plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bille de 1 kg va plus vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer le travail du poids d'un chariot qui descend un plan incliné, on utilise la ___ du plan.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Calculer le travail du poids : $W(\\vec{P}) = m\\,g\\,h$, où $h$ est le dénivelé vertical. Le poids est vertical, donc seule la hauteur compte. La longueur $L$ sert pour le travail du frottement ($-f \\times L$), et c'est l'erreur du piège de la confondre avec la hauteur.",
+                  "answers": [
+                    {
+                      "content": "hauteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "longueur",
+                      "correct": false
+                    },
+                    {
+                      "content": "largeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "pente en pourcentage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un frottement constant de 30 N, parallèle à un plan incliné de longueur 10 m et opposé au mouvement, a un travail de $-300$ J quand le solide descend tout le plan.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer les autres travaux : le frottement est constant, parallèle au plan et opposé au mouvement, donc $W(\\vec{f})$ $= -f \\times L$ $= -30 \\times 10$ $= -300$ J. Le signe est négatif et la longueur utilisée est $L$ (longueur parcourue), non la hauteur. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un ballon de football tombe d'un balcon et un chariot descend une rampe. Tu appliques la méthode de la chute et du plan incliné.",
+            "questions": [
+              {
+                "content": "Un ballon de football de masse 0,5 kg tombe d'une hauteur de 4 m. Calcule le travail de son poids ($g = 10$ N/kg).",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $m = 0{,}5$ kg et $h = 4$ m. Étape 2 — Calculer : $W(\\vec{P}) = m\\,g\\,h = 0{,}5 \\times 10 \\times 4 = 20$ J.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le travail du poids est $m \\times g \\times h$, avec $h$ la hauteur verticale."
+              },
+              {
+                "content": "Un ballon est lâché sans vitesse d'une hauteur de 5 m, l'air étant négligé. Calcule sa vitesse à l'arrivée au sol ($g = 10$ N/kg).",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer : $W(\\vec{P}) = m \\times 10 \\times 5 = 50\\,m$. Étape 4 — Écrire : $\\frac{1}{2}\\,m\\,v^2 = 50\\,m$, donc $v^2 = 100$. Étape 5 — Calculer : $v = 10$ m/s.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "hint": "Écris $v^2 = 2\\,g\\,h$ après avoir simplifié la masse."
+              },
+              {
+                "content": "En descente, le travail du poids vaut $m \\times g \\times$ ___ et il est ___ (positif ou négatif).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : seule la hauteur verticale $h$ compte. Étape 2 — Calculer : $W(\\vec{P}) = m\\,g\\,h$. En descente, le poids a le sens du déplacement vertical : son travail est positif (moteur).",
+                "answers": [
+                  {
+                    "content": "h",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "hauteur",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "positif",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "moteur",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "C'est la hauteur verticale, pas la longueur du plan."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un tir de football au stade d'Abidjan",
+          "statement": "Lors d'un match au stade d'Abidjan, un joueur tire un ballon de masse 0,5 kg, immobile avant le tir. Le ballon part à 72 km/h. Pendant le contact du pied (sur 0,4 m), on suppose la force du pied constante et de même sens que le déplacement, et on néglige les autres forces. Les justifications reprennent la méthode du théorème de l'énergie cinétique.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule la vitesse du ballon juste après le tir, en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever en unités SI : on divise la vitesse en km/h par 3,6. $v = \\frac{72}{3{,}6} = 20$ m/s. Garder 72 dans la formule de l'énergie cinétique serait une erreur d'unité.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'énergie cinétique du ballon juste après le tir.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $m = 0{,}5$ kg et $v = 20$ m/s. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 400$. Étape 4 — Calculer : $E_c = \\frac{1}{2} \\times 0{,}5 \\times 400 = 0{,}25 \\times 400 = 100$ J.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la valeur de la force exercée par le pied pendant le contact de 0,4 m.",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Théorème de l'énergie cinétique entre le début et la fin du contact. Étape 1 — Définir : $m = 0{,}5$ kg, $v_A = 0$, $v_B = 20$ m/s, $d = 0{,}4$ m. Étape 3 — Calculer le travail : seule la force du pied compte, $W(\\vec{F}) = F \\times 0{,}4$. Étape 4 — Écrire : $E_c(B) - E_c(A) = W(\\vec{F})$, soit $100 - 0 = 0{,}4\\,F$. Étape 5 — Résoudre : $F = \\frac{100}{0{,}4} = 250$ N.",
+              "answers": [
+                {
+                  "content": "250",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si le joueur tirait le même ballon deux fois moins vite, à 36 km/h, quelle serait son énergie cinétique ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : $v = \\frac{36}{3{,}6} = 10$ m/s. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 100$, donc $E_c = \\frac{1}{2} \\times 0{,}5 \\times 100$. Étape 4 — Calculer : $E_c = 0{,}25 \\times 100 = 25$ J. La vitesse est divisée par 2, donc l'énergie cinétique est divisée par 4 ($100 \\div 4 = 25$ J), pas par 2 (50 J).",
+              "answers": [
+                {
+                  "content": "25 J",
+                  "correct": true
+                },
+                {
+                  "content": "50 J",
+                  "correct": false
+                },
+                {
+                  "content": "100 J",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le gardien arrête le ballon (qui arrive à 20 m/s). Calcule la variation de l'énergie cinétique du ballon pendant l'arrêt.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Définir : $v_A = 20$ m/s, $v_B = 0$. Étape 4 — Écrire : $\\Delta E_c = E_c(B) - E_c(A) = 0 - 100 = -100$ J. La variation est négative : le ballon perd son énergie cinétique, il est freiné par les gants.",
+              "answers": [
+                {
+                  "content": "-100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les gants du gardien exercent une force constante, opposée au déplacement, sur 0,5 m pour arrêter le ballon. Calcule la valeur de cette force.",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Définir : $\\Delta E_c = -100$ J, $d = 0{,}5$ m. Étape 3 — Calculer le travail : $W(\\vec{F}) = -F \\times 0{,}5$ car la force est opposée au déplacement. Étape 4 — Écrire : $-100 = -0{,}5\\,F$. Étape 5 — Résoudre : $F = \\frac{100}{0{,}5} = 200$ N.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un gbaka qui démarre à Abobo",
+          "statement": "À Abobo, un gbaka de masse 2 000 kg démarre du repos sur une route horizontale rectiligne. Pendant 20 s, il parcourt 150 m et atteint 54 km/h. La force motrice F, constante et de même sens que le déplacement, et les frottements f = 500 N (constants, de sens opposé au déplacement) sont les seules forces à travail non nul. On prend $g = 10$ N/kg.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule la vitesse du gbaka à la fin des 150 m, en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever en unités SI : $v_B = \\frac{54}{3{,}6} = 15$ m/s. On divise par 3,6 pour passer de km/h à m/s.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la variation de l'énergie cinétique du gbaka entre le départ et la fin des 150 m.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Définir : $m = 2\\,000$ kg, $v_A = 0$ et $v_B = 15$ m/s. Étape 4 — Écrire : $\\Delta E_c = \\frac{1}{2}\\,m\\,v_B^2 - 0 = \\frac{1}{2} \\times 2\\,000 \\times 15^2 = 1\\,000 \\times 225 = 225\\,000$ J.",
+              "answers": [
+                {
+                  "content": "225000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule le travail des frottements sur les 150 m.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer le travail des frottements : le frottement est opposé au déplacement, donc $\\alpha = 180°$ et $W(\\vec{f}) = -f \\times d = -500 \\times 150 = -75\\,000$ J. Le travail est négatif : les frottements sont résistants.",
+              "answers": [
+                {
+                  "content": "-75000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En appliquant le théorème de l'énergie cinétique, calcule le travail de la force motrice sur les 150 m.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Bilan : le poids et la réaction normale ont un travail nul (perpendiculaires à la route horizontale) ; restent la force motrice et les frottements. Étape 4 — Écrire : $\\Delta E_c = W(\\vec{F}) + W(\\vec{f})$, soit $225\\,000 = W(\\vec{F}) - 75\\,000$. Étape 5 — Résoudre : $W(\\vec{F}) = 225\\,000 + 75\\,000 = 300\\,000$ J. Oublier le travail des frottements donnerait 225 000 J, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "300000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la valeur de la force motrice F.",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer : $W(\\vec{F}) = F \\times d \\times \\cos 0° = F \\times 150$. Étape 4 — Écrire : $F \\times 150 = 300\\,000$. Étape 5 — Résoudre : $F = \\frac{300\\,000}{150} = 2\\,000$ N.",
+              "answers": [
+                {
+                  "content": "2000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la puissance moyenne de la force motrice pendant les 20 s de démarrage.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "La puissance moyenne se calcule avec la durée : $P_{moy} = \\frac{W}{\\Delta t}$. Ici $W(\\vec{F}) = 300\\,000$ J et $\\Delta t = 20$ s, donc $P_{moy} = \\frac{300\\,000}{20} = 15\\,000$ W, soit 15 kW. L'unité de la puissance est le watt.",
+              "answers": [
+                {
+                  "content": "15000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pendant le démarrage du gbaka sur la route horizontale, quelles sont les deux forces dont le travail est nul ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Calculer les travaux : le poids et la réaction normale sont perpendiculaires à la route horizontale, donc perpendiculaires au déplacement ($\\cos 90° = 0$) : leur travail est nul. La force motrice et les frottements sont parallèles au déplacement : leur travail n'est pas nul.",
+              "answers": [
+                {
+                  "content": "Le poids du gbaka",
+                  "correct": true
+                },
+                {
+                  "content": "La réaction normale de la route",
+                  "correct": true
+                },
+                {
+                  "content": "La force motrice",
+                  "correct": false
+                },
+                {
+                  "content": "Les frottements",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Freiner sur la route de Yopougon",
+          "statement": "Sur une route horizontale de Yopougon, un gbaka de masse 2 000 kg (avec ses passagers) roule en ligne droite à 72 km/h. Le conducteur aperçoit un obstacle et freine. Sur route sèche, la force de freinage constante vaut 8 000 N. On prend $g = 10$ N/kg et on étudie le mouvement entre le début du freinage et l'arrêt.",
+          "exercise_type": "evaluation",
+          "figure": "freinage-gbaka-route",
+          "questions": [
+            {
+              "content": "Calcule la vitesse du gbaka avant le freinage, en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever en unités SI : $v_A = \\frac{72}{3{,}6} = 20$ m/s.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'énergie cinétique du gbaka avant le freinage.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Énergie cinétique d'un solide en translation. Étape 1 — Relever : $m = 2\\,000$ kg et $v = 20$ m/s. Étape 2 — Écrire : $E_c = \\frac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $v^2 = 400$. Étape 4 — Calculer : $E_c = 1\\,000 \\times 400 = 400\\,000$ J.",
+              "answers": [
+                {
+                  "content": "400000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la distance de freinage sur route sèche (force de freinage de 8 000 N).",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Méthode de la distance de freinage. Étape 1 — Relever : $m = 2\\,000$ kg, $v_A = 20$ m/s, $v_B = 0$, $f = 8\\,000$ N. Étape 2 — Écrire : $0 - 400\\,000 = W(\\vec{f})$, car le poids et la réaction normale ont un travail nul. Étape 3 — Exprimer : $-f \\times d = -400\\,000$. Étape 4 — Calculer : $d = \\frac{400\\,000}{8\\,000} = 50$ m.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sur route mouillée, la force de freinage constante n'est plus que de 4 000 N. Calcule la distance de freinage pour la même vitesse initiale.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $f = 4\\,000$ N, $E_c = 400\\,000$ J. Étape 2 — Écrire : $0 - 400\\,000 = W(\\vec{f})$. Étape 3 — Exprimer : $-4\\,000 \\times d = -400\\,000$. Étape 4 — Calculer : $d = \\frac{400\\,000}{4\\,000} = 100$ m. La force de freinage étant deux fois plus petite, la distance est deux fois plus grande.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sur route sèche (force de freinage de 8 000 N), le gbaka roule à 108 km/h. Quelle est la distance de freinage ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : $v_A = \\frac{108}{3{,}6} = 30$ m/s. Étape 2 — Écrire : $0 - \\frac{1}{2} \\times 2\\,000 \\times 30^2 = -900\\,000$ J. Étape 3 — Exprimer : $d = \\frac{900\\,000}{8\\,000}$. Étape 4 — Calculer : $d = 112{,}5$ m. 75 m suppose la distance proportionnelle à la vitesse ($50 \\times 1{,}5$) : c'est faux, elle dépend du carré de la vitesse. 225 m oublie le facteur $\\frac{1}{2}$ de l'énergie cinétique.",
+              "answers": [
+                {
+                  "content": "112,5 m",
+                  "correct": true
+                },
+                {
+                  "content": "75 m",
+                  "correct": false
+                },
+                {
+                  "content": "225 m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le gbaka commence à freiner 32 m avant l'obstacle (route sèche, force de freinage de 8 000 N). Calcule sa vitesse au moment où il atteindrait l'obstacle.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Théorème de l'énergie cinétique entre le début du freinage et l'obstacle. Étape 1 — Relever : $m = 2\\,000$ kg, $v_A = 20$ m/s, $f = 8\\,000$ N, $d = 32$ m. Étape 3 — Calculer le travail : $W(\\vec{f}) = -8\\,000 \\times 32 = -256\\,000$ J. Étape 4 — Écrire : $\\frac{1}{2} \\times 2\\,000 \\times v_B^2 - 400\\,000 = -256\\,000$. Étape 5 — Résoudre : $1\\,000\\,v_B^2 = 144\\,000$, donc $v_B^2 = 144$ et $v_B = 12$ m/s (43,2 km/h) : le choc aurait lieu à cette vitesse.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes, avec des nombres tirés de l'exercice, pourquoi un gbaka qui roule deux fois plus vite a besoin d'une distance de freinage beaucoup plus grande.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "La distance de freinage dépend…",
+              "criteria": [
+                "Indique que la distance dépend du carré de la vitesse",
+                "Donne un exemple chiffré (la vitesse double, la distance est multipliée par 4)",
+                "Relie le résultat à la sécurité sur la route"
+              ],
+              "explanation": "Corrigé modèle. La distance de freinage vaut $d = \\frac{m\\,v^2}{2f}$ : elle dépend du carré de la vitesse. Dans l'exercice, à 72 km/h (20 m/s) la distance est de 50 m ; à 144 km/h (40 m/s), avec la même force de freinage de 8 000 N, elle vaut $\\frac{2\\,000 \\times 40^2}{2 \\times 8\\,000} = 200$ m, soit 4 fois plus. Il faut donc ralentir près des écoles et des marchés, car un petit excès de vitesse allonge beaucoup la distance d'arrêt. Points : dépendance au carré de la vitesse (1), exemple chiffré (1), lien avec la sécurité (1).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Un gbaka sans moteur dans une descente",
+          "statement": "Sur une route d'Abidjan en pente, un gbaka de masse 2 000 kg, moteur coupé, démarre sans vitesse en haut d'une descente de longueur 100 m et de dénivelé 8 m. Les frottements, constants et parallèles à la route, valent 600 N. En bas, la route redevient horizontale et le conducteur freine. On prend $g = 10$ N/kg. Les justifications reprennent la méthode du théorème de l'énergie cinétique.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule le poids du gbaka.",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $m = 2\\,000$ kg et $g = 10$ N/kg. Le poids est $P = m\\,g = 2\\,000 \\times 10 = 20\\,000$ N.",
+              "answers": [
+                {
+                  "content": "20000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule le travail du poids pendant la descente de 100 m (dénivelé de 8 m).",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Calculer le travail du poids : seule la hauteur verticale compte, $W(\\vec{P}) = m\\,g\\,h = 20\\,000 \\times 8 = 160\\,000$ J. Il est positif car le gbaka descend. Utiliser les 100 m de la route donnerait 2 000 000 J, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "160000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule le travail des frottements pendant la descente de 100 m.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer les autres travaux : le frottement est opposé au déplacement et se calcule avec la longueur parcourue, $W(\\vec{f}) = -f \\times L = -600 \\times 100 = -60\\,000$ J. La réaction normale a un travail nul.",
+              "answers": [
+                {
+                  "content": "-60000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la variation de l'énergie cinétique du gbaka pendant la descente.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Écrire le théorème : $\\Delta E_c = \\sum W = W(\\vec{P}) + W(\\vec{R}_N) + W(\\vec{f}) = 160\\,000 + 0 - 60\\,000 = 100\\,000$ J.",
+              "answers": [
+                {
+                  "content": "100000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la vitesse du gbaka en bas de la descente, en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Écrire : $\\frac{1}{2} \\times 2\\,000 \\times v_B^2 - 0 = 100\\,000$. Étape 5 — Calculer : $1\\,000\\,v_B^2 = 100\\,000$, donc $v_B^2 = 100$ et $v_B = 10$ m/s.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la vitesse du gbaka en bas de la descente, en km/h ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 5 — Convertir : pour passer de m/s à km/h, on multiplie par 3,6. $10 \\times 3{,}6 = 36$ km/h. 2,8 km/h vient d'une division par 3,6 (on a inversé la conversion) ; 10 km/h oublie la conversion ; 360 km/h est un facteur 36 au lieu de 3,6.",
+              "answers": [
+                {
+                  "content": "36 km/h",
+                  "correct": true
+                },
+                {
+                  "content": "2,8 km/h",
+                  "correct": false
+                },
+                {
+                  "content": "10 km/h",
+                  "correct": false
+                },
+                {
+                  "content": "360 km/h",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En bas, sur la route horizontale, le conducteur freine avec une force constante de 5 000 N jusqu'à l'arrêt. Calcule la distance de freinage à partir de la vitesse trouvée.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Méthode de la distance de freinage. Étape 1 — Relever : $E_c = 100\\,000$ J, $v_B = 0$ à l'arrêt, $f = 5\\,000$ N. Étape 2 — Écrire : $0 - 100\\,000 = W(\\vec{f})$. Étape 3 — Exprimer : $-5\\,000 \\times d = -100\\,000$. Étape 4 — Calculer : $d = \\frac{100\\,000}{5\\,000} = 20$ m.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le conducteur affirme : « Si le dénivelé de la route était deux fois plus grand (16 m) pour la même longueur de 100 m et les mêmes frottements, j'arriverais deux fois plus vite. » Cette affirmation est-elle exacte ? Justifie par un calcul.",
+              "question_type": "written",
+              "points": 4,
+              "starter": "Avec un dénivelé de 16 m…",
+              "criteria": [
+                "Calcule le travail du poids avec h = 16 m (320 000 J)",
+                "Écrit le théorème et trouve v² = 260, donc une vitesse d'environ 16 m/s",
+                "Conclut que la vitesse n'est pas doublée (20 m/s)",
+                "Explique que l'énergie cinétique dépend du carré de la vitesse"
+              ],
+              "explanation": "Corrigé modèle. Avec $h = 16$ m : $W(\\vec{P}) = 20\\,000 \\times 16 = 320\\,000$ J ; $W(\\vec{f}) = -60\\,000$ J ; la réaction normale a un travail nul, donc $\\sum W = 260\\,000$ J. Le théorème donne $1\\,000\\,v_B^2 = 260\\,000$, soit $v_B^2 = 260$ et $v_B = \\sqrt{260} \\approx 16{,}1$ m/s, environ 16 m/s. Deux fois plus vite voudrait dire 20 m/s ($v^2 = 400$), ce qui exigerait $\\sum W = 400\\,000$ J. L'affirmation est donc fausse : doubler le dénivelé ne double pas la vitesse, car l'énergie cinétique dépend du carré de la vitesse. Points : travail du poids (1), théorème et vitesse (1,5), conclusion (1), explication (0,5).",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "énergie cinétique d'un solide en translation et conversion des vitesses ; théorème de l'énergie cinétique (bilan des forces, somme des travaux) ; distance de freinage sur route horizontale ; travail du poids et du frottement sur un plan incliné.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un atelier de mécanique, on étudie l'énergie cinétique de quelques solides en translation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis les km/h en m/s en divisant par 3,6, puis utilise $E_c = \\dfrac{1}{2}\\,m\\,v^2$.",
+              "questions": [
+                {
+                  "content": "Dans quelle unité du Système international exprime-t-on l'énergie cinétique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : l'énergie cinétique $E_c = \\dfrac{1}{2}\\,m\\,v^2$ s'exprime avec $m$ en kg et $v$ en m/s ; le résultat est en joules (J). Le newton mesure une force, le watt une puissance, le kilogramme une masse : les confondre est une erreur d'unité.",
+                  "answers": [
+                    {
+                      "content": "Le joule (J)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le newton (N)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le watt (W)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le kilogramme (kg)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 1 000 kg roule à 54 km/h. Calcule son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg et $v = \\dfrac{54}{3{,}6} = 15$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c$ $= \\dfrac{1}{2} \\times 1\\,000$ $\\times 15^2$. Étape 4 — Calculer : $E_c = 500 \\times 225 = 112\\,500$ J. Sans conversion, on trouverait $500 \\times 54^2 = 1\\,458\\,000$ J, valeur fausse.",
+                  "answers": [
+                    {
+                      "content": "112500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 4 kg se déplace à 5 m/s. Calcule son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 4$ kg et $v = 5$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c = \\dfrac{1}{2} \\times 4 \\times 5^2$. Étape 4 — Calculer : $E_c = 2 \\times 25 = 50$ J. Écrire $2 \\times 5 = 10$ J oublie le carré de la vitesse.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'énergie cinétique d'un solide en translation peut être négative.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$, avec $m > 0$ et $v^2 \\geq 0$. L'énergie cinétique est donc toujours positive ou nulle (nulle si le solide est arrêté). Seule la variation $\\Delta E_c$ ou un travail peut être négatif, ce qui est une autre grandeur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un même solide, la vitesse est multipliée par 3. Par combien l'énergie cinétique est-elle multipliée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$ est proportionnelle à $v^2$. Étape 3 — Remplacer : la vitesse est multipliée par 3, donc $v^2$ est multipliée par $3^2 = 9$. Répondre « par 3 » oublie le carré (erreur du piège) ; « par 6 » additionne $3 + 3$ ; « par 27 » élève au cube.",
+                  "answers": [
+                    {
+                      "content": "Par 9",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par 6",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par 27",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un camion de 2 000 kg, étudié dans le référentiel terrestre, roule en ligne droite sur une route horizontale.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le poids et la réaction normale d'une route horizontale ont un travail nul. Le frottement s'oppose au déplacement : son travail est négatif.",
+              "questions": [
+                {
+                  "content": "Dans le théorème de l'énergie cinétique, la variation $\\Delta E_c$ est égale à la ___ des travaux des forces extérieures.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Écrire le théorème : $\\Delta E_c$ $= \\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$ $= \\sum W$. Le symbole $\\sum$ désigne la somme des travaux de toutes les forces extérieures, d'où le mot attendu. On n'en retient pas une seule : oublier une force fausse le résultat.",
+                  "answers": [
+                    {
+                      "content": "somme",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le camion de 2 000 kg passe de 10 m/s à 20 m/s. Calcule la variation de son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : $m = 2\\,000$ kg, $v_A = 10$ m/s et $v_B = 20$ m/s. Étape 4 — Écrire : $\\Delta E_c$ $= \\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$. Étape 5 — Résoudre : $\\Delta E_c$ $= 1\\,000 \\times 400$ $- 1\\,000 \\times 100$ $= 300\\,000$ J. Calculer $\\dfrac{1}{2}\\,m\\,(v_B - v_A)^2$ $= 100\\,000$ J est faux : on soustrait les énergies, pas les vitesses.",
+                  "answers": [
+                    {
+                      "content": "300000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur 50 m, le camion subit une force motrice de 6 000 N (dans le sens du déplacement) et un frottement de 2 000 N (opposé au déplacement). Calcule la somme des travaux de ces deux forces.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Faire le bilan : le poids et la réaction normale ne travaillent pas (perpendiculaires au déplacement). Étape 3 — Calculer les travaux : $W(\\vec{F})$ $= 6\\,000 \\times 50$ $= 300\\,000$ J et $W(\\vec{f})$ $= -2\\,000 \\times 50$ $= -100\\,000$ J. La somme est $\\sum W = 200\\,000$ J. Compter le frottement avec le signe $+$ donnerait $400\\,000$ J, erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "200000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le camion de 2 000 kg démarre à l'arrêt. La somme des travaux des forces extérieures sur son trajet vaut 225 000 J. Calcule sa vitesse finale.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : $m = 2\\,000$ kg, $v_A = 0$ et on cherche $v_B$. Étape 4 — Écrire : $\\dfrac{1}{2} \\times 2\\,000\\,v_B^2$ $- 0$ $= 225\\,000$. Étape 5 — Résoudre : $1\\,000\\,v_B^2 = 225\\,000$, donc $v_B^2 = 225$ et $v_B = 15$ m/s. Oublier la racine carrée donnerait $225$ m/s.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la somme des travaux des forces extérieures est négative, le solide en translation ralentit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$ $= \\sum W$. Si $\\sum W < 0$, alors $v_B^2 < v_A^2$ : la vitesse diminue. L'affirmation est vraie. Une somme nulle, elle, laisse la vitesse inchangée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un taxi de 1 000 kg roule à 72 km/h (soit 20 m/s) sur une route horizontale d'Abidjan. Pour s'arrêter, le conducteur freine avec une force de freinage constante.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La vitesse finale est nulle. Utilise $d = \\dfrac{m\\,v_A^2}{2f}$ avec la vitesse en m/s.",
+              "questions": [
+                {
+                  "content": "La force de freinage constante vaut 5 000 N. Calcule la distance de freinage du taxi qui roule à 20 m/s.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg, $v_A = 20$ m/s, $v_B = 0$ et $f = 5\\,000$ N. Étape 2 — Écrire : $0 - \\dfrac{1}{2}\\,m\\,v_A^2$ $= W(\\vec{f})$. Étape 3 — Exprimer : $-f \\times d = -200\\,000$, donc $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{1\\,000 \\times 400}{10\\,000}$ $= 40$ m.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le travail de la force de freinage entre le début du freinage et l'arrêt du taxi de 1 000 kg lancé à 20 m/s. Donne la valeur absolue en joules.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg, $v_A = 20$ m/s, $v_B = 0$. Étape 2 — Écrire le théorème : le poids et la réaction normale ne travaillent pas, donc $W(\\vec{f})$ $= 0 - \\dfrac{1}{2}\\,m\\,v_A^2$. Calcul : $W(\\vec{f})$ $= -500 \\times 400$ $= -200\\,000$ J. Le travail est négatif (le freinage s'oppose au mouvement) ; sa valeur absolue est $200\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "200000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le même taxi (1 000 kg, force de freinage de 5 000 N) roule à 36 km/h au lieu de 72 km/h. Quelle est sa distance de freinage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : $v_A = \\dfrac{36}{3{,}6} = 10$ m/s. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{1\\,000 \\times 100}{10\\,000}$ $= 10$ m. La vitesse est divisée par 2, donc la distance est divisée par $2^2 = 4$ (soit $40 / 4 = 10$ m). La réponse 20 m divise par 2 seulement : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "10 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "20 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi de 1 000 kg roulant à 20 m/s s'arrête sur 50 m avec une force de freinage constante. Calcule la valeur de cette force.",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg, $v_A = 20$ m/s, $v_B = 0$ et $d = 50$ m. Étape 2 — Écrire : $0$ $- \\dfrac{1}{2} \\times 1\\,000$ $\\times 20^2$ $= -f \\times 50$. Étape 3 — Exprimer : $f = \\dfrac{200\\,000}{50}$. Étape 4 — Calculer : $f = 4\\,000$ N.",
+                  "answers": [
+                    {
+                      "content": "4000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À vitesse initiale et force de freinage égales, la distance de freinage est proportionnelle à la masse du véhicule.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. La masse $m$ est au numérateur à la puissance 1 : pour $v_A$ et $f$ fixés, doubler la masse double la distance. L'affirmation est vraie ; c'est la vitesse, et non la masse, qui intervient par son carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un chariot de 20 kg est lâché sans vitesse en haut d'une rampe de longueur 6 m et de hauteur 3 m. Le frottement constant, parallèle à la rampe, vaut 40 N. On prend $g = 10$ N/kg.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le poids travaille avec la hauteur $h$, le frottement avec la longueur $L$. Pour convertir m/s en km/h, multiplie par 3,6.",
+              "questions": [
+                {
+                  "content": "Calcule le travail du poids du chariot de 20 kg qui descend de 3 m en hauteur.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 20$ kg et $h = 3$ m (hauteur verticale). Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= m\\,g\\,h$ $= 20 \\times 10 \\times 3$ $= 600$ J. Utiliser la longueur $L = 6$ m donnerait $1\\,200$ J, erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un frottement constant de 40 N, parallèle à la rampe et opposé au mouvement, s'exerce sur la longueur $L = 6$ m. Donne la valeur absolue de son travail.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $f = 40$ N et $L = 6$ m (longueur parcourue). Étape 3 — Calculer les autres travaux : $W(\\vec{f})$ $= -f \\times L$ $= -40 \\times 6$ $= -240$ J, négatif car le frottement s'oppose au mouvement. La valeur absolue est $240$ J.",
+                  "answers": [
+                    {
+                      "content": "240",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chariot de 20 kg est lâché sans vitesse. Le travail de son poids vaut 600 J, celui du frottement $-240$ J, et celui de la réaction normale est nul. Calcule sa vitesse en bas.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer les travaux : $\\sum W = 600 + 0 - 240 = 360$ J. Étape 4 — Écrire le théorème : $\\dfrac{1}{2} \\times 20\\,v_B^2$ $- 0$ $= 360$, soit $10\\,v_B^2 = 360$. Étape 5 — Calculer : $v_B^2 = 36$, donc $v_B = 6$ m/s. Sans le frottement, on trouverait $v_B^2 = 60$, valeur fausse.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chariot arrive en bas à 6 m/s. Convertis cette vitesse en km/h.",
+                  "question_type": "numeric",
+                  "unit": "km/h",
+                  "tolerance": 0,
+                  "explanation": "Étape 5 — Calculer : pour passer de m/s à km/h, on multiplie par 3,6. $v = 6 \\times 3{,}6 = 21{,}6$ km/h. Diviser par 3,6 donnerait environ $1{,}7$ km/h, ce qui est la conversion dans l'autre sens.",
+                  "answers": [
+                    {
+                      "content": "21,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En chute libre depuis la même hauteur, un objet lourd arrive au sol plus vite qu'un objet léger.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer le travail du poids : $W(\\vec{P}) = m\\,g\\,h$. Étape 4 — Écrire : $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$, d'où $v^2 = 2\\,g\\,h$. La masse disparaît : les deux objets arrivent à la même vitesse. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "énergie cinétique d'un gbaka à Abobo ; freinage d'un camion de cacao entre Soubré et San-Pédro ; descente d'une caisse sur une rampe du port d'Abidjan avec frottement ; chute d'une noix de coco près de Man.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un gbaka de 2 500 kg, passagers compris, circule sur la route d'Abobo, à Abidjan. On l'étudie en translation sur une route horizontale.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis les km/h en m/s. Pour un travail d'une force constante dans le sens du déplacement, utilise $W = F \\times d$.",
+              "questions": [
+                {
+                  "content": "Le gbaka roule à 72 km/h. Calcule son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\,500$ kg et $v = \\dfrac{72}{3{,}6} = 20$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c$ $= \\dfrac{1}{2} \\times 2\\,500$ $\\times 20^2$. Étape 4 — Calculer : $E_c = 1\\,250 \\times 400 = 500\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "500000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gbaka de 2 500 kg ralentit et roule à 36 km/h. Calcule son énergie cinétique.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $v = \\dfrac{36}{3{,}6} = 10$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c = 1\\,250 \\times 10^2$. Étape 4 — Calculer : $E_c = 125\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "125000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La vitesse du gbaka est divisée par 2. Son énergie cinétique est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$ dépend de $v^2$. Étape 3 — Remplacer : la vitesse est divisée par 2, donc $v^2$ est divisée par $2^2 = 4$. Exemple : de $500\\,000$ J à $125\\,000$ J, soit $4$ fois moins. « Divisée par 2 » oublie le carré (erreur du piège).",
+                  "answers": [
+                    {
+                      "content": "divisée par 4",
+                      "correct": true
+                    },
+                    {
+                      "content": "divisée par 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "divisée par 8",
+                      "correct": false
+                    },
+                    {
+                      "content": "inchangée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur 100 m de route horizontale, le gbaka de 2 500 kg passe de 10 m/s à 20 m/s. Calcule la somme des travaux des forces extérieures.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : $m = 2\\,500$ kg, $v_A = 10$ m/s et $v_B = 20$ m/s. Étape 4 — Écrire le théorème : $\\sum W$ $= \\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$. Étape 5 — Résoudre : $\\sum W$ $= 1\\,250 \\times 400$ $- 1\\,250 \\times 100$ $= 375\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "375000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La somme des travaux sur 100 m vaut 375 000 J. Les forces qui travaillent ont toutes la direction et le sens du déplacement. Calcule la valeur de la résultante de ces forces.",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer les travaux : pour une force constante de même direction et de même sens que le déplacement, $\\sum W = F \\times d$. Étape 5 — Résoudre : $F = \\dfrac{375\\,000}{100} = 3\\,750$ N. Diviser par $2$ ou oublier la distance ne donne pas une force en newtons.",
+                  "answers": [
+                    {
+                      "content": "3750",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un camion de 10 000 kg, chargé de cacao, roule sur la route entre Soubré et San-Pédro. Pour s'arrêter, il freine avec une force de freinage constante de 25 000 N sur une route horizontale.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un camion qui s'arrête a une vitesse finale nulle. La distance de freinage est $d = \\dfrac{m\\,v_A^2}{2f}$. La masse y est à la puissance 1, la vitesse au carré.",
+              "questions": [
+                {
+                  "content": "Le camion roule à 54 km/h. Calcule sa distance de freinage.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 10\\,000$ kg, $v_A = \\dfrac{54}{3{,}6} = 15$ m/s, $v_B = 0$ et $f = 25\\,000$ N. Étape 2 — Écrire : $0 - \\dfrac{1}{2}\\,m\\,v_A^2$ $= W(\\vec{f})$. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{10\\,000 \\times 225}{50\\,000}$ $= 45$ m.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un obstacle apparaît : le camion doit pouvoir s'arrêter en 20 m avec la même force de freinage. Calcule sa vitesse maximale, en km/h.",
+                  "question_type": "numeric",
+                  "unit": "km/h",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 10\\,000$ kg, $f = 25\\,000$ N, $d = 20$ m et $v_B = 0$. Étape 3 — Exprimer : $v_A^2$ $= \\dfrac{2\\,f\\,d}{m}$ $= \\dfrac{1\\,000\\,000}{10\\,000}$ $= 100$. Étape 4 — Calculer : $v_A = 10$ m/s, soit $10 \\times 3{,}6 = 36$ km/h. Laisser le résultat en m/s sans le convertir donnerait la valeur fausse « 10 km/h ».",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le camion roule à la même vitesse, mais sa masse double (20 000 kg) après un chargement supplémentaire. La force de freinage est inchangée. Sa distance de freinage devient :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$ est proportionnelle à $m$. Étape 4 — Calculer : $d$ $= \\dfrac{20\\,000 \\times 225}{50\\,000}$ $= 90$ m, le double de 45 m. La réponse 180 m confond la masse avec la vitesse (le carré ne vaut que pour la vitesse).",
+                  "answers": [
+                    {
+                      "content": "90 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "45 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "180 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "67,5 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À 108 km/h, avec la même force de freinage de 25 000 N, la distance de freinage du camion de 10 000 kg est de 180 m.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : $v_A = \\dfrac{108}{3{,}6} = 30$ m/s. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{10\\,000 \\times 900}{50\\,000}$ $= 180$ m. L'affirmation est vraie : la vitesse double (de 54 à 108 km/h), la distance est multipliée par 4 ($45 \\times 4 = 180$ m).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le camion de 10 000 kg roule à 15 m/s. Calcule l'énergie, en joules, que le freinage doit dissiper pour l'arrêter.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Écrire le théorème : $0 - \\dfrac{1}{2}\\,m\\,v_A^2$ $= W(\\vec{f})$. Étape 4 — Calculer : $\\dfrac{1}{2}\\,m\\,v_A^2$ $= 5\\,000 \\times 225$ $= 1\\,125\\,000$ J. Le travail du freinage vaut donc $-1\\,125\\,000$ J ; l'énergie à dissiper est sa valeur absolue.",
+                  "answers": [
+                    {
+                      "content": "1125000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au port d'Abidjan, un docker laisse glisser une caisse de 40 kg, sans vitesse initiale, le long d'une rampe de chargement de longueur 6 m et de hauteur 3 m. Le frottement constant, parallèle à la rampe, vaut 80 N. On prend $g = 10$ N/kg.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le poids travaille avec la hauteur $h$, le frottement avec la longueur $L$. Le frottement a un travail négatif.",
+              "questions": [
+                {
+                  "content": "Calcule le travail du poids de la caisse de 40 kg qui descend de 3 m en hauteur.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 40$ kg et $h = 3$ m. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= m\\,g\\,h$ $= 40 \\times 10 \\times 3$ $= 1\\,200$ J.",
+                  "answers": [
+                    {
+                      "content": "1200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le frottement constant de 80 N est parallèle à la rampe de 6 m et opposé au mouvement. Quel est son travail sur la descente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer les autres travaux : $W(\\vec{f})$ $= -f \\times L$ $= -80 \\times 6$ $= -480$ J. Le signe est négatif, car le frottement s'oppose au mouvement. Le signe $+$ oublie cette opposition ; $-240$ J utilise la hauteur $3$ m au lieu de la longueur parcourue ; $-80$ J oublie de multiplier par la distance.",
+                  "answers": [
+                    {
+                      "content": "$-480$ J",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+480$ J",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-240$ J",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-80$ J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail du poids vaut 1 200 J et celui du frottement $-480$ J ; la réaction normale ne travaille pas. La caisse de 40 kg part sans vitesse. Calcule sa vitesse en bas.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer les travaux : $\\sum W = 1\\,200 - 480 = 720$ J. Étape 4 — Écrire : $\\dfrac{1}{2} \\times 40\\,v_B^2$ $- 0$ $= 720$, soit $20\\,v_B^2 = 720$. Étape 5 — Calculer : $v_B^2 = 36$, donc $v_B = 6$ m/s.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La caisse arrive en bas à 6 m/s. Convertis cette vitesse en km/h.",
+                  "question_type": "numeric",
+                  "unit": "km/h",
+                  "tolerance": 0,
+                  "explanation": "Étape 5 — Calculer : on multiplie les m/s par 3,6 pour obtenir des km/h. $v = 6 \\times 3{,}6 = 21{,}6$ km/h.",
+                  "answers": [
+                    {
+                      "content": "21,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sans frottement, la même caisse arriverait en bas de la rampe avec une vitesse supérieure à 6 m/s.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer les autres travaux : sans frottement, $\\sum W = W(\\vec{P}) = 1\\,200$ J, supérieur à $720$ J. Étape 4 — Écrire : $20\\,v_B^2 = 1\\,200$, donc $v_B^2 = 60$ et $v_B \\approx 7{,}7$ m/s, supérieur à $6$ m/s. L'affirmation est vraie : le frottement dissipe une partie de l'énergie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un village près de Man, une noix de coco de 1,5 kg se détache d'un cocotier et tombe, sans vitesse initiale, d'une hauteur de 20 m. Les frottements sont négligés et on prend $g = 10$ N/kg.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En chute libre, la vitesse est donnée par $v^2 = 2\\,g\\,h$ et ne dépend pas de la masse. Le travail du poids est $m\\,g\\,h$.",
+              "questions": [
+                {
+                  "content": "Calcule la vitesse de la noix de coco au moment où elle touche le sol.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1{,}5$ kg, $h = 20$ m et $v_A = 0$. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= 1{,}5 \\times 10 \\times 20$ $= 300$ J. Étape 4 — Écrire : $\\dfrac{1}{2} \\times 1{,}5\\,v_B^2 = 300$. Étape 5 — Calculer : $v_B^2 = 400$, donc $v_B = 20$ m/s (soit $72$ km/h).",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'énergie cinétique de la noix de coco de 1,5 kg lorsqu'elle touche le sol à 20 m/s.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1{,}5$ kg et $v = 20$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c$ $= \\dfrac{1}{2} \\times 1{,}5 \\times 400$. Étape 4 — Calculer : $E_c = 0{,}75 \\times 400 = 300$ J.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une noix de coco de 3 kg tombe de la même hauteur de 20 m, sans frottement. Sa vitesse au sol est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Écrire : $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$. La masse se simplifie : $v^2$ $= 2\\,g\\,h$ $= 2 \\times 10 \\times 20$ $= 400$, donc $v = 20$ m/s, quelle que soit la masse. Doubler la masse ne change pas la vitesse de chute libre.",
+                  "answers": [
+                    {
+                      "content": "20 m/s, comme la noix de 1,5 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "40 m/s, le double",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 m/s, la moitié",
+                      "correct": false
+                    },
+                    {
+                      "content": "28 m/s environ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le travail du poids de la noix de 1,5 kg qui tombe de 20 m.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= m\\,g\\,h$ $= 1{,}5 \\times 10 \\times 20$ $= 300$ J. Il est égal à l'énergie cinétique gagnée, car aucune autre force ne travaille.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "D'une autre hauteur $h$, une noix de coco tombe sans vitesse initiale et touche le sol à 10 m/s. Calcule $h$.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$, donc $h = \\dfrac{v^2}{2\\,g}$. Étape 5 — Calculer : $h = \\dfrac{100}{20} = 5$ m. Oublier le facteur 2 donnerait $10$ m.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "comparaison d'énergies cinétiques et rôle du carré de la vitesse ; raisonnement avec le signe de la somme des travaux ; proportionnalité de la distance de freinage au carré de la vitesse ; justification du travail du poids (hauteur) et de la réaction normale.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Deux véhicules sont comparés. Le véhicule A a une masse de 1 000 kg et une vitesse de 10 m/s. Le véhicule B a une masse de 500 kg et une vitesse de 20 m/s.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule chaque énergie cinétique avec $E_c = \\dfrac{1}{2}\\,m\\,v^2$ avant de comparer. Ne te fie pas au produit $m \\times v$.",
+              "questions": [
+                {
+                  "content": "Quel véhicule a la plus grande énergie cinétique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : A : $m = 1\\,000$ kg et $v = 10$ m/s ; B : $m = 500$ kg et $v = 20$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_{c,A} = 500 \\times 100 = 50\\,000$ J et $E_{c,B} = 250 \\times 400 = 100\\,000$ J. Étape 4 — Calculer et comparer : B l'emporte. Dire « à égalité » parce que $m \\times v = 10\\,000$ pour les deux est l'erreur du piège : seul le carré de la vitesse compte.",
+                  "answers": [
+                    {
+                      "content": "Le véhicule B",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le véhicule A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux, à égalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le rapport de l'énergie cinétique du véhicule B (500 kg à 20 m/s) à celle du véhicule A (1 000 kg à 10 m/s).",
+                  "question_type": "numeric",
+                  "unit": "",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Remplacer : $E_{c,B}$ $= \\dfrac{1}{2} \\times 500 \\times 20^2$ $= 100\\,000$ J et $E_{c,A}$ $= \\dfrac{1}{2} \\times 1\\,000$ $\\times 10^2$ $= 50\\,000$ J. Étape 4 — Calculer : le rapport est $\\dfrac{100\\,000}{50\\,000} = 2$. B a deux fois plus d'énergie cinétique, malgré une masse deux fois plus petite : sa vitesse double compte pour un facteur 4.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les véhicules A (1 000 kg à 10 m/s) et B (500 kg à 20 m/s) ont la même énergie cinétique, car le produit masse fois vitesse est le même pour les deux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$, et non $\\dfrac{1}{2}\\,m\\,v$. Étape 3 — Remplacer : A donne $50\\,000$ J et B donne $100\\,000$ J. Les produits $m \\times v = 10\\,000$ sont égaux, mais cela ne prouve rien pour $E_c$, qui dépend de $m\\,v^2$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies sur ces deux véhicules (A : 1 000 kg à 10 m/s ; B : 500 kg à 20 m/s) ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Remplacer : $E_{c,B} = 250 \\times 400 = 100\\,000$ J, vrai ; $E_{c,A} = 500 \\times 100 = 50\\,000$ J, donc l'affirmation $100\\,000$ J pour A est fausse. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$ dépend de $v^2$, vrai. Elle ne dépend ni de la direction ni du sens du mouvement ; A et B n'ont pas la même énergie ($50\\,000$ J et $100\\,000$ J).",
+                  "answers": [
+                    {
+                      "content": "L'énergie cinétique de B vaut 100 000 J",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'énergie cinétique dépend du carré de la vitesse",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'énergie cinétique de A vaut 100 000 J",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'énergie cinétique dépend de la direction du mouvement",
+                      "correct": false
+                    },
+                    {
+                      "content": "A et B ont la même énergie cinétique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un véhicule C roule à 20 m/s. Quelle masse doit-il avoir pour que son énergie cinétique soit égale à 50 000 J, comme celle du véhicule A ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $50\\,000$ $= \\dfrac{1}{2} \\times m \\times 20^2$ $= 200\\,m$. Étape 4 — Calculer : $m = \\dfrac{50\\,000}{200} = 250$ kg. Une masse de $500$ kg donnerait $100\\,000$ J, le double.",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un solide de 2 kg glisse en ligne droite sur une table horizontale. Sa vitesse passe de 8 m/s à 6 m/s. On raisonne avec le théorème de l'énergie cinétique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris le théorème avec les énergies cinétiques finale et initiale, jamais avec la différence des vitesses.",
+              "questions": [
+                {
+                  "content": "Si la somme des travaux des forces extérieures qui s'exercent sur un solide en translation est nulle, sa vitesse reste constante.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$ $= \\sum W$. Si $\\sum W = 0$, alors $v_B^2 = v_A^2$ et, la vitesse étant positive, $v_B = v_A$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le solide de 2 kg passe de 8 m/s à 6 m/s. Quelle est la somme des travaux des forces extérieures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Définir : $m = 2$ kg, $v_A = 8$ m/s, $v_B = 6$ m/s. Étape 4 — Écrire : $\\sum W$ $= \\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$. Étape 5 — Résoudre : $\\sum W = 36 - 64 = -28$ J. Le signe est négatif, car le solide ralentit. $+28$ J se trompe de signe ; $-100$ J additionne les énergies au lieu de les soustraire ; $-4$ J utilise $(v_B - v_A)^2$.",
+                  "answers": [
+                    {
+                      "content": "$-28$ J",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+28$ J",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-100$ J",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$ J",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le solide de 2 kg ralentit de 8 m/s à 6 m/s sur une distance de 7 m. Une seule force travaille (un frottement constant, opposé au déplacement). Calcule sa valeur.",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer les travaux : $W(\\vec{f}) = -f \\times 7$. Étape 4 — Écrire : $-7\\,f = 36 - 64 = -28$. Étape 5 — Résoudre : $f = \\dfrac{28}{7} = 4$ N. Le signe moins disparaît des deux côtés : la force est positive, son travail est négatif.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide dont la somme des travaux est négative voit sa vitesse ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$ $= \\sum W$. Si $\\sum W < 0$, alors $v_B < v_A$ : la vitesse diminue. Elle augmenterait si la somme était positive, et resterait constante si elle était nulle.",
+                  "answers": [
+                    {
+                      "content": "diminuer",
+                      "correct": true
+                    },
+                    {
+                      "content": "augmenter",
+                      "correct": false
+                    },
+                    {
+                      "content": "rester constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "doubler",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit $\\sum W$ $= \\dfrac{1}{2}\\,m\\,(v_B - v_A)^2$ pour le solide de 2 kg qui passe de 8 à 6 m/s. Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Écrire le théorème : la variation d'énergie cinétique est $\\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$, la différence des énergies et non l'énergie de la différence des vitesses. Ici, $\\dfrac{1}{2} \\times 2 \\times (6-8)^2$ $= 4$ J alors que le bon résultat est $-28$ J. Les autres corrections proposées ne sont pas des règles du théorème.",
+                  "answers": [
+                    {
+                      "content": "Il faut la différence des énergies, $\\dfrac{1}{2}\\,m\\,v_B^2$ $- \\dfrac{1}{2}\\,m\\,v_A^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il faut utiliser la masse en grammes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut ajouter les deux vitesses",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut ne garder que $v_A$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur une route horizontale de Yamoussoukro, une voiture de 1 000 kg freine avec une force de freinage constante, dirigée à l'opposé du déplacement. On étudie sa distance de freinage en fonction de sa vitesse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La distance de freinage est proportionnelle au carré de la vitesse : un rapport de vitesses $k$ donne un rapport de distances $k^2$.",
+              "questions": [
+                {
+                  "content": "La voiture roule d'abord à 72 km/h, puis à 108 km/h. Par combien la distance de freinage est-elle multipliée ? Écris le facteur sous forme décimale.",
+                  "question_type": "numeric",
+                  "unit": "",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$ est proportionnelle à $v_A^2$. Étape 4 — Calculer : le rapport des vitesses est $\\dfrac{108}{72} = 1{,}5$, donc la distance est multipliée par $1{,}5^2 = 2{,}25$. Répondre $1{,}5$ revient à croire que la distance est proportionnelle à la vitesse, erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "2,25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec une force de freinage de 5 000 N, calcule la distance de freinage de la voiture de 1 000 kg qui roule à 108 km/h.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $v_A = \\dfrac{108}{3{,}6} = 30$ m/s, $m = 1\\,000$ kg et $f = 5\\,000$ N. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{1\\,000 \\times 900}{10\\,000}$ $= 90$ m. On retrouve $40 \\times 2{,}25 = 90$ m, valeur cohérente avec le facteur de $2{,}25$.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Rouler 10 % plus vite augmente la distance de freinage de 10 %.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$ est proportionnelle à $v_A^2$. Étape 4 — Calculer : une vitesse multipliée par $1{,}1$ donne une distance multipliée par $1{,}1^2 = 1{,}21$, soit $21$ % de plus et non $10$ %. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour écrire que la distance de freinage vaut $d = \\dfrac{m\\,v_A^2}{2f}$, quelle condition est indispensable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire le théorème : le poids et la réaction normale ne travaillent pas seulement si la route est horizontale. Étape 3 — Exprimer : $W(\\vec{f}) = -f \\times d$ n'est valable que pour une force $f$ constante, opposée au déplacement. Une vitesse constante contredirait le freinage ; l'état de la route ou la masse précise ne conditionnent pas la formule.",
+                  "answers": [
+                    {
+                      "content": "La force de freinage est constante, opposée au déplacement, sur route horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse de la voiture est constante pendant le freinage",
+                      "correct": false
+                    },
+                    {
+                      "content": "La route est mouillée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La masse de la voiture est de 1 000 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 1 000 kg roulant à 15 m/s doit s'arrêter sur 25 m, sur route horizontale. Calcule la force de freinage constante nécessaire.",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000$ kg, $v_A = 15$ m/s, $v_B = 0$ et $d = 25$ m. Étape 2 — Écrire : $0$ $- \\dfrac{1}{2} \\times 1\\,000$ $\\times 15^2$ $= -f \\times 25$. Étape 3 — Exprimer : $f = \\dfrac{112\\,500}{25}$. Étape 4 — Calculer : $f = 4\\,500$ N.",
+                  "answers": [
+                    {
+                      "content": "4500",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un chariot de 20 kg est lâché sans vitesse en haut d'une rampe de longueur 10 m et de hauteur 6 m. Le frottement constant est parallèle à la rampe et opposé au mouvement. On prend $g = 10$ N/kg.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le poids travaille avec $h$, le frottement avec $L$. Avec une vitesse finale nulle, la somme des travaux est nulle.",
+              "questions": [
+                {
+                  "content": "Pourquoi le travail du poids du chariot ne dépend-il pas de la longueur $L$ de la rampe, mais seulement de sa hauteur $h$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer le travail du poids : $W(\\vec{P}) = m\\,g\\,h$. Le poids est une force verticale ; seul le déplacement vertical, le dénivelé $h$, intervient. Le poids n'est pas parallèle à la rampe, et son travail n'est pas nul tant que $h \\neq 0$. Utiliser $L$ à la place de $h$ est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Parce que le poids est vertical : seul le dénivelé compte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le poids est parallèle à la rampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la longueur est toujours égale à la hauteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le travail du poids est toujours nul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En chute libre, la vitesse acquise au bout d'une hauteur donnée ne dépend pas de la masse.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$. La masse se simplifie, donc $v^2 = 2\\,g\\,h$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le frottement constant vaut 20 N sur la rampe de 10 m ; la hauteur est 6 m ; le chariot de 20 kg part sans vitesse. Calcule sa vitesse en bas.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 20$ kg, $h = 6$ m, $L = 10$ m, $f = 20$ N et $v_A = 0$. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= 20 \\times 10 \\times 6$ $= 1\\,200$ J. Étape 3 — Calculer les autres travaux : $W(\\vec{f}) = -20 \\times 10 = -200$ J, donc $\\sum W = 1\\,000$ J. Étape 4 — Écrire : $10\\,v_B^2 = 1\\,000$. Étape 5 — Calculer : $v_B^2 = 100$ et $v_B = 10$ m/s.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel frottement constant, parallèle à la rampe de 10 m, ferait arriver le chariot de 20 kg en bas avec une vitesse nulle ? Le poids travaille avec la hauteur de 6 m ($g = 10$ N/kg).",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= 20 \\times 10 \\times 6$ $= 1\\,200$ J. Étape 4 — Écrire le théorème avec $v_B = 0$ et $v_A = 0$ : $0 = 1\\,200 - f \\times 10$. Étape 5 — Résoudre : $f = \\dfrac{1\\,200}{10} = 120$ N. Avec la longueur au lieu de la hauteur, on trouverait $200$ N, valeur fausse.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail de la réaction normale du plan est nul quand le chariot descend le plan.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer les autres travaux : la réaction normale est perpendiculaire au plan donc perpendiculaire au déplacement ; son travail est nul. L'affirmation est vraie. Seul le frottement, parallèle au plan, a un travail non nul parmi les forces de contact.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "énergie cinétique et conversion des vitesses ; théorème de l'énergie cinétique pour un démarrage et un freinage ; distance de freinage et facteurs qui la modifient ; chute libre et plan incliné avec frottement, puis arrêt sur sol horizontal.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un gbaka de 2 000 kg démarre à l'arrêt à Abobo, sur une route horizontale, et atteint 15 m/s (54 km/h) après 75 m. Ensuite, le conducteur freine jusqu'à l'arrêt avec une force de freinage constante de 4 500 N.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Sur le démarrage, $\\sum W = F \\times d$ ; sur le freinage, utilise $d = \\dfrac{m\\,v_A^2}{2f}$.",
+              "questions": [
+                {
+                  "content": "Calcule l'énergie cinétique du gbaka lorsqu'il atteint 15 m/s.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\,000$ kg et $v = 15$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c = 1\\,000 \\times 15^2$. Étape 4 — Calculer : $E_c = 225\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "225000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant la phase de démarrage, la résultante des forces extérieures est constante, de même direction et même sens que le déplacement de 75 m. Calcule sa valeur.",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Définir : $v_A = 0$, $v_B = 15$ m/s, $d = 75$ m. Étape 4 — Écrire le théorème : $\\sum W$ $= F \\times 75$ $= \\dfrac{1}{2} \\times 2\\,000$ $\\times 15^2$ $- 0$ $= 225\\,000$ J. Étape 5 — Résoudre : $F = \\dfrac{225\\,000}{75} = 3\\,000$ N.",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gbaka roule à 15 m/s et freine avec une force constante de 4 500 N. Calcule sa distance de freinage.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\,000$ kg, $v_A = 15$ m/s, $f = 4\\,500$ N. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{2\\,000 \\times 225}{9\\,000}$ $= 50$ m.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre passagers de plus portent la masse du gbaka à 2 400 kg. Même vitesse de 15 m/s, même force de freinage de 4 500 N. Calcule la nouvelle distance de freinage.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\,400$ kg, $v_A = 15$ m/s, $f = 4\\,500$ N. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{2\\,400 \\times 225}{9\\,000}$ $= 60$ m. La distance est proportionnelle à la masse : $50 \\times \\dfrac{2\\,400}{2\\,000} = 60$ m.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gbaka de 2 000 kg à 15 m/s freine avec 4 500 N. S'il roulait à 30 m/s avec la même force, sa distance de freinage serait :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$ est proportionnelle à $v_A^2$. Étape 4 — Calculer : la vitesse est multipliée par 2, donc la distance est multipliée par $2^2 = 4$ : $50 \\times 4 = 200$ m. La réponse 100 m double seulement la distance, erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "200 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "100 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "50 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "400 m",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un chariot de 50 kg est lâché sans vitesse en haut d'une rampe de longueur 8 m et de hauteur 4 m. Le frottement sur la rampe, constant et parallèle à elle, vaut 50 N. En bas, le chariot roule sur un sol horizontal où le frottement constant vaut 100 N, jusqu'à l'arrêt. On prend $g = 10$ N/kg.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Sur la rampe : $\\sum W = m\\,g\\,h - f \\times L$. Sur le sol horizontal : le chariot s'arrête, donc $v_B = 0$ et $d = \\dfrac{m\\,v_A^2}{2f}$.",
+              "questions": [
+                {
+                  "content": "Calcule le travail du poids du chariot sur la rampe.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 50$ kg et $h = 4$ m. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= 50 \\times 10 \\times 4$ $= 2\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la somme des travaux des forces extérieures sur la rampe de 8 m (poids, réaction normale et frottement de 50 N).",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer le travail du poids : $2\\,000$ J. Étape 3 — Calculer les autres travaux : $W(\\vec{R}_N) = 0$ et $W(\\vec{f}) = -50 \\times 8 = -400$ J. La somme est $\\sum W = 2\\,000 - 400 = 1\\,600$ J.",
+                  "answers": [
+                    {
+                      "content": "1600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La somme des travaux sur la rampe vaut 1 600 J. Le chariot de 50 kg part sans vitesse. Calcule sa vitesse en bas de la rampe.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Écrire : $\\dfrac{1}{2} \\times 50\\,v_B^2$ $- 0$ $= 1\\,600$, soit $25\\,v_B^2 = 1\\,600$. Étape 5 — Calculer : $v_B^2 = 64$, donc $v_B = 8$ m/s.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chariot de 50 kg arrive à 8 m/s sur un sol horizontal où le frottement constant vaut 100 N. Calcule la distance qu'il parcourt avant de s'arrêter.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 50$ kg, $v_A = 8$ m/s, $v_B = 0$ et $f = 100$ N. Étape 2 — Écrire : $0$ $- \\dfrac{1}{2} \\times 50 \\times 8^2$ $= -100 \\times d$. Étape 3 — Exprimer : $d = \\dfrac{1\\,600}{100}$. Étape 4 — Calculer : $d = 16$ m. La formule est celle de la distance de freinage : $d = \\dfrac{m\\,v_A^2}{2f}$.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la rampe, la réaction normale du plan fournit un travail positif qui accélère le chariot.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer les autres travaux : la réaction normale est perpendiculaire à la rampe, donc perpendiculaire au déplacement ; son travail est nul. C'est le poids (travail positif) qui accélère le chariot. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une mangue de 0,5 kg se détache d'un grand arbre d'un marché de Daloa et tombe, sans vitesse initiale, d'une hauteur de 45 m. On prend $g = 10$ N/kg et on néglige d'abord l'air.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En chute libre, $v^2 = 2\\,g\\,h$. Avec un frottement, le travail négatif diminue la somme des travaux.",
+              "questions": [
+                {
+                  "content": "Calcule la vitesse de la mangue au moment où elle touche le sol.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}5$ kg, $h = 45$ m, $v_A = 0$. Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= 0{,}5 \\times 10 \\times 45$ $= 225$ J. Étape 4 — Écrire : $\\dfrac{1}{2} \\times 0{,}5\\,v_B^2 = 225$. Étape 5 — Calculer : $v_B^2 = 900$, donc $v_B = 30$ m/s.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La mangue touche le sol à 30 m/s. Convertis cette vitesse en km/h.",
+                  "question_type": "numeric",
+                  "unit": "km/h",
+                  "tolerance": 0,
+                  "explanation": "Étape 5 — Calculer : on multiplie par 3,6. $v = 30 \\times 3{,}6 = 108$ km/h. Diviser par 3,6 donnerait environ $8{,}3$, la conversion dans l'autre sens.",
+                  "answers": [
+                    {
+                      "content": "108",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'énergie cinétique de la mangue de 0,5 kg à 30 m/s.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c$ $= \\dfrac{1}{2} \\times 0{,}5 \\times 900$. Étape 4 — Calculer : $E_c = 0{,}25 \\times 900 = 225$ J.",
+                  "answers": [
+                    {
+                      "content": "225",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le travail du poids de la mangue de 0,5 kg qui tombe de 45 m.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer le travail du poids : $W(\\vec{P})$ $= m\\,g\\,h$ $= 0{,}5 \\times 10 \\times 45$ $= 225$ J. C'est exactement l'énergie cinétique gagnée, car seul le poids travaille.",
+                  "answers": [
+                    {
+                      "content": "225",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En réalité, l'air exerce un frottement sur la mangue. Sa vitesse au sol est alors :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer les autres travaux : le frottement de l'air s'oppose au mouvement, son travail est négatif. Étape 4 — Écrire : $\\sum W = 225 + W(\\vec{f})$ est inférieur à $225$ J, donc $\\dfrac{1}{2}\\,m\\,v_B^2 < 225$ J et $v_B < 30$ m/s. Oublier ce travail négatif conduirait à surestimer la vitesse.",
+                  "answers": [
+                    {
+                      "content": "inférieure à 30 m/s",
+                      "correct": true
+                    },
+                    {
+                      "content": "supérieure à 30 m/s",
+                      "correct": false
+                    },
+                    {
+                      "content": "exactement 30 m/s",
+                      "correct": false
+                    },
+                    {
+                      "content": "nulle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un semi-remorque de 20 000 kg roule à 36 km/h (10 m/s) sur une route horizontale près de Yamoussoukro. Pour s'arrêter, il freine avec une force de freinage constante de 50 000 N, opposée au déplacement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rappelle-toi $E_c = \\dfrac{1}{2}\\,m\\,v^2$ et $d = \\dfrac{m\\,v_A^2}{2f}$ : la distance est proportionnelle à $m$ et à $v_A^2$, inversement proportionnelle à $f$.",
+              "questions": [
+                {
+                  "content": "Calcule l'énergie cinétique du semi-remorque à 10 m/s.",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 20\\,000$ kg et $v = 10$ m/s. Étape 2 — Écrire : $E_c = \\dfrac{1}{2}\\,m\\,v^2$. Étape 3 — Remplacer : $E_c = 10\\,000 \\times 100$. Étape 4 — Calculer : $E_c = 1\\,000\\,000$ J.",
+                  "answers": [
+                    {
+                      "content": "1000000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la distance de freinage du semi-remorque de 20 000 kg lancé à 10 m/s avec une force de freinage de 50 000 N.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 20\\,000$ kg, $v_A = 10$ m/s, $f = 50\\,000$ N. Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$. Étape 4 — Calculer : $d$ $= \\dfrac{20\\,000 \\times 100}{100\\,000}$ $= 20$ m.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur le semi-remorque, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Calculer : $E_c = 10\\,000 \\times 100 = 1\\,000\\,000$ J, vrai. $E_c$ dépend de $v^2$ : la vitesse double, $E_c$ est multipliée par 4, vrai. $d = \\dfrac{m\\,v_A^2}{2f}$ est proportionnelle à $m$, vrai. Elle est aussi proportionnelle à $v_A^2$ : si la vitesse double, la distance est multipliée par 4, donc « double » est faux. Le poids est perpendiculaire au déplacement horizontal : son travail est nul.",
+                  "answers": [
+                    {
+                      "content": "Son énergie cinétique vaut 1 000 000 J à 36 km/h",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si sa vitesse double, son énergie cinétique est multipliée par 4",
+                      "correct": true
+                    },
+                    {
+                      "content": "À force de freinage égale, sa distance de freinage est proportionnelle à sa masse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si sa vitesse double, sa distance de freinage double",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids du semi-remorque travaille pendant le freinage sur route horizontale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque grandeur à son expression.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Écrire : l'énergie cinétique est $\\dfrac{1}{2}\\,m\\,v^2$. Pour le poids en descente, calculer son travail : $m\\,g\\,h$, avec la hauteur $h$. Pour un frottement, calculer son travail : $-f \\times L$ pour un frottement opposé au mouvement. Pour le freinage, exprimer la distance : $d = \\dfrac{m\\,v_A^2}{2f}$. Il ne faut pas échanger le travail du poids (avec $h$) et celui du frottement (avec $L$).",
+                  "answers": [
+                    {
+                      "content": "Énergie cinétique",
+                      "match": "$\\dfrac{1}{2}\\,m\\,v^2$"
+                    },
+                    {
+                      "content": "Travail du poids en descente",
+                      "match": "$m\\,g\\,h$"
+                    },
+                    {
+                      "content": "Travail du frottement sur une longueur $L$",
+                      "match": "$-f \\times L$"
+                    },
+                    {
+                      "content": "Distance de freinage",
+                      "match": "$\\dfrac{m\\,v_A^2}{2f}$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de freinage deux fois plus grande (100 000 N) est utilisée pour le semi-remorque de 20 000 kg à 10 m/s. Calcule la nouvelle distance de freinage.",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Exprimer : $d = \\dfrac{m\\,v_A^2}{2f}$ est inversement proportionnelle à $f$. Étape 4 — Calculer : $d$ $= \\dfrac{20\\,000 \\times 100}{200\\,000}$ $= 10$ m, la moitié de $20$ m. Doubler la force divise la distance par 2.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
