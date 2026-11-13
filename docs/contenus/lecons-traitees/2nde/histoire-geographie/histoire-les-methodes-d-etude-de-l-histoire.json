@@ -1,0 +1,3044 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — Les méthodes d'étude de l'histoire",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Histoire-Géographie",
+      "figures": [
+        {
+          "key": "familles-de-sources",
+          "kind": "diagram",
+          "description": "Un arbre à une racine, « Les sources de l'historien », et quatre branches : les sources écrites (archives, registres, journaux, lettres), les sources orales (témoignages, récits, traditions orales), les sources matérielles (objets, outils, monuments, vestiges) et les sources iconographiques (peintures, photographies, affiches).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "racine",
+                "label": "Les sources de l'historien"
+              },
+              {
+                "id": "ecrites",
+                "label": "Écrites"
+              },
+              {
+                "id": "orales",
+                "label": "Orales"
+              },
+              {
+                "id": "materielles",
+                "label": "Matérielles"
+              },
+              {
+                "id": "icono",
+                "label": "Iconographiques"
+              }
+            ],
+            "edges": [
+              {
+                "from": "racine",
+                "to": "ecrites"
+              },
+              {
+                "from": "racine",
+                "to": "orales"
+              },
+              {
+                "from": "racine",
+                "to": "materielles"
+              },
+              {
+                "from": "racine",
+                "to": "icono"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "critique-d-une-source",
+          "kind": "diagram",
+          "description": "Un schéma en quatre étapes : la critique externe vérifie l'origine du document (qui, quand, où), la critique interne examine son contenu et l'intention de l'auteur, on compare ensuite avec d'autres sources, puis on conclut sur le degré de fiabilité du document.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "ext",
+                "label": "Critique externe : qui, quand, où ?"
+              },
+              {
+                "id": "int",
+                "label": "Critique interne : que dit-il, pourquoi ?"
+              },
+              {
+                "id": "cmp",
+                "label": "Comparer avec d'autres sources"
+              },
+              {
+                "id": "fin",
+                "label": "Conclure sur la fiabilité"
+              }
+            ],
+            "edges": [
+              {
+                "from": "ext",
+                "to": "int"
+              },
+              {
+                "from": "int",
+                "to": "cmp"
+              },
+              {
+                "from": "cmp",
+                "to": "fin"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-xxe-siecle",
+          "kind": "timeline",
+          "description": "Une frise chronologique de 1850 à 2000, graduée tous les 25 ans. Elle montre la période coloniale de la Côte d'Ivoire (de 1893 à 1960) et quatre repères : la création de la colonie en 1893, le début de la Première Guerre mondiale en 1914, la fin de la Seconde Guerre mondiale en 1945 et l'indépendance en 1960.",
+          "params": {
+            "start": 1850,
+            "end": 2000,
+            "step": 25,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1893,
+                "to": 1960,
+                "label": "Période coloniale"
+              }
+            ],
+            "events": [
+              {
+                "at": 1893,
+                "label": "Création de la colonie"
+              },
+              {
+                "at": 1914,
+                "label": "Début de la Première Guerre mondiale"
+              },
+              {
+                "at": 1945,
+                "label": "Fin de la Seconde Guerre mondiale"
+              },
+              {
+                "at": 1960,
+                "label": "Indépendance"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les sources de l'historien",
+          "remember": "Une **source** est une trace laissée par une société du passé, que l'historien utilise pour la connaître. On la classe selon la **forme de l'information**, et non selon son support : une lettre écrite sur papier reste une source écrite.\n\n**Sources écrites** : archives, registres, journaux, lettres, actes officiels.\n**Sources orales** : témoignages et récits transmis de bouche à oreille ; en Afrique, les traditions orales sont essentielles là où l'écrit manque.\n**Sources matérielles** : objets, outils, monuments, vestiges archéologiques.\n**Sources iconographiques** : images, peintures, photographies, affiches.\n\nUne seule source ne suffit pas : l'historien les **croise**.",
+          "method": [
+            "Lister les traces disponibles sur le sujet étudié.",
+            "Classer chaque trace dans sa famille : écrite, orale, matérielle ou iconographique.",
+            "Repérer ce que chaque source apporte, et ce qu'elle laisse dans l'ombre.",
+            "Croiser les sources pour établir ce qui est solide."
+          ],
+          "example": {
+            "statement": "Étudier la construction du marché de ton quartier à partir des traces disponibles.",
+            "steps": [
+              "Lister : les archives de la mairie, les témoignages des commerçants, d'anciennes photographies, le bâtiment lui-même.",
+              "Classer : les archives sont écrites, les témoignages sont oraux, les photographies sont iconographiques, le bâtiment est une source matérielle.",
+              "Repérer : les archives donnent les dates et les décisions, les témoignages donnent le vécu, les photographies montrent l'aspect d'origine, le bâtiment révèle matériaux et techniques.",
+              "Croiser : quand un témoignage et une archive concordent, la conclusion est solide ; quand ils divergent, on cherche une autre trace."
+            ]
+          },
+          "pitfall": "Ne classe pas une source d'après son support. Contre-exemple : un témoignage enregistré sur une cassette reste une source orale, pas une source matérielle, car l'information transmise est parlée. De même, ne conclus pas à partir d'une seule source : le cahier d'un commerçant peut être incomplet et le récit d'un ancien peut oublier un détail. Demande-toi : « Sous quelle forme l'information m'est-elle transmise ? »",
+          "figure": "familles-de-sources",
+          "exercise": [
+            {
+              "title": "Reconnaître les quatre familles de sources",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (lister, classer, repérer, croiser) pour reconnaître les familles de sources.",
+              "exercise_type": "fixation",
+              "figure": "familles-de-sources",
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les quatre grandes familles de sources de l'historien ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Classer : on range les sources selon la forme de l'information : écrite, orale, matérielle ou iconographique. Les autres propositions classent selon l'âge, la valeur ou l'origine, ce qui ne correspond pas à la fiche.",
+                  "answers": [
+                    {
+                      "content": "Écrites, orales, matérielles et iconographiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Écrites, orales, secrètes et publiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Anciennes, récentes, vraies et fausses",
+                      "correct": false
+                    },
+                    {
+                      "content": "Officielles, privées, nationales et étrangères",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque trace à sa famille de source.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer chaque trace dans sa famille : le registre est écrit, le récit est oral, l'outil de pierre est un objet donc matériel, la photographie est une image donc iconographique. Mélanger l'outil et la photographie vient d'une confusion entre objet et image.",
+                  "answers": [
+                    {
+                      "content": "Un registre de naissances",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "Le récit d'un ancien du village",
+                      "match": "Source orale"
+                    },
+                    {
+                      "content": "Un outil de pierre trouvé en fouille",
+                      "match": "Source matérielle"
+                    },
+                    {
+                      "content": "Une photographie de classe",
+                      "match": "Source iconographique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un témoignage enregistré sur une cassette est une source matérielle, car la cassette est un objet.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Classer d'après la forme de l'information, pas d'après le support : le témoignage est parlé, c'est donc une source orale. C'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un monument ou un outil ancien est une source ___ (un adjectif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Classer : les objets, outils, monuments et vestiges forment la famille des sources matérielles. Une source écrite est un texte et une source orale est parlée.",
+                  "answers": [
+                    {
+                      "content": "matérielle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'historien croise-t-il plusieurs sources ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Croiser : une source est toujours partielle (un cahier peut être incomplet, un récit peut oublier un détail). En les comparant, l'historien repère ce qui concorde. Garder la plus ancienne ou gagner du temps n'est pas le but.",
+                  "answers": [
+                    {
+                      "content": "Aucune source ne raconte tout : il les confronte pour établir ce qui est solide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour ne garder que la plus ancienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour gagner du temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'une source écrite suffit rarement à remplir un cahier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les sources d'une école de village",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (lister, classer, repérer, croiser) pour étudier l'histoire d'une école de village imaginée.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Demande-toi : l'information est-elle écrite, parlée, faite d'un objet ou d'une image ?",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de la méthode de la fiche.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lister, Étape 2 — Classer, Étape 3 — Repérer, Étape 4 — Croiser. On ne peut pas classer avant d'avoir listé, ni croiser avant d'avoir repéré l'apport de chaque source.",
+                  "answers": [
+                    {
+                      "content": "Lister les traces disponibles"
+                    },
+                    {
+                      "content": "Classer chaque trace dans sa famille"
+                    },
+                    {
+                      "content": "Repérer ce que chaque source apporte"
+                    },
+                    {
+                      "content": "Croiser les sources"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont trois sources orales ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Classer : un récit, un conte et une tradition orale sont parlés, ils forment des sources orales. Un registre est une source écrite et une photographie est une source iconographique.",
+                  "answers": [
+                    {
+                      "content": "Le récit d'une ancienne élève",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un conte raconté aux enfants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une tradition orale transmise par les anciens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un registre de la mairie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une photographie de la rentrée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque trace de l'école à sa famille de source.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer : le cahier est un texte, le récit est parlé, le tableau est un objet, la photo est une image. Confondre le tableau (objet) et la photo (image) est une erreur de support.",
+                  "answers": [
+                    {
+                      "content": "Le cahier de comptes du directeur",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "Le récit d'une ancienne élève",
+                      "match": "Source orale"
+                    },
+                    {
+                      "content": "Un vieux tableau en bois",
+                      "match": "Source matérielle"
+                    },
+                    {
+                      "content": "Une photo de classe de 1975",
+                      "match": "Source iconographique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle source apporte le mieux le vécu des anciens élèves ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer ce que chaque source apporte : les témoignages donnent le vécu, les cahiers donnent des chiffres et des dates, les objets donnent les techniques et les matériaux.",
+                  "answers": [
+                    {
+                      "content": "Les témoignages oraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cahier de comptes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tableau en bois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plan du bâtiment",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une seule source suffit pour établir solidement un fait.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Croiser : une seule source peut être incomplète ou partiale. L'historien cherche plusieurs traces qui concordent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une classe réunit 3 documents d'archives, 4 témoignages, 2 photographies et 1 objet ancien. Combien de sources a-t-elle listées en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lister : on additionne toutes les traces trouvées, quelle que soit la famille. $3 + 4 + 2 + 1 = 10$. Étape 2 — Classer viendra ensuite : 3 écrites, 4 orales, 2 iconographiques, 1 matérielle.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "sources"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La critique des sources",
+          "remember": "L'historien n'utilise jamais un document sans le vérifier. La **critique externe** vérifie l'**origine** du document : qui l'a produit, quand, où, sous quelle forme, et s'il n'a pas été modifié.\n\nLa **critique interne** examine le **contenu** : ce que dit le document, son ton, ses lacunes, l'**intention de l'auteur** et sa fiabilité ; on le compare aux autres sources.\n\nRègle : un document n'est jamais vrai ou faux par principe ; il est **plus ou moins fiable** selon son auteur, son époque, son but et son contenu. Un texte ancien, officiel ou imprimé n'est pas forcément exact.",
+          "method": [
+            "Identifier le document : sa nature, son auteur, sa date et son lieu (critique externe).",
+            "Examiner le contenu : ce qu'il dit, son ton, son but et l'intérêt de l'auteur (critique interne).",
+            "Comparer avec d'autres sources sur le même fait.",
+            "Conclure sur la fiabilité du document et sur l'usage que l'on peut en faire."
+          ],
+          "example": {
+            "statement": "Un tract sans date ni signature affirme : « Le marché sera fermé demain par la mairie. » Peut-on le croire ?",
+            "steps": [
+              "Identifier : le tract n'a ni date ni auteur. On ne sait ni qui l'a écrit, ni quand, ni où. Sa fiabilité est faible.",
+              "Examiner : le contenu est court, sans justification, et le ton alarmiste cherche à provoquer une réaction. L'intention de l'auteur est inconnue.",
+              "Comparer : on consulte la mairie ou un avis officiel affiché. Si aucune autre source ne confirme l'information, on ne la retient pas.",
+              "Conclure : ce tract ne peut pas servir seul de preuve. Il faut le croiser avec d'autres sources avant de s'en servir."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'un document est fiable parce qu'il est ancien, écrit ou officiel. Contre-exemple : un journal peut déformer les faits pour servir un camp, et un texte officiel peut servir une cause. L'ancienneté prouve qu'un document est un témoin du passé, pas qu'il dit vrai. Demande-toi toujours : « Qui parle, et quel est son intérêt ? »",
+          "figure": "critique-d-une-source",
+          "exercise": [
+            {
+              "title": "Critique externe et critique interne",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (identifier, examiner, comparer, conclure) à des documents imaginés.",
+              "exercise_type": "fixation",
+              "figure": "critique-d-une-source",
+              "hint": null,
+              "questions": [
+                {
+                  "content": "« Qui a écrit ce document, quand et où ? » est une question de…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la critique externe vérifie l'origine du document (auteur, date, lieu, forme). La critique interne, elle, examine le contenu et l'intention.",
+                  "answers": [
+                    {
+                      "content": "critique externe",
+                      "correct": true
+                    },
+                    {
+                      "content": "critique interne",
+                      "correct": false
+                    },
+                    {
+                      "content": "conclusion",
+                      "correct": false
+                    },
+                    {
+                      "content": "comparaison avec d'autres sources",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle question relève de la critique interne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Examiner le contenu : la critique interne porte sur ce que dit le document, son ton, son but. Support, lieu de conservation et date relèvent de l'origine, donc de la critique externe.",
+                  "answers": [
+                    {
+                      "content": "Que dit le document et pourquoi l'auteur l'a-t-il écrit ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur quel support le document est-il écrit ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Où le document est-il conservé ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quelle est la date d'écriture ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un document officiel est forcément fiable.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : un texte officiel peut servir une cause ou omettre des faits. C'est le piège de la fiche : un document n'est jamais vrai par principe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant de croire une source, on se demande : qui parle, et quel est son ___ ? (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Examiner l'intention : l'intérêt de l'auteur peut déformer ce qu'il dit. C'est la question clé de la critique interne.",
+                  "answers": [
+                    {
+                      "content": "intérêt",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux défauts qui rendent le tract fragile ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : sans date ni signature, on ne sait ni quand ni par qui le tract a été écrit. Le papier et la longueur ne mesurent pas la fiabilité.",
+                  "answers": [
+                    {
+                      "content": "Il n'a pas de date",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'a pas de signature",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est écrit sur du papier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est trop court pour être lu",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Juger la fiabilité d'un document",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (identifier, examiner, comparer, conclure) à des documents imaginés pour juger de leur fiabilité.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque document, demande-toi : qui parle, quand, pourquoi, et qui d'autre le confirme ?",
+              "questions": [
+                {
+                  "content": "Relie chaque question à ce qu'elle vérifie.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier (origine), Étape 2 — Examiner (contenu et intention), Étape 3 — Comparer (autres sources). Chaque question de la liste correspond à l'une de ces étapes.",
+                  "answers": [
+                    {
+                      "content": "Qui a produit ce document, et quand ?",
+                      "match": "L'origine du document"
+                    },
+                    {
+                      "content": "Que raconte le document, avec quel ton ?",
+                      "match": "Le contenu"
+                    },
+                    {
+                      "content": "Pourquoi l'auteur l'a-t-il écrit ?",
+                      "match": "L'intention de l'auteur"
+                    },
+                    {
+                      "content": "Que disent d'autres sources du même fait ?",
+                      "match": "La comparaison avec d'autres sources"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de la critique d'un document.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier, Étape 2 — Examiner, Étape 3 — Comparer, Étape 4 — Conclure. Conclure avant d'avoir comparé donnerait un jugement sans appui.",
+                  "answers": [
+                    {
+                      "content": "Identifier le document (auteur, date, lieu)"
+                    },
+                    {
+                      "content": "Examiner le contenu et l'intention"
+                    },
+                    {
+                      "content": "Comparer avec d'autres sources"
+                    },
+                    {
+                      "content": "Conclure sur la fiabilité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un journal de l'époque, favorable au gouvernement, décrit une manifestation. Que faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Examiner l'intention, Étape 3 — Comparer : le parti pris de l'auteur oblige à vérifier, mais ne rend pas le document inutile. Le croire ou le rejeter en bloc est une erreur de jugement.",
+                  "answers": [
+                    {
+                      "content": "Se demander quel est son intérêt et le comparer avec d'autres sources",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le croire entièrement, car il est imprimé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rejeter entièrement, car il est favorable au gouvernement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne pas le lire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un document ancien est forcément fiable.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : l'ancienneté prouve que le document vient du passé, pas qu'il dit vrai. Sa fiabilité dépend de son auteur, de son but et de son contenu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont trois questions de critique interne ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Examiner le contenu : ce que dit le document, son ton, l'intention de l'auteur. « Qui l'a produit ? » et « quelle date ? » relèvent de la critique externe.",
+                  "answers": [
+                    {
+                      "content": "Que dit le document ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quel est son ton ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quelle est l'intention de l'auteur ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Qui l'a produit ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "À quelle date a-t-il été écrit ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un document n'est jamais vrai ou faux par principe : il est plus ou moins ___ (un adjectif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : on parle de fiabilité, qui dépend de l'auteur, de l'époque, du but et du contenu du document.",
+                  "answers": [
+                    {
+                      "content": "fiable",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Repères chronologiques et périodes",
+          "remember": "Un **siècle** dure 100 ans : le XXe siècle regroupe les années 1901 à 2000, le XIXe les années 1801 à 1900. Pour trouver le siècle d'une année : retire 1 à l'année, garde les centaines et ajoute 1 (1960 → 1959 → 19 → 20e siècle).\n\n**Avant et après J.-C.** : après J.-C., on compte en avançant depuis l'an 1 ; avant J.-C., on compte à rebours vers l'an 1. Ainsi 500 av. J.-C. est plus ancien que 100 av. J.-C.\n\nLa **préhistoire** est la période qui précède l'apparition de l'écriture. Sur une **frise chronologique**, le plus ancien est à gauche, le plus récent à droite.",
+          "method": [
+            "Convertir l'année en siècle (ou le siècle en années) : un siècle dure 100 ans.",
+            "Comparer les dates en tenant compte de l'ère : après J.-C. on compte en avançant, avant J.-C. on compte à rebours.",
+            "Ranger les événements du plus ancien au plus récent, comme sur une frise.",
+            "Rattacher chaque événement à sa période et conclure."
+          ],
+          "example": {
+            "statement": "Dans quel siècle se situe 1960 ? Lequel est le plus ancien, 500 av. J.-C. ou 100 av. J.-C. ? Range ensuite : 1960, 500 av. J.-C., l'an 1 et 1893.",
+            "steps": [
+              "Convertir : on retire 1 à 1960, ce qui donne 1959 ; on garde les centaines (19) et on ajoute 1 : 1960 appartient au XXe siècle (années 1901 à 2000).",
+              "Comparer : avant J.-C., on compte à rebours. 500 av. J.-C. est plus loin de l'an 1 que 100 av. J.-C., donc plus ancien.",
+              "Ranger : du plus ancien au plus récent, 500 av. J.-C., puis l'an 1, puis 1893, puis 1960.",
+              "Rattacher : 1893 (création de la colonie) et 1960 (indépendance) appartiennent au XIXe et au XXe siècle ; 500 av. J.-C. est bien avant notre ère. La frise rend ces écarts visibles."
+            ]
+          },
+          "pitfall": "Ne crois pas que « 500 avant J.-C. » est plus récent que « 100 avant J.-C. » parce que 500 est plus grand : avant J.-C., plus le nombre est grand, plus la date est ancienne. Autre piège : le XXe siècle ne commence pas en 1900 mais en 1901. Contre-exemple : l'année 1900 appartient encore au XIXe siècle. Demande-toi : « Compte-t-on avant ou après J.-C. ? »",
+          "figure": "frise-xxe-siecle",
+          "exercise": [
+            {
+              "title": "Siècles, ère et frise : reconnaître la notion",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (convertir, comparer, ranger, rattacher) à des dates de la Côte d'Ivoire et du monde.",
+              "exercise_type": "fixation",
+              "figure": "frise-xxe-siecle",
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Dans quel siècle se situe l'année 1960 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Convertir : on retire 1 à 1960 (1959), on garde les centaines (19) et on ajoute 1 : 20. Le XXe siècle couvre 1901 à 2000. Choisir le XIXe vient du réflexe « 19 donc 19e ».",
+                  "answers": [
+                    {
+                      "content": "Le XXe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XXIe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XVIIIe siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le XIXe siècle commence en 1801. En quelle année se termine-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Convertir : un siècle dure 100 ans. Il commence en 1801 et finit en $1801 + 99 = 1900$. Dire 1901 serait déjà entrer dans le XXe siècle.",
+                  "answers": [
+                    {
+                      "content": "1900",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "500 avant J.-C. est plus récent que 100 avant J.-C.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : avant J.-C., on compte à rebours vers l'an 1. 500 av. J.-C. est plus loin de l'an 1 que 100 av. J.-C. : il est plus ancien. C'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La préhistoire est la période qui précède l'apparition de l'___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Rattacher à une période : la préhistoire s'arrête avec l'apparition de l'écriture. Avant elle, on ne dispose pas de textes.",
+                  "answers": [
+                    {
+                      "content": "écriture",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le XXe siècle commence en…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Convertir : le XXe siècle regroupe les années 1901 à 2000. 1900 est encore dans le XIXe. C'est l'erreur fréquente du second piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "1901",
+                      "correct": true
+                    },
+                    {
+                      "content": "1900",
+                      "correct": false
+                    },
+                    {
+                      "content": "2000",
+                      "correct": false
+                    },
+                    {
+                      "content": "1999",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Ranger et situer des événements",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (convertir, comparer, ranger, rattacher) à des repères de l'histoire de la Côte d'Ivoire et du monde.",
+              "exercise_type": "fixation",
+              "figure": "frise-xxe-siecle",
+              "hint": "Pour chaque date, demande-toi : avant ou après J.-C. ? quel siècle ? quel ordre ?",
+              "questions": [
+                {
+                  "content": "Range ces repères du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Ranger : on place d'abord ce qui est avant J.-C. (300 av. J.-C.), puis l'an 1, puis 1893, puis 1960. Étape 2 — Comparer : ne mélange pas 300 av. J.-C. avec l'année 300 après J.-C.",
+                  "answers": [
+                    {
+                      "content": "300 avant J.-C."
+                    },
+                    {
+                      "content": "L'an 1 de notre ère"
+                    },
+                    {
+                      "content": "1893 : création de la colonie de Côte d'Ivoire"
+                    },
+                    {
+                      "content": "1960 : indépendance de la Côte d'Ivoire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque année à son siècle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Convertir : on retire 1, on garde les centaines et on ajoute 1. 1789 → 17 → XVIIIe ; 1893 → 18 → XIXe ; 1960 → 19 → XXe ; 2005 → 20 → XXIe. L'erreur fréquente est d'écrire « 17 donc XVIIe ».",
+                  "answers": [
+                    {
+                      "content": "1789",
+                      "match": "XVIIIe siècle"
+                    },
+                    {
+                      "content": "1893",
+                      "match": "XIXe siècle"
+                    },
+                    {
+                      "content": "1960",
+                      "match": "XXe siècle"
+                    },
+                    {
+                      "content": "2005",
+                      "match": "XXIe siècle"
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre 700 avant J.-C. et 200 avant J.-C., laquelle est la plus ancienne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : avant J.-C., on compte à rebours. 700 est plus loin de l'an 1 que 200, donc 700 av. J.-C. est plus ancienne.",
+                  "answers": [
+                    {
+                      "content": "700 avant J.-C.",
+                      "correct": true
+                    },
+                    {
+                      "content": "200 avant J.-C.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont de la même époque",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'année 1900 appartient au XIXe siècle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Convertir : le XIXe siècle regroupe les années 1801 à 1900. Le XXe siècle commence en 1901. Répondre Faux, c'est tomber dans le piège du « 19 donc XXe ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent la création de la colonie (1893) de l'indépendance (1960) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Ranger : 1893 est avant 1960. On soustrait : $1960 - 1893 = 67$. La période coloniale dure 67 ans, comme le montre la frise.",
+                  "answers": [
+                    {
+                      "content": "67",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Quelles années appartiennent au XXe siècle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Rattacher à sa période : le XXe siècle couvre 1901 à 2000. 1900 est dans le XIXe et 2001 dans le XXIe. Les extrémités sont le piège classique.",
+                  "answers": [
+                    {
+                      "content": "1901",
+                      "correct": true
+                    },
+                    {
+                      "content": "2000",
+                      "correct": true
+                    },
+                    {
+                      "content": "1900",
+                      "correct": false
+                    },
+                    {
+                      "content": "2001",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les sources de l'histoire d'un marché de quartier",
+          "statement": "Document : une classe d'un lycée de Bouaké (situation imaginée, écrite pour Lnclass) étudie l'histoire du marché de son quartier. Elle réunit : le cahier de comptes d'un commerçant, daté de 1985 ; l'enregistrement du récit d'un ancien du quartier ; une photographie en noir et blanc du marché ; un vieux poids en laiton retrouvé dans le marché. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "familles-de-sources",
+          "hint": "Classe d'après la forme de l'information, puis croise.",
+          "questions": [
+            {
+              "content": "Relie chaque source de la classe à sa famille.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Lister les traces. 2) Classer selon la forme de l'information : le cahier est un texte, l'enregistrement transmet un récit parlé (source orale malgré le support), la photographie est une image, le poids est un objet. 3) Ne pas classer d'après le support.",
+              "answers": [
+                {
+                  "content": "Le cahier de comptes de 1985",
+                  "match": "Source écrite"
+                },
+                {
+                  "content": "L'enregistrement du récit de l'ancien",
+                  "match": "Source orale"
+                },
+                {
+                  "content": "La photographie en noir et blanc",
+                  "match": "Source iconographique"
+                },
+                {
+                  "content": "Le poids en laiton",
+                  "match": "Source matérielle"
+                }
+              ]
+            },
+            {
+              "content": "Quelle source donne probablement les prix pratiqués en 1985 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Repérer ce que chaque source apporte. 2) Un cahier de comptes note des prix et des quantités. 3) La photographie montre l'aspect, le poids indique les mesures, le récit donne le vécu.",
+              "answers": [
+                {
+                  "content": "Le cahier de comptes",
+                  "correct": true
+                },
+                {
+                  "content": "L'enregistrement du récit",
+                  "correct": false
+                },
+                {
+                  "content": "La photographie",
+                  "correct": false
+                },
+                {
+                  "content": "Le poids en laiton",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'enregistrement du récit de l'ancien est une source matérielle, car c'est un enregistrement.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Classer selon la forme de l'information. 2) Le récit est parlé : source orale. 3) Le support (un enregistrement) ne change pas la famille.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le cahier date de 1985. Combien d'années séparent 1985 de 2025 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Repérer les deux dates. 2) Soustraire : $2025 - 1985 = 40$. 3) Il s'est écoulé 40 ans.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "Quelles sont deux bonnes raisons de croiser ces sources ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Croiser les sources. 2) Chacune est partielle ; la concordance renforce la conclusion. 3) L'ancienneté ne garantit rien et plus de sources ne dispense jamais de vérifier.",
+              "answers": [
+                {
+                  "content": "Chacune est partielle et peut être incomplète",
+                  "correct": true
+                },
+                {
+                  "content": "Si elles concordent, la conclusion est plus solide",
+                  "correct": true
+                },
+                {
+                  "content": "Une seule suffit si elle est ancienne",
+                  "correct": false
+                },
+                {
+                  "content": "Plus il y a de sources, moins on doit les vérifier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe qui explique comment la classe peut utiliser ces quatre sources ensemble pour reconstituer l'histoire du marché.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Nommer au moins trois familles de sources",
+                "Dire ce que chaque source apporte",
+                "Expliquer pourquoi il faut les croiser",
+                "Rédiger clairement"
+              ],
+              "explanation": "Corrigé modèle : La classe dispose d'une source écrite (le cahier de comptes), d'une source orale (le récit de l'ancien), d'une source iconographique (la photographie) et d'une source matérielle (le poids en laiton). Le cahier donne les prix, le récit donne le vécu, la photographie montre l'aspect du marché, le poids renseigne sur les mesures. Aucune de ces sources ne raconte tout : la classe les croise et retient ce qui concorde. Barème : familles (1) ; apport de chacune (1) ; croisement (1) ; clarté (1).",
+              "answers": [],
+              "starter": "La classe dispose de quatre sources : …"
+            }
+          ]
+        },
+        {
+          "title": "Un tract et un arrêté : peut-on les croire ?",
+          "statement": "Documents imaginés, écrits pour Lnclass. Document 1 : un tract sans date ni signature affirme : « Demain, tous les marchés de la ville seront fermés. » Document 2 : un arrêté municipal affiché à la mairie, daté du 12 mars 1985 et signé du maire, qui annonce la fermeture du marché central pour travaux du 14 au 16 mars. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "critique-d-une-source",
+          "hint": "Pour chaque document, applique la critique externe puis la critique interne.",
+          "questions": [
+            {
+              "content": "Quel document est le plus fiable d'après son origine ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Critique externe : le Document 2 a une date, une signature et un lieu d'affichage ; le Document 1 n'en a aucun. 2) Un document identifié se vérifie plus facilement. 3) Dire que tous se valent ignore l'origine.",
+              "answers": [
+                {
+                  "content": "Le Document 2 : il est daté et signé",
+                  "correct": true
+                },
+                {
+                  "content": "Le Document 1 : il est plus alarmant",
+                  "correct": false
+                },
+                {
+                  "content": "Le Document 1 : il n'a pas d'auteur connu",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun : tous les documents se valent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux défauts du Document 1 ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Identifier : ni date ni auteur. 2) Examiner le contenu : l'affirmation est générale (« tous les marchés ») et sans justification, le ton est alarmiste. 3) Parler du marché ou être court ne mesure pas la fiabilité.",
+              "answers": [
+                {
+                  "content": "Il n'a ni date ni signature",
+                  "correct": true
+                },
+                {
+                  "content": "Son ton alarmiste cherche à provoquer une réaction",
+                  "correct": true
+                },
+                {
+                  "content": "Il est trop court pour être imprimé",
+                  "correct": false
+                },
+                {
+                  "content": "Il parle du marché",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le marché central est fermé du 14 au 16 mars, jours compris. Combien de jours dure la fermeture ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Lire le Document 2 : du 14 au 16 mars, jours compris. 2) Compter : 14, 15 et 16, soit 3 jours. 3) Soustraire seulement ($16 - 14 = 2$) oublierait un des jours.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "jours"
+            },
+            {
+              "content": "Le Document 2 est forcément exact, car il est officiel.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Un document officiel reste à vérifier. 2) Sa fiabilité dépend de son auteur, de son but et de son contenu. 3) La réponse est Faux ; il paraît seulement plus fiable que le tract.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que faire du Document 1 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Comparer avec d'autres sources. 2) Le Document 2 ne parle que du marché central, pas de « tous les marchés ». 3) Recopier ou diffuser sans vérifier est le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "Le comparer avec le Document 2 et d'autres sources avant de s'en servir",
+                  "correct": true
+                },
+                {
+                  "content": "Le recopier dans son cahier",
+                  "correct": false
+                },
+                {
+                  "content": "L'afficher partout",
+                  "correct": false
+                },
+                {
+                  "content": "L'ignorer sans rien vérifier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige une réponse de six lignes qui compare les deux documents et conclut sur leur fiabilité, en utilisant les mots « critique externe » et « critique interne ».",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Appliquer la critique externe aux deux documents",
+                "Appliquer la critique interne aux deux documents",
+                "Comparer les deux informations",
+                "Conclure avec nuance",
+                "Employer correctement le vocabulaire"
+              ],
+              "explanation": "Corrigé modèle : La critique externe montre que le tract n'a ni date ni auteur, alors que l'arrêté est daté du 12 mars 1985 et signé du maire. La critique interne montre que le tract annonce sans justification la fermeture de tous les marchés, sur un ton alarmiste, alors que l'arrêté précise un marché, des dates et un motif (travaux). Les deux informations ne concordent pas : l'arrêté est plus fiable, mais il reste à confirmer avec d'autres sources. Le tract ne peut pas servir seul de preuve. Barème : externe (1) ; interne (1) ; comparaison (1) ; conclusion nuancée (1) ; vocabulaire (1).",
+              "answers": [],
+              "starter": "La critique externe montre que…"
+            }
+          ]
+        },
+        {
+          "title": "Une frise chronologique du XXe siècle",
+          "statement": "Document : la frise de la leçon, de 1850 à 2000. Elle indique la période coloniale de la Côte d'Ivoire (1893-1960), la création de la colonie (1893), le début de la Première Guerre mondiale (1914), la fin de la Seconde Guerre mondiale (1945) et l'indépendance (1960). Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": "frise-xxe-siecle",
+          "hint": "Convertis les années en siècles, puis compare les écarts.",
+          "questions": [
+            {
+              "content": "Range ces repères du plus ancien au plus récent.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Lire les dates sur la frise. 2) Comparer : $1893 < 1914 < 1945 < 1960$. 3) Ranger du plus ancien au plus récent.",
+              "answers": [
+                {
+                  "content": "Création de la colonie de Côte d'Ivoire (1893)"
+                },
+                {
+                  "content": "Début de la Première Guerre mondiale (1914)"
+                },
+                {
+                  "content": "Fin de la Seconde Guerre mondiale (1945)"
+                },
+                {
+                  "content": "Indépendance de la Côte d'Ivoire (1960)"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque année au siècle ou à la moitié de siècle correspondante.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Convertir chaque année en siècle : 1893 → XIXe ; 1914 → XXe ; 1960 → XXe. 2) Dans le XXe siècle, 1914 est dans la première moitié (jusqu'en 1950) et 1960 dans la seconde. 3) 1893 est encore dans le XIXe.",
+              "answers": [
+                {
+                  "content": "1893",
+                  "match": "XIXe siècle"
+                },
+                {
+                  "content": "1914",
+                  "match": "XXe siècle, première moitié"
+                },
+                {
+                  "content": "1960",
+                  "match": "XXe siècle, seconde moitié"
+                }
+              ]
+            },
+            {
+              "content": "Combien d'années séparent le début de la Première Guerre mondiale (1914) de la fin de la Seconde (1945) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Lire les deux dates. 2) Soustraire : $1945 - 1914 = 31$. 3) Il s'écoule 31 ans entre les deux repères.",
+              "answers": [
+                {
+                  "content": "31",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "La période coloniale en Côte d'Ivoire commence au XXe siècle.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Lire la frise : la période commence en 1893. 2) Convertir : 1893 appartient au XIXe siècle. 3) La réponse est Faux.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel repère de la frise se situe le plus près de l'indépendance (1960) ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Calculer les écarts : $1960 - 1945 = 15$, $1960 - 1914 = 46$, $1960 - 1893 = 67$. 2) Comparer : 15 est le plus petit écart. 3) Le repère le plus proche est 1945.",
+              "answers": [
+                {
+                  "content": "La fin de la Seconde Guerre mondiale (1945)",
+                  "correct": true
+                },
+                {
+                  "content": "Le début de la Première Guerre mondiale (1914)",
+                  "correct": false
+                },
+                {
+                  "content": "La création de la colonie (1893)",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun, ils sont tous à égale distance",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe de six lignes qui présente la période coloniale à l'aide de la frise : situe-la dans le temps, donne sa durée et cite deux repères mondiaux qui l'encadrent.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Donner les dates de début et de fin (1893 et 1960)",
+                "Calculer la durée (67 ans)",
+                "Situer dans les siècles (XIXe et XXe)",
+                "Citer deux repères mondiaux (1914, 1945)",
+                "Rédiger un texte clair"
+              ],
+              "explanation": "Corrigé modèle : La période coloniale de la Côte d'Ivoire commence en 1893, avec la création de la colonie, et se termine en 1960, avec l'indépendance. Elle dure 67 ans et s'étend sur deux siècles, la fin du XIXe siècle et la première partie du XXe. Pendant cette période ont lieu deux événements mondiaux : le début de la Première Guerre mondiale en 1914 et la fin de la Seconde Guerre mondiale en 1945. Barème : dates (1) ; durée (1) ; siècles (1) ; deux repères (2) ; clarté (1).",
+              "answers": [],
+              "starter": "La période coloniale commence en…"
+            }
+          ]
+        },
+        {
+          "title": "Une photographie de 1960 : étudier une trace",
+          "statement": "Document : une classe de 2nde étudie une photographie en noir et blanc, prise lors d'une fête (situation imaginée, écrite pour Lnclass). Elle montre une foule rassemblée devant une mairie ornée de drapeaux. Au dos, une main inconnue a écrit « 1960 ». Un ancien du quartier, interrogé, affirme : « C'était pour le grand jour de l'indépendance, tout le monde y était. » Un registre de la mairie, daté de 1961, mentionne une fête organisée le 7 août 1960. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Classe les trois documents, applique les deux critiques, puis croise.",
+          "questions": [
+            {
+              "content": "Relie chaque document à sa famille de source.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Lister les trois documents. 2) Classer d'après la forme de l'information : la photographie est une image, le témoignage est parlé, le registre est un texte. 3) Le papier de la photographie ne la rend pas écrite.",
+              "answers": [
+                {
+                  "content": "La photographie",
+                  "match": "Source iconographique"
+                },
+                {
+                  "content": "Le témoignage de l'ancien",
+                  "match": "Source orale"
+                },
+                {
+                  "content": "Le registre de la mairie",
+                  "match": "Source écrite"
+                }
+              ]
+            },
+            {
+              "content": "Que dit la critique externe de la photographie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Critique externe : qui, quand, où ? 2) Un auteur inconnu a noté l'année au dos : la date n'est pas certaine. 3) Le document n'est pas faux pour autant, mais il demande à être vérifié.",
+              "answers": [
+                {
+                  "content": "Elle n'est pas datée avec certitude : « 1960 » a été noté par un inconnu",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est datée et signée par le photographe",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est forcément fausse",
+                  "correct": false
+                },
+                {
+                  "content": "Elle prouve la date exacte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le témoignage de l'ancien suffit à prouver la date de la fête.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Un témoignage est précieux mais sélectif. 2) L'ancien ne donne pas de date précise. 3) La réponse est Faux ; il faut le croiser avec le registre.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux conclusions solides après croisement ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Croiser. 2) Les trois documents concordent sur 1960 ; seul le registre donne le jour exact. 3) La photographie seule ne prouve pas la date, et un témoignage oral reste une source utile.",
+              "answers": [
+                {
+                  "content": "La photographie, le témoignage et le registre concordent sur une fête en 1960",
+                  "correct": true
+                },
+                {
+                  "content": "Le registre précise la date du 7 août 1960",
+                  "correct": true
+                },
+                {
+                  "content": "La photographie prouve à elle seule le jour exact",
+                  "correct": false
+                },
+                {
+                  "content": "Le témoignage est inutile parce qu'il est oral",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La fête a eu lieu en 1960. Combien d'années séparent 1960 de 2025 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Repérer l'année de la fête : 1960. 2) Soustraire : $2025 - 1960 = 65$. 3) La fête date de 65 ans. Le registre de 1961 est postérieur à la fête : ne l'utilise pas pour dater la fête elle-même.",
+              "answers": [
+                {
+                  "content": "65",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "Rédige une réponse de dix lignes qui présente les trois documents, leur apport et leurs limites, puis conclut sur ce que la classe peut affirmer.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Classer les trois documents par famille de source",
+                "Appliquer la critique externe à la photographie",
+                "Appliquer la critique interne au témoignage",
+                "Montrer l'apport du registre",
+                "Croiser les trois documents",
+                "Conclure avec nuance sur ce qui est établi",
+                "Citer au moins un repère de date correct",
+                "Rédiger un texte structuré"
+              ],
+              "explanation": "Corrigé modèle : La photographie est une source iconographique, le témoignage une source orale et le registre une source écrite. La photographie montre une fête mais sa date repose sur une note d'un inconnu : la critique externe appelle à la prudence. Le témoignage donne le vécu et le sens de la fête, mais il est sélectif et sans date précise. Le registre de 1961 mentionne une fête le 7 août 1960. En croisant les trois documents, on peut affirmer qu'une fête a bien eu lieu en 1960, le 7 août d'après le registre, ce qui correspond à l'indépendance de la Côte d'Ivoire. La classe doit rester prudente sur les détails. Barème (8 points) : familles (1) ; critique externe (1) ; critique interne (1) ; apport du registre (1) ; croisement (1) ; conclusion nuancée (1) ; repère de date (1) ; rédaction (1).",
+              "answers": [],
+              "starter": "Nous disposons de trois documents : …"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base : sources, critique, siècles et ère",
+          "notions": "Les quatre familles de sources, la critique externe et la critique interne, le calcul du siècle, le classement avant et après J.-C., la frise chronologique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : au cours d'histoire, le professeur apporte une lettre ancienne, un enregistrement du récit d'un ancien, une vieille pièce de monnaie et une photographie de classe. Tu dois les classer.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe d'après la forme de l'information, pas d'après le support.",
+              "questions": [
+                {
+                  "content": "Relie chaque document du professeur à sa famille de source.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Lister les quatre documents. 2) Classer d'après la forme de l'information : la lettre est un texte, le récit est parlé même s'il est enregistré, la pièce est un objet, la photographie est une image. 3) Le support (papier, enregistrement) ne change pas la famille.",
+                  "answers": [
+                    {
+                      "content": "La lettre ancienne",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "L'enregistrement du récit de l'ancien",
+                      "match": "Source orale"
+                    },
+                    {
+                      "content": "La vieille pièce de monnaie",
+                      "match": "Source matérielle"
+                    },
+                    {
+                      "content": "La photographie de classe",
+                      "match": "Source iconographique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les quatre familles de sources ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Reprendre la fiche. 2) Les sources se classent selon la forme de l'information. 3) Les autres propositions classent selon l'âge, la valeur ou l'origine, ce qui ne correspond pas à la fiche.",
+                  "answers": [
+                    {
+                      "content": "Écrites, orales, matérielles et iconographiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Écrites, orales, vraies et fausses",
+                      "correct": false
+                    },
+                    {
+                      "content": "Anciennes, nouvelles, grandes et petites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Officielles, secrètes, publiques et privées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lettre écrite sur papier est une source écrite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Classer d'après la forme de l'information : un texte. 2) Le papier est seulement le support. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un témoignage ou un récit transmis de bouche à oreille est une source ___ (un adjectif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Identifier la forme de l'information : la parole. 2) Elle définit la source orale. 3) En Afrique, les traditions orales sont essentielles pour une partie du passé.",
+                  "answers": [
+                    {
+                      "content": "orale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'historien croise-t-il plusieurs sources ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Se rappeler que chaque source est partielle. 2) La confrontation de plusieurs sources renforce ce qui concorde. 3) Une source seule n'est pas toujours fausse, elle est seulement insuffisante.",
+                  "answers": [
+                    {
+                      "content": "Aucune source ne raconte tout",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour éviter de les lire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour garder la plus ancienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'une seule source est toujours fausse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : un élève trouve un papier sans nom, sans date, qui annonce « Les cours sont supprimés toute la semaine ». Il se demande s'il peut le croire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Qui parle, quand, pourquoi ?",
+              "questions": [
+                {
+                  "content": "« Qui a écrit ce papier, et quand ? » est une question de…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier : la critique externe vérifie l'origine. 2) Auteur et date relèvent de l'origine. 3) La critique interne porte sur le contenu et l'intention.",
+                  "answers": [
+                    {
+                      "content": "critique externe",
+                      "correct": true
+                    },
+                    {
+                      "content": "critique interne",
+                      "correct": false
+                    },
+                    {
+                      "content": "conclusion",
+                      "correct": false
+                    },
+                    {
+                      "content": "calcul de siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« Que dit le papier, et pourquoi l'auteur l'a-t-il écrit ? » est une question de…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Examiner le contenu et l'intention. 2) C'est la critique interne. 3) La critique externe ne s'occupe que de l'origine.",
+                  "answers": [
+                    {
+                      "content": "critique interne",
+                      "correct": true
+                    },
+                    {
+                      "content": "critique externe",
+                      "correct": false
+                    },
+                    {
+                      "content": "frise chronologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "classement des sources",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce papier peut servir seul de preuve.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Sans auteur ni date, sa fiabilité est faible. 2) Il faut le comparer à une source officielle. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux vérifications utiles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Comparer avec d'autres sources. 2) L'administration et l'affichage officiel sont des sources à consulter. 3) Recopier ou diffuser sans vérifier est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Demander à l'administration du lycée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Consulter l'affichage officiel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Recopier le papier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le faire circuler tout de suite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un document n'est jamais vrai ou faux par principe : il est plus ou moins ___ (un adjectif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Conclure sur la fiabilité. 2) Elle dépend de l'auteur, de l'époque, du but et du contenu. 3) On ne juge pas un document « vrai » ou « faux » par principe.",
+                  "answers": [
+                    {
+                      "content": "fiable",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : un professeur donne des années et demande de trouver le siècle correspondant : 1789, 1893, 1960, 2005.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Retire 1, garde les centaines, ajoute 1.",
+              "questions": [
+                {
+                  "content": "Dans quel siècle se situe l'année 1893 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Convertir : on retire 1 à 1893 (1892), on garde les centaines (18) et on ajoute 1 : 19. 2) Le XIXe siècle couvre 1801 à 1900. 3) Dire XVIIIe vient du réflexe « 18 donc 18e ».",
+                  "answers": [
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XVIIIe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XVIIe siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel siècle se situe l'année 2005 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Convertir : on retire 1 à 2005 (2004), on garde les centaines (20) et on ajoute 1 : 21. 2) Le XXIe siècle commence en 2001. 3) Dire XXe vient du réflexe « 20 donc 20e ».",
+                  "answers": [
+                    {
+                      "content": "Le XXIe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XXIIe siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le XXe siècle commence en 1901. En quelle année se termine-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Un siècle dure 100 ans. 2) Il commence en 1901 et finit en $1901 + 99 = 2000$. 3) L'année 2001 ouvre déjà le XXIe siècle.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles années appartiennent au XIXe siècle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Le XIXe siècle couvre 1801 à 1900. 2) 1800 est le dernier millésime du XVIIIe, 1901 le premier du XXe. 3) Les extrémités sont le piège classique.",
+                  "answers": [
+                    {
+                      "content": "1801",
+                      "correct": true
+                    },
+                    {
+                      "content": "1900",
+                      "correct": true
+                    },
+                    {
+                      "content": "1800",
+                      "correct": false
+                    },
+                    {
+                      "content": "1901",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque année à son siècle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Convertir chaque année : retirer 1, garder les centaines, ajouter 1. 2) 1789 → 17 → XVIIIe ; 1893 → 18 → XIXe ; 1960 → 19 → XXe ; 2005 → 20 → XXIe. 3) Ne pas confondre le numéro du siècle avec les deux premiers chiffres.",
+                  "answers": [
+                    {
+                      "content": "1789",
+                      "match": "XVIIIe siècle"
+                    },
+                    {
+                      "content": "1893",
+                      "match": "XIXe siècle"
+                    },
+                    {
+                      "content": "1960",
+                      "match": "XXe siècle"
+                    },
+                    {
+                      "content": "2005",
+                      "match": "XXIe siècle"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : sur une frise chronologique, un élève place 700 avant J.-C., 200 avant J.-C., l'an 1 et 1960.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avant J.-C., on compte à rebours.",
+              "questions": [
+                {
+                  "content": "Range ces repères du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Comparer d'abord l'ère : ce qui est avant J.-C. est plus ancien. 2) Avant J.-C., plus le nombre est grand, plus la date est ancienne : 700 av. J.-C. puis 200 av. J.-C. 3) Puis l'an 1, puis 1960.",
+                  "answers": [
+                    {
+                      "content": "700 avant J.-C."
+                    },
+                    {
+                      "content": "200 avant J.-C."
+                    },
+                    {
+                      "content": "L'an 1 de notre ère"
+                    },
+                    {
+                      "content": "1960"
+                    }
+                  ]
+                },
+                {
+                  "content": "200 avant J.-C. est plus ancien que 700 avant J.-C.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Avant J.-C., on compte à rebours vers l'an 1. 2) 700 est plus loin de l'an 1 que 200. 3) La réponse est Faux : 700 av. J.-C. est plus ancien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La préhistoire est la période qui précède l'apparition de l'___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Rappeler la définition. 2) La préhistoire s'arrête avec l'écriture. 3) Après commence l'histoire.",
+                  "answers": [
+                    {
+                      "content": "écriture",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une frise, le plus ancien est placé…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Rappeler la règle de la frise. 2) On lit de gauche à droite, du plus ancien au plus récent. 3) Placer le plus ancien à droite inverserait l'ordre.",
+                  "answers": [
+                    {
+                      "content": "à gauche",
+                      "correct": true
+                    },
+                    {
+                      "content": "à droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "au centre",
+                      "correct": false
+                    },
+                    {
+                      "content": "n'importe où",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent l'an 1960 de l'an 2000 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Repérer deux dates après J.-C. 2) Soustraire : $2000 - 1960 = 40$. 3) Il s'est écoulé 40 ans.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Les méthodes de l'histoire dans la vie courante en Côte d'Ivoire",
+          "notions": "Situations d'exemple en Côte d'Ivoire (maquis d'un quartier d'Abidjan, rumeur sur un marché de Daloa, histoire d'un quartier de Bouaké, visite d'un site à Grand-Bassam) : sources, critique, siècles et frise.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : au maquis de son quartier d'Abidjan, tantie raconte comment le quartier s'est formé. Au mur est accrochée une photographie ancienne ; dans un tiroir, un vieux cahier de comptes ; dans l'arrière-boutique, de vieux outils.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe chaque trace selon la forme de l'information.",
+              "questions": [
+                {
+                  "content": "Relie chaque trace du maquis à sa famille de source.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Lister les traces du maquis. 2) Classer : le récit est parlé, le cahier est un texte, les outils sont des objets, la photographie est une image. 3) Chaque trace appartient à une seule famille ici.",
+                  "answers": [
+                    {
+                      "content": "Le récit de tantie",
+                      "match": "Source orale"
+                    },
+                    {
+                      "content": "Le cahier de comptes",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "Les vieux outils",
+                      "match": "Source matérielle"
+                    },
+                    {
+                      "content": "La photographie ancienne",
+                      "match": "Source iconographique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle source donne le mieux le vécu du quartier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Repérer ce que chaque source apporte. 2) Le récit donne le vécu, le cahier des chiffres, les outils des techniques. 3) Dire « aucune » est faux : toutes apportent quelque chose.",
+                  "answers": [
+                    {
+                      "content": "Le récit de tantie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cahier de comptes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les outils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cahier de comptes suffit à raconter toute l'histoire du quartier.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Une seule source est partielle. 2) Le cahier ne dit rien du vécu des habitants. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux raisons de croiser le récit de tantie et le cahier ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Croiser : chaque source a des limites. 2) Un récit peut oublier, un cahier peut être incomplet. 3) Aucune source n'est exacte ou fausse par principe.",
+                  "answers": [
+                    {
+                      "content": "Le récit peut oublier un détail",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cahier peut être incomplet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cahier est toujours faux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récit est toujours exact",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour établir ce qui est solide, l'historien ___ les sources entre elles (un verbe à l'infinitif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Étape 4 de la méthode des sources. 2) On croise, on confronte, on compare. 3) Une source seule ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "croiser",
+                      "correct": true
+                    },
+                    {
+                      "content": "confronter",
+                      "correct": true
+                    },
+                    {
+                      "content": "comparer",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : sur un marché de Daloa, un client affirme : « Le prix du sac de riz va doubler demain, c'est certain. » Un commerçant dément. Un avis officiel affiché à la mairie ne mentionne aucune hausse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Qui parle ? Quel est son intérêt ? Qui d'autre le dit ?",
+              "questions": [
+                {
+                  "content": "Quelle est la première question à se poser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Critique externe : l'origine d'abord. 2) Qui parle, où, quand ? 3) Le nombre de personnes qui entendent ne prouve rien.",
+                  "answers": [
+                    {
+                      "content": "Qui a dit cela, où et quand ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quel est le plus grand prix possible ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Qui crie le plus fort ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Combien de personnes l'ont entendu ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux questions de critique interne ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Critique interne : contenu, intention, justification. 2) Chercher pourquoi le client parle et si son affirmation est justifiée porte sur le contenu et l'intention. 3) Rue et heure appartiennent à la critique externe.",
+                  "answers": [
+                    {
+                      "content": "Pourquoi le client dit-il cela ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son affirmation est-elle justifiée ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans quelle rue habite-t-il ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "À quelle heure a-t-il parlé ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La rumeur du client est confirmée par l'avis officiel.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Comparer avec l'avis officiel. 2) Il ne mentionne aucune hausse. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est la plus prudente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Conclure avec nuance. 2) Une seule source qui affirme et une qui dément ne tranchent pas. 3) Dire qu'on ne peut jamais savoir est excessif.",
+                  "answers": [
+                    {
+                      "content": "L'information n'est pas confirmée ; il faut chercher d'autres sources",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est vraie car elle est affirmée avec force",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse car un commerçant la dément",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut jamais savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant de croire une rumeur, on se demande quel est l'___ de celui qui parle (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Examiner l'intention. 2) L'intérêt de celui qui parle peut déformer son message. 3) C'est la question clé de la critique interne.",
+                  "answers": [
+                    {
+                      "content": "intérêt",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : un lycée de Bouaké imagine l'histoire d'un quartier : arrivée de la route en 1975, ouverture du marché en 1982, construction de l'école en 1996.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule les écarts entre les dates.",
+              "questions": [
+                {
+                  "content": "Range ces événements du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Lire les dates : 1975, 1982, 1996. 2) Comparer : $1975 < 1982 < 1996$. 3) Ranger du plus ancien au plus récent.",
+                  "answers": [
+                    {
+                      "content": "Arrivée de la route en 1975"
+                    },
+                    {
+                      "content": "Ouverture du marché en 1982"
+                    },
+                    {
+                      "content": "Construction de l'école en 1996"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent l'arrivée de la route (1975) de l'ouverture du marché (1982) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Repérer 1975 et 1982. 2) Soustraire : $1982 - 1975 = 7$. 3) Il s'écoule 7 ans.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Combien d'années séparent l'arrivée de la route (1975) de la construction de l'école (1996) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Repérer 1975 et 1996. 2) Soustraire : $1996 - 1975 = 21$. 3) Il s'écoule 21 ans, soit la somme de 7 ans et de 14 ans.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Dans quel siècle se situent ces trois événements ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Convertir : 1975, 1982 et 1996 sont compris entre 1901 et 2000. 2) Ils appartiennent tous au XXe siècle. 3) Aucun n'est dans le XXIe, qui commence en 2001.",
+                  "answers": [
+                    {
+                      "content": "Le XXe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XXIe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chacun dans un siècle différent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ouverture du marché est postérieure à l'arrivée de la route.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Comparer 1982 et 1975. 2) 1982 est après 1975. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : lors d'une visite à Grand-Bassam, une classe note trois dates : un bâtiment construit en 1892 (donnée imaginée), la fête de l'indépendance en 1960, l'inscription de la ville au patrimoine mondial en 2012.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis chaque année en siècle.",
+              "questions": [
+                {
+                  "content": "Relie chaque date à son siècle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Convertir : 1892 → 18 → XIXe ; 1960 → 19 → XXe ; 2012 → 20 → XXIe. 2) Chaque date appartient à un siècle différent. 3) Ne confonds pas le numéro du siècle avec les deux premiers chiffres.",
+                  "answers": [
+                    {
+                      "content": "1892",
+                      "match": "XIXe siècle"
+                    },
+                    {
+                      "content": "1960",
+                      "match": "XXe siècle"
+                    },
+                    {
+                      "content": "2012",
+                      "match": "XXIe siècle"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent 1960 de 2012 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Repérer 1960 et 2012. 2) Soustraire : $2012 - 1960 = 52$. 3) Il s'écoule 52 ans.",
+                  "answers": [
+                    {
+                      "content": "52",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Parmi ces trois repères, lequel est le plus ancien ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Comparer les trois années. 2) $1892 < 1960 < 2012$. 3) Le bâtiment est donc le plus ancien.",
+                  "answers": [
+                    {
+                      "content": "Le bâtiment de 1892",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fête de 1960",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'inscription de 2012",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont le même âge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bâtiment de 1892 appartient au XXe siècle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Convertir : 1892 est compris entre 1801 et 1900. 2) C'est le XIXe siècle. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux sources possibles pour étudier ce bâtiment ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Lister les traces. 2) Le bâtiment est une source matérielle et le registre une source écrite. 3) Une prévision météo et un souhait ne sont pas des traces du passé.",
+                  "answers": [
+                    {
+                      "content": "Le bâtiment lui-même (source matérielle)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un registre de la ville (source écrite)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une prévision météo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un souhait pour l'avenir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier : sources, fiabilité et chronologie",
+          "notions": "Comparer deux témoignages, juger l'intérêt d'un auteur, raisonner avant et après J.-C., justifier un siècle.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : deux anciens d'un village racontent l'arrivée de la première école. Le premier dit « c'était en 1950 », le second « c'était en 1955 ». Un registre de la mairie, daté de 1953, mentionne une école déjà ouverte.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Croise les deux témoignages et le registre.",
+              "questions": [
+                {
+                  "content": "Que peut-on dire après avoir lu le registre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Comparer : le registre est daté de 1953 et mentionne une école ouverte. 2) Une école ouverte en 1953 ne peut pas arriver en 1955. 3) Le témoignage de 1950 est compatible avec le registre.",
+                  "answers": [
+                    {
+                      "content": "L'école existait déjà en 1953 ; le témoignage de 1955 est donc fragile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux anciens ont raison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le registre se trompe forcément",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux témoignages peuvent être exacts en même temps.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Comparer les deux dates : 1950 et 1955. 2) Elles décrivent la même première école et ne peuvent pas être vraies en même temps. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux raisons pour lesquelles un témoin peut se tromper ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Critique interne : un témoignage est une mémoire. 2) La mémoire est sélective et peut mélanger les souvenirs. 3) Dire qu'un témoin ne se trompe jamais est faux.",
+                  "answers": [
+                    {
+                      "content": "La mémoire est sélective",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les souvenirs peuvent se mélanger avec le temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un témoin ne se trompe jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les registres effacent les souvenirs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre le témoignage de 1950 et celui de 1955, quelle est la différence, en années ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Relever les deux dates. 2) Soustraire : $1955 - 1950 = 5$. 3) Les deux témoins sont séparés de 5 ans.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Quelle démarche suit l'historien ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Croiser. 2) Chercher d'autres traces. 3) Choisir au hasard ou selon l'âge n'est pas une méthode.",
+                  "answers": [
+                    {
+                      "content": "Il cherche d'autres traces avant de trancher",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il choisit au hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il garde le témoin le plus âgé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il abandonne l'enquête",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : un journal de 1950, publié par le propriétaire d'une grande plantation (situation imaginée), affirme que « tous les ouvriers sont heureux et bien payés ». Un registre de salaires de la même année donne des chiffres bas.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Qui parle, et quel est son intérêt ?",
+              "questions": [
+                {
+                  "content": "Pourquoi le journal est-il à utiliser avec prudence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Critique interne : l'intention de l'auteur. 2) Le propriétaire a intérêt à valoriser sa plantation. 3) Être imprimé, ancien ou court ne mesure pas la fiabilité.",
+                  "answers": [
+                    {
+                      "content": "Son auteur a intérêt à présenter une image favorable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il est imprimé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il est ancien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il est trop court",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le registre de salaires est forcément parfait.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Aucune source n'est parfaite par principe. 2) Elle est à vérifier et à croiser. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux démarches utiles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Croiser. 2) Comparer et chercher d'autres sources. 3) Ne garder qu'une seule source revient à ne pas croiser.",
+                  "answers": [
+                    {
+                      "content": "Comparer les chiffres du registre avec d'autres sources",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chercher des témoignages d'anciens ouvriers",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne retenir que le journal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne retenir que le registre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est la plus juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Conclure avec nuance. 2) Les deux sources divergent. 3) Aucune n'est inutile : chacune apporte quelque chose.",
+                  "answers": [
+                    {
+                      "content": "Les deux sources divergent ; il faut croiser avec d'autres traces",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le journal est vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le registre est faux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont inutiles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un document qui sert l'intérêt de son auteur est à lire avec ___ (un mot : une attitude prudente).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Examiner l'intention. 2) Un document peut déformer les faits pour servir une cause. 3) On le lit avec prudence.",
+                  "answers": [
+                    {
+                      "content": "prudence",
+                      "correct": true
+                    },
+                    {
+                      "content": "précaution",
+                      "correct": true
+                    },
+                    {
+                      "content": "esprit critique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : un élève affirme : « 100 avant J.-C. est plus ancien que 500 avant J.-C., parce que 100 est plus petit. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avant J.-C., on compte à rebours.",
+              "questions": [
+                {
+                  "content": "L'affirmation de l'élève est correcte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Avant J.-C., on compte à rebours vers l'an 1. 2) 500 est plus loin de l'an 1 que 100. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle correction est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Comparer d'après l'ère. 2) Plus le nombre est grand, plus la date est ancienne avant J.-C. 3) La bonne correction est la première.",
+                  "answers": [
+                    {
+                      "content": "500 avant J.-C. est plus ancien que 100 avant J.-C.",
+                      "correct": true
+                    },
+                    {
+                      "content": "100 avant J.-C. est plus ancien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont de la même année",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces repères du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Avant J.-C. d'abord, du plus grand nombre au plus petit : 500 puis 100. 2) Puis l'an 1. 3) Puis 100 après J.-C.",
+                  "answers": [
+                    {
+                      "content": "500 avant J.-C."
+                    },
+                    {
+                      "content": "100 avant J.-C."
+                    },
+                    {
+                      "content": "L'an 1 de notre ère"
+                    },
+                    {
+                      "content": "100 après J.-C."
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant J.-C., on compte à ___ vers l'an 1 (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Rappeler la règle. 2) On compte à rebours. 3) C'est ce qui explique que 500 av. J.-C. soit plus ancien que 100 av. J.-C.",
+                  "answers": [
+                    {
+                      "content": "rebours",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Comparer d'après l'ère. 2) 300 av. J.-C. est plus ancien que 200 av. J.-C. et l'an 1 est postérieur à 50 av. J.-C. 3) Les deux autres affirmations inversent l'ordre.",
+                  "answers": [
+                    {
+                      "content": "300 avant J.-C. est plus ancien que 200 avant J.-C.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'an 1 est plus récent que 50 avant J.-C.",
+                      "correct": true
+                    },
+                    {
+                      "content": "50 avant J.-C. est plus ancien que 300 avant J.-C.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'an 1 est plus ancien que 200 avant J.-C.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : un élève soutient que « l'année 2000 est dans le XXIe siècle, car elle commence par 20 ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Retire 1 avant de garder les centaines.",
+              "questions": [
+                {
+                  "content": "L'année 2000 est dans le XXIe siècle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Convertir : on retire 1 à 2000 (1999), on garde les centaines (19) et on ajoute 1 : 20. 2) 2000 appartient au XXe siècle. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel siècle se situe l'année 2000 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Appliquer la règle : retirer 1, garder les centaines, ajouter 1. 2) 1999 → 19 → 20. 3) C'est le XXe siècle.",
+                  "answers": [
+                    {
+                      "content": "Le XXe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XXIe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XXIIe siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel siècle se situe l'année 2001 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Retirer 1 : 2000 ; garder les centaines : 20 ; ajouter 1 : 21. 2) 2001 est la première année du XXIe siècle. 3) La limite se fait entre 2000 et 2001.",
+                  "answers": [
+                    {
+                      "content": "Le XXIe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XXIIe siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années compte un siècle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Rappeler la définition. 2) Un siècle dure 100 ans. 3) Il commence par une année en 01 et finit par une année en 00.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Quelles années appartiennent au XXIe siècle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Le XXIe siècle commence en 2001. 2) 2001 et 2024 en font partie. 3) 2000 et 1999 appartiennent au XXe siècle.",
+                  "answers": [
+                    {
+                      "content": "2001",
+                      "correct": true
+                    },
+                    {
+                      "content": "2024",
+                      "correct": true
+                    },
+                    {
+                      "content": "2000",
+                      "correct": false
+                    },
+                    {
+                      "content": "1999",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : sources, critique et repères chronologiques",
+          "notions": "Bilan des trois notions : sources de l'historien, critique des sources, repères chronologiques et périodes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : un lycée de Yamoussoukro prépare une exposition sur son histoire avec des registres, des témoignages d'anciens élèves, des photographies et le bâtiment lui-même.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe, puis croise.",
+              "questions": [
+                {
+                  "content": "Relie chaque document à sa famille.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Lister les documents. 2) Classer d'après la forme de l'information. 3) Chaque famille est représentée.",
+                  "answers": [
+                    {
+                      "content": "Les registres du lycée",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "Les témoignages d'anciens élèves",
+                      "match": "Source orale"
+                    },
+                    {
+                      "content": "Les photographies de rentrée",
+                      "match": "Source iconographique"
+                    },
+                    {
+                      "content": "Le bâtiment du lycée",
+                      "match": "Source matérielle"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul de ces documents suffit pour raconter l'histoire du lycée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Chaque source est partielle. 2) Il faut les croiser. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle source montre l'aspect d'origine du bâtiment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Repérer ce que chaque source apporte. 2) Les images montrent l'aspect. 3) Les registres donnent des dates, les témoignages le vécu.",
+                  "answers": [
+                    {
+                      "content": "Les photographies anciennes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les registres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les témoignages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'exposition réunit 5 registres, 6 témoignages, 3 photographies et 1 bâtiment. Combien de sources cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Additionner toutes les sources. 2) $5 + 6 + 3 + 1 = 15$. 3) Il y a 15 sources.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "sources"
+                },
+                {
+                  "content": "Quelles sont deux règles de présentation d'un document ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Identifier le document. 2) Nature, auteur, date et famille. 3) Cacher l'origine empêche la critique.",
+                  "answers": [
+                    {
+                      "content": "Indiquer sa nature, son auteur et sa date",
+                      "correct": true
+                    },
+                    {
+                      "content": "Préciser sa famille de source",
+                      "correct": true
+                    },
+                    {
+                      "content": "Cacher son origine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien dire de son contenu",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : un journal affirme qu'un événement a eu lieu en 1962 ; un registre officiel de la même année dit 1963 ; un ancien dit « je ne me souviens plus ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les trois sources.",
+              "questions": [
+                {
+                  "content": "Que faire en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Croiser. 2) Comparer et chercher d'autres traces. 3) Choisir une source sans vérifier est le piège.",
+                  "answers": [
+                    {
+                      "content": "Comparer les trois sources et chercher d'autres traces",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir le journal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir le registre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oublier l'événement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le registre officiel est forcément exact car il est officiel.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Un document officiel reste à vérifier. 2) La fiabilité dépend de l'auteur et du but. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux limites du témoignage de l'ancien ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Examiner le témoignage. 2) Il ne précise pas la date. 3) Un témoignage n'est ni faux par principe ni écrit.",
+                  "answers": [
+                    {
+                      "content": "Il est imprécis",
+                      "correct": true
+                    },
+                    {
+                      "content": "La mémoire est sélective",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est forcément faux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est écrit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la différence, en années, entre les dates du journal et du registre ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Relever 1962 et 1963. 2) Soustraire : $1963 - 1962 = 1$. 3) Les deux sources diffèrent d'un an.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "an"
+                },
+                {
+                  "content": "Quand les sources divergent, l'historien note une ___ et cherche d'autres traces (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Reconnaître que les sources divergent. 2) Ne pas trancher sans trace. 3) Noter l'incertitude.",
+                  "answers": [
+                    {
+                      "content": "incertitude",
+                      "correct": true
+                    },
+                    {
+                      "content": "divergence",
+                      "correct": true
+                    },
+                    {
+                      "content": "différence",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : une frise est construite avec ces repères : 1893 (création de la colonie de Côte d'Ivoire), 1914 (début de la Première Guerre mondiale), 1945 (fin de la Seconde Guerre mondiale), 1960 (indépendance).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Ordre et durées.",
+              "questions": [
+                {
+                  "content": "Range les repères du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Comparer les dates. 2) $1893 < 1914 < 1945 < 1960$. 3) Ranger du plus ancien au plus récent.",
+                  "answers": [
+                    {
+                      "content": "1893 : création de la colonie"
+                    },
+                    {
+                      "content": "1914 : début de la Première Guerre mondiale"
+                    },
+                    {
+                      "content": "1945 : fin de la Seconde Guerre mondiale"
+                    },
+                    {
+                      "content": "1960 : indépendance"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent 1893 de 1960 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Repérer 1893 et 1960. 2) Soustraire : $1960 - 1893 = 67$. 3) La période dure 67 ans.",
+                  "answers": [
+                    {
+                      "content": "67",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Dans quel siècle se situe 1914 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Convertir : 1913 → 19 → 20. 2) 1914 est dans le XXe siècle (1901-2000). 3) Dire XIXe vient du réflexe « 19 donc 19e ».",
+                  "answers": [
+                    {
+                      "content": "Le XXe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XXIe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XVIIIe siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La création de la colonie (1893) appartient au XIXe siècle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Convertir : 1892 → 18 → 19. 2) 1893 est dans le XIXe siècle (1801-1900). 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels repères sont postérieurs à 1914 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Comparer chaque date à 1914. 2) 1945 et 1960 sont après. 3) 1893 et 1850 sont avant.",
+                  "answers": [
+                    {
+                      "content": "1945",
+                      "correct": true
+                    },
+                    {
+                      "content": "1960",
+                      "correct": true
+                    },
+                    {
+                      "content": "1893",
+                      "correct": false
+                    },
+                    {
+                      "content": "1850",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : un élève prépare une fiche sur la préhistoire et l'histoire. Il note : « Avant l'écriture, on est en préhistoire ; après, on est dans l'histoire. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Retiens la définition de la préhistoire.",
+              "questions": [
+                {
+                  "content": "La préhistoire est la période qui précède l'apparition de l'écriture.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Rappeler la définition. 2) La préhistoire s'arrête avec l'écriture. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sources utilise-t-on surtout pour la préhistoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Sans écriture, il n'y a pas de textes. 2) Il reste des objets, outils et vestiges. 3) Journaux, registres et lettres sont des sources écrites.",
+                  "answers": [
+                    {
+                      "content": "Des sources matérielles comme les outils et les vestiges",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des journaux imprimés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des registres d'état civil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des lettres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après l'apparition de l'écriture commence l'___ (un mot : la période suivante).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Rappeler la distinction. 2) Avant l'écriture : préhistoire. 3) Après : histoire.",
+                  "answers": [
+                    {
+                      "content": "histoire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux conséquences de l'absence d'écriture ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Sans écriture, pas de textes. 2) Les objets et vestiges comptent beaucoup. 3) Dire qu'il n'existe aucune trace est faux.",
+                  "answers": [
+                    {
+                      "content": "Il n'y a pas de textes du passé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources matérielles deviennent essentielles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a plus d'archives écrites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'existe aucune trace du passé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de siècles y a-t-il entre l'an 1 et l'an 2001, en comptant des siècles entiers ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Un siècle dure 100 ans. 2) De l'an 1 à l'an 2001, il y a 2000 ans, soit $2000 \\div 100 = 20$ siècles entiers. 3) On compte des siècles entiers.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "siècles"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

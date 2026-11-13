@@ -1,0 +1,3230 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Ensemble des nombres réels",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "C",
+      "material_name": "Mathématiques",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "droite-intervalle",
+          "kind": "number_line",
+          "description": "Une droite graduée de −4 à 8, de 1 en 1. Les points d'abscisses −2 et 5 sont marqués. La zone entre −2 et 5 est colorée : le point −2 est exclu (crochet ouvert) et le point 5 est inclus (crochet fermé). Elle représente l'intervalle ]−2 ; 5].",
+          "params": {
+            "min": -4,
+            "max": 8,
+            "step": 1,
+            "points": [
+              {
+                "value": -2,
+                "label": "−2"
+              },
+              {
+                "value": 5,
+                "label": "5"
+              }
+            ],
+            "intervals": [
+              {
+                "from": -2,
+                "to": 5,
+                "from_open": true,
+                "to_open": false
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "droite-distance",
+          "kind": "number_line",
+          "description": "Une droite graduée de −1 à 7, de 1 en 1. Le point d'abscisse 3 est le centre. Les points 1 et 5 sont situés à une distance 2 de 3. La zone colorée de 1 à 5, bornes incluses, représente l'intervalle [1 ; 5] : les réels x tels que la distance de x à 3 est au plus égale à 2.",
+          "params": {
+            "min": -1,
+            "max": 7,
+            "step": 1,
+            "points": [
+              {
+                "value": 1,
+                "label": "1"
+              },
+              {
+                "value": 3,
+                "label": "3"
+              },
+              {
+                "value": 5,
+                "label": "5"
+              }
+            ],
+            "intervals": [
+              {
+                "from": 1,
+                "to": 5,
+                "from_open": false,
+                "to_open": false
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "droite-encadrement",
+          "kind": "number_line",
+          "description": "Une droite graduée de 1,6 à 1,9, de 0,1 en 0,1. Les points 1,7 et 1,8 sont marqués, ainsi que le point d'abscisse 1,7321 qui représente la racine carrée de 3. La zone colorée entre 1,7 et 1,8 représente l'encadrement 1,7 < √3 < 1,8, d'amplitude 0,1.",
+          "params": {
+            "min": 1.6,
+            "max": 1.9,
+            "step": 0.1,
+            "points": [
+              {
+                "value": 1.7,
+                "label": "1,7"
+              },
+              {
+                "value": 1.7321,
+                "label": "√3"
+              },
+              {
+                "value": 1.8,
+                "label": "1,8"
+              }
+            ],
+            "intervals": [
+              {
+                "from": 1.7,
+                "to": 1.8,
+                "from_open": true,
+                "to_open": true
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les ensembles de nombres et leurs inclusions",
+          "remember": "$\\mathbb{N}$ : entiers naturels $0, 1, 2, \\ldots$ ; $\\mathbb{Z}$ : entiers relatifs ; $\\mathbb{D}$ : **décimaux**, de la forme $\\frac{a}{10^n}$ avec $a \\in \\mathbb{Z}$ et $n \\in \\mathbb{N}$ ; $\\mathbb{Q}$ : **rationnels**, de la forme $\\frac{a}{b}$ avec $a, b \\in \\mathbb{Z}$ et $b \\neq 0$ ; $\\mathbb{R}$ : **réels**, tous les points de la droite graduée. On a $\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{D} \\subset \\mathbb{Q} \\subset \\mathbb{R}$. Une fraction irréductible est décimale si son dénominateur n'a que les facteurs 2 et 5. Un réel qui n'est pas rationnel est **irrationnel** : $\\sqrt{2}$, $\\sqrt{3}$ et $\\pi$ en sont.",
+          "method": [
+            "Écrire le nombre sous sa forme la plus simple (simplifier la fraction ou la racine).",
+            "Regarder si c'est un entier : naturel s'il est positif ou nul, relatif sinon.",
+            "Sinon, regarder si c'est un quotient d'entiers : décimal si le dénominateur irréductible n'a que les facteurs 2 et 5, seulement rationnel sinon.",
+            "Conclure : donner le plus petit ensemble qui contient le nombre ; si ce n'est pas un quotient d'entiers, c'est un irrationnel."
+          ],
+          "example": {
+            "statement": "Dans quel plus petit ensemble se trouve $\\frac{12}{32}$ ?",
+            "steps": [
+              "Écrire sous la forme la plus simple : $\\frac{12}{32} = \\frac{3}{8}$ en divisant par 4.",
+              "Regarder si c'est un entier : $\\frac{3}{8} = 0,375$ n'est pas un entier.",
+              "Fraction ou décimal : c'est un quotient d'entiers, et $8 = 2^3$ n'a que le facteur 2, donc c'est un décimal : $\\frac{3}{8} = \\frac{375}{1000}$.",
+              "Conclure : le plus petit ensemble qui contient $\\frac{12}{32}$ est $\\mathbb{D}$ (donc aussi $\\mathbb{Q}$ et $\\mathbb{R}$)."
+            ]
+          },
+          "pitfall": "Ne pas confondre rationnel et décimal. $\\frac{1}{3}$ est rationnel mais n'est pas décimal : 3 n'est pas de la forme $2^a5^b$, on écrit $0,333\\ldots$ sans jamais s'arrêter. Ne pas croire non plus que $\\pi = \\frac{22}{7}$ : $\\frac{22}{7} = 3,1428\\ldots$ est rationnel et $\\pi = 3,14159\\ldots$ est irrationnel. Simplifie toujours avant de classer : $\\sqrt{16} = 4$ est un entier.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Trouver le plus petit ensemble d'un nombre",
+              "statement": "Dans cet exercice, tu cherches le plus petit ensemble qui contient un nombre, avec la méthode de la fiche : simplifier, regarder si c'est un entier, regarder si c'est un quotient d'entiers, conclure.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $-7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $-7$ est déjà simplifié ou vaut $-7$. Étape 2 — Regarder si c'est un entier : oui, c'est un entier relatif négatif. Étape 3 — Fraction ou décimal : inutile, c'est déjà un entier. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{Z}$. La proposition $\\mathbb{N}$ oublie les nombres négatifs ou les nombres à virgule. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{3}{8}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{3}{8}$ est déjà simplifié ou vaut $0,375$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est une fraction (ou un nombre à virgule) dont le dénominateur irréductible n'a que des facteurs 2 et 5, donc un décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{D}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit. La proposition $\\mathbb{N}$ oublie les nombres négatifs ou les nombres à virgule.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{1}{3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{1}{3}$ est déjà simplifié ou vaut $\\frac{1}{3}$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est un quotient d'entiers, mais son dénominateur irréductible a un facteur autre que 2 et 5 : il n'est pas décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{Q}$. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition « $\\mathbb{R}$ mais pas $\\mathbb{Q}$ » est réservée aux nombres qui ne sont pas des quotients d'entiers. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\sqrt{3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{3}$ ne se simplifie pas en fraction ou en entier. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : ce n'est pas un quotient de deux entiers. Étape 4 — Conclure : c'est un irrationnel, donc seulement un réel : $\\mathbb{R}$ mais pas $\\mathbb{Q}$. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $\\pi$ est égal à la fraction $\\frac{22}{7}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{22}{7}$ est une fraction irréductible, dont la valeur est $3,142857\\ldots$ ; $\\pi$ vaut $3,14159\\ldots$. Étape 2 — Regarder si c'est un entier : ni l'un ni l'autre. Étape 3 — Fraction ou décimal : $\\frac{22}{7}$ est un quotient d'entiers, donc un rationnel (non décimal, car 7 n'est pas de la forme $2^a5^b$) ; $\\pi$ n'est pas un quotient d'entiers. Étape 4 — Conclure : $\\frac{22}{7}$ est dans $\\mathbb{Q}$ et $\\pi$ est irrationnel, ils ne sont donc pas égaux. $\\frac{22}{7}$ n'est qu'une valeur approchée de $\\pi$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer des nombres dans les ensembles",
+              "statement": "Dans cet exercice, tu classes des nombres dans $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{D}$, $\\mathbb{Q}$ et $\\mathbb{R}$, avec la méthode de la fiche : simplifier, regarder si c'est un entier, regarder si c'est un quotient d'entiers, conclure.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque nombre au plus petit ensemble qui le contient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $0,25 = \\frac{1}{4}$ ; les autres nombres sont déjà simples. Étape 2 — Regarder si c'est un entier : $12$ est un entier naturel ; $-5$ est un entier relatif. Étape 3 — Fraction ou décimal : $0,25 = \\frac{1}{4}$ a un dénominateur $2^2$, c'est un décimal ; $\\frac{5}{6}$ a le facteur 3 au dénominateur, il est seulement rationnel. Étape 4 — Conclure : $12$ est dans $\\mathbb{N}$, $-5$ dans $\\mathbb{Z}$, $0,25$ dans $\\mathbb{D}$, $\\frac{5}{6}$ dans $\\mathbb{Q}$, et $\\sqrt{2}$, qui n'est pas un quotient d'entiers, est un irrationnel : réel mais pas rationnel.",
+                  "answers": [
+                    {
+                      "content": "$12$",
+                      "match": "$\\mathbb{N}$"
+                    },
+                    {
+                      "content": "$-5$",
+                      "match": "$\\mathbb{Z}$"
+                    },
+                    {
+                      "content": "$0,25$",
+                      "match": "$\\mathbb{D}$"
+                    },
+                    {
+                      "content": "$\\frac{5}{6}$",
+                      "match": "$\\mathbb{Q}$"
+                    },
+                    {
+                      "content": "$\\sqrt{2}$",
+                      "match": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble $\\mathbb{Z}$ est contenu dans l'ensemble $\\mathbb{N}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : on prend un exemple, $-3$. Étape 2 — Regarder si c'est un entier : $-3$ est un entier relatif, donc dans $\\mathbb{Z}$. Étape 3 — Fraction ou décimal : inutile ici. Étape 4 — Conclure : $-3$ n'est pas un entier naturel (il est négatif), donc $\\mathbb{Z}$ n'est pas contenu dans $\\mathbb{N}$ ; c'est l'inverse : $\\mathbb{N} \\subset \\mathbb{Z}$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois nombres rationnels ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{16} = 4$. Étape 2 — Regarder si c'est un entier : $-2$ et $4$ sont des entiers. Étape 3 — Fraction ou décimal : $\\frac{3}{7}$ est un quotient d'entiers, et tout entier $n$ s'écrit $\\frac{n}{1}$. Étape 4 — Conclure : $\\frac{3}{7}$, $-2$ et $\\sqrt{16}$ sont rationnels. $\\sqrt{2}$ et $\\pi$ ne sont pas des quotients d'entiers. Attention : $\\sqrt{16}$ porte une racine mais vaut 4, c'est un piège classique.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{7}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{16}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\pi$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un réel qui n'est pas rationnel est dit ___ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : on prend $\\sqrt{2}$, qui ne se simplifie pas. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : ce n'est pas un quotient de deux entiers. Étape 4 — Conclure : un tel réel est dit irrationnel. Le mot « décimal » ne convient pas : un décimal est toujours rationnel.",
+                  "answers": [
+                    {
+                      "content": "irrationnel",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plus petit ensemble qui contient le nombre $\\sqrt{49}$ est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{49} = 7$ car $7^2 = 49$. Étape 2 — Regarder si c'est un entier : $7$ est un entier positif, donc un entier naturel. Étape 3 — Fraction ou décimal : inutile. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{N}$. Les ensembles $\\mathbb{Z}$ et $\\mathbb{Q}$ contiennent aussi 7 mais ne sont pas les plus petits ; la racine n'est pas un irrationnel ici, car 49 est un carré parfait.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver le plus petit ensemble d'un nombre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : on commence toujours par simplifier, car $\\frac{12}{3}$ ou $\\sqrt{16}$ sont des entiers déguisés. Étape 2 — Regarder si c'est un entier. Étape 3 — Fraction ou décimal : seulement si ce n'est pas un entier. Étape 4 — Conclure : on donne le plus petit ensemble. Tester le nombre avant de le simplifier mène à de fausses réponses.",
+                  "answers": [
+                    {
+                      "content": "Écrire le nombre sous sa forme la plus simple."
+                    },
+                    {
+                      "content": "Regarder si c'est un entier, naturel ou relatif."
+                    },
+                    {
+                      "content": "Sinon, regarder si c'est un quotient d'entiers, décimal ou seulement rationnel."
+                    },
+                    {
+                      "content": "Conclure par le plus petit ensemble, ou irrationnel si ce n'est pas un quotient d'entiers."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les intervalles de nombres réels",
+          "remember": "Un **intervalle** est un ensemble de réels « sans trous ». Avec $a < b$ : $[a\\,;\\,b]$ pour $a \\leq x \\leq b$ ; $]a\\,;\\,b[$ pour $a < x < b$ ; $[a\\,;\\,b[$ pour $a \\leq x < b$ ; $]a\\,;\\,b]$ pour $a < x \\leq b$. Demi-droites : $[a\\,;\\,+\\infty[$ pour $x \\geq a$ ; $]a\\,;\\,+\\infty[$ pour $x > a$ ; $]-\\infty\\,;\\,b]$ pour $x \\leq b$ ; $]-\\infty\\,;\\,b[$ pour $x < b$. Un crochet est **fermé** (tourné vers le nombre) quand la borne est incluse, **ouvert** sinon ; le symbole $\\infty$ est toujours entouré d'un crochet ouvert. L'**intersection** $I \\cap J$ est l'ensemble des réels qui sont à la fois dans $I$ et dans $J$.",
+          "method": [
+            "Traduire la condition par des inégalités sur $x$ (ou lire l'intervalle comme une inégalité).",
+            "Repérer chaque borne et dire si elle est incluse (inégalité large) ou exclue (inégalité stricte).",
+            "Écrire l'intervalle : borne inférieure à gauche, crochet fermé pour une borne incluse, ouvert pour une borne exclue.",
+            "Vérifier avec un nombre de la zone et chaque borne ; pour une intersection, ne garder que les réels communs aux deux intervalles."
+          ],
+          "example": {
+            "statement": "Écrire sous forme d'intervalle l'ensemble des réels $x$ tels que $-2 < x \\leq 5$, puis dire si $5$ et $-2$ en font partie.",
+            "steps": [
+              "Traduire : la condition est $-2 < x$ et $x \\leq 5$.",
+              "Repérer les bornes : $-2$ est exclue (inégalité stricte) ; $5$ est incluse (inégalité large).",
+              "Écrire l'intervalle : $x \\in ]-2\\,;\\,5]$, crochet ouvert en $-2$ et fermé en $5$.",
+              "Vérifier : $5 \\in ]-2\\,;\\,5]$ car la borne 5 est incluse ; $-2 \\notin ]-2\\,;\\,5]$ car la borne $-2$ est exclue."
+            ]
+          },
+          "pitfall": "Ne pas confondre crochet ouvert et crochet fermé. $5 \\in [2\\,;\\,5]$, mais $5 \\notin [2\\,;\\,5[$ : le crochet tourné vers l'extérieur exclut la borne. Ne pas écrire non plus $[3\\,;\\,+\\infty]$ : $+\\infty$ n'est pas un réel, son crochet est toujours ouvert, donc $[3\\,;\\,+\\infty[$. Teste toujours la borne pour vérifier ton crochet.",
+          "figure": "droite-intervalle",
+          "exercise": [
+            {
+              "title": "Écrire et lire des intervalles",
+              "statement": "Dans cet exercice, tu passes d'une inégalité à un intervalle et inversement, avec la méthode de la fiche : traduire, repérer les bornes, écrire l'intervalle, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel intervalle correspond à la condition $x \\geq 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $x \\geq 3$. Étape 2 — Repérer les bornes : la borne 3 est incluse (inégalité large) ; le symbole $\\infty$ est toujours entouré d'un crochet ouvert. Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $[3\\,;\\,+\\infty[$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel intervalle correspond à la condition $-2 < x \\leq 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $-2 < x \\leq 5$. Étape 2 — Repérer les bornes : la borne -2 est exclue (inégalité stricte) ; la borne 5 est incluse (inégalité large). Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $]-2\\,;\\,5]$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$]-2\\,;\\,5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-2\\,;\\,5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-2\\,;\\,5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-2\\,;\\,5[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $4$ appartient à l'intervalle $[1\\,;\\,4[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $[1\\,;\\,4[$ correspond à $1 \\leq x < 4$. Étape 2 — Repérer les bornes : 1 est incluse ; 4 est exclue. Étape 3 — Écrire l'intervalle : il est donné, on compare $4$ à ses bornes. Étape 4 — Vérifier : $4$ est une borne, et cette borne est exclue, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $I = [-1\\,;\\,4]$ et $J = ]2\\,;\\,7[$. Quel est l'intervalle $I \\cap J$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : $I$ correspond à $-1 \\leq x \\leq 4$ et $J$ à $2 < x < 7$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 2, et la plus petite borne supérieure, 4 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $]2\\,;\\,4]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+                  "answers": [
+                    {
+                      "content": "$]2\\,;\\,4]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-1\\,;\\,7[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;\\,7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;\\,4]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel intervalle correspond à la condition $x < 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $x < 3$. Étape 2 — Repérer les bornes : la borne 3 est exclue (inégalité stricte) ; le symbole $\\infty$ est toujours entouré d'un crochet ouvert. Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $]-\\infty\\,;\\,3[$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Intervalles, bornes et intersection",
+              "statement": "Dans cet exercice, tu travailles sur les bornes des intervalles et leurs éléments, avec la méthode de la fiche : traduire, repérer les bornes, écrire l'intervalle, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque condition à l'intervalle qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Traduire : chaque condition est déjà une inégalité sur $x$. Étape 2 — Repérer les bornes : une inégalité stricte ($<$, $>$) exclut la borne, une inégalité large ($\\leq$, $\\geq$) l'inclut. Étape 3 — Écrire l'intervalle : $x > 2$ donne $]2\\,;\\,+\\infty[$ ; $x \\leq 2$ donne $]-\\infty\\,;\\,2]$ ; $2 \\leq x < 5$ donne $[2\\,;\\,5[$ ; $2 < x \\leq 5$ donne $]2\\,;\\,5]$. Étape 4 — Vérifier : on teste la borne 2 dans chacun, elle est dans $x \\leq 2$ et $2 \\leq x < 5$ seulement. Le symbole $\\infty$ a toujours un crochet ouvert.",
+                  "answers": [
+                    {
+                      "content": "$x > 2$",
+                      "match": "$]2\\,;\\,+\\infty[$"
+                    },
+                    {
+                      "content": "$x \\leq 2$",
+                      "match": "$]-\\infty\\,;\\,2]$"
+                    },
+                    {
+                      "content": "$2 \\leq x < 5$",
+                      "match": "$[2\\,;\\,5[$"
+                    },
+                    {
+                      "content": "$2 < x \\leq 5$",
+                      "match": "$]2\\,;\\,5]$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers relatifs appartiennent à l'intervalle $[-2\\,;\\,3[$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Traduire : $[-2\\,;\\,3[$ correspond à $-2 \\leq x < 3$. Étape 2 — Repérer les bornes : -2 est incluse et 3 est exclue. Étape 3 — Écrire l'intervalle : les entiers qui y sont sont -2, -1, 0, 1, 2. Étape 4 — Vérifier : en comptant, on trouve 5 entiers. Si tu trouves 6 ou 4, tu as mal traité une borne : une borne exclue ne compte pas, une borne incluse compte.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres qui appartiennent à l'intervalle $]1\\,;\\,4]$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Traduire : $]1\\,;\\,4]$ correspond à $1 < x \\leq 4$. Étape 2 — Repérer les bornes : 1 est exclue, 4 est incluse. Étape 3 — Écrire l'intervalle : il est donné. Étape 4 — Vérifier : $4$ est la borne incluse, donc il appartient ; $2$ est entre les bornes ; $1$ est la borne exclue ; $5$ est au-delà de 4.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole $\\infty$ est toujours entouré d'un crochet ___ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Traduire : par exemple $x \\geq 3$ donne $[3\\,;\\,+\\infty[$. Étape 2 — Repérer les bornes : $+\\infty$ n'est pas un nombre réel, on ne peut pas l'atteindre. Étape 3 — Écrire l'intervalle : le crochet du côté de $\\infty$ est tourné vers l'extérieur. Étape 4 — Vérifier : écrire $[3\\,;\\,+\\infty]$ est une erreur, le crochet est ouvert.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'intervalle $]-\\infty\\,;\\,6[$ contient le nombre ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Traduire : $]-\\infty\\,;\\,6[$ correspond à $x < 6$. Étape 2 — Repérer les bornes : 6 est exclue. Étape 3 — Écrire l'intervalle : il est donné. Étape 4 — Vérifier : $5,9 < 6$ appartient ; $6$ est la borne exclue ; $6,1$ et $7$ sont supérieurs à 6.",
+                  "answers": [
+                    {
+                      "content": "5,9",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "6,1",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $2$ appartient à l'intervalle $]2\\,;\\,5[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $]2\\,;\\,5[$ correspond à $2 < x < 5$. Étape 2 — Repérer les bornes : 2 est exclue ; 5 est exclue. Étape 3 — Écrire l'intervalle : il est donné, on compare $2$ à ses bornes. Étape 4 — Vérifier : $2$ est une borne, et cette borne est exclue, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La valeur absolue et la distance à un réel",
+          "remember": "La **valeur absolue** de $x$ est $|x| = x$ si $x \\geq 0$ et $|x| = -x$ si $x \\leq 0$ ; on a toujours $|x| \\geq 0$. Le nombre $|x - a|$ est la **distance** entre $x$ et $a$ sur la droite graduée ; en particulier $|a - b| = |b - a|$. Pour $r > 0$ : $|x - a| = r$ équivaut à $x = a - r$ ou $x = a + r$ ; $|x - a| \\leq r$ équivaut à $a - r \\leq x \\leq a + r$, soit $x \\in [a - r\\,;\\,a + r]$ ; $|x - a| < r$ équivaut à $x \\in ]a - r\\,;\\,a + r[$.",
+          "method": [
+            "Écrire l'expression sous la forme $|x - a|$ comparée à $r$ : repérer le centre $a$ et le rayon $r$.",
+            "Traduire en distance : $x$ est à la distance $r$ de $a$ (ou au plus $r$, ou moins de $r$).",
+            "Calculer les bornes $a - r$ et $a + r$.",
+            "Conclure : $x = a - r$ ou $x = a + r$ pour une égalité ; $x \\in [a - r\\,;\\,a + r]$ pour une inégalité large (crochets ouverts si elle est stricte)."
+          ],
+          "example": {
+            "statement": "Résoudre $|x - 3| \\leq 2$.",
+            "steps": [
+              "Écrire sous la forme $|x - a| \\leq r$ : ici $a = 3$ et $r = 2$.",
+              "Traduire en distance : $x$ est à une distance de 3 au plus égale à 2.",
+              "Calculer les bornes : $a - r = 3 - 2 = 1$ et $a + r = 3 + 2 = 5$.",
+              "Conclure : $x \\in [1\\,;\\,5]$, bornes incluses car l'inégalité est large."
+            ]
+          },
+          "pitfall": "Ne pas se tromper de centre. Dans $|x + 1| \\leq 3$, on écrit $|x - (-1)| \\leq 3$ : le centre est $-1$, pas $1$, et la solution est $[-4\\,;\\,2]$. Contre-exemple : $x = -4$ vérifie $|-4 + 1| = 3 \\leq 3$ et appartient à $[-4\\,;\\,2]$, alors que $[-2\\,;\\,4]$ (centre $1$) ne le contient pas. Pense aussi à la distance : $|3 - 8| = 5$, jamais $-5$.",
+          "figure": "droite-distance",
+          "exercise": [
+            {
+              "title": "Valeur absolue et distance",
+              "statement": "Dans cet exercice, tu calcules des valeurs absolues et tu résous des équations et des inéquations avec la méthode de la fiche : écrire sous la forme $|x - a|$, traduire en distance, calculer les bornes, conclure.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule $|3 - 8|$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : c'est la distance entre $3$ et $8$. Étape 2 — Traduire en distance : on calcule l'écart entre les deux nombres. Étape 3 — Calculer : $3 - 8 = -5$, puis on prend la valeur absolue (toujours positive ou nulle). Étape 4 — Conclure : $|3 - 8| = 5$. Si tu obtiens $-5$ ou un autre signe, tu as oublié que la valeur absolue est une distance, donc positive.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $|x - 4| = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| = r$ : $|x - 4| = 3$, donc $a = 4$ et $r = 3$. Étape 2 — Traduire en distance : $x$ est à la distance $3$ de $4$. Étape 3 — Calculer les bornes : $a - r = 4 - 3 = 1$ et $a + r = 4 + 3 = 7$. Étape 4 — Conclure : $x = 1$ ou $x = 7$. Les autres propositions se trompent de centre (par exemple $-4$ au lieu de $4$) ou prennent $a$ et $r$ comme solutions.",
+                  "answers": [
+                    {
+                      "content": "$x = 1$ ou $x = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 4$ ou $x = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -7$ ou $x = -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -1$ ou $x = 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x - 2| \\leq 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 2| \\leq 5$ avec $a = 2$ et $r = 5$. Étape 2 — Traduire en distance : $x$ est à une distance de $2$ au plus égale à $5$. Étape 3 — Calculer les bornes : $a - r = -3$ et $a + r = 7$. Étape 4 — Conclure : $x \\in [-3\\,;\\,7]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $2$.",
+                  "answers": [
+                    {
+                      "content": "$[-3\\,;\\,7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-7\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-5\\,;\\,5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;\\,7[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x| < 4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| < r$ : $|x| < 4$ avec $a = 0$ et $r = 4$. Étape 2 — Traduire en distance : $x$ est à une distance de $0$ strictement inférieure à $4$. Étape 3 — Calculer les bornes : $a - r = -4$ et $a + r = 4$. Étape 4 — Conclure : $x \\in ]-4\\,;\\,4[$ (bornes exclues car l'inégalité est stricte). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $0$.",
+                  "answers": [
+                    {
+                      "content": "$]-4\\,;\\,4[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-4\\,;\\,4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-4\\,;\\,4[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-4\\,;\\,4]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x + 1| \\leq 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x + 1| \\leq 3$ avec $a = -1$ et $r = 3$. Étape 2 — Traduire en distance : $x$ est à une distance de $-1$ au plus égale à $3$. Étape 3 — Calculer les bornes : $a - r = -4$ et $a + r = 2$. Étape 4 — Conclure : $x \\in [-4\\,;\\,2]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $-1$.",
+                  "answers": [
+                    {
+                      "content": "$[-4\\,;\\,2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-2\\,;\\,4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-4\\,;\\,2[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distances, tolérances et centre d'un intervalle",
+              "statement": "Dans cet exercice, tu utilises la valeur absolue comme distance, avec la méthode de la fiche : écrire sous la forme $|x - a|$, traduire en distance, calculer les bornes, conclure.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur une droite graduée, quelle est la distance entre les points d'abscisses $-2$ et $5$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : la distance est $|5 - (-2)|$ (ou $|-2 - 5|$, c'est la même). Étape 2 — Traduire en distance : c'est bien l'écart entre les deux abscisses. Étape 3 — Calculer : $5 - (-2) = 7$, et $|7| = 7$. Étape 4 — Conclure : la distance vaut 7. Si tu trouves 3, tu as calculé $5 + (-2)$ : pour une distance, on soustrait.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque écriture à sa traduction en distance.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : on repère $a$ et $r$ ; pour $|x + 3|$, on écrit $|x - (-3)|$ donc $a = -3$. Étape 2 — Traduire en distance : $|x - a| \\leq r$ signifie « la distance de $x$ à $a$ est au plus $r$ », et $|x - a| = r$ « exactement $r$ ». Étape 3 — Calculer les bornes : inutile ici, on ne cherche que le sens. Étape 4 — Conclure : $|x - 3| \\leq 2$ ↔ distance à 3 au plus 2 ; $|x - 3| = 2$ ↔ distance à 3 exactement 2 ; $|x - 2| \\leq 3$ ↔ distance à 2 au plus 3 ; $|x + 3| \\leq 2$ ↔ distance à $-3$ au plus 2.",
+                  "answers": [
+                    {
+                      "content": "$|x - 3| \\leq 2$",
+                      "match": "Distance de $x$ à $3$ au plus égale à $2$"
+                    },
+                    {
+                      "content": "$|x - 3| = 2$",
+                      "match": "Distance de $x$ à $3$ exactement égale à $2$"
+                    },
+                    {
+                      "content": "$|x - 2| \\leq 3$",
+                      "match": "Distance de $x$ à $2$ au plus égale à $3$"
+                    },
+                    {
+                      "content": "$|x + 3| \\leq 2$",
+                      "match": "Distance de $x$ à $-3$ au plus égale à $2$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux solutions de l'équation $|x - 1| = 6$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| = r$ : $a = 1$ et $r = 6$. Étape 2 — Traduire en distance : $x$ est à la distance 6 de 1. Étape 3 — Calculer les bornes : $1 + 6 = 7$ et $1 - 6 = -5$. Étape 4 — Conclure : $x = 7$ ou $x = -5$. Les valeurs 5 et $-7$ viennent d'un mauvais centre (le centre est 1, pas $-1$).",
+                  "answers": [
+                    {
+                      "content": "$x = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = -5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$, on a $|x| \\geq 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : $|x| = |x - 0|$, la distance de $x$ à $0$. Étape 2 — Traduire en distance : une distance n'est jamais négative. Étape 3 — Calculer : si $x \\geq 0$, $|x| = x \\geq 0$ ; si $x < 0$, $|x| = -x > 0$. Étape 4 — Conclure : $|x| \\geq 0$ pour tout $x$. L'affirmation est vraie ; seul $x = 0$ donne $|x| = 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $|x - a|$ est la ___ entre $x$ et $a$ sur la droite graduée (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : l'écriture est donnée. Étape 2 — Traduire en distance : c'est précisément le sens de la valeur absolue d'une différence. Étape 3 — Calculer : par exemple $|7 - 3| = 4$ est l'écart entre 7 et 3. Étape 4 — Conclure : le mot attendu est « distance ».",
+                  "answers": [
+                    {
+                      "content": "distance",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pièce a une longueur $L$ en cm avec $|L - 12| \\leq 0,5$. Laquelle de ces longueurs est possible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 12$ et $r = 0,5$. Étape 2 — Traduire en distance : $L$ est à une distance au plus $0,5$ de $12$. Étape 3 — Calculer les bornes : $12 - 0,5 = 11,5$ et $12 + 0,5 = 12,5$, donc $L \\in [11,5\\,;\\,12,5]$. Étape 4 — Conclure : $12,4$ est dans l'intervalle. $11,4$ est trop petit, $12,6$ et $13$ sont trop grands.",
+                  "answers": [
+                    {
+                      "content": "$12,4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$11,4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12,6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$13$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Encadrement et valeur approchée d'un réel",
+          "remember": "Encadrer un réel $x$ à $10^{-n}$ près, c'est trouver deux décimaux $a$ et $b$ tels que $a < x < b$ et $b - a = 10^{-n}$. On dit que $a$ est une valeur approchée de $x$ **par défaut** et $b$ une valeur approchée **par excès**. L'**amplitude** de l'encadrement est $b - a$. L'arrondi de $x$ est celle des deux valeurs qui est la plus proche de $x$. Pour $a \\geq 0$ et $b \\geq 0$ : si $a^2 < n < b^2$, alors $a < \\sqrt{n} < b$. Valeurs à connaître : $\\sqrt{2} = 1,4142\\ldots$ et $\\pi = 3,14159\\ldots$.",
+          "method": [
+            "Choisir la précision demandée (par exemple $0,1$ ou $0,01$) : elle donne le pas des décimaux à tester.",
+            "Encadrer : élever au carré des décimaux consécutifs et repérer les deux carrés entre lesquels se trouve le nombre sous la racine.",
+            "Calculer l'amplitude $b - a$ et nommer les valeurs approchées : $a$ par défaut, $b$ par excès.",
+            "Conclure en écrivant l'encadrement $a < x < b$, avec sa précision."
+          ],
+          "example": {
+            "statement": "Encadrer $\\sqrt{3}$ à $0,1$ près.",
+            "steps": [
+              "Choisir la précision : $0,1$, donc on teste des décimaux au dixième.",
+              "Encadrer : $1,7^2 = 2,89$ et $1,8^2 = 3,24$, et $2,89 < 3 < 3,24$, donc $1,7 < \\sqrt{3} < 1,8$.",
+              "Calculer l'amplitude : $1,8 - 1,7 = 0,1$ ; $1,7$ est la valeur approchée par défaut et $1,8$ par excès.",
+              "Conclure : $1,7 < \\sqrt{3} < 1,8$, à $0,1$ près."
+            ]
+          },
+          "pitfall": "Ne pas encadrer la racine par les carrés. De $1,4^2 = 1,96 < 2 < 2,25 = 1,5^2$, on déduit $1,4 < \\sqrt{2} < 1,5$, et non $1,96 < \\sqrt{2} < 2,25$ : $\\sqrt{2} = 1,414\\ldots$ est plus petit que $1,96$. Vérifie aussi l'amplitude : $1 < \\sqrt{2} < 2$ est juste mais n'est pas à $0,1$ près, car l'amplitude vaut $1$.",
+          "figure": "droite-encadrement",
+          "exercise": [
+            {
+              "title": "Encadrer une racine carrée",
+              "statement": "Dans cet exercice, tu encadres des nombres à une précision donnée avec la méthode de la fiche : choisir la précision, encadrer, calculer l'amplitude, conclure.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel encadrement de $\\sqrt{2}$ à $0,1$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $1,4^2 = 1,96$ et $1,5^2 = 2,25$, et $2$ est compris entre ces deux carrés, donc $1,4 < \\sqrt{2} < 1,5$. Étape 3 — Calculer l'amplitude : $1,5 - 1,4 = 0,1$ ; $1,4$ est la valeur approchée par défaut et $1,5$ par excès. Étape 4 — Conclure : $1,4 < \\sqrt{2} < 1,5$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{2}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$1,4 < \\sqrt{2} < 1,5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1,5 < \\sqrt{2} < 1,6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,3 < \\sqrt{2} < 1,4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,96 < \\sqrt{2} < 2,25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel encadrement de $\\sqrt{5}$ à $0,1$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $2,2^2 = 4,84$ et $2,3^2 = 5,29$, et $5$ est compris entre ces deux carrés, donc $2,2 < \\sqrt{5} < 2,3$. Étape 3 — Calculer l'amplitude : $2,3 - 2,2 = 0,1$ ; $2,2$ est la valeur approchée par défaut et $2,3$ par excès. Étape 4 — Conclure : $2,2 < \\sqrt{5} < 2,3$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{5}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$2,2 < \\sqrt{5} < 2,3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2,3 < \\sqrt{5} < 2,4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2,1 < \\sqrt{5} < 2,2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4,84 < \\sqrt{5} < 5,29$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $2,6 < x < 2,7$. Quelle est l'amplitude de cet encadrement ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir la précision : l'amplitude est la précision de l'encadrement. Étape 2 — Encadrer : l'encadrement est déjà donné, $2,6 < x < 2,7$. Étape 3 — Calculer l'amplitude : $b - a = 2,7 - 2,6 = 0,1$. Étape 4 — Conclure : l'amplitude vaut $0,1$. Si tu trouves $5,3$, tu as additionné les bornes au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "0,1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $3,14 < \\pi < 3,15$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$, donc on compare à des décimaux au centième. Étape 2 — Encadrer : $\\pi = 3,14159\\ldots$, donc $\\pi$ est supérieur à $3,14$ et inférieur à $3,15$. Étape 3 — Calculer l'amplitude : $3,15 - 3,14 = 0,01$ ; $3,14$ est une valeur approchée par défaut et $3,15$ par excès. Étape 4 — Conclure : l'encadrement $3,14 < \\pi < 3,15$ est juste. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel encadrement de $\\sqrt{7}$ à $0,1$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $2,6^2 = 6,76$ et $2,7^2 = 7,29$, et $7$ est compris entre ces deux carrés, donc $2,6 < \\sqrt{7} < 2,7$. Étape 3 — Calculer l'amplitude : $2,7 - 2,6 = 0,1$ ; $2,6$ est la valeur approchée par défaut et $2,7$ par excès. Étape 4 — Conclure : $2,6 < \\sqrt{7} < 2,7$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{7}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$2,6 < \\sqrt{7} < 2,7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2,7 < \\sqrt{7} < 2,8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2,5 < \\sqrt{7} < 2,6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6,76 < \\sqrt{7} < 7,29$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Valeurs approchées et arrondis",
+              "statement": "Dans cet exercice, tu encadres des nombres, tu lis des valeurs approchées par défaut et par excès et tu arrondis, avec la méthode de la fiche : choisir la précision, encadrer, calculer l'amplitude, conclure.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel encadrement de $\\sqrt{3}$ à $0,01$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$, donc on teste des décimaux de pas $0,01$. Étape 2 — Encadrer : $1,73^2 = 2,9929$ et $1,74^2 = 3,0276$, et $3$ est compris entre ces deux carrés, donc $1,73 < \\sqrt{3} < 1,74$. Étape 3 — Calculer l'amplitude : $1,74 - 1,73 = 0,01$ ; $1,73$ est la valeur approchée par défaut et $1,74$ par excès. Étape 4 — Conclure : $1,73 < \\sqrt{3} < 1,74$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{3}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$1,73 < \\sqrt{3} < 1,74$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1,74 < \\sqrt{3} < 1,75$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,72 < \\sqrt{3} < 1,73$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2,9929 < \\sqrt{3} < 3,0276$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'encadrement $1 < \\sqrt{2} < 2$ est un encadrement de $\\sqrt{2}$ à $0,1$ près.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$ est demandé, donc l'amplitude doit valoir $0,1$. Étape 2 — Encadrer : $1 < \\sqrt{2} < 2$ est juste car $1^2 = 1 < 2 < 4 = 2^2$. Étape 3 — Calculer l'amplitude : $2 - 1 = 1$, ce qui n'est pas $0,1$. Étape 4 — Conclure : l'encadrement est vrai mais n'est pas à $0,1$ près ; à $0,1$ près, on a $1,4 < \\sqrt{2} < 1,5$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $1,41 < \\sqrt{2} < 1,42$. Quelle est la valeur approchée de $\\sqrt{2}$ par excès à $0,01$ près ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$. Étape 2 — Encadrer : l'encadrement est donné, $1,41 < \\sqrt{2} < 1,42$. Étape 3 — Calculer l'amplitude : $1,42 - 1,41 = 0,01$ ; la borne de gauche est la valeur par défaut, celle de droite la valeur par excès. Étape 4 — Conclure : la valeur approchée par excès est $1,42$. La valeur $1,41$ est celle par défaut.",
+                  "answers": [
+                    {
+                      "content": "1,42",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'arrondi de $\\sqrt{2}$ au centième ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : le centième, $0,01$. Étape 2 — Encadrer : $1,41 < \\sqrt{2} < 1,42$, avec $\\sqrt{2} = 1,4142\\ldots$. Étape 3 — Calculer l'amplitude : $0,01$ ; $\\sqrt{2} - 1,41 \\approx 0,0042$ est plus petit que $1,42 - \\sqrt{2} \\approx 0,0058$. Étape 4 — Conclure : l'arrondi est la valeur la plus proche, $1,41$. $1,42$ est la valeur par excès, mais pas la plus proche ; $1,40$ et $1,4$ ne sont pas à moins de $0,01$.",
+                  "answers": [
+                    {
+                      "content": "$1,41$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1,42$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,40$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'encadrement $3,14 < \\pi < 3,15$, le nombre $3,14$ est une valeur approchée par ___ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$. Étape 2 — Encadrer : l'encadrement est donné. Étape 3 — Calculer l'amplitude : $0,01$ ; la borne de gauche est inférieure à $\\pi$, donc une valeur par défaut. Étape 4 — Conclure : $3,14$ est une valeur approchée par défaut. La borne $3,15$ est par excès.",
+                  "answers": [
+                    {
+                      "content": "défaut",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque racine carrée à son encadrement à $0,01$ près.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$. Étape 2 — Encadrer : $1,41^2 = 1,9881 < 2 < 2,0164 = 1,42^2$ ; $1,73^2 = 2,9929 < 3 < 3,0276 = 1,74^2$ ; $2,23^2 = 4,9729 < 5 < 5,0176 = 2,24^2$ ; $2,64^2 = 6,9696 < 7 < 7,0225 = 2,65^2$. Étape 3 — Calculer l'amplitude : chaque encadrement a pour amplitude $0,01$. Étape 4 — Conclure : $\\sqrt{2}$ ↔ 1,41 et 1,42 ; $\\sqrt{3}$ ↔ 1,73 et 1,74 ; $\\sqrt{5}$ ↔ 2,23 et 2,24 ; $\\sqrt{7}$ ↔ 2,64 et 2,65.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{2}$",
+                      "match": "$1,41 < \\sqrt{2} < 1,42$"
+                    },
+                    {
+                      "content": "$\\sqrt{3}$",
+                      "match": "$1,73 < \\sqrt{3} < 1,74$"
+                    },
+                    {
+                      "content": "$\\sqrt{5}$",
+                      "match": "$2,23 < \\sqrt{5} < 2,24$"
+                    },
+                    {
+                      "content": "$\\sqrt{7}$",
+                      "match": "$2,64 < \\sqrt{7} < 2,65$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les nombres du tableau",
+          "statement": "Le professeur de mathématiques de la classe de 2nde C écrit au tableau des nombres, et les élèves doivent les ranger dans les ensembles $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{D}$, $\\mathbb{Q}$ et $\\mathbb{R}$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le plus petit ensemble qui contient le nombre $\\sqrt{49}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{49}$ est déjà simplifié ou vaut $7$. Étape 2 — Regarder si c'est un entier : oui, c'est un entier naturel. Étape 3 — Fraction ou décimal : inutile, c'est déjà un entier. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{N}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit.",
+              "answers": [
+                {
+                  "content": "$\\mathbb{N}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathbb{Z}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{D}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{Q}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{7}{20}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{7}{20}$ est déjà simplifié ou vaut $0,35$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est une fraction (ou un nombre à virgule) dont le dénominateur irréductible n'a que des facteurs 2 et 5, donc un décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{D}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit. La proposition $\\mathbb{N}$ oublie les nombres négatifs ou les nombres à virgule.",
+              "answers": [
+                {
+                  "content": "$\\mathbb{D}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathbb{Z}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{Q}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{N}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{5}{6}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{5}{6}$ est déjà simplifié ou vaut $\\frac{5}{6}$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est un quotient d'entiers, mais son dénominateur irréductible a un facteur autre que 2 et 5 : il n'est pas décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{Q}$. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition « $\\mathbb{R}$ mais pas $\\mathbb{Q}$ » est réservée aux nombres qui ne sont pas des quotients d'entiers. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas.",
+              "answers": [
+                {
+                  "content": "$\\mathbb{Q}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathbb{D}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{Z}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces nombres, quels sont les trois nombres rationnels ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{49} = 7$ et $0,25 = \\frac{1}{4}$. Étape 2 — Regarder si c'est un entier : $7$ est un entier. Étape 3 — Fraction ou décimal : $\\frac{1}{4}$ et $\\frac{5}{6}$ sont des quotients d'entiers. Étape 4 — Conclure : $\\sqrt{49}$, $0,25$ et $\\frac{5}{6}$ sont rationnels. $\\sqrt{3}$ et $\\pi$ ne sont pas des quotients d'entiers.",
+              "answers": [
+                {
+                  "content": "$\\sqrt{49}$",
+                  "correct": true
+                },
+                {
+                  "content": "$0,25$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{5}{6}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\sqrt{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\pi$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le nombre $\\sqrt{3} + 1$ est irrationnel.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{3} + 1$ ne se simplifie pas. Étape 2 — Regarder si c'est un entier : $\\sqrt{3} + 1 \\approx 2,73$, ce n'est pas un entier. Étape 3 — Fraction ou décimal : si $\\sqrt{3} + 1$ était un quotient d'entiers, alors $\\sqrt{3} = (\\sqrt{3} + 1) - 1$ en serait un aussi, ce qui est faux. Étape 4 — Conclure : $\\sqrt{3} + 1$ est irrationnel. L'affirmation est vraie ; ajouter un entier à un irrationnel ne le rend pas rationnel.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La chambre froide d'ignames",
+          "statement": "Dans un entrepôt de Bouaké, les ignames sont conservées dans une chambre froide où la température $t$ (en degrés Celsius) doit rester comprise entre 12 et 16, bornes incluses.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "On note $x$ la température acceptable. Quel intervalle correspond à la condition $12 \\leq x \\leq 16$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Traduire : la condition est $12 \\leq x \\leq 16$. Étape 2 — Repérer les bornes : la borne 12 est incluse (inégalité large) ; la borne 16 est incluse (inégalité large). Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $[12\\,;\\,16]$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+              "answers": [
+                {
+                  "content": "$[12\\,;\\,16]$",
+                  "correct": true
+                },
+                {
+                  "content": "$]12\\,;\\,16]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[12\\,;\\,16[$",
+                  "correct": false
+                },
+                {
+                  "content": "$]12\\,;\\,16[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le thermomètre indique 16,5 °C. Le nombre $16,5$ appartient à l'intervalle $[12\\,;\\,16]$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Traduire : $[12\\,;\\,16]$ correspond à $12 \\leq x \\leq 16$. Étape 2 — Repérer les bornes : 12 est incluse ; 16 est incluse. Étape 3 — Écrire l'intervalle : il est donné, on compare $16,5$ à ses bornes. Étape 4 — Vérifier : $16,5$ n’est pas entre les bornes, donc l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La condition s'écrit aussi avec une distance. Quel est l'ensemble des réels $x$ qui vérifient $|x - 14| \\leq 2$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 14| \\leq 2$ avec $a = 14$ et $r = 2$. Étape 2 — Traduire en distance : $x$ est à une distance de $14$ au plus égale à $2$. Étape 3 — Calculer les bornes : $a - r = 12$ et $a + r = 16$. Étape 4 — Conclure : $x \\in [12\\,;\\,16]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $14$.",
+              "answers": [
+                {
+                  "content": "$[12\\,;\\,16]$",
+                  "correct": true
+                },
+                {
+                  "content": "$[-16\\,;\\,-12]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[-2\\,;\\,2]$",
+                  "correct": false
+                },
+                {
+                  "content": "$]12\\,;\\,16[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La température reste proche de 14 °C. Une valeur $x$ vérifie $|x - 14| \\leq 2$. Quelle est la plus grande valeur possible de $x$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 14$ et $r = 2$. Étape 2 — Traduire en distance : $x$ est au plus à $2$ de $14$. Étape 3 — Calculer les bornes : $a - r = 12$ et $a + r = 16$. Étape 4 — Conclure : $x \\in [12\\,;\\,16]$, donc la plus grande valeur est $16$. Si tu trouves $12$, tu as inversé la borne basse et la borne haute.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une deuxième chambre accepte les températures de $J = ]15\\,;\\,20]$. Les ignames peuvent être placées dans les deux. On pose $I = [12\\,;\\,16]$ et $J = ]15\\,;\\,20]$. Quel est l'intervalle $I \\cap J$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Traduire : $I$ correspond à $12 \\leq x \\leq 16$ et $J$ à $15 < x \\leq 20$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 15, et la plus petite borne supérieure, 16 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $]15\\,;\\,16]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+              "answers": [
+                {
+                  "content": "$]15\\,;\\,16]$",
+                  "correct": true
+                },
+                {
+                  "content": "$[12\\,;\\,20]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[15\\,;\\,16]$",
+                  "correct": false
+                },
+                {
+                  "content": "$]15\\,;\\,16[$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les sacs de cacao de 50 kg",
+          "statement": "Une coopérative de Soubré remplit des sacs de cacao dont la masse $m$ (en kg) doit vérifier $|m - 50| \\leq 0,5$ pour être acceptée par l'acheteur.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La tolérance est donnée par la masse nominale 50 kg. Quel est l'ensemble des réels $x$ qui vérifient $|x - 50| \\leq 0,5$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 50| \\leq 0,5$ avec $a = 50$ et $r = 0,5$. Étape 2 — Traduire en distance : $x$ est à une distance de $50$ au plus égale à $0,5$. Étape 3 — Calculer les bornes : $a - r = 49,5$ et $a + r = 50,5$. Étape 4 — Conclure : $x \\in [49,5\\,;\\,50,5]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $50$.",
+              "answers": [
+                {
+                  "content": "$[49,5\\,;\\,50,5]$",
+                  "correct": true
+                },
+                {
+                  "content": "$[-50,5\\,;\\,-49,5]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[-0,5\\,;\\,0,5]$",
+                  "correct": false
+                },
+                {
+                  "content": "$]49,5\\,;\\,50,5[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'acheteur veut connaître la masse minimale acceptée. Une valeur $x$ vérifie $|x - 50| \\leq 0,5$. Quelle est la plus petite valeur possible de $x$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 50$ et $r = 0,5$. Étape 2 — Traduire en distance : $x$ est au plus à $0,5$ de $50$. Étape 3 — Calculer les bornes : $a - r = 49,5$ et $a + r = 50,5$. Étape 4 — Conclure : $x \\in [49,5\\,;\\,50,5]$, donc la plus petite valeur est $49,5$. Si tu trouves $50,5$, tu as inversé la borne basse et la borne haute.",
+              "answers": [
+                {
+                  "content": "49,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac pèse 51,5 kg. Quel est son écart avec 50 kg ? Calcule $|50 - 51,5|$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : c'est la distance entre $50$ et $51,5$. Étape 2 — Traduire en distance : on calcule l'écart entre les deux nombres. Étape 3 — Calculer : $50 - 51,5 = -1,5$, puis on prend la valeur absolue (toujours positive ou nulle). Étape 4 — Conclure : $|50 - 51,5| = 1,5$. Si tu obtiens $-1,5$ ou un autre signe, tu as oublié que la valeur absolue est une distance, donc positive.",
+              "answers": [
+                {
+                  "content": "1,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac pèse 51,5 kg. Le nombre $51,5$ appartient à l'intervalle $[49,5\\,;\\,50,5]$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Traduire : $[49,5\\,;\\,50,5]$ correspond à $49,5 \\leq x \\leq 50,5$. Étape 2 — Repérer les bornes : 49,5 est incluse ; 50,5 est incluse. Étape 3 — Écrire l'intervalle : il est donné, on compare $51,5$ à ses bornes. Étape 4 — Vérifier : $51,5$ n’est pas entre les bornes, donc l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac pèse 50,3 kg. Montre qu'il respecte la tolérance $|m - 50| \\leq 0,5$ en suivant la méthode de la fiche.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Traduit la condition en distance ou en intervalle",
+                "Calcule correctement l'écart $0,3$ ou les bornes",
+                "Conclut que le sac est accepté"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 50$, $r = 0,5$ et $m = 50,3$. Étape 2 — Traduire en distance : l'écart entre la masse du sac et 50 doit être au plus de $0,5$. Étape 3 — Calculer : $|50,3 - 50| = |0,3| = 0,3$, ou les bornes $49,5$ et $50,5$ encadrent $50,3$. Étape 4 — Conclure : $0,3 \\leq 0,5$, donc $50,3 \\in [49,5\\,;\\,50,5]$ et le sac est accepté. Barème sur 2 : traduction en distance ou en intervalle (0,5 point), calcul de l'écart ou des bornes (1 point), conclusion (0,5 point).",
+              "answers": [],
+              "starter": "Je calcule $|50,3 - 50|$…"
+            }
+          ]
+        },
+        {
+          "title": "Bilan : ensembles, intervalles et encadrements",
+          "statement": "Un exercice de bilan, au niveau du devoir, mélange les nombres, les intervalles, les valeurs absolues et les encadrements.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "On veut encadrer la racine carrée de 11. Quel encadrement de $\\sqrt{11}$ à $0,1$ près est correct ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $3,3^2 = 10,89$ et $3,4^2 = 11,56$, et $11$ est compris entre ces deux carrés, donc $3,3 < \\sqrt{11} < 3,4$. Étape 3 — Calculer l'amplitude : $3,4 - 3,3 = 0,1$ ; $3,3$ est la valeur approchée par défaut et $3,4$ par excès. Étape 4 — Conclure : $3,3 < \\sqrt{11} < 3,4$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{11}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+              "answers": [
+                {
+                  "content": "$3,3 < \\sqrt{11} < 3,4$",
+                  "correct": true
+                },
+                {
+                  "content": "$3,4 < \\sqrt{11} < 3,5$",
+                  "correct": false
+                },
+                {
+                  "content": "$3,2 < \\sqrt{11} < 3,3$",
+                  "correct": false
+                },
+                {
+                  "content": "$10,89 < \\sqrt{11} < 11,56$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On cherche les réels à la distance 2 de 5. Quelles sont les solutions de $|x - 5| = 2$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous la forme $|x - a| = r$ : $|x - 5| = 2$, donc $a = 5$ et $r = 2$. Étape 2 — Traduire en distance : $x$ est à la distance $2$ de $5$. Étape 3 — Calculer les bornes : $a - r = 5 - 2 = 3$ et $a + r = 5 + 2 = 7$. Étape 4 — Conclure : $x = 3$ ou $x = 7$. Les autres propositions se trompent de centre (par exemple $-5$ au lieu de $5$) ou prennent $a$ et $r$ comme solutions.",
+              "answers": [
+                {
+                  "content": "$x = 3$ ou $x = 7$",
+                  "correct": true
+                },
+                {
+                  "content": "$x = 5$ ou $x = 2$",
+                  "correct": false
+                },
+                {
+                  "content": "$x = -7$ ou $x = -3$",
+                  "correct": false
+                },
+                {
+                  "content": "$x = -3$ ou $x = 7$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On pose $I = [-3\\,;\\,4[$ et $J = [0\\,;\\,9]$. Quel est l'intervalle $I \\cap J$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Traduire : $I$ correspond à $-3 \\leq x < 4$ et $J$ à $0 \\leq x \\leq 9$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 0, et la plus petite borne supérieure, 4 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $[0\\,;\\,4[$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+              "answers": [
+                {
+                  "content": "$[0\\,;\\,4[$",
+                  "correct": true
+                },
+                {
+                  "content": "$[-3\\,;\\,9]$",
+                  "correct": false
+                },
+                {
+                  "content": "$]0\\,;\\,4[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[0\\,;\\,4]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{\\sqrt{12}}{\\sqrt{3}}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{\\sqrt{12}}{\\sqrt{3}}$ est déjà simplifié ou vaut $2$. Étape 2 — Regarder si c'est un entier : oui, c'est un entier naturel. Étape 3 — Fraction ou décimal : inutile, c'est déjà un entier. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{N}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit.",
+              "answers": [
+                {
+                  "content": "$\\mathbb{N}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathbb{Z}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{D}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{Q}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Résous $|x - 2| \\leq 3$ et écris l'ensemble des solutions sous forme d'intervalle. Combien d'entiers relatifs appartiennent à cet intervalle ? Rédige avec la méthode de la fiche.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Identifie le centre 2 et le rayon 3",
+                "Calcule les bornes $-1$ et $5$",
+                "Écrit l'intervalle $[-1\\,;\\,5]$ avec les crochets fermés",
+                "Dénombre 7 entiers"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 2$ et $r = 3$. Étape 2 — Traduire en distance : $x$ est à une distance de 2 au plus égale à 3. Étape 3 — Calculer les bornes : $2 - 3 = -1$ et $2 + 3 = 5$. Étape 4 — Conclure : $x \\in [-1\\,;\\,5]$, bornes incluses. Les entiers sont $-1, 0, 1, 2, 3, 4, 5$ : il y en a 7. Barème sur 3 : écriture $a = 2$, $r = 3$ (0,5 point), bornes (1 point), intervalle avec les bons crochets (1 point), dénombrement (0,5 point).",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Ensembles de nombres et inclusions ; intervalles, bornes et intersection ; valeur absolue, distance, équations et inéquations ; encadrement et valeur approchée d'un réel.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On range des nombres dans les ensembles $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{D}$, $\\mathbb{Q}$ et $\\mathbb{R}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Simplifie d'abord, puis teste dans l'ordre : entier, décimal, rationnel.",
+              "questions": [
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $-3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $-3$ est déjà simplifié ou vaut $-3$. Étape 2 — Regarder si c'est un entier : oui, c'est un entier relatif négatif. Étape 3 — Fraction ou décimal : inutile, c'est déjà un entier. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{Z}$. La proposition $\\mathbb{N}$ oublie les nombres négatifs ou les nombres à virgule. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{9}{4}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{9}{4}$ est déjà simplifié ou vaut $2,25$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est une fraction (ou un nombre à virgule) dont le dénominateur irréductible n'a que des facteurs 2 et 5, donc un décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{D}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit. La proposition $\\mathbb{N}$ oublie les nombres négatifs ou les nombres à virgule.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{2}{7}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{2}{7}$ est déjà simplifié ou vaut $\\frac{2}{7}$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est un quotient d'entiers, mais son dénominateur irréductible a un facteur autre que 2 et 5 : il n'est pas décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{Q}$. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition « $\\mathbb{R}$ mais pas $\\mathbb{Q}$ » est réservée aux nombres qui ne sont pas des quotients d'entiers. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\sqrt{5}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{5}$ ne se simplifie pas en fraction ou en entier. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : ce n'est pas un quotient de deux entiers. Étape 4 — Conclure : c'est un irrationnel, donc seulement un réel : $\\mathbb{R}$ mais pas $\\mathbb{Q}$. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble $\\mathbb{N}$ est contenu dans l'ensemble $\\mathbb{Z}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : on prend un entier naturel, par exemple $5$. Étape 2 — Regarder si c'est un entier : $5$ est aussi un entier relatif (positif). Étape 3 — Fraction ou décimal : inutile. Étape 4 — Conclure : tout entier naturel est un entier relatif, donc $\\mathbb{N} \\subset \\mathbb{Z}$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On écrit des intervalles à partir d'inégalités et on cherche leur intersection.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque borne, regarde si l'inégalité est large (borne incluse) ou stricte (borne exclue).",
+              "questions": [
+                {
+                  "content": "Quel intervalle correspond à la condition $x \\leq 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $x \\leq 2$. Étape 2 — Repérer les bornes : la borne 2 est incluse (inégalité large) ; le symbole $\\infty$ est toujours entouré d'un crochet ouvert. Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $]-\\infty\\,;\\,2]$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;\\,2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;\\,2[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-2\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel intervalle correspond à la condition $1 \\leq x < 6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $1 \\leq x < 6$. Étape 2 — Repérer les bornes : la borne 1 est incluse (inégalité large) ; la borne 6 est exclue (inégalité stricte). Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $[1\\,;\\,6[$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;\\,6[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1\\,;\\,6[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[1\\,;\\,6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;\\,6]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $6$ appartient à l'intervalle $[1\\,;\\,6[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $[1\\,;\\,6[$ correspond à $1 \\leq x < 6$. Étape 2 — Repérer les bornes : 1 est incluse ; 6 est exclue. Étape 3 — Écrire l'intervalle : il est donné, on compare $6$ à ses bornes. Étape 4 — Vérifier : $6$ est une borne, et cette borne est exclue, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $I = [0\\,;\\,5]$ et $J = [3\\,;\\,9[$. Quel est l'intervalle $I \\cap J$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : $I$ correspond à $0 \\leq x \\leq 5$ et $J$ à $3 \\leq x < 9$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 3, et la plus petite borne supérieure, 5 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $[3\\,;\\,5]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;\\,5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[0\\,;\\,9[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;\\,9]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3\\,;\\,5]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers relatifs appartiennent à l'intervalle $]-3\\,;\\,2]$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Traduire : $]-3\\,;\\,2]$ correspond à $-3 < x \\leq 2$. Étape 2 — Repérer les bornes : -3 est exclue et 2 est incluse. Étape 3 — Écrire l'intervalle : les entiers qui y sont sont -2, -1, 0, 1, 2. Étape 4 — Vérifier : en comptant, on trouve 5 entiers. Si tu trouves 6 ou 4, tu as mal traité une borne : une borne exclue ne compte pas, une borne incluse compte.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On calcule des valeurs absolues et on résout des équations et des inéquations.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une valeur absolue est une distance : elle n'est jamais négative.",
+              "questions": [
+                {
+                  "content": "Calcule $|-4 - 3|$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : c'est la distance entre $-4$ et $3$. Étape 2 — Traduire en distance : on calcule l'écart entre les deux nombres. Étape 3 — Calculer : $-4 - 3 = -7$, puis on prend la valeur absolue (toujours positive ou nulle). Étape 4 — Conclure : $|-4 - 3| = 7$. Si tu obtiens $-7$ ou un autre signe, tu as oublié que la valeur absolue est une distance, donc positive.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $|x - 6| = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| = r$ : $|x - 6| = 2$, donc $a = 6$ et $r = 2$. Étape 2 — Traduire en distance : $x$ est à la distance $2$ de $6$. Étape 3 — Calculer les bornes : $a - r = 6 - 2 = 4$ et $a + r = 6 + 2 = 8$. Étape 4 — Conclure : $x = 4$ ou $x = 8$. Les autres propositions se trompent de centre (par exemple $-6$ au lieu de $6$) ou prennent $a$ et $r$ comme solutions.",
+                  "answers": [
+                    {
+                      "content": "$x = 4$ ou $x = 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 6$ ou $x = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -8$ ou $x = -4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -4$ ou $x = 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x - 3| \\leq 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 3| \\leq 1$ avec $a = 3$ et $r = 1$. Étape 2 — Traduire en distance : $x$ est à une distance de $3$ au plus égale à $1$. Étape 3 — Calculer les bornes : $a - r = 2$ et $a + r = 4$. Étape 4 — Conclure : $x \\in [2\\,;\\,4]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $3$.",
+                  "answers": [
+                    {
+                      "content": "$[2\\,;\\,4]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-4\\,;\\,-2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;\\,1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]2\\,;\\,4[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x| < 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| < r$ : $|x| < 5$ avec $a = 0$ et $r = 5$. Étape 2 — Traduire en distance : $x$ est à une distance de $0$ strictement inférieure à $5$. Étape 3 — Calculer les bornes : $a - r = -5$ et $a + r = 5$. Étape 4 — Conclure : $x \\in ]-5\\,;\\,5[$ (bornes exclues car l'inégalité est stricte). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $0$.",
+                  "answers": [
+                    {
+                      "content": "$]-5\\,;\\,5[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-5\\,;\\,5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-5\\,;\\,5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-5\\,;\\,5]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le réel $x = -5$, on a $|x| = -5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : $|-5| = |-5 - 0|$, la distance de $-5$ à $0$. Étape 2 — Traduire en distance : une distance est positive. Étape 3 — Calculer : $x < 0$, donc $|x| = -x = -(-5) = 5$. Étape 4 — Conclure : $|-5| = 5$, et non $-5$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On encadre des nombres et on lit des valeurs approchées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour une racine, élève des décimaux au carré et compare au nombre sous la racine.",
+              "questions": [
+                {
+                  "content": "Quel encadrement de $\\sqrt{6}$ à $0,1$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $2,4^2 = 5,76$ et $2,5^2 = 6,25$, et $6$ est compris entre ces deux carrés, donc $2,4 < \\sqrt{6} < 2,5$. Étape 3 — Calculer l'amplitude : $2,5 - 2,4 = 0,1$ ; $2,4$ est la valeur approchée par défaut et $2,5$ par excès. Étape 4 — Conclure : $2,4 < \\sqrt{6} < 2,5$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{6}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$2,4 < \\sqrt{6} < 2,5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2,5 < \\sqrt{6} < 2,6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2,3 < \\sqrt{6} < 2,4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5,76 < \\sqrt{6} < 6,25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel encadrement de $\\sqrt{10}$ à $0,1$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $3,1^2 = 9,61$ et $3,2^2 = 10,24$, et $10$ est compris entre ces deux carrés, donc $3,1 < \\sqrt{10} < 3,2$. Étape 3 — Calculer l'amplitude : $3,2 - 3,1 = 0,1$ ; $3,1$ est la valeur approchée par défaut et $3,2$ par excès. Étape 4 — Conclure : $3,1 < \\sqrt{10} < 3,2$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{10}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$3,1 < \\sqrt{10} < 3,2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3,2 < \\sqrt{10} < 3,3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 < \\sqrt{10} < 3,1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9,61 < \\sqrt{10} < 10,24$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $1,73 < x < 1,74$. Quelle est l'amplitude de cet encadrement ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir la précision : l'amplitude est la précision de l'encadrement. Étape 2 — Encadrer : l'encadrement est déjà donné, $1,73 < x < 1,74$. Étape 3 — Calculer l'amplitude : $b - a = 1,74 - 1,73 = 0,01$. Étape 4 — Conclure : l'amplitude vaut $0,01$. Si tu trouves $3,47$, tu as additionné les bornes au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "0,01",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $3,14 < \\frac{22}{7} < 3,15$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$. Étape 2 — Encadrer : $\\frac{22}{7} = 3,142857\\ldots$, donc il est supérieur à $3,14$ et inférieur à $3,15$. Étape 3 — Calculer l'amplitude : $3,15 - 3,14 = 0,01$. Étape 4 — Conclure : l'encadrement est juste, $\\frac{22}{7}$ est entre $3,14$ et $3,15$ (même s'il n'est pas égal à $\\pi$). L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'arrondi de $\\pi$ au centième ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : le centième, $0,01$. Étape 2 — Encadrer : $3,14 < \\pi < 3,15$ avec $\\pi = 3,14159\\ldots$. Étape 3 — Calculer l'amplitude : $0,01$ ; $\\pi - 3,14 \\approx 0,0016$ est bien plus petit que $3,15 - \\pi \\approx 0,0084$. Étape 4 — Conclure : l'arrondi est $3,14$. $3,15$ est la valeur par excès mais pas la plus proche.",
+                  "answers": [
+                    {
+                      "content": "$3,14$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3,15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3,16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3,1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Les nombres réels dans la vie courante en Côte d'Ivoire",
+          "notions": "Températures à Korhogo, masse de sacs de riz et tolérances, prix d'un marché, découpe d'une planche : intervalles, intersection, valeur absolue comme distance, encadrement et arrondi.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Korhogo, pendant une journée de la saison sèche, la température $t$ (en °C) a toujours été comprise entre 19 et 35, bornes incluses.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La température moyenne est le centre de l'intervalle, la demi-amplitude est son rayon.",
+              "questions": [
+                {
+                  "content": "On note $x$ la température relevée. Quel intervalle correspond à la condition $19 \\leq x \\leq 35$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $19 \\leq x \\leq 35$. Étape 2 — Repérer les bornes : la borne 19 est incluse (inégalité large) ; la borne 35 est incluse (inégalité large). Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $[19\\,;\\,35]$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$[19\\,;\\,35]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]19\\,;\\,35]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[19\\,;\\,35[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]19\\,;\\,35[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le maximum de la journée est 35 °C. Le nombre $35$ appartient à l'intervalle $[19\\,;\\,35]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $[19\\,;\\,35]$ correspond à $19 \\leq x \\leq 35$. Étape 2 — Repérer les bornes : 19 est incluse ; 35 est incluse. Étape 3 — Écrire l'intervalle : il est donné, on compare $35$ à ses bornes. Étape 4 — Vérifier : $35$ est une borne, et cette borne est incluse, donc l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On résume le relevé avec une distance à la température moyenne. Quel est l'ensemble des réels $x$ qui vérifient $|x - 27| \\leq 8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 27| \\leq 8$ avec $a = 27$ et $r = 8$. Étape 2 — Traduire en distance : $x$ est à une distance de $27$ au plus égale à $8$. Étape 3 — Calculer les bornes : $a - r = 19$ et $a + r = 35$. Étape 4 — Conclure : $x \\in [19\\,;\\,35]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $27$.",
+                  "answers": [
+                    {
+                      "content": "$[19\\,;\\,35]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-35\\,;\\,-19]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-8\\,;\\,8]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]19\\,;\\,35[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les températures restent proches de 27 °C. Une valeur $x$ vérifie $|x - 27| \\leq 8$. Quelle est la plus grande valeur possible de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 27$ et $r = 8$. Étape 2 — Traduire en distance : $x$ est au plus à $8$ de $27$. Étape 3 — Calculer les bornes : $a - r = 19$ et $a + r = 35$. Étape 4 — Conclure : $x \\in [19\\,;\\,35]$, donc la plus grande valeur est $35$. Si tu trouves $19$, tu as inversé la borne basse et la borne haute.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un thermomètre donne des valeurs dans $J = [30\\,;\\,40]$. On pose $I = [19\\,;\\,35]$ et $J = [30\\,;\\,40]$. Quel est l'intervalle $I \\cap J$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : $I$ correspond à $19 \\leq x \\leq 35$ et $J$ à $30 \\leq x \\leq 40$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 30, et la plus petite borne supérieure, 35 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $[30\\,;\\,35]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+                  "answers": [
+                    {
+                      "content": "$[30\\,;\\,35]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[19\\,;\\,40]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]30\\,;\\,35]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[30\\,;\\,35[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une boutique de Yopougon, les sacs de riz sont vendus pour 25 kg. L'étiquette autorise une masse $m$ (en kg) vérifiant $|m - 25| \\leq 0,2$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare l'écart $|m - 25|$ à la tolérance 0,2.",
+              "questions": [
+                {
+                  "content": "L'étiquette donne la tolérance. Quel est l'ensemble des réels $x$ qui vérifient $|x - 25| \\leq 0,2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 25| \\leq 0,2$ avec $a = 25$ et $r = 0,2$. Étape 2 — Traduire en distance : $x$ est à une distance de $25$ au plus égale à $0,2$. Étape 3 — Calculer les bornes : $a - r = 24,8$ et $a + r = 25,2$. Étape 4 — Conclure : $x \\in [24,8\\,;\\,25,2]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $25$.",
+                  "answers": [
+                    {
+                      "content": "$[24,8\\,;\\,25,2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-25,2\\,;\\,-24,8]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-0,2\\,;\\,0,2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]24,8\\,;\\,25,2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le client contrôle la masse minimale. Une valeur $x$ vérifie $|x - 25| \\leq 0,2$. Quelle est la plus petite valeur possible de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 25$ et $r = 0,2$. Étape 2 — Traduire en distance : $x$ est au plus à $0,2$ de $25$. Étape 3 — Calculer les bornes : $a - r = 24,8$ et $a + r = 25,2$. Étape 4 — Conclure : $x \\in [24,8\\,;\\,25,2]$, donc la plus petite valeur est $24,8$. Si tu trouves $25,2$, tu as inversé la borne basse et la borne haute.",
+                  "answers": [
+                    {
+                      "content": "24,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac pèse 25,15 kg. Calcule $|25 - 25,15|$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : c'est la distance entre $25$ et $25,15$. Étape 2 — Traduire en distance : on calcule l'écart entre les deux nombres. Étape 3 — Calculer : $25 - 25,15 = -0,15$, puis on prend la valeur absolue (toujours positive ou nulle). Étape 4 — Conclure : $|25 - 25,15| = 0,15$. Si tu obtiens $-0,15$ ou un autre signe, tu as oublié que la valeur absolue est une distance, donc positive.",
+                  "answers": [
+                    {
+                      "content": "0,15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac pèse 25,15 kg. Le nombre $25,15$ appartient à l'intervalle $[24,8\\,;\\,25,2]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $[24,8\\,;\\,25,2]$ correspond à $24,8 \\leq x \\leq 25,2$. Étape 2 — Repérer les bornes : 24,8 est incluse ; 25,2 est incluse. Étape 3 — Écrire l'intervalle : il est donné, on compare $25,15$ à ses bornes. Étape 4 — Vérifier : $25,15$ est entre les bornes, donc l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un autre sac pèse 25,35 kg. Le nombre $25,35$ appartient à l'intervalle $[24,8\\,;\\,25,2]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $[24,8\\,;\\,25,2]$ correspond à $24,8 \\leq x \\leq 25,2$. Étape 2 — Repérer les bornes : 24,8 est incluse ; 25,2 est incluse. Étape 3 — Écrire l'intervalle : il est donné, on compare $25,35$ à ses bornes. Étape 4 — Vérifier : $25,35$ n’est pas entre les bornes, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au marché de Treichville, une vendeuse affiche le prix $p$ (en francs) d'un tas de mangues : $p$ est strictement supérieur à 500 et au plus égal à 800.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une borne exclue ne fait pas partie de l'intervalle : teste-la.",
+              "questions": [
+                {
+                  "content": "On note $x$ le prix du tas. Quel intervalle correspond à la condition $500 < x \\leq 800$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $500 < x \\leq 800$. Étape 2 — Repérer les bornes : la borne 500 est exclue (inégalité stricte) ; la borne 800 est incluse (inégalité large). Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $]500\\,;\\,800]$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$]500\\,;\\,800]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[500\\,;\\,800]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]500\\,;\\,800[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[500\\,;\\,800[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas coûte 500 F. Le nombre $500$ appartient à l'intervalle $]500\\,;\\,800]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $]500\\,;\\,800]$ correspond à $500 < x \\leq 800$. Étape 2 — Repérer les bornes : 500 est exclue ; 800 est incluse. Étape 3 — Écrire l'intervalle : il est donné, on compare $500$ à ses bornes. Étape 4 — Vérifier : $500$ est une borne, et cette borne est exclue, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cliente accepte les prix de $J = [700\\,;\\,1000]$. On pose $I = ]500\\,;\\,800]$ et $J = [700\\,;\\,1000]$. Quel est l'intervalle $I \\cap J$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : $I$ correspond à $500 < x \\leq 800$ et $J$ à $700 \\leq x \\leq 1000$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 700, et la plus petite borne supérieure, 800 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $[700\\,;\\,800]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+                  "answers": [
+                    {
+                      "content": "$[700\\,;\\,800]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]500\\,;\\,1000]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[500\\,;\\,1000]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]700\\,;\\,800]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un prix est à 150 F de 650 F. On résout l'équation correspondante. Quelles sont les solutions de $|x - 650| = 150$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| = r$ : $|x - 650| = 150$, donc $a = 650$ et $r = 150$. Étape 2 — Traduire en distance : $x$ est à la distance $150$ de $650$. Étape 3 — Calculer les bornes : $a - r = 650 - 150 = 500$ et $a + r = 650 + 150 = 800$. Étape 4 — Conclure : $x = 500$ ou $x = 800$. Les autres propositions se trompent de centre (par exemple $-650$ au lieu de $650$) ou prennent $a$ et $r$ comme solutions.",
+                  "answers": [
+                    {
+                      "content": "$x = 500$ ou $x = 800$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 650$ ou $x = 150$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -800$ ou $x = -500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -500$ ou $x = 800$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la distance entre 800 F et 650 F ? Calcule $|800 - 650|$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : c'est la distance entre $800$ et $650$. Étape 2 — Traduire en distance : on calcule l'écart entre les deux nombres. Étape 3 — Calculer : $800 - 650 = 150$, puis on prend la valeur absolue (toujours positive ou nulle). Étape 4 — Conclure : $|800 - 650| = 150$. Si tu obtiens $-150$ ou un autre signe, tu as oublié que la valeur absolue est une distance, donc positive.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un menuisier de Bouaké doit découper une planche de $\\sqrt{2}$ mètres de long. Il utilise un mètre gradué au centimètre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour un encadrement, compare le nombre sous la racine aux carrés des décimaux.",
+              "questions": [
+                {
+                  "content": "Il encadre la longueur. Quel encadrement de $\\sqrt{2}$ à $0,01$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$, donc on teste des décimaux de pas $0,01$. Étape 2 — Encadrer : $1,41^2 = 1,9881$ et $1,42^2 = 2,0164$, et $2$ est compris entre ces deux carrés, donc $1,41 < \\sqrt{2} < 1,42$. Étape 3 — Calculer l'amplitude : $1,42 - 1,41 = 0,01$ ; $1,41$ est la valeur approchée par défaut et $1,42$ par excès. Étape 4 — Conclure : $1,41 < \\sqrt{2} < 1,42$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{2}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$1,41 < \\sqrt{2} < 1,42$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1,42 < \\sqrt{2} < 1,43$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,4 < \\sqrt{2} < 1,41$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,9881 < \\sqrt{2} < 2,0164$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il obtient l'encadrement. On a $1,41 < x < 1,42$. Quelle est l'amplitude de cet encadrement ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir la précision : l'amplitude est la précision de l'encadrement. Étape 2 — Encadrer : l'encadrement est déjà donné, $1,41 < x < 1,42$. Étape 3 — Calculer l'amplitude : $b - a = 1,42 - 1,41 = 0,01$. Étape 4 — Conclure : l'amplitude vaut $0,01$. Si tu trouves $2,83$, tu as additionné les bornes au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "0,01",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'arrondi de $\\sqrt{2}$ au centième ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : le centième. Étape 2 — Encadrer : $1,41 < \\sqrt{2} < 1,42$, avec $\\sqrt{2} = 1,4142\\ldots$. Étape 3 — Calculer l'amplitude : $0,01$ ; $\\sqrt{2}$ est plus près de $1,41$ que de $1,42$. Étape 4 — Conclure : l'arrondi est $1,41$ m. $1,42$ est la valeur par excès, $1,40$ et $1,4$ sont trop petites.",
+                  "answers": [
+                    {
+                      "content": "$1,41$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1,42$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,40$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La longueur $\\sqrt{2}$ est un nombre décimal.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{2}$ ne se simplifie pas. Étape 2 — Regarder si c'est un entier : non, $1,41 < \\sqrt{2} < 1,42$. Étape 3 — Fraction ou décimal : ce n'est pas un quotient de deux entiers, donc pas un décimal ; ses décimales ne s'arrêtent jamais. Étape 4 — Conclure : $\\sqrt{2}$ est un irrationnel. Le mètre ne peut donner qu'une valeur approchée. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le menuisier accepte une planche de longueur $L$ avec un écart d'au plus 0,01 m par rapport à 1,41 m. Quel est l'ensemble des réels $x$ qui vérifient $|x - 1,41| \\leq 0,01$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 1,41| \\leq 0,01$ avec $a = 1,41$ et $r = 0,01$. Étape 2 — Traduire en distance : $x$ est à une distance de $1,41$ au plus égale à $0,01$. Étape 3 — Calculer les bornes : $a - r = 1,4$ et $a + r = 1,42$. Étape 4 — Conclure : $x \\in [1,4\\,;\\,1,42]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $1,41$.",
+                  "answers": [
+                    {
+                      "content": "$[1,4\\,;\\,1,42]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-1,42\\,;\\,-1,4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-0,01\\,;\\,0,01]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1,4\\,;\\,1,42[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier l'appartenance d'un nombre à un ensemble ; passer d'un intervalle à une valeur absolue et inversement ; intersections et distance ; encadrements et classement de nombres.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On raisonne sur les ensembles de nombres et sur leurs inclusions.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour savoir si une fraction irréductible est décimale, décompose son dénominateur en facteurs premiers.",
+              "questions": [
+                {
+                  "content": "Le nombre $\\sqrt{2}$ est rationnel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\sqrt{2}$ ne se simplifie pas (2 n'est pas un carré parfait). Étape 2 — Regarder si c'est un entier : non, car $1^2 = 1 < 2 < 4 = 2^2$. Étape 3 — Fraction ou décimal : $\\sqrt{2}$ n'est pas un quotient de deux entiers. Étape 4 — Conclure : $\\sqrt{2}$ est irrationnel. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Tout nombre décimal est un nombre rationnel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : un décimal s'écrit $\\frac{a}{10^n}$. Étape 2 — Regarder si c'est un entier : pas nécessairement. Étape 3 — Fraction ou décimal : $\\frac{a}{10^n}$ est un quotient de deux entiers ($10^n \\neq 0$). Étape 4 — Conclure : $\\mathbb{D} \\subset \\mathbb{Q}$, l'affirmation est vraie ; la réciproque est fausse ($\\frac{1}{3}$).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux inclusions vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : on a $\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{D} \\subset \\mathbb{Q} \\subset \\mathbb{R}$. Étape 2 — Regarder si c'est un entier : tout entier $n$ est le décimal $\\frac{10n}{10}$, donc $\\mathbb{Z} \\subset \\mathbb{D}$. Étape 3 — Fraction ou décimal : $0,5 \\in \\mathbb{D}$ mais $0,5 \\notin \\mathbb{Z}$, donc $\\mathbb{D} \\not\\subset \\mathbb{Z}$ ; $\\sqrt{2} \\in \\mathbb{R}$ mais $\\sqrt{2} \\notin \\mathbb{Q}$, donc $\\mathbb{R} \\not\\subset \\mathbb{Q}$. Étape 4 — Conclure : les inclusions vraies sont $\\mathbb{Q} \\subset \\mathbb{R}$ et $\\mathbb{Z} \\subset \\mathbb{D}$.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{Q} \\subset \\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z} \\subset \\mathbb{D}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{D} \\subset \\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R} \\subset \\mathbb{Q}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nombre qui peut s'écrire $\\frac{a}{b}$ avec $a$ et $b$ entiers et $b \\neq 0$ est dit ___ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : on écrit le nombre comme une fraction $\\frac{a}{b}$. Étape 2 — Regarder si c'est un entier : pas nécessairement. Étape 3 — Fraction ou décimal : un quotient de deux entiers est un rationnel. Étape 4 — Conclure : le mot attendu est « rationnel ». Le mot « décimal » est plus restrictif : il impose $b = 10^n$.",
+                  "answers": [
+                    {
+                      "content": "rationnel",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi $\\frac{7}{8}$ est un nombre décimal, puis pourquoi $\\frac{7}{6}$ n'est pas décimal.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Vérifie que les fractions sont irréductibles",
+                    "Décompose 8 en $2^3$ et conclut que $\\frac{7}{8}$ est décimal",
+                    "Repère le facteur 3 dans $6 = 2 \\times 3$",
+                    "Conclut que $\\frac{7}{6}$ n'est pas décimal"
+                  ],
+                  "explanation": "Corrigé modèle : Étape 1 — Écrire sous la forme la plus simple : $\\frac{7}{8}$ et $\\frac{7}{6}$ sont irréductibles (7 est premier avec 8 et 6). Étape 2 — Regarder si c'est un entier : ni l'un ni l'autre. Étape 3 — Fraction ou décimal : $8 = 2^3$ n'a que le facteur 2, donc $\\frac{7}{8} = \\frac{875}{1000} = 0,875$ est décimal ; $6 = 2 \\times 3$ a le facteur 3, qui n'est ni 2 ni 5. Étape 4 — Conclure : $\\frac{7}{8} \\in \\mathbb{D}$ ; $\\frac{7}{6}$ est un rationnel qui n'est pas décimal. Barème sur 2 : fraction irréductible (0,5 point), décomposition de 8 et conclusion décimale (0,5 point), décomposition de 6 avec le facteur 3 (0,5 point), conclusion pour $\\frac{7}{6}$ (0,5 point).",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On passe d'un intervalle à une inéquation avec une valeur absolue, et inversement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le centre d'un intervalle $[p\\,;\\,q]$ est $\\frac{p + q}{2}$ et son rayon est $\\frac{q - p}{2}$.",
+              "questions": [
+                {
+                  "content": "Quelle inéquation traduit $[-3\\,;\\,5]$ pour un réel $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : on cherche le centre $a$ et le rayon $r$ de l'intervalle. Étape 2 — Traduire en distance : $x$ est dans $[-3\\,;\\,5]$ quand il est à une distance au plus $r$ du milieu. Étape 3 — Calculer : le centre est $a = \\frac{-3 + 5}{2} = 1$ et le rayon est $r = \\frac{5 - (-3)}{2} = 4$. Étape 4 — Conclure : $|x - 1| \\leq 4$. Les autres propositions utilisent un mauvais centre (par exemple l'opposé $-1$) ou un mauvais rayon.",
+                  "answers": [
+                    {
+                      "content": "$|x - 1| \\leq 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x + 1| \\leq 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x| \\leq 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x - 1| \\leq 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle inéquation traduit $[2\\,;\\,10]$ pour un réel $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : on cherche le centre $a$ et le rayon $r$ de l'intervalle. Étape 2 — Traduire en distance : $x$ est dans $[2\\,;\\,10]$ quand il est à une distance au plus $r$ du milieu. Étape 3 — Calculer : le centre est $a = \\frac{2 + 10}{2} = 6$ et le rayon est $r = \\frac{10 - 2}{2} = 4$. Étape 4 — Conclure : $|x - 6| \\leq 4$. Les autres propositions utilisent un mauvais centre (par exemple l'opposé $-6$) ou un mauvais rayon.",
+                  "answers": [
+                    {
+                      "content": "$|x - 6| \\leq 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x + 6| \\leq 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x - 6| \\leq 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x| \\leq 10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x + 2| \\leq 4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x + 2| \\leq 4$ avec $a = -2$ et $r = 4$. Étape 2 — Traduire en distance : $x$ est à une distance de $-2$ au plus égale à $4$. Étape 3 — Calculer les bornes : $a - r = -6$ et $a + r = 2$. Étape 4 — Conclure : $x \\in [-6\\,;\\,2]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $-2$.",
+                  "answers": [
+                    {
+                      "content": "$[-6\\,;\\,2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-2\\,;\\,6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-4\\,;\\,4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-6\\,;\\,2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les inégalités $|x - 1| \\leq 3$ et $-2 \\leq x \\leq 4$ sont équivalentes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 1$ et $r = 3$. Étape 2 — Traduire en distance : $x$ est à une distance de 1 au plus égale à 3. Étape 3 — Calculer les bornes : $1 - 3 = -2$ et $1 + 3 = 4$. Étape 4 — Conclure : $x \\in [-2\\,;\\,4]$, soit $-2 \\leq x \\leq 4$. Les deux écritures sont équivalentes ; l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers relatifs appartiennent à l'intervalle $[-1\\,;\\,6[$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Traduire : $[-1\\,;\\,6[$ correspond à $-1 \\leq x < 6$. Étape 2 — Repérer les bornes : -1 est incluse et 6 est exclue. Étape 3 — Écrire l'intervalle : les entiers qui y sont sont -1, 0, 1, 2, 3, 4, 5. Étape 4 — Vérifier : en comptant, on trouve 7 entiers. Si tu trouves 8 ou 6, tu as mal traité une borne : une borne exclue ne compte pas, une borne incluse compte.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On raisonne sur des intersections d'intervalles et des valeurs absolues.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une inégalité stricte donne des crochets ouverts.",
+              "questions": [
+                {
+                  "content": "On pose $I = [-4\\,;\\,1]$ et $J = ]-1\\,;\\,6]$. Quel est l'intervalle $I \\cap J$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : $I$ correspond à $-4 \\leq x \\leq 1$ et $J$ à $-1 < x \\leq 6$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, -1, et la plus petite borne supérieure, 1 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $]-1\\,;\\,1]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+                  "answers": [
+                    {
+                      "content": "$]-1\\,;\\,1]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-4\\,;\\,6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;\\,1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-1\\,;\\,1[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $I = ]2\\,;\\,8[$ et $J = [2\\,;\\,5]$. Quel est l'intervalle $I \\cap J$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : $I$ correspond à $2 < x < 8$ et $J$ à $2 \\leq x \\leq 5$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 2, et la plus petite borne supérieure, 5 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $]2\\,;\\,5]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+                  "answers": [
+                    {
+                      "content": "$]2\\,;\\,5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[2\\,;\\,8]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;\\,5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]2\\,;\\,5[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $1$ appartient à l'intervalle $]-4\\,;\\,1[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $]-4\\,;\\,1[$ correspond à $-4 < x < 1$. Étape 2 — Repérer les bornes : -4 est exclue ; 1 est exclue. Étape 3 — Écrire l'intervalle : il est donné, on compare $1$ à ses bornes. Étape 4 — Vérifier : $1$ est une borne, et cette borne est exclue, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $|x + 3| = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| = r$ : $|x + 3| = 2$, donc $a = -3$ et $r = 2$. Étape 2 — Traduire en distance : $x$ est à la distance $2$ de $-3$. Étape 3 — Calculer les bornes : $a - r = -3 - 2 = -5$ et $a + r = -3 + 2 = -1$. Étape 4 — Conclure : $x = -5$ ou $x = -1$. Les autres propositions se trompent de centre (par exemple $3$ au lieu de $-3$) ou prennent $a$ et $r$ comme solutions.",
+                  "answers": [
+                    {
+                      "content": "$x = -5$ ou $x = -1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = -3$ ou $x = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 1$ ou $x = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 5$ ou $x = -1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $|x - 4| < 1$. Écris $x$ sous forme d'intervalle, puis justifie que $x$ n'est pas un entier relatif sauf une seule valeur que tu donneras.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Identifie $a = 4$ et $r = 1$",
+                    "Calcule les bornes 3 et 5",
+                    "Écrit $]3\\,;\\,5[$ avec des crochets ouverts",
+                    "Donne l'entier 4 en excluant 3 et 5"
+                  ],
+                  "explanation": "Corrigé modèle : Étape 1 — Écrire sous la forme $|x - a| < r$ : $a = 4$ et $r = 1$. Étape 2 — Traduire en distance : $x$ est à une distance de 4 strictement inférieure à 1. Étape 3 — Calculer les bornes : $4 - 1 = 3$ et $4 + 1 = 5$. Étape 4 — Conclure : $x \\in ]3\\,;\\,5[$, bornes exclues car l'inégalité est stricte. Le seul entier dans $]3\\,;\\,5[$ est $4$ (3 et 5 sont exclus). Barème sur 3 : identification de $a$ et $r$ (0,5 point), bornes (0,5 point), intervalle avec crochets ouverts (1 point), entier 4 et exclusion de 3 et 5 (1 point).",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On résout des problèmes qui combinent valeur absolue, intervalles et encadrements.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule d'abord les bornes de l'intervalle avant de compter ou de comparer.",
+              "questions": [
+                {
+                  "content": "Les réels $x$ tels que $|x - 3| \\leq 2,5$ forment l'intervalle suivant. Combien d'entiers relatifs appartiennent à l'intervalle $[0,5\\,;\\,5,5]$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Traduire : $[0,5\\,;\\,5,5]$ correspond à $0,5 \\leq x \\leq 5,5$. Étape 2 — Repérer les bornes : 0,5 est incluse et 5,5 est incluse. Étape 3 — Écrire l'intervalle : les entiers qui y sont sont 1, 2, 3, 4, 5. Étape 4 — Vérifier : en comptant, on trouve 5 entiers. Si tu trouves 6 ou 4, tu as mal traité une borne : une borne exclue ne compte pas, une borne incluse compte.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel encadrement de $\\sqrt{8}$ à $0,1$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $2,8^2 = 7,84$ et $2,9^2 = 8,41$, et $8$ est compris entre ces deux carrés, donc $2,8 < \\sqrt{8} < 2,9$. Étape 3 — Calculer l'amplitude : $2,9 - 2,8 = 0,1$ ; $2,8$ est la valeur approchée par défaut et $2,9$ par excès. Étape 4 — Conclure : $2,8 < \\sqrt{8} < 2,9$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{8}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$2,8 < \\sqrt{8} < 2,9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2,9 < \\sqrt{8} < 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2,7 < \\sqrt{8} < 2,8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7,84 < \\sqrt{8} < 8,41$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x - 1| < 0,5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| < r$ : $|x - 1| < 0,5$ avec $a = 1$ et $r = 0,5$. Étape 2 — Traduire en distance : $x$ est à une distance de $1$ strictement inférieure à $0,5$. Étape 3 — Calculer les bornes : $a - r = 0,5$ et $a + r = 1,5$. Étape 4 — Conclure : $x \\in ]0,5\\,;\\,1,5[$ (bornes exclues car l'inégalité est stricte). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $1$.",
+                  "answers": [
+                    {
+                      "content": "$]0,5\\,;\\,1,5[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-1,5\\,;\\,-0,5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-0,5\\,;\\,0,5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0,5\\,;\\,1,5]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{\\sqrt{18}}{\\sqrt{2}}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{\\sqrt{18}}{\\sqrt{2}}$ est déjà simplifié ou vaut $3$. Étape 2 — Regarder si c'est un entier : oui, c'est un entier naturel. Étape 3 — Fraction ou décimal : inutile, c'est déjà un entier. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{N}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève a une note $n$ sur 20 avec $|n - 7,5| \\leq 1,5$. Une valeur $x$ vérifie $|x - 7,5| \\leq 1,5$. Quelle est la plus grande valeur possible de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 7,5$ et $r = 1,5$. Étape 2 — Traduire en distance : $x$ est au plus à $1,5$ de $7,5$. Étape 3 — Calculer les bornes : $a - r = 6$ et $a + r = 9$. Étape 4 — Conclure : $x \\in [6\\,;\\,9]$, donc la plus grande valeur est $9$. Si tu trouves $6$, tu as inversé la borne basse et la borne haute.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : classement des nombres, intervalles et intersections, valeur absolue et distance, encadrement, valeur approchée et arrondi, dans des situations de tolérance.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève de 2nde C range des nombres et des intervalles dans son cahier de révision.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Simplifie d'abord ; pour un intervalle, regarde si les inégalités sont strictes ou larges.",
+              "questions": [
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{\\sqrt{50}}{\\sqrt{2}}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{\\sqrt{50}}{\\sqrt{2}}$ est déjà simplifié ou vaut $5$. Étape 2 — Regarder si c'est un entier : oui, c'est un entier naturel. Étape 3 — Fraction ou décimal : inutile, c'est déjà un entier. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{N}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{11}{25}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{11}{25}$ est déjà simplifié ou vaut $0,44$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est une fraction (ou un nombre à virgule) dont le dénominateur irréductible n'a que des facteurs 2 et 5, donc un décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{D}$. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas. La proposition $\\mathbb{Q}$ est vraie mais n'est pas le plus petit ensemble : le nombre est dans un ensemble plus petit. La proposition $\\mathbb{N}$ oublie les nombres négatifs ou les nombres à virgule.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble qui contient le nombre $\\frac{4}{9}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme la plus simple : $\\frac{4}{9}$ est déjà simplifié ou vaut $\\frac{4}{9}$. Étape 2 — Regarder si c'est un entier : non. Étape 3 — Fraction ou décimal : c'est un quotient d'entiers, mais son dénominateur irréductible a un facteur autre que 2 et 5 : il n'est pas décimal. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{Q}$. La proposition $\\mathbb{D}$ exige un dénominateur de la forme $2^a5^b$ : par exemple $\\frac{1}{3}$ n'est pas décimal. La proposition « $\\mathbb{R}$ mais pas $\\mathbb{Q}$ » est réservée aux nombres qui ne sont pas des quotients d'entiers. La proposition $\\mathbb{Z}$ ne contient que des entiers : un nombre à virgule n'y est pas.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$ mais pas $\\mathbb{Q}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel intervalle correspond à la condition $-1 < x < 7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : la condition est $-1 < x < 7$. Étape 2 — Repérer les bornes : la borne -1 est exclue (inégalité stricte) ; la borne 7 est exclue (inégalité stricte). Étape 3 — Écrire l'intervalle : la borne inférieure à gauche, avec le crochet qui correspond, soit $]-1\\,;\\,7[$. Étape 4 — Vérifier : on teste un nombre dans la zone et chaque borne finie. Les autres propositions inversent un crochet : une borne incluse devient exclue, ou l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$]-1\\,;\\,7[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-1\\,;\\,7[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-1\\,;\\,7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;\\,7]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $3,5$ appartient à l'intervalle $]-1\\,;\\,7[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $]-1\\,;\\,7[$ correspond à $-1 < x < 7$. Étape 2 — Repérer les bornes : -1 est exclue ; 7 est exclue. Étape 3 — Écrire l'intervalle : il est donné, on compare $3,5$ à ses bornes. Étape 4 — Vérifier : $3,5$ est entre les bornes, donc l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On travaille avec des valeurs absolues, des distances et leur traduction en intervalles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "$|x - a|$ est la distance entre $x$ et $a$ : pense au centre et au rayon.",
+              "questions": [
+                {
+                  "content": "Calcule $|7 - (-2)|$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a|$ : c'est la distance entre $7$ et $-2$. Étape 2 — Traduire en distance : on calcule l'écart entre les deux nombres. Étape 3 — Calculer : $7 - (-2) = 9$, puis on prend la valeur absolue (toujours positive ou nulle). Étape 4 — Conclure : $|7 - (-2)| = 9$. Si tu obtiens $-9$ ou un autre signe, tu as oublié que la valeur absolue est une distance, donc positive.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $|x - 2| = 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| = r$ : $|x - 2| = 5$, donc $a = 2$ et $r = 5$. Étape 2 — Traduire en distance : $x$ est à la distance $5$ de $2$. Étape 3 — Calculer les bornes : $a - r = 2 - 5 = -3$ et $a + r = 2 + 5 = 7$. Étape 4 — Conclure : $x = -3$ ou $x = 7$. Les autres propositions se trompent de centre (par exemple $-2$ au lieu de $2$) ou prennent $a$ et $r$ comme solutions.",
+                  "answers": [
+                    {
+                      "content": "$x = -3$ ou $x = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 2$ ou $x = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -7$ ou $x = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 3$ ou $x = 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ qui vérifient $|x - 4| \\leq 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 4| \\leq 3$ avec $a = 4$ et $r = 3$. Étape 2 — Traduire en distance : $x$ est à une distance de $4$ au plus égale à $3$. Étape 3 — Calculer les bornes : $a - r = 1$ et $a + r = 7$. Étape 4 — Conclure : $x \\in [1\\,;\\,7]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $4$.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;\\,7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-7\\,;\\,-1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3\\,;\\,3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;\\,7[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle inéquation traduit $[-6\\,;\\,0]$ pour un réel $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : on cherche le centre $a$ et le rayon $r$ de l'intervalle. Étape 2 — Traduire en distance : $x$ est dans $[-6\\,;\\,0]$ quand il est à une distance au plus $r$ du milieu. Étape 3 — Calculer : le centre est $a = \\frac{-6 + 0}{2} = -3$ et le rayon est $r = \\frac{0 - (-6)}{2} = 3$. Étape 4 — Conclure : $|x + 3| \\leq 3$. Les autres propositions utilisent un mauvais centre (par exemple l'opposé $3$) ou un mauvais rayon.",
+                  "answers": [
+                    {
+                      "content": "$|x + 3| \\leq 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x - 3| \\leq 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x + 3| \\leq 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x| \\leq 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une valeur $x$ vérifie $|x - 10| \\leq 4$. Quelle est la plus petite valeur possible de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 10$ et $r = 4$. Étape 2 — Traduire en distance : $x$ est au plus à $4$ de $10$. Étape 3 — Calculer les bornes : $a - r = 6$ et $a + r = 14$. Étape 4 — Conclure : $x \\in [6\\,;\\,14]$, donc la plus petite valeur est $6$. Si tu trouves $14$, tu as inversé la borne basse et la borne haute.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On encadre des réels et on compare des valeurs approchées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour comparer des précisions, calcule les amplitudes.",
+              "questions": [
+                {
+                  "content": "Quel encadrement de $\\sqrt{13}$ à $0,1$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,1$, donc on teste des décimaux de pas $0,1$. Étape 2 — Encadrer : $3,6^2 = 12,96$ et $3,7^2 = 13,69$, et $13$ est compris entre ces deux carrés, donc $3,6 < \\sqrt{13} < 3,7$. Étape 3 — Calculer l'amplitude : $3,7 - 3,6 = 0,1$ ; $3,6$ est la valeur approchée par défaut et $3,7$ par excès. Étape 4 — Conclure : $3,6 < \\sqrt{13} < 3,7$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{13}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$3,6 < \\sqrt{13} < 3,7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3,7 < \\sqrt{13} < 3,8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3,5 < \\sqrt{13} < 3,6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12,96 < \\sqrt{13} < 13,69$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel encadrement de $\\sqrt{5}$ à $0,01$ près est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : $0,01$, donc on teste des décimaux de pas $0,01$. Étape 2 — Encadrer : $2,23^2 = 4,9729$ et $2,24^2 = 5,0176$, et $5$ est compris entre ces deux carrés, donc $2,23 < \\sqrt{5} < 2,24$. Étape 3 — Calculer l'amplitude : $2,24 - 2,23 = 0,01$ ; $2,23$ est la valeur approchée par défaut et $2,24$ par excès. Étape 4 — Conclure : $2,23 < \\sqrt{5} < 2,24$. Les encadrements décalés d'un pas ne contiennent pas $\\sqrt{5}$ ; l'encadrement par les carrés confond la racine avec son carré.",
+                  "answers": [
+                    {
+                      "content": "$2,23 < \\sqrt{5} < 2,24$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2,24 < \\sqrt{5} < 2,25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2,22 < \\sqrt{5} < 2,23$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4,9729 < \\sqrt{5} < 5,0176$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $2,23 < x < 2,24$. Quelle est l'amplitude de cet encadrement ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir la précision : l'amplitude est la précision de l'encadrement. Étape 2 — Encadrer : l'encadrement est déjà donné, $2,23 < x < 2,24$. Étape 3 — Calculer l'amplitude : $b - a = 2,24 - 2,23 = 0,01$. Étape 4 — Conclure : l'amplitude vaut $0,01$. Si tu trouves $4,47$, tu as additionné les bornes au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "0,01",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'encadrement $2,2 < \\sqrt{5} < 2,3$ est de plus petite amplitude que $2,23 < \\sqrt{5} < 2,24$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir la précision : on compare deux précisions, $0,1$ et $0,01$. Étape 2 — Encadrer : les deux encadrements sont justes ($2,2^2 = 4,84 < 5 < 5,29 = 2,3^2$ et $2,23^2 = 4,9729 < 5 < 5,0176 = 2,24^2$). Étape 3 — Calculer l'amplitude : $2,3 - 2,2 = 0,1$ et $2,24 - 2,23 = 0,01$. Étape 4 — Conclure : le premier encadrement a une amplitude de $0,1$, plus grande que $0,01$ : il est moins précis. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'arrondi de $\\sqrt{3}$ au centième ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir la précision : le centième. Étape 2 — Encadrer : $1,73 < \\sqrt{3} < 1,74$, avec $\\sqrt{3} = 1,7320\\ldots$. Étape 3 — Calculer l'amplitude : $0,01$ ; $\\sqrt{3} - 1,73 \\approx 0,0021$ est plus petit que $1,74 - \\sqrt{3} \\approx 0,0079$. Étape 4 — Conclure : l'arrondi est $1,73$. $1,74$ est la valeur par excès, pas la plus proche.",
+                  "answers": [
+                    {
+                      "content": "$1,73$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1,74$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,70$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1,7$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une coopérative de Daloa vend du café en sachets de 500 g, avec une tolérance sur la masse $m$ (en g) donnée par $|m - 500| \\leq 5$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare l'écart $|m - 500|$ à la tolérance 5.",
+              "questions": [
+                {
+                  "content": "La coopérative note la tolérance. Quel est l'ensemble des réels $x$ qui vérifient $|x - 500| \\leq 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $|x - 500| \\leq 5$ avec $a = 500$ et $r = 5$. Étape 2 — Traduire en distance : $x$ est à une distance de $500$ au plus égale à $5$. Étape 3 — Calculer les bornes : $a - r = 495$ et $a + r = 505$. Étape 4 — Conclure : $x \\in [495\\,;\\,505]$ (bornes incluses car l'inégalité est large). Les autres propositions se trompent de centre, ou de crochet, ou prennent le centre $0$ à la place de $500$.",
+                  "answers": [
+                    {
+                      "content": "$[495\\,;\\,505]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-505\\,;\\,-495]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-5\\,;\\,5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]495\\,;\\,505[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'acheteur cherche la masse maximale acceptée. Une valeur $x$ vérifie $|x - 500| \\leq 5$. Quelle est la plus grande valeur possible de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 500$ et $r = 5$. Étape 2 — Traduire en distance : $x$ est au plus à $5$ de $500$. Étape 3 — Calculer les bornes : $a - r = 495$ et $a + r = 505$. Étape 4 — Conclure : $x \\in [495\\,;\\,505]$, donc la plus grande valeur est $505$. Si tu trouves $495$, tu as inversé la borne basse et la borne haute.",
+                  "answers": [
+                    {
+                      "content": "505",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sachet pèse 504,5 g. Le nombre $504,5$ appartient à l'intervalle $[495\\,;\\,505]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Traduire : $[495\\,;\\,505]$ correspond à $495 \\leq x \\leq 505$. Étape 2 — Repérer les bornes : 495 est incluse ; 505 est incluse. Étape 3 — Écrire l'intervalle : il est donné, on compare $504,5$ à ses bornes. Étape 4 — Vérifier : $504,5$ est entre les bornes, donc l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un contrôleur n'accepte que les sachets de $J = ]500\\,;\\,520]$. On pose $I = [495\\,;\\,505]$ et $J = ]500\\,;\\,520]$. Quel est l'intervalle $I \\cap J$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Traduire : $I$ correspond à $495 \\leq x \\leq 505$ et $J$ à $500 < x \\leq 520$. Étape 2 — Repérer les bornes : on garde la plus grande borne inférieure, 500, et la plus petite borne supérieure, 505 ; une borne commune est exclue dès qu'elle est exclue dans l'un des deux intervalles. Étape 3 — Écrire l'intervalle : $]500\\,;\\,505]$. Étape 4 — Vérifier : on place $I$ et $J$ sur la droite graduée et on garde la zone commune. Les autres propositions mélangent les bornes (elles prennent la réunion ou une borne d'un seul intervalle) ou se trompent de crochet.",
+                  "answers": [
+                    {
+                      "content": "$]500\\,;\\,505]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[495\\,;\\,520]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[500\\,;\\,505]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]500\\,;\\,505[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sachet pèse 507 g. Dis s'il respecte la tolérance $|m - 500| \\leq 5$ en suivant la méthode de la fiche, puis donne l'écart avec la masse nominale.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Traduit la tolérance en distance ou en intervalle",
+                    "Calcule l'écart 7 ou les bornes 495 et 505",
+                    "Conclut que le sachet est refusé",
+                    "Donne l'écart 7 g avec son unité"
+                  ],
+                  "explanation": "Corrigé modèle : Étape 1 — Écrire sous la forme $|x - a| \\leq r$ : $a = 500$, $r = 5$ et $m = 507$. Étape 2 — Traduire en distance : l'écart avec 500 doit être au plus de 5. Étape 3 — Calculer : $|507 - 500| = 7$, ou les bornes $495$ et $505$. Étape 4 — Conclure : $7 > 5$, donc $507 \\notin [495\\,;\\,505]$ et le sachet est refusé ; l'écart est de 7 g. Barème sur 2 : traduction de la tolérance (0,5 point), calcul de l'écart ou des bornes (0,5 point), conclusion (0,5 point), écart donné avec l'unité (0,5 point).",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

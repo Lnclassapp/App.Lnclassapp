@@ -53,6 +53,43 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ## Leçons traitées
 
+### 2nde, 3 premières leçons de chaque série et matière, réécrites en v3 complet (chantier `lecons-1ere-2nde-debut`)
+
+Depuis le 2026-11-12, les 3 premières leçons de la progression DPFC 2026-2027 de 2nde A, 2nde C (Français, Mathématiques, Physique-Chimie, SVT) et d'Histoire-Géographie de 2nde sont revenues de `a-reprendre/format-v1/`, réécrites au format v3 complet comme Thalès : 27 fichiers (Français et Physique-Chimie sont communs à A et C, écrits une fois et recopiés avec le `series_name` de chaque série). Chaque notion a 2 exercices (le second en `fixation`, 6 questions d'au moins 4 types), chaque leçon 4 problèmes et 4 sujets de devoir de 4 exercices. Hors Mathématiques et Physique-Chimie, les seconds exercices et les sujets sont entièrement corrigés automatiquement.
+
+Même vérification hors dépôt que pour la 1ère (format, `valider.rb` sur la leçon et chaque sujet, sympy sur les calculs). Points à faire valider par un enseignant : [journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
+
+| Fichier | Titre | Notions | Exercices | Questions |
+|---|---|---:|---:|---:|
+| `2nde-a/francais/les-techniques-de-communication.json` | Les techniques de communication | 4 | 28 | 145 |
+| `2nde-a/francais/oeuvre-narrative.json` | Œuvre narrative | 3 | 26 | 134 |
+| `2nde-a/francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 3 | 26 | 134 |
+| `2nde-a/mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 28 | 148 |
+| `2nde-a/mathematiques/calcul-numerique.json` | Calcul numérique | 4 | 28 | 148 |
+| `2nde-a/mathematiques/denombrement.json` | Dénombrement | 4 | 28 | 148 |
+| `2nde-a/physique-chimie/l-element-chimique.json` | L'élément chimique | 3 | 26 | 140 |
+| `2nde-a/physique-chimie/le-mouvement.json` | Le mouvement | 3 | 26 | 140 |
+| `2nde-a/physique-chimie/structure-de-l-atome.json` | Structure de l'atome | 4 | 28 | 152 |
+| `2nde-a/svt/la-transmission-d-un-message-hormonal.json` | La transmission d'un message hormonal | 3 | 26 | 135 |
+| `2nde-a/svt/la-transmission-d-un-message-nerveux.json` | La transmission d'un message nerveux | 3 | 26 | 135 |
+| `2nde-a/svt/les-grands-ensembles-environnementaux.json` | Les grands ensembles environnementaux | 3 | 26 | 135 |
+| `2nde-c/francais/les-techniques-de-communication.json` | Les techniques de communication | 4 | 28 | 145 |
+| `2nde-c/francais/oeuvre-narrative.json` | Œuvre narrative | 3 | 26 | 134 |
+| `2nde-c/francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 3 | 26 | 134 |
+| `2nde-c/mathematiques/ensemble-des-nombres-reels.json` | Ensemble des nombres réels | 4 | 28 | 144 |
+| `2nde-c/mathematiques/utilisation-des-symetries-et-translations.json` | Utilisation des symétries et translations | 3 | 26 | 133 |
+| `2nde-c/mathematiques/vecteurs-et-points-du-plan.json` | Vecteurs et points du plan | 4 | 28 | 144 |
+| `2nde-c/physique-chimie/l-element-chimique.json` | L'élément chimique | 3 | 26 | 140 |
+| `2nde-c/physique-chimie/le-mouvement.json` | Le mouvement | 3 | 26 | 140 |
+| `2nde-c/physique-chimie/structure-de-l-atome.json` | Structure de l'atome | 4 | 28 | 152 |
+| `2nde-c/svt/l-absorption-de-l-eau-par-la-plante-verte.json` | L'absorption de l'eau par la plante verte | 3 | 26 | 133 |
+| `2nde-c/svt/l-absorption-des-sels-mineraux-par-la-plante-verte.json` | L'absorption des sels minéraux par la plante verte | 3 | 26 | 133 |
+| `2nde-c/svt/l-influence-des-sels-mineraux-sur-la-croissance-de-la-plante-verte.json` | L'influence des sels minéraux sur la croissance de la plante verte | 3 | 26 | 133 |
+| `2nde/histoire-geographie/geographie-la-geographie-objet-interet-et-demarche.json` | Géographie — La géographie : objet, intérêt et démarche | 3 | 26 | 137 |
+| `2nde/histoire-geographie/histoire-l-histoire-et-la-formation-du-citoyen.json` | Histoire — L'Histoire et la formation du citoyen | 3 | 26 | 136 |
+| `2nde/histoire-geographie/histoire-les-methodes-d-etude-de-l-histoire.json` | Histoire — Les méthodes d'étude de l'histoire | 3 | 26 | 137 |
+| **Total** | | | | **3769** |
+
 ### 1ère, 3 premières leçons de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
 
 Depuis le 2026-11-12, les 3 premières leçons de la progression DPFC 2026-2027 de chaque série (A1, A2, C, D) et matière (Français, Mathématiques, Physique-Chimie, SVT, Philosophie, Histoire-Géographie) de 1ère sont revenues de `a-reprendre/` au format complet : 63 fichiers, 36 fiches distinctes (une fiche commune à plusieurs séries est écrite une fois et recopiée avec le `series_name` et le `theme` de chaque série). Chaque notion a reçu un second exercice en `fixation` de 6 questions d'au moins 4 types, et chaque leçon 4 sujets de devoir de 4 exercices de 5 ou 6 questions. Le cours, les fiches, le premier exercice, le `practice` et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement.

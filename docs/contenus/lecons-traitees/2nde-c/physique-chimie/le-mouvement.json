@@ -1,0 +1,2727 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le mouvement",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "figures": [
+        {
+          "key": "droite-distance-temps",
+          "kind": "coordinate_plane",
+          "description": "Un repère avec le temps t en secondes en abscisse et la distance parcourue d en mètres en ordonnée. Une droite passe par l'origine et par les points (1 ; 10), (2 ; 20), (3 ; 30), (4 ; 40) et (5 ; 50) : un scooter en mouvement rectiligne uniforme parcourt 10 m chaque seconde.",
+          "params": {
+            "xmin": 0,
+            "xmax": 6,
+            "ymin": 0,
+            "ymax": 50,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 10
+              },
+              {
+                "id": "B",
+                "x": 2,
+                "y": 20
+              },
+              {
+                "id": "C",
+                "x": 3,
+                "y": 30
+              },
+              {
+                "id": "D",
+                "x": 4,
+                "y": 40
+              },
+              {
+                "id": "E",
+                "x": 5,
+                "y": 50
+              }
+            ],
+            "lines": [
+              {
+                "a": 10,
+                "b": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "piste-circulaire",
+          "kind": "geometry",
+          "description": "Une piste circulaire vue de dessus : un cercle de centre O et de rayon R, avec quatre points A, B, C et D régulièrement répartis. Un coureur en mouvement circulaire uniforme passe successivement par A, B, C, D puis revient en A, en mettant la même durée entre deux points voisins.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0,
+                "label": "O"
+              },
+              {
+                "id": "A",
+                "x": 4,
+                "y": 0,
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "x": 0,
+                "y": 4,
+                "label": "B"
+              },
+              {
+                "id": "C",
+                "x": -4,
+                "y": 0,
+                "label": "C"
+              },
+              {
+                "id": "D",
+                "x": 0,
+                "y": -4,
+                "label": "D"
+              }
+            ],
+            "segments": [
+              [
+                "O",
+                "A"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "O",
+                "r": 4
+              }
+            ],
+            "labels": [
+              {
+                "from": "O",
+                "to": "A",
+                "text": "R"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le référentiel et la trajectoire",
+          "remember": "Un **référentiel** est un objet (ou un ensemble d'objets immobiles entre eux) par rapport auquel on étudie un mouvement. Un objet est **en mouvement** par rapport à un référentiel si sa position change au cours du temps ; il est **immobile** si elle ne change pas. La **trajectoire** est la ligne formée par les positions successives d'un point de l'objet : droite (rectiligne), cercle (circulaire) ou courbe quelconque. Mouvement et trajectoire dépendent du référentiel choisi.",
+          "method": [
+            "Identifier l'objet étudié et le référentiel dans lequel on l'observe.",
+            "Comparer la position de l'objet à celle du référentiel à plusieurs instants.",
+            "Conclure : en mouvement ou immobile par rapport à ce référentiel, et nommer la forme de la trajectoire."
+          ],
+          "example": {
+            "statement": "Un gbaka roule sur une route droite. Un passager est assis dedans. Que dire du passager par rapport au gbaka, puis par rapport à la route ? Quelle est sa trajectoire dans le référentiel de la route ?",
+            "steps": [
+              "Identifier : l'objet est le passager ; on considère deux référentiels, le gbaka puis la route.",
+              "Comparer : par rapport au gbaka, la position du passager ne change pas ; par rapport à la route, elle change à chaque instant.",
+              "Conclure : le passager est immobile par rapport au gbaka et en mouvement par rapport à la route ; sa trajectoire dans le référentiel de la route est une droite, elle est rectiligne."
+            ]
+          },
+          "pitfall": "Ne dis jamais « il bouge » ou « il est immobile » sans préciser par rapport à quoi. Contre-exemple : le passager assis est immobile par rapport au gbaka, mais en mouvement par rapport à la marchande au bord de la route. Les deux phrases sont vraies en même temps, parce que les référentiels sont différents.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Reconnaître référentiel, mouvement et trajectoire",
+              "statement": "Dans cet exercice, tu choisis le référentiel, tu dis si un objet est en mouvement ou immobile, puis tu nommes sa trajectoire.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Aya est assise dans un car qui roule sur une route droite. Par rapport au siège du car, Aya est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est Aya, le référentiel est le siège du car. Étape 2 — Comparer : la position d'Aya par rapport au siège ne change pas au cours du temps. Étape 3 — Conclure : Aya est immobile par rapport au siège. Dire qu'elle bouge parce que le car roule oublie de changer de référentiel : le car roule par rapport à la route, pas par rapport au siège.",
+                  "answers": [
+                    {
+                      "content": "immobile",
+                      "correct": true
+                    },
+                    {
+                      "content": "en mouvement, parce que le car roule",
+                      "correct": false
+                    },
+                    {
+                      "content": "en mouvement, parce qu'elle est vivante",
+                      "correct": false
+                    },
+                    {
+                      "content": "ni immobile ni en mouvement : on ne peut pas le dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule sur une route droite. Le chauffeur est en mouvement par rapport à…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est le chauffeur ; on cherche un référentiel pour lequel il bouge. Étape 2 — Comparer : par rapport au poteau, sa position change à chaque instant. Étape 3 — Conclure : il est en mouvement par rapport au poteau. Le volant, le siège et le tableau de bord se déplacent avec lui : par rapport à eux, sa position ne change pas.",
+                  "answers": [
+                    {
+                      "content": "un poteau planté au bord de la route",
+                      "correct": true
+                    },
+                    {
+                      "content": "le volant du gbaka",
+                      "correct": false
+                    },
+                    {
+                      "content": "le siège du chauffeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "le tableau de bord du gbaka",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le référentiel est l'objet, ou l'ensemble d'objets immobiles entre eux, par rapport auquel on étudie un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le référentiel est le point de départ de toute étude. Étape 2 — Comparer : c'est par rapport à lui que l'on regarde si la position de l'objet change. Étape 3 — Conclure : le mot attendu est mouvement.",
+                  "answers": [
+                    {
+                      "content": "mouvement",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point de la jante d'une roue de vélo qui tourne, observé depuis le cadre du vélo, décrit une trajectoire ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'objet est un point de la jante, le référentiel est le cadre du vélo. Étape 2 — Comparer : à chaque instant, ce point reste à la même distance de l'axe de la roue. Étape 3 — Conclure : la trajectoire est un cercle, donc circulaire. Elle n'est ni droite, ni réduite à un point.",
+                  "answers": [
+                    {
+                      "content": "circulaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "rectiligne",
+                      "correct": false
+                    },
+                    {
+                      "content": "immobile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste roule sur une route droite. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : l'objet est le cycliste ; deux référentiels sont possibles, la route et le vélo. Étape 2 — Comparer : sa position change par rapport à la route et à l'arbre, mais pas par rapport à son vélo. Étape 3 — Conclure : mouvement par rapport à la route, immobile par rapport au vélo. Dire qu'il bouge dans tous les référentiels est faux : cela dépend du référentiel.",
+                  "answers": [
+                    {
+                      "content": "Par rapport à la route, il est en mouvement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par rapport à son vélo, il est immobile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est en mouvement dans tous les référentiels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par rapport à un arbre du bord de la route, il est immobile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un passager est immobile dans un train qui roule. Il est donc immobile pour une personne qui l'observe depuis le quai.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'objet est le passager ; il y a deux référentiels, le train et le quai. Étape 2 — Comparer : par rapport au siège, la position ne change pas ; par rapport au quai, elle change. Étape 3 — Conclure : le passager est immobile par rapport au train mais en mouvement par rapport au quai. L'erreur est de croire qu'un objet est immobile ou en mouvement tout court.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Un gbaka, une marchande et une roue : changer de référentiel",
+              "statement": "Dans cet exercice, tu étudies le même mouvement dans deux référentiels : celui du gbaka et celui de la route.",
+              "hint": "Pose-toi toujours la question : par rapport à quoi ? Un objet fixe dans le référentiel est immobile ; sinon, il est en mouvement.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un gbaka roule vers Yopougon. Un passager est assis à l'intérieur. Une marchande est debout au bord de la route. Pour la marchande, le passager est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est le passager, le référentiel est la marchande (donc la route). Étape 2 — Comparer : la distance entre le passager et la marchande change au cours du temps. Étape 3 — Conclure : il est en mouvement. Être assis ne le rend pas immobile pour la marchande : il est immobile seulement par rapport au gbaka.",
+                  "answers": [
+                    {
+                      "content": "en mouvement",
+                      "correct": true
+                    },
+                    {
+                      "content": "immobile",
+                      "correct": false
+                    },
+                    {
+                      "content": "immobile, parce qu'il est assis",
+                      "correct": false
+                    },
+                    {
+                      "content": "en mouvement seulement s'il se lève",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à la conclusion qui convient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : pour chaque ligne, repère l'objet et le référentiel. Étape 2 — Comparer : la position de l'objet change-t-elle par rapport au référentiel ? Étape 3 — Conclure : le passager est immobile dans le gbaka ; il est en mouvement rectiligne par rapport à la route ; le point de la jante tourne autour de l'axe fixé à la caisse, sa trajectoire est un cercle.",
+                  "answers": [
+                    {
+                      "content": "Un passager assis, étudié dans le référentiel du gbaka",
+                      "match": "Immobile"
+                    },
+                    {
+                      "content": "Un passager assis, étudié dans le référentiel de la route",
+                      "match": "En mouvement, trajectoire rectiligne"
+                    },
+                    {
+                      "content": "Un point de la jante d'une roue, étudié dans le référentiel de la caisse du gbaka",
+                      "match": "En mouvement, trajectoire circulaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "La valve d'une roue du gbaka tourne autour de l'axe de la roue. Dans le référentiel de la caisse du gbaka, quel point de la roue est immobile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est un point de la roue, le référentiel est la caisse. Étape 2 — Comparer : le centre de la roue garde la même position par rapport à la caisse ; la valve et les autres points de la jante tournent autour de lui. Étape 3 — Conclure : seul le centre de la roue, sur l'axe, est immobile.",
+                  "answers": [
+                    {
+                      "content": "le centre de la roue, sur l'axe",
+                      "correct": true
+                    },
+                    {
+                      "content": "la valve",
+                      "correct": false
+                    },
+                    {
+                      "content": "tous les points de la jante",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucun point de la roue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour décrire un mouvement.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on commence toujours par l'objet et le référentiel. Étape 2 — Comparer : on observe les positions à plusieurs instants. Étape 3 — Conclure : mouvement ou immobile, puis on nomme la trajectoire. Sans référentiel, la phrase « il bouge » n'a pas de sens.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'objet étudié et le référentiel"
+                    },
+                    {
+                      "content": "Comparer la position de l'objet à celle du référentiel à plusieurs instants"
+                    },
+                    {
+                      "content": "Conclure : mouvement ou immobile par rapport à ce référentiel"
+                    },
+                    {
+                      "content": "Nommer la forme de la trajectoire"
+                    }
+                  ]
+                },
+                {
+                  "content": "La ligne formée par les positions successives d'un point d'un objet en mouvement s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Conclure : la ligne formée par les positions successives d'un point de l'objet est sa trajectoire. Elle dépend du référentiel, comme le mouvement lui-même (étapes 1 et 2 : objet et référentiel).",
+                  "answers": [
+                    {
+                      "content": "trajectoire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bout du rétroviseur d'un gbaka qui roule sur une route droite a une trajectoire rectiligne dans le référentiel de la route.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'objet est le bout du rétroviseur, le référentiel est la route. Étape 2 — Comparer : ce point avance en ligne droite avec le gbaka. Étape 3 — Conclure : sa trajectoire est rectiligne dans le référentiel de la route (et il est immobile dans celui du gbaka).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La vitesse moyenne",
+          "remember": "La **vitesse moyenne** d'un objet est le quotient de la distance $d$ parcourue par la durée $t$ du parcours : $v = \\dfrac{d}{t}$, donc $d = v \\times t$ et $t = \\dfrac{d}{v}$. Dans le Système international, $d$ est en mètres, $t$ en secondes et $v$ en m/s ; on utilise aussi le km/h. Conversions : $1\\ \\text{km} = 1\\,000\\ \\text{m}$ ; $1\\ \\text{min} = 60\\ \\text{s}$ ; $1\\ \\text{h} = 3\\,600\\ \\text{s}$ ; $1\\ \\text{m/s} = 3{,}6\\ \\text{km/h}$, donc pour passer de km/h à m/s on **divise** par 3,6.",
+          "method": [
+            "Relever la distance d et la durée t dans l'énoncé, avec leurs unités.",
+            "Convertir pour obtenir des unités cohérentes : m et s (vitesse en m/s) ou km et h (vitesse en km/h).",
+            "Écrire la formule adaptée à l'inconnue : $v = \\dfrac{d}{t}$, $d = v \\times t$ ou $t = \\dfrac{d}{v}$.",
+            "Calculer avec les valeurs converties, puis écrire le résultat avec son unité."
+          ],
+          "example": {
+            "statement": "Une élève parcourt 1,5 km à pied en 10 min. Calculer sa vitesse moyenne, en m/s.",
+            "steps": [
+              "Relever : $d = 1{,}5$ km et $t = 10$ min.",
+              "Convertir : $d = 1{,}5\\ \\text{km} = 1\\,500\\ \\text{m}$ et $t = 10\\ \\text{min} = 600\\ \\text{s}$.",
+              "Écrire la formule : on cherche la vitesse, donc $v = \\dfrac{d}{t}$.",
+              "Calculer : $v = \\dfrac{1\\,500}{600} = 2{,}5$ m/s."
+            ]
+          },
+          "pitfall": "Ne divise jamais une distance par une durée sans avoir converti. Contre-exemple : pour 1,5 km en 10 min, écrire $\\dfrac{1{,}5}{10} = 0{,}15$ ne donne ni des m/s ni des km/h. Le bon résultat est $2{,}5$ m/s, soit $9$ km/h. Et pour passer de km/h à m/s, on divise par 3,6 : $72\\ \\text{km/h} = 20\\ \\text{m/s}$, pas $259{,}2$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer une vitesse, une distance ou une durée",
+              "statement": "Dans cet exercice, tu relèves les données, tu convertis, puis tu appliques la bonne formule.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un cycliste parcourt 600 m en 100 s. Quelle est sa vitesse moyenne, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 600 m et t = 100 s. Étape 2 — Convertir : d et t sont déjà en m et en s, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 600 / 100 = 6 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un car parcourt 180 km en 3 h. Quelle est sa vitesse moyenne, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 180 km et t = 3 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 180 / 3 = 60 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève marche 1,5 km en 20 min. Quelle est sa vitesse moyenne, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 1,5 km et t = 20 min. Étape 2 — Convertir : d = 1,5 km = 1 500 m et t = 20 min = 1 200 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 1 500 / 1 200 = 1,25 m/s. Écrire 1,5 / 20 = 0,075 sans convertir donne un nombre qui n'est ni en m/s ni en km/h.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "1,25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un scooter roule à la vitesse moyenne de 15 m/s pendant 2 min. Quelle distance parcourt-il, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 15 m/s et t = 2 min. Étape 2 — Convertir : t = 2 min = 120 s. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 15 × 120 = 1 800 m. Calculer 15 × 2 = 30 m oublie que 2 min valent 120 s.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "1800",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion roule à la vitesse moyenne de 60 km/h. Combien de temps met-il pour parcourir 90 km, en minutes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 90 km et v = 60 km/h. Étape 2 — Convertir : d et v sont déjà en km et en km/h, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 90 / 60 = 1,5 h soit 90 min. Le résultat 1,5 est en heures ; il faut le convertir en minutes.",
+                  "tolerance": 0,
+                  "unit": "min",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coureur parcourt 3 km en 15 min. Quelle est sa vitesse moyenne, en km/h ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : d = 3 km et t = 15 min. Étape 2 — Convertir : t = 15 min = 0,25 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 3 / 0,25 = 12 km/h. La proposition 0,2 km/h vient de 3 / 15 sans conversion ; 45 km/h vient de la multiplication 3 × 15 ; 720 km/h vient de 15 lu en secondes.",
+                  "answers": [
+                    {
+                      "content": "12 km/h",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,2 km/h",
+                      "correct": false
+                    },
+                    {
+                      "content": "45 km/h",
+                      "correct": false
+                    },
+                    {
+                      "content": "720 km/h",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Convertir des vitesses entre km/h et m/s",
+              "statement": "Dans cet exercice, tu passes de km/h à m/s et de m/s à km/h, puis tu compares des vitesses données dans des unités différentes.",
+              "hint": "Pour passer de km/h à m/s, divise par 3,6. Pour passer de m/s à km/h, multiplie par 3,6.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un car roule à 72 km/h. Exprime sa vitesse en m/s.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 72 km/h. Étape 2 — Convertir : 72 km = 72 000 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 72 000 / 3 600 = 20 m/s. On retrouve le raccourci : 72 / 3,6 = 20.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coureur a une vitesse de 15 m/s. Exprime sa vitesse en km/h.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 15 m/s, soit 15 m en 1 s. Étape 2 — Convertir : 15 m = 0,015 km et 1 s = 1/3 600 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 0,015 × 3 600 = 54 km/h. Raccourci : 15 × 3,6 = 54.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la plus grande de ces vitesses ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 25 m/s, 80 km/h, 18 m/s et 60 km/h. Étape 2 — Convertir : tout en km/h. 25 m/s = 25 × 3,6 = 90 km/h ; 18 m/s = 64,8 km/h. Étape 3 — Écrire la formule : v(km/h) = v(m/s) × 3,6. Étape 4 — Calculer et comparer : 90 > 80 > 64,8 > 60. La plus grande est 25 m/s. Comparer 25 et 80 sans conversion est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "25 m/s",
+                      "correct": true
+                    },
+                    {
+                      "content": "80 km/h",
+                      "correct": false
+                    },
+                    {
+                      "content": "18 m/s",
+                      "correct": false
+                    },
+                    {
+                      "content": "60 km/h",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour passer d'une vitesse en km/h à une vitesse en m/s, on multiplie par 3,6.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Convertir : 1 km/h = 1 000 m / 3 600 s, soit environ 0,28 m/s ; on divise donc par 3,6. Exemple : 36 km/h = 36 / 3,6 = 10 m/s. Multiplier donnerait 129,6, ce qui est absurde pour un cycliste (étape 4 : vérifier que le résultat est vraisemblable).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque vitesse en km/h à la vitesse en m/s qui lui est égale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Convertir : on divise par 3,6 chaque vitesse en km/h. Étape 4 — Calculer : 36 / 3,6 = 10 ; 18 / 3,6 = 5 ; 54 / 3,6 = 15 ; 108 / 3,6 = 30. Chaque vitesse en km/h est donc reliée à sa valeur en m/s.",
+                  "answers": [
+                    {
+                      "content": "36 km/h",
+                      "match": "10 m/s"
+                    },
+                    {
+                      "content": "18 km/h",
+                      "match": "5 m/s"
+                    },
+                    {
+                      "content": "54 km/h",
+                      "match": "15 m/s"
+                    },
+                    {
+                      "content": "108 km/h",
+                      "match": "30 m/s"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans les conversions de vitesses, 1 m/s est égal à ___ km/h (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Convertir : 1 m/s = 1 m en 1 s = 0,001 km en 1/3 600 h. Étape 4 — Calculer : 0,001 × 3 600 = 3,6. Donc 1 m/s = 3,6 km/h.",
+                  "answers": [
+                    {
+                      "content": "3,6",
+                      "correct": true
+                    },
+                    {
+                      "content": "3.6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mouvements rectiligne et circulaire uniformes",
+          "remember": "Un mouvement est **uniforme** quand la valeur de la vitesse reste constante : l'objet parcourt des distances égales pendant des durées égales, et $d = v \\times t$. Il est **rectiligne** quand la trajectoire est une droite, **circulaire** quand c'est un cercle. Si la valeur de la vitesse change, le mouvement est **non uniforme**. Sur un cercle de rayon $R$, un tour complet mesure $2\\pi R$ (on prend $\\pi \\approx 3{,}14$).",
+          "method": [
+            "Relever la trajectoire de l'objet dans le référentiel donné (droite, cercle ou courbe).",
+            "Relever les distances parcourues pendant des durées égales, ou la vitesse à plusieurs instants.",
+            "Comparer ces valeurs : sont-elles égales (vitesse constante) ou différentes ?",
+            "Conclure en nommant le mouvement : rectiligne uniforme, circulaire uniforme ou non uniforme."
+          ],
+          "example": {
+            "statement": "Un scooter roule sur une route droite. Il parcourt 120 m entre 0 et 10 s, 120 m entre 10 et 20 s, puis 120 m entre 20 et 30 s. Quel est son mouvement ?",
+            "steps": [
+              "Relever la trajectoire : sur la route, c'est une droite.",
+              "Relever les distances : 120 m, 120 m et 120 m, pendant trois durées égales de 10 s.",
+              "Comparer : les trois distances sont égales, la vitesse est constante : $v = \\dfrac{120}{10} = 12$ m/s.",
+              "Conclure : le mouvement est rectiligne uniforme."
+            ]
+          },
+          "pitfall": "Uniforme ne veut pas dire « en ligne droite ». Contre-exemple : un cheval de manège qui garde une vitesse de valeur 2 m/s a un mouvement uniforme, mais sa trajectoire est un cercle. Inversement, une voiture qui démarre sur une route droite est en mouvement rectiligne, mais sa vitesse change : il n'est pas uniforme. Pose deux questions : quelle trajectoire ? la valeur de la vitesse change-t-elle ?",
+          "figure": "piste-circulaire",
+          "exercise": [
+            {
+              "title": "Reconnaître un mouvement uniforme",
+              "statement": "Dans cet exercice, tu relèves la trajectoire et les distances parcourues, tu les compares, puis tu nommes le mouvement.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur une route droite, un scooter parcourt 5 m pendant la 1re seconde, 5 m pendant la 2e et 5 m pendant la 3e. Quel est son mouvement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la trajectoire : le scooter roule sur une route droite, la trajectoire est une droite. Étape 2 — Relever les distances : 5 m, 5 m et 5 m en trois durées égales de 1 s. Étape 3 — Comparer : les distances sont égales, donc la vitesse est constante. Étape 4 — Conclure : le mouvement est rectiligne uniforme. Il n'est pas circulaire, puisque la trajectoire est une droite.",
+                  "answers": [
+                    {
+                      "content": "rectiligne uniforme",
+                      "correct": true
+                    },
+                    {
+                      "content": "circulaire uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "rectiligne non uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "circulaire non uniforme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cheval de manège tourne en rond. La valeur de sa vitesse est toujours 2 m/s. Quel est son mouvement dans le référentiel du sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la trajectoire : le cheval tourne en rond, la trajectoire est un cercle. Étape 2 — Relever la vitesse : sa valeur est 2 m/s à tous les instants. Étape 3 — Comparer : les valeurs sont égales, donc la vitesse est constante. Étape 4 — Conclure : le mouvement est circulaire uniforme. Il n'est pas rectiligne, car la trajectoire n'est pas une droite.",
+                  "answers": [
+                    {
+                      "content": "circulaire uniforme",
+                      "correct": true
+                    },
+                    {
+                      "content": "rectiligne uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "circulaire non uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "rectiligne non uniforme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture roule sur une route droite et parcourt 10 m, puis 20 m, puis 30 m pendant trois secondes successives. Son mouvement est rectiligne uniforme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la trajectoire : la route est droite. Étape 2 — Relever les distances : 10 m, 20 m et 30 m en trois durées égales de 1 s. Étape 3 — Comparer : les distances sont différentes, donc la vitesse change. Étape 4 — Conclure : le mouvement est rectiligne non uniforme. L'erreur est de ne regarder que la trajectoire droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un scooter est en mouvement rectiligne uniforme à 12 m/s. Quelle distance parcourt-il en 25 s, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 12 m/s et t = 25 s. Étape 2 — Convertir : v et t sont déjà en m/s et en s, rien à convertir. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 12 × 25 = 300 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une piste circulaire a un rayon de 50 m. Un coureur fait un tour complet. Quelle distance parcourt-il, en mètres ? Prends $\\pi \\approx 3{,}14$ (longueur d'un tour : $2\\pi R$).",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever la trajectoire : la piste est un cercle de rayon R = 50 m. Étape 2 — Relever la distance : un tour complet, c'est le périmètre du cercle. Étape 3 — Comparer : aucune comparaison n'est nécessaire, on applique la formule 2 × π × R. Étape 4 — Conclure : d = 2 × 3,14 × 50 = 314 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "314",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mouvement uniforme a toujours une trajectoire en ligne droite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la trajectoire : elle peut être droite ou circulaire. Étape 2 — Relever la vitesse : uniforme veut seulement dire que la valeur de la vitesse est constante. Étape 3 — Comparer : un manège a une vitesse de valeur constante sur un cercle. Étape 4 — Conclure : il existe des mouvements uniformes circulaires, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire la droite distance-temps d'un scooter",
+              "statement": "Dans cet exercice, tu lis la droite qui donne la distance parcourue par un scooter en fonction du temps, et tu en déduis le mouvement.",
+              "hint": "Si la droite passe par l'origine, la distance est proportionnelle à la durée : la vitesse est constante.",
+              "exercise_type": "fixation",
+              "figure": "droite-distance-temps",
+              "questions": [
+                {
+                  "content": "Un scooter roule sur une route droite. À l'instant 2 s il a parcouru 20 m, et à l'instant 4 s il a parcouru 40 m, depuis son départ à 0 s. Quelle distance a-t-il parcourue à l'instant 5 s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever la trajectoire : la route est droite. Étape 2 — Relever les distances : 20 m à 2 s et 40 m à 4 s. Étape 3 — Comparer : 20 / 2 = 10 m/s et 40 / 4 = 10 m/s, la vitesse est constante. Étape 4 — Conclure : mouvement rectiligne uniforme, donc d = 10 × 5 = 50 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un scooter parcourt 20 m en 2 s, 30 m en 3 s et 50 m en 5 s depuis le départ. Quelle est sa vitesse, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever la trajectoire : elle est rectiligne. Étape 2 — Relever les distances : 20 m en 2 s, 30 m en 3 s, 50 m en 5 s. Étape 3 — Comparer : 20 / 2 = 30 / 3 = 50 / 5 = 10, les quotients sont égaux. Étape 4 — Conclure : mouvement rectiligne uniforme de vitesse 10 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le graphique distance-temps d'un mobile, les points forment une droite qui passe par l'origine. Que cela signifie-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la trajectoire : le graphique ne la montre pas, il donne d en fonction de t. Étape 2 — Relever les distances : elles croissent régulièrement avec t. Étape 3 — Comparer : le quotient d / t est le même pour tous les points d'une droite passant par l'origine. Étape 4 — Conclure : la vitesse est constante. Un mobile immobile aurait une droite horizontale ; une vitesse qui augmente donnerait une courbe.",
+                  "answers": [
+                    {
+                      "content": "La distance parcourue est proportionnelle à la durée : la vitesse est constante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mobile est immobile",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse du mobile augmente à chaque seconde",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trajectoire du mobile est un cercle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque description au mouvement qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever la trajectoire : droite ou cercle. Étape 2 — Relever les distances ou la vitesse. Étape 3 — Comparer : constantes ou non. Étape 4 — Conclure : droite avec distances égales = rectiligne uniforme ; cercle avec vitesse de valeur constante = circulaire uniforme ; droite avec distances croissantes = rectiligne non uniforme.",
+                  "answers": [
+                    {
+                      "content": "Trajectoire droite, distances égales en durées égales",
+                      "match": "Rectiligne uniforme"
+                    },
+                    {
+                      "content": "Trajectoire en cercle, valeur de la vitesse constante",
+                      "match": "Circulaire uniforme"
+                    },
+                    {
+                      "content": "Trajectoire droite, distances de plus en plus grandes en durées égales",
+                      "match": "Rectiligne non uniforme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un mouvement.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever la trajectoire : elle vient en premier. Étape 2 — Relever les distances en durées égales. Étape 3 — Comparer. Étape 4 — Conclure en nommant le mouvement. On ne peut pas conclure avant d'avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Relever la trajectoire dans le référentiel donné"
+                    },
+                    {
+                      "content": "Relever les distances parcourues en durées égales"
+                    },
+                    {
+                      "content": "Comparer ces distances"
+                    },
+                    {
+                      "content": "Conclure en nommant le mouvement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point d'un manège a un mouvement circulaire uniforme. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever la trajectoire : circulaire veut dire que c'est un cercle. Étape 2 — Relever la vitesse : uniforme veut dire que sa valeur ne change pas. Étape 3 — Comparer : ces deux propriétés sont compatibles. Étape 4 — Conclure : trajectoire en cercle et vitesse de valeur constante. Le point n'est pas sur une droite, et il bouge par rapport au sol.",
+                  "answers": [
+                    {
+                      "content": "Sa trajectoire est un cercle",
+                      "correct": true
+                    },
+                    {
+                      "content": "La valeur de sa vitesse est constante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa trajectoire est une droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est immobile dans le référentiel du sol",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un trajet en gbaka dans Abidjan",
+          "statement": "Un gbaka part de la gare d'Adjamé et roule en ligne droite sur un boulevard. Il parcourt 9 km en 15 min. Koffi, un passager, reste assis pendant tout le trajet. Un vendeur est debout au bord de la route.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Pour chaque question, commence par choisir le référentiel, puis convertis les unités avant d'appliquer la formule.",
+          "questions": [
+            {
+              "content": "Un gbaka roule sur un boulevard droit. Koffi, un passager, reste assis. Koffi est immobile par rapport à…",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : l'objet est Koffi ; on compare avec trois référentiels possibles. Étape 2 — Comparer : sa position par rapport aux sièges du gbaka ne change pas, mais elle change par rapport au vendeur et au boulevard. Étape 3 — Conclure : Koffi est immobile par rapport au gbaka seulement. Dire « immobile pour tous » est l'erreur du piège : l'immobilité dépend du référentiel.",
+              "answers": [
+                {
+                  "content": "le gbaka",
+                  "correct": true
+                },
+                {
+                  "content": "le vendeur au bord de la route",
+                  "correct": false
+                },
+                {
+                  "content": "le boulevard",
+                  "correct": false
+                },
+                {
+                  "content": "tous les objets, sans exception",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi est assis dans un gbaka qui roule. Un vendeur est debout au bord de la route. Pour le vendeur, Koffi est immobile.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : l'objet est Koffi, le référentiel est le vendeur (donc le sol). Étape 2 — Comparer : la distance entre Koffi et le vendeur change au cours du temps. Étape 3 — Conclure : pour le vendeur, Koffi est en mouvement. Il n'est immobile que dans le référentiel du gbaka.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un gbaka parcourt 9 km en 15 min. Quelle est sa vitesse moyenne, en km/h ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 9 km et t = 15 min. Étape 2 — Convertir : d = 9 km = 9 km et t = 15 min = 0,25 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 9 / 0,25 = 36 km/h. Écrire 9 / 15 = 0,6 oublie que 15 min valent 0,25 h.",
+              "tolerance": 0,
+              "unit": "km/h",
+              "answers": [
+                {
+                  "content": "36",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un gbaka parcourt 9 km en 15 min. Quelle est sa vitesse moyenne, en m/s ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 9 km et t = 15 min. Étape 2 — Convertir : d = 9 km = 9 000 m et t = 15 min = 900 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 9 000 / 900 = 10 m/s. On peut aussi diviser 36 km/h par 3,6 pour retrouver 10 m/s.",
+              "tolerance": 0,
+              "unit": "m/s",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un gbaka garde la vitesse moyenne de 36 km/h pendant 40 min. Quelle distance parcourt-il, en kilomètres ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : v = 36 km/h et t = 40 min. Étape 2 — Convertir : t = 40 min = 2/3 h. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 36 × 2/3 = 24 km. Calculer 36 × 40 = 1 440 km oublie de convertir 40 min en heures.",
+              "tolerance": 0,
+              "unit": "km",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le référentiel du boulevard, la trajectoire d'un point de la caisse du gbaka est une droite : on dit qu'elle est ___ (un adjectif).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Identifier : l'objet est un point de la caisse, le référentiel est le boulevard. Étape 2 — Comparer : ce point avance sur le boulevard sans jamais quitter la ligne droite. Étape 3 — Conclure : la trajectoire est rectiligne.",
+              "answers": [
+                {
+                  "content": "rectiligne",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un coureur sur une piste circulaire",
+          "statement": "Sur un stade, une piste circulaire a un rayon R = 50 m. Un coureur la parcourt à la vitesse de valeur constante 5 m/s. On prend $\\pi \\approx 3{,}14$ et la longueur d'un tour vaut $2\\pi R$.",
+          "exercise_type": "fixation",
+          "figure": "piste-circulaire",
+          "hint": "Un tour complet mesure $2\\pi R$. Utilise ensuite $t = \\dfrac{d}{v}$ et $d = v \\times t$.",
+          "questions": [
+            {
+              "content": "Un coureur parcourt une piste circulaire à la vitesse de valeur constante 5 m/s. Quel est son mouvement dans le référentiel du stade ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever la trajectoire : la piste est un cercle. Étape 2 — Relever la vitesse : sa valeur est 5 m/s tout le temps. Étape 3 — Comparer : la valeur est constante. Étape 4 — Conclure : mouvement circulaire uniforme. Il ne peut pas être rectiligne, car la piste est un cercle.",
+              "answers": [
+                {
+                  "content": "circulaire uniforme",
+                  "correct": true
+                },
+                {
+                  "content": "rectiligne uniforme",
+                  "correct": false
+                },
+                {
+                  "content": "circulaire non uniforme",
+                  "correct": false
+                },
+                {
+                  "content": "rectiligne non uniforme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une piste circulaire a un rayon R = 50 m. Quelle est la longueur d'un tour, en mètres ? Prends $\\pi \\approx 3{,}14$ et $d = 2\\pi R$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : R = 50 m et π ≈ 3,14. Étape 2 — Convertir : R est déjà en mètres. Étape 3 — Écrire la formule : d = 2 × π × R. Étape 4 — Calculer : d = 2 × 3,14 × 50 = 314 m.",
+              "tolerance": 0,
+              "unit": "m",
+              "answers": [
+                {
+                  "content": "314",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un coureur parcourt un tour de piste de 314 m à la vitesse constante de 5 m/s. Quelle est la durée d'un tour, en secondes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 314 m et v = 5 m/s. Étape 2 — Convertir : d et v sont déjà en m et en m/s, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 314 / 5 = 62,8 s.",
+              "tolerance": 0,
+              "unit": "s",
+              "answers": [
+                {
+                  "content": "62,8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un coureur garde la vitesse constante de 5 m/s pendant 2 min. Quelle distance parcourt-il, en mètres ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : v = 5 m/s et t = 2 min. Étape 2 — Convertir : t = 2 min = 120 s. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 5 × 120 = 600 m. Sans convertir 2 min en 120 s, on trouverait 10 m, ce qui est absurde.",
+              "tolerance": 0,
+              "unit": "m",
+              "answers": [
+                {
+                  "content": "600",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un coureur a la vitesse constante de 5 m/s. Cette vitesse vaut 18 km/h.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : v = 5 m/s. Étape 2 — Convertir : 5 m/s × 3,6 = 18 km/h (5 m en 1 s, soit 18 000 m en 3 600 s). Étape 3 — Écrire la formule : v(km/h) = v(m/s) × 3,6. Étape 4 — Calculer : 5 × 3,6 = 18 km/h. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un coureur parcourt une piste circulaire à vitesse de valeur constante. Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Relever la trajectoire : un cercle. Étape 2 — Relever les distances : égales en durées égales, puisque la vitesse est constante. Étape 3 — Comparer : ces deux faits vont ensemble dans un mouvement circulaire uniforme. Étape 4 — Conclure : les affirmations « trajectoire en cercle » et « distances égales en durées égales » sont justes ; la trajectoire n'est pas une droite et le coureur bouge par rapport au sol.",
+              "answers": [
+                {
+                  "content": "Sa trajectoire est un cercle",
+                  "correct": true
+                },
+                {
+                  "content": "Il parcourt des distances égales pendant des durées égales",
+                  "correct": true
+                },
+                {
+                  "content": "Sa trajectoire est une droite",
+                  "correct": false
+                },
+                {
+                  "content": "Il est immobile par rapport au sol",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un voyage en car en deux étapes",
+          "statement": "Un car fait un voyage en deux étapes. Première étape : 160 km en 2 h. Deuxième étape, après une pause : 120 km en 3 h. On étudie sa vitesse moyenne dans le référentiel de la route. Les durées ne comptent que le temps de roulage.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Calcule chaque vitesse avec $v = \\dfrac{d}{t}$. Pour l'ensemble du voyage, additionne d'abord les distances, puis les durées.",
+          "questions": [
+            {
+              "content": "Un car parcourt 160 km en 2 h. Quelle est sa vitesse moyenne, en km/h ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 160 km et t = 2 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 160 / 2 = 80 km/h.",
+              "tolerance": 0,
+              "unit": "km/h",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un car parcourt 120 km en 3 h. Quelle est sa vitesse moyenne, en km/h ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 120 km et t = 3 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 120 / 3 = 40 km/h.",
+              "tolerance": 0,
+              "unit": "km/h",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un car parcourt 160 km pendant la première étape et 120 km pendant la deuxième. Quelle est la distance totale, en kilomètres ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : 160 km et 120 km. Étape 2 — Convertir : les deux distances sont déjà en kilomètres. Étape 3 — Écrire la formule : la distance totale est la somme des distances. Étape 4 — Calculer : 160 + 120 = 280 km.",
+              "tolerance": 0,
+              "unit": "km",
+              "answers": [
+                {
+                  "content": "280",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un car roule 2 h pendant la première étape et 3 h pendant la deuxième. Quelle est la durée totale de roulage, en heures ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : 2 h et 3 h. Étape 2 — Convertir : les deux durées sont déjà en heures. Étape 3 — Écrire la formule : la durée totale est la somme des durées. Étape 4 — Calculer : 2 + 3 = 5 h.",
+              "tolerance": 0,
+              "unit": "h",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un car parcourt 280 km au total en 5 h de roulage. Quelle est sa vitesse moyenne sur l'ensemble du voyage, en km/h ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 280 km et t = 5 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 280 / 5 = 56 km/h. Faire la moyenne de 80 et de 40 donnerait 60 km/h : c'est faux, car les deux durées ne sont pas égales.",
+              "tolerance": 0,
+              "unit": "km/h",
+              "answers": [
+                {
+                  "content": "56",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève affirme : « La vitesse moyenne du voyage est la moyenne de 80 km/h et de 40 km/h, soit 60 km/h. » Explique pourquoi c'est faux et donne la bonne valeur.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Relever : 160 km en 2 h puis 120 km en 3 h. Étape 2 — Convertir : tout est en km et en h. Étape 3 — Écrire la formule : v = d / t avec la distance totale et la durée totale. Étape 4 — Calculer : v = (160 + 120) / (2 + 3) = 280 / 5 = 56 km/h. La moyenne 60 km/h est fausse, parce que le car roule plus longtemps à 40 km/h (3 h) qu'à 80 km/h (2 h). Barème : formule avec distance totale et durée totale (1 pt), calcul 56 km/h (1 pt), explication des durées différentes (1 pt).",
+              "points": 3,
+              "criteria": [
+                "Dit que la vitesse moyenne se calcule avec la distance totale et la durée totale",
+                "Calcule 280 / 5 = 56 km/h",
+                "Explique que les deux étapes n'ont pas la même durée"
+              ],
+              "answers": [],
+              "starter": "La vitesse moyenne se calcule avec…"
+            }
+          ]
+        },
+        {
+          "title": "Deux trajets vers le marché",
+          "statement": "Awa et Moussa quittent en même temps leur village pour aller au marché, situé à 6 km, par la même piste droite. Awa marche à la vitesse constante de 3,6 km/h. Moussa roule à vélo à la vitesse constante de 18 km/h. Leurs mouvements sont rectilignes uniformes dans le référentiel de la piste.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Convertis 3,6 km/h et 18 km/h en m/s en divisant par 3,6. Calcule chaque durée avec $t = \\dfrac{d}{v}$, puis compare.",
+          "questions": [
+            {
+              "content": "Awa marche à la vitesse constante de 3,6 km/h sur une piste de 6 km. Combien de temps met-elle, en minutes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 6 km et v = 3,6 km/h. Étape 2 — Convertir : d et v sont déjà en km et en km/h, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 6 / 3,6 = 5/3 h soit 100 min.",
+              "tolerance": 0,
+              "unit": "min",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Moussa roule à la vitesse constante de 18 km/h sur une piste de 6 km. Combien de temps met-il, en minutes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : d = 6 km et v = 18 km/h. Étape 2 — Convertir : d et v sont déjà en km et en km/h, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 6 / 18 = 1/3 h soit 20 min.",
+              "tolerance": 0,
+              "unit": "min",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa arrive après 100 min et Moussa après 20 min. De combien de minutes Moussa arrive-t-il avant Awa ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : 100 min pour Awa, 20 min pour Moussa. Étape 2 — Convertir : les deux durées sont en minutes. Étape 3 — Écrire la formule : écart = durée d'Awa − durée de Moussa. Étape 4 — Calculer : 100 − 20 = 80 min.",
+              "tolerance": 0,
+              "unit": "min",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Moussa roule à 18 km/h. Exprime sa vitesse en m/s.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : v = 18 km/h. Étape 2 — Convertir : 18 km = 18 000 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 18 000 / 3 600 = 5 m/s.",
+              "tolerance": 0,
+              "unit": "m/s",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa marche à 1 m/s. Quelle distance a-t-elle parcourue quand Moussa arrive au marché, c'est-à-dire au bout de 20 min ? Réponds en mètres.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : v = 1 m/s et t = 20 min. Étape 2 — Convertir : t = 20 min = 1 200 s. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 1 × 1 200 = 1 200 m. 20 min valent 1 200 s, pas 20 s.",
+              "tolerance": 0,
+              "unit": "m",
+              "answers": [
+                {
+                  "content": "1200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Moussa roule sur une piste droite. Dans quel référentiel est-il immobile ? Dans quel référentiel son mouvement est-il rectiligne uniforme ? Justifie en une ou deux phrases.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : l'objet est Moussa ; on compare deux référentiels, son vélo et la piste. Étape 2 — Comparer : sa position par rapport au vélo ne change pas ; par rapport à la piste, elle change. Étape 3 — Conclure : Moussa est immobile dans le référentiel du vélo ; dans le référentiel de la piste, sa trajectoire est une droite et la valeur de sa vitesse est constante (18 km/h), donc son mouvement est rectiligne uniforme. Barème : référentiel d'immobilité (1 pt), référentiel de la piste (1 pt), justification trajectoire et vitesse (1 pt).",
+              "points": 3,
+              "criteria": [
+                "Cite le vélo (ou Moussa lui-même) comme référentiel où Moussa est immobile",
+                "Cite la piste (ou le sol) comme référentiel du mouvement rectiligne uniforme",
+                "Justifie : trajectoire droite et vitesse de valeur constante dans ce référentiel"
+              ],
+              "answers": [],
+              "starter": "Moussa est immobile dans le référentiel…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Référentiel, mouvement et trajectoire ; vitesse moyenne (v = d / t) ; conversions entre km/h et m/s ; reconnaissance d'un mouvement rectiligne uniforme avec un graphique distance-temps.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Yao est assis dans un car qui roule sur une route droite. Un agent de police est debout au bord de la route.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque question, dis quel est l'objet, quel est le référentiel, puis compare les positions.",
+              "questions": [
+                {
+                  "content": "Yao est assis dans un car qui roule sur une route droite. Par rapport au car, Yao est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est Yao, le référentiel est le car. Étape 2 — Comparer : sa position par rapport au car ne change pas. Étape 3 — Conclure : Yao est immobile par rapport au car. Dire qu'il bouge parce que le car roule est faux : le car n'est pas son référentiel pour cette phrase.",
+                  "answers": [
+                    {
+                      "content": "immobile",
+                      "correct": true
+                    },
+                    {
+                      "content": "en mouvement",
+                      "correct": false
+                    },
+                    {
+                      "content": "en mouvement si le car accélère seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "impossible à dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao est assis dans un car qui roule sur une route droite. Un agent de police est debout au bord de la route. Par rapport à l'agent, Yao est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est Yao, le référentiel est l'agent, donc le sol. Étape 2 — Comparer : la distance entre Yao et l'agent change au cours du temps. Étape 3 — Conclure : Yao est en mouvement. Être assis ne change rien : l'immobilité se juge par rapport au référentiel.",
+                  "answers": [
+                    {
+                      "content": "en mouvement",
+                      "correct": true
+                    },
+                    {
+                      "content": "immobile",
+                      "correct": false
+                    },
+                    {
+                      "content": "immobile, car il est assis",
+                      "correct": false
+                    },
+                    {
+                      "content": "ni immobile ni en mouvement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La ligne formée par les positions successives d'un point d'un objet en mouvement s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Conclure : les positions successives d'un point de l'objet forment sa trajectoire. Étapes 1 et 2 : on la décrit une fois l'objet et le référentiel choisis.",
+                  "answers": [
+                    {
+                      "content": "trajectoire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le référentiel du car, l'agent de police debout au bord de la route est en mouvement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'objet est l'agent, le référentiel est le car. Étape 2 — Comparer : vu du car, l'agent défile et sa position change. Étape 3 — Conclure : il est en mouvement dans le référentiel du car, même s'il est immobile dans celui du sol.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao est assis dans un car qui roule. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : l'objet est Yao ; référentiels : le car (et son siège) et le sol. Étape 2 — Comparer : sa position change par rapport au sol, pas par rapport au car ni au siège. Étape 3 — Conclure : immobile par rapport au car, en mouvement par rapport au sol. Les deux autres affirmations inversent les référentiels.",
+                  "answers": [
+                    {
+                      "content": "Yao est immobile par rapport au car",
+                      "correct": true
+                    },
+                    {
+                      "content": "Yao est en mouvement par rapport au sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "Yao est en mouvement par rapport à son siège",
+                      "correct": false
+                    },
+                    {
+                      "content": "Yao est immobile par rapport au sol",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un livreur à moto parcourt 27 km en 30 min sur une route droite, à vitesse moyenne constante.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis 30 min en heures (0,5 h) pour les km/h, et en secondes (1 800 s) pour les m/s.",
+              "questions": [
+                {
+                  "content": "Un livreur à moto parcourt 27 km en 30 min. Quelle est sa vitesse moyenne, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 27 km et t = 30 min. Étape 2 — Convertir : d = 27 km = 27 km et t = 30 min = 0,5 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 27 / 0,5 = 54 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livreur à moto parcourt 27 km en 30 min. Quelle est sa vitesse moyenne, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 27 km et t = 30 min. Étape 2 — Convertir : d = 27 km = 27 000 m et t = 30 min = 1 800 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 27 000 / 1 800 = 15 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livreur roule à la vitesse moyenne de 54 km/h pendant 20 min. Quelle distance parcourt-il, en kilomètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 54 km/h et t = 20 min. Étape 2 — Convertir : t = 20 min = 1/3 h. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 54 × 1/3 = 18 km.",
+                  "tolerance": 0,
+                  "unit": "km",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livreur roule à la vitesse moyenne de 54 km/h. Combien de temps met-il pour parcourir 81 km, en minutes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 81 km et v = 54 km/h. Étape 2 — Convertir : d et v sont déjà en km et en km/h, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 81 / 54 = 1,5 h soit 90 min.",
+                  "tolerance": 0,
+                  "unit": "min",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On cherche la durée t d'un trajet de distance d à la vitesse moyenne v. Quelle formule faut-il écrire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : on connaît d et v, on cherche t. Étape 2 — Convertir : sans importance pour la formule. Étape 3 — Écrire la formule : de v = d / t, on tire t = d / v. Étape 4 — Calculer : par exemple 81 / 54 = 1,5 h. Les formules t = d × v et t = v / d ne donnent pas des heures ; la soustraction n'a aucun sens physique.",
+                  "answers": [
+                    {
+                      "content": "$t = \\dfrac{d}{v}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$t = d \\times v$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = \\dfrac{v}{d}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = d - v$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un panneau indique 90 km/h. Un cycliste roule à 8 m/s. On veut comparer des vitesses données dans des unités différentes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour passer de km/h à m/s, divise par 3,6 ; de m/s à km/h, multiplie par 3,6.",
+              "questions": [
+                {
+                  "content": "Un panneau limite la vitesse à 90 km/h. Exprime cette vitesse en m/s.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 90 km/h. Étape 2 — Convertir : 90 km = 90 000 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 90 000 / 3 600 = 25 m/s (ou 90 / 3,6).",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste roule à 8 m/s. Exprime sa vitesse en km/h.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 8 m/s. Étape 2 — Convertir : 8 m = 0,008 km et 1 s = 1/3 600 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 0,008 × 3 600 = 28,8 km/h (ou 8 × 3,6).",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "28,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque vitesse en m/s à la vitesse égale en km/h.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Convertir : on multiplie chaque vitesse en m/s par 3,6. Étape 4 — Calculer : 10 × 3,6 = 36 ; 20 × 3,6 = 72 ; 30 × 3,6 = 108 ; 5 × 3,6 = 18. Chaque paire est donc exacte.",
+                  "answers": [
+                    {
+                      "content": "10 m/s",
+                      "match": "36 km/h"
+                    },
+                    {
+                      "content": "20 m/s",
+                      "match": "72 km/h"
+                    },
+                    {
+                      "content": "30 m/s",
+                      "match": "108 km/h"
+                    },
+                    {
+                      "content": "5 m/s",
+                      "match": "18 km/h"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste roule à 8 m/s, un autre à 25 km/h. Celui qui roule à 25 km/h va plus vite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : 8 m/s et 25 km/h. Étape 2 — Convertir en km/h : 8 m/s = 8 × 3,6 = 28,8 km/h. Étape 3 — Écrire la formule : v(km/h) = v(m/s) × 3,6. Étape 4 — Calculer et comparer : 28,8 km/h > 25 km/h, donc le premier va plus vite. Comparer 8 et 25 sans convertir est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la plus petite de ces trois vitesses : 12 m/s, 40 km/h, 36 km/h ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 12 m/s, 40 km/h et 36 km/h. Étape 2 — Convertir : 12 m/s = 12 × 3,6 = 43,2 km/h. Étape 3 — Écrire la formule : v(km/h) = v(m/s) × 3,6. Étape 4 — Calculer et comparer : 36 < 40 < 43,2. La plus petite est 36 km/h.",
+                  "answers": [
+                    {
+                      "content": "36 km/h",
+                      "correct": true
+                    },
+                    {
+                      "content": "12 m/s",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 km/h",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont égales",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un scooter roule sur une route droite. Le graphique donne la distance d parcourue (en m) en fonction du temps t (en s) : une droite qui passe par l'origine et par les points (1 ; 10), (3 ; 30) et (5 ; 50).",
+              "exercise_type": "evaluation",
+              "figure": "droite-distance-temps",
+              "hint": "La droite passe par l'origine : le quotient d / t est le même pour tous ses points.",
+              "questions": [
+                {
+                  "content": "Le graphique d'un scooter est une droite qui passe par les points (1 s ; 10 m), (3 s ; 30 m) et (5 s ; 50 m). Quelle est sa vitesse, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever la trajectoire : la route est droite. Étape 2 — Relever les distances : 10 m en 1 s, 30 m en 3 s, 50 m en 5 s. Étape 3 — Comparer : 10 / 1 = 30 / 3 = 50 / 5 = 10. Étape 4 — Conclure : la vitesse est 10 m/s, constante.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un scooter roule à la vitesse constante de 10 m/s. Quelle distance parcourt-il en 4 s, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 10 m/s et t = 4 s. Étape 2 — Convertir : v et t sont déjà en m/s et en s, rien à convertir. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 10 × 4 = 40 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un scooter roule à la vitesse constante de 10 m/s. En combien de temps parcourt-il 70 m, en secondes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 70 m et v = 10 m/s. Étape 2 — Convertir : d et v sont déjà en m et en m/s, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 70 / 10 = 7 s.",
+                  "tolerance": 0,
+                  "unit": "s",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un scooter roule sur une route droite et parcourt 10 m chaque seconde. Quel est son mouvement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la trajectoire : route droite. Étape 2 — Relever les distances : 10 m par seconde. Étape 3 — Comparer : les distances sont égales en durées égales. Étape 4 — Conclure : le mouvement est rectiligne uniforme.",
+                  "answers": [
+                    {
+                      "content": "rectiligne uniforme",
+                      "correct": true
+                    },
+                    {
+                      "content": "circulaire uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "rectiligne non uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "immobile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une droite qui passe par l'origine sur un graphique distance-temps montre que la distance parcourue est proportionnelle à la durée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : pour tous les points de la droite, le quotient d / t a la même valeur, donc d = v × t avec v constante. Étape 4 — Conclure : la distance est proportionnelle à la durée, le mouvement est uniforme (si la trajectoire est droite, il est rectiligne uniforme).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Vitesse moyenne et conversions dans des situations ivoiriennes : gbaka, vélo de livreur, piste de stade, camion de cacao ; référentiel du gbaka et de la route ; mouvement rectiligne uniforme et circulaire uniforme.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un gbaka relie Abobo au Plateau en suivant une route droite sur 18 km. Il met 30 min, à vitesse moyenne constante.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Trajet de 18 km en 30 min : convertis les 30 min en 0,5 h pour les km/h.",
+              "questions": [
+                {
+                  "content": "Un gbaka parcourt 18 km en 30 min. Quelle est sa vitesse moyenne, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 18 km et t = 30 min. Étape 2 — Convertir : d = 18 km = 18 km et t = 30 min = 0,5 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 18 / 0,5 = 36 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka parcourt 18 km en 30 min. Quelle est sa vitesse moyenne, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 18 km et t = 30 min. Étape 2 — Convertir : d = 18 km = 18 000 m et t = 30 min = 1 800 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 18 000 / 1 800 = 10 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule à la vitesse moyenne de 36 km/h pendant 45 min. Quelle distance parcourt-il, en kilomètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 36 km/h et t = 45 min. Étape 2 — Convertir : t = 45 min = 0,75 h. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 36 × 0,75 = 27 km.",
+                  "tolerance": 0,
+                  "unit": "km",
+                  "answers": [
+                    {
+                      "content": "27",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule à la vitesse moyenne de 36 km/h. Combien de temps met-il pour parcourir 54 km, en minutes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 54 km et v = 36 km/h. Étape 2 — Convertir : d et v sont déjà en km et en km/h, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 54 / 36 = 1,5 h soit 90 min.",
+                  "tolerance": 0,
+                  "unit": "min",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un passager reste assis dans un gbaka qui roule. Par rapport à quoi est-il en mouvement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est le passager. Étape 2 — Comparer : sa position change par rapport à la route, pas par rapport au siège, au gbaka ni au conducteur qui avancent avec lui. Étape 3 — Conclure : il est en mouvement par rapport à la route.",
+                  "answers": [
+                    {
+                      "content": "la route",
+                      "correct": true
+                    },
+                    {
+                      "content": "le siège du gbaka",
+                      "correct": false
+                    },
+                    {
+                      "content": "le gbaka",
+                      "correct": false
+                    },
+                    {
+                      "content": "le conducteur assis devant lui",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un livreur de pain pédale à vélo dans une rue droite de Treichville à la vitesse constante de 18 km/h.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "18 km/h = 5 m/s. Pense à convertir les durées en secondes si la vitesse est en m/s.",
+              "questions": [
+                {
+                  "content": "Un livreur de pain roule à 18 km/h. Exprime sa vitesse en m/s.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 18 km/h. Étape 2 — Convertir : 18 km = 18 000 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 18 000 / 3 600 = 5 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livreur de pain roule à 5 m/s pendant 10 min. Quelle distance parcourt-il, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 5 m/s et t = 10 min. Étape 2 — Convertir : t = 10 min = 600 s. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 5 × 600 = 3 000 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livreur de pain roule à 5 m/s. Combien de temps met-il pour parcourir 1 500 m, en secondes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 1 500 m et v = 5 m/s. Étape 2 — Convertir : d et v sont déjà en m et en m/s, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 1 500 / 5 = 300 s.",
+                  "tolerance": 0,
+                  "unit": "s",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livreur de pain pédale en ligne droite à vitesse de valeur constante. Son mouvement est rectiligne uniforme dans le référentiel de la rue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la trajectoire : la rue est droite. Étape 2 — Relever les distances : égales en durées égales, puisque la vitesse est constante. Étape 3 — Comparer : aucune différence entre les intervalles. Étape 4 — Conclure : mouvement rectiligne uniforme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point de la jante de la roue du vélo décrit, dans le référentiel du cadre du vélo, une trajectoire ___ (un adjectif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : l'objet est un point de la jante, le référentiel est le cadre. Étape 2 — Comparer : le point reste à la même distance de l'axe de la roue. Étape 3 — Conclure : sa trajectoire est circulaire.",
+                  "answers": [
+                    {
+                      "content": "circulaire",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Lors de la fête de l'école, Fatou court 400 m en 50 s sur la piste du stade, à vitesse constante. Elle poursuit ensuite à la même vitesse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Utilise v = d / t en m et s. Pour le temps, t = d / v.",
+              "questions": [
+                {
+                  "content": "Fatou court 400 m en 50 s. Quelle est sa vitesse moyenne, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 400 m et t = 50 s. Étape 2 — Convertir : d et t sont déjà en m et en s, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 400 / 50 = 8 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou court à 8 m/s. Exprime sa vitesse en km/h.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 8 m/s. Étape 2 — Convertir : 8 m = 0,008 km et 1 s = 1/3 600 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 0,008 × 3 600 = 28,8 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "28,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou court à la vitesse constante de 8 m/s. Combien de temps met-elle pour parcourir 1 500 m, en secondes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 1 500 m et v = 8 m/s. Étape 2 — Convertir : d et v sont déjà en m et en m/s, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 1 500 / 8 = 187,5 s.",
+                  "tolerance": 0,
+                  "unit": "s",
+                  "answers": [
+                    {
+                      "content": "187,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une piste de stade fait un tour de 400 m. Fatou court 800 m à vitesse constante. Combien de tours fait-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : un tour fait 400 m, Fatou parcourt 800 m. Étape 2 — Convertir : les deux distances sont en mètres. Étape 3 — Écrire la formule : nombre de tours = distance totale / longueur d'un tour. Étape 4 — Calculer : 800 / 400 = 2 tours. Les autres propositions viennent d'une division ou d'une multiplication mal posée.",
+                  "answers": [
+                    {
+                      "content": "2 tours",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 tour",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 tours",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 tours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou court à vitesse de valeur constante sur une piste circulaire. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever la trajectoire : un cercle. Étape 2 — Relever la vitesse : sa valeur est constante. Étape 3 — Comparer : les distances sont égales pour des durées égales. Étape 4 — Conclure : mouvement circulaire uniforme. Il n'est pas rectiligne, puisque la trajectoire n'est pas une droite.",
+                  "answers": [
+                    {
+                      "content": "Son mouvement est circulaire uniforme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle parcourt des distances égales en durées égales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son mouvement est rectiligne uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa trajectoire est une droite",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un camion de cacao fait un trajet de 120 km sur une route droite. Il roule à la vitesse moyenne de 60 km/h, puis s'arrête 30 min pour décharger.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La durée de roulage est t = d / v. La pause n'entre pas dans le calcul de la vitesse de roulage.",
+              "questions": [
+                {
+                  "content": "Un camion doit parcourir 120 km à la vitesse moyenne de 60 km/h. Combien de temps roule-t-il, en minutes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 120 km et v = 60 km/h. Étape 2 — Convertir : d et v sont déjà en km et en km/h, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 120 / 60 = 2 h soit 120 min.",
+                  "tolerance": 0,
+                  "unit": "min",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion roule à la vitesse moyenne de 60 km/h pendant 45 min. Quelle distance parcourt-il, en kilomètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 60 km/h et t = 45 min. Étape 2 — Convertir : t = 45 min = 0,75 h. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 60 × 0,75 = 45 km.",
+                  "tolerance": 0,
+                  "unit": "km",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion roule 2 h, puis s'arrête 30 min pour décharger. Combien de minutes s'écoulent entre le départ et la fin de l'arrêt ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : 2 h de roulage et 30 min de pause. Étape 2 — Convertir : 2 h = 120 min. Étape 3 — Écrire la formule : durée totale = durée de roulage + durée de pause. Étape 4 — Calculer : 120 + 30 = 150 min.",
+                  "tolerance": 0,
+                  "unit": "min",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour sortir de la ville, un camion roule à 72 km/h. Exprime sa vitesse en m/s.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 72 km/h. Étape 2 — Convertir : 72 km = 72 000 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 72 000 / 3 600 = 20 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion de cacao roule sur une route droite à la vitesse de valeur constante 60 km/h. Pour le chauffeur, le chargement dans la remorque est en mouvement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'objet est le chargement, le référentiel est le chauffeur (donc le camion). Étape 2 — Comparer : sa position par rapport au camion ne change pas. Étape 3 — Conclure : il est immobile pour le chauffeur ; il est en mouvement seulement par rapport à la route.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Comparer des vitesses après conversion ; repérer et corriger des erreurs de conversion ; justifier si un mouvement est rectiligne, circulaire, uniforme ou non ; vitesse moyenne d'un trajet en deux étapes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Deux élèves se disputent. Adjoua dit : « Mon frère court à 5 m/s, donc il va moins vite que le tien, qui court à 14,4 km/h. » On veut vérifier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis les deux vitesses dans la même unité avant de comparer.",
+              "questions": [
+                {
+                  "content": "Un garçon court à 5 m/s. Exprime sa vitesse en km/h.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 5 m/s. Étape 2 — Convertir : 5 m = 0,005 km et 1 s = 1/3 600 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 0,005 × 3 600 = 18 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un autre garçon court à 14,4 km/h. Exprime sa vitesse en m/s.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 14,4 km/h. Étape 2 — Convertir : 14,4 km = 14 400 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 14 400 / 3 600 = 4 m/s (ou 14,4 / 3,6).",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un garçon court à 5 m/s ; un autre court à 14,4 km/h. Lequel va le plus vite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 5 m/s et 15 km/h. Étape 2 — Convertir en km/h : 5 m/s = 18 km/h. Étape 3 — Écrire la formule : v(km/h) = v(m/s) × 3,6. Étape 4 — Calculer et comparer : 18 km/h > 14,4 km/h. Le nombre 14,4 est plus grand que 5, mais les unités ne sont pas les mêmes : on peut toujours comparer après conversion.",
+                  "answers": [
+                    {
+                      "content": "Celui qui court à 5 m/s",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celui qui court à 14,4 km/h",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils vont à la même vitesse",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer des m/s et des km/h",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour comparer 5 m/s et 14,4 km/h, il suffit de comparer les nombres 5 et 14,4.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Convertir : 5 m/s valent 18 km/h, donc 5 m/s > 14,4 km/h, alors que 5 < 14,4. Comparer les nombres sans convertir est une erreur : il faut d'abord exprimer les deux vitesses dans la même unité (étape 2), puis calculer et comparer (étape 4).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour comparer des vitesses données dans des unités différentes, il faut d'abord les ___ dans la même unité.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Convertir : toute comparaison de vitesses se fait dans la même unité. Le mot attendu est « convertir » (ou « exprimer » ou « mettre »).",
+                  "answers": [
+                    {
+                      "content": "convertir",
+                      "correct": true
+                    },
+                    {
+                      "content": "exprimer",
+                      "correct": true
+                    },
+                    {
+                      "content": "mettre",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève corrige trois calculs de vitesse d'un camarade. Dans chaque cas, on te donne les données et le résultat du camarade, et tu dois trouver la bonne valeur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Regarde si la conversion a été faite : minutes en secondes ou en heures.",
+              "questions": [
+                {
+                  "content": "Un camarade calcule : « 3 km en 15 min, donc v = 3 / 15 = 0,2 km/h. » Quelle est la vraie vitesse en km/h ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : d = 3 km et t = 15 min. Étape 2 — Convertir : 15 min = 0,25 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 3 / 0,25 = 12 km/h. Le camarade a divisé par 15 au lieu de 0,25 : il n'a pas converti les minutes en heures.",
+                  "answers": [
+                    {
+                      "content": "12 km/h",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,2 km/h",
+                      "correct": false
+                    },
+                    {
+                      "content": "45 km/h",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 km/h",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camarade calcule : « 72 km/h, donc 72 × 3,6 = 259,2 m/s. » Quelle est la vraie valeur en m/s ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : v = 72 km/h. Étape 2 — Convertir : 72 km = 72 000 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 72 000 / 3 600 = 20 m/s. Le camarade a multiplié par 3,6 au lieu de diviser : 259,2 m/s serait une vitesse absurde.",
+                  "answers": [
+                    {
+                      "content": "20 m/s",
+                      "correct": true
+                    },
+                    {
+                      "content": "259,2 m/s",
+                      "correct": false
+                    },
+                    {
+                      "content": "75,6 m/s",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,2 m/s",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camarade calcule : « 2 h 30 min = 2,30 h. » Un cycliste roule 30 km en 2 h 30 min, soit 2,5 h. Quelle est sa vitesse, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 30 km et t = 2,5 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 30 / 2,5 = 12 km/h. 2 h 30 min valent 2,5 h, et non 2,30 h : 30 min sont une demi-heure.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camarade dit : « 6 km en 20 min : 6 / 20 = 0,3 km/min, donc 0,3 km/h. » Le résultat 0,3 km/h est faux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : d = 6 km et t = 20 min. Étape 2 — Convertir : 20 min = 1/3 h. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 6 / (1/3) = 18 km/h. Le camarade a trouvé 0,3 km par minute, qu'il a recopié en km/h sans multiplier par 60 : 0,3 km/min = 18 km/h.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces conseils, lesquels évitent les erreurs de calcul d'une vitesse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Convertir : les durées en minutes sont la source principale d'erreur. Étape 4 — Calculer : on écrit le résultat avec son unité et on vérifie qu'il est plausible (un cycliste à 259 m/s est impossible). Diviser la durée par la distance donne l'inverse de la vitesse.",
+                  "answers": [
+                    {
+                      "content": "Convertir les durées en secondes ou en heures avant de diviser",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vérifier que le résultat est vraisemblable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Diviser toujours la durée par la distance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Écrire seulement le nombre, sans unité",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On te propose des affirmations sur les mouvements. Tu dois dire si elles sont justes, en raisonnant avec le référentiel, la trajectoire et la vitesse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pose-toi toujours : quel référentiel ? quelle trajectoire ? la valeur de la vitesse est-elle constante ?",
+              "questions": [
+                {
+                  "content": "Un cheval de manège a une vitesse de valeur constante. Son mouvement est donc rectiligne uniforme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la trajectoire : le cheval tourne en rond, la trajectoire est un cercle. Étape 2 — Relever la vitesse : sa valeur est constante. Étape 3 — Comparer : la vitesse est constante, mais la trajectoire n'est pas une droite. Étape 4 — Conclure : le mouvement est circulaire uniforme, pas rectiligne.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture démarre sur une route droite : elle parcourt 5 m, puis 15 m, puis 25 m en trois secondes successives. Son mouvement est rectiligne non uniforme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la trajectoire : route droite. Étape 2 — Relever les distances : 5 m, 15 m, 25 m en durées égales. Étape 3 — Comparer : elles sont différentes, la vitesse augmente. Étape 4 — Conclure : mouvement rectiligne non uniforme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un passager est immobile dans un train qui roule. Une personne est sur le quai. Quelle phrase est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est le passager, avec deux référentiels, le train et le quai. Étape 2 — Comparer : la position change par rapport au quai, pas par rapport au train. Étape 3 — Conclure : la phrase correcte est celle qui nomme les deux référentiels. « Partout » est faux dans les deux sens.",
+                  "answers": [
+                    {
+                      "content": "Le passager est immobile dans le train et en mouvement par rapport au quai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le passager est immobile partout",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le passager est en mouvement partout",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le passager n'a pas de trajectoire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point de la roue d'un vélo qui roule : dans le référentiel du cadre sa trajectoire est ___ ; elle est une courbe plus compliquée dans le référentiel de la route.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'objet est un point de la jante. Étape 2 — Comparer : par rapport au cadre, la distance à l'axe reste constante ; par rapport à la route, le point avance en même temps qu'il tourne. Étape 3 — Conclure : dans le référentiel du cadre, la trajectoire est un cercle. Elle dépend donc du référentiel.",
+                  "answers": [
+                    {
+                      "content": "un cercle",
+                      "correct": true
+                    },
+                    {
+                      "content": "une droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "un point immobile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes d'un calcul de vitesse.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever en premier les données. Étape 2 — Convertir avant de calculer. Étape 3 — Écrire la formule. Étape 4 — Calculer et donner l'unité. Convertir après le calcul ne corrige pas le résultat.",
+                  "answers": [
+                    {
+                      "content": "Relever la distance et la durée avec leurs unités"
+                    },
+                    {
+                      "content": "Convertir en m et s, ou en km et h"
+                    },
+                    {
+                      "content": "Écrire la formule v = d / t"
+                    },
+                    {
+                      "content": "Calculer et écrire le résultat avec son unité"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un taxi interurbain fait un trajet en deux étapes sur une route droite. Étape 1 : 90 km en 1 h. Étape 2 : 60 km en 2 h. On étudie sa vitesse moyenne dans le référentiel de la route.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La vitesse moyenne de tout le trajet se calcule avec la distance totale et la durée totale, pas en faisant la moyenne des deux vitesses.",
+              "questions": [
+                {
+                  "content": "Un taxi parcourt 90 km en 1 h. Quelle est sa vitesse moyenne, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 90 km et t = 1 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 90 / 1 = 90 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi parcourt 60 km en 2 h. Quelle est sa vitesse moyenne, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 60 km et t = 2 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 60 / 2 = 30 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi parcourt 150 km au total en 3 h de roulage. Quelle est sa vitesse moyenne sur l'ensemble, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 150 km et t = 3 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 150 / 3 = 50 km/h. La moyenne de 90 et de 30 donnerait 60 km/h : c'est faux, car le taxi roule deux fois plus longtemps à 30 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi roule à 90 km/h pendant 1 h, puis à 30 km/h pendant 2 h. Pourquoi sa vitesse moyenne n'est-elle pas 60 km/h ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 90 km en 1 h puis 60 km en 2 h. Étape 2 — Convertir : tout est en km et en h. Étape 3 — Écrire la formule : v = d totale / t totale = 150 / 3. Étape 4 — Calculer : 50 km/h, valeur plus proche de 30 que de 90, parce que la durée à 30 km/h est la plus longue.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il roule plus longtemps à la vitesse la plus faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il s'arrête en route",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que 90 + 30 = 120 n'est pas divisible par 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la route est droite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La vitesse moyenne d'un trajet en deux étapes est toujours la moyenne des vitesses de chaque étape.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Écrire la formule : v = d totale / t totale. Contre-exemple : 90 km/h pendant 1 h puis 30 km/h pendant 2 h donnent 150 / 3 = 50 km/h, alors que (90 + 30) / 2 = 60 km/h. La moyenne des vitesses n'est correcte que si les deux durées sont égales.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : référentiel et trajectoire, vitesse moyenne et conversions, mouvements rectiligne et circulaire uniformes ; manège, piste circulaire de stade, taxi-brousse et course sur une ligne droite.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un enfant est sur un manège dont la plate-forme tourne à vitesse de valeur constante. Un parent le regarde, debout à côté du manège.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare l'enfant au manège, puis au parent debout. Rappelle-toi : uniforme veut dire que la valeur de la vitesse est constante.",
+              "questions": [
+                {
+                  "content": "Un enfant est assis sur un cheval de manège qui tourne. Par rapport au manège, l'enfant est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est l'enfant, le référentiel est le manège. Étape 2 — Comparer : sa position par rapport au manège ne change pas. Étape 3 — Conclure : il est immobile par rapport au manège.",
+                  "answers": [
+                    {
+                      "content": "immobile",
+                      "correct": true
+                    },
+                    {
+                      "content": "en mouvement",
+                      "correct": false
+                    },
+                    {
+                      "content": "en mouvement circulaire uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "impossible à dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant est assis sur un cheval de manège qui tourne à vitesse de valeur constante. Dans le référentiel du sol, son mouvement est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la trajectoire : un cercle. Étape 2 — Relever la vitesse : sa valeur ne change pas. Étape 3 — Comparer : la vitesse est constante. Étape 4 — Conclure : circulaire uniforme.",
+                  "answers": [
+                    {
+                      "content": "circulaire uniforme",
+                      "correct": true
+                    },
+                    {
+                      "content": "rectiligne uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "rectiligne non uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "circulaire non uniforme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un parent est debout à côté d'un manège qui tourne. Dans le référentiel du manège, le parent est immobile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'objet est le parent, le référentiel est le manège. Étape 2 — Comparer : le manège tourne, donc la position du parent par rapport au manège change. Étape 3 — Conclure : le parent est en mouvement dans le référentiel du manège, même s'il est immobile par rapport au sol.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La trajectoire de l'enfant, dans le référentiel du sol, est un ___ (le nom de la figure).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever la trajectoire : l'enfant reste à la même distance de l'axe du manège. Étape 2 — Relever la vitesse : sans importance ici. Étape 3 — Comparer : tous les points décrits sont à la même distance de l'axe. Étape 4 — Conclure : la trajectoire est un cercle.",
+                  "answers": [
+                    {
+                      "content": "cercle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant tourne sur un manège à vitesse de valeur constante. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever la trajectoire : un cercle dans le référentiel du sol, un point dans celui du manège. Étape 2 — Relever la vitesse : constante. Étape 3 — Comparer : distances égales pour des durées égales. Étape 4 — Conclure : les affirmations sur les distances égales et sur la trajectoire dépendant du référentiel sont justes. L'enfant n'est pas immobile par rapport au sol.",
+                  "answers": [
+                    {
+                      "content": "Il parcourt des distances égales en durées égales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa trajectoire dépend du référentiel choisi",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa vitesse est nulle puisqu'il est assis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa trajectoire est une droite dans le référentiel du sol",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur la piste circulaire d'un stade, de rayon R = 100 m, une athlète court à la vitesse de valeur constante 8 m/s. On prend $\\pi \\approx 3{,}14$ et un tour mesure $2\\pi R$.",
+              "exercise_type": "evaluation",
+              "figure": "piste-circulaire",
+              "hint": "Un tour mesure $2\\pi R$. Le temps d'un tour est $t = \\dfrac{d}{v}$.",
+              "questions": [
+                {
+                  "content": "Une piste circulaire a un rayon de 100 m. Quelle est la longueur d'un tour, en mètres ? Prends $\\pi \\approx 3{,}14$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : R = 100 m et π ≈ 3,14. Étape 2 — Convertir : R est déjà en mètres. Étape 3 — Écrire la formule : d = 2 × π × R. Étape 4 — Calculer : d = 2 × 3,14 × 100 = 628 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "628",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une athlète parcourt un tour de piste de 628 m à la vitesse constante de 8 m/s. Quelle est la durée d'un tour, en secondes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 628 m et v = 8 m/s. Étape 2 — Convertir : d et v sont déjà en m et en m/s, rien à convertir. Étape 3 — Écrire la formule : t = d / v. Étape 4 — Calculer : t = 628 / 8 = 78,5 s.",
+                  "tolerance": 0,
+                  "unit": "s",
+                  "answers": [
+                    {
+                      "content": "78,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une athlète court à la vitesse constante de 8 m/s pendant 5 min. Quelle distance parcourt-elle, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 8 m/s et t = 5 min. Étape 2 — Convertir : t = 5 min = 300 s. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 8 × 300 = 2 400 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "2400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le mouvement de l'athlète, qui court à vitesse de valeur constante sur une piste circulaire, dans le référentiel du stade ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la trajectoire : un cercle. Étape 2 — Relever la vitesse : constante à 8 m/s. Étape 3 — Comparer : la valeur ne change pas. Étape 4 — Conclure : circulaire uniforme.",
+                  "answers": [
+                    {
+                      "content": "circulaire uniforme",
+                      "correct": true
+                    },
+                    {
+                      "content": "rectiligne uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "circulaire non uniforme",
+                      "correct": false
+                    },
+                    {
+                      "content": "immobile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une athlète court à 8 m/s. Sa vitesse en km/h est 28,8.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : v = 8 m/s. Étape 2 — Convertir : 8 m/s = 8 × 3,6 km/h. Étape 3 — Écrire la formule : v(km/h) = v(m/s) × 3,6. Étape 4 — Calculer : 8 × 3,6 = 28,8 km/h. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un taxi-brousse parcourt 135 km sur une route droite en 1 h 30 min, à vitesse moyenne constante. Les passagers sont assis.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "1 h 30 min = 1,5 h. Pour les m/s, divise les km/h par 3,6.",
+              "questions": [
+                {
+                  "content": "Un taxi-brousse parcourt 135 km en 1 h 30 min (soit 1,5 h). Quelle est sa vitesse moyenne, en km/h ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 135 km et t = 1,5 h. Étape 2 — Convertir : d et t sont déjà en km et en h, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 135 / 1,5 = 90 km/h.",
+                  "tolerance": 0,
+                  "unit": "km/h",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi-brousse roule à 90 km/h. Exprime sa vitesse en m/s.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 90 km/h. Étape 2 — Convertir : 90 km = 90 000 m et 1 h = 3 600 s. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : 90 000 / 3 600 = 25 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi-brousse roule à la vitesse moyenne de 90 km/h pendant 20 min. Quelle distance parcourt-il, en kilomètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 90 km/h et t = 20 min. Étape 2 — Convertir : t = 20 min = 1/3 h. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 90 × 1/3 = 30 km.",
+                  "tolerance": 0,
+                  "unit": "km",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un passager reste assis dans un taxi-brousse qui roule. Quelle affirmation est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'objet est le passager. Étape 2 — Comparer : sa position change par rapport à la route, pas par rapport au taxi-brousse. Étape 3 — Conclure : la bonne affirmation donne les deux référentiels. Les autres inversent les rôles ou refusent de conclure.",
+                  "answers": [
+                    {
+                      "content": "Il est immobile par rapport au taxi-brousse et en mouvement par rapport à la route",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est en mouvement par rapport au taxi-brousse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est immobile par rapport à la route",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'est ni immobile ni en mouvement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi-brousse roule à vitesse de valeur constante sur une route droite. Son mouvement est rectiligne uniforme dans le référentiel de la route.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la trajectoire : la route est droite. Étape 2 — Relever la vitesse : constante. Étape 3 — Comparer : les distances sont égales en durées égales. Étape 4 — Conclure : rectiligne uniforme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Kouadio et Mariam font la course sur une ligne droite de 200 m, chacun à vitesse constante. Kouadio parcourt les 200 m en 40 s. Mariam court à 6 m/s.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule la vitesse de Kouadio avec v = d / t, la durée de Mariam avec t = d / v, puis compare.",
+              "questions": [
+                {
+                  "content": "Kouadio parcourt 200 m en 40 s à vitesse constante. Quelle est sa vitesse, en m/s ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : d = 200 m et t = 40 s. Étape 2 — Convertir : d et t sont déjà en m et en s, rien à convertir. Étape 3 — Écrire la formule : v = d / t. Étape 4 — Calculer : v = 200 / 40 = 5 m/s.",
+                  "tolerance": 0,
+                  "unit": "m/s",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam court à la vitesse constante de 6 m/s. Quelle distance parcourt-elle en 30 s, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : v = 6 m/s et t = 30 s. Étape 2 — Convertir : v est en m/s et t en s, rien à convertir. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : d = 6 × 30 = 180 m.",
+                  "tolerance": 0,
+                  "unit": "m",
+                  "answers": [
+                    {
+                      "content": "180",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouadio court à 5 m/s, Mariam à 6 m/s, sur la même ligne droite et à vitesse constante. Après 30 s de course, lequel a parcouru la plus grande distance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : 5 m/s, 6 m/s et t = 30 s. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : Kouadio 5 × 30 = 150 m, Mariam 6 × 30 = 180 m. Mariam a parcouru plus.",
+                  "answers": [
+                    {
+                      "content": "Mariam",
+                      "correct": true
+                    },
+                    {
+                      "content": "Kouadio",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont parcouru la même distance",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir sans la longueur de la piste",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouadio court à 5 m/s et Mariam à 6 m/s, tous deux en mouvement rectiligne uniforme. Mariam va 1 m/s plus vite que Kouadio, donc elle gagne 1 m chaque seconde.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : 5 m/s et 6 m/s. Étape 2 — Convertir : même unité. Étape 3 — Écrire la formule : d = v × t. Étape 4 — Calculer : en 1 s, Mariam parcourt 6 m et Kouadio 5 m, l'écart gagné est 1 m par seconde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouadio et Mariam courent chacun sur une ligne droite à vitesse de valeur constante. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever la trajectoire : une ligne droite. Étape 2 — Relever la vitesse : constante. Étape 3 — Comparer : d / t est constant, donc le graphique d(t) est une droite passant par l'origine. Étape 4 — Conclure : rectiligne uniforme. Une trajectoire circulaire ou une vitesse qui change n'est pas décrite.",
+                  "answers": [
+                    {
+                      "content": "Leur mouvement est rectiligne uniforme dans le référentiel de la piste",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le graphique distance-temps de chacun est une droite passant par l'origine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Leur trajectoire est un cercle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Leur vitesse change à chaque seconde",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

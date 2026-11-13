@@ -41,3 +41,19 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **SVT 1ère A (drogues)** : un document fictif montre la cocaïne raccourcissant le temps de réaction, ce que la fiche ne dit pas en ces termes (« stimulante »).
 - **SVT 1ère C et D** : les corrections de sujets sont courtes et complétées d'un rappel automatique de la méthode et du piège de la notion ; à étoffer.
 - **Histoire-Géographie 1ère** : le procédé Bessemer (1856) est rattaché à la seconde révolution industrielle, comme la fiche.
+
+### 2nde (réécriture complète depuis `format-v1/`)
+
+- **Thème** : aucun v1 de 2nde n'avait de `theme` ; les fichiers v3 n'en ont pas (bleu par défaut), sauf Mathématiques 2nde C (bleu, sarcelle, bordeaux). Option possible : un thème par matière, comme en Tle.
+- **Mathématiques 2nde A** : « Racines carrées simples » (leçon 1), « Tableau à double entrée » et « Diagramme et réunion de deux ensembles » (leçon 2) ne sont pas dans le v1 ; dénombrement par produits décroissants sans notation factorielle ; `card(A)` employé. Unités « m² », « cm² » en `numeric`.
+- **Mathématiques 2nde C** : symétrie axiale limitée aux axes (Ox) et (Oy) ; composition de transformations exclue ; périmètre de la colinéarité, du déterminant, de la valeur absolue et des encadrements repris du v1, à confirmer contre la progression.
+- **Physique-Chimie 2nde** : « classification simple » (leçon 2) traitée comme mélange / corps simple / corps composé ; le nombre d'électrons d'un ion à partir de Z est demandé en leçon 3, sans structure électronique ni octet.
+- **SVT 2nde A** : insuline sans glucagon ni glande mixte, glycémie ≈ 1 g/L ; mangrove traitée comme un milieu littoral à part ; notions « à compléter » du v1 (potentiel d'action, toundra, taïga, forêt tempérée) non écrites.
+- **SVT 2nde C** : composition de la solution de Knop donnée de mémoire ; hypotonique, hypertonique, isotonique écartés ; « chlorose » employé.
+- **Histoire-Géographie 2nde** : aucune périodisation (Antiquité, Moyen Âge) faute de bornes sûres ; dates réelles citées : 1893, 1914, 1945, 20 septembre 1960 (ONU), 2012 (Grand-Bassam à l'UNESCO) ; documents d'archive des exercices fictifs.
+- **Français 2nde** : adjuvant et opposant gardés (le v1 les marquait « à faire valider ») ; une question de sujet porte sur un retour en arrière ; 4e notion « lettre personnelle et lettre formelle » (leçon 2), à retirer si hors programme ; fonctions du langage non traitées ; résumé au quart, marge de 10 % et décompte des mots repris du modèle de 3ème.
+
+## Correctif après le train #571
+
+- **Débordement à 390 px** : en Mathématiques 2nde A (Calcul littéral), une réponse d'ordonnancement portait une formule d'une seule pièce de 72 caractères (développement d'un produit) ; la feuille à remplir faisait 538 px. La preuve de #570 ne l'a pas vu : le test d'affichage ne rend que 5 leçons tirées au hasard parmi les changées (`Selection::MAX`), et ce fichier n'était pas tiré. Correctif : les formules en ligne de 50 caractères ou plus des Mathématiques et de la Physique-Chimie de 2nde sont coupées en plusieurs `$…$` aux signes « = », « + », « − » de premier niveau (27 formules, 3 fichiers, corrections comprises) ; les 6 leçons de Mathématiques de 2nde rendues une à une, vertes.
+- **À retenir** : pour une vague de leçons, rendre toutes les leçons touchées par lots de 5 (`LECONS=<5 chemins>`), pas seulement le tirage de `bin/ci-quiet`.
