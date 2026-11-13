@@ -1,0 +1,2929 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Dénombrement",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "A",
+      "figures": [
+        {
+          "key": "arbre-president-secretaire",
+          "kind": "diagram",
+          "description": "Un arbre de dénombrement : on choisit un président parmi Awa, Koffi et Yao, puis un secrétaire différent du président. Du début partent trois branches, une par président ; de chacune partent deux branches, une par secrétaire possible. L'arbre a 6 chemins complets.",
+          "params": {
+            "layout": "tree",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "d",
+                "label": "Début"
+              },
+              {
+                "id": "a",
+                "label": "Awa présidente"
+              },
+              {
+                "id": "k",
+                "label": "Koffi président"
+              },
+              {
+                "id": "y",
+                "label": "Yao président"
+              },
+              {
+                "id": "ak",
+                "label": "Koffi secrétaire"
+              },
+              {
+                "id": "ay",
+                "label": "Yao secrétaire"
+              },
+              {
+                "id": "ka",
+                "label": "Awa secrétaire"
+              },
+              {
+                "id": "ky",
+                "label": "Yao secrétaire"
+              },
+              {
+                "id": "ya",
+                "label": "Awa secrétaire"
+              },
+              {
+                "id": "yk",
+                "label": "Koffi secrétaire"
+              }
+            ],
+            "edges": [
+              {
+                "from": "d",
+                "to": "a"
+              },
+              {
+                "from": "d",
+                "to": "k"
+              },
+              {
+                "from": "d",
+                "to": "y"
+              },
+              {
+                "from": "a",
+                "to": "ak"
+              },
+              {
+                "from": "a",
+                "to": "ay"
+              },
+              {
+                "from": "k",
+                "to": "ka"
+              },
+              {
+                "from": "k",
+                "to": "ky"
+              },
+              {
+                "from": "y",
+                "to": "ya"
+              },
+              {
+                "from": "y",
+                "to": "yk"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Principes multiplicatif et additif",
+          "remember": "**Principe multiplicatif.** Si une situation se décompose en choix successifs, avec $p$ possibilités pour le premier choix et $q$ pour le second, quel que soit le premier, il y a $p \\times q$ issues ; avec un troisième choix de $r$ possibilités, $p \\times q \\times r$. **Principe additif.** Si deux cas s'excluent, avec $p$ issues pour l'un et $q$ pour l'autre, il y a $p + q$ issues en tout.",
+          "method": [
+            "Identifier : repérer les choix à faire et dire s'ils se font l'un après l'autre ou s'ils s'excluent.",
+            "Compter : donner le nombre de possibilités de chaque choix.",
+            "Combiner : multiplier les nombres pour des choix successifs, les additionner pour des cas qui s'excluent.",
+            "Conclure : écrire une phrase de réponse avec le total."
+          ],
+          "example": {
+            "statement": "Un maquis propose 3 plats (riz, attiéké, foutou) et 2 sauces (arachide, gombo), chaque plat pouvant se manger avec chaque sauce, puis 2 boissons (bissap, eau). Un menu est un plat, une sauce et une boisson. Combien de menus peut-on composer ?",
+            "steps": [
+              "Identifier : on choisit un plat, puis une sauce, puis une boisson ; les trois choix s'enchaînent.",
+              "Compter : 3 possibilités pour le plat, 2 pour la sauce, 2 pour la boisson.",
+              "Combiner : choix successifs, donc on multiplie, $3 \\times 2 \\times 2 = 12$.",
+              "Conclure : on peut composer 12 menus différents."
+            ]
+          },
+          "pitfall": "Ne pas additionner quand les choix s'enchaînent. Contre-exemple : 2 plats et 3 boissons donnent 6 menus, car chaque plat peut s'associer à chacune des 3 boissons ; $2 + 3 = 5$ serait faux. On additionne seulement quand le client prend **un seul** élément parmi des groupes qui s'excluent.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Choisir en multipliant ou en additionnant",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour compter des choix.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un maquis propose 3 plats et 4 boissons. Un menu est composé d'un plat et d'une boisson. Combien de menus différents peut-on composer ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : on choisit un plat, puis une boisson ; les deux choix se font l'un après l'autre. Étape 2 — Compter : il y a 3 possibilités pour le plat et 4 pour la boisson. Étape 3 — Combiner : les choix sont successifs, on multiplie, $3 \\times 4 = 12$. Étape 4 — Conclure : on peut composer 12 menus. Additionner donnerait 7 menus, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "menus"
+                },
+                {
+                  "content": "Aminata choisit un pantalon parmi 4 et une chemise parmi 5. Combien de tenues différentes peut-elle composer ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : elle choisit un pantalon, puis une chemise. Étape 2 — Compter : 4 possibilités pour le pantalon, 5 pour la chemise. Étape 3 — Combiner : choix successifs, on multiplie, $4 \\times 5 = 20$. Étape 4 — Conclure : elle peut composer 20 tenues. Le nombre 9 vient d'une addition à tort.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "tenues"
+                },
+                {
+                  "content": "Un maquis propose 2 plats de viande et 3 plats de poisson. Un client choisit un seul plat, de viande ou de poisson. Combien de choix a-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le client prend un seul plat, soit de viande, soit de poisson ; les deux cas s'excluent. Étape 2 — Compter : 2 possibilités pour la viande, 3 pour le poisson. Étape 3 — Combiner : les cas s'excluent, on additionne, $2 + 3 = 5$. Étape 4 — Conclure : le client a 5 choix. Le nombre 6 est le résultat d'une multiplication, qui conviendrait si le client prenait un plat de viande et un plat de poisson.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "23",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un code est formé de 2 chiffres choisis chacun parmi les dix chiffres de 0 à 9, un chiffre pouvant être répété. Combien de codes existe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on choisit un premier chiffre, puis un second, tous deux parmi 10. Étape 2 — Compter : 10 possibilités pour chacun des deux chiffres. Étape 3 — Combiner : choix successifs, on multiplie, $10 \\times 10 = 100$. Étape 4 — Conclure : il existe 100 codes, de 00 à 99. Le nombre 20 additionne les deux choix, et 90 interdit à tort de répéter un chiffre.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": false
+                    },
+                    {
+                      "content": "90",
+                      "correct": false
+                    },
+                    {
+                      "content": "100",
+                      "correct": true
+                    },
+                    {
+                      "content": "19",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec 4 pagnes et 3 foulards, choisir un pagne et un foulard donne 7 possibilités.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on choisit un pagne, puis un foulard ; les deux choix s'enchaînent. Étape 2 — Compter : 4 possibilités pour le pagne, 3 pour le foulard. Étape 3 — Combiner : on multiplie, $4 \\times 3 = 12$. Étape 4 — Conclure : il y a 12 possibilités et non 7. L'addition ne convient que si on choisit un seul objet, pagne ou foulard.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Menus, tenues et codes",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les principes de dénombrement, en refaisant la méthode de la fiche.",
+              "hint": "Des choix qui s'enchaînent se multiplient ; des cas qui s'excluent s'additionnent.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un restaurant propose 3 entrées et 5 plats. Un menu est composé d'une entrée et d'un plat. Il y a ___ menus possibles.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on choisit une entrée, puis un plat. Étape 2 — Compter : 3 possibilités pour l'entrée, 5 pour le plat. Étape 3 — Combiner : choix successifs, on multiplie, $3 \\times 5 = 15$. Étape 4 — Conclure : il y a 15 menus. Le nombre 8 viendrait d'une addition.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au nombre de possibilités.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : on repère si les choix s'enchaînent ou s'excluent dans chaque situation. Étape 2 — Compter : on note le nombre de possibilités de chaque choix. Étape 3 — Combiner : $2 \\times 3 = 6$ ; $2 + 3 = 5$ ; $3 \\times 2 \\times 2 = 12$ ; $10 \\times 10 = 100$. Étape 4 — Conclure : on relie chaque situation à son résultat. Le seul cas d'addition est celui d'un plat unique, viande ou poisson.",
+                  "answers": [
+                    {
+                      "content": "2 plats et 3 boissons : un plat et une boisson",
+                      "match": "6"
+                    },
+                    {
+                      "content": "2 plats de viande ou 3 plats de poisson : un seul plat",
+                      "match": "5"
+                    },
+                    {
+                      "content": "3 plats, 2 sauces et 2 boissons : un de chaque",
+                      "match": "12"
+                    },
+                    {
+                      "content": "Un code de 2 chiffres, chacun parmi les 10 chiffres",
+                      "match": "100"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations se comptent par une multiplication ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on cherche dans chaque proposition si les choix se font l'un après l'autre ou s'ils s'excluent. Étape 2 — Compter : chaque proposition a des choix dont on connaît le nombre. Étape 3 — Combiner : un plat puis une boisson se multiplient ; les 3 chiffres d'un code se multiplient ; un seul sport, un seul transport ou un seul fruit s'additionnent. Étape 4 — Conclure : les deux propositions à multiplication sont le menu et le code.",
+                  "answers": [
+                    {
+                      "content": "Choisir un seul sport entre le football et le basket.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir un seul transport, bus ou taxi, pour aller en ville.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir un plat parmi 3, puis une boisson parmi 2.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir un seul fruit, mangue ou ananas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Écrire un code de 3 chiffres, chacun parmi les dix chiffres.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour compter les menus de 3 plats, 2 sauces et 2 boissons.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on commence par repérer comment les choix s'enchaînent. Étape 2 — Compter : on note ensuite le nombre de possibilités de chaque choix. Étape 3 — Combiner : seulement après, on multiplie. Étape 4 — Conclure : on termine par une phrase de réponse. On ne peut pas multiplier avant d'avoir compté les possibilités.",
+                  "answers": [
+                    {
+                      "content": "Identifier : on choisit un plat, puis une sauce, puis une boisson, les choix s'enchaînent."
+                    },
+                    {
+                      "content": "Compter : 3 plats, 2 sauces, 2 boissons."
+                    },
+                    {
+                      "content": "Combiner : on multiplie, $3 \\times 2 \\times 2 = 12$."
+                    },
+                    {
+                      "content": "Conclure : on peut composer 12 menus."
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les choix se font l'un après l'autre, on ___ les nombres de possibilités.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : les choix s'enchaînent l'un après l'autre. Étape 2 — Compter : chaque choix a son nombre de possibilités. Étape 3 — Combiner : quel que soit le premier choix, il reste le même nombre de possibilités pour le suivant, donc on multiplie. Étape 4 — Conclure : on multiplie, par exemple $3 \\times 4 = 12$ menus. On additionne seulement pour des cas qui s'excluent.",
+                  "answers": [
+                    {
+                      "content": "multiplie",
+                      "correct": true
+                    },
+                    {
+                      "content": "additionne",
+                      "correct": false
+                    },
+                    {
+                      "content": "soustrait",
+                      "correct": false
+                    },
+                    {
+                      "content": "divise",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il y a 4 routes de Yamoussoukro à Bouaké et 3 routes de Bouaké à Korhogo. Combien de trajets différents Yamoussoukro - Bouaké - Korhogo peut-on faire ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : on prend une route de Yamoussoukro à Bouaké, puis une route de Bouaké à Korhogo. Étape 2 — Compter : 4 routes pour la première partie, 3 pour la seconde. Étape 3 — Combiner : choix successifs, on multiplie, $4 \\times 3 = 12$. Étape 4 — Conclure : on peut faire 12 trajets. Le nombre 7 additionnerait les routes à tort.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "trajets"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Arbre de dénombrement",
+          "remember": "Un **arbre** représente une situation à choix successifs : chaque niveau est un choix, chaque branche une possibilité, et chaque chemin complet une issue. Le nombre d'issues est le nombre de chemins. Si chaque nœud d'un niveau a le même nombre de branches, on multiplie les nombres de branches des niveaux. Pour un code, un chiffre pouvant se répéter garde le même nombre de branches ; sans répétition, il diminue d'un niveau à l'autre.",
+          "method": [
+            "Découper : écrire les choix successifs, dans l'ordre.",
+            "Dessiner : tracer un niveau par choix, avec autant de branches que de possibilités à ce niveau, en tenant compte de ce qui est déjà choisi.",
+            "Compter : dénombrer les chemins complets, ou multiplier les nombres de branches des niveaux.",
+            "Conclure : écrire une phrase de réponse avec le total."
+          ],
+          "example": {
+            "statement": "Awa, Koffi et Yao forment un groupe. On choisit un président, puis un secrétaire différent du président. Combien d'attributions des deux postes existe-t-il ?",
+            "steps": [
+              "Découper : on choisit d'abord le président, puis le secrétaire.",
+              "Dessiner : 3 branches pour le président ; au bout de chacune, 2 branches pour le secrétaire, car il doit être différent.",
+              "Compter : $3 \\times 2 = 6$ chemins complets.",
+              "Conclure : il existe 6 attributions possibles des deux postes."
+            ]
+          },
+          "pitfall": "Ne pas garder 3 branches au deuxième niveau quand le choix ne peut pas se répéter. Contre-exemple : avec A, B, C, des codes de deux lettres **différentes** sont AB, AC, BA, BC, CA, CB, soit $3 \\times 2 = 6$ et non $3 \\times 3 = 9$ ; AA, BB et CC sont interdits.",
+          "figure": "arbre-president-secretaire",
+          "exercise": [
+            {
+              "title": "Dessiner et lire un arbre",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour dénombrer avec un arbre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une pièce de monnaie est lancée 3 fois de suite. Combien de suites de résultats (pile ou face) existe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : il y a trois choix successifs, un par lancer. Étape 2 — Dessiner : chaque lancer a 2 branches (pile ou face) ; l'arbre a donc 3 niveaux de 2 branches. Étape 3 — Compter : $2 \\times 2 \\times 2 = 8$ chemins. Étape 4 — Conclure : il existe 8 suites de résultats. Le nombre 6 additionne les branches ($2 + 2 + 2$) au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un groupe de 4 candidats, on élit un délégué, puis un adjoint différent du délégué. Combien de choix de ces deux postes existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit le délégué, puis l'adjoint. Étape 2 — Dessiner : 4 branches pour le délégué, puis 3 branches seulement pour l'adjoint, car il doit être différent. Étape 3 — Compter : $4 \\times 3 = 12$ chemins. Étape 4 — Conclure : il existe 12 choix possibles. Le nombre 16 oublie que l'adjoint est différent du délégué.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "choix"
+                },
+                {
+                  "content": "Un code est formé de 2 chiffres choisis dans l'ensemble {1, 2, 3}, un chiffre pouvant être répété. Combien de codes existe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : on choisit le premier chiffre, puis le second. Étape 2 — Dessiner : 3 branches pour le premier chiffre, puis 3 branches pour le second, car la répétition est permise. Étape 3 — Compter : $3 \\times 3 = 9$ chemins. Étape 4 — Conclure : il existe 9 codes. Le nombre 6 retire à tort la répétition ; 5 additionne les branches.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": true
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de façons peut-on placer 3 élèves sur une banquette de 3 places ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : on choisit l'élève de la première place, puis celui de la deuxième, puis celui de la troisième. Étape 2 — Dessiner : 3 branches pour la première place, 2 pour la deuxième, 1 pour la dernière, car un élève ne peut pas occuper deux places. Étape 3 — Compter : $3 \\times 2 \\times 1 = 6$ chemins. Étape 4 — Conclure : il y a 6 façons de les placer. Le nombre 27 oublie que le nombre de branches diminue.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "27",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec les lettres A, B, C, il existe 9 codes de deux lettres différentes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Découper : on choisit la première lettre, puis la seconde. Étape 2 — Dessiner : 3 branches pour la première lettre, puis 2 pour la seconde, car elle doit être différente de la première. Étape 3 — Compter : $3 \\times 2 = 6$ chemins. Étape 4 — Conclure : il y a 6 codes et non 9. Le nombre 9 compterait aussi AA, BB et CC.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Arbres, codes et rangements",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les arbres de dénombrement, en refaisant la méthode de la fiche.",
+              "hint": "Quand une personne ne peut pas être choisie deux fois, le nombre de branches diminue d'un niveau à l'autre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un arbre a 3 branches au premier niveau, puis 2 branches à partir de chacune d'elles. Cet arbre a ___ chemins complets.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Découper : deux choix successifs, le premier à 3 possibilités, le second à 2. Étape 2 — Dessiner : 3 branches, puis 2 branches au bout de chacune. Étape 3 — Compter : $3 \\times 2 = 6$ chemins. Étape 4 — Conclure : l'arbre a 6 chemins complets. Le nombre 5 additionne les branches à tort.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à son nombre d'issues.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Découper : on repère les choix successifs de chaque situation. Étape 2 — Dessiner : 2 puis 2 branches ; 3 puis 3 ; 3 puis 2 puis 1 ; 4 puis 3. Étape 3 — Compter : $2 \\times 2 = 4$ ; $3 \\times 3 = 9$ ; $3 \\times 2 \\times 1 = 6$ ; $4 \\times 3 = 12$. Étape 4 — Conclure : on relie chaque situation à son nombre. Quand on ne peut pas répéter, le nombre de branches diminue.",
+                  "answers": [
+                    {
+                      "content": "Lancer une pièce 2 fois de suite",
+                      "match": "4"
+                    },
+                    {
+                      "content": "Code de 2 chiffres pris dans {1, 2, 3}, répétition permise",
+                      "match": "9"
+                    },
+                    {
+                      "content": "Classer 3 coureurs à l'arrivée, sans ex aequo",
+                      "match": "6"
+                    },
+                    {
+                      "content": "Élire un président puis un secrétaire différent parmi 4 personnes",
+                      "match": "12"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations donnent 12 issues ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Découper : on repère les choix de chaque proposition. Étape 2 — Dessiner : un arbre à 4 puis 3 branches, un arbre à 3 puis 4 branches, un seul choix à $3 + 4$, trois niveaux de 2 branches, deux niveaux de 3 branches. Étape 3 — Compter : $4 \\times 3 = 12$ ; $3 \\times 4 = 12$ ; $3 + 4 = 7$ ; $2 \\times 2 \\times 2 = 8$ ; $3 \\times 3 = 9$. Étape 4 — Conclure : les deux bonnes propositions sont le président et secrétaire, et le pagne et foulard.",
+                  "answers": [
+                    {
+                      "content": "Choisir un pagne parmi 3 ou un foulard parmi 4.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lancer une pièce 3 fois de suite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Former un code de 2 chiffres pris dans {1, 2, 3}, répétition permise.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir un président puis un secrétaire différent parmi 4 personnes.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir un pagne parmi 3 et un foulard parmi 4.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour dénombrer les façons de choisir un président puis un secrétaire différent parmi Awa, Koffi et Yao.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Découper : on liste d'abord les choix dans l'ordre. Étape 2 — Dessiner : on trace les niveaux, en retirant la personne déjà choisie. Étape 3 — Compter : on multiplie les nombres de branches. Étape 4 — Conclure : on écrit la réponse. On ne peut pas compter avant d'avoir dessiné ou imaginé l'arbre.",
+                  "answers": [
+                    {
+                      "content": "Découper : choisir d'abord le président, puis le secrétaire."
+                    },
+                    {
+                      "content": "Dessiner : 3 branches pour le président, puis 2 branches pour le secrétaire à partir de chaque président."
+                    },
+                    {
+                      "content": "Compter : $3 \\times 2 = 6$ chemins."
+                    },
+                    {
+                      "content": "Conclure : il y a 6 façons d'attribuer les deux postes."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un arbre où chaque nœud d'un même niveau a le même nombre de branches, le nombre d'issues est ___ des nombres de branches des niveaux.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Découper : un niveau par choix. Étape 2 — Dessiner : chaque niveau multiplie le nombre de chemins par son nombre de branches. Étape 3 — Compter : $2 \\times 3 = 6$ pour un niveau à 2 branches puis un niveau à 3 branches. Étape 4 — Conclure : le nombre d'issues est le produit. La somme $2 + 3 = 5$ serait fausse.",
+                  "answers": [
+                    {
+                      "content": "la somme",
+                      "correct": false
+                    },
+                    {
+                      "content": "le produit",
+                      "correct": true
+                    },
+                    {
+                      "content": "la différence",
+                      "correct": false
+                    },
+                    {
+                      "content": "le quotient",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cadenas a 3 molettes portant chacune les chiffres de 0 à 9, un chiffre pouvant se répéter. Combien de codes différents existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit un chiffre pour chacune des trois molettes. Étape 2 — Dessiner : 10 branches à chaque niveau, sur 3 niveaux. Étape 3 — Compter : $10 \\times 10 \\times 10 = 10^3 = 1\\,000$. Étape 4 — Conclure : il existe 1 000 codes, de 000 à 999.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "codes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tableau à double entrée",
+          "remember": "Un **tableau à double entrée** classe des éléments selon deux critères : un critère en lignes, l'autre en colonnes. Chaque case contient le nombre d'éléments qui vérifient à la fois les deux critères. Les **totaux** sont écrits en marge : le total d'une ligne (ou d'une colonne) est la somme de ses cases, et le total général est à la fois la somme des totaux des lignes et la somme des totaux des colonnes.",
+          "method": [
+            "Repérer : les deux critères (lignes et colonnes) et les données de l'énoncé.",
+            "Placer : écrire chaque donnée dans la bonne case ou dans la bonne marge.",
+            "Compléter : trouver les cases manquantes par addition ou soustraction, dans une ligne ou une colonne.",
+            "Lire : donner la réponse dans la case ou le total demandé."
+          ],
+          "example": {
+            "statement": "Dans une classe de 40 élèves, il y a 24 filles. 10 élèves sont internes, dont 4 filles. Combien de garçons sont externes ?",
+            "steps": [
+              "Repérer : les critères sont le sexe (filles, garçons) et le régime (interne, externe).",
+              "Placer : 40 comme total général, 24 comme total des filles, 10 comme total des internes, 4 dans la case filles internes.",
+              "Compléter : garçons $40 - 24 = 16$ ; garçons internes $10 - 4 = 6$ ; garçons externes $16 - 6 = 10$.",
+              "Lire : la case garçons externes contient 10."
+            ]
+          },
+          "pitfall": "Ne pas confondre une case et un total de marge. Contre-exemple : « 10 internes, dont 4 filles » ne veut pas dire 10 filles internes ; la case filles internes vaut 4 et le total 10 se partage entre filles (4) et garçons ($10 - 4 = 6$). Vérifie toujours que les cases d'une ligne s'additionnent bien au total.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Lire et compléter un tableau à double entrée",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour compléter et lire des tableaux à double entrée.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans une classe de 40 élèves, il y a 24 filles. Combien y a-t-il de garçons ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le critère est le sexe, le total est 40 et la ligne des filles vaut 24. Étape 2 — Placer : 40 dans la case du total, 24 dans la case des filles. Étape 3 — Compléter : les garçons sont le total moins les filles, $40 - 24 = 16$. Étape 4 — Lire : la case des garçons contient 16. Répondre 24 donne le nombre de filles.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "garçons"
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, 10 sont internes, dont 4 filles. Combien y a-t-il de garçons internes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et le régime (interne ou externe), le total des internes est 10. Étape 2 — Placer : 10 dans la colonne des internes, 4 dans la case filles internes. Étape 3 — Compléter : les garçons internes sont $10 - 4 = 6$. Étape 4 — Lire : la case garçons internes contient 6. Répondre 4 reprend la case des filles.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "garçons"
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, il y a 24 filles, dont 4 sont internes. Combien de filles sont externes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et le régime ; la ligne des filles a pour total 24. Étape 2 — Placer : 24 comme total de la ligne des filles, 4 dans la case filles internes. Étape 3 — Compléter : les filles externes sont $24 - 4 = 20$. Étape 4 — Lire : la case filles externes contient 20. Répondre 36 soustrait 4 du total de la classe et non de la ligne des filles.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Parmi 50 élèves, 25 sont des filles. Chaque élève aime exactement un sport : le football ou le basket. 12 filles aiment le basket. Combien de filles aiment le football ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et le sport ; la ligne des filles vaut 25. Étape 2 — Placer : 25 comme total des filles, 12 dans la case filles basket. Étape 3 — Compléter : les filles football sont $25 - 12 = 13$. Étape 4 — Lire : 13 filles aiment le football. Le nombre 37 retire la mauvaise case.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    },
+                    {
+                      "content": "13",
+                      "correct": true
+                    },
+                    {
+                      "content": "37",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : dans une classe de 40 élèves où 10 sont internes dont 4 filles, la case « filles internes » contient 10.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : 10 est le total de la colonne des internes, 4 est la case filles internes. Étape 2 — Placer : 10 dans la marge de la colonne, 4 dans la case du croisement. Étape 3 — Compléter : la case garçons internes vaut $10 - 4 = 6$. Étape 4 — Lire : la case « filles internes » contient 4 et non 10. Il ne faut pas confondre un total de marge et une case.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Tableaux d'élèves et d'habitants",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les tableaux à double entrée, en refaisant la méthode de la fiche.",
+              "hint": "Complète le tableau par des additions et des soustractions, ligne par ligne.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans une classe de 36 élèves, il y a 20 filles, dont 14 sont externes. Il y a ___ filles internes.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et le régime ; 20 filles en tout. Étape 2 — Placer : 20 comme total de la ligne des filles, 14 dans la case filles externes. Étape 3 — Compléter : $20 - 14 = 6$. Étape 4 — Lire : il y a 6 filles internes. Le nombre 16 retrancherait 20 de 36, ce qui donne les garçons.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, il y a 24 filles, 10 internes dont 4 filles. Relie chaque effectif à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : total 40, filles 24, internes 10, filles internes 4. Étape 2 — Placer : on met ces données dans le tableau. Étape 3 — Compléter : garçons $40 - 24 = 16$ ; garçons internes $10 - 4 = 6$ ; externes $40 - 10 = 30$ ; filles externes $24 - 4 = 20$. Étape 4 — Lire : on relie chaque effectif à sa valeur.",
+                  "answers": [
+                    {
+                      "content": "Les garçons",
+                      "match": "16"
+                    },
+                    {
+                      "content": "Les garçons internes",
+                      "match": "6"
+                    },
+                    {
+                      "content": "Les externes",
+                      "match": "30"
+                    },
+                    {
+                      "content": "Les filles externes",
+                      "match": "20"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, il y a 24 filles, 10 internes dont 4 filles. Quelles opérations donnent le nombre de garçons externes ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche la case garçons externes ; les garçons sont $40 - 24 = 16$, les externes $40 - 10 = 30$. Étape 2 — Placer : garçons internes $10 - 4 = 6$, filles externes $24 - 4 = 20$. Étape 3 — Compléter : garçons externes $= 16 - 6 = 10$ ou $30 - 20 = 10$. Étape 4 — Lire : les deux bonnes opérations sont $(40 - 24) - (10 - 4)$ et $(40 - 10) - (24 - 4)$. L'opération $40 - 24 - 10 = 6$ retire deux fois les garçons internes.",
+                  "answers": [
+                    {
+                      "content": "$40 - 24 - 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24 - 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(40 - 10) - (24 - 4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(40 - 24) - (10 - 4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$40 - 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver les garçons externes d'une classe de 40 élèves comptant 24 filles, 10 internes dont 4 filles.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on identifie d'abord les critères. Étape 2 — Placer : on met ensuite les données dans le tableau. Étape 3 — Compléter : on calcule les cases manquantes par soustractions. Étape 4 — Lire : on lit enfin la case demandée. On ne peut pas lire une case avant de l'avoir calculée.",
+                  "answers": [
+                    {
+                      "content": "Repérer : les critères sont le sexe et le régime, avec les données de l'énoncé."
+                    },
+                    {
+                      "content": "Placer : 40, 24, 10 et 4 dans les cases et les marges du tableau."
+                    },
+                    {
+                      "content": "Compléter : garçons $16$, garçons internes $6$, puis garçons externes $16 - 6 = 10$."
+                    },
+                    {
+                      "content": "Lire : la case garçons externes contient 10."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un tableau à double entrée, le total de la colonne « internes » est la somme de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : la colonne des internes contient deux cases, une par sexe. Étape 2 — Placer : son total est écrit dans la marge. Étape 3 — Compléter : total internes $=$ filles internes $+$ garçons internes. Étape 4 — Lire : par exemple $4 + 6 = 10$. Additionner filles internes et filles externes donne le total de la ligne des filles.",
+                  "answers": [
+                    {
+                      "content": "la case filles internes et de la case garçons internes",
+                      "correct": true
+                    },
+                    {
+                      "content": "la case filles internes et de la case filles externes",
+                      "correct": false
+                    },
+                    {
+                      "content": "la case garçons internes et de la case garçons externes",
+                      "correct": false
+                    },
+                    {
+                      "content": "toutes les cases du tableau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un village de 60 habitants, 35 sont des hommes. 20 personnes sont agriculteurs, dont 12 hommes. Combien de femmes ne sont pas agricultrices ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et le métier ; les femmes sont $60 - 35 = 25$. Étape 2 — Placer : 60, 35, 20 et 12 dans le tableau. Étape 3 — Compléter : les agricultrices sont $20 - 12 = 8$, donc les femmes non agricultrices sont $25 - 8 = 17$. Étape 4 — Lire : il y a 17 femmes qui ne sont pas agricultrices.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "femmes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Diagramme et réunion de deux ensembles",
+          "remember": "$A \\cap B$ (lu « A inter B ») est l'ensemble des éléments communs à A et à B. $A \\cup B$ (lu « A union B ») est l'ensemble des éléments qui sont dans A ou dans B, ou dans les deux. Dans un diagramme à deux cercles : $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$. Le nombre d'éléments hors de $A \\cup B$ est le total moins $\\text{card}(A \\cup B)$. Si A et B n'ont aucun élément commun, on additionne simplement.",
+          "method": [
+            "Nommer : donner un nom à chaque ensemble et noter les effectifs de l'énoncé, y compris le total.",
+            "Placer : écrire d'abord l'effectif de l'intersection, au centre du diagramme.",
+            "Compléter : trouver A seul et B seul en retirant l'intersection de chaque effectif.",
+            "Calculer : la réponse demandée, réunion ou nombre d'éléments hors des deux ensembles."
+          ],
+          "example": {
+            "statement": "Dans une classe de 40 élèves, 25 aiment le football (F), 18 aiment le basket (B) et 10 aiment les deux. Combien aiment au moins un de ces deux sports, et combien n'en aiment aucun ?",
+            "steps": [
+              "Nommer : $\\text{card}(F) = 25$, $\\text{card}(B) = 18$, $\\text{card}(F \\cap B) = 10$ et 40 élèves en tout.",
+              "Placer : on écrit 10 au centre du diagramme.",
+              "Compléter : F seul $25 - 10 = 15$ et B seul $18 - 10 = 8$.",
+              "Calculer : au moins un sport $15 + 8 + 10 = 33$, et aucun sport $40 - 33 = 7$."
+            ]
+          },
+          "pitfall": "Ne pas additionner simplement les effectifs de A et de B. Contre-exemple : $25 + 18 = 43$ élèves, alors que la classe n'en compte que 40 ; les 10 élèves qui aiment les deux sports sont comptés deux fois. La bonne réunion est $25 + 18 - 10 = 33$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Réunion, intersection et diagramme",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour dénombrer avec un diagramme.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un ensemble A compte 12 éléments, un ensemble B en compte 9, et 4 éléments appartiennent aux deux. Combien d'éléments appartiennent à A ou à B (ou aux deux) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 12$, $\\text{card}(B) = 9$ et $\\text{card}(A \\cap B) = 4$. Étape 2 — Placer : 4 éléments au centre du diagramme. Étape 3 — Compléter : A seul $12 - 4 = 8$ et B seul $9 - 4 = 5$. Étape 4 — Calculer : $8 + 5 + 4 = 17$. Le nombre 21 additionne 12 et 9 sans retirer les 4 éléments comptés deux fois.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "éléments"
+                },
+                {
+                  "content": "Dans une classe de 30 élèves, 18 aiment la mangue, 14 aiment l'orange et 6 aiment les deux. Combien d'élèves aiment au moins un de ces deux fruits ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : M les élèves qui aiment la mangue (18), O ceux qui aiment l'orange (14), 6 dans les deux, 30 en tout. Étape 2 — Placer : 6 au centre du diagramme. Étape 3 — Compléter : M seul $18 - 6 = 12$ et O seul $14 - 6 = 8$. Étape 4 — Calculer : $12 + 8 + 6 = 26$. Le nombre 32 additionne 18 et 14 sans retirer les 6 comptés deux fois.",
+                  "answers": [
+                    {
+                      "content": "32",
+                      "correct": false
+                    },
+                    {
+                      "content": "26",
+                      "correct": true
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    },
+                    {
+                      "content": "38",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une classe de 30 élèves, 18 aiment la mangue, 14 aiment l'orange et 6 aiment les deux. Combien d'élèves n'aiment aucun de ces deux fruits ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : 30 élèves, 18 pour la mangue, 14 pour l'orange, 6 pour les deux. Étape 2 — Placer : 6 au centre. Étape 3 — Compléter : M seul 12, O seul 8. Étape 4 — Calculer : au moins un fruit $12 + 8 + 6 = 26$, donc aucun fruit $30 - 26 = 4$. Retrancher 18 de 30 compterait mal.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Dans une classe de 30 élèves, 18 aiment la mangue, 14 aiment l'orange et 6 aiment les deux. Combien d'élèves aiment la mangue sans aimer l'orange ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : M les élèves qui aiment la mangue (18), 6 aiment aussi l'orange. Étape 2 — Placer : 6 au centre du diagramme. Étape 3 — Compléter : M seul $= 18 - 6 = 12$. Étape 4 — Calculer : 12 élèves aiment la mangue sans l'orange. Le nombre 18 compte aussi ceux qui aiment les deux.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": false
+                    },
+                    {
+                      "content": "24",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : pour deux ensembles A et B, $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B)$ dans tous les cas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : prenons $\\text{card}(A) = 12$, $\\text{card}(B) = 9$ et $\\text{card}(A \\cap B) = 4$. Étape 2 — Placer : 4 éléments au centre, comptés dans A et dans B. Étape 3 — Compléter : A seul 8, B seul 5. Étape 4 — Calculer : $\\text{card}(A \\cup B) = 17$, alors que $12 + 9 = 21$. L'égalité n'est vraie que si A et B n'ont aucun élément commun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Diagrammes de sports et de goûts",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la réunion et l'intersection, en refaisant la méthode de la fiche.",
+              "hint": "Place toujours l'intersection au centre avant de calculer les parties « seul ».",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour deux ensembles, $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$. Avec 15, 12 et 5, on trouve ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 15$, $\\text{card}(B) = 12$, $\\text{card}(A \\cap B) = 5$. Étape 2 — Placer : 5 au centre du diagramme. Étape 3 — Compléter : A seul $15 - 5 = 10$, B seul $12 - 5 = 7$. Étape 4 — Calculer : $10 + 7 + 5 = 22$. Le nombre 27 oublie de retirer l'intersection.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque expression à ce qu'elle désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Nommer : A et B sont deux ensembles dans un ensemble total. Étape 2 — Placer : l'intersection est au centre du diagramme. Étape 3 — Compléter : A seul s'obtient en retirant l'intersection de A. Étape 4 — Calculer : « hors de A et de B » s'obtient en retirant la réunion du total.",
+                  "answers": [
+                    {
+                      "content": "$A \\cap B$",
+                      "match": "les éléments communs à A et à B"
+                    },
+                    {
+                      "content": "$A \\cup B$",
+                      "match": "les éléments de A ou de B, ou des deux"
+                    },
+                    {
+                      "content": "A seul",
+                      "match": "$\\text{card}(A) - \\text{card}(A \\cap B)$"
+                    },
+                    {
+                      "content": "hors de A et de B",
+                      "match": "le total moins $\\text{card}(A \\cup B)$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit un ensemble de 40 élèves : 20 sont dans A, 15 dans B, 8 dans les deux. Quelles affirmations sont vraies ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Nommer : total 40, $\\text{card}(A) = 20$, $\\text{card}(B) = 15$, $\\text{card}(A \\cap B) = 8$. Étape 2 — Placer : 8 au centre. Étape 3 — Compléter : A seul $20 - 8 = 12$ ; B seul $15 - 8 = 7$. Étape 4 — Calculer : réunion $12 + 7 + 8 = 27$ ; hors de A et de B : $40 - 27 = 13$. Les bonnes affirmations sont donc 12 dans A seul et 27 dans A ou B ; 35 oublie l'intersection, 15 est le total de B, 5 est faux.",
+                  "answers": [
+                    {
+                      "content": "Il y a 35 élèves dans A ou dans B.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 27 élèves dans A ou dans B.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 15 élèves dans B seul.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 12 élèves dans A seul.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 5 élèves hors de A et de B.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver combien d'élèves n'aiment ni le foot ni le basket.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Nommer : on commence par nommer les ensembles et leurs effectifs. Étape 2 — Placer : on place ensuite l'intersection au centre. Étape 3 — Compléter : on déduit les parties « seul ». Étape 4 — Calculer : on termine par le total moins la réunion. On ne peut pas calculer l'extérieur avant la réunion.",
+                  "answers": [
+                    {
+                      "content": "Nommer : F le foot, B le basket, l'ensemble total et leurs effectifs."
+                    },
+                    {
+                      "content": "Placer : l'effectif des élèves qui aiment les deux, au centre."
+                    },
+                    {
+                      "content": "Compléter : F seul et B seul, en retirant le centre de chaque effectif."
+                    },
+                    {
+                      "content": "Calculer : le total moins la réunion $F \\cup B$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour trouver le nombre d'éléments hors de A et de B, on retranche ___ du nombre total d'éléments.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Nommer : l'ensemble total contient la réunion $A \\cup B$ et le reste. Étape 2 — Placer : le reste est la partie du diagramme hors des deux cercles. Étape 3 — Compléter : total $= \\text{card}(A \\cup B) + \\text{hors de A et de B}$. Étape 4 — Calculer : hors de A et de B $= $ total $- \\text{card}(A \\cup B)$. Retrancher $\\text{card}(A) + \\text{card}(B)$ retire deux fois l'intersection.",
+                  "answers": [
+                    {
+                      "content": "$\\text{card}(A \\cup B)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\text{card}(A) + \\text{card}(B)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{card}(A \\cap B)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{card}(A)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un lycée de 100 élèves, 60 aiment le français, 45 aiment les mathématiques et 20 aiment les deux. Combien d'élèves n'aiment aucune de ces deux matières ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : 100 élèves, F 60, M 45, F ∩ M 20. Étape 2 — Placer : 20 au centre. Étape 3 — Compléter : F seul $60 - 20 = 40$ et M seul $45 - 20 = 25$. Étape 4 — Calculer : réunion $40 + 25 + 20 = 85$, donc aucune matière $100 - 85 = 15$.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le menu du maquis de Tantie Yao",
+          "statement": "Au maquis de Tantie Yao, un menu se compose d'un plat parmi riz, attiéké et foutou, d'une sauce parmi arachide et gombo, et d'une boisson parmi bissap et eau. Chaque plat peut se manger avec chaque sauce. En dessert, le client prend un seul dessert : l'un des 2 fruits ou l'une des 3 pâtisseries.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien de menus plat - sauce - boisson peut-on composer ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : on choisit un plat, puis une sauce, puis une boisson ; les trois choix s'enchaînent. Étape 2 — Compter : 3 plats, 2 sauces, 2 boissons. Étape 3 — Combiner : on multiplie, $3 \\times 2 \\times 2 = 12$. Étape 4 — Conclure : on peut composer 12 menus.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "menus"
+            },
+            {
+              "content": "Combien de desserts différents le client a-t-il le choix de prendre ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : le client prend un seul dessert, fruit ou pâtisserie ; les deux cas s'excluent. Étape 2 — Compter : 2 fruits, 3 pâtisseries. Étape 3 — Combiner : on additionne, $2 + 3 = 5$. Étape 4 — Conclure : il y a 5 desserts possibles. Multiplier ($2 \\times 3 = 6$) serait faux, car il ne prend pas un fruit et une pâtisserie.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "desserts"
+            },
+            {
+              "content": "Combien de menus complets (plat - sauce - boisson, puis dessert) peut-on composer ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : on choisit un menu plat - sauce - boisson, puis un dessert ; les choix s'enchaînent. Étape 2 — Compter : 12 menus et 5 desserts. Étape 3 — Combiner : on multiplie, $12 \\times 5 = 60$. Étape 4 — Conclure : on peut composer 60 menus complets.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "menus"
+            },
+            {
+              "content": "Combien de menus plat - sauce - boisson contiennent de l'attiéké ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : le plat est fixé (attiéké), on choisit ensuite une sauce, puis une boisson. Étape 2 — Compter : 1 possibilité pour le plat, 2 pour la sauce, 2 pour la boisson. Étape 3 — Combiner : $1 \\times 2 \\times 2 = 4$. Étape 4 — Conclure : 4 menus contiennent de l'attiéké. Le nombre 12 serait tous les menus, sans fixer le plat.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": false
+                },
+                {
+                  "content": "4",
+                  "correct": true
+                },
+                {
+                  "content": "5",
+                  "correct": false
+                },
+                {
+                  "content": "6",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Vrai ou faux : si le foutou n'était servi qu'avec la sauce gombo, il y aurait encore 12 menus plat - sauce - boisson.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : le nombre de sauces dépend maintenant du plat. Étape 2 — Compter : riz $2 \\times 2 = 4$ menus, attiéké $2 \\times 2 = 4$ menus, foutou $1 \\times 2 = 2$ menus. Étape 3 — Combiner : les trois cas s'excluent, on additionne, $4 + 4 + 2 = 10$. Étape 4 — Conclure : il y aurait 10 menus et non 12. Le principe multiplicatif exige que le nombre de sauces soit le même pour chaque plat.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le cadenas de Koffi",
+          "statement": "Le cadenas de Koffi s'ouvre avec un code de 3 chiffres, chacun choisi parmi 1, 2 et 3.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien de codes existe-t-il si un chiffre peut être répété ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Découper : on choisit le premier chiffre, puis le deuxième, puis le troisième. Étape 2 — Dessiner : 3 branches à chacun des 3 niveaux, la répétition étant permise. Étape 3 — Compter : $3 \\times 3 \\times 3 = 27$ chemins. Étape 4 — Conclure : il existe 27 codes.",
+              "answers": [
+                {
+                  "content": "27",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "codes"
+            },
+            {
+              "content": "Combien de codes existe-t-il si les trois chiffres doivent être tous différents ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Découper : on choisit les trois chiffres dans l'ordre. Étape 2 — Dessiner : 3 branches pour le premier chiffre, 2 pour le deuxième, 1 pour le troisième. Étape 3 — Compter : $3 \\times 2 \\times 1 = 6$ chemins. Étape 4 — Conclure : il existe 6 codes aux chiffres tous différents.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "codes"
+            },
+            {
+              "content": "Combien de codes (répétition permise) commencent par le chiffre 1 ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Découper : le premier chiffre est fixé à 1, il reste deux chiffres à choisir. Étape 2 — Dessiner : 1 branche pour le premier niveau, puis 3 branches et 3 branches. Étape 3 — Compter : $1 \\times 3 \\times 3 = 9$ chemins. Étape 4 — Conclure : 9 codes commencent par 1.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "codes"
+            },
+            {
+              "content": "Combien de codes aux chiffres tous différents commencent par le chiffre 2 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Découper : le premier chiffre est fixé à 2, il reste deux chiffres différents à choisir parmi 1 et 3. Étape 2 — Dessiner : 1 branche, puis 2 branches, puis 1 branche. Étape 3 — Compter : $1 \\times 2 \\times 1 = 2$ chemins, 213 et 231. Étape 4 — Conclure : 2 codes. Le nombre 6 compte tous les codes sans fixer le premier chiffre.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": false
+                },
+                {
+                  "content": "3",
+                  "correct": false
+                },
+                {
+                  "content": "2",
+                  "correct": true
+                },
+                {
+                  "content": "4",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Vrai ou faux : il y a autant de codes de 3 chiffres avec répétition permise qu'avec des chiffres tous différents.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Découper : dans les deux cas, trois choix successifs. Étape 2 — Dessiner : avec répétition, 3 branches à chaque niveau ; sans répétition, 3 puis 2 puis 1. Étape 3 — Compter : $27$ codes d'un côté, $6$ de l'autre. Étape 4 — Conclure : les nombres sont différents, l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'enquête au collège de Bouaké",
+          "statement": "Dans un collège de Bouaké, on interroge 200 élèves de 2nde : 120 sont des filles et 140 sont externes. Parmi les filles, 70 sont externes. On range les réponses dans un tableau à double entrée (sexe et régime).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien de garçons y a-t-il parmi les 200 élèves ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les critères sont le sexe et le régime, le total est 200 et les filles sont 120. Étape 2 — Placer : 200 dans la case du total, 120 dans la marge des filles. Étape 3 — Compléter : $200 - 120 = 80$. Étape 4 — Lire : il y a 80 garçons.",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "garçons"
+            },
+            {
+              "content": "Combien de garçons sont externes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les externes sont 140 en tout, dont 70 filles. Étape 2 — Placer : 140 dans la marge des externes, 70 dans la case filles externes. Étape 3 — Compléter : $140 - 70 = 70$. Étape 4 — Lire : 70 garçons sont externes.",
+              "answers": [
+                {
+                  "content": "70",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "garçons"
+            },
+            {
+              "content": "Combien de filles sont internes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les filles sont 120 en tout, dont 70 externes. Étape 2 — Placer : 120 dans la marge des filles, 70 dans la case filles externes. Étape 3 — Compléter : $120 - 70 = 50$. Étape 4 — Lire : 50 filles sont internes.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "filles"
+            },
+            {
+              "content": "Combien d'élèves sont internes en tout ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : 200 élèves, dont 140 externes. Étape 2 — Placer : 200 dans le total, 140 dans la marge des externes. Étape 3 — Compléter : $200 - 140 = 60$. Étape 4 — Lire : 60 élèves sont internes. On peut vérifier : 50 filles internes et 10 garçons internes.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Parmi les garçons, quel pourcentage est interne ? On rappelle que 60 élèves sont internes, dont 50 filles.",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : les garçons sont 80 et les internes 60, dont 50 filles. Étape 2 — Placer : garçons internes $60 - 50 = 10$. Étape 3 — Compléter : le taux est $\\dfrac{10}{80} \\times 100$. Étape 4 — Lire : $\\dfrac{10}{80} = 0{,}125$, soit 12,5 %. Le nombre 10 % est l'effectif, non le pourcentage.",
+              "answers": [
+                {
+                  "content": "10 %",
+                  "correct": false
+                },
+                {
+                  "content": "50 %",
+                  "correct": false
+                },
+                {
+                  "content": "60 %",
+                  "correct": false
+                },
+                {
+                  "content": "12,5 %",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Vrai ou faux : il y a plus de filles internes que de garçons internes (50 filles internes, 10 garçons internes).",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : filles internes 50, garçons internes $60 - 50 = 10$. Étape 2 — Placer : ces deux cases dans la colonne des internes. Étape 3 — Compléter : on compare $50$ et $10$. Étape 4 — Lire : $50 > 10$, l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le club de sport du lycée",
+          "statement": "Dans une classe de 48 élèves de 2nde A, 30 élèves pratiquent le football, 24 le handball et 12 pratiquent les deux sports.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien d'élèves pratiquent au moins un de ces deux sports ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Nommer : $\\text{card}(F) = 30$, $\\text{card}(H) = 24$, $\\text{card}(F \\cap H) = 12$. Étape 2 — Placer : 12 au centre du diagramme. Étape 3 — Compléter : F seul $30 - 12 = 18$ et H seul $24 - 12 = 12$. Étape 4 — Calculer : $18 + 12 + 12 = 42$.",
+              "answers": [
+                {
+                  "content": "42",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Combien d'élèves ne pratiquent aucun de ces deux sports ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Nommer : 48 élèves, dont 42 pratiquent au moins un sport. Étape 2 — Placer : la réunion $F \\cup H$ compte 42 élèves. Étape 3 — Compléter : le reste est hors des deux cercles. Étape 4 — Calculer : $48 - 42 = 6$.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Combien d'élèves pratiquent le football sans pratiquer le handball ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Nommer : $\\text{card}(F) = 30$ et 12 pratiquent aussi le handball. Étape 2 — Placer : 12 au centre. Étape 3 — Compléter : F seul $= 30 - 12$. Étape 4 — Calculer : $30 - 12 = 18$.",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Combien d'élèves pratiquent le handball sans pratiquer le football ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Nommer : $\\text{card}(H) = 24$ et 12 pratiquent aussi le football. Étape 2 — Placer : 12 au centre. Étape 3 — Compléter : H seul $= 24 - 12$. Étape 4 — Calculer : $24 - 12 = 12$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Le professeur forme un duo : un élève qui ne fait que du football et un élève qui ne fait que du handball. Combien de duos différents peut-il former ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : on choisit un élève de football seul, puis un élève de handball seul ; les choix s'enchaînent. Étape 2 — Compter : 18 possibilités pour le premier, 12 pour le second. Étape 3 — Combiner : on multiplie, $18 \\times 12 = 216$. Étape 4 — Conclure : il peut former 216 duos.",
+              "answers": [
+                {
+                  "content": "216",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "duos"
+            },
+            {
+              "content": "Vrai ou faux : 30 + 24 = 54 est plus grand que 48, donc des élèves pratiquent forcément les deux sports.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Nommer : 30 élèves au football et 24 au handball dans une classe de 48. Étape 2 — Placer : si personne ne faisait les deux, on aurait $30 + 24 = 54$ élèves. Étape 3 — Compléter : or la classe n'a que 48 élèves, donc certains sont comptés deux fois. Étape 4 — Calculer : $54 - 48 = 6$ élèves au moins sont dans les deux sports. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Principe multiplicatif et principe additif, arbre de dénombrement, tableau à double entrée, diagramme et réunion de deux ensembles : des dénombrements directs, à refaire avec la méthode de chaque fiche.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu comptes des choix successifs avec le principe multiplicatif.",
+              "hint": "Des choix qui s'enchaînent se multiplient.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève a 5 tee-shirts et 3 shorts. Combien de tenues (un tee-shirt et un short) peut-il composer ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : on choisit un tee-shirt, puis un short. Étape 2 — Compter : 5 possibilités pour le tee-shirt, 3 pour le short. Étape 3 — Combiner : on multiplie, $5 \\times 3 = 15$. Étape 4 — Conclure : il peut composer 15 tenues.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "tenues"
+                },
+                {
+                  "content": "Un restaurant propose 2 entrées, 4 plats et 3 desserts. Un menu est composé d'une entrée, d'un plat et d'un dessert. Combien de menus existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : on choisit une entrée, puis un plat, puis un dessert. Étape 2 — Compter : 2, 4 et 3 possibilités. Étape 3 — Combiner : on multiplie, $2 \\times 4 \\times 3 = 24$. Étape 4 — Conclure : il existe 24 menus.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "menus"
+                },
+                {
+                  "content": "Un artisan fabrique des sandales en 6 modèles et 4 couleurs. Combien de sandales différentes (un modèle et une couleur) propose-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on choisit un modèle, puis une couleur. Étape 2 — Compter : 6 modèles, 4 couleurs. Étape 3 — Combiner : on multiplie, $6 \\times 4 = 24$. Étape 4 — Conclure : il propose 24 sandales différentes. Le nombre 10 additionne 6 et 4 à tort.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un code est formé d'une lettre parmi A, B, C, D, puis d'un chiffre parmi 1, 2, 3. Il y a ___ codes.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on choisit une lettre, puis un chiffre. Étape 2 — Compter : 4 lettres, 3 chiffres. Étape 3 — Combiner : on multiplie, $4 \\times 3 = 12$. Étape 4 — Conclure : il y a 12 codes. Le nombre 7 additionne à tort.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec 5 maillots et 2 shorts, on peut composer 7 tenues (un maillot et un short).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on choisit un maillot, puis un short. Étape 2 — Compter : 5 maillots, 2 shorts. Étape 3 — Combiner : $5 \\times 2 = 10$. Étape 4 — Conclure : on compose 10 tenues et non 7. L'addition ne convient que pour un seul article choisi parmi deux groupes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu distingues les cas qui s'additionnent des choix qui se multiplient.",
+              "hint": "Un seul élément parmi des groupes : on additionne. Des éléments qui s'enchaînent : on multiplie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève choisit un seul article : l'une des 4 sortes de fruits locaux ou l'une des 3 sortes de jus. Combien de choix a-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : il prend un seul article, un fruit ou un jus ; les deux cas s'excluent. Étape 2 — Compter : 4 fruits, 3 jus. Étape 3 — Combiner : on additionne, $4 + 3 = 7$. Étape 4 — Conclure : il a 7 choix. Multiplier ($12$) serait faux.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "choix"
+                },
+                {
+                  "content": "Pour aller à Daloa, un voyageur choisit un seul voyage : l'une des 3 compagnies de car ou l'une des 2 compagnies de taxi brousse. Combien de choix a-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : un seul voyage, en car ou en taxi brousse ; les deux cas s'excluent. Étape 2 — Compter : 3 compagnies de car, 2 de taxi brousse. Étape 3 — Combiner : on additionne, $3 + 2 = 5$. Étape 4 — Conclure : il a 5 choix. Le nombre 6 multiplie, ce qui supposerait de prendre un car et un taxi.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "32",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations se comptent par une addition ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on cherche les situations où l'on ne prend qu'un seul élément parmi des groupes qui s'excluent. Étape 2 — Compter : sport ou repas, un seul élément est choisi. Étape 3 — Combiner : ces deux situations s'additionnent ; le sac puis la gourde, le code et le pagne puis le foulard se multiplient. Étape 4 — Conclure : les deux bonnes propositions sont le sport et le repas.",
+                  "answers": [
+                    {
+                      "content": "Choisir un sac, puis une gourde.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir un seul sport entre le football, le basket et le handball.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Former un code de 2 chiffres.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir un seul repas : poulet ou poisson.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir un pagne, puis un foulard.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On choisit un seul plat, de viande ou de poisson : on ___ les nombres de plats de chaque sorte.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : un seul plat, les deux sortes s'excluent. Étape 2 — Compter : chaque sorte a son nombre de plats. Étape 3 — Combiner : on additionne. Étape 4 — Conclure : le total est la somme. Multiplier supposerait de prendre un plat de viande et un plat de poisson.",
+                  "answers": [
+                    {
+                      "content": "multiplie",
+                      "correct": false
+                    },
+                    {
+                      "content": "soustrait",
+                      "correct": false
+                    },
+                    {
+                      "content": "divise",
+                      "correct": false
+                    },
+                    {
+                      "content": "additionne",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un menu se compose d'un plat, viande (2 choix) ou poisson (3 choix) mais un seul, puis d'une boisson parmi 4. Combien de menus existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : on choisit un plat parmi deux groupes qui s'excluent, puis une boisson. Étape 2 — Compter : $2 + 3 = 5$ plats possibles, 4 boissons. Étape 3 — Combiner : on multiplie les deux choix, $5 \\times 4 = 20$. Étape 4 — Conclure : il existe 20 menus.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "menus"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu dénombres avec des arbres et des codes.",
+              "hint": "Si on ne peut pas répéter un choix, le nombre de branches diminue à chaque niveau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une pièce de monnaie est lancée 4 fois de suite. Combien de suites de résultats existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : quatre choix successifs, un par lancer. Étape 2 — Dessiner : 2 branches à chacun des 4 niveaux. Étape 3 — Compter : $2 \\times 2 \\times 2 \\times 2 = 16$. Étape 4 — Conclure : il existe 16 suites.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "suites"
+                },
+                {
+                  "content": "Cinq coureurs participent à une course. Combien de façons y a-t-il d'attribuer la médaille d'or puis la médaille d'argent à deux coureurs différents ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : on choisit le médaillé d'or, puis celui d'argent. Étape 2 — Dessiner : 5 branches, puis 4 branches, car l'argent est un autre coureur. Étape 3 — Compter : $5 \\times 4 = 20$. Étape 4 — Conclure : il y a 20 façons. Le nombre 25 oublie que le coureur d'or ne peut pas gagner aussi l'argent.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un code est formé de 2 chiffres choisis dans {1, 2, 3, 4}, un chiffre pouvant être répété. Combien de codes existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit le premier chiffre, puis le deuxième. Étape 2 — Dessiner : 4 branches, puis 4 branches, la répétition étant permise. Étape 3 — Compter : $4 \\times 4 = 16$. Étape 4 — Conclure : il existe 16 codes.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "codes"
+                },
+                {
+                  "content": "Un code est formé de 3 lettres toutes différentes choisies parmi A, B, C, D. Combien de codes existe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : on choisit la première, la deuxième, puis la troisième lettre. Étape 2 — Dessiner : 4 branches, puis 3, puis 2. Étape 3 — Compter : $4 \\times 3 \\times 2 = 24$. Étape 4 — Conclure : il existe 24 codes. Le nombre 64 permettrait de répéter une lettre.",
+                  "answers": [
+                    {
+                      "content": "64",
+                      "correct": false
+                    },
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec les chiffres 1, 2 et 3, il existe 27 codes de 3 chiffres tous différents.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Découper : trois choix successifs sans répétition. Étape 2 — Dessiner : 3 branches, puis 2, puis 1. Étape 3 — Compter : $3 \\times 2 \\times 1 = 6$. Étape 4 — Conclure : il y a 6 codes et non 27 ; le nombre 27 est celui des codes avec répétition permise.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu complètes des tableaux et tu lis des diagrammes.",
+              "hint": "Place l'intersection au centre avant de calculer les parties « seul ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur 50 élèves, 30 sont des garçons. 18 élèves portent des lunettes, dont 7 garçons. Combien de filles portent des lunettes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et les lunettes ; 18 élèves portent des lunettes. Étape 2 — Placer : 18 dans la marge des lunettes, 7 dans la case garçons avec lunettes. Étape 3 — Compléter : $18 - 7 = 11$. Étape 4 — Lire : 11 filles portent des lunettes.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Sur 50 élèves, 30 sont des garçons, donc 20 sont des filles, et 11 filles portent des lunettes. Combien de filles ne portent pas de lunettes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 20 filles en tout, dont 11 avec lunettes. Étape 2 — Placer : 20 dans la marge des filles, 11 dans la case filles avec lunettes. Étape 3 — Compléter : $20 - 11 = 9$. Étape 4 — Lire : 9 filles ne portent pas de lunettes.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Un ensemble A compte 14 éléments, un ensemble B en compte 10, et 6 éléments sont dans les deux. Combien d'éléments sont dans A ou dans B ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 14$, $\\text{card}(B) = 10$, $\\text{card}(A \\cap B) = 6$. Étape 2 — Placer : 6 au centre. Étape 3 — Compléter : A seul 8, B seul 4. Étape 4 — Calculer : $8 + 4 + 6 = 18$.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "éléments"
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, 22 jouent au football, 15 au basket et 7 jouent aux deux. Combien n'en jouent aucun ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : 40 élèves, F 22, B 15, F ∩ B 7. Étape 2 — Placer : 7 au centre. Étape 3 — Compléter : F seul 15 et B seul 8. Étape 4 — Calculer : réunion $15 + 8 + 7 = 30$, donc aucun sport $40 - 30 = 10$. Le nombre 3 oublie de retirer l'intersection avant de soustraire.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": true
+                    },
+                    {
+                      "content": "33",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si A compte 22 éléments, B en compte 15 et 7 sont communs, alors $A \\cup B$ en compte moins de 37.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 22$, $\\text{card}(B) = 15$, $\\text{card}(A \\cap B) = 7$. Étape 2 — Placer : 7 au centre. Étape 3 — Compléter : A seul 15, B seul 8. Étape 4 — Calculer : la réunion compte $15 + 8 + 7 = 30$, et $30 < 37$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux ensembles, $\\text{card}(A \\cap B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cup B)$. Avec 20, 12 et 25, on trouve ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 20$, $\\text{card}(B) = 12$, $\\text{card}(A \\cup B) = 25$. Étape 2 — Placer : l'intersection est ce qui est compté deux fois. Étape 3 — Compléter : $20 + 12 = 32$ compte l'intersection deux fois. Étape 4 — Calculer : $32 - 25 = 7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Principes multiplicatif et additif (pagnes, couturières), arbres (compagnies de transport), tableau à double entrée (enquête dans un collège), diagramme de deux ensembles (sports d'une classe).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Aya veut une tenue en pagne au marché de Cocody. Elle choisit un modèle parmi 4 pagnes, puis une couturière parmi 3, puis une couleur de boutons parmi 5.",
+              "hint": "Pour plusieurs choix à la suite, multiplie les nombres de possibilités.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de choix (un pagne et une couturière) Aya a-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : elle choisit un pagne, puis une couturière. Étape 2 — Compter : 4 pagnes, 3 couturières. Étape 3 — Combiner : on multiplie, $4 \\times 3 = 12$. Étape 4 — Conclure : elle a 12 choix.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "choix"
+                },
+                {
+                  "content": "Combien de choix (un pagne, une couturière et une couleur de boutons) Aya a-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : trois choix qui s'enchaînent. Étape 2 — Compter : 4 pagnes, 3 couturières, 5 couleurs. Étape 3 — Combiner : on multiplie, $4 \\times 3 \\times 5 = 60$. Étape 4 — Conclure : elle a 60 choix.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "choix"
+                },
+                {
+                  "content": "Aya décide d'acheter un seul article : un des 4 pagnes ou une des 5 couleurs de boutons. Combien de choix a-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : un seul article, pagne ou boutons ; les deux cas s'excluent. Étape 2 — Compter : 4 pagnes, 5 boutons. Étape 3 — Combiner : on additionne, $4 + 5 = 9$. Étape 4 — Conclure : elle a 9 choix. Le nombre 20 multiplie, ce qui supposerait d'acheter un pagne et des boutons.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "45",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si le nombre de modèles de pagne double (de 4 à 8), le nombre de choix pagne - couturière double aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on choisit un pagne, puis une couturière. Étape 2 — Compter : avec 4 pagnes, $4 \\times 3 = 12$ ; avec 8 pagnes, $8 \\times 3 = 24$. Étape 3 — Combiner : $24 = 2 \\times 12$. Étape 4 — Conclure : le nombre de choix double, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec 8 modèles de pagne, 3 couturières et 5 couleurs de boutons, combien de choix Aya a-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : trois choix qui s'enchaînent. Étape 2 — Compter : 8 pagnes, 3 couturières, 5 couleurs. Étape 3 — Combiner : on multiplie, $8 \\times 3 \\times 5 = 120$. Étape 4 — Conclure : elle a 120 choix.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "choix"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un voyageur doit faire un aller puis un retour avec l'une des 4 compagnies de transport d'Abidjan à Bouaké.",
+              "hint": "Si les compagnies doivent être différentes, le nombre de branches diminue de 1 à chaque niveau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien d'aller-retour existe-t-il si la compagnie du retour peut être la même que celle de l'aller ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit la compagnie de l'aller, puis celle du retour. Étape 2 — Dessiner : 4 branches, puis 4 branches, la répétition étant permise. Étape 3 — Compter : $4 \\times 4 = 16$. Étape 4 — Conclure : il existe 16 aller-retour.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "trajets"
+                },
+                {
+                  "content": "Combien d'aller-retour existe-t-il si la compagnie du retour doit être différente de celle de l'aller ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit la compagnie de l'aller, puis celle du retour. Étape 2 — Dessiner : 4 branches, puis 3 branches, car le retour est une autre compagnie. Étape 3 — Compter : $4 \\times 3 = 12$. Étape 4 — Conclure : il existe 12 aller-retour.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "trajets"
+                },
+                {
+                  "content": "Combien d'aller-retour utilisent la même compagnie à l'aller et au retour ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : les aller-retour avec la même compagnie sont ceux qui ne sont pas à compagnies différentes. Étape 2 — Dessiner : parmi les $16$ aller-retour, $12$ ont des compagnies différentes. Étape 3 — Compter : $16 - 12 = 4$, une par compagnie. Étape 4 — Conclure : 4 aller-retour utilisent la même compagnie.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "trajets"
+                },
+                {
+                  "content": "La compagnie de l'aller est déjà choisie. Combien de compagnies différentes reste-t-il pour le retour ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : le retour est le deuxième choix. Étape 2 — Dessiner : parmi les 4 compagnies, on retire celle de l'aller. Étape 3 — Compter : $4 - 1 = 3$ branches. Étape 4 — Conclure : il reste 3 compagnies. Le nombre 4 permettrait de reprendre la même compagnie.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : s'il choisit 3 compagnies toutes différentes pour 3 trajets, parmi les 4 compagnies, il a $4 \\times 3 \\times 2 = 24$ possibilités.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Découper : on choisit les compagnies des trois trajets, dans l'ordre. Étape 2 — Dessiner : 4 branches, puis 3, puis 2 car les compagnies sont toutes différentes. Étape 3 — Compter : $4 \\times 3 \\times 2 = 24$. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un collège de Man, on interroge 120 élèves : 70 sont des garçons. 80 élèves viennent à l'école à pied, dont 45 garçons.",
+              "hint": "Complète le tableau case par case, par soustraction.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de filles y a-t-il parmi les 120 élèves ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et le mode de transport. Étape 2 — Placer : 120 dans le total, 70 dans la marge des garçons. Étape 3 — Compléter : $120 - 70 = 50$. Étape 4 — Lire : il y a 50 filles.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Combien de garçons ne viennent pas à pied ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 70 garçons, dont 45 viennent à pied. Étape 2 — Placer : 70 dans la marge des garçons, 45 dans la case garçons à pied. Étape 3 — Compléter : $70 - 45 = 25$. Étape 4 — Lire : 25 garçons ne viennent pas à pied.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "garçons"
+                },
+                {
+                  "content": "Combien de filles viennent à pied ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 80 élèves viennent à pied, dont 45 garçons. Étape 2 — Placer : 80 dans la marge des élèves à pied, 45 dans la case garçons à pied. Étape 3 — Compléter : $80 - 45 = 35$. Étape 4 — Lire : 35 filles viennent à pied.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Combien d'élèves ne viennent pas à pied ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 120 élèves, dont 80 viennent à pied. Étape 2 — Placer : 120 dans le total, 80 dans la marge des élèves à pied. Étape 3 — Compléter : $120 - 80 = 40$. Étape 4 — Lire : 40 élèves ne viennent pas à pied.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Combien de filles ne viennent pas à pied ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 50 filles, dont 35 viennent à pied. Étape 2 — Placer : 50 dans la marge des filles, 35 dans la case filles à pied. Étape 3 — Compléter : $50 - 35 = 15$. Étape 4 — Lire : 15 filles ne viennent pas à pied. Le nombre 25 est celui des garçons qui ne viennent pas à pied.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": false
+                    },
+                    {
+                      "content": "15",
+                      "correct": true
+                    },
+                    {
+                      "content": "35",
+                      "correct": false
+                    },
+                    {
+                      "content": "40",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : il y a plus de garçons à pied (45) que de filles à pied (35).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : garçons à pied 45, filles à pied $80 - 45 = 35$. Étape 2 — Placer : ces deux cases dans la colonne des élèves à pied. Étape 3 — Compléter : on compare 45 et 35. Étape 4 — Lire : $45 > 35$, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans une classe de 36 élèves, 20 jouent au football, 14 au basket et 6 jouent aux deux sports.",
+              "hint": "Pour une partie « seul », retire l'intersection de l'effectif de l'ensemble.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien d'élèves jouent à au moins un de ces deux sports ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : F 20, B 14, F ∩ B 6. Étape 2 — Placer : 6 au centre. Étape 3 — Compléter : F seul $20 - 6 = 14$ et B seul $14 - 6 = 8$. Étape 4 — Calculer : $14 + 8 + 6 = 28$.",
+                  "answers": [
+                    {
+                      "content": "28",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Combien d'élèves ne jouent à aucun de ces deux sports ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : 36 élèves, dont 28 jouent à au moins un sport. Étape 2 — Placer : la réunion compte 28 élèves. Étape 3 — Compléter : le reste est hors des deux cercles. Étape 4 — Calculer : $36 - 28 = 8$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Combien d'élèves jouent au football sans jouer au basket ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : F 20 dont 6 jouent aussi au basket. Étape 2 — Placer : 6 au centre. Étape 3 — Compléter : F seul $= 20 - 6$. Étape 4 — Calculer : $20 - 6 = 14$.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Combien d'élèves jouent au basket sans jouer au football ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : B 14 dont 6 jouent aussi au football. Étape 2 — Placer : 6 au centre. Étape 3 — Compléter : B seul $= 14 - 6$. Étape 4 — Calculer : $14 - 6 = 8$. Le nombre 14 compte aussi ceux qui jouent aux deux.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 14 élèves jouent uniquement au basket.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : B 14 dont 6 jouent aussi au football. Étape 2 — Placer : 6 au centre. Étape 3 — Compléter : B seul $14 - 6 = 8$. Étape 4 — Calculer : 8 élèves jouent uniquement au basket et non 14. Le nombre 14 est le total du basket, intersection comprise.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Choisir entre addition et multiplication, justifier un nombre de branches dans un arbre, vérifier les cases d'un tableau, repérer les erreurs sur la réunion de deux ensembles.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu justifies s'il faut additionner ou multiplier.",
+              "hint": "Cherche si l'on prend un seul élément ou plusieurs éléments à la suite.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Vrai ou faux : avec 3 chemises et 4 pantalons, on peut composer 7 tenues (une chemise et un pantalon).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : une tenue comprend une chemise et un pantalon, choix successifs. Étape 2 — Compter : 3 chemises, 4 pantalons. Étape 3 — Combiner : $3 \\times 4 = 12$. Étape 4 — Conclure : il y a 12 tenues et non 7. Le nombre 7 serait le nombre d'articles au total.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec 3 chemises et 4 pantalons, on peut choisir un seul vêtement de 7 façons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on prend un seul vêtement, chemise ou pantalon ; les deux cas s'excluent. Étape 2 — Compter : 3 chemises, 4 pantalons. Étape 3 — Combiner : on additionne, $3 + 4 = 7$. Étape 4 — Conclure : il y a 7 façons, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un code est formé de 3 chiffres, chacun parmi 1, 2, 3, 4, 5, avec répétition permise. Combien de codes existe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : trois choix successifs, tous parmi 5 possibilités. Étape 2 — Compter : 5, 5 et 5. Étape 3 — Combiner : $5 \\times 5 \\times 5 = 125$. Étape 4 — Conclure : il existe 125 codes. Le nombre 15 additionne les trois choix, et 60 retire la répétition.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": false
+                    },
+                    {
+                      "content": "60",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "125",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un menu se compose d'un seul plat (2 viandes ou 3 poissons) puis d'une boisson parmi 4. Quels calculs donnent le nombre de menus ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : un plat parmi deux groupes qui s'excluent, puis une boisson. Étape 2 — Compter : $2 + 3 = 5$ plats, 4 boissons. Étape 3 — Combiner : $5 \\times 4 = 20$, ou menus à viande $2 \\times 4 = 8$ plus menus à poisson $3 \\times 4 = 12$, soit $20$. Étape 4 — Conclure : les deux bonnes écritures sont $(2 + 3) \\times 4$ et $2 \\times 4 + 3 \\times 4$. Le produit $2 \\times 3 \\times 4 = 24$ suppose de prendre une viande et un poisson.",
+                  "answers": [
+                    {
+                      "content": "$2 + 3 + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 4 + 3 \\times 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2 + 3) \\times 4$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour 5 plats et 4 boissons, un menu étant un plat et une boisson, il y a ___ menus.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on choisit un plat, puis une boisson. Étape 2 — Compter : 5 plats, 4 boissons. Étape 3 — Combiner : $5 \\times 4 = 20$. Étape 4 — Conclure : il y a 20 menus. Le nombre 9 additionne à tort.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu justifies le nombre de branches de chaque niveau dans un arbre.",
+              "hint": "Compte les branches de chaque niveau en tenant compte de ce qui est déjà choisi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un code est formé de 2 lettres différentes choisies parmi A, B, C, D. Combien de codes existe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : on choisit la première lettre, puis la seconde. Étape 2 — Dessiner : 4 branches, puis 3 branches, car la seconde lettre est différente. Étape 3 — Compter : $4 \\times 3 = 12$. Étape 4 — Conclure : il existe 12 codes. Le nombre 16 permettrait de répéter une lettre.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": true
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec 3 lettres, il y a autant de codes de 2 lettres avec répétition permise que de codes de 2 lettres différentes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Découper : on choisit la première lettre, puis la seconde. Étape 2 — Dessiner : avec répétition, 3 puis 3 branches ; sans répétition, 3 puis 2 branches. Étape 3 — Compter : $3 \\times 3 = 9$ d'un côté, $3 \\times 2 = 6$ de l'autre. Étape 4 — Conclure : 9 et 6 sont différents, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre coureurs terminent une course sans ex aequo. Combien de classements différents existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit le premier, puis le deuxième, puis le troisième, puis le dernier. Étape 2 — Dessiner : 4 branches, puis 3, puis 2, puis 1. Étape 3 — Compter : $4 \\times 3 \\times 2 \\times 1 = 24$. Étape 4 — Conclure : il existe 24 classements.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ordres"
+                },
+                {
+                  "content": "Un code est formé de 3 lettres toutes différentes choisies parmi 5 lettres. Combien de codes existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit la première, la deuxième, puis la troisième lettre. Étape 2 — Dessiner : 5 branches, puis 4, puis 3. Étape 3 — Compter : $5 \\times 4 \\times 3 = 60$. Étape 4 — Conclure : il existe 60 codes.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "codes"
+                },
+                {
+                  "content": "Un code est formé de 2 chiffres choisis dans {1, 2, 3}, un chiffre pouvant être répété. Combien de ces codes commencent par 1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : le premier chiffre est fixé à 1, on choisit le second. Étape 2 — Dessiner : 1 branche, puis 3 branches, la répétition étant permise. Étape 3 — Compter : $1 \\times 3 = 3$ chemins. Étape 4 — Conclure : 3 codes commencent par 1, soit 11, 12 et 13. Le nombre 9 est le nombre total de codes.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu vérifies les cases et les totaux de tableaux à double entrée.",
+              "hint": "Le total général est la somme de toutes les cases du tableau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Vrai ou faux : dans une classe de 30 élèves dont 16 filles, il y a 16 garçons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le total est 30 et les filles sont 16. Étape 2 — Placer : 30 dans le total, 16 dans la marge des filles. Étape 3 — Compléter : les garçons sont $30 - 16 = 14$. Étape 4 — Lire : il y a 14 garçons et non 16.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un tableau, la ligne des filles a pour total 12. Elle contient 5 filles internes. Combien de filles sont externes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le total de la ligne des filles est 12, la case filles internes vaut 5. Étape 2 — Placer : 12 dans la marge, 5 dans la case. Étape 3 — Compléter : $12 - 5 = 7$. Étape 4 — Lire : 7 filles sont externes. Le nombre 17 additionne au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "17",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une classe de 32 élèves, il y a 10 garçons internes et 6 filles internes. Combien d'élèves sont internes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la colonne des internes contient deux cases, garçons internes et filles internes. Étape 2 — Placer : 10 et 6 dans cette colonne. Étape 3 — Compléter : le total de la colonne est la somme de ses cases, $10 + 6 = 16$. Étape 4 — Lire : 16 élèves sont internes.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, il y a 24 filles, dont 4 internes, et 10 internes en tout. Quelles affirmations sont vraies ? (deux bonnes propositions)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : total 40, filles 24, filles internes 4, internes 10. Étape 2 — Placer : ces données dans le tableau. Étape 3 — Compléter : garçons $40 - 24 = 16$ ; filles externes $24 - 4 = 20$ ; garçons internes $10 - 4 = 6$ ; externes $40 - 10 = 30$. Étape 4 — Lire : les deux bonnes affirmations sont 16 garçons et 20 filles externes. Les autres sont fausses : 6 garçons internes, 30 externes.",
+                  "answers": [
+                    {
+                      "content": "Il y a 14 garçons internes.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 10 externes.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 20 filles externes.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 4 garçons internes.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 16 garçons.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les quatre cases d'un tableau valent 4, 20, 6 et ___ ; leur somme est le total général, 40.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les quatre cases (filles internes, filles externes, garçons internes, garçons externes) ont pour somme le total 40. Étape 2 — Placer : 4, 20 et 6 sont connus. Étape 3 — Compléter : $40 - (4 + 20 + 6) = 40 - 30 = 10$. Étape 4 — Lire : la case manquante vaut 10.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu repères les erreurs fréquentes sur la réunion et l'intersection de deux ensembles.",
+              "hint": "Une partie « seul » se calcule en retirant l'intersection.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Vrai ou faux : si deux ensembles A et B n'ont aucun élément commun, alors $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : A et B n'ont aucun élément commun, donc $\\text{card}(A \\cap B) = 0$. Étape 2 — Placer : 0 au centre du diagramme. Étape 3 — Compléter : A seul $= \\text{card}(A)$ et B seul $= \\text{card}(B)$. Étape 4 — Calculer : la réunion vaut $\\text{card}(A) + \\text{card}(B) - 0$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ensemble A compte 25 éléments, un ensemble B en compte 17, et 9 éléments sont dans les deux. Combien d'éléments sont dans A ou dans B ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 25$, $\\text{card}(B) = 17$, $\\text{card}(A \\cap B) = 9$. Étape 2 — Placer : 9 au centre. Étape 3 — Compléter : A seul 16 et B seul 8. Étape 4 — Calculer : $16 + 8 + 9 = 33$.",
+                  "answers": [
+                    {
+                      "content": "33",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "éléments"
+                },
+                {
+                  "content": "Dans un ensemble de 45 élèves, 25 sont dans A, 17 dans B et 9 dans les deux. Combien sont hors de A et de B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : total 45, A 25, B 17, A ∩ B 9. Étape 2 — Placer : 9 au centre. Étape 3 — Compléter : A seul 16 et B seul 8, donc la réunion compte $16 + 8 + 9 = 33$. Étape 4 — Calculer : hors de A et de B, $45 - 33 = 12$. Le nombre 33 est la réunion et non le reste.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "33",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si A compte 15 éléments, B en compte 12 et l'ensemble total en compte 20, alors A et B ont au moins un élément commun.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 15$, $\\text{card}(B) = 12$, total 20. Étape 2 — Placer : si l'intersection était vide, la réunion compterait $15 + 12 = 27$. Étape 3 — Compléter : or la réunion ne peut pas dépasser le total 20. Étape 4 — Calculer : $27 > 20$, donc l'intersection n'est pas vide. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si A compte 15 éléments, B en compte 12 et l'ensemble total en compte 20, quel est le plus petit nombre possible d'éléments communs à A et à B ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : $\\text{card}(A) = 15$, $\\text{card}(B) = 12$, total 20. Étape 2 — Placer : la réunion compte au plus 20 éléments. Étape 3 — Compléter : $\\text{card}(A \\cap B) = 15 + 12 - \\text{card}(A \\cup B)$, qui est le plus petit quand la réunion est la plus grande, soit 20. Étape 4 — Calculer : $15 + 12 - 20 = 7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "éléments"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Principes additif et multiplicatif, arbres, tableaux à double entrée et diagrammes de deux ensembles : quatre situations complètes, du dénombrement à la conclusion.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au maquis de Tantie Awa, un menu se compose d'un plat, viande (2 choix) ou poisson (3 choix) mais un seul, d'une boisson parmi 4 et d'une sauce parmi 2.",
+              "hint": "Compte d'abord les plats, puis multiplie par les autres choix.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de plats différents le client peut-il choisir ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : un seul plat, viande ou poisson ; les deux cas s'excluent. Étape 2 — Compter : 2 viandes, 3 poissons. Étape 3 — Combiner : on additionne, $2 + 3 = 5$. Étape 4 — Conclure : il y a 5 plats possibles.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "plats"
+                },
+                {
+                  "content": "Combien de menus (plat, boisson et sauce) peut-on composer ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : on choisit un plat, puis une boisson, puis une sauce. Étape 2 — Compter : 5 plats, 4 boissons, 2 sauces. Étape 3 — Combiner : on multiplie, $5 \\times 4 \\times 2 = 40$. Étape 4 — Conclure : on peut composer 40 menus.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "menus"
+                },
+                {
+                  "content": "Combien de menus contiennent un plat de poisson ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le plat est un poisson, puis on choisit une boisson et une sauce. Étape 2 — Compter : 3 poissons, 4 boissons, 2 sauces. Étape 3 — Combiner : $3 \\times 4 \\times 2 = 24$. Étape 4 — Conclure : 24 menus contiennent du poisson. Le nombre 40 compte aussi les plats de viande.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : il y a 16 menus avec un plat de viande.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le plat est une viande, puis on choisit une boisson et une sauce. Étape 2 — Compter : 2 viandes, 4 boissons, 2 sauces. Étape 3 — Combiner : $2 \\times 4 \\times 2 = 16$. Étape 4 — Conclure : l'affirmation est vraie. On vérifie : $16 + 24 = 40$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tantie Awa ajoute une troisième sauce. Combien de menus (plat, boisson et sauce) peut-on alors composer ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : trois choix qui s'enchaînent, avec 5 plats, 4 boissons et 3 sauces. Étape 2 — Compter : 5, 4 et 3 possibilités. Étape 3 — Combiner : $5 \\times 4 \\times 3 = 60$. Étape 4 — Conclure : on peut composer 60 menus.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "menus"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Quatre équipes, A, B, C et D, participent à un tournoi.",
+              "hint": "Quand une équipe est déjà choisie, retire-la des choix suivants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien d'ordres de passage différents existe-t-il pour les 4 équipes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit l'équipe qui passe en premier, puis en deuxième, puis en troisième, puis en dernier. Étape 2 — Dessiner : 4 branches, puis 3, puis 2, puis 1. Étape 3 — Compter : $4 \\times 3 \\times 2 \\times 1 = 24$. Étape 4 — Conclure : il existe 24 ordres de passage.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ordres"
+                },
+                {
+                  "content": "Combien d'ordres de passage existe-t-il si l'équipe A passe en premier ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : A est fixée en premier, il reste 3 équipes à ordonner. Étape 2 — Dessiner : 1 branche, puis 3, puis 2, puis 1. Étape 3 — Compter : $1 \\times 3 \\times 2 \\times 1 = 6$. Étape 4 — Conclure : il existe 6 ordres de passage.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ordres"
+                },
+                {
+                  "content": "Combien de façons y a-t-il de décerner une médaille d'or, puis une médaille d'argent à deux équipes différentes parmi les 4 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Découper : on choisit l'équipe en or, puis l'équipe en argent. Étape 2 — Dessiner : 4 branches, puis 3 branches, car l'équipe d'argent est différente. Étape 3 — Compter : $4 \\times 3 = 12$. Étape 4 — Conclure : il y a 12 façons. Le nombre 16 permettrait à la même équipe de gagner les deux médailles.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    },
+                    {
+                      "content": "24",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec 5 équipes, il existe $5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$ ordres de passage.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Découper : cinq choix successifs, un par place. Étape 2 — Dessiner : 5 branches, puis 4, puis 3, puis 2, puis 1. Étape 3 — Compter : $5 \\times 4 = 20$, $20 \\times 3 = 60$, $60 \\times 2 = 120$, $120 \\times 1 = 120$. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une finale, on choisit deux équipes différentes parmi les 4, dans l'ordre (la première joue à domicile). Combien de finales ordonnées existe-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Découper : on choisit l'équipe à domicile, puis l'équipe visiteuse. Étape 2 — Dessiner : 4 branches, puis 3 branches, car l'équipe visiteuse est différente. Étape 3 — Compter : $4 \\times 3 = 12$. Étape 4 — Conclure : il existe 12 finales ordonnées.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "finales"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur 100 candidats à un BEPC blanc, 55 sont des filles et 70 sont admis. Parmi les filles, 40 sont admises.",
+              "hint": "Complète d'abord la ligne et la colonne qui ont le plus de données.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de garçons y a-t-il parmi les 100 candidats ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les critères sont le sexe et le résultat (admis ou non). Étape 2 — Placer : 100 dans le total, 55 dans la marge des filles. Étape 3 — Compléter : $100 - 55 = 45$. Étape 4 — Lire : il y a 45 garçons.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "garçons"
+                },
+                {
+                  "content": "Combien de garçons sont admis ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 70 admis en tout, dont 40 filles. Étape 2 — Placer : 70 dans la marge des admis, 40 dans la case filles admises. Étape 3 — Compléter : $70 - 40 = 30$. Étape 4 — Lire : 30 garçons sont admis.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "garçons"
+                },
+                {
+                  "content": "Combien de filles ne sont pas admises ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 55 filles, dont 40 admises. Étape 2 — Placer : 55 dans la marge des filles, 40 dans la case filles admises. Étape 3 — Compléter : $55 - 40 = 15$. Étape 4 — Lire : 15 filles ne sont pas admises.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "filles"
+                },
+                {
+                  "content": "Combien de candidats ne sont pas admis ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 100 candidats, dont 70 admis. Étape 2 — Placer : 100 dans le total, 70 dans la marge des admis. Étape 3 — Compléter : $100 - 70 = 30$. Étape 4 — Lire : 30 candidats ne sont pas admis.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "candidats"
+                },
+                {
+                  "content": "Combien de garçons ne sont pas admis ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 45 garçons, dont 30 admis. Étape 2 — Placer : 45 dans la marge des garçons, 30 dans la case garçons admis. Étape 3 — Compléter : $45 - 30 = 15$. Étape 4 — Lire : 15 garçons ne sont pas admis. Le nombre 30 est celui des garçons admis.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    },
+                    {
+                      "content": "30",
+                      "correct": false
+                    },
+                    {
+                      "content": "45",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un club de 60 jeunes, 35 chantent, 28 dansent et 12 font les deux activités.",
+              "hint": "Place toujours l'intersection au centre avant de calculer.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de jeunes font au moins une de ces deux activités ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : C 35, D 28, C ∩ D 12. Étape 2 — Placer : 12 au centre. Étape 3 — Compléter : C seul $35 - 12 = 23$ et D seul $28 - 12 = 16$. Étape 4 — Calculer : $23 + 16 + 12 = 51$.",
+                  "answers": [
+                    {
+                      "content": "51",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "jeunes"
+                },
+                {
+                  "content": "Combien de jeunes ne font aucune de ces deux activités ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : 60 jeunes, dont 51 font au moins une activité. Étape 2 — Placer : la réunion compte 51 jeunes. Étape 3 — Compléter : le reste est hors des deux cercles. Étape 4 — Calculer : $60 - 51 = 9$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "jeunes"
+                },
+                {
+                  "content": "Combien de jeunes chantent sans danser ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer : C 35 dont 12 dansent aussi. Étape 2 — Placer : 12 au centre. Étape 3 — Compléter : C seul $= 35 - 12$. Étape 4 — Calculer : $35 - 12 = 23$.",
+                  "answers": [
+                    {
+                      "content": "23",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "jeunes"
+                },
+                {
+                  "content": "Combien de jeunes dansent sans chanter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : D 28 dont 12 chantent aussi. Étape 2 — Placer : 12 au centre. Étape 3 — Compléter : D seul $= 28 - 12$. Étape 4 — Calculer : $28 - 12 = 16$. Le nombre 28 compte aussi ceux qui font les deux activités.",
+                  "answers": [
+                    {
+                      "content": "28",
+                      "correct": false
+                    },
+                    {
+                      "content": "16",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "40",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : comme $35 + 28 = 63$ est plus grand que 60, des jeunes font forcément les deux activités.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : 35 jeunes chantent et 28 dansent parmi 60. Étape 2 — Placer : sans personne dans les deux, on aurait $35 + 28 = 63$ jeunes. Étape 3 — Compléter : or il n'y en a que 60. Étape 4 — Calculer : $63 - 60 = 3$ jeunes au moins font les deux activités. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

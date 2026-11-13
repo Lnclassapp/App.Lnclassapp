@@ -10,17 +10,22 @@ class PreuveVagueTest < ActiveSupport::TestCase
   CLEAN = { "RAILS_ENV" => "development", "RAILWAY_ENVIRONMENT_NAME" => nil, "DATABASE_URL" => nil }.freeze
 
   def preuve(*args, env: {})
+    env = { "PREUVE_VAGUE_RACINE" => @root }.compact.merge(env)
     Open3.capture2e(CLEAN.merge(env), SCRIPT, *args, chdir: Rails.root.to_s)
   end
 
-  # Un dossier de vague jetable : tle-x/<matière>/<fichier>.json
+  # Un dossier de vague jetable : <racine jetable>/<vague>/<matière>/<fichier>.json. La racine est hors du dépôt : le semis,
+  # qui lit docs/contenus/lecons-traitees, ne peut jamais le voir (tests parallèles).
   def wave
-    folder = Rails.root.join("docs/contenus/lecons-traitees", "zz-preuve-test-#{Process.pid}")
-    folder.join("mathematiques").mkpath
-    folder.join("svt").mkpath
-    yield folder
-  ensure
-    FileUtils.rm_rf(folder) if folder
+    Dir.mktmpdir("lecons-") do |root|
+      @root = File.realpath(root)
+      folder = Pathname(@root).join("zz-preuve-test-#{Process.pid}")
+      folder.join("mathematiques").mkpath
+      folder.join("svt").mkpath
+      yield folder
+    ensure
+      @root = nil
+    end
   end
 
   test "sans dossier, il affiche son usage et ne fait rien" do
