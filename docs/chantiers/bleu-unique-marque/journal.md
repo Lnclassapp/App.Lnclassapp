@@ -12,8 +12,8 @@
 
 ## À trancher
 
-- [ ] 2026-11-13 · bleu-unique-marque · Le « logo d'origine » `lnclass/logo-lnclass.svg` est un « L » dans un rond (image intégrée) suivi du mot « Lnclass », pas le baobab ; il n'a pas de variante enseignant. Faut-il afficher ce « L » à la place du baobab ? — appliqué : le baobab reste, son fond passe en #0861E1 (logo, favicon, icônes PWA et Android élèves), le « L » et l'icône passent au même bleu sans être affichés ; autres : afficher le « L » pour tous (l'enseignant perd son baobab orange), ou le « L » pour l'élève et le baobab orange pour l'enseignant ; recommandé : garder le baobab (identité déjà installée sur les téléphones, variante enseignant existante).
-- [ ] 2026-11-13 · bleu-unique-marque · Les icônes Android sont dans le dépôt mais l'app publiée ne change qu'au prochain build signé — appliqué : ressources mises à jour, aucun build lancé ; autres : publier un build ; recommandé : l'inclure au prochain build de la coque.
+- [x] 2026-11-13 · bleu-unique-marque · Le « logo d'origine » `lnclass/logo-lnclass.svg` est un « L » dans un rond (image intégrée) suivi du mot « Lnclass », pas le baobab ; il n'a pas de variante enseignant. Faut-il afficher ce « L » à la place du baobab ? — appliqué : le baobab reste, son fond passe en #0861E1 (logo, favicon, icônes PWA et Android élèves), le « L » et l'icône passent au même bleu sans être affichés ; autres : afficher le « L » pour tous (l'enseignant perd son baobab orange), ou le « L » pour l'élève et le baobab orange pour l'enseignant ; recommandé : garder le baobab (identité déjà installée sur les téléphones, variante enseignant existante). **Tranché par le porteur le 2026-11-13 : garder le baobab.**
+- [x] 2026-11-13 · bleu-unique-marque · Les icônes Android sont dans le dépôt mais l'app publiée ne change qu'au prochain build signé — appliqué : ressources mises à jour, aucun build lancé ; autres : publier un build ; recommandé : l'inclure au prochain build de la coque. **Tranché par le porteur le 2026-11-13 : oui, au prochain build signé.**
 
 ## Retouches
 
