@@ -274,6 +274,64 @@
             ]
           },
           "pitfall": "Ne pas croire que deux vecteurs de même longueur sont égaux. Dans un carré $ABCD$ de côté 3 cm, $AB = BC = 3$ cm, mais $\\overrightarrow{AB}(3\\,;\\,0)$ et $\\overrightarrow{BC}(0\\,;\\,3)$ n'ont pas la même direction : $\\overrightarrow{AB} \\neq \\overrightarrow{BC}$. De même, $\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ d'un parallélogramme ont la même longueur et la même direction, mais des sens contraires. Vérifie toujours les trois critères.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître des vecteurs égaux dans un parallélogramme.",
+            "questions": [
+              {
+                "content": "$ABCD$ est un parallélogramme. Alors $\\overrightarrow{AD} = \\overrightarrow{BC}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $\\overrightarrow{AD}$ va de $A$ vers $D$ et $\\overrightarrow{BC}$ va de $B$ vers $C$. Étape 2 — Comparer les directions : les côtés opposés $(AD)$ et $(BC)$ sont parallèles. Étape 3 — Comparer les sens et les longueurs : en parcourant $ABCD$, on va de $A$ vers $D$ comme de $B$ vers $C$, dans le même sens, et $AD = BC$. Étape 4 — Conclure : $\\overrightarrow{AD} = \\overrightarrow{BC}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare la direction, le sens puis la longueur des deux côtés opposés."
+              },
+              {
+                "content": "$ABCD$ est un parallélogramme. Quel vecteur est égal à $\\overrightarrow{DC}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $\\overrightarrow{DC}$ va de $D$ vers $C$. Étape 2 — Comparer les directions : le côté opposé à $[DC]$ est $[AB]$, parallèle à $(DC)$. Étape 3 — Comparer les sens et les longueurs : $A \\to B$ et $D \\to C$ vont dans le même sens, et $AB = DC$. Étape 4 — Conclure : $\\overrightarrow{DC} = \\overrightarrow{AB}$. La proposition $\\overrightarrow{BA}$ a le sens contraire. La proposition $\\overrightarrow{CD}$ est l'opposé de $\\overrightarrow{DC}$. La proposition $\\overrightarrow{AD}$ a une autre direction.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{BA}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{CD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AD}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Dessine le parallélogramme et suis les côtés dans le même sens."
+              },
+              {
+                "content": "Si $\\overrightarrow{MN} = \\overrightarrow{PQ}$ et $MN = 7$ cm (valeur d'exercice), alors $PQ$ = ___ cm.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : deux vecteurs égaux $\\overrightarrow{MN}$ et $\\overrightarrow{PQ}$. Étape 2 — Rappeler : des vecteurs égaux ont même direction, même sens et même longueur. Étape 3 — Conclure : $PQ = MN = 7$ cm.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Des vecteurs égaux ont la même longueur."
+              }
+            ]
+          },
           "figure": "parallelogramme-pirogues",
           "exercise": [
             {
@@ -533,6 +591,75 @@
             ]
           },
           "pitfall": "Ne pas additionner les longueurs quand on additionne des vecteurs. Dans un triangle $ABC$ rectangle en $B$ avec $AB = 3$ et $BC = 4$, le vecteur $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$ a pour longueur $AC = 5$, et non $3 + 4 = 7$. Ne pas appliquer non plus Chasles à des vecteurs qui ne sont pas bout à bout : $\\overrightarrow{AB} + \\overrightarrow{CB}$ ne vaut pas $\\overrightarrow{AC}$.",
+          "practice": {
+            "statement": "Tu t'entraînes à simplifier une somme de vecteurs avec la relation de Chasles.",
+            "questions": [
+              {
+                "content": "Simplifie $\\overrightarrow{MN} + \\overrightarrow{NP}$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $\\overrightarrow{MN}$ va de $M$ à $N$ et $\\overrightarrow{NP}$ va de $N$ à $P$. Étape 2 — Mettre bout à bout : l'extrémité $N$ du premier est l'origine du second. Étape 3 — Appliquer Chasles : $\\overrightarrow{MN} + \\overrightarrow{NP} = \\overrightarrow{MP}$. Étape 4 — Conclure : $\\overrightarrow{MP}$. La proposition $\\overrightarrow{PM}$ est le trajet inverse.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{PM}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{MN}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{MP}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{NP}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'extrémité du premier vecteur est l'origine du second : le résultat va du départ à l'arrivée."
+              },
+              {
+                "content": "Simplifie $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CA}$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les trois vecteurs vont de $A$ à $B$, de $B$ à $C$, de $C$ à $A$. Étape 2 — Mettre bout à bout : c'est déjà le cas. Étape 3 — Appliquer Chasles : $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$, puis $\\overrightarrow{AC} + \\overrightarrow{CA} = \\overrightarrow{AA}$. Étape 4 — Conclure : on revient au point de départ, le résultat est $\\overrightarrow{0}$ et non $\\overrightarrow{AC}$.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{0}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{CB}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Où arrive-t-on quand on enchaîne les trois trajets ?"
+              },
+              {
+                "content": "$\\overrightarrow{AB} + \\overrightarrow{CB} = \\overrightarrow{AC}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $\\overrightarrow{AB}$ va de $A$ à $B$ et $\\overrightarrow{CB}$ va de $C$ à $B$. Étape 2 — Mettre bout à bout : l'extrémité $B$ du premier n'est pas l'origine $C$ du second, Chasles ne s'applique pas directement. Étape 3 — Conclure : l'égalité est fausse. La bonne relation est $\\overrightarrow{AC} + \\overrightarrow{CB} = \\overrightarrow{AB}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Vérifie si l'extrémité du premier vecteur est l'origine du second."
+              }
+            ]
+          },
           "figure": "trajet-chasles",
           "exercise": [
             {
@@ -787,6 +914,60 @@
             ]
           },
           "pitfall": "Ne pas vérifier une seule coordonnée. Pour $\\overrightarrow{u}(2\\,;\\,1)$ et $\\overrightarrow{v}(6\\,;\\,5)$, on trouve $k = 3$ avec les abscisses, mais $3 \\times 1 = 3 \\neq 5$ : les vecteurs ne sont pas colinéaires. Il faut que le même $k$ convienne aux deux coordonnées. Pense aussi au signe de $k$ : un $k$ négatif donne un sens contraire.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître des vecteurs colinéaires avec leurs coordonnées.",
+            "questions": [
+              {
+                "content": "Les vecteurs $\\overrightarrow{u}(2\\,;\\,5)$ et $\\overrightarrow{v}(6\\,;\\,y)$ sont colinéaires. Alors $y$ = ___ .",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Calculer : les coordonnées sont données. Étape 2 — Chercher $k$ : $k = \\frac{6}{2} = 3$. Étape 3 — Vérifier : l'autre coordonnée doit valoir $3 \\times 5 = 15$. Étape 4 — Conclure : $y = 15$.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Cherche le réel $k$ qui passe des abscisses de $\\overrightarrow{u}$ à celle de $\\overrightarrow{v}$."
+              },
+              {
+                "content": "Les vecteurs $\\overrightarrow{u}(4\\,;\\,-6)$ et $\\overrightarrow{v}(-2\\,;\\,3)$ sont colinéaires.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : les coordonnées sont données. Étape 2 — Chercher $k$ : $k = \\frac{-2}{4} = -\\frac{1}{2}$. Étape 3 — Vérifier : $-\\frac{1}{2} \\times (-6) = 3$, la deuxième coordonnée convient. Étape 4 — Conclure : $\\overrightarrow{v} = -\\frac{1}{2}\\,\\overrightarrow{u}$, ils sont colinéaires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le réel $k$ peut être négatif ou décimal."
+              },
+              {
+                "content": "Avec $A(1\\,;\\,1)$, $B(2\\,;\\,3)$ et $C(4\\,;\\,6)$, les points $A$, $B$, $C$ sont-ils alignés ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $\\overrightarrow{AB}(1\\,;\\,2)$ et $\\overrightarrow{AC}(3\\,;\\,5)$. Étape 2 — Chercher $k$ : avec les abscisses, $k = 3$. Étape 3 — Vérifier : $3 \\times 2 = 6 \\neq 5$. Étape 4 — Conclure : les vecteurs ne sont pas colinéaires, les points ne sont pas alignés. L'erreur tentante est de ne vérifier qu'une seule coordonnée.",
+                "answers": [
+                  {
+                    "content": "Oui, car $\\overrightarrow{AC} = 3\\,\\overrightarrow{AB}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, car les abscisses 1, 2, 4 augmentent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car $\\overrightarrow{AB}(1\\,;\\,2)$ et $\\overrightarrow{AC}(3\\,;\\,5)$ ne sont pas colinéaires",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le même $k$ doit convenir aux deux coordonnées."
+              }
+            ]
+          },
           "figure": "points-alignes",
           "exercise": [
             {
@@ -1027,6 +1208,70 @@
             ]
           },
           "pitfall": "Ne pas perdre un signe en soustrayant. Pour $A(-2\\,;\\,3)$ et $B(1\\,;\\,5)$, l'abscisse de $\\overrightarrow{AB}$ est $1 - (-2) = 3$ et non $1 - 2 = -1$. Ne pas non plus échanger l'ordre : $\\overrightarrow{BA}$ vaut $(-3\\,;\\,-2)$, l'opposé de $\\overrightarrow{AB}(3\\,;\\,2)$. Mets toujours les nombres négatifs entre parenthèses.",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer des coordonnées de vecteurs et de milieux.",
+            "questions": [
+              {
+                "content": "Avec $A(1\\,;\\,4)$ et $B(6\\,;\\,-2)$, $\\overrightarrow{AB}$ a pour coordonnées ( ___ ; ___ ).",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : $x_A = 1$, $y_A = 4$, $x_B = 6$, $y_B = -2$. Étape 2 — Choisir la formule : extrémité moins origine. Étape 3 — Calculer : $6 - 1 = 5$ et $-2 - 4 = -6$. Étape 4 — Conclure : $\\overrightarrow{AB}(5\\,;\\,-6)$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-6",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Extrémité moins origine, coordonnée par coordonnée."
+              },
+              {
+                "content": "Quel est le milieu $I$ de $[AB]$ avec $A(-3\\,;\\,2)$ et $B(5\\,;\\,6)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $x_A = -3$, $y_A = 2$, $x_B = 5$, $y_B = 6$. Étape 2 — Choisir la formule : demi-sommes. Étape 3 — Calculer : $\\frac{-3 + 5}{2} = 1$ et $\\frac{2 + 6}{2} = 4$. Étape 4 — Conclure : $I(1\\,;\\,4)$. La proposition $(4\\,;\\,2)$ est la demi-différence ; $(2\\,;\\,8)$ oublie de diviser par 2.",
+                "answers": [
+                  {
+                    "content": "$(4\\,;\\,2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(1\\,;\\,4)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(2\\,;\\,8)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(-1\\,;\\,-2)$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le milieu s'obtient avec la moyenne des abscisses et celle des ordonnées."
+              },
+              {
+                "content": "Les vecteurs $\\overrightarrow{u}(2\\,;\\,3)$ et $\\overrightarrow{v}(5\\,;\\,7)$ sont colinéaires.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : $\\overrightarrow{u}(2\\,;\\,3)$ et $\\overrightarrow{v}(5\\,;\\,7)$. Étape 2 — Choisir la formule : le déterminant $xy' - yx'$. Étape 3 — Calculer : $2 \\times 7 - 3 \\times 5 = 14 - 15 = -1$. Étape 4 — Conclure : le déterminant n'est pas nul, les vecteurs ne sont pas colinéaires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule le déterminant : il doit être nul pour que les vecteurs soient colinéaires."
+              }
+            ]
+          },
           "figure": "milieu-repere",
           "exercise": [
             {
