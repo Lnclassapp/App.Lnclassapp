@@ -5,7 +5,7 @@
   <% if @has_older %>
     <%= turbo_frame_tag "school_crm_journal_page_#{@page + 1}" do %>
       <%= link_to t(".older"), teams_school_interactions_path(@school.public_id, page: @page + 1),
-                  class: "inline-flex min-h-12 items-center text-sm font-medium text-brand hover:underline" %>
+                  class: "inline-flex min-h-12 items-center text-sm font-medium text-brand-strong hover:underline" %>
     <% end %>
   <% end %>
 <% end %>

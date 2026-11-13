@@ -2,7 +2,7 @@
 // Rôle : page « Pas de connexion », assets digérés, pages de compte déjà ouvertes (60 par clé, 30 jours) servies si le réseau échoue ; oubli de la clé (forget)
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, §4.3, menace P1, P2, P3, P6), 0082 (§4.2 amendé), 0049, 0076
 // <N> augmente à chaque modification de public/offline.html ou de public/offline.css (ADR-0082 §4.2).
-const CACHE = "lnclass-offline-v2"
+const CACHE = "lnclass-offline-v3"
 const ASSETS = "lnclass-assets-v1"
 const STATE = "lnclass-state-v1"
 const PAGES_PREFIX = "lnclass-pages-"

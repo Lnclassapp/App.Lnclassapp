@@ -28,7 +28,7 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#main h1", "Mon profil"
     assert_select "#main p", text: "Ce que Lnclass sait de vous, et ce que vous pouvez changer.", count: 0
     # CA-E9: the card is in a frame hidden under lg (the phone page is CA-E2's), with the avatar and the name alone.
-    assert_select "#student_profile > div.hidden.lg\\:block > section#profile_identity.bg-linear-to-br.from-brand-strong" do
+    assert_select "#student_profile > div.hidden.lg\\:block > section#profile_identity.bg-brand.text-on-brand" do
       assert_select "h2#profile_identity_name", "Aya Koné"
       assert_select "[role=img][aria-label='Aya Koné']"
       assert_select "p", 0

@@ -23,7 +23,7 @@
   <p id="exam-instructions" class="exam-instructions mb-4"><%= t("#{shown}.questions", count: sheet.questions.size) %></p>
   <div class="sticky top-0 z-10 flex items-center justify-between gap-3 bg-paper py-3">
     <p id="copy-counter" class="text-sm font-medium text-ink tabular-nums" aria-live="polite" data-offline-copy-target="counter"><%= t("#{shown}.counter", answered: 0, total: counted) %></p>
-    <a href="#copy-statement" class="inline-flex min-h-tap items-center gap-1.5 text-sm font-medium text-brand underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-brand">
+    <a href="#copy-statement" class="inline-flex min-h-tap items-center gap-1.5 text-sm font-medium text-brand-strong underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-brand">
       <%= ui_icon "document-text", variant: :mini, size: :sm %><%= t("#{shown}.review_statement") %>
     </a>
   </div>
@@ -73,7 +73,7 @@
     <%# Collé en bas, au-dessus de la zone sûre (UDR-0087 §3.2). %>
     <div data-pausable class="sticky bottom-0 z-10 -mx-gutter mt-6 bg-paper px-gutter pt-4 pb-safe-action min-[700px]:mx-0 min-[700px]:px-0">
       <p class="mb-3 text-sm text-mute"><%= t("offline.copy.footer") %></p>
-      <%= ui_button t("#{shown}.submit"), type: :submit, variant: :brand, size: :lg, full: true, data: { offline_copy_target: "submitButton" } %>
+      <%= ui_button t("#{shown}.submit"), type: :submit, variant: :primary, size: :lg, full: true, data: { offline_copy_target: "submitButton" } %>
       <p id="offline-copy-result-failed" role="status" hidden data-offline-copy-target="resultFailed"
          class="mt-3 rounded-card bg-warning-soft px-4 py-3 text-sm font-medium text-warning"><%= t("offline.copy.result_failed") %></p>
     </div>

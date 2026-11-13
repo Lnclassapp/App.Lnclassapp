@@ -28,7 +28,7 @@
   <p id="exam-instructions" class="exam-instructions mb-4"><%= t(".questions", count: play.questions.size) %></p>
   <div class="sticky top-0 z-10 flex items-center justify-between gap-3 bg-paper py-3">
     <p id="copy-counter" class="text-sm font-medium text-ink tabular-nums" aria-live="polite" data-assessment--copy-target="counter"><%= t(".counter", answered: 0, total: counted) %></p>
-    <a href="#copy-statement" class="inline-flex min-h-tap items-center gap-1.5 text-sm font-medium text-brand underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-brand">
+    <a href="#copy-statement" class="inline-flex min-h-tap items-center gap-1.5 text-sm font-medium text-brand-strong underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-brand">
       <%= ui_icon "document-text", variant: :mini, size: :sm %><%= t(".review_statement") %>
     </a>
   </div>
@@ -121,13 +121,13 @@
     <%# Collé en bas, au-dessus de la zone sûre (UDR-0087 §3.2). %>
     <div class="sticky bottom-0 z-10 -mx-gutter mt-6 bg-paper px-gutter pt-4 pb-safe-action min-[700px]:mx-0 min-[700px]:px-0">
       <p class="mb-3 text-sm text-mute"><%= t(".lock_warning") %></p>
-      <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, data: { turbo_submits_with: t(".submitting") } %>
+      <%= ui_button t(".submit"), type: :submit, variant: :primary, size: :lg, full: true, data: { turbo_submits_with: t(".submitting") } %>
     </div>
 
     <%= ui_modal id: "copy-confirm", title: t(".confirm_title"), size: :sm, placement: :phone_sheet, described_by: "copy-missing" do |modal| %>
       <p id="copy-missing" class="text-ink" data-assessment--copy-target="missing"></p>
       <% modal.footer do %>
-        <%= ui_button t(".confirm"), type: :submit, variant: :brand, class: "w-full sm:w-auto", form: "copy-form",
+        <%= ui_button t(".confirm"), type: :submit, variant: :primary, class: "w-full sm:w-auto", form: "copy-form",
                                      data: { action: "assessment--copy#confirm" } %>
         <%= ui_button t(".keep_going"), variant: :secondary, class: "w-full sm:w-auto", data: { action: "modal#close" } %>
       <% end %>

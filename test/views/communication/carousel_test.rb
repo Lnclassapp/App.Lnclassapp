@@ -70,7 +70,7 @@ module Communication
 
       assert_select "div.hidden.justify-center.gap-1\\.5.pt-2[aria-hidden=true][data-communication--carousel-target=pager]" do
         assert_select "span[data-communication--carousel-target=dot]", 2
-        assert_select "span:first-child.h-1\\.5.w-4.rounded-full.bg-brand-strong"
+        assert_select "span:first-child.h-1\\.5.w-4.rounded-full.bg-brand"
         assert_select "span:last-child.h-1\\.5.w-1\\.5.rounded-full.bg-line"
       end
     end

@@ -76,6 +76,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`badge-liste-moyenne`](badge-liste-moyenne/memo.md) | livré | bugfix | 2026-10-29 | Liste de la classe : le badge dit qu'il vient de la moyenne |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | feature | 2026-09-28 | Barème des classes modifiable par l'équipe |
 | [`base-de-lecons`](base-de-lecons/memo.md) | en cours | refactoring | 2026-11-06 | Base de leçons : seules les leçons au format complet actuel |
+| [`bleu-unique-marque`](bleu-unique-marque/memo.md) | livré | feature | 2026-11-13 | Bleu unique de marque |
 | [`blog`](blog/memo.md) | planifié | feature | 2026-10-02 | Blog de Lnclass |
 | [`blog-toast-instable`](blog-toast-instable/memo.md) | preuve | bugfix | 2026-10-27 | Le toast « Article créé » arrive parfois après la fin de l'attente du test |
 | [`boucle-pedagogique`](boucle-pedagogique/memo.md) | livré | feature | 2026-09-25 | Boucle pédagogique (V1) |

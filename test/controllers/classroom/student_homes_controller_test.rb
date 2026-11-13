@@ -55,7 +55,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal %w[offline_queue student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     # The band is the shell's, above the column, and the page title is not repeated.
-    assert_select "main > div.lg\\:hidden > header.student-band.bg-brand.text-band-ink"
+    assert_select "main > div.lg\\:hidden > header.student-band.bg-brand.text-on-brand"
     assert_select "header.sticky.max-lg\\:hidden"
     assert_select "[class*='fixed bottom-0'], nav.fixed", 0
     assert_no_match(/À faire ensuite|Paiement/, response.body)
@@ -354,7 +354,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a#subject_svt span.bg-warning-dot[aria-hidden=true]", 1
     assert_select "a#subject_svt .sr-only", text: tl("subjects.late")
     assert_select "a#subject_mathematiques span.bg-warning-dot", 0
-    assert_select "a#subject_mathematiques .sr-only", 0
+    assert_select "a#subject_mathematiques .sr-only", text: "Mathématiques"
   end
 
   test "a late exercise already done brings no dot" do
@@ -367,7 +367,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a#subject_svt span.bg-warning-dot", 0
   end
 
-  test "the grid: a round per subject of the student's level, in the charter order, the full names, then « Inviter » to WhatsApp" do
+  test "the grid: a round per subject of the student's level, in the charter order, the short names (full name for screen readers), then « Inviter » to WhatsApp" do
     create_course(material: create_material(name: "Physique-Chimie"), level: @classroom.level)
     create_course(material: create_material(name: "Histoire-Géographie", category: "literature"), level: @classroom.level)
     maths = create_material(name: "Mathématiques")
@@ -384,8 +384,12 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 5, ids.size
     assert_select "nav#student_subjects[aria-label=?]", tl("subjects.label") do
       assert_select "ul.grid-cols-4"
-      assert_select "a#subject_physique-chimie[href=?]", courses_path(material: "physique-chimie"), text: "Physique-Chimie"
-      assert_select "a#subject_histoire-geographie", text: "Histoire-Géographie"
+      assert_select "a#subject_physique-chimie[href=?]", courses_path(material: "physique-chimie"), text: "PC Physique-Chimie"
+      assert_select "a#subject_physique-chimie span[aria-hidden=true]", text: "PC"
+      assert_select "a#subject_physique-chimie .sr-only", text: "Physique-Chimie"
+      assert_select "a#subject_histoire-geographie span[aria-hidden=true]", text: "HG"
+      assert_select "a#subject_mathematiques span[aria-hidden=true]", text: "Maths"
+      assert_select "a#subject_svt", text: "SVT"
       assert_select "a#subject_svt .bg-brand-soft.size-14 img[src*='subjects/svt']"
       assert_select "a#subject_invite[target=_blank][rel~=noopener][href^='https://wa.me/?text=']", text: tl("subjects.invite")
       assert_select "a#subject_invite[aria-label=?]", tl("invite_teacher.action_label")

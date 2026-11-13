@@ -26,7 +26,7 @@ class School::SchoolLevelsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "turbo-frame#picker_levels.block.transition-opacity[aria-live=polite]" do
       assert_select ".sr-only", text: I18n.t("#{PICKER}.levels_found", count: 2)
-      assert_select "div.flex.flex-wrap label.h-10.rounded-full.has-checked\\:bg-brand-strong.has-checked\\:text-white", 2
+      assert_select "div.flex.flex-wrap label.h-10.rounded-full.has-checked\\:bg-brand.has-checked\\:text-on-brand", 2
       assert_equal [ "6ème", "3ème" ], css_select("label").map { it.text.strip }
       assert_select "label input[type=radio][name='student_registration[level_slug]'][required]" \
                     "[data-action='change->classroom--class-picker#loadClassrooms']", 2

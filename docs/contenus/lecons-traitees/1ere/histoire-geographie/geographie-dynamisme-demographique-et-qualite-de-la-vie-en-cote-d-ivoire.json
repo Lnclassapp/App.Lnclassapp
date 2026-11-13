@@ -270,6 +270,103 @@
             ]
           },
           "pitfall": "L'erreur la plus fréquente est de **s'arrêter à la croissance naturelle** et d'oublier le solde migratoire. Contre-exemple : un village de 1 000 habitants a 40 naissances et 10 décès, donc +30 personnes. Mais 50 personnes partent vers la ville et 10 arrivent : le solde migratoire est $10 - 50 = -40$. La population passe de $+30$ à $-10$ : elle **diminue**. Autre piège : un taux de 30 pour 1 000 n'est pas 30 %, mais 3 %.",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer des taux et à passer de la croissance naturelle à la croissance totale d'une population, avec les quatre étapes de la fiche. Les chiffres sont des valeurs d'exercice.",
+            "questions": [
+              {
+                "content": "Un village imaginé compte 8 000 habitants et 160 décès en une année (valeurs d'exercice). Quel est son taux de mortalité, en décès pour 1 000 habitants ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Relever : population 8 000 ; décès 160. Étape 2 — Calculer le taux : $\\frac{160}{8\\,000} = 0{,}02$, puis $0{,}02 \\times 1\\,000 = 20$. Le taux de mortalité est de 20 pour 1 000. Répondre 160 donne le nombre de décès sans le ramener à 1 000 habitants.",
+                "hint": "Divise le nombre de décès par la population, puis multiplie par 1 000.",
+                "tolerance": 0,
+                "unit": "pour mille"
+              },
+              {
+                "content": "Un pays imaginé a un taux de natalité de 20 pour 1 000 et un taux de mortalité de 25 pour 1 000. Sa croissance naturelle est positive.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Relever : natalité 20 ; mortalité 25. Étape 3 — Calculer la croissance naturelle : natalité moins mortalité, soit $20 - 25 = -5$ pour 1 000. Elle est négative : il y a plus de décès que de naissances. Répondre Vrai, c'est lire seulement le nombre le plus grand sans faire la soustraction.",
+                "hint": "Soustrais la mortalité de la natalité et regarde le signe du résultat."
+              },
+              {
+                "content": "Un village imaginé a une croissance naturelle de +60 personnes en un an. Il reçoit 20 arrivées et connaît 45 départs (valeurs d'exercice). Quelle est sa croissance totale ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "+60 personnes",
+                    "correct": false
+                  },
+                  {
+                    "content": "+85 personnes",
+                    "correct": false
+                  },
+                  {
+                    "content": "+35 personnes",
+                    "correct": true
+                  },
+                  {
+                    "content": "-25 personnes",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Relever : croissance naturelle +60 ; arrivées 20 ; départs 45. Étape 4 — Calculer le solde migratoire : $20 - 45 = -25$. Croissance totale : $60 + (-25) = +35$ personnes. La réponse +60 est le piège : elle s'arrête à la croissance naturelle et oublie le solde migratoire.",
+                "hint": "Calcule d'abord le solde migratoire (arrivées moins départs), puis ajoute-le à la croissance naturelle."
+              },
+              {
+                "content": "Le solde migratoire est égal aux ___ moins les ___.",
+                "question_type": "select",
+                "answers": [
+                  {
+                    "content": "arrivées",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "naissances",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "décès",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "départs",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "décès",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "naissances",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "explanation": "Étape 4 — Calculer le solde migratoire : arrivées moins départs. Il peut être négatif. Les naissances et les décès servent à la croissance naturelle, pas au solde migratoire.",
+                "hint": "Le solde migratoire concerne les mouvements de personnes qui entrent et sortent, pas les naissances."
+              }
+            ]
+          },
           "figure": "bilan-population",
           "exercise": [
             {
@@ -533,6 +630,85 @@
             ]
           },
           "pitfall": "L'erreur la plus fréquente est de croire que **le revenu seul mesure la qualité de la vie**. Contre-exemple : deux familles ont le même revenu. L'une habite à 10 minutes d'un centre de santé et a l'eau au robinet. L'autre marche 2 heures pour atteindre le dispensaire et porte l'eau d'un puits. Leur qualité de vie est très différente. De même, un taux de scolarisation de 80 % ne dit rien de la santé. L'IDH combine **trois** dimensions, et il ne mesure ni la sécurité ni l'environnement.",
+          "practice": {
+            "statement": "Tu t'entraînes à choisir un indicateur de la qualité de la vie, à le calculer et à dire ce qu'il mesure, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un village imaginé, 500 enfants ont l'âge d'aller à l'école primaire et 350 y sont scolarisés (valeurs d'exercice). Quel est le taux de scolarisation, en pourcentage ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "70",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : l'éducation. Étape 2 — Relever : 500 enfants d'âge scolaire ; 350 scolarisés. Étape 3 — Calculer : $\\frac{350}{500} \\times 100 = 70$. Le taux de scolarisation est de 70 %. Répondre 150 vient de la soustraction $500 - 350$ : ce sont les enfants non scolarisés.",
+                "hint": "Divise les enfants scolarisés par les enfants d'âge scolaire, puis multiplie par 100.",
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Parmi ces dimensions, laquelle l'indice de développement humain (IDH) ne mesure-t-il pas ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "La santé",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'éducation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le niveau de vie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sécurité",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier les dimensions : l'IDH combine la santé (espérance de vie), l'éducation (durée de scolarisation) et le niveau de vie (revenu par habitant). Étape 4 — Interpréter : il ne mesure ni la sécurité ni l'environnement. Choisir le niveau de vie serait une erreur : le revenu par habitant en fait partie.",
+                "hint": "L'IDH a trois dimensions. Cherche celle qui n'est pas parmi elles."
+              },
+              {
+                "content": "Un pays dont l'IDH est de 0,8 a un niveau plus élevé qu'un pays dont l'IDH est de 0,5.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 4 — Interpréter : l'IDH est compris entre 0 et 1, et plus il est proche de 1, plus le niveau est élevé. 0,8 est plus proche de 1 que 0,5. Répondre Faux, c'est croire qu'un petit nombre est meilleur.",
+                "hint": "Compare chaque valeur à 1 : plus elle en est proche, plus le niveau est élevé."
+              },
+              {
+                "content": "Relie chaque donnée à la dimension de la qualité de la vie qu'elle mesure.",
+                "question_type": "matching",
+                "answers": [
+                  {
+                    "content": "Espérance de vie à la naissance",
+                    "match": "Santé"
+                  },
+                  {
+                    "content": "Durée de scolarisation",
+                    "match": "Éducation"
+                  },
+                  {
+                    "content": "Revenu par habitant",
+                    "match": "Niveau de vie"
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier la dimension : l'espérance de vie renvoie à la santé, la durée de scolarisation à l'éducation, le revenu par habitant au niveau de vie. Ce sont les trois dimensions de l'IDH.",
+                "hint": "L'IDH regroupe trois dimensions : santé, éducation, niveau de vie."
+              }
+            ]
+          },
           "figure": "composantes-idh",
           "exercise": [
             {
@@ -821,6 +997,85 @@
             ]
           },
           "pitfall": "L'erreur la plus fréquente est de dire qu'**une population nombreuse suffit à expliquer une mauvaise qualité de la vie**. Ce qui compte, c'est le rapport entre la population et les services. Contre-exemple : une école de 240 élèves avec 6 salles a 40 élèves par salle. Une autre école de 300 élèves avec 10 salles n'a que 30 élèves par salle : elle a plus d'élèves, mais de meilleures conditions. Compare toujours la population **aux** services.",
+          "practice": {
+            "statement": "Tu t'entraînes à relier la population aux services (écoles, santé) et à en tirer une conclusion nuancée, avec les quatre étapes de la fiche. Les chiffres sont des valeurs d'exercice.",
+            "questions": [
+              {
+                "content": "Une école de village imaginé compte 420 élèves et 12 salles de classe (valeurs d'exercice). Combien d'élèves y a-t-il par salle ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "35",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Présenter : un relevé chiffré d'une école. Étape 2 — Comparer : élèves et salles. Calcul : $\\frac{420}{12} = 35$. Il y a 35 élèves par salle. Répondre 12 ou 420 donne une des deux données, pas leur rapport.",
+                "hint": "Divise le nombre d'élèves par le nombre de salles.",
+                "tolerance": 0,
+                "unit": "élèves"
+              },
+              {
+                "content": "Dans un village imaginé, les services augmentent plus vite que la population. La qualité de la vie par habitant baisse forcément.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 3 — Expliquer le lien : la qualité de la vie par habitant peut baisser quand les services augmentent moins vite que la population. Si les services augmentent plus vite, elle tend plutôt à s'améliorer. Ce qui compte, c'est le rapport entre la population et les services.",
+                "hint": "Compare la vitesse de croissance de la population et celle des services."
+              },
+              {
+                "content": "Remets dans l'ordre cet enchaînement dans un village imaginé.",
+                "question_type": "ordering",
+                "answers": [
+                  {
+                    "content": "La population du village augmente"
+                  },
+                  {
+                    "content": "Le centre de santé garde le même nombre de lits"
+                  },
+                  {
+                    "content": "L'attente des malades s'allonge"
+                  },
+                  {
+                    "content": "La qualité des soins par habitant baisse"
+                  }
+                ],
+                "explanation": "Étape 3 — Expliquer le lien : la population augmente, les services restent au même niveau, donc l'attente s'allonge et la qualité des soins par habitant baisse. Étape 4 — Conclure : on peut proposer d'agrandir le centre de santé.",
+                "hint": "Pars de ce qui change (la population), puis de ce qui ne change pas (le service), puis des conséquences."
+              },
+              {
+                "content": "Tu étudies un relevé chiffré de l'école d'un village. Que fais-tu en premier ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "Je présente le document : sa nature, sa source, sa date et son sujet",
+                    "correct": true
+                  },
+                  {
+                    "content": "Je conclus en proposant une mesure",
+                    "correct": false
+                  },
+                  {
+                    "content": "J'explique le lien entre population et services",
+                    "correct": false
+                  },
+                  {
+                    "content": "Je compare les données entre deux années",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Présenter le document : nature, source, date, sujet. Ensuite on compare les données, on explique le lien, puis on conclut en nuançant et en proposant une mesure. Conclure en premier est l'erreur tentante : on ne peut pas conclure avant d'avoir lu le document.",
+                "hint": "La méthode se déroule dans l'ordre : présenter, comparer, expliquer, conclure."
+              }
+            ]
+          },
           "figure": "lien-population-services",
           "exercise": [
             {

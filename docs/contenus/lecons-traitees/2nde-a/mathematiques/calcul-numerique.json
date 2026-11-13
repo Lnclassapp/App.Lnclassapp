@@ -53,6 +53,89 @@
             ]
           },
           "pitfall": "Ne jamais additionner les numérateurs **et** les dénominateurs. Contre-exemple : $\\dfrac{1}{2} + \\dfrac{1}{3} = \\dfrac{2}{5}$ serait faux, car $\\dfrac{1}{2} = \\dfrac{3}{6}$ et $\\dfrac{1}{3} = \\dfrac{2}{6}$ donnent $\\dfrac{5}{6}$. On n'additionne que des parts de même taille : le dénominateur commun reste inchangé.",
+          "practice": {
+            "statement": "Tu t'entraînes à additionner, multiplier et diviser des fractions, puis à simplifier le résultat.",
+            "questions": [
+              {
+                "content": "Calcule $\\dfrac{1}{6} + \\dfrac{1}{3}$.",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{2}{9}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{1}{9}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{3}$",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Transformer : le dénominateur commun est 6, et $\\dfrac{1}{3} = \\dfrac{2}{6}$. Étape 2 — Calculer : $\\dfrac{1}{6} + \\dfrac{2}{6} = \\dfrac{3}{6}$. Étape 3 — Simplifier : on divise le haut et le bas par 3, ce qui donne $\\dfrac{1}{2}$. Le résultat $\\dfrac{2}{9}$ vient de l'addition des numérateurs et des dénominateurs : c'est l'erreur tentante.",
+                "hint": "Mets les deux fractions sur le même dénominateur avant d'additionner, puis simplifie."
+              },
+              {
+                "content": "Calcule $\\dfrac{3}{4} \\times \\dfrac{2}{9}$.",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{1}{6}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{5}{13}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{27}{8}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{6}{13}$",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Transformer : c'est un produit, rien à changer. Étape 2 — Calculer : $\\dfrac{3 \\times 2}{4 \\times 9} = \\dfrac{6}{36}$. Étape 3 — Simplifier : on divise le haut et le bas par 6, ce qui donne $\\dfrac{1}{6}$. La proposition $\\dfrac{27}{8}$ est un quotient (on a multiplié par l'inverse sans raison).",
+                "hint": "Pour un produit, on multiplie les numérateurs entre eux et les dénominateurs entre eux."
+              },
+              {
+                "content": "Vrai ou faux : $\\dfrac{3}{4} \\div \\dfrac{3}{8} = \\dfrac{1}{2}$.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Transformer : diviser par $\\dfrac{3}{8}$ revient à multiplier par son inverse $\\dfrac{8}{3}$. Étape 2 — Calculer : $\\dfrac{3}{4} \\times \\dfrac{8}{3} = \\dfrac{24}{12}$. Étape 3 — Simplifier : $\\dfrac{24}{12} = 2$. L'affirmation est donc fausse ; $\\dfrac{1}{2}$ s'obtient en inversant la mauvaise fraction.",
+                "hint": "Remplace la division par une multiplication par l'inverse de la deuxième fraction."
+              },
+              {
+                "content": "Un fût contient 12 litres d'eau. On en utilise $\\dfrac{2}{3}$. Combien de litres utilise-t-on ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Transformer : prendre $\\dfrac{2}{3}$ de 12, c'est multiplier 12 par $\\dfrac{2}{3}$. Étape 2 — Calculer : $12 \\times \\dfrac{2}{3} = \\dfrac{24}{3}$. Étape 3 — Simplifier : $\\dfrac{24}{3} = 8$. On utilise donc 8 litres ; 4 litres serait ce qui reste.",
+                "tolerance": 0,
+                "unit": "L",
+                "hint": "Prendre une fraction d'une quantité, c'est multiplier la quantité par cette fraction."
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -300,6 +383,76 @@
             ]
           },
           "pitfall": "Dans un produit de puissances de même base, on **additionne** les exposants et on garde la base. Contre-exemple : $2^2 \\times 2^3 = 4 \\times 8 = 32 = 2^5$, et non $4^5 = 1\\,024$ ni $2^6 = 64$. On ne multiplie les exposants que pour une puissance de puissance, comme $(2^2)^3 = 2^6$.",
+          "practice": {
+            "statement": "Tu t'entraînes à appliquer les règles des exposants à un produit, un quotient ou une puissance de puissance.",
+            "questions": [
+              {
+                "content": "Quel est le résultat de $7^4 \\times 7^2$ ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "$7^{6}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$7^{8}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$49^{6}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7^{2}$",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : la base 7 est commune et l'opération est un produit. Étape 2 — Appliquer : pour un produit, on additionne les exposants, $7^4 \\times 7^2 = 7^{4+2}$. Étape 3 — Calculer : l'exposant est 6, donc $7^6$. L'erreur $7^8$ multiplie les exposants, et $49^6$ multiplie les bases : la base reste 7.",
+                "hint": "Quand on multiplie deux puissances de la même base, que fait-on des exposants ?"
+              },
+              {
+                "content": "Vrai ou faux : $\\dfrac{4^5}{4^3} = 4^2$.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : la base 4 est commune et l'opération est un quotient. Étape 2 — Appliquer : pour un quotient, on soustrait les exposants, $\\dfrac{4^5}{4^3} = 4^{5-3}$. Étape 3 — Calculer : $4^{5-3} = 4^2$. L'affirmation est vraie ; l'erreur tentante est de diviser les exposants.",
+                "hint": "Pour un quotient de puissances de même base, on soustrait les exposants."
+              },
+              {
+                "content": "Calcule $\\dfrac{3^5}{3^2}$.",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "27",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : la base 3 est commune et l'opération est un quotient. Étape 2 — Appliquer : $\\dfrac{3^5}{3^2} = 3^{5-2} = 3^3$. Étape 3 — Calculer : $3^3 = 3 \\times 3 \\times 3 = 27$.",
+                "tolerance": 0,
+                "hint": "Soustrais les exposants, puis calcule la puissance obtenue."
+              },
+              {
+                "content": "Complète : $(5^2)^3 = 5^{?}$ avec ? égal à ___ (écris seulement l'exposant).",
+                "question_type": "fill_blank",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : c'est une puissance de puissance. Étape 2 — Appliquer : on multiplie les exposants, $(5^2)^3 = 5^{2 \\times 3}$. Étape 3 — Calculer : $2 \\times 3 = 6$, l'exposant est 6 (et non 5, somme des exposants).",
+                "hint": "Pour une puissance de puissance, on multiplie les exposants."
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -546,6 +699,76 @@
             ]
           },
           "pitfall": "Ne pas écrire $\\sqrt{a + b} = \\sqrt{a} + \\sqrt{b}$. Contre-exemple : $\\sqrt{9 + 16} = \\sqrt{25} = 5$, mais $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$. La racine ne se sépare que sur un **produit**, jamais sur une somme.",
+          "practice": {
+            "statement": "Tu t'entraînes à simplifier des racines carrées en repérant un carré parfait.",
+            "questions": [
+              {
+                "content": "Simplifie $\\sqrt{32}$.",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "$16\\sqrt{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8\\sqrt{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4\\sqrt{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2\\sqrt{16}$",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Décomposer : $32 = 16 \\times 2$ et 16 est un carré parfait. Étape 2 — Séparer : $\\sqrt{32} = \\sqrt{16} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{16} = 4$, donc $\\sqrt{32} = 4\\sqrt{2}$. L'écriture $16\\sqrt{2}$ oublie de prendre la racine de 16.",
+                "hint": "Cherche le plus grand carré parfait qui divise 32."
+              },
+              {
+                "content": "Calcule $\\sqrt{9 \\times 16}$.",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Décomposer : le produit est déjà écrit avec deux carrés parfaits. Étape 2 — Séparer : $\\sqrt{9 \\times 16} = \\sqrt{9} \\times \\sqrt{16}$. Étape 3 — Calculer : $3 \\times 4 = 12$.",
+                "tolerance": 0,
+                "hint": "La racine d'un produit est le produit des racines."
+              },
+              {
+                "content": "Vrai ou faux : $\\sqrt{25 - 9} = \\sqrt{25} - \\sqrt{9}$.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Décomposer : calculons d'abord sous la racine, $25 - 9 = 16$. Étape 2 — Séparer : $\\sqrt{16} = 4$. Étape 3 — Comparer : $\\sqrt{25} - \\sqrt{9} = 5 - 3 = 2$, et $4 \\neq 2$. La règle de séparation ne vaut que pour un produit ou un quotient, jamais pour une somme ou une différence.",
+                "hint": "Calcule les deux côtés séparément et compare."
+              },
+              {
+                "content": "Complète : $\\sqrt{48} = ___\\sqrt{3}$ (écris le nombre entier qui manque).",
+                "question_type": "fill_blank",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Décomposer : $48 = 16 \\times 3$ et 16 est un carré parfait. Étape 2 — Séparer : $\\sqrt{48} = \\sqrt{16} \\times \\sqrt{3}$. Étape 3 — Calculer : $\\sqrt{16} = 4$, donc $\\sqrt{48} = 4\\sqrt{3}$.",
+                "hint": "Écris 48 comme le produit d'un carré parfait et de 3."
+              }
+            ]
+          },
           "figure": "droite-racine-de-2",
           "exercise": [
             {
@@ -795,6 +1018,77 @@
             ]
           },
           "pitfall": "Deux évolutions successives ne s'annulent pas. Contre-exemple : un prix de 100 F baisse de 20 % (il vaut 80 F), puis monte de 20 % : $80 \\times 1{,}2 = 96$ F et non 100 F. Les pourcentages se calculent chaque fois sur la valeur du moment : on multiplie les coefficients, on n'additionne pas les taux.",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une part, une valeur finale ou un taux en pourcentage.",
+            "questions": [
+              {
+                "content": "Un commerçant a 20 000 F. Il en place 30 % dans un compte d'épargne. Quelle somme place-t-il ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "6000",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : la quantité de départ est 20 000 F, le pourcentage est 30 %, on cherche la part. Étape 2 — Traduire : 30 % s'écrit $\\dfrac{30}{100} = 0{,}3$. Étape 3 — Calculer : $20\\,000 \\times 0{,}3 = 6\\,000$. Étape 4 — Conclure : il place 6 000 F.",
+                "tolerance": 0,
+                "unit": "F",
+                "hint": "Prendre 30 % d'une quantité, c'est la multiplier par 0,3."
+              },
+              {
+                "content": "Un prix baisse de 15 %. Par quel nombre faut-il le multiplier ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "0,15",
+                    "correct": false
+                  },
+                  {
+                    "content": "1,15",
+                    "correct": false
+                  },
+                  {
+                    "content": "15",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,85",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : c'est une baisse de 15 %, on cherche le coefficient multiplicateur. Étape 2 — Traduire : une baisse de $t$ % se traduit par $1 - \\dfrac{t}{100}$, soit $1 - 0{,}15$. Étape 3 — Calculer : $1 - 0{,}15 = 0{,}85$. Le nombre 1,15 correspond à une hausse de 15 %, et 0,15 donne seulement le montant de la baisse.",
+                "hint": "Une baisse se traduit par 1 moins le taux écrit en décimal."
+              },
+              {
+                "content": "Un sac de ciment coûte 5 000 F. Son prix augmente de 10 %. Quel est le nouveau prix ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "5500",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : le prix de départ est 5 000 F, la hausse est de 10 %, on cherche le prix final. Étape 2 — Traduire : le coefficient est $1 + \\dfrac{10}{100} = 1{,}1$. Étape 3 — Calculer : $5\\,000 \\times 1{,}1 = 5\\,500$. Étape 4 — Conclure : le nouveau prix est 5 500 F.",
+                "tolerance": 0,
+                "unit": "F",
+                "hint": "Une hausse de 10 % multiplie le prix par 1,1."
+              },
+              {
+                "content": "Dans une classe de 36 élèves, 9 élèves vont à l'école à pied. Quel pourcentage de la classe cela représente-t-il ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : la partie est 9, le total est 36, on cherche un taux. Étape 2 — Traduire : le taux vaut $\\dfrac{9}{36} \\times 100$ %. Étape 3 — Calculer : $\\dfrac{9}{36} = \\dfrac{1}{4}$ et $\\dfrac{1}{4} \\times 100 = 25$. Étape 4 — Conclure : cela représente 25 % de la classe.",
+                "tolerance": 0,
+                "unit": "%",
+                "hint": "Divise la partie par le total, puis multiplie par 100."
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {

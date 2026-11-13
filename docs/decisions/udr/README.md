@@ -179,6 +179,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0168](./0168-pipeline-et-relances.md) | Pipeline et relances | Accepté | 2026-11-04 | [0128](../adr/0128-contexte-crm-suivi-des-ecoles.md) | Comment l'équipe voit son pipeline et ses relances du jour sans nouvelle entrée dans la barre de navigation |
 | [0169](./0169-acces-beta-sans-abonnement.md) | Bêta sans invitation à s'abonner | Accepté | 2026-11-12 | [0132](../adr/0132-acces-beta-reglage-unique.md) | un bêta-testeur ne doit voir ni compte à rebours ni appel à l'abonnement |
 | [0170](./0170-hors-connexion-bandeau-copie-provisoire-et-file.md) | Hors connexion : bandeau, note provisoire et copies à envoyer | Accepté | 2026-11-12 | 0133-hors-connexion-pages-ouvertes-et-copies-synchronisees | Hors ligne, l'élève doit savoir ce qu'il lit (une page gardée), que sa note est provisoire et où en sont ses copies, sans écran nouveau à apprendre. |
+| [0171](./0171-bleu-unique-de-marque.md) | Bleu unique de marque #0861E1 | Accepté | 2026-11-13 | — | Le logo, les boutons et le bandeau portaient trois bleus différents (#00a0ff, #0070b3, #1e6bae) ; le bleu roi #0861E1 devient le seul, en clair comme en sombre, texte blanc sur fond bleu |
 <!-- index:end -->
 
 ---

@@ -27,9 +27,9 @@ class PwaOfflineTest < ApplicationSystemTestCase
       assert_offline_page_without(student)
       # Hors connexion (ADR-0133) : la page de secours, des assets et la clé d'appareil ; aucune page sans « Lnclass-Offline: keep ».
       caches = cached_paths
-      assert_equal OFFLINE_FILES, caches["lnclass-offline-v2"]
+      assert_equal OFFLINE_FILES, caches["lnclass-offline-v3"]
       assert_not_includes caches.select { |name, _| name.start_with?("lnclass-pages-") }.values.flatten, home
-      assert_empty caches.keys - [ "lnclass-offline-v2", "lnclass-assets-v1", "lnclass-state-v1" ] - caches.keys.grep(/\Alnclass-pages-/)
+      assert_empty caches.keys - [ "lnclass-offline-v3", "lnclass-assets-v1", "lnclass-state-v1" ] - caches.keys.grep(/\Alnclass-pages-/)
     end
 
     click_link "Réessayer"
