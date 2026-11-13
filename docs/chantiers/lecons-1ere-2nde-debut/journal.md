@@ -59,6 +59,12 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **À retenir** : pour une vague de leçons, rendre toutes les leçons touchées par lots de 5 (`LECONS=<5 chemins>`), pas seulement le tirage de `bin/ci-quiet`.
 - **1ère, rendu complet après #573** : les 63 leçons de 1ère rendues d'un coup (copie hors dépôt du test d'affichage sans la limite de 5, 9 min). Un défaut, le même en A1 et A2 : Généralités sur les fonctions, feuille « Étudier le sens de variation et les extremums », 432 px à 390 px, à cause d'une réponse portant $f(b) - f(a) = b^2 - a^2 = (b - a)(b + a)$ d'une pièce. Corrigé comme en 2nde : formules en ligne de 40 caractères ou plus coupées dans ce fichier, de 50 ou plus dans les autres leçons de Mathématiques et de Physique-Chimie de 1ère (14 fichiers) ; les 14 rendues vertes.
 
+## Correctif « Je m'entraîne » (2nde)
+
+- **Constat** : aucune des 90 notions des 27 fichiers de 2nde n'avait le bloc « Je m'entraîne » (`practice`, UDR-0147) : la fiche de révision n'y proposait aucun exercice. Cause : les consignes de réécriture v1 → v3 ne l'exigeaient pas, et `docs/contenus/prompt-redaction.md` ne le citait pas. Même défaut en 1ère Philosophie (14 notions × 4 séries) et Histoire-Géographie (12 notions), corrigés dans une PR à part.
+- **Correctif** : un `practice` de 3 ou 4 questions corrigées automatiquement, d'au moins 2 types, sur chaque notion (le même pour A et C en Français et Physique-Chimie) ; rien d'autre ne change dans les fichiers (vérifié par script contre `Develop`). `prompt-redaction.md` rend le bloc obligatoire, avec une ligne de la liste de contrôle.
+- **Rendu** : les 27 leçons de 2nde rendues à 390 px (copie du test d'affichage sans la limite de 5).
+- **À faire vérifier par un enseignant** : SVT 2nde C (Knop et carences, sol inondé, mots attendus des textes à trous) ; Mathématiques 2nde A (distracteur $2\sqrt{16}$) ; Français (lettre formelle, marge de 10 %) ; Physique-Chimie (Fe³⁺, argon (K)2(L)8(M)8, propane) ; Histoire-Géographie (distracteurs sur les devises, Grand-Bassam 2012).
 ## Correctif « Je m'entraîne » (1ère)
 
 - **Constat** : en 1ère, la Philosophie (14 notions, recopiées dans les 4 séries) et l'Histoire-Géographie (12 notions) n'avaient pas le bloc « Je m'entraîne » (`practice`, UDR-0147). Les autres matières de 1ère l'avaient déjà. La règle qui le rend obligatoire est ajoutée à `prompt-redaction.md` par la PR 2nde.

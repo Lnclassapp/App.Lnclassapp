@@ -180,6 +180,70 @@
             ]
           },
           "pitfall": "Ne pas placer le symétrique « à vue d'œil » ni oublier de doubler les coordonnées du centre. Avec $I(1\\,;\\,3)$ et $A(2\\,;\\,-1)$, le point $(-1\\,;\\,4)$ (qui vaut $I - A$) n'a pas $I$ pour milieu : son milieu avec $A$ est $(0,5\\,;\\,1,5)$. Ne pas confondre non plus avec la symétrie axiale : une symétrie centrale n'a pas d'axe et change les deux coordonnées. Vérifie toujours que le centre est le milieu de $[MM']$.",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver le symétrique d'un point par rapport à un point.",
+            "questions": [
+              {
+                "content": "Avec $I(2\\,;\\,1)$ et $M(5\\,;\\,4)$, le symétrique de $M$ par rapport à $I$ est $M'$( ___ ; ___ ).",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : $I(2\\,;\\,1)$ et $M(5\\,;\\,4)$. Étape 2 — Traduire : $I$ est le milieu de $[MM']$. Étape 3 — Calculer : $x' = 2 \\times 2 - 5 = -1$ et $y' = 2 \\times 1 - 4 = -2$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(2\\,;\\,1)$. Conclusion : $M'(-1\\,;\\,-2)$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Utilise $x' = 2x_I - x$ et $y' = 2y_I - y$."
+              },
+              {
+                "content": "Quel est le symétrique de $A(-2\\,;\\,3)$ par rapport à $I(1\\,;\\,1)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $I(1\\,;\\,1)$ et $A(-2\\,;\\,3)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$. Étape 3 — Calculer : $x' = 2 \\times 1 - (-2) = 4$ et $y' = 2 \\times 1 - 3 = -1$. Étape 4 — Vérifier : le milieu de $[AA']$ est $(1\\,;\\,1)$. La proposition $(-0,5\\,;\\,2)$ est le milieu de $[AI]$ : on a oublié de doubler.",
+                "answers": [
+                  {
+                    "content": "$(4\\,;\\,-1)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(-0,5\\,;\\,2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(3\\,;\\,-2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(2\\,;\\,-1)$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le point $I$ est le milieu de $[AA']$."
+              },
+              {
+                "content": "Le symétrique de $O(0\\,;\\,0)$ par rapport à $I(3\\,;\\,5)$ est le point $(6\\,;\\,10)$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $I(3\\,;\\,5)$ et $O(0\\,;\\,0)$. Étape 2 — Traduire : $I$ est le milieu de $[OO']$. Étape 3 — Calculer : $x' = 2 \\times 3 - 0 = 6$ et $y' = 2 \\times 5 - 0 = 10$. Étape 4 — Vérifier : le milieu de $[OO']$ est $(3\\,;\\,5)$, donc l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Double les coordonnées de $I$, puis retire celles de $O$."
+              }
+            ]
+          },
           "figure": "symetrie-centrale-pagne",
           "exercise": [
             {
@@ -409,6 +473,70 @@
             ]
           },
           "pitfall": "Ne pas confondre les deux axes : par rapport à l'axe des ordonnées, c'est l'abscisse qui change de signe, pas l'ordonnée. Ne pas changer le signe des deux coordonnées non plus : $(x\\,;\\,y) \\to (-x\\,;\\,-y)$ est la symétrie centrale de centre $O$. Pour $A(3\\,;\\,1)$, on obtient $(-3\\,;\\,1)$ et non $(-3\\,;\\,-1)$ ni $(3\\,;\\,-1)$.",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver le symétrique d'un point par rapport à un axe du repère.",
+            "questions": [
+              {
+                "content": "Quel est le symétrique de $B(-4\\,;\\,5)$ par rapport à l'axe des abscisses $(Ox)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : l'axe est $(Ox)$. Étape 2 — Traduire : l'abscisse est conservée. Étape 3 — Calculer : l'ordonnée change de signe, $5$ devient $-5$. Étape 4 — Vérifier : le milieu de $[BB']$ est $(-4\\,;\\,0)$, sur $(Ox)$. La proposition $(4\\,;\\,5)$ est le symétrique par rapport à $(Oy)$ ; $(4\\,;\\,-5)$ change les deux signes, c'est la symétrie par rapport à l'origine.",
+                "answers": [
+                  {
+                    "content": "$(4\\,;\\,5)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(4\\,;\\,-5)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(-4\\,;\\,-5)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(5\\,;\\,-4)$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pour $(Ox)$, quelle coordonnée change de signe ?"
+              },
+              {
+                "content": "Le symétrique de $C(6\\,;\\,-3)$ par rapport à l'axe des ordonnées $(Oy)$ est $C'$( ___ ; ___ ).",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : l'axe est $(Oy)$. Étape 2 — Traduire : l'ordonnée est conservée. Étape 3 — Calculer : l'abscisse change de signe, $6$ devient $-6$, et l'ordonnée reste $-3$. Étape 4 — Vérifier : le milieu de $[CC']$ est $(0\\,;\\,-3)$, sur $(Oy)$. Conclusion : $C'(-6\\,;\\,-3)$.",
+                "answers": [
+                  {
+                    "content": "-6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Pour $(Oy)$, l'ordonnée est conservée."
+              },
+              {
+                "content": "Le symétrique d'un point de l'axe $(Ox)$ par rapport à $(Ox)$ est ce point lui-même.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : l'axe est $(Ox)$. Étape 2 — Traduire : un point de l'axe a pour ordonnée $0$. Étape 3 — Calculer : l'ordonnée change de signe, mais $-0 = 0$. Étape 4 — Conclure : le point ne bouge pas, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quelle est l'ordonnée d'un point de l'axe $(Ox)$ ?"
+              }
+            ]
+          },
           "figure": "symetrie-axiale-pli",
           "exercise": [
             {
@@ -638,6 +766,70 @@
             ]
           },
           "pitfall": "Ne pas inverser le sens du décalage : l'image vérifie $\\overrightarrow{MM'} = \\overrightarrow{u}$, on part de $M$ et on avance de $\\overrightarrow{u}$. Écrire $x' = x - a$ revient à utiliser $-\\overrightarrow{u}$. Avec $\\overrightarrow{u}(2\\,;\\,-1)$ et $A(0\\,;\\,3)$, le point $(-2\\,;\\,4)$ est l'image par la translation de vecteur $-\\overrightarrow{u}$, et non $A'$. Ne confonds pas non plus le vecteur $\\overrightarrow{u}$ avec le point image : ses coordonnées sont un déplacement.",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver l'image d'un point par une translation.",
+            "questions": [
+              {
+                "content": "Avec $M(-2\\,;\\,4)$ et $\\overrightarrow{u}(5\\,;\\,-3)$, l'image de $M$ par la translation de vecteur $\\overrightarrow{u}$ est $M'$( ___ ; ___ ).",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : $M(-2\\,;\\,4)$ et $\\overrightarrow{u}(5\\,;\\,-3)$. Étape 2 — Traduire : $\\overrightarrow{MM'} = \\overrightarrow{u}$. Étape 3 — Calculer : $x' = -2 + 5 = 3$ et $y' = 4 + (-3) = 1$. Étape 4 — Vérifier : $\\overrightarrow{MM'}(5\\,;\\,-3)$. Conclusion : $M'(3\\,;\\,1)$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Ajoute les coordonnées du vecteur à celles du point."
+              },
+              {
+                "content": "$A'(6\\,;\\,1)$ est l'image de $A$ par la translation de vecteur $\\overrightarrow{u}(2\\,;\\,-4)$. Quelles sont les coordonnées de $A$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $A'(6\\,;\\,1)$ et $\\overrightarrow{u}(2\\,;\\,-4)$. Étape 2 — Traduire : $\\overrightarrow{AA'} = \\overrightarrow{u}$, donc $6 = x + 2$ et $1 = y - 4$. Étape 3 — Calculer : $x = 6 - 2 = 4$ et $y = 1 + 4 = 5$. Étape 4 — Vérifier : $\\overrightarrow{AA'}(2\\,;\\,-4)$. La proposition $(8\\,;\\,-3)$ ajoute le vecteur à $A'$ au lieu de le retirer.",
+                "answers": [
+                  {
+                    "content": "$(4\\,;\\,5)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(8\\,;\\,-3)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(4\\,;\\,-3)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(-4\\,;\\,-5)$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pour revenir à $A$, retire le vecteur à $A'$."
+              },
+              {
+                "content": "Si $M'$ est l'image de $M$ par la translation de vecteur $\\overrightarrow{u}$, alors $\\overrightarrow{MM'} = \\overrightarrow{u}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : la définition de la translation. Étape 2 — Traduire : $M'$ est l'image de $M$ exactement quand $\\overrightarrow{MM'} = \\overrightarrow{u}$. Étape 3 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Relis la définition de l'image par une translation."
+              }
+            ]
+          },
           "figure": "translation-motif",
           "exercise": [
             {

@@ -132,6 +132,63 @@
             ]
           },
           "pitfall": "Ne dis jamais « il bouge » ou « il est immobile » sans préciser par rapport à quoi. Contre-exemple : le passager assis est immobile par rapport au gbaka, mais en mouvement par rapport à la marchande au bord de la route. Les deux phrases sont vraies en même temps, parce que les référentiels sont différents.",
+          "practice": {
+            "statement": "Tu t'entraînes à choisir un référentiel et à dire si un objet est en mouvement ou immobile.",
+            "questions": [
+              {
+                "content": "Un gbaka passe devant un cocotier planté au bord de la route. Dans le référentiel du gbaka, le cocotier est…",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'objet est le cocotier, le référentiel est le gbaka. Étape 2 — Comparer : vu du gbaka, la position du cocotier change à chaque instant. Étape 3 — Conclure : le cocotier est en mouvement par rapport au gbaka. Dire « immobile parce qu'un arbre ne bouge pas » oublie que le référentiel, ici le gbaka, change tout.",
+                "hint": "Place-toi dans le gbaka et regarde si la position du cocotier change.",
+                "answers": [
+                  {
+                    "content": "en mouvement",
+                    "correct": true
+                  },
+                  {
+                    "content": "immobile, parce qu'un arbre ne peut pas bouger",
+                    "correct": false
+                  },
+                  {
+                    "content": "immobile, parce que le gbaka roule",
+                    "correct": false
+                  },
+                  {
+                    "content": "ni en mouvement ni immobile : on ne peut pas le dire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sac posé sur le plancher d'un bus qui roule est immobile par rapport au bus.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'objet est le sac, le référentiel est le bus. Étape 2 — Comparer : le sac se déplace avec le bus, sa position par rapport au bus ne change pas. Étape 3 — Conclure : il est immobile par rapport au bus (mais en mouvement par rapport à la route). Croire qu'il bouge parce que le bus roule oublie de préciser le référentiel.",
+                "hint": "Demande-toi par rapport à quoi on décrit le sac.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un point de l'aile d'un ventilateur qui tourne, observé depuis le socle, a une trajectoire ___ (un adjectif).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le point tourne autour de l'axe, le référentiel est le socle. Étape 2 — Comparer : ses positions successives forment un cercle. Étape 3 — Conclure : la trajectoire est circulaire.",
+                "hint": "La trajectoire est la ligne formée par les positions successives du point.",
+                "answers": [
+                  {
+                    "content": "circulaire",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -396,6 +453,77 @@
             ]
           },
           "pitfall": "Ne divise jamais une distance par une durée sans avoir converti. Contre-exemple : pour 1,5 km en 10 min, écrire $\\dfrac{1{,}5}{10} = 0{,}15$ ne donne ni des m/s ni des km/h. Le bon résultat est $2{,}5$ m/s, soit $9$ km/h. Et pour passer de km/h à m/s, on divise par 3,6 : $72\\ \\text{km/h} = 20\\ \\text{m/s}$, pas $259{,}2$.",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une vitesse moyenne, une distance et à convertir des unités.",
+            "questions": [
+              {
+                "content": "Un coureur parcourt 900 m en 300 s. Quelle est sa vitesse moyenne, en m/s ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : d = 900 m et t = 300 s. Étape 2 — Convertir : déjà en m et en s. Étape 3 — Formule : v = d / t. Étape 4 — Calculer : v = 900 / 300 = 3 m/s.",
+                "tolerance": 0,
+                "unit": "m/s",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les unités sont déjà cohérentes : divise la distance par la durée."
+              },
+              {
+                "content": "Un car roule à la vitesse moyenne de 80 km/h pendant 45 min. Quelle distance parcourt-il, en kilomètres ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : v = 80 km/h et t = 45 min. Étape 2 — Convertir : t = 45 min = 0,75 h, pour avoir des km et des h. Étape 3 — Formule : d = v × t. Étape 4 — Calculer : d = 80 × 0,75 = 60 km. Calculer 80 × 45 sans convertir donne 3 600, un nombre sans sens ici.",
+                "tolerance": 0,
+                "unit": "km",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ],
+                "hint": "Convertis les minutes en heures avant de multiplier."
+              },
+              {
+                "content": "Un élève parcourt 1,2 km en 4 min. Quelle est sa vitesse moyenne, en m/s ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : d = 1,2 km et t = 4 min. Étape 2 — Convertir : d = 1 200 m et t = 4 × 60 = 240 s. Étape 3 — Formule : v = d / t. Étape 4 — Calculer : v = 1 200 / 240 = 5 m/s.",
+                "tolerance": 0,
+                "unit": "m/s",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "hint": "1 km = 1 000 m et 1 min = 60 s."
+              },
+              {
+                "content": "Un taxi roule à 54 km/h. Sa vitesse, exprimée en m/s, est…",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on passe de km/h à m/s. Étape 2 — Règle : on divise par 3,6. Étape 3 — Calculer : 54 / 3,6 = 15 m/s. Multiplier par 3,6 donne 194,4 : c'est l'erreur tentante, car pour aller de m/s vers km/h on multiplie.",
+                "hint": "Pour passer de km/h à m/s, on divise.",
+                "answers": [
+                  {
+                    "content": "15 m/s",
+                    "correct": true
+                  },
+                  {
+                    "content": "194,4 m/s",
+                    "correct": false
+                  },
+                  {
+                    "content": "50,4 m/s",
+                    "correct": false
+                  },
+                  {
+                    "content": "1,5 m/s",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -626,6 +754,79 @@
             ]
           },
           "pitfall": "Uniforme ne veut pas dire « en ligne droite ». Contre-exemple : un cheval de manège qui garde une vitesse de valeur 2 m/s a un mouvement uniforme, mais sa trajectoire est un cercle. Inversement, une voiture qui démarre sur une route droite est en mouvement rectiligne, mais sa vitesse change : il n'est pas uniforme. Pose deux questions : quelle trajectoire ? la valeur de la vitesse change-t-elle ?",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un mouvement uniforme, rectiligne ou circulaire.",
+            "questions": [
+              {
+                "content": "Sur une route droite, un vélo parcourt 3 m pendant la 1re seconde, 6 m pendant la 2e et 9 m pendant la 3e. Son mouvement est…",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever la trajectoire : route droite, donc rectiligne. Étape 2 — Relever les distances : 3 m, 6 m, 9 m en trois durées égales de 1 s. Étape 3 — Comparer : elles ne sont pas égales, la vitesse change. Étape 4 — Conclure : rectiligne non uniforme. Dire « uniforme » parce que la trajectoire est droite confond uniforme et rectiligne.",
+                "hint": "Compare les trois distances parcourues pendant des durées égales.",
+                "answers": [
+                  {
+                    "content": "rectiligne non uniforme",
+                    "correct": true
+                  },
+                  {
+                    "content": "rectiligne uniforme",
+                    "correct": false
+                  },
+                  {
+                    "content": "circulaire uniforme",
+                    "correct": false
+                  },
+                  {
+                    "content": "circulaire non uniforme",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un scooter est en mouvement rectiligne uniforme à la vitesse de 8 m/s. Quelle distance parcourt-il en 30 s, en mètres ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : v = 8 m/s et t = 30 s. Étape 2 — Convertir : déjà en m/s et en s. Étape 3 — Formule : le mouvement est uniforme, donc d = v × t. Étape 4 — Calculer : d = 8 × 30 = 240 m.",
+                "tolerance": 0,
+                "unit": "m",
+                "answers": [
+                  {
+                    "content": "240",
+                    "correct": true
+                  }
+                ],
+                "hint": "Dans un mouvement uniforme, d = v × t."
+              },
+              {
+                "content": "Un point du bout d'une pale de ventilateur, dont la vitesse garde la même valeur, a un mouvement circulaire uniforme.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever la trajectoire : le point tourne, c'est un cercle. Étape 2 — Relever la vitesse : sa valeur est constante. Étape 3 — Conclure : le mouvement est circulaire uniforme. La direction change, mais « uniforme » ne concerne que la valeur de la vitesse.",
+                "hint": "Pour « uniforme », seule la valeur de la vitesse compte.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une piste circulaire a un rayon de 10 m. Un enfant fait un tour complet. Quelle distance parcourt-il, en mètres ? Prends $\\pi \\approx 3{,}14$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : R = 10 m. Étape 2 — Formule : un tour mesure $2\\pi R$. Étape 3 — Calculer : 2 × 3,14 × 10 = 62,8 m.",
+                "tolerance": 0,
+                "unit": "m",
+                "answers": [
+                  {
+                    "content": "62,8",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un tour mesure $2\\pi R$."
+              }
+            ]
+          },
           "figure": "piste-circulaire",
           "exercise": [
             {

@@ -126,6 +126,10 @@ Dans toutes les matières, la méthode commence par un **verbe d'action à l'inf
 
 **Exactement deux** par notion (une liste de 2), de **5 questions au moins** (30 au plus) chacun. Le premier va du plus simple au plus fin : reconnaître la notion, appliquer la méthode dans des cas variés (un savoir-faire par question), puis une question qui piège sur l'erreur de `pitfall`. Le second a **6 questions** d'au moins 4 types différents, au même niveau, un titre descriptif, un énoncé « Dans cet exercice, tu … » et un indice (`hint`). Chaque correction refait la méthode de la fiche en citant ses étapes, puis nomme l'erreur derrière chaque mauvaise proposition. `exercise_type` : `fixation` pour les deux.
 
+### « Je m'entraîne » par notion (`notions[i].practice`) : obligatoire
+
+Le 5e bloc de la fiche de révision (UDR-0147), joué et corrigé dans la fiche, sans trace. Chaque notion porte `"practice": { "statement": "Tu t'entraînes à …", "questions": [ … ] }`, placé après `pitfall` : **3 ou 4 questions** d'**au moins 2 types**, toutes corrigées automatiquement (jamais `written` ni `notebook`), chacune avec une correction en étapes et un indice (`hint`). Application directe de La méthode, plus facile que les deux exercices, avec d'autres valeurs que l'exemple corrigé. Sans ce bloc, la fiche de révision n'a aucun exercice.
+
 ### Quatre problèmes de synthèse (`exercises`)
 
 **Exactement quatre**, de **5 questions au moins** chacun, au style d'une interrogation, d'un devoir ou d'un examen (BEPC en 3ème) : un énoncé de situation (ou un texte, un document, selon la matière), des questions qui s'enchaînent et combinent plusieurs notions de la leçon. Les deux premiers sont de niveau interrogation, le troisième de niveau devoir, le quatrième de niveau BEPC (ou bac au 2nd cycle). `exercise_type` : `fixation` pour les deux premiers, `evaluation` pour les deux derniers.
@@ -325,6 +329,7 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
 ## Contrôle final (avant de rendre)
 
 - [ ] Chaque notion a ses 4 blocs ; `method` a 2 à 8 étapes ; `example.steps` a **autant d'étapes** que `method`, et l'étape *n* applique l'étape *n*.
+- [ ] Chaque notion a son `practice` (« Je m'entraîne ») de 3 ou 4 questions corrigées automatiquement, de 2 types au moins.
 - [ ] 2 exercices par notion (3 sont refusés), le second de 6 questions de 4 types au moins ; exactement 4 problèmes, de 5 questions au moins chacun ; 4 sujets de 4 exercices de 5 ou 6 questions.
 - [ ] Chaque question a une correction de 20 à 2 000 caractères ; dans l'exercice d'une notion, elle reprend les étapes et les mots de La méthode ; dans un problème, elle donne la méthode détaillée, réutilisable en interrogation.
 - [ ] Chaque question respecte la règle de son type (propositions, bonnes propositions, `___`, paires, étapes) ; chaque proposition fausse est plausible.
