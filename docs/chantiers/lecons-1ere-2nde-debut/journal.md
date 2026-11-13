@@ -52,3 +52,8 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **SVT 2nde C** : composition de la solution de Knop donnée de mémoire ; hypotonique, hypertonique, isotonique écartés ; « chlorose » employé.
 - **Histoire-Géographie 2nde** : aucune périodisation (Antiquité, Moyen Âge) faute de bornes sûres ; dates réelles citées : 1893, 1914, 1945, 20 septembre 1960 (ONU), 2012 (Grand-Bassam à l'UNESCO) ; documents d'archive des exercices fictifs.
 - **Français 2nde** : adjuvant et opposant gardés (le v1 les marquait « à faire valider ») ; une question de sujet porte sur un retour en arrière ; 4e notion « lettre personnelle et lettre formelle » (leçon 2), à retirer si hors programme ; fonctions du langage non traitées ; résumé au quart, marge de 10 % et décompte des mots repris du modèle de 3ème.
+
+## Correctif après le train #571
+
+- **Débordement à 390 px** : en Mathématiques 2nde A (Calcul littéral), une réponse d'ordonnancement portait une formule d'une seule pièce de 72 caractères (développement d'un produit) ; la feuille à remplir faisait 538 px. La preuve de #570 ne l'a pas vu : le test d'affichage ne rend que 5 leçons tirées au hasard parmi les changées (`Selection::MAX`), et ce fichier n'était pas tiré. Correctif : les formules en ligne de 50 caractères ou plus des Mathématiques et de la Physique-Chimie de 2nde sont coupées en plusieurs `$…$` aux signes « = », « + », « − » de premier niveau (27 formules, 3 fichiers, corrections comprises) ; les 6 leçons de Mathématiques de 2nde rendues une à une, vertes.
+- **À retenir** : pour une vague de leçons, rendre toutes les leçons touchées par lots de 5 (`LECONS=<5 chemins>`), pas seulement le tirage de `bin/ci-quiet`.
