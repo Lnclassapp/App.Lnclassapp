@@ -248,9 +248,11 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
     fill(classroom("3ème 1"), students: 2, assignments: 1, handed: [ 1 ])
     cache = ActiveSupport::Cache::MemoryStore.new
     # The cache counts its 5 minutes from the write, at the end of the first read: the clock is frozen so that this read,
-    # however slow on a loaded machine, writes its entry at read_at (chantier tests-instables-cache-blog).
-    freeze_time
-    read_at = Time.current
+    # however slow on a loaded machine, writes its entry at read_at (chantier tests-instables-cache-blog). The key holds the
+    # day (ADR-0065), so read_at is noon of the current day: a run at 23:56 would cross midnight at 4 min 59 s and recompute
+    # (chantier tests-instables-cache-direction).
+    read_at = Time.current.noon
+    travel_to(read_at)
     home(cache:)
 
     assert_equal 0, count_queries { home(cache:) }
