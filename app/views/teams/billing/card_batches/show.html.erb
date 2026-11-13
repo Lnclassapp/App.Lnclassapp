@@ -4,7 +4,7 @@
 <% page_title t(".title") %>
 <h1 class="sr-only"><%= t(".title") %></h1>
 <div data-controller="print" class="mb-6 flex flex-wrap items-center gap-3 print:hidden">
-  <button type="button" data-action="print#print" class="inline-flex min-h-tap items-center gap-2 rounded-ln bg-brand px-5 font-medium text-white">
+  <button type="button" data-action="print#print" class="inline-flex min-h-tap items-center gap-2 rounded-ln bg-brand px-5 font-medium text-on-brand">
     <%= ui_icon "printer", size: :sm %><%= t(".print") %>
   </button>
   <%= link_to t(".back"), teams_billing_relay_points_path, class: "text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>

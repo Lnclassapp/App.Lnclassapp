@@ -12,7 +12,7 @@
   <div id="sponsor_share_actions" class="mt-5 flex flex-wrap gap-3" data-controller="identity--share"
        data-identity--share-url-value="<%= teacher_referral_shares_path %>" data-identity--share-link-value="<%= link %>"
        data-identity--share-text-value="<%= message %>" data-action="clipboard:copied->identity--share#recordCopy">
-    <%= ui_button t("identity.referrals.invite.whatsapp"), href: whatsapp_share_url(message), variant: :brand, icon: "chat-bubble-left-right",
+    <%= ui_button t("identity.referrals.invite.whatsapp"), href: whatsapp_share_url(message), variant: :primary, icon: "chat-bubble-left-right",
                   target: "_blank", rel: "noopener",
                   data: { action: "identity--share#record", "identity--share-channel-param": "whatsapp" } %>
     <%= ui_button t("identity.referrals.invite.sms"), href: sms_share_url(message), variant: :secondary, icon: "device-phone-mobile",

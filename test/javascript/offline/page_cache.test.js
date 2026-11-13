@@ -87,7 +87,7 @@ const pagesOf = (key) => [ ...(caches.stores.get(`lnclass-pages-${key}`)?.keys()
 
 beforeEach(async () => {
   caches = createCaches()
-  const cache = await caches.open("lnclass-offline-v2")
+  const cache = await caches.open("lnclass-offline-v3")
   await cache.put(ORIGIN + "/offline.html", new Response("<html>Pas de connexion</html>", { headers: { "Content-Type": "text/html" } }))
   boot()
 })
@@ -273,7 +273,7 @@ test("l'activation purge les anciennes versions et garde les caches de pages", a
   const names = await caches.keys()
   assert.ok(!names.includes("lnclass-offline-v1"))
   assert.ok(!names.includes("lnclass-assets-v0"))
-  assert.ok(names.includes("lnclass-offline-v2"))
+  assert.ok(names.includes("lnclass-offline-v3"))
   assert.ok(names.includes(`lnclass-pages-${KEY}`))
 })
 
@@ -283,7 +283,7 @@ test("l'installation range la page « Pas de connexion » et ses deux fichiers",
   const { settled } = dispatch("install")
   await settled()
 
-  assert.deepEqual([ ...fresh.stores.get("lnclass-offline-v2").keys() ].sort(), [ ORIGIN + "/icon-192.png", ORIGIN + "/offline.css", ORIGIN + "/offline.html" ])
+  assert.deepEqual([ ...fresh.stores.get("lnclass-offline-v3").keys() ].sort(), [ ORIGIN + "/icon-192.png", ORIGIN + "/offline.css", ORIGIN + "/offline.html" ])
 })
 
 const forget = async (key = KEY) => { const { settled } = dispatch("message", { data: { type: "lnclass:forget", key } }); await settled() }

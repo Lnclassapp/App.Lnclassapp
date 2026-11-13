@@ -28,15 +28,15 @@
   <div class="flex flex-1 flex-col lg:mt-8 lg:flex-row lg:gap-10">
     <%# UDR §3.5 bis : le panneau d'ordinateur, le même aux trois étapes ; le contrôleur Stimulus y marque l'étape en cours. Il remplace
         la carte de bienvenue, la barre en trois segments et « Déjà un compte ? » du téléphone, cachés dès lg. %>
-    <section id="signup-panel" aria-label="Lnclass" class="hidden min-h-135 flex-col rounded-card bg-brand-strong p-8 text-white lg:flex lg:w-90 lg:shrink-0">
+    <section id="signup-panel" aria-label="Lnclass" class="hidden min-h-135 flex-col rounded-card bg-brand p-8 text-on-brand lg:flex lg:w-90 lg:shrink-0">
       <h1 class="text-lg font-medium"><%= t(".welcome") %></h1>
-      <p class="mt-2 text-meta text-brand-soft"><%= t(".panel_hint") %></p>
+      <p class="mt-2 text-meta text-on-brand"><%= t(".panel_hint") %></p>
       <ol id="signup-panel-steps" aria-label="<%= t(".panel_steps") %>" class="mt-10 space-y-4">
         <% { 1 => :classroom, 2 => :you, 3 => :security }.each do |number, key| %>
           <li data-step="<%= number %>" data-classroom--signup-steps-target="panelStep" <%= tag.attributes("aria-current": ("step" if number == start)) %>>
             <div class="flex items-center gap-3">
               <span data-mark aria-hidden="true"
-                    class="grid size-7 shrink-0 place-items-center rounded-full text-meta <%= number > start ? "border border-white" : "bg-white text-brand-strong" %>"><%= number < start ? "✓" : number %></span>
+                    class="grid size-7 shrink-0 place-items-center rounded-full text-meta <%= number > start ? "border border-on-brand" : "bg-white text-brand-strong" %>"><%= number < start ? "✓" : number %></span>
               <span data-label class="<%= number == start ? "text-base font-medium" : "text-sm" %>"><%= t("classroom.student_registrations.form.#{key}") %></span>
               <span data-done class="sr-only" <%= "hidden" unless number < start %>><%= t(".panel_step_done") %></span>
             </div>
@@ -49,7 +49,7 @@
                 </p>
                 <%= link_to new_student_registration_path, id: "panel-other-classroom",
                             data: ({ action: "click->classroom--signup-steps#restart" } unless @preview),
-                            class: "inline-flex min-h-tap items-center underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-white" do %>
+                            class: "inline-flex min-h-tap items-center underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-on-brand" do %>
                   <%= t("classroom.student_registrations.form.other_classroom") %><span aria-hidden="true">&nbsp;›</span>
                 <% end %>
               </div>
@@ -60,7 +60,7 @@
       <p class="mt-auto pt-8 text-sm">
         <%= t(".have_account") %>
         <%= link_to t(".sign_in"), new_session_path,
-                    class: "inline-flex min-h-tap items-center underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-white" %>
+                    class: "inline-flex min-h-tap items-center underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-on-brand" %>
       </p>
     </section>
 
@@ -76,13 +76,13 @@
       <ol id="signup-progress" class="mb-4 flex gap-1.5 lg:hidden" aria-hidden="true">
         <% 3.times do |index| %>
           <li data-classroom--signup-steps-target="segment"
-              class="h-1.5 flex-1 rounded-full <%= index < start ? "bg-brand-strong" : "bg-line" %>"></li>
+              class="h-1.5 flex-1 rounded-full <%= index < start ? "bg-brand" : "bg-line" %>"></li>
         <% end %>
       </ol>
       <p id="signup-live" class="sr-only" aria-live="polite" data-classroom--signup-steps-target="live"></p>
 
       <div id="signup-welcome" class="mb-4 space-y-3 lg:hidden" data-classroom--signup-steps-target="welcome" <%= "hidden" if start > floor %>>
-        <section aria-label="Lnclass" class="rounded-card bg-brand-strong p-5 text-white">
+        <section aria-label="Lnclass" class="rounded-card bg-brand p-5 text-on-brand">
           <p class="text-lg font-medium"><%= t(".welcome") %></p>
           <p class="mt-2 text-sm leading-relaxed"><%= t(".welcome_hint") %></p>
         </section>

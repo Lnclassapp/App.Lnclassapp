@@ -163,7 +163,7 @@ export default class extends Controller {
     this.counterTarget.textContent = this.counterValue.replace("%{n}", this.current)
     this.segmentTargets.forEach((segment, index) => {
       const reached = index < this.current
-      segment.classList.toggle("bg-brand-strong", reached)
+      segment.classList.toggle("bg-brand", reached)
       segment.classList.toggle("bg-line", !reached)
     })
     this.backTarget.hidden = this.current <= this.firstStep
@@ -185,7 +185,7 @@ export default class extends Controller {
     mark.classList.toggle("bg-white", done || active)
     mark.classList.toggle("text-brand-strong", done || active)
     mark.classList.toggle("border", !done && !active)
-    mark.classList.toggle("border-white", !done && !active)
+    mark.classList.toggle("border-on-brand", !done && !active)
 
     const label = item.querySelector("[data-label]")
     label.classList.toggle("text-base", active)

@@ -45,7 +45,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     get new_session_path
 
     assert_select "body > div.grid[class~='lg:grid-cols-2']" do
-      assert_select "> aside#auth-welcome-panel.hidden[class~='lg:flex'][class~='from-brand-strong']", text: "Heureux de vous revoir"
+      assert_select "> aside#auth-welcome-panel.hidden[class~='lg:flex'][class~='bg-brand']", text: "Heureux de vous revoir"
       assert_select "> div > #auth-help.justify-end [aria-controls=help-sheet]", text: "Besoin d'aide ?"
       assert_select "> div > main[class~='lg:justify-center']" do
         assert_select "> div.max-w-110 > section#auth-welcome-card[class~='lg:hidden']", text: "Heureux de vous revoir"

@@ -39,7 +39,7 @@
                         id: "classroom_roster_badge_#{key || 'all'}", "aria-current": ("true" if current), data: { turbo_action: "advance" },
                         class: class_names("inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm",
                                            "focus-visible:outline-2 focus-visible:outline-brand",
-                                           current ? "border-brand-strong bg-brand-strong text-white" : "border-line bg-white text-ink hover:bg-mist") do %>
+                                           current ? "border-brand bg-brand text-on-brand" : "border-line bg-white text-ink hover:bg-mist") do %>
               <% if key && key != Queries::Classroom::ClassroomOverviewQuery::NO_BADGE %>
                 <%= comprehension_trophy(current ? "text-white" : comprehension_badge_class(key.to_sym, 1)) %>
               <% end %>

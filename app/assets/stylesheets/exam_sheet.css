@@ -39,6 +39,7 @@
   --color-brand-soft: rgba(0, 0, 0, 0.08);
   --color-brand-strong: #1a1a1a;
   --color-band-ink: #ffffff;
+  --color-on-brand: #ffffff;
   --color-teacher: #1a1a1a;
   --color-school: #1a1a1a;
   --color-team: #1a1a1a;
@@ -178,18 +179,16 @@
   border-color: #1a1a1a;
 }
 
-/* Boutons : carrés, noirs sur blanc. Le bouton « brand » est texte `ink` sur fond `brand`, deux fois #1a1a1a ici. */
+/* Boutons : carrés, noirs sur blanc. Le bouton principal (fond `brand`, texte `on-brand`) devient #1a1a1a ici. */
 .exam-sheet .ui-button {
   border-radius: 0;
 }
 
-.exam-sheet .ui-button-brand,
 .exam-sheet .ui-button-primary {
   background: #1a1a1a;
   color: #ffffff;
 }
 
-.exam-sheet .ui-button-brand:hover,
 .exam-sheet .ui-button-primary:hover {
   background: #333333;
 }

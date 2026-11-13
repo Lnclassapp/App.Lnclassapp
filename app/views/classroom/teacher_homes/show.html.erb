@@ -36,7 +36,7 @@
             <% end %>
             <span class="flex gap-1.5" aria-hidden="true">
               <% (@home.classrooms.size + 1).times do |index| %>
-                <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+                <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand" : "h-1.5 w-1.5 rounded-full bg-line" %>"
                       data-communication--carousel-target="dot"></span>
               <% end %>
             </span>

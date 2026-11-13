@@ -93,7 +93,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   test "CA-C1: the gender stays two pills that are real radios, 44 px, the phone and the secret code fields are kept" do
     get new_student_registration_path
 
-    assert_select "#student-registration-gender label.h-11[class~='has-checked:bg-brand-strong']", count: 2 do |pills|
+    assert_select "#student-registration-gender label.h-11[class~='has-checked:bg-brand']", count: 2 do |pills|
       assert_equal [ I18n.t("genders.male"), I18n.t("genders.female") ].sort, pills.map { it.text.squish }.sort
     end
     assert_select "#student-registration-gender label > input[type=radio][name='student_registration[gender]'][required]", count: 2
@@ -132,7 +132,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   test "CA-C8: the panel carries the welcome, the three steps in a list with the current one marked, and « Déjà un compte ? »" do
     get new_student_registration_path
 
-    assert_select "#signup-panel.hidden.lg\\:flex.bg-brand-strong.text-white" do
+    assert_select "#signup-panel.hidden.lg\\:flex.bg-brand.text-on-brand" do
       assert_select "h1", text: I18n.t("#{PAGE}.welcome")
       assert_select "ol#signup-panel-steps li[data-step]", 3
       assert_select "ol#signup-panel-steps li[aria-current=step]", 1

@@ -191,7 +191,7 @@
             <li>
               <%= link_to courses_path(material: one.slug), id: "lesson_material_#{one.slug}", "aria-current": ("page" if active), title: (one.name if short),
                           class: class_names("inline-flex min-h-tap items-center gap-2 rounded-full border py-1 pr-4 pl-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
-                                             "border-brand-strong bg-brand-strong text-white" => active,
+                                             "border-brand bg-brand text-on-brand" => active,
                                              "border-line-strong bg-white text-ink transition hover:bg-mist" => !active) do %>
                 <span class="<%= class_names("grid size-8 shrink-0 place-items-center rounded-full", active ? "bg-white" : illustration.tint) %>">
                   <%= image_tag illustration.path, alt: "", class: "size-5", "aria-hidden": true %>

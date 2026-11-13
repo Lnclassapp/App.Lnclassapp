@@ -701,7 +701,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
                                               .each_with_index do |(key, label), index|
         assert_select "label:nth-child(#{index + 1})" do
           assert_select "input.sr-only[type=radio][name='announcement[theme]'][value=#{key}][data-action='change->communication--theme-preview#preview']"
-          assert_select "span.grid.size-10.rounded-full.bg-brand-soft.ring-1[data-announcement-theme=#{key}] span.size-3.rounded-full.bg-brand-strong"
+          assert_select "span.grid.size-10.rounded-full.bg-brand-soft.ring-1[data-announcement-theme=#{key}] span.size-3.rounded-full.bg-brand"
           assert_select "span", text: label
         end
       end

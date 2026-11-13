@@ -12,7 +12,7 @@
         <li class="flex flex-col gap-1 py-3 first:pt-0 last:pb-0">
           <span class="font-medium text-ink"><%= relay_point.name %></span>
           <span class="text-sm text-mute"><%= relay_point.location %></span>
-          <%= link_to "tel:#{relay_point.phone}", class: "inline-flex min-h-tap items-center gap-2 whitespace-nowrap text-brand" do %>
+          <%= link_to "tel:#{relay_point.phone}", class: "inline-flex min-h-tap items-center gap-2 whitespace-nowrap text-brand-strong" do %>
             <%= ui_icon "phone", size: :sm %><%= relay_point.phone %>
           <% end %>
         </li>
