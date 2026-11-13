@@ -13,13 +13,15 @@ class BrandBlueTest < ActiveSupport::TestCase
   BRAND_FILES = %w[
     app/assets/stylesheets/application.tailwind.css config/application.rb
     public/400.html public/404.html public/422.html public/500.html public/offline.html public/offline.css
-    app/assets/images/lnclass/icon.svg app/assets/images/lnclass/logo-lnclass.svg
+    app/assets/images/lnclass/icon.svg app/assets/images/lnclass/logo-lnclass.svg app/assets/images/subjects/generique.svg
     android/shell/src/main/res/values/colors.xml android/student/src/main/res/values/colors.xml
     android/student/src/main/res/values/ic_launcher_background.xml
   ].freeze
+  # Une chaîne littérale, entre guillemets, apostrophes ou accents graves.
+  STRING = /"([^"]*)"|'([^']*)'|`([^`]*)`/
   SOURCES = Rails.root.glob("app/{views,helpers,javascript}/**/*.{erb,rb,js}").freeze
-  # La page /design montre chaque token, `brand-strong` compris : seule exception au fond `brand-strong`.
-  SWATCHES = "app/views/design/index.html.erb".freeze
+  # La page /design montre chaque token, `brand-strong` compris : seule exception au fond `brand-strong`, sa pastille.
+  SWATCH = /\[ "brand-strong", "bg-brand-strong" \]/
 
   def root = tokens(STYLESHEET[/@theme \{(.*?)\n\}/m, 1])
   def dark_root(start, finish) = tokens(block(start, finish)[/  :root[^\n]*\{\n(.*?)\n  \}/m, 1])
@@ -51,20 +53,32 @@ class BrandBlueTest < ActiveSupport::TestCase
 
     assert_empty offences
     assert_equal BLUE, Rails.configuration.x.pwa[:theme_color]
-    assert_includes Rails.root.join("android/student/src/main/res/values/colors.xml").read, "#0861E1"
+    { "android/student/src/main/res/values/colors.xml" => %w[brand],
+      "android/student/src/main/res/values/ic_launcher_background.xml" => %w[ic_launcher_background],
+      "android/shell/src/main/res/values/colors.xml" => %w[brand avatar_background] }.each do |file, names|
+      colors = Rails.root.join(file).read.scan(/<color name="([\w]+)">(#\h{6})</).to_h
+      names.each { assert_equal "#0861E1", colors[it], "#{file} : #{it}" }
+    end
   end
 
   test "no blue background in brand-strong: the blue background is brand" do
-    offences = scan(/(?<![\w-])(?:[\w-]+:)*bg-brand-strong(?![\w-])/).reject { it.start_with?("#{SWATCHES}:") }
+    offences = scan(/(?<![\w-])(?:[\w-]+:)*bg-brand-strong(?![\w-])/, except: SWATCH)
 
     assert_empty offences, "fond `brand` (UDR bleu unique) :\n#{offences.join("\n")}"
   end
 
   test "a blue background carries on-brand text, never text-white (dark in dark mode) nor text-ink" do
+    # Lu par instruction (ligne, plus ses suites `\`, `,`, `(` ou `+`), découpée en chaînes ("…", '…', `…`). Une chaîne
+    # qui porte un fond `bg-brand` (préfixe compris : `hover:`, `has-checked:`…) est en faute si elle porte aussi
+    # `text-white`/`text-ink` au même préfixe, ou si une chaîne de base de l'instruction, sans fond à elle (donc appliquée
+    # quel que soit le fond choisi), les porte : `class_names("… text-white", "bg-brand")`, ERB imbriqué, gabarit JS.
     offences = SOURCES.flat_map do |path|
-      path.read.scan(/"([^"\n]*)"/).flatten.filter_map do |classes|
-        background = classes[/(?:\A|\s)((?:[\w-]+:)*)bg-brand(?![\w-])/, 1] or next
-        "#{path.relative_path_from(Rails.root)} : « #{classes} »" if classes.match?(/(?:\A|\s)#{Regexp.escape(background)}text-(?:white|ink)(?![\w-])/)
+      statements(path.read).filter_map do |number, code|
+        literals = code.scan(STRING).map(&:compact).flatten
+        bases = [ *literals, code.gsub(STRING, " ") ].grep_v(/(?<![\w-])bg-/)
+        clash = literals.flat_map { |literal| literal.scan(/(?<![\w:-])((?:[\w-]+:)*)bg-brand(?![\w-])/).flatten.map { [ literal, it ] } }
+                        .find { |literal, prefix| [ literal, *bases ].any? { it.match?(/(?<![\w:-])#{Regexp.escape(prefix)}text-(?:white|ink)(?![\w-])/) } }
+        "#{path.relative_path_from(Rails.root)}:#{number} (« #{clash.last}bg-brand ») : #{code.strip[0, 160]}" if clash
       end
     end
 
@@ -78,12 +92,18 @@ class BrandBlueTest < ActiveSupport::TestCase
 
   private
 
-  def scan(pattern)
+  def scan(pattern, except: nil)
     SOURCES.flat_map do |path|
       path.each_line.with_index(1).filter_map do |line, number|
-        "#{path.relative_path_from(Rails.root)}:#{number}" if line.match?(pattern)
+        "#{path.relative_path_from(Rails.root)}:#{number}" if line.match?(pattern) && !(except && line.match?(except))
       end
     end
+  end
+
+  # Regroupe les lignes d'une même instruction : une ligne qui finit par `\`, `,`, `(` ou `+` continue sur la suivante.
+  def statements(source)
+    source.each_line.with_index(1).slice_after { |line, _| !line.rstrip.match?(/[\\,(+]\z/) }
+          .map { |group| [ group.first.last, group.map(&:first).join ] }
   end
 
   def block(start_marker, end_marker)

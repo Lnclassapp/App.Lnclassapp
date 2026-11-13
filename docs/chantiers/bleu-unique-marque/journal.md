@@ -17,7 +17,7 @@
 
 ## Retouches
 
-- …
+- Revue des tests (PR #581) : le test « fond bleu + texte blanc/noir » lisait une chaîne à la fois et laissait passer 7 formes réelles (`class_names("… text-white", "bg-brand")`, ERB imbriqué, apostrophes, `hover:`). Il lit maintenant l'instruction entière, toutes les chaînes ; il a trouvé la case de `classroom/teachings/_toggle` (coche `text-white`, sombre en mode sombre) → `text-on-brand`. Exception `/design` réduite à la seule pastille ; couleurs Android vérifiées une à une ; `subjects/generique.svg` (4 anciens bleus, hors de la liste) recoloré et ajouté à la liste.
 
 ## Ce qui a dérapé
 
@@ -43,6 +43,6 @@
 | | |
 |---|---|
 | **Livré le** | — *(PR ouverte vers `Develop`)* |
-| **PR** | |
+| **PR** | #581 |
 | **ADR produits** | — |
 | **UDR produits** | UDR-XXXX-bleu-unique-de-marque |

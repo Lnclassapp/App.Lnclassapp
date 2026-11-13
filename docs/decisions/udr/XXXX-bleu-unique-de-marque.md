@@ -63,7 +63,7 @@ Pourquoi un jeton `on-brand` plutôt que `text-white` : `white` est une surface,
 - `public/{400,404,422,500}.html` : `--brand #0861e1`, `--brand-soft #e7f0fd`, `--brand-strong #0861e1`, `--on-brand #ffffff` ; bouton `background: var(--brand); color: var(--on-brand)`, survol `rgb(8 97 225 / 0.9)`.
 - `public/offline.html` meta `#0861e1` ; `public/offline.css` `--accent #0861e1`, `--on-accent #ffffff` dans les deux modes, bouton `background: var(--accent)`. Le cache hors connexion passe à `lnclass-offline-v3`.
 - Android : `brand` et `avatar_background` `#0861E1`, `avatar_text` `#FFFFFF` (coque), `brand` et `ic_launcher_background` `#0861E1` (élèves). Enseignants inchangés.
-- Images : fond du baobab #0861E1 dans `logo/lnclass.jpeg` (et ses copies `student.jpg`, `parent.jpg`), `lnclass/lnclass.png`, `public/icon*.png`, `public/apple-touch-icon.png`, `public/favicon.ico`, `android/student/.../mipmap-*/ic_launcher{,_round}.png` ; `lnclass/icon.svg`, `icon.png` et `logo-lnclass.svg` en #0861e1.
+- Images : fond du baobab #0861E1 dans `logo/lnclass.jpeg` (et ses copies `student.jpg`, `parent.jpg`), `lnclass/lnclass.png`, `public/icon*.png`, `public/apple-touch-icon.png`, `public/favicon.ico`, `android/student/.../mipmap-*/ic_launcher{,_round}.png` ; `lnclass/icon.svg`, `icon.png` et `logo-lnclass.svg` en #0861e1 ; l'illustration de matière par défaut `subjects/generique.svg` passe aux mêmes tons (#0861e1, #0548a8 pour sa tranche, #8bb8f9, #e7f0fd).
 
 **États obligatoires** : aucun nouvel écran ; les états vide · chargement · erreur · succès existants gardent leurs composants. Bouton désactivé : `opacity-50` sur `brand` (inchangé).
 
