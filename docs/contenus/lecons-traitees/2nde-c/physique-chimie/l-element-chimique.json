@@ -78,6 +78,64 @@
             ]
           },
           "pitfall": "Ne confonds pas les majuscules et les minuscules d'un symbole. Contre-exemple : CO désigne deux éléments, le carbone C et l'oxygène O, alors que Co désigne un seul élément, le cobalt. Ne crois pas non plus qu'un élément se transforme en un autre : le fer qui rouille reste de l'élément fer.",
+          "practice": {
+            "statement": "Tu t'entraînes à écrire des symboles d'éléments et à repérer les éléments d'un corps.",
+            "questions": [
+              {
+                "content": "Quel est le symbole de l'élément zinc ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'élément est le zinc. Étape 2 — Relever le symbole : une majuscule suivie d'une minuscule, Zn. Étape 3 — Comparer : Z seul n'est pas le symbole d'un élément, et Cn n'est pas celui du zinc.",
+                "hint": "Le symbole commence par Z et a deux lettres.",
+                "answers": [
+                  {
+                    "content": "Zn",
+                    "correct": true
+                  },
+                  {
+                    "content": "Z",
+                    "correct": false
+                  },
+                  {
+                    "content": "Zi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cn",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'écriture CL est un symbole correctement écrit pour l'élément chlore.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le symbole du chlore. Étape 2 — Relever la règle : une majuscule, puis éventuellement une minuscule. Étape 3 — Conclure : le chlore s'écrit Cl, avec un l minuscule ; CL serait une écriture fausse.",
+                "hint": "Regarde la deuxième lettre : majuscule ou minuscule ?",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le sel de cuisine a pour formule NaCl. Combien d'éléments chimiques différents contient-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : la formule NaCl. Étape 2 — Relever les symboles : Na (sodium) et Cl (chlore). Étape 3 — Compter : deux éléments différents.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Cherche les majuscules : chacune commence un symbole."
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -336,6 +394,72 @@
             ]
           },
           "pitfall": "Ne compte pas les atomes à la place des éléments. Contre-exemple : O2 contient deux atomes, mais un seul élément, l'oxygène : c'est un corps simple, pas un corps composé. À l'inverse, l'eau du robinet ou l'eau de mer sont des mélanges, même si l'on dit « de l'eau ».",
+          "practice": {
+            "statement": "Tu t'entraînes à classer une substance : mélange, corps simple ou corps composé.",
+            "questions": [
+              {
+                "content": "Le sel de cuisine pur a pour formule NaCl. De quelle classe est-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Compter les espèces : une seule, c'est un corps pur. Étape 2 — Relever les éléments : Na et Cl. Étape 3 — Compter : deux éléments différents, donc un corps composé. Ce n'est pas un corps simple, qui n'aurait qu'un seul élément.",
+                "hint": "Compte les éléments différents dans la formule.",
+                "answers": [
+                  {
+                    "content": "un corps composé",
+                    "correct": true
+                  },
+                  {
+                    "content": "un corps simple",
+                    "correct": false
+                  },
+                  {
+                    "content": "un mélange",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le propane a pour formule C3H8. Combien d'atomes contient une molécule de propane au total ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : C3H8. Étape 2 — Lire les indices : 3 atomes C et 8 atomes H. Étape 3 — Additionner : 3 + 8 = 11 atomes.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "11",
+                    "correct": true
+                  }
+                ],
+                "hint": "L'indice donne le nombre d'atomes de l'élément qui précède."
+              },
+              {
+                "content": "Le fer Fe est un corps simple.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Compter les espèces : le fer pur est un corps pur. Étape 2 — Relever les éléments : un seul, Fe. Étape 3 — Conclure : c'est un corps simple.",
+                "hint": "Combien d'éléments différents dans la formule Fe ?",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une substance qui contient plusieurs espèces chimiques est un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Compter les espèces chimiques : plusieurs. Étape 2 — Conclure : un corps pur n'en a qu'une, donc la substance est un mélange.",
+                "hint": "Le contraire d'un corps pur.",
+                "answers": [
+                  {
+                    "content": "mélange",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
           "figure": "classification-matiere",
           "exercise": [
             {
@@ -592,6 +716,76 @@
             ]
           },
           "pitfall": "Ne confonds pas perte d'électrons et charge négative. Contre-exemple : l'atome de sodium qui perd 1 électron devient $\\mathrm{Na^{+}}$, un ion positif, et non $\\mathrm{Na^{-}}$. Un atome qui gagne des électrons devient un ion négatif : le chlore qui gagne 1 électron devient $\\mathrm{Cl^{-}}$.",
+          "practice": {
+            "statement": "Tu t'entraînes à écrire la formule d'un ion monoatomique et à dire si c'est un cation ou un anion.",
+            "questions": [
+              {
+                "content": "Un atome de potassium K perd 1 électron. Quelle est la formule de l'ion obtenu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le symbole est K, 1 électron perdu. Étape 2 — Déduire le signe : perdre des électrons donne une charge positive. Étape 3 — Écrire : $\\mathrm{K^{+}}$. Écrire $\\mathrm{K^{-}}$ confond perte d'électron et charge négative.",
+                "hint": "Un seul électron est perdu, et la perte rend l'ion positif.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{K^{+}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{K^{-}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{K^{2+}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{K^{2-}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'atome de fer forme l'ion $\\mathrm{Fe^{3+}}$. Combien d'électrons a-t-il perdus ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : l'ion $\\mathrm{Fe^{3+}}$. Étape 2 — Lire l'exposant : 3+, soit 3 charges positives. Étape 3 — Conclure : 3 électrons perdus.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le nombre en exposant est le nombre d'électrons échangés."
+              },
+              {
+                "content": "L'ion $\\mathrm{Cl^{-}}$ est un anion.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la charge est négative. Étape 2 — Conclure : un ion de charge négative, formé en gagnant des électrons, est un anion.",
+                "hint": "Regarde le signe de la charge.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ion de charge négative s'appelle un ___ (un nom).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : charge négative. Étape 2 — Conclure : l'atome a gagné des électrons, c'est un anion (le cation est positif).",
+                "hint": "Il commence par « an- » ; le cation est l'autre.",
+                "answers": [
+                  {
+                    "content": "anion",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {

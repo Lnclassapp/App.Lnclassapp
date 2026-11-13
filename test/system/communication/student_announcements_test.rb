@@ -140,7 +140,7 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
       assert_match(/\bw-4\b/, dot_classes.first)
       page.execute_script("document.querySelector('[data-communication--carousel-target=track]').scrollLeft = 10000")
-      assert_selector "[data-communication--carousel-target=dot]:last-child.w-4.bg-brand-strong"
+      assert_selector "[data-communication--carousel-target=dot]:last-child.w-4.bg-brand"
       assert_match(/\bw-1\.5\b/, dot_classes.first)
 
       within("#student_home_announcements") { find(cross(@rentree)).click }

@@ -106,7 +106,7 @@
     <% appreciation = result.appreciation %>
     <% if appreciation.review? %>
       <% weak = result.review.select { appreciation.weak_numbers.include?(it.number) } %>
-      <% links = weak.map { link_to(it.number, "#question_review_#{it.id}", class: "font-medium text-brand underline") } %>
+      <% links = weak.map { link_to(it.number, "#question_review_#{it.id}", class: "font-medium text-brand-strong underline") } %>
       <% numbers = links.each_with_index.map { |link, rank| rank.zero? ? link : safe_join([ t(rank == links.size - 1 ? "support.array.last_word_connector" : "support.array.words_connector"), link ]) } %>
       <% questions = t(".review_questions_html", count: weak.size, numbers: safe_join(numbers)) %>
       <section id="session_to_review" class="rounded-card border border-line bg-white p-4 text-left">
@@ -114,7 +114,7 @@
           <p class="text-ink"><%= t(".to_review_essential_html", essential: appreciation.essential_name, questions:) %></p>
         <% else %>
           <p class="text-ink"><%= t(".to_review_lesson_html", questions:) %></p>
-          <p class="mt-1"><%= link_to t(".whole_lesson"), lesson_href, class: "text-sm font-medium text-brand underline", data: { turbo_prefetch: false } %></p>
+          <p class="mt-1"><%= link_to t(".whole_lesson"), lesson_href, class: "text-sm font-medium text-brand-strong underline", data: { turbo_prefetch: false } %></p>
         <% end %>
       </section>
     <% end %>
@@ -134,10 +134,10 @@
       <p id="restart_pause" class="text-center text-ink"><%= t(".restart_pause", time: l(@resume_at, format: :hour_minute)) %></p>
     <% elsif @can_restart && !grading.perfect?(result.score_percent) %>
       <% if redo_href %>
-        <%= ui_button t("assessment.exercises.show.redo"), href: redo_href, id: "restart-exercise-link", variant: :brand, size: :lg, full: true, icon: "arrow-path", data: { turbo_prefetch: false } %>
+        <%= ui_button t("assessment.exercises.show.redo"), href: redo_href, id: "restart-exercise-link", variant: :primary, size: :lg, full: true, icon: "arrow-path", data: { turbo_prefetch: false } %>
       <% else %>
         <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
-          <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
+          <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :primary, size: :lg, full: true, icon: "arrow-path" %>
         <% end %>
       <% end %>
     <% end %>

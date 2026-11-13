@@ -120,6 +120,76 @@
             ]
           },
           "pitfall": "Ne pas additionner quand les choix s'enchaînent. Contre-exemple : 2 plats et 3 boissons donnent 6 menus, car chaque plat peut s'associer à chacune des 3 boissons ; $2 + 3 = 5$ serait faux. On additionne seulement quand le client prend **un seul** élément parmi des groupes qui s'excluent.",
+          "practice": {
+            "statement": "Tu t'entraînes à choisir entre multiplier et additionner pour compter des possibilités.",
+            "questions": [
+              {
+                "content": "Un badge porte une couleur choisie parmi 4 et un numéro choisi parmi 6. Combien de badges différents peut-on fabriquer ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : deux choix successifs, la couleur puis le numéro. Étape 2 — Compter : 4 couleurs et 6 numéros. Étape 3 — Combiner : choix successifs, donc on multiplie, $4 \\times 6 = 24$. Étape 4 — Conclure : il y a 24 badges différents.",
+                "tolerance": 0,
+                "hint": "Les deux choix se font l'un après l'autre : que fait-on des nombres ?"
+              },
+              {
+                "content": "Au marché, Aya achète un seul fruit : il y a 5 variétés de mangues et 3 variétés d'oranges. Combien de choix a-t-elle ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  },
+                  {
+                    "content": "15",
+                    "correct": false
+                  },
+                  {
+                    "content": "2",
+                    "correct": false
+                  },
+                  {
+                    "content": "53",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : elle prend une mangue ou une orange, jamais les deux : les cas s'excluent. Étape 2 — Compter : 5 possibilités, puis 3. Étape 3 — Combiner : cas qui s'excluent, donc on additionne, $5 + 3 = 8$. Étape 4 — Conclure : elle a 8 choix. Le résultat 15 est l'erreur tentante : on multiplie seulement des choix successifs.",
+                "hint": "Elle ne choisit qu'un seul fruit : les deux cas s'excluent."
+              },
+              {
+                "content": "Vrai ou faux : avec 3 entrées et 4 desserts, un menu composé d'une entrée et d'un dessert peut se choisir de 12 façons.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : deux choix successifs, l'entrée puis le dessert. Étape 2 — Compter : 3 entrées, 4 desserts. Étape 3 — Combiner : on multiplie, $3 \\times 4 = 12$. Étape 4 — Conclure : l'affirmation est vraie ; 7 serait l'erreur de l'addition.",
+                "hint": "Une entrée et un dessert : les choix s'enchaînent."
+              },
+              {
+                "content": "Il y a 2 routes pour aller de A à B, 3 routes de B à C et 2 routes de C à D. Il y a ___ trajets de A à D en passant par B et C.",
+                "question_type": "fill_blank",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Identifier : trois choix successifs, A vers B, B vers C, puis C vers D. Étape 2 — Compter : 2, 3 et 2 possibilités. Étape 3 — Combiner : on multiplie, $2 \\times 3 \\times 2 = 12$. Étape 4 — Conclure : il y a 12 trajets.",
+                "hint": "Trois choix successifs : multiplie les trois nombres."
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -363,6 +433,76 @@
             ]
           },
           "pitfall": "Ne pas garder 3 branches au deuxième niveau quand le choix ne peut pas se répéter. Contre-exemple : avec A, B, C, des codes de deux lettres **différentes** sont AB, AC, BA, BC, CA, CB, soit $3 \\times 2 = 6$ et non $3 \\times 3 = 9$ ; AA, BB et CC sont interdits.",
+          "practice": {
+            "statement": "Tu t'entraînes à dénombrer les issues d'une situation à choix successifs avec un arbre.",
+            "questions": [
+              {
+                "content": "Un code est formé de 2 lettres choisies dans {A, B, C, D}, une lettre pouvant être répétée. Combien de codes existe-t-il ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": false
+                  },
+                  {
+                    "content": "16",
+                    "correct": true
+                  },
+                  {
+                    "content": "12",
+                    "correct": false
+                  },
+                  {
+                    "content": "6",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Découper : on choisit la première lettre, puis la seconde. Étape 2 — Dessiner : 4 branches au premier niveau, puis 4 branches depuis chacune, car la lettre peut se répéter. Étape 3 — Compter : $4 \\times 4 = 16$ chemins. Étape 4 — Conclure : il y a 16 codes. Le résultat 12 suppose que la lettre ne peut pas se répéter.",
+                "hint": "Si une lettre peut se répéter, le deuxième niveau a autant de branches que le premier."
+              },
+              {
+                "content": "Parmi 5 élèves, on choisit un président, puis un trésorier différent du président. Combien de choix des deux postes existe-t-il ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Découper : on choisit le président, puis le trésorier. Étape 2 — Dessiner : 5 branches au premier niveau, puis 4 depuis chacune, car le trésorier est différent. Étape 3 — Compter : $5 \\times 4 = 20$. Étape 4 — Conclure : il y a 20 choix.",
+                "tolerance": 0,
+                "hint": "Une fois le président choisi, il reste un élève de moins pour le second poste."
+              },
+              {
+                "content": "Vrai ou faux : un arbre a 2 branches au premier niveau, puis 3 branches depuis chacune d'elles ; il a 5 chemins complets.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Découper : deux niveaux de choix. Étape 2 — Dessiner : 2 branches, puis 3 depuis chacune. Étape 3 — Compter : on multiplie, $2 \\times 3 = 6$ chemins complets, et non $2 + 3 = 5$. Étape 4 — Conclure : l'affirmation est fausse.",
+                "hint": "Chaque branche du premier niveau est suivie de 3 branches."
+              },
+              {
+                "content": "Avec les chiffres 1, 2, 3 et 4, on forme un code de 3 chiffres tous différents. Il y a ___ codes possibles.",
+                "question_type": "fill_blank",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Découper : trois choix successifs, sans répétition. Étape 2 — Dessiner : 4 branches, puis 3, puis 2. Étape 3 — Compter : $4 \\times 3 \\times 2 = 24$. Étape 4 — Conclure : il y a 24 codes.",
+                "hint": "À chaque niveau, un chiffre déjà utilisé n'est plus disponible."
+              }
+            ]
+          },
           "figure": "arbre-president-secretaire",
           "exercise": [
             {
@@ -616,6 +756,76 @@
             ]
           },
           "pitfall": "Ne pas confondre une case et un total de marge. Contre-exemple : « 10 internes, dont 4 filles » ne veut pas dire 10 filles internes ; la case filles internes vaut 4 et le total 10 se partage entre filles (4) et garçons ($10 - 4 = 6$). Vérifie toujours que les cases d'une ligne s'additionnent bien au total.",
+          "practice": {
+            "statement": "Tu t'entraînes à compléter un tableau à double entrée à l'aide des totaux.",
+            "questions": [
+              {
+                "content": "Dans une classe de 50 élèves, il y a 28 filles. 15 élèves portent des lunettes, dont 6 filles. Combien de garçons portent des lunettes ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : les critères sont fille ou garçon, avec ou sans lunettes. Étape 2 — Placer : 15 élèves avec lunettes en total de colonne, 6 filles avec lunettes dans la case. Étape 3 — Compléter : garçons avec lunettes $= 15 - 6 = 9$. Étape 4 — Lire : 9 garçons portent des lunettes.",
+                "tolerance": 0,
+                "hint": "Dans la colonne « lunettes », le total est la somme des filles et des garçons."
+              },
+              {
+                "content": "Dans une classe de 50 élèves, il y a 28 filles. 15 élèves portent des lunettes, dont 6 filles. Combien de filles ne portent pas de lunettes ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": false
+                  },
+                  {
+                    "content": "34",
+                    "correct": false
+                  },
+                  {
+                    "content": "22",
+                    "correct": true
+                  },
+                  {
+                    "content": "35",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : on cherche la case « filles sans lunettes ». Étape 2 — Placer : 28 filles en total de ligne, 6 filles avec lunettes. Étape 3 — Compléter : $28 - 6 = 22$. Étape 4 — Lire : 22 filles ne portent pas de lunettes. Le nombre 9 est la case « garçons avec lunettes » : il faut lire la bonne case.",
+                "hint": "Dans la ligne « filles », le total est la somme des deux cases."
+              },
+              {
+                "content": "Vrai ou faux : dans un tableau à double entrée, le total général est à la fois la somme des totaux des lignes et la somme des totaux des colonnes.",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : le total général est écrit dans le coin du tableau. Étape 2 — Placer : chaque élément est dans une seule case. Étape 3 — Compléter : en additionnant les lignes ou les colonnes, on compte une fois chaque élément. Étape 4 — Lire : l'affirmation est vraie.",
+                "hint": "Chaque élément du tableau est compté dans une seule case."
+              },
+              {
+                "content": "Dans une classe de 45 élèves, il y a 25 garçons. 12 élèves sont internes, dont 7 garçons. Il y a ___ filles externes.",
+                "question_type": "fill_blank",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Repérer : les critères sont fille ou garçon, interne ou externe. Étape 2 — Placer : 45 élèves, 25 garçons donc $45 - 25 = 20$ filles ; 12 internes dont 7 garçons donc $12 - 7 = 5$ filles internes. Étape 3 — Compléter : filles externes $= 20 - 5 = 15$. Étape 4 — Lire : il y a 15 filles externes.",
+                "hint": "Cherche d'abord le nombre total de filles, puis les filles internes."
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -849,6 +1059,77 @@
             ]
           },
           "pitfall": "Ne pas additionner simplement les effectifs de A et de B. Contre-exemple : $25 + 18 = 43$ élèves, alors que la classe n'en compte que 40 ; les 10 élèves qui aiment les deux sports sont comptés deux fois. La bonne réunion est $25 + 18 - 10 = 33$.",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser un diagramme à deux cercles pour compter une réunion et ce qui reste en dehors.",
+            "questions": [
+              {
+                "content": "Un ensemble A compte 20 éléments, un ensemble B en compte 14, et 6 éléments appartiennent aux deux. Combien d'éléments appartiennent à A ou à B ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "28",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Nommer : card(A) = 20, card(B) = 14, card($A \\cap B$) = 6. Étape 2 — Placer : 6 éléments au centre du diagramme. Étape 3 — Compléter : A seul $= 20 - 6 = 14$ et B seul $= 14 - 6 = 8$. Étape 4 — Calculer : $14 + 6 + 8 = 28$, ou $20 + 14 - 6 = 28$. L'addition $20 + 14 = 34$ compterait deux fois l'intersection.",
+                "tolerance": 0,
+                "hint": "Les éléments communs ont été comptés deux fois dans la somme des effectifs."
+              },
+              {
+                "content": "Dans une classe de 40 élèves, 22 aiment le football, 15 aiment le handball et 7 aiment les deux. Combien d'élèves n'aiment aucun de ces deux sports ?",
+                "question_type": "numeric",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "explanation": "Étape 1 — Nommer : total 40, card(F) = 22, card(H) = 15, card($F \\cap H$) = 7. Étape 2 — Placer : 7 au centre. Étape 3 — Compléter : $22 - 7 = 15$ pour le football seul et $15 - 7 = 8$ pour le handball seul. Étape 4 — Calculer : la réunion vaut $15 + 7 + 8 = 30$, donc $40 - 30 = 10$ élèves n'aiment ni l'un ni l'autre.",
+                "tolerance": 0,
+                "hint": "Calcule d'abord la réunion, puis retranche-la du total."
+              },
+              {
+                "content": "Que désigne $A \\cap B$ ?",
+                "question_type": "single_choice",
+                "answers": [
+                  {
+                    "content": "Les éléments qui sont à la fois dans A et dans B",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les éléments qui sont dans A ou dans B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les éléments qui ne sont ni dans A ni dans B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nombre total d'éléments de A et de B",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Nommer : $A \\cap B$ se lit « A inter B ». Étape 2 — Placer : c'est la zone commune aux deux cercles, au centre du diagramme. Étape 3 — Conclure : ce sont les éléments communs à A et à B. La proposition « dans A ou dans B » décrit la réunion $A \\cup B$.",
+                "hint": "Le signe $\\cap$ désigne la zone où les deux cercles se recouvrent."
+              },
+              {
+                "content": "Vrai ou faux : si A et B n'ont aucun élément commun, alors card($A \\cup B$) = card(A) + card(B).",
+                "question_type": "true_false",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "explanation": "Étape 1 — Nommer : l'intersection est vide, card($A \\cap B$) = 0. Étape 2 — Calculer : card($A \\cup B$) = card(A) + card(B) $- 0$. Étape 3 — Conclure : on additionne simplement ; l'affirmation est vraie.",
+                "hint": "Que vaut le nombre d'éléments de l'intersection quand il n'y a aucun élément commun ?"
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {

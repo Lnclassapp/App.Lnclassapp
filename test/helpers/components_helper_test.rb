@@ -88,10 +88,15 @@ class ComponentsHelperTest < ActionView::TestCase
   # --- Boutons ----------------------------------------------------------------
 
   test "ui_button renders a typed button with its variant and size" do
-    show ui_button("Enregistrer", variant: :brand, size: :lg, type: :submit, full: true, class: "mt-4")
+    show ui_button("Enregistrer", variant: :primary, size: :lg, type: :submit, full: true, class: "mt-4")
 
-    assert_select "button[type=submit].ui-button-brand.ui-button-lg.w-full.mt-4", text: "Enregistrer"
+    assert_select "button[type=submit].ui-button-primary.ui-button-lg.w-full.mt-4", text: "Enregistrer"
     assert_select "button[disabled]", 0
+  end
+
+  # UDR-0171 : la variante `brand` (bleu ciel, texte noir) est fusionnée dans `primary` ; elle n'existe plus.
+  test "ui_button has a single blue variant: brand is refused" do
+    assert_raises(ArgumentError) { ui_button("Rejoindre", variant: :brand) }
   end
 
   test "ui_button accepts a block as its label and icons on both sides" do
@@ -771,7 +776,7 @@ class ComponentsHelperTest < ActionView::TestCase
     show ui_avatar("Awa Koné", size: :sm, add_photo: true)
 
     assert_select "span.relative.inline-flex > span.ui-avatar[role=img][aria-label='Awa Koné']", text: "AK"
-    assert_select "span.relative > span[aria-hidden=true].rounded-full.bg-brand-strong.text-white.size-4", text: "+"
+    assert_select "span.relative > span[aria-hidden=true].rounded-full.bg-brand.text-on-brand.size-4", text: "+"
     assert_not_includes ui_avatar("Awa Koné", src: "/a.png", add_photo: true), "+"
     assert_not_includes ui_avatar("Awa Koné"), "+"
   end

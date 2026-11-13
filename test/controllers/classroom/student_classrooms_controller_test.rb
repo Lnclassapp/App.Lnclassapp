@@ -30,7 +30,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     # CA-1 (UDR-0086 §3.1): no « Accueil » back link above the title any more; the header and the menus lead home.
     assert_select "#main nav[aria-label=?]", I18n.t("components.back_link.label"), 0
     # CA-2 (UDR-0086 §3.2): the classroom card on the blue gradient, without the count or the list of its students.
-    assert_select "section#student_classroom_header.bg-linear-to-br.from-brand-strong.to-brand.text-white" do
+    assert_select "section#student_classroom_header.bg-brand.text-on-brand" do
       assert_select "h2", text: "Tle D 1"
       assert_select "*", text: "Tle · D"
       assert_select "*", text: "Lycée Classique"
@@ -152,7 +152,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "section#student_classroom_no_teacher[aria-labelledby=student_classroom_no_teacher_title]" do
       assert_select "h2#student_classroom_no_teacher_title", text: tl("no_teacher.title")
       assert_select "p", text: tl("no_teacher.description")
-      assert_select "a.ui-button-brand[href=?][target=_blank][rel=noopener][aria-label=?]",
+      assert_select "a.ui-button-primary[href=?][target=_blank][rel=noopener][aria-label=?]",
                     "https://wa.me/?text=#{ERB::Util.url_encode(message)}",
                     I18n.t("classroom.student_homes.invite_teacher.action_label"),
                     text: I18n.t("classroom.student_homes.invite_teacher.action")

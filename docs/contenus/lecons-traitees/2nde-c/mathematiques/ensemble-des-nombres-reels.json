@@ -126,6 +126,75 @@
             ]
           },
           "pitfall": "Ne pas confondre rationnel et décimal. $\\frac{1}{3}$ est rationnel mais n'est pas décimal : 3 n'est pas de la forme $2^a5^b$, on écrit $0,333\\ldots$ sans jamais s'arrêter. Ne pas croire non plus que $\\pi = \\frac{22}{7}$ : $\\frac{22}{7} = 3,1428\\ldots$ est rationnel et $\\pi = 3,14159\\ldots$ est irrationnel. Simplifie toujours avant de classer : $\\sqrt{16} = 4$ est un entier.",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver le plus petit ensemble qui contient un nombre.",
+            "questions": [
+              {
+                "content": "Quel est le plus petit ensemble qui contient $\\frac{18}{6}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Simplifier : $\\frac{18}{6} = 3$. Étape 2 — Regarder si c'est un entier : oui, $3$ est un entier naturel. Étape 3 — Inutile de chercher plus loin. Étape 4 — Conclure : le plus petit ensemble est $\\mathbb{N}$. Les autres ensembles contiennent aussi $3$, mais ne sont pas les plus petits.",
+                "answers": [
+                  {
+                    "content": "$\\mathbb{Z}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathbb{N}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathbb{D}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathbb{Q}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Simplifie d'abord la fraction avant de répondre."
+              },
+              {
+                "content": "Quel est le plus petit ensemble qui contient $\\frac{7}{20}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Simplifier : $\\frac{7}{20}$ est déjà irréductible. Étape 2 — Entier ? Non, $\\frac{7}{20} = 0,35$. Étape 3 — Décimal ? $20 = 2^2 \\times 5$ n'a que les facteurs 2 et 5, donc c'est un décimal. Étape 4 — Conclure : $\\mathbb{D}$. La proposition « $\\mathbb{Q}$ seulement » oublie que le dénominateur ne contient que 2 et 5.",
+                "answers": [
+                  {
+                    "content": "$\\mathbb{Z}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathbb{D}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathbb{Q}$ seulement, pas $\\mathbb{D}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathbb{N}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Décompose le dénominateur en facteurs premiers."
+              },
+              {
+                "content": "Le nombre $\\sqrt{5}$ est un nombre rationnel.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Simplifier : $\\sqrt{5}$ ne se simplifie pas. Étape 2 — Entier ? Non, $2^2 = 4$ et $3^2 = 9$ encadrent $5$. Étape 3 — Quotient d'entiers ? Non, $\\sqrt{5}$ n'est pas un quotient d'entiers. Étape 4 — Conclure : $\\sqrt{5}$ est un irrationnel, il n'appartient pas à $\\mathbb{Q}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un nombre rationnel s'écrit comme un quotient d'entiers."
+              }
+            ]
+          },
           "figure": null,
           "exercise": [
             {
@@ -396,6 +465,70 @@
             ]
           },
           "pitfall": "Ne pas confondre crochet ouvert et crochet fermé. $5 \\in [2\\,;\\,5]$, mais $5 \\notin [2\\,;\\,5[$ : le crochet tourné vers l'extérieur exclut la borne. Ne pas écrire non plus $[3\\,;\\,+\\infty]$ : $+\\infty$ n'est pas un réel, son crochet est toujours ouvert, donc $[3\\,;\\,+\\infty[$. Teste toujours la borne pour vérifier ton crochet.",
+          "practice": {
+            "statement": "Tu t'entraînes à passer d'une inégalité à un intervalle et inversement.",
+            "questions": [
+              {
+                "content": "Quel intervalle correspond à $-1 \\leq x < 4$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Traduire : $-1 \\leq x$ et $x < 4$. Étape 2 — Repérer les bornes : $-1$ est incluse (inégalité large), $4$ est exclue (inégalité stricte). Étape 3 — Écrire : crochet fermé en $-1$, ouvert en $4$, soit $[-1\\,;\\,4[$. Les autres propositions inversent ou changent un crochet.",
+                "answers": [
+                  {
+                    "content": "$]-1\\,;\\,4]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[-1\\,;\\,4]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[-1\\,;\\,4[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-1\\,;\\,4[$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Inégalité large : crochet fermé ; inégalité stricte : crochet ouvert."
+              },
+              {
+                "content": "Le nombre $6$ appartient à l'intervalle $]2\\,;\\,6[$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Traduire : $]2\\,;\\,6[$ signifie $2 < x < 6$. Étape 2 — Repérer les bornes : $6$ est exclue (crochet ouvert). Étape 3 — Conclure : $6 \\notin ]2\\,;\\,6[$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde le crochet placé du côté de 6."
+              },
+              {
+                "content": "$[1\\,;\\,6] \\cap [4\\,;\\,9] = [$ ___ $\\,;\\,$ ___ $]$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Traduire : $1 \\leq x \\leq 6$ et $4 \\leq x \\leq 9$. Étape 2 — Garder les réels communs : $x \\geq 4$ (la plus grande borne inférieure) et $x \\leq 6$ (la plus petite borne supérieure). Étape 3 — Conclure : $[4\\,;\\,6]$, bornes incluses.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Pour une intersection, garde la plus grande borne de gauche et la plus petite borne de droite."
+              }
+            ]
+          },
           "figure": "droite-intervalle",
           "exercise": [
             {
@@ -651,6 +784,72 @@
             ]
           },
           "pitfall": "Ne pas se tromper de centre. Dans $|x + 1| \\leq 3$, on écrit $|x - (-1)| \\leq 3$ : le centre est $-1$, pas $1$, et la solution est $[-4\\,;\\,2]$. Contre-exemple : $x = -4$ vérifie $|-4 + 1| = 3 \\leq 3$ et appartient à $[-4\\,;\\,2]$, alors que $[-2\\,;\\,4]$ (centre $1$) ne le contient pas. Pense aussi à la distance : $|3 - 8| = 5$, jamais $-5$.",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser la valeur absolue comme une distance.",
+            "questions": [
+              {
+                "content": "Calcule $|2 - 9|$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : c'est la distance entre $2$ et $9$. Étape 2 — Calculer : $2 - 9 = -7$. Étape 3 — Conclure : la valeur absolue est positive, $|2 - 9| = 7$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Une valeur absolue est une distance, donc positive ou nulle."
+              },
+              {
+                "content": "Parmi ces valeurs, laquelle vérifie $|x - 5| = 2$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : le centre est $a = 5$ et le rayon $r = 2$. Étape 2 — Traduire : $x$ est à la distance $2$ de $5$. Étape 3 — Calculer : $5 - 2 = 3$ et $5 + 2 = 7$. Étape 4 — Conclure : $x = 3$ ou $x = 7$, et seul $7$ figure parmi les propositions. Les valeurs $-3$ et $10$ viennent d'une erreur de signe ou de calcul ; $5$ est le centre, à distance $0$.",
+                "answers": [
+                  {
+                    "content": "$-3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7$",
+                    "correct": true
+                  }
+                ],
+                "hint": "Cherche les nombres situés à la distance 2 de 5."
+              },
+              {
+                "content": "Quel est l'ensemble des solutions de $|x - 1| \\leq 3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $a = 1$ et $r = 3$. Étape 2 — Traduire : $x$ est à une distance de $1$ d'au plus $3$. Étape 3 — Calculer : $1 - 3 = -2$ et $1 + 3 = 4$. Étape 4 — Conclure : $x \\in [-2\\,;\\,4]$. La proposition $[-3\\,;\\,3]$ oublie le centre.",
+                "answers": [
+                  {
+                    "content": "$[-3\\,;\\,3]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[1\\,;\\,3]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[2\\,;\\,4]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[-2\\,;\\,4]$",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les bornes sont centre moins rayon et centre plus rayon."
+              }
+            ]
+          },
           "figure": "droite-distance",
           "exercise": [
             {
@@ -903,6 +1102,64 @@
             ]
           },
           "pitfall": "Ne pas encadrer la racine par les carrés. De $1,4^2 = 1,96 < 2 < 2,25 = 1,5^2$, on déduit $1,4 < \\sqrt{2} < 1,5$, et non $1,96 < \\sqrt{2} < 2,25$ : $\\sqrt{2} = 1,414\\ldots$ est plus petit que $1,96$. Vérifie aussi l'amplitude : $1 < \\sqrt{2} < 2$ est juste mais n'est pas à $0,1$ près, car l'amplitude vaut $1$.",
+          "practice": {
+            "statement": "Tu t'entraînes à encadrer une racine carrée à une précision donnée.",
+            "questions": [
+              {
+                "content": "Quel encadrement de $\\sqrt{5}$ à $0,1$ près est correct ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir la précision : $0,1$. Étape 2 — Encadrer : $2,2^2 = 4,84$ et $2,3^2 = 5,29$, et $4,84 < 5 < 5,29$, donc $2,2 < \\sqrt{5} < 2,3$. Étape 3 — Amplitude : $0,1$. Étape 4 — Conclure. Les encadrements décalés ne contiennent pas $\\sqrt{5}$ ; le dernier encadre $5$ par des carrés au lieu d'encadrer sa racine.",
+                "answers": [
+                  {
+                    "content": "$2,1 < \\sqrt{5} < 2,2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2,2 < \\sqrt{5} < 2,3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2,3 < \\sqrt{5} < 2,4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4,8 < \\sqrt{5} < 5,3$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Élève au carré des décimaux consécutifs et compare à 5."
+              },
+              {
+                "content": "La valeur approchée par excès de $\\sqrt{10}$ à $0,1$ près est ___ .",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Choisir la précision : $0,1$. Étape 2 — Encadrer : $3,1^2 = 9,61$ et $3,2^2 = 10,24$, donc $3,1 < \\sqrt{10} < 3,2$. Étape 3 — Nommer : $3,1$ est par défaut, $3,2$ par excès. Étape 4 — Conclure : $3,2$.",
+                "answers": [
+                  {
+                    "content": "3.2",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "La valeur par excès est la borne de droite de l'encadrement."
+              },
+              {
+                "content": "On a $3,4 < \\sqrt{12} < 3,5$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir la précision : $0,1$. Étape 2 — Encadrer : $3,4^2 = 11,56$ et $3,5^2 = 12,25$, et $11,56 < 12 < 12,25$. Étape 3 — Conclure : $3,4 < \\sqrt{12} < 3,5$ est vrai.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Élève au carré les deux bornes et compare à 12."
+              }
+            ]
+          },
           "figure": "droite-encadrement",
           "exercise": [
             {

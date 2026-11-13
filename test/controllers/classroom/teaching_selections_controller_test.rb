@@ -47,12 +47,12 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
 
     assert_select "form#teaching_#{@sixth1.public_id} button[aria-pressed=false].min-h-13" do
       assert_select "> span:first-child", text: "6ème 1"
-      assert_select "> span:last-child.border-line.bg-white:not(.bg-brand-strong)", 1
+      assert_select "> span:last-child.border-line.bg-white:not(.bg-brand)", 1
       assert_select "svg", 0
     end
     assert_select "form#teaching_#{@third_b.public_id} button[aria-pressed=true]" do
       assert_select "> span:first-child", text: "3ème B"
-      assert_select "> span:last-child.bg-brand-strong svg", 1
+      assert_select "> span:last-child.bg-brand svg", 1
     end
   end
 

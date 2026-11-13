@@ -42,7 +42,7 @@
                                              "cursor-pointer border-line hover:bg-mist": !school.current) do %>
               <span class="<%= class_names("grid size-5 shrink-0 place-items-center rounded-full border-2",
                                            "border-brand-strong": school.current, "border-line": !school.current) %>" aria-hidden="true">
-                <% if school.current %><span class="size-2.5 rounded-full bg-brand-strong"></span><% end %>
+                <% if school.current %><span class="size-2.5 rounded-full bg-brand"></span><% end %>
               </span>
               <span class="min-w-0 flex-1">
                 <span class="block truncate text-sm font-medium"><%= school.sigle.presence || school.name %></span>

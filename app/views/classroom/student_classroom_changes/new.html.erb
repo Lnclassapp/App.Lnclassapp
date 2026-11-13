@@ -35,7 +35,7 @@
                                                                current_classroom_public_id: @current.public_id, **class_picker_lists %>
 
     <%# Sans JavaScript, jamais désactivé ; le contrôleur classroom--class-picker le désactive tant qu'aucune classe n'est cochée. %>
-    <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, icon_end: "arrow-right",
+    <%= ui_button t(".submit"), type: :submit, variant: :primary, size: :lg, full: true, icon_end: "arrow-right",
                                 id: "student-classroom-change-submit", data: { "classroom--class-picker-target": "submit" } %>
   <% end %>
 </div>

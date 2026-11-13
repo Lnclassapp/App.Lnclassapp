@@ -18,7 +18,14 @@
             <%# UDR §3.4 : le point ambre, décoratif ; sa phrase est lue après le nom (suffixe sr-only). %>
             <% if late %><span class="absolute top-0 right-0 size-2.5 rounded-full bg-warning-dot ring-2 ring-white" aria-hidden="true"></span><% end %>
           </span>
-          <span class="break-words"><%= subject.name %></span>
+          <%# Retouche matieres-noms-courts : nom court affiché (I18n par slug, sinon le nom entier) ; le nom entier reste lu aux lecteurs d'écran. %>
+          <% short = t("classroom.student_homes.subjects.short_names.#{subject.slug}", default: subject.name) %>
+          <% if short == subject.name %>
+            <span class="break-words"><%= subject.name %></span>
+          <% else %>
+            <span class="break-words" aria-hidden="true"><%= short %></span>
+            <span class="sr-only"><%= subject.name %></span>
+          <% end %>
           <% if late %><span class="sr-only"><%= t("classroom.student_homes.subjects.late") %></span><% end %>
         <% end %>
       </li>

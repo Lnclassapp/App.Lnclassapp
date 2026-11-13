@@ -238,7 +238,7 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
       %w[#signup-no-code-label #student_registration_join_code].each do |selector|
         assert_operator evaluate_script("document.querySelector('#{selector}').getBoundingClientRect().height"), :>=, 44
       end
-      assert_equal [ true, false, false ], page.all("#signup-progress li", visible: :all).map { it[:class].include?("bg-brand-strong") }
+      assert_equal [ true, false, false ], page.all("#signup-progress li", visible: :all).map { it[:class].include?("bg-brand") }
     end
   end
 

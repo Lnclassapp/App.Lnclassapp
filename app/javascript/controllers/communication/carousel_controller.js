@@ -4,7 +4,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 // Classes écrites en entier pour que Tailwind les compile.
-const ACTIVE = ["w-4", "bg-brand-strong"]
+const ACTIVE = ["w-4", "bg-brand"]
 const IDLE = ["w-1.5", "bg-line"]
 
 export default class extends Controller {

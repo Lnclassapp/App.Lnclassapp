@@ -43,7 +43,7 @@ module Repositories
       end
 
       test "un jeton expire après 30 jours" do
-        signed = token
+        signed = travel_to(ISSUED) { token }
 
         travel_to(ISSUED + 29.days) { assert_not_nil @signer.verify(token: signed) }
         travel_to(ISSUED + 31.days) { assert_nil @signer.verify(token: signed) }

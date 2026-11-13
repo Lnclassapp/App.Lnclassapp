@@ -19,9 +19,8 @@ class SharedClassesTest < ActiveSupport::TestCase
                    "select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 " \
                    "focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 " \
                    "aria-disabled:pointer-events-none aria-disabled:opacity-50",
-    # UDR palette froide §3.3 (mvp-teacher-student, Lot P) : principal en `brand-strong`, secondaire au texte bleu.
-    "ui-button-primary" => "bg-brand-strong text-white hover:bg-brand-strong/90",
-    "ui-button-brand" => "bg-brand text-ink hover:bg-brand/85",
+    # UDR-0171 (amende UDR palette froide §3.3) : un seul bouton bleu, fond `brand`, texte `on-brand` ; secondaire au texte bleu.
+    "ui-button-primary" => "bg-brand text-on-brand hover:bg-brand/90",
     "ui-button-secondary" => "border border-line-strong bg-white text-brand-strong hover:bg-mist",
     "ui-button-ghost" => "text-ink hover:bg-ink/5",
     "ui-button-danger" => "bg-error text-white hover:bg-error/90",
@@ -53,7 +52,7 @@ class SharedClassesTest < ActiveSupport::TestCase
     assert_equal({ sm: "ui-badge-sm", md: "ui-badge-md" }, ComponentsHelper::BADGE_SIZES)
     assert_equal "ui-card-link", ComponentsHelper::CARD_LINK
     assert_equal "ui-button", ComponentsHelper::BUTTON_BASE
-    assert_equal %i[primary brand secondary ghost danger].index_with { "ui-button-#{it}" }, ComponentsHelper::BUTTON_VARIANTS
+    assert_equal %i[primary secondary ghost danger].index_with { "ui-button-#{it}" }, ComponentsHelper::BUTTON_VARIANTS
     assert_equal %i[sm md lg].index_with { "ui-button-#{it}" }, ComponentsHelper::BUTTON_SIZES
     assert_equal({ default: "ui-menu-item-default", danger: "ui-menu-item-danger" }, ComponentsHelper::DROPDOWN_TONES)
   end
