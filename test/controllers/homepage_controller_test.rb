@@ -34,7 +34,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "main [role='note'][aria-label='Je prépare mes interros et devoirs à la maison.']", 1 do
       assert_select "svg[aria-hidden='true'] path", 1
       assert_select "span[aria-hidden='true']", text: /Je prépare mes\s*interros\s*et devoirs\s*à la maison\./
-      assert_equal [ "interros et devoirs" ], css_select("span.font-extrabold.text-brand.bg-white").map { it.text.squish }
+      assert_equal [ "interros", "et devoirs" ], css_select("span.font-extrabold.text-ink").map { it.text.squish }
     end
     assert_select "main button[aria-haspopup='dialog']", text: "Je suis élève"
     assert_select "main button[aria-haspopup='dialog']", text: "Enseignant(e)"

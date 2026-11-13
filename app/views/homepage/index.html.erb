@@ -24,12 +24,9 @@
       </svg>
       <span aria-hidden="true" class="relative grid leading-tight font-bold whitespace-nowrap text-white">
         <span><%= t(".badge.lead") %></span>
-        <%# « interros et devoirs » en accent : graisse 800, bleu `brand` sur une étiquette blanche (sur l'étoile `brand`, le bleu seul
-            serait invisible), identique dans les deux thèmes (retouche accroche-accueil-interros). %>
-        <span class="home-badge-accent my-0.5 grid justify-self-center rounded-sm bg-white px-1.5 py-0.5 font-display leading-none font-extrabold text-brand">
-          <span><%= t(".badge.accent_1") %></span>
-          <span><%= t(".badge.accent_2") %></span>
-        </span>
+        <%# « interros et devoirs » en accent : graisse 800 et `ink`, comme l'ancien « 6ème » (choix du porteur sur capture, sans étiquette blanche). %>
+        <span class="home-badge-accent font-display leading-none font-extrabold text-ink"><%= t(".badge.accent_1") %></span>
+        <span class="home-badge-accent font-display leading-none font-extrabold text-ink"><%= t(".badge.accent_2") %></span>
         <span><%= t(".badge.tail") %></span>
       </span>
     </p>
