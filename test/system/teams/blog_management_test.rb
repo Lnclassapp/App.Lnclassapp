@@ -434,18 +434,25 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
 
   # The team endpoint holds every upload of the block until the test releases it: release.call lets the upload through,
   # release.call(500) answers that status instead. The state seen while an upload is under way is then certain, instead
-  # of raced against a slowed network. Whatever is still held at the end of the block is let go.
+  # of raced against a slowed network. release waits until the upload is held by the server (the browser shrinks the
+  # image first): released before it arrived, it would meet the restored action and pass. Whatever is still held at the
+  # end of the block is let go.
   # The original action is kept in a local, not under an alias: a request let through just before the block ends still
   # finds it once the action is restored.
   def hold_uploads
     gate = Thread::Queue.new
+    arrived = Thread::Queue.new
     endpoint = Teams::ArticleImagesController
     original = endpoint.instance_method(:create)
     endpoint.define_method(:create) do
+      arrived << true
       answer = gate.pop
       answer == :pass ? original.bind_call(self) : head(answer || :service_unavailable)
     end
-    yield ->(status = :pass) { gate << status }
+    yield lambda { |status = :pass|
+      assert arrived.pop(timeout: UPLOAD_WAIT), "aucun envoi n'a atteint le serveur"
+      gate << status
+    }
   ensure
     gate.close
     endpoint.define_method(:create, original)
