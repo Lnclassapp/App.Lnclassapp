@@ -36,7 +36,7 @@
     <%# L'état vide est toute la page : son titre en est le h1 (UDR-0054 §3.1). %>
     <%= ui_empty_state title:, description:, icon:, heading: :h1 do %>
       <% if @case == :student %>
-        <%= ui_button t(".student.join"), href: new_student_classroom_choice_path, variant: :brand, icon: "academic-cap" %>
+        <%= ui_button t(".student.join"), href: new_student_classroom_choice_path, variant: :primary, icon: "academic-cap" %>
         <% if @archived %>
           <%= ui_button t(".student.archive"), href: student_archive_path, variant: :secondary, icon: "archive-box" %>
         <% end %>

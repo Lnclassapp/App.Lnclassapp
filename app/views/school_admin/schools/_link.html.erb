@@ -11,7 +11,7 @@
   <p id="school_link_hint" class="mt-2 text-sm text-mute"><%= t(".hint") %></p>
   <div class="mt-4 flex flex-col gap-3 sm:flex-row">
     <%= ui_copy_button link, label: t(".copy"), copied: t(".copied"), aria_label: t(".copy_label"), icon: "link" %>
-    <%= ui_button t(".share_whatsapp"), href: whatsapp_share_url(t(".share_message", school: school.name, link:)), variant: :brand,
+    <%= ui_button t(".share_whatsapp"), href: whatsapp_share_url(t(".share_message", school: school.name, link:)), variant: :primary,
                                         size: :sm, icon: "chat-bubble-left-right", target: "_blank", rel: "noopener",
                                         id: "school_link_whatsapp" %>
   </div>

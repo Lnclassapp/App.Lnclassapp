@@ -32,7 +32,7 @@
     <div class="hidden justify-center gap-1.5 pt-2" aria-hidden="true" data-communication--carousel-target="pager">
       <% carousel.cards.each_index do |index| %>
         <%# Les deux états sont écrits en entier : Tailwind ne compile que ce qu'il lit (le contrôleur les échange). %>
-        <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+        <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand" : "h-1.5 w-1.5 rounded-full bg-line" %>"
               data-communication--carousel-target="dot"></span>
       <% end %>
     </div>

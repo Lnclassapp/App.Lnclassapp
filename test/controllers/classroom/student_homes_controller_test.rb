@@ -55,7 +55,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal %w[offline_queue student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     # The band is the shell's, above the column, and the page title is not repeated.
-    assert_select "main > div.lg\\:hidden > header.student-band.bg-brand.text-band-ink"
+    assert_select "main > div.lg\\:hidden > header.student-band.bg-brand.text-on-brand"
     assert_select "header.sticky.max-lg\\:hidden"
     assert_select "[class*='fixed bottom-0'], nav.fixed", 0
     assert_no_match(/À faire ensuite|Paiement/, response.body)

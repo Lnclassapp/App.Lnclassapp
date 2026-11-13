@@ -11,7 +11,7 @@
   <%= ui_modal title:, id: "staff-position-modal", size: :sm, open: true do |modal| %>
     <% modal.footer do %>
       <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
-      <%= ui_button t(".submit"), type: :submit, variant: :brand, form: "staff-position-form",
+      <%= ui_button t(".submit"), type: :submit, variant: :primary, form: "staff-position-form",
                                   data: { turbo_submits_with: t(".submitting") } %>
     <% end %>
     <%= form_with model: @form, scope: :staff_position, url: school_staff_member_position_path(@school.public_id, @target.user_public_id),

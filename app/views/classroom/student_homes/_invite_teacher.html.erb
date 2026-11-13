@@ -6,7 +6,7 @@
 <% message = t("#{scope}.message", classroom:, school:, link: new_teacher_registration_url) %>
 <% if standalone %>
   <%# UDR-0086 §3.7 : le nom du bouton dit WhatsApp, et commence par son texte visible. %>
-  <%= ui_button t("#{scope}.action"), href: whatsapp_share_url(message), variant: :brand, icon: "chat-bubble-left-right",
+  <%= ui_button t("#{scope}.action"), href: whatsapp_share_url(message), variant: :primary, icon: "chat-bubble-left-right",
                 target: "_blank", rel: "noopener", "aria-label": t("#{scope}.action_label"), class: "mt-2" %>
 <% else %>
   <div id="student_home_invite_teacher" class="mt-4 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row sm:items-center sm:justify-between">

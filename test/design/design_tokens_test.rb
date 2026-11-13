@@ -58,7 +58,7 @@ class DesignTokensTest < ActiveSupport::TestCase
   COLD_PALETTE = {
     "ink" => "#1f2128", "mute" => "#5f6470", "line" => "#e3eef7", "line-strong" => "#c3d8e8", "mist" => "#f4f8fb",
     "paper" => "#ffffff", "warning" => "#8a4a00", "warning-dot" => "#f08c00", "band-ink" => "#0b2a40",
-    "brand" => "#00a0ff", "brand-soft" => "#e5f5ff", "brand-strong" => "#0070b3", "teacher" => "#ff8a00",
+    "brand" => "#0861e1", "brand-soft" => "#e7f0fd", "brand-strong" => "#0861e1", "on-brand" => "#ffffff", "teacher" => "#ff8a00",
     "success" => "#18723f", "warning-soft" => "#fff1dc"
   }.freeze
   COLD_PALETTE_DARK = { "line-strong" => "#3a4655", "warning-dot" => "#ffa94d", "band-ink" => "#ffffff" }.freeze

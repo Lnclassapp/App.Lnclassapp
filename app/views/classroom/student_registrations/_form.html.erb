@@ -94,7 +94,7 @@
       </legend>
       <div class="grid grid-cols-2 gap-3">
         <% Entities::Identity::User::GENDERS.each do |gender| %>
-          <label class="relative flex h-11 items-center justify-center rounded-full border border-line bg-white px-4 font-medium text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
+          <label class="relative flex h-11 items-center justify-center rounded-full border border-line bg-white px-4 font-medium text-ink transition has-checked:border-brand has-checked:bg-brand has-checked:text-on-brand">
             <%= form.radio_button :gender, gender, required: true,
                                   class: "absolute inset-0 cursor-pointer appearance-none rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                                   "aria-invalid": ("true" if gender_error) %>

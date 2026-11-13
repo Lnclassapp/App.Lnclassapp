@@ -28,7 +28,7 @@
             <%= ui_field form, :code, required: true, value: "", hint: t("shared.autosubmit.hint_second_factor"), inputmode: "numeric",
                                       autocomplete: "one-time-code", maxlength: 6, pattern: '\d{6}', data: { autosubmit_target: "input" } %>
             <p class="sr-only" role="status" aria-live="polite" data-autosubmit-target="status"></p>
-            <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
+            <%= ui_button t(".submit"), type: :submit, variant: :primary, full: true %>
           <% end %>
         </li>
       </ol>

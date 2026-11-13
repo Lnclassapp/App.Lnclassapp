@@ -47,7 +47,7 @@ module ComponentsHelper
   # Lot E6 (politique-cache) : forme, variantes et tailles écrites une fois dans application.tailwind.css (classes
   # partagées ui-button*, leur contenu figé par test/design/shared_classes_test.rb).
   BUTTON_BASE = "ui-button"
-  BUTTON_VARIANTS = { primary: "ui-button-primary", brand: "ui-button-brand", secondary: "ui-button-secondary",
+  BUTTON_VARIANTS = { primary: "ui-button-primary", secondary: "ui-button-secondary",
                       ghost: "ui-button-ghost", danger: "ui-button-danger" }.freeze
   # `sm` agrandit sa zone tactile à 48 px par un pseudo-élément : le bouton paraît petit, le doigt ne le rate pas.
   BUTTON_SIZES = { sm: "ui-button-sm", md: "ui-button-md", lg: "ui-button-lg" }.freeze
@@ -147,13 +147,13 @@ module ComponentsHelper
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   # Chaque ton passe AA avec son texte, en clair comme en sombre (test/design/dark_mode_test.rb) : tous peuvent être tirés.
   AVATAR_TONES = {
-    brand: "bg-brand text-ink", teacher: "bg-teacher text-ink", school: "bg-school text-white",
+    brand: "bg-brand text-on-brand", teacher: "bg-teacher text-ink", school: "bg-school text-white",
     team: "bg-team text-white", gold: "bg-gold text-ink"
   }.freeze
   # UDR-0084 §3.4 : pastille « + » d'un avatar sans photo, 16 px à la taille sm.
   AVATAR_BADGE_SIZES = { sm: "size-4 text-2xs", md: "size-5 text-xs", lg: "size-6 text-sm", xl: "size-8 text-base" }.freeze
-  AVATAR_BADGE = "absolute -right-0.5 -bottom-0.5 grid place-items-center rounded-full bg-brand-strong font-medium leading-none " \
-                 "text-white ring-2 ring-white"
+  AVATAR_BADGE = "absolute -right-0.5 -bottom-0.5 grid place-items-center rounded-full bg-brand font-medium leading-none " \
+                 "text-on-brand ring-2 ring-white"
 
   # UDR palette froide §2, UDR enseignant §3.1 : barre de progression pleine de la couleur du rôle (role_fill_class) sur
   # une piste `line`. Une case par élément fait, sans largeur calculée (ni `style`, ni valeur arbitraire) ; au-delà de

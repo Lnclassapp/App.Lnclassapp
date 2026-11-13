@@ -10,12 +10,13 @@ class DarkModeTest < ActiveSupport::TestCase
   # Paires des composants (ComponentsHelper : boutons, badges, toasts ; pages : texte sur surfaces), [texte, fond, minimum].
   TEXT_PAIRS = [
     %w[ink paper], %w[ink white], %w[ink mist], %w[mute white], %w[mute paper], %w[mute mist],
-    %w[white ink], %w[ink brand], %w[ink brand-soft], %w[brand-strong paper], %w[brand-strong white], %w[brand-strong brand-soft],
+    %w[white ink], %w[on-brand brand], %w[ink brand-soft], %w[brand-strong paper], %w[brand-strong white], %w[brand-strong brand-soft],
     %w[success success-soft], %w[warning warning-soft], %w[error error-soft], %w[success white], %w[warning white], %w[error white],
     %w[white error], %w[white team], %w[white school], %w[ink teacher], %w[ink gold], %w[school white], %w[team white]
   ].map { [ *it, 4.5 ] }.freeze
-  # Le contour de focus (`outline-brand`) se voit sur les surfaces sombres. En clair, il est à 2,7 : constat hors chantier.
-  DARK_ONLY_PAIRS = [ [ "brand", "paper", 3.0 ], [ "brand", "white", 3.0 ] ].freeze
+  # Le contour de focus (`outline-brand`) et les pastilles pleines se voient sur les surfaces, dans les deux modes (3:1,
+  # élément graphique). UDR-0171 : #0861E1 y est à 5,52 en clair, à 3,1 et 3,4 en sombre (2,7 avec l'ancien bleu ciel).
+  GRAPHIC_PAIRS = [ [ "brand", "paper", 3.0 ], [ "brand", "white", 3.0 ] ].freeze
   # UDR-0074 §3.7 : les pastilles de la direction se lisent sur leur anneau, de la couleur de la carte (3:1, élément graphique).
   # Constat du challenger (phase 5, O5) : le jaune #f2b705 n'y avait que 1,82.
   SIGNAL_PAIRS = %w[signal-green signal-yellow signal-red].map { [ it, "white", 3.0 ] }.freeze
@@ -66,8 +67,8 @@ class DarkModeTest < ActiveSupport::TestCase
   end
 
   test "every text and background pair of the components stays readable, in light and in dark" do
-    failures = { "clair" => [ light, TEXT_PAIRS + SIGNAL_PAIRS ],
-                 "sombre" => [ dark, TEXT_PAIRS + DARK_ONLY_PAIRS + SIGNAL_PAIRS ] }.flat_map do |mode, (palette, pairs)|
+    failures = { "clair" => [ light, TEXT_PAIRS + GRAPHIC_PAIRS + SIGNAL_PAIRS ],
+                 "sombre" => [ dark, TEXT_PAIRS + GRAPHIC_PAIRS + SIGNAL_PAIRS ] }.flat_map do |mode, (palette, pairs)|
       pairs.filter_map do |text, background, minimum|
         ratio = contrast(palette.fetch(text), palette.fetch(background))
         "#{mode} : #{text} sur #{background} = #{ratio.round(2)} (< #{minimum})" if ratio < minimum
