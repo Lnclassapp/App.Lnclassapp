@@ -12,7 +12,7 @@ problematique: Les premières maquettes « Wave » ont été refusées (trop de 
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |
-| **Remplacé par** | — *(§2.2 et §3.1, les trois bleus : amendés par UDR-XXXX-bleu-unique-de-marque, 2026-11-13)* |
+| **Remplacé par** | — *(§2.2 et §3.1, les trois bleus : amendés par UDR-0171, 2026-11-13)* |
 
 ---
 
@@ -23,7 +23,7 @@ L'app a des neutres chauds (fond crème #faf8f4, gris brun #5e5a54) et deux poli
 ## 2. Décision
 
 1. **Neutres froids** : page blanche, gris bleutés. Le crème disparaît.
-2. **Le bleu se dose** : `brand` (#00a0ff) seulement en aplat de bandeau et en barre de progression ; `brand-strong` (#0070b3) pour les boutons principaux et les liens ; `brand-soft` (#e5f5ff) pour tous les ronds d'icône et les cartes d'annonce. *Amendé par UDR-XXXX-bleu-unique-de-marque (2026-11-13) : un seul bleu, #0861E1 ; les fonds bleus (bouton principal compris) sont `brand` à texte blanc `on-brand`, `brand-strong` n'est plus qu'un texte ou une icône, `brand-soft` devient #e7f0fd.*
+2. **Le bleu se dose** : `brand` (#00a0ff) seulement en aplat de bandeau et en barre de progression ; `brand-strong` (#0070b3) pour les boutons principaux et les liens ; `brand-soft` (#e5f5ff) pour tous les ronds d'icône et les cartes d'annonce. *Amendé par UDR-0171 (2026-11-13) : un seul bleu, #0861E1 ; les fonds bleus (bouton principal compris) sont `brand` à texte blanc `on-brand`, `brand-strong` n'est plus qu'un texte ou une icône, `brand-soft` devient #e7f0fd.*
 3. **L'ambre veut dire « retard », rien d'autre.** Les notes ne sont jamais rouges.
 4. **Une seule police, DM Sans.** Graisse 400 pour le texte, 500 au plus pour les titres. Aucun texte en 600, 700 ou 800.
 5. **Échelle de texte réduite**, minimum 12 px.
@@ -48,7 +48,7 @@ Pourquoi changer les neutres pour toute l'app et pas pour l'élève seul : un je
 | `--font-display` | Bricolage Grotesque | **DM Sans** (même valeur que `--font-sans`) | — | titres |
 | `--text-meta` | — | **0.8125rem** (13 px, nouveau) | — | méta, aide, libellés de grille |
 
-Inchangés : `brand` #00a0ff, `brand-soft` #e5f5ff, `brand-strong` #0070b3 *(remplacés depuis par UDR-XXXX-bleu-unique-de-marque)*, `success` #18723f, `warning-soft` #fff1dc, rayons, ombres, espacements, conteneurs. Le fichier de police Bricolage Grotesque cesse d'être chargé.
+Inchangés : `brand` #00a0ff, `brand-soft` #e5f5ff, `brand-strong` #0070b3 *(remplacés depuis par UDR-0171)*, `success` #18723f, `warning-soft` #fff1dc, rayons, ombres, espacements, conteneurs. Le fichier de police Bricolage Grotesque cesse d'être chargé.
 
 ### 3.2 Échelle de texte (classes Tailwind)
 

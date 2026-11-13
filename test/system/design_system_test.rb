@@ -28,7 +28,7 @@ test "in a dark system theme the tokens turn dark, and a printed page stays ligh
 
   assert_equal "rgb(15, 18, 24)", css(find("body"), "background-color")
   assert_equal "rgb(238, 241, 245)", css(find("body"), "color")
-  assert_equal "rgb(8, 97, 225)", css(find("[data-token='brand'] div"), "background-color"), "UDR bleu unique : le fond bleu ne change pas"
+  assert_equal "rgb(8, 97, 225)", css(find("[data-token='brand'] div"), "background-color"), "UDR-0171 : le fond bleu ne change pas"
 
   emulate_media(media: "print", features: [ { name: "prefers-color-scheme", value: "dark" } ])
 

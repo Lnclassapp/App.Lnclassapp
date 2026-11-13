@@ -94,7 +94,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[disabled]", 0
   end
 
-  # UDR bleu unique : la variante `brand` (bleu ciel, texte noir) est fusionnée dans `primary` ; elle n'existe plus.
+  # UDR-0171 : la variante `brand` (bleu ciel, texte noir) est fusionnée dans `primary` ; elle n'existe plus.
   test "ui_button has a single blue variant: brand is refused" do
     assert_raises(ArgumentError) { ui_button("Rejoindre", variant: :brand) }
   end

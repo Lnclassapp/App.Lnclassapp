@@ -51,7 +51,7 @@ Le porteur a tranché le 2026-09-25 pour un **design mixte**. Les écrans, les p
 | `mist` | `#f2eee7` | fonds neutres, squelettes, survols |
 | `paper` | `#faf8f4` | fond de page |
 | `white` | `#ffffff` | cartes, champs, modales |
-| `brand` | `#0861e1` *(avant : #00a0ff, UDR-XXXX-bleu-unique-de-marque)* | aplats de marque ; **le texte posé dessus est `on-brand`, blanc** (5,52) |
+| `brand` | `#0861e1` *(avant : #00a0ff, UDR-0171)* | aplats de marque ; **le texte posé dessus est `on-brand`, blanc** (5,52) |
 | `brand-soft` | `#e7f0fd` *(avant : #e5f5ff)* | fonds de marque doux, tuiles d'icône |
 | `brand-strong` | `#0861e1` *(avant : #0070b3)* | texte et icônes de marque sur fond clair (5,52 sur blanc) |
 | `teacher` · `school` · `team` · `gold` | `#ff8a00` · `#1b365d` · `#7b3aed` · `#f39c12` | couleurs de rôle (filet d'en-tête, badges, avatars) |

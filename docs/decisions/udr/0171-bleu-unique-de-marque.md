@@ -1,4 +1,4 @@
-# UDR-XXXX : Bleu unique de marque — #0861E1 du logo aux boutons, au bandeau, à la PWA et à Android
+# UDR-0171 : Bleu unique de marque — #0861E1 du logo aux boutons, au bandeau, à la PWA et à Android
 <!-- index
 titre: Bleu unique de marque #0861E1
 statut: Accepté

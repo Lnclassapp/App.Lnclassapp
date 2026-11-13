@@ -3,7 +3,7 @@
 module SobrietyAssertions
   ActionDispatch::SystemTestCase.include(self)
 
-  # ComponentsHelper::BUTTON_VARIANTS (ui-button-primary, the single blue button of UDR bleu unique), and the same look
+  # ComponentsHelper::BUTTON_VARIANTS (ui-button-primary, the single blue button of UDR-0171), and the same look
   # written by hand in a view (bg-ink text-white, bg-brand text-on-brand).
   PRIMARY_ACTION = "a.ui-button-primary, button.ui-button-primary, " \
                    "a.bg-ink.text-white, button.bg-ink.text-white, a.bg-brand.text-on-brand, button.bg-brand.text-on-brand".freeze

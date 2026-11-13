@@ -1,8 +1,8 @@
 <%# 🌐 UI · shared/_auth_welcome — l'accueil bleu de la connexion et de l'inscription élève : carte en haut du formulaire, ou panneau à gauche %>
-<%# Rôle : variant :card sous 1 024 px (logo 48 px), :panel au-delà (moitié de l'écran, logo 64 px) ; aplat brand, texte on-brand (UDR bleu unique), tokens seuls %>
-<%# UDR  : 0054 (§3.2 logo vers l'accueil public), 0084 §3.5 (AA ; dégradé remplacé par l'aplat, UDR bleu unique), 0088 (§3.1, §3.7) · locals : variant, title, text %>
+<%# Rôle : variant :card sous 1 024 px (logo 48 px), :panel au-delà (moitié de l'écran, logo 64 px) ; aplat brand, texte on-brand (UDR-0171), tokens seuls %>
+<%# UDR  : 0054 (§3.2 logo vers l'accueil public), 0084 §3.5 (AA ; dégradé remplacé par l'aplat, UDR-0171), 0088 (§3.1, §3.7) · locals : variant, title, text %>
 <%# locals: (variant:, title:, text: nil) -%>
-<%# UDR bleu unique : un aplat du bleu de marque, texte on-brand blanc (5,52:1) dans les deux thèmes. %>
+<%# UDR-0171 : un aplat du bleu de marque, texte on-brand blanc (5,52:1) dans les deux thèmes. %>
 <% gradient = "bg-brand text-on-brand" %>
 <% logo = lambda do |size|
      link_to root_path, "aria-label": t(".logo_home"),

@@ -82,4 +82,4 @@ Tests : `test/design/brand_blue_test.rb`, `dark_mode_test.rb`, `design_tokens_te
 ## 6. Décisions rattachées
 
 - Pas d'ADR : ni port, ni table, ni dépendance, ni contrat ; seules des valeurs de l'ADR-0082 §4.1 et de l'ADR-0086 §4.8 changent, annotées sur place.
-- UDR-XXXX-bleu-unique-de-marque — amende UDR-0136 (et UDR-0005, 0065, 0075, 0078, 0080).
+- UDR-0171 — amende UDR-0136 (et UDR-0005, 0065, 0075, 0078, 0080).

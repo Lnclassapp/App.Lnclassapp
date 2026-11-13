@@ -47,7 +47,7 @@
   --color-mist: #f4f8fb;
   --color-paper: #ffffff;
 
-  /* UDR bleu unique (amende UDR-0136) : le bleu roi du logo, #0861E1, est le seul bleu de marque. `brand` est le fond (bouton
+  /* UDR-0171 (amende UDR-0136) : le bleu roi du logo, #0861E1, est le seul bleu de marque. `brand` est le fond (bouton
      principal, bandeau, pastille pleine) et ne change pas en sombre ; `brand-strong` est le texte et l'icône bleus, le même
      bleu en clair, éclairci en sombre ; `brand-soft` est sa teinte claire (fond doux, sélection). */
   --color-brand: #0861e1;
@@ -446,7 +446,7 @@
   @apply relative inline-flex cursor-pointer items-center justify-center rounded-full font-medium whitespace-nowrap select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
 }
 
-/* UDR bleu unique : un seul bouton bleu, fond `brand` #0861E1 et texte `on-brand` blanc (5,52:1) dans les deux modes ;
+/* UDR-0171 : un seul bouton bleu, fond `brand` #0861E1 et texte `on-brand` blanc (5,52:1) dans les deux modes ;
    l'ancienne variante `brand` (bleu ciel, texte noir) y est fusionnée. Secondaire blanc, texte bleu. */
 @utility ui-button-primary {
   @apply bg-brand text-on-brand hover:bg-brand/90;
@@ -673,7 +673,7 @@ dialog.dialog-drawer {
    Aucune classe `dark:` dans les vues ; chaque utilitaire lit la variable du token, et ces blocs en changent la valeur.
    La règle d'inversion : le texte (`ink`, `mute`) devient clair, les surfaces (`white`, `paper`, `mist`) sombres ; un fond
    qui porte un texte blanc (`team`, `school`, `error`, `success`, `warning`) devient clair, un fond qui porte un texte
-   `ink` (`teacher`, `gold`) devient profond. Exception (UDR bleu unique) : `brand` garde #0861E1 et son texte `on-brand`
+   `ink` (`teacher`, `gold`) devient profond. Exception (UDR-0171) : `brand` garde #0861E1 et son texte `on-brand`
    reste blanc ; seuls `brand-strong` (texte bleu, éclairci) et `brand-soft` (assombri) changent. Écran seulement : une page imprimée reste claire (codes de secours).
    Amendement du 2026-10-03 — l'interrupteur pose `data-theme` sur <html> : `dark` l'emporte sur un téléphone clair,
    `light` sur un téléphone sombre ; sans choix, le réglage du téléphone. Les deux blocs portent les mêmes valeurs.

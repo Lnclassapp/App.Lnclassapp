@@ -110,7 +110,7 @@ Onglets de l'app enseignants :
 - `android/student` et `android/teacher` : modules d'app minces. Chacun porte :
   - son identifiant et son jeton User-Agent ;
   - ses onglets ;
-  - ses icônes et ses couleurs : élèves `#0861E1` (UDR-XXXX-bleu-unique-de-marque) ; enseignants `#FF8A00` pour l'écran de démarrage et `#C2410C` pour l'onglet actif, lisible sur fond blanc ;
+  - ses icônes et ses couleurs : élèves `#0861E1` (UDR-0171) ; enseignants `#FF8A00` pour l'écran de démarrage et `#C2410C` pour l'onglet actif, lisible sur fond blanc ;
   - ses liens profonds.
 - Variantes : `develop`, `recette` et `production`, identifiant `com.lnclass.teacher` avec le suffixe `.develop` ou `.recette`.
 - `bin/android-build [student|teacher] <variante> [dossier]` : `student` par défaut, donc `bin/android-build recette` garde son sens. Les fichiers produits s'appellent `lnclass-<variante>.apk` et `lnclass-teacher-<variante>.apk`.

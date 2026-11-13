@@ -12,7 +12,7 @@ class AnnouncementThemesTest < ActiveSupport::TestCase
   # The background, the text (signature and fill-school), the illustration, the strong illustration or the badge.
   TOKENS = %w[brand-soft school brand brand-strong].freeze
   # UDR-0075 §3.1, the table validated by the owner on 2026-10-05: [light, dark], each in the order of TOKENS. « Ciel »
-  # follows the brand blue of UDR bleu unique (#0861E1, 2026-11-13); the nine others are unchanged.
+  # follows the brand blue of UDR-0171 (#0861E1, 2026-11-13); the nine others are unchanged.
   PALETTE = {
     "ciel" => [ %w[#e7f0fd #1b365d #0861e1 #0861e1], %w[#122949 #a9c4ee #0861e1 #8bb8f9] ],
     "lagune" => [ %w[#d9f7f3 #0b4a45 #14b8a6 #0f766e], %w[#0f2e2b #99e6dc #0f766e #5eead4] ],

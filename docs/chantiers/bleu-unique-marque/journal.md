@@ -45,4 +45,4 @@
 | **Livré le** | — *(PR ouverte vers `Develop`)* |
 | **PR** | #581 |
 | **ADR produits** | — |
-| **UDR produits** | UDR-XXXX-bleu-unique-de-marque |
+| **UDR produits** | UDR-0171 |

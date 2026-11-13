@@ -15,7 +15,7 @@ class DarkModeTest < ActiveSupport::TestCase
     %w[white error], %w[white team], %w[white school], %w[ink teacher], %w[ink gold], %w[school white], %w[team white]
   ].map { [ *it, 4.5 ] }.freeze
   # Le contour de focus (`outline-brand`) et les pastilles pleines se voient sur les surfaces, dans les deux modes (3:1,
-  # élément graphique). UDR bleu unique : #0861E1 y est à 5,52 en clair, à 3,1 et 3,4 en sombre (2,7 avec l'ancien bleu ciel).
+  # élément graphique). UDR-0171 : #0861E1 y est à 5,52 en clair, à 3,1 et 3,4 en sombre (2,7 avec l'ancien bleu ciel).
   GRAPHIC_PAIRS = [ [ "brand", "paper", 3.0 ], [ "brand", "white", 3.0 ] ].freeze
   # UDR-0074 §3.7 : les pastilles de la direction se lisent sur leur anneau, de la couleur de la carte (3:1, élément graphique).
   # Constat du challenger (phase 5, O5) : le jaune #f2b705 n'y avait que 1,82.

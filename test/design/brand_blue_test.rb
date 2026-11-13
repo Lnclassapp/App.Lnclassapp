@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR bleu unique (amende UDR-0136, porteur 2026-11-13) : le bleu roi du logo, #0861E1, est le seul bleu de marque de
+# UDR-0171 (amende UDR-0136, porteur 2026-11-13) : le bleu roi du logo, #0861E1, est le seul bleu de marque de
 # Lnclass, dans l'application, le mode sombre, la PWA, les pages statiques et les apps Android. Un fond bleu porte un
 # texte blanc (`on-brand`), dans les deux modes ; `brand-strong` n'est plus qu'un texte ou une icône.
 class BrandBlueTest < ActiveSupport::TestCase
@@ -64,7 +64,7 @@ class BrandBlueTest < ActiveSupport::TestCase
   test "no blue background in brand-strong: the blue background is brand" do
     offences = scan(/(?<![\w-])(?:[\w-]+:)*bg-brand-strong(?![\w-])/, except: SWATCH)
 
-    assert_empty offences, "fond `brand` (UDR bleu unique) :\n#{offences.join("\n")}"
+    assert_empty offences, "fond `brand` (UDR-0171) :\n#{offences.join("\n")}"
   end
 
   test "a blue background carries on-brand text, never text-white (dark in dark mode) nor text-ink" do

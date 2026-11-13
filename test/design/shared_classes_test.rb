@@ -19,7 +19,7 @@ class SharedClassesTest < ActiveSupport::TestCase
                    "select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 " \
                    "focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 " \
                    "aria-disabled:pointer-events-none aria-disabled:opacity-50",
-    # UDR bleu unique (amende UDR palette froide §3.3) : un seul bouton bleu, fond `brand`, texte `on-brand` ; secondaire au texte bleu.
+    # UDR-0171 (amende UDR palette froide §3.3) : un seul bouton bleu, fond `brand`, texte `on-brand` ; secondaire au texte bleu.
     "ui-button-primary" => "bg-brand text-on-brand hover:bg-brand/90",
     "ui-button-secondary" => "border border-line-strong bg-white text-brand-strong hover:bg-mist",
     "ui-button-ghost" => "text-ink hover:bg-ink/5",

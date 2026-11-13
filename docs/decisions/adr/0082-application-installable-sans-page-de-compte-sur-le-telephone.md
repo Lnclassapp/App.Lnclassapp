@@ -63,7 +63,7 @@ Servi par `Rails::PwaController` (`GET /manifest.json`, route `pwa_manifest`), d
 | `start_url` | `/?source=app` |
 | `scope`, `id` | `/` |
 | `display` | `standalone` |
-| `theme_color` | `#0861e1` (bleu de marque, une seule couleur, quel que soit le rôle ; #00a0ff avant UDR-XXXX-bleu-unique-de-marque) |
+| `theme_color` | `#0861e1` (bleu de marque, une seule couleur, quel que soit le rôle ; #00a0ff avant UDR-0171) |
 | `background_color` | `#ffffff` |
 | `icons` | `/icon-192.png` (192), `/icon.png` (512), `/icon-maskable.png` (512, `purpose: maskable`, logo dans la zone sûre de 80 %) |
 
