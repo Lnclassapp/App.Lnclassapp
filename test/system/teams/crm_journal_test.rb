@@ -49,10 +49,13 @@ class Teams::CrmJournalTest < ApplicationSystemTestCase
       choose "Appel"
       choose "Neutre"
       check "Créer une relance"
-      fill_in "Date de la relance", with: (Date.current - 1).strftime("%d/%m/%Y")
+      fill_in "Date de la relance", with: Date.current - 1
       click_on "Noter l'échange"
-      assert_selector "[id$=_error]"
     end
+    # The date goes in as a Date, not as « dd/mm/yyyy »: Chrome reads that string as mm/dd/yyyy, so on days 1 to 13 yesterday
+    # became a day of December, the follow-up was valid and the modal closed (chantier tests-instables-crm-journal). The 422
+    # answer replaces the whole dialog inside the « modal » frame: the error is looked up from the page, not from the old one.
+    assert_selector "dialog#interaction-modal[open] [id$=_error]"
     assert_equal 0, Orm::CrmInteraction.count
   end
 end
