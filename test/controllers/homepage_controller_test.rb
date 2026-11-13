@@ -1,7 +1,7 @@
 require "test_helper"
 
 # Chantier mvp-teacher-student, lot F (chantier page-d-accueil-photo, UDR-0059) : la page d'accueil publique est une photo,
-# une feuille qui porte « Tu comprends chap chap », le macaron « De la 6ème à la Terminale, même sans internet » et deux entrées de rôle (modales,
+# une feuille qui porte « Tu comprends chap chap », le macaron « Je prépare mes interros et devoirs à la maison. » et deux entrées de rôle (modales,
 # UDR-0012 §2) ; ni en-tête, ni pied de page, ni section qui oblige à défiler (CA-A1, CA-A3).
 # CA-A2 : « Espace établissement » (lien et fenêtre) n'existe que drapeau `school_space_enabled` allumé.
 class HomepageControllerTest < ActionDispatch::IntegrationTest
@@ -31,9 +31,10 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: /chap chap/
     assert_select "h1 svg[aria-hidden='true'].text-gold path"
     assert_select "main img[src*='students']", 1
-    assert_select "main [role='note'][aria-label='De la 6ème à la Terminale, même sans internet']", 1 do
+    assert_select "main [role='note'][aria-label='Je prépare mes interros et devoirs à la maison.']", 1 do
       assert_select "svg[aria-hidden='true'] path", 1
-      assert_select "span[aria-hidden='true']", text: /6ème/
+      assert_select "span[aria-hidden='true']", text: /Je prépare mes\s*interros\s*et devoirs\s*à la maison\./
+      assert_equal [ "interros et devoirs" ], css_select("span.font-extrabold.text-brand.bg-white").map { it.text.squish }
     end
     assert_select "main button[aria-haspopup='dialog']", text: "Je suis élève"
     assert_select "main button[aria-haspopup='dialog']", text: "Enseignant(e)"

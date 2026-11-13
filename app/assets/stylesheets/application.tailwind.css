@@ -293,8 +293,8 @@
   object-position: 60% 100%;
 }
 
-/* Le macaron étoilé : 136 px sous 341 px, 146 px jusqu'à 380 px, 160 px au-delà (UDR-0059 §3, 2.) ; texte de 12 à 14 px,
-   « 6ème » de 30 à 36 px. */
+/* Le macaron étoilé : 136 px sous 341 px, 146 px jusqu'à 380 px, 160 px au-delà (UDR-0059 §3, 2.) ; texte de 12 px,
+   « interros et devoirs » de 16 à 18 px. */
 @utility home-badge {
   width: 8.5rem;
   height: 8.5rem;
@@ -306,13 +306,12 @@
   @media (width >= 381px) {
     width: 10rem;
     height: 10rem;
-    font-size: var(--text-sm);
   }
 }
-@utility home-badge-grade {
-  font-size: var(--text-3xl);
+@utility home-badge-accent {
+  font-size: var(--text-base);
   @media (width >= 381px) {
-    font-size: var(--text-4xl);
+    font-size: var(--text-lg);
   }
 }
 
