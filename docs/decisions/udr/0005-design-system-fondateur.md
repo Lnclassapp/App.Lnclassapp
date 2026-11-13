@@ -51,9 +51,9 @@ Le porteur a tranché le 2026-09-25 pour un **design mixte**. Les écrans, les p
 | `mist` | `#f2eee7` | fonds neutres, squelettes, survols |
 | `paper` | `#faf8f4` | fond de page |
 | `white` | `#ffffff` | cartes, champs, modales |
-| `brand` | `#00a0ff` | aplats de marque ; **le texte posé dessus est toujours `ink`** (5,38 ; le blanc ne fait que 2,81) |
-| `brand-soft` | `#e5f5ff` | fonds de marque doux, tuiles d'icône |
-| `brand-strong` | `#0070b3` | texte et icônes de marque sur fond clair (5,29 sur blanc) |
+| `brand` | `#0861e1` *(avant : #00a0ff, UDR-XXXX-bleu-unique-de-marque)* | aplats de marque ; **le texte posé dessus est `on-brand`, blanc** (5,52) |
+| `brand-soft` | `#e7f0fd` *(avant : #e5f5ff)* | fonds de marque doux, tuiles d'icône |
+| `brand-strong` | `#0861e1` *(avant : #0070b3)* | texte et icônes de marque sur fond clair (5,52 sur blanc) |
 | `teacher` · `school` · `team` · `gold` | `#ff8a00` · `#1b365d` · `#7b3aed` · `#f39c12` | couleurs de rôle (filet d'en-tête, badges, avatars) |
 | `success` / `success-soft` | `#18723f` / `#e7f5ed` | état réussi (5,31 sur son fond) |
 | `warning` / `warning-soft` | `#9a5200` / `#fff1dc` | avertissement (5,27) |

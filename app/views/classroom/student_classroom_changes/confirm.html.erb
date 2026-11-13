@@ -65,7 +65,7 @@
         <%= hidden_field_tag "student_classroom_change[#{field}]", @form.public_send(field), id: nil %>
       <% end %>
     <% end %>
-    <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, class: "w-full sm:w-auto" %>
+    <%= ui_button t(".submit"), type: :submit, variant: :primary, size: :lg, class: "w-full sm:w-auto" %>
     <%= ui_button t(".cancel"), variant: :ghost, size: :lg, href: via_link ? student_home_path : new_student_classroom_change_path,
                                 class: "w-full sm:w-auto" %>
   <% end %>

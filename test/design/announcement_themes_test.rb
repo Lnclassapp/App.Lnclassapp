@@ -11,9 +11,10 @@ class AnnouncementThemesTest < ActiveSupport::TestCase
   CHOSEN_MEDIA = "@media screen {\n  :root[data-theme=\"dark\"]"
   # The background, the text (signature and fill-school), the illustration, the strong illustration or the badge.
   TOKENS = %w[brand-soft school brand brand-strong].freeze
-  # UDR-0075 §3.1, the table validated by the owner on 2026-10-05: [light, dark], each in the order of TOKENS.
+  # UDR-0075 §3.1, the table validated by the owner on 2026-10-05: [light, dark], each in the order of TOKENS. « Ciel »
+  # follows the brand blue of UDR bleu unique (#0861E1, 2026-11-13); the nine others are unchanged.
   PALETTE = {
-    "ciel" => [ %w[#e5f5ff #1b365d #00a0ff #0070b3], %w[#132c42 #a9c4ee #0070b3 #7fd0ff] ],
+    "ciel" => [ %w[#e7f0fd #1b365d #0861e1 #0861e1], %w[#122949 #a9c4ee #0861e1 #8bb8f9] ],
     "lagune" => [ %w[#d9f7f3 #0b4a45 #14b8a6 #0f766e], %w[#0f2e2b #99e6dc #0f766e #5eead4] ],
     "menthe" => [ %w[#e3f9e5 #14452a #22c55e #15803d], %w[#13301c #a7e8b8 #15803d #86efac] ],
     "citron" => [ %w[#fff6c7 #4a3b05 #eab308 #a16207], %w[#332a0c #f5e08a #a16207 #fde047] ],
@@ -94,7 +95,7 @@ class AnnouncementThemesTest < ActiveSupport::TestCase
     assert_in_delta 21.0, contrast("#000000", "#ffffff"), 0.01
     assert_in_delta 1.0, contrast("#0070b3", "#0070b3"), 0.001
     assert_equal "#cccccc", blend("#ffffff", "#000000", 0.8)
-    assert_equal "#1b365d", blend("#1b365d", "#e5f5ff", 1.0)
+    assert_equal "#1b365d", blend("#1b365d", "#e7f0fd", 1.0)
   end
 
   private

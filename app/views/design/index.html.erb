@@ -116,7 +116,7 @@
         <%= ui_button t(".buttons.with_icon_end"), variant: :secondary, icon_end: "chevron-right", data: { state: "icon-end" } %>
         <%= ui_button t(".buttons.disabled"), disabled: true, data: { state: "disabled" } %>
         <%= ui_button t(".buttons.loading"), loading: true, data: { state: "loading" } %>
-        <%= ui_button t(".buttons.link"), href: design_path(anchor: "buttons"), variant: :brand, data: { state: "link" } %>
+        <%= ui_button t(".buttons.link"), href: design_path(anchor: "buttons"), variant: :primary, data: { state: "link" } %>
         <%= ui_button t(".buttons.disabled_link"), href: design_path, variant: :secondary, disabled: true, data: { state: "disabled-link" } %>
       </div>
       <div class="mt-3 max-w-form"><%= ui_button t(".buttons.full"), full: true, data: { state: "full" } %></div>
@@ -252,7 +252,7 @@
       <%# UDR-0064 : déclencheur `lg` pleine largeur, celui d'une entrée de rôle de la page d'accueil %>
       <div class="w-full sm:w-72">
         <%= ui_modal title: t(".modal.entry_title"), id: "demo-modal-entry", size: :sm, trigger: t(".modal.open_entry"),
-              trigger_variant: :brand, trigger_size: :lg, trigger_full: true do %>
+              trigger_variant: :primary, trigger_size: :lg, trigger_full: true do %>
           <p class="text-mute"><%= t(".modal.body") %></p>
         <% end %>
       </div>

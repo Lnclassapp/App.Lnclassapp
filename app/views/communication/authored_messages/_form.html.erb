@@ -56,7 +56,7 @@
         <label class="flex min-h-tap cursor-pointer flex-col items-center gap-1 rounded-ln p-1 text-xs font-medium has-focus-visible:outline-2 has-focus-visible:outline-brand has-checked:bg-mist has-checked:font-medium">
           <%= f.radio_button :theme, key, class: "sr-only", data: { action: "change->communication--theme-preview#preview" } %>
           <span class="grid size-10 place-items-center rounded-full bg-brand-soft ring-1 ring-school/30" data-announcement-theme="<%= key %>">
-            <span class="size-3 rounded-full bg-brand-strong"></span>
+            <span class="size-3 rounded-full bg-brand"></span>
           </span>
           <span><%= t("communication.themes.#{key}") %></span>
         </label>

@@ -18,7 +18,7 @@
     <dl class="grid gap-4 text-sm sm:grid-cols-3">
       <div>
         <dt class="text-xs text-mute"><%= t(".phone") %></dt>
-        <dd><%= link_to "tel:#{@relay_point.phone}", class: "inline-flex min-h-tap items-center gap-2 whitespace-nowrap text-brand" do %><%= ui_icon "phone", size: :sm %><%= @relay_point.phone %><% end %></dd>
+        <dd><%= link_to "tel:#{@relay_point.phone}", class: "inline-flex min-h-tap items-center gap-2 whitespace-nowrap text-brand-strong" do %><%= ui_icon "phone", size: :sm %><%= @relay_point.phone %><% end %></dd>
       </div>
       <div>
         <dt class="text-xs text-mute"><%= t(".state") %></dt>

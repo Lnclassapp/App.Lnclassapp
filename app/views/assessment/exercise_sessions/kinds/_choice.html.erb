@@ -14,10 +14,10 @@
       <span class="relative grid shrink-0 place-items-center">
         <% if question.multiple? %>
           <%= check_box_tag "#{f.object_name}[display_order][]", answer.index, picked.include?(answer.index.to_s), id: "q#{number}-answer_#{answer.index}",
-                            class: "peer size-8 cursor-pointer appearance-none rounded-sm border border-line bg-paper checked:border-brand-strong checked:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+                            class: "peer size-8 cursor-pointer appearance-none rounded-sm border border-line bg-paper checked:border-brand checked:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
         <% else %>
           <%= radio_button_tag "#{f.object_name}[display_order][]", answer.index, picked.include?(answer.index.to_s), id: "q#{number}-answer_#{answer.index}",
-                               class: "peer size-8 cursor-pointer appearance-none rounded-full border border-line bg-paper checked:border-brand-strong checked:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+                               class: "peer size-8 cursor-pointer appearance-none rounded-full border border-line bg-paper checked:border-brand checked:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
         <% end %>
         <span class="pointer-events-none absolute text-sm font-medium text-ink peer-checked:text-white" aria-hidden="true"><%= letter %></span>
       </span>

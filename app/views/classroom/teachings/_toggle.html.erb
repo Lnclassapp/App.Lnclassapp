@@ -8,7 +8,7 @@
                      "focus-visible:outline-brand" do %>
   <span><%= classroom.name %></span>
   <%= tag.span class: class_names("flex size-6 shrink-0 items-center justify-center rounded-sm border text-white transition",
-                                  classroom.declared ? "border-brand-strong bg-brand-strong" : "border-line bg-white") do %>
+                                  classroom.declared ? "border-brand bg-brand" : "border-line bg-white") do %>
     <%= ui_icon "check", variant: :mini, size: :sm if classroom.declared %>
   <% end %>
 <% end %>

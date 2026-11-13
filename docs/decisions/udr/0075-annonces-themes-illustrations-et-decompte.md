@@ -34,7 +34,7 @@ Liste fermée, dans cet ordre (`Entities::Communication::Message::THEMES`). Libe
 
 | Clé | Libellé | Clair : fond · texte · illus. · forte | Sombre : fond · texte · illus. · forte |
 |---|---|---|---|
-| `ciel` | Ciel *(par défaut, l'apparence actuelle)* | `#e5f5ff` · `#1b365d` · `#00a0ff` · `#0070b3` | `#132c42` · `#a9c4ee` · `#0070b3` · `#7fd0ff` |
+| `ciel` | Ciel *(par défaut, l'apparence actuelle ; suit le bleu de marque, UDR-XXXX-bleu-unique-de-marque)* | `#e7f0fd` · `#1b365d` · `#0861e1` · `#0861e1` | `#122949` · `#a9c4ee` · `#0861e1` · `#8bb8f9` |
 | `lagune` | Lagune | `#d9f7f3` · `#0b4a45` · `#14b8a6` · `#0f766e` | `#0f2e2b` · `#99e6dc` · `#0f766e` · `#5eead4` |
 | `menthe` | Menthe | `#e3f9e5` · `#14452a` · `#22c55e` · `#15803d` | `#13301c` · `#a7e8b8` · `#15803d` · `#86efac` |
 | `citron` | Citron | `#fff6c7` · `#4a3b05` · `#eab308` · `#a16207` | `#332a0c` · `#f5e08a` · `#a16207` · `#fde047` |

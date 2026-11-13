@@ -98,7 +98,7 @@
     <%# Collé en bas au téléphone ; une seule action principale (UDR-0138 §3.1). %>
     <footer id="exercise_actions" class="sticky bottom-0 z-10 -mx-gutter space-y-3 bg-paper px-gutter pt-4 pb-safe-action min-[700px]:mx-0 min-[700px]:px-0">
       <% if @progress.started_session_public_id %>
-        <%= ui_button t(".resume"), href: exercise_session_path(@progress.started_session_public_id), variant: :brand, size: :lg,
+        <%= ui_button t(".resume"), href: exercise_session_path(@progress.started_session_public_id), variant: :primary, size: :lg,
                       full: true, icon_end: "arrow-right" %>
         <% unless @resume_at %>
           <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "restart-exercise-form" do %>
@@ -115,9 +115,9 @@
                                 offline_start_copy_url_value: offline_copy_exercise_path(exercise.public_id),
                                 action: "submit->offline-start#go" } do %>
             <% if @progress.completed_count.positive? %>
-              <%= ui_button t(".redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path", data: { offline_start_target: "button" } %>
+              <%= ui_button t(".redo"), type: :submit, variant: :primary, size: :lg, full: true, icon: "arrow-path", data: { offline_start_target: "button" } %>
             <% else %>
-              <%= ui_button t(".start"), type: :submit, variant: :brand, size: :lg, full: true, icon_end: "arrow-right", data: { offline_start_target: "button" } %>
+              <%= ui_button t(".start"), type: :submit, variant: :primary, size: :lg, full: true, icon_end: "arrow-right", data: { offline_start_target: "button" } %>
             <% end %>
             <p hidden id="offline-start-unavailable" class="mt-2 text-sm text-mute" data-offline-start-target="unavailable"><%= t("offline.start.unavailable") %></p>
           <% end %>

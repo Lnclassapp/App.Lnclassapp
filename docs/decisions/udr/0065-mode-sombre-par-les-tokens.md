@@ -48,9 +48,9 @@ Un téléphone en thème sombre reçoit des pages claires. La grille de design d
 | `line` | `#e6e1d8` | `#2c3542` |
 | `mist` | `#f2eee7` | `#222a35` |
 | `paper` (fond de page) | `#faf8f4` | `#0f1218` |
-| `brand` | `#00a0ff` | `#0070b3` |
-| `brand-soft` | `#e5f5ff` | `#132c42` |
-| `brand-strong` | `#0070b3` | `#7fd0ff` |
+| `brand` | `#0861e1` | `#0861e1` *(texte `on-brand` blanc ; UDR-XXXX-bleu-unique-de-marque)* |
+| `brand-soft` | `#e7f0fd` | `#122949` |
+| `brand-strong` | `#0861e1` | `#8bb8f9` |
 | `teacher` | `#ff8a00` | `#9a5000` |
 | `school` | `#1b365d` | `#a9c4ee` |
 | `team` | `#7b3aed` | `#c3a4ff` |

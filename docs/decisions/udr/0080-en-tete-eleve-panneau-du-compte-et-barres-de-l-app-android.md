@@ -118,10 +118,10 @@ Les données de l'avatar viennent du pont. Le shell rend, dans la coque et pour 
 
 **Barre d'onglets du bas**, en `BottomNavigationView` native :
 - trois onglets : Accueil (`home`), Cours (`book-open`), Ma classe (`academic-cap`), avec les libellés de `shared.navigation` ;
-- couleur active : le bleu de marque `#00A0FF` ;
+- couleur active : le bleu de marque `#0861E1` (UDR-XXXX-bleu-unique-de-marque) ;
 - cachée pendant une séance d'exercice (modale plein écran).
 
-**Écran de démarrage** : l'icône de l'app (baobab sur bleu), sur un fond `#00A0FF`.
+**Écran de démarrage** : l'icône de l'app (baobab sur bleu), sur un fond `#0861E1` (UDR-XXXX-bleu-unique-de-marque).
 
 **Couleurs** : la barre d'état et la barre du haut suivent le thème du système (clair : fond blanc, texte `#1F2128` ; sombre : fond `#0F1218`, texte `#EEF1F5`).
 

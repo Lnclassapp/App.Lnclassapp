@@ -75,7 +75,7 @@ module AppLnclassapp
 
     # ADR-0082 §4.1 : couleurs de l'app installée (manifeste, barre d'état), le bleu de marque pour tous les rôles. Une
     # fiche d'application ne lit pas les tokens CSS : la valeur vit ici, hors des vues (UDR-0005, pas d'hexadécimal).
-    config.x.pwa = { theme_color: "#00a0ff", background_color: "#ffffff" }.freeze
+    config.x.pwa = { theme_color: "#0861e1", background_color: "#ffffff" }.freeze
 
     # ADR-0084 §4.7, ADR-0086 §4.7 : les apps Android que ce site autorise à ouvrir ses liens (/.well-known/assetlinks.json).
     # Les identifiants dépendent de l'environnement (la recette installe com.lnclass.student.recette) ; les empreintes SHA-256

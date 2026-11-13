@@ -47,10 +47,15 @@
   --color-mist: #f4f8fb;
   --color-paper: #ffffff;
 
-  --color-brand: #00a0ff;
-  --color-brand-soft: #e5f5ff;
-  --color-brand-strong: #0070b3;
-  /* Texte et icônes posés sur le bandeau `brand` (aucun texte blanc sur `brand`) */
+  /* UDR bleu unique (amende UDR-0136) : le bleu roi du logo, #0861E1, est le seul bleu de marque. `brand` est le fond (bouton
+     principal, bandeau, pastille pleine) et ne change pas en sombre ; `brand-strong` est le texte et l'icône bleus, le même
+     bleu en clair, éclairci en sombre ; `brand-soft` est sa teinte claire (fond doux, sélection). */
+  --color-brand: #0861e1;
+  --color-brand-soft: #e7f0fd;
+  --color-brand-strong: #0861e1;
+  /* Texte et icônes posés sur un fond `brand` : blanc dans les deux modes (5,52:1) */
+  --color-on-brand: #ffffff;
+  /* Texte et icônes posés sur le bandeau `teacher` (aucun texte blanc sur l'orange) */
   --color-band-ink: #0b2a40;
 
   /* Couleurs de rôle */
@@ -140,10 +145,10 @@
    les deux blocs de l'UDR-0065, plus bas. Hors couche, comme eux ; test/design/announcement_themes_test.rb vérifie
    chaque valeur et chaque contraste. */
 [data-announcement-theme="ciel"] {
-  --color-brand-soft: #e5f5ff;
+  --color-brand-soft: #e7f0fd;
   --color-school: #1b365d;
-  --color-brand: #00a0ff;
-  --color-brand-strong: #0070b3;
+  --color-brand: #0861e1;
+  --color-brand-strong: #0861e1;
 }
 
 [data-announcement-theme="lagune"] {
@@ -441,13 +446,10 @@
   @apply relative inline-flex cursor-pointer items-center justify-center rounded-full font-medium whitespace-nowrap select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
 }
 
-/* UDR palette froide §3.3 : bouton principal en `brand-strong`, texte blanc (5,29:1) ; secondaire blanc, texte bleu. */
+/* UDR bleu unique : un seul bouton bleu, fond `brand` #0861E1 et texte `on-brand` blanc (5,52:1) dans les deux modes ;
+   l'ancienne variante `brand` (bleu ciel, texte noir) y est fusionnée. Secondaire blanc, texte bleu. */
 @utility ui-button-primary {
-  @apply bg-brand-strong text-white hover:bg-brand-strong/90;
-}
-
-@utility ui-button-brand {
-  @apply bg-brand text-ink hover:bg-brand/85;
+  @apply bg-brand text-on-brand hover:bg-brand/90;
 }
 
 @utility ui-button-secondary {
@@ -671,7 +673,8 @@ dialog.dialog-drawer {
    Aucune classe `dark:` dans les vues ; chaque utilitaire lit la variable du token, et ces blocs en changent la valeur.
    La règle d'inversion : le texte (`ink`, `mute`) devient clair, les surfaces (`white`, `paper`, `mist`) sombres ; un fond
    qui porte un texte blanc (`team`, `school`, `error`, `success`, `warning`) devient clair, un fond qui porte un texte
-   `ink` (`brand`, `teacher`, `gold`) devient profond. Écran seulement : une page imprimée reste claire (codes de secours).
+   `ink` (`teacher`, `gold`) devient profond. Exception (UDR bleu unique) : `brand` garde #0861E1 et son texte `on-brand`
+   reste blanc ; seuls `brand-strong` (texte bleu, éclairci) et `brand-soft` (assombri) changent. Écran seulement : une page imprimée reste claire (codes de secours).
    Amendement du 2026-10-03 — l'interrupteur pose `data-theme` sur <html> : `dark` l'emporte sur un téléphone clair,
    `light` sur un téléphone sombre ; sans choix, le réglage du téléphone. Les deux blocs portent les mêmes valeurs.
    Hors couche, exprès : l'emporte sur `@layer theme`. test/design/dark_mode_test.rb vérifie chaque token, chaque
@@ -688,9 +691,10 @@ dialog.dialog-drawer {
     --color-mist: #222a35;
     --color-paper: #0f1218;
 
-    --color-brand: #0070b3;
-    --color-brand-soft: #132c42;
-    --color-brand-strong: #7fd0ff;
+    --color-brand: #0861e1;
+    --color-brand-soft: #122949;
+    --color-brand-strong: #8bb8f9;
+    --color-on-brand: #ffffff;
     --color-band-ink: #ffffff;
 
     --color-teacher: #9a5000;
@@ -735,10 +739,10 @@ dialog.dialog-drawer {
 
   /* UDR-0075 §3.1 — les thèmes d'annonce en sombre ; plus précis que le thème clair de la carte, ils l'emportent. */
   :root:not([data-theme="light"]) [data-announcement-theme="ciel"] {
-    --color-brand-soft: #132c42;
+    --color-brand-soft: #122949;
     --color-school: #a9c4ee;
-    --color-brand: #0070b3;
-    --color-brand-strong: #7fd0ff;
+    --color-brand: #0861e1;
+    --color-brand-strong: #8bb8f9;
   }
 
   :root:not([data-theme="light"]) [data-announcement-theme="lagune"] {
@@ -817,9 +821,10 @@ dialog.dialog-drawer {
     --color-mist: #222a35;
     --color-paper: #0f1218;
 
-    --color-brand: #0070b3;
-    --color-brand-soft: #132c42;
-    --color-brand-strong: #7fd0ff;
+    --color-brand: #0861e1;
+    --color-brand-soft: #122949;
+    --color-brand-strong: #8bb8f9;
+    --color-on-brand: #ffffff;
     --color-band-ink: #ffffff;
 
     --color-teacher: #9a5000;
@@ -863,10 +868,10 @@ dialog.dialog-drawer {
 
   /* UDR-0075 §3.1 — les mêmes thèmes d'annonce en sombre, choisis par l'interrupteur. */
   :root[data-theme="dark"] [data-announcement-theme="ciel"] {
-    --color-brand-soft: #132c42;
+    --color-brand-soft: #122949;
     --color-school: #a9c4ee;
-    --color-brand: #0070b3;
-    --color-brand-strong: #7fd0ff;
+    --color-brand: #0861e1;
+    --color-brand-strong: #8bb8f9;
   }
 
   :root[data-theme="dark"] [data-announcement-theme="lagune"] {

@@ -3,7 +3,7 @@ require "test_helper"
 # UDR-0088 §3.1, §3.2 : l'accueil bleu de la connexion et de l'inscription élève (carte sous 1 024 px, panneau à gauche
 # au-delà) et « Besoin d'aide ? » en haut à droite. Tokens seuls : le thème sombre change leurs valeurs, pas les classes.
 class AuthWelcomeTest < ActionView::TestCase
-  GRADIENT = %w[bg-linear-to-br from-brand-strong to-brand text-white].freeze
+  GRADIENT = %w[bg-brand text-on-brand].freeze # UDR bleu unique : un aplat du bleu roi, plus de dégradé
 
   setup { view.define_singleton_method(:lnclass_app) { nil } }
 

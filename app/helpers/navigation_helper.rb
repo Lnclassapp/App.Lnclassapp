@@ -85,6 +85,10 @@ module NavigationHelper
   # UDR enseignant §3.1 : la couleur du bandeau, des barres de progression et des segments d'étape, choisie par le rôle à cet
   # unique endroit ; aucune vue n'écrit `bg-teacher` en dur.
   ROLE_FILLS = { student: "bg-brand", teacher: "bg-teacher" }.freeze
+  # UDR bleu unique : le texte et le contour de focus posés sur ce fond. Blanc (`on-brand`) sur le bleu, `band-ink` sur
+  # l'orange de l'enseignant ; classes écrites en entier pour que Tailwind les trouve.
+  ROLE_INKS = { student: { text: "text-on-brand", outline: "focus-visible:outline-on-brand" },
+                teacher: { text: "text-band-ink", outline: "focus-visible:outline-band-ink" } }.freeze
 
   NAV_STYLES = {
     sidebar: { base: "flex min-h-tap items-center gap-3 rounded-ln px-4 text-sm font-medium transition",
@@ -216,6 +220,11 @@ module NavigationHelper
   # UDR enseignant §3.1 : bg-brand (élève) ou bg-teacher (enseignant) ; KeyError pour les autres rôles, qui n'ont pas cet accueil.
   def role_fill_class(role)
     ROLE_FILLS.fetch(role.to_sym)
+  end
+
+  # UDR bleu unique : { text:, outline: } du texte posé sur role_fill_class ; KeyError pour les mêmes rôles.
+  def role_ink_classes(role)
+    ROLE_INKS.fetch(role.to_sym)
   end
 
   # Retour vers une liste filtrée (UDR-0054 §3.2) : l'URL de provenance si elle est de ce même hôte et que son chemin
