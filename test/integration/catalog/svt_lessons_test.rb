@@ -6,7 +6,7 @@ require Rails.root.join("script/contenus/valider")
 # par la vraie chaîne d'import (schéma puis adaptateur).
 class Catalog::SvtLessonsTest < ActiveSupport::TestCase
   DIRECTORY = Rails.root.join("docs/contenus/lecons-traitees/3eme/svt")
-  PROGRESSION = Rails.root.join("docs/contenus/progressions-2026-2027/progressions-2026-2027-svt.json")
+  PROGRESSION = Rails.root.join("test/fixtures/files/contenus/progressions-2026-2027-svt.json")
   # Dans l'ordre de la progression : [fichier, nombre de figures].
   FILES = {
     "Les aliments et l'Homme" => [ "les-aliments-et-l-homme", 3 ],
