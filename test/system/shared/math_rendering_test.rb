@@ -32,7 +32,7 @@ class MathRenderingTest < ApplicationSystemTestCase
     assert_no_text "overrightarrow{DC}"
   end
 
-  # PR #626, tâche `lecons` : des éléments math imbriqués (la feuille, l'exercice) dont un texte garde un « $ » seul (une formule coupée
+  # PR de train 626, tâche `lecons` : des éléments math imbriqués (la feuille, l'exercice) dont un texte garde un « $ » seul (une formule coupée
   # par une case à remplir) se renvoyaient leurs mutations sans fin, et la page ne se reposait jamais. Le rendu doit se poser.
   test "des éléments math imbriqués avec un « $ » seul se posent, sans mutations sans fin" do
     visit root_path

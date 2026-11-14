@@ -43,7 +43,7 @@ export default class extends Controller {
   }
 
   // Le rendu vient de muter le DOM, et KaTeX réécrit aussi un texte qui garde un `$` seul (une formule coupée par une case à
-  // remplir) : un contrôleur qui rendrait pour ces mutations-là les ferait rendre à son tour, sans fin (PR #626, tâche `lecons`).
+  // remplir) : un contrôleur qui rendrait pour ces mutations-là les ferait rendre à son tour, sans fin (PR de train 626, tâche `lecons`).
   // Les mutations arrivées sous l'élément rendu sont donc les nôtres, de tous les contrôleurs : on les écarte. Celles hors de
   // l'élément, qu'il n'a pas rendu, restent dues à leur contrôleur.
   settle() {
