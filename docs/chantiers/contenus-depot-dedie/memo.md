@@ -32,7 +32,7 @@ Le rythme de rédaction monte (30 leçons de 5ème, 30 de 6ème en une semaine, 
 - **Le chargement automatique sur Develop et Staging** : ses règles restent celles des décisions en place ; seule change l'origine du dossier qu'il lit.
 - **L'import automatique en production** : la production reste à l'import manuel, en création seule.
 - **La réécriture des leçons à reprendre** : elles déménagent telles quelles.
-- **La création du dépôt de contenus** : faite par le porteur le 2026-11-14 (`Kamkara007/App.Lnclassapp-contenus`, vide).
+- **La création du dépôt de contenus** : faite par le porteur le 2026-11-14 (`Lnclassapp/App.Lnclassapp-contenus`, public).
 - **Changer le chemin où l'application lit ses leçons** : il reste le même, pour ne toucher ni le chargement, ni la CI ciblée, ni l'aperçu.
 
 ## Ce que le grill a révélé

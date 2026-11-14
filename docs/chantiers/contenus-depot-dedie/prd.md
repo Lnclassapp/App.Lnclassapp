@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-Les leçons, progressions, leçons à reprendre et prompts quittent le dépôt de l'application pour `<propriétaire>/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, écrite par un outil de synchronisation dans une PR ; Develop, Staging, le jeu standard et la CI continuent de lire cette copie. Rédaction (`/lecon`), publication en production (`/publier-prod`, création seule) et annonces audio (`/annonce`) deviennent des skills de projet.
+Les leçons, progressions, leçons à reprendre et prompts quittent le dépôt de l'application pour `Lnclassapp/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, écrite par un outil de synchronisation dans une PR ; Develop, Staging, le jeu standard et la CI continuent de lire cette copie. Rédaction (`/lecon`), publication en production (`/publier-prod`, création seule) et annonces audio (`/annonce`) deviennent des skills de projet.
 
 ## 2. Acteurs et permissions
 

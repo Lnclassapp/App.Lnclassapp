@@ -8,7 +8,7 @@
 ```
 Lot A — outil de synchronisation + skills (cette PR, sans attendre)
   ↓ attend : PR de validation pédagogique fusionnée dans Develop (agent validateur-pedagogique présent)
-Lot B — migration vers <propriétaire>/App.Lnclassapp-contenus (historique filtré, CI du dépôt de contenus)
+Lot B — migration vers Lnclassapp/App.Lnclassapp-contenus (historique filtré, CI du dépôt de contenus)
   ↓
 Lot C — branchement de l'application (VERSION, --verifier en CI, fixtures de progressions, docs/contenus allégé)
 ```
@@ -32,7 +32,7 @@ Séquentiel : B et C touchent les mêmes fichiers de contenu.
 ## Lot B — Migrer les contenus
 
 - **Couche**       : dépôt de contenus
-- **Fichiers**     : dépôt `<propriétaire>/App.Lnclassapp-contenus` : `lecons/`, `a-reprendre/`, `progressions/`, `prompts/`, `README.md`, `CLAUDE.md`, `.github/workflows/valider.yml`
+- **Fichiers**     : dépôt `Lnclassapp/App.Lnclassapp-contenus` : `lecons/`, `a-reprendre/`, `progressions/`, `prompts/`, `README.md`, `CLAUDE.md`, `.github/workflows/valider.yml`
 - **Dépend de**    : Lot A ; PR de validation pédagogique fusionnée (vérifier `git ls-tree origin/Develop .claude/agents/validateur-pedagogique.md`)
 - **Test associé** : `git log --follow` sur 3 leçons garde leurs commits d'origine ; `diff -r` entre `lecons/` et `docs/contenus/lecons-traitees/` d'origine/Develop vide ; `valider.yml` vert sur une PR d'essai
 - **Done quand**   : `main` du dépôt de contenus contient tout `docs/contenus/` avec son historique, réorganisé (`git filter-repo --path docs/contenus --path-rename docs/contenus/lecons-traitees/:lecons/ …`)
@@ -47,7 +47,7 @@ git filter-repo --path docs/contenus/ \
   --path-rename docs/contenus/prompt-redaction.md:prompts/prompt-redaction.md \
   --path-rename docs/contenus/prompt-redaction-lot.md:prompts/prompt-redaction-lot.md \
   --path-rename docs/contenus/:
-git remote add origin https://github.com/<propriétaire>/App.Lnclassapp-contenus && git push -u origin HEAD:main   # propriétaire vérifié avec list_repos avant
+git remote add origin https://github.com/Lnclassapp/App.Lnclassapp-contenus && git push -u origin HEAD:main
 ```
 
 ---

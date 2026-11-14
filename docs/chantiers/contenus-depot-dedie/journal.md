@@ -8,7 +8,7 @@
 |---|---|---|---|
 | 2026-11-14 | Copie figée versionnée au même chemin (`docs/contenus/lecons-traitees/` + `VERSION`), pas de sous-module ni de téléchargement | Develop et Staging chargent les leçons au pré-déploiement depuis l'image : ni jeton ni réseau en plus | Oui, ADR `contenus-dans-un-depot-dedie-copie-figee` |
 | 2026-11-14 | `valider.rb` reste dans l'application | Il charge les entités du domaine et un test de parité le lie à l'import | Oui, même ADR §4.1 |
-| 2026-11-14 | Dépôt : `Kamkara007/App.Lnclassapp-contenus` (créé par le porteur, vide), attaché à la session ; rien n'y est poussé avant la migration | Un premier commit README obligerait à réécrire `main` pour y poser l'historique migré | Non |
+| 2026-11-14 | Dépôt : d'abord `Kamkara007/App.Lnclassapp-contenus`, puis `Lnclassapp/App.Lnclassapp-contenus` (final) ; rien n'y est poussé avant la migration | Un premier commit README obligerait à réécrire `main` pour y poser l'historique migré | Non |
 
 ## À trancher
 
@@ -16,7 +16,7 @@
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
 - [x] 2026-11-14 · contenus-depot-dedie · Le dépôt de contenus doit-il être privé ? — réponse du porteur (via l'orchestrateur) : **public**, tel quel. Écrit dans l'ADR §4.4 (corrigés visibles, jamais de secret ni de donnée d'élève). Si sa CI récupère l'application (privée), il lui faut un jeton de lecture : `APP_READ_TOKEN`, secret du dépôt de contenus, posé par le porteur.
-- Info : propriétaire du dépôt en cours de transfert (`Kamkara007` → `Lnclassapp`) ; aucun nom de propriétaire figé dans les outils, vérification `list_repos` avant la migration.
+- Info : dépôt final `Lnclassapp/App.Lnclassapp-contenus` (porteur, 2026-11-14). Il ne peut pas être attaché à la session du Lot A (même nom que `Kamkara007/App.Lnclassapp-contenus`, déjà attaché) : le Lot B part d'une **nouvelle session** avec `Lnclassapp/App.Lnclassapp-contenus` comme source. `Kamkara007/App.Lnclassapp-contenus` (vide) peut être supprimé par le porteur.
 - [ ] 2026-11-14 · contenus-depot-dedie · Ne pas lancer soi-même les commandes d'initialisation du dépôt (README « first commit ») — appliqué : dépôt laissé vide, la migration (Lot B) y pose l'historique des leçons puis le README ; autres : initialiser maintenant et poser la migration par-dessus ; recommandé : laisser vide.
 - [ ] 2026-11-14 · contenus-depot-dedie · La PR de synchronisation des contenus vers l'application est-elle ouverte à la demande ou automatiquement à chaque fusion sur `main` des contenus ? — appliqué : à la demande ; autres : automatique (jeton d'écriture croisé) ; recommandé : à la demande.
 - [ ] 2026-11-14 · contenus-depot-dedie · Migration (Lot B) en attente de la fusion de la PR de validation pédagogique (session validation-pedagogique-agent) : au 2026-11-14 elle n'est pas ouverte et l'agent `validateur-pedagogique` n'est pas sur `Develop`. — appliqué : attendre ; autres : migrer sans attendre (conflits sur ~460 fichiers) ; recommandé : attendre.

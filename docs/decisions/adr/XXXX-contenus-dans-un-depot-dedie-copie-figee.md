@@ -45,7 +45,7 @@ Le contrôle `script/contenus/valider.rb` charge des entités du domaine (`app/d
 
 ## 4. Décision
 
-> **Nous déplaçons les leçons, les progressions, les leçons à reprendre, les prompts et le mode d'emploi dans `<propriétaire>/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, avec un fichier `docs/contenus/VERSION` qui nomme la version copiée ; cette copie ne s'écrit que par `script/contenus/synchroniser`, dans une PR. Le contrôle `valider.rb` reste dans l'application.**
+> **Nous déplaçons les leçons, les progressions, les leçons à reprendre, les prompts et le mode d'emploi dans `Lnclassapp/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, avec un fichier `docs/contenus/VERSION` qui nomme la version copiée ; cette copie ne s'écrit que par `script/contenus/synchroniser`, dans une PR. Le contrôle `valider.rb` reste dans l'application.**
 
 ### 4.1 Ce qui part, ce qui reste
 
@@ -57,7 +57,7 @@ Le contrôle `script/contenus/valider.rb` charge des entités du domaine (`app/d
 | `script/contenus/valider.rb`, `fonds_de_carte.rb`, `bin/apercu-lecon` | Application |
 | `docs/contenus/README.md` | Remplacé par une page courte : d'où vient la copie, comment synchroniser |
 
-### 4.2 Arborescence de `<propriétaire>/App.Lnclassapp-contenus`
+### 4.2 Arborescence de `Lnclassapp/App.Lnclassapp-contenus`
 
 ```
 lecons/<niveau>-<série>/<matière>/*.json   ← ce que l'application copie
@@ -85,7 +85,7 @@ Décision du porteur (2026-11-14) : le dépôt de contenus est **public**. Tout 
 
 Il n'y entre **jamais** : de secret (jeton, clé, PIN, mot de passe), de donnée d'élève, d'enseignant ou d'établissement réel (nom, contact, résultat), ni de nom de personne réelle hors auteurs. Un secret poussé par erreur est révoqué, pas seulement effacé : l'historique public l'a déjà exposé.
 
-Nom : `App.Lnclassapp-contenus`, propriétaire en cours de transfert de `Kamkara007` vers l'organisation `Lnclassapp` ; aucun outil ne fige le propriétaire (le script lit le `remote origin` du clone), et une session le vérifie (`list_repos`) avant de pousser.
+Nom : `Lnclassapp/App.Lnclassapp-contenus` (confirmé par le porteur le 2026-11-14, après un premier dépôt `Kamkara007/App.Lnclassapp-contenus`). Le script ne fige aucun nom : il lit le `remote origin` du clone.
 
 ### 4.5 Lecture seule
 

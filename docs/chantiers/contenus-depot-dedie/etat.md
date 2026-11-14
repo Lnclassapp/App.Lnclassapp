@@ -17,13 +17,13 @@
 Prises :
 
 - 2026-11-14 · copie figée versionnée au même chemin (ADR) — par la session du chantier
-- 2026-11-14 · dépôt `Kamkara007/App.Lnclassapp-contenus` — par le porteur
+- 2026-11-14 · dépôt `Lnclassapp/App.Lnclassapp-contenus`, public — par le porteur
 
 Ouvertes : `script/docs/a_trancher`, et les sections `## À trancher` des journaux des chantiers de la vague.
 
 ## Prochaine action
 
-Quand `.claude/agents/validateur-pedagogique.md` est sur `origin/Develop` : Lot B (recette dans `plan.md`), puis Lot C.
+Quand `.claude/agents/validateur-pedagogique.md` est sur `origin/Develop` : nouvelle session avec `Lnclassapp/App.Lnclassapp-contenus` comme source, Lot B (recette dans `plan.md`), puis Lot C.
 
 ## Prompt de reprise
 
