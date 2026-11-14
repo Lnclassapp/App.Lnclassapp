@@ -194,10 +194,15 @@ jobs:
           restore-keys: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-
 
       # The DRENA and school files live in the public Lnclassapp/App.Lnclassapp-contenus (referentiel/): test/db/import_data_files_test.rb
-      # reads them through CONTENUS_DIR instead of skipping.
+      # reads them through CONTENUS_DIR instead of skipping. The clone names a commit: a push on that repository does not
+      # change what the same tree tests (ADR-0069 §4.3). Moving it is a pull request here.
       - name: Contents repository (referentiel)
+        env:
+          CONTENUS_SHA: 01967bd602dc91720e64d49709fd034d4511c5de
         run: |
-          git clone --depth 1 https://github.com/Lnclassapp/App.Lnclassapp-contenus "$RUNNER_TEMP/contenus"
+          git init --quiet "$RUNNER_TEMP/contenus"
+          git -C "$RUNNER_TEMP/contenus" fetch --quiet --depth 1 https://github.com/Lnclassapp/App.Lnclassapp-contenus "$CONTENUS_SHA"
+          git -C "$RUNNER_TEMP/contenus" checkout --quiet "$CONTENUS_SHA"
           echo "CONTENUS_DIR=$RUNNER_TEMP/contenus" >> "$GITHUB_ENV"
 
       - name: Run bin/ci
