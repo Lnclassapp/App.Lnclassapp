@@ -1,0 +1,22 @@
+<%# 🌐 UI · classroom/student_homes/_choose_class — l'élève sans classe active (archivée, ou retiré) : « Choisis ta classe » %>
+<%# Rôle : une carte blanche sur la jonction : le champ du code de classe et « Rejoindre » ; « Je n'ai pas de code » ouvre la cascade ; son historique s'il en a un ; plus d'exercice du jour %>
+<%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, sans classe), 0132 accueil élève §3.3 (état 6), 0081 (§3.5) · ADR : 0109 code de classe (§4.7) %>
+<%# locals: (form:, archived:, overlap: true) -%>
+<%= tag.section id: "student_choose_class", "aria-labelledby": "student_choose_class_title",
+                class: class_names("relative z-10 mx-gutter space-y-3 rounded-card bg-white p-5 shadow-lift lg:mx-0", { "max-lg:-top-wave-card max-lg:-mb-wave-card" => local_assigns.fetch(:overlap, true) }) do %>
+  <h2 id="student_choose_class_title" class="text-xl leading-snug font-medium text-ink"><%= t("classroom.student_homes.no_classroom.title") %></h2>
+  <%= form_with model: form, scope: :student_classroom_choice, url: student_classroom_choices_path, id: "student-home-code-form", class: "space-y-3" do |f| %>
+    <%= ui_field f, :join_code, label: t("classroom.student_homes.no_classroom.code"), hint: t("classroom.student_homes.no_classroom.hint"),
+                 required: true, maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters", spellcheck: false,
+                 class: "font-mono uppercase tracking-widest" %>
+    <%= ui_button t("classroom.student_homes.no_classroom.submit"), type: :submit, variant: :primary, full: true, icon_end: "arrow-right" %>
+  <% end %>
+  <div class="flex flex-col items-start">
+    <%= link_to t("classroom.student_homes.no_classroom.no_code"), new_student_classroom_choice_path, id: "student_choose_class_no_code",
+                class: "inline-flex min-h-tap items-center rounded-sm text-sm font-medium text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% if archived %>
+      <%= link_to t("classroom.student_homes.no_classroom.archive"), student_archive_path,
+                  class: "inline-flex min-h-tap items-center rounded-sm text-sm font-medium text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% end %>
+  </div>
+<% end %>

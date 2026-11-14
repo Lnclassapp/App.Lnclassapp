@@ -35,18 +35,18 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
   test "the student whose only classroom is archived sees « Choisis ta classe », no assigned work and no classroom name" do
     sign_in_as @student
     get student_home_path
-    assert_select "#student_next_step[data-state=due]", text: /Tle D 1/
-    assert_select "#student_next_step_title", text: "Méiose, les étapes"
+    assert_select "#student_class_card", text: /Tle D 1/
+    assert_select "#student_to_do", text: /Méiose, les étapes/
 
     archive!
     get student_home_path
 
     assert_response :success
-    assert_select "#student_next_step[data-state=no_classroom]", text: /#{Regexp.escape(tl("student_homes.no_classroom.title"))}/
+    assert_select "#student_choose_class", text: /#{Regexp.escape(tl("student_homes.no_classroom.title"))}/
     assert_select "#student_history", 0
     assert_select "#student_subjects"
     assert_no_match "Tle D 1", response.body
-    assert_select "#student_next_step_title", text: tl("student_homes.no_classroom.title")
+    assert_select "#student_choose_class_title", text: tl("student_homes.no_classroom.title")
     assert_equal [ true, nil ], [ Orm::ClassroomStudent.exists?(student: @student, left_at: nil), Queries::Classroom::StudentClassroomQuery.new.call(student_id: @student.id) ]
   end
 
@@ -60,7 +60,7 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     get student_home_path
 
     assert_response :success
-    assert_select "#student_next_step", text: /Tle D 2/
+    assert_select "#student_class_card", text: /Tle D 2/
     assert_no_match "Tle D 1", response.body
     assert_equal "Tle D 2 · Lycée Classique d'Abidjan", Queries::Identity::ShellUserQuery.new.call(user_id: @student.id).detail
   end

@@ -40,7 +40,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     # UDR-0084 §3.5: no greeting any more; the page is named by a hidden « Accueil » title.
     assert_home student_home_path
     assert_selector "h1.sr-only", text: I18n.t("classroom.student_homes.show.page_title"), visible: :all
-    assert_selector "#student_next_step", text: /Tle D 1/i
+    assert_selector "#student_class_card", text: /Tle D 1/i
     within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
     assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path }
     assert_signs_out_from_avatar_menu
@@ -111,7 +111,7 @@ class RoleHomesTest < ApplicationSystemTestCase
       visit student_home_path
       assert_no_selector "nav.bottom-0"
       assert_no_selector "header.sticky", visible: :visible
-      find("#student_next_step a[href='#{student_classroom_path}']").click
+      find("#student_class_enter").click
       assert_current_path student_classroom_path
       assert_no_selector "nav.bottom-0"
 

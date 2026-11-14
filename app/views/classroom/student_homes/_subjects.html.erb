@@ -1,20 +1,18 @@
-<%# 🌐 UI · classroom/student_homes/_subjects — la grille de l'accueil élève : 6 matières et « Inviter », 4 colonnes (7 dès lg) %>
-<%# Rôle : un rond bg-brand-soft par matière de son niveau, vers le catalogue filtré, nom entier ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; « Inviter » partage Lnclass ; sans classe (invite_href nil), pas d'« Inviter » %>
-<%# UDR  : 0132 accueil élève §3.4, §3.8 (nav nommée) · 0062 §3.3 · charte §9 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
-<%# locals: (subjects:, late_slugs:, invite_href:) -%>
-<%# PRD CA-D1 : 7 cases, 6 matières au plus puis « Inviter » ; une 7e matière n'est pas affichée. %>
+<%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève : un rond teinté par matière, 4 colonnes %>
+<%# Rôle : une matière de son niveau, vers le catalogue filtré, nom court (le nom entier lu aux lecteurs d'écran) ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; plus de case « Inviter » (la bannière est la seule porte) %>
+<%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, Mes matières), 0132 accueil élève §3.4, 0062 §3.3 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
+<%# locals: (subjects:, late_slugs:) -%>
 <% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
-<% disc = "relative grid size-14 place-items-center rounded-full bg-brand-soft transition group-active:scale-95" %>
-<nav id="student_subjects" aria-label="<%= t("classroom.student_homes.subjects.label") %>">
-  <%# Amendement eleve-sans-prof (porteur, 2026-11-12 : « affiche la section Mes matières ») : le titre, à toutes les tailles. %>
-  <h2 class="mb-3 font-display text-base font-medium text-ink"><%= t(".label") %></h2>
-  <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-7 lg:gap-x-2">
+<nav id="student_subjects" aria-labelledby="student_subjects_title">
+  <h2 id="student_subjects_title" class="px-1 pb-3 text-sm font-medium text-mute"><%= t(".label") %></h2>
+  <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-8 lg:gap-x-2">
     <% subjects.first(Classroom::StudentHomesController::MAX_SUBJECTS).each do |subject| %>
       <% late = late_slugs.include?(subject.slug) %>
+      <% illustration = subject_illustration(subject.slug) %>
       <li>
         <%= link_to courses_path(material: subject.slug), id: "subject_#{subject.slug}", class: tile do %>
-          <span class="<%= disc %>">
-            <%= image_tag subject_illustration(subject.slug).path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
+          <span class="<%= class_names("relative grid size-16 place-items-center rounded-full transition group-active:scale-95", illustration.tint) %>">
+            <%= image_tag illustration.path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
             <%# UDR §3.4 : le point ambre, décoratif ; sa phrase est lue après le nom (suffixe sr-only). %>
             <% if late %><span class="absolute top-0 right-0 size-2.5 rounded-full bg-warning-dot ring-2 ring-white" aria-hidden="true"></span><% end %>
           </span>
@@ -27,18 +25,6 @@
             <span class="sr-only"><%= subject.name %></span>
           <% end %>
           <% if late %><span class="sr-only"><%= t("classroom.student_homes.subjects.late") %></span><% end %>
-        <% end %>
-      </li>
-    <% end %>
-    <% if invite_href %>
-      <li>
-        <%# La 7e case : le même partage WhatsApp que « Ton enseignant n'est pas sur Lnclass ? » (ADR-0089 §4.3), dans un nouvel onglet. %>
-        <%= link_to invite_href, id: "subject_invite", target: "_blank", rel: "noopener", class: tile,
-                    "aria-label": t("classroom.student_homes.invite_teacher.action_label") do %>
-          <span class="<%= disc %>">
-            <%= image_tag subject_illustration(:invite).path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
-          </span>
-          <span aria-hidden="true"><%= t("classroom.student_homes.subjects.invite") %></span>
         <% end %>
       </li>
     <% end %>

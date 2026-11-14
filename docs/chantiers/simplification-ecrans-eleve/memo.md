@@ -1,5 +1,13 @@
 # Mémo — simplification-ecrans-eleve
 
+| | |
+|---|---|
+| **Type de cycle** | feature |
+| **Statut** | en cours |
+| **Ouvert le** | 2026-11-14 |
+| **Branche** | `feature/simplification-ecrans-eleve` |
+| **Programme** | — |
+
 **Slug** : `simplification-ecrans-eleve` · **Cycle** : feature (3 écrans) · **Date** : 2026-11-14
 
 ## Le problème

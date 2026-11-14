@@ -35,7 +35,7 @@
   <%# ADR hors-connexion §4.2 : les contrôleurs d'arrière-plan (clé d'appareil, envoi des copies) ; Stimulus ignore un identifiant absent. %>
   <%= tag.div hidden: true, data: { controller: "offline-session offline-sync" } %>
   <main id="main" tabindex="-1" class="<%= class_names("focus:outline-none", "pb-28 lg:pb-12" => bottom_bar,
-                                                       "pb-12" => !in_app && !focus && !bottom_bar, "lg:pl-rail" => !in_app && !focus && !inner) %>">
+                                                       "pb-12" => !in_app && !focus && !bottom_bar && !wave, "lg:pl-rail" => !in_app && !focus && !inner) %>">
     <%# UDR hors-connexion §3.1 : le bandeau « Hors ligne », premier enfant de main, pour l'élève et l'enseignant. %>
     <%= render "shared/offline/status_banner", role: shell_user.role %>
     <% if focus %>

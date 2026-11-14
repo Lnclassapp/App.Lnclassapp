@@ -58,7 +58,8 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_assignment(classroom:, assignable: exercise)
 
     sign_in_as student
-    click_on t("classroom.student_homes.next_step.due.start")
+    within("#student_to_do") { click_on "Méiose" }
+    click_on t("assessment.exercises.show.start")
     assert_selector "#copy-form"
     assert_equal 0, Orm::QuestionAttempt.count
 

@@ -1,0 +1,19 @@
+<%# 🌐 UI · classroom/student_homes/_invite_banner — « Ton enseignant n'est pas sur Lnclass ? » : la seule porte « Inviter » de l'accueil %>
+<%# Rôle : bannière douce avec « Inviter » (partage WhatsApp, nouvel onglet) et une croix ; masquée sur cet appareil une fois fermée (contrôleur dismissible, localStorage), jamais côté serveur %>
+<%# ADR  : 0089 §4.3 · UDR : XXXX écrans minimalistes style Wave §3 (accueil, bannière), 0084 §3.6 · locals: (invite_href:) -%>
+<% scope = "classroom.student_homes.invite_teacher" %>
+<%= tag.section id: "student_invite_banner", "aria-labelledby": "student_invite_banner_title",
+                class: "relative flex items-center gap-3 rounded-card bg-brand-soft py-4 pr-12 pl-4",
+                data: { controller: "dismissible", dismissible_key_value: "student-invite-teacher" } do %>
+  <span class="grid size-10 shrink-0 place-items-center rounded-full bg-white text-brand-strong" aria-hidden="true"><%= ui_icon "user-plus" %></span>
+  <div class="min-w-0 flex-1 space-y-1">
+    <h2 id="student_invite_banner_title" class="text-base leading-snug font-medium text-ink"><%= t("#{scope}.prompt") %></h2>
+    <p class="text-sm text-mute"><%= t("#{scope}.banner_hint") %></p>
+    <%= ui_button t("#{scope}.banner_action"), href: invite_href, size: :sm, variant: :secondary, target: "_blank", rel: "noopener", class: "mt-1",
+                  "aria-label": t("#{scope}.action_label") %>
+  </div>
+  <button type="button" data-action="dismissible#hide" aria-label="<%= t("#{scope}.banner_dismiss") %>"
+          class="absolute top-0 right-0 grid size-tap cursor-pointer place-items-center rounded-full text-ink hover:bg-white/40 focus-visible:outline-2 focus-visible:outline-brand">
+    <%= ui_icon "x-mark", size: :sm %>
+  </button>
+<% end %>
