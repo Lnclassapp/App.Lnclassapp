@@ -1,0 +1,3323 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les gaz",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "verre-renverse",
+          "kind": "diagram",
+          "description": "Les quatre étapes de l'expérience du verre retourné. On colle un papier au fond du verre, on retourne le verre et on l'enfonce droit dans l'eau. L'air reste dans le verre et occupe la place, donc l'eau n'entre presque pas. Le papier reste sec : le verre contenait de l'air.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Un verre avec un papier collé au fond"
+              },
+              {
+                "id": "b",
+                "label": "On le retourne et on l'enfonce droit dans l'eau"
+              },
+              {
+                "id": "c",
+                "label": "L'air du verre occupe la place : l'eau n'entre presque pas"
+              },
+              {
+                "id": "d",
+                "label": "Le papier reste sec : le verre contient de l'air"
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "seringue-volumes",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres du volume d'air enfermé dans une seringue bouchée, en millilitres. Position de départ : 40 mL. Piston poussé : 20 mL. Piston tiré : 60 mL. Plus on pousse le piston, plus le volume de l'air diminue : l'air est compressible. Plus on le tire, plus il augmente.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              40,
+              20,
+              60
+            ],
+            "labels": [
+              "Départ",
+              "Piston poussé",
+              "Piston tiré"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pesee-ballon",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres des pesées d'un ballon de football, en grammes. Ballon gonflé : 430 g. Même ballon après la sortie de l'équivalent de 3 L d'air : 426 g. Une troisième barre, très courte, montre l'air sorti : 4 g. Cette différence est la masse de l'air sorti : l'air a une masse.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              430,
+              426,
+              4
+            ],
+            "labels": [
+              "Ballon gonflé",
+              "Après sortie d'air",
+              "Air sorti"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Mettre en évidence l'existence de l'air",
+          "remember": "L'air est tout autour de nous, mais on ne le voit pas : il est **incolore** (sans couleur). L'air est un **gaz**. Un gaz est de la **matière** : il occupe de la place. Un récipient qui paraît « vide » (un verre, une bouteille, une seringue) est en réalité plein d'air. On met l'air en évidence par ses **effets** : le vent qui pousse, un ballon ou un pneu de vélo qui se gonfle, des bulles qui sortent d'un verre dans l'eau.",
+          "method": [
+            "Repérer l'objet qui paraît vide ou le phénomène à expliquer.",
+            "Réaliser l'expérience ou observer l'effet produit (bulles, objet gonflé, résistance).",
+            "Interpréter : un effet que l'on observe sans rien voir est dû à quelque chose qui occupe de la place.",
+            "Conclure : nommer le gaz (l'air) et dire qu'il est de la matière."
+          ],
+          "example": {
+            "statement": "Mariam colle un petit morceau de papier au fond d'un verre. Elle retourne le verre et l'enfonce droit dans une bassine d'eau. Le papier reste sec. Elle incline ensuite le verre sous l'eau : des bulles remontent. Que montre cette expérience ?",
+            "steps": [
+              "Repérer : le verre paraît vide ; on veut comprendre pourquoi l'eau n'atteint pas le papier.",
+              "Réaliser : le verre enfoncé droit garde le papier sec ; le verre incliné laisse échapper des bulles.",
+              "Interpréter : quelque chose occupe la place dans le verre et empêche presque toute l'eau d'entrer ; les bulles montrent que ce quelque chose s'échappe.",
+              "Conclure : le verre contenait de l'air. L'air est un gaz, il est de la matière."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un récipient « vide » ne contient rien. Contre-exemple : une bouteille « vide » ouverte, qu'on enfonce dans l'eau, fait sortir des bulles : l'air qu'elle contenait s'échappe et l'eau prend sa place. « Vide » veut dire « sans eau, sans sable… », pas « sans air ». Pour éviter l'erreur, demande-toi : « Qu'est-ce qui occupe la place ici ? »",
+          "figure": "verre-renverse",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les effets de l'air et à conclure que l'air est un gaz.",
+            "questions": [
+              {
+                "content": "Le gaz qui remplit un ballon qu'on gonfle avec une pompe s'appelle ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : le ballon se gonfle avec une pompe. Étape 4 — Conclure : ce qui le remplit est de l'air, un gaz. L'eau est un liquide et le sable un solide : ils ne passent pas dans la pompe.",
+                "answers": [
+                  {
+                    "content": "l'air",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "le sable",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qu'est-ce que la pompe pousse dans le ballon ?"
+              },
+              {
+                "content": "Quand des bulles sortent d'un verre enfoncé de travers dans l'eau, c'est de l'air qui s'échappe.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Réaliser : on incline le verre sous l'eau et des bulles remontent. Étape 3 — Interpréter : les bulles sont du gaz qui sort du verre. Étape 4 — Conclure : c'est l'air que contenait le verre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "D'où viennent les bulles : du verre ou de l'eau ?"
+              },
+              {
+                "content": "Un récipient qui paraît vide est en réalité plein d'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le récipient paraît vide. Étape 3 — Interpréter : quelque chose occupe sa place. Étape 4 — Conclure : c'est de l'air.",
+                "answers": [
+                  {
+                    "content": "air",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un récipient « vide » ne contient pas d'eau, mais il contient quoi ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître l'air autour de nous",
+              "statement": "Dans cet exercice, tu suis les étapes de la fiche pour montrer que l'air existe, dans des situations de la vie courante.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un ballon de football bien gonflé est dur. Qu'est-ce qui le remplit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le ballon est gonflé, donc quelque chose occupe sa place. Étape 3 — Interpréter : il est dur parce qu'il est plein. Étape 4 — Conclure : il est rempli d'air, un gaz. Dire « du vide » ou « rien » oublie que l'air occupe de la place.",
+                  "answers": [
+                    {
+                      "content": "De l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien du tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre « vide » est vraiment vide : il ne contient rien.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le verre paraît vide. Étape 2 — Réaliser : enfoncé dans l'eau, il garde l'eau dehors et, incliné, il laisse sortir des bulles. Étape 4 — Conclure : il est plein d'air. L'erreur est de croire que ce qu'on ne voit pas n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels effets montrent l'existence de l'air ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Réaliser : on cherche un effet visible produit par quelque chose d'invisible. Le vent qui pousse les feuilles et les bulles qui sortent sont des effets de l'air. La chute d'une pierre, le bois qui flotte ou la flaque ne montrent pas l'air.",
+                  "answers": [
+                    {
+                      "content": "Le vent fait bouger les feuilles du manguier.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des bulles sortent d'une bouteille ouverte enfoncée dans l'eau.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pierre tombe quand on la lâche.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un morceau de bois flotte sur l'eau.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une flaque d'eau reste sur le sol.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'air est un ___, c'est-à-dire un corps qu'on ne voit pas et qui occupe de la place.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : on nomme l'air un gaz. Un gaz est de la matière : il occupe de la place même si on ne le voit pas.",
+                  "answers": [
+                    {
+                      "content": "gaz",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi regarde une bouteille ouverte et dit : « Elle est vide, il n'y a rien dedans. » Que peut-on lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la bouteille paraît vide. Étape 3 — Interpréter : si on l'enfonce dans l'eau, des bulles sortent, donc quelque chose l'occupe. Étape 4 — Conclure : c'est de l'air. Kofi confond « vide d'eau » et « sans air ».",
+                  "answers": [
+                    {
+                      "content": "Elle est pleine d'air, qu'on ne voit pas.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, il n'y a rien dedans.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est pleine d'eau invisible.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est pleine de sable très fin.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Montrer l'air par des expériences",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la mise en évidence de l'air.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour mettre l'air en évidence.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer d'abord l'objet ou le phénomène. Étape 2 — Réaliser l'expérience. Étape 3 — Interpréter l'effet. Étape 4 — Conclure. On ne peut pas conclure avant d'avoir observé.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'objet qui paraît vide ou le phénomène à expliquer."
+                    },
+                    {
+                      "content": "Réaliser l'expérience ou observer l'effet produit."
+                    },
+                    {
+                      "content": "Interpréter l'effet : quelque chose occupe de la place."
+                    },
+                    {
+                      "content": "Conclure : nommer le gaz et dire qu'il est de la matière."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à ce qu'elle montre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Réaliser : on observe l'effet. Étape 3 — Interpréter : le vent qui pousse montre que l'air peut pousser ; les bulles montrent que l'air s'échappe ; le pneu gonflé montre que l'air occupe de la place.",
+                  "answers": [
+                    {
+                      "content": "Le vent pousse un cerf-volant",
+                      "match": "L'air peut pousser un objet."
+                    },
+                    {
+                      "content": "Des bulles sortent d'un verre incliné sous l'eau",
+                      "match": "L'air s'échappe du verre."
+                    },
+                    {
+                      "content": "Un pneu de vélo se gonfle avec une pompe",
+                      "match": "L'air occupe de la place."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bouteille « vide » d'un litre est ouverte. Combien de litres d'air contient-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la bouteille paraît vide mais elle est ouverte. Étape 3 — Interpréter : l'air remplit toute la place libre. Étape 4 — Conclure : elle contient 1 L d'air. Ce n'est pas 0 L : « vide » ne veut pas dire « sans air ».",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "Dans le verre retourné enfoncé dans l'eau, la place est occupée par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Interpréter : l'eau n'entre pas dans le verre, donc quelque chose occupe la place. Étape 4 — Conclure : c'est de l'air. Le vide ne peut pas empêcher l'eau d'entrer, et la poussière ne remplit pas le verre.",
+                  "answers": [
+                    {
+                      "content": "de l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "du vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "de la poussière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On ne voit pas l'air, donc l'air n'existe pas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Interpréter : un effet visible (le vent, les bulles, le ballon gonflé) prouve qu'un gaz est là. Étape 4 — Conclure : l'air existe même si on ne le voit pas, car il est incolore.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels objets sont remplis d'air ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on regarde ce qui occupe chaque objet. Étape 4 — Conclure : le ballon et le pneu gonflés et la bouteille ouverte « vide » contiennent de l'air. La bouteille d'eau et le seau de sable sont remplis d'un liquide et d'un solide.",
+                  "answers": [
+                    {
+                      "content": "Un ballon gonflé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pneu de vélo gonflé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une bouteille ouverte qui paraît vide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une bouteille pleine d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un seau rempli de sable",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un récipient qui paraît vide contient de l'air. Cherche l'effet qui le prouve : des bulles, un ballon gonflé, le vent."
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître les propriétés d'un gaz",
+          "remember": "Un **solide** garde sa forme. Un **liquide** prend la forme de la partie du récipient qu'il remplit, avec une surface plane en haut. Un **gaz** n'a **pas de forme propre** : il prend la forme du récipient qui le contient. Il **occupe tout le volume** que le récipient lui offre : il n'a pas de surface plane. Un gaz s'échappe d'un récipient ouvert et se répand dans toute la pièce, comme le gaz d'une bouteille de butane qui fuit et qui finit par se répandre dans toute la pièce.",
+          "method": [
+            "Repérer le récipient qui contient le corps et son volume.",
+            "Observer la forme du corps et la place qu'il occupe dans le récipient.",
+            "Comparer avec un solide et avec un liquide.",
+            "Conclure : nommer l'état du corps (solide, liquide ou gaz) en justifiant par sa forme et son volume."
+          ],
+          "example": {
+            "statement": "Adjoua enferme de l'air dans une bouteille de 2 L, puis dans une boîte carrée de 2 L. Dans les deux récipients, l'air remplit tout l'intérieur. Est-ce un solide, un liquide ou un gaz ?",
+            "steps": [
+              "Repérer : il y a deux récipients, une bouteille de 2 L et une boîte carrée de 2 L.",
+              "Observer : dans chaque récipient, l'air prend la forme du récipient et occupe les 2 L en entier.",
+              "Comparer : un solide garde sa forme ; un liquide reste en bas avec une surface plane ; l'air remplit tout le récipient et n'a pas de surface.",
+              "Conclure : l'air n'a pas de forme propre et occupe tout le volume offert, donc c'est un gaz."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un gaz reste dans le bas du récipient comme un liquide, ni qu'il a un volume fixe. Contre-exemple : 1 L d'eau versé dans un récipient de 5 L n'occupe que 1 L, au fond. Un gaz enfermé dans le même récipient de 5 L occupe les 5 L. Pour éviter l'erreur, regarde si le corps garde une surface plane : un gaz n'en a pas.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un gaz par sa forme et par le volume qu'il occupe.",
+            "questions": [
+              {
+                "content": "Quel corps prend la forme du récipient et occupe tout son volume ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Observer : le corps prend la forme du récipient et remplit tout. Étape 3 — Comparer : un solide garde sa forme et un liquide ne remplit que le bas. Étape 4 — Conclure : c'est un gaz.",
+                "answers": [
+                  {
+                    "content": "Un gaz",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un solide",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un liquide",
+                    "correct": false
+                  }
+                ],
+                "hint": "Lequel des trois n'a pas de surface plane ?"
+              },
+              {
+                "content": "Un gaz a une forme propre, comme un caillou.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : c'est le solide, comme le caillou, qui garde sa forme. Étape 4 — Conclure : un gaz n'a pas de forme propre, il prend celle du récipient.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un caillou change-t-il de forme quand on le change de récipient ?"
+              },
+              {
+                "content": "Un solide garde sa ___ quand on le change de récipient.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Comparer : un solide garde sa forme. Un liquide et un gaz prennent la forme du récipient.",
+                "answers": [
+                  {
+                    "content": "forme",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à un caillou dans un seau puis dans un sac."
+              },
+              {
+                "content": "Un gaz est enfermé dans une bouteille de 1,5 L. Quel volume occupe-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la bouteille fait 1,5 L. Étape 2 — Observer : un gaz occupe tout le volume offert. Étape 4 — Conclure : il occupe 1,5 L, pas seulement une partie.",
+                "answers": [
+                  {
+                    "content": "1,5",
+                    "correct": true
+                  }
+                ],
+                "unit": "L",
+                "hint": "Un gaz remplit tout le récipient."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Distinguer solide, liquide et gaz",
+              "statement": "Dans cet exercice, tu suis les étapes de la fiche pour reconnaître un gaz.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un corps enfermé remplit en entier n'importe quel flacon où on le met, petit ou grand. Quel est son état ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on met le corps dans des flacons de tailles différentes. Étape 2 — Observer : il remplit chaque flacon en entier. Étape 3 — Comparer : un solide garde sa forme, un liquide reste en bas. Étape 4 — Conclure : c'est un gaz.",
+                  "answers": [
+                    {
+                      "content": "Gaz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Solide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz n'a pas de forme propre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Observer : un gaz prend la forme du récipient. Étape 4 — Conclure : il n'a pas de forme propre, contrairement au solide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz est enfermé dans un récipient fermé de 1 L. Quel volume occupe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le récipient fait 1 L. Étape 2 — Observer : un gaz occupe tout le volume offert. Étape 4 — Conclure : il occupe 1 L en entier. « Le bas » est la réponse du liquide.",
+                  "answers": [
+                    {
+                      "content": "1 L en entier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement le bas du récipient",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moitié du récipient",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un volume qui ne change jamais, même dans un autre récipient",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz occupe tout le ___ que le récipient lui offre.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Observer : le gaz remplit le récipient. Étape 4 — Conclure : il occupe tout le volume offert.",
+                  "answers": [
+                    {
+                      "content": "volume",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa dit : « Le gaz d'un flacon de 500 mL reste au fond, comme l'eau. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer : un liquide reste en bas avec une surface plane, un gaz non. Étape 4 — Conclure : le gaz remplit les 500 mL. Moussa confond le gaz avec le liquide, c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Faux : le gaz remplit tout le flacon.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai : un gaz forme une surface plane en haut.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai : un gaz reste toujours en bas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : un gaz ne remplit jamais le flacon.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer les trois états",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les propriétés d'un gaz.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles propriétés sont celles d'un gaz ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Observer : un gaz prend la forme du récipient et le remplit. Étape 4 — Conclure : pas de forme propre et volume offert occupé en entier. Garder sa forme est propre au solide, la surface plane au liquide.",
+                  "answers": [
+                    {
+                      "content": "Il n'a pas de forme propre.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il occupe tout le volume offert.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il garde sa forme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a une surface plane.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste toujours au fond.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque corps à sa propriété.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Comparer : le caillou est un solide qui garde sa forme ; l'eau est un liquide qui reste en bas ; l'air est un gaz qui remplit tout le ballon.",
+                  "answers": [
+                    {
+                      "content": "Un caillou",
+                      "match": "Il garde sa forme."
+                    },
+                    {
+                      "content": "L'eau dans un seau",
+                      "match": "Il reste en bas avec une surface plane."
+                    },
+                    {
+                      "content": "L'air dans un ballon",
+                      "match": "Il remplit tout le ballon."
+                    }
+                  ]
+                },
+                {
+                  "content": "On verse 300 mL d'eau dans un bocal de 1 000 mL. Quel volume occupe l'eau ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : bocal de 1 000 mL, 300 mL d'eau. Étape 3 — Comparer : un liquide garde son volume. Étape 4 — Conclure : l'eau occupe 300 mL, alors qu'un gaz occuperait les 1 000 mL.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un gaz.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le récipient. Étape 2 — Observer le corps. Étape 3 — Comparer. Étape 4 — Conclure. On ne compare qu'après avoir observé.",
+                  "answers": [
+                    {
+                      "content": "Repérer le récipient et son volume."
+                    },
+                    {
+                      "content": "Observer la forme et la place occupée."
+                    },
+                    {
+                      "content": "Comparer avec un solide et un liquide."
+                    },
+                    {
+                      "content": "Conclure en justifiant par la forme et le volume."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz qui fuit d'une bouteille ouverte se répand dans ___ la pièce.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Observer : le gaz occupe tout le volume offert, ici la pièce. Étape 4 — Conclure : il se répand dans toute la pièce. Il ne reste pas dans un coin ni en bas, comme le ferait un liquide.",
+                  "answers": [
+                    {
+                      "content": "toute",
+                      "correct": true
+                    },
+                    {
+                      "content": "le coin de",
+                      "correct": false
+                    },
+                    {
+                      "content": "le bas de",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un liquide occupe tout le volume du récipient, comme un gaz.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : un liquide garde son volume et reste en bas avec une surface plane. Seul le gaz remplit tout le récipient. Étape 4 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare toujours avec un caillou (solide) et de l'eau (liquide). Le gaz est le seul à remplir tout le récipient."
+            }
+          ]
+        },
+        {
+          "name": "Comprimer et détendre un gaz",
+          "remember": "Un gaz est **compressible** : on peut diminuer son volume en le serrant, par exemple en poussant le piston d'une seringue dont le bout est bouché, ou avec une pompe à vélo. Un gaz est **expansible** : son volume augmente quand on lui offre plus de place, par exemple en tirant le piston. Le volume se lit sur la graduation de la seringue, en **millilitres** (mL) ; $1\\text{ L} = 1000\\text{ mL}$. Quand on comprime ou qu'on détend un gaz enfermé, **sa quantité ne change pas**, seul son volume change. Un liquide ou un solide ne se comprime pratiquement pas.",
+          "method": [
+            "Lire le volume de gaz au départ sur la graduation de la seringue.",
+            "Repérer l'action sur le piston : on le pousse ou on le tire, le bout restant bouché.",
+            "Lire le volume final, puis calculer la variation en faisant la différence.",
+            "Conclure : volume qui diminue, gaz comprimé ; volume qui augmente, gaz détendu ; la quantité de gaz ne change pas."
+          ],
+          "example": {
+            "statement": "Koffi bouche le bout d'une seringue qui contient 40 mL d'air. Il pousse le piston jusqu'à la graduation 25 mL. Que devient l'air ?",
+            "steps": [
+              "Lire : au départ, la seringue contient 40 mL d'air.",
+              "Repérer : Koffi pousse le piston et le bout est bouché.",
+              "Lire le volume final : 25 mL. La variation est $40 - 25 = 15$ mL de moins.",
+              "Conclure : le volume a diminué de 15 mL, l'air est comprimé. Il n'a rien perdu, car le bout est bouché."
+            ]
+          },
+          "pitfall": "Ne pas croire que le gaz disparaît quand on le comprime, ni qu'un liquide se comprime comme un gaz. Contre-exemple : dans une seringue bouchée, 40 mL d'air descendent à 20 mL si on pousse le piston ; 40 mL d'eau restent à 40 mL, le piston ne bouge presque pas. Si on lâche le piston, l'air revient vers son volume de départ : il n'avait pas disparu.",
+          "figure": "seringue-volumes",
+          "practice": {
+            "statement": "Tu t'entraînes à lire les volumes d'une seringue et à dire si le gaz est comprimé ou détendu.",
+            "questions": [
+              {
+                "content": "Une seringue bouchée contient 80 mL d'air. On pousse le piston jusqu'à 50 mL. De combien de mL le volume a-t-il diminué ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : 80 mL au départ. Étape 3 — Lire le volume final : 50 mL, la variation est 80 − 50 = 30 mL. Étape 4 — Conclure : le volume a diminué de 30 mL.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ],
+                "unit": "mL",
+                "hint": "Fais la différence entre le volume de départ et le volume final."
+              },
+              {
+                "content": "Si on tire le piston d'une seringue bouchée, le volume du gaz augmente.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : on tire le piston, le bout est bouché. Étape 4 — Conclure : le volume augmente, le gaz est détendu, c'est-à-dire expansible.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le gaz a-t-il plus de place ou moins de place ?"
+              },
+              {
+                "content": "Quand on pousse le piston d'une seringue bouchée remplie d'air, l'air est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Repérer : on pousse le piston. Étape 4 — Conclure : le volume diminue, l'air est comprimé. Il n'est pas perdu : le bout est bouché.",
+                "answers": [
+                  {
+                    "content": "comprimé",
+                    "correct": true
+                  },
+                  {
+                    "content": "détendu",
+                    "correct": false
+                  },
+                  {
+                    "content": "perdu",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le volume diminue-t-il ou augmente-t-il ?"
+              },
+              {
+                "content": "Un gaz qu'on peut serrer pour diminuer son volume est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : un gaz dont le volume diminue quand on le serre est compressible.",
+                "answers": [
+                  {
+                    "content": "compressible",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot commence par « com… »"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire et interpréter une seringue",
+              "statement": "Dans cet exercice, tu suis les étapes de la fiche pour comprimer et détendre un gaz avec une seringue.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une seringue bouchée contient 50 mL d'air. On pousse le piston jusqu'à 30 mL. Que fait le gaz ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 50 mL au départ. Étape 2 — Repérer : on pousse le piston. Étape 3 — Lire le volume final : 30 mL. Étape 4 — Conclure : le volume diminue, le gaz est comprimé. Il ne disparaît pas, le bout est bouché.",
+                  "answers": [
+                    {
+                      "content": "Il est comprimé : son volume diminue.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est détendu : son volume augmente.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il disparaît en partie.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son volume ne change pas.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une seringue bouchée contient 50 mL d'air. On pousse le piston jusqu'à 30 mL. Quelle est la variation du volume, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : 50 mL. Étape 3 — Lire le volume final : 30 mL et calculer la variation : 50 − 30 = 20 mL. Étape 4 — Conclure : le volume a diminué de 20 mL.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Si on tire le piston d'une seringue bouchée, le volume du gaz augmente.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer : on tire le piston, le bout est bouché. Étape 4 — Conclure : le gaz a plus de place, son volume augmente : il est expansible.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz dont le volume diminue quand on le serre est dit ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : un gaz qui se comprime est compressible.",
+                  "answers": [
+                    {
+                      "content": "compressible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou pousse le piston d'une seringue bouchée remplie d'air et dit : « Une partie de l'air a disparu. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer : le bout est bouché, donc l'air ne peut pas sortir. Étape 4 — Conclure : la quantité d'air ne change pas, seul son volume diminue. Fatou confond « volume plus petit » et « moins d'air ».",
+                  "answers": [
+                    {
+                      "content": "Non, le bout est bouché : l'air est seulement comprimé.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, le piston a détruit de l'air.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, l'air a traversé la seringue.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, l'air ne se comprime pas du tout.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Pompes, pneus et seringues",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la compression et l'expansion d'un gaz.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles situations montrent qu'un gaz est compressible ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer : on cherche où le volume d'un gaz diminue. La seringue d'air et le pneu qu'on gonfle le montrent. L'eau et le caillou ne se compriment pratiquement pas.",
+                  "answers": [
+                    {
+                      "content": "On pousse le piston d'une seringue bouchée remplie d'air.",
+                      "correct": true
+                    },
+                    {
+                      "content": "On pompe de l'air dans un pneu de vélo.",
+                      "correct": true
+                    },
+                    {
+                      "content": "On pousse le piston d'une seringue bouchée remplie d'eau.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On écrase un caillou avec le pied.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On verse de l'eau dans un verre.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action au résultat.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer : on regarde l'action sur le piston. Étape 4 — Conclure : l'air se comprime quand on pousse et se détend quand on tire ; l'eau, un liquide, ne se comprime presque pas.",
+                  "answers": [
+                    {
+                      "content": "Pousser le piston (seringue d'air bouchée)",
+                      "match": "Le volume du gaz diminue."
+                    },
+                    {
+                      "content": "Tirer le piston (seringue d'air bouchée)",
+                      "match": "Le volume du gaz augmente."
+                    },
+                    {
+                      "content": "Pousser le piston (seringue d'eau bouchée)",
+                      "match": "Le volume ne change presque pas."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une seringue bouchée contient 20 mL d'air. On tire le piston jusqu'à 55 mL. De combien de mL le volume a-t-il augmenté ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : 20 mL au départ. Étape 3 — Lire le volume final : 55 mL, la variation est 55 − 20 = 35 mL. Étape 4 — Conclure : le volume a augmenté de 35 mL, le gaz est détendu.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier un gaz dans une seringue.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire le volume de départ. Étape 2 — Repérer l'action. Étape 3 — Lire le volume final et calculer. Étape 4 — Conclure. Sans volume de départ, on ne peut pas calculer la variation.",
+                  "answers": [
+                    {
+                      "content": "Lire le volume de gaz au départ."
+                    },
+                    {
+                      "content": "Repérer si le piston est poussé ou tiré."
+                    },
+                    {
+                      "content": "Lire le volume final et calculer la variation."
+                    },
+                    {
+                      "content": "Conclure : gaz comprimé ou gaz détendu."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le volume d'un gaz augmente parce qu'on lui offre plus de place, le gaz est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : un gaz qui occupe plus de place est expansible. Compressible décrit le contraire : un volume qui diminue quand on serre.",
+                  "answers": [
+                    {
+                      "content": "expansible",
+                      "correct": true
+                    },
+                    {
+                      "content": "compressible",
+                      "correct": false
+                    },
+                    {
+                      "content": "solide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un liquide se comprime aussi facilement qu'un gaz.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : un liquide ne se comprime presque pas : 40 mL d'eau restent à peu près 40 mL, alors que 40 mL d'air peuvent descendre à 20 mL.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pousser le piston, c'est comprimer : le volume diminue. Tirer le piston, c'est détendre : le volume augmente. La variation est la différence des deux volumes."
+            }
+          ]
+        },
+        {
+          "name": "Montrer que l'air a une masse",
+          "remember": "Un gaz a une **masse**, comme tout corps : on la mesure avec une **balance**, en **grammes** (g). On la trouve par différence : masse du récipient avec plus de gaz − masse du même récipient avec moins de gaz. Pour l'air, **1 litre a une masse d'environ 1,3 g** (valeur approchée). Pour estimer la masse d'un volume d'air, on multiplie le volume en litres par 1,3 g : 10 L d'air ont donc une masse d'environ 13 g.",
+          "method": [
+            "Peser le récipient qui contient le gaz et noter sa masse.",
+            "Retirer du gaz du récipient, puis peser le même récipient et noter sa masse.",
+            "Calculer la différence des deux masses : c'est la masse du gaz retiré.",
+            "Conclure : le gaz a une masse ; pour estimer la masse d'un volume d'air, multiplier le volume en litres par environ 1,3 g."
+          ],
+          "example": {
+            "statement": "Awa pèse un ballon de football gonflé (enveloppe rigide avec une valve) : 430 g. Elle laisse sortir l'équivalent de 3 L d'air pris dans la pièce, puis pèse le même ballon : 426 g. Que montre cette pesée ?",
+            "steps": [
+              "Peser : le ballon de football gonflé a une masse de 430 g.",
+              "Retirer : Awa laisse sortir de l'air, puis pèse le même ballon : 426 g.",
+              "Calculer : $430 - 426 = 4$ g. C'est la masse de l'air qui est sorti.",
+              "Conclure : l'air a une masse. Pour l'équivalent de 3 L d'air, l'estimation est $3 \\times 1{,}3 = 3{,}9$ g, soit environ 4 g : les deux résultats sont proches."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'air n'a pas de masse parce qu'on ne sent rien dans la main. Contre-exemple : dans la main, 3 L d'air ne se sentent pas, mais la balance mesure 4 g de moins quand ils sortent d'un ballon de football. L'air a une petite masse ; la balance la détecte. Ne pas confondre non plus le volume (en litres) et la masse (en grammes).",
+          "figure": "pesee-ballon",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer la masse d'un gaz par différence et à l'estimer à partir de son volume.",
+            "questions": [
+              {
+                "content": "Un ballon de football gonflé a une masse de 440 g. Après la sortie d'un peu d'air, il a une masse de 437 g. Quelle est la masse de l'air sorti ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Peser : 440 g. Étape 2 — Retirer : le ballon pèse ensuite 437 g. Étape 3 — Calculer : 440 − 437 = 3 g. Étape 4 — Conclure : l'air sorti a une masse de 3 g.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "unit": "g",
+                "hint": "Fais la différence des deux pesées."
+              },
+              {
+                "content": "Un flacon ouvert contient 2 L d'air. Estime la masse de cet air, avec 1,3 g par litre.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Conclure : on multiplie le volume par 1,3 g : 2 × 1,3 = 2,6 g. Cette valeur est une estimation.",
+                "answers": [
+                  {
+                    "content": "2,6",
+                    "correct": true
+                  }
+                ],
+                "unit": "g",
+                "hint": "Multiplie 2 par 1,3."
+              },
+              {
+                "content": "L'air n'a pas de masse, car on ne sent rien dans la main.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : la différence de pesée d'un ballon avant et après la sortie d'air n'est pas nulle. Étape 4 — Conclure : l'air a une masse, même petite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Que dit la balance quand l'air sort ?"
+              },
+              {
+                "content": "Quel instrument permet de mesurer la masse d'un gaz ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Peser : la masse se mesure avec une balance, en grammes. La règle mesure une longueur et le chronomètre une durée.",
+                "answers": [
+                  {
+                    "content": "Une balance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une règle graduée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un chronomètre",
+                    "correct": false
+                  }
+                ],
+                "hint": "On cherche une masse, pas une longueur."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Peser un gaz",
+              "statement": "Dans cet exercice, tu suis les étapes de la fiche pour montrer que l'air a une masse.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel instrument faut-il pour comparer la masse d'un ballon avant et après la sortie d'air ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Peser : on mesure la masse avec une balance. L'éprouvette mesure un volume et la règle une longueur.",
+                  "answers": [
+                    {
+                      "content": "Une balance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éprouvette graduée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de football gonflé a une masse de 435 g. Après la sortie d'un peu d'air, il a une masse de 431 g. Quelle est la masse de l'air sorti, en g ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Peser : 435 g. Étape 2 — Retirer : 431 g après la sortie d'air. Étape 3 — Calculer : 435 − 431 = 4 g. Étape 4 — Conclure : l'air sorti a une masse de 4 g.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "L'air n'a pas de masse.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer : la différence de pesée est de plusieurs grammes, elle n'est pas nulle. Étape 4 — Conclure : l'air a une masse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un grand sac ouvert contient 5 L d'air. Estime sa masse avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Conclure : on multiplie le volume par 1,3 g : 5 × 1,3 = 6,5 g. C'est une estimation, car la valeur de 1,3 g par litre est approchée.",
+                  "answers": [
+                    {
+                      "content": "6,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Yao dit : « Un ballon de football gonflé et le même ballon dégonflé ont la même masse, car l'air ne pèse rien. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer : la différence entre les deux pesées donne la masse de l'air sorti, elle n'est pas nulle. Étape 4 — Conclure : l'air a une masse. Yao confond « petite masse » et « pas de masse ».",
+                  "answers": [
+                    {
+                      "content": "Faux : le ballon gonflé contient plus d'air, donc il a une masse un peu plus grande.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai : un gaz n'a jamais de masse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : le ballon dégonflé est toujours le plus lourd.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai : la balance ne peut pas peser un ballon.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Estimer la masse de l'air",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la masse d'un gaz.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles affirmations sur la masse de l'air sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Peser : la masse se mesure avec une balance. Étape 4 — Conclure : 1 L d'air a une masse d'environ 1,3 g. L'air a bien une masse, et elle est bien plus petite que 1 kg.",
+                  "answers": [
+                    {
+                      "content": "Elle se mesure avec une balance.",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 L d'air a une masse d'environ 1,3 g.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air n'a aucune masse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 L d'air a une masse de 1 kg.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se mesure avec une règle.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour montrer que l'air a une masse.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Peser avec le gaz. Étape 2 — Retirer du gaz et peser encore. Étape 3 — Calculer la différence. Étape 4 — Conclure. On ne peut pas calculer avant les deux pesées.",
+                  "answers": [
+                    {
+                      "content": "Peser le récipient qui contient le gaz."
+                    },
+                    {
+                      "content": "Retirer du gaz puis peser le même récipient."
+                    },
+                    {
+                      "content": "Calculer la différence des deux masses."
+                    },
+                    {
+                      "content": "Conclure que le gaz a une masse."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque grandeur à son instrument ou à son unité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Peser : la masse se mesure avec une balance, en g. Le volume d'un gaz se lit sur la seringue graduée, en mL. Une longueur se mesure avec une règle.",
+                  "answers": [
+                    {
+                      "content": "La masse d'un gaz",
+                      "match": "Une balance, en grammes"
+                    },
+                    {
+                      "content": "Le volume d'un gaz",
+                      "match": "Une seringue graduée, en millilitres"
+                    },
+                    {
+                      "content": "Une longueur",
+                      "match": "Une règle, en centimètres"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un grand sac plastique ouvert contient 20 L d'air. Estime la masse de cet air avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Conclure : on multiplie le volume par 1,3 g : 20 × 1,3 = 26 g. C'est une valeur approchée.",
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Un volume de 10 L d'air a une masse de 10 g.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : on multiplie 10 L par 1,3 g, soit 13 g, pas 10 g. Le volume (en litres) et la masse (en grammes) sont deux grandeurs différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour estimer la masse de l'air, on multiplie le volume en litres par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : 1 L d'air a une masse d'environ 1,3 g. 1 000 g est beaucoup trop grand, et les mL sont une unité de volume, pas de masse.",
+                  "answers": [
+                    {
+                      "content": "1,3 g",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 000 g",
+                      "correct": false
+                    },
+                    {
+                      "content": "13 mL",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "La masse du gaz retiré est la différence des deux pesées. Pour estimer la masse d'un volume d'air, multiplie le nombre de litres par 1,3 g."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les ballons de la fête de l'école",
+          "statement": "Pour la fête de fin d'année de son école à Bouaké, Kouadio gonfle des ballons colorés avec une pompe. Chaque ballon reçoit environ 2 L d'air pris dans la pièce. Il en gonfle 5. Dans les calculs de masse, on prend 1,3 g d'air par litre (valeur approchée).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Qu'est-ce qui remplit les ballons de Kouadio ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer : les ballons grossissent quand la pompe pousse quelque chose dedans. 2. Observer l'effet : ils se gonflent. 3. Interpréter : quelque chose occupe la place. 4. Conclure : c'est de l'air, un gaz. Dire « du vide » ou « rien » oublie que l'air est de la matière.",
+              "answers": [
+                {
+                  "content": "De l'air, un gaz",
+                  "correct": true
+                },
+                {
+                  "content": "Du vide",
+                  "correct": false
+                },
+                {
+                  "content": "Un liquide invisible",
+                  "correct": false
+                },
+                {
+                  "content": "Rien, ils sont seulement tendus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles observations montrent que l'air existe ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 2. Chercher un effet qui prouve qu'un gaz occupe de la place ou pousse. Un ballon rond et ferme prouve que de l'air l'occupe. Le vent qui pousse prouve que l'air peut pousser. La couleur, la matière et le prix du ballon ne parlent pas de l'air.",
+              "answers": [
+                {
+                  "content": "Les ballons gonflés restent ronds et fermes.",
+                  "correct": true
+                },
+                {
+                  "content": "Le vent pousse un ballon léger sur la cour.",
+                  "correct": true
+                },
+                {
+                  "content": "Le ballon est de couleur rouge.",
+                  "correct": false
+                },
+                {
+                  "content": "Le ballon dégonflé est en caoutchouc.",
+                  "correct": false
+                },
+                {
+                  "content": "Le ballon coûte 100 F CFA au marché.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un ballon, l'air garde la forme d'une petite boule, comme un caillou.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 3. Comparer avec un solide : un caillou garde sa forme. Un gaz n'a pas de forme propre : il prend celle du récipient. Dans le ballon, l'air a la forme du ballon. Dire qu'il garde sa propre forme confond le gaz et le solide.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Kouadio gonfle 5 ballons de 2 L d'air chacun. Quel volume d'air a-t-il utilisé en tout, en L ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer : 5 ballons, 2 L chacun. 2. Calculer : 5 × 2 = 10. 3. Conclure : il a utilisé 10 L d'air en tout. Un gaz occupe le volume offert : chaque ballon en prend 2 L.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "L"
+            },
+            {
+              "content": "Quelle est la masse de ces 10 L d'air, avec 1,3 g par litre, en g ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer : 10 L d'air. 2. Appliquer : masse = volume en litres × 1,3 g, soit 10 × 1,3 = 13. 3. Conclure : l'air des ballons a une masse d'environ 13 g. Ne confonds pas 10 L (un volume) avec 10 g (une masse).",
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            }
+          ]
+        },
+        {
+          "title": "La pompe à vélo de Moussa",
+          "statement": "Moussa gonfle le pneu de son vélo à Korhogo. Il observe sa pompe : quand le piston est tiré, elle contient 300 mL d'air. Il bouche la sortie de la pompe avec son doigt et pousse le piston jusqu'à la graduation 100 mL.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Que devient l'air dans la pompe quand Moussa pousse le piston, la sortie étant bouchée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Lire le volume de départ : 300 mL. 2. Repérer l'action : on pousse le piston, la sortie est bouchée. 3. Lire le volume final : 100 mL. 4. Conclure : le volume diminue, l'air est comprimé. Il ne disparaît pas, car il ne peut pas sortir.",
+              "answers": [
+                {
+                  "content": "Il est comprimé : son volume diminue.",
+                  "correct": true
+                },
+                {
+                  "content": "Il est détendu : son volume augmente.",
+                  "correct": false
+                },
+                {
+                  "content": "Il disparaît.",
+                  "correct": false
+                },
+                {
+                  "content": "Il sort par le piston.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de mL le volume de l'air a-t-il diminué ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Lire le volume de départ : 300 mL. 2. Lire le volume final : 100 mL. 3. Calculer la variation : 300 − 100 = 200. 4. Conclure : le volume a diminué de 200 mL.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ],
+              "unit": "mL"
+            },
+            {
+              "content": "L'air de la pompe est un gaz ___ : son volume diminue quand on le serre.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 4. Conclure : un gaz dont le volume diminue quand on le serre est compressible. Un liquide, au contraire, ne se comprime presque pas.",
+              "answers": [
+                {
+                  "content": "compressible",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En poussant le piston, Moussa a fait disparaître une partie de l'air.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 2. Repérer : la sortie est bouchée, donc l'air ne peut pas partir. 4. Conclure : la quantité d'air ne change pas, seul son volume diminue. Si Moussa lâche le piston, il remonte, preuve que l'air est toujours là.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Moussa remplace l'air par de l'eau dans la même pompe, sortie bouchée. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 3. Comparer avec un liquide : un liquide ne se comprime presque pas, alors que l'air se comprime facilement. Le piston avance donc très peu avec l'eau. L'eau ne disparaît pas et ne sort pas par le piston.",
+              "answers": [
+                {
+                  "content": "Le piston avance très peu.",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau est un liquide, qui ne se comprime presque pas.",
+                  "correct": true
+                },
+                {
+                  "content": "Le piston avance autant qu'avec l'air.",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau disparaît en partie.",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau sort par le piston.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La bouteille de gaz du maquis",
+          "statement": "Aminata tient un petit maquis à Yopougon. Un jour, le robinet de la bouteille de gaz butane est resté entrouvert : on a senti le gaz dans toute la salle. Pour contrôler sa consommation, Aminata pèse sa bouteille : 14 200 g quand elle est neuve, puis 13 600 g après une semaine d'utilisation.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pourquoi sent-on le gaz dans toute la salle et pas seulement près de la bouteille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer : le gaz s'échappe dans une salle ouverte. 2. Observer : on le sent partout. 3. Comparer : un solide garde sa forme, un liquide reste en bas, un gaz remplit tout. 4. Conclure : un gaz occupe tout le volume offert. Penser qu'il forme une flaque, c'est le raisonner comme un liquide.",
+              "answers": [
+                {
+                  "content": "Un gaz occupe tout le volume qu'on lui offre.",
+                  "correct": true
+                },
+                {
+                  "content": "Un gaz garde sa forme et reste en boule.",
+                  "correct": false
+                },
+                {
+                  "content": "Un gaz forme toujours une flaque.",
+                  "correct": false
+                },
+                {
+                  "content": "Un gaz ne se déplace jamais.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un gaz qui fuit d'une bouteille forme une flaque près de la bouteille, comme de l'eau renversée.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 3. Comparer : l'eau renversée reste en une flaque. Un gaz n'a pas de forme propre et occupe tout le volume offert : il se répand dans toute la pièce. 4. Conclure : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle masse la bouteille a-t-elle perdue en une semaine, en g ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Peser : 14 200 g au départ. 2. Peser encore : 13 600 g une semaine après. 3. Calculer la différence : 14 200 − 13 600 = 600. 4. Conclure : la bouteille a perdu 600 g, c'est la masse du gaz utilisé.",
+              "answers": [
+                {
+                  "content": "600",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            },
+            {
+              "content": "Que montre cette perte de masse de la bouteille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3. Calculer : la différence entre les deux pesées n'est pas nulle. 4. Conclure : quand du gaz sort d'un récipient, sa masse diminue, donc le gaz a une masse. Dire que le gaz n'a pas de masse contredit la pesée.",
+              "answers": [
+                {
+                  "content": "Le gaz utilisé avait une masse.",
+                  "correct": true
+                },
+                {
+                  "content": "Le gaz n'a pas de masse.",
+                  "correct": false
+                },
+                {
+                  "content": "La balance est fausse.",
+                  "correct": false
+                },
+                {
+                  "content": "La bouteille s'est rétrécie.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour montrer qu'un gaz a une masse.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Peser avec le gaz. 2. Retirer du gaz et peser encore. 3. Calculer la différence. 4. Conclure. L'ordre compte : on ne peut calculer une différence qu'avec deux pesées.",
+              "answers": [
+                {
+                  "content": "Peser le récipient qui contient le gaz."
+                },
+                {
+                  "content": "Retirer du gaz puis peser le même récipient."
+                },
+                {
+                  "content": "Calculer la différence des deux masses."
+                },
+                {
+                  "content": "Conclure que le gaz a une masse."
+                }
+              ]
+            },
+            {
+              "content": "Pour mesurer la masse de la bouteille, Aminata utilise ___.",
+              "question_type": "select",
+              "explanation": "Méthode : 1. Repérer la grandeur : une masse. 2. Choisir l'instrument : une balance, en grammes. L'éprouvette et la seringue mesurent des volumes.",
+              "answers": [
+                {
+                  "content": "une balance",
+                  "correct": true
+                },
+                {
+                  "content": "une éprouvette graduée",
+                  "correct": false
+                },
+                {
+                  "content": "une seringue",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'atelier de Yao, mécanicien à Abidjan",
+          "statement": "Yao répare des motos et des vélos à Abidjan. Pour expliquer à son apprenti, il utilise un pneu de moto dans lequel il a pompé l'équivalent de 4 L d'air pris dans l'atelier, une seringue bouchée et un ballon de football (enveloppe rigide avec une valve). Dans les calculs de masse, on prend 1,3 g d'air par litre (valeur approchée).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Estime la masse de l'air pompé dans le pneu de moto (l'équivalent de 4 L d'air de l'atelier), en g.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer : 4 L d'air pris dans l'atelier, avant d'être comprimés dans le pneu. 2. Appliquer : masse = volume en litres × 1,3 g, soit 4 × 1,3 = 5,2. 3. Conclure : l'air du pneu a une masse d'environ 5,2 g. C'est une estimation.",
+              "answers": [
+                {
+                  "content": "5,2",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            },
+            {
+              "content": "Yao bouche une seringue qui contient 60 mL d'air et pousse le piston jusqu'à 24 mL. De combien de mL le volume a-t-il diminué ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Lire le volume de départ : 60 mL. 2. Repérer l'action : il pousse le piston, le bout est bouché. 3. Lire le volume final : 24 mL et calculer 60 − 24 = 36. 4. Conclure : le volume a diminué de 36 mL, l'air est comprimé.",
+              "answers": [
+                {
+                  "content": "36",
+                  "correct": true
+                }
+              ],
+              "unit": "mL"
+            },
+            {
+              "content": "Si Yao remplit la même seringue d'eau, le piston avance autant qu'avec l'air.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 3. Comparer avec un liquide : l'eau ne se comprime presque pas, alors que l'air se comprime facilement. Le piston avance donc très peu. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Yao pèse un ballon de football : 420 g. Il laisse sortir l'équivalent de 6 L d'air de l'atelier et le pèse de nouveau : 412 g. Quelle est la masse de l'air sorti, en g ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Peser : 420 g avec le gaz. 2. Peser après la sortie de l'air : 412 g. 3. Calculer : 420 − 412 = 8. 4. Conclure : l'air sorti a une masse de 8 g, donc l'air a une masse.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            },
+            {
+              "content": "Avec 1,3 g par litre, estime la masse de ces 6 L d'air, en g.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 4. Conclure par l'estimation : 6 × 1,3 = 7,8 g. La pesée donne 8 g, l'estimation 7,8 g : les deux valeurs sont proches, ce qui confirme l'ordre de grandeur de 1,3 g par litre.",
+              "answers": [
+                {
+                  "content": "7,8",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            },
+            {
+              "content": "Quelles propriétés d'un gaz les expériences de Yao illustrent-elles ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 4. Conclure pour chaque expérience : la seringue montre que l'air est compressible ; la pesée du ballon montre que l'air a une masse ; le pneu gonflé montre que l'air occupe de la place. Un gaz n'a pas de forme propre, et il se comprime.",
+              "answers": [
+                {
+                  "content": "L'air peut être comprimé.",
+                  "correct": true
+                },
+                {
+                  "content": "L'air a une masse.",
+                  "correct": true
+                },
+                {
+                  "content": "L'air occupe de la place dans un pneu.",
+                  "correct": true
+                },
+                {
+                  "content": "L'air garde toujours sa forme.",
+                  "correct": false
+                },
+                {
+                  "content": "L'air ne se comprime jamais.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Mise en évidence de l'air, propriétés d'un gaz (pas de forme propre, occupe tout le volume offert), gaz compressible et expansible (seringue), masse de l'air.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au laboratoire du collège, le professeur montre que l'air existe. Il colle un papier au fond d'un verre, retourne le verre et l'enfonce droit dans une bassine d'eau. Le papier reste sec. Il incline ensuite le verre : des bulles remontent.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi le papier reste-t-il sec quand le verre est enfoncé droit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : le verre paraît vide. 2. Réaliser : on l'enfonce droit, le papier reste sec. 3. Interpréter : quelque chose occupe la place et empêche l'eau d'entrer. 4. Conclure : c'est de l'air. Le « vide » n'empêcherait pas l'eau d'entrer.",
+                  "answers": [
+                    {
+                      "content": "Le verre est plein d'air, qui occupe la place.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le verre est vide, donc l'eau ne peut pas y entrer.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le papier repousse l'eau.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau ne mouille jamais le papier.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les bulles qui remontent quand on incline le verre sont de l'air qui s'échappe.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Réaliser : on incline le verre sous l'eau. 3. Interpréter : les bulles sont du gaz qui sort du verre. 4. Conclure : c'est l'air que contenait le verre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'air est un ___, un corps qu'on ne voit pas et qui occupe de la place.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : on nomme l'air un gaz. Un gaz est de la matière : il occupe de la place même s'il est incolore.",
+                  "answers": [
+                    {
+                      "content": "gaz",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels effets montrent l'existence de l'air ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Chercher un effet visible d'un gaz invisible. Le pneu qui se gonfle montre que l'air occupe de la place ; le vent qui fait tourner la girouette montre que l'air peut pousser. Les autres propositions ne parlent pas de l'air.",
+                  "answers": [
+                    {
+                      "content": "Un pneu de vélo se gonfle avec une pompe.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vent fait tourner une girouette.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pierre tombe quand on la lâche.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sel se pose au fond de la marmite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une flaque d'eau reste au sol.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bouteille ouverte qui paraît vide est en réalité pleine ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Repérer : la bouteille paraît vide. 4. Conclure : elle est pleine d'air, car des bulles sortent si on l'enfonce dans l'eau. Le vide ne peut pas fournir de bulles, et le sable est un solide.",
+                  "answers": [
+                    {
+                      "content": "d'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "de vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "de sable fin",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un récipient qui paraît vide contient de l'air. Cherche l'effet qui le prouve : les bulles, le papier sec, le pneu gonflé."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le professeur place trois corps dans des flacons : un caillou, de l'eau et de l'air. Chaque flacon fait 100 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel corps garde sa forme quand on le change de flacon ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : trois corps, trois flacons. 2. Observer la forme. 3. Comparer : un solide garde sa forme ; un liquide et un gaz prennent la forme du récipient. 4. Conclure : seul le caillou garde sa forme.",
+                  "answers": [
+                    {
+                      "content": "Le caillou, un solide",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau, un liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air, un gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel volume occupe l'air enfermé dans le flacon de 100 mL ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : le flacon fait 100 mL. 2. Observer : un gaz remplit tout le récipient. 4. Conclure : l'air occupe 100 mL en entier. Un liquide resterait au fond ; le gaz n'a pas de surface plane.",
+                  "answers": [
+                    {
+                      "content": "100 mL en entier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement le fond du flacon",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 mL",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un volume qui ne dépend pas du flacon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque corps à sa propriété.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 3. Comparer : le caillou est un solide, il garde sa forme ; l'eau est un liquide, elle reste en bas avec une surface plane ; l'air est un gaz, il occupe tout le volume offert.",
+                  "answers": [
+                    {
+                      "content": "Le caillou",
+                      "match": "Il garde sa forme."
+                    },
+                    {
+                      "content": "L'eau",
+                      "match": "Il reste en bas avec une surface plane."
+                    },
+                    {
+                      "content": "L'air",
+                      "match": "Il occupe tout le volume offert."
+                    }
+                  ]
+                },
+                {
+                  "content": "On verse 40 mL d'eau dans le flacon de 100 mL. Quel volume l'eau occupe-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : flacon de 100 mL, 40 mL d'eau. 3. Comparer : un liquide garde son volume. 4. Conclure : l'eau occupe 40 mL, alors qu'un gaz aurait occupé les 100 mL.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Un gaz n'a pas de surface plane dans un récipient fermé.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : la surface plane est propre au liquide, qui reste en bas. 4. Conclure : un gaz remplit tout le récipient, sans surface plane.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare avec un caillou (solide) et de l'eau (liquide). Un gaz est le seul à remplir tout le récipient."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au laboratoire, un élève utilise une seringue graduée dont le bout est bouché. Elle contient 60 mL d'air. Il pousse le piston jusqu'à la graduation 35 mL, puis le tire jusqu'à 80 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De combien de mL le volume de l'air a-t-il diminué quand l'élève a poussé le piston de 60 mL à 35 mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire le volume de départ : 60 mL. 2. Repérer : on pousse le piston. 3. Lire le volume final : 35 mL et calculer 60 − 35 = 25. 4. Conclure : le volume a diminué de 25 mL.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quand on pousse le piston, comment appelle-t-on la propriété du gaz mise en évidence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : un gaz dont le volume diminue quand on le serre est compressible. Expansible décrit un volume qui augmente quand on offre de la place.",
+                  "answers": [
+                    {
+                      "content": "Compressible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Expansible",
+                      "correct": false
+                    },
+                    {
+                      "content": "Solide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Invisible",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En tirant le piston de 35 mL à 80 mL, le volume de l'air augmente.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Repérer : on tire le piston, le bout est bouché. 3. Calculer : 80 − 35 = 45 mL de plus. 4. Conclure : le volume augmente, le gaz est détendu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz dont le volume augmente quand on lui offre plus de place est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : un gaz qui occupe plus de place est expansible.",
+                  "answers": [
+                    {
+                      "content": "expansible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « En poussant le piston, une partie de l'air a disparu. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Repérer : le bout est bouché, donc l'air ne sort pas. 4. Conclure : la quantité d'air ne change pas, seul son volume diminue.",
+                  "answers": [
+                    {
+                      "content": "Non, le bout est bouché : l'air est seulement comprimé.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, le piston a détruit de l'air.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, l'air est passé dans le piston.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, l'air ne se comprime pas.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pousser le piston, c'est comprimer : le volume diminue. Tirer le piston, c'est détendre : le volume augmente. La variation est la différence des volumes."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur pèse un ballon de football gonflé (enveloppe rigide avec une valve) : 430 g. Il laisse sortir l'équivalent de 3 L d'air pris dans la salle, puis pèse le même ballon : 426 g. Dans les calculs, on prend 1,3 g d'air par litre (valeur approchée).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la masse de l'air sorti du ballon, en g ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Peser : 430 g avec le gaz. 2. Peser après la sortie d'air : 426 g. 3. Calculer : 430 − 426 = 4. 4. Conclure : l'air sorti a une masse de 4 g.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Estime la masse de 3 L d'air avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Conclure par l'estimation : 3 × 1,3 = 3,9 g. C'est proche des 4 g pesés, ce qui est cohérent.",
+                  "answers": [
+                    {
+                      "content": "3,9",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "L'air n'a pas de masse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Calculer : la différence des pesées n'est pas nulle. 4. Conclure : l'air a une masse, même petite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La masse d'un gaz se mesure avec ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Peser : on utilise une balance, en grammes. La règle mesure des longueurs et l'éprouvette des volumes.",
+                  "answers": [
+                    {
+                      "content": "une balance",
+                      "correct": true
+                    },
+                    {
+                      "content": "une règle",
+                      "correct": false
+                    },
+                    {
+                      "content": "une éprouvette",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour montrer que l'air a une masse.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Peser avec le gaz. 2. Retirer du gaz et peser encore. 3. Calculer la différence. 4. Conclure. L'ordre compte : on calcule après les deux pesées.",
+                  "answers": [
+                    {
+                      "content": "Peser le récipient qui contient le gaz."
+                    },
+                    {
+                      "content": "Retirer du gaz puis peser le même récipient."
+                    },
+                    {
+                      "content": "Calculer la différence des deux masses."
+                    },
+                    {
+                      "content": "Conclure que le gaz a une masse."
+                    }
+                  ]
+                }
+              ],
+              "hint": "La masse du gaz sorti est la différence des deux pesées. Pour estimer la masse d'un volume d'air, multiplie le nombre de litres par 1,3 g."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Les gaz dans la vie courante",
+          "notions": "Ballons, pneu de vélo et pompe, bouteille de gaz butane, seringue : existence de l'air, propriétés d'un gaz, compression, masse d'un gaz.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Fanta vend des ballons colorés au marché de Treichville. Elle en gonfle 12 pour la journée, chacun avec environ 2 L d'air pris dans l'air du marché. Dans les calculs de masse, on prend 1,3 g d'air par litre (valeur approchée).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un client défait le nœud d'un ballon : il se dégonfle. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : le nœud est défait. 2. Observer : le ballon se dégonfle. 3. Interpréter : le gaz sort par l'ouverture. 4. Conclure : l'air s'échappe, il n'est pas détruit.",
+                  "answers": [
+                    {
+                      "content": "L'air s'échappe du ballon.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air se colle au caoutchouc.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air est détruit par le nœud.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ballon se remplit d'eau.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta a gonflé 12 ballons de 2 L d'air chacun. Quel volume d'air a-t-elle utilisé en tout, en L ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 12 ballons de 2 L. 2. Calculer : 12 × 2 = 24. 3. Conclure : elle a utilisé 24 L d'air.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "Estime la masse de ces 24 L d'air avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 24 L d'air. 2. Appliquer : masse = volume en litres × 1,3 g, soit 24 × 1,3 = 31,2. 3. Conclure : environ 31,2 g d'air.",
+                  "answers": [
+                    {
+                      "content": "31,2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "L'air d'un ballon n'a pas de forme propre : il prend la forme du ballon.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : un solide garde sa forme, un gaz non. 4. Conclure : l'air prend la forme du ballon.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations de la vie courante montrent que l'air existe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Chercher les effets de l'air : un ballon qui se gonfle et un cerf-volant poussé par le vent. Les autres situations parlent d'autres phénomènes.",
+                  "answers": [
+                    {
+                      "content": "Un ballon se gonfle quand on souffle dedans.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vent pousse un cerf-volant.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sucre disparaît dans le thé.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pierre tombe dans la rivière.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le riz cuit dans la marmite.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un ballon gonflé est rempli d'air. Pour la masse, multiplie le volume en litres par 1,3 g."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Salif gonfle le pneu de son vélo à Korhogo avec une pompe. Quand le piston est levé, la pompe contient 250 mL d'air. Il bouche la sortie avec son doigt et pousse le piston jusqu'à 100 mL. Il pèse aussi sa roue avant et après le gonflage du pneu.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que devient l'air de la pompe quand Salif pousse le piston, sortie bouchée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire : 250 mL au départ. 2. Repérer : on pousse le piston. 3. Lire : 100 mL à la fin. 4. Conclure : le volume diminue, l'air est comprimé.",
+                  "answers": [
+                    {
+                      "content": "Il est comprimé.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est détendu.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il disparaît.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il sort par le piston.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de mL le volume de l'air a-t-il diminué ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire le volume de départ : 250 mL. 3. Lire le volume final : 100 mL et calculer 250 − 100 = 150. 4. Conclure : le volume a diminué de 150 mL.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Un gaz dont le volume diminue quand on le serre est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : un gaz qui se comprime est compressible.",
+                  "answers": [
+                    {
+                      "content": "compressible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pneu crevé se dégonfle parce que l'air sort par le trou.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Interpréter : un gaz s'échappe d'un récipient ouvert et occupe tout le volume offert. 4. Conclure : l'air sort par le trou, le pneu se dégonfle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roue gonflée a une masse un peu plus grande que la même roue dégonflée. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Calculer : la différence entre les deux pesées de la roue est positive. 4. Conclure : l'air ajouté a une masse. Dire que l'air n'a pas de masse contredit la pesée.",
+                  "answers": [
+                    {
+                      "content": "L'air ajouté a une masse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air n'a pas de masse, c'est le caoutchouc qui change.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pneu gonflé contient du liquide.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La balance se trompe toujours.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pousser le piston comprime l'air : le volume diminue. L'air ajouté dans le pneu a une masse."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la cuisine de sa tante, à San-Pédro, Awa remarque une odeur de gaz près de la bouteille de butane. Plus tard, elle pèse la bouteille : 9 400 g quand elle est neuve, puis 8 950 g après quelques jours.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'odeur de gaz se sent peu à peu dans toute la cuisine. Quelle propriété du gaz l'explique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : le gaz sort de la bouteille. 2. Observer : on le sent partout. 3. Comparer avec un liquide qui reste au sol. 4. Conclure : un gaz occupe tout le volume offert.",
+                  "answers": [
+                    {
+                      "content": "Il occupe tout le volume offert.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il garde sa forme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il forme une flaque.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne bouge pas.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gaz qui fuit forme une flaque près de la bouteille, comme de l'eau renversée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : l'eau renversée reste en flaque. 4. Conclure : un gaz n'a pas de forme propre et se répand dans toute la pièce.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle masse la bouteille a-t-elle perdue, en g ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Peser : 9 400 g. 2. Peser encore : 8 950 g. 3. Calculer : 9 400 − 8 950 = 450. 4. Conclure : la bouteille a perdu 450 g, la masse du gaz utilisé.",
+                  "answers": [
+                    {
+                      "content": "450",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Que montre cette perte de masse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Calculer : la différence n'est pas nulle. 4. Conclure : du gaz est sorti de la bouteille et sa masse a diminué, donc le gaz a une masse.",
+                  "answers": [
+                    {
+                      "content": "Le gaz a une masse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gaz n'a pas de masse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bouteille est trop petite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La balance mesure une longueur.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En cas d'odeur de gaz dans la cuisine, que faut-il faire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Raisonner : le gaz se répand dans la pièce. 4. Conclure : on ferme le robinet pour arrêter la fuite et on aère pour disperser le gaz. On évite toute flamme et toute étincelle.",
+                  "answers": [
+                    {
+                      "content": "Fermer le robinet de la bouteille.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ouvrir les portes et les fenêtres.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Allumer une allumette pour chercher la fuite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Allumer et éteindre l'interrupteur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer toutes les fenêtres.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un gaz se répand dans toute la pièce. La perte de masse de la bouteille est la masse du gaz utilisé."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au laboratoire du collège de Daloa, le professeur utilise une seringue sans aiguille, bouchée au bout. Elle contient 30 mL d'air. Il pousse le piston jusqu'à 12 mL, puis le tire jusqu'à 45 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De combien de mL le volume a-t-il diminué quand le piston passe de 30 mL à 12 mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire le volume de départ : 30 mL. 3. Lire le volume final : 12 mL et calculer 30 − 12 = 18. 4. Conclure : le volume a diminué de 18 mL.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Que devient l'air quand on tire le piston jusqu'à 45 mL ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Repérer : on tire le piston. 3. Lire : 45 mL. 4. Conclure : le volume augmente, le gaz est détendu.",
+                  "answers": [
+                    {
+                      "content": "Il est détendu : son volume augmente.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est comprimé.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il disparaît.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il traverse le piston.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec de l'eau à la place de l'air, le piston avancerait autant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : un liquide ne se comprime presque pas. 4. Conclure : le piston avancerait très peu avec de l'eau.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action à son résultat sur la seringue d'air bouchée.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 2. Repérer l'action sur le piston. 4. Conclure : on comprime en poussant, on détend en tirant, et sans action le volume reste le même.",
+                  "answers": [
+                    {
+                      "content": "Pousser le piston",
+                      "match": "Le volume diminue."
+                    },
+                    {
+                      "content": "Tirer le piston",
+                      "match": "Le volume augmente."
+                    },
+                    {
+                      "content": "Ne pas toucher au piston",
+                      "match": "Le volume ne change pas."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz dont on peut diminuer puis augmenter le volume est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 4. Conclure : tous les gaz peuvent être comprimés (volume qui diminue) et détendus (volume qui augmente). Un gaz n'est ni solide ni liquide.",
+                  "answers": [
+                    {
+                      "content": "compressible et expansible",
+                      "correct": true
+                    },
+                    {
+                      "content": "solide et dur",
+                      "correct": false
+                    },
+                    {
+                      "content": "toujours liquide",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Lis le volume de départ puis le volume final : la variation est leur différence."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Interpréter une expérience, comparer solide, liquide et gaz, comparer la compression d'un gaz et d'un liquide, raisonner sur une pesée et une estimation de masse.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Ibrahim enfonce une bouteille en plastique ouverte, goulot vers le bas, dans une bassine d'eau. L'eau monte très peu dans la bouteille. Il incline ensuite la bouteille : des bulles sortent et l'eau y entre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi l'eau monte-t-elle très peu quand la bouteille est droite, goulot vers le bas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : la bouteille paraît vide. 2. Réaliser : elle est enfoncée goulot vers le bas. 3. Interpréter : quelque chose occupe la place. 4. Conclure : c'est l'air.",
+                  "answers": [
+                    {
+                      "content": "L'air de la bouteille occupe la place.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bouteille est vide.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau est trop lourde.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plastique repousse l'eau.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand Ibrahim incline la bouteille, l'eau entre parce que l'air sort en faisant des bulles.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Interpréter : les bulles sont de l'air qui s'échappe, et l'eau prend sa place. 4. Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conclusions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 4. Conclure : l'air qui occupe la place empêche l'eau d'entrer ; il est de la matière. La bouteille n'était pas vide d'air, et l'air est un gaz.",
+                  "answers": [
+                    {
+                      "content": "La bouteille contenait de l'air.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air occupe de la place.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bouteille ne contenait rien.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air est un liquide.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air n'existe pas.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du raisonnement.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer. 2. Réaliser. 3. Interpréter. 4. Conclure. On interprète après avoir observé.",
+                  "answers": [
+                    {
+                      "content": "Repérer la bouteille qui paraît vide."
+                    },
+                    {
+                      "content": "Réaliser l'expérience dans la bassine."
+                    },
+                    {
+                      "content": "Interpréter : quelque chose occupe la place."
+                    },
+                    {
+                      "content": "Conclure : la bouteille contient de l'air."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récipient qui paraît vide est en réalité plein d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Repérer un récipient qui paraît vide. 4. Conclure : il est plein d'air. C'est l'erreur du piège : confondre « vide d'eau » et « sans air ».",
+                  "answers": [
+                    {
+                      "content": "air",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Interprète d'abord l'effet observé (la place occupée, les bulles), puis conclus. Un récipient qui paraît vide contient de l'air."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans le laboratoire, le professeur propose trois flacons de 200 mL : le premier contient de l'air, le deuxième 80 mL d'eau, le troisième un morceau de bois.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque flacon à ce qu'on observe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 3. Comparer : l'air est un gaz qui remplit tout ; l'eau est un liquide qui reste en bas ; le bois est un solide qui garde sa forme.",
+                  "answers": [
+                    {
+                      "content": "Le flacon d'air",
+                      "match": "Le corps remplit tout le flacon."
+                    },
+                    {
+                      "content": "Le flacon d'eau",
+                      "match": "Le liquide reste en bas, avec une surface plane."
+                    },
+                    {
+                      "content": "Le flacon de bois",
+                      "match": "Le morceau garde sa forme."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel volume l'eau du deuxième flacon occupe-t-elle, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 80 mL d'eau. 3. Comparer : un liquide garde son volume. 4. Conclure : l'eau occupe 80 mL.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quel volume l'air du premier flacon occupe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Observer : un gaz remplit tout le récipient. 4. Conclure : l'air occupe 200 mL. Les autres valeurs seraient celles d'un liquide.",
+                  "answers": [
+                    {
+                      "content": "200 mL en entier",
+                      "correct": true
+                    },
+                    {
+                      "content": "80 mL",
+                      "correct": false
+                    },
+                    {
+                      "content": "100 mL",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut reconnaître un gaz parce qu'il remplit tout le récipient et n'a pas de surface plane.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer avec un solide et un liquide. 4. Conclure : ce sont bien deux signes d'un gaz.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur les gaz sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 4. Conclure : un gaz n'a pas de forme propre, occupe tout le volume offert et peut être comprimé. Garder sa forme est propre au solide.",
+                  "answers": [
+                    {
+                      "content": "Ils n'ont pas de forme propre.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils occupent tout le volume offert.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils peuvent être comprimés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils gardent leur forme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ne se compriment jamais.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque corps, demande-toi : garde-t-il sa forme ? reste-t-il en bas ? remplit-il tout ?"
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Deux seringues bouchées au bout contiennent chacune 50 mL : l'une de l'air, l'autre de l'eau. Un élève pousse le piston de chacune jusqu'à la graduation 30 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que se passe-t-il pour la seringue d'air ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire : 50 mL. 2. Repérer : on pousse le piston. 3. Lire : 30 mL. 4. Conclure : le volume diminue de 20 mL, l'air est comprimé.",
+                  "answers": [
+                    {
+                      "content": "Le piston avance jusqu'à 30 mL : l'air est comprimé.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le piston ne bouge pas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air sort par le piston.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air disparaît.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour la seringue d'eau, le piston avance facilement jusqu'à 30 mL.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : un liquide ne se comprime presque pas. 4. Conclure : le piston avance très peu, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de mL le volume de l'air a-t-il diminué, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire le volume de départ : 50 mL. 3. Lire le volume final : 30 mL et calculer 50 − 30 = 20. 4. Conclure : 20 mL de moins.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quelle conclusion tirer de la comparaison des deux seringues ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : l'air se comprime, l'eau presque pas. Penser que le gaz disparaît est le piège de la fiche : la quantité de gaz ne change pas.",
+                  "answers": [
+                    {
+                      "content": "Un gaz est compressible, un liquide ne l'est presque pas.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un liquide est plus compressible qu'un gaz.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont aussi compressibles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un gaz disparaît quand on le serre.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on pousse le piston d'une seringue bouchée d'air, la ___ de gaz ne change pas, seul son volume change.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : le bout est bouché, donc rien ne sort. La quantité de gaz reste la même.",
+                  "answers": [
+                    {
+                      "content": "quantité",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare l'air et l'eau : l'air se comprime, l'eau presque pas. Le bout bouché empêche le gaz de sortir."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Awa pèse un ballon de football gonflé (enveloppe rigide avec une valve) : 420 g. Elle laisse sortir l'équivalent de 6 L d'air pris dans la salle et pèse de nouveau : 412 g. Elle compare avec une estimation, avec 1,3 g d'air par litre (valeur approchée).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la masse de l'air sorti, mesurée avec la balance, en g ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Peser : 420 g. 2. Peser après : 412 g. 3. Calculer : 420 − 412 = 8. 4. Conclure : l'air sorti a une masse de 8 g.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Estime la masse de 6 L d'air avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Conclure par l'estimation : 6 × 1,3 = 7,8 g.",
+                  "answers": [
+                    {
+                      "content": "7,8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "La pesée (8 g) et l'estimation (7,8 g) donnent des valeurs proches.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : 8 g mesurés et 7,8 g estimés. 4. Conclure : les deux résultats sont proches, ce qui confirme l'ordre de grandeur de 1,3 g par litre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "1 L d'air a une masse de 1,3 g. Combien de litres d'air faut-il pour avoir une masse de 13 g ? (Cherche combien de fois 1,3 g tient dans 13 g.)",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Conclure : on cherche le nombre de litres qui, multiplié par 1,3 g, donne 13 g. Essai : 10 × 1,3 = 13. Il faut donc 10 L d'air. Ce n'est pas 13 L, car 13 est une masse en g.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "Un élève dit : « Les 8 g perdus viennent du caoutchouc du ballon. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Raisonner : le ballon est resté entier, c'est l'air qui est sorti. 4. Conclure : la perte de masse est celle de l'air, donc l'air a une masse.",
+                  "answers": [
+                    {
+                      "content": "Non : le caoutchouc est resté, c'est l'air sorti qui a diminué la masse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : le caoutchouc s'est usé.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : le ballon perd de la matière.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : l'air n'a pas de masse.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "La masse sortie est la différence des pesées. Pour trouver un volume à partir d'une masse d'air, on divise par 1,3 g."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur les gaz",
+          "notions": "Bilan de toutes les notions : existence de l'air, propriétés d'un gaz, compression et expansion, masse d'un gaz.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À la fête du quartier, à Abobo, des enfants jouent avec des ballons gonflés. L'animateur demande : « Qu'y a-t-il dans un ballon ? »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un ballon gonflé est rempli de...",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : le ballon se gonfle. 4. Conclure : il est rempli d'air, un gaz.",
+                  "answers": [
+                    {
+                      "content": "air, un gaz",
+                      "correct": true
+                    },
+                    {
+                      "content": "vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "sable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ballon a la forme de l'air qui est dedans : l'air a une forme propre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : c'est le contraire, l'air prend la forme du ballon. Un gaz n'a pas de forme propre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon contient 3 L d'air. Estime la masse de cet air avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Conclure : 3 × 1,3 = 3,9 g.",
+                  "answers": [
+                    {
+                      "content": "3,9",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Un gaz dont le volume diminue quand on le serre est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : c'est un gaz compressible.",
+                  "answers": [
+                    {
+                      "content": "compressible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 4. Conclure : l'air est de la matière : il occupe de la place et a une masse. Ce n'est ni du vide ni un liquide.",
+                  "answers": [
+                    {
+                      "content": "L'air occupe de la place.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air a une masse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air est du vide.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air est un liquide.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un gaz occupe de la place, prend la forme du récipient, se comprime et a une masse."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Yao, mécanicien à Yopougon, gonfle le pneu d'une moto. Il a pompé dans le pneu l'équivalent de 4 L d'air pris dans l'atelier. Sa pompe contient 400 mL d'air quand le piston est levé. Il bouche la sortie et pousse le piston jusqu'à 150 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De combien de mL le volume de l'air de la pompe a-t-il diminué ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire : 400 mL. 3. Lire : 150 mL et calculer 400 − 150 = 250. 4. Conclure : le volume a diminué de 250 mL.",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quelle propriété de l'air est mise en évidence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : le volume diminue quand on serre, donc l'air est compressible.",
+                  "answers": [
+                    {
+                      "content": "Il est compressible.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est solide.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est toujours liquide.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas de masse.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Estime la masse de l'air pompé dans le pneu (équivalent de 4 L d'air de l'atelier) avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Conclure : 4 L pris à l'air libre avant la compression, donc 4 × 1,3 = 5,2 g.",
+                  "answers": [
+                    {
+                      "content": "5,2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Si Yao remplit la pompe d'eau, le piston avance autant qu'avec l'air.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : l'eau, un liquide, ne se comprime presque pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire de l'air du pneu ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 4. Conclure : le pneu gonflé montre que l'air occupe de la place, et comme tout gaz il a une masse. L'air prend la forme du pneu.",
+                  "answers": [
+                    {
+                      "content": "Il occupe de la place.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a une masse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'existe pas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il garde sa forme.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Variation d'un volume = volume de départ − volume final. Masse d'air = volume en litres × 1,3 g."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une cuisine de Daloa, la bouteille de gaz pèse 15 000 g quand elle est pleine, puis 14 500 g après usage. Le gaz s'échappe aussi un peu quand le robinet est mal fermé : on le sent dans toute la pièce. Au laboratoire, le professeur utilise une seringue bouchée de 40 mL d'air.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle masse de gaz la bouteille a-t-elle perdue, en g ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Peser : 15 000 g. 2. Peser encore : 14 500 g. 3. Calculer : 15 000 − 14 500 = 500. 4. Conclure : 500 g de gaz utilisés.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Pourquoi sent-on le gaz dans toute la pièce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Comparer : un gaz n'a pas de forme propre et occupe tout le volume offert.",
+                  "answers": [
+                    {
+                      "content": "Il occupe tout le volume offert.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il reste en boule.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il forme une flaque.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il garde sa forme.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette perte de masse montre que le gaz a une masse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Conclure : la bouteille est plus légère parce que du gaz en est sorti. Le gaz a donc une masse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pousse le piston de la seringue de 40 mL jusqu'à 15 mL. De combien de mL le volume a-t-il diminué ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire : 40 mL. 3. Lire : 15 mL et calculer 40 − 15 = 25. 4. Conclure : 25 mL de moins.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Le gaz de la seringue, dont le volume a diminué, est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 4. Conclure : le volume diminue, le gaz est comprimé. Il n'a pas disparu, car le bout est bouché.",
+                  "answers": [
+                    {
+                      "content": "comprimé",
+                      "correct": true
+                    },
+                    {
+                      "content": "détendu",
+                      "correct": false
+                    },
+                    {
+                      "content": "disparu",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un gaz se répand dans toute la pièce. La masse perdue par la bouteille est celle du gaz utilisé."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan sur les gaz. Pour réviser, un groupe d'élèves de Yamoussoukro fait trois expériences : un verre retourné dans l'eau, une seringue bouchée contenant 50 mL d'air, et un ballon de football pesé avant et après la sortie de l'équivalent de 5 L d'air de la salle. Dans les calculs, on prend 1,3 g d'air par litre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans quelle expérience un papier reste-t-il sec grâce à l'air du verre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Réaliser : le verre enfoncé garde le papier sec. 3. Interpréter : quelque chose occupe la place. 4. Conclure : c'est de l'air.",
+                  "answers": [
+                    {
+                      "content": "Le verre retourné dans l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pesée d'un caillou",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lecture de la seringue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gaz n'a pas de forme propre et occupe tout le volume offert.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer avec un solide et un liquide. 4. Conclure : c'est la propriété d'un gaz.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pousse le piston de la seringue de 50 mL jusqu'à 20 mL. De combien de mL le volume a-t-il diminué ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire : 50 mL. 3. Lire : 20 mL et calculer 50 − 20 = 30. 4. Conclure : 30 mL de moins.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Estime la masse des 5 L d'air sortis du ballon avec 1,3 g par litre, en g.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Conclure : 5 × 1,3 = 6,5 g.",
+                  "answers": [
+                    {
+                      "content": "6,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Quelles affirmations sur les gaz sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 4. Conclure : l'air est un gaz, un gaz se comprime et a une masse. Il n'a pas de forme propre, et on ne le voit pas mais il existe.",
+                  "answers": [
+                    {
+                      "content": "L'air est un gaz.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un gaz est compressible.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un gaz a une masse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un gaz garde sa forme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un gaz est invisible donc n'existe pas.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Réponds avec les quatre idées du cours : un gaz existe, occupe tout le volume, se comprime et a une masse."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

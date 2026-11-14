@@ -1,0 +1,3541 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Nombres entiers naturels",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Mathématiques",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "droite-pas-10",
+          "kind": "number_line",
+          "description": "Une droite graduée de 0 à 100 avec une graduation tous les 10 ; tous les nombres de 0 à 100 sont écrits sous les graduations. Le point A est placé en 30 et le point B en 70. On lit le pas de la droite (10) et l'abscisse de chaque point, en comptant les graduations à partir de 0.",
+          "params": {
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "points": [
+              {
+                "value": 30,
+                "label": "A"
+              },
+              {
+                "value": 70,
+                "label": "B"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "droite-pas-10-m",
+          "kind": "number_line",
+          "description": "Une droite graduée de 20 à 60 avec une graduation tous les 10 ; chaque graduation porte son nombre : 20, 30, 40, 50 et 60. Quatre intervalles séparent 20 et 60. Le point M est placé en 50, trois graduations après 20. On vérifie le pas, puis on lit l'abscisse de M.",
+          "params": {
+            "min": 20,
+            "max": 60,
+            "step": 10,
+            "points": [
+              {
+                "value": 50,
+                "label": "M"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "droite-prix",
+          "kind": "number_line",
+          "description": "Une droite graduée de 0 à 100 avec une graduation tous les 10, pour des prix en F CFA ; chaque graduation porte son nombre. Trois points sont placés : P en 30, Q en 60 et R en 90. On lit chaque prix en comptant les graduations à partir de 0 et on compare les positions pour savoir quel prix est le plus grand.",
+          "params": {
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "points": [
+              {
+                "value": 30,
+                "label": "P"
+              },
+              {
+                "value": 60,
+                "label": "Q"
+              },
+              {
+                "value": 90,
+                "label": "R"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "droite-sacs",
+          "kind": "number_line",
+          "description": "Une droite graduée de 0 à 50 avec une graduation tous les 5, pour des stocks d'igname en kilogrammes ; chaque graduation porte son nombre. Trois points sont placés : S en 15, T en 35 et U en 45. On compte les pas à partir de 0 pour lire chaque stock et on compare les positions pour savoir quel stock est le plus petit.",
+          "params": {
+            "min": 0,
+            "max": 50,
+            "step": 5,
+            "points": [
+              {
+                "value": 15,
+                "label": "S"
+              },
+              {
+                "value": 35,
+                "label": "T"
+              },
+              {
+                "value": 45,
+                "label": "U"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "droite-pas-25",
+          "kind": "number_line",
+          "description": "Une droite graduée de 0 à 100 avec une graduation tous les 25, pour des kilogrammes de maïs. Chaque graduation porte son nombre : 0, 25, 50, 75 et 100, avec quatre intervalles de 0 à 100. Le point M est placé en 75. On vérifie le pas, puis on lit l'abscisse de M en comptant les graduations depuis 0.",
+          "params": {
+            "min": 0,
+            "max": 100,
+            "step": 25,
+            "points": [
+              {
+                "value": 75,
+                "label": "M"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Lire et écrire un grand nombre entier naturel",
+          "remember": "Un nombre entier naturel s'écrit avec les chiffres de 0 à 9. La valeur d'un chiffre dépend de son rang. On range les chiffres en classes de trois : unités, milliers, millions, milliards. Dans chaque classe, on trouve les unités, les dizaines et les centaines. On écrit le nombre en laissant un espace entre les classes : 3 482 160.",
+          "method": [
+            "Séparer les chiffres en classes de trois, en partant de la droite.",
+            "Nommer chaque classe : unités, milliers, millions, milliards.",
+            "Lire chaque classe comme un nombre inférieur à 1 000, puis dire le nom de la classe.",
+            "Donner la valeur du chiffre demandé d'après son rang : unités, dizaines, centaines, puis de même dans chaque classe."
+          ],
+          "example": {
+            "statement": "Lire le nombre $4\\,052\\,306$ et donner la valeur du chiffre des dizaines de mille.",
+            "steps": [
+              "Séparer : $4\\,052\\,306$ se sépare en 4 | 052 | 306.",
+              "Nommer : 4 est dans la classe des millions, 052 dans celle des milliers, 306 dans celle des unités.",
+              "Lire : « quatre millions cinquante-deux mille trois cent six ».",
+              "Donner : dans la classe des milliers, 0 est le chiffre des centaines de mille et 5 celui des dizaines de mille. Sa valeur est $5 \\times 10\\,000 = 50\\,000$."
+            ]
+          },
+          "pitfall": "Ne pas oublier les zéros qui gardent la place d'un rang vide. Contre-exemple : « trois mille quarante » s'écrit $3\\,040$, et non $340$ ni $3\\,400$. Sans le zéro des centaines, le 4 ne serait plus à la place des dizaines. Pour éviter l'erreur, prépare toujours les classes de trois chiffres, puis remplis chaque case.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à lire et à écrire des grands nombres avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel est le chiffre des centaines dans 7 316 428 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Séparer : 7 | 316 | 428. Étape 2 — Nommer : 428 est la classe des unités. Étape 3 — Lire : sept millions trois cent seize mille quatre cent vingt-huit. Étape 4 — Donner : dans la classe des unités, 4 est le chiffre des centaines, 2 celui des dizaines et 8 celui des unités. Le chiffre 3 est celui des centaines de mille.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  },
+                  {
+                    "content": "3",
+                    "correct": false
+                  },
+                  {
+                    "content": "6",
+                    "correct": false
+                  },
+                  {
+                    "content": "2",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche la classe des unités, c'est la tranche de droite."
+              },
+              {
+                "content": "Quelle est la valeur du chiffre 6 dans 7 316 428 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Séparer : 7 | 316 | 428. Étape 2 — Nommer : 316 est la classe des milliers. Étape 3 — Lire : trois cent seize mille. Étape 4 — Donner : le chiffre 6 est le dernier de la classe des milliers, c'est le chiffre des unités de mille. Sa valeur est 6 000.",
+                "answers": [
+                  {
+                    "content": "6000",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le 6 est le dernier chiffre (le plus à droite) de la classe des milliers."
+              },
+              {
+                "content": "Affirmation : le nombre 40 506 se lit « quarante mille cinq cent six ».",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Séparer : 40 | 506. Étape 2 — Nommer : 40 milliers et 506 unités. Étape 3 — Lire chaque classe : « quarante mille » et « cinq cent six ». Étape 4 — Donner : le nombre se lit quarante mille cinq cent six. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Sépare en deux classes puis lis chacune."
+              },
+              {
+                "content": "Écris en chiffres : neuf millions trois cent mille.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Séparer : trois classes, millions | milliers | unités. Étape 2 — Nommer : 9 millions, 300 milliers, 0 unité. Étape 3 — Lire chaque classe : 9, 300 et 000. Étape 4 — Donner : $9\\,300\\,000$ en gardant les zéros.",
+                "answers": [
+                  {
+                    "content": "9300000",
+                    "correct": true
+                  }
+                ],
+                "hint": "N'oublie pas la classe des unités : elle est faite de trois zéros."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire et écrire des grands nombres entiers",
+              "statement": "Dans cet exercice, tu lis des nombres avec le tableau de numération, comme les prix et les stocks d'un grand marché.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans le nombre 3 482 160, quel est le chiffre des centaines de mille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Séparer : 3 | 482 | 160. Étape 2 — Nommer : 3 est dans la classe des millions, 482 dans celle des milliers, 160 dans celle des unités. Étape 3 — Lire : trois millions quatre cent quatre-vingt-deux mille cent soixante. Étape 4 — Donner : dans la classe des milliers, le premier chiffre (4) est celui des centaines de mille. Le chiffre 1 est celui des centaines tout court ; 3 est le chiffre des millions ; 8 est celui des dizaines de mille.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le nombre 3 482 160, quelle est la valeur du chiffre 8 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Séparer : 3 | 482 | 160. Étape 2 — Nommer : 482 est la classe des milliers. Étape 3 — Lire : quatre cent quatre-vingt-deux mille. Étape 4 — Donner : le chiffre 8 est le deuxième de la classe des milliers, c'est le chiffre des dizaines de mille. Sa valeur est $8 \\times 10\\,000 = 80\\,000$. Écrire 8 000 oublie un rang, car 8 000 est la valeur d'un 8 de la classe des unités de mille.",
+                  "answers": [
+                    {
+                      "content": "80000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment lit-on 2 305 040 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Séparer : 2 | 305 | 040. Étape 2 — Nommer : 2 millions, 305 milliers, 040 unités. Étape 3 — Lire chaque classe : « deux millions », « trois cent cinq mille », « quarante ». Étape 4 — Donner la lecture complète : deux millions trois cent cinq mille quarante. La lecture « trois cent cinquante mille » lit 350 au lieu de 305 ; « quatre » oublie le chiffre des dizaines (040 se lit quarante).",
+                  "answers": [
+                    {
+                      "content": "deux millions trois cent cinq mille quarante",
+                      "correct": true
+                    },
+                    {
+                      "content": "deux millions trois cent cinquante mille quarante",
+                      "correct": false
+                    },
+                    {
+                      "content": "deux millions trois cent cinq mille quatre",
+                      "correct": false
+                    },
+                    {
+                      "content": "deux cent trente mille cinq cent quarante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Écris en chiffres : sept millions quatre mille deux.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Séparer : on prépare trois classes, millions | milliers | unités. Étape 2 — Nommer : 7 millions, 4 milliers, 2 unités. Étape 3 — Lire chaque classe : 7, 004 et 002. Étape 4 — Donner le nombre en gardant les zéros des rangs vides : $7\\,004\\,002$. Si tu as écrit 742, tu as oublié les zéros qui gardent la place des rangs.",
+                  "answers": [
+                    {
+                      "content": "7004002",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : le nombre « trois mille quarante » s'écrit 3 400.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Séparer : on cherche deux classes, 3 milliers et 040 unités. Étape 2 — Nommer : 3 milliers et quarante unités. Étape 3 — Lire : trois mille | quarante, la classe des unités est 040. Étape 4 — Donner : $3\\,040$. L'écriture 3 400 se lit « trois mille quatre cents » : le 4 est alors au rang des centaines, pas des dizaines. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître les rangs et les classes d'un nombre",
+              "statement": "Dans cet exercice, tu relies, tu ordonnes et tu choisis pour bien lire les grands nombres avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Sépare le nombre en classes de trois chiffres avant de répondre, puis cherche le rang du chiffre dans sa classe.",
+              "questions": [
+                {
+                  "content": "Relie chaque nombre à sa lecture.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Séparer : 3 000 000 se coupe en 3 | 000 | 000 ; 300 000 en 300 | 000 ; 30 000 en 30 | 000 ; 3 000 en 3 | 000. Étape 2 — Nommer : la classe du 3 est celle des millions pour le premier, celle des milliers pour les trois autres. Étape 3 — Lire : trois millions ; trois cent mille ; trente mille ; trois mille. Étape 4 — Donner : le chiffre 3 vaut 3 000 000, 300 000, 30 000 puis 3 000 selon son rang.",
+                  "answers": [
+                    {
+                      "content": "3 000 000",
+                      "match": "trois millions"
+                    },
+                    {
+                      "content": "300 000",
+                      "match": "trois cent mille"
+                    },
+                    {
+                      "content": "30 000",
+                      "match": "trente mille"
+                    },
+                    {
+                      "content": "3 000",
+                      "match": "trois mille"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour lire un grand nombre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Séparer : on coupe toujours en classes de trois chiffres en partant de la droite. Étape 2 — Nommer : on repère le nom de chaque classe. Étape 3 — Lire : on lit chaque classe comme un petit nombre, puis on dit son nom. Étape 4 — Donner la valeur du chiffre demandé. On ne peut pas nommer une classe avant de l'avoir séparée.",
+                  "answers": [
+                    {
+                      "content": "Séparer les chiffres en classes de trois, en partant de la droite."
+                    },
+                    {
+                      "content": "Nommer chaque classe : unités, milliers, millions, milliards."
+                    },
+                    {
+                      "content": "Lire chaque classe comme un nombre inférieur à 1 000, puis dire le nom de la classe."
+                    },
+                    {
+                      "content": "Donner la valeur du chiffre demandé d'après son rang."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le nombre 6 019 250, le chiffre ___ est le chiffre des dizaines de mille.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Séparer : 6 | 019 | 250. Étape 2 — Nommer : 6 millions, 019 milliers, 250 unités. Étape 3 — Lire : six millions dix-neuf mille deux cent cinquante. Étape 4 — Donner : dans la classe des milliers, 0 est le chiffre des centaines de mille, 1 celui des dizaines de mille et 9 celui des unités de mille. Le chiffre 9 est donc le chiffre des unités de mille, et 6 celui des millions.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres dans lesquels le chiffre 7 vaut 7 000 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Séparer : 37 | 012 et 7 | 305. Étape 2 — Nommer : dans les deux cas, 37 et 7 sont dans la classe des milliers. Étape 3 — Lire : trente-sept mille douze ; sept mille trois cent cinq. Étape 4 — Donner : le 7 est au rang des unités de mille, il vaut 7 000. Dans 70 300 il vaut 70 000 ; dans 2 700 il vaut 700 ; dans 170 il vaut 70.",
+                  "answers": [
+                    {
+                      "content": "37 012",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 305",
+                      "correct": true
+                    },
+                    {
+                      "content": "70 300",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 700",
+                      "correct": false
+                    },
+                    {
+                      "content": "170",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Écris en chiffres : quatre-vingt-dix mille six cent un.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Séparer : on prépare deux classes, milliers | unités. Étape 2 — Nommer : 90 milliers et 601 unités. Étape 3 — Lire chaque classe : 90 et 601. Étape 4 — Donner : $90\\,601$. Si tu as écrit 9 601, tu as oublié le chiffre des dizaines de mille.",
+                  "answers": [
+                    {
+                      "content": "90601",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le nombre 5 208 413, le chiffre 2 est le chiffre des ___ de mille.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Séparer : 5 | 208 | 413. Étape 2 — Nommer : 208 est dans la classe des milliers. Étape 3 — Lire : cinq millions deux cent huit mille quatre cent treize. Étape 4 — Donner : dans la classe des milliers, le premier chiffre (2) est celui des centaines de mille. Le 2 vaut donc 200 000.",
+                  "answers": [
+                    {
+                      "content": "centaines",
+                      "correct": true
+                    },
+                    {
+                      "content": "centaine",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Comparer et ranger des nombres entiers",
+          "remember": "Pour comparer deux nombres entiers, on regarde d'abord le nombre de chiffres : celui qui en a le plus est le plus grand. S'ils ont le même nombre de chiffres, on compare de gauche à droite : le premier chiffre différent décide. $a < b$ se lit « a est plus petit que b » (ou « a est inférieur à b ») et $a > b$ « a est plus grand que b » (ou « a est supérieur à b »). Ranger dans l'ordre croissant, c'est du plus petit au plus grand ; dans l'ordre décroissant, du plus grand au plus petit.",
+          "method": [
+            "Compter les chiffres de chaque nombre.",
+            "Conclure tout de suite si le nombre de chiffres est différent : le nombre qui a le plus de chiffres est le plus grand.",
+            "Comparer, sinon, les chiffres de gauche à droite jusqu'au premier chiffre différent.",
+            "Écrire la comparaison avec $<$ ou $>$, ou ranger les nombres dans l'ordre demandé."
+          ],
+          "example": {
+            "statement": "Ranger du plus petit au plus grand : $8\\,450$ ; $845$ ; $8\\,540$ ; $8\\,405$.",
+            "steps": [
+              "Compter : 845 a 3 chiffres, les trois autres nombres ont 4 chiffres.",
+              "Conclure : 845 a moins de chiffres que les autres, c'est le plus petit.",
+              "Comparer : 8 450, 8 540 et 8 405 commencent par 8 ; le deuxième chiffre est 4, 5 et 4, donc 8 540 est le plus grand. Pour 8 450 et 8 405, le troisième chiffre est 5 et 0, donc 8 405 est plus petit que 8 450.",
+              "Écrire : $845 < 8\\,405 < 8\\,450 < 8\\,540$."
+            ]
+          },
+          "pitfall": "Ne pas comparer seulement les premiers chiffres quand les nombres n'ont pas la même longueur. Contre-exemple : $98$ et $102$. Le chiffre 9 est plus grand que 1, mais $98 < 102$, car 102 a trois chiffres et 98 en a deux. Compte toujours les chiffres avant de comparer.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à comparer et à ranger des nombres entiers avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quelle comparaison est juste ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Compter : les deux nombres ont 4 chiffres. Étape 2 — Conclure : on ne peut pas conclure. Étape 3 — Comparer : le premier chiffre est 5 des deux côtés ; le deuxième est 2 pour 5 280 et 8 pour 5 820. Étape 4 — Écrire : $5\\,280 < 5\\,820$.",
+                "answers": [
+                  {
+                    "content": "$5\\,280 < 5\\,820$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$5\\,280 > 5\\,820$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5\\,280 = 5\\,820$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare les chiffres de gauche à droite jusqu'au premier chiffre différent."
+              },
+              {
+                "content": "Range du plus petit au plus grand : 305 ; 3 050 ; 350 ; 3 005.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Compter : 305 et 350 ont 3 chiffres, 3 005 et 3 050 en ont 4. Étape 2 — Conclure : 305 et 350 sont plus petits que 3 005 et 3 050. Étape 3 — Comparer : 305 < 350 (deuxième chiffre 0 puis 5) et 3 005 < 3 050 (troisième chiffre 0 puis 5). Étape 4 — Écrire : $305 < 350 < 3\\,005 < 3\\,050$.",
+                "answers": [
+                  {
+                    "content": "305"
+                  },
+                  {
+                    "content": "350"
+                  },
+                  {
+                    "content": "3 005"
+                  },
+                  {
+                    "content": "3 050"
+                  }
+                ],
+                "hint": "Sépare d'abord les nombres de 3 chiffres de ceux de 4 chiffres."
+              },
+              {
+                "content": "Affirmation : 12 005 est plus petit que 12 050.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Compter : les deux nombres ont 5 chiffres. Étape 2 — Conclure : on ne peut pas conclure. Étape 3 — Comparer : 1, 2 et 0 sont identiques ; le quatrième chiffre est 0 pour 12 005 et 5 pour 12 050. Étape 4 — Écrire : $12\\,005 < 12\\,050$. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le premier chiffre différent en partant de la gauche."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Comparer et ranger des nombres entiers",
+              "statement": "Dans cet exercice, tu compares les prix et les quantités d'un marché en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle comparaison est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 9 870 a 4 chiffres, 10 200 en a 5. Étape 2 — Conclure : le nombre qui a le plus de chiffres est le plus grand, donc 10 200 est plus grand. Étape 3 — Comparer : inutile, les nombres n'ont pas la même longueur. Étape 4 — Écrire : $9\\,870 < 10\\,200$. La réponse avec $>$ compare les premiers chiffres (9 et 1), ce qui est faux ici.",
+                  "answers": [
+                    {
+                      "content": "$9\\,870 < 10\\,200$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9\\,870 > 10\\,200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9\\,870 = 10\\,200$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus grand nombre : 45 307 ; 45 370 ; 45 037 ; 4 537 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 4 537 a 4 chiffres, les trois autres en ont 5. Étape 2 — Conclure : 4 537 est le plus petit des quatre. Étape 3 — Comparer : 45 307, 45 370 et 45 037 commencent par 45 ; le troisième chiffre est 3, 3 et 0, donc 45 037 est le plus petit des trois. Pour 45 307 et 45 370, le quatrième chiffre est 0 et 7. Étape 4 — Écrire : $45\\,370 > 45\\,307 > 45\\,037 > 4\\,537$. Le plus grand est 45 370.",
+                  "answers": [
+                    {
+                      "content": "45 370",
+                      "correct": true
+                    },
+                    {
+                      "content": "45 307",
+                      "correct": false
+                    },
+                    {
+                      "content": "45 037",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 537",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range du plus petit au plus grand : 7 099 ; 7 909 ; 790 ; 7 990.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Compter : 790 a 3 chiffres, les autres en ont 4. Étape 2 — Conclure : 790 est le plus petit. Étape 3 — Comparer : 7 099, 7 909 et 7 990 ont le même premier chiffre 7 ; le deuxième est 0, 9 et 9, donc 7 099 vient ensuite. Pour 7 909 et 7 990, le troisième chiffre est 0 et 9. Étape 4 — Écrire : $790 < 7\\,099 < 7\\,909 < 7\\,990$.",
+                  "answers": [
+                    {
+                      "content": "790"
+                    },
+                    {
+                      "content": "7 099"
+                    },
+                    {
+                      "content": "7 909"
+                    },
+                    {
+                      "content": "7 990"
+                    }
+                  ]
+                },
+                {
+                  "content": "56 120 est ___ 56 102.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Compter : les deux nombres ont 5 chiffres. Étape 2 — Conclure : on ne peut pas conclure, il faut comparer. Étape 3 — Comparer : 5, 6 et 1 sont identiques ; le quatrième chiffre est 2 pour 56 120 et 0 pour 56 102. Étape 4 — Écrire : $56\\,120 > 56\\,102$. Dire « plus petit » vient d'une lecture de droite à gauche, alors qu'on compare toujours de gauche à droite.",
+                  "answers": [
+                    {
+                      "content": "plus grand que",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus petit que",
+                      "correct": false
+                    },
+                    {
+                      "content": "égal à",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : 98 est plus grand que 102, car 9 est plus grand que 1.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter : 98 a 2 chiffres, 102 en a 3. Étape 2 — Conclure : le nombre qui a le plus de chiffres est le plus grand, donc 102 est plus grand. Étape 3 — Comparer : il ne faut pas comparer les premiers chiffres quand les longueurs sont différentes. Étape 4 — Écrire : $98 < 102$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Ranger et comparer des prix du marché",
+              "statement": "Dans cet exercice, tu utilises la comparaison de nombres pour choisir, relier et ranger des prix et des quantités.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compte d'abord les chiffres. Si la longueur est la même, compare de gauche à droite.",
+              "questions": [
+                {
+                  "content": "Écris le plus petit nombre entier qui s'écrit avec 5 chiffres.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Compter : on cherche un nombre de 5 chiffres. Étape 2 — Conclure : tous les nombres de 5 chiffres sont plus grands que ceux de 4 chiffres, le plus petit est donc le premier de la liste. Étape 3 — Comparer : le premier chiffre ne peut pas être 0, il faut au moins 1, puis les autres chiffres sont les plus petits possibles, des zéros. Étape 4 — Écrire : $10\\,000$. Écrire 9 999 donne un nombre de 4 chiffres seulement.",
+                  "answers": [
+                    {
+                      "content": "10000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles comparaisons sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Compter : 4 050 et 4 500 ont 4 chiffres, 12 300 a 5 chiffres et 9 999 en a 4. Étape 2 — Conclure : $12\\,300 > 9\\,999$ tout de suite. Étape 3 — Comparer : 4 050 et 4 500 diffèrent au deuxième chiffre (0 puis 5) ; 7 008 et 7 080 au troisième (0 puis 8). Étape 4 — Écrire : $4\\,050 < 4\\,500$ et $7\\,008 < 7\\,080$ sont justes. Les deux autres sont fausses : 3 999 est plus petit que 4 000, et 65 210 est plus grand que 65 201 (quatrième chiffre 1 contre 0).",
+                  "answers": [
+                    {
+                      "content": "$4\\,050 < 4\\,500$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12\\,300 > 9\\,999$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7\\,008 < 7\\,080$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3\\,999 > 4\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$65\\,210 < 65\\,201$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque écriture à sa lecture.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter : on n'a pas de nombres à compter ici. Étape 2 — Conclure : on lit chaque symbole. Étape 3 — Comparer : l'ouverture du signe regarde le nombre le plus grand. Étape 4 — Écrire : $>$ se lit « plus grand que », $<$ « plus petit que » et $=$ « égal à ».",
+                  "answers": [
+                    {
+                      "content": "$a > b$",
+                      "match": "a est plus grand que b"
+                    },
+                    {
+                      "content": "$a < b$",
+                      "match": "a est plus petit que b"
+                    },
+                    {
+                      "content": "$a = b$",
+                      "match": "a est égal à b"
+                    }
+                  ]
+                },
+                {
+                  "content": "Range du plus grand au plus petit : 23 450 ; 2 345 ; 23 054 ; 23 405.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Compter : 2 345 a 4 chiffres, les autres en ont 5. Étape 2 — Conclure : 2 345 est le plus petit. Étape 3 — Comparer : 23 450, 23 054 et 23 405 commencent par 23 ; le troisième chiffre est 4, 0 et 4, donc 23 054 est le plus petit des trois. Pour 23 450 et 23 405, le quatrième chiffre est 5 et 0. Étape 4 — Écrire : $23\\,450 > 23\\,405 > 23\\,054 > 2\\,345$.",
+                  "answers": [
+                    {
+                      "content": "23 450"
+                    },
+                    {
+                      "content": "23 405"
+                    },
+                    {
+                      "content": "23 054"
+                    },
+                    {
+                      "content": "2 345"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit chiffre $a$ qui rend vraie la comparaison $3\\,a50 > 3\\,450$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Compter : les deux nombres ont 4 chiffres. Étape 2 — Conclure : on ne peut pas conclure, il faut comparer. Étape 3 — Comparer : le premier chiffre est 3 des deux côtés ; le deuxième est $a$ contre 4, le troisième et le quatrième sont 5 et 0 dans les deux. Il faut donc $a > 4$. Étape 4 — Écrire : le plus petit chiffre est 5, car $3\\,550 > 3\\,450$. Avec $a = 4$, les nombres sont égaux et la comparaison est fausse.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre sacs de riz coûtent 14 500 F, 9 800 F, 14 050 F et 13 900 F. Quel sac est le moins cher ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 9 800 a 4 chiffres, les trois autres en ont 5. Étape 2 — Conclure : 9 800 est le plus petit. Étape 3 — Comparer : inutile, 9 800 est déjà le plus petit. Étape 4 — Écrire : $9\\,800 < 13\\,900 < 14\\,050 < 14\\,500$. Le sac le moins cher coûte 9 800 F. Choisir 13 900 F vient de l'idée fausse qu'un nombre qui commence par un petit chiffre est le plus petit.",
+                  "answers": [
+                    {
+                      "content": "9 800 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "14 050 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "13 900 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "14 500 F",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Placer des nombres entiers sur une droite graduée",
+          "remember": "Une droite graduée a une origine 0 et une graduation régulière. Le nombre qui correspond à un point est son abscisse. Les nombres augmentent vers la droite. Le pas est l'écart entre deux graduations voisines : il est le même partout sur la droite.",
+          "method": [
+            "Repérer deux graduations dont les nombres sont écrits.",
+            "Calculer le pas : la différence des deux nombres, divisée par le nombre d'intervalles qui les séparent.",
+            "Avancer de graduation en graduation à partir d'un nombre connu, en ajoutant le pas à chaque fois (pour reculer, on l'enlève).",
+            "Lire l'abscisse du point, ou placer le nombre à la graduation trouvée."
+          ],
+          "example": {
+            "statement": "Sur une droite graduée, les nombres 20 et 60 sont écrits, avec 4 intervalles entre eux. Quelle est l'abscisse du point M, situé 3 graduations après 20 ?",
+            "steps": [
+              "Repérer : les graduations écrites sont 20 et 60.",
+              "Calculer le pas : $(60 - 20) \\div 4 = 10$.",
+              "Avancer : $20 + 10 = 30$, puis $40$, puis $50$ (trois pas).",
+              "Lire : l'abscisse de M est $50$."
+            ]
+          },
+          "pitfall": "Ne pas compter les graduations au lieu des intervalles, ni croire que le pas vaut toujours 1. Contre-exemple : entre 0 et 100, on voit 5 graduations (0, 25, 50, 75, 100) mais seulement 4 intervalles. Le pas est $100 \\div 4 = 25$, et non $100 \\div 5 = 20$. Compte les espaces entre les traits, pas les traits.",
+          "figure": "droite-pas-10-m",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver le pas d'une droite graduée et à lire des abscisses.",
+            "questions": [
+              {
+                "content": "Sur une droite graduée, les nombres 0 et 60 sont écrits et 6 intervalles les séparent. Quel est le pas ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : 0 et 60 sont écrits. Étape 2 — Calculer le pas : $(60 - 0) \\div 6 = 10$. Étape 3 — Avancer : 0, 10, 20, 30, 40, 50, 60. Étape 4 — Lire : le pas est 10.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise la différence des deux nombres par le nombre d'intervalles."
+              },
+              {
+                "content": "Sur une droite de pas 5, la graduation 45 est écrite. Quelle est l'abscisse du point situé 4 graduations après 45 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la graduation 45 est écrite. Étape 2 — Calculer le pas : il est donné, 5. Étape 3 — Avancer : 45, 50, 55, 60, 65 (quatre pas). Étape 4 — Lire : l'abscisse est 65, soit $45 + 4 \\times 5$.",
+                "answers": [
+                  {
+                    "content": "65",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ajoute le pas à chaque graduation."
+              },
+              {
+                "content": "Affirmation : sur une droite où 10 et 20 sont deux nombres écrits séparés par 5 intervalles, le pas est 2.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : 10 et 20 sont écrits. Étape 2 — Calculer le pas : $(20 - 10) \\div 5 = 2$. Étape 3 — Avancer : 10, 12, 14, 16, 18, 20. Étape 4 — Lire : le pas vaut 2, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Calcule la différence 20 − 10, puis divise."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire et placer des nombres sur une droite graduée",
+              "statement": "Dans cet exercice, tu calcules le pas d'une droite graduée, puis tu lis des abscisses, comme sur la règle d'un commerçant.",
+              "exercise_type": "fixation",
+              "figure": "droite-pas-10",
+              "questions": [
+                {
+                  "content": "Sur une droite graduée, les nombres 0 et 50 sont écrits et 5 intervalles les séparent. Quel est le pas de la droite ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les graduations 0 et 50 sont écrites. Étape 2 — Calculer le pas : $(50 - 0) \\div 5 = 10$. Étape 3 — Avancer : on vérifie, 0, 10, 20, 30, 40, 50 : cinq intervalles. Étape 4 — Lire : le pas est 10. Répondre 5 compte les intervalles au lieu de diviser la différence.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la droite de la figure (de 0 à 100, pas 10), le point A est en 30 et le point B est situé 7 graduations après 0. Quelle est l'abscisse de B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 0 est écrit, le pas est de 10. Étape 2 — Calculer le pas : il est donné, il vaut 10. Étape 3 — Avancer : 0, 10, 20, 30, 40, 50, 60, 70 (sept pas). Étape 4 — Lire : l'abscisse de B est 70, soit $7 \\times 10$ ; le point A, en 30, est 4 graduations avant B. La réponse 7 oublie que chaque graduation vaut 10 ; 80 compte une graduation de trop.",
+                  "answers": [
+                    {
+                      "content": "70",
+                      "correct": true
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "700",
+                      "correct": false
+                    },
+                    {
+                      "content": "80",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite graduée, les nombres 600 et 800 sont écrits et 4 intervalles les séparent. Quel est le pas ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 600 et 800 sont écrits. Étape 2 — Calculer le pas : $(800 - 600) \\div 4 = 200 \\div 4 = 50$. Étape 3 — Avancer : 600, 650, 700, 750, 800, quatre intervalles. Étape 4 — Lire : le pas est 50. Répondre 200 donne seulement la différence.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite de pas 50, la graduation 600 est écrite. Quelle est l'abscisse du point situé 3 graduations après 600 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la graduation 600 est écrite. Étape 2 — Calculer le pas : il est donné, 50. Étape 3 — Avancer : 600 + 50 = 650, puis 700, puis 750 (trois pas). Étape 4 — Lire : l'abscisse est 750, soit $600 + 3 \\times 50$. Répondre 650 s'arrête après un seul pas.",
+                  "answers": [
+                    {
+                      "content": "750",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : sur une droite où 0 et 100 sont écrits, avec 5 graduations visibles en tout (0, 25, 50, 75, 100), le pas vaut 20.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les graduations 0 et 100 sont écrites. Étape 2 — Calculer le pas : entre 0 et 100, il y a 5 graduations mais seulement 4 intervalles. Le pas est $(100 - 0) \\div 4 = 25$. Étape 3 — Avancer : 0, 25, 50, 75, 100. Étape 4 — Lire : le pas vaut 25, pas 20. L'affirmation est fausse : $100 \\div 5 = 20$ divise par le nombre de graduations au lieu du nombre d'intervalles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Trouver le pas et placer des points",
+              "statement": "Dans cet exercice, tu calcules des pas, tu ranges des points et tu complètes des graduations pour t'entraîner à lire une droite graduée.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule le pas : (différence des deux nombres écrits) divisée par le nombre d'intervalles, pas par le nombre de graduations.",
+              "questions": [
+                {
+                  "content": "Sur une droite graduée, les nombres 40 et 100 sont écrits et 3 intervalles les séparent. Quel est le pas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 40 et 100 sont écrits. Étape 2 — Calculer le pas : $(100 - 40) \\div 3 = 60 \\div 3 = 20$. Étape 3 — Avancer : 40, 60, 80, 100, trois intervalles. Étape 4 — Lire : le pas est 20. Répondre 60 donne seulement la différence ; 30 divise par 2 au lieu de 3 ; 180 multiplie au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    },
+                    {
+                      "content": "30",
+                      "correct": false
+                    },
+                    {
+                      "content": "60",
+                      "correct": false
+                    },
+                    {
+                      "content": "180",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces points du plus à gauche au plus à droite sur une droite graduée : 65 ; 5 ; 120 ; 80.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on lit les abscisses 65, 5, 120 et 80. Étape 2 — Calculer le pas : pas utile ici. Étape 3 — Avancer : sur la droite, les nombres augmentent vers la droite. Étape 4 — Lire : le plus petit est le plus à gauche, donc 5, 65, 80, 120.",
+                  "answers": [
+                    {
+                      "content": "5"
+                    },
+                    {
+                      "content": "65"
+                    },
+                    {
+                      "content": "80"
+                    },
+                    {
+                      "content": "120"
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite de pas 25, les graduations sont 0, 25, 50, ___ et 100.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : 0, 25 et 50 sont écrits, et 100 aussi. Étape 2 — Calculer le pas : $25 - 0 = 25$. Étape 3 — Avancer : $50 + 25 = 75$. Étape 4 — Lire : la graduation manquante est 75, puis $75 + 25 = 100$.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque droite graduée à son pas.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on lit les deux nombres écrits. Étape 2 — Calculer le pas : $10 \\div 5 = 2$ ; $100 \\div 4 = 25$ ; $1\\,000 \\div 10 = 100$ ; $(50 - 20) \\div 6 = 5$. Étape 3 — Avancer : on peut vérifier en comptant, 20, 25, 30, 35, 40, 45, 50. Étape 4 — Lire : on relie chaque droite à son pas.",
+                  "answers": [
+                    {
+                      "content": "0 et 10 écrits, 5 intervalles",
+                      "match": "2"
+                    },
+                    {
+                      "content": "0 et 100 écrits, 4 intervalles",
+                      "match": "25"
+                    },
+                    {
+                      "content": "0 et 1 000 écrits, 10 intervalles",
+                      "match": "100"
+                    },
+                    {
+                      "content": "20 et 50 écrits, 6 intervalles",
+                      "match": "5"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels nombres se placent à gauche du point d'abscisse 60 sur une droite graduée ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : le point d'abscisse 60 est le repère. Étape 2 — Calculer le pas : pas utile. Étape 3 — Avancer : à gauche, les nombres sont plus petits que 60. Étape 4 — Lire : 45 et 55 sont plus petits que 60, donc à gauche. Les nombres 65, 90 et 600 sont plus grands : ils sont à droite.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    },
+                    {
+                      "content": "55",
+                      "correct": true
+                    },
+                    {
+                      "content": "65",
+                      "correct": false
+                    },
+                    {
+                      "content": "600",
+                      "correct": false
+                    },
+                    {
+                      "content": "90",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite de pas 100, le point d'abscisse 350 se place entre 300 et ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : 300 est une graduation voisine de 350. Étape 2 — Calculer le pas : il est donné, 100. Étape 3 — Avancer : 300 + 100 = 400, c'est la graduation suivante. Étape 4 — Lire : 350 est entre 300 et 400. Le nombre 350 n'est pas une graduation, et 450 ou 500 sont trop loin.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    },
+                    {
+                      "content": "350",
+                      "correct": false
+                    },
+                    {
+                      "content": "450",
+                      "correct": false
+                    },
+                    {
+                      "content": "500",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Encadrer et arrondir un nombre entier",
+          "remember": "Encadrer un nombre, c'est trouver deux nombres ronds consécutifs qui l'entourent. Pour arrondir à un rang (dizaine, centaine, millier), on regarde le chiffre juste à droite : s'il vaut 0, 1, 2, 3 ou 4, on garde le plus petit nombre rond ; s'il vaut 5, 6, 7, 8 ou 9, on prend le plus grand. Un arrondi donne un ordre de grandeur, une valeur simple proche du nombre exact.",
+          "method": [
+            "Repérer le rang demandé : dizaine, centaine ou millier.",
+            "Encadrer le nombre entre deux nombres ronds consécutifs de ce rang.",
+            "Regarder le chiffre situé juste à droite du rang demandé.",
+            "Choisir l'arrondi : le plus petit des deux nombres ronds si ce chiffre est 0, 1, 2, 3 ou 4 ; le plus grand s'il est 5, 6, 7, 8 ou 9."
+          ],
+          "example": {
+            "statement": "Arrondir $6\\,748$ à la centaine.",
+            "steps": [
+              "Repérer : le rang demandé est la centaine.",
+              "Encadrer : $6\\,700 < 6\\,748 < 6\\,800$.",
+              "Regarder : le chiffre juste à droite des centaines est le chiffre des dizaines, c'est 4.",
+              "Choisir : 4 est dans {0, 1, 2, 3, 4}, on prend le plus petit des deux nombres ronds. L'arrondi est $6\\,700$."
+            ]
+          },
+          "pitfall": "Ne pas supprimer les chiffres de droite : ils deviennent des zéros. Contre-exemple : l'arrondi de $6\\,748$ à la centaine est $6\\,700$, et non $67$. N'oublie pas non plus le cas du 5 : l'arrondi de $4\\,951$ à la centaine est $5\\,000$, et non $4\\,900$, car le chiffre des dizaines est 5.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à encadrer et à arrondir des nombres entiers avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Arrondis 7 614 à la centaine.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le rang demandé est la centaine. Étape 2 — Encadrer : $7\\,600 < 7\\,614 < 7\\,700$. Étape 3 — Regarder : le chiffre des dizaines est 1. Étape 4 — Choisir : 1 est dans {0, 1, 2, 3, 4}, on prend le plus petit : 7 600.",
+                "answers": [
+                  {
+                    "content": "7600",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde le chiffre des dizaines."
+              },
+              {
+                "content": "Quel est l'encadrement de 2 750 au millier près ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le rang demandé est le millier. Étape 2 — Encadrer : $2\\,000 < 2\\,750 < 3\\,000$. Étape 3 — Regarder : pas utile pour encadrer. Étape 4 — Choisir : on garde 2 000 et 3 000. L'encadrement 2 700 et 2 800 est à la centaine près.",
+                "answers": [
+                  {
+                    "content": "2 000 et 3 000",
+                    "correct": true
+                  },
+                  {
+                    "content": "2 700 et 2 800",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 750 et 3 000",
+                    "correct": false
+                  },
+                  {
+                    "content": "1 000 et 2 000",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche les deux milliers entiers qui entourent 2 750."
+              },
+              {
+                "content": "Affirmation : l'arrondi de 9 999 au millier est 10 000.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le rang demandé est le millier. Étape 2 — Encadrer : $9\\,000 < 9\\,999 < 10\\,000$. Étape 3 — Regarder : le chiffre des centaines est 9. Étape 4 — Choisir : 9 donne le plus grand, 10 000. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde le chiffre des centaines."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Encadrer et arrondir un nombre entier",
+              "statement": "Dans cet exercice, tu encadres et tu arrondis des prix et des quantités du marché en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est l'encadrement de 3 482 à la centaine près ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on travaille à la centaine près. Étape 2 — Encadrer : les nombres ronds qui entourent 3 482 sont 3 400 et 3 500, car $3\\,400 < 3\\,482 < 3\\,500$. Étape 3 — Regarder : inutile pour un encadrement. Étape 4 — Choisir : on garde les deux bornes. L'encadrement 3 000 et 4 000 est au millier près ; 3 480 et 3 490 est à la dizaine près ; 3 300 et 3 400 n'entoure pas 3 482.",
+                  "answers": [
+                    {
+                      "content": "3 400 et 3 500",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 000 et 4 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 480 et 3 490",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 300 et 3 400",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Arrondis 3 482 à la centaine.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le rang demandé est la centaine. Étape 2 — Encadrer : $3\\,400 < 3\\,482 < 3\\,500$. Étape 3 — Regarder : le chiffre juste à droite des centaines est le chiffre des dizaines, c'est 8. Étape 4 — Choisir : 8 est dans {5, 6, 7, 8, 9}, on prend le plus grand des deux nombres ronds : 3 500. Répondre 3 400 oublie de regarder le chiffre 8.",
+                  "answers": [
+                    {
+                      "content": "3500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'arrondi de 8 235 à la dizaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le rang demandé est la dizaine. Étape 2 — Encadrer : $8\\,230 < 8\\,235 < 8\\,240$. Étape 3 — Regarder : le chiffre juste à droite des dizaines est le chiffre des unités, c'est 5. Étape 4 — Choisir : avec 5, on prend le plus grand des deux nombres ronds, 8 240. La réponse 8 230 arrondit à tort vers le bas ; 8 200 et 8 300 sont des arrondis à la centaine.",
+                  "answers": [
+                    {
+                      "content": "8 240",
+                      "correct": true
+                    },
+                    {
+                      "content": "8 230",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 200",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 300",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Arrondis 25 960 au millier.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le rang demandé est le millier. Étape 2 — Encadrer : $25\\,000 < 25\\,960 < 26\\,000$. Étape 3 — Regarder : le chiffre juste à droite des milliers est le chiffre des centaines, c'est 9. Étape 4 — Choisir : 9 est dans {5, 6, 7, 8, 9}, on prend le plus grand, 26 000. Répondre 25 000 oublie que 960 est proche de 1 000.",
+                  "answers": [
+                    {
+                      "content": "26000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'arrondi de 4 951 à la centaine est 4 900.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le rang demandé est la centaine. Étape 2 — Encadrer : $4\\,900 < 4\\,951 < 5\\,000$. Étape 3 — Regarder : le chiffre juste à droite des centaines est le chiffre des dizaines, c'est 5. Étape 4 — Choisir : avec 5, on prend le plus grand, soit 5 000. L'arrondi est donc 5 000 et l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Arrondir pour estimer un prix ou une quantité",
+              "statement": "Dans cet exercice, tu arrondis à plusieurs rangs et tu trouves des ordres de grandeur pour estimer des totaux.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Repère le rang, encadre, puis regarde seulement le chiffre juste à droite de ce rang.",
+              "questions": [
+                {
+                  "content": "Relie chaque nombre à son arrondi à la dizaine.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : le rang demandé est la dizaine. Étape 2 — Encadrer : 2 641 est entre 2 640 et 2 650 ; 2 645 aussi ; 2 699 est entre 2 690 et 2 700 ; 2 604 est entre 2 600 et 2 610. Étape 3 — Regarder : le chiffre des unités est 1, 5, 9 et 4. Étape 4 — Choisir : 1 donne 2 640 ; 5 donne 2 650 ; 9 donne 2 700 ; 4 donne 2 600.",
+                  "answers": [
+                    {
+                      "content": "2 641",
+                      "match": "2 640"
+                    },
+                    {
+                      "content": "2 645",
+                      "match": "2 650"
+                    },
+                    {
+                      "content": "2 699",
+                      "match": "2 700"
+                    },
+                    {
+                      "content": "2 604",
+                      "match": "2 600"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres dont l'arrondi au millier est 7 000 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : le rang demandé est le millier. Étape 2 — Encadrer : 6 520 est entre 6 000 et 7 000 ; 7 480 est entre 7 000 et 8 000. Étape 3 — Regarder : le chiffre des centaines est 5 pour 6 520 et 4 pour 7 480. Étape 4 — Choisir : 5 donne 7 000 vers le haut ; 4 donne 7 000 vers le bas. Les autres ont pour arrondi 6 000 (6 480), 8 000 (7 500) et 8 000 (8 100).",
+                  "answers": [
+                    {
+                      "content": "6 520",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 480",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 480",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 500",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 100",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arrondi de 18 096 à la centaine est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le rang demandé est la centaine. Étape 2 — Encadrer : $18\\,000 < 18\\,096 < 18\\,100$. Étape 3 — Regarder : le chiffre des dizaines est 9. Étape 4 — Choisir : 9 donne le plus grand des deux nombres ronds, 18 100. La réponse 18 000 ne regarde que les premiers chiffres ; 18 090 est un arrondi à la dizaine.",
+                  "answers": [
+                    {
+                      "content": "18 100",
+                      "correct": true
+                    },
+                    {
+                      "content": "18 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "18 090",
+                      "correct": false
+                    },
+                    {
+                      "content": "19 000",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour estimer 4 951 + 3 048, on arrondit chaque nombre au millier. Quel ordre de grandeur de la somme obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le rang demandé est le millier. Étape 2 — Encadrer : 4 951 est entre 4 000 et 5 000 ; 3 048 est entre 3 000 et 4 000. Étape 3 — Regarder : les centaines sont 9 et 0. Étape 4 — Choisir : 4 951 devient 5 000 et 3 048 devient 3 000. On calcule $5\\,000 + 3\\,000 = 8\\,000$. La somme exacte est 7 999, très proche de cet ordre de grandeur.",
+                  "answers": [
+                    {
+                      "content": "8000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour arrondir 5 372 à la centaine, on regarde le chiffre des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le rang demandé est la centaine. Étape 2 — Encadrer : $5\\,300 < 5\\,372 < 5\\,400$. Étape 3 — Regarder : on regarde le chiffre juste à droite des centaines, c'est le chiffre des dizaines, ici 7. Étape 4 — Choisir : avec 7, l'arrondi est 5 400. On ne regarde pas les unités, car elles ne décident pas de l'arrondi à la centaine.",
+                  "answers": [
+                    {
+                      "content": "dizaines",
+                      "correct": true
+                    },
+                    {
+                      "content": "dizaine",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse a 12 478 F. Elle dit : « J'ai environ 12 500 F. » À quel rang a-t-elle arrondi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche le rang. Étape 2 — Encadrer : à la centaine, $12\\,400 < 12\\,478 < 12\\,500$. Étape 3 — Regarder : le chiffre des dizaines est 7. Étape 4 — Choisir : 7 donne 12 500, c'est bien l'arrondi à la centaine. À la dizaine, on aurait 12 480 ; au millier, 12 000 ; à la dizaine de mille, 10 000.",
+                  "answers": [
+                    {
+                      "content": "à la centaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "à la dizaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "au millier",
+                      "correct": false
+                    },
+                    {
+                      "content": "à la dizaine de mille",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Additionner, soustraire et multiplier des nombres entiers",
+          "remember": "On additionne pour trouver un total, on soustrait pour trouver un reste ou un écart, on multiplie pour trouver le total de paquets égaux. Dans une opération posée, on aligne les unités sous les unités, les dizaines sous les dizaines, et ainsi de suite. On vérifie une addition par une soustraction, et une soustraction par une addition.",
+          "method": [
+            "Repérer l'opération d'après la situation : total ou ajout, c'est une addition ; reste ou écart, une soustraction ; paquets égaux, une multiplication.",
+            "Estimer le résultat avec un ordre de grandeur.",
+            "Poser l'opération en alignant les unités sous les unités, puis calculer colonne par colonne.",
+            "Vérifier avec l'estimation et par un autre calcul, puis conclure par une phrase avec l'unité."
+          ],
+          "example": {
+            "statement": "Awa vend 3 régimes de bananes à 1 850 F chacun. Combien reçoit-elle ?",
+            "steps": [
+              "Repérer : 3 régimes au même prix, c'est une multiplication $3 \\times 1\\,850$.",
+              "Estimer : $1\\,850$ est proche de $2\\,000$, et $3 \\times 2\\,000 = 6\\,000$.",
+              "Poser : $3 \\times 0 = 0$ ; $3 \\times 5 = 15$, on pose 5 et on retient 1 ; $3 \\times 8 = 24$, plus 1 font 25, on pose 5 et on retient 2 ; $3 \\times 1 = 3$, plus 2 font 5. On trouve $5\\,550$.",
+              "Vérifier : $5\\,550$ est proche de $6\\,000$, et $1\\,850 + 1\\,850 + 1\\,850 = 5\\,550$. Awa reçoit $5\\,550$ F."
+            ]
+          },
+          "pitfall": "Dans une soustraction posée, ne soustrais pas le plus petit chiffre du plus grand dans chaque colonne. Contre-exemple : $502 - 178 = 324$, et non $476$. Pour $2 - 8$, on emprunte une dizaine au lieu de faire $8 - 2$. Vérifie toujours : $324 + 178 = 502$.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à additionner, soustraire et multiplier avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Calcule 2 480 + 1 735.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : c'est une addition. Étape 2 — Estimer : $2\\,500 + 1\\,700 = 4\\,200$. Étape 3 — Poser : unités $0 + 5 = 5$ ; dizaines $8 + 3 = 11$, on pose 1 et on retient 1 ; centaines $4 + 7 + 1 = 12$, on pose 2 et on retient 1 ; milliers $2 + 1 + 1 = 4$. On trouve $4\\,215$. Étape 4 — Vérifier : $4\\,215 - 1\\,735 = 2\\,480$.",
+                "answers": [
+                  {
+                    "content": "4215",
+                    "correct": true
+                  }
+                ],
+                "hint": "Aligne les unités sous les unités et n'oublie pas les retenues."
+              },
+              {
+                "content": "Calcule 5 000 - 1 280.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : c'est une soustraction. Étape 2 — Estimer : $5\\,000 - 1\\,300 = 3\\,700$. Étape 3 — Poser : unités $0 - 0 = 0$ ; dizaines $0 - 8$ impossible, on emprunte, $10 - 8 = 2$ ; centaines $9 - 2 = 7$ ; milliers $4 - 1 = 3$. On trouve $3\\,720$. Étape 4 — Vérifier : $3\\,720 + 1\\,280 = 5\\,000$.",
+                "answers": [
+                  {
+                    "content": "3720",
+                    "correct": true
+                  }
+                ],
+                "hint": "Vérifie avec une addition : le reste plus 1 280 doit faire 5 000."
+              },
+              {
+                "content": "Quel est l'ordre de grandeur de $6 \\times 1\\,980$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est une multiplication. Étape 2 — Estimer : 1 980 est proche de 2 000. Étape 3 — Poser : $6 \\times 2\\,000 = 12\\,000$. Étape 4 — Vérifier : le calcul exact donne $11\\,880$, proche de 12 000. Les autres résultats se trompent d'un rang ou ajoutent au lieu de multiplier.",
+                "answers": [
+                  {
+                    "content": "$12\\,000$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1\\,200$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$120\\,000$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Arrondis 1 980 à 2 000 avant de multiplier."
+              },
+              {
+                "content": "Affirmation : $3 \\times 2\\,150 = 6\\,450$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : c'est une multiplication. Étape 2 — Estimer : $3 \\times 2\\,000 = 6\\,000$. Étape 3 — Poser : $3 \\times 150 = 450$ et $3 \\times 2\\,000 = 6\\,000$, soit $6\\,450$. Étape 4 — Vérifier : $2\\,150 + 2\\,150 + 2\\,150 = 6\\,450$. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare avec 3 × 2 000 = 6 000."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Additionner, soustraire et multiplier au marché",
+              "statement": "Dans cet exercice, tu calcules des totaux, des restes et des prix de paquets au marché avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Maman Awa a 12 500 F. Elle dépense 7 850 F au marché. Combien lui reste-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche un reste, c'est une soustraction $12\\,500 - 7\\,850$. Étape 2 — Estimer : $12\\,500 - 8\\,000 = 4\\,500$, le résultat est proche de 4 500. Étape 3 — Poser : unités $0 - 0 = 0$ ; dizaines $0 - 5$ impossible, on emprunte, $10 - 5 = 5$ ; centaines $4 - 8$ impossible (après emprunt), on emprunte, $14 - 8 = 6$ ; milliers $1 - 7$ impossible (après emprunt), on emprunte, $11 - 7 = 4$ ; dizaines de mille $0 - 0 = 0$. On trouve $4\\,650$. Étape 4 — Vérifier : $4\\,650 + 7\\,850 = 12\\,500$ et le résultat est proche de l'estimation. Il lui reste 4 650 F. Le résultat 20 350 F vient d'une addition ; 5 650 F oublie une retenue.",
+                  "answers": [
+                    {
+                      "content": "4 650 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "20 350 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 650 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 750 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de riz coûte 2 350 F. Combien coûtent 4 sacs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 4 sacs au même prix, c'est une multiplication $4 \\times 2\\,350$. Étape 2 — Estimer : $4 \\times 2\\,000 = 8\\,000$, le résultat sera un peu plus grand. Étape 3 — Poser : $4 \\times 0 = 0$ ; $4 \\times 5 = 20$, on pose 0 et on retient 2 ; $4 \\times 3 = 12$, plus 2 font 14, on pose 4 et on retient 1 ; $4 \\times 2 = 8$, plus 1 font 9. On trouve $9\\,400$. Étape 4 — Vérifier : $2\\,350 + 2\\,350 = 4\\,700$ et $4\\,700 + 4\\,700 = 9\\,400$. Les 4 sacs coûtent 9 400 F.",
+                  "answers": [
+                    {
+                      "content": "9400",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Un vendeur vend 1 275 tomates le lundi et 2 840 le mardi. Combien de tomates a-t-il vendues en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on cherche un total, c'est une addition $1\\,275 + 2\\,840$. Étape 2 — Estimer : $1\\,300 + 2\\,800 = 4\\,100$. Étape 3 — Poser : unités $5 + 0 = 5$ ; dizaines $7 + 4 = 11$, on pose 1 et on retient 1 ; centaines $2 + 8 + 1 = 11$, on pose 1 et on retient 1 ; milliers $1 + 2 + 1 = 4$. On trouve $4\\,115$. Étape 4 — Vérifier : $4\\,115 - 2\\,840 = 1\\,275$. Il a vendu 4 115 tomates.",
+                  "answers": [
+                    {
+                      "content": "4115",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "tomates"
+                },
+                {
+                  "content": "Une vendeuse a 6 paniers de 24 oranges chacun. Quelle opération donne le nombre total d'oranges ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 6 paniers égaux, c'est une multiplication. Étape 2 — Estimer : $6 \\times 25 = 150$. Étape 3 — Poser : $6 \\times 24 = 144$. Étape 4 — Vérifier : 144 est proche de 150. Elle a 144 oranges. L'addition $6 + 24$ donne 30 et ne tient pas compte des paniers égaux ; la soustraction cherche un reste ; la division cherche une part.",
+                  "answers": [
+                    {
+                      "content": "$6 \\times 24$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6 + 24$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24 - 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24 \\div 6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $502 - 178 = 476$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : c'est une soustraction. Étape 2 — Estimer : $500 - 200 = 300$, le résultat doit être proche de 300. Étape 3 — Poser : $2 - 8$ est impossible, on emprunte : $12 - 8 = 4$ ; $0 - 7$ est impossible aussi, on emprunte : $9 - 7 = 2$ ; $4 - 1 = 3$. On trouve $324$. Étape 4 — Vérifier : $324 + 178 = 502$. L'affirmation est fausse : 476 vient de la soustraction du plus petit chiffre au plus grand dans chaque colonne.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Choisir l'opération et vérifier un calcul",
+              "statement": "Dans cet exercice, tu choisis l'opération, tu estimes et tu vérifies des calculs de commerçant avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Choisis l'opération d'après la situation, estime avec des nombres ronds, puis vérifie avec l'opération inverse.",
+              "questions": [
+                {
+                  "content": "Relie chaque situation à l'opération qui la résout.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : un total ou un ajout se calcule par une addition ; un reste ou un écart par une soustraction ; des paquets égaux par une multiplication. Étape 2 — Estimer : on choisit l'opération avant de calculer. Étape 3 — Poser : on pose ensuite le calcul. Étape 4 — Vérifier : on contrôle que l'opération donne bien ce qu'on cherche.",
+                  "answers": [
+                    {
+                      "content": "Le total de deux ventes",
+                      "match": "Addition"
+                    },
+                    {
+                      "content": "Ce qu'il reste après un achat",
+                      "match": "Soustraction"
+                    },
+                    {
+                      "content": "Le prix de 5 objets identiques",
+                      "match": "Multiplication"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour estimer $3 \\times 4\\,980$, on arrondit 4 980 au millier. Quel ordre de grandeur obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : trois paquets égaux, c'est une multiplication. Étape 2 — Estimer : 4 980 arrondi au millier donne 5 000, car le chiffre des centaines est 9. Étape 3 — Poser : $3 \\times 5\\,000 = 15\\,000$. Étape 4 — Vérifier : le calcul exact donne $3 \\times 4\\,980 = 14\\,940$, très proche de 15 000.",
+                  "answers": [
+                    {
+                      "content": "15000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule 3 764 + 2 859.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : c'est une addition. Étape 2 — Estimer : $3\\,800 + 2\\,900 = 6\\,700$. Étape 3 — Poser : unités $4 + 9 = 13$, on pose 3 et on retient 1 ; dizaines $6 + 5 + 1 = 12$, on pose 2 et on retient 1 ; centaines $7 + 8 + 1 = 16$, on pose 6 et on retient 1 ; milliers $3 + 2 + 1 = 6$. On trouve $6\\,623$. Étape 4 — Vérifier : $6\\,623 - 2\\,859 = 3\\,764$, et le résultat est proche de 6 700.",
+                  "answers": [
+                    {
+                      "content": "6623",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "9 000 - 2 750 = ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : c'est une soustraction. Étape 2 — Estimer : $9\\,000 - 3\\,000 = 6\\,000$. Étape 3 — Poser : unités $0 - 0 = 0$ ; dizaines $0 - 5$ impossible, on emprunte, $10 - 5 = 5$ ; centaines $9 - 7 = 2$ ; milliers $8 - 2 = 6$. On trouve $6\\,250$. Étape 4 — Vérifier : $6\\,250 + 2\\,750 = 9\\,000$. Le résultat 11 750 vient d'une addition ; 6 350 et 7 250 oublient une retenue.",
+                  "answers": [
+                    {
+                      "content": "6 250",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 350",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 250",
+                      "correct": false
+                    },
+                    {
+                      "content": "11 750",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux calculs justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : trois opérations différentes à contrôler. Étape 2 — Estimer : on arrondit chaque calcul. Étape 3 — Poser : $1\\,200 \\times 5 = 6\\,000$ ; $3\\,500 - 1\\,750 = 1\\,750$ ; $2\\,600 + 3\\,700 = 6\\,300$ ; $450 \\times 3 = 1\\,350$ ; $8\\,000 - 2\\,500 = 5\\,500$. Étape 4 — Vérifier : les deux premiers sont justes, les trois autres sont faux (6 200, 1 250 et 6 500 sont des erreurs de retenue ou de calcul).",
+                  "answers": [
+                    {
+                      "content": "$1\\,200 \\times 5 = 6\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3\\,500 - 1\\,750 = 1\\,750$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\,600 + 3\\,700 = 6\\,200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$450 \\times 3 = 1\\,250$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\,000 - 2\\,500 = 6\\,500$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'opération inverse de l'addition, qui sert à vérifier un résultat, est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on veut vérifier une addition. Étape 2 — Estimer : l'estimation donne un ordre de grandeur, mais ne prouve pas le calcul. Étape 3 — Poser : on pose le calcul inverse, par exemple $6\\,623 - 2\\,859$. Étape 4 — Vérifier : si on retrouve le premier nombre, 3 764, l'addition est juste. L'opération inverse de l'addition est donc la soustraction.",
+                  "answers": [
+                    {
+                      "content": "soustraction",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les mangues de Mme Adjoua",
+          "statement": "Mme Adjoua tient un étal au marché de Treichville. Lundi, elle a vendu 3 405 mangues. Mardi, elle en a vendu 2 598. Dans cet exercice, applique les méthodes de la fiche.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Comment lit-on le nombre de mangues vendues lundi, 3 405 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Lire et écrire un grand nombre entier naturel ». Étape 1 — Séparer : 3 | 405. Étape 2 — Nommer : 3 milliers et 405 unités. Étape 3 — Lire : « trois mille » puis « quatre cent cinq ». Étape 4 — Donner la lecture complète : trois mille quatre cent cinq. La lecture « quarante-cinq » oublie le chiffre des centaines ; « trois cent quatre mille » inverse les classes.",
+              "answers": [
+                {
+                  "content": "trois mille quatre cent cinq",
+                  "correct": true
+                },
+                {
+                  "content": "trois mille quarante-cinq",
+                  "correct": false
+                },
+                {
+                  "content": "trois cent quatre mille cinq",
+                  "correct": false
+                },
+                {
+                  "content": "trois mille quatre cents",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel jour Mme Adjoua a-t-elle vendu le plus de mangues ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Comparer et ranger des nombres entiers ». Étape 1 — Compter : 3 405 et 2 598 ont 4 chiffres. Étape 2 — Conclure : impossible, la longueur est la même. Étape 3 — Comparer : le premier chiffre est 3 pour lundi et 2 pour mardi. Étape 4 — Écrire : $3\\,405 > 2\\,598$, donc lundi. Dire « les deux autant » ignore la différence des premiers chiffres.",
+              "answers": [
+                {
+                  "content": "lundi",
+                  "correct": true
+                },
+                {
+                  "content": "mardi",
+                  "correct": false
+                },
+                {
+                  "content": "les deux jours autant",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de mangues Mme Adjoua a-t-elle vendues en tout sur les deux jours ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : on cherche un total, c'est une addition. Étape 2 — Estimer : $3\\,400 + 2\\,600 = 6\\,000$. Étape 3 — Poser : unités $5 + 8 = 13$, on pose 3 et on retient 1 ; dizaines $0 + 9 + 1 = 10$, on pose 0 et on retient 1 ; centaines $4 + 5 + 1 = 10$, on pose 0 et on retient 1 ; milliers $3 + 2 + 1 = 6$. On trouve $6\\,003$. Étape 4 — Vérifier : $6\\,003 - 2\\,598 = 3\\,405$. Elle a vendu 6 003 mangues.",
+              "answers": [
+                {
+                  "content": "6003",
+                  "correct": true
+                }
+              ],
+              "unit": "mangues"
+            },
+            {
+              "content": "Arrondis le total de 6 003 mangues à la centaine.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Encadrer et arrondir un nombre entier ». Étape 1 — Repérer : le rang demandé est la centaine. Étape 2 — Encadrer : $6\\,000 < 6\\,003 < 6\\,100$. Étape 3 — Regarder : le chiffre des dizaines est 0. Étape 4 — Choisir : 0 est dans {0, 1, 2, 3, 4}, on prend le plus petit : 6 000. Choisir 6 100 oublierait de regarder le chiffre 0.",
+              "answers": [
+                {
+                  "content": "6000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la différence entre les mangues vendues lundi (3 405) et mardi (2 598) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : on cherche un écart, c'est une soustraction $3\\,405 - 2\\,598$. Étape 2 — Estimer : $3\\,400 - 2\\,600 = 800$. Étape 3 — Poser : unités $5 - 8$ impossible, on emprunte, $15 - 8 = 7$ ; dizaines $9 - 9 = 0$ (après emprunt) ; centaines $3 - 5$ impossible, on emprunte, $13 - 5 = 8$ ; milliers $2 - 2 = 0$. On trouve $807$. Étape 4 — Vérifier : $807 + 2\\,598 = 3\\,405$ et 807 est proche de 800. L'écart est de 807 mangues.",
+              "answers": [
+                {
+                  "content": "807",
+                  "correct": true
+                }
+              ],
+              "unit": "mangues"
+            }
+          ],
+          "hint": "Suis les étapes de chaque fiche et vérifie chaque résultat avec l'opération inverse."
+        },
+        {
+          "title": "Les prix du piment sur la droite graduée",
+          "statement": "Au marché d'Adjamé, trois vendeuses affichent le prix d'un tas de piment, en F CFA. La figure montre une droite graduée de 0 à 100 : les points P, Q et R donnent ces prix. Dans cet exercice, applique les méthodes de la fiche.",
+          "exercise_type": "fixation",
+          "figure": "droite-prix",
+          "questions": [
+            {
+              "content": "Sur la droite graduée, les nombres 0 et 100 sont écrits et 10 intervalles les séparent. Quel est le pas de la droite ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Placer des nombres entiers sur une droite graduée ». Étape 1 — Repérer : les graduations 0 et 100 sont écrites. Étape 2 — Calculer le pas : $(100 - 0) \\div 10 = 10$. Étape 3 — Avancer : 0, 10, 20, 30, et ainsi de suite jusqu'à 100. Étape 4 — Lire : le pas est 10. Répondre 1 oublie que le pas se calcule avec la différence et le nombre d'intervalles.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "F"
+            },
+            {
+              "content": "Sur cette droite de pas 10, le point Q est situé 6 graduations après 0. Quel est son prix ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Placer des nombres entiers sur une droite graduée ». Étape 1 — Repérer : 0 est écrit, le pas est de 10. Étape 2 — Calculer le pas : il est donné, 10. Étape 3 — Avancer : 0, 10, 20, 30, 40, 50, 60 (six pas). Étape 4 — Lire : le prix de Q est 60 F, soit $6 \\times 10$. La réponse 70 F compte une graduation de trop.",
+              "answers": [
+                {
+                  "content": "60 F",
+                  "correct": true
+                },
+                {
+                  "content": "6 F",
+                  "correct": false
+                },
+                {
+                  "content": "600 F",
+                  "correct": false
+                },
+                {
+                  "content": "70 F",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les prix des points P, Q et R sont 30 F, 60 F et 90 F. Quel est le prix total des trois tas de piment ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : on cherche un total, c'est une addition. Étape 2 — Estimer : 30, 60 et 90, la somme est proche de 200. Étape 3 — Poser : $30 + 60 = 90$, puis $90 + 90 = 180$. Étape 4 — Vérifier : $180 - 90 = 90$ et $90 - 60 = 30$. Les trois tas coûtent 180 F.",
+              "answers": [
+                {
+                  "content": "180",
+                  "correct": true
+                }
+              ],
+              "unit": "F"
+            },
+            {
+              "content": "Les prix des points P, Q et R sont 30 F, 60 F et 90 F. Quel tas de piment est le moins cher ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Comparer et ranger des nombres entiers ». Étape 1 — Compter : 30, 60 et 90 ont 2 chiffres. Étape 2 — Conclure : impossible, la longueur est la même. Étape 3 — Comparer : les premiers chiffres sont 3, 6 et 9, donc 30 est le plus petit. Étape 4 — Écrire : $30 < 60 < 90$. Le tas le moins cher est P. Sur une droite graduée, le plus petit nombre est aussi le plus à gauche.",
+              "answers": [
+                {
+                  "content": "P",
+                  "correct": true
+                },
+                {
+                  "content": "Q",
+                  "correct": false
+                },
+                {
+                  "content": "R",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aya achète le tas Q (60 F) et le tas R (90 F). Elle donne 200 F. Combien la vendeuse lui rend-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : il faut d'abord un total, puis un reste. Étape 2 — Estimer : $60 + 90$ est proche de 150, et $200 - 150 = 50$. Étape 3 — Poser : $60 + 90 = 150$ puis $200 - 150 = 50$. Étape 4 — Vérifier : $50 + 150 = 200$. La vendeuse rend 50 F.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ],
+              "unit": "F"
+            }
+          ],
+          "hint": "Lis les étapes de la fiche sur la droite graduée avant de calculer."
+        },
+        {
+          "title": "Le stock d'ignames de M. Koné",
+          "statement": "Au marché de Bouaké, M. Koné a 12 480 ignames en stock. Le premier mois, il en vend 7 365. Le second mois, il en vend 2 890. Dans cet exercice, rédige chaque calcul avec les étapes des fiches.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien d'ignames M. Koné a-t-il vendues en tout pendant les deux mois ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : on cherche un total, c'est une addition $7\\,365 + 2\\,890$. Étape 2 — Estimer : $7\\,400 + 2\\,900 = 10\\,300$. Étape 3 — Poser : unités $5 + 0 = 5$ ; dizaines $6 + 9 = 15$, on pose 5 et on retient 1 ; centaines $3 + 8 + 1 = 12$, on pose 2 et on retient 1 ; milliers $7 + 2 + 1 = 10$. On trouve $10\\,255$. Étape 4 — Vérifier : $10\\,255 - 2\\,890 = 7\\,365$. Il a vendu 10 255 ignames.",
+              "answers": [
+                {
+                  "content": "10255",
+                  "correct": true
+                }
+              ],
+              "unit": "ignames"
+            },
+            {
+              "content": "M. Koné avait 12 480 ignames et en a vendu 10 255. Combien lui en reste-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : on cherche un reste, c'est une soustraction $12\\,480 - 10\\,255$. Étape 2 — Estimer : $12\\,500 - 10\\,300 = 2\\,200$. Étape 3 — Poser : unités $0 - 5$ impossible, on emprunte : $10 - 5 = 5$ ; dizaines $7 - 5 = 2$ ; centaines $4 - 2 = 2$ ; milliers $2 - 0 = 2$ ; dizaines de mille $1 - 1 = 0$. On trouve $2\\,225$. Étape 4 — Vérifier : $2\\,225 + 10\\,255 = 12\\,480$. Il lui reste 2 225 ignames.",
+              "answers": [
+                {
+                  "content": "2225",
+                  "correct": true
+                }
+              ],
+              "unit": "ignames"
+            },
+            {
+              "content": "M. Koné a vendu 7 365 ignames le premier mois et 2 890 le second. Pendant quel mois a-t-il vendu le plus d'ignames ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Comparer et ranger des nombres entiers ». Étape 1 — Compter : 7 365 et 2 890 ont 4 chiffres. Étape 2 — Conclure : impossible, la longueur est la même. Étape 3 — Comparer : le premier chiffre est 7 contre 2. Étape 4 — Écrire : $7\\,365 > 2\\,890$. Le premier mois est le plus fort. Dire « autant » ignore que 7 est plus grand que 2.",
+              "answers": [
+                {
+                  "content": "le premier mois",
+                  "correct": true
+                },
+                {
+                  "content": "le second mois",
+                  "correct": false
+                },
+                {
+                  "content": "autant chaque mois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Arrondis le stock de 12 480 ignames au millier.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Encadrer et arrondir un nombre entier ». Étape 1 — Repérer : le rang demandé est le millier. Étape 2 — Encadrer : $12\\,000 < 12\\,480 < 13\\,000$. Étape 3 — Regarder : le chiffre des centaines est 4. Étape 4 — Choisir : 4 est dans {0, 1, 2, 3, 4}, on prend le plus petit : 12 000. Répondre 13 000 serait l'erreur de croire que 480 est plus proche de 1 000.",
+              "answers": [
+                {
+                  "content": "12000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une vendeuse achète 8 ignames à 250 F l'une. Combien paie-t-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : 8 ignames au même prix, c'est une multiplication $8 \\times 250$. Étape 2 — Estimer : $8 \\times 250$ est proche de $8 \\times 200 = 1\\,600$ et de $8 \\times 300 = 2\\,400$. Étape 3 — Poser : $8 \\times 0 = 0$ ; $8 \\times 5 = 40$, on pose 0 et on retient 4 ; $8 \\times 2 = 16$, plus 4 font 20. On trouve $2\\,000$. Étape 4 — Vérifier : $250 + 250 + 250 + 250 = 1\\,000$, et deux fois 1 000 font 2 000. Elle paie 2 000 F.",
+              "answers": [
+                {
+                  "content": "2000",
+                  "correct": true
+                }
+              ],
+              "unit": "F"
+            },
+            {
+              "content": "Dans le nombre 12 480, quelle est la valeur du chiffre 4 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Lire et écrire un grand nombre entier naturel ». Étape 1 — Séparer : 12 | 480. Étape 2 — Nommer : 12 milliers et 480 unités. Étape 3 — Lire : douze mille quatre cent quatre-vingts. Étape 4 — Donner : dans la classe des unités, 4 est le chiffre des centaines, sa valeur est 400. La réponse 40 le prend pour un chiffre des dizaines.",
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                },
+                {
+                  "content": "40",
+                  "correct": false
+                },
+                {
+                  "content": "4 000",
+                  "correct": false
+                },
+                {
+                  "content": "4",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Pour chaque question, repère d'abord la fiche à utiliser, puis suis ses étapes."
+        },
+        {
+          "title": "Les taxes d'un marché de gros",
+          "statement": "Un marché de gros a reçu 1 250 000 F de taxes en janvier, 980 500 F en février et 1 304 250 F en mars. Dans cet exercice, rédige chaque réponse avec la méthode détaillée.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Comment lit-on le montant de janvier, 1 250 000 F ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Lire et écrire un grand nombre entier naturel ». Étape 1 — Séparer : 1 | 250 | 000. Étape 2 — Nommer : 1 million, 250 milliers, 000 unités. Étape 3 — Lire : « un million », « deux cent cinquante mille ». Étape 4 — Donner : un million deux cent cinquante mille. « Deux cent cinq mille » oublie le chiffre 5 des dizaines de mille.",
+              "answers": [
+                {
+                  "content": "un million deux cent cinquante mille",
+                  "correct": true
+                },
+                {
+                  "content": "douze millions cinq cent mille",
+                  "correct": false
+                },
+                {
+                  "content": "un million deux cent cinq mille",
+                  "correct": false
+                },
+                {
+                  "content": "cent vingt-cinq mille",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Range les montants de février, janvier et mars du plus petit au plus grand : 1 250 000 ; 980 500 ; 1 304 250.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la notion « Comparer et ranger des nombres entiers ». Étape 1 — Compter : 980 500 a 6 chiffres, les deux autres en ont 7. Étape 2 — Conclure : 980 500 est le plus petit. Étape 3 — Comparer : 1 250 000 et 1 304 250 commencent par 1 ; le deuxième chiffre est 2 puis 3. Étape 4 — Écrire : $980\\,500 < 1\\,250\\,000 < 1\\,304\\,250$.",
+              "answers": [
+                {
+                  "content": "980 500"
+                },
+                {
+                  "content": "1 250 000"
+                },
+                {
+                  "content": "1 304 250"
+                }
+              ]
+            },
+            {
+              "content": "Quel est le total des taxes reçues pendant les trois mois ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : on cherche un total, c'est une addition. Étape 2 — Estimer : $1\\,250\\,000 + 1\\,000\\,000 + 1\\,300\\,000 = 3\\,550\\,000$. Étape 3 — Poser : on additionne d'abord $1\\,250\\,000 + 980\\,500 = 2\\,230\\,500$, puis $2\\,230\\,500 + 1\\,304\\,250 = 3\\,534\\,750$. Étape 4 — Vérifier : $3\\,534\\,750 - 1\\,304\\,250 = 2\\,230\\,500$ et le résultat est proche de l'estimation. Le total est de 3 534 750 F.",
+              "answers": [
+                {
+                  "content": "3534750",
+                  "correct": true
+                }
+              ],
+              "unit": "F"
+            },
+            {
+              "content": "Arrondis le total de 3 534 750 F au millier.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Encadrer et arrondir un nombre entier ». Étape 1 — Repérer : le rang demandé est le millier. Étape 2 — Encadrer : $3\\,534\\,000 < 3\\,534\\,750 < 3\\,535\\,000$. Étape 3 — Regarder : le chiffre des centaines est 7. Étape 4 — Choisir : 7 est dans {5, 6, 7, 8, 9}, on prend le plus grand : 3 535 000. Répondre 3 534 000 oublie de regarder le chiffre 7.",
+              "answers": [
+                {
+                  "content": "3535000",
+                  "correct": true
+                }
+              ],
+              "unit": "F"
+            },
+            {
+              "content": "Quelle somme de plus le marché a-t-il reçue en mars qu'en février ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion « Additionner, soustraire et multiplier des nombres entiers ». Étape 1 — Repérer : on cherche un écart, c'est une soustraction $1\\,304\\,250 - 980\\,500$. Étape 2 — Estimer : $1\\,300\\,000 - 1\\,000\\,000 = 300\\,000$. Étape 3 — Poser : unités $0 - 0 = 0$ ; dizaines $5 - 0 = 5$ ; centaines $2 - 5$ impossible, on emprunte, $12 - 5 = 7$ ; milliers $3 - 0 = 3$ ; dizaines de mille $0 - 8$ impossible, on emprunte, $10 - 8 = 2$ ; centaines de mille $2 - 9$ impossible, on emprunte, $12 - 9 = 3$ ; millions $0$. On trouve $323\\,750$. Étape 4 — Vérifier : $323\\,750 + 980\\,500 = 1\\,304\\,250$. Mars a rapporté 323 750 F de plus que février.",
+              "answers": [
+                {
+                  "content": "323750",
+                  "correct": true
+                }
+              ],
+              "unit": "F"
+            },
+            {
+              "content": "Dans le total 3 534 750 F, quelle est la valeur du chiffre 4 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Lire et écrire un grand nombre entier naturel ». Étape 1 — Séparer : 3 | 534 | 750. Étape 2 — Nommer : 3 millions, 534 milliers, 750 unités. Étape 3 — Lire : trois millions cinq cent trente-quatre mille sept cent cinquante. Étape 4 — Donner : le 4 est le dernier chiffre de la classe des milliers, c'est le chiffre des unités de mille, il vaut 4 000. Le chiffre des centaines est 7, pas 4.",
+              "answers": [
+                {
+                  "content": "4 000",
+                  "correct": true
+                },
+                {
+                  "content": "40",
+                  "correct": false
+                },
+                {
+                  "content": "400",
+                  "correct": false
+                },
+                {
+                  "content": "4",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Estime d'abord avec des nombres ronds, puis vérifie ton calcul avec l'opération inverse."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Lire et écrire un grand nombre entier, comparer et ranger, droite graduée (pas, abscisse), encadrer et arrondir, additionner et soustraire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le comptable d'une coopérative note le nombre de sacs de riz livrés au marché dans l'année : 4 073 802. Ce sujet révise la lecture des grands nombres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Sépare toujours le nombre en classes de trois chiffres, en partant de la droite.",
+              "questions": [
+                {
+                  "content": "Comment lit-on 4 073 802 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : lire un grand nombre. Étape 1 : on sépare les classes, 4 | 073 | 802. Étape 2 : on les nomme, 4 millions, 073 milliers, 802 unités. Étape 3 : on lit chaque classe, « quatre millions », « soixante-treize mille », « huit cent deux ». La réponse « sept cent trois mille » lit 073 comme 703 ; la dernière lit 802 comme 820.",
+                  "answers": [
+                    {
+                      "content": "quatre millions soixante-treize mille huit cent deux",
+                      "correct": true
+                    },
+                    {
+                      "content": "quatre millions sept cent trois mille huit cent deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "quarante millions soixante-treize mille huit cent deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "quatre millions soixante-treize mille huit cent vingt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans 4 073 802, quel est le chiffre des dizaines de mille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : repérer le rang. Étape 1 : 4 | 073 | 802. Étape 2 : 073 est la classe des milliers. Étape 3 : dans cette classe, 0 est le chiffre des centaines de mille, 7 celui des dizaines de mille et 3 celui des unités de mille. Le chiffre 4 est celui des millions.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur du chiffre 3 dans 4 073 802 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 4 | 073 | 802. Étape 2 : le 3 est le dernier chiffre de la classe des milliers. Étape 3 : c'est le chiffre des unités de mille. Étape 4 : sa valeur est 3 000. Répondre 3 oublie le rang du chiffre.",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Écris en chiffres : deux millions cinq cent mille trente.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on prépare trois classes, millions | milliers | unités. Étape 2 : 2 millions, 500 milliers, 030 unités. Étape 3 : on écrit $2\\,500\\,030$ en gardant les zéros des rangs vides. Si tu écris 2 500 300, tu mets le 3 au rang des centaines au lieu des dizaines.",
+                  "answers": [
+                    {
+                      "content": "2500030",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : le nombre 4 073 802 est écrit avec trois classes de chiffres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : on sépare 4 | 073 | 802. Étape 2 : on trouve trois classes, les millions, les milliers et les unités. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Quatre vendeuses ont vendu des mangues : Ama 5 408, Binta 5 480, Carole 5 048 et Dado 4 985.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les chiffres, puis compare de gauche à droite jusqu'au premier chiffre différent.",
+              "questions": [
+                {
+                  "content": "Qui a vendu le plus de mangues ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : comparer. Étape 1 : 4 985 a 4 chiffres comme les autres, 5 408, 5 480 et 5 048 aussi. Étape 2 : 4 985 commence par 4, il est plus petit que les autres, qui commencent par 5. Étape 3 : pour 5 408, 5 480 et 5 048, le deuxième chiffre est 4, 4 et 0, donc 5 048 est le plus petit des trois. Pour 5 408 et 5 480, le troisième chiffre est 0 et 8. Binta a vendu le plus : $5\\,480 > 5\\,408 > 5\\,048 > 4\\,985$.",
+                  "answers": [
+                    {
+                      "content": "Binta",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ama",
+                      "correct": false
+                    },
+                    {
+                      "content": "Carole",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dado",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range du plus petit au plus grand les mangues vendues : 5 408 ; 5 480 ; 5 048 ; 4 985.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 : les quatre nombres ont 4 chiffres. Étape 2 : on compare de gauche à droite. 4 985 est le plus petit (premier chiffre 4). Étape 3 : parmi 5 408, 5 480 et 5 048, le deuxième chiffre est 4, 4 et 0, donc 5 048 vient ensuite. Étape 4 : pour 5 408 et 5 480, le troisième chiffre est 0 puis 8. Ordre : $4\\,985 < 5\\,048 < 5\\,408 < 5\\,480$.",
+                  "answers": [
+                    {
+                      "content": "4 985"
+                    },
+                    {
+                      "content": "5 048"
+                    },
+                    {
+                      "content": "5 408"
+                    },
+                    {
+                      "content": "5 480"
+                    }
+                  ]
+                },
+                {
+                  "content": "5 408 est ___ 5 048.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 : les deux nombres ont 4 chiffres. Étape 2 : le premier chiffre est 5 dans les deux. Étape 3 : le deuxième chiffre est 4 pour 5 408 et 0 pour 5 048. Étape 4 : $5\\,408 > 5\\,048$. Dire « plus petit » vient d'une lecture de droite à gauche.",
+                  "answers": [
+                    {
+                      "content": "plus grand que",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus petit que",
+                      "correct": false
+                    },
+                    {
+                      "content": "égal à",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : 4 985 est plus grand que 5 048, car 9 est plus grand que 0 et 8 plus grand que 4.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : les deux nombres ont 4 chiffres. Étape 2 : on compare le premier chiffre : 4 contre 5. Étape 3 : 4 est plus petit que 5, donc on conclut tout de suite : $4\\,985 < 5\\,048$. L'affirmation compare les chiffres de rangs différents, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle comparaison est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : les deux nombres ont 4 chiffres. Étape 2 : les deux premiers chiffres sont 5 et 4. Étape 3 : le troisième chiffre est 8 pour 5 480 et 0 pour 5 408. Étape 4 : $5\\,480 > 5\\,408$.",
+                  "answers": [
+                    {
+                      "content": "$5\\,480 > 5\\,408$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5\\,480 < 5\\,408$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\,480 = 5\\,408$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur la droite graduée de la figure, le pas est de 10. Les points A et B sont placés en 30 et en 70. Tu calcules des pas et des abscisses.",
+              "exercise_type": "evaluation",
+              "figure": "droite-pas-10",
+              "hint": "Le pas est la différence des deux nombres écrits, divisée par le nombre d'intervalles.",
+              "questions": [
+                {
+                  "content": "Sur une droite graduée, les nombres 0 et 200 sont écrits et 8 intervalles les séparent. Quel est le pas ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : droite graduée. Étape 1 : on repère les nombres écrits 0 et 200. Étape 2 : on calcule le pas, $(200 - 0) \\div 8 = 25$. Étape 3 : on vérifie, 0, 25, 50, 75, 100, 125, 150, 175, 200 : huit intervalles. Le pas est 25. Répondre 8 donne le nombre d'intervalles.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la droite de la figure (pas 10), le point A est en 30. Le point B est situé 4 graduations après A. Quelle est l'abscisse de B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : on repère A en 30. Étape 2 : le pas est 10. Étape 3 : on avance de quatre pas, 40, 50, 60, 70. Étape 4 : l'abscisse de B est 70, soit $30 + 4 \\times 10$. Répondre 34 ajoute 4 au lieu de 4 pas de 10.",
+                  "answers": [
+                    {
+                      "content": "70",
+                      "correct": true
+                    },
+                    {
+                      "content": "34",
+                      "correct": false
+                    },
+                    {
+                      "content": "40",
+                      "correct": false
+                    },
+                    {
+                      "content": "80",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite de pas 25, quelle est l'abscisse du point situé 3 graduations après 125 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on repère 125. Étape 2 : le pas est 25. Étape 3 : on avance, $125 + 25 = 150$, puis 175, puis 200. Étape 4 : l'abscisse est 200, soit $125 + 3 \\times 25$.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite de pas 10, le point d'abscisse 45 se place entre 40 et ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 : 40 est la graduation voisine à gauche. Étape 2 : le pas est 10. Étape 3 : $40 + 10 = 50$. Étape 4 : 45 est entre 40 et 50. Le nombre 45 n'est pas une graduation de pas 10.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    },
+                    {
+                      "content": "45",
+                      "correct": false
+                    },
+                    {
+                      "content": "55",
+                      "correct": false
+                    },
+                    {
+                      "content": "60",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : sur une droite où 100 et 300 sont écrits, avec 4 intervalles entre eux, le pas est 50.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : 100 et 300 sont écrits. Étape 2 : $(300 - 100) \\div 4 = 50$. Étape 3 : on vérifie, 100, 150, 200, 250, 300. Le pas est 50 : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un marché reçoit 2 349 clients le samedi et 1 876 le dimanche. Tu arrondis, tu calcules et tu estimes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Arrondis avec le chiffre juste à droite du rang demandé, puis calcule avec la méthode posée.",
+              "questions": [
+                {
+                  "content": "Arrondis 2 349 à la centaine.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : arrondir. Étape 1 : le rang demandé est la centaine. Étape 2 : $2\\,300 < 2\\,349 < 2\\,400$. Étape 3 : le chiffre des dizaines est 4. Étape 4 : 4 donne le plus petit, 2 300.",
+                  "answers": [
+                    {
+                      "content": "2300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Arrondis 1 876 au millier.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : le rang demandé est le millier. Étape 2 : $1\\,000 < 1\\,876 < 2\\,000$. Étape 3 : le chiffre des centaines est 8. Étape 4 : 8 donne le plus grand, 2 000.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de clients le marché a-t-il reçus en tout, samedi et dimanche ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : additionner. Étape 1 : on cherche un total. Étape 2 : $2\\,300 + 1\\,900 = 4\\,200$. Étape 3 : unités $9 + 6 = 15$, on pose 5 et on retient 1 ; dizaines $4 + 7 + 1 = 12$, on pose 2 et on retient 1 ; centaines $3 + 8 + 1 = 12$, on pose 2 et on retient 1 ; milliers $2 + 1 + 1 = 4$. On trouve $4\\,225$. Étape 4 : $4\\,225 - 1\\,876 = 2\\,349$.",
+                  "answers": [
+                    {
+                      "content": "4225",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "clients"
+                },
+                {
+                  "content": "Quel est l'ordre de grandeur du total si on arrondit chaque nombre au millier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : on arrondit au millier. Étape 2 : 2 349 devient 2 000 (centaines 3) et 1 876 devient 2 000 (centaines 8). Étape 3 : $2\\,000 + 2\\,000 = 4\\,000$. Le total exact, 4 225, est proche de cet ordre de grandeur. Répondre 5 000 arrondit 2 349 vers le haut.",
+                  "answers": [
+                    {
+                      "content": "4 000 clients",
+                      "correct": true
+                    },
+                    {
+                      "content": "5 000 clients",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 000 clients",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 300 clients",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de clients de plus le marché a-t-il reçus le samedi que le dimanche ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : soustraire. Étape 1 : on cherche un écart, $2\\,349 - 1\\,876$. Étape 2 : $2\\,300 - 1\\,900 = 400$. Étape 3 : unités $9 - 6 = 3$ ; dizaines $4 - 7$ impossible, on emprunte, $14 - 7 = 7$ ; centaines $2 - 8$ impossible (après emprunt), on emprunte, $12 - 8 = 4$ ; milliers $1 - 1 = 0$. On trouve $473$. Étape 4 : $473 + 1\\,876 = 2\\,349$.",
+                  "answers": [
+                    {
+                      "content": "473",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "clients"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante au marché",
+          "notions": "Calculs de recettes, de caisse et de prix au marché : additionner, soustraire, multiplier, lire un grand nombre, lire des abscisses sur une droite graduée, comparer, ranger et arrondir.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Mme Aminata vend des tas de tomates au marché de Cocody, à 150 F le tas. Elle en vend 24 le lundi et 18 le mardi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour des tas au même prix, multiplie le nombre de tas par le prix d'un tas.",
+              "questions": [
+                {
+                  "content": "Combien de tas Mme Aminata a-t-elle vendus en tout, lundi et mardi ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un total, c'est une addition. Étape 2 : $20 + 20 = 40$ environ. Étape 3 : $24 + 18 = 42$. Étape 4 : $42 - 18 = 24$. Elle a vendu 42 tas.",
+                  "answers": [
+                    {
+                      "content": "42",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "tas"
+                },
+                {
+                  "content": "Quelle somme Mme Aminata encaisse-t-elle le lundi pour 24 tas à 150 F ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 24 tas au même prix, c'est une multiplication $24 \\times 150$. Étape 2 : $24 \\times 150$ est proche de $25 \\times 150 = 3\\,750$ ou de $20 \\times 150 = 3\\,000$. Étape 3 : $24 \\times 150 = 24 \\times 100 + 24 \\times 50 = 2\\,400 + 1\\,200 = 3\\,600$. Étape 4 : $3\\,600$ est entre les deux estimations. Elle encaisse 3 600 F.",
+                  "answers": [
+                    {
+                      "content": "3600",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Quelle somme encaisse-t-elle le mardi pour 18 tas à 150 F ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : 18 tas au même prix, c'est une multiplication $18 \\times 150$. Étape 2 : $20 \\times 150 = 3\\,000$, le résultat est un peu plus petit. Étape 3 : $18 \\times 150 = 18 \\times 100 + 18 \\times 50 = 1\\,800 + 900 = 2\\,700$. Étape 4 : $2\\,700 + 2 \\times 150 = 3\\,000$. Elle encaisse 2 700 F. Le résultat 1 800 F oublie $18 \\times 50 = 900$ F.",
+                  "answers": [
+                    {
+                      "content": "2 700 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 400 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 800 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la différence entre la somme encaissée le lundi (3 600 F) et celle du mardi (2 700 F) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un écart, c'est une soustraction. Étape 2 : $3\\,600 - 2\\,700$ est proche de 1 000. Étape 3 : $3\\,600 - 2\\,700 = 900$. Étape 4 : $900 + 2\\,700 = 3\\,600$. L'écart est de 900 F.",
+                  "answers": [
+                    {
+                      "content": "900",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Pour estimer la recette de 42 tas à 150 F, on arrondit 42 à 40. Quel ordre de grandeur obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 42 tas au même prix, c'est une multiplication. Étape 2 : on arrondit 42 à la dizaine : 40. Étape 3 : $40 \\times 150 = 6\\,000$. Étape 4 : la recette exacte, $42 \\times 150 = 6\\,300$, est proche de 6 000.",
+                  "answers": [
+                    {
+                      "content": "6000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le gérant d'un marché de Yopougon a 85 000 F dans sa caisse. Il encaisse 47 500 F de droits de place, puis paie 38 250 F de salaires.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Additionne ce qui entre dans la caisse, puis soustrais ce qui en sort.",
+              "questions": [
+                {
+                  "content": "Combien y a-t-il dans la caisse après les droits de place encaissés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un total, c'est une addition. Étape 2 : $85\\,000 + 47\\,500$ est proche de 130 000. Étape 3 : unités et dizaines $0 + 0 = 0$ ; centaines $0 + 5 = 5$ ; milliers $5 + 7 = 12$, on pose 2 et on retient 1 ; dizaines de mille $8 + 4 + 1 = 13$, on pose 3 et on retient 1 ; centaines de mille $0 + 0 + 1 = 1$. On trouve $132\\,500$. Étape 4 : $132\\,500 - 47\\,500 = 85\\,000$.",
+                  "answers": [
+                    {
+                      "content": "132500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Combien reste-t-il dans la caisse après le paiement des salaires de 38 250 F ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un reste, c'est une soustraction $132\\,500 - 38\\,250$. Étape 2 : $132\\,500 - 38\\,000$ est proche de 94 500. Étape 3 : unités $0 - 0 = 0$ ; dizaines $0 - 5$ impossible, on emprunte, $10 - 5 = 5$ ; centaines $4 - 2 = 2$ ; milliers $2 - 8$ impossible, on emprunte, $12 - 8 = 4$ ; dizaines de mille $2 - 3$ impossible, on emprunte, $12 - 3 = 9$ ; centaines de mille $0$. On trouve $94\\,250$. Étape 4 : $94\\,250 + 38\\,250 = 132\\,500$.",
+                  "answers": [
+                    {
+                      "content": "94250",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Comment lit-on 94 250 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : on sépare 94 | 250. Étape 2 : 94 milliers et 250 unités. Étape 3 : « quatre-vingt-quatorze mille » puis « deux cent cinquante ». Étape 4 : la lecture complète est quatre-vingt-quatorze mille deux cent cinquante. « Vingt-cinq » oublie le chiffre des centaines.",
+                  "answers": [
+                    {
+                      "content": "quatre-vingt-quatorze mille deux cent cinquante",
+                      "correct": true
+                    },
+                    {
+                      "content": "quatre-vingt-quatorze mille vingt-cinq",
+                      "correct": false
+                    },
+                    {
+                      "content": "quatre-vingt-dix-neuf mille deux cent cinquante",
+                      "correct": false
+                    },
+                    {
+                      "content": "quatre-vingt-quatorze mille cinq cent vingt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arrondi de 94 250 au millier est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 : le rang demandé est le millier. Étape 2 : $94\\,000 < 94\\,250 < 95\\,000$. Étape 3 : le chiffre des centaines est 2. Étape 4 : 2 donne le plus petit, 94 000. Répondre 95 000 arrondit vers le haut à tort.",
+                  "answers": [
+                    {
+                      "content": "94 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "95 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "94 300",
+                      "correct": false
+                    },
+                    {
+                      "content": "90 000",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : la caisse finale (94 250 F) est plus grande que la caisse du début (85 000 F).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : 94 250 et 85 000 ont 5 chiffres. Étape 2 : le premier chiffre est 9 contre 8. Étape 3 : $94\\,250 > 85\\,000$. L'affirmation est vraie : la caisse a gagné 9 250 F.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "La figure montre une droite graduée de 0 à 50 avec un pas de 5. Les points S, T et U donnent le stock d'igname, en kg, de trois vendeurs : S en 15, T en 35 et U en 45.",
+              "exercise_type": "evaluation",
+              "figure": "droite-sacs",
+              "hint": "Compte les pas depuis 0 : chaque pas vaut 5.",
+              "questions": [
+                {
+                  "content": "La droite de la figure va de 0 à 50 avec 10 intervalles égaux. Quel est le pas ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : la droite va de 0 à 50. Étape 2 : $(50 - 0) \\div 10 = 5$. Étape 3 : on vérifie sur la figure, 0, 5, 10, 15, 20… jusqu'à 50. Étape 4 : le pas est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point T est situé 7 graduations après 0, avec un pas de 5. Quel est son stock ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : 0 est écrit. Étape 2 : le pas est 5. Étape 3 : $7 \\times 5 = 35$. Étape 4 : le stock de T est 35 kg. La réponse 40 kg compte une graduation de trop.",
+                  "answers": [
+                    {
+                      "content": "35 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les stocks de S et de U sont 15 kg et 45 kg. Quel est leur stock total ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un total. Étape 2 : $15 + 45$ est proche de 60. Étape 3 : $15 + 45 = 60$. Étape 4 : $60 - 45 = 15$.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "Les stocks de S, T et U sont 15 kg, 35 kg et 45 kg. Quel vendeur a le plus petit stock ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : 15, 35 et 45 ont 2 chiffres. Étape 2 : on compare les premiers chiffres : 1, 3 et 4. Étape 3 : $15 < 35 < 45$. Le plus petit stock est celui de S, le point le plus à gauche.",
+                  "answers": [
+                    {
+                      "content": "S",
+                      "correct": true
+                    },
+                    {
+                      "content": "T",
+                      "correct": false
+                    },
+                    {
+                      "content": "U",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de kg de plus U a-t-il que S (45 kg et 15 kg) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un écart, c'est une soustraction. Étape 2 : $45 - 15$ est proche de 30. Étape 3 : $45 - 15 = 30$. Étape 4 : $30 + 15 = 45$. U a 30 kg de plus.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Quatre vendeuses affichent le prix d'un régime de bananes : 1 850 F, 1 580 F, 2 050 F et 1 805 F.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare de gauche à droite, puis arrondis avec le chiffre des dizaines.",
+              "questions": [
+                {
+                  "content": "Range ces prix du plus petit au plus grand : 1 850 ; 1 580 ; 2 050 ; 1 805.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 : les quatre prix ont 4 chiffres. Étape 2 : 2 050 commence par 2, c'est le plus grand. Étape 3 : pour 1 850, 1 580 et 1 805, le deuxième chiffre est 8, 5 et 8, donc 1 580 est le plus petit. Pour 1 850 et 1 805, le troisième chiffre est 5 et 0. Ordre : $1\\,580 < 1\\,805 < 1\\,850 < 2\\,050$.",
+                  "answers": [
+                    {
+                      "content": "1 580"
+                    },
+                    {
+                      "content": "1 805"
+                    },
+                    {
+                      "content": "1 850"
+                    },
+                    {
+                      "content": "2 050"
+                    }
+                  ]
+                },
+                {
+                  "content": "Arrondis 1 850 F à la centaine.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : le rang demandé est la centaine. Étape 2 : $1\\,800 < 1\\,850 < 1\\,900$. Étape 3 : le chiffre des dizaines est 5. Étape 4 : 5 donne le plus grand, 1 900.",
+                  "answers": [
+                    {
+                      "content": "1900",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Arrondis 1 580 F à la centaine.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : le rang demandé est la centaine. Étape 2 : $1\\,500 < 1\\,580 < 1\\,600$. Étape 3 : le chiffre des dizaines est 8. Étape 4 : 8 donne le plus grand, 1 600.",
+                  "answers": [
+                    {
+                      "content": "1600",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Combien coûtent 3 régimes à 1 805 F l'un ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 3 régimes au même prix, c'est une multiplication. Étape 2 : $3 \\times 1\\,800 = 5\\,400$. Étape 3 : $3 \\times 5 = 15$, on pose 5 et on retient 1 ; $3 \\times 0 = 0$, plus 1 fait 1 ; $3 \\times 8 = 24$, on pose 4 et on retient 2 ; $3 \\times 1 = 3$, plus 2 font 5. On trouve $5\\,415$. Étape 4 : $1\\,805 + 1\\,805 + 1\\,805 = 5\\,415$.",
+                  "answers": [
+                    {
+                      "content": "5415",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Quel régime est le plus cher ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : les quatre prix ont 4 chiffres. Étape 2 : on compare les premiers chiffres : 1, 1, 2 et 1. Étape 3 : 2 050 est le seul à commencer par 2. Étape 4 : $2\\,050 > 1\\,850$. Le régime le plus cher est à 2 050 F.",
+                  "answers": [
+                    {
+                      "content": "2 050 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 850 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 805 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 580 F",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier une comparaison, un arrondi ou une écriture en chiffres ; expliquer le calcul d'un pas ; vérifier une opération avec l'opération inverse ; estimer avec un ordre de grandeur.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Koffi, Fanta et Yao parlent de nombres entiers rencontrés au marché. Tu dis qui a raison et pourquoi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque affirmation, cherche d'abord la règle de la fiche, puis un contre-exemple chiffré.",
+              "questions": [
+                {
+                  "content": "Koffi dit : « 999 est plus grand que 1 000 parce que 9 est plus grand que 1. » Pourquoi a-t-il tort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : on compte les chiffres, 999 en a 3 et 1 000 en a 4. Étape 2 : le nombre qui a le plus de chiffres est le plus grand. Étape 3 : $999 < 1\\,000$. Koffi compare les premiers chiffres alors que les longueurs sont différentes.",
+                  "answers": [
+                    {
+                      "content": "1 000 a 4 chiffres et 999 en a 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "999 a plus de zéros",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 000 est un nombre rond",
+                      "correct": false
+                    },
+                    {
+                      "content": "les deux nombres sont égaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation de Fanta : « L'arrondi de 4 951 à la dizaine est 4 950. »",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : le rang demandé est la dizaine. Étape 2 : $4\\,950 < 4\\,951 < 4\\,960$. Étape 3 : le chiffre des unités est 1. Étape 4 : 1 donne le plus petit, 4 950. Fanta a raison.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao doit écrire « trois mille quarante ». Quelle écriture est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : « trois mille » est la classe des milliers, « quarante » celle des unités. Étape 2 : quarante s'écrit 040 en trois chiffres. Étape 3 : on assemble, 3 | 040, soit $3\\,040$. Le zéro garde la place des centaines : sans lui, on obtiendrait 340 ou 3 400.",
+                  "answers": [
+                    {
+                      "content": "3 040",
+                      "correct": true
+                    },
+                    {
+                      "content": "340",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 400",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 040",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 : 52 300 se lit 52 | 300, le chiffre 5 est celui des dizaines de mille et vaut 50 000. Étape 2 : un nombre de 6 chiffres est plus grand qu'un nombre de 5 chiffres, c'est la règle de comparaison. Étape 3 : le zéro de 3 040 garde la place des centaines, il n'est pas inutile. Étape 4 : 98 a 2 chiffres, 102 en a 3, donc 98 est plus petit.",
+                  "answers": [
+                    {
+                      "content": "Dans 52 300, le chiffre 5 vaut 50 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nombre de 6 chiffres est plus grand qu'un nombre de 5 chiffres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le zéro de 3 040 est inutile",
+                      "correct": false
+                    },
+                    {
+                      "content": "98 est plus grand que 102",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier que 502 − 178 = 324, on calcule 324 + 178. Quel nombre obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : une soustraction se vérifie par l'addition. Étape 2 : $324 + 178$ est proche de $300 + 200 = 500$. Étape 3 : unités $4 + 8 = 12$, on pose 2 et on retient 1 ; dizaines $2 + 7 + 1 = 10$, on pose 0 et on retient 1 ; centaines $3 + 1 + 1 = 5$. On trouve $502$. Le calcul est juste.",
+                  "answers": [
+                    {
+                      "content": "502",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un commerçant a 7 496 sacs de riz en stock. Il veut en donner un nombre arrondi à ses clients. Tu justifies chaque arrondi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Regarde le chiffre juste à droite du rang demandé.",
+              "questions": [
+                {
+                  "content": "Quel est l'arrondi de 7 496 à la centaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : le rang demandé est la centaine. Étape 2 : $7\\,400 < 7\\,496 < 7\\,500$. Étape 3 : le chiffre des dizaines est 9. Étape 4 : 9 donne le plus grand, 7 500. Répondre 7 400 oublie de regarder le chiffre 9.",
+                  "answers": [
+                    {
+                      "content": "7 500",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 400",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 490",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'arrondi de 7 496 au millier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : le rang demandé est le millier. Étape 2 : $7\\,000 < 7\\,496 < 8\\,000$. Étape 3 : le chiffre des centaines est 4. Étape 4 : 4 donne le plus petit, 7 000. Répondre 8 000 arrondit vers le haut à tort, car 496 est plus proche de 0 que de 1 000.",
+                  "answers": [
+                    {
+                      "content": "7 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "8 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 500",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 400",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'arrondi de 7 496 est le même à la centaine et au millier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : à la centaine, on regarde le chiffre des dizaines (9) et on obtient 7 500. Étape 2 : au millier, on regarde le chiffre des centaines (4) et on obtient 7 000. Étape 3 : 7 500 est différent de 7 000. L'affirmation est fausse : le rang change le chiffre que l'on regarde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour arrondir au millier, on regarde le chiffre des ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 : le rang demandé est le millier. Étape 2 : on regarde le chiffre juste à droite du rang. Étape 3 : à droite des milliers se trouve le chiffre des centaines. Regarder les dizaines ou les unités mène à une erreur d'arrondi.",
+                  "answers": [
+                    {
+                      "content": "centaines",
+                      "correct": true
+                    },
+                    {
+                      "content": "dizaines",
+                      "correct": false
+                    },
+                    {
+                      "content": "unités",
+                      "correct": false
+                    },
+                    {
+                      "content": "milliers",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour estimer 7 496 + 2 510, on arrondit chaque nombre au millier. Quel ordre de grandeur obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : le rang demandé est le millier. Étape 2 : 7 496 devient 7 000 (centaines 4) et 2 510 devient 3 000 (centaines 5). Étape 3 : $7\\,000 + 3\\,000 = 10\\,000$. Étape 4 : la somme exacte est 10 006, proche de 10 000.",
+                  "answers": [
+                    {
+                      "content": "10000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur une droite graduée, les nombres 3 000 et 4 000 sont écrits et 5 intervalles les séparent.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les intervalles, pas les graduations, pour calculer le pas.",
+              "questions": [
+                {
+                  "content": "Quel est le pas de cette droite ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 3 000 et 4 000 sont écrits. Étape 2 : $(4\\,000 - 3\\,000) \\div 5 = 1\\,000 \\div 5 = 200$. Étape 3 : on vérifie, 3 000, 3 200, 3 400, 3 600, 3 800, 4 000 : cinq intervalles. Le pas est 200. Répondre 5 donne le nombre d'intervalles.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'abscisse du point situé 3 graduations après 3 000 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on repère 3 000. Étape 2 : le pas est 200. Étape 3 : $3\\,000 + 200 = 3\\,200$, puis 3 400, puis 3 600. Étape 4 : l'abscisse est 3 600, soit $3\\,000 + 3 \\times 200$.",
+                  "answers": [
+                    {
+                      "content": "3600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre quelles graduations se trouve le point d'abscisse 3 750 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : les graduations sont 3 000, 3 200, 3 400, 3 600, 3 800 et 4 000. Étape 2 : $3\\,600 < 3\\,750 < 3\\,800$. Étape 3 : 3 750 n'est pas une graduation. Étape 4 : il est entre 3 600 et 3 800.",
+                  "answers": [
+                    {
+                      "content": "3 600 et 3 800",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 400 et 3 600",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 800 et 4 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 700 et 3 750",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : le nombre 3 800 est une graduation de cette droite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : à partir de 3 000, on ajoute 200 à chaque pas. Étape 2 : 3 000, 3 200, 3 400, 3 600, 3 800. Étape 3 : 3 800 est dans la liste, juste avant 4 000, c'est donc bien une graduation. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de graduations de 3 000 à 4 000, en comptant 3 000 et 4 000 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : il y a 5 intervalles. Étape 2 : il y a toujours une graduation de plus que d'intervalles. Étape 3 : $5 + 1 = 6$. On les liste pour vérifier : 3 000, 3 200, 3 400, 3 600, 3 800, 4 000.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mme Zeinab achète 5 pagnes à 3 200 F l'un. Elle paie avec un billet de 20 000 F.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule le prix total d'abord, puis la monnaie avec une soustraction.",
+              "questions": [
+                {
+                  "content": "Combien Mme Zeinab paie-t-elle pour les 5 pagnes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 5 pagnes au même prix, c'est une multiplication $5 \\times 3\\,200$. Étape 2 : $5 \\times 3\\,000 = 15\\,000$. Étape 3 : $5 \\times 3\\,200 = 5 \\times 3\\,000 + 5 \\times 200 = 15\\,000 + 1\\,000 = 16\\,000$. Étape 4 : $3\\,200 + 3\\,200 + 3\\,200 + 3\\,200 + 3\\,200 = 16\\,000$ confirme. Elle paie 16 000 F.",
+                  "answers": [
+                    {
+                      "content": "16000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Quelle monnaie la vendeuse lui rend-elle sur 20 000 F ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un reste, c'est une soustraction $20\\,000 - 16\\,000$. Étape 2 : $20\\,000 - 16\\,000$ est proche de 4 000. Étape 3 : $20\\,000 - 16\\,000 = 4\\,000$. Étape 4 : $4\\,000 + 16\\,000 = 20\\,000$. On lui rend 4 000 F.",
+                  "answers": [
+                    {
+                      "content": "4000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Quel est l'ordre de grandeur de 5 × 3 200 si on arrondit 3 200 au millier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : 5 paquets égaux, c'est une multiplication. Étape 2 : 3 200 arrondi au millier donne 3 000 (centaines 2). Étape 3 : $5 \\times 3\\,000 = 15\\,000$. Étape 4 : le résultat exact, 16 000, est proche. Les réponses 1 500 et 150 000 se trompent d'un rang.",
+                  "answers": [
+                    {
+                      "content": "15 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "16 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 500",
+                      "correct": false
+                    },
+                    {
+                      "content": "150 000",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : la monnaie rendue (4 000 F) est plus petite que le prix d'un pagne (3 200 F).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : 4 000 et 3 200 ont 4 chiffres. Étape 2 : le premier chiffre est 4 contre 3. Étape 3 : $4\\,000 > 3\\,200$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer la monnaie rendue, on fait une ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 : la monnaie est ce qui reste du billet après l'achat. Étape 2 : un reste se calcule par une soustraction. Étape 3 : $20\\,000 - 16\\,000$. Une addition donnerait un total, une multiplication un prix de paquets égaux.",
+                  "answers": [
+                    {
+                      "content": "soustraction",
+                      "correct": true
+                    },
+                    {
+                      "content": "addition",
+                      "correct": false
+                    },
+                    {
+                      "content": "multiplication",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Toutes les notions : lire un grand nombre, comparer et ranger, droite graduée, encadrer et arrondir, additionner, soustraire et multiplier, estimer et vérifier.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le marché de Daloa a reçu 24 580 visiteurs lundi et 31 245 visiteurs samedi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Lis le nombre par classes, puis calcule avec la méthode posée.",
+              "questions": [
+                {
+                  "content": "Comment lit-on 31 245 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : on sépare 31 | 245. Étape 2 : 31 milliers et 245 unités. Étape 3 : « trente et un mille » puis « deux cent quarante-cinq ». Étape 4 : trente et un mille deux cent quarante-cinq.",
+                  "answers": [
+                    {
+                      "content": "trente et un mille deux cent quarante-cinq",
+                      "correct": true
+                    },
+                    {
+                      "content": "trois mille cent vingt-quatre",
+                      "correct": false
+                    },
+                    {
+                      "content": "trente et un mille deux cent cinquante-quatre",
+                      "correct": false
+                    },
+                    {
+                      "content": "trente et un mille deux cent quatre-vingt-cinq",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur du chiffre 2 dans 31 245 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 31 | 245. Étape 2 : 245 est la classe des unités. Étape 3 : 2 est le chiffre des centaines. Étape 4 : sa valeur est 200.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de visiteurs le marché a-t-il reçus en tout, lundi et samedi ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un total. Étape 2 : $24\\,600 + 31\\,200 = 55\\,800$. Étape 3 : unités $0 + 5 = 5$ ; dizaines $8 + 4 = 12$, on pose 2 et on retient 1 ; centaines $5 + 2 + 1 = 8$ ; milliers $4 + 1 = 5$ ; dizaines de mille $2 + 3 = 5$. On trouve $55\\,825$. Étape 4 : $55\\,825 - 31\\,245 = 24\\,580$.",
+                  "answers": [
+                    {
+                      "content": "55825",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "visiteurs"
+                },
+                {
+                  "content": "Arrondis 55 825 à la centaine.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : le rang demandé est la centaine. Étape 2 : $55\\,800 < 55\\,825 < 55\\,900$. Étape 3 : le chiffre des dizaines est 2. Étape 4 : 2 donne le plus petit, 55 800.",
+                  "answers": [
+                    {
+                      "content": "55800",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de visiteurs de plus le marché a-t-il reçus samedi que lundi ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un écart. Étape 2 : $31\\,200 - 24\\,600 = 6\\,600$. Étape 3 : unités $5 - 0 = 5$ ; dizaines $4 - 8$ impossible, on emprunte, $14 - 8 = 6$ ; centaines $1 - 5$ impossible (après emprunt), on emprunte, $11 - 5 = 6$ ; milliers $0 - 4$ impossible (après emprunt), on emprunte, $10 - 4 = 6$ ; dizaines de mille $2 - 2 = 0$. On trouve $6\\,665$. Étape 4 : $6\\,665 + 24\\,580 = 31\\,245$.",
+                  "answers": [
+                    {
+                      "content": "6665",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "visiteurs"
+                },
+                {
+                  "content": "Affirmation : le marché a reçu plus de visiteurs lundi que samedi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : 24 580 et 31 245 ont 5 chiffres. Étape 2 : le premier chiffre est 2 contre 3. Étape 3 : $24\\,580 < 31\\,245$. Samedi a eu plus de visiteurs : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Quatre sacs de riz sont vendus 12 500 F, 9 750 F, 12 050 F et 10 200 F.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte d'abord les chiffres de chaque prix.",
+              "questions": [
+                {
+                  "content": "Range ces prix du plus petit au plus grand : 12 500 ; 9 750 ; 12 050 ; 10 200.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 : 9 750 a 4 chiffres, les autres en ont 5. Étape 2 : 9 750 est le plus petit. Étape 3 : pour 12 500, 12 050 et 10 200, le deuxième chiffre est 2, 2 et 0, donc 10 200 vient ensuite. Pour 12 500 et 12 050, le troisième chiffre est 5 puis 0. Ordre : $9\\,750 < 10\\,200 < 12\\,050 < 12\\,500$.",
+                  "answers": [
+                    {
+                      "content": "9 750"
+                    },
+                    {
+                      "content": "10 200"
+                    },
+                    {
+                      "content": "12 050"
+                    },
+                    {
+                      "content": "12 500"
+                    }
+                  ]
+                },
+                {
+                  "content": "Arrondis 9 750 F à la centaine.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : le rang demandé est la centaine. Étape 2 : $9\\,700 < 9\\,750 < 9\\,800$. Étape 3 : le chiffre des dizaines est 5. Étape 4 : 5 donne le plus grand, 9 800.",
+                  "answers": [
+                    {
+                      "content": "9800",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Quel est l'arrondi de 12 050 F au millier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : le rang demandé est le millier. Étape 2 : $12\\,000 < 12\\,050 < 13\\,000$. Étape 3 : le chiffre des centaines est 0. Étape 4 : 0 donne le plus petit, 12 000. Répondre 13 000 oublie de regarder le chiffre 0.",
+                  "answers": [
+                    {
+                      "content": "12 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "13 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 100",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 050",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien coûtent 4 sacs à 12 500 F l'un ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 4 sacs au même prix, c'est une multiplication. Étape 2 : $4 \\times 12\\,000 = 48\\,000$ environ. Étape 3 : $4 \\times 12\\,500 = 4 \\times 12\\,000 + 4 \\times 500 = 48\\,000 + 2\\,000 = 50\\,000$. Étape 4 : $12\\,500 + 12\\,500 = 25\\,000$ et $25\\,000 + 25\\,000 = 50\\,000$.",
+                  "answers": [
+                    {
+                      "content": "50000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Affirmation : 9 750 est plus grand que 10 200, car 9 est plus grand que 1.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : 9 750 a 4 chiffres, 10 200 en a 5. Étape 2 : le nombre qui a le plus de chiffres est le plus grand. Étape 3 : $9\\,750 < 10\\,200$. L'affirmation compare les premiers chiffres, ce qui est faux quand les longueurs diffèrent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "La figure montre une droite graduée de 0 à 100 avec un pas de 25. Le point M est placé en 75. Elle représente des kilogrammes de maïs ; chaque graduation porte son nombre.",
+              "exercise_type": "evaluation",
+              "figure": "droite-pas-25",
+              "hint": "Divise la différence des deux nombres écrits par le nombre d'intervalles.",
+              "questions": [
+                {
+                  "content": "La droite de la figure va de 0 à 100 avec 4 intervalles égaux. Quel est le pas ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : la droite va de 0 à 100. Étape 2 : $(100 - 0) \\div 4 = 25$. Étape 3 : on vérifie sur la figure, 0, 25, 50, 75, 100. Étape 4 : le pas est 25.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'abscisse du point situé 2 graduations après 25 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on repère 25. Étape 2 : le pas est 25. Étape 3 : $25 + 25 = 50$, puis 75. Étape 4 : l'abscisse est 75, celle du point M.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur cette droite de pas 25, le point d'abscisse 60 se place entre 50 et ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 : 50 est la graduation voisine à gauche. Étape 2 : le pas est 25. Étape 3 : $50 + 25 = 75$. Étape 4 : 60 est entre 50 et 75.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    },
+                    {
+                      "content": "60",
+                      "correct": false
+                    },
+                    {
+                      "content": "80",
+                      "correct": false
+                    },
+                    {
+                      "content": "100",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : entre 0 et 100 inclus, cette droite a 5 graduations.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : il y a 4 intervalles. Étape 2 : il y a une graduation de plus que d'intervalles, soit 5. Étape 3 : 0, 25, 50, 75, 100. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'intervalles y a-t-il entre 0 et 100 sur cette droite de pas 25 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : la différence est $100 - 0 = 100$. Étape 2 : chaque intervalle vaut 25. Étape 3 : $100 \\div 25 = 4$. On vérifie en comptant : 0, 25, 50, 75, 100.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une commerçante achète 6 cageots de tomates à 4 250 F chacun, puis revend le tout 30 000 F.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule la dépense, puis compare-la à la recette.",
+              "questions": [
+                {
+                  "content": "Combien la commerçante dépense-t-elle pour 6 cageots à 4 250 F ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : 6 cageots au même prix, c'est une multiplication. Étape 2 : $6 \\times 4\\,000 = 24\\,000$, le résultat sera un peu plus grand. Étape 3 : $6 \\times 4\\,250 = 6 \\times 4\\,000 + 6 \\times 250 = 24\\,000 + 1\\,500 = 25\\,500$. Étape 4 : $4\\,250 + 4\\,250 + 4\\,250 = 12\\,750$ et $12\\,750 \\times 2 = 25\\,500$. Elle dépense 25 500 F.",
+                  "answers": [
+                    {
+                      "content": "25500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Elle revend le tout 30 000 F après avoir dépensé 25 500 F. Quel est son gain ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 : on cherche un écart, c'est une soustraction. Étape 2 : $30\\,000 - 25\\,500$ est proche de 5 000. Étape 3 : $30\\,000 - 25\\,500 = 4\\,500$. Étape 4 : $4\\,500 + 25\\,500 = 30\\,000$. Son gain est de 4 500 F.",
+                  "answers": [
+                    {
+                      "content": "4500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F"
+                },
+                {
+                  "content": "Quel est l'ordre de grandeur de 6 × 4 250 si on arrondit 4 250 au millier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : 6 paquets égaux, c'est une multiplication. Étape 2 : 4 250 arrondi au millier donne 4 000 (centaines 2). Étape 3 : $6 \\times 4\\,000 = 24\\,000$. Étape 4 : le résultat exact, 25 500, est proche. Répondre 2 400 se trompe d'un rang.",
+                  "answers": [
+                    {
+                      "content": "24 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "25 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 400",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 000",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer le gain, on fait une ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 : le gain est l'écart entre la recette et la dépense. Étape 2 : un écart se calcule par une soustraction. Étape 3 : $30\\,000 - 25\\,500$. Une addition donnerait un total.",
+                  "answers": [
+                    {
+                      "content": "soustraction",
+                      "correct": true
+                    },
+                    {
+                      "content": "addition",
+                      "correct": false
+                    },
+                    {
+                      "content": "multiplication",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : la commerçante a perdu de l'argent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 : la recette est 30 000 F et la dépense 25 500 F. Étape 2 : 30 000 a 5 chiffres comme 25 500, on compare le premier chiffre : 3 contre 2. Étape 3 : $30\\,000 > 25\\,500$. La recette dépasse la dépense, la commerçante a gagné 4 500 F.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

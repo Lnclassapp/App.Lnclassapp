@@ -1,0 +1,3422 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Commande d'un circuit électrique",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "circuit-interrupteur-ferme",
+          "kind": "diagram",
+          "description": "Un circuit fermé avec un interrupteur, dessiné en boucle. La pile est reliée à l'interrupteur, l'interrupteur à la lampe, puis la lampe revient à la pile. L'interrupteur est fermé : le chemin est complet, sans aucune coupure, et la lampe brille. Les couleurs distinguent le générateur, le récepteur, les fils et l'interrupteur.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile",
+                "category": 1
+              },
+              {
+                "id": "fil1",
+                "label": "Fil 1",
+                "category": 3
+              },
+              {
+                "id": "inter",
+                "label": "Interrupteur fermé",
+                "category": 4
+              },
+              {
+                "id": "fil2",
+                "label": "Fil 2",
+                "category": 3
+              },
+              {
+                "id": "lampe",
+                "label": "Lampe",
+                "category": 2
+              },
+              {
+                "id": "fil3",
+                "label": "Fil 3",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "fil1"
+              },
+              {
+                "from": "fil1",
+                "to": "inter"
+              },
+              {
+                "from": "inter",
+                "to": "fil2"
+              },
+              {
+                "from": "fil2",
+                "to": "lampe"
+              },
+              {
+                "from": "lampe",
+                "to": "fil3"
+              },
+              {
+                "from": "fil3",
+                "to": "pile"
+              }
+            ],
+            "legend": [
+              "Générateur",
+              "Récepteur",
+              "Fil de connexion",
+              "Interrupteur"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "circuit-interrupteur-ouvert",
+          "kind": "diagram",
+          "description": "Un circuit ouvert par un interrupteur. La pile est reliée par un premier fil à l'interrupteur, qui est ouvert. De l'autre côté, la lampe est reliée par un fil à la pile. Les flèches servent seulement à lire le schéma. Ce sont des boîtes de texte, pas des symboles électriques. Il n'y a aucune flèche entre l'interrupteur ouvert et la lampe : le chemin est coupé à cet endroit, donc la lampe reste éteinte.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile",
+                "category": 1
+              },
+              {
+                "id": "fil1",
+                "label": "Fil 1",
+                "category": 3
+              },
+              {
+                "id": "inter",
+                "label": "Interrupteur ouvert",
+                "category": 4
+              },
+              {
+                "id": "lampe",
+                "label": "Lampe",
+                "category": 2
+              },
+              {
+                "id": "fil3",
+                "label": "Fil 3 vers la pile",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "fil1"
+              },
+              {
+                "from": "fil1",
+                "to": "inter"
+              },
+              {
+                "from": "lampe",
+                "to": "fil3"
+              },
+              {
+                "from": "fil3",
+                "to": "pile"
+              }
+            ],
+            "legend": [
+              "Générateur",
+              "Récepteur",
+              "Fil de connexion",
+              "Interrupteur"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "circuit-deux-recepteurs",
+          "kind": "diagram",
+          "description": "Une seule boucle fermée qui contient une pile, un interrupteur, une lampe et un moteur, reliés les uns à la suite des autres par des fils. Le chemin du courant passe par chaque élément avant de revenir à la pile : un seul interrupteur commande donc la lampe et le moteur en même temps.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile",
+                "category": 1
+              },
+              {
+                "id": "inter",
+                "label": "Interrupteur",
+                "category": 4
+              },
+              {
+                "id": "lampe",
+                "label": "Lampe",
+                "category": 2
+              },
+              {
+                "id": "moteur",
+                "label": "Moteur",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "inter"
+              },
+              {
+                "from": "inter",
+                "to": "lampe"
+              },
+              {
+                "from": "lampe",
+                "to": "moteur"
+              },
+              {
+                "from": "moteur",
+                "to": "pile"
+              }
+            ],
+            "legend": [
+              "Générateur",
+              "Récepteur",
+              "Fil de connexion",
+              "Interrupteur"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un interrupteur ouvert ou fermé",
+          "remember": "Un **interrupteur** sert à **ouvrir** ou à **fermer** un circuit quand on le veut. Quand il est **fermé**, il laisse le chemin complet : le circuit est fermé et la lampe brille. Quand il est **ouvert**, il coupe le chemin : le circuit est ouvert et la lampe reste éteinte. Sur un schéma, son **symbole** montre deux bornes reliées par un petit levier : levier posé sur la deuxième borne = interrupteur fermé ; levier relevé, qui ne touche pas la deuxième borne = interrupteur ouvert. Un interrupteur fermé ne suffit pas si le circuit a une autre coupure (fil débranché, ampoule grillée).",
+          "method": [
+            "Repérer l'interrupteur dans le montage.",
+            "Regarder la position de l'interrupteur : fermé (le chemin est complet à cet endroit) ou ouvert (le chemin est coupé).",
+            "Chercher s'il existe une autre coupure sur le chemin du courant.",
+            "Conclure : circuit fermé et récepteur en marche, ou circuit ouvert et récepteur arrêté."
+          ],
+          "example": {
+            "statement": "Aminata monte un circuit avec une pile, un interrupteur, une lampe et trois fils bien fixés. Le levier de l'interrupteur est relevé. La lampe brille-t-elle ?",
+            "steps": [
+              "Repérer : le montage contient une pile, un interrupteur, une lampe et trois fils.",
+              "Regarder : le levier est relevé et ne touche pas la deuxième borne, donc l'interrupteur est ouvert.",
+              "Chercher : les fils sont bien fixés et l'ampoule est bien vissée, mais l'interrupteur ouvert est déjà une coupure. Une seule coupure suffit.",
+              "Conclure : le circuit est ouvert, donc la lampe reste éteinte."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un interrupteur « ouvert » laisse passer le courant, comme une porte ouverte laisse passer les gens. C'est l'inverse : un interrupteur ouvert coupe le chemin. Contre-exemple : interrupteur ouvert, lampe éteinte ; interrupteur fermé, chemin complet, lampe allumée. Retiens : ouvert = coupé, fermé = chemin complet. Et un interrupteur fermé ne garantit rien si l'ampoule est grillée : cherche toujours une autre coupure.",
+          "figure": "circuit-interrupteur-ouvert",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un interrupteur ouvert ou fermé.",
+            "questions": [
+              {
+                "content": "Un interrupteur dont le levier est posé sur ses deux bornes est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer l'interrupteur. Étape 2 — Regarder sa position : le levier posé sur les deux bornes laisse le chemin complet, l'interrupteur est fermé. Un interrupteur n'est pas « grillé » : c'est une ampoule qui peut l'être.",
+                "answers": [
+                  {
+                    "content": "fermé",
+                    "correct": true
+                  },
+                  {
+                    "content": "ouvert",
+                    "correct": false
+                  },
+                  {
+                    "content": "grillé",
+                    "correct": false
+                  }
+                ],
+                "hint": "Levier posé : le chemin est-il complet ou coupé ?"
+              },
+              {
+                "content": "Quand l'interrupteur est ouvert, la lampe du circuit brille.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Regarder : un interrupteur ouvert coupe le chemin. Étape 4 — Conclure : le circuit est ouvert, la lampe reste éteinte. Elle ne brille pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ouvert veut dire coupé."
+              },
+              {
+                "content": "Dans le couloir de Koffi, la lampe est éteinte. L'interrupteur est fermé et tous les fils sont bien fixés. Quelle est la cause la plus probable ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Regarder : l'interrupteur est fermé. Étape 3 — Chercher une autre coupure : les fils sont bien fixés, il reste l'ampoule. Une ampoule grillée a son filament coupé : c'est elle la coupure. Dire que le circuit est fermé est faux, car la lampe devrait alors briller.",
+                "answers": [
+                  {
+                    "content": "L'ampoule est grillée",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'interrupteur est ouvert",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le circuit est fermé, donc c'est normal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les fils sont trop longs",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'interrupteur est fermé : cherche une autre coupure."
+              },
+              {
+                "content": "Un interrupteur ___ coupe le chemin du courant.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Regarder la position : un interrupteur ouvert coupe le chemin. Étape 4 — Conclure : le circuit est ouvert et le récepteur s'arrête.",
+                "answers": [
+                  {
+                    "content": "ouvert",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est le contraire de fermé."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire la position d'un interrupteur",
+              "statement": "Dans cet exercice, tu lis la position d'un interrupteur avec la méthode de la fiche : repérer, regarder, chercher une autre coupure, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le rôle d'un interrupteur dans un circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'interrupteur. Étape 2 — Regarder sa position : fermé, il laisse passer le courant ; ouvert, il le coupe. Son rôle est donc d'ouvrir ou de fermer le circuit. Fournir l'énergie est le rôle du générateur, et l'utiliser celui du récepteur.",
+                  "answers": [
+                    {
+                      "content": "Ouvrir ou fermer le circuit quand on le veut",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fournir l'énergie électrique au circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Utiliser l'énergie pour éclairer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer les fils de connexion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment est le levier dans le symbole d'un interrupteur ouvert ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Regarder la position : le levier relevé laisse un vide entre les bornes, c'est un interrupteur ouvert. Le levier posé sur les deux bornes est le symbole de l'interrupteur fermé. Le cercle avec une croix est le symbole de la lampe.",
+                  "answers": [
+                    {
+                      "content": "Relevé, il ne touche pas la deuxième borne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Posé sur les deux bornes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacé par un cercle traversé d'une croix",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de levier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur fermé permet au courant de passer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Regarder : un interrupteur fermé laisse le chemin complet. Étape 4 — Conclure : s'il n'y a pas d'autre coupure, le circuit est fermé et le courant passe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez Yao, quatre lampes sont commandées chacune par son propre interrupteur, dans quatre circuits séparés. Trois interrupteurs sont fermés, un est ouvert, et les ampoules sont en bon état. Combien de lampes brillent ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Regarder la position de chaque interrupteur : 3 fermés, 1 ouvert. Étape 3 — Chercher une autre coupure : les ampoules sont en bon état, il n'y en a pas. Étape 4 — Conclure : 3 circuits sont fermés, donc 3 lampes brillent. La lampe du circuit ouvert reste éteinte.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "lampes"
+                },
+                {
+                  "content": "Un interrupteur ouvert laisse passer le courant, comme une porte ouverte laisse passer les gens.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Regarder : l'interrupteur ouvert coupe le chemin du courant. Étape 4 — Conclure : le circuit est ouvert. La comparaison avec la porte est trompeuse : ouvert veut dire coupé, fermé veut dire chemin complet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Ouvert = chemin coupé. Fermé = chemin complet."
+            },
+            {
+              "title": "Interrupteurs et lampes de la maison",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les interrupteurs ouverts et fermés, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans un circuit avec un interrupteur, quelles situations donnent une lampe éteinte ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Regarder : un interrupteur ouvert est une coupure. Étape 3 — Chercher une autre coupure : une ampoule grillée a son filament coupé. Dans ces deux cas, le circuit est ouvert. Avec un interrupteur fermé, des fils bien fixés et une ampoule en bon état, le chemin est complet.",
+                  "answers": [
+                    {
+                      "content": "L'interrupteur est ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule est grillée",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur est fermé et tout est en bon état",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fils sont bien fixés aux bornes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on appuie sur l'interrupteur de la chambre et que la lampe s'allume, l'interrupteur est maintenant ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Regarder : la lampe s'allume, donc le chemin est complet. Étape 4 — Conclure : l'interrupteur est fermé. S'il était ouvert, le circuit serait coupé et la lampe resterait éteinte.",
+                  "answers": [
+                    {
+                      "content": "fermé",
+                      "correct": true
+                    },
+                    {
+                      "content": "ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "débranché",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si une lampe va briller.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer l'interrupteur. Étape 2 — Regarder sa position. Étape 3 — Chercher une autre coupure. Étape 4 — Conclure. Conclure avant de chercher une autre coupure est une erreur : un interrupteur fermé ne suffit pas si l'ampoule est grillée.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'interrupteur dans le montage."
+                    },
+                    {
+                      "content": "Regarder sa position : fermé ou ouvert."
+                    },
+                    {
+                      "content": "Chercher une autre coupure sur le chemin."
+                    },
+                    {
+                      "content": "Conclure sur le circuit et sur la lampe."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur qui laisse passer le courant est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Regarder la position : seul un interrupteur fermé laisse le chemin complet. Étape 4 — Conclure : le circuit est fermé et le courant passe. Un interrupteur ouvert, lui, coupe le chemin.",
+                  "answers": [
+                    {
+                      "content": "fermé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Regarder la position de l'interrupteur. Étape 3 — Chercher une autre coupure. Étape 4 — Conclure : fermé sans autre coupure, la lampe brille ; ouvert, elle est éteinte ; fermé avec une ampoule grillée, la coupure est dans l'ampoule et la lampe est éteinte.",
+                  "answers": [
+                    {
+                      "content": "Interrupteur fermé, aucune autre coupure",
+                      "match": "Le circuit est fermé et la lampe brille"
+                    },
+                    {
+                      "content": "Interrupteur ouvert",
+                      "match": "Le circuit est coupé et la lampe est éteinte"
+                    },
+                    {
+                      "content": "Interrupteur fermé, ampoule grillée",
+                      "match": "Il reste une coupure, la lampe est éteinte"
+                    }
+                  ]
+                },
+                {
+                  "content": "Aminata a 5 interrupteurs dans 5 circuits séparés. Deux sont fermés et les autres sont ouverts. Combien d'interrupteurs sont ouverts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : il y a 5 interrupteurs. Étape 2 — Regarder la position de chacun : 2 sont fermés. Étape 4 — Conclure : 5 − 2 = 3 interrupteurs sont ouverts.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour une lampe éteinte, cherche d'abord l'interrupteur, puis une autre coupure."
+            }
+          ]
+        },
+        {
+          "name": "Placer un interrupteur dans un circuit",
+          "remember": "Pour commander un récepteur, on place l'**interrupteur** **dans la boucle**, sur le chemin du courant. On le branche par ses **deux bornes** : une borne vers un élément, l'autre vers l'élément suivant. On peut le placer **n'importe où** sur la boucle : sur le fil qui va de la pile à la lampe, ou sur le fil qui revient de la lampe à la pile. L'effet est le même : ouvert, il coupe la boucle et la lampe s'éteint ; fermé, il la complète. Sur un **schéma**, on dessine le symbole normalisé de l'interrupteur et des fils droits, tracés à la règle.",
+          "method": [
+            "Dessiner la boucle du circuit : pile, récepteur et fils.",
+            "Choisir un endroit sur un fil de la boucle pour placer l'interrupteur.",
+            "Couper le fil à cet endroit et brancher l'interrupteur par ses deux bornes.",
+            "Vérifier en suivant le chemin : il passe par l'interrupteur, et l'interrupteur ouvert coupe la boucle."
+          ],
+          "example": {
+            "statement": "Koffi veut commander avec un interrupteur la lampe d'une maquette de sa chambre. Il a une pile, une lampe, un interrupteur et des fils. Comment les branche-t-il ?",
+            "steps": [
+              "Dessiner : la pile et la lampe sont reliées en boucle par deux fils.",
+              "Choisir : il choisit le fil qui va de la pile à la lampe.",
+              "Couper et brancher : il coupe ce fil en deux et fixe les deux bouts aux deux bornes de l'interrupteur. Le circuit a maintenant 3 fils.",
+              "Vérifier : le chemin va de la pile à l'interrupteur, puis à la lampe, puis revient à la pile. Interrupteur ouvert, la boucle est coupée ; fermé, la lampe brille."
+            ]
+          },
+          "pitfall": "Ne pas laisser l'interrupteur hors de la boucle, ni le brancher par une seule borne. Contre-exemple : la lampe de Koffi est reliée à la pile par deux fils, et l'interrupteur n'a qu'une borne reliée à la pile, l'autre reste libre. Le chemin de la pile à la lampe ne passe pas par l'interrupteur : ouvert ou fermé, la lampe brille toujours. Un interrupteur ne commande que s'il est sur le chemin du courant.",
+          "figure": "circuit-interrupteur-ferme",
+          "practice": {
+            "statement": "Tu t'entraînes à placer un interrupteur dans un circuit.",
+            "questions": [
+              {
+                "content": "Pour commander une lampe, l'interrupteur se place ___ du courant.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Choisir un endroit sur un fil de la boucle. Étape 3 — Brancher l'interrupteur par ses deux bornes : il est alors sur le chemin du courant. En dehors du chemin ou sans fil, il ne commande rien.",
+                "answers": [
+                  {
+                    "content": "sur le chemin",
+                    "correct": true
+                  },
+                  {
+                    "content": "en dehors du chemin",
+                    "correct": false
+                  },
+                  {
+                    "content": "à côté de la pile, sans fil",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'interrupteur doit faire partie de la boucle."
+              },
+              {
+                "content": "L'interrupteur doit toucher la pile pour commander la lampe.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Choisir : on peut placer l'interrupteur n'importe où sur la boucle. Étape 4 — Vérifier : s'il est sur le chemin, il commande la lampe, même loin de la pile.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Où peut-on le placer sur la boucle ?"
+              },
+              {
+                "content": "Une pile, une lampe et un interrupteur sont reliés en boucle. Combien de fils faut-il pour relier ces trois éléments ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Dessiner la boucle : pile, interrupteur, lampe, retour à la pile. Étape 3 — Brancher par les deux bornes : un fil entre chaque paire d'éléments qui se suivent. Il y a 3 éléments en boucle, donc 3 fils.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "unit": "fils",
+                "hint": "Un fil entre deux éléments qui se suivent."
+              },
+              {
+                "content": "Un interrupteur n'a qu'une borne reliée à la pile, l'autre borne reste libre. La lampe est reliée à la pile par deux fils. Que peut-on dire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Brancher par les deux bornes : ici ce n'est pas le cas. Étape 4 — Vérifier : le chemin de la pile à la lampe ne passe pas par l'interrupteur, donc la lampe brille et l'interrupteur ne change rien. La lampe n'est pas éteinte, car la boucle pile et lampe est complète.",
+                "answers": [
+                  {
+                    "content": "La lampe brille et l'interrupteur ne la commande pas",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lampe est éteinte car l'interrupteur est ouvert",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'interrupteur commande la lampe",
+                    "correct": false
+                  },
+                  {
+                    "content": "La pile ne fonctionne plus",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le chemin passe-t-il par l'interrupteur ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Brancher l'interrupteur au bon endroit",
+              "statement": "Dans cet exercice, tu places un interrupteur dans un circuit avec la méthode de la fiche : dessiner la boucle, choisir un endroit, brancher par les deux bornes, vérifier.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Aminata place un interrupteur sur le fil qui ramène le courant de la lampe vers la pile. Peut-il commander la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Choisir un endroit : on peut placer l'interrupteur n'importe où sur la boucle. Étape 3 — Brancher par les deux bornes : il est alors sur le chemin. Étape 4 — Vérifier : ouvert, il coupe la boucle et la lampe s'éteint, comme s'il était de l'autre côté.",
+                  "answers": [
+                    {
+                      "content": "Oui, car il est dans la boucle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, il doit être sur le fil qui part de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, un interrupteur ne se place jamais près de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, mais seulement s'il touche l'ampoule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur placé n'importe où sur la boucle commande la lampe de la même façon.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Choisir un endroit : la boucle est un seul chemin. Étape 4 — Vérifier : où qu'il soit sur ce chemin, l'interrupteur ouvert coupe la boucle entière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour relier en boucle 1 pile, 1 lampe, 1 moteur et 1 interrupteur, combien de fils faut-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Dessiner la boucle : 4 éléments en boucle. Étape 3 — Brancher par les deux bornes : il faut un fil entre chaque élément et le suivant, soit 4 fils.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Un interrupteur dont une borne reste libre commande la lampe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Brancher par les deux bornes : une borne libre n'est reliée à rien, le chemin ne passe pas par l'interrupteur. Étape 4 — Vérifier : ouvert ou fermé, il ne change rien. C'est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur un schéma, les fils se tracent à la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Dessiner la boucle : sur un schéma normalisé, les fils sont des traits droits, tracés à la règle, avec des angles droits. Des courbes à main levée rendent le schéma difficile à lire.",
+                  "answers": [
+                    {
+                      "content": "règle",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "L'interrupteur doit être sur le chemin, branché par ses deux bornes."
+            },
+            {
+              "title": "Le schéma d'une lampe de couloir",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la place de l'interrupteur, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque branchement à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Brancher par les deux bornes : un interrupteur sur la boucle commande la lampe. Une seule borne reliée ne le met pas sur le chemin. Étape 4 — Vérifier : ouvert sur la boucle, il coupe le chemin et la lampe est éteinte.",
+                  "answers": [
+                    {
+                      "content": "Interrupteur sur la boucle, branché par ses deux bornes",
+                      "match": "Il commande la lampe"
+                    },
+                    {
+                      "content": "Interrupteur relié par une seule borne",
+                      "match": "Il ne commande rien"
+                    },
+                    {
+                      "content": "Interrupteur ouvert sur la boucle",
+                      "match": "La lampe est éteinte"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour placer un interrupteur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Dessiner la boucle. Étape 2 — Choisir un endroit. Étape 3 — Couper le fil et brancher l'interrupteur. Étape 4 — Vérifier. On ne peut pas brancher avant d'avoir dessiné la boucle.",
+                  "answers": [
+                    {
+                      "content": "Dessiner la boucle : pile, récepteur et fils."
+                    },
+                    {
+                      "content": "Choisir un endroit sur un fil de la boucle."
+                    },
+                    {
+                      "content": "Couper le fil et brancher l'interrupteur par ses deux bornes."
+                    },
+                    {
+                      "content": "Vérifier que le chemin passe par l'interrupteur."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels branchements permettent de commander la lampe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Brancher par les deux bornes : les deux premiers branchements mettent l'interrupteur sur la boucle, sur le fil aller ou sur le fil retour. Étape 4 — Vérifier : les deux autres laissent le chemin sans passer par l'interrupteur, qui ne commande rien.",
+                  "answers": [
+                    {
+                      "content": "Interrupteur sur le fil aller, relié par ses deux bornes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Interrupteur sur le fil retour, relié par ses deux bornes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Interrupteur relié à la pile par une seule borne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Interrupteur posé à côté du montage, sans fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur commande une lampe quand il est branché par ses ___ bornes.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Brancher par les deux bornes : il faut que le courant entre par une borne et sorte par l'autre. Avec une seule borne ou aucune, le chemin ne passe pas par l'interrupteur.",
+                  "answers": [
+                    {
+                      "content": "deux",
+                      "correct": true
+                    },
+                    {
+                      "content": "une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur ouvert placé sur la boucle coupe le ___ du courant.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Vérifier : l'interrupteur ouvert coupe la boucle, donc le chemin du courant. Le circuit est alors ouvert et la lampe s'éteint.",
+                  "answers": [
+                    {
+                      "content": "chemin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un circuit pile et lampe a 2 fils. Koffi coupe l'un des fils en deux pour y brancher un interrupteur, chaque bout étant fixé à une borne de l'interrupteur. Combien de fils compte maintenant le circuit ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Dessiner la boucle : au départ 2 fils. Étape 3 — Couper le fil et brancher : le fil coupé donne 2 morceaux, plus l'autre fil, soit 2 + 1 = 3 fils. On retrouve bien un fil entre chaque élément : pile, interrupteur, lampe.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                }
+              ],
+              "hint": "L'interrupteur remplace un morceau de fil : il se branche à la place."
+            }
+          ]
+        },
+        {
+          "name": "Commander plusieurs récepteurs avec un interrupteur",
+          "remember": "Quand plusieurs récepteurs sont dans **une seule boucle**, le courant suit **un seul chemin** : il passe par chacun d'eux. Un seul **interrupteur** les commande alors **tous à la fois**. Fermé, sans autre coupure, **tous** fonctionnent. Ouvert, **tous** s'arrêtent. Il en est de même si une ampoule de la boucle est grillée ou dévissée : la coupure arrête tous les récepteurs. Avec **deux interrupteurs** dans la même boucle, il faut que les deux soient fermés pour que les récepteurs fonctionnent.",
+          "method": [
+            "Repérer l'interrupteur et tous les récepteurs de la boucle.",
+            "Suivre le chemin du courant : pile, interrupteur, puis chaque récepteur, retour à la pile.",
+            "Regarder la position de l'interrupteur et chercher toute autre coupure sur ce chemin.",
+            "Conclure pour chaque récepteur : tous fonctionnent, ou tous sont arrêtés."
+          ],
+          "example": {
+            "statement": "Dans la maquette de la chambre de Fatou, une pile, un interrupteur, une lampe et le moteur d'un petit ventilateur sont reliés en une seule boucle par 4 fils bien fixés. On ferme l'interrupteur, puis on l'ouvre. Que font la lampe et le ventilateur ?",
+            "steps": [
+              "Repérer : il y a 1 interrupteur et 2 récepteurs, la lampe et le moteur.",
+              "Suivre : le chemin va de la pile à l'interrupteur, puis à la lampe, puis au moteur, puis revient à la pile. Il n'y a qu'un seul chemin.",
+              "Regarder : interrupteur fermé, aucune autre coupure, le chemin est complet. Interrupteur ouvert, le chemin est coupé.",
+              "Conclure : interrupteur fermé, la lampe brille et le ventilateur tourne. Interrupteur ouvert, les deux s'arrêtent en même temps."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'interrupteur éteint seulement la lampe et laisse tourner le moteur. Dans une boucle unique, le même chemin passe par tous les récepteurs : une coupure les arrête tous. Contre-exemple : lampe et moteur dans la boucle, interrupteur ouvert, les deux sont arrêtés. Même chose si l'ampoule est grillée : la boucle est coupée et le moteur s'arrête aussi.",
+          "figure": "circuit-deux-recepteurs",
+          "practice": {
+            "statement": "Tu t'entraînes à commander plusieurs récepteurs avec un interrupteur.",
+            "questions": [
+              {
+                "content": "Dans une boucle avec une lampe et un moteur, ouvrir l'interrupteur arrête seulement la lampe.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Suivre le chemin : il passe par la lampe et par le moteur. Étape 3 — Regarder l'interrupteur : ouvert, il coupe ce chemin. Étape 4 — Conclure : les deux récepteurs s'arrêtent, pas seulement la lampe.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Il n'y a qu'un seul chemin."
+              },
+              {
+                "content": "Une boucle contient une pile, un interrupteur fermé, une lampe et une sonnerie, sans aucune coupure. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Suivre le chemin : pile, interrupteur, lampe, sonnerie, retour à la pile. Étape 3 — Regarder : interrupteur fermé et aucune autre coupure. Étape 4 — Conclure : les deux récepteurs fonctionnent en même temps.",
+                "answers": [
+                  {
+                    "content": "La lampe brille et la sonnerie sonne",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lampe brille mais la sonnerie reste muette",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sonnerie sonne mais la lampe reste éteinte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien ne fonctionne",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un seul chemin complet : tous les récepteurs en profitent."
+              },
+              {
+                "content": "Une boucle a 1 pile, 1 interrupteur fermé et 3 lampes en bon état, sans autre coupure. Combien de lampes brillent ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : 1 interrupteur et 3 récepteurs. Étape 3 — Regarder : interrupteur fermé, pas d'autre coupure. Étape 4 — Conclure : les 3 lampes brillent.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "unit": "lampes",
+                "hint": "Tous les récepteurs de la boucle fonctionnent ensemble."
+              },
+              {
+                "content": "Dans une boucle unique, si l'interrupteur est ouvert, ___ les récepteurs sont arrêtés.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Regarder l'interrupteur : ouvert, il coupe l'unique chemin. Étape 4 — Conclure : tous les récepteurs de la boucle sont arrêtés.",
+                "answers": [
+                  {
+                    "content": "tous",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pas un seul : combien ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Un interrupteur, deux récepteurs",
+              "statement": "Dans cet exercice, tu étudies une boucle avec plusieurs récepteurs avec la méthode de la fiche : repérer, suivre le chemin, regarder l'interrupteur, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans la chambre d'Aminata, une lampe et un ventilateur sont dans la même boucle avec un interrupteur. On ouvre l'interrupteur. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Suivre le chemin : il passe par la lampe et par le ventilateur. Étape 3 — Regarder l'interrupteur : ouvert, il coupe ce chemin unique. Étape 4 — Conclure : les deux récepteurs s'arrêtent. Éteindre un seul des deux est impossible avec ce montage.",
+                  "answers": [
+                    {
+                      "content": "La lampe et le ventilateur s'arrêtent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seule la lampe s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul le ventilateur s'arrête",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une boucle unique, une ampoule grillée arrête aussi le ventilateur de cette boucle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Chercher une autre coupure : le filament d'une ampoule grillée est coupé. Étape 4 — Conclure : le chemin unique est coupé, donc le ventilateur s'arrête aussi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boucle contient 1 pile, 1 interrupteur fermé, 2 lampes et 1 moteur, tous en bon état et sans autre coupure. Combien de récepteurs fonctionnent ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 2 lampes + 1 moteur = 3 récepteurs. Étape 3 — Regarder : interrupteur fermé, aucune autre coupure. Étape 4 — Conclure : les 3 récepteurs fonctionnent.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "récepteurs"
+                },
+                {
+                  "content": "Avec deux interrupteurs dans la même boucle, il suffit qu'un seul soit ouvert pour que la lampe soit éteinte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Regarder les interrupteurs : chacun est sur le chemin unique. Un interrupteur ouvert coupe ce chemin. Étape 4 — Conclure : la lampe est éteinte. Pour qu'elle brille, il faut que les deux soient fermés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'interrupteur est fermé et qu'il n'y a aucune autre coupure, ___ les récepteurs de la boucle fonctionnent.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Regarder : interrupteur fermé et aucune autre coupure, le chemin est complet. Étape 4 — Conclure : tous les récepteurs de la boucle fonctionnent en même temps.",
+                  "answers": [
+                    {
+                      "content": "tous",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un seul chemin : une coupure arrête tous les récepteurs."
+            },
+            {
+              "title": "Le ventilateur et la lampe de la chambre",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la commande de plusieurs récepteurs, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une boucle contient un interrupteur, une lampe et un ventilateur. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Suivre le chemin : il passe par la lampe et le ventilateur. Étape 3 — Regarder l'interrupteur et chercher une autre coupure : ouvert, il arrête les deux. Une lampe grillée coupe aussi le chemin. Étape 4 — Conclure : on ne peut ni éteindre la lampe seule, ni garder le ventilateur en marche avec une lampe grillée.",
+                  "answers": [
+                    {
+                      "content": "Un seul interrupteur commande les deux récepteurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Interrupteur ouvert, le ventilateur s'arrête",
+                      "correct": true
+                    },
+                    {
+                      "content": "On peut éteindre la lampe seule avec cet interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ventilateur continue de tourner si la lampe est grillée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier une boucle à plusieurs récepteurs.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Suivre le chemin. Étape 3 — Regarder l'interrupteur et chercher une coupure. Étape 4 — Conclure. On suit toujours cet ordre pour ne rien oublier.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'interrupteur et tous les récepteurs."
+                    },
+                    {
+                      "content": "Suivre le chemin du courant dans la boucle."
+                    },
+                    {
+                      "content": "Regarder l'interrupteur et chercher une autre coupure."
+                    },
+                    {
+                      "content": "Conclure pour chaque récepteur."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une boucle unique avec une lampe et un ventilateur, une ampoule dévissée rend le circuit ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Chercher une autre coupure : une ampoule dévissée ne touche plus le plot de contact de la douille, le chemin est coupé. Étape 4 — Conclure : le circuit est ouvert et tous les récepteurs s'arrêtent.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus puissant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à sa conséquence dans une boucle unique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Regarder l'interrupteur et chercher une autre coupure. Étape 4 — Conclure : sans coupure, tous les récepteurs fonctionnent ; avec une coupure, à l'interrupteur ou dans une ampoule, tous s'arrêtent.",
+                  "answers": [
+                    {
+                      "content": "Interrupteur fermé, aucune coupure",
+                      "match": "Tous les récepteurs fonctionnent"
+                    },
+                    {
+                      "content": "Interrupteur ouvert",
+                      "match": "Tout s'arrête, car le chemin est coupé à l'interrupteur"
+                    },
+                    {
+                      "content": "Ampoule grillée dans la boucle",
+                      "match": "Tout s'arrête, car le chemin est coupé dans l'ampoule"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boucle contient 1 pile, 3 interrupteurs et 2 lampes. Deux interrupteurs sont fermés, un est ouvert. Combien de lampes brillent ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Suivre le chemin : il passe par les 3 interrupteurs. Étape 3 — Regarder : un interrupteur ouvert suffit à couper le chemin. Étape 4 — Conclure : aucune lampe ne brille, soit 0. Les deux interrupteurs fermés ne compensent pas l'interrupteur ouvert.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "lampes"
+                },
+                {
+                  "content": "Pour que les récepteurs d'une boucle fonctionnent, tous les interrupteurs de la boucle doivent être ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Regarder les interrupteurs : chacun est sur le chemin unique. Étape 4 — Conclure : un seul ouvert coupe le chemin, donc il faut que tous soient fermés.",
+                  "answers": [
+                    {
+                      "content": "fermés",
+                      "correct": true
+                    },
+                    {
+                      "content": "fermé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Imagine un seul chemin : il faut qu'il soit complet partout."
+            }
+          ]
+        },
+        {
+          "name": "Utiliser un bouton-poussoir",
+          "remember": "Un **bouton-poussoir** est un interrupteur qu'on commande en **appuyant**. Il est **fermé seulement pendant l'appui**. Dès qu'on relâche le bouton, il **revient seul** en position **ouverte** et le circuit s'ouvre. Un interrupteur ordinaire à levier, lui, **reste** dans la position où on l'a laissé. La sonnette d'une maison est un exemple : la sonnerie sonne tant qu'on appuie, puis se tait quand on relâche.",
+          "method": [
+            "Repérer le bouton-poussoir dans le montage.",
+            "Regarder l'action : on appuie sur le bouton, ou on le relâche.",
+            "Déterminer la position : fermé pendant l'appui, ouvert dès qu'on relâche.",
+            "Conclure : le récepteur fonctionne seulement tant qu'on appuie."
+          ],
+          "example": {
+            "statement": "Mariam appuie pendant 3 secondes sur le bouton de la sonnette de la maison de sa tante, puis le relâche. Le circuit contient une pile, un bouton-poussoir, une sonnerie et des fils. Que fait la sonnerie ?",
+            "steps": [
+              "Repérer : le montage contient une pile, un bouton-poussoir, une sonnerie et des fils.",
+              "Regarder : Mariam appuie pendant 3 secondes, puis elle relâche le bouton.",
+              "Déterminer : pendant les 3 secondes d'appui, le bouton-poussoir est fermé. Dès qu'elle relâche, il revient seul en position ouverte.",
+              "Conclure : la sonnerie sonne pendant 3 secondes, puis elle se tait."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un bouton-poussoir reste fermé après l'appui, comme un interrupteur à levier. Contre-exemple : on appuie 2 secondes sur la sonnette, la sonnerie sonne 2 secondes, puis elle s'arrête dès qu'on relâche, sans qu'on touche à rien d'autre. Un bouton-poussoir ne garde pas sa position : il revient seul en position ouverte. Pour un son continu, il faut garder le doigt appuyé.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser un bouton-poussoir.",
+            "questions": [
+              {
+                "content": "Tant qu'on appuie sur le bouton-poussoir de la sonnette, l'interrupteur est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Regarder l'action : on appuie. Étape 3 — Déterminer la position : fermé pendant l'appui. Étape 4 — Conclure : le circuit est fermé et la sonnerie sonne.",
+                "answers": [
+                  {
+                    "content": "fermé",
+                    "correct": true
+                  },
+                  {
+                    "content": "ouvert",
+                    "correct": false
+                  },
+                  {
+                    "content": "grillé",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pendant l'appui, le courant passe-t-il ?"
+              },
+              {
+                "content": "Dès qu'on relâche un bouton-poussoir, le circuit reste fermé.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Regarder l'action : on relâche. Étape 3 — Déterminer la position : le bouton revient seul en position ouverte. Étape 4 — Conclure : le circuit s'ouvre, il ne reste pas fermé.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le bouton revient seul."
+              },
+              {
+                "content": "Yao appuie 3 fois sur la sonnette. Chaque appui dure 2 secondes et il relâche entre deux appuis. Pendant combien de secondes au total le circuit est-il fermé ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Regarder l'action : 3 appuis de 2 secondes. Étape 3 — Déterminer la position : le circuit est fermé seulement pendant les appuis. Étape 4 — Conclure : 3 × 2 = 6 secondes.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "unit": "s",
+                "hint": "Compte seulement le temps d'appui."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Appuyer et relâcher la sonnette",
+              "statement": "Dans cet exercice, tu utilises un bouton-poussoir avec la méthode de la fiche : repérer le bouton, regarder l'action, déterminer la position, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Mariam relâche le bouton de la sonnette. Que fait la sonnerie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Regarder l'action : elle relâche. Étape 3 — Déterminer la position : le bouton-poussoir revient seul en position ouverte. Étape 4 — Conclure : le circuit est ouvert et la sonnerie s'arrête. Elle ne continue pas, car le bouton ne reste pas fermé.",
+                  "answers": [
+                    {
+                      "content": "Elle s'arrête",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle continue de sonner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle sonne plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se met à éclairer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur à levier reste dans la position où on l'a mis.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le type d'interrupteur : un interrupteur à levier garde sa position, contrairement au bouton-poussoir qui revient seul en position ouverte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la différence entre un bouton-poussoir et un interrupteur à levier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Déterminer la position : le bouton-poussoir est fermé seulement pendant l'appui, puis il revient seul en position ouverte. L'interrupteur à levier reste où on l'a laissé. Aucun des deux ne fournit d'énergie : c'est le rôle de la pile.",
+                  "answers": [
+                    {
+                      "content": "Le bouton-poussoir n'est fermé que pendant l'appui",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bouton-poussoir fournit de l'énergie",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur à levier n'ouvre jamais le circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucune différence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa appuie 4 fois sur la sonnette, chaque appui dure 1 seconde. Pendant combien de secondes au total la sonnerie sonne-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Regarder l'action : 4 appuis de 1 seconde. Étape 3 — Déterminer : le circuit est fermé seulement pendant les appuis. Étape 4 — Conclure : 4 × 1 = 4 secondes.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "s"
+                },
+                {
+                  "content": "Pour que la sonnerie sonne 10 secondes d'affilée, il faut garder le doigt appuyé pendant 10 secondes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déterminer la position : le bouton n'est fermé que pendant l'appui. Étape 4 — Conclure : pour 10 secondes de son continu, l'appui doit durer 10 secondes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le circuit n'est fermé que pendant l'appui."
+            },
+            {
+              "title": "La sonnette de la maison",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur le bouton-poussoir, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier un bouton-poussoir.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le bouton. Étape 2 — Regarder l'action. Étape 3 — Déterminer la position. Étape 4 — Conclure. On ne peut conclure sur la sonnerie qu'après avoir su si on appuie ou si on relâche.",
+                  "answers": [
+                    {
+                      "content": "Repérer le bouton-poussoir dans le montage."
+                    },
+                    {
+                      "content": "Regarder l'action : on appuie ou on relâche."
+                    },
+                    {
+                      "content": "Déterminer la position : fermé ou ouvert."
+                    },
+                    {
+                      "content": "Conclure sur le fonctionnement du récepteur."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases sont vraies pour un bouton-poussoir ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Déterminer la position : fermé pendant l'appui, ouvert dès le relâchement. Il ne reste donc pas fermé. Il ne fournit pas d'énergie : c'est un interrupteur, et le générateur est la pile.",
+                  "answers": [
+                    {
+                      "content": "Il ferme le circuit pendant l'appui",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il rouvre le circuit quand on le relâche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il reste fermé après l'appui",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fournit l'énergie à la sonnerie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand Mariam relâche le bouton de la sonnette, l'interrupteur devient ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Regarder l'action : elle relâche. Étape 3 — Déterminer la position : le bouton revient seul en position ouverte. Le circuit est coupé et la sonnerie se tait.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus fort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à sa conséquence.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Regarder l'action. Étape 3 — Déterminer la position : appui = fermé, relâchement = ouvert pour un bouton-poussoir. Un interrupteur à levier, lui, reste fermé tant qu'on ne le rouvre pas. Étape 4 — Conclure pour la sonnerie.",
+                  "answers": [
+                    {
+                      "content": "On appuie sur le bouton de la sonnette",
+                      "match": "Circuit fermé, la sonnerie sonne"
+                    },
+                    {
+                      "content": "On relâche le bouton de la sonnette",
+                      "match": "Circuit ouvert, la sonnerie se tait"
+                    },
+                    {
+                      "content": "Un interrupteur à levier est laissé fermé",
+                      "match": "La sonnerie continue de sonner"
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim appuie 5 secondes sur la sonnette, relâche pendant 3 secondes, puis appuie encore 2 secondes. Pendant combien de secondes la sonnerie sonne-t-elle au total ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Regarder l'action : un appui de 5 s, un relâchement de 3 s, un appui de 2 s. Étape 3 — Déterminer : le circuit est fermé seulement pendant les appuis. Étape 4 — Conclure : 5 + 2 = 7 secondes. Les 3 secondes de relâchement ne comptent pas.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "s"
+                },
+                {
+                  "content": "Un bouton-poussoir est un interrupteur qui revient seul en position ouverte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le bouton-poussoir est un interrupteur. Étape 3 — Déterminer la position : dès qu'on le relâche, il revient seul en position ouverte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compte seulement le temps où le doigt appuie."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La lampe du couloir de Koffi",
+          "statement": "Dans la maison de Koffi, une lampe éclaire le couloir. Pour comprendre son fonctionnement, Koffi monte une maquette à piles : une pile, un interrupteur, une lampe et des fils, tous reliés en une seule boucle. Tu étudies la commande de la lampe.",
+          "exercise_type": "fixation",
+          "figure": "circuit-interrupteur-ferme",
+          "questions": [
+            {
+              "content": "Dans la maquette de Koffi, quel élément est le récepteur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer : la maquette contient une pile, un interrupteur, une lampe et des fils. 2. Identifier le générateur : la pile fournit l'énergie. 3. Identifier le récepteur : la lampe utilise l'énergie pour éclairer, c'est le récepteur. L'interrupteur commande le circuit mais n'utilise pas l'énergie pour éclairer.",
+              "answers": [
+                {
+                  "content": "La lampe",
+                  "correct": true
+                },
+                {
+                  "content": "La pile",
+                  "correct": false
+                },
+                {
+                  "content": "L'interrupteur",
+                  "correct": false
+                },
+                {
+                  "content": "Un fil",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi ferme l'interrupteur. Tous les fils sont bien fixés et l'ampoule est en bon état. La lampe ___.",
+              "question_type": "select",
+              "explanation": "Méthode : Étape 1 — Repérer l'interrupteur. Étape 2 — Regarder sa position : fermé, le chemin est complet. Étape 3 — Chercher une autre coupure : fils bien fixés, ampoule en bon état, il n'y en a pas. Étape 4 — Conclure : le circuit est fermé, la lampe brille.",
+              "answers": [
+                {
+                  "content": "brille",
+                  "correct": true
+                },
+                {
+                  "content": "reste éteinte",
+                  "correct": false
+                },
+                {
+                  "content": "est grillée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand Koffi relève le levier de l'interrupteur, le circuit reste fermé.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Regarder : le levier relevé ne touche pas la deuxième borne, l'interrupteur est ouvert. Étape 4 — Conclure : le chemin est coupé, le circuit est ouvert et la lampe s'éteint. Un levier relevé ne laisse pas passer le courant.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de fils faut-il pour relier en boucle la pile, l'interrupteur et la lampe de la maquette ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Dessiner la boucle : pile, interrupteur, lampe, retour à la pile. Étape 3 — Brancher l'interrupteur par ses deux bornes : un fil entre chaque élément et le suivant. Il y a 3 éléments en boucle, donc 3 fils.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "fils"
+            },
+            {
+              "content": "Koffi relie l'interrupteur à la pile par une seule borne ; l'autre borne reste libre. La lampe est reliée à la pile par deux fils. Que fait l'interrupteur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Brancher l'interrupteur par ses deux bornes : ici une borne est libre. Étape 4 — Vérifier le chemin : de la pile à la lampe, le courant ne passe pas par l'interrupteur. Ouvert ou fermé, il ne change rien : la lampe brille toujours. C'est l'erreur du piège : un interrupteur ne commande que s'il est sur le chemin.",
+              "answers": [
+                {
+                  "content": "Il ne commande pas la lampe",
+                  "correct": true
+                },
+                {
+                  "content": "Il commande la lampe quand il est ouvert",
+                  "correct": false
+                },
+                {
+                  "content": "Il éteint la pile",
+                  "correct": false
+                },
+                {
+                  "content": "Il fait briller la lampe plus fort",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour placer l'interrupteur dans la maquette.",
+              "question_type": "ordering",
+              "explanation": "Méthode : Étape 1 — Dessiner la boucle. Étape 2 — Choisir un endroit. Étape 3 — Couper le fil et brancher l'interrupteur. Étape 4 — Vérifier. Chaque étape prépare la suivante : on ne branche pas avant d'avoir dessiné la boucle.",
+              "answers": [
+                {
+                  "content": "Dessiner la boucle : pile, lampe et fils."
+                },
+                {
+                  "content": "Choisir un endroit sur un fil de la boucle."
+                },
+                {
+                  "content": "Couper le fil et brancher l'interrupteur par ses deux bornes."
+                },
+                {
+                  "content": "Vérifier que le chemin passe par l'interrupteur."
+                }
+              ]
+            }
+          ],
+          "hint": "Suis le chemin de la pile à la pile : passe-t-il par l'interrupteur ?"
+        },
+        {
+          "title": "Le ventilateur et la lampe de la chambre d'Aminata",
+          "statement": "Dans la chambre d'Aminata, une maquette comprend une pile, un interrupteur, une lampe et le moteur d'un petit ventilateur. Les 4 éléments sont reliés en une seule boucle par 4 fils. Tu étudies ce que commande l'interrupteur.",
+          "exercise_type": "fixation",
+          "figure": "circuit-deux-recepteurs",
+          "questions": [
+            {
+              "content": "Aminata ferme l'interrupteur. Tous les éléments sont en bon état et tous les fils sont bien fixés. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer l'interrupteur et les 2 récepteurs, la lampe et le moteur. Étape 2 — Suivre le chemin : pile, interrupteur, lampe, moteur, retour à la pile. Étape 3 — Regarder : interrupteur fermé, aucune autre coupure. Étape 4 — Conclure : les deux récepteurs fonctionnent ensemble.",
+              "answers": [
+                {
+                  "content": "La lampe brille et le ventilateur tourne",
+                  "correct": true
+                },
+                {
+                  "content": "La lampe brille mais le ventilateur reste arrêté",
+                  "correct": false
+                },
+                {
+                  "content": "Le ventilateur tourne mais la lampe reste éteinte",
+                  "correct": false
+                },
+                {
+                  "content": "Rien ne fonctionne",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand Aminata ouvre l'interrupteur, seule la lampe s'éteint et le ventilateur continue de tourner.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Suivre le chemin : il passe par la lampe et par le moteur. Étape 3 — Regarder l'interrupteur : ouvert, il coupe ce chemin unique. Étape 4 — Conclure : la lampe et le ventilateur s'arrêtent tous les deux. L'erreur serait de croire que l'interrupteur ne commande que la lampe.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de récepteurs la maquette d'Aminata contient-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer : une pile (générateur), un interrupteur, une lampe et un moteur, plus 4 fils. Les récepteurs sont les éléments qui utilisent l'énergie : la lampe et le moteur, soit 2. L'interrupteur et les fils ne sont pas des récepteurs.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "unit": "récepteurs"
+            },
+            {
+              "content": "La lampe et le ventilateur sont arrêtés. Quelles causes sont possibles ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 3 — Regarder l'interrupteur et chercher une autre coupure. Un interrupteur ouvert ou un fil débranché coupent l'unique chemin : tout s'arrête. Un interrupteur fermé avec des fils bien fixés laisse le chemin complet, et dire que la pile est le générateur ne cause aucune panne.",
+              "answers": [
+                {
+                  "content": "L'interrupteur est ouvert",
+                  "correct": true
+                },
+                {
+                  "content": "Un fil est débranché de la pile",
+                  "correct": true
+                },
+                {
+                  "content": "L'interrupteur est fermé et tous les fils sont bien fixés",
+                  "correct": false
+                },
+                {
+                  "content": "La pile est le générateur du circuit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cette boucle, si l'ampoule est grillée, le circuit est ___ et le ventilateur s'arrête aussi.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 3 — Chercher une autre coupure : le filament d'une ampoule grillée est coupé, c'est une coupure sur l'unique chemin. Étape 4 — Conclure : le circuit est ouvert, donc le moteur s'arrête lui aussi.",
+              "answers": [
+                {
+                  "content": "ouvert",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Un seul chemin : une coupure arrête tous les récepteurs."
+        },
+        {
+          "title": "La sonnette de la boutique de Mme Adjoua",
+          "statement": "Mme Adjoua tient une boutique à Yopougon. Son fils Ibrahim construit une maquette de sonnette pour son exposé : une pile, un bouton-poussoir et une sonnerie, reliés en boucle. Il ajoute ensuite, dans la même boucle, un interrupteur à levier pour couper la sonnerie la nuit.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la différence entre le bouton-poussoir et l'interrupteur à levier de la maquette ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer le type d'interrupteur. Étape 3 — Déterminer la position : le bouton-poussoir est fermé seulement pendant l'appui puis revient seul en position ouverte ; l'interrupteur à levier reste où on l'a laissé. Aucun des deux ne fournit d'énergie ni ne la consomme : la pile fournit, la sonnerie utilise.",
+              "answers": [
+                {
+                  "content": "Le bouton-poussoir n'est fermé que pendant l'appui, le levier reste dans sa position",
+                  "correct": true
+                },
+                {
+                  "content": "Le bouton-poussoir reste fermé après l'appui",
+                  "correct": false
+                },
+                {
+                  "content": "Le levier fournit l'énergie à la sonnerie",
+                  "correct": false
+                },
+                {
+                  "content": "Le bouton-poussoir est un récepteur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un client appuie 5 fois sur le bouton, chaque appui dure 2 secondes. Le levier est fermé. Pendant combien de secondes la sonnerie sonne-t-elle au total ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 2 — Regarder l'action : 5 appuis de 2 secondes. Étape 3 — Déterminer : le circuit est fermé seulement pendant les appuis, le levier fermé ne coupe rien. Étape 4 — Conclure : 5 × 2 = 10 secondes.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "s"
+            },
+            {
+              "content": "La nuit, le levier est ouvert : si on appuie sur le bouton-poussoir, la sonnerie sonne quand même.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Suivre le chemin : il passe par la pile, le levier, le bouton-poussoir et la sonnerie. Étape 3 — Regarder : le levier ouvert coupe ce chemin unique, même si le bouton est appuyé et fermé. Étape 4 — Conclure : la sonnerie reste muette. Il faut que les deux interrupteurs soient fermés.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour que la sonnerie sonne, quelles conditions doivent être réunies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 3 — Déterminer les positions : les deux interrupteurs sont sur le même chemin, il faut les deux fermés. Le levier doit être fermé et le bouton-poussoir doit être appuyé, donc fermé. Un levier ouvert ou un bouton relâché coupent le chemin.",
+              "answers": [
+                {
+                  "content": "Le levier est fermé",
+                  "correct": true
+                },
+                {
+                  "content": "On appuie sur le bouton-poussoir",
+                  "correct": true
+                },
+                {
+                  "content": "Le levier est ouvert",
+                  "correct": false
+                },
+                {
+                  "content": "On a relâché le bouton-poussoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque situation à ce que fait la sonnerie.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 3 — Déterminer les positions de chaque interrupteur : levier fermé et bouton appuyé, le chemin est complet et la sonnerie sonne. Si le bouton est relâché, il est ouvert et la sonnerie se tait. Si le levier est ouvert, il coupe le chemin même si on appuie.",
+              "answers": [
+                {
+                  "content": "Levier fermé, bouton appuyé",
+                  "match": "Elle sonne"
+                },
+                {
+                  "content": "Levier fermé, bouton relâché",
+                  "match": "Elle se tait, le bouton est ouvert"
+                },
+                {
+                  "content": "Levier ouvert, bouton appuyé",
+                  "match": "Elle se tait, le levier est ouvert"
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi Ibrahim peut couper la sonnerie la nuit avec le levier, même si un client appuie sur le bouton-poussoir.",
+              "question_type": "written",
+              "points": 2,
+              "starter": "Le levier et le bouton sont dans la même boucle, donc…",
+              "criteria": [
+                "Dit que le levier et le bouton sont sur le même chemin",
+                "Dit que le levier ouvert coupe ce chemin",
+                "Conclut que la sonnerie ne sonne pas, même si le bouton est appuyé"
+              ],
+              "explanation": "Corrigé modèle : le levier et le bouton-poussoir sont dans la même boucle, donc le courant doit passer par les deux. Quand Ibrahim ouvre le levier, le chemin est coupé. Même si un client appuie et ferme le bouton-poussoir, le circuit reste ouvert, donc la sonnerie ne sonne pas. Points : 0,5 pour le même chemin, 1 pour le levier ouvert qui coupe, 0,5 pour la conclusion.",
+              "answers": []
+            }
+          ],
+          "hint": "Pour la sonnerie, il faut que tous les interrupteurs de la boucle soient fermés."
+        },
+        {
+          "title": "La maquette de la boutique éclairée",
+          "statement": "Pour son exposé, Ibrahim monte la maquette d'une boutique de Mme Fatou à Abobo. Dans une seule boucle, il relie une pile, un interrupteur K1, un interrupteur K2, une lampe L pour l'enseigne et le moteur M d'un petit ventilateur. Tu étudies le fonctionnement de la maquette.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "K1 est fermé, K2 est ouvert, tous les autres éléments sont en bon état. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 2 — Suivre le chemin : pile, K1, K2, lampe, moteur, retour à la pile. Étape 3 — Regarder les interrupteurs : K2 est ouvert, il coupe l'unique chemin. Étape 4 — Conclure : tous les récepteurs sont arrêtés, même si K1 est fermé.",
+              "answers": [
+                {
+                  "content": "La lampe et le ventilateur sont arrêtés",
+                  "correct": true
+                },
+                {
+                  "content": "La lampe brille et le ventilateur est arrêté",
+                  "correct": false
+                },
+                {
+                  "content": "Le ventilateur tourne et la lampe est éteinte",
+                  "correct": false
+                },
+                {
+                  "content": "La lampe et le ventilateur fonctionnent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La boucle contient 5 éléments : la pile, K1, K2, la lampe et le moteur. Combien de fils faut-il pour la fermer ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Dessiner la boucle : 5 éléments se suivent en boucle. Étape 3 — Brancher chaque interrupteur par ses deux bornes : il faut un fil entre chaque élément et le suivant, donc 5 fils.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "fils"
+            },
+            {
+              "content": "Si l'ampoule de la lampe L est grillée, le ventilateur s'arrête aussi.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 3 — Chercher une autre coupure : le filament d'une ampoule grillée est coupé, ce qui coupe l'unique chemin. Étape 4 — Conclure : le moteur s'arrête aussi. Un récepteur coupé arrête tous les autres de la boucle.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour que la lampe brille ET que le ventilateur tourne, quelles conditions faut-il réunir ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 3 — Regarder les interrupteurs et chercher une autre coupure : K1 et K2 sont sur le même chemin, il faut les deux fermés, et l'ampoule ne doit pas être grillée. K1 ouvert couperait le chemin. Le moteur est un récepteur, jamais le générateur : la pile fournit l'énergie.",
+              "answers": [
+                {
+                  "content": "K1 est fermé",
+                  "correct": true
+                },
+                {
+                  "content": "K2 est fermé",
+                  "correct": true
+                },
+                {
+                  "content": "L'ampoule n'est pas grillée",
+                  "correct": true
+                },
+                {
+                  "content": "K1 est ouvert",
+                  "correct": false
+                },
+                {
+                  "content": "Le moteur joue le rôle de générateur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Ibrahim voudrait éteindre la lampe de l'enseigne en laissant tourner le ventilateur, avec cette maquette. Explique pourquoi c'est impossible avec les interrupteurs K1 et K2.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Dans cette boucle, il n'y a qu'un seul chemin, donc…",
+              "criteria": [
+                "Dit qu'il n'y a qu'un seul chemin pour tous les récepteurs",
+                "Dit que l'ouverture d'un interrupteur coupe ce chemin",
+                "Conclut que la lampe et le ventilateur s'arrêtent en même temps"
+              ],
+              "explanation": "Corrigé modèle : dans cette maquette, la lampe, le moteur et les interrupteurs sont dans une seule boucle. Le courant suit un seul chemin et passe par tous les récepteurs. Ouvrir K1 ou K2 coupe ce chemin : la lampe et le ventilateur s'arrêtent en même temps. On ne peut donc pas éteindre la lampe seule. Points : 1 pour le chemin unique, 1 pour l'interrupteur qui coupe, 1 pour la conclusion.",
+              "answers": []
+            },
+            {
+              "content": "Ibrahim ferme K1 et K2, mais rien ne fonctionne. Les fils sont bien fixés. Quelle est la cause la plus probable ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Chercher une autre coupure : K1 et K2 sont fermés, les fils sont bien fixés, il reste les récepteurs et la pile. Une ampoule grillée coupe le chemin, ou la pile usée ne fournit plus d'énergie. Deux interrupteurs fermés ne se bloquent pas : chacun laisse le chemin complet.",
+              "answers": [
+                {
+                  "content": "Une ampoule grillée ou une pile usée",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux interrupteurs fermés se bloquent l'un l'autre",
+                  "correct": false
+                },
+                {
+                  "content": "Le moteur est un générateur",
+                  "correct": false
+                },
+                {
+                  "content": "Un interrupteur fermé coupe le courant",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Une seule boucle : tous les interrupteurs doivent être fermés et il ne doit y avoir aucune autre coupure."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Interrupteur ouvert ou fermé, symbole, place dans la boucle, rôle du générateur et du récepteur, bouton-poussoir.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur la table de la classe, le professeur monte un circuit avec une pile, une lampe, un interrupteur et des fils. Tu étudies l'interrupteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le rôle de l'interrupteur dans ce circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer l'interrupteur. 2. Regarder sa position : fermé, il laisse le chemin complet ; ouvert, il le coupe. Il sert donc à ouvrir ou fermer le circuit. Fournir l'énergie est le rôle de la pile, éclairer celui de la lampe.",
+                  "answers": [
+                    {
+                      "content": "Ouvrir ou fermer le circuit quand on le veut",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fournir l'énergie électrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Éclairer la pièce",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer la pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'interrupteur est fermé, le chemin du courant est complet à cet endroit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer l'interrupteur. 2. Regarder sa position : fermé, il laisse le chemin complet. 3. Chercher une autre coupure. 4. Conclure : sans autre coupure, le circuit est fermé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'interrupteur est ___, la lampe reste éteinte.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 2. Regarder la position : un interrupteur ouvert coupe le chemin. 4. Conclure : le circuit est ouvert et la lampe reste éteinte.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le symbole d'un interrupteur fermé, comment est le levier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Regarder la position dans le symbole : le levier posé sur les deux bornes laisse le chemin complet, c'est un interrupteur fermé. Le levier relevé indique un interrupteur ouvert.",
+                  "answers": [
+                    {
+                      "content": "Posé sur la deuxième borne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Relevé, loin de la deuxième borne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacé par une croix",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dessiné en cercle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur ouvert laisse passer le courant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Regarder : ouvert veut dire coupé. 4. Conclure : le courant ne passe pas. L'erreur vient de la comparaison avec une porte ouverte, qui laisse passer : pour un interrupteur, c'est l'inverse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Ouvert = chemin coupé. Fermé = chemin complet."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Fatou monte une maquette de lampe de poche avec une pile, une ampoule, un interrupteur et trois fils. Elle cherche si la lampe va briller.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Interrupteur fermé, ampoule en bon état, fils bien fixés : la lampe brille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Regarder : l'interrupteur est fermé. 3. Chercher une autre coupure : fils bien fixés, ampoule en bon état, aucune. 4. Conclure : le circuit est fermé, la lampe brille.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Interrupteur fermé, ampoule grillée : la lampe brille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Regarder : l'interrupteur est fermé. 3. Chercher une autre coupure : le filament de l'ampoule grillée est coupé, c'est une coupure. 4. Conclure : le circuit est ouvert, la lampe reste éteinte. Un interrupteur fermé ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles causes éteignent la lampe de Fatou ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Regarder l'interrupteur et 3. chercher une autre coupure : un interrupteur ouvert et un fil débranché coupent le chemin. Fils bien fixés et interrupteur fermé avec ampoule en bon état laissent le chemin complet.",
+                  "answers": [
+                    {
+                      "content": "L'interrupteur est ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil est débranché de la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les fils sont bien fixés",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur est fermé et l'ampoule est en bon état",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La maquette de Fatou contient 1 pile, 1 ampoule et 1 interrupteur reliés en boucle. Combien de fils faut-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Dessiner la boucle de 3 éléments. Étape 3 — Brancher : il faut un fil entre chaque élément et le suivant, soit 3 fils.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Une ampoule dont le filament est coupé est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 3. Chercher une autre coupure : une ampoule dont le filament est coupé est grillée. Le chemin est coupé à cet endroit, même si l'interrupteur est fermé.",
+                  "answers": [
+                    {
+                      "content": "grillée",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Après l'interrupteur, cherche toujours une autre coupure."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Moussa dessine le schéma d'un circuit de maquette. Il y place une pile, une lampe, un interrupteur et des fils.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque élément à son symbole.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : Étape 1 — Dessiner la boucle : chaque élément a son symbole. La lampe est un cercle avec une croix, la pile deux traits parallèles, le fil un trait droit.",
+                  "answers": [
+                    {
+                      "content": "Lampe",
+                      "match": "Un cercle traversé d'une croix"
+                    },
+                    {
+                      "content": "Pile",
+                      "match": "Deux traits parallèles, l'un long, l'autre court"
+                    },
+                    {
+                      "content": "Fil de connexion",
+                      "match": "Un trait droit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa trace les fils à main levée, en courbes. Son schéma est bien fait.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Dessiner la boucle : relier les symboles par des traits droits, tracés à la règle, avec des angles droits. Des fils courbes à main levée rendent le schéma difficile à lire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Où Moussa peut-il dessiner l'interrupteur pour commander la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Choisir un endroit sur un fil de la boucle. 4. Vérifier : où qu'il soit sur le chemin unique, l'interrupteur ouvert coupe la boucle. Hors de la boucle, il ne commande rien.",
+                  "answers": [
+                    {
+                      "content": "N'importe où sur la boucle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement collé à la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "En dehors de la boucle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement collé à la lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa dessine 1 pile, 1 lampe et 1 interrupteur. Combien de symboles dessine-t-il, sans compter les fils ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lister : 1 pile + 1 lampe + 1 interrupteur = 3 symboles. Les fils se tracent ensuite entre les symboles.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un schéma utilise des symboles ___, les mêmes pour tout le monde.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Lister les symboles : ils sont normalisés, c'est-à-dire fixés pour tous. Ainsi chacun lit le schéma de la même façon.",
+                  "answers": [
+                    {
+                      "content": "normalisés",
+                      "correct": true
+                    },
+                    {
+                      "content": "normalisé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un symbole par élément, des fils droits tracés à la règle."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève relie une lampe à un interrupteur et à une pile dans une même boucle. Puis il ajoute un bouton-poussoir de sonnette dans un autre montage. Tu vérifies ce qu'il observe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un bouton-poussoir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le bouton-poussoir. 3. Déterminer la position : fermé pendant l'appui, ouvert dès qu'on relâche. C'est donc un interrupteur qui revient seul en position ouverte.",
+                  "answers": [
+                    {
+                      "content": "Un interrupteur fermé seulement pendant l'appui",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un interrupteur qui reste toujours fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil de connexion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bouton-poussoir reste fermé après l'appui.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Déterminer la position : dès qu'on relâche, le bouton revient seul en position ouverte. 4. Conclure : le récepteur s'arrête. L'erreur est de le confondre avec un interrupteur à levier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève appuie 2 fois sur la sonnette, chaque appui dure 3 secondes. Pendant combien de secondes la sonnerie sonne-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 2. Regarder l'action : 2 appuis de 3 secondes. 3. Le circuit est fermé seulement pendant les appuis. 4. Conclure : 2 × 3 = 6 secondes.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "s"
+                },
+                {
+                  "content": "Une sonnerie est un ___, car elle utilise l'énergie de la pile.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le générateur fournit l'énergie, le récepteur l'utilise. La sonnerie utilise l'énergie de la pile pour sonner : c'est un récepteur.",
+                  "answers": [
+                    {
+                      "content": "récepteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur à levier reste dans la position où on l'a laissé.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer le type d'interrupteur. Un interrupteur à levier garde sa position, alors que le bouton-poussoir revient seul en position ouverte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le bouton-poussoir n'est fermé que si on appuie."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · L'interrupteur dans la vie courante",
+          "notions": "Lampe à piles, couloir, chambre, sonnette : position de l'interrupteur, place dans le schéma, plusieurs récepteurs, bouton-poussoir.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un soir, à Treichville, un commerçant éclaire son étal avec une lampe à piles munie d'un interrupteur. Elle contient une pile, une ampoule, un interrupteur et des fils.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel élément de la lampe de l'étal est le générateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : pile, ampoule, interrupteur, fils. 2. Le générateur est l'élément qui fournit l'énergie : la pile. L'ampoule l'utilise et l'interrupteur commande le circuit.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerçant ferme l'interrupteur et la lampe ne s'allume pas. Les fils sont bien fixés. Quelle est la cause la plus probable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Regarder : l'interrupteur est fermé. 3. Chercher une autre coupure : les fils sont bien fixés, il reste l'ampoule (peut-être grillée) et la pile (peut-être usée). Un interrupteur fermé ne coupe pas le circuit.",
+                  "answers": [
+                    {
+                      "content": "L'ampoule est grillée ou la pile est usée",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur fermé coupe le circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur est devenu un récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fils fournissent trop d'énergie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le commerçant ouvre l'interrupteur, la lampe de l'étal s'éteint.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Regarder : l'interrupteur ouvert coupe le chemin. 4. Conclure : le circuit est ouvert, la lampe s'éteint.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerçant range ses 6 lampes à piles : 4 ont leur interrupteur fermé. Combien ont leur interrupteur ouvert ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 6 lampes. 2. Regarder : 4 interrupteurs fermés. 4. Conclure : 6 − 4 = 2 interrupteurs ouverts.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "lampes"
+                },
+                {
+                  "content": "Pour éteindre sa lampe, le commerçant ___ l'interrupteur.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 2. Regarder la position : on éteint la lampe en coupant le chemin, donc en ouvrant l'interrupteur.",
+                  "answers": [
+                    {
+                      "content": "ouvre",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Commence par la position de l'interrupteur."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans le couloir de la maison de Kouassi, une lampe est commandée par un interrupteur. Kouassi fait un schéma de la maquette pour son cahier de sciences.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Où Kouassi place-t-il l'interrupteur sur son schéma pour commander la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Choisir un endroit sur un fil de la boucle. 3. Brancher l'interrupteur par ses deux bornes. Hors de la boucle ou avec une borne libre, il ne commande rien.",
+                  "answers": [
+                    {
+                      "content": "Sur la boucle, entre deux éléments qui se suivent",
+                      "correct": true
+                    },
+                    {
+                      "content": "À côté du schéma, sans fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Relié à la pile par une seule borne",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'intérieur de la lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur dont une borne est libre commande la lampe.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Brancher par les deux bornes : une borne libre n'est reliée à rien. 4. Vérifier : le chemin ne passe pas par l'interrupteur, qui ne change rien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour dessiner la commande de la lampe.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Dessiner la boucle. 2. Choisir un endroit. 3. Couper le fil et brancher l'interrupteur. 4. Vérifier. Chaque étape prépare la suivante.",
+                  "answers": [
+                    {
+                      "content": "Dessiner la boucle : pile, lampe et fils."
+                    },
+                    {
+                      "content": "Choisir un endroit sur un fil."
+                    },
+                    {
+                      "content": "Couper le fil et brancher l'interrupteur par ses deux bornes."
+                    },
+                    {
+                      "content": "Vérifier que le chemin passe par l'interrupteur."
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le schéma de Kouassi, il y a une pile, un interrupteur et une lampe en boucle. Combien de fils dessine-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Dessiner la boucle de 3 éléments. Étape 3 — Brancher : il faut un fil entre chaque élément et le suivant, soit 3 fils.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Kouassi peut placer l'interrupteur sur le fil qui va de la pile à la lampe ou sur le fil qui revient de la lampe à la pile : la commande est la même.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Choisir un endroit : la boucle est un seul chemin. 4. Vérifier : où qu'il soit sur ce chemin, l'interrupteur ouvert coupe la boucle entière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un interrupteur doit être sur le chemin, par ses deux bornes."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la chambre d'Adjoua, une maquette à piles réunit une lampe de chevet et le moteur d'un petit ventilateur, avec un seul interrupteur, en une seule boucle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Adjoua ouvre l'interrupteur. Que font la lampe et le ventilateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Suivre le chemin : il passe par la lampe et le moteur. 3. Regarder l'interrupteur : ouvert, il coupe ce chemin unique. 4. Conclure : les deux récepteurs s'arrêtent.",
+                  "answers": [
+                    {
+                      "content": "Les deux s'arrêtent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seule la lampe s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul le ventilateur s'arrête",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux continuent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua peut éteindre la lampe seule avec cet interrupteur en gardant le ventilateur en marche.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Suivre le chemin : un seul chemin pour les deux récepteurs. 4. Conclure : l'interrupteur arrête les deux ou aucun. L'erreur serait de croire qu'il choisit un récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La maquette contient 1 pile, 1 interrupteur, 1 lampe et 1 moteur. Combien de fils relient ces 4 éléments en boucle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer 4 éléments en boucle. 2. Suivre le chemin : un fil entre chaque élément et le suivant, soit 4 fils.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Si l'ampoule de la lampe de chevet est grillée, le ventilateur ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 3. Chercher une autre coupure : une ampoule grillée coupe l'unique chemin. 4. Conclure : le moteur s'arrête aussi. Il ne peut pas continuer, car il est dans la même boucle.",
+                  "answers": [
+                    {
+                      "content": "s'arrête aussi",
+                      "correct": true
+                    },
+                    {
+                      "content": "continue de tourner",
+                      "correct": false
+                    },
+                    {
+                      "content": "tourne plus vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette boucle, un seul interrupteur commande ___ les récepteurs.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 2. Suivre le chemin : il passe par chaque récepteur. 4. Conclure : l'interrupteur les commande tous à la fois.",
+                  "answers": [
+                    {
+                      "content": "tous",
+                      "correct": true
+                    },
+                    {
+                      "content": "les deux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un seul chemin passe par la lampe et le ventilateur."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Chez la tante de Mariam, à Bouaké, une sonnette comprend une pile, un bouton-poussoir et une sonnerie, reliés en boucle. Tu étudies son fonctionnement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Mariam appuie sur le bouton et le garde appuyé. Que fait la sonnerie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Regarder l'action : on appuie. 3. Déterminer la position : fermé pendant l'appui. 4. Conclure : la sonnerie sonne tant qu'on appuie.",
+                  "answers": [
+                    {
+                      "content": "Elle sonne tant que Mariam appuie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle sonne une seule fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle reste muette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle sonne pendant une heure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand Mariam relâche le bouton, la sonnerie continue de sonner.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Déterminer la position : le bouton revient seul en position ouverte dès qu'on relâche. 4. Conclure : le circuit est ouvert, la sonnerie se tait.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un visiteur appuie 3 fois, chaque appui dure 2 secondes. Pendant combien de secondes la sonnerie sonne-t-elle au total ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 2. Regarder : 3 appuis de 2 secondes. 3. Le circuit est fermé seulement pendant les appuis. 4. Conclure : 3 × 2 = 6 secondes.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "s"
+                },
+                {
+                  "content": "Quel élément de la sonnette utilise l'énergie de la pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : pile, bouton-poussoir, sonnerie, fils. La pile est le générateur, la sonnerie utilise l'énergie pour sonner, c'est le récepteur. Le bouton-poussoir commande, les fils relient.",
+                  "answers": [
+                    {
+                      "content": "La sonnerie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bouton-poussoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun élément",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases sont vraies pour le bouton de la sonnette ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Déterminer la position : fermé pendant l'appui, ouvert dès le relâchement. Il ne reste donc pas fermé. C'est un interrupteur, pas un générateur : l'énergie vient de la pile.",
+                  "answers": [
+                    {
+                      "content": "Il est fermé pendant l'appui",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il revient seul en position ouverte quand on le relâche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il reste fermé après l'appui",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fournit l'énergie à la sonnerie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le bouton-poussoir revient seul en position ouverte."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Chercher une coupure, deux interrupteurs dans une boucle, plusieurs récepteurs, comparaison du bouton-poussoir et du levier.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Yao construit une maquette : une pile, un interrupteur et une lampe. La lampe reste éteinte et il cherche pourquoi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Interrupteur fermé, fils bien fixés, ampoule bien vissée. La lampe reste éteinte. Que contrôler en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. L'interrupteur est fermé. 3. Chercher une autre coupure : fils et ampoule sont en ordre, il reste la pile. Rouvrir l'interrupteur ne peut qu'aggraver la situation.",
+                  "answers": [
+                    {
+                      "content": "La pile : est-elle usée ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rouvrir l'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ajouter un interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Couper un fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'ampoule est grillée, fermer l'interrupteur la fait briller.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Chercher une autre coupure : une ampoule grillée coupe le chemin. L'interrupteur fermé ne répare pas cette coupure. 4. Conclure : la lampe reste éteinte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles coupures peuvent empêcher la lampe de briller alors que l'interrupteur est fermé ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Chercher une autre coupure : un fil cassé et une ampoule dévissée coupent le chemin. Un fil bien fixé et une pile en bon état ne sont pas des coupures.",
+                  "answers": [
+                    {
+                      "content": "Un fil cassé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une ampoule dévissée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil bien fixé aux bornes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile en bon état",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi peut-on dire que l'interrupteur fermé ne garantit pas que la lampe brille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Regarder l'interrupteur. 3. Chercher une autre coupure : le chemin doit être complet partout. Une seule coupure ailleurs suffit à éteindre la lampe.",
+                  "answers": [
+                    {
+                      "content": "Parce que le chemin peut être coupé ailleurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que l'interrupteur est un récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'un interrupteur fermé coupe le circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la lampe est le générateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que la lampe brille, il faut que le circuit soit ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : un circuit fermé a un chemin complet, sans coupure, et la lampe brille.",
+                  "answers": [
+                    {
+                      "content": "fermé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un seul endroit coupé suffit à éteindre la lampe."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une maquette, une pile, deux interrupteurs K1 et K2 et une lampe sont reliés en une seule boucle. Aminata teste les positions des interrupteurs.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "K1 fermé et K2 fermé, tout est en bon état : la lampe brille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Regarder les interrupteurs : les deux sont fermés, aucune autre coupure. 4. Conclure : le chemin est complet, la lampe brille.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "K1 fermé et K2 ouvert : la lampe brille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Regarder les interrupteurs : K2 ouvert coupe l'unique chemin. 4. Conclure : la lampe est éteinte, même si K1 est fermé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la seule position qui allume la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Suivre le chemin : il passe par K1 et par K2. 3. Un seul interrupteur ouvert coupe ce chemin. 4. Conclure : seule la position fermé-fermé le laisse complet.",
+                  "answers": [
+                    {
+                      "content": "K1 fermé et K2 fermé",
+                      "correct": true
+                    },
+                    {
+                      "content": "K1 ouvert et K2 fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "K1 fermé et K2 ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "K1 ouvert et K2 ouvert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque interrupteur peut être ouvert ou fermé. Combien de positions de K1 et K2 éteignent la lampe (tout le reste étant en bon état) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : il y a 4 positions possibles : fermé-fermé, fermé-ouvert, ouvert-fermé, ouvert-ouvert. Seule fermé-fermé allume la lampe. 4 − 1 = 3 positions l'éteignent.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour allumer la lampe, il faut que ___ les interrupteurs soient fermés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 2. Suivre le chemin unique. 3. Un interrupteur ouvert suffit à le couper. 4. Conclure : il faut que tous soient fermés.",
+                  "answers": [
+                    {
+                      "content": "tous",
+                      "correct": true
+                    },
+                    {
+                      "content": "les deux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Dans une seule boucle, un interrupteur ouvert suffit à tout couper."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Fatou installe dans sa chambre un montage à piles : une lampe et un moteur de ventilateur dans une seule boucle avec un interrupteur. Elle a des doutes sur son fonctionnement et vérifie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'interrupteur est fermé, mais la lampe et le moteur sont tous les deux arrêtés. Que vérifier en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Suivre le chemin : un seul chemin pour la lampe et le moteur. 3. Regarder l'interrupteur, puis chercher une autre coupure : fil débranché, ampoule grillée ou dévissée. 4. Conclure : tout est arrêté parce que le chemin est coupé quelque part. L'interrupteur n'est pas un récepteur et le moteur n'est pas un générateur.",
+                  "answers": [
+                    {
+                      "content": "S'il y a une autre coupure sur le chemin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si l'interrupteur est un récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si le moteur est le générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si le circuit est trop fermé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe et le moteur sont arrêtés alors que l'interrupteur est fermé : cela peut venir d'un fil débranché.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Suivre le chemin unique. 3. Chercher une autre coupure : un fil débranché coupe ce chemin. 4. Conclure : la lampe et le moteur s'arrêtent ensemble, même si l'interrupteur est fermé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies dans cette boucle unique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Suivre le chemin : il passe par les deux récepteurs. L'interrupteur et l'ampoule grillée agissent sur ce chemin unique. On ne peut pas choisir un récepteur, et le moteur utilise l'énergie, il ne la fournit pas.",
+                  "answers": [
+                    {
+                      "content": "Un seul interrupteur commande lampe et moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une ampoule grillée arrête aussi le moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "On peut éteindre la lampe en laissant tourner le moteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moteur est un générateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou a un montage avec 1 pile, 1 interrupteur fermé, 1 lampe et 1 moteur, en une seule boucle, tous en bon état. Combien de récepteurs fonctionnent ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 1 lampe + 1 moteur = 2 récepteurs. 3. Interrupteur fermé et aucune coupure. 4. Conclure : les 2 récepteurs fonctionnent.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "récepteurs"
+                },
+                {
+                  "content": "Si Fatou dévisse une lampe de la boucle, le moteur ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 3. Chercher une autre coupure : une lampe dévissée coupe l'unique chemin. 4. Conclure : le moteur s'arrête. Il ne peut pas continuer, puisque le courant ne circule plus.",
+                  "answers": [
+                    {
+                      "content": "s'arrête",
+                      "correct": true
+                    },
+                    {
+                      "content": "tourne plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "continue de tourner",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Si la lampe brille, le chemin est complet partout."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Ibrahim installe à l'entrée de sa maison une sonnette : une pile, un bouton-poussoir et une sonnerie. Il se demande comment la faire sonner longtemps sans garder le doigt appuyé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Avec un bouton-poussoir seul, pendant combien de temps la sonnerie sonne-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Déterminer la position : un bouton-poussoir est fermé seulement pendant l'appui. 4. Conclure : la sonnerie sonne tant qu'on appuie.",
+                  "answers": [
+                    {
+                      "content": "Tant qu'on appuie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour toujours après le premier appui",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une minute exactement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel type d'interrupteur laisse la sonnerie sonner sans garder le doigt appuyé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le type d'interrupteur. Un interrupteur à levier reste fermé jusqu'à ce qu'on le rouvre, alors que le bouton-poussoir revient seul en position ouverte.",
+                  "answers": [
+                    {
+                      "content": "Un interrupteur à levier fermé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un bouton-poussoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil de connexion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bouton-poussoir et un interrupteur à levier se comportent de la même façon après le relâchement.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Déterminer la position : le bouton-poussoir revient seul en position ouverte, le levier garde sa position. Ils sont donc différents après le relâchement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim veut une sonnerie de 8 secondes avec un bouton-poussoir, en appuyant 4 secondes à chaque fois. Combien d'appuis doit-il faire ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 2. Regarder l'action : chaque appui dure 4 secondes. 3. Le circuit est fermé seulement pendant les appuis. 4. Conclure : 8 ÷ 4 = 2 appuis.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "appuis"
+                },
+                {
+                  "content": "Explique pourquoi la sonnerie s'arrête dès qu'on relâche un bouton-poussoir, alors qu'elle reste en marche avec un interrupteur à levier fermé.",
+                  "question_type": "written",
+                  "points": 2,
+                  "starter": "Un bouton-poussoir revient seul…",
+                  "criteria": [
+                    "Dit que le bouton-poussoir revient seul en position ouverte",
+                    "Dit que le circuit s'ouvre quand on relâche",
+                    "Dit que le levier garde sa position fermée"
+                  ],
+                  "explanation": "Corrigé modèle : un bouton-poussoir est fermé seulement pendant l'appui. Quand on le relâche, il revient seul en position ouverte : le circuit est coupé et la sonnerie s'arrête. Un interrupteur à levier garde la position où on l'a laissé : fermé, il laisse le chemin complet et la sonnerie continue. Points : 1 pour le retour en position ouverte, 0,5 pour le circuit coupé, 0,5 pour le levier.",
+                  "answers": []
+                }
+              ],
+              "hint": "Pense à ce que fait le bouton quand on le relâche."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la commande d'un circuit",
+          "notions": "Bilan : interrupteur ouvert ou fermé, place de l'interrupteur, plusieurs récepteurs, bouton-poussoir, interrupteur à levier.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour son exposé de sciences, un élève de Cocody monte la maquette d'une boutique éclairée : une pile, un interrupteur, une lampe et des fils. Tu fais le bilan sur les éléments et l'interrupteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel élément de la maquette est le générateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer les éléments. 2. Le générateur fournit l'énergie : c'est la pile. La lampe l'utilise, l'interrupteur commande le circuit et les fils relient.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément de la maquette est le récepteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Le récepteur utilise l'énergie : la lampe éclaire grâce à l'énergie de la pile. L'interrupteur ne l'utilise pas : il ouvre ou ferme le circuit.",
+                  "answers": [
+                    {
+                      "content": "La lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Interrupteur ouvert : le circuit est fermé et la lampe brille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Regarder la position : ouvert veut dire coupé. 4. Conclure : le circuit est ouvert, la lampe est éteinte. Ouvert et fermé sont des mots à ne pas inverser.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La maquette est une boucle de 3 éléments : pile, interrupteur, lampe. Combien de fils faut-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Dessiner la boucle. 3. Brancher chaque élément au suivant par un fil : 3 éléments, 3 fils.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Un interrupteur se branche par ses deux ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 3. Brancher par les deux bornes : le courant entre par une borne et sort par l'autre, ce qui met l'interrupteur sur le chemin.",
+                  "answers": [
+                    {
+                      "content": "bornes",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Générateur = fournit, récepteur = utilise, interrupteur = commande."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la chambre de Koffi, une maquette comprend une pile, un interrupteur, une lampe et le moteur d'un petit ventilateur, en une seule boucle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'interrupteur est fermé, tout est en bon état. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Suivre le chemin : pile, interrupteur, lampe, moteur, retour. 3. Interrupteur fermé et aucune autre coupure. 4. Conclure : les deux récepteurs fonctionnent.",
+                  "answers": [
+                    {
+                      "content": "La lampe brille et le moteur tourne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seule la lampe brille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul le moteur tourne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne fonctionne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Interrupteur ouvert : la lampe est éteinte mais le moteur tourne encore.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Suivre le chemin : un seul chemin pour les deux récepteurs. 3. L'interrupteur ouvert le coupe. 4. Conclure : les deux s'arrêtent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles causes arrêtent la lampe et le moteur ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Regarder l'interrupteur et chercher une autre coupure : un interrupteur ouvert et un fil débranché coupent l'unique chemin. Le reste est un fonctionnement normal.",
+                  "answers": [
+                    {
+                      "content": "L'interrupteur est ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil est débranché",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur est fermé et les fils sont bien fixés",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile est le générateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La boucle contient 1 pile, 1 interrupteur, 1 lampe et 1 moteur. Combien de fils la ferment ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Dessiner la boucle de 4 éléments. Étape 3 — Brancher : il faut un fil entre chaque élément et le suivant, soit 4 fils.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Dans une boucle unique, une ampoule grillée coupe le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 3. Chercher une autre coupure : le filament de l'ampoule grillée est coupé. Le chemin du courant est coupé, donc tous les récepteurs s'arrêtent.",
+                  "answers": [
+                    {
+                      "content": "chemin",
+                      "correct": true
+                    },
+                    {
+                      "content": "circuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "courant",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un seul chemin : une coupure arrête tous les récepteurs."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Chez Awa, une sonnette est formée d'une pile, d'un bouton-poussoir et d'une sonnerie. Elle ajoute dans la même boucle un interrupteur à levier pour couper la sonnerie la nuit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le levier est fermé. Awa appuie sur le bouton-poussoir. Que fait la sonnerie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Déterminer les positions : levier fermé, bouton appuyé donc fermé. 4. Conclure : le chemin est complet, la sonnerie sonne.",
+                  "answers": [
+                    {
+                      "content": "Elle sonne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste muette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle sonne après le relâchement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle éclaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Levier ouvert : en appuyant sur le bouton, la sonnerie sonne quand même.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Déterminer les positions : le levier ouvert coupe l'unique chemin. 4. Conclure : la sonnerie reste muette, même si le bouton est appuyé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le levier est fermé. Awa appuie 3 fois sur le bouton, chaque appui dure 2 secondes. Pendant combien de secondes la sonnerie sonne-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 2. Regarder l'action : 3 appuis de 2 secondes. 3. Le circuit est fermé seulement pendant les appuis. 4. Conclure : 3 × 2 = 6 secondes.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "s"
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si la sonnerie sonne.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer les interrupteurs. 2. Regarder l'action. 3. Déterminer les positions. 4. Conclure. Conclure avant de déterminer les positions est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Repérer le levier et le bouton-poussoir."
+                    },
+                    {
+                      "content": "Regarder si on appuie ou si on relâche."
+                    },
+                    {
+                      "content": "Déterminer la position de chaque interrupteur."
+                    },
+                    {
+                      "content": "Conclure sur la sonnerie."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que la sonnerie sonne, les deux interrupteurs doivent être ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 3. Déterminer les positions : les deux sont sur le même chemin, un seul ouvert suffit à le couper. Il faut donc les deux fermés.",
+                  "answers": [
+                    {
+                      "content": "fermés",
+                      "correct": true
+                    },
+                    {
+                      "content": "ouverts",
+                      "correct": false
+                    },
+                    {
+                      "content": "débranchés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Deux interrupteurs dans la même boucle : il faut les deux fermés."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pour son devoir, Ibrahim monte une maquette de boutique : une pile, un interrupteur K, une lampe L et le moteur M d'un petit ventilateur, en une seule boucle. Il en tire un bilan complet.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Repérer : la pile fournit l'énergie, L et M l'utilisent. 3. K ouvert coupe l'unique chemin. K est un interrupteur, pas un récepteur, et il commande L et M ensemble.",
+                  "answers": [
+                    {
+                      "content": "La pile est le générateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur K ouvert coupe le chemin",
+                      "correct": true
+                    },
+                    {
+                      "content": "L et M sont des récepteurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "K est un récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "On peut éteindre L en gardant M en marche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La maquette contient 1 pile, 1 interrupteur, 1 lampe et 1 moteur reliés en boucle. Combien de fils ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Dessiner la boucle de 4 éléments. 3. Un fil entre chaque élément et le suivant : 4 fils.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "K fermé, L grillée : le moteur M tourne.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Chercher une autre coupure : L grillée coupe l'unique chemin, même si K est fermé. 4. Conclure : M s'arrête aussi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim ajoute un bouton-poussoir B dans la boucle. K est fermé et B est relâché. Que font L et M ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Suivre le chemin : il passe par K, B, L et M. 3. B relâché est ouvert et coupe le chemin. 4. Conclure : L et M sont arrêtés.",
+                  "answers": [
+                    {
+                      "content": "Ils sont arrêtés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils fonctionnent",
+                      "correct": false
+                    },
+                    {
+                      "content": "L brille seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "M tourne seul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi, dans la maquette, l'interrupteur K arrête en même temps la lampe L et le moteur M.",
+                  "question_type": "written",
+                  "points": 2,
+                  "starter": "Dans cette boucle, le courant suit…",
+                  "criteria": [
+                    "Dit qu'il n'y a qu'un seul chemin pour L et M",
+                    "Dit que K ouvert coupe ce chemin",
+                    "Conclut que L et M s'arrêtent ensemble"
+                  ],
+                  "explanation": "Corrigé modèle : dans cette boucle, le courant suit un seul chemin qui passe par K, par la lampe L et par le moteur M. Quand K est ouvert, ce chemin est coupé. Le courant ne circule plus nulle part, donc L et M s'arrêtent en même temps. Points : 1 pour le chemin unique, 0,5 pour K qui coupe, 0,5 pour la conclusion.",
+                  "answers": []
+                }
+              ],
+              "hint": "Un seul chemin passe par la lampe et le moteur."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
