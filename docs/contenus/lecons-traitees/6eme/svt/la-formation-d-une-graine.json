@@ -1,0 +1,3364 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La formation d'une graine",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "SVT",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "fleur-schema",
+          "kind": "diagram",
+          "description": "Schéma en arbre des pièces d'une fleur. La fleur donne quatre groupes de pièces : les sépales et les pétales, qui protègent, puis les étamines et le pistil, qui servent à la reproduction. L'étamine a un filet qui porte l'anthère, laquelle contient le pollen. Le pistil comprend le stigmate, le style et l'ovaire, qui contient les ovules.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "fleur",
+                "label": "Fleur"
+              },
+              {
+                "id": "sepales",
+                "label": "Sépales (verts)",
+                "category": 1
+              },
+              {
+                "id": "petales",
+                "label": "Pétales (colorés)",
+                "category": 1
+              },
+              {
+                "id": "etamines",
+                "label": "Étamines (organes mâles)",
+                "category": 2
+              },
+              {
+                "id": "pistil",
+                "label": "Pistil (organe femelle)",
+                "category": 3
+              },
+              {
+                "id": "filet",
+                "label": "Filet",
+                "category": 2
+              },
+              {
+                "id": "anthere",
+                "label": "Anthère : le pollen",
+                "category": 2
+              },
+              {
+                "id": "stigmate",
+                "label": "Stigmate",
+                "category": 3
+              },
+              {
+                "id": "style",
+                "label": "Style",
+                "category": 3
+              },
+              {
+                "id": "ovaire",
+                "label": "Ovaire : les ovules",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "fleur",
+                "to": "sepales"
+              },
+              {
+                "from": "fleur",
+                "to": "petales"
+              },
+              {
+                "from": "fleur",
+                "to": "etamines"
+              },
+              {
+                "from": "fleur",
+                "to": "pistil"
+              },
+              {
+                "from": "etamines",
+                "to": "filet"
+              },
+              {
+                "from": "etamines",
+                "to": "anthere"
+              },
+              {
+                "from": "pistil",
+                "to": "stigmate"
+              },
+              {
+                "from": "pistil",
+                "to": "style"
+              },
+              {
+                "from": "pistil",
+                "to": "ovaire"
+              }
+            ],
+            "legend": [
+              "Pièces de protection",
+              "Partie mâle",
+              "Partie femelle"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pollinisation-etapes",
+          "kind": "diagram",
+          "description": "Schéma fléché de la pollinisation, de haut en bas : le pollen est fabriqué dans l'anthère d'une étamine, il est pris par un insecte ou emporté par le vent, puis il arrive sur le stigmate d'un pistil. Les deux transporteurs possibles, l'insecte et le vent, sont placés au même niveau.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "anthere",
+                "label": "Anthère : le pollen est prêt",
+                "category": 1
+              },
+              {
+                "id": "insecte",
+                "label": "Un insecte le transporte",
+                "category": 2
+              },
+              {
+                "id": "vent",
+                "label": "Le vent l'emporte",
+                "category": 2
+              },
+              {
+                "id": "stigmate",
+                "label": "Stigmate : le pollen arrive",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "anthere",
+                "to": "insecte",
+                "label": "ou"
+              },
+              {
+                "from": "anthere",
+                "to": "vent",
+                "label": "ou"
+              },
+              {
+                "from": "insecte",
+                "to": "stigmate"
+              },
+              {
+                "from": "vent",
+                "to": "stigmate"
+              }
+            ],
+            "legend": [
+              "Départ du pollen",
+              "Transporteur",
+              "Arrivée du pollen"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "fleur-graine",
+          "kind": "diagram",
+          "description": "Schéma en arbre de la transformation du pistil après la pollinisation et la fécondation. Le pistil comprend l'ovaire, qui contient les ovules. L'ovule devient la graine. L'ovaire devient le fruit. Les graines se trouvent à l'intérieur du fruit.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "pistil",
+                "label": "Pistil d'une fleur fécondée"
+              },
+              {
+                "id": "ovaire",
+                "label": "Ovaire",
+                "category": 2
+              },
+              {
+                "id": "ovule",
+                "label": "Ovule",
+                "category": 1
+              },
+              {
+                "id": "graine",
+                "label": "Graine",
+                "category": 1
+              },
+              {
+                "id": "fruit",
+                "label": "Fruit",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "pistil",
+                "to": "ovaire"
+              },
+              {
+                "from": "ovaire",
+                "to": "ovule",
+                "label": "contient"
+              },
+              {
+                "from": "ovule",
+                "to": "graine",
+                "label": "devient"
+              },
+              {
+                "from": "ovaire",
+                "to": "fruit",
+                "label": "devient"
+              }
+            ],
+            "legend": [
+              "Ovule et graine",
+              "Ovaire et fruit"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "experience-sachets",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres d'une expérience au jardin scolaire. Sur 10 fleurs femelles de courge pour chaque lot, on compte les fruits formés : 8 pour les fleurs laissées libres, 0 pour les fleurs sous un filet à mailles très fines (le vent passe, pas les insectes), 7 pour les fleurs sous un filet à grandes mailles (le vent et les insectes passent).",
+          "params": {
+            "chart": "bars",
+            "series": [
+              8,
+              0,
+              7
+            ],
+            "labels": [
+              "Fleurs libres",
+              "Filet à mailles très fines",
+              "Filet à grandes mailles"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître les pièces d'une fleur",
+          "remember": "La **fleur** est l'organe de reproduction d'une plante à fleurs. De l'extérieur vers l'intérieur, on trouve : les **sépales**, petites pièces vertes qui protègent le bouton ; les **pétales**, souvent colorés ; les **étamines**, organes **mâles** ; le **pistil**, organe **femelle** au centre. Une étamine a un **filet** qui porte une **anthère**, un petit sac qui contient le **pollen** (une fine poussière, souvent jaune). Le pistil a un **stigmate** (le bout, collant), un **style** (le tube) et un **ovaire** renflé, qui contient les **ovules**. Les sépales et les pétales protègent ; les étamines et le pistil servent à la reproduction.",
+          "method": [
+            "Observer la fleur de l'extérieur vers l'intérieur et compter ses pièces.",
+            "Nommer les pièces de protection : les sépales (verts) puis les pétales (souvent colorés).",
+            "Repérer les étamines, organes mâles : un filet qui porte une anthère pleine de pollen.",
+            "Repérer le pistil, organe femelle au centre : le stigmate, le style et l'ovaire qui contient les ovules."
+          ],
+          "example": {
+            "statement": "Au bord du champ de maïs et d'arachide, Awa observe une fleur jaune. Elle voit en bas de petites pièces vertes, puis de grandes pièces jaunes, puis des fines tiges terminées par un sac poudreux jaune. Au centre, une pièce renflée à la base a un bout collant. Nommer les pièces de la fleur.",
+            "steps": [
+              "Observer : de l'extérieur vers l'intérieur, Awa voit quatre sortes de pièces.",
+              "Nommer : les petites pièces vertes sont les sépales ; les grandes pièces jaunes sont les pétales.",
+              "Repérer les étamines : les fines tiges (filets) terminées par un sac poudreux jaune (anthère avec le pollen) sont les étamines, organes mâles.",
+              "Repérer le pistil : la pièce centrale, renflée à la base (ovaire) avec un bout collant (stigmate), est le pistil, organe femelle."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'**étamine** et le **pistil**, ni les **sépales** et les **pétales**. L'étamine fabrique le pollen (mâle) ; le pistil contient les ovules (femelle). Contre-exemple : une fleur a 5 sépales verts, 5 pétales jaunes, 10 étamines et 1 seul pistil. Les 10 fines tiges ne sont pas 10 pistils : ce sont des étamines. Le pistil est unique, au centre. Retiens : les sépales sont verts et en bas ; les pétales sont colorés.",
+          "figure": "fleur-schema",
+          "exercise": [
+            {
+              "title": "Observer les pièces d'une fleur au bord du champ",
+              "statement": "Dans cet exercice, tu observes des fleurs au bord d'un champ de maïs et d'arachide avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Au bord du champ, Koffi ouvre une fleur. Quelle pièce contient le pollen ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : Koffi regarde les pièces de l'extérieur vers l'intérieur. Étape 2 — Nommer les pièces de protection : les sépales et les pétales protègent (les pétales attirent aussi souvent les insectes). Étape 3 — Repérer les étamines : chaque étamine a un filet qui porte une anthère, un sac poudreux. Étape 4 — Repérer le pistil : le stigmate, le style et l'ovaire sont dans le pistil, qui contient les ovules, pas le pollen. Donc le pollen est dans l'anthère. Le stigmate est tentant, mais il reçoit le pollen sans le fabriquer.",
+                  "answers": [
+                    {
+                      "content": "L'anthère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le stigmate",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sépale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pistil est l'organe mâle de la fleur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer les étamines : ce sont elles, les organes mâles, car l'anthère fabrique le pollen. Étape 4 — Repérer le pistil : il est au centre et contient les ovules, c'est donc l'organe femelle. L'affirmation est fausse : il ne faut pas confondre l'étamine et le pistil.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque pièce de la fleur à ce qui la décrit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer : on part de l'extérieur. Étape 2 — Nommer : les petites pièces vertes sont les sépales, les pièces colorées sont les pétales. Étape 3 — Repérer les étamines : elles portent le pollen, c'est la partie mâle. Étape 4 — Repérer le pistil : il est au centre, c'est la partie femelle. Piège : ne pas inverser étamine et pistil.",
+                  "answers": [
+                    {
+                      "content": "Les sépales",
+                      "match": "Petites pièces vertes qui protègent le bouton"
+                    },
+                    {
+                      "content": "Les pétales",
+                      "match": "Pièces souvent colorées"
+                    },
+                    {
+                      "content": "Une étamine",
+                      "match": "Organe mâle qui porte le pollen"
+                    },
+                    {
+                      "content": "Le pistil",
+                      "match": "Organe femelle au centre de la fleur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les ovules sont contenus dans l'___ du pistil.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Repérer le pistil : il a trois parties, le stigmate, le style et l'ovaire. Le stigmate reçoit le pollen, le style est le tube, et l'ovaire est la partie renflée qui contient les ovules. Donc la réponse est ovaire.",
+                  "answers": [
+                    {
+                      "content": "ovaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fleur du jardin scolaire a 5 sépales verts, 5 pétales jaunes, 10 étamines et 1 pistil. Quelle affirmation est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : on compte les pièces de l'extérieur vers l'intérieur : 5, 5, 10 puis 1. Étape 2 — Nommer : les pièces vertes sont les sépales, les pièces jaunes sont les pétales. Étape 3 — Repérer les étamines : les 10 fines tiges à anthère sont les étamines, organes mâles. Étape 4 — Repérer le pistil : le pistil est unique au centre. Compter 10 pistils est l'erreur du piège : on prend les étamines pour des pistils.",
+                  "answers": [
+                    {
+                      "content": "Les 10 fines tiges à anthère sont des étamines ; il n'y a qu'un seul pistil.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 10 pistils, car il y a 10 pièces au centre.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les 5 sépales verts sont des pétales.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les 10 étamines sont les organes femelles.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distinguer les parties de l'étamine et du pistil",
+              "statement": "Dans cet exercice, tu distingues les parties de l'étamine et du pistil avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Retiens deux mots : l'anthère fabrique le pollen (étamine, mâle) ; l'ovaire contient les ovules (pistil, femelle).",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les pièces d'une fleur, de l'extérieur vers l'intérieur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer : on regarde la fleur de l'extérieur vers l'intérieur. Étape 2 — Nommer : les sépales sont les plus externes, puis viennent les pétales. Étape 3 — Repérer les étamines : elles entourent le centre. Étape 4 — Repérer le pistil : il est tout au centre. L'ordre est sépales, pétales, étamines, pistil.",
+                  "answers": [
+                    {
+                      "content": "Les sépales"
+                    },
+                    {
+                      "content": "Les pétales"
+                    },
+                    {
+                      "content": "Les étamines"
+                    },
+                    {
+                      "content": "Le pistil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois parties du pistil ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Repérer le pistil : il comprend le stigmate (le bout collant), le style (le tube) et l'ovaire (la partie renflée). L'anthère est une partie de l'étamine, pas du pistil, et le pétale est une pièce de protection.",
+                  "answers": [
+                    {
+                      "content": "Le stigmate",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le style",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'anthère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pétale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux parties de l'étamine ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Repérer les étamines : une étamine a un filet, fine tige, qui porte une anthère, sac de pollen. Le stigmate et l'ovaire sont dans le pistil. Le sépale est une pièce de protection.",
+                  "answers": [
+                    {
+                      "content": "Le filet",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'anthère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le stigmate",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sépale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pollen est fabriqué dans l'___ de l'étamine.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Repérer les étamines : l'anthère est le sac qui contient le pollen. L'ovaire contient des ovules, le stigmate reçoit le pollen et le pétale protège.",
+                  "answers": [
+                    {
+                      "content": "anthère",
+                      "correct": true
+                    },
+                    {
+                      "content": "ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "stigmate",
+                      "correct": false
+                    },
+                    {
+                      "content": "pétale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les pétales colorés protègent la fleur et peuvent attirer les insectes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Nommer : les pétales sont les pièces souvent colorées de la fleur. Ils protègent les organes du centre et leur couleur attire souvent les insectes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les petits grains contenus dans l'ovaire s'appellent les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Repérer le pistil : son ovaire contient les ovules, organes femelles de la reproduction. Ne pas les confondre avec les grains de pollen, qui sont dans l'anthère.",
+                  "answers": [
+                    {
+                      "content": "ovules",
+                      "correct": true
+                    },
+                    {
+                      "content": "ovule",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à nommer les pièces d'une fleur avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le bout collant du pistil, qui reçoit le pollen, s'appelle le ___.",
+                "question_type": "fill_blank",
+                "hint": "Cherche la partie du pistil qui est tout en haut.",
+                "explanation": "Étape 4 — Repérer le pistil : il a un stigmate (le bout collant), un style (le tube) et un ovaire. Le bout collant est le stigmate.",
+                "answers": [
+                  {
+                    "content": "stigmate",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une fleur d'hibiscus de la cour, les petites pièces vertes sous les grands pétales sont :",
+                "question_type": "single_choice",
+                "hint": "Les pièces vertes sont les plus externes.",
+                "explanation": "Étape 1 — Observer : on regarde la fleur de l'extérieur. Étape 2 — Nommer : les petites pièces vertes en bas sont les sépales. Les étamines et le pistil sont plus à l'intérieur.",
+                "answers": [
+                  {
+                    "content": "les sépales",
+                    "correct": true
+                  },
+                  {
+                    "content": "les étamines",
+                    "correct": false
+                  },
+                  {
+                    "content": "le pistil",
+                    "correct": false
+                  },
+                  {
+                    "content": "les anthères",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les étamines sont au centre de la fleur, à l'intérieur du pistil.",
+                "question_type": "true_false",
+                "hint": "Le pistil est la pièce du milieu.",
+                "explanation": "Étape 3 — Repérer les étamines : elles entourent le centre. Étape 4 — Repérer le pistil : c'est lui qui est tout au centre. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer la pollinisation",
+          "remember": "La **pollinisation** est le transport du **pollen** depuis l'**anthère** d'une étamine jusqu'au **stigmate** d'un pistil. Le pollen ne se déplace pas tout seul : il est transporté par les **insectes** (abeilles, papillons) ou par le **vent**. Les fleurs pollinisées par les insectes ont souvent des pétales colorés, une odeur et du **nectar**, un liquide sucré. L'insecte vient chercher le nectar, se couvre de pollen et en dépose sur une autre fleur. Les fleurs pollinisées par le vent sont peu colorées et sans nectar ; elles libèrent un pollen très léger et très abondant, comme les fleurs mâles du maïs, au sommet de la tige. La pollinisation est la première étape de la formation des graines.",
+          "method": [
+            "Repérer d'où part le pollen : l'anthère d'une étamine.",
+            "Repérer où le pollen doit arriver : le stigmate d'un pistil.",
+            "Identifier ce qui transporte le pollen : un insecte ou le vent.",
+            "Justifier avec les caractères de la fleur (pétales colorés et nectar, ou pollen léger et abondant), puis conclure."
+          ],
+          "example": {
+            "statement": "Au bord du champ, Yao voit des abeilles sur les fleurs jaunes d'une courge. Du pollen jaune colle à leurs pattes. Plus loin, les fleurs mâles du maïs, au sommet des tiges, lâchent un nuage de poussière jaune quand le vent souffle. Expliquer comment chaque fleur est pollinisée.",
+            "steps": [
+              "Repérer le départ : dans les deux cas, le pollen part de l'anthère d'une étamine.",
+              "Repérer l'arrivée : le pollen doit arriver sur le stigmate d'un pistil.",
+              "Identifier le transporteur : pour la courge, ce sont les abeilles ; pour le maïs, c'est le vent.",
+              "Justifier : la courge a de grands pétales jaunes qui attirent les abeilles. Le maïs n'a pas de pétales colorés et libère un pollen léger et abondant. Conclusion : la courge est pollinisée par les insectes, le maïs par le vent."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'insecte **fabrique** le pollen : il le **transporte**. Le pollen est fabriqué par l'anthère. Contre-exemple : sur 10 fleurs femelles de courge laissées libres, 8 donnent un fruit ; sur 10 fleurs femelles sous un filet à mailles très fines (le vent passe, pas les insectes), aucune n'en donne. Le filet empêche les insectes d'apporter le pollen sur le stigmate. Ne confonds pas non plus pollinisation (transport du pollen) et formation du fruit.",
+          "figure": "pollinisation-etapes",
+          "exercise": [
+            {
+              "title": "Comprendre la pollinisation dans le champ",
+              "statement": "Dans cet exercice, tu expliques la pollinisation de fleurs d'un champ de maïs avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce que la pollinisation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le départ : le pollen part de l'anthère. Étape 2 — Repérer l'arrivée : il doit arriver sur le stigmate. Donc la pollinisation est le transport du pollen de l'anthère au stigmate. La transformation de l'ovule en graine et celle de l'ovaire en fruit viennent après.",
+                  "answers": [
+                    {
+                      "content": "Le transport du pollen de l'anthère jusqu'au stigmate",
+                      "correct": true
+                    },
+                    {
+                      "content": "La transformation de l'ovule en graine",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croissance de l'ovaire en fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le transport de l'eau par les racines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pollen est transporté par les insectes ou par le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Identifier le transporteur : il y a deux transporteurs possibles, les insectes (abeilles, papillons) et le vent. Donc la réponse est vent.",
+                  "answers": [
+                    {
+                      "content": "vent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le champ de Mariam, les fleurs mâles du maïs n'ont ni pétales colorés ni nectar et libèrent beaucoup de pollen léger. Par quoi sont-elles pollinisées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le départ : le pollen part des anthères des fleurs mâles. Étape 2 — Repérer l'arrivée : il doit arriver sur les stigmates des fleurs femelles. Étape 3 — Identifier le transporteur. Étape 4 — Justifier : pas de pétales colorés ni de nectar, donc rien n'attire les insectes ; le pollen léger et abondant est emporté par le vent. Conclusion : le maïs est pollinisé par le vent.",
+                  "answers": [
+                    {
+                      "content": "Par le vent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par les abeilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par la pluie qui coule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par les racines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux caractéristiques d'une fleur attirent les insectes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Justifier : une fleur pollinisée par les insectes a des pétales colorés et du nectar, liquide sucré qui attire les abeilles. Un pollen très léger et très abondant est le signe d'une fleur pollinisée par le vent. L'absence de pétales n'attire pas les insectes.",
+                  "answers": [
+                    {
+                      "content": "Des pétales colorés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du nectar",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pollen très léger et très abondant",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'absence de pétales",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'abeille fabrique le pollen qu'elle dépose sur le stigmate.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le départ : le pollen est fabriqué dans l'anthère de l'étamine. Étape 3 — Identifier le transporteur : l'abeille ne fabrique rien, elle transporte le pollen d'une fleur à l'autre. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distinguer la pollinisation par les insectes et par le vent",
+              "statement": "Dans cet exercice, tu distingues les fleurs pollinisées par les insectes et celles pollinisées par le vent avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour savoir qui pollinise, regarde la fleur : pétales colorés et nectar, ce sont les insectes ; pollen léger et abondant, c'est le vent.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la pollinisation d'une fleur par une abeille.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le départ : l'abeille touche d'abord l'anthère. Étape 3 — Identifier le transporteur : le pollen se colle sur son corps, puis elle va sur une autre fleur. Étape 2 — Repérer l'arrivée : le pollen reste sur le stigmate. L'ordre est celui du trajet du pollen.",
+                  "answers": [
+                    {
+                      "content": "L'abeille se pose sur la fleur pour chercher le nectar et touche l'anthère"
+                    },
+                    {
+                      "content": "Du pollen se colle sur le corps de l'abeille"
+                    },
+                    {
+                      "content": "L'abeille se pose sur une autre fleur"
+                    },
+                    {
+                      "content": "Du pollen reste collé sur le stigmate de cette fleur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque caractère à ce qu'il montre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le départ : l'anthère fabrique le pollen. Étape 2 — Repérer l'arrivée : le stigmate le reçoit. Étape 4 — Justifier : des pétales colorés et du nectar attirent les insectes ; un pollen léger et abondant est emporté par le vent.",
+                  "answers": [
+                    {
+                      "content": "Pétales colorés et nectar",
+                      "match": "Pollinisation par les insectes"
+                    },
+                    {
+                      "content": "Pollen très léger et très abondant",
+                      "match": "Pollinisation par le vent"
+                    },
+                    {
+                      "content": "Anthère",
+                      "match": "Là où le pollen est fabriqué"
+                    },
+                    {
+                      "content": "Stigmate",
+                      "match": "Là où le pollen doit arriver"
+                    }
+                  ]
+                },
+                {
+                  "content": "Au jardin scolaire, 10 fleurs femelles de courge sont laissées libres et 8 d'entre elles donnent un fruit. Combien de fleurs libres n'en donnent pas ?",
+                  "question_type": "numeric",
+                  "unit": "fleurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer le départ : le pollen part des anthères, et toutes ces fleurs libres peuvent recevoir la visite des insectes. Étape 4 — Justifier par les nombres : 10 fleurs libres, 8 avec un fruit, donc 10 − 8 = 2 fleurs sans fruit. Il ne faut pas répondre 8 : c'est le nombre de fleurs qui en donnent un.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On couvre 10 fleurs femelles de courge d'un filet à mailles très fines (le vent passe, pas les insectes) : aucune ne donne de fruit. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le départ : le pollen part de l'anthère d'une fleur mâle. Étape 3 — Identifier le transporteur : la courge est pollinisée par les insectes. Étape 4 — Justifier : le filet très fin laisse passer le vent mais pas les insectes ; le pollen n'atteint donc pas le stigmate. Le filet ne change pas la fabrication du pollen.",
+                  "answers": [
+                    {
+                      "content": "Le filet empêche les insectes d'apporter le pollen sur le stigmate",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le filet fabrique du pollen en trop",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le filet empêche l'anthère de fabriquer le pollen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le filet donne trop d'eau à la fleur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour qu'il y ait pollinisation, le pollen doit arriver sur le ___ du pistil.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer l'arrivée : le bout collant du pistil est le stigmate. Le style est le tube, le filet est dans l'étamine et le sépale est une pièce verte de protection.",
+                  "answers": [
+                    {
+                      "content": "stigmate",
+                      "correct": true
+                    },
+                    {
+                      "content": "style",
+                      "correct": false
+                    },
+                    {
+                      "content": "filet",
+                      "correct": false
+                    },
+                    {
+                      "content": "sépale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nectar est un liquide sucré qui attire les insectes vers la fleur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Justifier : le nectar est un caractère des fleurs pollinisées par les insectes. L'abeille vient le chercher, et se couvre de pollen au passage. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer comment une fleur est pollinisée avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La pollinisation est le transport du pollen jusqu'au ___ d'un pistil.",
+                "question_type": "fill_blank",
+                "hint": "C'est le bout collant du pistil.",
+                "explanation": "Étape 1 — Repérer le départ : l'anthère. Étape 2 — Repérer l'arrivée : le pollen doit arriver sur le stigmate du pistil.",
+                "answers": [
+                  {
+                    "content": "stigmate",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans le champ, le pollen des fleurs mâles du maïs est emporté par :",
+                "question_type": "single_choice",
+                "hint": "Le maïs n'a pas de fleurs colorées.",
+                "explanation": "Étape 3 — Identifier le transporteur : les fleurs mâles du maïs ont un pollen léger et abondant. Étape 4 — Justifier : elles n'ont ni pétales colorés ni nectar, donc le transporteur est le vent.",
+                "answers": [
+                  {
+                    "content": "le vent",
+                    "correct": true
+                  },
+                  {
+                    "content": "les abeilles",
+                    "correct": false
+                  },
+                  {
+                    "content": "les racines",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'eau du sol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une abeille qui cherche du nectar peut transporter du pollen d'une fleur à une autre.",
+                "question_type": "true_false",
+                "hint": "Pense au trajet de l'abeille d'une fleur à l'autre.",
+                "explanation": "Étape 3 — Identifier le transporteur : en cherchant le nectar, l'abeille touche les anthères et se couvre de pollen. Étape 2 — Repérer l'arrivée : en se posant sur une autre fleur, elle en dépose sur le stigmate. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer la formation de la graine et du fruit",
+          "remember": "Après la pollinisation, le pollen permet la **fécondation** : un élément du pollen rejoint l'**ovule** dans l'ovaire. Ensuite, la fleur se transforme. L'**ovule** fécondé devient la **graine**. L'**ovaire** grossit et devient le **fruit**, qui contient la ou les graines. Un ovaire qui contient plusieurs ovules fécondés donne un seul fruit avec plusieurs graines. Les pétales et les étamines se flétrissent et tombent. Le fruit protège les graines, et chaque graine pourra donner une nouvelle plante. Une fleur qui n'a pas été pollinisée ne donne ni fruit ni graine.",
+          "method": [
+            "Rappeler que la fleur a été pollinisée : le pollen est arrivé sur le stigmate.",
+            "Suivre l'ovule : après la fécondation, l'ovule devient une graine.",
+            "Suivre l'ovaire : il grossit et devient un fruit qui contient la ou les graines.",
+            "Conclure en écrivant les deux transformations : ovule → graine, ovaire → fruit."
+          ],
+          "example": {
+            "statement": "Dans le champ, Aya observe une fleur de niébé pollinisée. Son ovaire contient 6 ovules. Quelques jours plus tard, une gousse a remplacé la fleur et les pétales sont tombés. Expliquer comment la gousse et les graines se sont formées.",
+            "steps": [
+              "Rappeler : la fleur de niébé a été pollinisée, car le pollen est arrivé sur son stigmate.",
+              "Suivre l'ovule : les 6 ovules fécondés sont devenus 6 graines.",
+              "Suivre l'ovaire : l'ovaire a grossi et est devenu la gousse, qui contient les 6 graines.",
+              "Conclure : l'ovule devient la graine et l'ovaire devient le fruit. La gousse est le fruit, les graines de niébé (les petits haricots) sont à l'intérieur."
+            ]
+          },
+          "pitfall": "Ne pas confondre la **graine** et le **fruit**. L'**ovule** devient la graine ; l'**ovaire** devient le fruit. Contre-exemple : une gousse d'arachide est un fruit, et les arachides à l'intérieur sont des graines. Un ovaire à 6 ovules donne **un** fruit avec 6 graines, pas 6 fruits. Beaucoup de « légumes » (tomate, piment, gombo, aubergine) sont des fruits, car ils viennent de l'ovaire d'une fleur.",
+          "figure": "fleur-graine",
+          "exercise": [
+            {
+              "title": "Suivre la transformation d'une fleur en fruit",
+              "statement": "Dans cet exercice, tu suis la transformation d'une fleur de ton champ en fruit avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Après la fécondation, en quoi l'ovule se transforme-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : la fleur est pollinisée. Étape 2 — Suivre l'ovule : l'ovule fécondé devient la graine. Étape 3 — Suivre l'ovaire : c'est lui qui devient le fruit, pas l'ovule. Donc l'ovule devient la graine.",
+                  "answers": [
+                    {
+                      "content": "En graine",
+                      "correct": true
+                    },
+                    {
+                      "content": "En fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "En pétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "En pollen",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après la fécondation, l'ovaire devient le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire grossit et devient le fruit, qui contient les graines. Il ne faut pas écrire graine : la graine vient de l'ovule.",
+                  "answers": [
+                    {
+                      "content": "fruit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque pièce de la fleur à ce qu'elle devient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Suivre l'ovule : l'ovule devient la graine. Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit. Étape 4 — Conclure : les pétales, devenus inutiles, se flétrissent et tombent. Ne pas inverser la graine et le fruit.",
+                  "answers": [
+                    {
+                      "content": "L'ovule",
+                      "match": "La graine"
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "match": "Le fruit"
+                    },
+                    {
+                      "content": "Les pétales",
+                      "match": "Ils se flétrissent et tombent"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ovaire d'une fleur de niébé contient 8 ovules, tous fécondés. Combien de graines contiendra la gousse ?",
+                  "question_type": "numeric",
+                  "unit": "graines",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Rappeler : la fleur est pollinisée et les 8 ovules sont fécondés. Étape 2 — Suivre l'ovule : chaque ovule fécondé devient une graine. Étape 3 — Suivre l'ovaire : l'ovaire devient une seule gousse. Étape 4 — Conclure : 8 ovules donnent 8 graines dans 1 gousse.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On ouvre une gousse d'arachide. Que sont les arachides qu'elle contient ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Suivre l'ovaire : la gousse vient de l'ovaire, c'est le fruit. Étape 2 — Suivre l'ovule : ce qu'elle contient vient des ovules, ce sont les graines. Les arachides sont donc des graines. Les appeler des fruits est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Des graines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des étamines",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comprendre ce qui devient graine et ce qui devient fruit",
+              "statement": "Dans cet exercice, tu distingues la graine et le fruit avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Retiens deux flèches : ovule → graine, ovaire → fruit. Le fruit contient la graine.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la formation d'un fruit de piment.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rappeler : tout commence par la pollinisation. Étape 2 — Suivre l'ovule : les ovules sont fécondés, puis deviennent des graines. Étape 3 — Suivre l'ovaire : il grossit et devient le fruit. L'ordre est pollinisation, fécondation, transformation, fruit mûr.",
+                  "answers": [
+                    {
+                      "content": "Le pollen arrive sur le stigmate de la fleur"
+                    },
+                    {
+                      "content": "Les ovules sont fécondés"
+                    },
+                    {
+                      "content": "Les ovules deviennent des graines et l'ovaire grossit"
+                    },
+                    {
+                      "content": "L'ovaire est devenu un fruit qui contient les graines"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Suivre l'ovule : l'ovule devient la graine. Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit. Étape 4 — Conclure : les pétales deviennent inutiles et tombent. Le pollen ne devient pas le fruit : il sert à féconder l'ovule.",
+                  "answers": [
+                    {
+                      "content": "L'ovule devient la graine",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovaire devient le fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les pétales se flétrissent et tombent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pollen devient le fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sépales deviennent les graines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fleur qui n'a pas été pollinisée peut quand même donner un fruit avec des graines.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : il faut d'abord que le pollen arrive sur le stigmate. Sans pollinisation, il n'y a pas de fécondation, donc l'ovule ne devient pas une graine et l'ovaire ne devient pas un fruit. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fruit protège les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire devient un fruit qui contient la ou les graines. Le fruit les protège, comme la gousse protège les arachides.",
+                  "answers": [
+                    {
+                      "content": "graines",
+                      "correct": true
+                    },
+                    {
+                      "content": "graine",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une tomate vient de l'ovaire d'une fleur : c'est donc un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Suivre l'ovaire : tout ce qui vient de l'ovaire d'une fleur est un fruit. La tomate, avec ses graines à l'intérieur, est donc un fruit, même si on la cuisine comme un légume.",
+                  "answers": [
+                    {
+                      "content": "fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "légume-feuille",
+                      "correct": false
+                    },
+                    {
+                      "content": "pétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "pollen",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fruit de piment contient 20 graines. Combien d'ovules ont été fécondés dans l'ovaire de la fleur ?",
+                  "question_type": "numeric",
+                  "unit": "ovules",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Suivre l'ovule : chaque ovule fécondé devient une graine. Étape 4 — Conclure : 20 graines viennent donc de 20 ovules fécondés. Il y a un seul fruit, mais 20 graines.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à dire ce que deviennent l'ovule et l'ovaire avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Après la fécondation, l'ovule devient la ___.",
+                "question_type": "fill_blank",
+                "hint": "C'est la partie qui pourra donner une nouvelle plante.",
+                "explanation": "Étape 2 — Suivre l'ovule : l'ovule fécondé devient la graine. Étape 4 — Conclure : ovule → graine.",
+                "answers": [
+                  {
+                    "content": "graine",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que devient l'ovaire d'une fleur de papayer après la fécondation ?",
+                "question_type": "single_choice",
+                "hint": "L'ovaire grossit beaucoup.",
+                "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire grossit et devient le fruit, ici la papaye. Les graines noires viennent des ovules et sont à l'intérieur.",
+                "answers": [
+                  {
+                    "content": "Le fruit",
+                    "correct": true
+                  },
+                  {
+                    "content": "La graine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pétale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pollen",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le fruit contient la ou les graines.",
+                "question_type": "true_false",
+                "hint": "Pense à la gousse d'arachide.",
+                "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit. Étape 2 — Suivre l'ovule : les ovules deviennent les graines, qui restent à l'intérieur de l'ovaire devenu fruit. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les fleurs du champ de M. Kouassi",
+          "statement": "M. Kouassi cultive du maïs et de l'arachide à Daloa. Pour apprendre à ses enfants le nom des pièces d'une fleur, il décrit le schéma en arbre d'une fleur de son champ : les sépales et les pétales protègent, les étamines et le pistil servent à la reproduction.",
+          "exercise_type": "fixation",
+          "figure": "fleur-schema",
+          "questions": [
+            {
+              "content": "Relie chaque pièce de la fleur à son rôle ou à sa description.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Observer : on lit la fleur de l'extérieur vers l'intérieur. Étape 2 — Nommer les pièces de protection : les sépales sont verts et protègent le bouton. Étape 3 — Repérer les étamines : l'anthère contient le pollen. Étape 4 — Repérer le pistil : son stigmate est collant et reçoit le pollen, son ovaire contient les ovules. Ne pas confondre l'anthère (mâle) et le stigmate (femelle).",
+              "answers": [
+                {
+                  "content": "Les sépales",
+                  "match": "Pièces vertes qui protègent le bouton"
+                },
+                {
+                  "content": "L'anthère",
+                  "match": "Sac qui contient le pollen"
+                },
+                {
+                  "content": "Le stigmate",
+                  "match": "Bout collant du pistil qui reçoit le pollen"
+                },
+                {
+                  "content": "L'ovaire",
+                  "match": "Partie renflée qui contient les ovules"
+                }
+              ]
+            },
+            {
+              "content": "Dans la fleur décrite, quelle pièce est l'organe femelle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Repérer les étamines : elles portent le pollen, donc elles sont mâles. Étape 4 — Repérer le pistil : il contient les ovules, donc il est femelle. Les pétales et les sépales ne font que protéger.",
+              "answers": [
+                {
+                  "content": "Le pistil",
+                  "correct": true
+                },
+                {
+                  "content": "Les étamines",
+                  "correct": false
+                },
+                {
+                  "content": "Les pétales",
+                  "correct": false
+                },
+                {
+                  "content": "Les sépales",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux pièces servent surtout à protéger les organes de reproduction ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Nommer les pièces de protection : les sépales et les pétales entourent les organes du centre. Les étamines et le pistil sont ces organes de reproduction eux-mêmes.",
+              "answers": [
+                {
+                  "content": "Les sépales",
+                  "correct": true
+                },
+                {
+                  "content": "Les pétales",
+                  "correct": true
+                },
+                {
+                  "content": "Les étamines",
+                  "correct": false
+                },
+                {
+                  "content": "L'ovaire",
+                  "correct": false
+                },
+                {
+                  "content": "Le stigmate",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une fleur du champ a 5 sépales, 5 pétales, 8 étamines et 1 pistil. Combien de pièces de protection a-t-elle ?",
+              "question_type": "numeric",
+              "unit": "pièces",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Observer : on compte chaque groupe. Étape 2 — Nommer les pièces de protection : les sépales (5) et les pétales (5). Pour calculer : 5 + 5 = 10. On ne compte pas les 8 étamines ni le pistil, qui sont des organes de reproduction.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les étamines sont les organes femelles de la fleur et contiennent les ovules.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Repérer les étamines : ce sont les organes mâles, qui portent le pollen. Étape 4 — Repérer le pistil : ce sont les ovules que contient son ovaire. L'affirmation mélange l'étamine et le pistil : elle est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le pollen dans les champs",
+          "statement": "Dans le champ de maïs d'une famille de Korhogo, les fleurs mâles du maïs libèrent un nuage de pollen jaune au sommet des tiges. Au bord du champ, des fleurs de courge aux pétales jaunes reçoivent la visite d'abeilles. Le schéma montre le trajet du pollen, de l'anthère au stigmate.",
+          "exercise_type": "fixation",
+          "figure": "pollinisation-etapes",
+          "questions": [
+            {
+              "content": "D'où part le pollen et où doit-il arriver pour qu'il y ait pollinisation ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le départ : le pollen est fabriqué dans l'anthère. Étape 2 — Repérer l'arrivée : il doit arriver sur le stigmate du pistil. Le sens inverse est l'erreur : le stigmate ne fabrique pas de pollen.",
+              "answers": [
+                {
+                  "content": "Il part de l'anthère et arrive sur le stigmate",
+                  "correct": true
+                },
+                {
+                  "content": "Il part du stigmate et arrive sur l'anthère",
+                  "correct": false
+                },
+                {
+                  "content": "Il part de l'ovaire et arrive sur le pétale",
+                  "correct": false
+                },
+                {
+                  "content": "Il part du sépale et arrive sur le style",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément du champ à ce qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer le départ : l'anthère fabrique le pollen. Étape 3 — Identifier le transporteur. Étape 4 — Justifier : le maïs a un pollen léger et abondant et pas de pétales colorés, donc le vent. La courge a de grands pétales jaunes qui attirent les insectes, comme les abeilles. Conclusion : maïs et vent, courge et insectes.",
+              "answers": [
+                {
+                  "content": "La fleur mâle du maïs",
+                  "match": "Le vent"
+                },
+                {
+                  "content": "La fleur de courge aux pétales jaunes",
+                  "match": "Les insectes"
+                },
+                {
+                  "content": "L'anthère",
+                  "match": "Là où le pollen est fabriqué"
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux caractéristiques montrent qu'une fleur est pollinisée par le vent ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Justifier : le vent emporte un pollen léger, et comme beaucoup de grains se perdent, la fleur en libère beaucoup. Des pétales colorés et du nectar attirent des insectes : ils ne sont pas utiles à une fleur pollinisée par le vent.",
+              "answers": [
+                {
+                  "content": "Un pollen très léger",
+                  "correct": true
+                },
+                {
+                  "content": "Un pollen très abondant",
+                  "correct": true
+                },
+                {
+                  "content": "Des pétales colorés",
+                  "correct": false
+                },
+                {
+                  "content": "Du nectar sucré",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet du pollen d'une fleur de courge jusqu'au fruit.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer le départ : le pollen est fabriqué dans l'anthère. Étape 3 — Identifier le transporteur : l'abeille l'emporte. Étape 2 — Repérer l'arrivée : il arrive sur le stigmate. Ensuite seulement, l'ovaire peut devenir un fruit : la pollinisation vient avant la formation du fruit.",
+              "answers": [
+                {
+                  "content": "L'anthère d'une fleur mâle fabrique le pollen"
+                },
+                {
+                  "content": "Une abeille emporte du pollen sur son corps"
+                },
+                {
+                  "content": "Le pollen arrive sur le stigmate d'une fleur femelle"
+                },
+                {
+                  "content": "L'ovaire grossit et devient un fruit"
+                }
+              ]
+            },
+            {
+              "content": "Les abeilles fabriquent le pollen des fleurs de courge.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer le départ : le pollen est fabriqué par l'anthère de l'étamine. Étape 3 — Identifier le transporteur : l'abeille le transporte seulement. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'expérience des sachets au jardin scolaire",
+          "statement": "Au jardin scolaire de Bouaké, la classe de 6ème veut savoir si les insectes sont utiles aux fleurs de courge. Pour trois lots de 10 fleurs femelles (seules les fleurs femelles de la courge donnent des fruits), elle compte les fruits formés : le premier lot est laissé libre ; le deuxième est couvert d'un filet à mailles très fines, qui laisse passer l'air et le vent mais pas les insectes ; le troisième est couvert d'un filet à grandes mailles, qui laisse passer le vent et les insectes. Le diagramme donne les résultats.",
+          "exercise_type": "evaluation",
+          "figure": "experience-sachets",
+          "questions": [
+            {
+              "content": "Combien de fruits se forment sur les 10 fleurs couvertes du filet à mailles très fines ?",
+              "question_type": "numeric",
+              "unit": "fruits",
+              "tolerance": 0,
+              "explanation": "Pour lire le diagramme : on lit la barre du lot demandé. La barre du filet à mailles très fines est à zéro. Donc aucun fruit ne se forme. On ne lit pas la barre des fleurs libres, qui vaut 8.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le rôle du lot « fleurs libres » dans l'expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Pour lire une expérience : on repère d'abord le lot qui n'a aucun obstacle. Les insectes et le vent y viennent comme d'habitude. Ce lot sert de comparaison, c'est le témoin. Il ne reçoit pas moins de pollen : il en reçoit normalement.",
+              "answers": [
+                {
+                  "content": "C'est le lot témoin : les insectes peuvent venir librement",
+                  "correct": true
+                },
+                {
+                  "content": "C'est le lot qui reçoit moins de pollen",
+                  "correct": false
+                },
+                {
+                  "content": "C'est le lot qui n'a pas de fleurs",
+                  "correct": false
+                },
+                {
+                  "content": "C'est le lot qui est arrosé davantage",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle conclusion tire-t-on de la comparaison entre le filet à mailles très fines (0 fruit) et le filet à grandes mailles (7 fruits) ?",
+              "question_type": "single_choice",
+              "explanation": "Pour lire l'expérience : 0 fruit sous le filet à mailles très fines, 7 sous le filet à grandes mailles. Dans les deux cas, le vent passe ; la seule différence est le passage des insectes. Les fruits se forment seulement quand les insectes peuvent venir apporter le pollen. Conclusion : les insectes sont nécessaires à la pollinisation de la courge, et le vent seul ne suffit pas.",
+              "answers": [
+                {
+                  "content": "Les insectes sont nécessaires : sans eux, aucun fruit ne se forme, alors que le vent passe dans les deux filets",
+                  "correct": true
+                },
+                {
+                  "content": "Le vent suffit à former les fruits",
+                  "correct": false
+                },
+                {
+                  "content": "Le filet très fin fabrique des fruits sans pollen",
+                  "correct": false
+                },
+                {
+                  "content": "Les fleurs n'ont pas besoin de pollen pour former un fruit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux affirmations sont justes d'après le diagramme ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Pour lire le diagramme : libres 8, filet très fin 0, filet à grandes mailles 7. 8 est plus grand que 0, et 7 est proche de 8. Les deux autres affirmations sont contredites par les barres.",
+              "answers": [
+                {
+                  "content": "Les fleurs libres donnent plus de fruits que les fleurs sous filet à mailles très fines",
+                  "correct": true
+                },
+                {
+                  "content": "Les fleurs sous filet donnent presque autant de fruits que les fleurs libres",
+                  "correct": true
+                },
+                {
+                  "content": "Les fleurs sous filet à mailles très fines donnent le plus de fruits",
+                  "correct": false
+                },
+                {
+                  "content": "Les fleurs sous filet ne donnent aucun fruit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de fruits de plus donnent les 10 fleurs libres par rapport aux 10 fleurs sous filet à grandes mailles ?",
+              "question_type": "numeric",
+              "unit": "fruit",
+              "tolerance": 0,
+              "explanation": "Pour lire le diagramme : libres 8 fruits, filet à grandes mailles 7 fruits, donc 8 − 7 = 1. Il y a un fruit de plus pour les fleurs libres.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Cette expérience montre que le vent seul suffit à polliniser la courge.",
+              "question_type": "true_false",
+              "explanation": "Sous le filet à mailles très fines, le vent passe mais il n'y a aucun fruit. Si le vent seul suffisait, ces fleurs donneraient des fruits. L'expérience montre au contraire que les insectes sont nécessaires à la courge. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "De la fleur du niébé à la gousse",
+          "statement": "Dans un champ près de Man, Fatou suit une fleur de niébé. Un jour, une abeille visite la fleur. Quelques jours plus tard, les pétales fanent et tombent. Deux semaines après, une gousse a remplacé la fleur : elle contient 7 graines. Le schéma montre ce que deviennent l'ovule et l'ovaire après la pollinisation et la fécondation.",
+          "exercise_type": "evaluation",
+          "figure": "fleur-graine",
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les événements observés par Fatou.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Rappeler : la pollinisation vient en premier, avec le pollen apporté par l'abeille. Étape 2 — Suivre l'ovule : l'ovule est ensuite fécondé. Les pétales, devenus inutiles, tombent. Étape 3 — Suivre l'ovaire : il devient la gousse. Ne pas placer la gousse avant la pollinisation.",
+              "answers": [
+                {
+                  "content": "Une abeille dépose du pollen sur le stigmate de la fleur"
+                },
+                {
+                  "content": "Les ovules sont fécondés"
+                },
+                {
+                  "content": "Les pétales fanent et tombent"
+                },
+                {
+                  "content": "L'ovaire est devenu une gousse qui contient des graines"
+                }
+              ]
+            },
+            {
+              "content": "Que devient l'ovaire de la fleur de niébé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire grossit et devient le fruit. Ici, le fruit est la gousse. Les graines sont dedans : elles viennent des ovules, pas de l'ovaire.",
+              "answers": [
+                {
+                  "content": "La gousse, qui est le fruit",
+                  "correct": true
+                },
+                {
+                  "content": "Une graine",
+                  "correct": false
+                },
+                {
+                  "content": "Un pétale",
+                  "correct": false
+                },
+                {
+                  "content": "Du pollen",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La gousse contient 7 graines. Combien d'ovules ont été fécondés dans l'ovaire ?",
+              "question_type": "numeric",
+              "unit": "ovules",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Suivre l'ovule : chaque ovule fécondé devient une graine. Étape 4 — Conclure : 7 graines viennent de 7 ovules fécondés, dans un seul ovaire devenu une seule gousse.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque partie de la fleur à ce qu'elle devient.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Suivre l'ovule : ovule → graine. Étape 3 — Suivre l'ovaire : ovaire → fruit. Étape 4 — Conclure : les pétales n'ont plus de rôle après la fécondation, ils tombent.",
+              "answers": [
+                {
+                  "content": "L'ovule",
+                  "match": "La graine"
+                },
+                {
+                  "content": "L'ovaire",
+                  "match": "Le fruit"
+                },
+                {
+                  "content": "Les pétales",
+                  "match": "Ils se flétrissent et tombent"
+                }
+              ]
+            },
+            {
+              "content": "Fatou ouvre la gousse et dit : « Les graines de niébé sont des fruits. » A-t-elle raison ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Suivre l'ovule : les ovules deviennent des graines, ce sont les petits haricots de la gousse. Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit, c'est la gousse. Fatou confond la graine et le fruit, comme dans le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "Non : ce sont des graines, le fruit est la gousse",
+                  "correct": true
+                },
+                {
+                  "content": "Oui : tout ce qui se mange est un fruit",
+                  "correct": false
+                },
+                {
+                  "content": "Oui : les graines viennent de l'ovaire",
+                  "correct": false
+                },
+                {
+                  "content": "Non : ce sont des pétales",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si l'abeille n'était pas venue et que le vent n'avait rien apporté, la fleur aurait quand même donné une gousse.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Rappeler : sans pollen sur le stigmate, il n'y a pas de pollinisation. Sans pollinisation, l'ovule n'est pas fécondé, donc il ne devient pas une graine et l'ovaire ne devient pas un fruit. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Pièces d'une fleur (sépales, pétales, étamines, pistil), anthère et pollen, stigmate et ovaire, pollinisation par les insectes et par le vent, ovule et graine, ovaire et fruit.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève de 6ème observe une fleur dans le jardin de l'école. Le schéma en arbre donne les pièces de la fleur : sépales, pétales, étamines (avec l'anthère) et pistil (avec le stigmate, le style et l'ovaire).",
+              "exercise_type": "evaluation",
+              "figure": "fleur-schema",
+              "hint": "Retiens : l'anthère fabrique le pollen ; le stigmate le reçoit ; l'ovule devient la graine ; l'ovaire devient le fruit.",
+              "questions": [
+                {
+                  "content": "Quelle pièce de la fleur est l'organe femelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer les pièces. Étape 3 — Repérer les étamines : elles portent le pollen, donc elles sont mâles. Étape 4 — Repérer le pistil : il contient les ovules, donc il est femelle. Les pétales et les sépales protègent (les pétales attirent aussi souvent les insectes).",
+                  "answers": [
+                    {
+                      "content": "Le pistil",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'étamine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sépale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les sépales sont de petites pièces ___ qui protègent le bouton.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Nommer les pièces de protection : les sépales sont les pièces vertes, les plus externes, qui protègent le bouton. Les pétales sont souvent colorés.",
+                  "answers": [
+                    {
+                      "content": "vertes",
+                      "correct": true
+                    },
+                    {
+                      "content": "verts",
+                      "correct": true
+                    },
+                    {
+                      "content": "verte",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux parties font partie du pistil ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Repérer le pistil : il a un stigmate, un style et un ovaire. L'anthère et le filet sont dans l'étamine, et le pétale est une pièce de protection.",
+                  "answers": [
+                    {
+                      "content": "Le stigmate",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'anthère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le filet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pétale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pollen est fabriqué dans l'ovaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer les étamines : le pollen est fabriqué dans l'anthère. L'ovaire, au contraire, contient les ovules. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les pièces d'une fleur, de l'extérieur vers le centre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer de l'extérieur vers l'intérieur. Les sépales sont les plus externes, puis les pétales, puis les étamines, puis le pistil au centre.",
+                  "answers": [
+                    {
+                      "content": "Les sépales"
+                    },
+                    {
+                      "content": "Les pétales"
+                    },
+                    {
+                      "content": "Les étamines"
+                    },
+                    {
+                      "content": "Le pistil"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un champ de maïs, le pollen jaune des fleurs mâles est emporté par le vent. Au bord du champ, des abeilles visitent des fleurs aux pétales colorés.",
+              "exercise_type": "evaluation",
+              "figure": "pollinisation-etapes",
+              "hint": "Pense au trajet du pollen : de l'anthère au stigmate, porté par un insecte ou par le vent.",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que la pollinisation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le départ : l'anthère. Étape 2 — Repérer l'arrivée : le stigmate. La pollinisation est le transport du pollen de l'une à l'autre. La formation du fruit vient après.",
+                  "answers": [
+                    {
+                      "content": "Le transport du pollen jusqu'au stigmate",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le transport de l'eau jusqu'aux feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "La formation du fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chute des pétales",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel transporteur pollinise les fleurs mâles du maïs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier le transporteur. Étape 4 — Justifier : le maïs libère un pollen léger et abondant, sans pétales colorés : c'est le vent qui l'emporte.",
+                  "answers": [
+                    {
+                      "content": "Le vent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les abeilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les poissons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le liquide sucré que les abeilles viennent chercher dans les fleurs s'appelle le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Justifier : le nectar est un liquide sucré qui attire les insectes. En le cherchant, l'abeille se couvre de pollen.",
+                  "answers": [
+                    {
+                      "content": "nectar",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les fleurs aux pétales colorés et au nectar sont souvent pollinisées par les insectes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Justifier : des pétales colorés et du nectar attirent les abeilles et les papillons, qui transportent le pollen. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux transporteurs possibles du pollen ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Identifier le transporteur : à ce niveau, le pollen est transporté par les insectes ou par le vent. Les racines et les sépales ne transportent rien.",
+                  "answers": [
+                    {
+                      "content": "Les insectes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sépales",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau de la pluie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Après la pollinisation et la fécondation, la fleur se transforme : le schéma montre ce que deviennent l'ovule et l'ovaire.",
+              "exercise_type": "evaluation",
+              "figure": "fleur-graine",
+              "hint": "Deux flèches : ovule → graine, ovaire → fruit.",
+              "questions": [
+                {
+                  "content": "En quoi l'ovule fécondé se transforme-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : la fleur est pollinisée. Étape 2 — Suivre l'ovule : l'ovule devient la graine. L'ovaire, lui, devient le fruit.",
+                  "answers": [
+                    {
+                      "content": "En graine",
+                      "correct": true
+                    },
+                    {
+                      "content": "En fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "En pollen",
+                      "correct": false
+                    },
+                    {
+                      "content": "En sépale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ovaire grossit et devient le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Suivre l'ovaire : après la fécondation, l'ovaire grossit et devient le fruit. Les graines sont à l'intérieur.",
+                  "answers": [
+                    {
+                      "content": "fruit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La gousse d'arachide est le fruit de la plante, et les arachides qu'elle contient sont des graines.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre l'ovaire : la gousse vient de l'ovaire, c'est le fruit. Étape 2 — Suivre l'ovule : les arachides viennent des ovules, ce sont des graines. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fruit de gombo contient 30 graines. Combien d'ovules ont été fécondés dans son ovaire ?",
+                  "question_type": "numeric",
+                  "unit": "ovules",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Suivre l'ovule : un ovule fécondé donne une graine. 30 graines viennent donc de 30 ovules fécondés, dans un seul ovaire.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que deviennent les pétales après la fécondation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : après la fécondation, les pétales n'ont plus de rôle. Ils se flétrissent et tombent. Seuls l'ovule et l'ovaire se transforment en graine et en fruit.",
+                  "answers": [
+                    {
+                      "content": "Ils se flétrissent et tombent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils deviennent des graines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils deviennent le fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils fabriquent le pollen",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au jardin scolaire, le professeur de SVT demande de relier le vocabulaire de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Retiens : l'anthère fabrique le pollen ; le stigmate le reçoit ; l'ovule devient la graine ; l'ovaire devient le fruit.",
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Repérer les étamines : le pollen est fabriqué par l'anthère. Le nectar attire les insectes. Les ovules sont dans l'ovaire du pistil. Le stigmate est le bout collant du pistil, qui reçoit le pollen.",
+                  "answers": [
+                    {
+                      "content": "Le pollen",
+                      "match": "Fine poussière fabriquée par l'anthère"
+                    },
+                    {
+                      "content": "Le nectar",
+                      "match": "Liquide sucré qui attire les insectes"
+                    },
+                    {
+                      "content": "Les ovules",
+                      "match": "Petits organes femelles contenus dans l'ovaire"
+                    },
+                    {
+                      "content": "Le stigmate",
+                      "match": "Bout collant du pistil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la formation d'un fruit.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rappeler : tout commence par la pollinisation. Étape 2 — Suivre l'ovule : la fécondation, puis la graine. Étape 3 — Suivre l'ovaire : le fruit. On ne peut pas avoir de fruit avant la pollinisation.",
+                  "answers": [
+                    {
+                      "content": "La fleur est pollinisée"
+                    },
+                    {
+                      "content": "L'ovule est fécondé"
+                    },
+                    {
+                      "content": "L'ovule devient la graine"
+                    },
+                    {
+                      "content": "L'ovaire devient le fruit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fleur qui n'a pas été pollinisée ne donne pas de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : sans pollen sur le stigmate, il n'y a pas de fécondation. L'ovaire ne devient donc pas un fruit.",
+                  "answers": [
+                    {
+                      "content": "fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "pétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "sépale",
+                      "correct": false
+                    },
+                    {
+                      "content": "feuille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pistil est l'organe mâle de la fleur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Repérer le pistil : il contient les ovules, c'est l'organe femelle. L'organe mâle est l'étamine. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois affirmations sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Repérer les étamines : l'anthère fabrique le pollen. Étape 4 — Repérer le pistil : le stigmate reçoit le pollen et l'ovaire contient les ovules. Le pétale et le sépale ne fabriquent ni pollen ni ovules.",
+                  "answers": [
+                    {
+                      "content": "L'anthère fabrique le pollen",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le stigmate reçoit le pollen",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovaire contient les ovules",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pétale fabrique le pollen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sépale contient les ovules",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Le champ de maïs et d'arachide, les abeilles et les fleurs, le marché, les fruits et les graines que l'on mange, le jardin scolaire : pièces de la fleur, pollinisation, graine et fruit.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Seydou cultive du maïs près de Korhogo. Il remarque que, quand le vent souffle, les fleurs mâles au sommet des tiges lâchent un nuage de poussière jaune. Les fleurs du maïs n'ont ni pétales colorés ni nectar.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pas de pétales colorés, pas de nectar, un pollen léger : pense au vent.",
+              "questions": [
+                {
+                  "content": "Que contient la poussière jaune que lâchent les fleurs mâles du maïs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le départ : les fleurs mâles ont des étamines dont l'anthère fabrique le pollen. La poussière jaune est donc du pollen. Les ovules sont dans l'ovaire d'un pistil, et le nectar est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Du pollen",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des ovules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du nectar",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des graines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le transporteur du pollen du maïs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier le transporteur. Étape 4 — Justifier : sans pétales colorés ni nectar, rien n'attire les insectes. Le pollen léger et abondant est emporté par le vent.",
+                  "answers": [
+                    {
+                      "content": "Le vent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les abeilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les papillons",
+                      "correct": false
+                    },
+                    {
+                      "content": "La racine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un champ de maïs, une abeille est indispensable pour transporter le pollen.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Identifier le transporteur : le maïs est pollinisé par le vent, pas par les abeilles. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux caractéristiques du maïs montrent qu'il est pollinisé par le vent ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Justifier : un pollen léger et abondant, et des fleurs sans pétales colorés ni nectar, sont les signes d'une pollinisation par le vent.",
+                  "answers": [
+                    {
+                      "content": "Il libère beaucoup de pollen léger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ses fleurs n'ont pas de pétales colorés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ses fleurs produisent du nectar sucré",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ses fleurs ont une forte odeur de fruit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pollen doit arriver sur le ___ du pistil pour qu'il y ait pollinisation.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer l'arrivée : le bout collant du pistil, qui retient le pollen, est le stigmate.",
+                  "answers": [
+                    {
+                      "content": "stigmate",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mariam vend des arachides au marché de Treichville. Elle ouvre une gousse devant sa petite sœur Awa. La gousse contient deux arachides.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Ovule → graine ; ovaire → fruit.",
+              "questions": [
+                {
+                  "content": "Que représente la gousse d'arachide pour la plante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Suivre l'ovaire : la gousse vient de l'ovaire d'une fleur, c'est donc le fruit. Les arachides à l'intérieur viennent des ovules.",
+                  "answers": [
+                    {
+                      "content": "Le fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "La graine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'étamine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que représentent les deux arachides dans la gousse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Suivre l'ovule : chaque arachide vient d'un ovule fécondé, c'est donc une graine. La gousse qui les contient est le fruit.",
+                  "answers": [
+                    {
+                      "content": "Des graines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des sépales",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La gousse que Mariam ouvre contient 2 arachides. Combien d'ovules ont été fécondés dans l'ovaire de la fleur ?",
+                  "question_type": "numeric",
+                  "unit": "ovules",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Suivre l'ovule : un ovule fécondé donne une graine. 2 arachides, donc 2 ovules fécondés. Étape 3 — Suivre l'ovaire : un seul ovaire donne une seule gousse.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam peut dire : « J'ai 5 gousses, donc j'ai 5 fruits. »",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre l'ovaire : chaque gousse vient de l'ovaire d'une fleur, c'est un fruit. 5 gousses font donc 5 fruits. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le marché, la tomate, le piment et le gombo sont des ___ au sens de la SVT, car ils viennent de l'ovaire d'une fleur.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Suivre l'ovaire : tout ce qui vient de l'ovaire d'une fleur est un fruit. Même si on les cuisine comme des légumes, ce sont des fruits.",
+                  "answers": [
+                    {
+                      "content": "fruits",
+                      "correct": true
+                    },
+                    {
+                      "content": "feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "pétales",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "M. Konan, apiculteur à Man, installe des ruches à côté d'un champ de courges. Les abeilles visitent beaucoup les grandes fleurs jaunes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pétales colorés et nectar : les abeilles. Pollen léger et abondant : le vent.",
+              "questions": [
+                {
+                  "content": "Pourquoi les abeilles visitent-elles les fleurs de courge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Justifier : les grandes fleurs jaunes et le nectar attirent les abeilles. Elles viennent boire le nectar. Elles ne fabriquent pas le pollen : il vient de l'anthère.",
+                  "answers": [
+                    {
+                      "content": "Elles y cherchent du nectar",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles y cherchent des graines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles y fabriquent le pollen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles y cherchent des racines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que font les abeilles qui aide la courge à former des fruits ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier le transporteur : en cherchant le nectar, l'abeille touche les anthères et se couvre de pollen. Étape 2 — Repérer l'arrivée : en se posant sur une autre fleur, elle en dépose sur le stigmate. Elle ne fabrique ni pollen ni ovules.",
+                  "answers": [
+                    {
+                      "content": "Elles transportent le pollen d'une fleur à l'autre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles fabriquent le pollen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles fabriquent les ovules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles arrosent les fleurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui se passe sur une fleur de courge visitée par une abeille.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le départ : l'anthère. Étape 3 — Identifier le transporteur : l'abeille, couverte de pollen, change de fleur. Étape 2 — Repérer l'arrivée : le stigmate. L'ordre suit le trajet du pollen.",
+                  "answers": [
+                    {
+                      "content": "L'abeille se pose sur la fleur et touche l'anthère"
+                    },
+                    {
+                      "content": "Du pollen se colle sur son corps"
+                    },
+                    {
+                      "content": "L'abeille se pose sur une autre fleur"
+                    },
+                    {
+                      "content": "Du pollen reste sur le stigmate de cette autre fleur"
+                    }
+                  ]
+                },
+                {
+                  "content": "M. Konan a intérêt à installer ses ruches loin du champ de courges pour que les fruits se forment.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Identifier le transporteur : la courge est pollinisée par les insectes. Si les ruches sont proches, les abeilles visitent plus de fleurs. L'affirmation est fausse : elles doivent être proches.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à ce qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le départ : l'anthère fabrique le pollen. Étape 4 — Justifier : le maïs a un pollen léger et pas de pétales colorés, donc le vent. La courge a des pétales jaunes et du nectar, donc les insectes.",
+                  "answers": [
+                    {
+                      "content": "Le maïs, sans pétales colorés ni nectar",
+                      "match": "Le vent"
+                    },
+                    {
+                      "content": "La courge, aux pétales jaunes et au nectar",
+                      "match": "Les insectes"
+                    },
+                    {
+                      "content": "L'anthère",
+                      "match": "Là où le pollen est fabriqué"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au jardin scolaire de Gagnoa, les élèves de 6ème couvrent d'un filet à mailles très fines (le vent passe, pas les insectes) 5 fleurs femelles de courge, avant leur ouverture. Ils laissent 5 autres fleurs femelles de courge libres. Un mois plus tard, ils comptent les fruits.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Filet très fin : le vent passe, mais pas les insectes.",
+              "questions": [
+                {
+                  "content": "Pourquoi les élèves laissent-ils 5 fleurs libres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour lire l'expérience : on compare deux lots. Le lot libre sert de témoin, c'est le point de comparaison. Il ne sert pas à enlever quoi que ce soit.",
+                  "answers": [
+                    {
+                      "content": "Pour avoir des fleurs de comparaison, le témoin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour avoir moins de fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour avoir plus de pétales",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour enlever le pollen",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle question l'expérience permet-elle de poser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour lire l'expérience : le filet très fin empêche les insectes d'arriver sur la fleur, mais le vent passe. On compare ensuite les fruits formés. La question porte donc sur le rôle des insectes dans la formation des fruits.",
+                  "answers": [
+                    {
+                      "content": "Les insectes sont-ils utiles pour que les fleurs forment des fruits ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fleurs ont-elles des sépales ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tomate pousse-t-elle sur le sol ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sachet change-t-il la couleur des pétales ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur les 5 fleurs libres, 4 donnent un fruit. Combien n'en donnent pas ?",
+                  "question_type": "numeric",
+                  "unit": "fleur",
+                  "tolerance": 0,
+                  "explanation": "Pour lire les résultats : 5 fleurs libres, 4 avec un fruit, donc 5 − 4 = 1. Une fleur libre ne donne pas de fruit.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si aucune fleur sous le filet très fin ne donne de fruit, on peut dire que le pollen n'est pas arrivé sur leurs stigmates.",
+                  "question_type": "true_false",
+                  "explanation": "Sans pollen sur le stigmate, il n'y a pas de fécondation et pas de fruit. Le filet très fin empêche les insectes d'apporter le pollen. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fruit de courge contient des ___, qui viennent des ovules.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit. Étape 2 — Suivre l'ovule : les ovules deviennent des graines à l'intérieur. Le fruit de courge contient donc des graines.",
+                  "answers": [
+                    {
+                      "content": "graines",
+                      "correct": true
+                    },
+                    {
+                      "content": "graine",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Lire un diagramme d'expérience, déduire le transporteur du pollen d'après la fleur, repérer et corriger des erreurs (étamine et pistil, graine et fruit), remettre dans l'ordre le trajet de la fleur au fruit.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au jardin scolaire de Bouaké, la classe compte les fruits formés sur trois lots de 10 fleurs femelles de courge : fleurs libres, fleurs sous un filet à mailles très fines (le vent passe, pas les insectes), fleurs sous un filet à grandes mailles (le vent et les insectes passent). Le diagramme donne les résultats.",
+              "exercise_type": "evaluation",
+              "figure": "experience-sachets",
+              "hint": "Compare les barres deux à deux : qu'est-ce qui change entre les lots, et qu'est-ce que cela change aux fruits ?",
+              "questions": [
+                {
+                  "content": "Combien de fruits se forment sur les 10 fleurs libres ?",
+                  "question_type": "numeric",
+                  "unit": "fruits",
+                  "tolerance": 0,
+                  "explanation": "Pour lire le diagramme : on lit la barre des fleurs libres. Elle atteint 8. Il se forme donc 8 fruits.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel lot donne le moins de fruits ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour lire le diagramme : libres 8, filet très fin 0, filet à grandes mailles 7. 0 est la plus petite valeur, c'est le filet à mailles très fines.",
+                  "answers": [
+                    {
+                      "content": "Les fleurs sous filet à mailles très fines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fleurs libres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fleurs sous filet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois lots donnent autant de fruits",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les fleurs sous filet à grandes mailles donnent-elles presque autant de fruits que les fleurs libres, alors que le filet à mailles très fines n'en donne aucun ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour lire le diagramme : 7 fruits sous le filet à grandes mailles, presque autant que 8. Ce filet laisse passer les insectes, qui apportent le pollen sur les stigmates. Le filet très fin laisse passer le vent mais pas les insectes : 0 fruit. Les insectes sont donc nécessaires.",
+                  "answers": [
+                    {
+                      "content": "Le filet laisse passer les insectes, qui apportent le pollen",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le filet fabrique du pollen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le filet attire le vent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le filet remplace les ovules",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après le diagramme, le filet à mailles très fines aide les fleurs de courge à former des fruits.",
+                  "question_type": "true_false",
+                  "explanation": "Pour lire le diagramme : sous le filet à mailles très fines, il n'y a aucun fruit. Il empêche les insectes d'apporter le pollen. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux conclusions découlent des résultats ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Quand les insectes ne peuvent pas venir, alors que le vent passe, il n'y a pas de fruit : les insectes sont nécessaires et le vent seul ne suffit pas. Les deux premières affirmations sont justes. Les deux autres sont contredites par les résultats (le vent passe sous le filet très fin, et il n'y a aucun fruit).",
+                  "answers": [
+                    {
+                      "content": "Les insectes sont nécessaires à la formation des fruits de courge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quand le vent passe mais pas les insectes, la fleur de courge ne forme pas de fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le filet très fin fabrique des fruits sans pollen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vent seul suffit à polliniser les fleurs de courge",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Koffi a noté les caractères de quatre fleurs. Il veut deviner le transporteur de pollen de chacune. Il sait que les fleurs aux pétales colorés et au nectar attirent les insectes, et que les fleurs au pollen léger et abondant, sans pétales colorés, sont pollinisées par le vent.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pétales colorés et nectar : insectes. Pollen léger et abondant : vent.",
+              "questions": [
+                {
+                  "content": "La fleur A a de grands pétales rouges et du nectar sucré. Quel est son transporteur le plus probable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier le transporteur. Étape 4 — Justifier : de grands pétales colorés et du nectar attirent les insectes. Le transporteur le plus probable est donc un insecte.",
+                  "answers": [
+                    {
+                      "content": "Les insectes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fleur B est verte, sans pétales colorés ni nectar, et libère un pollen léger en grande quantité. Quel est son transporteur le plus probable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Justifier : pas de couleur ni de nectar pour attirer, mais un pollen léger et abondant. C'est le signe d'une pollinisation par le vent.",
+                  "answers": [
+                    {
+                      "content": "Le vent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les abeilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les papillons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les oiseaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fleur sans pétales colorés ni nectar est forcément stérile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Justifier : une fleur peut très bien être pollinisée par le vent, comme le maïs, sans pétales colorés ni nectar. Elle n'est pas stérile. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois caractéristiques d'une fleur pollinisée par les insectes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Justifier : les pétales colorés, le nectar et une odeur attirent les insectes. Un pollen très léger et très abondant et l'absence de pétales sont des signes de pollinisation par le vent.",
+                  "answers": [
+                    {
+                      "content": "Des pétales colorés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du nectar sucré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une odeur qui attire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pollen très léger et très abondant",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'absence de pétales",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche de Koffi pour trouver le transporteur du pollen.",
+                  "question_type": "ordering",
+                  "explanation": "On observe d'abord les caractères de la fleur, puis on compare avec les caractères connus, et on conclut par l'identification du transporteur (Étape 3 — Identifier le transporteur, Étape 4 — Justifier). On ne conclut qu'après avoir observé et comparé.",
+                  "answers": [
+                    {
+                      "content": "Observer les caractères de la fleur : pétales, nectar, pollen"
+                    },
+                    {
+                      "content": "Comparer avec les caractères connus des deux types de fleurs"
+                    },
+                    {
+                      "content": "Conclure : insecte ou vent"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Quatre élèves de 6ème ont fait des affirmations dans leur cahier. Tu dois trouver les erreurs.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Vérifie chaque affirmation avec les deux flèches : ovule → graine, ovaire → fruit.",
+              "questions": [
+                {
+                  "content": "Adjoua écrit : « L'étamine contient les ovules. » Son affirmation est juste.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer les étamines : l'étamine porte le pollen, dans son anthère. Étape 4 — Repérer le pistil : ce sont les ovules que contient l'ovaire du pistil. Adjoua confond l'étamine et le pistil. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao écrit : « La gousse d'arachide est un fruit. » Son affirmation est juste.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre l'ovaire : la gousse vient de l'ovaire de la fleur, c'est le fruit. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou écrit : « Les arachides dans la gousse sont des fruits. » Quelle correction est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Suivre l'ovule : l'ovule fécondé devient la graine. Les arachides sont des graines. Étape 3 — Suivre l'ovaire : seul l'ovaire devient le fruit, ici la gousse. Fatou confond la graine et le fruit.",
+                  "answers": [
+                    {
+                      "content": "Ce sont des graines, qui viennent des ovules",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ce sont des ovaires, qui deviennent des fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce sont des sépales, qui protègent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce sont des pollens, qui viennent de l'anthère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Konan écrit : « L'abeille fabrique le pollen dans son corps. » Quelle correction est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le départ : le pollen est fabriqué dans l'anthère de l'étamine. Étape 3 — Identifier le transporteur : l'abeille le transporte seulement.",
+                  "answers": [
+                    {
+                      "content": "L'abeille transporte le pollen, qui est fabriqué dans l'anthère",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'abeille fabrique le pollen dans le stigmate",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'abeille fabrique les ovules",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'abeille fabrique le nectar de la fleur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux phrases corrigent bien les erreurs des élèves ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Suivre l'ovule : l'ovule devient la graine. Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit. Les deux autres phrases inversent la graine et le fruit : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "L'ovule devient la graine",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovaire devient le fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovule devient le fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ovaire devient la graine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Awa fait le récit de la vie d'une fleur femelle de courge dans le champ de sa grand-mère, de l'ouverture de la fleur à la formation du fruit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Suis le trajet : fleur, pollen, stigmate, fécondation, graine et fruit.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre le récit d'Awa.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le départ : la fleur s'ouvre et attire les abeilles. Étape 3 — Identifier le transporteur : l'abeille emporte le pollen d'une anthère de fleur mâle. Étape 2 — Repérer l'arrivée : elle le dépose sur le stigmate de la fleur femelle. Ensuite, après la fécondation, les graines et le fruit se forment (Étapes 2 et 3 de la formation du fruit). Le fruit est la dernière étape.",
+                  "answers": [
+                    {
+                      "content": "La fleur s'ouvre et ses pétales jaunes attirent les abeilles"
+                    },
+                    {
+                      "content": "Une abeille emporte du pollen d'une anthère de fleur mâle"
+                    },
+                    {
+                      "content": "Le pollen arrive sur le stigmate de la fleur femelle d'Awa"
+                    },
+                    {
+                      "content": "Les ovules fécondés deviennent des graines et l'ovaire devient le fruit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la première étape pour qu'un fruit se forme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : sans pollen sur le stigmate, il n'y a pas de fécondation et pas de fruit. La pollinisation est donc la première étape.",
+                  "answers": [
+                    {
+                      "content": "La pollinisation",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chute des pétales",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croissance du fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le départ des abeilles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fruit de courge d'Awa contient 40 graines. Combien d'ovules ont été fécondés ?",
+                  "question_type": "numeric",
+                  "unit": "ovules",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Suivre l'ovule : chaque ovule fécondé devient une graine. 40 graines viennent donc de 40 ovules fécondés, dans un seul ovaire.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les pétales jaunes deviennent les graines du fruit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : les pétales se flétrissent et tombent après la fécondation. Les graines viennent des ovules. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque événement à ce qu'il produit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler : la pollinisation amène le pollen sur le stigmate. Étape 2 — Suivre l'ovule : l'ovule fécondé devient une graine. Étape 3 — Suivre l'ovaire : il devient le fruit.",
+                  "answers": [
+                    {
+                      "content": "La pollinisation",
+                      "match": "Le pollen arrive sur le stigmate"
+                    },
+                    {
+                      "content": "L'ovule fécondé",
+                      "match": "Il devient une graine"
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "match": "Il devient le fruit"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : pièces de la fleur, rôle de l'étamine et du pistil, pollinisation par les insectes et par le vent, lecture d'une expérience, ovule et graine, ovaire et fruit, de la fleur au fruit.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur le schéma en arbre d'une fleur d'un champ de Yamoussoukro, on lit les sépales, les pétales, les étamines avec l'anthère, et le pistil avec le stigmate, le style et l'ovaire.",
+              "exercise_type": "evaluation",
+              "figure": "fleur-schema",
+              "hint": "Étamine : anthère et pollen (mâle). Pistil : stigmate, style, ovaire et ovules (femelle).",
+              "questions": [
+                {
+                  "content": "Relie chaque pièce à sa fonction.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer les pièces. Étape 2 — Nommer : les sépales protègent le bouton. Étape 3 — Repérer les étamines : l'anthère fabrique le pollen. Étape 4 — Repérer le pistil : le stigmate reçoit le pollen, l'ovaire contient les ovules.",
+                  "answers": [
+                    {
+                      "content": "Les sépales",
+                      "match": "Protéger le bouton"
+                    },
+                    {
+                      "content": "L'anthère",
+                      "match": "Fabriquer le pollen"
+                    },
+                    {
+                      "content": "Le stigmate",
+                      "match": "Recevoir le pollen"
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "match": "Contenir les ovules"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la partie mâle de la fleur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer les étamines : elles fabriquent le pollen, donc elles forment la partie mâle. Le pistil contient les ovules : c'est la partie femelle.",
+                  "answers": [
+                    {
+                      "content": "L'étamine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pistil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sépale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le stigmate",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où le pollen doit-il arriver pour qu'il y ait pollinisation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer l'arrivée : le pollen part de l'anthère et arrive sur le stigmate, le bout collant du pistil.",
+                  "answers": [
+                    {
+                      "content": "Sur le stigmate",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur l'anthère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur le sépale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la racine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les sépales et les pétales sont des organes de reproduction.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Nommer : les sépales et les pétales protègent la fleur. Étape 3 et 4 — Repérer : les organes de reproduction sont les étamines (mâles) et le pistil (femelle). L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les parties d'un pistil, du haut vers la base.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 4 — Repérer le pistil : le stigmate est le bout collant en haut, le style est le tube, l'ovaire est la partie renflée à la base.",
+                  "answers": [
+                    {
+                      "content": "Le stigmate"
+                    },
+                    {
+                      "content": "Le style"
+                    },
+                    {
+                      "content": "L'ovaire"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un champ de maïs touche un champ de courges, près de Daloa. Les élèves observent les deux plantes pendant la saison des fleurs. Le schéma montre le trajet du pollen.",
+              "exercise_type": "evaluation",
+              "figure": "pollinisation-etapes",
+              "hint": "Pétales colorés et nectar : insectes. Pollen léger et abondant : vent.",
+              "questions": [
+                {
+                  "content": "Quel est le transporteur du pollen pour les fleurs de maïs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier le transporteur. Étape 4 — Justifier : fleurs sans pétales colorés ni nectar, pollen léger et abondant : le vent emporte le pollen.",
+                  "answers": [
+                    {
+                      "content": "Le vent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les abeilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les papillons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fourmis",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le transporteur du pollen pour les fleurs de courge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Identifier le transporteur. Étape 4 — Justifier : grands pétales jaunes et nectar attirent les abeilles, qui emportent le pollen.",
+                  "answers": [
+                    {
+                      "content": "Les abeilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau de pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le départ : l'anthère fabrique le pollen. Étape 3 — Identifier le transporteur : l'abeille le transporte seulement. Les affirmations qui font partir le pollen du stigmate ou le font fabriquer par l'abeille sont fausses.",
+                  "answers": [
+                    {
+                      "content": "Une abeille transporte du pollen sans le fabriquer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pollen part de l'anthère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pollen part du stigmate",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'abeille fabrique le pollen",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur 10 fleurs femelles de courge libres, 8 donnent un fruit ; sur 10 fleurs sous un filet à mailles très fines, aucune. Quelle est la différence du nombre de fruits entre les deux lots ?",
+                  "question_type": "numeric",
+                  "unit": "fruits",
+                  "tolerance": 0,
+                  "explanation": "Pour comparer les lots : 8 fruits contre 0, donc 8 − 0 = 8. La différence est de 8 fruits, qui s'explique par l'absence d'insectes sous le filet très fin (le vent y passe pourtant).",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nectar et les pétales colorés servent surtout à attirer les insectes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Justifier : ces caractères signalent la fleur aux abeilles et aux papillons, qui transportent le pollen. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans le champ de maïs et d'arachide de la famille Kouadio, une fleur d'arachide a été pollinisée. Son ovaire contient 2 ovules. Une gousse se forme ensuite à la place de la fleur. Le schéma montre ce que deviennent l'ovule et l'ovaire.",
+              "exercise_type": "evaluation",
+              "figure": "fleur-graine",
+              "hint": "Ovule → graine ; ovaire → fruit ; pétales qui fanent.",
+              "questions": [
+                {
+                  "content": "En quoi l'ovaire de la fleur d'arachide se transforme-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire grossit et devient le fruit. Ici, c'est la gousse. La graine vient de l'ovule.",
+                  "answers": [
+                    {
+                      "content": "En gousse, le fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "En graine",
+                      "correct": false
+                    },
+                    {
+                      "content": "En pétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "En pollen",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fleur a 2 ovules fécondés. Combien d'arachides la gousse contiendra-t-elle ?",
+                  "question_type": "numeric",
+                  "unit": "arachides",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Suivre l'ovule : chaque ovule fécondé devient une graine. 2 ovules fécondés donnent 2 arachides dans une seule gousse.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les arachides contenues dans la gousse sont des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Suivre l'ovule : l'ovule fécondé devient une graine. Les arachides sont donc des graines. La gousse, elle, est le fruit.",
+                  "answers": [
+                    {
+                      "content": "graines",
+                      "correct": true
+                    },
+                    {
+                      "content": "graine",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la fleur d'arachide n'avait pas été pollinisée, une gousse se serait quand même formée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : sans pollen sur le stigmate, il n'y a pas de fécondation. L'ovule ne devient pas une graine et l'ovaire ne devient pas un fruit. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois changements ont lieu après la pollinisation et la fécondation ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Suivre l'ovule : l'ovule devient la graine. Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit. Étape 4 — Conclure : les pétales fanent. Les deux autres propositions mélangent les parties.",
+                  "answers": [
+                    {
+                      "content": "L'ovule devient la graine",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovaire devient le fruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les pétales fanent et tombent",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovule devient le fruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le stigmate devient la graine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pour le bilan de la leçon, le professeur de SVT de Korhogo demande de retrouver toutes les étapes de la formation d'une graine, depuis la fleur jusqu'au fruit mûr.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pollinisation, fécondation, puis graine et fruit : l'ordre est toujours le même.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes depuis la fleur jusqu'au fruit mûr.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le départ : la fleur s'ouvre et son anthère libère le pollen. Étape 3 — Identifier le transporteur : insecte ou vent. Étape 2 — Repérer l'arrivée : le pollen arrive sur le stigmate. Ensuite l'ovule devient la graine et l'ovaire devient le fruit. Le fruit est la dernière étape.",
+                  "answers": [
+                    {
+                      "content": "La fleur s'ouvre avec ses étamines et son pistil"
+                    },
+                    {
+                      "content": "Le pollen est transporté par un insecte ou par le vent"
+                    },
+                    {
+                      "content": "Le pollen arrive sur le stigmate : c'est la pollinisation"
+                    },
+                    {
+                      "content": "Les ovules fécondés deviennent des graines et l'ovaire devient le fruit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler : la pollinisation est le transport du pollen. Étape 2 — Suivre l'ovule : il devient la graine. Étape 3 — Suivre l'ovaire : il devient le fruit. Le nectar attire les insectes.",
+                  "answers": [
+                    {
+                      "content": "Pollinisation",
+                      "match": "Transport du pollen de l'anthère au stigmate"
+                    },
+                    {
+                      "content": "Ovule",
+                      "match": "Devient la graine"
+                    },
+                    {
+                      "content": "Ovaire",
+                      "match": "Devient le fruit"
+                    },
+                    {
+                      "content": "Nectar",
+                      "match": "Liquide sucré qui attire les insectes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paysan de Daloa récolte des tomates. D'où vient une tomate normale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le plus souvent, une fleur est pollinisée. Étape 2 — Suivre l'ovule : les ovules deviennent des graines. Étape 3 — Suivre l'ovaire : il devient le fruit. Une tomate normale est donc un fruit avec des graines.",
+                  "answers": [
+                    {
+                      "content": "De l'ovaire d'une fleur pollinisée : elle contient des graines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle vient d'un pétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle vient de l'anthère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne contient jamais de graines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fruit protège les graines et vient de l'ovaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre l'ovaire : l'ovaire devient le fruit, qui contient et protège les graines. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La graine vient de l'___ fécondé.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Suivre l'ovule : c'est l'ovule fécondé qui devient la graine. L'ovaire devient le fruit.",
+                  "answers": [
+                    {
+                      "content": "ovule",
+                      "correct": true
+                    },
+                    {
+                      "content": "ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "anthère",
+                      "correct": false
+                    },
+                    {
+                      "content": "pétale",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

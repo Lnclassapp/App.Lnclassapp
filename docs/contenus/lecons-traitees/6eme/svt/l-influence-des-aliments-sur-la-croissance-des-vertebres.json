@@ -1,0 +1,3304 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'influence des aliments sur la croissance des vertébrés",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "SVT",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "masses-lots",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres des masses moyennes de trois lots de poussins après 4 semaines, en grammes : lot A (maïs seul) 450, lot B (maïs et poisson séché) 750, lot C (maïs et huile de palme) 500. Au départ, chaque poussin pèse 50 g. Valeurs illustratives.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              450,
+              750,
+              500
+            ],
+            "labels": [
+              "Lot A",
+              "Lot B",
+              "Lot C"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "groupes-aliments",
+          "kind": "diagram",
+          "description": "Schéma en arbre qui part des aliments et se divise en trois groupes selon le rôle : bâtisseurs (riches en protéines), énergétiques (riches en glucides et en lipides) et fonctionnels (riches en vitamines et en sels minéraux). Chaque groupe est relié aux constituants principaux de ses aliments.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "al",
+                "label": "Aliments"
+              },
+              {
+                "id": "ba",
+                "label": "Bâtisseurs",
+                "category": 1
+              },
+              {
+                "id": "en",
+                "label": "Énergétiques",
+                "category": 2
+              },
+              {
+                "id": "fo",
+                "label": "Fonctionnels",
+                "category": 3
+              },
+              {
+                "id": "pr",
+                "label": "Protéines",
+                "category": 1
+              },
+              {
+                "id": "gl",
+                "label": "Glucides",
+                "category": 2
+              },
+              {
+                "id": "li",
+                "label": "Lipides",
+                "category": 2
+              },
+              {
+                "id": "vi",
+                "label": "Vitamines",
+                "category": 3
+              },
+              {
+                "id": "se",
+                "label": "Sels minéraux",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "al",
+                "to": "ba"
+              },
+              {
+                "from": "al",
+                "to": "en"
+              },
+              {
+                "from": "al",
+                "to": "fo"
+              },
+              {
+                "from": "ba",
+                "to": "pr"
+              },
+              {
+                "from": "en",
+                "to": "gl"
+              },
+              {
+                "from": "en",
+                "to": "li"
+              },
+              {
+                "from": "fo",
+                "to": "vi"
+              },
+              {
+                "from": "fo",
+                "to": "se"
+              }
+            ],
+            "legend": [
+              "Construire le corps",
+              "Donner de l'énergie",
+              "Aider le corps à fonctionner"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "croissance-enfant",
+          "kind": "stat_chart",
+          "description": "Courbe de la masse d'Awa à quatre âges, en kilogrammes : 20 kg à 6 ans, 25 kg à 8 ans, 31 kg à 10 ans et 38 kg à 12 ans. La courbe monte de plus en plus vite : le gain de masse est de 5 kg, puis 6 kg, puis 7 kg tous les deux ans. Valeurs illustratives.",
+          "params": {
+            "chart": "line",
+            "series": [
+              20,
+              25,
+              31,
+              38
+            ],
+            "labels": [
+              "6 ans",
+              "8 ans",
+              "10 ans",
+              "12 ans"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Comparer la croissance de lots nourris différemment",
+          "remember": "La **croissance** est l'augmentation de la taille et de la masse d'un être vivant. On la mesure avec la masse (en g ou en kg) prise à plusieurs dates. Pour savoir si un aliment influence la croissance, on forme des **lots** d'animaux de même espèce, de même âge et élevés dans les mêmes conditions (même abri, même température). **Un seul facteur change** : l'aliment étudié. Le **lot témoin** reçoit la ration habituelle. Le **lot d'expérience** reçoit en plus l'aliment étudié. Le **gain de masse** d'un lot est sa masse finale moins sa masse initiale.",
+          "method": [
+            "Repérer le facteur étudié : l'aliment qui change d'un lot à l'autre, les autres conditions restant les mêmes.",
+            "Identifier le lot témoin (ration habituelle) et le lot d'expérience (aliment étudié en plus).",
+            "Lire la masse de chaque lot au début et à la fin de l'élevage.",
+            "Calculer le gain de masse de chaque lot : masse finale moins masse initiale.",
+            "Conclure en reliant la différence de gain de masse à l'aliment étudié."
+          ],
+          "example": {
+            "statement": "Mme Adjoua élève des poussins à Daloa. Elle forme deux lots de 10 poussins du même âge, de 50 g chacun en moyenne, dans le même poulailler. Pendant 4 semaines, le lot A mange du maïs ; le lot B mange du maïs et du poisson séché. À la fin, les poussins du lot A pèsent 450 g en moyenne, ceux du lot B 750 g. Quel est l'effet du poisson séché ?",
+            "steps": [
+              "Repérer : le facteur étudié est le poisson séché ; les deux lots ont le même âge, le même poulailler et le même maïs.",
+              "Identifier : le lot A (maïs seul) est le lot témoin ; le lot B (maïs et poisson séché) est le lot d'expérience.",
+              "Lire : lot A, 50 g au début et 450 g à la fin ; lot B, 50 g au début et 750 g à la fin.",
+              "Calculer : lot A, $450 - 50 = 400$ g ; lot B, $750 - 50 = 700$ g.",
+              "Conclure : le lot B a gagné 300 g de plus que le lot A ; le poisson séché favorise la croissance des poulets."
+            ]
+          },
+          "pitfall": "Ne pas comparer seulement les masses finales. Contre-exemple : le lot C passe de 100 g à 300 g (gain de 200 g) ; le lot D passe de 250 g à 400 g (gain de 150 g). Le lot D est plus lourd à la fin, mais c'est le lot C qui a le plus grandi. Pour éviter l'erreur, calcule toujours le gain de masse, puis compare les gains.",
+          "figure": "masses-lots",
+          "practice": {
+            "statement": "Tu t'entraînes à comparer des lots nourris différemment, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Mme Adjoua forme deux lots de poussins de même âge. Les deux lots mangent du maïs, mais le lot B reçoit en plus du poisson séché. Quel est le facteur étudié ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le facteur étudié : c'est ce qui change d'un lot à l'autre, les autres conditions restant les mêmes. Ici, seul le poisson séché change. L'âge, le poulailler et le maïs sont identiques dans les deux lots, ce ne sont donc pas des facteurs étudiés.",
+                "answers": [
+                  {
+                    "content": "Le poisson séché donné au lot B",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'âge des poussins",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le poulailler",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nombre de poussins",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche ce qui est différent entre les deux lots, et seulement cela."
+              },
+              {
+                "content": "Le lot qui reçoit seulement la ration habituelle s'appelle le lot ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier le lot témoin et le lot d'expérience. Le lot témoin reçoit la ration habituelle et sert de comparaison. Le lot d'expérience reçoit en plus l'aliment étudié.",
+                "answers": [
+                  {
+                    "content": "témoin",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce lot sert de point de comparaison."
+              },
+              {
+                "content": "Le lot A passe de 50 g à 450 g en moyenne. Quel est son gain de masse ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Lire : masse initiale 50 g, masse finale 450 g. Étape 4 — Calculer le gain de masse : masse finale moins masse initiale, soit $450 - 50 = 400$ g.",
+                "answers": [
+                  {
+                    "content": "400",
+                    "correct": true
+                  }
+                ],
+                "unit": "g",
+                "hint": "Gain = masse finale moins masse initiale."
+              },
+              {
+                "content": "Pour comparer deux lots, les poussins doivent avoir le même âge et vivre dans le même poulailler.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le facteur étudié : un seul facteur change, l'aliment. Tout le reste doit être identique, y compris l'âge et le poulailler. Sinon, on ne saurait pas si la différence vient de l'aliment ou d'une autre cause.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un seul facteur doit changer."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire les résultats d'un élevage de poulets",
+              "statement": "Dans cet exercice, tu analyses les résultats de lots de poussins nourris différemment, avec la méthode de la fiche. Les valeurs sont illustratives.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux lots de poussins du même âge sont élevés ensemble. Le lot A mange du maïs ; le lot B mange du maïs et du poisson séché. Quel est le lot témoin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le facteur étudié : le poisson séché. Étape 2 — Identifier le lot témoin : c'est celui qui reçoit seulement la ration habituelle, donc le lot A. Le lot B est le lot d'expérience, car il reçoit l'aliment étudié en plus. Dire que les deux lots sont témoins reviendrait à ne rien étudier.",
+                  "answers": [
+                    {
+                      "content": "Le lot A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux lots",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux lots",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot B passe de 50 g à 750 g en moyenne. Quel est son gain de masse ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Lire la masse du lot B au début (50 g) et à la fin (750 g). Étape 4 — Calculer le gain de masse : $750 - 50 = 700$ g. Donner 750 g, c'est oublier de retirer la masse de départ.",
+                  "answers": [
+                    {
+                      "content": "700",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Le lot A gagne 400 g et le lot B gagne 700 g. On conclut que le poisson séché a ralenti la croissance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Calculer et comparer les gains : 700 g pour le lot B contre 400 g pour le lot A. Étape 5 — Conclure : le lot qui reçoit le poisson séché a gagné plus de masse, donc le poisson séché a favorisé la croissance, il ne l'a pas ralentie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour comparer des lots.",
+                  "question_type": "ordering",
+                  "explanation": "L'ordre est celui de la méthode : Étape 1 — Repérer le facteur étudié. Étape 2 — Identifier les lots. Étape 3 — Lire les masses. Étape 4 — Calculer les gains. Étape 5 — Conclure. On ne peut pas conclure avant d'avoir calculé les gains.",
+                  "answers": [
+                    {
+                      "content": "Repérer le facteur étudié"
+                    },
+                    {
+                      "content": "Identifier le lot témoin et le lot d'expérience"
+                    },
+                    {
+                      "content": "Lire les masses au début et à la fin"
+                    },
+                    {
+                      "content": "Calculer le gain de masse de chaque lot"
+                    },
+                    {
+                      "content": "Conclure en reliant la différence à l'aliment"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot C passe de 100 g à 300 g. Le lot D passe de 250 g à 400 g. Quel lot a le plus grandi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Lire les masses de chaque lot. Étape 4 — Calculer le gain : lot C, $300 - 100 = 200$ g ; lot D, $400 - 250 = 150$ g. Étape 5 — Conclure : le lot C a le plus grandi. Le lot D est plus lourd à la fin, mais cela vient de sa masse de départ : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Le lot C",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot D",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux lots autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer deux lots de lapereaux",
+              "statement": "Dans cet exercice, tu compares deux lots de lapereaux nourris différemment. Le lot Y reçoit en plus des granulés riches en protéines. Les valeurs sont illustratives.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche ce qui change entre les lots, puis compare les gains de masse et non les masses finales.",
+              "questions": [
+                {
+                  "content": "Dans un élevage de lapins à Korhogo, le lot qui reçoit l'aliment étudié en plus de la ration habituelle est le lot d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Identifier le lot témoin et le lot d'expérience. Le lot d'expérience reçoit l'aliment étudié (ici les granulés riches en protéines) en plus de la ration habituelle. Le lot témoin ne le reçoit pas.",
+                  "answers": [
+                    {
+                      "content": "expérience",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot Y de lapereaux passe de 500 g à 1 500 g. Quel est son gain de masse, en grammes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Lire : masse initiale 500 g, masse finale 1 500 g. Étape 4 — Calculer le gain de masse : $1500 - 500 = 1000$ g.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Quelles conditions doivent être identiques dans les deux lots de lapereaux ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le facteur étudié : un seul facteur change. L'âge, la cage et la température doivent être les mêmes. La ration doit changer (c'est le facteur étudié), et la masse finale est le résultat, pas une condition.",
+                  "answers": [
+                    {
+                      "content": "Le même âge des lapereaux au départ",
+                      "correct": true
+                    },
+                    {
+                      "content": "La même cage et la même température",
+                      "correct": true
+                    },
+                    {
+                      "content": "Exactement la même nourriture dans les deux lots",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le même aliment étudié donné aux deux lots",
+                      "correct": false
+                    },
+                    {
+                      "content": "La même masse finale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque expression à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier : le lot témoin reçoit la ration habituelle seule, le lot d'expérience reçoit l'aliment étudié en plus. Étape 4 — Calculer : le gain de masse est la masse finale moins la masse initiale. Confondre témoin et expérience fausserait toute la conclusion.",
+                  "answers": [
+                    {
+                      "content": "Lot témoin",
+                      "match": "Lot qui reçoit la ration habituelle seule"
+                    },
+                    {
+                      "content": "Lot d'expérience",
+                      "match": "Lot qui reçoit l'aliment étudié en plus"
+                    },
+                    {
+                      "content": "Gain de masse",
+                      "match": "Masse finale moins masse initiale"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot X gagne 500 g et le lot Y gagne 1 000 g. Le lot Y a grandi ___ que le lot X.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Comparer les gains : 1 000 g pour le lot Y, 500 g pour le lot X. Étape 5 — Conclure : le lot Y a plus grandi. Choisir « moins » serait comparer à l'envers.",
+                  "answers": [
+                    {
+                      "content": "plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot X (500 g au départ, 1 000 g à la fin) mange des herbes seules ; le lot Y (500 g au départ, 1 500 g à la fin) mange aussi des granulés riches en protéines. Les deux lots ont le même âge et la même cage. On peut conclure que les granulés riches en protéines favorisent la croissance des lapereaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : un seul facteur change, les granulés, et le reste est identique. Étape 5 — Conclure : le lot qui les reçoit gagne plus de masse, donc l'aliment favorise la croissance. Si plusieurs facteurs changeaient, on ne pourrait pas conclure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Distinguer aliments bâtisseurs, énergétiques et fonctionnels",
+          "remember": "Les aliments contiennent des **constituants** qui jouent chacun un rôle. Les aliments **bâtisseurs** sont riches en **protéines (protides)** : ils construisent et réparent le corps et le font grandir (œuf, poisson, viande, lait, niébé). Les aliments **énergétiques** sont riches en **glucides** (riz, igname, manioc, banane plantain, maïs) ou en **lipides** (huile de palme, beurre) : ils donnent l'énergie pour bouger et travailler. Les aliments **fonctionnels** sont riches en **vitamines** et en **sels minéraux** (fruits, légumes, feuilles) : ils aident le corps à bien fonctionner. On range un aliment selon son constituant principal.",
+          "method": [
+            "Repérer l'aliment étudié et son constituant principal : protéines, glucides, lipides, vitamines ou sels minéraux.",
+            "Associer ce constituant à son rôle : construire le corps, donner de l'énergie ou aider le corps à fonctionner.",
+            "Nommer le groupe de l'aliment : bâtisseur, énergétique ou fonctionnel.",
+            "Prévoir l'effet sur la croissance si cet aliment manque dans la ration."
+          ],
+          "example": {
+            "statement": "À Korhogo, une élève mange de l'igname bouillie à midi. Dans quel groupe range-t-on l'igname, et que se passe-t-il si elle ne mange que cela ?",
+            "steps": [
+              "Repérer : l'igname est riche en glucides, c'est son constituant principal.",
+              "Associer : les glucides donnent l'énergie pour bouger et travailler.",
+              "Nommer : l'igname est un aliment énergétique.",
+              "Prévoir : avec de l'igname seule, l'énergie est assurée, mais il manque les bâtisseurs et la croissance est ralentie."
+            ]
+          },
+          "pitfall": "Ne pas croire que seuls les aliments d'origine animale font grandir. Contre-exemple : le niébé est une plante, mais il est riche en protéines : c'est un aliment bâtisseur, comme le poisson. À l'inverse, le beurre vient du lait, mais il est riche en lipides : c'est un aliment énergétique. L'origine ne donne pas le groupe ; cherche toujours le constituant principal.",
+          "figure": "groupes-aliments",
+          "practice": {
+            "statement": "Tu t'entraînes à ranger un aliment dans son groupe, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le poisson est riche en protéines. Dans quel groupe le range-t-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le constituant principal du poisson : les protéines. Étape 2 — Associer : les protéines construisent le corps. Étape 3 — Nommer le groupe : bâtisseur. Énergétique serait pour les glucides et les lipides ; fonctionnel, pour les vitamines et les sels minéraux.",
+                "answers": [
+                  {
+                    "content": "Les aliments bâtisseurs",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les aliments énergétiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les aliments fonctionnels",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au rôle des protéines."
+              },
+              {
+                "content": "Relie chaque aliment à son groupe.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer le constituant principal : glucides pour l'igname, protéines pour l'œuf, vitamines pour l'orange. Étape 2 — Associer au rôle. Étape 3 — Nommer le groupe : énergétique, bâtisseur, fonctionnel.",
+                "answers": [
+                  {
+                    "content": "L'igname",
+                    "match": "Énergétique"
+                  },
+                  {
+                    "content": "L'œuf",
+                    "match": "Bâtisseur"
+                  },
+                  {
+                    "content": "L'orange",
+                    "match": "Fonctionnel"
+                  }
+                ],
+                "hint": "Cherche d'abord le constituant principal de chaque aliment."
+              },
+              {
+                "content": "Les aliments riches en vitamines et en sels minéraux sont des aliments ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Associer : les vitamines et les sels minéraux aident le corps à bien fonctionner. Étape 3 — Nommer le groupe : les aliments fonctionnels, comme les fruits et les légumes.",
+                "answers": [
+                  {
+                    "content": "fonctionnels",
+                    "correct": true
+                  },
+                  {
+                    "content": "fonctionnel",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ils aident le corps à bien fonctionner."
+              },
+              {
+                "content": "Un enfant qui ne mange jamais d'aliments bâtisseurs risque d'avoir une croissance ralentie.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Prévoir l'effet si le groupe manque. Les bâtisseurs construisent le corps et le font grandir : sans eux, la croissance est ralentie, même si l'énergie est assurée par d'autres aliments.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au rôle des bâtisseurs."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Classer des aliments de la cuisine ivoirienne",
+              "statement": "Dans cet exercice, tu ranges des aliments dans leur groupe avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le riz est riche en glucides. Dans quel groupe le range-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le constituant principal : les glucides. Étape 2 — Associer : les glucides donnent l'énergie. Étape 3 — Nommer le groupe : énergétique. Bâtisseur serait pour les protéines ; fonctionnel, pour les vitamines et les sels minéraux.",
+                  "answers": [
+                    {
+                      "content": "Les aliments énergétiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les aliments fonctionnels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun groupe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels aliments sont des aliments bâtisseurs ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer le constituant principal. Étape 2 — Associer au rôle. Étape 3 — Nommer le groupe. L'œuf, le poisson fumé et le niébé sont riches en protéines : ils sont bâtisseurs. L'igname est riche en glucides, l'huile de palme en lipides (énergétiques), la mangue en vitamines (fonctionnel).",
+                  "answers": [
+                    {
+                      "content": "L'œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poisson fumé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le niébé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'igname",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les aliments qui construisent le corps et le font grandir sont les aliments ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Associer : les protéines construisent et réparent le corps. Étape 3 — Nommer le groupe : les aliments bâtisseurs.",
+                  "answers": [
+                    {
+                      "content": "bâtisseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "bâtisseur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha ne mange jamais de fruits ni de légumes. Quel groupe manque dans sa ration ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les fruits et les légumes sont riches en vitamines et en sels minéraux. Étape 3 — Nommer le groupe : fonctionnel. Étape 4 — Prévoir : sans eux, le corps fonctionne moins bien.",
+                  "answers": [
+                    {
+                      "content": "Les aliments fonctionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les aliments énergétiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le niébé est une plante. Peut-on le ranger parmi les aliments bâtisseurs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le constituant principal du niébé : les protéines. Étape 3 — Nommer le groupe : bâtisseur. Dire non à cause de l'origine végétale est l'erreur du piège : l'origine ne donne pas le groupe.",
+                  "answers": [
+                    {
+                      "content": "Oui, car il est riche en protéines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car il est d'origine végétale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car seuls les aliments d'origine animale sont bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car il est riche en vitamines",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le rôle des aliments dans la croissance d'un enfant",
+              "statement": "Dans cet exercice, tu relies les aliments à leur rôle dans le corps d'un enfant qui grandit.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque aliment, cherche d'abord son constituant principal : il donne le groupe.",
+              "questions": [
+                {
+                  "content": "Relie chaque constituant à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le constituant. Étape 2 — Associer à son rôle : les protéines construisent, les glucides donnent l'énergie, les vitamines et les sels minéraux aident le corps à fonctionner.",
+                  "answers": [
+                    {
+                      "content": "Les protéines",
+                      "match": "Construire le corps"
+                    },
+                    {
+                      "content": "Les glucides",
+                      "match": "Donner de l'énergie"
+                    },
+                    {
+                      "content": "Les vitamines et sels minéraux",
+                      "match": "Aider le corps à fonctionner"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour ranger un aliment.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Associer. Étape 3 — Nommer. Étape 4 — Prévoir. On ne peut pas nommer le groupe avant d'avoir trouvé le constituant principal.",
+                  "answers": [
+                    {
+                      "content": "Repérer le constituant principal"
+                    },
+                    {
+                      "content": "Associer ce constituant à son rôle"
+                    },
+                    {
+                      "content": "Nommer le groupe de l'aliment"
+                    },
+                    {
+                      "content": "Prévoir l'effet si l'aliment manque"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un repas d'attiéké seul apporte surtout de l'énergie : l'attiéké est un aliment ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : l'attiéké, fait de manioc, est riche en glucides. Étape 2 — Associer : les glucides donnent l'énergie. Étape 3 — Nommer : énergétique.",
+                  "answers": [
+                    {
+                      "content": "énergétique",
+                      "correct": true
+                    },
+                    {
+                      "content": "bâtisseur",
+                      "correct": false
+                    },
+                    {
+                      "content": "fonctionnel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels aliments sont des aliments fonctionnels ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le constituant principal. La papaye et l'orange sont riches en vitamines : étape 3, ce sont des aliments fonctionnels. Le lait et l'œuf sont bâtisseurs (protéines), le riz est énergétique (glucides).",
+                  "answers": [
+                    {
+                      "content": "La papaye",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'orange",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le riz",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'œuf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le beurre vient du lait, donc c'est un aliment bâtisseur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le constituant principal du beurre : les lipides. Étape 3 — Nommer : énergétique. Le raisonnement par l'origine est faux : c'est le constituant principal qui donne le groupe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un repas se compose de riz, de poisson, d'huile de palme et d'une orange. Combien de groupes différents sont présents ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Nommer le groupe de chaque aliment : riz énergétique, poisson bâtisseur, huile de palme énergétique, orange fonctionnelle. Les groupes présents sont énergétique, bâtisseur et fonctionnel : 3 groupes. Compter 4 serait compter les aliments au lieu des groupes.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Relier la ration alimentaire à la croissance",
+          "remember": "Une **ration** est l'ensemble des aliments mangés (ou donnés à un animal) en une journée. Une ration **équilibrée** contient les trois groupes d'aliments : bâtisseurs, énergétiques et fonctionnels. Un **vertébré** est un animal qui a une colonne vertébrale : le poulet, le lapin et l'enfant en sont. Pour bien grandir, un jeune vertébré a besoin d'une ration équilibrée. Si un groupe manque, la croissance est ralentie ; un manque de bâtisseurs freine surtout la croissance. Manger beaucoup d'un seul groupe ne remplace pas les autres : la **qualité** de la ration compte autant que la quantité.",
+          "method": [
+            "Lister les aliments de la ration donnée chaque jour.",
+            "Classer chaque aliment dans son groupe : bâtisseur, énergétique ou fonctionnel.",
+            "Repérer le groupe absent ou en trop petite quantité.",
+            "Prévoir la conséquence sur la croissance du jeune.",
+            "Proposer un ou deux aliments à ajouter pour équilibrer la ration."
+          ],
+          "example": {
+            "statement": "Adjo, 9 ans, vit à Abengourou. Chaque jour, elle mange de l'attiéké le matin, puis du riz à midi et le soir, avec une sauce à l'huile de palme. Que penser de sa ration ?",
+            "steps": [
+              "Lister : attiéké, riz et huile de palme.",
+              "Classer : l'attiéké et le riz sont énergétiques (glucides) ; l'huile de palme est énergétique (lipides).",
+              "Repérer : aucun aliment bâtisseur et aucun aliment fonctionnel dans sa ration.",
+              "Prévoir : l'énergie est assurée, mais la croissance d'Adjo sera ralentie car il manque les bâtisseurs.",
+              "Proposer : ajouter du poisson ou un œuf (bâtisseurs), et une orange ou des légumes (fonctionnels)."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'en manger davantage du même aliment, on grandit mieux. Contre-exemple : le lot D reçoit une double ration de maïs seul et passe de 50 g à 500 g (gain de 450 g). Le lot E reçoit une ration normale de maïs avec du poisson séché et passe de 50 g à 750 g (gain de 700 g). Plus de maïs ne remplace pas le poisson séché, qui apporte les bâtisseurs. Cherche toujours le groupe qui manque.",
+          "figure": "croissance-enfant",
+          "practice": {
+            "statement": "Tu t'entraînes à analyser une ration pour prévoir la croissance, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Yao mange chaque jour du riz, du poisson et de l'huile de palme, mais jamais de fruits ni de légumes. Quel groupe est absent de sa ration ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : riz, poisson, huile de palme. Étape 2 — Classer : riz et huile de palme énergétiques, poisson bâtisseur. Étape 3 — Repérer le groupe absent : il n'y a ni fruit ni légume, donc pas d'aliment fonctionnel.",
+                "answers": [
+                  {
+                    "content": "Les aliments fonctionnels",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les aliments bâtisseurs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les aliments énergétiques",
+                    "correct": false
+                  }
+                ],
+                "hint": "Classe chaque aliment, puis cherche le groupe qui n'apparaît pas."
+              },
+              {
+                "content": "Une ration équilibrée contient des aliments bâtisseurs, énergétiques et fonctionnels.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Classer les aliments en trois groupes. Étape 3 — Repérer si un groupe manque. Une ration équilibrée est une ration où aucun des trois groupes ne manque.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une ration équilibrée n'oublie aucun groupe."
+              },
+              {
+                "content": "Un animal qui possède une colonne vertébrale est un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Le poulet, le lapin et l'enfant ont une colonne vertébrale : ce sont des vertébrés. Étape 4 — Prévoir la conséquence sur la croissance : elle concerne tous les jeunes vertébrés.",
+                "answers": [
+                  {
+                    "content": "vertébré",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au mot qui contient « vertèbre »."
+              },
+              {
+                "content": "Un élève mange seulement du riz. Quel aliment lui ajouter en premier pour sa croissance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Classer : le riz est énergétique. Étape 3 — Repérer le groupe absent, d'abord les bâtisseurs. Étape 5 — Proposer un aliment bâtisseur, comme le poisson. Davantage de riz, d'huile ou de sucre ajouterait encore de l'énergie.",
+                "answers": [
+                  {
+                    "content": "Du poisson",
+                    "correct": true
+                  },
+                  {
+                    "content": "Davantage de riz",
+                    "correct": false
+                  },
+                  {
+                    "content": "De l'huile de palme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du sucre",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le groupe qui manque le plus pour grandir."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Analyser la ration d'un enfant",
+              "statement": "Dans cet exercice, tu analyses la ration d'Adjo, qui mange chaque jour de l'attiéké, du riz et une sauce à l'huile de palme.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Attiéké, riz et huile de palme : quel(s) groupe(s) d'aliments cette ration contient-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : attiéké, riz, huile de palme. Étape 2 — Classer : l'attiéké et le riz sont riches en glucides, l'huile de palme en lipides : ils sont tous énergétiques.",
+                  "answers": [
+                    {
+                      "content": "Seulement des aliments énergétiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des aliments bâtisseurs et énergétiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des aliments énergétiques et fonctionnels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois groupes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels groupes manquent dans la ration d'Adjo ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Repérer le groupe absent. La ration ne contient que des énergétiques : il manque les bâtisseurs et les fonctionnels.",
+                  "answers": [
+                    {
+                      "content": "Les aliments bâtisseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments fonctionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments énergétiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun groupe ne manque",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la conséquence probable de cette ration sur la croissance d'Adjo ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Prévoir la conséquence. Sans bâtisseurs, le corps manque de matériaux pour se construire : la croissance est ralentie, même si l'énergie est assurée.",
+                  "answers": [
+                    {
+                      "content": "Une croissance ralentie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une croissance plus rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune conséquence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une croissance identique à celle d'une ration équilibrée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour apporter les bâtisseurs qui manquent à la ration d'Adjo, on ajoute par exemple ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 5 — Proposer un aliment du groupe qui manque. Le poisson, l'œuf, le niébé et le lait sont riches en protéines : ce sont des bâtisseurs.",
+                  "answers": [
+                    {
+                      "content": "poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "le poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "viande",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot D (maïs seul, double ration) gagne 450 g. Le lot E (ration normale de maïs avec du poisson séché) gagne 700 g. Quel lot a le mieux grandi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Classer : le poisson séché est bâtisseur. Étape 4 — Prévoir la conséquence : le lot E reçoit les bâtisseurs et grandit mieux (700 g contre 450 g). Doubler le maïs est l'erreur du piège : cela n'apporte que de l'énergie.",
+                  "answers": [
+                    {
+                      "content": "Le lot E",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot D",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux lots autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Qualité et quantité de la ration",
+              "statement": "Dans cet exercice, tu compares des rations de poulets et d'enfants. Les valeurs sont illustratives.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche le groupe qui manque, puis compare la qualité et la quantité de la ration.",
+              "questions": [
+                {
+                  "content": "Relie chaque ration à sa conséquence probable.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Repérer le groupe absent. Étape 4 — Prévoir la conséquence : sans bâtisseurs la croissance est ralentie, sans fonctionnels le corps fonctionne moins bien, avec une ration équilibrée la croissance est bonne.",
+                  "answers": [
+                    {
+                      "content": "Ration sans bâtisseurs",
+                      "match": "Croissance ralentie"
+                    },
+                    {
+                      "content": "Ration sans aliments fonctionnels",
+                      "match": "Corps qui fonctionne moins bien"
+                    },
+                    {
+                      "content": "Ration équilibrée",
+                      "match": "Bonne croissance"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot D de poussins passe de 50 g à 500 g avec une double ration de maïs seul. Quel est son gain de masse ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Prévoir la conséquence en chiffres : le gain de masse est la masse finale moins la masse initiale, soit $500 - 50 = 450$ g.",
+                  "answers": [
+                    {
+                      "content": "450",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Donner deux fois plus de maïs au lot D remplace le poisson séché donné au lot E.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Classer : le maïs est énergétique, le poisson séché est bâtisseur. Étape 3 — Le groupe qui manque au lot D reste absent même avec plus de maïs. La quantité ne remplace pas la qualité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour analyser une ration.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lister. Étape 2 — Classer. Étape 3 — Repérer. Étape 4 — Prévoir. Étape 5 — Proposer. On ne peut pas proposer un aliment avant d'avoir repéré le groupe absent.",
+                  "answers": [
+                    {
+                      "content": "Lister les aliments de la ration"
+                    },
+                    {
+                      "content": "Classer chaque aliment dans son groupe"
+                    },
+                    {
+                      "content": "Repérer le groupe absent"
+                    },
+                    {
+                      "content": "Prévoir la conséquence sur la croissance"
+                    },
+                    {
+                      "content": "Proposer des aliments à ajouter"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels aliments peut-on ajouter à une ration de riz seul pour l'équilibrer ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Repérer les groupes absents : bâtisseurs et fonctionnels. Étape 5 — Proposer : le poisson est bâtisseur, les légumes et les oranges sont fonctionnels. Le riz, le sucre et l'huile de palme ajoutent seulement de l'énergie.",
+                  "answers": [
+                    {
+                      "content": "Du poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des légumes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des oranges",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du riz en plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sucre",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'huile de palme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un vertébré est un animal qui possède ___.",
+                  "question_type": "select",
+                  "explanation": "Un vertébré possède une colonne vertébrale. Le poulet a des ailes et deux pattes, le lapin quatre pattes, l'enfant deux jambes et deux bras : seule la colonne vertébrale est commune. Étape 4 — La croissance des jeunes vertébrés dépend de la ration.",
+                  "answers": [
+                    {
+                      "content": "une colonne vertébrale",
+                      "correct": true
+                    },
+                    {
+                      "content": "des ailes",
+                      "correct": false
+                    },
+                    {
+                      "content": "quatre pattes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un élevage de poulets à Bouaké",
+          "statement": "M. Koffi élève des poulets à Bouaké. Il forme trois lots de 10 poussins du même âge, de 50 g chacun en moyenne, dans le même poulailler. Pendant 4 semaines, le lot A mange du maïs seul, le lot B du maïs et du poisson séché, le lot C du maïs et de l'huile de palme. À la fin, les poussins pèsent en moyenne 450 g (lot A), 750 g (lot B) et 500 g (lot C). Les valeurs sont illustratives. Tu analyses ces résultats.",
+          "exercise_type": "fixation",
+          "figure": "masses-lots",
+          "questions": [
+            {
+              "content": "Dans l'élevage de M. Koffi, le lot A mange du maïs seul, le lot B du maïs et du poisson séché, le lot C du maïs et de l'huile de palme. Quel lot est le lot témoin ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1) Repérer le facteur étudié : l'aliment ajouté au maïs (poisson séché ou huile de palme). 2) Identifier le lot témoin : celui qui reçoit seulement la ration habituelle, donc le lot A. Les lots B et C sont des lots d'expérience.",
+              "answers": [
+                {
+                  "content": "Le lot A",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot B",
+                  "correct": false
+                },
+                {
+                  "content": "Le lot C",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois lots",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les poussins du lot C passent de 50 g à 500 g en moyenne. Quel est le gain de masse du lot C ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. 1) Lire les masses : 50 g au début, 500 g à la fin. 2) Calculer le gain de masse : masse finale moins masse initiale, soit $500 - 50 = 450$ g.",
+              "answers": [
+                {
+                  "content": "450",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            },
+            {
+              "content": "Les gains de masse sont : lot A 400 g, lot B 700 g, lot C 450 g. Quels lots ont gagné plus de 400 g ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1) Calculer les gains : A $450 - 50 = 400$ g, B $750 - 50 = 700$ g, C $500 - 50 = 450$ g. 2) Comparer à 400 g : le lot B (700 g) et le lot C (450 g) dépassent 400 g. Le lot A gagne exactement 400 g, il ne dépasse pas.",
+              "answers": [
+                {
+                  "content": "Le lot B",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot C",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot A",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois lots",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque aliment à son groupe.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1) Repérer le constituant principal. 2) Associer au rôle. 3) Nommer le groupe : le poisson séché est riche en protéines (bâtisseur), le maïs en glucides (énergétique), la papaye en vitamines (fonctionnel).",
+              "answers": [
+                {
+                  "content": "Le poisson séché",
+                  "match": "Bâtisseur"
+                },
+                {
+                  "content": "Le maïs",
+                  "match": "Énergétique"
+                },
+                {
+                  "content": "La papaye",
+                  "match": "Fonctionnel"
+                }
+              ]
+            },
+            {
+              "content": "Quel aliment ajouté au maïs a le plus favorisé la croissance ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1) Calculer les gains : lot A 400 g, lot B 700 g, lot C 450 g. 2) Comparer : le lot B a le plus grand gain. 3) Conclure : le poisson séché, riche en protéines, est un aliment bâtisseur qui favorise la croissance. L'huile de palme est énergétique : elle n'a ajouté que 50 g par rapport au lot A.",
+              "answers": [
+                {
+                  "content": "Le poisson séché, un aliment bâtisseur",
+                  "correct": true
+                },
+                {
+                  "content": "L'huile de palme, un aliment bâtisseur",
+                  "correct": false
+                },
+                {
+                  "content": "Le poisson séché, un aliment énergétique",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun, les trois lots ont gagné pareil",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La croissance d'Awa",
+          "statement": "Awa vit à Yamoussoukro. Sa masse est mesurée à plusieurs âges : 20 kg à 6 ans, 25 kg à 8 ans, 31 kg à 10 ans et 38 kg à 12 ans. Les valeurs sont illustratives. Tu étudies sa croissance et sa ration.",
+          "exercise_type": "fixation",
+          "figure": "croissance-enfant",
+          "questions": [
+            {
+              "content": "La masse d'Awa passe de 20 kg à 6 ans à 38 kg à 12 ans. Quel est son gain de masse entre 6 ans et 12 ans ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. 1) Lire les masses : 20 kg à 6 ans et 38 kg à 12 ans. 2) Calculer le gain de masse : masse finale moins masse initiale, soit $38 - 20 = 18$ kg.",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ],
+              "unit": "kg"
+            },
+            {
+              "content": "Masses d'Awa : 20 kg à 6 ans, 25 kg à 8 ans, 31 kg à 10 ans, 38 kg à 12 ans. Entre quels âges son gain de masse est-il le plus grand ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1) Calculer chaque gain : de 6 à 8 ans $25 - 20 = 5$ kg ; de 8 à 10 ans $31 - 25 = 6$ kg ; de 10 à 12 ans $38 - 31 = 7$ kg. 2) Comparer : 7 kg est le plus grand gain. Prendre la masse la plus grande sans calculer les gains serait l'erreur du piège.",
+              "answers": [
+                {
+                  "content": "Entre 10 ans et 12 ans",
+                  "correct": true
+                },
+                {
+                  "content": "Entre 6 ans et 8 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 8 ans et 10 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Les gains sont tous égaux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa a gagné plus de masse entre 10 ans et 12 ans (7 kg) qu'entre 6 ans et 8 ans (5 kg).",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1) Calculer : $38 - 31 = 7$ kg et $25 - 20 = 5$ kg. 2) Comparer : 7 kg est plus grand que 5 kg. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour grandir, Awa a besoin d'aliments ___, riches en protéines.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. 1) Repérer le rôle cherché : construire le corps et le faire grandir. 2) Associer : ce sont les protéines. 3) Nommer le groupe : les aliments bâtisseurs.",
+              "answers": [
+                {
+                  "content": "bâtisseurs",
+                  "correct": true
+                },
+                {
+                  "content": "bâtisseur",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle ration journalière est la plus équilibrée pour Awa ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1) Lister et classer : riz énergétique, poisson bâtisseur, orange fonctionnelle. 2) Une ration équilibrée a les trois groupes : c'est la seule qui les réunit. Les autres rations ne contiennent que des aliments énergétiques.",
+              "answers": [
+                {
+                  "content": "Du riz, du poisson et une orange",
+                  "correct": true
+                },
+                {
+                  "content": "Du riz et de l'attiéké",
+                  "correct": false
+                },
+                {
+                  "content": "De l'igname et de la banane plantain",
+                  "correct": false
+                },
+                {
+                  "content": "De l'huile de palme et du beurre",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Lapereaux et enfants : qui a le plus grandi ?",
+          "statement": "Dans un élevage de lapins à Korhogo, le lot X (lapereaux de 500 g) mange des herbes seules, le lot Y (lapereaux de 500 g, même âge, même cage) mange des herbes et des granulés riches en protéines. Après 6 semaines, le lot X pèse 1 100 g en moyenne et le lot Y 1 600 g. Par ailleurs, Kouadio passe de 30 kg à 34 kg en un an, et Aya de 28 kg à 33 kg. Les valeurs sont illustratives.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans l'élevage de lapins, le lot X mange des herbes seules et le lot Y des herbes avec des granulés riches en protéines. Quel est le facteur étudié ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1) Repérer le facteur étudié : ce qui change entre les lots. Seuls les granulés changent ; l'âge, la cage et les herbes sont les mêmes.",
+              "answers": [
+                {
+                  "content": "Les granulés riches en protéines",
+                  "correct": true
+                },
+                {
+                  "content": "L'âge des lapereaux",
+                  "correct": false
+                },
+                {
+                  "content": "La cage",
+                  "correct": false
+                },
+                {
+                  "content": "Les herbes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le lot Y passe de 500 g à 1 600 g. Quel est son gain de masse, en grammes ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. 1) Lire : 500 g au début, 1 600 g à la fin. 2) Calculer : $1600 - 500 = 1100$ g. Le lot X gagne $1100 - 500 = 600$ g, soit 500 g de moins.",
+              "answers": [
+                {
+                  "content": "1100",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            },
+            {
+              "content": "Le lot Y a gagné plus de masse que le lot X : les granulés riches en protéines favorisent la croissance des lapereaux.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1) Comparer les gains : 1 100 g pour le lot Y, 600 g pour le lot X. 2) Un seul facteur change (les granulés) et les protéines sont des bâtisseurs. 3) Conclure : l'aliment favorise la croissance.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouadio passe de 30 kg à 34 kg en un an, Aya de 28 kg à 33 kg. Qui a le plus grandi, au sens du gain de masse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1) Calculer les gains : Kouadio $34 - 30 = 4$ kg, Aya $33 - 28 = 5$ kg. 2) Comparer les gains : 5 kg est plus grand que 4 kg. Kouadio est plus lourd à la fin, mais cela vient de sa masse de départ : c'est l'erreur de ne regarder que la masse finale.",
+              "answers": [
+                {
+                  "content": "Aya, avec 5 kg de gain",
+                  "correct": true
+                },
+                {
+                  "content": "Kouadio, car il est plus lourd à la fin",
+                  "correct": false
+                },
+                {
+                  "content": "Kouadio, avec 4 kg de gain",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux autant",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles conditions doivent être identiques dans les lots X et Y ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1) Pour attribuer la différence à l'aliment, un seul facteur doit changer. 2) L'âge, la cage et la température doivent être identiques. La ration change (c'est le facteur étudié) ; la masse finale est un résultat.",
+              "answers": [
+                {
+                  "content": "L'âge des lapereaux",
+                  "correct": true
+                },
+                {
+                  "content": "La cage et la température",
+                  "correct": true
+                },
+                {
+                  "content": "Toute la nourriture, granulés compris",
+                  "correct": false
+                },
+                {
+                  "content": "Les granulés donnés",
+                  "correct": false
+                },
+                {
+                  "content": "La masse finale",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du poulailler à la cantine : bien nourrir pour bien grandir",
+          "statement": "À l'école de Daloa, la classe de 6ème étudie un élevage. Le lot D (50 g au départ) reçoit une double ration de maïs seul et pèse 500 g après 4 semaines. Le lot E (50 g au départ) reçoit une ration normale de maïs avec du poisson séché et pèse 750 g. Les lots ont le même âge et le même poulailler. À la cantine, un enfant mange chaque jour du riz et une sauce à l'huile de palme. Les valeurs sont illustratives. Tu rédiges une analyse comme en devoir de classe.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le gain de masse du lot E, en grammes ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. 1) Lire : 50 g au départ, 750 g à l'arrivée. 2) Calculer : $750 - 50 = 700$ g.",
+              "answers": [
+                {
+                  "content": "700",
+                  "correct": true
+                }
+              ],
+              "unit": "g"
+            },
+            {
+              "content": "Le lot D reçoit une double ration de maïs seul et le lot E une ration normale de maïs avec du poisson séché. Quel lot a le plus grandi, et pourquoi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1) Calculer les gains : lot D $500 - 50 = 450$ g, lot E $750 - 50 = 700$ g. 2) Comparer : le lot E a le plus grand gain. 3) Expliquer : le poisson séché apporte les protéines (bâtisseurs) qui manquent au lot D. Plus de maïs n'apporte que de l'énergie : la quantité ne remplace pas la qualité.",
+              "answers": [
+                {
+                  "content": "Le lot E : son gain est de 700 g contre 450 g, grâce aux bâtisseurs",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot D : il reçoit plus de nourriture",
+                  "correct": false
+                },
+                {
+                  "content": "Le lot E : il est plus lourd, donc il mange plus",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux lots autant, car ils ont le même âge",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Doubler la quantité de maïs suffit pour remplacer le poisson séché dans la ration.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1) Classer : le maïs est énergétique (glucides), le poisson séché est bâtisseur (protéines). 2) Le groupe bâtisseur reste absent chez le lot D, quelle que soit la quantité de maïs. 3) Conclure : la proposition est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un enfant mange chaque jour du riz et une sauce à l'huile de palme. Quels groupes manquent dans sa ration ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1) Lister : riz, huile de palme. 2) Classer : le riz est riche en glucides et l'huile de palme en lipides, ils sont tous énergétiques. 3) Repérer les groupes absents : il manque les bâtisseurs et les fonctionnels.",
+              "answers": [
+                {
+                  "content": "Les aliments bâtisseurs",
+                  "correct": true
+                },
+                {
+                  "content": "Les aliments fonctionnels",
+                  "correct": true
+                },
+                {
+                  "content": "Les aliments énergétiques",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun groupe ne manque",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour analyser la ration de cet enfant.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1) Lister. 2) Classer. 3) Repérer. 4) Prévoir. 5) Proposer. Cette suite est la méthode de la fiche sur la ration : on ne propose un aliment qu'après avoir repéré le groupe absent.",
+              "answers": [
+                {
+                  "content": "Lister les aliments de la ration"
+                },
+                {
+                  "content": "Classer chaque aliment dans son groupe"
+                },
+                {
+                  "content": "Repérer le groupe absent"
+                },
+                {
+                  "content": "Prévoir la conséquence sur la croissance"
+                },
+                {
+                  "content": "Proposer des aliments à ajouter"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Vocabulaire de la croissance, lots témoin et d'expérience, gain de masse ; groupes d'aliments (bâtisseurs, énergétiques, fonctionnels) et leur rôle ; analyse simple d'une ration.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On révise le vocabulaire de la croissance et de l'élevage.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rappelle-toi les définitions de la fiche : lot témoin, lot d'expérience, gain de masse.",
+              "questions": [
+                {
+                  "content": "L'augmentation de la taille et de la masse d'un être vivant s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Rappeler la définition : la croissance est l'augmentation de la taille et de la masse. 2) Écrire le mot : croissance.",
+                  "answers": [
+                    {
+                      "content": "croissance",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot témoin reçoit l'aliment étudié en plus de la ration habituelle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Rappeler : le lot témoin reçoit la ration habituelle seule. 2) Le lot qui reçoit l'aliment étudié en plus est le lot d'expérience. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment calcule-t-on le gain de masse d'un lot ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire les deux masses. 2) Soustraire la masse de départ à la masse d'arrivée. Ajouter ou ne garder que la masse finale ne mesure pas ce que le lot a gagné.",
+                  "answers": [
+                    {
+                      "content": "Masse finale moins masse initiale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Masse initiale moins masse finale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Masse finale plus masse initiale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Masse finale seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque expression à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Identifier le lot qui sert de comparaison : le témoin. 2) Identifier celui qui reçoit l'aliment étudié : l'expérience. 3) Le gain de masse se calcule par une soustraction.",
+                  "answers": [
+                    {
+                      "content": "Lot témoin",
+                      "match": "Reçoit la ration habituelle seule"
+                    },
+                    {
+                      "content": "Lot d'expérience",
+                      "match": "Reçoit l'aliment étudié en plus"
+                    },
+                    {
+                      "content": "Gain de masse",
+                      "match": "Masse finale moins masse initiale"
+                    }
+                  ]
+                },
+                {
+                  "content": "Lequel de ces animaux est un vertébré ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Rappeler : un vertébré a une colonne vertébrale. 2) Le poulet en a une. Le criquet, l'escargot et le termite n'en ont pas.",
+                  "answers": [
+                    {
+                      "content": "Le poulet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le criquet",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'escargot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le termite",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On révise les groupes d'aliments et leur rôle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe chaque aliment par son constituant principal, puis cherche le groupe qui manque.",
+              "questions": [
+                {
+                  "content": "Relie chaque constituant à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer le constituant. 2) Associer à son rôle : protéines, construction ; glucides, énergie ; vitamines, bon fonctionnement.",
+                  "answers": [
+                    {
+                      "content": "Les protéines",
+                      "match": "Construire le corps"
+                    },
+                    {
+                      "content": "Les glucides",
+                      "match": "Donner de l'énergie"
+                    },
+                    {
+                      "content": "Les vitamines",
+                      "match": "Aider le corps à fonctionner"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels aliments sont bâtisseurs ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 1) Repérer le constituant principal. Le lait, le poisson et l'œuf sont riches en protéines : bâtisseurs. Le riz (glucides) et l'huile de palme (lipides) sont énergétiques ; l'orange (vitamines) est fonctionnelle.",
+                  "answers": [
+                    {
+                      "content": "Le lait",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le riz",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'orange",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le manioc est riche en glucides. Dans quel groupe le range-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : glucides. 2) Associer : énergie. 3) Nommer : énergétique.",
+                  "answers": [
+                    {
+                      "content": "Les aliments énergétiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les aliments fonctionnels",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les fruits et les légumes sont des aliments ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : vitamines et sels minéraux. 2) Associer : aider le corps à fonctionner. 3) Nommer : fonctionnels.",
+                  "answers": [
+                    {
+                      "content": "fonctionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "fonctionnel",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'origine animale d'un aliment suffit pour dire qu'il est bâtisseur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer le constituant principal, pas l'origine. 2) Le beurre, d'origine animale, est riche en lipides : il est énergétique. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un lot A de poussins (50 g chacun au départ) mange du maïs seul, un lot B du maïs et du poisson séché, un lot C du maïs et de l'huile de palme. Après 4 semaines, les masses moyennes sont 450 g pour A, 750 g pour B et 500 g pour C. Valeurs illustratives.",
+              "exercise_type": "evaluation",
+              "figure": "masses-lots",
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Dans cette expérience, quel lot est le lot témoin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer le facteur étudié : l'aliment ajouté au maïs. 2) Le lot témoin est celui qui ne reçoit que la ration habituelle : le lot A.",
+                  "answers": [
+                    {
+                      "content": "Le lot A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun lot",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot B passe de 50 g à 750 g. Quel est son gain de masse ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 50 g puis 750 g. 2) Calculer : $750 - 50 = 700$ g.",
+                  "answers": [
+                    {
+                      "content": "700",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Le lot C passe de 50 g à 500 g. Quel est son gain de masse ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 50 g puis 500 g. 2) Calculer : $500 - 50 = 450$ g.",
+                  "answers": [
+                    {
+                      "content": "450",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Les gains sont 400 g (A), 700 g (B) et 450 g (C). Quel lot a le plus grandi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Comparer les gains : 700 g est le plus grand. 2) Conclure : le lot B, qui reçoit le poisson séché, a le plus grandi.",
+                  "answers": [
+                    {
+                      "content": "Le lot B",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois lots autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot C a gagné plus de masse que le lot A.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Calculer : lot C $500 - 50 = 450$ g, lot A $450 - 50 = 400$ g. 2) Comparer : 450 g est plus grand que 400 g. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Kofi, 10 ans, mange chaque jour de l'igname bouillie, de la banane plantain braisée et une sauce à l'huile de palme.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe chaque aliment par son constituant principal, puis cherche le groupe qui manque.",
+              "questions": [
+                {
+                  "content": "Quel(s) groupe(s) d'aliments cette ration contient-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lister : igname, banane plantain, huile de palme. 2) Classer : glucides pour l'igname et la banane, lipides pour l'huile : tous énergétiques.",
+                  "answers": [
+                    {
+                      "content": "Seulement des aliments énergétiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des bâtisseurs et des énergétiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des fonctionnels et des énergétiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois groupes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels groupes manquent dans la ration de Kofi ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Lister et classer. 2) Repérer les groupes absents : il n'y a ni protéines ni vitamines, donc ni bâtisseurs ni fonctionnels.",
+                  "answers": [
+                    {
+                      "content": "Les aliments bâtisseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments fonctionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments énergétiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun groupe ne manque",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la conséquence probable sur la croissance de Kofi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer le groupe absent : les bâtisseurs. 2) Prévoir : sans bâtisseurs, le corps manque de matériaux pour grandir.",
+                  "answers": [
+                    {
+                      "content": "Une croissance ralentie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une croissance plus rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune conséquence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour apporter les bâtisseurs qui manquent à la ration de Kofi, on ajoute par exemple ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer le groupe qui manque. 2) Proposer un aliment riche en protéines : poisson, œuf, niébé ou lait.",
+                  "answers": [
+                    {
+                      "content": "poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "le poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "viande",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ration équilibrée contient seulement des aliments énergétiques.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Rappeler : une ration équilibrée contient les trois groupes. 2) Une ration seulement énergétique n'a ni bâtisseurs ni fonctionnels. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Choix d'aliments au marché, menus de cantine, élevage de lapins, suivi de la masse d'un enfant ; groupes d'aliments et croissance.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Mme Affoué fait ses courses au marché de Bouaké pour nourrir ses enfants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe chaque aliment par son constituant principal, puis cherche le groupe qui manque.",
+              "questions": [
+                {
+                  "content": "Relie chaque aliment du marché à son groupe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer le constituant principal : glucides, protéines, vitamines. 2) Nommer le groupe.",
+                  "answers": [
+                    {
+                      "content": "Le manioc",
+                      "match": "Énergétique"
+                    },
+                    {
+                      "content": "Le lait",
+                      "match": "Bâtisseur"
+                    },
+                    {
+                      "content": "La mangue",
+                      "match": "Fonctionnel"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les enfants mangent surtout du riz. Quel achat complète le mieux leur ration pour leur croissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Classer : le riz est énergétique. 2) Repérer le groupe absent : les bâtisseurs. 3) Choisir un aliment riche en protéines : le poisson fumé.",
+                  "answers": [
+                    {
+                      "content": "Du poisson fumé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un sac de riz en plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'huile de palme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sucre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels aliments du marché sont énergétiques ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer : l'igname est riche en glucides, l'huile de palme en lipides : énergétiques. L'œuf et le lait sont bâtisseurs, l'orange est fonctionnelle.",
+                  "answers": [
+                    {
+                      "content": "L'igname",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'orange",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les fruits et les légumes aident le corps à bien ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : vitamines et sels minéraux. 2) Associer : ils aident le corps à bien fonctionner.",
+                  "answers": [
+                    {
+                      "content": "fonctionner",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le niébé, vendu au marché, est un aliment bâtisseur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : le niébé est riche en protéines. 2) Nommer : bâtisseur, même s'il est d'origine végétale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "La cantine d'une école de Man propose le lundi du riz, une sauce tomate avec du poisson, et une orange. Le jeudi, elle propose seulement de l'attiéké avec de l'huile de palme.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe chaque aliment par son constituant principal, puis cherche le groupe qui manque.",
+              "questions": [
+                {
+                  "content": "Le menu du lundi contient du riz, du poisson, de la tomate et une orange. Combien de groupes différents contient-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lister et classer : riz énergétique, poisson bâtisseur, tomate et orange fonctionnelles. 2) Compter les groupes : énergétique, bâtisseur, fonctionnel, soit 3.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le menu du lundi est-il équilibré ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Classer les aliments du lundi. 2) Les trois groupes sont présents : le menu est équilibré.",
+                  "answers": [
+                    {
+                      "content": "Oui, il contient les trois groupes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, il manque les bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, il manque l'énergie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, il manque les fonctionnels",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels groupes manquent dans le menu du jeudi (attiéké et huile de palme) ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Classer : l'attiéké et l'huile de palme sont énergétiques. 2) Repérer les groupes absents : bâtisseurs et fonctionnels.",
+                  "answers": [
+                    {
+                      "content": "Les aliments bâtisseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments fonctionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments énergétiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun groupe ne manque",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour corriger le manque qui freine le plus la croissance, la cantine peut ajouter au menu du jeudi un aliment ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer le groupe absent qui freine le plus la croissance. 2) Proposer un aliment de ce groupe : le poisson est un aliment bâtisseur.",
+                  "answers": [
+                    {
+                      "content": "bâtisseur",
+                      "correct": true
+                    },
+                    {
+                      "content": "bâtisseurs",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Doubler la quantité d'attiéké au menu du jeudi suffit à l'équilibrer.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Classer : l'attiéké est énergétique. 2) Plus d'attiéké n'ajoute ni bâtisseurs ni fonctionnels. La quantité ne remplace pas la qualité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'élève qui mange toujours le menu du jeudi risque-t-il une croissance ralentie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : il manque les bâtisseurs. 2) Prévoir : sans protéines, le corps manque de matériaux pour grandir.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il manque les bâtisseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il y a trop de poisson",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il y a trop de fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il y a trop de protéines",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Yao élève des lapins à Korhogo. Les lots P et Q ont des lapereaux du même âge, de 600 g chacun, dans la même cage. Le lot P mange des herbes seules ; le lot Q mange des herbes et des granulés riches en protéines. Après 6 semaines, P pèse 1 000 g et Q pèse 1 200 g en moyenne. Valeurs illustratives.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Quel est le gain de masse du lot P, en grammes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 600 g puis 1 000 g. 2) Calculer : $1000 - 600 = 400$ g.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Quel est le gain de masse du lot Q, en grammes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 600 g puis 1 200 g. 2) Calculer : $1200 - 600 = 600$ g.",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Que peut conclure Yao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Un seul facteur change : les granulés. 2) Le gain du lot Q (600 g) dépasse celui du lot P (400 g). 3) Conclure : les granulés favorisent la croissance.",
+                  "answers": [
+                    {
+                      "content": "Les granulés riches en protéines favorisent la croissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les herbes seules font mieux grandir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux rations donnent le même résultat",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conditions sont identiques dans les deux lots ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Les conditions identiques sont l'âge, la cage, et la masse de départ. La ration et les granulés sont le facteur étudié, la masse finale est un résultat.",
+                  "answers": [
+                    {
+                      "content": "L'âge des lapereaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "La cage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toute la nourriture, granulés compris",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les granulés",
+                      "correct": false
+                    },
+                    {
+                      "content": "La masse finale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot P est le lot témoin.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Le lot P reçoit la ration habituelle seule. 2) C'est donc le lot témoin, et Q est le lot d'expérience.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au centre de santé de Daloa, la masse de Fatou est notée : 14 kg à 4 ans, 17 kg à 6 ans et 21 kg à 8 ans. Valeurs illustratives.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Quel est le gain de masse de Fatou entre 4 ans et 6 ans ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 14 kg puis 17 kg. 2) Calculer : $17 - 14 = 3$ kg.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "Quel est le gain de masse de Fatou entre 6 ans et 8 ans ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 17 kg puis 21 kg. 2) Calculer : $21 - 17 = 4$ kg.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "Entre quels âges Fatou a-t-elle le plus grandi en masse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Comparer les gains : 4 kg contre 3 kg. 2) Le plus grand gain est entre 6 et 8 ans.",
+                  "answers": [
+                    {
+                      "content": "Entre 6 ans et 8 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 4 ans et 6 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les gains sont égaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou a gagné 7 kg entre 4 ans et 8 ans.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Lire : 14 kg puis 21 kg. 2) Calculer : $21 - 14 = 7$ kg. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel conseil donner pour soutenir la croissance de Fatou ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Un enfant qui grandit a besoin des trois groupes. 2) Les autres propositions laissent un groupe de côté.",
+                  "answers": [
+                    {
+                      "content": "Une ration avec bâtisseurs, énergétiques et fonctionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement du riz en grande quantité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Supprimer les aliments bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Manger uniquement des fruits",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Comparer des gains de masse plutôt que des masses finales ; repérer une expérience mal conçue ; justifier qu'une ration est déséquilibrée ; qualité et quantité de la ration.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois lots de poussins du même âge sont élevés dans le même poulailler. Le lot F passe de 100 g à 400 g, le lot G de 250 g à 500 g, le lot H de 150 g à 400 g. Valeurs illustratives.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Quel est le gain de masse du lot F ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 100 g puis 400 g. 2) Calculer : $400 - 100 = 300$ g.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Quel lot est le plus lourd à la fin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire les masses finales : F 400 g, G 500 g, H 400 g. 2) Le plus lourd est G.",
+                  "answers": [
+                    {
+                      "content": "Le lot G",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot F",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot H",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois lots autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel lot a le plus grandi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Calculer les gains : F $400 - 100 = 300$ g, G $500 - 250 = 250$ g, H $400 - 150 = 250$ g. 2) Comparer : le plus grand gain est celui du lot F. Le lot G est le plus lourd, mais il partait de plus haut.",
+                  "answers": [
+                    {
+                      "content": "Le lot F",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot G",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot H",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois lots autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot G a le plus grandi parce qu'il est le plus lourd à la fin.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Calculer les gains. 2) Le lot G gagne 250 g, le lot F 300 g. Comparer les masses finales est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels lots ont le même gain de masse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Calculer : G $500 - 250 = 250$ g, H $400 - 150 = 250$ g. 2) Ils ont le même gain, 250 g. Le lot F gagne 300 g.",
+                  "answers": [
+                    {
+                      "content": "Le lot G",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot H",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot F",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun lot",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mme Awa compare deux lots de poussins. Le lot A a des poussins de 1 semaine nourris au maïs. Le lot B a des poussins de 3 semaines nourris au maïs et au poisson séché. Les deux lots sont élevés dans le même poulailler. Elle voit que le lot B est plus lourd.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Peut-elle conclure que le poisson séché fait grandir les poulets ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer ce qui change : l'âge et l'aliment. 2) Avec deux facteurs, on ne sait pas lequel explique la différence. Le lot B est plus lourd peut-être à cause de son âge.",
+                  "answers": [
+                    {
+                      "content": "Non, car deux facteurs changent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car le lot B est plus lourd",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car le poisson est un aliment bâtisseur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car le maïs est énergétique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels facteurs changent entre les deux lots ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Comparer les deux lots : l'âge (1 semaine, 3 semaines) et l'aliment (maïs seul, maïs et poisson) sont différents. Rien n'indique de changement de poulailler.",
+                  "answers": [
+                    {
+                      "content": "L'âge des poussins",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aliment donné",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poulailler",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de pattes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour conclure, un seul ___ doit changer entre les lots.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Rappeler : on étudie un seul facteur à la fois. 2) Le mot attendu est facteur.",
+                  "answers": [
+                    {
+                      "content": "facteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Il faut comparer des lots de poussins du même âge.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Les conditions doivent être identiques sauf l'aliment. 2) L'âge doit donc être le même dans les deux lots.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment corriger l'expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer le facteur à corriger : l'âge. 2) Prendre des poussins du même âge, pour qu'un seul facteur change.",
+                  "answers": [
+                    {
+                      "content": "Prendre deux lots de poussins du même âge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Donner le poisson aux deux lots",
+                      "correct": false
+                    },
+                    {
+                      "content": "Peser seulement le lot B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Arrêter l'élevage",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Yao mange chaque jour du manioc, de l'igname et de la banane plantain braisée, sans aucun autre aliment.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe chaque aliment par son constituant principal, puis cherche le groupe qui manque.",
+              "questions": [
+                {
+                  "content": "Dans quel groupe se range toute cette ration ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lister : manioc, igname, banane plantain. 2) Classer : tous riches en glucides, donc énergétiques.",
+                  "answers": [
+                    {
+                      "content": "Les aliments énergétiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les aliments bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les aliments fonctionnels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois groupes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases montrent que cette ration est déséquilibrée ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer les groupes absents : bâtisseurs et fonctionnels. 2) Elle ne manque pas d'énergie : tous les aliments en donnent.",
+                  "answers": [
+                    {
+                      "content": "Elle ne contient aucun aliment bâtisseur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle ne contient aucun aliment fonctionnel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle manque d'énergie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle contient trop d'aliments bâtisseurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la conséquence probable pour la croissance de Yao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : les bâtisseurs manquent. 2) Prévoir : sans protéines, la croissance est ralentie.",
+                  "answers": [
+                    {
+                      "content": "Elle sera ralentie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle sera accélérée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle sera normale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle sera impossible à prévoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour analyser cette ration.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Lister. 2) Classer. 3) Repérer. 4) Prévoir. 5) Proposer.",
+                  "answers": [
+                    {
+                      "content": "Lister les aliments"
+                    },
+                    {
+                      "content": "Classer chaque aliment"
+                    },
+                    {
+                      "content": "Repérer le groupe absent"
+                    },
+                    {
+                      "content": "Prévoir la conséquence"
+                    },
+                    {
+                      "content": "Proposer des aliments à ajouter"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel aliment ajouter en premier pour que Yao grandisse mieux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Le groupe absent qui freine la croissance est celui des bâtisseurs. 2) Ajouter un aliment riche en protéines : le poisson. Les autres propositions donnent encore de l'énergie.",
+                  "answers": [
+                    {
+                      "content": "Du poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "Davantage de manioc",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'huile de palme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sucre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Trois lots de poussins de 50 g chacun sont élevés quatre semaines dans les mêmes conditions. Le lot D mange une double ration de maïs seul (500 g à la fin). Le lot E mange une ration normale de maïs avec du poisson séché (750 g). Le lot F mange une ration normale de maïs seul (450 g). Valeurs illustratives.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Quel est le gain de masse du lot F ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 50 g puis 450 g. 2) Calculer : $450 - 50 = 400$ g.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Relie chaque lot à son gain de masse.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Calculer : D $500 - 50 = 450$ g, E $750 - 50 = 700$ g, F $450 - 50 = 400$ g.",
+                  "answers": [
+                    {
+                      "content": "Le lot D",
+                      "match": "450 g"
+                    },
+                    {
+                      "content": "Le lot E",
+                      "match": "700 g"
+                    },
+                    {
+                      "content": "Le lot F",
+                      "match": "400 g"
+                    }
+                  ]
+                },
+                {
+                  "content": "Que montre la comparaison du lot D et du lot F ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Comparer les gains : D 450 g, F 400 g. 2) La différence est de 50 g seulement : plus de maïs n'apporte que de l'énergie.",
+                  "answers": [
+                    {
+                      "content": "Doubler le maïs améliore peu la croissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Doubler le maïs double le gain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le maïs empêche de grandir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien du tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le lot E a-t-il le plus grandi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Les lots ont même âge et mêmes conditions. 2) Le seul facteur qui diffère de F est le poisson séché, riche en protéines.",
+                  "answers": [
+                    {
+                      "content": "Parce que le poisson séché apporte des bâtisseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il mange plus de maïs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il est plus âgé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il a plus de place",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour bien grandir, la quantité de maïs compte plus que la présence d'un aliment bâtisseur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Comparer E (700 g) à D (450 g). 2) La qualité de la ration compte autant que la quantité : plus de maïs seul ne remplace pas un aliment bâtisseur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Toutes les notions : comparer des lots nourris différemment, distinguer les groupes d'aliments, relier la ration à la croissance.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un lot A de poussins mange du maïs, un lot B du maïs et du poisson séché, un lot C du maïs et de l'huile de palme. Chaque poussin pèse 50 g au départ. Après 4 semaines, les masses moyennes sont 450 g pour A, 750 g pour B et 500 g pour C. Valeurs illustratives.",
+              "exercise_type": "evaluation",
+              "figure": "masses-lots",
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Quel est le lot témoin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer le facteur étudié : l'aliment ajouté. 2) Le lot témoin ne reçoit que le maïs : lot A.",
+                  "answers": [
+                    {
+                      "content": "Le lot A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lots B et C",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le gain de masse du lot B ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 50 g puis 750 g. 2) Calculer : $750 - 50 = 700$ g.",
+                  "answers": [
+                    {
+                      "content": "700",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Relie chaque aliment à son groupe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer le constituant principal. 2) Nommer le groupe : protéines, lipides, vitamines.",
+                  "answers": [
+                    {
+                      "content": "Le poisson séché",
+                      "match": "Bâtisseur"
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "match": "Énergétique"
+                    },
+                    {
+                      "content": "La papaye",
+                      "match": "Fonctionnel"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot C a peu gagné par rapport au lot B parce que l'huile de palme est un aliment énergétique et non bâtisseur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Calculer : C gagne 450 g, B gagne 700 g. 2) Classer : l'huile de palme est énergétique, le poisson séché est bâtisseur. 3) Conclure : pour grandir, ce sont les bâtisseurs qui comptent le plus.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion tirer de cette expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Comparer les gains : A 400 g, B 700 g, C 450 g. 2) Conclure : le lot B a le plus grandi.",
+                  "answers": [
+                    {
+                      "content": "Le poisson séché, un bâtisseur, favorise le plus la croissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'huile de palme favorise le plus la croissance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois rations donnent le même résultat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le maïs seul est la meilleure ration",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "La masse d'Awa est notée à plusieurs âges : 20 kg à 6 ans, 25 kg à 8 ans, 31 kg à 10 ans, 38 kg à 12 ans. Valeurs illustratives.",
+              "exercise_type": "evaluation",
+              "figure": "croissance-enfant",
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Quel est son gain de masse entre 8 ans et 12 ans ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 25 kg puis 38 kg. 2) Calculer : $38 - 25 = 13$ kg.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "Entre quels âges son gain de masse est-il le plus petit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Calculer : 5 kg, 6 kg et 7 kg. 2) Le plus petit est 5 kg, de 6 à 8 ans.",
+                  "answers": [
+                    {
+                      "content": "Entre 6 ans et 8 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 8 ans et 10 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 10 ans et 12 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sa masse augmente à chaque âge noté.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Lire : 20, 25, 31, 38 kg. 2) La suite est croissante : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour grandir, Awa doit manger des aliments ___, riches en protéines.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer le rôle : construire le corps. 2) Les protéines forment le groupe des bâtisseurs.",
+                  "answers": [
+                    {
+                      "content": "bâtisseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "bâtisseur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle ration journalière est équilibrée pour Awa ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Classer : riz énergétique, poisson bâtisseur, orange fonctionnelle. 2) Les trois groupes sont présents.",
+                  "answers": [
+                    {
+                      "content": "Du riz, du poisson et une orange",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du riz et du manioc",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'igname seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'huile de palme seule",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Aya, 11 ans, vit à Man. Elle mange chaque jour du riz, du poisson, une mangue et une sauce à l'huile de palme.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe chaque aliment par son constituant principal, puis cherche le groupe qui manque.",
+              "questions": [
+                {
+                  "content": "Quels groupes sa ration contient-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lister : riz, poisson, mangue, huile de palme. 2) Classer : énergétiques (riz, huile), bâtisseur (poisson), fonctionnel (mangue).",
+                  "answers": [
+                    {
+                      "content": "Les trois groupes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les énergétiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les bâtisseurs et les énergétiques seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fonctionnels seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de groupes différents contient sa ration ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Classer chaque aliment. 2) Compter les groupes : énergétique, bâtisseur, fonctionnel, soit 3.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La ration d'Aya est équilibrée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Aucun groupe ne manque. 2) La ration est donc équilibrée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya mange du riz, du poisson, une mangue et de l'huile de palme. Si elle arrête le poisson, quels groupes restent présents ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Retirer le poisson, seul bâtisseur. 2) Restent le riz et l'huile (énergétiques) et la mangue (fonctionnelle).",
+                  "answers": [
+                    {
+                      "content": "Les énergétiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fonctionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les bâtisseurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun groupe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle sera alors la conséquence probable pour sa croissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer le groupe absent : les bâtisseurs. 2) Prévoir : sans protéines, la croissance est ralentie.",
+                  "answers": [
+                    {
+                      "content": "Elle sera ralentie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle sera plus rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne changera pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On fait le bilan des méthodes de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis les étapes de la fiche : repère ce qui change, calcule, puis conclus.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour comparer des lots.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Repérer. 2) Identifier. 3) Lire. 4) Calculer. 5) Conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer le facteur étudié"
+                    },
+                    {
+                      "content": "Identifier le lot témoin et le lot d'expérience"
+                    },
+                    {
+                      "content": "Lire les masses au début et à la fin"
+                    },
+                    {
+                      "content": "Calculer le gain de masse de chaque lot"
+                    },
+                    {
+                      "content": "Conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque groupe à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer le constituant. 2) Associer le rôle : protéines, construire ; glucides et lipides, énergie ; vitamines et sels minéraux, fonctionner.",
+                  "answers": [
+                    {
+                      "content": "Bâtisseurs",
+                      "match": "Construire le corps"
+                    },
+                    {
+                      "content": "Énergétiques",
+                      "match": "Donner de l'énergie"
+                    },
+                    {
+                      "content": "Fonctionnels",
+                      "match": "Aider le corps à fonctionner"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot G passe de 100 g à 350 g, le lot H de 200 g à 400 g. Quel lot a le plus grandi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Calculer : G $350 - 100 = 250$ g, H $400 - 200 = 200$ g. 2) Comparer les gains : G est le plus grand.",
+                  "answers": [
+                    {
+                      "content": "Le lot G",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot H",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lot passe de 50 g à 600 g. Quel est son gain de masse ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Lire : 50 g puis 600 g. 2) Calculer : $600 - 50 = 550$ g.",
+                  "answers": [
+                    {
+                      "content": "550",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g"
+                },
+                {
+                  "content": "Quels aliments sont fonctionnels ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 1) Repérer le constituant principal. 2) La papaye, l'orange et la tomate sont riches en vitamines : fonctionnels. Le lait est bâtisseur, le riz et l'huile sont énergétiques.",
+                  "answers": [
+                    {
+                      "content": "La papaye",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'orange",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tomate",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le riz",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Doubler la quantité d'un seul aliment suffit à équilibrer une ration.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Classer l'aliment. 2) Doubler sa quantité ne fait pas apparaître les groupes absents. La qualité compte autant que la quantité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
