@@ -123,23 +123,49 @@ Depuis le 2026-11-13, les leçons 4 et 5 de la progression DPFC 2026-2027 de 1è
 
 | Fichier | Titre | Notions | Exercices | Questions |
 |---|---|---:|---:|---:|
+| `1ere-a1/francais/la-focalisation.json` | La focalisation | 4 | 28 | 169 |
+| `1ere-a1/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
 | `1ere-a1/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
 | `1ere-a1/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a1/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-a1/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
 | `1ere-a1/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
 | `1ere-a1/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-a1/svt/la-regulation-des-naissances.json` | La régulation des naissances | 3 | 26 | 147 |
+| `1ere-a1/svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 165 |
+| `1ere-a2/francais/la-focalisation.json` | La focalisation | 4 | 28 | 169 |
+| `1ere-a2/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
 | `1ere-a2/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
 | `1ere-a2/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a2/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-a2/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
 | `1ere-a2/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
 | `1ere-a2/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-a2/svt/la-regulation-des-naissances.json` | La régulation des naissances | 3 | 26 | 147 |
+| `1ere-a2/svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 165 |
+| `1ere-c/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-c/francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 30 | 179 |
 | `1ere-c/mathematiques/barycentre.json` | Barycentre | 5 | 30 | 183 |
 | `1ere-c/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 170 |
+| `1ere-c/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-c/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
 | `1ere-c/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
 | `1ere-c/physique-chimie/hydrocarbures-satures-les-alcanes.json` | Hydrocarbures saturés : les alcanes | 7 | 34 | 213 |
+| `1ere-c/svt/la-fecondation-chez-les-mammiferes.json` | La fécondation chez les mammifères | 3 | 26 | 151 |
+| `1ere-c/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 28 | 177 |
+| `1ere-d/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-d/francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 30 | 179 |
 | `1ere-d/mathematiques/denombrement.json` | Dénombrement | 4 | 28 | 167 |
 | `1ere-d/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 166 |
+| `1ere-d/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-d/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
 | `1ere-d/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
 | `1ere-d/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | Hydrocarbures insaturés : les alcènes et les alcynes | 5 | 30 | 186 |
-| **Total** | | | | **2801** |
+| `1ere-d/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 28 | 177 |
+| `1ere-d/svt/la-transmission-d-un-caractere-hereditaire-le-monohybridisme.json` | La transmission d'un caractère héréditaire : le monohybridisme | 4 | 28 | 168 |
+| `1ere/histoire-geographie/geographie-la-croissance-demographique-mondiale-et-ses-consequences.json` | Géographie — La croissance démographique mondiale et ses conséquences | 5 | 30 | 193 |
+| `1ere/histoire-geographie/histoire-le-mouvement-imperialiste-et-le-congres-de-berlin.json` | Histoire — Le mouvement impérialiste et le congrès de Berlin | 4 | 28 | 171 |
+| **Total** | | | | **7294** |
 
 ### 1ère, 3 premières leçons de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
 

@@ -96,3 +96,21 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
   - Suites (A) : décompte des termes par « dernier rang − premier rang + 1 » ; un sujet commence au mois 1 au lieu de $u_0$.
   - Physique-Chimie : la composition du gaz naturel est une valeur d'exercice ; Br = 80 g/mol est ajouté aux données (alcènes) ; la loi d'Ohm de 2nde est employée dans un sujet de la pile.
   - Les contextes ivoiriens et leurs chiffres sont fictifs.
+## Vague 2 : leçons 4 et 5 de 1ère — Français, SVT, Philosophie, Histoire-Géographie
+
+- **Périmètre** : 26 fichiers revenus de `a-reprendre/` au format complet.
+  - Français : Le rythme dans le texte (A1, A2, C, D), La focalisation (A1, A2), Les tonalités littéraires (C, D).
+  - SVT : Les cycles sexuels chez la femme et La régulation des naissances (A1, A2), La fécondation chez les mammifères (C), La synthèse des protéines (C, D), Le monohybridisme (D).
+  - Philosophie : L'essai de problématisation et La période antique, dans les 4 séries.
+  - Histoire-Géographie : La croissance démographique mondiale et ses conséquences ; Le mouvement impérialiste et le congrès de Berlin.
+  - En Philosophie et en Histoire-Géographie, le « Je m'entraîne » a été ajouté à chaque notion.
+- **Contrôles** : le même script hors dépôt que pour la vague 1, et un script pour les proportions génétiques et les traductions du code génétique. Les 26 leçons ont été rendues à 390 px.
+- **`practice` d'origine corrigés** (réversible), parce qu'une question `written` ne peut pas être corrigée automatiquement :
+  - La focalisation (A1, A2), notion 3 : la question `written` est remplacée par un QCM sur le marqueur du changement de focalisation.
+  - Les cycles sexuels (A1, A2) : une question vrai/faux est ajoutée aux notions 2 et 3, qui n'en avaient que 2. La `written` de la notion 4 est remplacée par un vrai/faux.
+- **À faire relire par un enseignant** :
+  - Le rythme : les comptes de syllabes. Les diérèses et synérèses ambiguës ont été évitées.
+  - La focalisation : la focalisation attribuée à chaque texte.
+  - Philosophie : les sujets de problématisation proposés (« Doit-on toujours pardonner ? »…) ; une question qui associe un texte support à la maïeutique.
+  - SVT : les valeurs des courbes de température et d'hormones sont schématiques ; les génotypes sont écrits en toutes lettres (« Hétérozygote R//r ») pour que l'import les distingue.
+  - Histoire-Géographie : les chiffres démographiques autres que ceux de la fiche sont des valeurs d'exercice, vérifiées à la main ; « la Côte d'Ivoire est dominée par la France vers 1914 » s'appuie sur la carte `afrique-1914`.
