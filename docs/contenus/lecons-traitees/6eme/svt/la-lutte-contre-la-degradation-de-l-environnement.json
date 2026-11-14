@@ -1,0 +1,3516 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La lutte contre la dégradation de l'environnement",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "SVT",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "tri-des-dechets",
+          "kind": "diagram",
+          "description": "Schéma fléché de gauche à droite en trois colonnes. À gauche, trois groupes de déchets : épluchures et restes de repas, plastique, verre et métal, piles et médicaments périmés. Au centre, un bac pour chaque groupe. À droite, le devenir : le compost pour les déchets organiques, le ramassage par le service de collecte pour le bac des déchets qui ne pourrissent pas, et un point de collecte à part (piles, pharmacie pour les médicaments) pour les déchets dangereux.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Déchets",
+              "Bacs",
+              "Devenir"
+            ],
+            "nodes": [
+              {
+                "id": "epl",
+                "label": "Épluchures et restes de repas",
+                "category": 1
+              },
+              {
+                "id": "plas",
+                "label": "Plastique, verre et métal",
+                "category": 1
+              },
+              {
+                "id": "pile",
+                "label": "Piles et médicaments périmés",
+                "category": 1
+              },
+              {
+                "id": "b1",
+                "label": "Bac des déchets organiques",
+                "category": 2
+              },
+              {
+                "id": "b2",
+                "label": "Bac des déchets qui ne pourrissent pas",
+                "category": 2
+              },
+              {
+                "id": "b3",
+                "label": "Bac à part des déchets dangereux",
+                "category": 2
+              },
+              {
+                "id": "comp",
+                "label": "Compost",
+                "category": 3
+              },
+              {
+                "id": "coll",
+                "label": "Ramassage par le service de collecte",
+                "category": 3
+              },
+              {
+                "id": "pt",
+                "label": "Point de collecte à part (piles, pharmacie)",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "epl",
+                "to": "b1"
+              },
+              {
+                "from": "plas",
+                "to": "b2"
+              },
+              {
+                "from": "pile",
+                "to": "b3"
+              },
+              {
+                "from": "b1",
+                "to": "comp",
+                "label": "compostage"
+              },
+              {
+                "from": "b2",
+                "to": "coll"
+              },
+              {
+                "from": "b3",
+                "to": "pt"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-du-compost",
+          "kind": "diagram",
+          "description": "Schéma en cycle du compostage. Les épluchures et les feuilles sont mises en tas. Les vers de terre et les champignons du tas les transforment. Il en sort le compost, une terre noire. Le compost est étalé sur le sol du jardin et nourrit les plantes, qui donnent à leur tour des feuilles et des épluchures.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "dech",
+                "label": "Épluchures et feuilles"
+              },
+              {
+                "id": "tas",
+                "label": "Tas de compost"
+              },
+              {
+                "id": "comp",
+                "label": "Compost, terre noire"
+              },
+              {
+                "id": "sol",
+                "label": "Sol du jardin"
+              },
+              {
+                "id": "plan",
+                "label": "Plantes qui poussent"
+              }
+            ],
+            "edges": [
+              {
+                "from": "dech",
+                "to": "tas",
+                "label": "on empile"
+              },
+              {
+                "from": "tas",
+                "to": "comp",
+                "label": "vers et champignons"
+              },
+              {
+                "from": "comp",
+                "to": "sol",
+                "label": "on épand"
+              },
+              {
+                "from": "sol",
+                "to": "plan",
+                "label": "nourrit"
+              },
+              {
+                "from": "plan",
+                "to": "dech",
+                "label": "donnent"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le reboisement",
+          "remember": "Le **reboisement** consiste à replanter des arbres là où ils ont été coupés ou brûlés. C'est une façon de lutter contre la dégradation de l'environnement. Un arbre rend plusieurs services : ses **racines retiennent la terre** et limitent l'érosion (la terre emportée par la pluie) ; ses feuilles mortes forment l'**humus**, qui enrichit le sol ; son **ombre** rafraîchit la cour ; il sert d'abri aux oiseaux et aux insectes. Pour réussir, on choisit des arbres adaptés au sol et au climat du lieu, on les plante au début de la saison des pluies, puis on les arrose et on les protège jusqu'à ce qu'ils aient bien repris.",
+          "method": [
+            "Observer le lieu à reboiser et repérer ce qui manque : ombre, sol protégé, arbres.",
+            "Choisir des arbres adaptés au sol et au climat du lieu.",
+            "Planter les jeunes plants dans des trous assez larges, au début de la saison des pluies.",
+            "Arroser, protéger et surveiller les plants jusqu'à ce qu'ils aient repris."
+          ],
+          "example": {
+            "statement": "La cour de l'école de Divo est nue : le sol est sec, la pluie emporte la terre et il n'y a aucune ombre. Les élèves du comité décident de la reboiser. Décrire leur projet en suivant la méthode.",
+            "steps": [
+              "Observer : la cour est nue, la terre part à chaque pluie et il n'y a pas d'ombre pour jouer.",
+              "Choisir : des manguiers et des acajous, des arbres qui poussent bien dans le climat chaud de la région.",
+              "Planter : les élèves creusent des trous assez larges et y mettent les jeunes plants au début de la saison des pluies.",
+              "Arroser et protéger : chaque classe adopte un arbre, l'arrose en saison sèche et l'entoure d'une petite clôture."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'il suffit de planter pour que le reboisement réussisse. Contre-exemple (valeurs pour l'exercice) : une classe plante 20 jeunes plants, puis personne ne les arrose pendant la saison sèche ; une chèvre en broute plusieurs et il n'en reste que 5. Planter n'est que la moitié du travail : arroser et protéger les jeunes plants est l'autre moitié. Pense aussi à choisir des arbres adaptés au lieu.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à organiser un reboisement, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Replanter des arbres là où ils ont été coupés ou brûlés s'appelle le ___.",
+                "question_type": "fill_blank",
+                "hint": "Le mot commence par « re » et contient « bois ».",
+                "explanation": "Étape 1 — Observer : des arbres ont disparu du lieu. Étape 2 à 4 : on choisit, on plante, on arrose. L'ensemble de ces actions s'appelle le reboisement.",
+                "answers": [
+                  {
+                    "content": "reboisement",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une cour nue, la pluie emporte la terre. Que font les racines des arbres plantés ?",
+                "question_type": "single_choice",
+                "hint": "Pense à ce que les racines font dans le sol.",
+                "explanation": "Étape 1 — Observer : la terre part à chaque pluie et il manque des arbres ; leurs racines retiennent la terre et limitent l'érosion. Les autres propositions donnent aux racines un pouvoir qu'elles n'ont pas.",
+                "answers": [
+                  {
+                    "content": "Elles retiennent la terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles font tomber moins de pluie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles rendent le sol plus sec",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles fabriquent de la terre neuve en une semaine",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes du reboisement.",
+                "question_type": "ordering",
+                "hint": "On regarde avant de choisir, et on choisit avant de planter.",
+                "explanation": "Étape 1 — Observer le lieu. Étape 2 — Choisir des arbres adaptés. Étape 3 — Planter. Étape 4 — Arroser et protéger. On ne plante pas avant d'avoir choisi, et on n'arrose pas avant d'avoir planté.",
+                "answers": [
+                  {
+                    "content": "Observer le lieu à reboiser"
+                  },
+                  {
+                    "content": "Choisir des arbres adaptés"
+                  },
+                  {
+                    "content": "Planter les jeunes plants dans des trous"
+                  },
+                  {
+                    "content": "Arroser et protéger les plants"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Comprendre le reboisement",
+              "statement": "Dans cet exercice, tu reconnais ce qu'est le reboisement et ce que font les arbres.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le reboisement consiste à replanter des arbres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : on parle de replanter des arbres. Le reboisement est exactement cela : replanter là où les arbres ont été coupés ou brûlés. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le rôle des feuilles mortes d'un arbre sur le sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : les feuilles tombent sur le sol, pourrissent et forment l'humus, qui nourrit le sol. Elles ne brûlent pas la terre et ne la laissent pas nue : elles la couvrent.",
+                  "answers": [
+                    {
+                      "content": "Elles forment l'humus qui enrichit le sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles brûlent la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles rendent le sol nu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles empêchent les racines de pousser",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux services rendus par un arbre dans une cour d'école ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer ce qui manque dans une cour nue : l'ombre et un sol protégé. L'arbre donne de l'ombre et ses racines retiennent la terre. Il ne favorise pas l'érosion, il la limite, et il ne dispense pas d'arroser le potager.",
+                  "answers": [
+                    {
+                      "content": "Il donne de l'ombre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ses racines retiennent la terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il augmente l'érosion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il remplace tout arrosage du potager",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que les jeunes plants survivent, il faut les ___ et les protéger.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Arroser, protéger et surveiller. Un jeune plant a besoin d'eau en saison sèche et d'une protection contre les animaux. Le mot attendu est arroser.",
+                  "answers": [
+                    {
+                      "content": "arroser",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une classe plante 20 jeunes arbres, puis ne s'en occupe plus en saison sèche. Que va-t-il probablement arriver ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Arroser et protéger. Sans eau ni protection, beaucoup de jeunes plants meurent : c'est l'erreur de la fiche, croire que planter suffit. Les autres propositions supposent qu'un jeune plant se débrouille seul.",
+                  "answers": [
+                    {
+                      "content": "Beaucoup de plants vont mourir faute d'eau et de protection",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les plants vont très bien pousser, planter suffit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les plants vont pousser plus vite sans arrosage",
+                      "correct": false
+                    },
+                    {
+                      "content": "La cour va devenir une forêt en une saison",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reboiser la cour de l'école pas à pas",
+              "statement": "Dans cet exercice, tu suis les étapes du reboisement d'une cour d'école, avec les mots de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Suis les 4 étapes dans l'ordre : observer, choisir, planter, arroser et protéger.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque partie de l'arbre au service qu'elle rend.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer ce qu'un arbre apporte. Les racines tiennent la terre, les feuilles mortes pourrissent en humus, le feuillage fait de l'ombre. Chaque partie a un rôle différent.",
+                  "answers": [
+                    {
+                      "content": "Les racines",
+                      "match": "Elles retiennent la terre"
+                    },
+                    {
+                      "content": "Les feuilles mortes",
+                      "match": "Elles forment l'humus"
+                    },
+                    {
+                      "content": "Le feuillage",
+                      "match": "Il donne de l'ombre"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui se passe après la plantation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Planter : tout commence par la plantation. Étape 4 — les plants arrosés grandissent. Leurs racines retiennent alors la terre, et la pluie abîme moins la cour. Le résultat vient en dernier.",
+                  "answers": [
+                    {
+                      "content": "On plante des jeunes plants"
+                    },
+                    {
+                      "content": "Les arbres grandissent"
+                    },
+                    {
+                      "content": "Les racines retiennent la terre"
+                    },
+                    {
+                      "content": "La cour est moins abîmée par la pluie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Six groupes d'élèves plantent chacun 4 jeunes plants. Combien de jeunes plants sont plantés en tout ?",
+                  "question_type": "numeric",
+                  "unit": "plants",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 6 groupes, 4 plants par groupe. Étape 3 — Planter : 6 × 4 = 24. Il y a 24 jeunes plants à arroser ensuite. Additionner 6 + 4 donnerait 10, ce qui oublie que chaque groupe plante 4 plants.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Il vaut mieux planter au début de la saison ___ pour que les jeunes plants reprennent.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Planter au début de la saison des pluies : le sol est humide et les jeunes plants reprennent. En saison sèche ou pendant l'harmattan, le sol est sec et les plants manquent d'eau.",
+                  "answers": [
+                    {
+                      "content": "des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "sèche",
+                      "correct": false
+                    },
+                    {
+                      "content": "de l'harmattan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il suffit de planter un arbre pour qu'il survive : il n'a plus besoin de soins.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Arroser, protéger et surveiller. Un jeune plant a besoin de soins pendant plusieurs mois. L'affirmation est fausse : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves veulent de l'ombre dans la cour. Quel choix respecte l'étape « Choisir des arbres adaptés » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Choisir des arbres adaptés au sol et au climat du lieu. Les manguiers et les acajous conviennent à un climat chaud. Un arbre qui n'aime pas la chaleur ou un seul petit plant ne donnera pas d'ombre.",
+                  "answers": [
+                    {
+                      "content": "Des manguiers et des acajous, qui poussent bien dans le climat de la région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des plantes qui ont besoin de beaucoup de froid",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des arbres choisis sans regarder le climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un seul tout petit plant pour toute la cour",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le tri et le ramassage des déchets",
+          "remember": "Un **déchet** est un objet dont on ne se sert plus. On distingue trois groupes. Les déchets **organiques** pourrissent et redonnent de la matière à la terre : épluchures, restes de repas, feuilles. Les déchets qui **ne pourrissent pas** restent très longtemps dans la nature : sachets et bouteilles en plastique, verre, métal (canettes). Les déchets **dangereux** sont toxiques : piles usées, médicaments périmés, produits chimiques. **Trier**, c'est mettre chaque déchet dans le bon bac. Les déchets triés sont ensuite **ramassés** par un service de collecte ou portés au lieu prévu. On ne les jette pas dans les caniveaux ni dans la nature, et on ne les brûle pas : la fumée du plastique pollue l'air. Pour produire moins de déchets, on peut aussi **réutiliser** : une bouteille propre devient un arrosoir.",
+          "method": [
+            "Observer le déchet et reconnaître la matière dont il est fait.",
+            "Classer le déchet : organique, qui ne pourrit pas, ou dangereux.",
+            "Placer le déchet dans le bac qui correspond à son groupe.",
+            "Faire ramasser les bacs pleins par le service de collecte, sans jeter ni brûler les déchets."
+          ],
+          "example": {
+            "statement": "Dans la cour de l'école, Awa ramasse une peau de banane, une bouteille en plastique et une pile usée. Elle doit les trier. Traiter ces trois déchets en suivant la méthode.",
+            "steps": [
+              "Observer : la peau de banane est un reste de fruit, la bouteille est en plastique, la pile contient des produits toxiques.",
+              "Classer : la peau de banane est organique, la bouteille ne pourrit pas, la pile est un déchet dangereux.",
+              "Placer : la peau de banane va dans le bac des déchets organiques, la bouteille dans le bac des déchets qui ne pourrissent pas, la pile dans le bac à part pour les déchets dangereux.",
+              "Faire ramasser : quand les bacs sont pleins, le service de collecte les emporte ; Awa ne brûle rien et ne jette rien dans le caniveau."
+            ]
+          },
+          "pitfall": "Ne pas croire que brûler les déchets les fait disparaître. Contre-exemple : un tas de sachets en plastique que l'on brûle donne une fumée noire qui pollue l'air et que l'on respire ; il reste aussi des restes de plastique qui n'ont pas disparu. Brûler ne remplace pas le tri et le ramassage. De même, jeter un déchet dans le caniveau ne le fait pas disparaître : il bouche l'écoulement de l'eau.",
+          "figure": "tri-des-dechets",
+          "practice": {
+            "statement": "Tu t'entraînes à trier des déchets, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une peau de mangue est un déchet. À quel groupe appartient-elle ?",
+                "question_type": "single_choice",
+                "hint": "Demande-toi si le déchet pourrit.",
+                "explanation": "Étape 1 — Observer : la peau de mangue est un reste de fruit. Étape 2 — Classer : un reste de fruit pourrit, c'est un déchet organique. Elle n'est ni toxique ni faite de plastique, de verre ou de métal.",
+                "answers": [
+                  {
+                    "content": "Les déchets organiques, qui pourrissent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les déchets dangereux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les déchets qui ne pourrissent pas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun groupe, elle disparaît seule",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque déchet à son groupe.",
+                "question_type": "matching",
+                "hint": "Le métal, la nourriture et la pile n'ont pas la même matière.",
+                "explanation": "Étape 1 — Observer la matière de chaque déchet. Étape 2 — Classer : le métal ne pourrit pas, les restes de repas pourrissent, la pile est toxique. Chaque déchet a son groupe.",
+                "answers": [
+                  {
+                    "content": "Une canette en métal",
+                    "match": "Ne pourrit pas"
+                  },
+                  {
+                    "content": "Des restes de repas",
+                    "match": "Organique"
+                  },
+                  {
+                    "content": "Une pile usée",
+                    "match": "Dangereux"
+                  }
+                ]
+              },
+              {
+                "content": "Pour se débarrasser d'un tas de sachets en plastique, il suffit de les brûler.",
+                "question_type": "true_false",
+                "hint": "Pense à la fumée.",
+                "explanation": "Étape 4 — Faire ramasser, sans jeter ni brûler. Brûler le plastique donne une fumée qui pollue l'air, et les déchets ne disparaissent pas vraiment. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître et trier les déchets",
+              "statement": "Dans cet exercice, tu classes des déchets et tu choisis le bon geste, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une bouteille en plastique pourrit en quelques jours dans la terre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer la matière : le plastique. Étape 2 — Classer : le plastique ne pourrit pas, il reste très longtemps dans la nature. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel déchet est un déchet organique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : les épluchures viennent d'un aliment. Étape 2 — Classer : elles pourrissent, ce sont des déchets organiques. Le métal et le plastique ne pourrissent pas, la pile est dangereuse.",
+                  "answers": [
+                    {
+                      "content": "Des épluchures de manioc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une canette en métal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile usée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sachet en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux déchets dangereux ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Classer : les piles usées et les médicaments périmés contiennent des produits toxiques, ce sont des déchets dangereux. La peau de banane est organique ; le verre ne pourrit pas mais n'est pas toxique.",
+                  "answers": [
+                    {
+                      "content": "Une pile usée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un médicament périmé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une peau de banane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une bouteille en verre vide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les restes de repas, les épluchures et les feuilles sont des déchets ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Classer : ces déchets pourrissent et redonnent de la matière à la terre. Le mot attendu est organiques.",
+                  "answers": [
+                    {
+                      "content": "organiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "organique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Où faut-il mettre une pile usée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Placer le déchet dans le bac de son groupe. La pile est dangereuse : elle va dans le bac à part. Dans le caniveau ou dans le feu, ses produits toxiques polluent l'eau et l'air.",
+                  "answers": [
+                    {
+                      "content": "Dans le bac à part pour les déchets dangereux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans le caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le bac des déchets organiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans un feu de cour",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Du tri au ramassage dans la cour",
+              "statement": "Dans cet exercice, tu suis le trajet d'un déchet, du tri jusqu'au ramassage.",
+              "exercise_type": "fixation",
+              "hint": "Pour chaque déchet, observe d'abord sa matière, puis choisis son groupe et son bac.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes du tri d'un déchet.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer. Étape 2 — Classer. Étape 3 — Placer dans le bon bac. Étape 4 — Faire ramasser. On ne peut pas placer un déchet avant de savoir à quel groupe il appartient.",
+                  "answers": [
+                    {
+                      "content": "Observer le déchet et sa matière"
+                    },
+                    {
+                      "content": "Classer le déchet dans son groupe"
+                    },
+                    {
+                      "content": "Placer le déchet dans le bon bac"
+                    },
+                    {
+                      "content": "Faire ramasser le bac plein"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque bac au déchet qu'il reçoit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Placer le déchet dans le bac de son groupe. La peau de banane pourrit, la bouteille ne pourrit pas, la pile est toxique. Chaque bac reçoit un seul groupe de déchets.",
+                  "answers": [
+                    {
+                      "content": "Bac des déchets organiques",
+                      "match": "Peau de banane"
+                    },
+                    {
+                      "content": "Bac des déchets qui ne pourrissent pas",
+                      "match": "Bouteille en plastique"
+                    },
+                    {
+                      "content": "Bac des déchets dangereux",
+                      "match": "Pile usée"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bac des déchets organiques contient 7 épluchures le matin et 5 restes de repas l'après-midi (nombres pour l'exercice). Combien d'objets contient-il en tout ?",
+                  "question_type": "numeric",
+                  "unit": "objets",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Placer les déchets organiques dans le même bac. Étape 4 — avant le ramassage, on compte : 7 + 5 = 12. Le bac contient 12 objets.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bouteille propre peut être ___ comme arrosoir pour le jardin de l'école.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer : la bouteille est propre et solide. Pour produire moins de déchets, on peut la réutiliser. La brûler pollue l'air et l'enterrer ne la fait pas pourrir.",
+                  "answers": [
+                    {
+                      "content": "réutilisée",
+                      "correct": true
+                    },
+                    {
+                      "content": "brûlée",
+                      "correct": false
+                    },
+                    {
+                      "content": "enterrée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Jeter un sachet dans le caniveau règle le problème : il disparaît avec l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Faire ramasser sans jeter dans le caniveau. Le sachet reste, bouche le caniveau et l'eau déborde à la première grosse pluie. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève trouve un tas de déchets mélangés dans la cour. Quelle est la bonne première étape ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer le déchet et reconnaître sa matière : on ne trie pas sans regarder. Brûler, tout mélanger ou cacher le tas ne règle rien : le tri reste à faire.",
+                  "answers": [
+                    {
+                      "content": "Observer chaque déchet pour reconnaître sa matière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brûler le tas pour aller plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout mettre dans un seul bac",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cacher le tas derrière le mur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le compostage",
+          "remember": "Le **compostage** transforme les déchets organiques en **compost**, une terre noire qui sert d'engrais naturel. Ce travail est fait par des êtres vivants du tas : vers de terre, champignons et très petits êtres vivants. Ils ont besoin d'**air** et d'un peu d'**eau**. On met dans le tas des épluchures, des restes de légumes, des herbes et des feuilles. On n'y met jamais de plastique, de verre, de métal ni de piles : ils ne pourrissent pas. Il faut attendre plusieurs semaines avant d'utiliser le compost. Épandu sur le jardin ou au pied des arbres, il rend au sol les sels minéraux et l'humus que les cultures lui ont pris. Le compostage réduit donc les déchets et nourrit le sol.",
+          "method": [
+            "Rassembler les déchets organiques et écarter tout ce qui ne pourrit pas.",
+            "Empiler les déchets en couches dans un tas ou une fosse, en alternant déchets frais et feuilles sèches.",
+            "Arroser un peu et aérer le tas en le retournant de temps en temps.",
+            "Attendre que les déchets soient devenus une terre noire et sans mauvaise odeur.",
+            "Épandre le compost sur le sol du jardin ou au pied des arbres."
+          ],
+          "example": {
+            "statement": "Le comité d'hygiène de l'école veut faire du compost avec les épluchures de la cantine, des feuilles balayées dans la cour et un sachet en plastique trouvé dans le tas. Décrire le compostage en suivant la méthode.",
+            "steps": [
+              "Rassembler : les épluchures et les feuilles sont gardées ; le sachet en plastique est écarté, car il ne pourrit pas.",
+              "Empiler : les élèves mettent une couche d'épluchures, puis une couche de feuilles sèches, et recommencent.",
+              "Arroser et aérer : ils arrosent un peu le tas et le retournent à la fourche pour que l'air y entre.",
+              "Attendre : après plusieurs semaines, les déchets sont devenus une terre noire qui ne sent pas mauvais.",
+              "Épandre : les élèves étalent le compost autour des jeunes arbres et dans le potager de l'école."
+            ]
+          },
+          "pitfall": "Ne pas mettre n'importe quel déchet dans le compost, et ne pas croire qu'il est prêt tout de suite. Contre-exemple : un sachet en plastique jeté dans le tas ; après plusieurs semaines, les épluchures sont devenues de la terre noire, mais le sachet est resté intact. Il faut donc le retirer à la main. De même, un tas fait hier n'est pas du compost aujourd'hui : il faut attendre plusieurs semaines.",
+          "figure": "cycle-du-compost",
+          "practice": {
+            "statement": "Tu t'entraînes à faire du compost, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel déchet peut aller dans le tas de compost ?",
+                "question_type": "single_choice",
+                "hint": "Cherche ce qui pourrit.",
+                "explanation": "Étape 1 — Rassembler les déchets organiques et écarter tout ce qui ne pourrit pas. Les épluchures pourrissent. La pile est dangereuse, le verre et le plastique ne pourrissent pas.",
+                "answers": [
+                  {
+                    "content": "Des épluchures de légumes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une pile usée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une bouteille en verre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un sachet en plastique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les premières étapes du compostage.",
+                "question_type": "ordering",
+                "hint": "On rassemble avant d'empiler.",
+                "explanation": "Étape 1 — Rassembler. Étape 2 — Empiler en couches. Étape 3 — Arroser et aérer. Étape 4 — Attendre. On ne peut pas empiler des déchets avant de les avoir rassemblés.",
+                "answers": [
+                  {
+                    "content": "Rassembler les déchets organiques"
+                  },
+                  {
+                    "content": "Empiler les déchets en couches"
+                  },
+                  {
+                    "content": "Arroser un peu et retourner le tas"
+                  },
+                  {
+                    "content": "Attendre plusieurs semaines"
+                  }
+                ]
+              },
+              {
+                "content": "Le tas de compost a besoin d'un peu d'eau et d'___ pour que les êtres vivants du tas travaillent.",
+                "question_type": "fill_blank",
+                "hint": "On retourne le tas pour en faire entrer.",
+                "explanation": "Étape 3 — Arroser et aérer. Les vers et les champignons du tas ont besoin d'eau et d'air. C'est pour cela qu'on retourne le tas. Le mot attendu est air.",
+                "answers": [
+                  {
+                    "content": "air",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Comprendre le compostage",
+              "statement": "Dans cet exercice, tu reconnais ce qu'est le compost et à quoi il sert.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le compost est un engrais naturel qui nourrit le sol.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Épandre le compost : il rend au sol des sels minéraux et de l'humus. C'est un engrais naturel. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui transforme les déchets en compost ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Arroser et aérer : les êtres vivants du tas ont besoin d'eau et d'air pour travailler. Ce sont eux qui transforment les déchets, pas la pluie seule ni le soleil, qui dessèche le tas.",
+                  "answers": [
+                    {
+                      "content": "Des êtres vivants du tas, comme les vers de terre et les champignons",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie seule, en lavant les déchets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plastique mélangé aux épluchures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le soleil, qui brûle les déchets",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois déchets qui peuvent aller dans le tas de compost ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Rassembler les déchets organiques. Épluchures, feuilles et restes de légumes pourrissent. Le plastique ne pourrit pas et la pile est dangereuse : on les écarte.",
+                  "answers": [
+                    {
+                      "content": "Des épluchures de manioc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des feuilles balayées dans la cour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des restes de légumes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une bouteille en plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile usée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le compost est une terre ___ qui sert d'engrais.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Attendre que les déchets soient devenus une terre noire, sans mauvaise odeur. Le mot attendu est noire.",
+                  "answers": [
+                    {
+                      "content": "noire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « J'ai fait mon tas hier, j'étale le compost aujourd'hui. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Attendre : la transformation des déchets prend plusieurs semaines. C'est le piège de la fiche. Le plastique ne pourrit pas et brûler le tas détruit le travail des êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Il faut attendre plusieurs semaines que les déchets se transforment",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, un tas est prêt en une nuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il doit ajouter du plastique pour aller plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il doit brûler le tas pour le rendre prêt",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Réussir le compost de l'école",
+              "statement": "Dans cet exercice, tu suis les étapes du compostage au potager de l'école, avec les mots de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Rappelle-toi les 5 étapes : rassembler, empiler, arroser et aérer, attendre, épandre.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque geste à son but.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Arroser et aérer : retourner fait entrer l'air, arroser garde l'humidité. Étape 1 — Rassembler : on écarte le plastique car il ne pourrit pas. Chaque geste a un but précis.",
+                  "answers": [
+                    {
+                      "content": "Retourner le tas",
+                      "match": "Faire entrer de l'air"
+                    },
+                    {
+                      "content": "Arroser un peu",
+                      "match": "Garder le tas humide"
+                    },
+                    {
+                      "content": "Écarter le plastique",
+                      "match": "Éviter ce qui ne pourrit pas"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet d'un déchet jusqu'au jardin.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Empiler : l'épluchure est mise dans le tas. Étape 3 et 4 — les êtres vivants la transforment pendant plusieurs semaines. Elle devient du compost. Étape 5 — Épandre le compost au potager.",
+                  "answers": [
+                    {
+                      "content": "L'épluchure est mise dans le tas"
+                    },
+                    {
+                      "content": "Les êtres vivants du tas la transforment"
+                    },
+                    {
+                      "content": "Elle devient du compost"
+                    },
+                    {
+                      "content": "Le compost est étalé au potager"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le comité apporte 8 seaux d'épluchures la première semaine et 6 seaux la deuxième semaine (valeurs pour l'exercice). Combien de seaux sont dans le tas ?",
+                  "question_type": "numeric",
+                  "unit": "seaux",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Rassembler les déchets organiques. Étape 2 — Empiler : tous les seaux vont dans le même tas. Calcul : 8 + 6 = 14. Le tas contient 14 seaux.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le compost rend au sol les sels ___ et l'humus que les cultures lui ont pris.",
+                  "question_type": "select",
+                  "explanation": "Étape 5 — Épandre le compost : il rend au sol les sels minéraux et l'humus. Les sels plastiques n'existent pas et les produits toxiques abîment le sol au lieu de le nourrir.",
+                  "answers": [
+                    {
+                      "content": "minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "plastiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "toxiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sachet en plastique mis dans le tas de compost pourrit comme les épluchures.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rassembler et écarter ce qui ne pourrit pas. Le plastique reste intact : il faut le retirer. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tas de l'école sent mauvais et reste mouillé. Quel geste de la fiche aide à le corriger ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Arroser et aérer : un tas trop mouillé et sans air sent mauvais. Le retourner fait entrer l'air. Étaler le tas tel quel serait ne pas attendre (Étape 4), et le brûler détruit le compost.",
+                  "answers": [
+                    {
+                      "content": "Le retourner pour faire entrer de l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "Y ajouter du plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Arrêter d'attendre et étaler le tas tel quel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le brûler",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le comité d'hygiène de l'école",
+          "remember": "Un **comité d'hygiène** est un petit groupe d'élèves, guidé par un adulte de l'école, qui veille à la propreté de la cour, des salles, des latrines et du point d'eau. Il **constate** ce qui est sale, **organise** le nettoyage en répartissant les tâches, **vérifie** que les bacs sont utilisés et vidés, et **sensibilise** les camarades par des affiches, des causeries ou des exemples. Il **rend compte** au directeur ou à l'enseignant responsable. Le comité aide tout le monde, mais il ne remplace pas les autres : la propreté de l'école est l'affaire de **chaque élève**. Les gestes du comité (reboiser, trier, composter) luttent contre la dégradation de l'environnement.",
+          "method": [
+            "Constater l'état de l'école et noter ce qui est sale ou en désordre.",
+            "Décider des actions et répartir les tâches : qui fait quoi, et quand.",
+            "Agir ensemble (ramasser, trier, vider les bacs) et sensibiliser les camarades.",
+            "Contrôler le résultat et rendre compte à l'adulte responsable."
+          ],
+          "example": {
+            "statement": "À l'école de Korhogo, le comité d'hygiène voit des papiers et des sachets dans la cour, des bacs qui débordent et un point d'eau mouillé et sale. Décrire l'action du comité en suivant la méthode.",
+            "steps": [
+              "Constater : les membres notent les papiers et sachets dans la cour, les bacs pleins et le point d'eau sale.",
+              "Décider : l'équipe de la cour ramasse et trie, l'équipe des bacs les vide au lieu de collecte, l'équipe du point d'eau le nettoie ; chaque équipe a son jour.",
+              "Agir : chaque équipe fait sa tâche, puis le comité explique aux autres élèves, avec une affiche, pourquoi on ne jette rien par terre.",
+              "Contrôler : le lendemain, le comité vérifie que la cour est propre, puis rend compte à l'enseignant responsable."
+            ]
+          },
+          "pitfall": "Ne pas croire que la propreté de l'école est seulement l'affaire du comité. Contre-exemple (valeurs pour l'exercice) : 5 membres du comité ramassent les déchets le matin ; à la récréation, 300 élèves jettent leurs sachets par terre, et la cour est de nouveau sale. Le comité montre l'exemple et organise, mais chaque élève doit jeter ses déchets dans le bon bac.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à agir comme un comité d'hygiène, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel est le rôle d'un comité d'hygiène ?",
+                "question_type": "single_choice",
+                "hint": "Pense aux quatre étapes de la fiche.",
+                "explanation": "Étape 1 à 4 : le comité constate, organise, agit et sensibilise, puis contrôle. Il n'est pas là pour tout faire seul, ni pour punir, ni pour noter.",
+                "answers": [
+                  {
+                    "content": "Veiller à la propreté de l'école et sensibiliser les camarades",
+                    "correct": true
+                  },
+                  {
+                    "content": "Remplacer tous les élèves pour nettoyer seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "Punir les élèves qui se salissent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Décider des notes de la classe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'action d'un comité d'hygiène.",
+                "question_type": "ordering",
+                "hint": "On regarde avant d'agir.",
+                "explanation": "Étape 1 — Constater. Étape 2 — Décider et répartir. Étape 3 — Agir et sensibiliser. Étape 4 — Contrôler et rendre compte. On ne répartit pas les tâches avant d'avoir constaté ce qui est à faire.",
+                "answers": [
+                  {
+                    "content": "Constater l'état de l'école"
+                  },
+                  {
+                    "content": "Décider des actions et répartir les tâches"
+                  },
+                  {
+                    "content": "Agir et sensibiliser les camarades"
+                  },
+                  {
+                    "content": "Contrôler et rendre compte"
+                  }
+                ]
+              },
+              {
+                "content": "La propreté de l'école est seulement l'affaire des membres du comité.",
+                "question_type": "true_false",
+                "hint": "Pense à la cour après la récréation.",
+                "explanation": "Étape 3 — Agir ensemble et sensibiliser les camarades. Le comité organise, mais chaque élève doit jeter ses déchets dans le bon bac. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Le rôle du comité d'hygiène",
+              "statement": "Dans cet exercice, tu reconnais ce que fait un comité d'hygiène à l'école.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un comité d'hygiène aide à garder l'école propre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 à 4 : le comité constate, organise, agit et contrôle pour garder la cour, les salles et les latrines propres. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la première étape du comité d'hygiène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Constater l'état de l'école et noter ce qui est sale. On ne contrôle un résultat et on ne répartit des tâches qu'après avoir vu ce qui est à faire.",
+                  "answers": [
+                    {
+                      "content": "Constater l'état de l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Contrôler le résultat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rendre compte au directeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Répartir les tâches sans avoir regardé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux actions du comité d'hygiène ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Agir ensemble et sensibiliser les camarades : vider les bacs et afficher des conseils sont des actions utiles. Jeter dans le caniveau ou brûler les sachets pollue : ce n'est pas la lutte contre la dégradation.",
+                  "answers": [
+                    {
+                      "content": "Vider les bacs au lieu de collecte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire une affiche pour sensibiliser les camarades",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jeter les déchets dans le caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Brûler les sachets derrière l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la fin de son action, le comité fait son compte ___ à l'enseignant responsable.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Contrôler le résultat et rendre compte à l'adulte responsable. On dit « rendre compte ». Le mot attendu est rendu (compte rendu).",
+                  "answers": [
+                    {
+                      "content": "rendu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Cinq élèves du comité ramassent les déchets, mais les autres élèves continuent de jeter leurs sachets par terre. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Agir ensemble et sensibiliser. C'est le piège de la fiche : le comité ne peut pas tout faire seul. Les sachets en plastique ne disparaissent pas et ne se transforment pas en compost.",
+                  "answers": [
+                    {
+                      "content": "La cour redevient sale, car la propreté est l'affaire de chaque élève",
+                      "correct": true
+                    },
+                    {
+                      "content": "La cour reste propre, le comité suffit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sachets disparaissent avec le vent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sachets se transforment en compost",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Organiser une journée de propreté",
+              "statement": "Dans cet exercice, tu aides un comité d'hygiène à préparer une journée de propreté, avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Retiens les 4 étapes : constater, répartir les tâches, agir et sensibiliser, contrôler et rendre compte.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque action du comité à son étape.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Constater : noter ce qui est sale. Étape 2 — Décider et répartir : chaque équipe a sa tâche et son jour. Étape 4 — Contrôler : vérifier le résultat. Chaque action correspond à une étape différente.",
+                  "answers": [
+                    {
+                      "content": "Noter les papiers et les bacs pleins",
+                      "match": "Constater"
+                    },
+                    {
+                      "content": "Donner un jour et une tâche à chaque équipe",
+                      "match": "Décider et répartir"
+                    },
+                    {
+                      "content": "Vérifier que la cour est propre le lendemain",
+                      "match": "Contrôler"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les actions d'une journée de propreté.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Constater. Étape 2 — Répartir les tâches. Étape 3 — Agir : ramasser et trier. Étape 4 — Contrôler et rendre compte. Chaque action prépare la suivante.",
+                  "answers": [
+                    {
+                      "content": "Le comité constate les déchets dans la cour"
+                    },
+                    {
+                      "content": "Les équipes reçoivent leurs tâches"
+                    },
+                    {
+                      "content": "Les élèves ramassent et trient les déchets"
+                    },
+                    {
+                      "content": "Le comité vérifie la cour et rend compte"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le comité forme 4 équipes de 5 élèves (nombres pour l'exercice). Combien d'élèves participent à la journée de propreté ?",
+                  "question_type": "numeric",
+                  "unit": "élèves",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Décider et répartir : 4 équipes de 5 élèves. Calcul : 4 × 5 = 20. Vingt élèves participent. Additionner 4 + 5 donnerait 9 : ce serait oublier que chaque équipe compte 5 élèves.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour sensibiliser ses camarades, le comité peut faire une ___ avec un conseil de propreté.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Agir ensemble et sensibiliser les camarades. Une affiche avec un conseil se lit à la récréation. La fumée pollue l'air et une tranchée ne sensibilise personne.",
+                  "answers": [
+                    {
+                      "content": "affiche",
+                      "correct": true
+                    },
+                    {
+                      "content": "fumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "tranchée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le comité a nettoyé la cour, les autres élèves n'ont plus à faire attention à leurs déchets.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Agir et sensibiliser. Chaque élève doit continuer à jeter ses déchets dans le bon bac, sinon la cour se salit de nouveau. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point d'eau de l'école est sale et mouillé. Que fait le comité après avoir constaté cela ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décider des actions et répartir les tâches : qui fait quoi et quand. Attendre ou jeter dans le caniveau ne règle rien, et sans répartition personne ne sait quoi faire.",
+                  "answers": [
+                    {
+                      "content": "Il répartit les tâches pour nettoyer, avec un jour et une équipe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il attend sans rien faire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il jette les déchets dans le caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il laisse chaque élève décider seul",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un projet de reboisement pour la cour de l'école de Bouaflé",
+          "statement": "Les élèves de 6ème de l'école de Bouaflé jouent dans une cour nue : le sol est sec, la pluie emporte la terre et il n'y a aucune ombre. Avec leur enseignant, ils décident de la reboiser. Ils reçoivent 30 jeunes plants de manguiers et d'acajous (valeurs inventées pour l'exercice) et les partagent entre les 6 classes de l'école. Dans cet exercice, tu analyses le projet avec les étapes du reboisement.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le problème de la cour de l'école ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer le lieu et repérer ce qui manque : le texte parle d'un sol sec et nu, de terre emportée par la pluie et d'absence d'ombre. Ce qui manque, ce sont des arbres. Les autres propositions disent le contraire de ce qu'on observe : il n'y a pas d'arbres, et un sol nu n'a pas d'humus.",
+              "answers": [
+                {
+                  "content": "Le sol nu n'est pas protégé : la pluie emporte la terre et il n'y a pas d'ombre",
+                  "correct": true
+                },
+                {
+                  "content": "Il y a trop d'arbres qui cachent le soleil",
+                  "correct": false
+                },
+                {
+                  "content": "La cour est trop humide à cause des racines",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol est trop riche en humus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux services que rendront les arbres plantés dans la cour ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Observer ce qui manque : un sol protégé et de l'ombre. Les racines retiennent la terre et limitent l'érosion, le feuillage donne de l'ombre. Un arbre ne fait pas cesser la pluie, et un jeune plant a justement besoin d'être arrosé (Étape 4).",
+              "answers": [
+                {
+                  "content": "Leurs racines retiendront la terre",
+                  "correct": true
+                },
+                {
+                  "content": "Leur feuillage donnera de l'ombre",
+                  "correct": true
+                },
+                {
+                  "content": "Ils empêcheront toute pluie de tomber",
+                  "correct": false
+                },
+                {
+                  "content": "Ils rendront inutile l'arrosage des jeunes plants",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les 30 jeunes plants sont partagés à égalité entre les 6 classes. Combien de jeunes plants chaque classe reçoit-elle ?",
+              "question_type": "numeric",
+              "unit": "plants",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Planter : il faut répartir les plants. Calcul : 30 ÷ 6 = 5, car 6 × 5 = 30. Chaque classe reçoit 5 jeunes plants. Si on calculait 30 − 6, on obtiendrait 24, ce qui ne partage pas les plants en parts égales.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes du projet de reboisement.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Observer la cour. Étape 2 — Choisir des arbres adaptés. Étape 3 — Planter au début de la saison des pluies. Étape 4 — Arroser et protéger. On choisit les arbres après avoir observé le lieu, et on arrose après avoir planté.",
+              "answers": [
+                {
+                  "content": "Observer la cour nue"
+                },
+                {
+                  "content": "Choisir des manguiers et des acajous"
+                },
+                {
+                  "content": "Planter les jeunes plants au début de la saison des pluies"
+                },
+                {
+                  "content": "Arroser et protéger chaque plant"
+                }
+              ]
+            },
+            {
+              "content": "Pendant la saison sèche, plusieurs classes oublient d'arroser leurs plants. Que va-t-il probablement se passer ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Arroser, protéger et surveiller jusqu'à la reprise. Sans eau en saison sèche, un jeune plant se dessèche et meurt : c'est l'erreur à éviter, croire que planter suffit. Aucun jeune plant ne pousse plus vite sans eau.",
+              "answers": [
+                {
+                  "content": "Une partie des plants va mourir, car planter ne suffit pas",
+                  "correct": true
+                },
+                {
+                  "content": "Les plants vont pousser plus vite sans eau",
+                  "correct": false
+                },
+                {
+                  "content": "Les plants vont se transformer en compost sans mourir",
+                  "correct": false
+                },
+                {
+                  "content": "Rien : un jeune plant n'a jamais besoin de soins",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Trier les déchets après la récréation",
+          "statement": "Après la récréation, le comité d'hygiène de l'école compte les déchets ramassés dans la cour : 18 épluchures et restes de repas, 9 bouteilles et sachets en plastique et 2 piles usées (valeurs inventées pour l'exercice). Les élèves disposent de trois bacs. Dans cet exercice, tu tries ces déchets avec les étapes de la fiche.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque déchet au bac où il doit aller.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Observer la matière de chaque déchet. Étape 2 — Classer : les épluchures pourrissent, le plastique ne pourrit pas, les piles sont toxiques. Étape 3 — Placer chaque déchet dans le bac de son groupe.",
+              "answers": [
+                {
+                  "content": "Les épluchures et restes de repas",
+                  "match": "Bac des déchets organiques"
+                },
+                {
+                  "content": "Les bouteilles et sachets en plastique",
+                  "match": "Bac des déchets qui ne pourrissent pas"
+                },
+                {
+                  "content": "Les piles usées",
+                  "match": "Bac à part des déchets dangereux"
+                }
+              ]
+            },
+            {
+              "content": "Combien de déchets le comité a-t-il ramassés en tout ?",
+              "question_type": "numeric",
+              "unit": "déchets",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Observer les données : 18 épluchures et restes, 9 plastiques, 2 piles. Calcul : 18 + 9 + 2 = 29. Le comité a ramassé 29 déchets. Oublier un des trois groupes donnerait un total faux.",
+              "answers": [
+                {
+                  "content": "29",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux groupes de déchets que l'on ne met jamais dans le compost ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 du compostage — Rassembler les déchets organiques et écarter ce qui ne pourrit pas. Le plastique ne pourrit pas et les piles sont dangereuses. Les épluchures et les feuilles mortes sont organiques : elles vont au compost.",
+              "answers": [
+                {
+                  "content": "Les déchets en plastique",
+                  "correct": true
+                },
+                {
+                  "content": "Les piles usées",
+                  "correct": true
+                },
+                {
+                  "content": "Les épluchures",
+                  "correct": false
+                },
+                {
+                  "content": "Les feuilles mortes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour faire disparaître les 9 bouteilles et sachets en plastique, le comité peut les brûler derrière l'école.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Faire ramasser sans jeter ni brûler. Brûler le plastique donne une fumée qui pollue l'air, et le plastique ne disparaît pas vraiment. Le comité doit mettre ces déchets dans le bac et les faire ramasser.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que doit faire le comité quand les trois bacs sont pleins ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Faire ramasser les bacs pleins par le service de collecte, sans jeter ni brûler. Vider dans le caniveau le bouche et pollue l'eau. Mélanger les bacs défait le tri, et brûler des piles libère des produits toxiques.",
+              "answers": [
+                {
+                  "content": "Les faire ramasser par le service de collecte",
+                  "correct": true
+                },
+                {
+                  "content": "Vider les bacs dans le caniveau",
+                  "correct": false
+                },
+                {
+                  "content": "Mélanger les bacs pour gagner de la place",
+                  "correct": false
+                },
+                {
+                  "content": "Brûler les bacs avec les piles",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le compost du potager de l'école",
+          "statement": "Dans le potager de l'école, les élèves préparent deux tas pendant 6 semaines. Le tas A contient des épluchures et des feuilles, il est arrosé un peu et retourné chaque semaine. Le tas B contient des épluchures et des sachets en plastique, il n'est jamais arrosé ni retourné. Au bout de 6 semaines, le tas A est devenu une terre noire sans mauvaise odeur ; dans le tas B, les épluchures sont sèches et les sachets sont intacts. Dans cet exercice de niveau devoir, tu compares les deux tas.",
+          "exercise_type": "evaluation",
+          "figure": "cycle-du-compost",
+          "questions": [
+            {
+              "content": "Quel tas a donné du compost ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Attendre que les déchets soient devenus une terre noire et sans mauvaise odeur. Seul le tas A a ce résultat. Dans le tas B, les épluchures sont sèches et les sachets n'ont pas changé : ce n'est pas du compost.",
+              "answers": [
+                {
+                  "content": "Le tas A, devenu une terre noire sans mauvaise odeur",
+                  "correct": true
+                },
+                {
+                  "content": "Le tas B, car il contient des sachets",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun des deux tas",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux tas de la même façon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux différences de traitement entre les tas A et B ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Rassembler : le tas A écarte le plastique, le tas B en contient. Étape 3 — Arroser et aérer : seul le tas A est arrosé et retourné. Le texte ne parle ni de la taille des tas, ni de piles.",
+              "answers": [
+                {
+                  "content": "Le tas A est arrosé et retourné, le tas B non",
+                  "correct": true
+                },
+                {
+                  "content": "Le tas A ne contient pas de plastique, le tas B en contient",
+                  "correct": true
+                },
+                {
+                  "content": "Le tas A est plus grand que le tas B",
+                  "correct": false
+                },
+                {
+                  "content": "Le tas A a été fait avec des piles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les sachets en plastique du tas B sont restés intacts parce qu'ils ne pourrissent pas.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Rassembler et écarter ce qui ne pourrit pas. Le plastique ne pourrit pas : après 6 semaines il est intact. Pour obtenir du compost, il fallait le retirer du tas. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le tas B, les êtres vivants du tas ont manqué d'eau et d'___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 3 — Arroser et aérer. Le tas B n'est jamais arrosé ni retourné : les vers et les champignons manquent d'eau et d'air. Le mot attendu est air.",
+              "answers": [
+                {
+                  "content": "air",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes à suivre par les élèves pour réussir le tas B la prochaine fois.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Rassembler : on retire le plastique. Étape 2 — Empiler en couches. Étape 3 — Arroser et aérer. Étapes 4 et 5 — Attendre, puis épandre le compost. Chaque étape prépare la suivante.",
+              "answers": [
+                {
+                  "content": "Retirer les sachets en plastique"
+                },
+                {
+                  "content": "Empiler les épluchures en couches avec des feuilles sèches"
+                },
+                {
+                  "content": "Arroser un peu et retourner le tas"
+                },
+                {
+                  "content": "Attendre plusieurs semaines puis épandre le compost"
+                }
+              ]
+            },
+            {
+              "content": "Quelle conclusion tirer de la comparaison ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Arroser et aérer, après l'Étape 1 qui écarte le plastique. La comparaison montre que seul le tas bien préparé donne du compost. Le plastique ne pourrit pas, il ne peut donc rien accélérer, et un tas sans eau ni air ne se transforme pas.",
+              "answers": [
+                {
+                  "content": "Pour faire du compost, il faut écarter le plastique, arroser un peu et aérer le tas",
+                  "correct": true
+                },
+                {
+                  "content": "Le plastique accélère la transformation",
+                  "correct": false
+                },
+                {
+                  "content": "Il suffit de faire un tas, sans rien d'autre",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne faut jamais arroser un tas de compost",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le plan d'action du comité d'hygiène",
+          "statement": "L'école de Man a trois problèmes : la cour est nue et la pluie emporte la terre, les déchets sont jetés mélangés par terre, et les bacs ne sont jamais vidés. Le comité d'hygiène prépare un plan avec reboisement, tri et compostage. Il reçoit 40 jeunes plants, dont 8 meurent pendant la saison sèche faute d'arrosage (valeurs inventées pour l'exercice). Dans cet exercice de synthèse, tu analyses la situation et tu proposes des actions.",
+          "exercise_type": "evaluation",
+          "figure": "tri-des-dechets",
+          "questions": [
+            {
+              "content": "Quels sont les trois problèmes de l'école de Man ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Constater l'état de l'école : le texte cite la cour nue, les déchets mélangés par terre et les bacs jamais vidés. Il n'y a pas trop d'arbres : au contraire, la cour en manque. Il n'est pas question de bacs à compost en trop.",
+              "answers": [
+                {
+                  "content": "La cour est nue et la terre est emportée par la pluie",
+                  "correct": true
+                },
+                {
+                  "content": "Les déchets sont jetés mélangés par terre",
+                  "correct": true
+                },
+                {
+                  "content": "Les bacs ne sont jamais vidés",
+                  "correct": true
+                },
+                {
+                  "content": "Il y a trop d'arbres dans la cour",
+                  "correct": false
+                },
+                {
+                  "content": "Les élèves ont trop de bacs à compost",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque problème à l'action du comité qui lui répond.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Décider des actions : la cour nue demande des arbres (reboisement), les déchets mélangés demandent un tri, les bacs jamais vidés demandent un ramassage. Une action différente répond à chaque problème.",
+              "answers": [
+                {
+                  "content": "La cour nue, la terre emportée",
+                  "match": "Le reboisement"
+                },
+                {
+                  "content": "Les déchets mélangés par terre",
+                  "match": "Le tri dans trois bacs"
+                },
+                {
+                  "content": "Les bacs jamais vidés",
+                  "match": "Le ramassage par le service de collecte"
+                }
+              ]
+            },
+            {
+              "content": "Combien de jeunes plants ont survécu à la saison sèche ?",
+              "question_type": "numeric",
+              "unit": "plants",
+              "tolerance": 0,
+              "explanation": "Étape 4 du reboisement — Arroser, protéger et surveiller. Calcul : 40 − 8 = 32. Il reste 32 plants vivants. Les 8 morts montrent qu'un arrosage régulier était nécessaire : planter ne suffit pas.",
+              "answers": [
+                {
+                  "content": "32",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour que le reboisement réussisse, le comité peut se contenter de planter, sans arroser.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Arroser, protéger et surveiller. Dans le texte, 8 plants sur 40 sont morts faute d'arrosage. L'affirmation est fausse : l'arrosage est une étape de la méthode.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans son plan d'action, que doit faire le comité en dernier ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 du comité — Contrôler le résultat et rendre compte à l'adulte responsable. Répartir les tâches vient à l'Étape 2. Brûler les déchets pollue l'air, et attendre sans rien faire ne règle aucun des trois problèmes.",
+              "answers": [
+                {
+                  "content": "Contrôler le résultat et rendre compte à l'adulte responsable",
+                  "correct": true
+                },
+                {
+                  "content": "Répartir les tâches avant d'avoir regardé",
+                  "correct": false
+                },
+                {
+                  "content": "Brûler les déchets restants",
+                  "correct": false
+                },
+                {
+                  "content": "Attendre sans rien faire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève dit : « Le comité s'occupe de tout, je peux jeter mon sachet par terre. » Que lui répondre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 du comité — Agir ensemble et sensibiliser les camarades. Le comité organise, mais chaque élève doit trier ses déchets. Brûler le sachet pollue l'air et le caniveau se bouche : ce ne sont pas des solutions.",
+              "answers": [
+                {
+                  "content": "La propreté est l'affaire de chaque élève : il doit jeter son sachet dans le bon bac",
+                  "correct": true
+                },
+                {
+                  "content": "Il a raison, le comité nettoie tout seul",
+                  "correct": false
+                },
+                {
+                  "content": "Il doit brûler son sachet derrière l'école",
+                  "correct": false
+                },
+                {
+                  "content": "Il doit jeter son sachet dans le caniveau",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Définir le reboisement, le tri et le ramassage des déchets, le compostage et le comité d'hygiène ; connaître le rôle des arbres, les groupes de déchets, ce qui va dans le compost et les étapes d'action du comité.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans cet exercice, tu rappelles ce qu'est le reboisement et pourquoi il protège l'environnement.",
+              "exercise_type": "evaluation",
+              "hint": "Pense aux 4 étapes : observer, choisir, planter, arroser et protéger.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le reboisement consiste à couper des arbres pour agrandir une cour.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer le sens du mot : le reboisement consiste à replanter des arbres là où ils ont été coupés ou brûlés. Couper des arbres est le contraire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que font les racines des arbres sur un sol nu emporté par la pluie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : la pluie emporte la terre d'un sol nu et il manque des arbres ; leurs racines retiennent la terre et limitent l'érosion.",
+                  "answers": [
+                    {
+                      "content": "Elles retiennent la terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles font fondre la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles chassent l'eau du sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles rendent la terre plus légère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les feuilles mortes des arbres pourrissent et forment l'___ qui enrichit le sol.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Observer le rôle des feuilles : elles tombent, pourrissent et forment l'humus. Le mot attendu est humus.",
+                  "answers": [
+                    {
+                      "content": "humus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux étapes du reboisement ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Planter au début de la saison des pluies. Étape 4 — Arroser et protéger. Brûler les herbes dégrade le sol et laisser les plants sans soins les fait mourir.",
+                  "answers": [
+                    {
+                      "content": "Planter les jeunes plants au début de la saison des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "Arroser et protéger les plants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brûler les herbes de la cour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Laisser les plants sans soins",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du reboisement.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer. Étape 2 — Choisir des arbres adaptés. Étape 3 — Planter. Étape 4 — Arroser et protéger. L'ordre va du repérage au suivi.",
+                  "answers": [
+                    {
+                      "content": "Observer le lieu à reboiser"
+                    },
+                    {
+                      "content": "Choisir des arbres adaptés"
+                    },
+                    {
+                      "content": "Planter les jeunes plants"
+                    },
+                    {
+                      "content": "Arroser et protéger les plants"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans cet exercice, tu tries des déchets en trois groupes.",
+              "exercise_type": "evaluation",
+              "hint": "Observe d'abord la matière du déchet : ce qui pourrit, ce qui ne pourrit pas, ce qui est toxique.",
+              "figure": "tri-des-dechets",
+              "questions": [
+                {
+                  "content": "Dans quel groupe range-t-on une canette en métal ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la matière : le métal. Étape 2 — Classer : le métal ne pourrit pas. Il n'est ni organique ni toxique.",
+                  "answers": [
+                    {
+                      "content": "Les déchets qui ne pourrissent pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les déchets organiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les déchets dangereux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun groupe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque déchet à son groupe.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer : les épluchures pourrissent, le plastique ne pourrit pas, la pile est toxique.",
+                  "answers": [
+                    {
+                      "content": "Des épluchures",
+                      "match": "Organique"
+                    },
+                    {
+                      "content": "Un sachet en plastique",
+                      "match": "Ne pourrit pas"
+                    },
+                    {
+                      "content": "Une pile usée",
+                      "match": "Dangereux"
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut jeter un déchet dans le caniveau car l'eau l'emporte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Faire ramasser sans jeter dans le caniveau. Le déchet bouche l'écoulement et l'eau déborde. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois déchets qui ne pourrissent pas ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Classer : le plastique, le verre et le métal ne pourrissent pas. La peau de banane et les restes de repas sont organiques.",
+                  "answers": [
+                    {
+                      "content": "Une bouteille en plastique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une bouteille en verre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une canette en métal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une peau de banane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des restes de repas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bouteille propre peut être ___ pour faire un arrosoir.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer : la bouteille est propre. Pour produire moins de déchets, on peut la réutiliser. La brûler pollue et la jeter salit la rue.",
+                  "answers": [
+                    {
+                      "content": "réutilisée",
+                      "correct": true
+                    },
+                    {
+                      "content": "brûlée",
+                      "correct": false
+                    },
+                    {
+                      "content": "jetée dans la rue",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans cet exercice, tu retrouves ce qu'on met dans un compost et pourquoi.",
+              "exercise_type": "evaluation",
+              "hint": "Un compost reçoit seulement ce qui pourrit. Retiens les étapes : rassembler, empiler, arroser et aérer, attendre, épandre.",
+              "figure": "cycle-du-compost",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que le compost ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Attendre que les déchets deviennent une terre noire. Étape 5 — Épandre : le compost nourrit le sol comme un engrais naturel.",
+                  "answers": [
+                    {
+                      "content": "Une terre noire qui sert d'engrais naturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un produit toxique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un bac pour les piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sac de plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tas de compost a besoin d'un peu d'eau et d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Arroser et aérer : les êtres vivants du tas ont besoin d'eau et d'air. Le mot attendu est air.",
+                  "answers": [
+                    {
+                      "content": "air",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les premières étapes du compostage.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rassembler. Étape 2 — Empiler. Étape 3 — Arroser et aérer. Étape 4 — Attendre.",
+                  "answers": [
+                    {
+                      "content": "Rassembler les déchets organiques"
+                    },
+                    {
+                      "content": "Empiler les déchets en couches"
+                    },
+                    {
+                      "content": "Arroser un peu et retourner le tas"
+                    },
+                    {
+                      "content": "Attendre plusieurs semaines"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les sachets en plastique pourrissent dans le compost comme les épluchures.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rassembler et écarter ce qui ne pourrit pas. Le plastique reste intact. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux déchets à mettre dans le compost ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rassembler les déchets organiques. Épluchures et feuilles pourrissent. Piles et verre ne vont jamais au compost.",
+                  "answers": [
+                    {
+                      "content": "Des épluchures de légumes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des feuilles mortes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des piles usées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des morceaux de verre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans cet exercice, tu retrouves le rôle du comité d'hygiène.",
+              "exercise_type": "evaluation",
+              "hint": "Retiens les 4 étapes du comité : constater, répartir, agir et sensibiliser, contrôler.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que fait un comité d'hygiène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 à 4 : constater, répartir les tâches, agir et sensibiliser, contrôler. Le comité ne note pas les devoirs et ne fait pas tout seul.",
+                  "answers": [
+                    {
+                      "content": "Il veille à la propreté de l'école et sensibilise les camarades",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il note les devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il remplace tous les élèves pour nettoyer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il décide des vacances",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La propreté de l'école est seulement l'affaire du comité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Agir ensemble et sensibiliser les camarades. Chaque élève doit jeter ses déchets dans le bon bac. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action du comité à son étape.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Constater. Étape 2 — Décider et répartir. Étape 4 — Contrôler. Chaque action correspond à une étape.",
+                  "answers": [
+                    {
+                      "content": "Noter ce qui est sale",
+                      "match": "Constater"
+                    },
+                    {
+                      "content": "Donner une tâche à chaque équipe",
+                      "match": "Répartir les tâches"
+                    },
+                    {
+                      "content": "Vérifier que la cour est propre",
+                      "match": "Contrôler"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le comité fait son compte rendu à l'enseignant ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Contrôler et rendre compte à l'adulte responsable. Le mot attendu est responsable.",
+                  "answers": [
+                    {
+                      "content": "responsable",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour sensibiliser ses camarades, le comité peut faire une ___ de propreté.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Agir et sensibiliser les camarades. Une affiche se lit à la récréation. La fumée pollue et mélanger les déchets défait le tri.",
+                  "answers": [
+                    {
+                      "content": "affiche",
+                      "correct": true
+                    },
+                    {
+                      "content": "fumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "fosse à déchets mélangés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La lutte contre la dégradation dans la vie courante",
+          "notions": "Situations ivoiriennes : caniveau bouché près d'un marché, survie de jeunes plants en saison sèche, compost d'un potager d'école, ramassage des déchets d'un quartier.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un quartier d'Abidjan, un caniveau près du marché est bouché par des sachets et des épluchures jetés par les vendeuses. À la première grosse pluie, l'eau déborde dans la rue. Dans cet exercice, tu cherches comment éviter ce problème.",
+              "exercise_type": "evaluation",
+              "hint": "Cherche où vont les déchets quand on les jette dans le caniveau, puis ce que doit faire le tri.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi l'eau déborde-t-elle dans la rue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : le caniveau est plein de sachets et d'épluchures. Les déchets empêchent l'eau de couler. L'eau déborde donc dans la rue.",
+                  "answers": [
+                    {
+                      "content": "Les déchets jetés dans le caniveau l'ont bouché",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le caniveau est trop propre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les épluchures ont arrêté la pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sachets se sont transformés en eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux actions qui évitent ce problème ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Placer les déchets dans les bacs. Étape 4 — Faire ramasser sans jeter ni brûler. Jeter plus loin déplace le problème et brûler pollue l'air.",
+                  "answers": [
+                    {
+                      "content": "Mettre les déchets dans des bacs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire ramasser les bacs par le service de collecte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jeter les sachets plus loin dans le caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Brûler les sachets au bord de la rue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on faire des épluchures du marché plutôt que de les jeter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rassembler les déchets organiques : les épluchures pourrissent. Elles peuvent faire du compost. Les brûler avec les sachets pollue, et elles n'ont rien à faire avec les piles.",
+                  "answers": [
+                    {
+                      "content": "Les composter pour faire de l'engrais",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les brûler avec les sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les mettre dans le bac des piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les laisser dans la rue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Brûler les sachets au bord de la rue est la bonne solution car ils disparaissent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Faire ramasser sans brûler. La fumée du plastique pollue l'air et il reste des restes de plastique. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour éviter que les déchets s'accumulent, on les met dans des ___ avant le ramassage.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Placer le déchet dans le bac qui correspond. Les bacs gardent les déchets jusqu'au passage du service de collecte. Le mot attendu est bacs.",
+                  "answers": [
+                    {
+                      "content": "bacs",
+                      "correct": true
+                    },
+                    {
+                      "content": "bac",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Korhogo, une école plante 15 manguiers au début de la saison des pluies. Pendant la saison sèche, les élèves ne les arrosent pas toujours : 6 manguiers meurent (valeurs inventées pour l'exercice). Dans cet exercice, tu expliques ce qui s'est passé.",
+              "exercise_type": "evaluation",
+              "hint": "Calcule d'abord ce qui reste, puis cherche l'étape du reboisement qui a été oubliée.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de manguiers sont encore vivants ?",
+                  "question_type": "numeric",
+                  "unit": "manguiers",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Surveiller les plants. Calcul : 15 − 6 = 9. Il reste 9 manguiers vivants.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi des manguiers sont-ils morts ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Arroser et protéger. Le texte dit que les élèves n'arrosent pas toujours. Planter au début de la saison des pluies est la bonne étape (Étape 3), et les racines qui retiennent la terre ne tuent pas un arbre.",
+                  "answers": [
+                    {
+                      "content": "Ils ont manqué d'eau en saison sèche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils ont reçu trop de compost",
+                      "correct": false
+                    },
+                    {
+                      "content": "Leurs racines ont retenu la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont été plantés en saison des pluies",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'école a respecté toutes les étapes du reboisement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Arroser, protéger et surveiller. L'arrosage a été oublié en saison sèche. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux mesures pour sauver les prochains plants ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Arroser, protéger et surveiller. Adopter un arbre et poser une clôture protègent les plants. Arrêter d'arroser est l'erreur commise, et ne rien replanter abandonne le reboisement.",
+                  "answers": [
+                    {
+                      "content": "Chaque classe adopte un arbre et l'arrose",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entourer chaque plant d'une petite clôture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Arrêter d'arroser dès que la saison sèche arrive",
+                      "correct": false
+                    },
+                    {
+                      "content": "Arracher les plants morts et ne rien replanter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le meilleur moment pour planter est le début de la saison ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Planter au début de la saison des pluies : le sol est humide. En saison sèche ou en harmattan, il est trop sec.",
+                  "answers": [
+                    {
+                      "content": "des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "sèche",
+                      "correct": false
+                    },
+                    {
+                      "content": "de l'harmattan",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À l'école de Man, le comité prépare du compost pour le potager avec des épluchures de la cantine et des feuilles de la cour. Un élève propose d'y ajouter des bouteilles en plastique et des piles. Dans cet exercice, tu aides le comité à préparer son compost.",
+              "exercise_type": "evaluation",
+              "hint": "Rappelle-toi ce qui pourrit et ce qui ne pourrit pas, puis les étapes dans l'ordre.",
+              "figure": "cycle-du-compost",
+              "questions": [
+                {
+                  "content": "Que répondre à l'élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rassembler les déchets organiques et écarter tout ce qui ne pourrit pas. Le plastique ne pourrit pas et les piles sont dangereuses.",
+                  "answers": [
+                    {
+                      "content": "Non : le plastique et les piles ne pourrissent pas et n'ont pas leur place dans le compost",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : le plastique donne de l'engrais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : les piles accélèrent le compostage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, mais seulement les piles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les actions du comité.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rassembler. Étape 2 — Empiler. Étape 3 — Arroser et aérer. Étape 5 — Épandre le compost, après avoir attendu.",
+                  "answers": [
+                    {
+                      "content": "Rassembler épluchures et feuilles"
+                    },
+                    {
+                      "content": "Les empiler en couches dans un tas"
+                    },
+                    {
+                      "content": "Arroser un peu et retourner le tas"
+                    },
+                    {
+                      "content": "Étaler le compost au potager"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le compost rend au sol des sels minéraux et de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 5 — Épandre le compost : il rend au sol des sels minéraux et de l'humus. Le mot attendu est humus.",
+                  "answers": [
+                    {
+                      "content": "humus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le comité apporte 5 seaux d'épluchures et 7 seaux de feuilles. Combien de seaux sont dans le tas ?",
+                  "question_type": "numeric",
+                  "unit": "seaux",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Empiler : tous les seaux vont dans le même tas. Calcul : 5 + 7 = 12 seaux.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le compost peut être étalé au potager le jour même où le tas est fait.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Attendre plusieurs semaines que les déchets se transforment. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un quartier de Bouaké, des habitants décident de ne plus jeter leurs déchets dans la rue. Chaque famille a deux bacs : un pour les déchets organiques et un pour ceux qui ne pourrissent pas, plus un dépôt à part pour les déchets dangereux. Le ramassage a lieu 3 fois par semaine. Dans cet exercice, tu analyses cette organisation.",
+              "exercise_type": "evaluation",
+              "hint": "Pense au trajet d'un déchet : tri, bac, ramassage.",
+              "figure": "tri-des-dechets",
+              "questions": [
+                {
+                  "content": "Quel avantage a le tri en deux bacs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Classer et Étape 3 — Placer dans le bon bac. Les déchets organiques servent au compost, les autres sont ramassés. Le tri ne supprime pas le ramassage.",
+                  "answers": [
+                    {
+                      "content": "Les déchets organiques peuvent faire du compost et les autres être ramassés à part",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les déchets deviennent du compost",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a plus jamais besoin de ramassage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les piles usées pourrissent plus vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de ramassages ont lieu en 2 semaines ?",
+                  "question_type": "numeric",
+                  "unit": "ramassages",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Faire ramasser. Calcul : 3 ramassages par semaine × 2 semaines = 6.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux gestes à ne pas faire dans ce quartier ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Faire ramasser, sans jeter ni brûler. Mettre les épluchures au bon bac et sortir le bac le jour du ramassage sont de bons gestes.",
+                  "answers": [
+                    {
+                      "content": "Jeter ses déchets dans le caniveau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brûler les sachets devant sa maison",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre les épluchures dans le bac organique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sortir le bac le jour du ramassage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une famille qui trie bien n'a pas besoin de montrer l'exemple aux voisins.",
+                  "question_type": "true_false",
+                  "explanation": "Comme le comité d'hygiène, chaque famille peut montrer l'exemple. La propreté du quartier est l'affaire de tous, et cela aide les voisins. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque déchet de la famille à l'endroit où il doit aller.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer et Étape 3 — Placer. Le manioc pourrit, le plastique ne pourrit pas, la pile est dangereuse. Chaque déchet va à l'endroit de son groupe.",
+                  "answers": [
+                    {
+                      "content": "Épluchures de manioc",
+                      "match": "Bac organique"
+                    },
+                    {
+                      "content": "Bouteille en plastique",
+                      "match": "Bac des déchets qui ne pourrissent pas"
+                    },
+                    {
+                      "content": "Pile usée",
+                      "match": "Dépôt à part pour les déchets dangereux"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Analyser des résultats d'observation et d'expérience : rôle des racines contre l'érosion, conditions d'un bon compost, survie de jeunes plants, arguments contre le brûlage des déchets.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Des élèves versent la même quantité d'eau sur trois bacs inclinés remplis de la même terre. Le bac A est de la terre nue, le bac B porte de l'herbe, le bac C porte de jeunes plants d'arbres. Ils pèsent la terre emportée par l'eau : 90 g pour A, 30 g pour B et 10 g pour C (valeurs inventées pour l'exercice). Dans cet exercice, tu analyses ces résultats.",
+              "exercise_type": "evaluation",
+              "hint": "Compare les masses de terre emportée, puis demande-toi ce qui change d'un bac à l'autre.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans quel bac l'eau a-t-elle emporté le plus de terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer les résultats : A 90 g, B 30 g, C 10 g. Le plus grand nombre est 90 g, dans le bac de terre nue.",
+                  "answers": [
+                    {
+                      "content": "Le bac A, de terre nue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bac B, avec l'herbe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le bac C, avec les plants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois bacs pareillement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de grammes de terre de moins sont emportés dans le bac C que dans le bac A ?",
+                  "question_type": "numeric",
+                  "unit": "g",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : 90 − 10 = 80. Le bac C perd 80 g de moins que le bac A.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion tirer de l'expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Conclure : moins la terre est nue, moins elle est emportée. Les racines des plantes retiennent la terre. Dire que la terre nue perd moins est contraire aux résultats.",
+                  "answers": [
+                    {
+                      "content": "Les plantes protègent le sol contre l'érosion",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les plantes font fondre la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau emporte moins de terre quand le sol est nu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les plantes n'ont aucun effet sur la terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette expérience montre l'intérêt du reboisement d'un sol nu.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Conclure : les plants (bac C) protègent mieux que le sol nu (bac A). Le reboisement a donc un intérêt pour un sol nu. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux éléments qui doivent rester identiques dans les trois bacs pour comparer ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer le protocole. Pour comparer, on ne change qu'une chose : la présence de plantes. L'eau et la terre doivent donc être identiques. La masse emportée est le résultat mesuré.",
+                  "answers": [
+                    {
+                      "content": "La quantité d'eau versée",
+                      "correct": true
+                    },
+                    {
+                      "content": "La terre de départ",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plante posée sur chaque bac",
+                      "correct": false
+                    },
+                    {
+                      "content": "La masse de terre emportée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux tas de compost sont suivis pendant 6 semaines. Le tas C est arrosé un peu et retourné chaque semaine. Le tas D est tassé, jamais retourné et reste mouillé. À la fin, le tas C est une terre noire sans mauvaise odeur ; le tas D sent mauvais et les épluchures y sont encore visibles (résultats inventés pour l'exercice). Dans cet exercice, tu justifies ces résultats.",
+              "exercise_type": "evaluation",
+              "hint": "Compare les deux traitements : arrosage, air, retournement.",
+              "figure": "cycle-du-compost",
+              "questions": [
+                {
+                  "content": "Quel tas est du compost prêt à servir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Attendre que les déchets soient devenus une terre noire et sans mauvaise odeur. Seul le tas C a ce résultat.",
+                  "answers": [
+                    {
+                      "content": "Le tas C",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le tas D",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux tas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux tas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le tas D n'est-il pas prêt ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Arroser et aérer. Le tas D est tassé et mouillé, sans air : les êtres vivants du tas travaillent mal et le tas sent mauvais.",
+                  "answers": [
+                    {
+                      "content": "Il manque d'air, car il n'est jamais retourné",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a reçu trop d'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a été retourné trop souvent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il contient du compost trop noir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Retourner le tas fait entrer de l'air.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Arroser et aérer. En retournant le tas, on fait entrer de l'air pour les êtres vivants du tas. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour réussir le tas D, il faut le ___ pour y faire entrer de l'air.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Arroser et aérer. Le geste qui fait entrer l'air est de retourner le tas. Le mot attendu est retourner.",
+                  "answers": [
+                    {
+                      "content": "retourner",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche suivie par les élèves.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer. Étape 2 — Comparer. Étape 3 — Chercher la cause. Étape 4 — Conclure. C'est la démarche scientifique appliquée au compostage.",
+                  "answers": [
+                    {
+                      "content": "Observer les deux tas"
+                    },
+                    {
+                      "content": "Comparer ce qui est différent"
+                    },
+                    {
+                      "content": "Chercher la cause du mauvais résultat"
+                    },
+                    {
+                      "content": "Conclure sur le bon geste"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Deux classes plantent chacune 20 jeunes plants. La classe A les arrose chaque semaine en saison sèche : 18 plants sont vivants à la fin. La classe B ne les arrose pas : 7 plants sont vivants à la fin (valeurs inventées pour l'exercice). Dans cet exercice, tu justifies ces résultats.",
+              "exercise_type": "evaluation",
+              "hint": "Compare 18 et 7, puis cherche ce qui change entre les deux classes.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de plants sont morts dans la classe B ?",
+                  "question_type": "numeric",
+                  "unit": "plants",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Surveiller le résultat. Calcul : 20 − 7 = 13. Treize plants sont morts dans la classe B.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle différence le texte indique-t-il entre les deux classes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : les deux classes ont chacune 20 plants. La différence indiquée par le texte est l'arrosage.",
+                  "answers": [
+                    {
+                      "content": "L'arrosage en saison sèche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de plants",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'espèce d'arbre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sol de la cour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les résultats montrent que planter suffit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Arroser, protéger et surveiller. La classe qui arrose a bien plus de plants vivants. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux mesures qui aident les plants à survivre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Planter au début de la saison des pluies. Étape 4 — Arroser et protéger. Planter en saison sèche et oublier les plants les font mourir.",
+                  "answers": [
+                    {
+                      "content": "Les arroser en saison sèche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les protéger des animaux par une clôture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les planter en pleine saison sèche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les oublier après la plantation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Conclure : 18 plants vivants avec arrosage contre 7 sans arrosage. L'arrosage aide donc les plants. Les autres propositions contredisent les résultats.",
+                  "answers": [
+                    {
+                      "content": "L'arrosage augmente beaucoup la survie des jeunes plants",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'arrosage fait mourir les plants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les plants vivent mieux sans soin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de plants vivants ne dépend de rien",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Lors d'un débat, un élève dit : « Pour nettoyer la cour, on peut brûler tous les déchets : ils disparaissent et il n'y a plus rien à ramasser. » Dans cet exercice, tu discutes cet avis.",
+              "exercise_type": "evaluation",
+              "hint": "Retiens que brûler pollue l'air et que le tri et le ramassage sont les bonnes solutions.",
+              "figure": "tri-des-dechets",
+              "questions": [
+                {
+                  "content": "Que répondre à cet élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Faire ramasser, sans jeter ni brûler. La fumée du plastique pollue l'air et il reste des restes. Les piles contiennent des produits toxiques.",
+                  "answers": [
+                    {
+                      "content": "Brûler le plastique pollue l'air et ne fait pas vraiment disparaître les déchets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, le feu règle tout",
+                      "correct": false
+                    },
+                    {
+                      "content": "Brûler les piles est sans danger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cendres du plastique sont un bon engrais",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois déchets à ne jamais brûler ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Classer : plastique, piles et médicaments sont des déchets qui ne pourrissent pas ou dangereux. Feuilles et épluchures sont organiques : on les composte plutôt que de les brûler.",
+                  "answers": [
+                    {
+                      "content": "Les sachets en plastique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les piles usées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les médicaments périmés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les feuilles mortes pour le compost",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les épluchures pour le compost",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les déchets organiques peuvent être transformés en compost plutôt que brûlés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Classer les déchets organiques, puis les composter (Étapes 1 à 4 du compostage). L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ramassage des déchets est assuré par un service de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Faire ramasser les bacs pleins par le service de collecte. Le mot attendu est collecte.",
+                  "answers": [
+                    {
+                      "content": "collecte",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour produire moins de déchets, on peut ___ une bouteille comme arrosoir.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer la bouteille propre. On peut la réutiliser. La brûler ou la jeter ajoute à la pollution.",
+                  "answers": [
+                    {
+                      "content": "réutiliser",
+                      "correct": true
+                    },
+                    {
+                      "content": "brûler",
+                      "correct": false
+                    },
+                    {
+                      "content": "jeter",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : reboiser, trier, composter, agir ensemble",
+          "notions": "Bilan des quatre notions : reboisement, tri et ramassage des déchets, compostage, comité d'hygiène ; choisir l'action adaptée à un problème, lire des données simples et justifier ses choix.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "L'école de Daloa organise une journée de l'environnement. Les élèves observent trois problèmes : une cour nue, des déchets jetés par terre et des épluchures qui s'accumulent derrière la cantine. Dans cet exercice, tu choisis l'action qui convient à chaque problème.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque problème, cherche l'action qui y répond : arbres, tri ou compost.",
+              "figure": "tri-des-dechets",
+              "questions": [
+                {
+                  "content": "Relie chaque problème à l'action qui lui répond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer le problème. Étape 2 — Choisir l'action : des arbres pour la cour nue, un tri pour les déchets, un compost pour les épluchures.",
+                  "answers": [
+                    {
+                      "content": "La cour nue",
+                      "match": "Le reboisement"
+                    },
+                    {
+                      "content": "Les déchets jetés par terre",
+                      "match": "Le tri et le ramassage"
+                    },
+                    {
+                      "content": "Les épluchures de la cantine",
+                      "match": "Le compostage"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle action est liée aux racines qui retiennent la terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 du reboisement — Observer : la terre est emportée par la pluie. Étape 2 — des arbres retiennent la terre avec leurs racines.",
+                  "answers": [
+                    {
+                      "content": "Le reboisement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le compostage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ramassage des piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réutilisation d'une bouteille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les épluchures de la cantine peuvent devenir du compost.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 du compostage — Rassembler les déchets organiques : les épluchures pourrissent. Elles peuvent donner du compost. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux gestes d'un bon membre du comité d'hygiène ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 du comité — Agir ensemble et sensibiliser. Vider les bacs et faire une affiche sont utiles. Brûler et jeter par terre aggravent le problème.",
+                  "answers": [
+                    {
+                      "content": "Un élève qui vide les bacs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un élève qui fait une affiche de sensibilisation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un élève qui brûle les sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un élève qui jette ses déchets par terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque classe de l'école plante 4 plants. L'école a 5 classes. Combien de plants sont plantés ?",
+                  "question_type": "numeric",
+                  "unit": "plants",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 du reboisement — Planter : 5 × 4 = 20. Vingt plants sont plantés.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le comité d'hygiène de l'école de Korhogo veut organiser ses actions de la semaine. Dans cet exercice, tu ranges les actions dans le bon ordre et tu justifies tes choix.",
+              "exercise_type": "evaluation",
+              "hint": "Suis l'ordre : constater, répartir, agir, contrôler.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de l'action du comité.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Constater. Étape 2 — Décider et répartir. Étape 3 — Agir et sensibiliser. Étape 4 — Contrôler et rendre compte.",
+                  "answers": [
+                    {
+                      "content": "Constater l'état de l'école"
+                    },
+                    {
+                      "content": "Décider des actions et répartir les tâches"
+                    },
+                    {
+                      "content": "Agir et sensibiliser les camarades"
+                    },
+                    {
+                      "content": "Contrôler et rendre compte"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le comité répartit-il les tâches avant d'agir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décider des actions et répartir les tâches : qui fait quoi et quand. Cela évite les oublis. Les autres propositions contredisent la méthode.",
+                  "answers": [
+                    {
+                      "content": "Pour que chacun sache ce qu'il doit faire et quand",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour que personne ne fasse rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour que le comité fasse tout seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour éviter de regarder l'état de l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le comité fait son compte rendu à l'adulte ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Contrôler et rendre compte à l'adulte responsable. Le mot attendu est responsable.",
+                  "answers": [
+                    {
+                      "content": "responsable",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le comité peut nettoyer la cour, mais chaque élève doit aussi trier ses déchets.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Agir ensemble et sensibiliser les camarades. La propreté est l'affaire de chaque élève. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après le nettoyage, le comité ___ le résultat le lendemain.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Contrôler le résultat. Oublier ou brûler ne règle rien.",
+                  "answers": [
+                    {
+                      "content": "contrôle",
+                      "correct": true
+                    },
+                    {
+                      "content": "oublie",
+                      "correct": false
+                    },
+                    {
+                      "content": "brûle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "En un mois, le comité de l'école compte 12 seaux d'épluchures mis au compost, 8 sacs de plastique ramassés et 3 piles déposées à part (valeurs inventées pour l'exercice). Dans cet exercice, tu lis ce bilan.",
+              "exercise_type": "evaluation",
+              "hint": "Additionne d'abord les trois nombres, puis compare-les.",
+              "figure": "cycle-du-compost",
+              "questions": [
+                {
+                  "content": "Combien de seaux et de sacs sont comptés en tout (les piles sont comptées à part) ?",
+                  "question_type": "numeric",
+                  "unit": "contenants",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 12 seaux et 8 sacs. Calcul : 12 + 8 = 20. Les 3 piles ne sont pas ajoutées, car ce ne sont pas des contenants.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre les seaux d'épluchures et les sacs de plastique, lequel est le plus nombreux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : 12 seaux et 8 sacs, deux nombres de contenants. 12 est plus grand que 8, donc les seaux d'épluchures sont plus nombreux.",
+                  "answers": [
+                    {
+                      "content": "Les seaux d'épluchures (12)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sacs de plastique (8)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont aussi nombreux",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où vont les 12 seaux d'épluchures et les 3 piles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Placer chaque déchet dans le bon bac. Épluchures au compost, piles à part. Le caniveau et le feu polluent.",
+                  "answers": [
+                    {
+                      "content": "Les épluchures vont au tas de compost",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les piles vont dans un dépôt à part",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les épluchures vont au caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les piles vont au feu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le comité a raison de ne pas brûler les 8 sacs de plastique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Faire ramasser, sans jeter ni brûler. Le plastique brûlé pollue l'air. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet des épluchures jusqu'au potager.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rassembler. Étape 2 — Empiler. Étape 4 — Attendre. Étape 5 — Épandre au potager.",
+                  "answers": [
+                    {
+                      "content": "Rassembler les épluchures"
+                    },
+                    {
+                      "content": "Les empiler dans le tas"
+                    },
+                    {
+                      "content": "Attendre plusieurs semaines"
+                    },
+                    {
+                      "content": "Étaler le compost au potager"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève de 6ème dit : « Je veux aider mon école et mon quartier à lutter contre la dégradation de l'environnement. » Dans cet exercice, tu l'aides à choisir ses gestes.",
+              "exercise_type": "evaluation",
+              "hint": "Choisis les gestes qui protègent le sol et réduisent les déchets.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont trois gestes qu'il peut faire ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 à 4 de chaque notion : planter et arroser, trier, composter sont des gestes de lutte. Jeter dans le caniveau ou brûler des piles sont des gestes néfastes.",
+                  "answers": [
+                    {
+                      "content": "Planter et arroser un arbre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trier ses déchets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre ses épluchures au compost",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jeter son sachet dans le caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Brûler les piles usées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel geste protège le sol contre l'érosion ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 du reboisement — Observer : la pluie emporte la terre nue. Les racines des arbres plantés la retiennent.",
+                  "answers": [
+                    {
+                      "content": "Planter des arbres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brûler la brousse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Laisser la terre nue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jeter des sachets au sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les déchets organiques peuvent devenir du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 du compostage — Attendre que les déchets deviennent une terre noire. Le mot attendu est compost.",
+                  "answers": [
+                    {
+                      "content": "compost",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul élève ne peut rien changer, il vaut mieux ne rien faire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 du comité — Agir ensemble et sensibiliser. Chaque élève compte, et montrer l'exemple entraîne les autres. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour garder l'école propre, chaque élève doit jeter ses déchets dans le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 du tri — Placer le déchet dans le bac de son groupe. Le caniveau et le feu sont à éviter.",
+                  "answers": [
+                    {
+                      "content": "bon bac",
+                      "correct": true
+                    },
+                    {
+                      "content": "caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "feu",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

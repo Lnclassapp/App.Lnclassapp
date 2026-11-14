@@ -1,0 +1,3460 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les facteurs de croissance chez les plantes à fleurs",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "SVT",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "demarche-experimentale",
+          "kind": "diagram",
+          "description": "Schéma fléché de la démarche d'une expérience avec témoin au potager : une hypothèse, le choix d'un seul facteur qui change, la préparation d'un lot témoin et d'un lot test, les mesures aux mêmes dates, puis la comparaison des lots et la conclusion.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "hyp",
+                "label": "Hypothèse"
+              },
+              {
+                "id": "fac",
+                "label": "Un seul facteur change"
+              },
+              {
+                "id": "lots",
+                "label": "Lot témoin et lot test"
+              },
+              {
+                "id": "mes",
+                "label": "Mesures aux mêmes dates"
+              },
+              {
+                "id": "con",
+                "label": "Comparaison et conclusion"
+              }
+            ],
+            "edges": [
+              {
+                "from": "hyp",
+                "to": "fac"
+              },
+              {
+                "from": "fac",
+                "to": "lots"
+              },
+              {
+                "from": "lots",
+                "to": "mes"
+              },
+              {
+                "from": "mes",
+                "to": "con"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-lot-temoin",
+          "kind": "stat_chart",
+          "description": "Courbe de croissance d'un plant de haricot du lot témoin, arrosé et placé au soleil. La hauteur en centimètres est donnée à J0, J7, J14, J21 et J28 : 5, 9, 15, 22 puis 30 cm. La courbe monte de plus en plus vite. Valeurs illustratives.",
+          "params": {
+            "chart": "line",
+            "series": [
+              5,
+              9,
+              15,
+              22,
+              30
+            ],
+            "labels": [
+              "J0",
+              "J7",
+              "J14",
+              "J21",
+              "J28"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-lot-sans-eau",
+          "kind": "stat_chart",
+          "description": "Courbe de croissance d'un plant de haricot du lot test, qui n'est pas arrosé. La hauteur en centimètres est donnée à J0, J7, J14, J21 et J28 : 5, 7, 8, 8 puis 8 cm. La courbe monte un peu puis reste plate : le plant ne grandit plus. Valeurs illustratives.",
+          "params": {
+            "chart": "line",
+            "series": [
+              5,
+              7,
+              8,
+              8,
+              8
+            ],
+            "labels": [
+              "J0",
+              "J7",
+              "J14",
+              "J21",
+              "J28"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "hauteur-a-j28",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la hauteur de quatre lots de haricot à J28, en centimètres : lot témoin 30 cm, lot sans eau 8 cm, lot sans sels minéraux 14 cm, lot trop froid 12 cm. Le lot témoin est le plus grand. Valeurs illustratives.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              30,
+              8,
+              14,
+              12
+            ],
+            "labels": [
+              "Témoin",
+              "Sans eau",
+              "Sans sels",
+              "Trop froid"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Mener une expérience avec un lot témoin",
+          "remember": "Un **facteur de croissance** est une condition du milieu dont dépend la croissance d'une plante : l'eau, la lumière, les sels minéraux, la température. La **croissance** est l'augmentation de la taille de la plante (hauteur, nombre de feuilles). Pour savoir si un facteur agit, on compare deux **lots** de plants identiques. Le **lot témoin** reçoit toutes les conditions favorables. Le **lot test** est pareil, sauf pour **un seul facteur** qui change. Si les lots diffèrent, la différence vient de ce facteur.",
+          "method": [
+            "Formuler l'hypothèse : dire quel facteur pourrait agir sur la croissance.",
+            "Choisir le facteur à étudier : un seul facteur change, tous les autres restent identiques.",
+            "Préparer un lot témoin (conditions favorables) et un lot test (le facteur étudié change).",
+            "Mesurer les plants des deux lots aux mêmes dates et noter les résultats.",
+            "Comparer les lots puis conclure : l'hypothèse est confirmée ou rejetée."
+          ],
+          "example": {
+            "statement": "Au potager de l'école, Yao pense que la lumière est utile à la croissance du haricot. Il prépare 10 pots de haricot. Après 14 jours, les plants du lot laissé au soleil sont verts et solides ; ceux du lot couvert d'une boîte en carton sont jaune pâle et fragiles.",
+            "steps": [
+              "Formuler : l'hypothèse de Yao est « la lumière est nécessaire à la croissance du haricot ».",
+              "Choisir : le facteur étudié est la lumière ; l'eau, la terre et la température restent identiques.",
+              "Préparer : le lot témoin (5 pots) reste au soleil ; le lot test (5 pots) est couvert d'un carton.",
+              "Mesurer : après 14 jours, on note l'aspect des plants : lot témoin vert et solide, lot test jaune pâle et fragile.",
+              "Comparer : les lots ne diffèrent que par la lumière, donc l'écart vient d'elle. Conclure : l'hypothèse est confirmée."
+            ]
+          },
+          "pitfall": "Ne pas changer plusieurs facteurs à la fois. Contre-exemple : Kofi met le lot A au soleil et arrosé, le lot B à l'ombre et non arrosé. Le lot B est petit. Est-ce l'eau ? la lumière ? On ne peut pas savoir, car deux facteurs ont changé. Dans une expérience, un seul facteur change entre le lot témoin et le lot test.",
+          "figure": "demarche-experimentale",
+          "practice": {
+            "statement": "Tu t'entraînes à choisir un facteur, à préparer un lot témoin et un lot test, puis à conclure, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans une expérience au potager, que représente le lot témoin ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Préparer : on prépare un lot témoin, qui reçoit les conditions favorables, et un lot test, où le facteur étudié change. Dire que le témoin est le lot dont on change le facteur le confond avec le lot test.",
+                "answers": [
+                  {
+                    "content": "Le lot placé dans toutes les conditions favorables",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le lot dont on change le facteur étudié",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le lot qui a le plus de plants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le lot qu'on ne mesure pas",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le témoin sert de référence : il reçoit tout ce qui est favorable."
+              },
+              {
+                "content": "Dans une expérience, on ne change qu'un seul ___ entre le lot témoin et le lot test.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir le facteur à étudier : un seul facteur change, tous les autres restent identiques. Le mot attendu est facteur.",
+                "answers": [
+                  {
+                    "content": "facteur",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est ce que la méthode appelle « le facteur étudié »."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode d'une expérience avec témoin.",
+                "question_type": "ordering",
+                "explanation": "On suit la méthode dans l'ordre : Étape 1 — Formuler l'hypothèse. Étape 2 — Choisir le facteur. Étape 3 — Préparer les lots. Étape 4 — Mesurer aux mêmes dates. Étape 5 — Comparer les lots et conclure.",
+                "answers": [
+                  {
+                    "content": "Formuler l'hypothèse"
+                  },
+                  {
+                    "content": "Choisir le facteur à étudier"
+                  },
+                  {
+                    "content": "Préparer le lot témoin et le lot test"
+                  },
+                  {
+                    "content": "Mesurer les plants aux mêmes dates"
+                  },
+                  {
+                    "content": "Comparer les lots et conclure"
+                  }
+                ],
+                "hint": "On commence par l'idée à vérifier et on finit par la conclusion."
+              },
+              {
+                "content": "Pour comparer deux lots, ils doivent avoir le même nombre de plants et la même terre.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Préparer : les deux lots doivent être identiques (plants, terre, nombre), sauf pour le facteur étudié. Étape 5 — Comparer : sinon on ne sait pas d'où vient la différence. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Si les lots diffèrent par la terre, la comparaison n'est plus juste."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître et organiser une expérience avec témoin",
+              "statement": "Dans cet exercice, tu reconnais le facteur étudié et tu organises les lots d'une expérience au potager.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Awa a une hypothèse : « L'eau est nécessaire à la croissance du maïs ». Quel facteur doit-elle étudier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Formuler : l'hypothèse parle de l'eau. Étape 2 — Choisir : le facteur étudié est donc l'eau, et lui seul. Choisir la lumière ou la température, c'est étudier un autre facteur que celui de l'hypothèse.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La température",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa étudie l'effet de l'eau sur le maïs. Quelles conditions doit-elle garder identiques entre les deux lots ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Choisir : un seul facteur change, ici l'eau. Étape 3 — Préparer : la lumière et la terre restent identiques dans les deux lots. La quantité d'eau est justement ce qui change. Dire que tout peut changer est l'erreur du piège : on ne saurait plus d'où vient l'écart.",
+                  "answers": [
+                    {
+                      "content": "La lumière reçue",
+                      "correct": true
+                    },
+                    {
+                      "content": "La terre des pots",
+                      "correct": true
+                    },
+                    {
+                      "content": "La quantité d'eau reçue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout peut changer entre les lots",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot témoin est le lot dont on change le facteur étudié.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Préparer : le lot témoin reçoit les conditions favorables ; c'est le lot test dont on change le facteur étudié. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao compare deux lots qui ne diffèrent que par la lumière. Il peut conclure que l'écart vient ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 5 — Comparer : un seul facteur a changé, la lumière. L'écart vient donc de la lumière. Répondre l'eau oublie que l'eau est identique dans les deux lots.",
+                  "answers": [
+                    {
+                      "content": "de la lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "de la chance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi met le lot A au soleil et arrosé, et le lot B à l'ombre et non arrosé. Le lot B est petit. Peut-il dire que c'est à cause du manque de lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Choisir : un seul facteur doit changer. Étape 3 — Préparer : ici la lumière et l'eau changent. Étape 5 — Conclure : on ne peut pas dire laquelle explique l'écart. Les trois autres réponses oublient que les deux facteurs ont changé.",
+                  "answers": [
+                    {
+                      "content": "Non, car deux facteurs ont changé en même temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car le lot B est à l'ombre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car le lot A est plus grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car le lot B n'est pas arrosé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Organiser une expérience au potager",
+              "statement": "Dans cet exercice, tu prépares et tu interprètes des expériences menées dans le jardin potager de l'école.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Seydou veut savoir si la température agit sur des plants de tomate. Quel facteur change entre les deux lots ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Formuler : l'hypothèse concerne la température. Étape 2 — Choisir : la température est le seul facteur qui change ; la lumière, l'eau et la terre restent identiques. Le nombre de feuilles est un résultat qu'on mesure, pas un facteur qu'on change.",
+                  "answers": [
+                    {
+                      "content": "La température",
+                      "correct": true
+                    },
+                    {
+                      "content": "La quantité de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur du pot",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mesures des deux lots se font aux mêmes dates.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Mesurer : on mesure les plants des deux lots aux mêmes dates, sinon la comparaison est faussée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plants qui reçoivent toutes les conditions favorables forment le lot ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Préparer : le lot témoin reçoit les conditions favorables ; le lot test voit un facteur changer. Le mot attendu est témoin.",
+                  "answers": [
+                    {
+                      "content": "témoin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Formuler : l'hypothèse est l'idée à vérifier. Étape 2 — Choisir : le facteur est la condition étudiée. Étape 3 — Préparer : le lot témoin est dans les conditions favorables, le lot test voit un facteur changer.",
+                  "answers": [
+                    {
+                      "content": "Lot témoin",
+                      "match": "Lot dans les conditions favorables"
+                    },
+                    {
+                      "content": "Lot test",
+                      "match": "Lot où un seul facteur change"
+                    },
+                    {
+                      "content": "Facteur",
+                      "match": "Condition dont dépend la croissance"
+                    },
+                    {
+                      "content": "Hypothèse",
+                      "match": "Idée à vérifier par l'expérience"
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa prépare 3 lots de haricot (un lot témoin et deux lots tests). Chaque lot a 6 plants. Combien de plants prépare-t-elle en tout ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Préparer : on compte les lots, 3, puis les plants de chaque lot, 6. Étape 4 — Mesurer : on mesurera donc 3 × 6 = 18 plants. Répondre 12 oublie un lot ; répondre 9 additionne les nombres au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "plants"
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de l'expérience de Yao sur la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Formuler l'hypothèse. Étape 2 — Choisir le facteur : la lumière seule. Étape 3 — Préparer les deux lots. Étape 4 — Mesurer à J14. Étape 5 — Comparer les lots et conclure.",
+                  "answers": [
+                    {
+                      "content": "Il pense que la lumière aide la croissance"
+                    },
+                    {
+                      "content": "Il ne change que la lumière"
+                    },
+                    {
+                      "content": "Il prépare un lot au soleil et un lot sous carton"
+                    },
+                    {
+                      "content": "Il mesure les plants à J14"
+                    },
+                    {
+                      "content": "Il compare et conclut"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Avant de répondre, demande-toi : quel est le seul facteur qui change entre les deux lots ?"
+            }
+          ]
+        },
+        {
+          "name": "Le rôle de l'eau et de la lumière",
+          "remember": "L'**eau** et la **lumière** sont deux facteurs de croissance des plantes à fleurs. Les racines absorbent l'eau du sol. Une plante qui manque d'eau **flétrit** : ses feuilles et sa tige deviennent molles et penchées, et sa croissance s'arrête. Une plante privée de lumière a des feuilles **jaune pâle** et une tige fine et fragile ; sa tige peut s'allonger mais reste fine et fragile ; la plante reste chétive et, si le manque dure, elle meurt. Une plante qui reçoit assez d'eau et de lumière a des feuilles vertes, une tige solide et grandit bien.",
+          "method": [
+            "Repérer le facteur qui change entre le lot témoin et le lot test.",
+            "Comparer l'aspect (feuilles, tige) et la hauteur des plants des deux lots.",
+            "Relier la différence observée au facteur étudié, eau ou lumière.",
+            "Conclure : écrire ce dont la plante a besoin pour bien croître."
+          ],
+          "example": {
+            "statement": "Au potager, Fatou arrose 6 plants de maïs (lot témoin) et n'arrose pas 6 autres plants (lot test). Les deux lots sont au soleil, dans la même terre. Après 14 jours, les plants arrosés mesurent 20 cm et ont des feuilles vertes ; les autres mesurent 7 cm et leurs feuilles sont molles et penchées.",
+            "steps": [
+              "Repérer : les deux lots ne diffèrent que par l'arrosage ; le facteur étudié est l'eau.",
+              "Comparer : le lot témoin mesure 20 cm avec des feuilles vertes ; le lot test mesure 7 cm avec des feuilles molles et penchées.",
+              "Relier : tout est identique sauf l'eau, donc la différence vient du manque d'eau.",
+              "Conclure : le maïs a besoin d'eau pour croître ; sans eau, il flétrit et sa croissance s'arrête."
+            ]
+          },
+          "pitfall": "Ne pas confondre les signes d'un manque d'eau et d'un manque de lumière. Un plant mou, aux feuilles penchées, manque d'eau. Un plant pâle, à la tige fine, manque de lumière. Contre-exemple : le plant de Seydou est arrosé chaque jour mais gardé dans un placard ; il est jaune pâle, pas flétri. Son problème n'est pas l'eau.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à relier l'aspect d'un plant à un manque d'eau ou de lumière, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un plant de maïs a des feuilles molles et penchées. Son lot n'a pas été arrosé depuis deux semaines. Que manque-t-il à ce plant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le lot n'a pas été arrosé, le facteur est l'eau. Étape 2 — Comparer : feuilles molles et penchées. Étape 3 — Relier : ces signes viennent du manque d'eau. Étape 4 — Conclure : il manque de l'eau.",
+                "answers": [
+                  {
+                    "content": "De l'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "De la lumière",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la terre",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la chaleur",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde le facteur qui change : l'arrosage."
+              },
+              {
+                "content": "Un plant gardé longtemps dans le noir a des feuilles de couleur ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Comparer : un plant privé de lumière a des feuilles jaune pâle. Étape 3 — Relier : cet aspect vient du manque de lumière. Étape 4 — Conclure : la plante a besoin de lumière. Vert foncé est l'aspect d'un plant bien éclairé.",
+                "answers": [
+                  {
+                    "content": "jaune pâle",
+                    "correct": true
+                  },
+                  {
+                    "content": "vert foncé",
+                    "correct": false
+                  },
+                  {
+                    "content": "rouge vif",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à un plant oublié dans un placard."
+              },
+              {
+                "content": "Sans eau, un plant de haricot continue de grandir normalement.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le facteur étudié est l'eau. Étape 3 — Relier : sans eau, le plant flétrit et sa croissance s'arrête. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Rappelle-toi l'aspect du plant du lot non arrosé."
+              },
+              {
+                "content": "Relie chaque signe à son facteur.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Comparer l'aspect des plants. Étape 3 — Relier chaque aspect au facteur : molles et penchées, l'eau ; jaune pâle et fine, la lumière ; vertes et solides, assez d'eau et de lumière. Étape 4 — Conclure.",
+                "answers": [
+                  {
+                    "content": "Feuilles molles et penchées",
+                    "match": "Manque d'eau"
+                  },
+                  {
+                    "content": "Feuilles jaune pâle, tige fine et fragile",
+                    "match": "Manque de lumière"
+                  },
+                  {
+                    "content": "Feuilles vertes, tige solide",
+                    "match": "Eau et lumière suffisantes"
+                  }
+                ],
+                "hint": "Distingue le plant pâle du plant mou."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Comparer des lots arrosés et non arrosés, éclairés et dans le noir",
+              "statement": "Dans cet exercice, tu compares des lots de plants du potager pour trouver le rôle de l'eau et de la lumière.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Au potager, un lot de haricot est arrosé et mesure 22 cm. Un lot non arrosé mesure 8 cm et ses feuilles sont molles. Quel facteur explique l'écart ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lots ne diffèrent que par l'arrosage. Étape 2 — Comparer : 22 cm contre 8 cm, feuilles molles. Étape 3 — Relier : l'écart vient de l'eau. Étape 4 — Conclure : la plante a besoin d'eau.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La température",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lot de maïs est resté 14 jours sous un carton ; l'autre lot est au soleil. Les plants sous carton sont jaune pâle et fragiles. Quelle conclusion est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lots ne diffèrent que par la lumière. Étape 2 — Comparer : vert et solide contre jaune pâle et fragile. Étape 3 — Relier : l'écart vient de la lumière. Étape 4 — Conclure : la plante a besoin de lumière. Dire qu'elle a besoin d'ombre inverse le résultat.",
+                  "answers": [
+                    {
+                      "content": "La plante a besoin de lumière pour bien croître",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plante a besoin d'ombre pour bien croître",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plante n'a pas besoin d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plante a besoin de moins de terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lot de haricot est gardé 14 jours dans une boîte noire, arrosé comme le lot au soleil. Les plants de la boîte noire ont des feuilles vertes et une tige solide.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : un plant privé de lumière a des feuilles jaune pâle et une tige fragile. Étape 3 — Relier : cet aspect vient du manque de lumière. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plante qui manque d'eau ___ : ses feuilles deviennent molles.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Comparer : les feuilles sont molles et penchées. Étape 3 — Relier : cet aspect vient du manque d'eau. Étape 4 — Conclure : la plante flétrit (ou fane).",
+                  "answers": [
+                    {
+                      "content": "flétrit",
+                      "correct": true
+                    },
+                    {
+                      "content": "fane",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plant de Seydou est arrosé chaque jour, mais il est gardé dans un placard. Il est jaune pâle et fin. Quelle est la cause ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le plant est arrosé, l'eau n'est pas le facteur qui manque. Étape 2 — Comparer : jaune pâle et fin. Étape 3 — Relier : ces signes viennent du manque de lumière. Un manque d'eau rendrait le plant mou, pas pâle.",
+                  "answers": [
+                    {
+                      "content": "Le manque de lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le manque d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un excès de soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le manque de terre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire les signes d'un manque d'eau ou de lumière",
+              "statement": "Dans cet exercice, tu lis l'aspect de plants du potager pour trouver le facteur qui manque et tu le démontres avec la méthode.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque observation à sa cause.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Comparer l'aspect des plants. Étape 3 — Relier chaque aspect à un facteur : molles et penchées, l'eau ; jaune pâle et fine, la lumière ; vertes et solides, assez d'eau et de lumière.",
+                  "answers": [
+                    {
+                      "content": "Feuilles molles et penchées",
+                      "match": "Manque d'eau"
+                    },
+                    {
+                      "content": "Feuilles jaune pâle, tige fine",
+                      "match": "Manque de lumière"
+                    },
+                    {
+                      "content": "Feuilles vertes, tige solide",
+                      "match": "Eau et lumière suffisantes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lot de haricot arrosé passe de 5 cm à 22 cm en 21 jours. De combien de centimètres a-t-il grandi ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : hauteur finale 22 cm et hauteur de départ 5 cm. Étape 4 — Conclure : la croissance est 22 − 5 = 17 cm. Répondre 22 oublie de retirer la hauteur de départ.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour interpréter une expérience sur l'eau.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le facteur. Étape 2 — Comparer l'aspect et la hauteur. Étape 3 — Relier la différence au facteur. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer le facteur qui change"
+                    },
+                    {
+                      "content": "Comparer l'aspect et la hauteur des plants"
+                    },
+                    {
+                      "content": "Relier la différence au facteur"
+                    },
+                    {
+                      "content": "Conclure sur le besoin de la plante"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plant flétri par manque d'eau a forcément besoin de plus de lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le facteur qui change est l'eau. Étape 3 — Relier : des feuilles molles viennent d'un manque d'eau, pas de lumière. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conditions qui permettent à un plant de maïs de bien croître ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure : la plante a besoin d'eau et de lumière pour bien croître. Le noir complet et l'absence d'arrosage sont les deux conditions qui la font dépérir.",
+                  "answers": [
+                    {
+                      "content": "Assez d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Assez de lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du noir complet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun arrosage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un lot sans lumière, la plante reste ___ et finit par mourir si le manque dure.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Comparer : un plant privé de lumière est pâle, fin et fragile. Étape 4 — Conclure : il reste chétif. Vigoureuse et vert foncé décrivent un plant bien éclairé.",
+                  "answers": [
+                    {
+                      "content": "chétive",
+                      "correct": true
+                    },
+                    {
+                      "content": "vigoureuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "vert foncé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Distingue bien l'aspect d'un plant qui manque d'eau (mou) de celui d'un plant qui manque de lumière (pâle et fin)."
+            }
+          ]
+        },
+        {
+          "name": "Le rôle des sels minéraux et de la température",
+          "remember": "Les **sels minéraux** sont des substances dissoutes dans l'eau du sol. Les racines les absorbent avec l'eau. Un sol riche en sels minéraux (terre fertile, compost, fumier, engrais) donne des plants grands aux feuilles vertes. Un sol pauvre en donne des plants petits aux feuilles jaunes. La **température** agit aussi : trop basse, elle ralentit la croissance ; trop élevée, elle peut faire flétrir la plante ; la croissance est meilleure à une température modérée. Un facteur est **favorable** s'il aide la croissance, **insuffisant** s'il manque, **excessif** s'il est trop fort.",
+          "method": [
+            "Lire le protocole : relever le facteur étudié et les conditions de chaque lot.",
+            "Comparer les mesures et l'aspect des plants de chaque lot.",
+            "Chercher dans le protocole le facteur qui explique l'écart.",
+            "Conclure : dire si le facteur est favorable, insuffisant ou excessif."
+          ],
+          "example": {
+            "statement": "Koffi cultive 6 plants de haricot en sable lavé, arrosé d'eau additionnée d'engrais (lot témoin) et 6 plants en sable lavé, arrosé d'eau seule (lot test). La lumière, la quantité d'eau et la température sont les mêmes. Après 28 jours, le lot témoin mesure 30 cm avec des feuilles vertes ; le lot test mesure 14 cm avec des feuilles jaunes.",
+            "steps": [
+              "Lire : le facteur étudié est la présence de sels minéraux ; les deux lots sont en sable lavé ; le lot témoin est arrosé d'eau avec engrais, le lot test d'eau seule.",
+              "Comparer : le lot témoin mesure 30 cm avec des feuilles vertes ; le lot test mesure 14 cm avec des feuilles jaunes.",
+              "Chercher : l'eau, la lumière et la température sont identiques ; seul l'apport de sels minéraux diffère.",
+              "Conclure : les sels minéraux sont favorables à la croissance ; leur absence est un facteur insuffisant."
+            ]
+          },
+          "pitfall": "Ne pas croire que plus il fait chaud, mieux la plante grandit. Contre-exemple : trois lots de haricot mesurent après 28 jours 10 cm à 12 °C, 30 cm à 28 °C et 6 cm à 40 °C, où les plants ont flétri. Une température trop basse est insuffisante, une température trop élevée est excessive : la meilleure est modérée.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à lire le protocole d'une expérience sur les sels minéraux ou la température et à conclure, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Les racines absorbent les sels minéraux dissous dans l'___ du sol.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : les sels minéraux sont dissous dans l'eau du sol. Étape 4 — Conclure : les racines les absorbent avec l'eau. Le mot attendu est eau.",
+                "answers": [
+                  {
+                    "content": "eau",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les sels minéraux voyagent dissous dans un liquide."
+              },
+              {
+                "content": "Quel apport donne des sels minéraux à la terre d'un potager ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Chercher : on cherche ce qui apporte des sels minéraux. Étape 4 — Conclure : le compost, le fumier et l'engrais en apportent. Le sable lavé et l'eau seule n'en apportent pas ; le carton noir joue sur la lumière.",
+                "answers": [
+                  {
+                    "content": "Le compost",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sable lavé",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau de pluie seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un carton noir",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce que le jardinier ajoute à la terre."
+              },
+              {
+                "content": "Plus la température est élevée, plus la plante grandit vite, sans limite.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Comparer : à 40 °C, les plants flétrissent. Étape 4 — Conclure : une température excessive gêne la croissance. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au lot à 40 °C."
+              },
+              {
+                "content": "Un lot de piment en sol pauvre a des plants petits aux feuilles jaunes. Le facteur concerné est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer : plants petits et feuilles jaunes. Étape 3 — Chercher : le sol est pauvre, donc il manque des sels minéraux. Étape 4 — Conclure : ce facteur est insuffisant.",
+                "answers": [
+                  {
+                    "content": "Les sels minéraux, insuffisants",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lumière, excessive",
+                    "correct": false
+                  },
+                  {
+                    "content": "La température, favorable",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau, excessive",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un sol pauvre manque de quoi ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire des expériences sur les sels minéraux et la température",
+              "statement": "Dans cet exercice, tu lis des expériences du potager pour trouver le rôle des sels minéraux et de la température.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un lot de haricot en sable lavé arrosé d'eau avec engrais mesure 30 cm. Un lot en sable lavé arrosé d'eau seule mesure 14 cm, feuilles jaunes. Quel facteur explique l'écart ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : le facteur étudié est l'apport de sels minéraux. Étape 2 — Comparer : 30 cm contre 14 cm, feuilles vertes contre jaunes. Étape 3 — Chercher : seul l'apport de sels minéraux diffère. Étape 4 — Conclure : les sels minéraux sont favorables.",
+                  "answers": [
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La quantité d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de plants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois lots de haricot ont été gardés dans trois pièces à 12 °C, 28 °C et 40 °C. Après 28 jours, ils mesurent 10 cm, 30 cm et 6 cm (flétri). Quel lot a la température la plus favorable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : 10 cm, 30 cm et 6 cm. Étape 3 — Chercher : seule la température change. Étape 4 — Conclure : 28 °C est favorable, 12 °C est insuffisant et 40 °C est excessif. Dire que la température n'agit pas oublie l'écart des mesures.",
+                  "answers": [
+                    {
+                      "content": "Le lot à 28 °C",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot à 12 °C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot à 40 °C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun, la température n'agit pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À 12 °C, la température est un facteur excessif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : à 12 °C, la température est trop basse, donc insuffisante, et la croissance est lente. Un facteur excessif est trop fort. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le compost est ajouté à la terre pour lui apporter des ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : le compost est ajouté à la terre du lot témoin. Étape 4 — Conclure : il apporte des sels minéraux. Les deux autres réponses ne sont pas des apports du sol.",
+                  "answers": [
+                    {
+                      "content": "sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "cartons",
+                      "correct": false
+                    },
+                    {
+                      "content": "rayons de soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aminata dit : « Il faisait 40 °C dans la pièce, donc le lot a poussé plus vite ». A-t-elle raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : le lot à 40 °C mesure 6 cm et a flétri. Étape 4 — Conclure : la chaleur excessive est un facteur excessif. Croire que plus chaud est toujours mieux est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Non, une chaleur excessive fait flétrir les plants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, plus chaud donne toujours plus de croissance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car le lot est resté au sec",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car la température n'agit jamais",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Sols riches, sols pauvres et températures",
+              "statement": "Dans cet exercice, tu utilises les sels minéraux et la température pour expliquer l'aspect de plants du jardin potager.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un lot de haricot en sable lavé arrosé d'eau avec engrais mesure 30 cm à J28. Un lot en sable lavé arrosé d'eau seule mesure 14 cm. Quelle est la différence de hauteur entre les deux lots ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer les mesures : 30 cm et 14 cm. Étape 4 — Conclure : la différence est 30 − 14 = 16 cm. Répondre 44 additionne les deux hauteurs au lieu de les comparer.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Relie chaque lot à son facteur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire les conditions de chaque lot. Étape 4 — Conclure : le sable lavé manque de sels minéraux (insuffisant), 12 °C est trop bas (insuffisant), 40 °C est trop haut (excessif), le compost en apporte (favorable).",
+                  "answers": [
+                    {
+                      "content": "Sable lavé, eau seule",
+                      "match": "Sels minéraux insuffisants"
+                    },
+                    {
+                      "content": "12 °C",
+                      "match": "Température insuffisante"
+                    },
+                    {
+                      "content": "40 °C",
+                      "match": "Température excessive"
+                    },
+                    {
+                      "content": "Sable lavé, eau avec engrais",
+                      "match": "Sels minéraux favorables"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels apports enrichissent le sol en sels minéraux ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Chercher : le compost, le fumier et l'engrais apportent des sels minéraux. Le sable lavé et l'eau pure n'en apportent pas. Étape 4 — Conclure : ces trois apports sont favorables.",
+                  "answers": [
+                    {
+                      "content": "Le compost",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fumier",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'engrais",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sable lavé",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau pure seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sol pauvre en sels minéraux donne des plants petits aux feuilles jaunes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : le lot en sable lavé est petit, aux feuilles jaunes. Étape 4 — Conclure : un sol pauvre est un facteur insuffisant. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À 12 °C, la croissance du haricot est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Comparer : le lot à 12 °C mesure 10 cm, contre 30 cm à 28 °C. Étape 4 — Conclure : une température trop basse ralentit la croissance, elle est lente.",
+                  "answers": [
+                    {
+                      "content": "lente",
+                      "correct": true
+                    },
+                    {
+                      "content": "ralentie",
+                      "correct": true
+                    },
+                    {
+                      "content": "faible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une expérience, des lots de haricot mesurent 10 cm à 12 °C, 30 cm à 28 °C et 6 cm (flétri) à 40 °C. Quelle est la température la plus favorable à la croissance du haricot ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : trop bas, croissance lente ; trop haut, plants flétris ; entre les deux, la meilleure croissance. Étape 4 — Conclure : la température modérée est favorable.",
+                  "answers": [
+                    {
+                      "content": "Une température modérée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une température très basse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une température très élevée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes donnent le même résultat",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare toujours le lot du protocole au lot témoin avant de nommer le facteur."
+            }
+          ]
+        },
+        {
+          "name": "Lire un tableau et une courbe de croissance",
+          "remember": "Pour suivre la croissance d'un plant, on mesure sa **hauteur** à des dates régulières (J0, J7, J14…). Les mesures se notent dans un **tableau**, puis se tracent en **courbe** : le temps est en bas, la hauteur est sur le côté. Une courbe qui monte montre que la plante grandit ; une courbe plate montre qu'elle ne grandit plus. La **croissance** entre deux dates est la hauteur finale moins la hauteur de départ. Les mesures de ce cours sont des valeurs illustratives.",
+          "method": [
+            "Lire le titre, le temps et la grandeur mesurée avec son unité.",
+            "Relever les valeurs utiles : la hauteur au départ et à la date voulue.",
+            "Calculer la croissance : hauteur finale moins hauteur de départ.",
+            "Comparer les lots puis conclure en nommant le facteur."
+          ],
+          "example": {
+            "statement": "Awa mesure un plant de haricot arrosé (lot témoin) et un plant non arrosé (lot test), en centimètres. Lot témoin : J0 5, J7 9, J14 15, J21 22, J28 30. Lot test : J0 5, J7 7, J14 8, J21 8, J28 8. Calculer la croissance de chaque plant entre J0 et J28, puis conclure.",
+            "steps": [
+              "Lire : les mesures sont des hauteurs en centimètres, prises de J0 à J28 ; le facteur qui change est l'arrosage.",
+              "Relever : lot témoin 5 cm à J0 et 30 cm à J28 ; lot test 5 cm à J0 et 8 cm à J28.",
+              "Calculer : lot témoin 30 − 5 = 25 cm ; lot test 8 − 5 = 3 cm.",
+              "Comparer : 25 cm est bien plus que 3 cm. Conclure : l'eau est nécessaire à la croissance."
+            ]
+          },
+          "pitfall": "Ne pas confondre la hauteur à une date et la croissance. Contre-exemple : le plant du lot témoin mesure 30 cm à J28, mais il mesurait déjà 5 cm à J0. Sa croissance n'est pas 30 cm : c'est 30 − 5 = 25 cm.",
+          "figure": "courbe-lot-temoin",
+          "practice": {
+            "statement": "Tu t'entraînes à lire un tableau de mesures, à calculer une croissance et à conclure, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un plant de maïs mesure 6 cm à J0 et 20 cm à J21. Quelle est sa croissance entre J0 et J21 ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : les mesures sont des hauteurs en cm. Étape 2 — Relever : 6 cm à J0 et 20 cm à J21. Étape 3 — Calculer : 20 − 6 = 14 cm.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Hauteur finale moins hauteur de départ.",
+                "unit": "cm"
+              },
+              {
+                "content": "Sur une courbe de croissance, le temps est placé ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire : on lit d'abord le temps, placé en bas de la courbe, et la hauteur, placée sur le côté, avec l'unité. Les autres places sont fausses.",
+                "answers": [
+                  {
+                    "content": "en bas",
+                    "correct": true
+                  },
+                  {
+                    "content": "sur le côté",
+                    "correct": false
+                  },
+                  {
+                    "content": "au centre",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les dates J0, J7, J14 sont écrites sous la courbe."
+              },
+              {
+                "content": "Une courbe de croissance plate montre que le plant ne grandit plus.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever : les valeurs ne changent plus entre deux dates. Étape 3 — Calculer : la croissance est nulle. Étape 4 — Conclure : le plant ne grandit plus. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une courbe plate a toujours la même hauteur."
+              },
+              {
+                "content": "Un plant mesure 5 cm à J0 et 30 cm à J28. Quelle est sa croissance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever : 5 cm au départ et 30 cm à J28. Étape 3 — Calculer : 30 − 5 = 25 cm. Répondre 30 cm confond hauteur et croissance (piège) ; 35 cm additionne au lieu de soustraire.",
+                "answers": [
+                  {
+                    "content": "25 cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "30 cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "35 cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "5 cm",
+                    "correct": false
+                  }
+                ],
+                "hint": "Ne prends pas la hauteur finale seule."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire un tableau et une courbe de croissance du haricot",
+              "statement": "Dans cet exercice, tu lis les mesures d'un plant de haricot du lot témoin : J0 5 cm, J7 9 cm, J14 15 cm, J21 22 cm, J28 30 cm.",
+              "exercise_type": "fixation",
+              "figure": "courbe-lot-temoin",
+              "questions": [
+                {
+                  "content": "D'après les mesures du lot témoin (J0 5 cm ; J28 30 cm), quelle est la croissance entre J0 et J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : hauteurs en cm de J0 à J28. Étape 2 — Relever : 5 cm à J0 et 30 cm à J28. Étape 3 — Calculer : 30 − 5 = 25 cm. Répondre 30 cm est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le plant du lot témoin mesure 15 cm à J14 et 22 cm à J21. De combien grandit-il pendant cette semaine ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : 15 cm à J14 et 22 cm à J21. Étape 3 — Calculer : 22 − 15 = 7 cm. Répondre 22 cm confond hauteur et croissance.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le plant du lot témoin mesure 5, 9, 15, 22 puis 30 cm à J0, J7, J14, J21, J28. Que dit la courbe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la hauteur augmente avec le temps. Étape 2 — Relever : les gains par semaine sont 4, 6, 7 puis 8 cm. Étape 4 — Conclure : la courbe monte de plus en plus vite. Une courbe plate se verrait avec des hauteurs égales.",
+                  "answers": [
+                    {
+                      "content": "Elle monte de plus en plus vite : le plant grandit bien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est plate : le plant ne grandit plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle descend : le plant raccourcit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne dit rien sur la croissance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La croissance du plant entre J0 et J28 est de 30 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : le plant mesurait déjà 5 cm à J0. Étape 3 — Calculer : la croissance est 30 − 5 = 25 cm, pas 30 cm. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre J7 et J14, le plant passe de 9 cm à 15 cm : il grandit de ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever : 9 cm à J7 et 15 cm à J14. Étape 3 — Calculer : 15 − 9 = 6 cm. La réponse est 6.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer des lots à partir de leurs mesures",
+              "statement": "Dans cet exercice, tu compares des lots de haricot du potager à partir de leurs mesures à J28 : lot témoin 30 cm, lot sans eau 8 cm, lot sans sels minéraux 14 cm, lot trop froid 12 cm. Tous les plants mesuraient 5 cm à J0.",
+              "exercise_type": "fixation",
+              "figure": "hauteur-a-j28",
+              "questions": [
+                {
+                  "content": "Quelle est la croissance du lot sans eau entre J0 (5 cm) et J28 (8 cm) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : hauteurs en cm. Étape 2 — Relever : 5 cm à J0 et 8 cm à J28. Étape 3 — Calculer : 8 − 5 = 3 cm.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la croissance du lot sans sels minéraux entre J0 (5 cm) et J28 (14 cm) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : 5 cm à J0 et 14 cm à J28. Étape 3 — Calculer : 14 − 5 = 9 cm. Répondre 14 cm est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "À J28, quel lot a la plus petite hauteur parmi : témoin 30 cm, sans eau 8 cm, sans sels 14 cm, trop froid 12 cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : 30, 8, 14 et 12 cm. Étape 4 — Comparer les lots : 8 cm est la plus petite valeur, celle du lot sans eau.",
+                  "answers": [
+                    {
+                      "content": "Le lot sans eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot témoin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot sans sels minéraux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot trop froid",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Classe les lots du plus grand au plus petit à J28.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever les hauteurs : 30, 14, 12 et 8 cm. Étape 4 — Comparer : on range de la plus grande valeur à la plus petite.",
+                  "answers": [
+                    {
+                      "content": "Lot témoin (30 cm)"
+                    },
+                    {
+                      "content": "Lot sans sels minéraux (14 cm)"
+                    },
+                    {
+                      "content": "Lot trop froid (12 cm)"
+                    },
+                    {
+                      "content": "Lot sans eau (8 cm)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les propositions suivantes, quels lots grandissent moins que le lot témoin à cause d'un facteur insuffisant ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Comparer et conclure : le lot sans eau (8 cm) et le lot sans sels minéraux (14 cm) sont plus petits que le témoin (30 cm) car un facteur leur manque. Le lot témoin reçoit toutes les conditions favorables.",
+                  "answers": [
+                    {
+                      "content": "Le lot sans eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot sans sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot témoin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun lot",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot trop froid a grandi autant que le lot témoin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : 12 cm contre 30 cm à J28. Étape 4 — Comparer : le lot trop froid est bien plus petit, car la température est insuffisante. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule d'abord la croissance de chaque lot, puis compare-les au lot témoin."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le maïs de la classe de 6ème A",
+          "statement": "Dans le jardin potager de l'école, la classe de 6ème A pense que l'eau est utile à la croissance du maïs. Les élèves préparent deux lots de 6 plants de maïs de 5 cm, dans la même terre, au soleil. Le lot A est arrosé deux fois par semaine ; le lot B n'est pas arrosé. À J21, les plants du lot A mesurent 20 cm avec des feuilles vertes ; ceux du lot B mesurent 7 cm avec des feuilles molles et penchées. Valeurs illustratives.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le facteur étudié dans cette expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer ce qui change entre les lots. 2. Écarter ce qui est identique. Ici les lots sont dans la même terre, au soleil : seul l'arrosage change, donc le facteur est l'eau. La lumière et les sels minéraux sont identiques dans les deux lots.",
+              "answers": [
+                {
+                  "content": "L'eau",
+                  "correct": true
+                },
+                {
+                  "content": "La lumière",
+                  "correct": false
+                },
+                {
+                  "content": "Les sels minéraux",
+                  "correct": false
+                },
+                {
+                  "content": "La température",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le lot témoin ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Le lot témoin reçoit les conditions favorables. 2. Le lot test voit changer le facteur étudié. Le lot A reçoit l'eau : c'est le témoin. Le lot B, privé d'eau, est le lot test.",
+              "answers": [
+                {
+                  "content": "Le lot A, qui est arrosé",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot B, qui n'est pas arrosé",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux lots",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun des deux lots",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la croissance du lot A entre J0 (5 cm) et J21 (20 cm) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1. Relever la hauteur de départ, 5 cm, et la hauteur finale, 20 cm. 2. Calculer la croissance : 20 − 5 = 15 cm. Répondre 20 cm confond hauteur et croissance.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Les feuilles molles et penchées du lot B montrent que ces plants manquent d'eau.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Comparer l'aspect des deux lots : vert au lot A, mou et penché au lot B. 2. Relier la différence au seul facteur qui change, l'eau. 3. Conclure : le lot B manque d'eau. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la conclusion de la classe.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Repérer le facteur qui change. 2. Comparer les mesures. 3. Relier l'écart au facteur. 4. Conclure sur le besoin de la plante. Chaque phrase de la conclusion suit ces quatre étapes.",
+              "answers": [
+                {
+                  "content": "Les lots ne diffèrent que par l'arrosage"
+                },
+                {
+                  "content": "Le lot A mesure 20 cm, le lot B 7 cm"
+                },
+                {
+                  "content": "L'écart vient donc de l'eau"
+                },
+                {
+                  "content": "Le maïs a besoin d'eau pour croître"
+                }
+              ]
+            }
+          ],
+          "hint": "Commence par repérer le seul facteur qui change entre les deux lots."
+        },
+        {
+          "title": "Un lot dans le placard",
+          "statement": "Fatou garde un lot de 5 plants de piment dans un placard fermé pendant 14 jours, arrosé comme le lot de 5 plants laissé au soleil (même sol, lot témoin). Dans le placard, les plants sont jaune pâle, avec une tige fine et fragile. Au soleil, ils sont verts et solides. Fatou veut aussi savoir si le compost aide : elle met aussi au soleil deux lots en sable lavé : l'un arrosé d'eau avec engrais, l'autre d'eau seule. Les plants arrosés d'eau seule sont petits, aux feuilles jaunes. Valeurs illustratives.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel facteur manque aux plants du placard ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer le facteur qui change : les lots sont arrosés pareil, seule la lumière change. 2. Comparer : pâles et fins contre verts et solides. 3. Relier l'aspect à la lumière. L'eau est la même dans les deux lots.",
+              "answers": [
+                {
+                  "content": "La lumière",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau",
+                  "correct": false
+                },
+                {
+                  "content": "Les sels minéraux",
+                  "correct": false
+                },
+                {
+                  "content": "La chaleur seule",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les deux signes d'un plant privé de lumière ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Comparer l'aspect des plants du placard. 2. Relever les signes : feuilles jaune pâle et tige fine et fragile. Les feuilles molles et penchées sont le signe d'un manque d'eau, pas de lumière.",
+              "answers": [
+                {
+                  "content": "Des feuilles jaune pâle",
+                  "correct": true
+                },
+                {
+                  "content": "Une tige fine et fragile",
+                  "correct": true
+                },
+                {
+                  "content": "Des feuilles molles et penchées",
+                  "correct": false
+                },
+                {
+                  "content": "Des feuilles vert foncé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le lot en sable lavé, arrosé à l'eau seule, est petit avec des feuilles jaunes. Quel facteur est insuffisant ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Lire le protocole : le sable lavé et l'eau seule n'apportent pas de sels minéraux. 2. Comparer : plants petits et feuilles jaunes. 3. Conclure : les sels minéraux sont insuffisants. La lumière est la même qu'au lot témoin.",
+              "answers": [
+                {
+                  "content": "Les sels minéraux",
+                  "correct": true
+                },
+                {
+                  "content": "La lumière",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau",
+                  "correct": false
+                },
+                {
+                  "content": "La taille du pot",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les feuilles jaunes du lot en sable lavé sont dues au manque de lumière.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Repérer : le lot en sable lavé est au soleil, la lumière est la même que pour le lot témoin. 2. Relier : l'écart vient des sels minéraux. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour apporter des sels minéraux au sol, un jardinier ajoute du ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Chercher ce qui apporte des sels minéraux. 2. Conclure : le compost et le fumier enrichissent le sol. Le mot attendu est compost (ou fumier).",
+              "answers": [
+                {
+                  "content": "compost",
+                  "correct": true
+                },
+                {
+                  "content": "fumier",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Quatre lots de haricot à J28",
+          "statement": "Au potager, Seydou prépare quatre lots de haricot de 5 cm à J0 : un lot témoin (eau, lumière, sable lavé arrosé d'eau avec engrais, température modérée), un lot sans eau, un lot en sable lavé arrosé d'eau seule (sans sels minéraux) et un lot gardé au frais (température trop basse). Il note la hauteur à J28 : 30 cm, 8 cm, 14 cm et 12 cm. Valeurs illustratives.",
+          "exercise_type": "evaluation",
+          "figure": "hauteur-a-j28",
+          "questions": [
+            {
+              "content": "D'après les mesures, quel lot a grandi le plus ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Relever les hauteurs à J28 : 30, 8, 14 et 12 cm. 2. Comparer. 3. Conclure : 30 cm est la plus grande valeur, celle du lot témoin.",
+              "answers": [
+                {
+                  "content": "Le lot témoin",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot sans eau",
+                  "correct": false
+                },
+                {
+                  "content": "Le lot sans sels minéraux",
+                  "correct": false
+                },
+                {
+                  "content": "Le lot gardé au frais",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la croissance du lot gardé au frais entre J0 et J28 ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1. Relever 5 cm à J0 et 12 cm à J28. 2. Calculer : 12 − 5 = 7 cm. Répondre 12 cm confond hauteur et croissance.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Relie chaque lot à son facteur étudié.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Lire le protocole de chaque lot. 2. Repérer le facteur qui est modifié. Le lot sans eau étudie l'eau, le sable lavé étudie les sels minéraux, le lot au frais étudie la température, et le témoin garde toutes les conditions favorables.",
+              "answers": [
+                {
+                  "content": "Lot sans eau",
+                  "match": "L'eau"
+                },
+                {
+                  "content": "Lot en sable lavé",
+                  "match": "Les sels minéraux"
+                },
+                {
+                  "content": "Lot gardé au frais",
+                  "match": "La température"
+                },
+                {
+                  "content": "Lot témoin",
+                  "match": "Aucun : toutes les conditions sont favorables"
+                }
+              ]
+            },
+            {
+              "content": "Le lot sans eau a grandi de 3 cm entre J0 et J28.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Relever 5 cm à J0 et 8 cm à J28. 2. Calculer : 8 − 5 = 3 cm. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Seydou conclut : « Tous les lots tests ont moins grandi que le témoin, donc chaque facteur étudié agit sur la croissance ». Cette conclusion est :",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Comparer chaque lot test au témoin : 8, 14 et 12 cm contre 30 cm. 2. Vérifier que chaque lot test ne change qu'un facteur. 3. Conclure : l'eau, les sels minéraux et la température modérée sont favorables à la croissance : chaque facteur étudié agit sur la croissance. Les autres réponses contredisent les mesures.",
+              "answers": [
+                {
+                  "content": "Juste, car un seul facteur change à chaque fois",
+                  "correct": true
+                },
+                {
+                  "content": "Fausse, car il n'y a qu'un lot test",
+                  "correct": false
+                },
+                {
+                  "content": "Fausse, car le témoin a grandi le moins",
+                  "correct": false
+                },
+                {
+                  "content": "Juste, car tous les lots ont la même hauteur",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Pour chaque lot test, nomme le seul facteur qui change et compare-le au témoin."
+        },
+        {
+          "title": "Enquête au potager : la croissance du haricot",
+          "statement": "Pendant 28 jours, les élèves de 6ème B étudient deux facteurs sur des plants de haricot de 5 cm. Expérience 1 : un lot est arrosé et l'autre ne l'est pas (même lumière, même terre). Les hauteurs du lot non arrosé sont 5, 7, 8, 8 et 8 cm à J0, J7, J14, J21 et J28 ; le lot arrosé atteint 30 cm. Expérience 2 : un lot en sable lavé arrosé d'eau avec engrais atteint 30 cm et un lot en sable lavé arrosé d'eau seule atteint 14 cm à J28. Valeurs illustratives.",
+          "exercise_type": "evaluation",
+          "figure": "courbe-lot-sans-eau",
+          "questions": [
+            {
+              "content": "Dans l'expérience 1, que montre la courbe du lot non arrosé ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Lire la courbe : hauteurs 5, 7, 8, 8, 8 cm. 2. Comparer : la hauteur ne change plus après J14. 3. Conclure : la croissance s'arrête, faute d'eau.",
+              "answers": [
+                {
+                  "content": "Le plant ne grandit presque plus après J14",
+                  "correct": true
+                },
+                {
+                  "content": "Le plant grandit de plus en plus vite",
+                  "correct": false
+                },
+                {
+                  "content": "Le plant raccourcit",
+                  "correct": false
+                },
+                {
+                  "content": "Le plant dépasse le lot arrosé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la croissance du lot arrosé entre J0 (5 cm) et J28 (30 cm) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1. Relever 5 cm et 30 cm. 2. Calculer : 30 − 5 = 25 cm. Répondre 30 cm confond hauteur et croissance.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "De combien de centimètres le lot arrosé d'eau avec engrais dépasse-t-il le lot arrosé d'eau seule à J28 ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1. Relever 30 cm et 14 cm. 2. Calculer l'écart : 30 − 14 = 16 cm. Répondre 44 additionne les hauteurs au lieu de les comparer.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Quelles conclusions sont justes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Expérience 1 : seul l'arrosage change, l'écart vient de l'eau. 2. Expérience 2 : seul l'apport de sels minéraux change, l'écart vient des sels minéraux. 3. Ces expériences n'ont pas étudié la lumière ni la température : on ne peut rien conclure sur elles.",
+              "answers": [
+                {
+                  "content": "L'eau est nécessaire à la croissance du haricot",
+                  "correct": true
+                },
+                {
+                  "content": "Les sels minéraux sont favorables à la croissance du haricot",
+                  "correct": true
+                },
+                {
+                  "content": "La lumière est inutile au haricot",
+                  "correct": false
+                },
+                {
+                  "content": "La température n'agit pas sur le haricot",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la démarche de l'expérience 2.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Formuler l'hypothèse. 2. Choisir un seul facteur. 3. Préparer le lot témoin et le lot test. 4. Mesurer aux mêmes dates. 5. Comparer et conclure. Ces cinq étapes sont celles de la fiche sur l'expérience avec témoin.",
+              "answers": [
+                {
+                  "content": "Formuler l'hypothèse sur les sels minéraux"
+                },
+                {
+                  "content": "Choisir un seul facteur : les sels minéraux"
+                },
+                {
+                  "content": "Préparer deux lots en sable lavé, l'un avec engrais, l'autre à l'eau seule"
+                },
+                {
+                  "content": "Mesurer les plants à J28"
+                },
+                {
+                  "content": "Comparer les lots et conclure"
+                }
+              ]
+            }
+          ],
+          "hint": "Reprends les étapes de la fiche sur l'expérience avec témoin."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur les facteurs de croissance",
+          "notions": "Facteurs de croissance, lot témoin et lot test, rôle de l'eau et de la lumière, rôle des sels minéraux et de la température, lecture de mesures et calcul d'une croissance.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au potager de l'école, les élèves veulent savoir quelles conditions aident le haricot à grandir. Ils comparent des lots de plants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Retenir le vocabulaire de la fiche : le facteur est la condition étudiée, le témoin est de référence, le test change un facteur, la croissance est l'augmentation de taille.",
+                  "answers": [
+                    {
+                      "content": "Facteur de croissance",
+                      "match": "Condition dont dépend la croissance"
+                    },
+                    {
+                      "content": "Lot témoin",
+                      "match": "Lot dans les conditions favorables"
+                    },
+                    {
+                      "content": "Lot test",
+                      "match": "Lot où un seul facteur change"
+                    },
+                    {
+                      "content": "Croissance",
+                      "match": "Augmentation de la taille de la plante"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois facteurs de croissance d'une plante ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Retenir les quatre facteurs de la leçon : l'eau, la lumière, les sels minéraux et la température. Le nom du pot et le nombre d'élèves n'agissent pas sur la plante.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La température",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nom du pot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'élèves",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une expérience, on peut changer plusieurs facteurs à la fois sans problème.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Si deux facteurs changent, on ne sait pas lequel explique l'écart. Étape 2 — Dans une expérience avec témoin, un seul facteur change. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot qui reçoit toutes les conditions favorables est le lot ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Le lot témoin sert de référence : il reçoit toutes les conditions favorables. Le mot attendu est témoin.",
+                  "answers": [
+                    {
+                      "content": "témoin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le bon ordre pour commencer une expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Formuler l'hypothèse. Étape 2 — Choisir un seul facteur. Mesurer, comparer et conclure viennent après la préparation des lots.",
+                  "answers": [
+                    {
+                      "content": "Formuler l'hypothèse, puis choisir un seul facteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mesurer les plants, puis formuler l'hypothèse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Conclure, puis préparer les lots",
+                      "correct": false
+                    },
+                    {
+                      "content": "Comparer les lots, puis choisir le facteur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Reprends le vocabulaire de la fiche sur l'expérience avec témoin."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Awa observe deux lots de maïs de même âge. Le lot A est arrosé et au soleil. Le lot B est arrosé mais gardé dans une boîte fermée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le facteur étudié ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer ce qui change : les deux lots sont arrosés, seule la lumière change. Le facteur est la lumière.",
+                  "answers": [
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux signes des plants du lot B ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Comparer : un plant privé de lumière est pâle, fin et fragile. Les signes vert foncé et tige solide sont ceux du lot A.",
+                  "answers": [
+                    {
+                      "content": "Feuilles jaune pâle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tige fine et fragile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Feuilles vert foncé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tige solide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot B manque d'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Les deux lots sont arrosés. Étape 3 — L'écart vient de la lumière, pas de l'eau. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plant qui manque d'eau a des feuilles ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Un plant sans eau flétrit : feuilles molles et penchées. Jaune pâle est le signe d'un manque de lumière.",
+                  "answers": [
+                    {
+                      "content": "molles et penchées",
+                      "correct": true
+                    },
+                    {
+                      "content": "jaune pâle et fines",
+                      "correct": false
+                    },
+                    {
+                      "content": "vert foncé et dressées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plante qui manque d'eau ___ : sa croissance s'arrête.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Sans eau, la plante flétrit (ou fane) et sa croissance s'arrête.",
+                  "answers": [
+                    {
+                      "content": "flétrit",
+                      "correct": true
+                    },
+                    {
+                      "content": "fane",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Distingue les signes du manque d'eau et du manque de lumière."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Koffi compare des lots de haricot. Lot 1 : sable lavé, eau avec engrais. Lot 2 : sable lavé, eau seule. Lot 3 : sable lavé, eau avec engrais, mais température de 12 °C. Les lots 1 et 2 sont à 28 °C. Hauteurs à J28 : lot 1 30 cm, lot 2 14 cm, lot 3 10 cm.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel facteur explique l'écart entre le lot 1 et le lot 2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : les lots 1 et 2 sont à 28 °C et ne diffèrent que par le sol. Étape 3 — L'écart vient des sels minéraux.",
+                  "answers": [
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "La température",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel facteur explique l'écart entre le lot 1 et le lot 3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : les lots 1 et 3 ont le même sol et le même engrais ; seule la température change. Étape 3 — L'écart vient de la température.",
+                  "answers": [
+                    {
+                      "content": "La température",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À 12 °C, la température est favorable à la croissance du haricot.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — À 12 °C, le lot mesure 10 cm contre 30 cm à 28 °C : la température est insuffisante. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le compost apporte au sol des ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Le compost enrichit le sol. Étape 4 — Il apporte des sels minéraux.",
+                  "answers": [
+                    {
+                      "content": "sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "rayons de soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "cartons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la différence de hauteur entre les lots 1 et 3 à J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : 30 cm et 10 cm. Étape 4 — La différence est 30 − 10 = 20 cm.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                }
+              ],
+              "hint": "Pour chaque comparaison, cherche le seul facteur qui change entre les deux lots."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Yao note la hauteur d'un plant de haricot arrosé : J0 5 cm, J7 9 cm, J14 15 cm, J21 22 cm, J28 30 cm.",
+              "exercise_type": "evaluation",
+              "figure": "courbe-lot-temoin",
+              "questions": [
+                {
+                  "content": "Quelle est la croissance du plant entre J0 et J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : hauteurs en cm. Étape 2 — Relever 5 cm et 30 cm. Étape 3 — Calculer : 30 − 5 = 25 cm. Répondre 30 cm est une erreur.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la croissance entre J14 et J21 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever 15 cm et 22 cm. Étape 3 — Calculer : 22 − 15 = 7 cm.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Pendant quelle semaine le plant grandit-il le plus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer les gains : 4, 6, 7 et 8 cm. Le plus grand gain, 8 cm, est entre J21 et J28.",
+                  "answers": [
+                    {
+                      "content": "Entre J21 et J28",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre J0 et J7",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre J7 et J14",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre J14 et J21",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La courbe de ce plant monte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Les hauteurs augmentent à chaque date : la courbe monte. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La croissance est la hauteur ___ moins la hauteur de départ.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — La croissance est la hauteur finale moins la hauteur de départ.",
+                  "answers": [
+                    {
+                      "content": "finale",
+                      "correct": true
+                    },
+                    {
+                      "content": "moyenne",
+                      "correct": false
+                    },
+                    {
+                      "content": "du témoin",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "La croissance se calcule par une soustraction."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Le jardin d'une famille ivoirienne",
+          "notions": "Facteurs de croissance dans des situations de la vie courante : arrosage en saison sèche, compost et coût, plants placés à l'ombre, suivi des mesures d'un jardin familial.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Mme Adjoua cultive des piments dans le jardin de sa famille. Pendant la saison sèche, elle oublie d'arroser une partie de ses plants pendant deux semaines.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est l'aspect probable des plants non arrosés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Le facteur qui manque est l'eau. Étape 2 — Un plant sans eau flétrit : feuilles molles et penchées. Les autres aspects sont ceux de plants bien arrosés.",
+                  "answers": [
+                    {
+                      "content": "Feuilles molles et penchées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Feuilles vert foncé et dressées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Feuilles rouges et pâles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tige plus solide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Arroser les plants flétris peut aider la plante à reprendre sa croissance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Le manque vient de l'eau. Étape 3 — En rendant l'eau, on rétablit le facteur qui manquait, et la plante peut reprendre sa croissance. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les racines des piments absorbent l'eau et les ___ du sol.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Les racines absorbent l'eau avec les sels minéraux dissous.",
+                  "answers": [
+                    {
+                      "content": "sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "cartons",
+                      "correct": false
+                    },
+                    {
+                      "content": "rayons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Adjoua arrose 12 plants avec 2 litres d'eau chacun. Combien de litres utilise-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Calcul (hors fiche) : 12 plants, 2 litres chacun, donc 12 × 2 = 24 litres. Répondre 14 additionne au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "L"
+                },
+                {
+                  "content": "Les plants non arrosés de Mme Adjoua ___ en saison sèche.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Sans eau, les plants flétrissent (ou fanent).",
+                  "answers": [
+                    {
+                      "content": "flétrissent",
+                      "correct": true
+                    },
+                    {
+                      "content": "fanent",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense au facteur qui manque : l'eau."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au marché d'Abengourou, Koffi achète du compost pour son jardin. Un sac coûte 1 500 F CFA. Il compare des plants de gombo avec compost et sans compost.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Koffi achète 4 sacs de compost. Combien paie-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Calcul (hors fiche) : un sac coûte 1 500 F CFA, il en achète 4, donc 4 × 1 500 = 6 000 F CFA. Répondre 1 504 additionne au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "6000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F CFA"
+                },
+                {
+                  "content": "Pourquoi ajoute-t-il du compost à sa terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Le compost enrichit le sol. Étape 4 — Il apporte des sels minéraux. Il n'apporte ni lumière ni ombre.",
+                  "answers": [
+                    {
+                      "content": "Pour apporter des sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour apporter de la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour apporter de l'ombre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour baisser la température",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plants de gombo en sol pauvre ont en général des feuilles jaunes et restent petits.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Un sol pauvre est un facteur insuffisant. Étape 4 — Les plants restent petits, aux feuilles jaunes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels apports enrichissent le sol ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Le compost et le fumier apportent des sels minéraux. Le sable lavé et l'eau pure n'en apportent pas.",
+                  "answers": [
+                    {
+                      "content": "Le compost",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fumier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sable lavé",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau pure seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de compost est utilisé pour 5 m². Pour 20 m², combien de sacs faut-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Calcul (hors fiche) : 1 sac pour 5 m², donc 20 ÷ 5 = 4 sacs. Répondre 100 multiplie au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "sacs"
+                }
+              ],
+              "hint": "Le compost agit sur les sels minéraux du sol."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Aminata garde des plants de tomate sous un hangar sombre et d'autres devant la maison, au soleil. Tous sont arrosés de la même façon. Après 14 jours, les plants du hangar sont jaune pâle, fins et fragiles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel facteur explique l'état des plants du hangar ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'arrosage est le même, seule la lumière change. Étape 3 — Relier : pâle et fin signale le manque de lumière.",
+                  "answers": [
+                    {
+                      "content": "Le manque de lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le manque d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le manque de terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chaleur excessive",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aminata peut déplacer les plants au soleil pour les aider à retrouver une croissance normale.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Le facteur qui manque est la lumière. Étape 4 — La lui rendre aide la plante. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plants du hangar ont des feuilles de couleur jaune ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Un plant privé de lumière a des feuilles jaune pâle.",
+                  "answers": [
+                    {
+                      "content": "pâle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les feuilles molles et penchées d'un autre plant montrent un manque :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Molles et penchées : signe d'un manque d'eau, pas de lumière. Confondre les deux signes est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "de sels minéraux",
+                      "correct": false
+                    },
+                    {
+                      "content": "de température",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes d'Aminata pour trouver la cause.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Comparer. Étape 3 — Relier. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer le facteur qui change"
+                    },
+                    {
+                      "content": "Comparer l'aspect des plants"
+                    },
+                    {
+                      "content": "Relier l'aspect à la lumière"
+                    },
+                    {
+                      "content": "Conclure : il leur faut de la lumière"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare l'aspect des plants à ce que tu as appris sur le manque de lumière."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans le jardin de la famille Kouassi, Adjoua mesure un plant de gombo : J0 6 cm, J7 10 cm, J14 16 cm, J21 23 cm, J28 31 cm.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est sa croissance entre J0 et J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire des hauteurs en cm. Étape 2 — Relever 6 cm et 31 cm. Étape 3 — Calculer : 31 − 6 = 25 cm.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "De combien grandit-il entre J14 et J21 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever 16 cm et 23 cm. Étape 3 — Calculer : 23 − 16 = 7 cm.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "À J21, quelle est la hauteur du plant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — À J21, le tableau indique 23 cm. 16 cm est la hauteur à J14 et 31 cm à J28.",
+                  "answers": [
+                    {
+                      "content": "23 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "16 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "31 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce plant a grandi de 31 cm entre J0 et J28.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Le plant mesurait déjà 6 cm à J0. La croissance est 31 − 6 = 25 cm. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La courbe tracée avec ces mesures est une courbe qui ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Les hauteurs augmentent à chaque date : la courbe monte.",
+                  "answers": [
+                    {
+                      "content": "monte",
+                      "correct": true
+                    },
+                    {
+                      "content": "descend",
+                      "correct": false
+                    },
+                    {
+                      "content": "reste plate",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Hauteur finale moins hauteur de départ."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Choisir un protocole juste, repérer un facteur qui change, interpréter des mesures, distinguer un fait observé d'une conclusion permise par l'expérience.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois élèves proposent un protocole pour savoir si la lumière agit sur le haricot. Awa : deux lots identiques, l'un au soleil, l'autre sous carton, arrosés pareil. Yao : un lot au soleil arrosé, un lot sous carton non arrosé. Seydou : un lot au soleil, un lot sous carton dans une autre terre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel protocole est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : un seul facteur doit changer. Étape 2 — Awa ne change que la lumière. Yao change aussi l'eau, Seydou change aussi la terre.",
+                  "answers": [
+                    {
+                      "content": "Celui d'Awa",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celui de Yao",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui de Seydou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le protocole de Yao, on peut conclure sur le rôle de la lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — L'eau et la lumière changent ensemble. On ne sait pas laquelle explique l'écart. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels facteurs changent dans le protocole de Yao ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Yao change la lumière et l'arrosage. Dire que rien ne change est faux, et la température n'est pas modifiée.",
+                  "answers": [
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La température seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le protocole de Seydou change la lumière et ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Seydou met un lot dans une autre terre : la terre change avec la lumière.",
+                  "answers": [
+                    {
+                      "content": "la terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "la saison",
+                      "correct": false
+                    },
+                    {
+                      "content": "le nombre d'élèves",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du protocole d'Awa.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Hypothèse. Étape 2 — Un seul facteur. Étape 3 — Lots identiques. Étape 4 — Mesures. Étape 5 — Conclusion.",
+                  "answers": [
+                    {
+                      "content": "Elle pense que la lumière aide le haricot"
+                    },
+                    {
+                      "content": "Elle ne change que la lumière"
+                    },
+                    {
+                      "content": "Elle prépare deux lots identiques"
+                    },
+                    {
+                      "content": "Elle mesure les plants aux mêmes dates"
+                    },
+                    {
+                      "content": "Elle compare et conclut"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compte les facteurs qui changent entre les deux lots de chaque élève."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Kofi met un lot A de maïs au soleil, arrosé, dans le sable lavé, arrosé d'eau seule. Un lot B est au soleil, dans le sable lavé, arrosé d'eau avec engrais. Le lot A mesure 14 cm et le lot B 30 cm à J28. Un camarade dit que la différence vient de la lumière.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que peut-on dire de l'affirmation du camarade ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le protocole : les deux lots sont au soleil. Étape 2 — Seul l'apport de sels minéraux change. Étape 3 — L'écart vient des sels minéraux, pas de la lumière.",
+                  "answers": [
+                    {
+                      "content": "Elle est fausse : la lumière est identique dans les deux lots",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est vraie, car la lumière est importante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est vraie, car le lot A est plus petit",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'écart de hauteur entre les deux lots ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — 30 cm et 14 cm. Étape 3 — 30 − 14 = 16 cm.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quel facteur explique l'écart ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Seul l'apport de sels minéraux change : eau seule contre eau avec engrais. Le facteur est les sels minéraux.",
+                  "answers": [
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La température",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sable lavé arrosé à l'eau seule apporte beaucoup de sels minéraux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Le sable lavé et l'eau seule n'en apportent presque pas. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sol du lot A est pauvre en ___ minéraux.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Le sol du lot A est pauvre en sels minéraux.",
+                  "answers": [
+                    {
+                      "content": "sels",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare les conditions des deux lots avant d'accepter une explication."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Fatou étudie trois lots de haricot de 5 cm : lot 1 (témoin) à 28 °C ; lot 2 à 12 °C ; lot 3 à 28 °C mais non arrosé. À J28, les hauteurs sont 30 cm, 10 cm et 8 cm. Le lot 3 a des feuilles molles et penchées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel lot montre l'effet de la température ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : le lot 2 est le seul qui diffère du témoin par la température.",
+                  "answers": [
+                    {
+                      "content": "Le lot 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois lots",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel lot montre l'effet de l'eau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : le lot 3 est le seul qui diffère du témoin par l'arrosage.",
+                  "answers": [
+                    {
+                      "content": "Le lot 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun lot",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la croissance du lot 2 entre J0 et J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — 5 cm à J0 et 10 cm à J28. Étape 3 — 10 − 5 = 5 cm.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelles conclusions sont permises ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Seuls la température et l'eau ont été étudiées. Sur la lumière et les sels minéraux, ces lots ne permettent aucune conclusion.",
+                  "answers": [
+                    {
+                      "content": "Une température de 12 °C ralentit la croissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sans eau, le haricot ne grandit presque pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière est inutile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sels minéraux sont inutiles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot 3 a grandi moins que le lot 2.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Lot 3 : 8 − 5 = 3 cm. Lot 2 : 10 − 5 = 5 cm. 3 est plus petit que 5. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relie chaque lot au seul facteur qui le distingue du témoin."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au potager, plusieurs élèves donnent leur avis après une expérience sur l'eau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Si deux lots ne diffèrent que par l'arrosage et que le lot arrosé grandit plus que le lot non arrosé, on peut dire que l'eau est nécessaire à la croissance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Les lots ne diffèrent que par l'eau. Étape 2 — L'écart vient de l'eau. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plant qui ne grandit plus a forcément besoin de plus de lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Il peut manquer d'eau, de sels minéraux ou de température adaptée. On cherche le facteur qui change. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On mesure les deux lots à des dates différentes pour gagner du temps.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — On mesure aux mêmes dates, sinon la comparaison est faussée. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot témoin reçoit toutes les conditions favorables.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Le lot témoin sert de référence : toutes les conditions sont favorables. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une température très élevée est toujours la meilleure pour la croissance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — À 40 °C, les plants flétrissent. La meilleure température est modérée. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la règle de chaque fiche avant de répondre."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur les facteurs de croissance",
+          "notions": "Bilan : expérience avec témoin, eau, lumière, sels minéraux, température, lecture et comparaison de mesures et de courbes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans le potager du collège, quatre lots de haricot de 5 cm sont suivis pendant 28 jours : lot témoin, lot sans eau, lot sans sels minéraux, lot trop froid.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque lot à ce qu'il permet d'étudier.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Chaque lot test change un seul facteur. Étape 2 — Le lot témoin garde toutes les conditions favorables : c'est la référence.",
+                  "answers": [
+                    {
+                      "content": "Lot sans eau",
+                      "match": "Le rôle de l'eau"
+                    },
+                    {
+                      "content": "Lot sans sels minéraux",
+                      "match": "Le rôle des sels minéraux"
+                    },
+                    {
+                      "content": "Lot trop froid",
+                      "match": "Le rôle de la température"
+                    },
+                    {
+                      "content": "Lot témoin",
+                      "match": "La référence"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le lot témoin est-il indispensable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Sans témoin, on ne peut pas dire si un écart existe. Étape 2 — On compare chaque lot test au témoin.",
+                  "answers": [
+                    {
+                      "content": "Pour comparer avec les lots tests",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour avoir plus de plants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour supprimer les mesures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour changer plusieurs facteurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot trop froid et le lot sans eau changent le même facteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — L'un change la température, l'autre l'eau. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans chaque lot test, un seul ___ change.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Un seul facteur change à chaque fois.",
+                  "answers": [
+                    {
+                      "content": "facteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels facteurs ces lots permettent-ils d'étudier ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Ces lots étudient l'eau, les sels minéraux et la température. La lumière n'est pas étudiée ici.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La température",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'élèves",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque lot, nomme le facteur qui change."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À J28, les hauteurs des lots de haricot sont : témoin 30 cm, sans eau 8 cm, sans sels minéraux 14 cm, trop froid 12 cm. Tous mesuraient 5 cm à J0.",
+              "exercise_type": "evaluation",
+              "figure": "hauteur-a-j28",
+              "questions": [
+                {
+                  "content": "Quelle est la croissance du lot témoin entre J0 et J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — 30 − 5 = 25 cm.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la croissance du lot sans eau ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — 8 − 5 = 3 cm.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la croissance du lot trop froid ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — 12 − 5 = 7 cm.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quel lot a grandi le moins ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Croissances : 25, 3, 9 et 7 cm. Le plus petit gain, 3 cm, est celui du lot sans eau.",
+                  "answers": [
+                    {
+                      "content": "Le lot sans eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot témoin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot sans sels minéraux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot trop froid",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lot sans sels minéraux a grandi de 14 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Il mesurait déjà 5 cm. Sa croissance est 14 − 5 = 9 cm. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule la croissance de chaque lot avant de comparer."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "La courbe du lot non arrosé donne 5, 7, 8, 8 et 8 cm à J0, J7, J14, J21 et J28. La courbe du lot arrosé donne 5, 9, 15, 22 et 30 cm.",
+              "exercise_type": "evaluation",
+              "figure": "courbe-lot-sans-eau",
+              "questions": [
+                {
+                  "content": "Que montre la courbe du lot non arrosé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 5, 7, 8, 8, 8. Étape 2 — La hauteur est constante après J14. Étape 4 — La croissance s'arrête.",
+                  "answers": [
+                    {
+                      "content": "Le plant ne grandit presque plus à partir de J14",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plant grandit de plus en plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plant raccourcit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plant atteint 30 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la croissance du lot non arrosé entre J0 et J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — 8 − 5 = 3 cm.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la croissance du lot arrosé entre J0 et J28 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — 30 − 5 = 25 cm.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le lot arrosé grandit ___ que le lot non arrosé.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — 25 cm est plus que 3 cm : le lot arrosé grandit plus.",
+                  "answers": [
+                    {
+                      "content": "plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut conclure que l'eau est nécessaire à la croissance du haricot.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Les lots ne diffèrent que par l'eau et l'écart est grand. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare les deux séries de mesures date par date."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pour clore le travail, la classe de 6ème écrit un bilan sur les facteurs de croissance des plantes à fleurs.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels facteurs agissent sur la croissance d'une plante à fleurs ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Les facteurs de la leçon sont l'eau, la lumière, les sels minéraux et la température. La couleur du pot et le nom de l'élève n'agissent pas.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "La couleur du pot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom de l'élève",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche d'une expérience.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Hypothèse. Étape 2 — Un seul facteur. Étape 3 — Lots. Étape 4 — Mesures. Étape 5 — Conclusion.",
+                  "answers": [
+                    {
+                      "content": "Formuler l'hypothèse"
+                    },
+                    {
+                      "content": "Choisir un seul facteur"
+                    },
+                    {
+                      "content": "Préparer lot témoin et lot test"
+                    },
+                    {
+                      "content": "Mesurer aux mêmes dates"
+                    },
+                    {
+                      "content": "Comparer et conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque signe à sa cause.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Chaque signe renvoie à un facteur : l'eau, la lumière, les sels minéraux ou la température.",
+                  "answers": [
+                    {
+                      "content": "Feuilles molles et penchées",
+                      "match": "Manque d'eau"
+                    },
+                    {
+                      "content": "Feuilles jaune pâle, tige fine",
+                      "match": "Manque de lumière"
+                    },
+                    {
+                      "content": "Petit plant, feuilles jaunes en sol pauvre",
+                      "match": "Manque de sels minéraux"
+                    },
+                    {
+                      "content": "Croissance lente à 12 °C",
+                      "match": "Température trop basse"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une température très élevée est toujours la plus favorable à la croissance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — À 40 °C, les plants flétrissent : la température est excessive. Étape 4 — La température la plus favorable est modérée. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La croissance est la hauteur finale moins la hauteur de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Hauteur finale moins hauteur de départ.",
+                  "answers": [
+                    {
+                      "content": "départ",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Reprends l'idée de chaque fiche de la leçon."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

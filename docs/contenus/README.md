@@ -55,7 +55,7 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ### 6ème, 5 premières leçons de chaque matière (chantier `lecons-6eme`)
 
-Depuis le 2026-11-14, les rangs 1 à 5 de la progression DPFC 2026-2027 de 6ème sont rédigés au format v3 complet, comme les 60 leçons de 3ème, à un niveau de langue et de difficulté de 6ème : 4 blocs et 2 exercices par notion (le second en `fixation`, 6 questions d'au moins 4 types), 4 problèmes, 4 sujets de devoir de 4 exercices. Lot A : Mathématiques et Physique-Chimie.
+Depuis le 2026-11-14, les rangs 1 à 5 de la progression DPFC 2026-2027 de 6ème sont rédigés au format v3 complet, comme les 60 leçons de 3ème, à un niveau de langue et de difficulté de 6ème : 4 blocs et 2 exercices par notion (le second en `fixation`, 6 questions d'au moins 4 types), 4 problèmes, 4 sujets de devoir de 4 exercices. Lot A : Mathématiques et Physique-Chimie ; lot B : Français et SVT. Hors Mathématiques et Physique-Chimie, les sujets sont entièrement corrigés automatiquement.
 
 Vérification hors dépôt : format, intitulé et rang de la progression, `valider.rb` sur la leçon et sur chaque sujet, relecture IA indépendante qui refait chaque calcul (sympy) ; les défauts trouvés ont été corrigés. Points à faire valider par un enseignant : [journal du chantier](../chantiers/lecons-6eme/journal.md).
 
@@ -66,11 +66,21 @@ Vérification hors dépôt : format, intitulé et rang de la progression, `valid
 | 3 | `6eme/mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 5 | 28 | 174 |
 | 4 | `6eme/mathematiques/segments.json` | Segments | 3 | 9 | 26 | 146 |
 | 5 | `6eme/mathematiques/paves-droits-et-cylindres-droits.json` | Pavés droits et cylindres droits | 5 | 4 | 30 | 181 |
+| 1 | `6eme/francais/la-phrase.json` | La phrase | 3 | 0 | 26 | 148 |
+| 2 | `6eme/francais/le-dialogue-oral.json` | Le dialogue oral | 5 | 0 | 30 | 174 |
+| 3 | `6eme/francais/la-lettre-personnelle.json` | La lettre personnelle | 3 | 0 | 26 | 153 |
+| 4 | `6eme/francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 5 | 0 | 30 | 195 |
+| 5 | `6eme/francais/orthographe-lexicale.json` | Orthographe lexicale | 4 | 0 | 28 | 177 |
 | 1 | `6eme/physique-chimie/le-circuit-electrique.json` | Le circuit électrique | 4 | 2 | 28 | 160 |
 | 2 | `6eme/physique-chimie/commande-d-un-circuit-electrique.json` | Commande d'un circuit électrique | 4 | 3 | 28 | 162 |
 | 3 | `6eme/physique-chimie/court-circuit-et-protection-des-installations-electriques.json` | Court - circuit et protection des installations électriques | 4 | 4 | 28 | 160 |
 | 4 | `6eme/physique-chimie/solides-et-liquides.json` | Solides et liquides | 4 | 2 | 28 | 159 |
 | 5 | `6eme/physique-chimie/les-gaz.json` | Les gaz | 4 | 3 | 28 | 161 |
+| 1 | `6eme/svt/les-actions-nefastes-de-l-homme-et-leurs-consequences-sur-l-environnement.json` | Les actions néfastes de l'Homme et leurs conséquences sur l'environnement | 4 | 5 | 28 | 158 |
+| 2 | `6eme/svt/la-lutte-contre-la-degradation-de-l-environnement.json` | La lutte contre la dégradation de l'environnement | 4 | 2 | 28 | 158 |
+| 3 | `6eme/svt/les-facteurs-de-croissance-chez-les-plantes-a-fleurs.json` | Les facteurs de croissance chez les plantes à fleurs | 4 | 4 | 28 | 160 |
+| 4 | `6eme/svt/l-influence-des-aliments-sur-la-croissance-des-vertebres.json` | L'influence des aliments sur la croissance des vertébrés | 3 | 3 | 26 | 147 |
+| 5 | `6eme/svt/la-formation-d-une-graine.json` | La formation d'une graine | 3 | 4 | 26 | 144 |
 
 ### 2nde, 3 premières leçons de chaque série et matière, réécrites en v3 complet (chantier `lecons-1ere-2nde-debut`)
 
