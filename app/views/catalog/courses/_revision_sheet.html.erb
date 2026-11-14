@@ -30,7 +30,7 @@
 <% when :sheet %>
   <% content_for :head do %><%= stylesheet_link_tag "course_sheet" %><% end %>
   <%= tag.div data: more_data do %>
-    <%= render "catalog/revision_sheets/sheet", sheet: revision.sheet, cut:, class_gaps:, proposals: %>
+    <%= render "catalog/revision_sheets/sheet", sheet: revision.sheet, cut:, class_gaps:, proposals:, team: current_actor&.team? %>
     <%= controls %>
   <% end %>
 <% when :empty %>
