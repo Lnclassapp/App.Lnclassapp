@@ -8,7 +8,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 30 leçons de 4ème (les 5 premières de la progression dans les mêmes 6 matières), les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 30 leçons de 6ème (les 5 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 30 leçons de 4ème (les 5 premières de la progression dans les mêmes 6 matières), les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
 | [`a-reprendre/`](a-reprendre/) | Les 275 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
@@ -28,7 +28,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `4eme/`, `3eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `6eme/` (rangs 1 à 5), `4eme/`, `3eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
 
 ## Boucle courte : corriger une leçon
 
@@ -52,6 +52,45 @@ Un import ne met jamais à jour l'existant : une fiche de cours déjà présente
 Si la progression a déjà été importée, la fiche de cours de la leçon existe vide, et l'import de la fiche de cours complète sera ignoré. Une fiche de cours ne se supprime pas, et une fiche de cours archivée compte encore comme doublon. Il faut donc **renommer** la fiche de cours vide dans l'écran des fiches de cours (par exemple « Limites et continuité (vide) »), l'archiver, puis importer la fiche de cours complète.
 
 ## Leçons traitées
+
+### 6ème, 5 premières leçons de chaque matière (chantier `lecons-6eme`)
+
+Depuis le 2026-11-14, les rangs 1 à 5 de la progression DPFC 2026-2027 de 6ème sont rédigés au format v3 complet, comme les 60 leçons de 3ème, à un niveau de langue et de difficulté de 6ème : 4 blocs et 2 exercices par notion (le second en `fixation`, 6 questions d'au moins 4 types), 4 problèmes, 4 sujets de devoir de 4 exercices. Lot A : Mathématiques et Physique-Chimie ; lot B : Français et SVT ; lot C : Histoire-Géographie et EDHC. Hors Mathématiques et Physique-Chimie, les sujets sont entièrement corrigés automatiquement.
+
+Vérification hors dépôt : format, intitulé et rang de la progression, `valider.rb` sur la leçon et sur chaque sujet, relecture IA indépendante qui refait chaque calcul (sympy) ; les défauts trouvés ont été corrigés. Points à faire valider par un enseignant : [journal du chantier](../chantiers/lecons-6eme/journal.md).
+
+| Rang | Fichier | Leçon | Notions | Figures | Exercices | Questions |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `6eme/mathematiques/nombres-entiers-naturels.json` | Nombres entiers naturels | 5 | 5 | 30 | 175 |
+| 2 | `6eme/mathematiques/droites-et-points.json` | Droites et points | 5 | 4 | 30 | 180 |
+| 3 | `6eme/mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 5 | 28 | 174 |
+| 4 | `6eme/mathematiques/segments.json` | Segments | 3 | 9 | 26 | 146 |
+| 5 | `6eme/mathematiques/paves-droits-et-cylindres-droits.json` | Pavés droits et cylindres droits | 5 | 4 | 30 | 181 |
+| 1 | `6eme/francais/la-phrase.json` | La phrase | 3 | 0 | 26 | 148 |
+| 2 | `6eme/francais/le-dialogue-oral.json` | Le dialogue oral | 5 | 0 | 30 | 174 |
+| 3 | `6eme/francais/la-lettre-personnelle.json` | La lettre personnelle | 3 | 0 | 26 | 153 |
+| 4 | `6eme/francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 5 | 0 | 30 | 195 |
+| 5 | `6eme/francais/orthographe-lexicale.json` | Orthographe lexicale | 4 | 0 | 28 | 177 |
+| 1 | `6eme/physique-chimie/le-circuit-electrique.json` | Le circuit électrique | 4 | 2 | 28 | 160 |
+| 2 | `6eme/physique-chimie/commande-d-un-circuit-electrique.json` | Commande d'un circuit électrique | 4 | 3 | 28 | 162 |
+| 3 | `6eme/physique-chimie/court-circuit-et-protection-des-installations-electriques.json` | Court - circuit et protection des installations électriques | 4 | 4 | 28 | 160 |
+| 4 | `6eme/physique-chimie/solides-et-liquides.json` | Solides et liquides | 4 | 2 | 28 | 159 |
+| 5 | `6eme/physique-chimie/les-gaz.json` | Les gaz | 4 | 3 | 28 | 161 |
+| 1 | `6eme/svt/les-actions-nefastes-de-l-homme-et-leurs-consequences-sur-l-environnement.json` | Les actions néfastes de l'Homme et leurs conséquences sur l'environnement | 4 | 5 | 28 | 158 |
+| 2 | `6eme/svt/la-lutte-contre-la-degradation-de-l-environnement.json` | La lutte contre la dégradation de l'environnement | 4 | 2 | 28 | 158 |
+| 3 | `6eme/svt/les-facteurs-de-croissance-chez-les-plantes-a-fleurs.json` | Les facteurs de croissance chez les plantes à fleurs | 4 | 4 | 28 | 160 |
+| 4 | `6eme/svt/l-influence-des-aliments-sur-la-croissance-des-vertebres.json` | L'influence des aliments sur la croissance des vertébrés | 3 | 3 | 26 | 147 |
+| 5 | `6eme/svt/la-formation-d-une-graine.json` | La formation d'une graine | 3 | 4 | 26 | 144 |
+| 1 | `6eme/histoire-geographie/histoire-l-histoire-et-son-objet.json` | Histoire — L'histoire et son objet | 4 | 0 | 28 | 156 |
+| 2 | `6eme/histoire-geographie/geographie-la-geographie-et-son-objet.json` | Géographie — La géographie et son objet | 4 | 3 | 28 | 165 |
+| 3 | `6eme/histoire-geographie/histoire-les-sources-de-l-histoire.json` | Histoire — Les sources de l'histoire | 4 | 2 | 28 | 158 |
+| 4 | `6eme/histoire-geographie/geographie-le-relief.json` | Géographie — Le relief | 4 | 4 | 28 | 164 |
+| 5 | `6eme/histoire-geographie/histoire-les-sources-d-information-et-la-dignite-humaine-en-temps-de-guerre-ou-de-violence.json` | Histoire — Les sources d'information et la dignité humaine en temps de guerre ou de violence | 3 | 1 | 26 | 145 |
+| 1 | `6eme/edhc/les-droits-a-la-survie-et-les-droits-a-la-protection-de-l-enfant.json` | Les droits à la survie et les droits à la protection de l'enfant | 4 | 2 | 28 | 159 |
+| 2 | `6eme/edhc/les-droits-humains.json` | Les droits humains | 4 | 2 | 28 | 167 |
+| 3 | `6eme/edhc/le-droit-international-humanitaire-dih.json` | Le droit international humanitaire (DIH) | 4 | 3 | 28 | 160 |
+| 4 | `6eme/edhc/la-constitution.json` | La Constitution | 4 | 3 | 28 | 161 |
+| 5 | `6eme/edhc/le-president-de-la-republique.json` | Le Président de la République | 3 | 1 | 26 | 149 |
 
 ### 2nde, leçons 4 et 5 de chaque série et matière, en v3 complet (chantier `lecons-2nde-4-5`)
 

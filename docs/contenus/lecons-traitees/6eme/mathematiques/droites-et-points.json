@@ -1,0 +1,4010 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Droites et points",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Mathématiques",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "cour-droite",
+          "kind": "geometry",
+          "description": "Le plan de la cour : une droite (d) tracée à la craie passe par les points E et F. Le point H est dans le prolongement, à droite de F, donc sur la droite. Le point G est au-dessus de la droite : il n'est pas dessus. On voit que la droite ne s'arrête pas au bout du trait.",
+          "params": {
+            "points": [
+              {
+                "id": "E",
+                "x": -4,
+                "y": 0
+              },
+              {
+                "id": "F",
+                "x": 2,
+                "y": 0
+              },
+              {
+                "id": "G",
+                "x": 0,
+                "y": 3
+              },
+              {
+                "id": "H",
+                "x": 7,
+                "y": 0
+              }
+            ],
+            "lines": [
+              [
+                "E",
+                "F"
+              ]
+            ],
+            "segments": [
+              [
+                "E",
+                "F"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cour-alignes",
+          "kind": "geometry",
+          "description": "Le jardin de l'école vu de dessus : quatre arbustes A, B, C et D. La craie tracée par A et B est la droite (AB). L'arbuste C est exactement sur cette droite, donc A, B et C sont alignés. L'arbuste D est loin de la droite : A, B et D ne sont pas alignés.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -6,
+                "y": -2
+              },
+              {
+                "id": "B",
+                "x": -2,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": 2,
+                "y": 2
+              },
+              {
+                "id": "D",
+                "x": 0,
+                "y": -3
+              }
+            ],
+            "lines": [
+              [
+                "A",
+                "B"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cour-traces",
+          "kind": "geometry",
+          "description": "Quatre lignes de craie dans la cour. La ligne d1 est horizontale (points A et B). La ligne d2 est verticale (points C et D) et coupe d1 en O à angle droit, marqué par un carré. La ligne d3 est horizontale, plus bas (points E et F), parallèle à d1. La ligne d4 est oblique (points G et H) et coupe d1 sans angle droit.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -8,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 8,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "D",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "E",
+                "x": -8,
+                "y": -4
+              },
+              {
+                "id": "F",
+                "x": 8,
+                "y": -4
+              },
+              {
+                "id": "G",
+                "x": -8,
+                "y": -6
+              },
+              {
+                "id": "H",
+                "x": 4,
+                "y": 6
+              }
+            ],
+            "lines": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "E",
+                "F"
+              ],
+              [
+                "G",
+                "H"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "B",
+                "to": "D",
+                "mark": "right"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "plan-cour",
+          "kind": "geometry",
+          "description": "Le plan de la cour. La droite (AB) est horizontale et longe le préau. Les droites (CD) et (EF) sont verticales, perpendiculaires à (AB), donc parallèles entre elles. (AB) coupe (CD) en I et (EF) en K. Le point G, le puits, est à l'écart des trois droites.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -8,
+                "y": 2
+              },
+              {
+                "id": "B",
+                "x": 8,
+                "y": 2
+              },
+              {
+                "id": "C",
+                "x": -4,
+                "y": -6
+              },
+              {
+                "id": "D",
+                "x": -4,
+                "y": 6
+              },
+              {
+                "id": "E",
+                "x": 2,
+                "y": -6
+              },
+              {
+                "id": "F",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "I",
+                "x": -4,
+                "y": 2
+              },
+              {
+                "id": "K",
+                "x": 2,
+                "y": 2
+              },
+              {
+                "id": "G",
+                "x": 6,
+                "y": -4
+              }
+            ],
+            "lines": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "E",
+                "F"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "I",
+                "from": "B",
+                "to": "D",
+                "mark": "right"
+              },
+              {
+                "vertex": "K",
+                "from": "B",
+                "to": "F",
+                "mark": "right"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Point, droite et appartenance",
+          "remember": "Un **point** se marque par une croix et se nomme par une lettre majuscule : $A$. Une **droite** est tout droit, sans début ni fin : elle se prolonge des deux côtés. On la nomme par deux de ses points, $(AB)$, ou par une lettre minuscule, $(d)$. Par deux points distincts, il passe une seule droite. Si le point $A$ est sur la droite $(d)$, on dit qu'il **appartient** à $(d)$ et on écrit $A \\in (d)$. Sinon, on écrit $A \\notin (d)$.",
+          "method": [
+            "Repérer la droite et le point à étudier.",
+            "Regarder si la droite passe exactement par le point, en la prolongeant avec la règle si besoin.",
+            "Choisir le symbole : $\\in$ si le point est sur la droite, $\\notin$ sinon.",
+            "Écrire la phrase avec le point et la droite bien nommés."
+          ],
+          "example": {
+            "statement": "Dans la cour, Awa trace à la craie la droite $(d)$ qui passe par les points $E$ et $F$. Le point $G$ est marqué à 3 m au-dessus de la craie. Écrire la position de $E$ et de $G$ par rapport à $(d)$.",
+            "steps": [
+              "Repérer : la droite est $(d) = (EF)$ ; on étudie les points $E$ et $G$.",
+              "Regarder : la craie passe par $E$ ; elle ne passe pas par $G$, qui est à 3 m d'elle.",
+              "Choisir : $E$ est sur la droite, donc $\\in$ ; $G$ n'y est pas, donc $\\notin$.",
+              "Écrire : $E \\in (d)$ et $G \\notin (d)$."
+            ]
+          },
+          "pitfall": "Une droite ne s'arrête pas là où le trait s'arrête sur la feuille. Contre-exemple : le trait de craie va de $E$ à $F$, mais un point $H$ placé dans le même alignement, après $F$, est bien sur la droite : $H \\in (EF)$. Avant de répondre $\\notin$, prolonge toujours le trait avec la règle.",
+          "figure": "cour-droite",
+          "practice": {
+            "statement": "Tu t'entraînes à dire si un point est sur une droite et à l'écrire.",
+            "questions": [
+              {
+                "content": "La droite $(d)$ passe par les points $A$ et $B$. Le point $C$ est sur cette droite. Quelle écriture est correcte ?",
+                "question_type": "single_choice",
+                "hint": "Si le point est sur la droite, c'est le symbole « appartient ».",
+                "explanation": "Étape 1 — Repérer : la droite est $(d)$, le point étudié est $C$. Étape 2 — Regarder : $C$ est sur la droite. Étape 3 — Choisir : le symbole est $\\in$. Étape 4 — Écrire : $C \\in (d)$. On n'écrit pas $(d) \\in C$ : le point est toujours à gauche du symbole.",
+                "answers": [
+                  {
+                    "content": "$C \\in (d)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$C \\notin (d)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(d) \\in C$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$C = (d)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un trait de craie va de $E$ à $F$. Le point $K$ est placé dans le même alignement, juste après $F$. Alors $K \\in (EF)$.",
+                "question_type": "true_false",
+                "hint": "Prolonge le trait avec la règle.",
+                "explanation": "Étape 1 — Repérer : la droite est $(EF)$ et le point est $K$. Étape 2 — Regarder : la droite ne s'arrête pas en $F$ ; prolongée avec la règle, elle passe par $K$. Étape 3 — Choisir : $\\in$. Étape 4 — Écrire : $K \\in (EF)$. Le trait de craie s'arrête, pas la droite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le point $M$ est à 1 cm de la droite $(d)$, sans la toucher. On écrit : $M$ ___ $(d)$.",
+                "question_type": "select",
+                "hint": "Un point proche n'est pas forcément sur la droite.",
+                "explanation": "Étape 1 — Repérer : le point $M$ et la droite $(d)$. Étape 2 — Regarder : la droite ne passe pas par $M$. Étape 3 — Choisir : $\\notin$. Étape 4 — Écrire : $M \\notin (d)$.",
+                "answers": [
+                  {
+                    "content": "$\\notin$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\in$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On lit $A \\in (d)$ : « le point $A$ ___ à la droite $(d)$ ».",
+                "question_type": "fill_blank",
+                "hint": "Le symbole se lit avec un verbe qui commence par « a ».",
+                "explanation": "Étape 1 — Repérer : le point $A$ et la droite $(d)$. Étape 2 — Regarder : $A$ est sur $(d)$. Étape 3 — Choisir : le symbole $\\in$ se lit « appartient à ». Étape 4 — Écrire la phrase : le point $A$ appartient à la droite $(d)$.",
+                "answers": [
+                  {
+                    "content": "appartient",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Dire si un point est sur une droite",
+              "statement": "Dans cet exercice, tu utilises les mots et les symboles du point et de la droite, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle écriture dit que le point $A$ est sur la droite $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le point $A$ et la droite $(d)$. Étape 2 — Regarder : $A$ est sur $(d)$. Étape 3 — Choisir : $\\in$. Étape 4 — Écrire : $A \\in (d)$. L'écriture $A \\notin (d)$ dit le contraire ; $(d) \\in A$ est écrite dans le mauvais sens.",
+                  "answers": [
+                    {
+                      "content": "$A \\in (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d) \\in A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A \\notin (d)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A = (d)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite qui passe par les points $R$ et $S$ se note $(R$ ___ $)$ avec la lettre du second point.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la droite passe par $R$ et par $S$. Étape 4 — Écrire : on nomme une droite par deux de ses points, donc $(RS)$. La lettre qui manque est $S$.",
+                  "answers": [
+                    {
+                      "content": "S",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Par deux points distincts, il passe une seule droite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : deux points distincts $A$ et $B$. Étape 2 — Regarder : avec la règle, on ne peut tracer qu'un seul trait qui passe par les deux. Étape 4 — Écrire : c'est la droite $(AB)$, et on la nomme aussi $(BA)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par un seul point $A$, combien de droites peut-on tracer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : un seul point $A$. Étape 2 — Regarder : on peut poser la règle sur $A$ dans toutes les directions. Étape 3 — Choisir : chaque direction donne une droite qui contient $A$. Étape 4 — Écrire : il passe une infinité de droites par $A$. Il en faut deux points pour n'en avoir qu'une seule.",
+                  "answers": [
+                    {
+                      "content": "Une infinité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trait de craie de la droite $(d)$ s'arrête en $F$. Le point $K$ est placé dans le même alignement, après $F$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : la droite $(d)$ et le point $K$. Étape 2 — Regarder : en prolongeant le trait avec la règle, la droite passe par $K$. Étape 3 — Choisir : $\\in$. Étape 4 — Écrire : $K \\in (d)$. L'erreur est de croire que la droite s'arrête où s'arrête le trait de craie : une droite n'a ni début ni fin.",
+                  "answers": [
+                    {
+                      "content": "$K \\in (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(d)$ ne s'arrête pas en $F$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$K \\notin (d)$, car le trait s'arrête avant $K$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(d)$ a une extrémité en $F$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Situer des points par rapport à la droite tracée dans la cour",
+              "statement": "Dans cet exercice, tu situes des points par rapport à une droite tracée à la craie dans la cour, avec la méthode de la fiche : repérer, regarder, choisir, écrire.",
+              "hint": "Une droite se prolonge des deux côtés : prolonge mentalement le trait de craie avant de choisir le symbole.",
+              "exercise_type": "fixation",
+              "figure": "cour-droite",
+              "questions": [
+                {
+                  "content": "La droite $(d)$ passe par $E$ et $F$. Le point $G$ est à 3 m de la craie, au-dessus de $(d)$. Quelle écriture est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la droite $(d) = (EF)$ et le point $G$. Étape 2 — Regarder : $G$ est à 3 m de la craie, la droite ne passe pas par $G$. Étape 3 — Choisir : $\\notin$. Étape 4 — Écrire : $G \\notin (d)$.",
+                  "answers": [
+                    {
+                      "content": "$G \\notin (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G \\in (d)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d) \\notin G$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G = (d)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(d)$ passe par $E$ et $F$. Le point $H$ est dans le même alignement, au-delà de $F$. Alors $H \\in (d)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la droite $(d) = (EF)$ et le point $H$. Étape 2 — Regarder : en prolongeant la craie avec la règle, la droite passe par $H$. Étape 3 — Choisir : $\\in$. Étape 4 — Écrire : $H \\in (d)$. Penser que $H$ est hors de la droite parce que le trait s'arrête avant lui est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque écriture à sa lecture.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Choisir : le symbole $\\in$ se lit « appartient à » et $\\notin$ se lit « n'appartient pas à ». Étape 4 — Écrire : $(AB)$ n'est pas une phrase sur un point, c'est le nom de la droite qui passe par $A$ et $B$.",
+                  "answers": [
+                    {
+                      "content": "$A \\in (d)$",
+                      "match": "le point A appartient à la droite (d)"
+                    },
+                    {
+                      "content": "$A \\notin (d)$",
+                      "match": "le point A n'appartient pas à la droite (d)"
+                    },
+                    {
+                      "content": "$(AB)$",
+                      "match": "la droite qui passe par A et B"
+                    }
+                  ]
+                },
+                {
+                  "content": "On lit $G \\notin (d)$ : « le point $G$ n'___ pas à la droite $(d)$ ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Choisir : le symbole $\\notin$ est le contraire de $\\in$. Étape 4 — Écrire la phrase : « le point $G$ n'appartient pas à la droite $(d)$ ».",
+                  "answers": [
+                    {
+                      "content": "appartient",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de droites passent à la fois par les deux points distincts $E$ et $F$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : deux points distincts $E$ et $F$. Étape 2 — Regarder : avec la règle, un seul trait passe par les deux points. Étape 4 — Écrire : il y a une seule droite, la droite $(EF)$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $H$ est sur la droite $(EF)$. Choisis le bon symbole : $H$ ___ $(EF)$.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le point $H$ et la droite $(EF)$. Étape 2 — Regarder : $H$ est sur la droite. Étape 3 — Choisir : $\\in$. Étape 4 — Écrire : $H \\in (EF)$.",
+                  "answers": [
+                    {
+                      "content": "$\\in$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\notin$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Demi-droite",
+          "remember": "Une **demi-droite** est une partie de droite qui a un début, appelé **origine**, et qui se prolonge sans fin d'un seul côté. La demi-droite d'origine $A$ qui passe par $B$ se note $[AB)$. Le crochet fermé est du côté de l'origine, la parenthèse est du côté où elle continue. Les demi-droites $[AB)$ et $[BA)$ sont différentes : elles n'ont pas la même origine et partent dans des sens opposés.",
+          "method": [
+            "Repérer l'origine : le point où la demi-droite commence.",
+            "Repérer un autre point par lequel la demi-droite passe.",
+            "Écrire le crochet, l'origine, le second point, puis la parenthèse.",
+            "Vérifier le sens : la demi-droite continue du côté du second point."
+          ],
+          "example": {
+            "statement": "Dans la cour, Koffi trace une ligne de craie qui commence au piquet $A$, passe par le piquet $B$ et continue vers le portail sans s'arrêter. Nommer cette demi-droite.",
+            "steps": [
+              "Repérer l'origine : la ligne commence au piquet $A$, donc l'origine est $A$.",
+              "Repérer un autre point : la ligne passe par le piquet $B$.",
+              "Écrire : le crochet, $A$, $B$, puis la parenthèse, soit $[AB)$.",
+              "Vérifier le sens : la ligne continue du côté de $B$ vers le portail, donc c'est bien $[AB)$ et non $[BA)$."
+            ]
+          },
+          "pitfall": "Ne pas confondre $[AB)$ et $[BA)$ : ce sont les mêmes lettres, mais pas la même demi-droite. Contre-exemple : le piquet $A$ est à gauche, le piquet $B$ à droite. $[AB)$ part de $A$ vers la droite, en passant par $B$. $[BA)$ part de $B$ vers la gauche, en passant par $A$. Un élève debout sur la craie, à droite de $B$, est sur $[AB)$, mais pas sur $[BA)$. Regarde toujours quelle lettre est en premier : c'est l'origine.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à nommer une demi-droite et à reconnaître son origine.",
+            "questions": [
+              {
+                "content": "La demi-droite d'origine $M$ qui passe par $N$ se note :",
+                "question_type": "single_choice",
+                "hint": "La première lettre est l'origine.",
+                "explanation": "Étape 1 — Repérer l'origine : c'est $M$. Étape 2 — Repérer un autre point : $N$. Étape 3 — Écrire : crochet, $M$, $N$, parenthèse, soit $[MN)$. Étape 4 — Vérifier le sens : elle part de $M$ vers $N$. Écrire $[NM)$ donnerait la demi-droite d'origine $N$.",
+                "answers": [
+                  {
+                    "content": "$[MN)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$[NM)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(MN)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$MN$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les demi-droites $[AB)$ et $[BA)$ sont la même demi-droite.",
+                "question_type": "true_false",
+                "hint": "Compare leurs origines.",
+                "explanation": "Étape 1 — Repérer l'origine : $[AB)$ commence en $A$, $[BA)$ commence en $B$. Étape 4 — Vérifier le sens : l'une part vers $B$, l'autre vers $A$. Ce sont deux demi-droites différentes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La demi-droite $[RS)$ a pour origine le point ___.",
+                "question_type": "fill_blank",
+                "hint": "Regarde la première lettre.",
+                "explanation": "Étape 1 — Repérer l'origine : dans $[RS)$, la première lettre est l'origine. Étape 3 — Écrire : l'origine est $R$ et la demi-droite passe par $S$.",
+                "answers": [
+                  {
+                    "content": "R",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une demi-droite continue sans fin dans ___ sens.",
+                "question_type": "select",
+                "hint": "Pense au début et à la fin.",
+                "explanation": "Étape 1 — Repérer l'origine : la demi-droite commence en un point. Étape 4 — Vérifier le sens : à partir de l'origine, elle continue d'un seul côté. Une droite, elle, continue des deux côtés.",
+                "answers": [
+                  {
+                    "content": "un seul",
+                    "correct": true
+                  },
+                  {
+                    "content": "deux",
+                    "correct": false
+                  },
+                  {
+                    "content": "aucun",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Nommer et lire des demi-droites",
+              "statement": "Dans cet exercice, tu nommes et tu lis des demi-droites avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que représente l'écriture $[OP)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : la première lettre de $[OP)$ est $O$. Étape 2 — Repérer un autre point : $P$. Étape 4 — Vérifier le sens : elle va de $O$ vers $P$. La demi-droite d'origine $P$ s'écrit $[PO)$.",
+                  "answers": [
+                    {
+                      "content": "La demi-droite d'origine $O$ qui passe par $P$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La demi-droite d'origine $P$ qui passe par $O$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite qui passe par $O$ et $P$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une demi-droite sans origine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ligne de craie commence au piquet $A$, passe par le piquet $B$ et continue. Comment la nommer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : $A$. Étape 2 — Repérer un autre point : $B$. Étape 3 — Écrire : $[AB)$. Étape 4 — Vérifier le sens : elle continue du côté de $B$. $[BA)$ aurait son origine en $B$.",
+                  "answers": [
+                    {
+                      "content": "$[AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[BA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(BA)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une demi-droite a deux extrémités.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer l'origine : une demi-droite commence en un point. Étape 4 — Vérifier le sens : de l'autre côté, elle continue sans fin. Elle a donc une origine et pas de fin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$ et $C$ sont alignés dans cet ordre : $B$ est entre $A$ et $C$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer l'origine de chaque demi-droite. Étape 4 — Vérifier le sens : $[AC)$ part de $A$ vers $C$ et passe par $B$ ; $[AB)$ part de $A$ vers $B$ et continue jusqu'à $C$. Mais $[BC)$ part de $B$ vers $C$ : $A$ est derrière $B$, donc $A \\notin [BC)$. Et $[BA)$ part de $B$ vers $A$ : $C$ est derrière $B$, donc $C \\notin [BA)$.",
+                  "answers": [
+                    {
+                      "content": "$B \\in [AC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C \\in [AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A \\in [BC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C \\in [BA)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le piquet $A$ est à gauche, le piquet $B$ à droite. Koffi se place à droite de $B$, sur la craie. Où est-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : $[AB)$ commence en $A$, $[BA)$ commence en $B$. Étape 4 — Vérifier le sens : $[AB)$ va de $A$ vers la droite en passant par $B$ : Koffi, à droite de $B$, y est. $[BA)$ part de $B$ vers la gauche : Koffi est derrière son origine, il n'y est pas.",
+                  "answers": [
+                    {
+                      "content": "Sur $[AB)$, pas sur $[BA)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur $[BA)$, pas sur $[AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur $[AB)$ et sur $[BA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni sur $[AB)$ ni sur $[BA)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Demi-droites sur la ligne de la cour",
+              "statement": "Dans cet exercice, tu nommes, tu lis et tu ordonnes des demi-droites tracées dans la cour, avec les étapes de la fiche.",
+              "hint": "Dans l'écriture d'une demi-droite, la première lettre est toujours l'origine.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Yao trace une ligne qui part du piquet $X$, passe par le piquet $Y$ et continue. Comment s'appelle-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : $X$. Étape 2 — Repérer un autre point : $Y$. Étape 3 — Écrire : crochet, $X$, $Y$, parenthèse, soit $[XY)$. Étape 4 — Vérifier le sens : elle continue du côté de $Y$.",
+                  "answers": [
+                    {
+                      "content": "$[XY)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[YX)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(XY)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$XY$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour nommer une demi-droite.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode de la fiche : Étape 1 — Repérer l'origine. Étape 2 — Repérer un autre point par lequel elle passe. Étape 3 — Écrire le crochet, l'origine, le second point, puis la parenthèse. Étape 4 — Vérifier le sens de la demi-droite.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'origine."
+                    },
+                    {
+                      "content": "Repérer un autre point de la demi-droite."
+                    },
+                    {
+                      "content": "Écrire le crochet, l'origine, le second point, puis la parenthèse."
+                    },
+                    {
+                      "content": "Vérifier le sens."
+                    }
+                  ]
+                },
+                {
+                  "content": "Les demi-droites $[ST)$ et $[TS)$ ont la même origine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer l'origine : $[ST)$ commence en $S$, $[TS)$ commence en $T$. Les origines sont différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une demi-droite a une origine, mais elle n'a pas de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer l'origine : la demi-droite commence en un point. Étape 4 — Vérifier le sens : elle continue d'un seul côté, sans s'arrêter. Elle n'a donc pas de fin.",
+                  "answers": [
+                    {
+                      "content": "fin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque écriture à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer l'origine. Étape 3 — Écrire : $(AB)$ a deux parenthèses, c'est une droite. $[AB)$ a son crochet du côté de $A$ : l'origine est $A$. $[BA)$ a son crochet du côté de $B$ : l'origine est $B$.",
+                  "answers": [
+                    {
+                      "content": "$(AB)$",
+                      "match": "la droite qui passe par A et B"
+                    },
+                    {
+                      "content": "$[AB)$",
+                      "match": "la demi-droite d'origine A qui passe par B"
+                    },
+                    {
+                      "content": "$[BA)$",
+                      "match": "la demi-droite d'origine B qui passe par A"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point $O$ d'une droite la partage en combien de demi-droites d'origine $O$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer l'origine : le point $O$. Étape 2 — Repérer un autre point : un point d'un côté de $O$, puis un point de l'autre côté. Étape 4 — Vérifier le sens : on obtient deux demi-droites de sens opposés. La réponse est 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Points alignés",
+          "remember": "Des points sont **alignés** quand ils sont tous sur une même droite. Deux points distincts sont toujours alignés, car une droite passe par eux. Pour trois points $A$, $B$ et $C$ : ils sont alignés si $C$ est sur la droite $(AB)$. On écrit alors « $A$, $B$ et $C$ sont alignés ». Sinon, ils ne sont **pas alignés**.",
+          "method": [
+            "Choisir deux points distincts parmi les points étudiés.",
+            "Tracer la droite qui passe par ces deux points, avec la règle.",
+            "Regarder si chacun des autres points est exactement sur cette droite.",
+            "Conclure : alignés si tous les points sont sur la droite, sinon non alignés."
+          ],
+          "example": {
+            "statement": "Dans le jardin de l'école, Mariam plante quatre arbustes $A$, $B$, $C$ et $D$. La craie tracée par $A$ et $B$ passe par $C$, mais pas par $D$. Les points $A$, $B$ et $C$ sont-ils alignés ?",
+            "steps": [
+              "Choisir : on prend les points $A$ et $B$.",
+              "Tracer : on trace la droite $(AB)$ avec la règle.",
+              "Regarder : le point $C$ est exactement sur la droite $(AB)$ ; le point $D$, lui, en est loin.",
+              "Conclure : $A$, $B$ et $C$ sont alignés. En revanche $A$, $B$ et $D$ ne sont pas alignés."
+            ]
+          },
+          "pitfall": "Ne pas conclure « à l'œil ». Contre-exemple : trois piquets $A$, $B$ et $C$ semblent sur la même ligne, mais $C$ est à 1 cm de la droite $(AB)$ : ils ne sont pas alignés. Et ne conclus jamais avec deux points seulement : deux points sont toujours alignés. Trace la droite à la règle et regarde si le troisième point est exactement dessus.",
+          "figure": "cour-alignes",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître des points alignés.",
+            "questions": [
+              {
+                "content": "Deux points distincts sont toujours alignés.",
+                "question_type": "true_false",
+                "hint": "Une droite passe toujours par deux points.",
+                "explanation": "Étape 1 — Choisir : on prend les deux points. Étape 2 — Tracer : la règle donne la droite qui passe par eux. Étape 3 — Regarder : il n'y a pas d'autre point à vérifier. Étape 4 — Conclure : ils sont alignés.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On trace la droite passant par les piquets $A$ et $B$. Le piquet $C$ est à 30 cm de cette droite. Que peut-on dire ?",
+                "question_type": "single_choice",
+                "hint": "Le troisième point est-il sur la droite ?",
+                "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $C$ est à 30 cm de la droite, il n'est pas dessus. Étape 4 — Conclure : $A$, $B$ et $C$ ne sont pas alignés.",
+                "answers": [
+                  {
+                    "content": "$A$, $B$ et $C$ ne sont pas alignés",
+                    "correct": true
+                  },
+                  {
+                    "content": "$A$, $B$ et $C$ sont alignés",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A$, $B$ et $C$ sont alignés si on les rapproche",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut rien dire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Des points qui sont sur une même droite sont dits ___.",
+                "question_type": "fill_blank",
+                "hint": "Le mot vient de « ligne ».",
+                "explanation": "Étape 3 — Regarder : tous les points sont sur la même droite. Étape 4 — Conclure : on dit qu'ils sont alignés.",
+                "answers": [
+                  {
+                    "content": "alignés",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le point $C$ est sur la droite $(AB)$. Donc $A$, $B$ et $C$ sont ___.",
+                "question_type": "select",
+                "hint": "Regarde si C est sur la droite.",
+                "explanation": "Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $C \\in (AB)$. Étape 4 — Conclure : les trois points sont alignés.",
+                "answers": [
+                  {
+                    "content": "alignés",
+                    "correct": true
+                  },
+                  {
+                    "content": "non alignés",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître des points alignés",
+              "statement": "Dans cet exercice, tu reconnais des points alignés avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que veut dire « $A$, $B$ et $C$ sont alignés » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Regarder : on regarde si les points sont sur une même droite. Étape 4 — Conclure : être alignés, c'est être sur une même droite, et non être proches ou à égale distance.",
+                  "answers": [
+                    {
+                      "content": "Les trois points sont sur une même droite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les trois points sont à la même distance les uns des autres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois points sont sur trois droites différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois points sont très proches",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $C$ est sur la droite $(AB)$. Que peut-on dire de $A$, $B$ et $C$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $C$ est sur cette droite. Étape 4 — Conclure : $A$, $B$ et $C$ sont alignés.",
+                  "answers": [
+                    {
+                      "content": "Ils sont alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils ne sont pas alignés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seuls $A$ et $B$ sont alignés",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $A$, $B$ et $C$ sont alignés, alors la droite $(AB)$ passe par $C$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : comme les trois points sont sur une même droite, c'est la droite $(AB)$, donc $C \\in (AB)$. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre élèves $A$, $B$, $C$ et $D$ font la queue le long d'une ligne de craie droite : ils sont tous alignés. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir : deux élèves, par exemple $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$ est la ligne de craie. Étape 3 — Regarder : les quatre élèves sont sur cette ligne. Étape 4 — Conclure : tous les groupes de points sont alignés, donc $A$, $B$ et $D$ le sont, et $D \\in (AC)$. Dire que $C \\notin (AB)$ ou que $A$ et $D$ ne sont pas alignés contredit l'énoncé.",
+                  "answers": [
+                    {
+                      "content": "$A$, $B$ et $D$ sont alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D$ est sur la droite $(AC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ n'appartient pas à $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$ et $D$ ne sont pas alignés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois piquets $A$, $B$ et $C$ semblent sur la même ligne, mais, la règle posée sur $A$ et $B$, on voit que $C$ est à 1 cm de la règle. Sont-ils alignés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$ avec la règle. Étape 3 — Regarder : $C$ est à 1 cm, il n'est pas exactement dessus. Étape 4 — Conclure : les trois points ne sont pas alignés. Juger à l'œil est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Non, $C$ n'est pas sur la droite $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car 1 cm est très petit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car deux des points sont alignés",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir sans mesurer",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Aligner des piquets dans le jardin de l'école",
+              "statement": "Dans cet exercice, tu vérifies l'alignement de piquets plantés dans le jardin de l'école, avec la méthode de la fiche.",
+              "hint": "Pour trois points, trace toujours la droite à la règle avant de conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si trois points sont alignés.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode : Étape 1 — Choisir deux points distincts. Étape 2 — Tracer la droite qui passe par eux avec la règle. Étape 3 — Regarder si le troisième point est sur la droite. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Choisir deux points distincts."
+                    },
+                    {
+                      "content": "Tracer la droite qui passe par ces deux points."
+                    },
+                    {
+                      "content": "Regarder si le troisième point est sur cette droite."
+                    },
+                    {
+                      "content": "Conclure : alignés ou non alignés."
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam plante quatre piquets $A$, $B$, $C$, $D$. La craie qui passe par $A$ et $B$ passe aussi par $C$, mais pas par $D$. Quels points sont alignés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la craie, c'est la droite $(AB)$. Étape 3 — Regarder : $C$ est dessus, pas $D$. Étape 4 — Conclure : $A$, $B$ et $C$ sont alignés. Les groupes qui contiennent $D$ ne sont pas alignés, car $D \\notin (AB)$.",
+                  "answers": [
+                    {
+                      "content": "$A$, $B$ et $C$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$, $B$ et $D$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B$, $C$ et $D$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$, $C$ et $D$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le point $D$ n'est pas sur la droite $(AB)$, alors $A$, $B$ et $D$ ne sont pas alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $D$ n'est pas dessus. Étape 4 — Conclure : $A$, $B$ et $D$ ne sont pas alignés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $D \\notin (AB)$, alors les points $A$, $B$ et $D$ ne sont pas ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Regarder : $D$ n'est pas sur la droite $(AB)$. Étape 4 — Conclure : $A$, $B$ et $D$ ne sont pas alignés.",
+                  "answers": [
+                    {
+                      "content": "alignés",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$ et $C$ sont alignés. Combien de droites passent par ces trois points à la fois ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : une seule droite passe par deux points distincts, la droite $(AB)$. Étape 3 — Regarder : $C$ est sur elle. Étape 4 — Conclure : une seule droite passe par les trois points.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à la bonne conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Regarder la position du dernier point. Étape 4 — Conclure : s'il est sur la droite, les points sont alignés ; s'il est à côté, ils ne le sont pas. Avec seulement deux points, on conclut toujours qu'ils sont alignés.",
+                  "answers": [
+                    {
+                      "content": "$C$ est sur la droite $(AB)$",
+                      "match": "$A$, $B$ et $C$ sont alignés"
+                    },
+                    {
+                      "content": "$C$ est à côté de la droite $(AB)$",
+                      "match": "$A$, $B$ et $C$ ne sont pas alignés"
+                    },
+                    {
+                      "content": "On n'a que deux points $A$ et $B$",
+                      "match": "$A$ et $B$ sont toujours alignés"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Droites sécantes, perpendiculaires et parallèles",
+          "remember": "Deux droites du plan sont **sécantes** quand elles ont un seul point commun, appelé point d'intersection. Elles sont **perpendiculaires** quand elles sont sécantes et forment un angle droit, comme le coin d'une équerre : on écrit $(d) \\perp (d')$. Elles sont **parallèles** quand elles ne se coupent jamais, même prolongées : on écrit $(d) \\parallel (d')$. Deux droites perpendiculaires à une même troisième droite sont parallèles. Par un point donné, il passe une seule perpendiculaire et une seule parallèle à une droite donnée.",
+          "method": [
+            "Repérer les deux droites et les prolonger avec la règle.",
+            "Chercher si les droites se coupent : un point commun ou aucun.",
+            "Si elles se coupent, vérifier avec l'équerre si elles forment un angle droit.",
+            "Conclure : parallèles si elles ne se coupent pas, perpendiculaires si l'angle est droit, sinon sécantes ; écrire avec le bon symbole."
+          ],
+          "example": {
+            "statement": "Sur le sol de la cour, Yao a tracé à la craie la ligne $(d_1) = (AB)$, horizontale, et la ligne $(d_2) = (CD)$, verticale, qui la traverse en $O$. Donner la position de $(d_1)$ par rapport à $(d_2)$.",
+            "steps": [
+              "Repérer : on prolonge $(d_1)$ et $(d_2)$ avec la règle.",
+              "Chercher : elles se coupent en un seul point, $O$.",
+              "Vérifier : on pose le coin de l'équerre en $O$ ; ses deux côtés suivent exactement $(d_1)$ et $(d_2)$, l'angle est droit.",
+              "Conclure : les deux droites sont perpendiculaires, on écrit $(d_1) \\perp (d_2)$."
+            ]
+          },
+          "pitfall": "Ne pas dire que deux droites sont parallèles parce que les traits dessinés ne se touchent pas. Contre-exemple : deux traits de craie de 2 m semblent ne pas se toucher, mais prolongés avec la règle, ils se coupent à 5 m : les droites sont sécantes. De même, ne juge pas un angle droit à l'œil : vérifie avec l'équerre.",
+          "figure": "cour-traces",
+          "practice": {
+            "statement": "Tu t'entraînes à nommer la position de deux droites.",
+            "questions": [
+              {
+                "content": "Les droites $(d)$ et $(d')$ se coupent en $I$ et forment un angle droit. Comment sont-elles ?",
+                "question_type": "single_choice",
+                "hint": "Un angle droit : pense à l'équerre.",
+                "explanation": "Étape 1 — Repérer : les droites $(d)$ et $(d')$. Étape 2 — Chercher : elles se coupent en $I$. Étape 3 — Vérifier : l'angle est droit. Étape 4 — Conclure : $(d) \\perp (d')$.",
+                "answers": [
+                  {
+                    "content": "Perpendiculaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parallèles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement sécantes, jamais perpendiculaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "Confondues en un seul point",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux droites qui ne se coupent jamais, même prolongées, sont ___.",
+                "question_type": "select",
+                "hint": "Elles n'ont aucun point commun.",
+                "explanation": "Étape 1 — Repérer : deux droites prolongées. Étape 2 — Chercher : elles n'ont aucun point commun. Étape 4 — Conclure : elles sont parallèles, on écrit $(d) \\parallel (d')$.",
+                "answers": [
+                  {
+                    "content": "parallèles",
+                    "correct": true
+                  },
+                  {
+                    "content": "sécantes",
+                    "correct": false
+                  },
+                  {
+                    "content": "perpendiculaires",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux droites perpendiculaires sont sécantes.",
+                "question_type": "true_false",
+                "hint": "Pour former un angle, il faut se couper.",
+                "explanation": "Étape 2 — Chercher : deux droites perpendiculaires se coupent en un point. Étape 3 — Vérifier : en ce point, l'angle est droit. Étape 4 — Conclure : elles sont sécantes, et en plus perpendiculaires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les droites $(d)$ et $(d')$ sont perpendiculaires à la même droite $(d_1)$. Alors $(d)$ et $(d')$ sont ___.",
+                "question_type": "fill_blank",
+                "hint": "Propriété de la fiche.",
+                "explanation": "Étape 2 — Chercher : deux droites perpendiculaires à une même troisième ne se coupent pas. Étape 4 — Conclure : $(d) \\parallel (d')$.",
+                "answers": [
+                  {
+                    "content": "parallèles",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la position de deux droites",
+              "statement": "Dans cet exercice, tu nommes la position de deux droites avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque écriture ou chaque situation à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Conclure : $\\perp$ s'écrit pour des droites qui se coupent à angle droit, $\\parallel$ pour des droites qui ne se coupent jamais. Des droites qui ont un seul point commun sont sécantes en ce point.",
+                  "answers": [
+                    {
+                      "content": "$(d) \\perp (d')$",
+                      "match": "perpendiculaires"
+                    },
+                    {
+                      "content": "$(d) \\parallel (d')$",
+                      "match": "parallèles"
+                    },
+                    {
+                      "content": "un seul point commun $I$",
+                      "match": "sécantes en $I$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites ont un seul point commun, mais l'équerre ne s'ajuste pas à leur angle. Que sont-elles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher : elles ont un seul point commun, donc elles sont sécantes. Étape 3 — Vérifier : l'équerre ne s'ajuste pas, l'angle n'est pas droit. Étape 4 — Conclure : sécantes, mais pas perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "Sécantes, mais pas perpendiculaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites parallèles ont un point commun.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher : des droites parallèles ne se coupent jamais, elles n'ont aucun point commun. Étape 4 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux bords d'une longue allée de la cour ne se coupent jamais, même prolongés. Comment sont ces deux droites ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les deux bords prolongés. Étape 2 — Chercher : ils n'ont aucun point commun. Étape 4 — Conclure : $\\parallel$, ils sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "Parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune de ces réponses",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux traits de craie de 2 m sont tracés au sol et ne se touchent pas. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on prolonge les traits avec la règle. Étape 2 — Chercher : s'ils se coupent, les droites sont sécantes ; sinon elles sont parallèles. Étape 4 — Conclure : le dessin seul ne permet pas de conclure. Dire « forcément parallèles » est l'erreur du piège ; « perpendiculaires » demande de vérifier l'angle avec l'équerre.",
+                  "answers": [
+                    {
+                      "content": "On ne peut pas conclure sans les prolonger",
+                      "correct": true
+                    },
+                    {
+                      "content": "S'ils se coupent une fois prolongés, ils sont sécants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont forcément parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont forcément perpendiculaires",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire les lignes tracées sur le sol de la cour",
+              "statement": "Dans cet exercice, tu nommes la position de lignes de craie tracées dans la cour, avec la méthode de la fiche : repérer, chercher le point commun, vérifier avec l'équerre, conclure. Les lignes sont $(d_1) = (AB)$ horizontale, $(d_2) = (CD)$ verticale coupant $(d_1)$ en $O$ à angle droit, $(d_3) = (EF)$ horizontale plus bas, et $(d_4) = (GH)$ oblique.",
+              "hint": "Cherche d'abord si les droites se coupent ; ensuite seulement, vérifie l'angle droit avec l'équerre.",
+              "exercise_type": "fixation",
+              "figure": "cour-traces",
+              "questions": [
+                {
+                  "content": "Les droites $(d_1)$ et $(d_3)$ sont toutes les deux horizontales et ne se coupent jamais. Comment sont-elles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $(d_1)$ et $(d_3)$ prolongées. Étape 2 — Chercher : elles n'ont aucun point commun. Étape 4 — Conclure : $(d_1) \\parallel (d_3)$.",
+                  "answers": [
+                    {
+                      "content": "Parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(d_1)$ et $(d_2)$ se coupent en $O$ et le coin de l'équerre s'ajuste exactement. Quelle écriture est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher : elles se coupent en $O$. Étape 3 — Vérifier : l'équerre s'ajuste, l'angle est droit. Étape 4 — Conclure : $(d_1) \\perp (d_2)$. Le symbole $\\parallel$ est réservé aux droites qui ne se coupent pas.",
+                  "answers": [
+                    {
+                      "content": "$(d_1) \\perp (d_2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1) \\parallel (d_2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1) \\in (d_2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1) = O$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite oblique $(d_4)$ coupe $(d_1)$ sans former d'angle droit. Alors $(d_4)$ et $(d_1)$ sont perpendiculaires.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher : elles se coupent, donc elles sont sécantes. Étape 3 — Vérifier : l'angle n'est pas droit. Étape 4 — Conclure : sécantes, mais pas perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(d_1)$ et $(d_3)$ ne se coupent jamais : elles sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher : aucun point commun. Étape 4 — Conclure : $(d_1) \\parallel (d_3)$, elles sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la cour, $(d_1)$ est horizontale, $(d_2)$ est verticale et coupe $(d_1)$ à angle droit, $(d_3)$ est horizontale plus bas, et $(d_4)$ est oblique et coupe $(d_1)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Chercher les points communs. $(d_1)$ et $(d_2)$ se coupent en $O$ à angle droit : perpendiculaires. $(d_1)$ et $(d_3)$ ne se coupent pas : parallèles. $(d_4)$ coupe $(d_1)$ : elle n'est pas parallèle à $(d_1)$. Étape 4 — Conclure avec les bons symboles.",
+                  "answers": [
+                    {
+                      "content": "$(d_1)$ et $(d_2)$ sont perpendiculaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_3)$ sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_4)$ sont parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_3)$ sont sécantes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(d_4)$ coupe $(d_1)$ sans angle droit : $(d_4)$ et $(d_1)$ sont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Chercher : elles ont un point commun. Étape 3 — Vérifier : l'angle n'est pas droit. Étape 4 — Conclure : sécantes, non perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "sécantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "perpendiculaires",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tracer une perpendiculaire et une parallèle",
+          "remember": "On trace avec une règle et une équerre. Pour tracer la **perpendiculaire** à $(d)$ passant par $A$ : on pose un côté de l'angle droit de l'équerre sur $(d)$, on la fait glisser jusqu'à ce que l'autre côté touche $A$, puis on trace. Pour tracer la **parallèle** à $(d)$ passant par $A$ : on trace deux perpendiculaires successives. Comme deux droites perpendiculaires à une même droite sont parallèles, la dernière est parallèle à $(d)$.",
+          "method": [
+            "Tracer la droite $(d)$ et placer le point $A$ par où doit passer la nouvelle droite.",
+            "Tracer la perpendiculaire $(d_1)$ à $(d)$ passant par $A$ : poser l'équerre sur $(d)$, la glisser jusqu'à $A$, tracer.",
+            "Tracer la perpendiculaire $(d_2)$ à $(d_1)$ passant par $A$ : poser l'équerre sur $(d_1)$, la glisser jusqu'à $A$, tracer.",
+            "Conclure : $(d_2)$ et $(d)$ sont perpendiculaires à $(d_1)$, donc parallèles."
+          ],
+          "example": {
+            "statement": "Dans la cour, la ligne de craie $(d)$ est tracée. Le piquet $A$ est à 1 m de $(d)$. Tracer la parallèle à $(d)$ passant par $A$.",
+            "steps": [
+              "Tracer : on trace $(d)$ et on place le piquet $A$ à 1 m de $(d)$.",
+              "Tracer la première perpendiculaire : on pose l'équerre sur $(d)$, on la glisse jusqu'à $A$ et on trace $(d_1) \\perp (d)$ passant par $A$.",
+              "Tracer la seconde perpendiculaire : on pose l'équerre sur $(d_1)$, on la glisse jusqu'à $A$ et on trace $(d_2) \\perp (d_1)$ passant par $A$.",
+              "Conclure : $(d_2)$ et $(d)$ sont perpendiculaires à $(d_1)$, donc $(d_2) \\parallel (d)$."
+            ]
+          },
+          "pitfall": "Ne pas s'arrêter à la première perpendiculaire. Contre-exemple : la perpendiculaire $(d_1)$ à $(d)$ passant par $A$ coupe $(d)$ en un point $I$. Elle a donc un point commun avec $(d)$ : elle n'est pas parallèle. Il faut tracer une seconde perpendiculaire, à $(d_1)$, pour obtenir la parallèle.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les gestes et la logique du tracé.",
+            "questions": [
+              {
+                "content": "Tu as tracé la perpendiculaire $(d_1)$ à $(d)$ passant par $A$. Que dois-tu faire pour obtenir la parallèle à $(d)$ passant par $A$ ?",
+                "question_type": "single_choice",
+                "hint": "Il faut une seconde perpendiculaire.",
+                "explanation": "Étape 2 — Tracer la première perpendiculaire : c'est $(d_1)$. Étape 3 — Tracer la seconde perpendiculaire : on pose l'équerre sur $(d_1)$ et on trace la perpendiculaire à $(d_1)$ passant par $A$. Étape 4 — Conclure : elle est parallèle à $(d)$. $(d_1)$ coupe $(d)$ : elle n'est pas parallèle.",
+                "answers": [
+                  {
+                    "content": "Tracer la perpendiculaire à $(d_1)$ passant par $A$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Rien : $(d_1)$ est déjà parallèle à $(d)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tracer la perpendiculaire à $(d)$ passant par un autre point",
+                    "correct": false
+                  },
+                  {
+                    "content": "Prolonger $(d_1)$ avec la règle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La perpendiculaire à $(d)$ passant par $A$ est parallèle à $(d)$.",
+                "question_type": "true_false",
+                "hint": "Une perpendiculaire coupe la droite.",
+                "explanation": "Étape 2 — Tracer la première perpendiculaire $(d_1)$ à $(d)$. Elle coupe $(d)$ en un point, elle n'est donc pas parallèle à $(d)$. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour tracer des perpendiculaires, on utilise une règle et une ___.",
+                "question_type": "fill_blank",
+                "hint": "Elle a un angle droit.",
+                "explanation": "Étape 2 — Tracer : on pose un côté de l'angle droit de l'équerre sur la droite, puis on la glisse jusqu'au point. L'instrument est l'équerre.",
+                "answers": [
+                  {
+                    "content": "équerre",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux droites perpendiculaires à la même droite sont ___.",
+                "question_type": "select",
+                "hint": "Propriété de la fiche.",
+                "explanation": "Étape 4 — Conclure : $(d_2)$ et $(d)$ sont perpendiculaires à $(d_1)$, donc parallèles : $(d_2) \\parallel (d)$.",
+                "answers": [
+                  {
+                    "content": "parallèles",
+                    "correct": true
+                  },
+                  {
+                    "content": "sécantes",
+                    "correct": false
+                  },
+                  {
+                    "content": "perpendiculaires entre elles",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Comprendre le tracé d'une perpendiculaire et d'une parallèle",
+              "statement": "Dans cet exercice, tu retrouves les gestes et le raisonnement du tracé avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel instrument sert à tracer un angle droit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tracer la perpendiculaire : on pose un côté de l'angle droit de l'équerre sur la droite. L'équerre porte l'angle droit ; la règle seule ne donne que des droites.",
+                  "answers": [
+                    {
+                      "content": "L'équerre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La règle seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le compas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le crayon seul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $A$ est sur la droite $(d)$. Combien de perpendiculaires à $(d)$ passent par $A$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tracer la perpendiculaire : on glisse l'équerre jusqu'à $A$ ; une seule position de l'équerre convient. Il n'y a qu'une seule perpendiculaire à $(d)$ passant par $A$.",
+                  "answers": [
+                    {
+                      "content": "Une seule",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $A$ n'est pas sur la droite $(d)$. Il passe par $A$ une seule parallèle à $(d)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire. Étape 3 — Tracer la seconde perpendiculaire. Étape 4 — Conclure : le tracé aboutit toujours à la même droite, il n'y a donc qu'une seule parallèle à $(d)$ passant par $A$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tracer la parallèle à $(d)$ passant par $A$, combien de perpendiculaires traces-tu à la suite ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire $(d_1)$ à $(d)$ passant par $A$. Étape 3 — Tracer la seconde perpendiculaire $(d_2)$ à $(d_1)$ passant par $A$. Il y en a 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après avoir tracé la perpendiculaire $(d_1)$ à $(d)$ passant par $A$, Awa dit : « J'ai la parallèle à $(d)$. » A-t-elle raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire : $(d_1)$ coupe $(d)$, elle a un point commun avec $(d)$, elle n'est donc pas parallèle. Étape 3 — Il faut tracer la seconde perpendiculaire, à $(d_1)$ passant par $A$. Étape 4 — Conclure : seule celle-là est parallèle à $(d)$.",
+                  "answers": [
+                    {
+                      "content": "Non : $(d_1)$ coupe $(d)$, il faut une seconde perpendiculaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : $(d_1)$ passe par $A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : $(d_1)$ est perpendiculaire à $(d)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : il faut tracer trois perpendiculaires",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Tracer une parallèle dans la cour",
+              "statement": "Dans cet exercice, tu suis les étapes du tracé d'une parallèle à une ligne de craie, avec la méthode de la fiche.",
+              "hint": "La seconde perpendiculaire se trace sur la première, pas sur (d).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour tracer la parallèle à $(d)$ passant par $A$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Tracer $(d)$ et placer $A$. Étape 2 — Tracer la première perpendiculaire $(d_1)$ à $(d)$ passant par $A$. Étape 3 — Tracer la seconde perpendiculaire $(d_2)$ à $(d_1)$ passant par $A$. Étape 4 — Conclure que $(d_2)$ est parallèle à $(d)$.",
+                  "answers": [
+                    {
+                      "content": "Tracer la droite $(d)$ et placer le point $A$."
+                    },
+                    {
+                      "content": "Tracer la perpendiculaire $(d_1)$ à $(d)$ passant par $A$."
+                    },
+                    {
+                      "content": "Tracer la perpendiculaire $(d_2)$ à $(d_1)$ passant par $A$."
+                    },
+                    {
+                      "content": "Conclure : $(d_2) \\parallel (d)$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tracer la perpendiculaire à $(d)$ passant par $A$, où poses-tu d'abord un côté de l'angle droit de l'équerre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tracer la perpendiculaire : on pose d'abord un côté de l'angle droit sur $(d)$, puis on glisse l'équerre jusqu'à $A$. Poser l'équerre ailleurs ne garantit pas l'angle droit avec $(d)$.",
+                  "answers": [
+                    {
+                      "content": "Sur la droite $(d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur le point $A$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur une droite quelconque passant par $A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au hasard sur la feuille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a tracé $(d_1) \\perp (d)$, puis $(d_2) \\perp (d_1)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — $(d_1)$ est perpendiculaire à $(d)$ : elles se coupent. Étape 3 — $(d_2)$ est perpendiculaire à $(d_1)$. Étape 4 — Conclure : $(d_2)$ et $(d)$ sont perpendiculaires à la même droite $(d_1)$, donc parallèles. Dire $(d_2) \\perp (d)$ ou $(d_1) \\parallel (d)$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$(d_2) \\parallel (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d)$ sont sécantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_2) \\perp (d)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1) \\parallel (d)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites perpendiculaires à une même troisième droite sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : si $(d) \\perp (d_1)$ et $(d_2) \\perp (d_1)$, alors $(d_2) \\parallel (d)$. C'est la propriété qui justifie le tracé de la parallèle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $A$ n'est pas sur la droite $(d)$. Combien de droites parallèles à $(d)$ passent par $A$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire. Étape 3 — Tracer la seconde perpendiculaire. Étape 4 — Conclure : le tracé donne une seule droite, il y a une seule parallèle à $(d)$ passant par $A$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$(d_1) \\perp (d)$ et $(d_2) \\perp (d_1)$, donc $(d_2)$ et $(d)$ sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : deux droites perpendiculaires à la même droite $(d_1)$ sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le plan de la cour de l'école",
+          "statement": "Sur le plan de la cour, la droite $(AB)$ longe le préau. Les droites $(CD)$ et $(EF)$ sont les bords de deux couloirs, perpendiculaires à $(AB)$. La droite $(AB)$ coupe $(CD)$ en $I$ et $(EF)$ en $K$. Le point $G$ est le puits, à l'écart des trois lignes. Tu situes les points et les droites du plan.",
+          "exercise_type": "fixation",
+          "figure": "plan-cour",
+          "questions": [
+            {
+              "content": "Dans la cour, les droites $(CD)$ et $(EF)$ sont toutes deux perpendiculaires à la droite $(AB)$. Que peut-on dire de $(CD)$ et $(EF)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : les droites $(CD)$ et $(EF)$ sont perpendiculaires à la même droite $(AB)$. Étape 2 — Chercher : deux droites perpendiculaires à une même troisième droite ne se coupent pas. Étape 4 — Conclure : $(CD) \\parallel (EF)$. Elles ne sont pas sécantes : sinon, il y aurait deux perpendiculaires à $(AB)$ issues d'un même point.",
+              "answers": [
+                {
+                  "content": "Elles sont parallèles",
+                  "correct": true
+                },
+                {
+                  "content": "Elles sont sécantes",
+                  "correct": false
+                },
+                {
+                  "content": "Elles sont perpendiculaires",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut rien dire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La droite $(AB)$ coupe la droite $(CD)$ en $I$ à angle droit. Alors $(AB)$ et $(CD)$ sont sécantes.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : $(AB)$ et $(CD)$. Étape 2 — Chercher : elles ont un seul point commun, $I$. Étape 4 — Conclure : elles sont sécantes en $I$, et même perpendiculaires puisque l'angle est droit.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le point $I$ est sur la droite $(AB)$ : on lit « le point $I$ ___ à la droite $(AB)$ ».",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer : le point $I$ et la droite $(AB)$. Étape 3 — Choisir : $I \\in (AB)$ se lit « $I$ appartient à $(AB)$ ».",
+              "answers": [
+                {
+                  "content": "appartient",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le point $G$ est à l'écart des droites $(AB)$, $(CD)$ et $(EF)$. Quelle écriture est correcte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le point $G$ et les trois droites. Étape 2 — Regarder : aucune des trois droites ne passe par $G$. Étape 3 — Choisir : $\\notin$ pour chacune. Étape 4 — Écrire : $G \\notin (AB)$, $G \\notin (CD)$ et $G \\notin (EF)$.",
+              "answers": [
+                {
+                  "content": "$G \\notin (AB)$, $G \\notin (CD)$ et $G \\notin (EF)$",
+                  "correct": true
+                },
+                {
+                  "content": "$G \\in (AB)$",
+                  "correct": false
+                },
+                {
+                  "content": "$G \\in (CD)$ et $G \\in (EF)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(AB) \\in G$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La droite $(AB)$ coupe $(CD)$ en $I$ et $(EF)$ en $K$ ; $(CD)$ et $(EF)$ sont parallèles ; $G$ est à l'écart des trois lignes. Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Repérer chaque point et chaque droite. Étape 2 — Regarder : $I$ est le point commun de $(AB)$ et $(CD)$, donc $I \\in (CD)$. $K$ est le point commun de $(AB)$ et $(EF)$, donc $K \\in (AB)$ et $K \\in (EF)$. Étape 3 — Choisir : $K \\notin (CD)$, car $(CD)$ et $(EF)$ sont parallèles et n'ont aucun point commun ; $G \\notin (EF)$.",
+              "answers": [
+                {
+                  "content": "$I \\in (CD)$",
+                  "correct": true
+                },
+                {
+                  "content": "$K \\in (AB)$",
+                  "correct": true
+                },
+                {
+                  "content": "$K \\in (EF)$",
+                  "correct": true
+                },
+                {
+                  "content": "$K \\in (CD)$",
+                  "correct": false
+                },
+                {
+                  "content": "$G \\in (EF)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les droites $(CD)$ et $(EF)$ sont parallèles. Combien ont-elles de points communs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : $(CD)$ et $(EF)$. Étape 2 — Chercher : des droites parallèles ne se coupent jamais. Étape 4 — Conclure : elles n'ont aucun point commun, la réponse est 0.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Aligner des arbustes dans le jardin",
+          "statement": "Mariam plante quatre arbustes $A$, $B$, $C$ et $D$ dans le jardin de l'école. La craie qui passe par $A$ et $B$ passe aussi par $C$. Le point $D$ est à l'écart de la craie. Tu étudies leur alignement.",
+          "exercise_type": "fixation",
+          "figure": "cour-alignes",
+          "questions": [
+            {
+              "content": "La craie qui passe par $A$ et $B$ passe aussi par $C$. Les arbustes $A$, $B$ et $C$ sont-ils alignés ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la craie est la droite $(AB)$. Étape 3 — Regarder : $C$ est sur cette droite. Étape 4 — Conclure : $A$, $B$ et $C$ sont alignés. La distance entre les points n'intervient pas.",
+              "answers": [
+                {
+                  "content": "Oui, $C$ est sur la droite $(AB)$",
+                  "correct": true
+                },
+                {
+                  "content": "Non, $C$ est trop loin de $A$",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                },
+                {
+                  "content": "Non, trois points ne sont jamais alignés",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La craie passe par $A$ et $B$ ; l'arbuste $D$ est à l'écart de cette craie. Les arbustes $A$, $B$ et $D$ sont-ils alignés ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $D$ est à l'écart de la droite, pas dessus. Étape 4 — Conclure : non alignés. Prolonger la craie ne la rapproche pas de $D$.",
+              "answers": [
+                {
+                  "content": "Non, $D$ n'est pas sur la droite $(AB)$",
+                  "correct": true
+                },
+                {
+                  "content": "Oui, car $A$ et $B$ sont alignés",
+                  "correct": false
+                },
+                {
+                  "content": "Oui, si on prolonge la craie",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les points $A$, $B$ et $C$ sont alignés. La droite $(AC)$ est la même droite que :",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$ contient $C$. Étape 3 — Regarder : $A$ et $C$ sont deux points de cette droite, donc la droite qui passe par $A$ et $C$ est $(AB)$. Étape 4 — Conclure : $(AC) = (AB)$. Les droites $(BD)$, $(AD)$ et $(CD)$ passent par $D$, qui n'est pas sur $(AB)$.",
+              "answers": [
+                {
+                  "content": "$(AB)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(BD)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(AD)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(CD)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour savoir si $A$, $B$ et $D$ sont alignés.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Choisir deux points distincts. Étape 2 — Tracer la droite qui passe par eux. Étape 3 — Regarder si le troisième point est exactement dessus. Étape 4 — Conclure. On ne conclut jamais avant d'avoir tracé la droite.",
+              "answers": [
+                {
+                  "content": "Choisir deux points distincts, par exemple $A$ et $B$."
+                },
+                {
+                  "content": "Tracer la droite $(AB)$ avec la règle."
+                },
+                {
+                  "content": "Regarder si $D$ est exactement sur cette droite."
+                },
+                {
+                  "content": "Conclure : alignés ou non alignés."
+                }
+              ]
+            },
+            {
+              "content": "Si $A$, $B$ et $C$ sont alignés, alors $C$ est toujours sur la demi-droite $[AB)$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $C$ peut être sur la droite mais du côté opposé à $B$ par rapport à $A$. Dans ce cas $C \\notin [AB)$ : $[AB)$ part de $A$ vers $B$ seulement. Étape 4 — Conclure : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les lignes de craie de la fête de l'école",
+          "statement": "Pour la fête de l'école, les élèves tracent quatre lignes de craie dans la cour. La ligne $(d_1) = (AB)$ est horizontale. La ligne $(d_2) = (CD)$ est verticale et coupe $(d_1)$ en $O$ à angle droit. La ligne $(d_3) = (EF)$ est horizontale, plus bas. La ligne $(d_4) = (GH)$ est oblique et coupe $(d_1)$ sans angle droit.",
+          "exercise_type": "evaluation",
+          "figure": "cour-traces",
+          "questions": [
+            {
+              "content": "Les lignes $(d_1)$ et $(d_3)$ sont horizontales et ne se coupent jamais. Comment sont-elles ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(d_1)$ et $(d_3)$, prolongées. Étape 2 — Chercher : elles n'ont aucun point commun. Étape 4 — Conclure : $(d_1) \\parallel (d_3)$. Elles ne sont pas sécantes puisqu'elles ne se coupent pas.",
+              "answers": [
+                {
+                  "content": "Parallèles",
+                  "correct": true
+                },
+                {
+                  "content": "Sécantes",
+                  "correct": false
+                },
+                {
+                  "content": "Perpendiculaires",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les lignes $(d_1)$ et $(d_2)$ se coupent en $O$ à angle droit. Quelle écriture est correcte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(d_1)$ et $(d_2)$. Étape 2 — Chercher : elles se coupent en $O$. Étape 3 — Vérifier : l'angle est droit. Étape 4 — Conclure : $(d_1) \\perp (d_2)$. De plus $O \\in (d_1)$, donc $O \\notin (d_1)$ est faux.",
+              "answers": [
+                {
+                  "content": "$(d_1) \\perp (d_2)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(d_1) \\parallel (d_2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(d_1) \\in (d_2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$O \\notin (d_1)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La ligne $(d_4)$ est oblique et coupe $(d_1)$ sans angle droit. Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Chercher : $(d_4)$ coupe $(d_1)$, elles ont un point commun : sécantes. Étape 3 — Vérifier : l'angle n'est pas droit, donc elles ne sont pas perpendiculaires. Étape 4 — Conclure. Parallèles est faux, car elles se coupent.",
+              "answers": [
+                {
+                  "content": "$(d_4)$ et $(d_1)$ sont sécantes",
+                  "correct": true
+                },
+                {
+                  "content": "$(d_4)$ et $(d_1)$ ne sont pas perpendiculaires",
+                  "correct": true
+                },
+                {
+                  "content": "$(d_4)$ et $(d_1)$ sont parallèles",
+                  "correct": false
+                },
+                {
+                  "content": "$(d_4)$ et $(d_1)$ sont perpendiculaires",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les lignes $(d_1)$ et $(d_3)$ sont parallèles. Combien ont-elles de points communs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : $(d_1)$ et $(d_3)$. Étape 2 — Chercher : des droites parallèles ne se coupent jamais. Étape 4 — Conclure : aucun point commun, la réponse est 0.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique comment vérifier avec une équerre que les lignes $(d_1)$ et $(d_2)$, qui se coupent en $O$, sont perpendiculaires.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Poser le coin de l'équerre au point $O$",
+                "Un côté de l'équerre le long de $(d_1)$, l'autre le long de $(d_2)$",
+                "Conclure que l'angle est droit, donc $(d_1) \\perp (d_2)$"
+              ],
+              "starter": "Je pose le coin de l'équerre",
+              "explanation": "Corrigé modèle : Je pose le coin de l'équerre au point $O$, où les deux lignes se coupent. Je place un côté de l'équerre le long de $(d_1)$. Si l'autre côté suit exactement $(d_2)$, l'angle est droit, donc $(d_1) \\perp (d_2)$. Barème : 1 point pour le coin posé en $O$ avec un côté sur chaque ligne, 1 point pour la conclusion.",
+              "answers": []
+            },
+            {
+              "content": "Yao dit : « Deux traits de craie qui ne se touchent pas sur le sol sont parallèles. » Que lui réponds-tu ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on prolonge les deux traits avec la règle. Étape 2 — Chercher : s'ils ont un point commun, les droites sont sécantes ; sinon elles sont parallèles. Étape 4 — Conclure : des traits qui ne se touchent pas sur le sol peuvent être sur des droites sécantes. Le dessin ne suffit pas.",
+              "answers": [
+                {
+                  "content": "Il faut les prolonger : s'ils se coupent, ils sont sécants",
+                  "correct": true
+                },
+                {
+                  "content": "Il a raison, des traits qui ne se touchent pas sont parallèles",
+                  "correct": false
+                },
+                {
+                  "content": "Il a raison, ils sont alors perpendiculaires",
+                  "correct": false
+                },
+                {
+                  "content": "Il a tort, ils sont forcément confondus",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Tracer une ligne parallèle dans la cour",
+          "statement": "Dans la cour, on place deux piquets $M$ et $N$ et on trace la droite $(MN)$ à la craie. Un piquet $P$ est placé exactement sur la craie, au-delà de $N$. Un piquet $R$ est placé à 1 m de la craie. Awa veut tracer une ligne passant par $R$, parallèle à $(MN)$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le piquet $P$ est sur la craie $(MN)$, au-delà de $N$. Que peut-on dire de $M$, $N$ et $P$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : $M$ et $N$. Étape 2 — Tracer : la droite $(MN)$. Étape 3 — Regarder : $P$ est exactement sur la craie, donc $P \\in (MN)$. Étape 4 — Conclure : $M$, $N$ et $P$ sont alignés.",
+              "answers": [
+                {
+                  "content": "Ils sont alignés",
+                  "correct": true
+                },
+                {
+                  "content": "Ils ne sont pas alignés",
+                  "correct": false
+                },
+                {
+                  "content": "Seuls $M$ et $N$ sont alignés",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le piquet $P$ est sur la droite $(MN)$, au-delà de $N$ (du côté opposé à $M$). Quelle écriture est correcte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer l'origine : $[MN)$ commence en $M$ et passe par $N$, $[NM)$ commence en $N$ et va vers $M$. Étape 4 — Vérifier le sens : $P$ est au-delà de $N$, du côté où $[MN)$ continue, donc $P \\in [MN)$. Mais $[NM)$ part de $N$ vers $M$ : $P$ est derrière son origine, donc $P \\notin [NM)$.",
+              "answers": [
+                {
+                  "content": "$P \\in [MN)$ et $P \\notin [NM)$",
+                  "correct": true
+                },
+                {
+                  "content": "$P \\in [NM)$ et $P \\notin [MN)$",
+                  "correct": false
+                },
+                {
+                  "content": "$P \\in [NM)$ et $P \\in [MN)$",
+                  "correct": false
+                },
+                {
+                  "content": "$P \\notin (MN)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le piquet $R$ est à 1 m de la droite $(MN)$. Alors $M$, $N$ et $R$ sont alignés.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Choisir : $M$ et $N$. Étape 2 — Tracer : la droite $(MN)$. Étape 3 — Regarder : $R$ est à 1 m de la droite, pas dessus. Étape 4 — Conclure : non alignés.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour tracer la parallèle à $(MN)$ passant par $R$.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Tracer $(MN)$ et placer $R$. Étape 2 — Tracer la perpendiculaire $(d_1)$ à $(MN)$ passant par $R$ avec l'équerre. Étape 3 — Tracer la perpendiculaire $(d_2)$ à $(d_1)$ passant par $R$. Étape 4 — Conclure : $(d_2)$ et $(MN)$ sont perpendiculaires à $(d_1)$, donc parallèles.",
+              "answers": [
+                {
+                  "content": "Tracer la droite $(MN)$ et placer le point $R$."
+                },
+                {
+                  "content": "Tracer la perpendiculaire $(d_1)$ à $(MN)$ passant par $R$."
+                },
+                {
+                  "content": "Tracer la perpendiculaire $(d_2)$ à $(d_1)$ passant par $R$."
+                },
+                {
+                  "content": "Conclure : $(d_2) \\parallel (MN)$."
+                }
+              ]
+            },
+            {
+              "content": "Le point $R$ n'est pas sur la droite $(MN)$. Combien de droites parallèles à $(MN)$ passent par $R$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Tracer la première perpendiculaire. Étape 3 — Tracer la seconde perpendiculaire. Étape 4 — Conclure : le tracé donne une seule droite. Il y a une seule parallèle à $(MN)$ passant par $R$.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa a tracé $(d_1) \\perp (MN)$ passant par $R$, puis $(d_2) \\perp (d_1)$ passant par $R$. Explique pourquoi $(d_2)$ est parallèle à $(MN)$.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dire que $(d_1)$ est perpendiculaire à $(MN)$",
+                "Dire que $(d_2)$ est perpendiculaire à $(d_1)$",
+                "Citer la propriété : deux droites perpendiculaires à une même droite sont parallèles",
+                "Conclure $(d_2) \\parallel (MN)$"
+              ],
+              "starter": "La droite $(d_1)$ est perpendiculaire à",
+              "explanation": "Corrigé modèle : La droite $(d_1)$ est perpendiculaire à $(MN)$. La droite $(d_2)$ est perpendiculaire à $(d_1)$. Or deux droites perpendiculaires à une même troisième droite sont parallèles. Donc $(d_2) \\parallel (MN)$. Barème : 1 point pour chacune des deux perpendicularités, 1 point pour la propriété citée et la conclusion.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur les droites et les points",
+          "notions": "point, droite, notation et appartenance ($\\in$, $\\notin$) ; demi-droite et son origine ; points alignés ; droites sécantes, perpendiculaires et parallèles ; tracé d'une perpendiculaire et d'une parallèle.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu connais le vocabulaire des points et des droites.",
+              "hint": "Un point se nomme par une majuscule, une droite par deux de ses points entre parenthèses.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Comment nomme-t-on un point ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on étudie le nom d'un point. Étape 3 — Choisir : un point se marque par une croix et se nomme par une lettre majuscule. Les parenthèses servent à nommer une droite, pas un point.",
+                  "answers": [
+                    {
+                      "content": "Par une lettre majuscule, comme $A$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par un chiffre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par deux lettres entre parenthèses",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par une lettre minuscule entre crochets",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment note-t-on la droite qui passe par les points $B$ et $C$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la droite passe par $B$ et $C$. Étape 4 — Écrire : on nomme la droite par deux de ses points entre parenthèses, $(BC)$. $[BC)$ est une demi-droite d'origine $B$.",
+                  "answers": [
+                    {
+                      "content": "$(BC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[BC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B \\in C$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{BC\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une droite a un début et une fin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : une droite se prolonge des deux côtés. Étape 4 — Conclure : elle n'a ni début ni fin. C'est une demi-droite qui a un début, l'origine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M$ est sur la droite $(d)$. On écrit : $M$ ___ $(d)$.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le point $M$ et la droite $(d)$. Étape 2 — Regarder : $M$ est sur la droite. Étape 3 — Choisir : $\\in$. Étape 4 — Écrire : $M \\in (d)$.",
+                  "answers": [
+                    {
+                      "content": "$\\in$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\notin$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par deux points distincts, il passe ___ seule droite.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : deux points distincts. Étape 2 — Regarder : la règle posée sur eux ne permet qu'un seul trait. Étape 4 — Écrire : il passe une seule droite.",
+                  "answers": [
+                    {
+                      "content": "une",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu nommes des demi-droites et tu reconnais leur origine.",
+              "hint": "La première lettre d'une demi-droite est son origine.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La demi-droite d'origine $T$ qui passe par $U$ se note :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : $T$. Étape 2 — Repérer un autre point : $U$. Étape 3 — Écrire : crochet, $T$, $U$, parenthèse, soit $[TU)$. Étape 4 — Vérifier le sens : elle va de $T$ vers $U$.",
+                  "answers": [
+                    {
+                      "content": "$[TU)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[UT)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(TU)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$TU$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les demi-droites $[AB)$ et $[BA)$ ont la même origine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer l'origine : $[AB)$ commence en $A$, $[BA)$ commence en $B$. Les origines sont différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La demi-droite $[KL)$ a pour origine le point ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer l'origine : dans $[KL)$, la première lettre est l'origine. L'origine est $K$.",
+                  "answers": [
+                    {
+                      "content": "K",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque écriture à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer l'origine. Étape 3 — Écrire : deux parenthèses pour une droite ; un crochet du côté de l'origine pour une demi-droite. $[XY)$ a son origine en $X$, $[YX)$ en $Y$.",
+                  "answers": [
+                    {
+                      "content": "$(XY)$",
+                      "match": "la droite qui passe par X et Y"
+                    },
+                    {
+                      "content": "$[XY)$",
+                      "match": "la demi-droite d'origine X qui passe par Y"
+                    },
+                    {
+                      "content": "$[YX)$",
+                      "match": "la demi-droite d'origine Y qui passe par X"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $K$, $L$ et $M$ sont alignés dans cet ordre : $L$ est entre $K$ et $M$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer l'origine de chaque demi-droite. Étape 4 — Vérifier le sens : $[KM)$ et $[KL)$ partent de $K$ vers $M$ et vers $L$, donc $L \\in [KM)$ et $M \\in [KL)$. $[LM)$ part de $L$ vers $M$ : $K$ est derrière $L$. $[LK)$ part de $L$ vers $K$ : $M$ est derrière $L$.",
+                  "answers": [
+                    {
+                      "content": "$L \\in [KM)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M \\in [KL)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$K \\in [LM)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M \\in [LK)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu reconnais des points alignés.",
+              "hint": "Trace la droite à la règle avant de conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que signifie « $D$, $E$ et $F$ sont alignés » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Regarder : on cherche si les trois points sont sur une même droite. Étape 4 — Conclure : alignés veut dire sur une même droite.",
+                  "answers": [
+                    {
+                      "content": "Les trois points sont sur une même droite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les trois points sont à égale distance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois points sont sur trois droites différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois points sont dans la même cour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il existe toujours une droite qui passe par deux points distincts donnés $S$ et $T$. Donc $S$ et $T$ sont alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : les deux points $S$ et $T$. Étape 2 — Tracer : la règle donne la droite $(ST)$. Étape 3 — Regarder : il n'y a pas d'autre point à vérifier. Étape 4 — Conclure : $S$ et $T$ sont alignés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $F$ est sur la droite $(DE)$. Que peut-on dire de $D$, $E$ et $F$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $D$ et $E$. Étape 2 — Tracer : la droite $(DE)$. Étape 3 — Regarder : $F$ est sur elle. Étape 4 — Conclure : $D$, $E$ et $F$ sont alignés.",
+                  "answers": [
+                    {
+                      "content": "Ils sont alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils ne sont pas alignés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seuls $D$ et $F$ sont alignés",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $F \\notin (DE)$, les points $D$, $E$ et $F$ ne sont pas ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Regarder : $F$ n'est pas sur la droite $(DE)$. Étape 4 — Conclure : les trois points ne sont pas alignés.",
+                  "answers": [
+                    {
+                      "content": "alignés",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier l'alignement de $X$, $Y$ et $Z$, remets les étapes dans l'ordre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Choisir deux points distincts. Étape 2 — Tracer la droite qui passe par eux avec la règle. Étape 3 — Regarder si le point restant est sur la droite. Étape 4 — Conclure : alignés si oui, non alignés sinon.",
+                  "answers": [
+                    {
+                      "content": "Choisir deux points distincts parmi $X$, $Y$, $Z$."
+                    },
+                    {
+                      "content": "Tracer, avec la règle, la droite qui passe par ces deux points."
+                    },
+                    {
+                      "content": "Regarder si le point restant est exactement sur cette droite."
+                    },
+                    {
+                      "content": "Conclure : alignés ou non alignés."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu nommes la position de deux droites et tu connais le tracé.",
+              "hint": "Cherche d'abord si les droites se coupent, puis vérifie l'angle droit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque écriture ou situation à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Conclure : $\\parallel$ désigne des droites qui ne se coupent jamais, $\\perp$ des droites qui se coupent à angle droit. Un seul point commun sans angle droit donne des droites sécantes, non perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "$(d) \\parallel (d')$",
+                      "match": "parallèles"
+                    },
+                    {
+                      "content": "$(d) \\perp (d')$",
+                      "match": "perpendiculaires"
+                    },
+                    {
+                      "content": "un seul point commun, sans angle droit",
+                      "match": "sécantes, non perpendiculaires"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites perpendiculaires à une même troisième droite sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : si $(d) \\perp (d_1)$ et $(d') \\perp (d_1)$, alors $(d) \\parallel (d')$. Elles ne se coupent pas.",
+                  "answers": [
+                    {
+                      "content": "Parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Perpendiculaires entre elles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Égales à la droite $(d_1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites parallèles ont un seul point commun.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher : des droites parallèles ne se coupent jamais, elles n'ont aucun point commun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tracer une perpendiculaire, on utilise une règle et une ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Tracer : on pose un côté de l'angle droit de l'équerre sur la droite, on la glisse jusqu'au point et on trace. L'équerre porte l'angle droit.",
+                  "answers": [
+                    {
+                      "content": "équerre",
+                      "correct": true
+                    },
+                    {
+                      "content": "rapporteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "ficelle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tracer la parallèle à une droite $(m)$ passant par un point $P$, combien de perpendiculaires traces-tu à la suite avec l'équerre ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire à $(m)$ passant par $P$. Étape 3 — Tracer la seconde perpendiculaire à la première, passant par $P$. Étape 4 — Conclure : la dernière est parallèle à $(m)$. Il y en a 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Lignes et alignements dans la vie courante",
+          "notions": "alignement d'étals au marché ; lignes d'un terrain de football (parallèles, perpendiculaires) ; demi-droite d'une piste ; tracé d'une parallèle dans le jardin scolaire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Treichville, la commerçante Mariam range ses étals. Les étals $A$, $B$ et $C$ sont placés le long d'un cordeau tendu, l'étal $D$ est un peu en retrait. Le cordeau tendu représente la droite $(AB)$.",
+              "hint": "Le cordeau tendu joue le rôle de la droite tracée à la règle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le cordeau tendu passe par les étals $A$ et $B$ et touche aussi l'étal $C$. Les étals $A$, $B$ et $C$ sont-ils alignés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : le cordeau est la droite $(AB)$. Étape 3 — Regarder : $C$ est sur le cordeau. Étape 4 — Conclure : alignés.",
+                  "answers": [
+                    {
+                      "content": "Oui, $C$ est sur la droite $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, il y a trop d'étals",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, $C$ est trop loin de $A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'étal $D$ est à 1 m du cordeau qui passe par $A$ et $B$. Les étals $A$, $B$ et $D$ sont-ils alignés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $D$ est à 1 m, pas sur la droite. Étape 4 — Conclure : non alignés.",
+                  "answers": [
+                    {
+                      "content": "Non, $D \\notin (AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, 1 m est une petite distance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $A$ et $B$ sont alignés",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les étals $A$, $B$ et $C$ sont alignés. On peut écrire $C \\in (AB)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : comme les trois étals sont alignés, $C$ est sur cette droite. Étape 4 — Écrire : $C \\in (AB)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les étals $A$, $B$ et $C$ sont alignés ; l'étal $D$ n'est pas sur le cordeau $(AB)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : $(AB)$, qui est aussi $(AC)$. Étape 3 — Regarder : $D$ n'est pas dessus. Étape 4 — Conclure : $D \\notin (AB)$ donc $D \\notin (AC)$, et $A$, $B$, $D$ ne sont pas alignés.",
+                  "answers": [
+                    {
+                      "content": "$D \\notin (AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$, $B$ et $C$ sont alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$, $B$ et $D$ sont alignés",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D \\in (AC)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Des étals placés le long d'un même cordeau tendu sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Regarder : tous les étals sont sur le même cordeau tendu, c'est-à-dire sur une même droite. Étape 4 — Conclure : ils sont alignés.",
+                  "answers": [
+                    {
+                      "content": "alignés",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur le terrain de football du quartier, les deux lignes de touche sont deux droites qui ne se coupent jamais. La ligne médiane coupe chaque ligne de touche à angle droit.",
+              "hint": "Pense aux bords d'une feuille : ils ne se coupent jamais.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les deux lignes de touche d'un terrain ne se coupent jamais, même prolongées. Comment sont-elles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les deux lignes prolongées. Étape 2 — Chercher : aucun point commun. Étape 4 — Conclure : parallèles.",
+                  "answers": [
+                    {
+                      "content": "Parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La ligne médiane coupe une ligne de touche en un point, à angle droit. Que peut-on dire des deux lignes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher : les lignes se coupent en un point. Étape 3 — Vérifier : l'angle est droit. Étape 4 — Conclure : perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "Elles sont perpendiculaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont confondues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles n'ont aucun point commun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La ligne médiane est perpendiculaire aux deux lignes de touche. Alors les deux lignes de touche sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la ligne médiane et les deux lignes de touche. Étape 2 — Chercher : la ligne médiane coupe chacune des lignes de touche. Étape 3 — Vérifier : à angle droit chaque fois. Étape 4 — Conclure : les deux lignes de touche sont perpendiculaires à la même droite, donc parallèles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La ligne médiane est perpendiculaire aux deux lignes de touche. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Chercher : la ligne médiane coupe chaque ligne de touche en un point. Étape 4 — Conclure : étant perpendiculaires à la même droite, les lignes de touche sont parallèles. Elles ne se coupent pas ; et la ligne médiane les coupe, donc elle ne leur est pas parallèle.",
+                  "answers": [
+                    {
+                      "content": "Les deux lignes de touche sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "La ligne médiane coupe chaque ligne de touche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux lignes de touche se coupent au centre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ligne médiane est parallèle aux lignes de touche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites perpendiculaires à une même troisième sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : si deux droites sont perpendiculaires à la même troisième, elles sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une piste de terre part du village $A$, passe par le village $B$ et continue sans fin vers le nord. La piste est traitée comme une demi-droite.",
+              "hint": "Dans $[AB)$, la première lettre est l'origine.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La piste part du village $A$, passe par $B$ et continue. Comment la nommer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : le village $A$. Étape 2 — Repérer un autre point : $B$. Étape 3 — Écrire : $[AB)$. Étape 4 — Vérifier le sens : la piste continue du côté de $B$.",
+                  "answers": [
+                    {
+                      "content": "$[AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[BA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un voyageur au village $B$ est sur la piste $[AB)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer l'origine : $A$. Étape 4 — Vérifier le sens : $B$ est un point par lequel la piste passe, donc $B \\in [AB)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village $C$ est placé sur la droite $(AB)$, mais derrière $A$, du côté opposé à $B$. Où est-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : $A$. Étape 4 — Vérifier le sens : $[AB)$ part de $A$ vers $B$ ; $C$ est derrière $A$, donc $C \\notin [AB)$. Mais $C$ est sur la droite $(AB)$, qui se prolonge des deux côtés.",
+                  "answers": [
+                    {
+                      "content": "Sur $(AB)$, mais pas sur $[AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur $[AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Hors de la droite $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur $[AB)$ et sur $[BA)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La piste $[AB)$ a pour origine le village ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer l'origine : dans $[AB)$, la première lettre est l'origine, soit $A$.",
+                  "answers": [
+                    {
+                      "content": "A",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village $M$ est placé sur une piste droite qui se prolonge des deux côtés. Il la partage en combien de demi-droites d'origine $M$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer l'origine : le point $M$. Étape 2 — Repérer un autre point de chaque côté de $O$. Étape 4 — Vérifier le sens : on obtient deux demi-droites de sens opposés. La réponse est 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans le jardin de l'école, les élèves veulent tracer une allée parallèle à la clôture $(d)$, passant par un piquet $A$ placé à 2 m de la clôture.",
+              "hint": "La seconde perpendiculaire se trace sur la première.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour tracer l'allée parallèle à $(d)$ passant par $A$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Tracer $(d)$ et placer $A$. Étape 2 — Tracer la première perpendiculaire $(d_1)$ passant par $A$. Étape 3 — Tracer la seconde perpendiculaire $(d_2)$ à $(d_1)$ passant par $A$. Étape 4 — Conclure : $(d_2)$ est parallèle à $(d)$.",
+                  "answers": [
+                    {
+                      "content": "Tracer $(d)$ et placer $A$."
+                    },
+                    {
+                      "content": "Tracer la perpendiculaire $(d_1)$ à $(d)$ passant par $A$."
+                    },
+                    {
+                      "content": "Tracer la perpendiculaire $(d_2)$ à $(d_1)$ passant par $A$."
+                    },
+                    {
+                      "content": "Conclure : $(d_2) \\parallel (d)$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel instrument les élèves utilisent-ils pour obtenir des angles droits ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tracer : on pose un côté de l'angle droit de l'équerre sur la droite et on la glisse jusqu'au point. Seule l'équerre porte l'angle droit.",
+                  "answers": [
+                    {
+                      "content": "Une équerre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un compas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cordeau seul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La première perpendiculaire $(d_1)$ tracée est déjà parallèle à la clôture $(d)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire : $(d_1)$ coupe $(d)$, elles ont un point commun. Elle n'est donc pas parallèle. Il faut tracer la seconde perpendiculaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On a tracé $(d_1) \\perp (d)$ puis $(d_2) \\perp (d_1)$ avec $A \\in (d_1)$ et $A \\in (d_2)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — $(d_1)$ coupe $(d)$. Étape 3 — $(d_2)$ est perpendiculaire à $(d_1)$. Étape 4 — Conclure : $(d_2)$ et $(d)$ sont perpendiculaires à la même droite $(d_1)$, donc parallèles.",
+                  "answers": [
+                    {
+                      "content": "$(d_2) \\parallel (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d)$ sont sécantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_2) \\perp (d)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1) \\parallel (d)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le piquet $P$ n'est pas sur la clôture $(c)$. Combien d'allées parallèles à $(c)$ passent par $P$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire. Étape 3 — Tracer la seconde perpendiculaire. Étape 4 — Conclure : une seule parallèle à $(c)$ passe par $P$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(d_2)$ et $(d)$, perpendiculaires à $(d_1)$, sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : deux droites perpendiculaires à la même droite sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "justifier un alignement ; déduire qu'il passe une seule droite par deux points ; raisonner sur les demi-droites ; déduire un parallélisme de deux perpendiculaires ; repérer une erreur de raisonnement.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu raisonnes sur des points alignés. Les points $A$, $B$, $C$ et $D$ sont distincts ; $A$, $B$ et $C$ sont alignés, et $A$, $B$ et $D$ sont alignés.",
+              "hint": "Par deux points distincts, il passe une seule droite.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les points $A$, $B$ et $C$ sont alignés, et $A$, $B$ et $D$ sont alignés ($A \\neq B$). Que peut-on dire de $C$ et de $D$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$, qui est la seule droite passant par eux. Étape 3 — Regarder : $C$ est sur elle puisque $A$, $B$, $C$ sont alignés, et $D$ aussi. Étape 4 — Conclure : $C$ et $D$ sont sur $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "$C$ et $D$ sont tous les deux sur la droite $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ et $D$ sont des points quelconques",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$ et $D$ sont sur deux droites différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$ est sur $(AB)$ mais pas $D$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$ et $C$ sont alignés, et $A$, $B$ et $D$ sont alignés ($A \\neq B$). Alors $A$, $C$ et $D$ sont alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : la droite $(AB)$. Étape 3 — Regarder : $C \\in (AB)$ et $D \\in (AB)$. Étape 4 — Conclure : $A$, $C$ et $D$ sont aussi sur cette même droite, donc alignés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $E$ n'est pas sur la droite $(AB)$. Que peut-on dire de $A$, $B$ et $E$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : $(AB)$. Étape 3 — Regarder : $E \\notin (AB)$. Étape 4 — Conclure : $A$, $B$ et $E$ ne sont pas alignés.",
+                  "answers": [
+                    {
+                      "content": "Ils ne sont pas alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont alignés, car $A$ et $B$ le sont",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont alignés si $E$ est proche de $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$ et $C$ sont alignés ($A \\neq B$). Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Tracer : par deux points distincts, il passe une seule droite, $(AB)$. Étape 3 — Regarder : $C$ est sur cette droite. Étape 4 — Conclure : $C \\in (AB)$, et la droite $(AC)$ est la même que $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "$C \\in (AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(AC) = (AB)$ si $C \\neq A$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C \\notin (AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il passe deux droites par $A$ et $B$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$ et $C$ sont alignés, et $A \\neq B$. Justifie que $C$ est sur la droite $(AB)$.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Dire que les trois points sont sur une même droite",
+                    "Dire que cette droite passe par $A$ et $B$ donc est $(AB)$",
+                    "Conclure $C \\in (AB)$"
+                  ],
+                  "starter": "Les trois points sont sur",
+                  "explanation": "Corrigé modèle : Les points $A$, $B$ et $C$ sont alignés, donc ils sont sur une même droite. Cette droite passe par $A$ et $B$ ; or par deux points distincts il passe une seule droite, $(AB)$. Donc cette droite est $(AB)$ et $C \\in (AB)$. Barème : 1 point pour la droite commune, 1 point pour l'unicité de la droite et la conclusion.",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu déduis des positions de droites. Les droites $(d)$ et $(d')$ sont toutes les deux perpendiculaires à la droite $(d_1)$.",
+              "hint": "Deux droites perpendiculaires à la même droite ne se coupent pas.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les droites $(d)$ et $(d')$ sont perpendiculaires à la même droite $(d_1)$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $(d)$ et $(d')$ sont perpendiculaires à $(d_1)$. Étape 2 — Chercher : deux droites perpendiculaires à une même droite ne se coupent pas. Étape 4 — Conclure : $(d) \\parallel (d')$.",
+                  "answers": [
+                    {
+                      "content": "$(d) \\parallel (d')$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d) \\perp (d')$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d)$ et $(d')$ sont sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d) = (d_1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $(d) \\perp (d_1)$, alors $(d)$ et $(d_1)$ sont sécantes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher : deux droites perpendiculaires se coupent en un point. Étape 3 — Vérifier : l'angle est droit. Étape 4 — Conclure : elles sont sécantes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $(d) \\perp (d_1)$ et $(d') \\perp (d_1)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Chercher : $(d_1)$ coupe $(d)$ et $(d')$ à angle droit. Étape 4 — Conclure : $(d) \\parallel (d')$, sans point commun. Elles ne se coupent pas, et $(d_1)$ n'est pas parallèle à $(d)$.",
+                  "answers": [
+                    {
+                      "content": "$(d)$ et $(d')$ n'ont aucun point commun",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ coupe $(d)$ et $(d')$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d)$ et $(d')$ se coupent en un point",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1)$ est parallèle à $(d)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dit : « Mes deux traits de craie ne se touchent pas, donc ils sont parallèles. » Quelle est la bonne réaction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on prolonge les deux traits avec la règle. Étape 2 — Chercher : s'ils se coupent, ils sont sécants ; sinon, parallèles. Étape 4 — Conclure : le dessin seul ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Il faut les prolonger avec la règle, puis chercher un point commun",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a raison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont confondus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On trace $(d_1) \\perp (d)$ puis $(d_2) \\perp (d_1)$. Alors $(d_2)$ et $(d)$ sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : $(d_2)$ et $(d)$ sont perpendiculaires à la même droite $(d_1)$, donc parallèles.",
+                  "answers": [
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu raisonnes sur des demi-droites. Les points $A$, $B$, $C$ et $D$ sont alignés dans cet ordre sur une même droite : $B$ est entre $A$ et $C$, $C$ est entre $B$ et $D$.",
+              "hint": "Pour chaque demi-droite, repère l'origine puis le sens.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les points $A$, $B$, $C$, $D$ sont alignés dans cet ordre. Le point $D$ appartient à :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : $[AB)$ commence en $A$. Étape 4 — Vérifier le sens : elle va de $A$ vers $B$ et continue au-delà, donc passe par $C$ et $D$. $[BA)$ et $[CB)$ vont du côté de $A$, et $[CA)$ aussi : $D$ est derrière leurs origines.",
+                  "answers": [
+                    {
+                      "content": "$[AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[BA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[CB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[CA)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$, $D$ sont alignés dans cet ordre. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer l'origine de chaque demi-droite. Étape 4 — Vérifier le sens : $[AB)$ va du côté de $D$, donc $C \\in [AB)$. $[DA)$ part de $D$ du côté de $A$ : $B \\in [DA)$. $[BC)$ va du côté de $D$ : $A \\notin [BC)$. Par contre $[BA)$ va du côté de $A$ : $D \\notin [BA)$, et $[CD)$ va du côté de $D$ : $A \\notin [CD)$.",
+                  "answers": [
+                    {
+                      "content": "$C \\in [AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B \\in [DA)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A \\notin [BC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D \\in [BA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A \\in [CD)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$, $D$ sont alignés dans cet ordre. Alors $[AB)$ et $[AC)$ sont la même demi-droite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer l'origine : les deux demi-droites commencent en $A$. Étape 4 — Vérifier le sens : $B$ et $C$ sont du même côté de $A$, sur la même droite. Elles sont identiques.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$, $D$ sont alignés dans cet ordre. Combien y a-t-il de droites passant par $A$ et $D$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $D$. Étape 2 — Tracer : par deux points distincts, il passe une seule droite, $(AD)$, qui est aussi $(AB)$ et $(BC)$.",
+                  "answers": [
+                    {
+                      "content": "Une seule",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$, $D$ sont alignés dans cet ordre. Les droites $(BC)$ et $(AD)$ sont la même droite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : $B$ et $C$. Étape 2 — Tracer : $(BC)$. Étape 3 — Regarder : $A$ et $D$ sont sur cette droite, puisque les quatre points sont alignés. Étape 4 — Conclure : $(BC) = (AD)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans chaque cas, tu repères l'erreur de raisonnement d'un élève.",
+              "hint": "Cherche ce que l'élève a oublié de vérifier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Koffi dit : « Les piquets $A$ et $B$ sont alignés, donc $A$, $B$ et $C$ sont alignés. » Où est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : $(AB)$. Étape 3 — Regarder : il faut vérifier que $C$ est sur la droite. Étape 4 — Conclure : l'alignement de $A$ et $B$ ne dit rien sur $C$.",
+                  "answers": [
+                    {
+                      "content": "Deux points sont toujours alignés : il faut regarder si $C$ est sur $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'y a pas d'erreur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut que $C$ soit au milieu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut que $A$ et $B$ soient proches",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dit : « Le point $K$ est après le bout de mon trait de craie, donc il n'est pas sur ma droite. » Où est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la droite et le point $K$. Étape 2 — Regarder : en prolongeant le trait avec la règle, on voit si la droite passe par $K$. Une droite n'a ni début ni fin, le bout du trait n'est pas le bout de la droite.",
+                  "answers": [
+                    {
+                      "content": "Une droite ne s'arrête pas au bout du trait : il faut la prolonger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'y a pas d'erreur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une droite est toujours plus courte que le trait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un point après le trait est toujours sur la droite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao confond $[AB)$ et $[BA)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer l'origine : la première lettre. $[AB)$ commence en $A$, $[BA)$ commence en $B$. Étape 4 — Vérifier le sens : elles partent dans des sens opposés, ce sont deux demi-droites différentes.",
+                  "answers": [
+                    {
+                      "content": "$[AB)$ a pour origine $A$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[BA)$ a pour origine $B$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[AB)$ et $[BA)$ sont la même demi-droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[BA)$ a pour origine $A$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou dit : « La perpendiculaire à $(d)$ passant par $A$ est la parallèle à $(d)$ passant par $A$. » Elle a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Tracer la première perpendiculaire : elle coupe $(d)$, elle n'est donc pas parallèle à $(d)$. Il faut une seconde perpendiculaire pour obtenir la parallèle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux traits de craie de 2 m ne se touchent pas. Explique pourquoi on ne peut pas encore dire qu'ils sont parallèles.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Dire qu'il faut prolonger les traits avec la règle",
+                    "Dire que s'ils se coupent alors ils sont sécants",
+                    "Conclure que le dessin seul ne suffit pas"
+                  ],
+                  "starter": "Pour savoir, je prolonge",
+                  "explanation": "Corrigé modèle : Les traits de craie sont des morceaux de droites. Pour savoir s'ils sont parallèles, je les prolonge avec la règle. S'ils se coupent, les droites sont sécantes ; s'ils ne se coupent jamais, elles sont parallèles. Le dessin seul ne permet pas de conclure. Barème : 1 point pour le prolongement, 1 point pour la conclusion selon qu'ils se coupent ou non.",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "point, droite et appartenance ; demi-droite ; points alignés ; droites sécantes, perpendiculaires et parallèles ; tracé d'une perpendiculaire et d'une parallèle.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur le plan de la cour, la droite $(AB)$ longe le préau. Les droites $(CD)$ et $(EF)$ sont perpendiculaires à $(AB)$, la coupent en $I$ et $K$. Le point $G$ est à l'écart des trois droites.",
+              "hint": "Un point d'intersection appartient aux deux droites.",
+              "exercise_type": "evaluation",
+              "figure": "plan-cour",
+              "questions": [
+                {
+                  "content": "La droite $(CD)$ est perpendiculaire à $(AB)$ en $I$. Quelle écriture est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le point $I$ et la droite $(CD)$. Étape 2 — Regarder : $I$ est le point d'intersection de $(AB)$ et $(CD)$, donc il est sur $(CD)$. Étape 3 — Choisir : $\\in$. Étape 4 — Écrire : $I \\in (CD)$.",
+                  "answers": [
+                    {
+                      "content": "$I \\in (CD)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I \\notin (CD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(CD) \\in I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I = (CD)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(CD)$ et $(EF)$ sont toutes deux perpendiculaires à $(AB)$. Elles sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : deux droites perpendiculaires à la même droite $(AB)$ sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $G$ est à l'écart des droites $(AB)$, $(CD)$ et $(EF)$. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Regarder : aucune des trois droites ne passe par $G$. Étape 3 — Choisir : $\\notin$ pour chacune. Étape 4 — Écrire : $G \\notin (AB)$, $G \\notin (CD)$ et $G \\notin (EF)$.",
+                  "answers": [
+                    {
+                      "content": "$G \\notin (AB)$, $G \\notin (CD)$ et $G \\notin (EF)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G \\in (AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G \\in (CD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G \\in (EF)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(AB)$ coupe $(CD)$ en $I$ et $(EF)$ en $K$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Regarder : $I$ est le point commun de $(AB)$ et $(CD)$ ; $K$ est le point commun de $(AB)$ et $(EF)$. Étape 3 — Choisir : $I \\in (AB)$ et $K \\in (EF)$. Comme $(CD) \\parallel (EF)$, ces deux droites n'ont aucun point commun : $K \\notin (CD)$ et $I \\notin (EF)$.",
+                  "answers": [
+                    {
+                      "content": "$I \\in (AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$K \\in (EF)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$K \\in (CD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I \\in (EF)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le plan, deux couloirs ont pour bords les droites parallèles $(m)$ et $(n)$. Combien de points ces deux droites ont-elles en commun ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $(m)$ et $(n)$. Étape 2 — Chercher : des droites parallèles ne se coupent jamais. Étape 4 — Conclure : aucun point commun, la réponse est 0.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Les lignes de craie de la cour : $(d_1) = (AB)$ horizontale, $(d_2) = (CD)$ verticale coupant $(d_1)$ en $O$ à angle droit, $(d_3) = (EF)$ horizontale plus bas, $(d_4) = (GH)$ oblique coupant $(d_1)$ sans angle droit.",
+              "hint": "Cherche d'abord un point commun, puis l'angle droit.",
+              "exercise_type": "evaluation",
+              "figure": "cour-traces",
+              "questions": [
+                {
+                  "content": "Relie chaque paire de lignes à sa position.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Chercher les points communs. $(d_1)$ et $(d_2)$ se coupent en $O$ à angle droit : perpendiculaires. $(d_1)$ et $(d_3)$ ne se coupent pas : parallèles. $(d_1)$ et $(d_4)$ se coupent sans angle droit : sécantes, non perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "$(d_1)$ et $(d_2)$",
+                      "match": "perpendiculaires"
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_3)$",
+                      "match": "parallèles"
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_4)$",
+                      "match": "sécantes, non perpendiculaires"
+                    }
+                  ]
+                },
+                {
+                  "content": "La ligne $(d_4)$ est oblique et coupe $(d_1)$ sans angle droit. Elles sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher : elles se coupent, elles ont un point commun. Étape 4 — Conclure : sécantes, pas parallèles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les lignes $(d_1)$ et $(d_3)$ ne se coupent jamais : $(d_1)$ ___ $(d_3)$.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Chercher : aucun point commun. Étape 4 — Écrire : $(d_1) \\parallel (d_3)$.",
+                  "answers": [
+                    {
+                      "content": "$\\parallel$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\perp$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $O$ est sur $(d_1)$ et sur $(d_2)$ : on dit que $O$ est leur point d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher : $O$ est le seul point commun aux deux lignes. On l'appelle leur point d'intersection.",
+                  "answers": [
+                    {
+                      "content": "intersection",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La ligne $(d_3)$ est horizontale et $(d_2)$ est verticale, elle coupe aussi $(d_3)$. Quelle est la position de $(d_3)$ et $(d_2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $(d_3)$ et $(d_2)$. Étape 2 — Chercher : elles se coupent. Étape 3 — Vérifier : $(d_3)$ est horizontale et $(d_2)$ verticale, l'angle est droit. Étape 4 — Conclure : $(d_3) \\perp (d_2)$.",
+                  "answers": [
+                    {
+                      "content": "Perpendiculaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sécantes, non perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Mariam plante des arbustes $A$, $B$, $C$ et $D$ le long d'une allée. Les arbustes $A$, $B$ et $C$ sont alignés dans cet ordre ; l'arbuste $D$ n'est pas sur la droite $(AB)$.",
+              "hint": "Trace la droite à la règle avant de dire que des points sont alignés.",
+              "exercise_type": "evaluation",
+              "figure": "cour-alignes",
+              "questions": [
+                {
+                  "content": "Les arbustes $A$, $B$ et $C$ sont alignés dans cet ordre. Le point $C$ appartient à :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'origine : $[AB)$ commence en $A$. Étape 4 — Vérifier le sens : $B$ est entre $A$ et $C$, donc $[AB)$ passe par $B$ puis par $C$. $[BA)$ va dans l'autre sens.",
+                  "answers": [
+                    {
+                      "content": "$[AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[BA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[AD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune demi-droite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $D$ n'est pas sur $(AB)$. Alors $A$, $B$ et $D$ ne sont pas alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : $(AB)$. Étape 3 — Regarder : $D$ n'est pas dessus. Étape 4 — Conclure : non alignés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les arbustes $A$, $B$ et $C$ sont alignés dans cet ordre ; $D \\notin (AB)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Tracer : $(AB)$ est aussi $(BC)$ et $(AC)$. Étape 3 — Regarder : $C \\in (AB)$, mais $D \\notin (AB)$ donc $D \\notin (BC)$ et $D \\notin (AC)$. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "$C \\in (AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$, $B$ et $D$ ne sont pas alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D \\in (BC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$, $C$ et $D$ sont alignés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les arbustes $A$, $B$ et $C$ sont alignés. Combien de droites passent par les trois à la fois ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : $A$ et $B$. Étape 2 — Tracer : une seule droite passe par eux, $(AB)$. Étape 3 — Regarder : $C$ y est. Étape 4 — Conclure : une seule droite.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour tracer la parallèle à $(AB)$ passant par $D$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Tracer $(AB)$ et placer $D$. Étape 2 — Tracer la perpendiculaire $(d_1)$ à $(AB)$ passant par $D$. Étape 3 — Tracer la perpendiculaire $(d_2)$ à $(d_1)$ passant par $D$. Étape 4 — Conclure : $(d_2)$ est parallèle à $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "Tracer $(AB)$ et placer $D$."
+                    },
+                    {
+                      "content": "Tracer la perpendiculaire $(d_1)$ à $(AB)$ passant par $D$."
+                    },
+                    {
+                      "content": "Tracer la perpendiculaire $(d_2)$ à $(d_1)$ passant par $D$."
+                    },
+                    {
+                      "content": "Conclure : $(d_2) \\parallel (AB)$."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan : tu mobilises le vocabulaire et les notations vus dans la leçon.",
+              "hint": "Relis les définitions de la fiche avant de répondre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque notation à son sens.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Écrire : $\\in$ relie un point à une droite. Le crochet de $[AB)$ est du côté de l'origine $A$. $\\parallel$ signifie « ne se coupent jamais » et $\\perp$ « se coupent à angle droit ».",
+                  "answers": [
+                    {
+                      "content": "$A \\in (d)$",
+                      "match": "le point A est sur la droite (d)"
+                    },
+                    {
+                      "content": "$[AB)$",
+                      "match": "la demi-droite d'origine A passant par B"
+                    },
+                    {
+                      "content": "$(d) \\parallel (d')$",
+                      "match": "les droites ne se coupent jamais"
+                    },
+                    {
+                      "content": "$(d) \\perp (d')$",
+                      "match": "les droites se coupent à angle droit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point $A$ est donné. Combien de droites passent par $A$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : un seul point. Étape 2 — Regarder : la règle peut pivoter autour de $A$ dans toutes les directions. Étape 4 — Conclure : une infinité de droites passent par $A$.",
+                  "answers": [
+                    {
+                      "content": "Une infinité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les demi-droites $[AB)$ et $[BA)$ forment ensemble la droite $(AB)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer l'origine : $[AB)$ part de $A$ vers $B$ et au-delà, $[BA)$ part de $B$ vers $A$ et au-delà. Étape 4 — Vérifier le sens : ensemble elles couvrent toute la droite $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites ont un seul point commun et forment un angle droit. Elles sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher : un seul point commun, sécantes. Étape 3 — Vérifier : angle droit. Étape 4 — Conclure : perpendiculaires, ce qui est une façon particulière d'être sécantes.",
+                  "answers": [
+                    {
+                      "content": "Perpendiculaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement sécantes, jamais perpendiculaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'écriture $A \\notin (d)$, le point $A$ n'___ pas à la droite $(d)$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Choisir : $\\notin$ est le contraire de $\\in$ (« appartient à »). Étape 4 — Écrire : le point $A$ n'appartient pas à la droite $(d)$.",
+                  "answers": [
+                    {
+                      "content": "appartient",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : une droite se prolonge des deux côtés, elle n'a ni début ni fin. Une demi-droite commence à son origine et continue d'un seul côté. Elle n'a donc pas deux extrémités, et par deux points distincts il passe une seule droite.",
+                  "answers": [
+                    {
+                      "content": "Une droite n'a ni début ni fin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une demi-droite a une origine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une demi-droite a deux extrémités",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par deux points distincts, il passe deux droites",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3631 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — Les sources de l'histoire",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "familles-sources",
+          "kind": "diagram",
+          "description": "Un arbre qui range les sources de l'histoire en quatre familles : écrites (lettre, registre, journal), orales (récit du griot, conte, proverbe), archéologiques (poterie, outil, ruines) et iconographiques (photographie, dessin, affiche).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "racine",
+                "label": "Les sources de l'histoire"
+              },
+              {
+                "id": "ecrites",
+                "label": "Sources écrites"
+              },
+              {
+                "id": "orales",
+                "label": "Sources orales"
+              },
+              {
+                "id": "archeo",
+                "label": "Sources archéologiques"
+              },
+              {
+                "id": "icono",
+                "label": "Sources iconographiques"
+              },
+              {
+                "id": "e1",
+                "label": "Lettre, registre, journal"
+              },
+              {
+                "id": "o1",
+                "label": "Récit du griot, conte, proverbe"
+              },
+              {
+                "id": "a1",
+                "label": "Poterie, outil, ruines"
+              },
+              {
+                "id": "i1",
+                "label": "Photographie, dessin, affiche"
+              }
+            ],
+            "edges": [
+              {
+                "from": "racine",
+                "to": "ecrites"
+              },
+              {
+                "from": "racine",
+                "to": "orales"
+              },
+              {
+                "from": "racine",
+                "to": "archeo"
+              },
+              {
+                "from": "racine",
+                "to": "icono"
+              },
+              {
+                "from": "ecrites",
+                "to": "e1"
+              },
+              {
+                "from": "orales",
+                "to": "o1"
+              },
+              {
+                "from": "archeo",
+                "to": "a1"
+              },
+              {
+                "from": "icono",
+                "to": "i1"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "critique-source",
+          "kind": "diagram",
+          "description": "Un schéma en quatre étapes pour critiquer une source : identifier l'auteur et la date, chercher pourquoi l'auteur l'a produite, comparer avec une autre source sur le même sujet, puis conclure en distinguant ce qui est sûr de ce qui reste à vérifier.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "s1",
+                "label": "1. Identifier l'auteur et la date"
+              },
+              {
+                "id": "s2",
+                "label": "2. Chercher pourquoi il l'a produite"
+              },
+              {
+                "id": "s3",
+                "label": "3. Comparer avec une autre source"
+              },
+              {
+                "id": "s4",
+                "label": "4. Conclure : sûr ou à vérifier"
+              }
+            ],
+            "edges": [
+              {
+                "from": "s1",
+                "to": "s2"
+              },
+              {
+                "from": "s2",
+                "to": "s3"
+              },
+              {
+                "from": "s3",
+                "to": "s4"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les sources écrites",
+          "remember": "Une **source écrite** est un document qui porte de l'écriture : une lettre, un journal, un registre, un acte de naissance, une loi, un cahier. Les **archives** sont les lieux où l'on conserve les anciens documents écrits.\n\nLes sources écrites donnent souvent des noms, des dates et des chiffres. Mais **écrit ne veut pas dire vrai** : l'auteur peut se tromper ou vouloir convaincre. L'historien lit donc chaque document avec attention.",
+          "method": [
+            "Nommer la nature du document (lettre, journal, registre, loi…).",
+            "Relever l'auteur et la date, s'ils sont donnés.",
+            "Dégager ce que le texte apprend sur le passé."
+          ],
+          "example": {
+            "statement": "Document écrit pour Lnclass. Registre d'appel de l'école de Kolia. Le 12 octobre, le directeur Traoré écrit : « 42 élèves présents sur 45. Trois élèves sont absents à cause de la pluie. » Étudie ce document.",
+            "steps": [
+              "Nommer : c'est un registre d'appel, un document qui porte de l'écriture. C'est donc une source écrite.",
+              "Relever : l'auteur est le directeur Traoré ; la date est le 12 octobre.",
+              "Dégager : ce jour-là, 42 élèves sur 45 sont venus. La pluie pouvait empêcher des élèves d'aller à l'école."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'un document est vrai parce qu'il est écrit. Contre-exemple : un journal annonce 500 personnes au marché, un autre journal annonce 800 personnes. Les deux sont écrits, mais ils ne peuvent pas être tous les deux exacts. Pour éviter l'erreur, relève toujours l'auteur et compare avec une autre source.",
+          "figure": "familles-sources",
+          "practice": {
+            "statement": "Tu t'entraînes à étudier une source écrite avec la méthode : nommer, relever l'auteur et la date, dégager ce qu'elle apprend.",
+            "questions": [
+              {
+                "content": "Un directeur d'école note chaque jour dans un registre les élèves présents. De quelle sorte de source s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer : un registre est un document qui porte de l'écriture, c'est une source écrite. Une source orale est une parole, une source archéologique est un objet ou un vestige, une source iconographique est une image.",
+                "answers": [
+                  {
+                    "content": "Une source écrite",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une source orale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source archéologique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source iconographique",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde si le document porte de l'écriture."
+              },
+              {
+                "content": "Un document qui porte de l'écriture, comme une lettre ou un registre, est une source ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Nommer la nature du document : une lettre, un registre ou un journal portent de l'écriture. On les appelle des sources écrites.",
+                "answers": [
+                  {
+                    "content": "écrite",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot s'accorde avec « source »."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour étudier une source écrite.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Nommer : on commence par dire ce qu'est le document. Étape 2 — Relever : on note qui a écrit et quand. Étape 3 — Dégager : on dit ce que le texte apprend.",
+                "answers": [
+                  {
+                    "content": "Nommer la nature du document"
+                  },
+                  {
+                    "content": "Relever l'auteur et la date"
+                  },
+                  {
+                    "content": "Dégager ce que le texte apprend sur le passé"
+                  }
+                ],
+                "hint": "On commence par dire ce qu'est le document."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître et lire une source écrite",
+              "statement": "Dans cet exercice, tu reconnais des sources écrites et tu dis ce qu'elles apprennent.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces documents, lequel est une source écrite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer la nature du document : une lettre porte de l'écriture, c'est une source écrite. Le récit du griot est une parole (source orale), la poterie est un objet (source archéologique), la peinture est une image (source iconographique).",
+                  "answers": [
+                    {
+                      "content": "Une lettre écrite par un directeur d'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un récit raconté par un griot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une poterie trouvée en fouille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un tableau peint sur toile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels documents sont des sources écrites ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Nommer : un journal et un acte de naissance portent de l'écriture. Un chant se dit à voix haute (source orale) et une photographie est une image (source iconographique).",
+                  "answers": [
+                    {
+                      "content": "Un journal publié un lundi",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un acte de naissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un chant de travail des tisserands",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une photographie de la place du marché",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque extrait à la nature du document.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Nommer la nature du document d'après sa forme : une liste de présents est un registre, un message adressé à un ami est une lettre, un texte divisé en articles est un règlement.",
+                  "answers": [
+                    {
+                      "content": "« Ce lundi, 42 élèves sont présents. »",
+                      "match": "Un registre d'appel"
+                    },
+                    {
+                      "content": "« Cher ami, je t'écris pour te dire que la récolte est bonne. »",
+                      "match": "Une lettre"
+                    },
+                    {
+                      "content": "« Article 1 : l'école est ouverte à tous. »",
+                      "match": "Un règlement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le 12 octobre, le directeur Traoré écrit dans le registre : « Trois élèves sont absents à cause de la pluie. » Que nous apprend ce registre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Dégager ce que le texte apprend : trois élèves ont manqué à cause de la pluie, donc la pluie pouvait gêner la vie de l'école. Rien n'indique que l'école est fermée ni que tous les élèves manquent (Étape 2 — Relever : l'auteur est le directeur).",
+                  "answers": [
+                    {
+                      "content": "La pluie pouvait empêcher des élèves de venir à l'école ce jour-là",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie a fermé l'école pour toujours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les élèves étaient absents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le directeur n'a pas dit la vérité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un document est écrit, alors tout ce qu'il dit est vrai.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever l'auteur : un auteur peut se tromper ou vouloir convaincre. Contre-exemple : un journal annonce 500 personnes au marché et un autre en annonce 800 ; ils ne peuvent pas être tous les deux exacts. Il faut comparer avec une autre source.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire des sources écrites au musée",
+              "statement": "Dans cet exercice, tu étudies des sources écrites vues pendant une visite de musée (documents écrits pour Lnclass).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Au musée, Koffi voit sous une vitrine un vieux cahier d'écolier plein de dates et de noms. Quelle sorte de source est ce cahier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : un cahier porte de l'écriture, c'est une source écrite. Même s'il est conservé dans un musée à côté d'objets, il reste un document écrit, pas un objet de fouille.",
+                  "answers": [
+                    {
+                      "content": "Une source écrite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source orale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source archéologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source iconographique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les lieux où l'on conserve les anciens documents écrits d'une ville s'appellent les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : les anciens documents écrits (lettres, registres, actes) sont gardés dans les archives. Ce mot sert à retrouver où se trouvent les sources écrites.",
+                  "answers": [
+                    {
+                      "content": "archives",
+                      "correct": true
+                    },
+                    {
+                      "content": "les archives",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels documents peuvent être des sources écrites ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Nommer : une lettre, un journal et un registre portent de l'écriture. Un chant de griot est une parole (source orale) et un outil en pierre est un objet (source archéologique).",
+                  "answers": [
+                    {
+                      "content": "Une lettre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un journal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un registre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un chant de griot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un outil en pierre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le registre de Kolia indique : « 42 élèves présents sur 45 ». Combien d'élèves sont absents ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Dégager ce que le texte apprend : il y a 45 élèves inscrits et 42 présents, donc 45 − 42 = 3 élèves absents. Étape 1 — Nommer : le registre est une source écrite qui donne des chiffres.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Une lettre écrite par un témoin le lendemain d'un événement est une source écrite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : une lettre porte de l'écriture, c'est une source écrite. Étape 2 — Relever : l'auteur est un témoin et la date est le lendemain, ce qui rend la source utile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux journaux parlent du même marché : l'un annonce 500 personnes, l'autre 800 personnes. Que faut-il en conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever l'auteur et la date de chaque journal, puis Étape 3 — Dégager ce qu'ils apprennent : deux chiffres différents sur le même marché ne peuvent pas être tous deux exacts. Croire une source parce qu'elle est écrite est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Les deux sont écrits, mais ils ne peuvent pas être tous les deux exacts : il faut les comparer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux sont vrais puisqu'ils sont écrits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plus long des deux est le vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les journaux ne sont pas des sources",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque document, pose-toi trois questions : qu'est-ce que c'est, qui l'a écrit et quand, qu'apprend-il ?"
+            }
+          ]
+        },
+        {
+          "name": "Les sources orales",
+          "remember": "Une **source orale** est une information transmise par la parole : un récit, un conte, une légende, un proverbe, un chant, une généalogie (la liste des ancêtres d'une famille).\n\nDans plusieurs peuples d'Afrique de l'Ouest, le **griot** garde et transmet de bouche à oreille l'histoire d'un peuple ou d'une famille. Un **témoin** est une personne qui a vu ou vécu un événement.\n\nUne source orale n'a pas besoin d'écriture. Mais en passant de bouche en bouche, un récit peut changer un peu : on le vérifie avec d'autres sources.",
+          "method": [
+            "Identifier qui parle et de qui il tient son récit.",
+            "Noter le genre de la parole (récit, conte, proverbe, chant, généalogie).",
+            "Relever ce que la parole apprend sur le passé du groupe."
+          ],
+          "example": {
+            "statement": "Document écrit pour Lnclass. Le griot Bakary raconte aux élèves la fondation du village de Sikoro : « Mon grand-père me l'a raconté, et son père le lui avait dit. Les premiers habitants se sont installés près du fleuve, car la terre y était bonne. » Étudie cette parole.",
+            "steps": [
+              "Identifier : celui qui parle est le griot Bakary ; il tient son récit de son grand-père, qui le tenait de son père.",
+              "Noter : c'est un récit sur l'origine du village, donc une source orale.",
+              "Relever : les premiers habitants de Sikoro se sont installés près du fleuve parce que la terre y était bonne."
+            ]
+          },
+          "pitfall": "Ne dis pas qu'une source orale ne vaut rien parce qu'elle n'est pas écrite. C'est une vraie source, souvent la seule pour le passé de peuples qui n'écrivaient pas. Mais ne la crois pas sans vérifier : un récit répété peut changer. Contre-exemple : dans le jeu du téléphone, « Koffi achète trois mangues » devient « Koffi a perdu ses mangues » après quelques bouches.",
+          "figure": "familles-sources",
+          "practice": {
+            "statement": "Tu t'entraînes à étudier une source orale avec la méthode : identifier qui parle, noter le genre, relever ce qu'elle apprend.",
+            "questions": [
+              {
+                "content": "Le griot Bakary raconte aux élèves l'histoire du village, que son grand-père lui a apprise. Quelle sorte de source est ce récit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier qui parle : le griot Bakary, qui tient son récit de son grand-père. Étape 2 — Noter le genre : un récit transmis par la parole est une source orale, pas une source écrite.",
+                "answers": [
+                  {
+                    "content": "Une source orale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une source écrite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source archéologique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source iconographique",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le récit passe par la parole."
+              },
+              {
+                "content": "Une personne qui a vu ou vécu un événement en est un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier qui parle : celui qui a vu ou vécu l'événement en est le témoin. Un témoin est précieux, mais il peut se tromper ou oublier.",
+                "answers": [
+                  {
+                    "content": "témoin",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce mot sert aussi au tribunal."
+              },
+              {
+                "content": "Relie chaque parole à son genre.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Noter le genre : l'histoire qui commence par « Il était une fois » est un conte ; la liste « fils de… fils de… » est une généalogie ; ce qu'on chante en travaillant est un chant.",
+                "answers": [
+                  {
+                    "content": "« Il était une fois une araignée rusée… »",
+                    "match": "Un conte"
+                  },
+                  {
+                    "content": "« Le fils de Sékou, fils de Moussa, fils de Karim… »",
+                    "match": "Une généalogie"
+                  },
+                  {
+                    "content": "Ce que les femmes chantent en pilant le mil",
+                    "match": "Un chant"
+                  }
+                ],
+                "hint": "Observe la forme de chaque parole."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître et lire une source orale",
+              "statement": "Dans cet exercice, tu reconnais des sources orales et tu dis ce qu'elles apprennent.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces sources, laquelle est orale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Noter le genre de la parole : un récit raconté par un ancien est une source orale. Le registre est écrit, le mur en ruine est un vestige (source archéologique), la photographie est une image.",
+                  "answers": [
+                    {
+                      "content": "Le récit d'un ancien sur la fondation du village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un registre d'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mur en ruine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une photographie ancienne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles paroles sont des sources orales ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Noter le genre : un conte et un proverbe se disent et se transmettent par la parole. Une lettre est écrite et une poterie est un objet.",
+                  "answers": [
+                    {
+                      "content": "Un conte transmis par les grands-parents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un proverbe répété de génération en génération",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lettre de cinq lignes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une poterie cassée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans plusieurs peuples d'Afrique de l'Ouest, quel est le rôle du griot ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier qui parle : le griot est celui qui garde la mémoire d'un groupe et la transmet par la parole. Faire des fouilles est le travail de l'archéologue, pas du griot.",
+                  "answers": [
+                    {
+                      "content": "Il garde et transmet de bouche à oreille l'histoire d'un peuple ou d'une famille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il fabrique les outils de la famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fait des fouilles dans la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il écrit les lois de l'État",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la chaîne de transmission d'un récit oral.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier qui parle : le récit passe d'abord de l'ancien à son fils, puis aux enfants de celui-ci, et arrive enfin au griot qui le dit à l'élève. À chaque passage, le récit peut un peu changer.",
+                  "answers": [
+                    {
+                      "content": "Un ancien vit ou apprend l'événement"
+                    },
+                    {
+                      "content": "Il le raconte à son fils"
+                    },
+                    {
+                      "content": "Ses descendants le transmettent de génération en génération jusqu'au griot"
+                    },
+                    {
+                      "content": "Un élève l'entend aujourd'hui de la bouche du griot"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une source orale ne vaut rien parce qu'elle n'est pas écrite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Relever ce que la parole apprend : une source orale apprend beaucoup sur le passé d'un groupe et reste parfois la seule source. Il faut seulement la vérifier, car un récit répété peut changer, comme dans le jeu du téléphone.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Écouter le griot comme un historien",
+              "statement": "Dans cet exercice, tu écoutes un récit comme le fait un historien (documents écrits pour Lnclass).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que faut-il retenir de la phrase du griot Bakary : « Mon grand-père me l'a raconté, et son père le lui avait dit » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier qui parle et de qui il tient son récit : le griot le tient de son grand-père, qui le tenait de son père. Ce n'est ni un livre ni un témoignage direct.",
+                  "answers": [
+                    {
+                      "content": "Le récit passe de bouche à oreille, de génération en génération",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le griot a lu le récit dans un livre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le griot a vu l'événement lui-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récit vient d'une fouille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récit qui passe de bouche à oreille peut ___ un peu en passant d'une personne à l'autre.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Relever ce que la parole apprend, avec prudence : un récit répété peut changer, comme « Koffi achète trois mangues » qui devient « Koffi a perdu ses mangues ». Il ne devient pas imprimé et ne reste pas sous terre.",
+                  "answers": [
+                    {
+                      "content": "changer",
+                      "correct": true
+                    },
+                    {
+                      "content": "être imprimé",
+                      "correct": false
+                    },
+                    {
+                      "content": "rester sous terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles paroles sont des sources orales ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Noter le genre : une généalogie récitée, un conte et un chant se transmettent par la parole. Un registre est écrit et un outil est un objet.",
+                  "answers": [
+                    {
+                      "content": "Une généalogie récitée par un griot",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un conte du soir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un chant de travail",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un registre de naissances",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un outil en fer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque exemple à sa sorte de source.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Noter le genre : le récit d'un ancien est transmis par la parole (orale) ; une lettre porte de l'écriture (écrite) ; un pot retrouvé en fouille est un objet (archéologique).",
+                  "answers": [
+                    {
+                      "content": "Le récit d'un ancien",
+                      "match": "Source orale"
+                    },
+                    {
+                      "content": "La lettre d'un chef de village",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "Un pot retrouvé en fouille",
+                      "match": "Source archéologique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un témoin est une personne qui a vu ou vécu un événement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier qui parle : le témoin parle de ce qu'il a vu ou vécu lui-même. Celui qui répète ce qu'on lui a dit n'est pas un témoin direct de l'événement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le jeu du téléphone, « Koffi achète trois mangues » devient « Koffi a perdu ses mangues ». Ce jeu montre qu'un message oral peut se ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Relever ce que la parole apprend avec prudence : le message du jeu change en passant de bouche en bouche. Une source orale peut donc se déformer, et on la compare avec d'autres sources.",
+                  "answers": [
+                    {
+                      "content": "déformer",
+                      "correct": true
+                    },
+                    {
+                      "content": "changer",
+                      "correct": true
+                    },
+                    {
+                      "content": "transformer",
+                      "correct": true
+                    },
+                    {
+                      "content": "modifier",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Quand tu écoutes un récit, demande-toi : qui parle, de qui tient-il son récit, et que raconte-t-il ?"
+            }
+          ]
+        },
+        {
+          "name": "Les sources archéologiques et iconographiques",
+          "remember": "Une **source archéologique** est un objet ou un vestige retrouvé dans la terre : un outil, une poterie, un bijou, des ossements, un mur en ruine. Le **vestige** est le reste d'un bâtiment ou d'un lieu ancien. L'**archéologue** cherche ces traces par des **fouilles** et les étudie. Elles sont souvent les seules traces des temps très anciens.\n\nUne **source iconographique** est une image : une peinture, un dessin, une gravure, une photographie, une affiche. Elle montre des vêtements, des outils, des maisons. Mais celui qui la fait choisit ce qu'il montre.\n\nLe **musée** conserve ces objets et ces images et les présente au public.",
+          "method": [
+            "Nommer la sorte de source (objet, vestige ou image).",
+            "Décrire ce que l'on voit : matière, forme, usage possible.",
+            "Déduire ce que cette trace apprend sur la vie des gens."
+          ],
+          "example": {
+            "statement": "Fiche de musée écrite pour Lnclass : « Pot en terre cuite à large panse, trouvé en fouille dans un ancien village. Le fond porte des traces de suie. » Étudie cet objet.",
+            "steps": [
+              "Nommer : c'est un objet retrouvé en fouille, donc une source archéologique.",
+              "Décrire : c'est un pot en terre cuite, à large panse, dont le fond est noirci par la suie.",
+              "Déduire : la suie vient du feu, donc on posait ce pot sur le feu pour cuire. Les habitants de cet ancien village cuisaient leurs repas dans des pots."
+            ]
+          },
+          "pitfall": "Un objet ou une image ne dit pas tout. Contre-exemple : sur une photographie de fête, on compte 10 personnes, mais le photographe a cadré un coin de la place qui peut en contenir 200. Une poterie cassée ne prouve pas non plus que ses propriétaires étaient pauvres. Pour éviter l'erreur, décris ce que l'on voit, puis compare avec d'autres sources.",
+          "figure": "familles-sources",
+          "practice": {
+            "statement": "Tu t'entraînes à étudier un objet ou une image avec la méthode : nommer, décrire, déduire.",
+            "questions": [
+              {
+                "content": "Des archéologues trouvent dans la terre d'un ancien village une poterie cassée. Quelle sorte de source est cette poterie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer la sorte de source : un objet retrouvé en fouille est une source archéologique. Elle ne porte pas d'écriture et n'est pas une image.",
+                "answers": [
+                  {
+                    "content": "Une source archéologique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une source écrite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source orale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source iconographique",
+                    "correct": false
+                  }
+                ],
+                "hint": "Elle a été retrouvée dans la terre."
+              },
+              {
+                "content": "Une photographie ancienne montre un marché de ville avec des vendeuses et des paniers. Quelle sorte de source est cette photographie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer : une photographie est une image, donc une source iconographique. Étape 2 — Décrire : on voit des vendeuses et des paniers. Une source archéologique est un objet retrouvé dans la terre.",
+                "answers": [
+                  {
+                    "content": "Une source iconographique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une source archéologique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source écrite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une source orale",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une photographie est une image."
+              },
+              {
+                "content": "Relie chaque trace à sa nature.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Nommer la sorte de source : un outil trouvé en fouille est un objet, un mur en ruine est un vestige, un dessin est une image. Les deux premiers sont archéologiques, le dernier est iconographique.",
+                "answers": [
+                  {
+                    "content": "Un outil retrouvé en fouille",
+                    "match": "Un objet"
+                  },
+                  {
+                    "content": "Un mur en ruine",
+                    "match": "Un vestige"
+                  },
+                  {
+                    "content": "Un dessin d'un ancien marché",
+                    "match": "Une image"
+                  }
+                ],
+                "hint": "Pense à ce qu'est chaque trace."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître et lire un objet ou une image",
+              "statement": "Dans cet exercice, tu reconnais des sources archéologiques et iconographiques et tu dis ce qu'elles apprennent.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui cherche et étudie les objets et les vestiges enfouis dans la terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer la sorte de source : les objets et vestiges retrouvés dans la terre sont des sources archéologiques, étudiées par l'archéologue. Le griot transmet des récits, le photographe fait des images.",
+                  "answers": [
+                    {
+                      "content": "L'archéologue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le griot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le directeur d'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le photographe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sources sont iconographiques ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Nommer : une peinture et une photographie sont des images. Une poterie est un objet (archéologique) et un conte est une parole (source orale).",
+                  "answers": [
+                    {
+                      "content": "Un tableau peint sur toile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une photographie de famille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une poterie retrouvée en fouille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un conte du soir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fiche de musée écrite pour Lnclass : « Pot en terre cuite, large panse, traces de suie sous le fond, trouvé en fouille. » Que peut-on déduire des traces de suie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : le fond du pot est noirci par la suie. Étape 3 — Déduire : la suie vient du feu, donc le pot servait à cuire. Une décoration ou un pot à eau froide ne serait pas noirci.",
+                  "answers": [
+                    {
+                      "content": "Le pot allait sur le feu : on s'en servait pour cuire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pot servait à garder de l'eau froide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pot était seulement un objet de décoration",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pot a été fabriqué hier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À quoi sert un musée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : les objets et les images conservés au musée sont des sources archéologiques ou iconographiques (et parfois des documents écrits). Le musée les garde et les montre au public pour faire connaître le passé.",
+                  "answers": [
+                    {
+                      "content": "À conserver des objets du passé et à les présenter au public",
+                      "correct": true
+                    },
+                    {
+                      "content": "À écrire les lois du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "À vendre des objets neufs",
+                      "correct": false
+                    },
+                    {
+                      "content": "À faire passer des examens",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une photographie montre tout ce qui se passait ce jour-là.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déduire avec prudence : le photographe choisit ce qu'il cadre. Sur une photographie de fête, on peut compter 10 personnes alors que la place en contient 200. Il faut comparer avec d'autres sources.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Objets, vestiges et images au musée",
+              "statement": "Dans cet exercice, tu étudies des sources vues pendant une visite de musée (fiches écrites pour Lnclass).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les restes d'un ancien bâtiment, comme un mur en ruine, s'appellent des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer la sorte de source : le reste d'un bâtiment ancien est un vestige. C'est une source archéologique, comme un outil ou une poterie.",
+                  "answers": [
+                    {
+                      "content": "vestiges",
+                      "correct": true
+                    },
+                    {
+                      "content": "vestige",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une affiche de fête dessinée il y a longtemps montre des danseurs en pagnes. Quelle sorte de source est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : une affiche dessinée est une image, donc une source iconographique. Étape 2 — Décrire : on y voit des danseurs en pagnes. Elle n'a pas été retrouvée en fouille.",
+                  "answers": [
+                    {
+                      "content": "Une source iconographique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source archéologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source orale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source écrite seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont des sources archéologiques ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Nommer : un outil, des ossements et un bijou sont des objets retrouvés dans la terre. Un conte est une parole (source orale) et une lettre porte de l'écriture.",
+                  "answers": [
+                    {
+                      "content": "Un outil en pierre trouvé en fouille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des ossements trouvés dans la terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un bijou enterré avec son propriétaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un conte du griot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lettre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour savoir à quoi servait un objet, l'archéologue regarde sa forme, sa matière et ses ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Décrire : on regarde la matière, la forme et les traces d'usage, comme la suie sur un pot. Un objet ancien n'a pas de prix d'achat connu.",
+                  "answers": [
+                    {
+                      "content": "traces d'usage",
+                      "correct": true
+                    },
+                    {
+                      "content": "prix d'achat",
+                      "correct": false
+                    },
+                    {
+                      "content": "dates de météo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche d'étude d'un objet de musée.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Nommer la sorte de source, Étape 2 — Décrire ce que l'on voit, Étape 3 — Déduire. On ne déduit rien avant d'avoir décrit.",
+                  "answers": [
+                    {
+                      "content": "Nommer la sorte de source (un objet)"
+                    },
+                    {
+                      "content": "Décrire la matière, la forme et l'usage possible"
+                    },
+                    {
+                      "content": "Déduire ce que l'objet apprend sur la vie des gens"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une poterie cassée prouve que les habitants du village étaient pauvres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déduire avec prudence : une poterie cassée apprend seulement qu'on fabriquait et utilisait des pots. Un objet cassé ne dit pas si ses propriétaires étaient pauvres. Il faut d'autres sources.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour un objet, décris d'abord ce que tu vois (matière, forme, traces), puis seulement déduis son usage."
+            }
+          ]
+        },
+        {
+          "name": "Critiquer une source simplement",
+          "remember": "**Critiquer une source**, c'est l'examiner avec attention pour savoir si l'on peut s'y fier. On se pose trois questions : **qui** l'a produite et **quand** ? **Pourquoi** l'a-t-il produite (informer, convaincre, se souvenir) ? Que disent **les autres sources** sur le même sujet ?\n\nUn **témoin direct** a vu l'événement ; un témoin indirect répète ce qu'on lui a dit. Un auteur qui veut convaincre ou défendre son camp peut déformer. **Croiser les sources**, c'est les comparer, surtout si elles sont de natures différentes.",
+          "method": [
+            "Identifier l'auteur et la date de la source.",
+            "Chercher pourquoi l'auteur l'a produite.",
+            "Comparer avec une autre source sur le même sujet.",
+            "Conclure : dire ce qui est sûr et ce qui reste à vérifier."
+          ],
+          "example": {
+            "statement": "Documents écrits pour Lnclass. Source A : une lettre du chef du village, écrite le lendemain de la fête : « Environ 300 personnes sont venues. » Source B : une affiche du comité de fête, imprimée avant la fête : « 500 personnes attendues, venez nombreux ! » Combien de personnes sont venues ?",
+            "steps": [
+              "Identifier : A est écrite par le chef du village, témoin, le lendemain ; B est produite par le comité, avant la fête.",
+              "Chercher pourquoi : le chef informe sur ce qu'il a vu ; le comité veut attirer du monde, il peut donc exagérer.",
+              "Comparer : A donne environ 300 personnes venues, B donne 500 personnes attendues. B prévoit, A constate.",
+              "Conclure : il est sûr que le comité espérait 500 personnes ; selon un témoin, environ 300 sont venues. Ce chiffre reste à vérifier avec une autre source."
+            ]
+          },
+          "pitfall": "Ne jette pas une source parce qu'elle prend parti, et ne la crois pas non plus sur parole. Une source qui exagère reste utile : elle montre ce que son auteur voulait. Contre-exemple : l'affiche annonce 500 personnes. Ce n'est pas le nombre de personnes venues, mais cela prouve que le comité voulait attirer beaucoup de monde.",
+          "figure": "critique-source",
+          "practice": {
+            "statement": "Tu t'entraînes à critiquer une source avec la méthode : identifier, chercher pourquoi, comparer, conclure.",
+            "questions": [
+              {
+                "content": "Pour critiquer une source, quelle est la première question à se poser ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier l'auteur et la date : on commence par savoir qui a produit la source et quand. La beauté ou le prix ne disent rien sur sa fiabilité.",
+                "answers": [
+                  {
+                    "content": "Qui l'a produite, et à quelle date ?",
+                    "correct": true
+                  },
+                  {
+                    "content": "Combien de pages a-t-elle ?",
+                    "correct": false
+                  },
+                  {
+                    "content": "Est-elle jolie ?",
+                    "correct": false
+                  },
+                  {
+                    "content": "Où l'a-t-on achetée ?",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à l'auteur."
+              },
+              {
+                "content": "Une affiche qui annonce « 500 personnes attendues » dit combien de personnes sont venues.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher pourquoi : l'affiche est produite avant la fête pour attirer du monde. Elle annonce un chiffre attendu, pas un chiffre réel. Étape 3 — Comparer avec un compte rendu écrit après.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde quand l'affiche est faite."
+              },
+              {
+                "content": "Comparer plusieurs sources sur le même sujet, c'est croiser les ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Comparer : croiser les sources, c'est les mettre côte à côte pour voir ce qu'elles disent en commun et ce qui les distingue.",
+                "answers": [
+                  {
+                    "content": "sources",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot est dans le titre de la leçon."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Critiquer une source pas à pas",
+              "statement": "Dans cet exercice, tu critiques des sources avec la méthode : identifier, chercher pourquoi, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que veut dire « critiquer une source » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 à 4 de la méthode : on identifie l'auteur, on cherche pourquoi il écrit, on compare, on conclut. Critiquer n'est pas rejeter, c'est vérifier.",
+                  "answers": [
+                    {
+                      "content": "L'examiner avec attention pour savoir si l'on peut s'y fier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dire du mal de son auteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La jeter si elle est ancienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "La recopier sans la lire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'est-ce qu'un témoin direct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier l'auteur : un témoin direct a vu l'événement lui-même. Celui qui répète ce qu'on lui a dit est un témoin indirect.",
+                  "answers": [
+                    {
+                      "content": "Une personne qui était présente et a vu l'événement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une personne qui a lu un livre sur l'événement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une personne qui a entendu l'événement raconté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une personne née après l'événement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles raisons peuvent pousser un auteur à déformer ce qu'il raconte ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Chercher pourquoi l'auteur a produit la source : vouloir convaincre ou défendre son camp peut le pousser à exagérer. La langue ou le lieu de naissance ne déforment pas ce qu'on dit.",
+                  "answers": [
+                    {
+                      "content": "Il veut convaincre les autres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il veut défendre son camp",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il écrit en français",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est né dans un village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la critique d'une source.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier, Étape 2 — Chercher pourquoi, Étape 3 — Comparer, Étape 4 — Conclure. On ne conclut qu'après avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'auteur et la date de la source"
+                    },
+                    {
+                      "content": "Chercher pourquoi l'auteur l'a produite"
+                    },
+                    {
+                      "content": "Comparer avec une autre source sur le même sujet"
+                    },
+                    {
+                      "content": "Conclure : dire ce qui est sûr et ce qui reste à vérifier"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affiche du comité de fête annonce 500 personnes, mais la fête n'a pas encore eu lieu. Que faire de cette source ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher pourquoi : le comité veut attirer du monde. Étape 4 — Conclure : l'affiche ne donne pas le nombre de personnes venues, mais elle reste utile pour savoir ce que le comité voulait. La jeter serait le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "La garder : elle montre ce que le comité voulait, même si le chiffre est exagéré",
+                      "correct": true
+                    },
+                    {
+                      "content": "La jeter, car elle n'est pas vraie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croire entièrement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La cacher aux autres élèves",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Critiquer deux sources sur une fête",
+              "statement": "Dans cet exercice, tu critiques deux sources sur la fête du village (documents écrits pour Lnclass) : une lettre du chef écrite le lendemain et une affiche du comité imprimée avant la fête.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une lettre écrite par le chef du village le lendemain de la fête dit : « environ 300 personnes sont venues ». Pourquoi est-elle une bonne source sur le nombre de présents ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier l'auteur et la date : le chef est témoin et écrit le lendemain. Étape 2 — Chercher pourquoi : il informe. Son âge ou la longueur de sa lettre ne comptent pas.",
+                  "answers": [
+                    {
+                      "content": "Son auteur était témoin et il écrit après l'événement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le chef est la personne la plus âgée du village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'une lettre est plus longue qu'une affiche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle est imprimée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une affiche imprimée avant la fête, qui annonce « 500 personnes attendues », donne le nombre exact de personnes venues.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher pourquoi : l'affiche est faite avant la fête pour attirer du monde et annonce des personnes attendues. Étape 3 — Comparer avec la lettre du chef : 300 venues, 500 attendues.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque question de la critique à ce qu'elle cherche.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : la question « qui ? » cherche l'auteur. Étape 2 — Chercher pourquoi : la question « pourquoi ? » cherche le but. Étape 3 — Comparer : la question sur les autres sources cherche la comparaison.",
+                  "answers": [
+                    {
+                      "content": "Qui a produit la source ?",
+                      "match": "L'auteur"
+                    },
+                    {
+                      "content": "Pourquoi l'a-t-il produite ?",
+                      "match": "Le but"
+                    },
+                    {
+                      "content": "Que disent les autres sources ?",
+                      "match": "La comparaison"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un auteur qui veut défendre son camp ou convaincre peut ne pas être ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher pourquoi l'auteur a produit la source : s'il veut convaincre ou défendre son camp, il peut ne pas être neutre. On le sait avant de lui faire confiance.",
+                  "answers": [
+                    {
+                      "content": "neutre",
+                      "correct": true
+                    },
+                    {
+                      "content": "impartial",
+                      "correct": true
+                    },
+                    {
+                      "content": "objectif",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles questions aident à critiquer une source ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : l'auteur et la date. Étape 3 — Comparer avec les autres sources. La taille des caractères ou le prix ne disent rien sur la fiabilité.",
+                  "answers": [
+                    {
+                      "content": "Qui est l'auteur ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "À quelle date a-t-elle été produite ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dit-elle la même chose que les autres sources ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Est-elle écrite en gros caractères ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Combien coûte-t-elle ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après avoir comparé deux sources, l'historien dit ce qui est ___ et ce qui reste à vérifier.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : on sépare ce qui est sûr (par exemple, on attendait 500 personnes) de ce qui reste à vérifier (le nombre exact de présents).",
+                  "answers": [
+                    {
+                      "content": "sûr",
+                      "correct": true
+                    },
+                    {
+                      "content": "joli",
+                      "correct": false
+                    },
+                    {
+                      "content": "long",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Demande-toi pour chaque source : qui, quand, pourquoi, et qu'en disent les autres sources ?"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une visite de musée avec un griot",
+          "statement": "La classe de 6ème B visite un petit musée d'une ville ivoirienne (texte écrit pour Lnclass). Dans les vitrines, les élèves voient une lettre ancienne, une poterie trouvée en fouille et une peinture d'un marché. Puis le griot Bakary leur raconte l'histoire de la ville.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque élément de la visite à sa sorte de source.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Nommer la nature du document. La lettre porte de l'écriture (écrite). La poterie est un objet retrouvé dans la terre (archéologique). La peinture est une image (iconographique). Le récit se transmet par la parole (orale).",
+              "answers": [
+                {
+                  "content": "La lettre ancienne",
+                  "match": "Source écrite"
+                },
+                {
+                  "content": "La poterie trouvée en fouille",
+                  "match": "Source archéologique"
+                },
+                {
+                  "content": "La peinture d'un marché",
+                  "match": "Source iconographique"
+                },
+                {
+                  "content": "Le récit du griot Bakary",
+                  "match": "Source orale"
+                }
+              ]
+            },
+            {
+              "content": "Qui a cherché et étudié la poterie trouvée en fouille avant de la confier au musée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Nommer la sorte de source : un objet retrouvé en fouille est une source archéologique. 2. Savoir qui l'étudie : l'archéologue, qui cherche dans la terre. Le griot transmet des récits et le peintre fait des images.",
+              "answers": [
+                {
+                  "content": "L'archéologue",
+                  "correct": true
+                },
+                {
+                  "content": "Le griot",
+                  "correct": false
+                },
+                {
+                  "content": "Le directeur d'école",
+                  "correct": false
+                },
+                {
+                  "content": "Le peintre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le récit du griot Bakary est une source orale parce qu'il est transmis par la parole.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier qui parle : le griot. 2. Noter le genre : un récit dit à voix haute. Une source orale n'a pas besoin d'écriture, elle passe de bouche à oreille.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La lettre ancienne exposée dans la vitrine est une source ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Nommer la nature du document : une lettre porte de l'écriture. C'est donc une source écrite.",
+              "answers": [
+                {
+                  "content": "écrite",
+                  "correct": true
+                },
+                {
+                  "content": "écrit",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la peinture du marché ne montre-t-elle pas tout le marché tel qu'il était ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Nommer : une peinture est une image. 2. Critiquer : celui qui peint choisit ce qu'il met dans son tableau, comme un photographe choisit son cadre. L'image est donc utile mais ne dit pas tout.",
+              "answers": [
+                {
+                  "content": "Le peintre choisit ce qu'il montre",
+                  "correct": true
+                },
+                {
+                  "content": "Une peinture est toujours une copie exacte",
+                  "correct": false
+                },
+                {
+                  "content": "Une peinture est une source écrite",
+                  "correct": false
+                },
+                {
+                  "content": "Un marché ne peut pas être peint",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le registre de l'école de Kolia",
+          "statement": "Document écrit pour Lnclass. Registre d'appel de l'école de Kolia, tenu par le directeur Traoré. Le 12 octobre, il écrit : « 42 élèves présents sur 45. Trois élèves sont absents à cause de la pluie. »",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la nature de ce document ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode d'une source écrite : 1. Nommer la nature du document. Il s'agit d'une liste de présents tenue par le directeur : un registre. Il porte de l'écriture, c'est une source écrite.",
+              "answers": [
+                {
+                  "content": "Un registre d'appel, donc une source écrite",
+                  "correct": true
+                },
+                {
+                  "content": "Un récit oral",
+                  "correct": false
+                },
+                {
+                  "content": "Un vestige archéologique",
+                  "correct": false
+                },
+                {
+                  "content": "Une image",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'élèves sont absents le 12 octobre d'après le registre ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 3. Dégager ce que le texte apprend. Il y a 45 élèves inscrits et 42 présents : 45 − 42 = 3. Le directeur écrit lui aussi « trois élèves absents », ce qui confirme le calcul.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "élèves"
+            },
+            {
+              "content": "Qui est l'auteur de ce document et quelle est sa date ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 2. Relever l'auteur et la date. Le texte dit que le registre est tenu par le directeur Traoré et que l'entrée est datée du 12 octobre.",
+              "answers": [
+                {
+                  "content": "Le directeur Traoré, le 12 octobre",
+                  "correct": true
+                },
+                {
+                  "content": "Un griot, le 12 octobre",
+                  "correct": false
+                },
+                {
+                  "content": "Les élèves, un autre jour",
+                  "correct": false
+                },
+                {
+                  "content": "Un archéologue, le jour des fouilles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que peut-on conclure du registre sur la pluie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3. Dégager ce que le texte apprend. Trois élèves sont absents à cause de la pluie : elle pouvait gêner la vie de l'école. Le registre ne dit ni que l'école est détruite ni que tous les élèves manquent.",
+              "answers": [
+                {
+                  "content": "La pluie pouvait empêcher des élèves de venir à l'école ce jour-là",
+                  "correct": true
+                },
+                {
+                  "content": "La pluie a détruit l'école",
+                  "correct": false
+                },
+                {
+                  "content": "Tous les élèves sont partis pour toujours",
+                  "correct": false
+                },
+                {
+                  "content": "La pluie n'a eu aucun effet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour étudier ce registre.",
+              "question_type": "ordering",
+              "explanation": "Méthode d'une source écrite : 1. Nommer (un registre), 2. Relever (le directeur Traoré, le 12 octobre), 3. Dégager (42 élèves présents, trois absents à cause de la pluie).",
+              "answers": [
+                {
+                  "content": "Nommer la nature du document"
+                },
+                {
+                  "content": "Relever l'auteur et la date"
+                },
+                {
+                  "content": "Dégager ce que le texte apprend sur le passé"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le village de Sikoro : un récit et des fouilles",
+          "statement": "Documents écrits pour Lnclass. Document A, le griot Bakary : « Les premiers habitants de Sikoro sont venus du nord. Ils se sont installés près du fleuve, car la terre y était bonne. Mon grand-père me l'a raconté, et son père le lui avait dit. » Document B, fiche de musée : « Morceaux de poterie et restes de foyers retrouvés en fouille près du fleuve, à l'emplacement de l'ancien village. »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle sorte de source est le document A, le récit du griot Bakary ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier qui parle : le griot Bakary, qui tient son récit de son grand-père. 2. Noter le genre : un récit transmis par la parole, donc une source orale.",
+              "answers": [
+                {
+                  "content": "Une source orale",
+                  "correct": true
+                },
+                {
+                  "content": "Une source écrite",
+                  "correct": false
+                },
+                {
+                  "content": "Une source archéologique",
+                  "correct": false
+                },
+                {
+                  "content": "Une source iconographique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle sorte de source sont les poteries et les restes de foyers du document B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Nommer la sorte de source : des objets et des restes retrouvés en fouille sont des sources archéologiques. Ils n'ont ni parole ni écriture.",
+              "answers": [
+                {
+                  "content": "Des sources archéologiques",
+                  "correct": true
+                },
+                {
+                  "content": "Des sources orales",
+                  "correct": false
+                },
+                {
+                  "content": "Des sources écrites",
+                  "correct": false
+                },
+                {
+                  "content": "Des sources iconographiques",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Qu'est-ce que les documents A et B disent en commun ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3. Comparer. A dit que les premiers habitants se sont installés près du fleuve ; B dit que les restes du village sont près du fleuve. Les deux se rejoignent. L'origine nord n'est que dans A ; l'inondation et le nombre d'habitants ne sont dans aucun document.",
+              "answers": [
+                {
+                  "content": "Des gens ont vécu près du fleuve",
+                  "correct": true
+                },
+                {
+                  "content": "Les habitants venaient du nord",
+                  "correct": false
+                },
+                {
+                  "content": "Le village a été abandonné à cause d'une inondation",
+                  "correct": false
+                },
+                {
+                  "content": "Les habitants étaient très peu nombreux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand une parole et des objets trouvés en fouille se rejoignent, ils se confirment l'un l'autre.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 3. Comparer, puis 4. Conclure. Quand deux sources de natures différentes disent la même chose, l'information devient plus sûre. C'est l'intérêt de croiser les sources.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que reste-t-il à vérifier dans ces documents ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 4. Conclure : on sépare ce qui est sûr de ce qui reste à vérifier. Seul A parle du nord ; B ne le confirme pas, donc cette information reste à vérifier.",
+              "answers": [
+                {
+                  "content": "D'où venaient les premiers habitants, car seul le récit du griot le dit",
+                  "correct": true
+                },
+                {
+                  "content": "Rien, car tout est prouvé",
+                  "correct": false
+                },
+                {
+                  "content": "Si le griot sait écrire",
+                  "correct": false
+                },
+                {
+                  "content": "Si les poteries sont cassées",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases pourquoi l'historien a intérêt à croiser le récit du griot et les objets trouvés en fouille.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il dit que les deux sources sont de natures différentes",
+                "Il explique qu'elles se rejoignent sur un point précis",
+                "Il dit qu'une information confirmée par deux sources est plus sûre",
+                "Phrases claires et vocabulaire de la leçon"
+              ],
+              "explanation": "Corrigé modèle : Le récit du griot est une source orale et les poteries sont des sources archéologiques. Les deux disent que des gens ont vécu près du fleuve. Quand deux sources de natures différentes se rejoignent, l'information est plus sûre. Cela évite de croire un seul récit qui pourrait avoir changé. Barème : 1 point pour la nature des sources, 1 point pour le point commun, 1 point pour la confiance plus grande, 1 point pour la clarté des phrases.",
+              "answers": [],
+              "starter": "Le récit du griot et les poteries sont de natures différentes, donc…"
+            }
+          ]
+        },
+        {
+          "title": "La fête de fin d'année : trois sources",
+          "statement": "Documents écrits pour Lnclass. Document 1, affiche de l'école, imprimée avant la fête : « Fête de fin d'année : 400 parents attendus ! » Document 2, compte rendu de la directrice, écrit le lendemain : « Environ 250 parents sont venus. Il a plu en fin d'après-midi. » Document 3, témoignage oral de la mère d'Awa, recueilli par Awa : « Il y avait beaucoup de monde, plus que l'an dernier. Je suis partie avant la pluie. »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle sorte de source est le témoignage de la mère d'Awa ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier qui parle : la mère d'Awa, témoin de la fête. 2. Noter le genre : c'est une parole, donc une source orale. Awa a recueilli ce témoignage mais la source reste orale.",
+              "answers": [
+                {
+                  "content": "Une source orale, car c'est une parole d'un témoin",
+                  "correct": true
+                },
+                {
+                  "content": "Une source écrite, car Awa l'a recopié",
+                  "correct": false
+                },
+                {
+                  "content": "Une source archéologique",
+                  "correct": false
+                },
+                {
+                  "content": "Une source iconographique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi l'affiche n'est-elle pas une bonne source pour compter les parents venus ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier la date : avant la fête. 2. Chercher pourquoi l'école l'a produite : pour attirer du monde. Elle donne un chiffre attendu, pas un chiffre réel.",
+              "answers": [
+                {
+                  "content": "Elle est produite avant la fête et annonce un chiffre attendu pour attirer du monde",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est écrite en gros caractères",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est trop ancienne",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est signée par un griot",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'affiche annonce 400 parents et le compte rendu en compte environ 250 venus. Quel est l'écart entre les deux chiffres ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 3. Comparer deux sources. 400 annoncés − 250 venus = 150, soit un écart d'environ 150 parents. Ce calcul compare une prévision (affiche) et un constat (compte rendu).",
+              "answers": [
+                {
+                  "content": "150",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "parents"
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la critique d'une source.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la critique : 1. Identifier, 2. Chercher pourquoi, 3. Comparer, 4. Conclure. On ne conclut qu'après avoir comparé.",
+              "answers": [
+                {
+                  "content": "Identifier l'auteur et la date de la source"
+                },
+                {
+                  "content": "Chercher pourquoi l'auteur l'a produite"
+                },
+                {
+                  "content": "Comparer avec une autre source sur le même sujet"
+                },
+                {
+                  "content": "Conclure : dire ce qui est sûr et ce qui reste à vérifier"
+                }
+              ]
+            },
+            {
+              "content": "Quelle conclusion est la plus prudente ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 4. Conclure. Le compte rendu écrit le lendemain par la directrice est la source la plus fiable pour le nombre de présents ; le témoignage oral va dans le même sens (beaucoup de monde). On garde un « environ 250 » à confirmer. Dire « exactement 400 » reprend l'affiche, et « on ne peut rien dire » refuse de comparer.",
+              "answers": [
+                {
+                  "content": "Environ 250 parents sont venus selon le compte rendu écrit le lendemain, chiffre à confirmer par une autre source",
+                  "correct": true
+                },
+                {
+                  "content": "Exactement 400 parents sont venus",
+                  "correct": false
+                },
+                {
+                  "content": "Personne n'est venu à cause de la pluie",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut rien dire du tout",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe de quatre ou cinq phrases qui répond à la question : combien de parents sont venus à la fête ? Appuie-toi sur les trois documents.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il distingue le chiffre attendu (affiche) du chiffre constaté (compte rendu)",
+                "Il utilise le compte rendu comme source principale",
+                "Il cite le témoignage oral et dit son utilité",
+                "Il conclut avec prudence"
+              ],
+              "explanation": "Corrigé modèle : L'affiche annonce 400 parents attendus, mais elle est faite avant la fête pour attirer du monde. Le compte rendu de la directrice, écrit le lendemain, donne environ 250 parents venus : c'est la source la plus sûre. Le témoignage oral de la mère d'Awa dit qu'il y avait beaucoup de monde, ce qui va dans le même sens, mais ne donne pas de chiffre. On peut donc dire qu'environ 250 parents sont venus, chiffre à confirmer. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "L'affiche annonce 400 parents attendus, mais…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur les sources",
+          "notions": "les quatre familles de sources (écrites, orales, archéologiques, iconographiques), le vocabulaire (archives, archéologue, griot, témoin, vestige, musée) et les premiers gestes de la critique d'une source.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Les élèves d'une classe de 6ème étudient les quatre familles de sources de l'histoire : écrites, orales, archéologiques et iconographiques.",
+              "exercise_type": "evaluation",
+              "figure": "familles-sources",
+              "questions": [
+                {
+                  "content": "Relie chaque exemple à sa famille de sources.",
+                  "question_type": "matching",
+                  "explanation": "1. On nomme la nature de chaque exemple. 2. Une lettre porte de l'écriture ; un conte se dit ; un outil trouvé en fouille est un objet ; une photographie est une image.",
+                  "answers": [
+                    {
+                      "content": "Une lettre de directeur",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "Un conte du griot",
+                      "match": "Source orale"
+                    },
+                    {
+                      "content": "Un outil trouvé en fouille",
+                      "match": "Source archéologique"
+                    },
+                    {
+                      "content": "Une photographie ancienne",
+                      "match": "Source iconographique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle famille de sources comprend les objets retrouvés dans la terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Un objet retrouvé en fouille se range dans les sources archéologiques. 2. Les sources orales sont des paroles, les sources écrites portent de l'écriture.",
+                  "answers": [
+                    {
+                      "content": "Les sources archéologiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources orales",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sources écrites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sources iconographiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une peinture est une source iconographique.",
+                  "question_type": "true_false",
+                  "explanation": "1. Une peinture est une image. 2. Une image (peinture, dessin, photographie, affiche illustrée) est une source iconographique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récit transmis par la parole est une source ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Un récit dit à voix haute et transmis de bouche à oreille est une source orale. Une source écrite porte de l'écriture.",
+                  "answers": [
+                    {
+                      "content": "orale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sources sont des sources écrites ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Un registre et une loi portent de l'écriture. 2. Un chant est une parole, un mur en ruine est un vestige.",
+                  "answers": [
+                    {
+                      "content": "Un registre d'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une loi",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un chant de travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mur en ruine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque exemple, demande-toi : est-ce un écrit, une parole, un objet ou une image ?"
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Pendant une visite de musée, Awa note des mots nouveaux dans son cahier : archives, archéologue, griot, témoin, vestige. Elle veut les retenir.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "1. Chaque mot a un sens précis dans la leçon. 2. Les archives gardent des écrits, l'archéologue fouille, le griot parle, le témoin a vu, le vestige est un reste de bâtiment.",
+                  "answers": [
+                    {
+                      "content": "Les archives",
+                      "match": "Lieu où l'on conserve les anciens documents écrits"
+                    },
+                    {
+                      "content": "L'archéologue",
+                      "match": "Celui qui fait des fouilles et étudie les objets trouvés"
+                    },
+                    {
+                      "content": "Le griot",
+                      "match": "Celui qui transmet par la parole l'histoire d'un groupe"
+                    },
+                    {
+                      "content": "Le témoin",
+                      "match": "Celui qui a vu ou vécu un événement"
+                    },
+                    {
+                      "content": "Le vestige",
+                      "match": "Reste d'un bâtiment ancien"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le reste d'un ancien mur s'appelle un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Le reste d'un bâtiment ancien est un vestige. 2. C'est une source archéologique.",
+                  "answers": [
+                    {
+                      "content": "vestige",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'archéologue étudie les objets retrouvés lors des ___.",
+                  "question_type": "select",
+                  "explanation": "1. L'archéologue cherche dans la terre. 2. On appelle cette recherche les fouilles.",
+                  "answers": [
+                    {
+                      "content": "fouilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "lettres",
+                      "correct": false
+                    },
+                    {
+                      "content": "chants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un musée conserve des objets du passé et les présente au public.",
+                  "question_type": "true_false",
+                  "explanation": "1. Le musée garde les objets et les images du passé. 2. Il les présente au public pour faire connaître le passé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle personne transmet l'histoire d'un peuple par la parole ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Dans plusieurs peuples d'Afrique de l'Ouest, le griot garde la mémoire par la parole. 2. L'archéologue étudie des objets, le photographe fait des images.",
+                  "answers": [
+                    {
+                      "content": "Le griot",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'archéologue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le photographe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le directeur d'archives",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un mot du vocabulaire correspond à un seul métier ou à une seule notion."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une classe visite un musée d'histoire (texte écrit pour Lnclass). Le guide explique qu'un musée garde des objets, des images et parfois des copies de documents écrits.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "À quoi sert un musée ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Un musée conserve les traces du passé. 2. Il les montre au public. Il ne fabrique pas d'objets neufs.",
+                  "answers": [
+                    {
+                      "content": "À conserver des traces du passé et à les montrer au public",
+                      "correct": true
+                    },
+                    {
+                      "content": "À fabriquer des objets neufs",
+                      "correct": false
+                    },
+                    {
+                      "content": "À vendre des billets de loterie",
+                      "correct": false
+                    },
+                    {
+                      "content": "À faire passer des examens",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier un objet de musée.",
+                  "question_type": "ordering",
+                  "explanation": "1. Nommer la sorte de source (un objet). 2. Décrire sa matière et sa forme. 3. Déduire son usage. On ne déduit rien avant d'avoir décrit.",
+                  "answers": [
+                    {
+                      "content": "Nommer la sorte de source"
+                    },
+                    {
+                      "content": "Décrire ce que l'on voit"
+                    },
+                    {
+                      "content": "Déduire ce que la trace apprend sur la vie des gens"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet de musée est toujours une source écrite.",
+                  "question_type": "true_false",
+                  "explanation": "1. Un objet de musée peut être un objet, une image ou un écrit. 2. Une poterie est une source archéologique, pas une source écrite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments peuvent se trouver dans un musée d'histoire ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "1. Un musée d'histoire garde des traces du passé : objet, image, écrit. 2. Un fruit frais et un ballon neuf ne sont pas des traces du passé.",
+                  "answers": [
+                    {
+                      "content": "Une poterie ancienne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une peinture ancienne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lettre ancienne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fruit frais du marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un ballon de football neuf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un guide dit : « Cette poterie a été trouvée dans la terre d'un ancien village. » De quelle famille de sources s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Une poterie trouvée dans la terre est un objet. 2. C'est une source archéologique.",
+                  "answers": [
+                    {
+                      "content": "Une source archéologique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source orale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source écrite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source iconographique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un musée garde des traces de plusieurs familles de sources."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Koffi lit une lettre ancienne (document écrit pour Lnclass) : « Cher ami, la fête a rassemblé beaucoup de monde. Signé : le chef du village, le lendemain de la fête. » Il veut savoir s'il peut s'y fier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui est l'auteur de la lettre ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On relève l'auteur : la lettre est signée par le chef du village. Koffi est seulement celui qui la lit.",
+                  "answers": [
+                    {
+                      "content": "Le chef du village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un griot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un archéologue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Koffi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'auteur de la lettre était probablement témoin de la fête.",
+                  "question_type": "true_false",
+                  "explanation": "1. Le chef écrit le lendemain de la fête. 2. Il a donc pu la voir lui-même : c'est probablement un témoin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le chef a-t-il écrit cette lettre ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On cherche pourquoi l'auteur écrit. 2. La lettre est adressée à un ami pour lui donner des nouvelles de la fête.",
+                  "answers": [
+                    {
+                      "content": "Pour informer son ami de la fête",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour vendre des objets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour faire une fouille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour chanter un chant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour être plus sûr de l'information, Koffi doit ___ cette lettre avec une autre source.",
+                  "question_type": "select",
+                  "explanation": "1. Comparer avec une autre source rend l'information plus sûre. 2. Jeter ou recopier ne vérifie rien.",
+                  "answers": [
+                    {
+                      "content": "comparer",
+                      "correct": true
+                    },
+                    {
+                      "content": "jeter",
+                      "correct": false
+                    },
+                    {
+                      "content": "recopier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comparer plusieurs sources, c'est ___ les sources.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Comparer plusieurs sources, c'est croiser les sources. 2. Cela permet de voir ce qui se rejoint et ce qui reste à vérifier.",
+                  "answers": [
+                    {
+                      "content": "croiser",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Retiens les gestes de base : qui, pourquoi, et comparer."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Les sources dans la vie courante",
+          "notions": "des sources de la vie courante en Côte d'Ivoire (carnet de commerçante, récit d'une grand-mère, photographie de famille, découverte de poterie dans la cour d'une école), la nature de chaque source et ce qu'elle apprend.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document écrit pour Lnclass. Carnet de comptes de Mme Kouassi, commerçante au marché de Kolia : « Lundi : 12 sacs de riz vendus. Mardi : 8 sacs de riz vendus. Mercredi : marché fermé à cause de la pluie. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle sorte de source est ce carnet ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On nomme la nature : un carnet porte de l'écriture. 2. C'est une source écrite.",
+                  "answers": [
+                    {
+                      "content": "Une source écrite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source orale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source archéologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source iconographique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de sacs de riz Mme Kouassi a-t-elle vendus le lundi et le mardi ensemble ?",
+                  "question_type": "numeric",
+                  "explanation": "1. On dégage les chiffres du carnet : 12 sacs le lundi et 8 le mardi. 2. On additionne : 12 + 8 = 20.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "sacs"
+                },
+                {
+                  "content": "Pourquoi n'y a-t-il aucune vente notée le mercredi ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On relit la phrase du carnet : « marché fermé à cause de la pluie ». 2. Le vol et le prix du riz ne sont pas dans le texte.",
+                  "answers": [
+                    {
+                      "content": "Le marché était fermé à cause de la pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mme Kouassi a vendu 0 sac à cause d'un vol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carnet est une source orale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le riz était trop cher",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce carnet est utile pour savoir comment se passait le commerce au marché de Kolia.",
+                  "question_type": "true_false",
+                  "explanation": "1. Le carnet donne des chiffres de vente. 2. Il apprend comment se passait le commerce, même s'il ne dit pas tout.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'auteur du carnet est ___.",
+                  "question_type": "select",
+                  "explanation": "1. On relève l'auteur : le carnet est celui de la commerçante Mme Kouassi.",
+                  "answers": [
+                    {
+                      "content": "Mme Kouassi",
+                      "correct": true
+                    },
+                    {
+                      "content": "le chef du village",
+                      "correct": false
+                    },
+                    {
+                      "content": "un archéologue",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Lis le carnet jour par jour et relève les chiffres."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document écrit pour Lnclass. La grand-mère Yaya raconte à Mariam : « Quand j'étais enfant, notre quartier n'avait qu'une seule fontaine. Nous faisions la queue le matin pour remplir nos seaux. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle sorte de source est le récit de Yaya ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Yaya parle : son récit est transmis par la parole. 2. C'est une source orale.",
+                  "answers": [
+                    {
+                      "content": "Une source orale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source écrite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source archéologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source iconographique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yaya est témoin direct de ce qu'elle raconte.",
+                  "question_type": "true_false",
+                  "explanation": "1. Yaya dit « quand j'étais enfant » : elle a vécu ce qu'elle raconte. 2. Elle est donc un témoin direct.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que nous apprend ce récit sur le quartier autrefois ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On relève ce que Yaya dit : une seule fontaine, des queues le matin. 2. Les autres propositions disent l'inverse.",
+                  "answers": [
+                    {
+                      "content": "Il n'y avait qu'une fontaine et l'on faisait la queue pour l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y avait de l'eau dans chaque maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quartier n'avait pas d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les gens n'avaient pas besoin d'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un souvenir raconté de nombreuses années après peut ___ un peu.",
+                  "question_type": "select",
+                  "explanation": "1. Un souvenir peut changer avec le temps. 2. C'est pourquoi on compare avec d'autres sources.",
+                  "answers": [
+                    {
+                      "content": "changer",
+                      "correct": true
+                    },
+                    {
+                      "content": "être imprimé",
+                      "correct": false
+                    },
+                    {
+                      "content": "être enterré",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sources pourraient confirmer le récit de Yaya ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. On compare le récit avec d'autres sources sur le même sujet. 2. Un plan du quartier et le récit d'un autre ancien parlent du même sujet.",
+                  "answers": [
+                    {
+                      "content": "Un plan ancien du quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le récit d'un autre ancien du quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un conte inventé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chant sans rapport",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un récit oral se confirme par d'autres sources."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document écrit pour Lnclass. Sur une photographie de famille, on voit six personnes devant une case : une grand-mère assise, deux parents debout et trois enfants. Au dos, une main a écrit : « Fête de la récolte ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle sorte de source est la photographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Une photographie est une image. 2. C'est une source iconographique.",
+                  "answers": [
+                    {
+                      "content": "Une source iconographique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source orale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source archéologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source écrite seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de personnes voit-on sur la photographie ?",
+                  "question_type": "numeric",
+                  "explanation": "1. On décrit ce que l'on voit : 1 grand-mère + 2 parents + 3 enfants. 2. 1 + 2 + 3 = 6.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "personnes"
+                },
+                {
+                  "content": "Que nous apprend l'inscription au dos ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. L'inscription « Fête de la récolte » est une source écrite qui donne l'occasion. 2. Elle aide à comprendre l'image.",
+                  "answers": [
+                    {
+                      "content": "La photographie a été prise pendant la fête de la récolte",
+                      "correct": true
+                    },
+                    {
+                      "content": "La photographie est un objet de fouille",
+                      "correct": false
+                    },
+                    {
+                      "content": "La photographie est une peinture",
+                      "correct": false
+                    },
+                    {
+                      "content": "La famille n'avait pas de maison",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La photographie prouve que seules ces six personnes ont participé à la fête.",
+                  "question_type": "true_false",
+                  "explanation": "1. Le photographe choisit ce qu'il cadre. 2. Six personnes sont sur l'image, mais d'autres ont pu participer à la fête.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Celui qui prend une photographie ___ ce qu'il montre.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Le photographe choisit son cadre. 2. L'image ne montre donc pas tout.",
+                  "answers": [
+                    {
+                      "content": "choisit",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Regarde ce que l'image montre et ce qu'elle ne montre pas."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document écrit pour Lnclass. En creusant pour planter un arbre dans la cour de l'école de Kolia, des élèves trouvent des morceaux de poterie. Leur maîtresse demande de les poser doucement et de prévenir le musée de la ville.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle sorte de source sont ces morceaux de poterie ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Des morceaux de poterie trouvés dans la terre sont des objets. 2. Ce sont des sources archéologiques.",
+                  "answers": [
+                    {
+                      "content": "Des sources archéologiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des sources orales",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des sources écrites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des sources iconographiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la maîtresse demande-t-elle de prévenir le musée ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Une trace du passé ne doit pas être abîmée. 2. Des spécialistes, comme les archéologues, savent l'étudier.",
+                  "answers": [
+                    {
+                      "content": "Pour que des spécialistes étudient ces traces du passé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour vendre les morceaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour les jeter plus loin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour les peindre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il faut jeter les morceaux de poterie car ils sont cassés.",
+                  "question_type": "true_false",
+                  "explanation": "1. Un objet cassé reste une source. 2. Même cassé, il peut apprendre comment vivaient les habitants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut faire un archéologue avec ces morceaux ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. L'archéologue décrit d'abord ce qu'il voit. 2. Il déduit l'usage possible des objets. Il ne les chante pas et ne les range pas dans un registre d'école.",
+                  "answers": [
+                    {
+                      "content": "Les décrire : matière, forme, décor",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chercher à quoi ils servaient",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les écrire dans un registre d'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les chanter comme un griot",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un morceau de poterie ne dit pas tout : il faut le comparer avec d'autres ___.",
+                  "question_type": "select",
+                  "explanation": "1. Une seule trace ne suffit pas. 2. On la compare avec d'autres sources, écrites, orales ou iconographiques.",
+                  "answers": [
+                    {
+                      "content": "sources",
+                      "correct": true
+                    },
+                    {
+                      "content": "fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "cahiers de dessin",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un objet trouvé reste une source, même cassé."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier avec les sources",
+          "notions": "comparer deux récits, distinguer un témoin d'un auteur qui répète, choisir la source adaptée à une question et justifier un choix de source.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Documents écrits pour Lnclass. Récit 1, griot Bakary : « Le village de Sikoro compte sept familles fondatrices. » Récit 2, ancien Yao : « Le village de Sikoro compte sept familles fondatrices, et la plus ancienne est celle de Bamba. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur quel point les deux récits se rejoignent-ils ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On compare les deux récits. 2. Ils disent tous deux « sept familles fondatrices ».",
+                  "answers": [
+                    {
+                      "content": "Le nombre de familles fondatrices : sept",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nom de la famille la plus ancienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "La date de fondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom du fleuve",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle information n'apparaît que dans le récit 2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On repère ce qui n'est que dans l'un des récits. 2. La famille de Bamba n'est citée que dans le récit de Yao.",
+                  "answers": [
+                    {
+                      "content": "La famille de Bamba est la plus ancienne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a sept familles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village s'appelle Sikoro",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les récits sont oraux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand deux récits indépendants se rejoignent, l'information devient plus sûre.",
+                  "question_type": "true_false",
+                  "explanation": "1. Croiser des sources indépendantes rend une information plus sûre. 2. Mais il faut vérifier que les deux récits ne viennent pas de la même personne, et ce qui n'apparaît que dans un seul récit reste à vérifier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'information sur la famille de Bamba reste ___ à vérifier.",
+                  "question_type": "select",
+                  "explanation": "1. Elle ne vient que d'une source. 2. Elle est donc encore à vérifier.",
+                  "answers": [
+                    {
+                      "content": "encore",
+                      "correct": true
+                    },
+                    {
+                      "content": "déjà",
+                      "correct": false
+                    },
+                    {
+                      "content": "jamais",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la critique appliquée à ces récits.",
+                  "question_type": "ordering",
+                  "explanation": "1. Identifier l'auteur. 2. Chercher pourquoi. 3. Comparer. 4. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Identifier qui parle dans chaque récit"
+                    },
+                    {
+                      "content": "Chercher pourquoi chacun raconte"
+                    },
+                    {
+                      "content": "Comparer les deux récits"
+                    },
+                    {
+                      "content": "Conclure : dire ce qui est sûr et ce qui est à vérifier"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare phrase par phrase : ce qui est pareil, ce qui diffère."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Documents écrits pour Lnclass. Source A : lettre de Mariam, présente au marché, écrite le soir même : « Il y avait beaucoup de monde. » Source B : article d'un journal, écrit par un journaliste absent, qui a lu la lettre de Mariam : « Il y avait beaucoup de monde au marché. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui est le témoin direct ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Le témoin direct est celui qui était présent. 2. Mariam était au marché ; le journaliste était absent.",
+                  "answers": [
+                    {
+                      "content": "Mariam",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le journaliste",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lecteur du journal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le journaliste est un témoin indirect.",
+                  "question_type": "true_false",
+                  "explanation": "1. Il n'était pas au marché. 2. Il répète ce qu'il a lu : c'est un témoin indirect.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le journal ne prouve-t-il pas plus que la lettre ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On compare. 2. Le journal ne fait que répéter la lettre : deux sources, mais une seule information d'origine.",
+                  "answers": [
+                    {
+                      "content": "Il reprend la lettre de Mariam, il n'apporte pas de nouvelle information",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est écrit à la main",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est un chant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est plus ancien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux sources qui se copient ne sont pas vraiment ___.",
+                  "question_type": "select",
+                  "explanation": "1. Une source qui copie l'autre n'est pas indépendante. 2. Elle ne confirme donc pas vraiment.",
+                  "answers": [
+                    {
+                      "content": "indépendantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "colorées",
+                      "correct": false
+                    },
+                    {
+                      "content": "enterrées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que faudrait-il pour confirmer le témoignage de Mariam ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Il faut des sources indépendantes de la lettre. 2. Une photographie et un autre témoin le sont ; la copie de l'article reprend la lettre.",
+                  "answers": [
+                    {
+                      "content": "Une photographie du marché ce jour-là",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le témoignage d'une autre personne présente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une copie de l'article du journal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un conte sur un autre marché",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Deux sources qui répètent la même chose n'en font qu'une."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Documents écrits pour Lnclass. Question A : « Comment les habitants d'un ancien village préparaient-ils leurs repas ? » Question B : « Quel jour le chef a-t-il reçu une visite ? » Question C : « À quoi ressemblait la place du marché autrefois ? » Sources disponibles : poterie avec traces de suie, lettre du chef, dessin ancien de la place.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque question à la source qui aide le plus à y répondre.",
+                  "question_type": "matching",
+                  "explanation": "1. On choisit la source selon la question. 2. La suie renseigne sur la cuisine, la lettre sur les dates, le dessin sur l'aspect de la place.",
+                  "answers": [
+                    {
+                      "content": "Comment préparaient-ils leurs repas ?",
+                      "match": "Poterie avec traces de suie"
+                    },
+                    {
+                      "content": "Quel jour le chef a-t-il reçu une visite ?",
+                      "match": "Lettre du chef"
+                    },
+                    {
+                      "content": "À quoi ressemblait la place du marché ?",
+                      "match": "Dessin ancien de la place"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle source aide le plus à répondre à la question B ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Une date s'écrit dans un document écrit. 2. La lettre du chef peut donner le jour de la visite.",
+                  "answers": [
+                    {
+                      "content": "La lettre du chef",
+                      "correct": true
+                    },
+                    {
+                      "content": "La poterie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dessin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul document suffit toujours pour répondre à toutes les questions.",
+                  "question_type": "true_false",
+                  "explanation": "1. Chaque source apprend des choses différentes. 2. Il faut choisir la source adaptée et les croiser.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour savoir à quoi ressemblait la place, quelle précaution faut-il prendre avec le dessin ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Un dessin est une image faite par quelqu'un. 2. Il choisit ce qu'il montre, donc on compare avec d'autres sources.",
+                  "answers": [
+                    {
+                      "content": "Se rappeler que le dessinateur a choisi ce qu'il montre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Croire que le dessin montre tout",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jeter le dessin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le recopier sans le regarder",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La suie sur le pot montre qu'il allait sur le ___.",
+                  "question_type": "select",
+                  "explanation": "1. La suie vient du feu. 2. Le pot servait à cuire.",
+                  "answers": [
+                    {
+                      "content": "feu",
+                      "correct": true
+                    },
+                    {
+                      "content": "lit",
+                      "correct": false
+                    },
+                    {
+                      "content": "toit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Choisis la famille de source qui répond le mieux à chaque question."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document écrit pour Lnclass. Un élève affirme : « Le récit du griot est faux, car il n'est écrit nulle part. » Sa maîtresse lui demande de vérifier son affirmation avec la méthode de la critique d'une source.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle réponse est la plus juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. L'oral est une famille de sources. 2. Ni toujours vrai ni toujours faux : on compare.",
+                  "answers": [
+                    {
+                      "content": "Un récit non écrit peut être une vraie source, mais il faut le comparer avec d'autres sources",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un récit non écrit est toujours faux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un récit non écrit est toujours vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un récit non écrit n'est pas une source",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'absence d'écrit prouve qu'un événement n'a pas eu lieu.",
+                  "question_type": "true_false",
+                  "explanation": "1. Beaucoup de peuples transmettaient leur histoire par la parole. 2. Pas d'écrit ne veut pas dire pas d'événement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle première étape de la critique faut-il faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. La première étape de la critique est d'identifier l'auteur. 2. Pour un récit oral, c'est celui qui parle.",
+                  "answers": [
+                    {
+                      "content": "Identifier qui parle et de qui il tient son récit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Compter les mots du récit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jeter le récit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chercher le prix du récit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier un récit oral, on le compare avec d'autres ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. On compare avec d'autres sources. 2. Ainsi on voit ce qui est sûr et ce qui reste à vérifier.",
+                  "answers": [
+                    {
+                      "content": "sources",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sources pourraient confirmer le récit du griot ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Des sources de natures différentes qui parlent du même sujet. 2. Des objets de fouille et un écrit ancien peuvent confirmer le récit.",
+                  "answers": [
+                    {
+                      "content": "Des objets trouvés en fouille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un document écrit ancien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un jeu sans rapport",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une chanson inventée hier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Écrit ne veut pas dire vrai ; oral ne veut pas dire faux."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur les sources de l'histoire",
+          "notions": "bilan : reconnaître les quatre familles de sources, étudier chacune avec sa méthode, critiquer une source et conclure avec prudence.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Visite du musée de la ville (texte écrit pour Lnclass). Les élèves de 6ème voient quatre éléments : un registre ancien, une poterie de fouille, une photographie de la place du marché et un enregistrement du griot Bakary qui raconte la fondation de la ville.",
+              "exercise_type": "evaluation",
+              "figure": "familles-sources",
+              "questions": [
+                {
+                  "content": "Relie chaque élément à sa famille de sources.",
+                  "question_type": "matching",
+                  "explanation": "1. Nommer la nature de chaque élément. 2. Registre : écriture. Poterie : objet. Photographie : image. Récit : parole.",
+                  "answers": [
+                    {
+                      "content": "Le registre ancien",
+                      "match": "Source écrite"
+                    },
+                    {
+                      "content": "La poterie de fouille",
+                      "match": "Source archéologique"
+                    },
+                    {
+                      "content": "La photographie de la place",
+                      "match": "Source iconographique"
+                    },
+                    {
+                      "content": "Le récit du griot Bakary",
+                      "match": "Source orale"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément demande l'intervention d'un archéologue ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. L'archéologue étudie les objets et vestiges trouvés dans la terre. 2. C'est le cas de la poterie.",
+                  "answers": [
+                    {
+                      "content": "La poterie de fouille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le registre ancien",
+                      "correct": false
+                    },
+                    {
+                      "content": "La photographie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récit du griot",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La photographie montre exactement tout ce qui se passait sur la place ce jour-là.",
+                  "question_type": "true_false",
+                  "explanation": "1. Le photographe choisit son cadre. 2. L'image ne montre pas tout.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le registre est conservé dans les ___ de la ville.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Les anciens documents écrits sont conservés dans les archives.",
+                  "answers": [
+                    {
+                      "content": "archives",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont des objets que l'on peut toucher et qui viennent du passé ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. On peut toucher une poterie et un registre. 2. Les paroles du griot et un souvenir oublié ne se touchent pas.",
+                  "answers": [
+                    {
+                      "content": "La poterie de fouille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le registre ancien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les paroles racontées par le griot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un souvenir oublié",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque élément, demande-toi si tu peux le toucher, le lire, le voir ou l'écouter."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document écrit pour Lnclass. Mariam veut critiquer une affiche de l'école qui annonce « 400 parents attendus » à la fête de l'école, avec la méthode de la critique d'une source.",
+              "exercise_type": "evaluation",
+              "figure": "critique-source",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la critique d'une source.",
+                  "question_type": "ordering",
+                  "explanation": "1. Identifier. 2. Chercher pourquoi. 3. Comparer. 4. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'auteur et la date de la source"
+                    },
+                    {
+                      "content": "Chercher pourquoi l'auteur l'a produite"
+                    },
+                    {
+                      "content": "Comparer avec une autre source sur le même sujet"
+                    },
+                    {
+                      "content": "Conclure : dire ce qui est sûr et ce qui reste à vérifier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui a produit l'affiche et pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Une affiche de fête est produite par ceux qui organisent la fête. 2. Son but est d'attirer le public.",
+                  "answers": [
+                    {
+                      "content": "L'école, pour attirer les parents à la fête",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un griot, pour raconter l'histoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un archéologue, pour une fouille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un journaliste, pour prouver le nombre de présents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affiche donne le nombre exact de parents venus.",
+                  "question_type": "true_false",
+                  "explanation": "1. L'affiche est faite avant la fête. 2. Elle annonce des parents attendus, pas des parents venus.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affiche annonce 400 parents et le compte rendu écrit le lendemain compte environ 250 parents venus. Quel est l'écart entre les deux chiffres ?",
+                  "question_type": "numeric",
+                  "explanation": "1. Comparer : 400 annoncés − 250 venus. 2. 400 − 250 = 150, soit un écart d'environ 150 parents.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "parents"
+                },
+                {
+                  "content": "Quelle conclusion est prudente ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Conclure en séparant le sûr et le douteux. 2. Le compte rendu écrit après la fête est la source la plus fiable.",
+                  "answers": [
+                    {
+                      "content": "Environ 250 parents sont venus selon le compte rendu, chiffre à confirmer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Exactement 400 parents sont venus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun parent n'est venu",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien conclure",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une affiche est écrite avant ; un compte rendu est écrit après."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Documents écrits pour Lnclass. Document 1 : fiche de musée, « Morceaux de pots, restes de foyers et mur en ruine retrouvés en fouille près du fleuve, à Sikoro. » Document 2 : le griot Bakary, « Les premiers habitants de Sikoro se sont installés près du fleuve. » Document 3 : peinture de l'ancien village de Sikoro au bord du fleuve, avec des cases et des pirogues.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel document est une source iconographique ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Une peinture est une image : source iconographique. 2. Le document 1 décrit des objets et le document 2 est un récit oral.",
+                  "answers": [
+                    {
+                      "content": "Le document 3, la peinture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le document 1, la fiche de fouille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le document 2, le récit du griot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que disent les trois documents en commun ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On compare les trois documents. 2. Fouille, récit et peinture parlent du village de Sikoro près du fleuve.",
+                  "answers": [
+                    {
+                      "content": "Un village se trouvait près d'un fleuve",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le village était très riche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village avait mille habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village était sans fleuve",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois sources de natures différentes qui se rejoignent rendent l'information plus sûre.",
+                  "question_type": "true_false",
+                  "explanation": "1. Croiser des sources de natures différentes renforce l'information. 2. Ici, objets, parole et image disent la même chose.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle information reste à vérifier ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. On conclut en séparant le sûr du douteux. 2. Aucun des trois documents ne dit combien d'habitants il y avait.",
+                  "answers": [
+                    {
+                      "content": "Le nombre d'habitants du village, car aucun document ne le donne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Que le village était près d'un fleuve",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que le document 1 est un document de musée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que la peinture est une image",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La peinture a été faite par un peintre qui ___ ce qu'il montre.",
+                  "question_type": "select",
+                  "explanation": "1. Celui qui fait une image choisit ce qu'il montre. 2. Il faut donc la comparer avec d'autres sources.",
+                  "answers": [
+                    {
+                      "content": "choisit",
+                      "correct": true
+                    },
+                    {
+                      "content": "efface",
+                      "correct": false
+                    },
+                    {
+                      "content": "enterre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Les trois documents ont des natures différentes mais parlent du même lieu."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document écrit pour Lnclass. Un élève conclut : « Les sources, c'est simple : j'en choisis une, je la crois, et j'ai fini. » Son professeur lui demande de corriger cette conclusion avec ce qu'il a appris.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle phrase corrige le mieux la conclusion de l'élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. L'historien utilise plusieurs sources. 2. Il les critique (qui, pourquoi) et les compare.",
+                  "answers": [
+                    {
+                      "content": "Je choisis plusieurs sources, je les critique et je les compare",
+                      "correct": true
+                    },
+                    {
+                      "content": "Je choisis la source la plus longue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je choisis la source la plus jolie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je ne choisis aucune source",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une source écrite est toujours vraie.",
+                  "question_type": "true_false",
+                  "explanation": "1. Écrit ne veut pas dire vrai. 2. L'auteur peut se tromper ou vouloir convaincre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une source orale peut être une vraie source.",
+                  "question_type": "true_false",
+                  "explanation": "1. L'oral est une famille de sources. 2. Il est précieux, à condition de le vérifier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces propositions, lesquelles sont des familles de sources de l'histoire ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "1. Les familles étudiées sont écrites, orales, archéologiques et iconographiques. 2. « Inventées » et « oubliées » ne sont pas des familles de sources.",
+                  "answers": [
+                    {
+                      "content": "Les sources écrites",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources orales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources iconographiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources inventées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sources oubliées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Critiquer une source, c'est l'examiner pour savoir si l'on peut s'y ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Critiquer une source, c'est l'examiner pour savoir si l'on peut s'y fier. 2. On ne la rejette pas, on la vérifie.",
+                  "answers": [
+                    {
+                      "content": "fier",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "L'historien utilise plusieurs sources et les compare."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3601 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — Le relief",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "formes-relief",
+          "kind": "diagram",
+          "description": "Schéma en arbre des cinq grandes formes de relief. La montagne, la colline et le plateau sont des reliefs situés en hauteur. La plaine et la vallée sont des reliefs bas : la plaine est une étendue plane, la vallée est un creux allongé creusé par un cours d'eau.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "relief",
+                "label": "Les formes de relief"
+              },
+              {
+                "id": "montagne",
+                "label": "Montagne : très haute",
+                "category": 1
+              },
+              {
+                "id": "colline",
+                "label": "Colline : arrondie, peu haute",
+                "category": 1
+              },
+              {
+                "id": "plateau",
+                "label": "Plateau : plat, en hauteur",
+                "category": 1
+              },
+              {
+                "id": "plaine",
+                "label": "Plaine : plate et basse",
+                "category": 2
+              },
+              {
+                "id": "vallee",
+                "label": "Vallée : creux allongé",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "relief",
+                "to": "montagne"
+              },
+              {
+                "from": "relief",
+                "to": "colline"
+              },
+              {
+                "from": "relief",
+                "to": "plateau"
+              },
+              {
+                "from": "relief",
+                "to": "plaine"
+              },
+              {
+                "from": "relief",
+                "to": "vallee"
+              }
+            ],
+            "legend": [
+              "Reliefs en hauteur",
+              "Reliefs bas"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "profil-schema",
+          "kind": "stat_chart",
+          "description": "Profil schématique d'un relief imaginé, avec des altitudes illustratives en mètres, de gauche à droite : A 200, B 350, C 700, D 1000, E 650, F 180, G 300 et H 220. A est dans une plaine, D est le sommet d'une montagne, F est le fond d'une vallée et G est une colline arrondie, suivie d'une légère descente jusqu'à H. La courbe monte de A à D, puis descend jusqu'à F.",
+          "params": {
+            "chart": "line",
+            "series": [
+              200,
+              350,
+              700,
+              1000,
+              650,
+              180,
+              300,
+              220
+            ],
+            "labels": [
+              "A (200 m)",
+              "B (350 m)",
+              "C (700 m)",
+              "D (1 000 m)",
+              "E (650 m)",
+              "F (180 m)",
+              "G (300 m)",
+              "H (220 m)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-relief-ci",
+          "kind": "map",
+          "description": "Carte schématique de la Côte d'Ivoire. À l'ouest, la zone des montagnes, autour de la ville de Man, est un relief élevé. Au sud, la plaine côtière borde le golfe de Guinée : c'est un relief bas, où se trouvent Abidjan et Grand-Bassam. San-Pédro, sur le littoral de l'ouest, est repérée comme lieu de la côte. Korhogo est repérée au nord. Les contours sont simplifiés.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "mountain_west",
+                "category": 1
+              },
+              {
+                "id": "coastal_strip",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "man",
+                "label": "Man (région des montagnes)"
+              },
+              {
+                "id": "abidjan",
+                "label": "Abidjan"
+              },
+              {
+                "id": "grand_bassam",
+                "label": "Grand-Bassam"
+              },
+              {
+                "id": "san_pedro",
+                "label": "San-Pédro"
+              },
+              {
+                "id": "korhogo",
+                "label": "Korhogo"
+              }
+            ],
+            "legend": [
+              "Montagnes de l'ouest : relief élevé",
+              "Plaine côtière du sud : relief bas"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "altitudes-lieux",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de cinq lieux imaginés, avec des altitudes illustratives en mètres : le village P à 20 m, le village Q à 150 m, la ville R à 340 m, le village S à 620 m et le sommet T à 1120 m. Plus la barre est haute, plus le lieu est haut au-dessus du niveau de la mer.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              20,
+              150,
+              340,
+              620,
+              1120
+            ],
+            "labels": [
+              "P (20 m)",
+              "Q (150 m)",
+              "R (340 m)",
+              "S (620 m)",
+              "T (1 120 m)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître les grandes formes de relief",
+          "remember": "Le **relief** est l'ensemble des formes de la surface de la Terre : des parties hautes, des parties basses, des parties plates. On distingue cinq formes. La **montagne** est un relief très haut, aux versants raides (un **versant** est le côté incliné d'un relief). La **colline** est un relief arrondi, peu haut, aux versants doux. Le **plateau** est une étendue plane située en hauteur, bordée de versants. La **plaine** est une étendue plane et basse. La **vallée** est un creux allongé, creusé par un cours d'eau entre deux versants.",
+          "method": [
+            "Observer la hauteur du relief par rapport au terrain autour : très haut, peu haut ou bas.",
+            "Observer la forme du dessus : sommet, surface plane ou creux allongé.",
+            "Comparer avec les caractéristiques des cinq formes de relief.",
+            "Nommer la forme de relief et justifier avec un mot-clé."
+          ],
+          "example": {
+            "statement": "Près de Man, dans l'ouest de la Côte d'Ivoire, un élève décrit un relief : il est très haut par rapport au terrain autour, son sommet domine toute la région et ses versants sont raides. Quelle forme de relief est-ce ?",
+            "steps": [
+              "Observer la hauteur : le relief est très haut par rapport au terrain autour.",
+              "Observer la forme du dessus : il y a un sommet qui domine et des versants raides ; il n'y a ni surface plane, ni creux.",
+              "Comparer : « très haut, versants raides » correspond à la montagne. La colline est peu haute et arrondie, le plateau est plat.",
+              "Nommer : c'est une montagne. Le mot-clé est « très haut »."
+            ]
+          },
+          "pitfall": "Ne confonds pas le **plateau** et la **plaine** : les deux sont plats, mais pas à la même hauteur. Contre-exemple (valeurs illustratives) : une étendue plate à 20 m d'altitude, près de la mer, est une plaine ; une étendue plate à 450 m d'altitude, bordée de versants, est un plateau. Pour ne pas te tromper, demande-toi toujours : « Est-ce plat ET en hauteur, avec des versants ? »",
+          "figure": "formes-relief",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une forme de relief avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Au bord du golfe de Guinée, une grande étendue plane et de faible altitude s'étend à perte de vue. C'est :",
+                "question_type": "single_choice",
+                "hint": "Plat et bas : pas besoin de monter.",
+                "explanation": "Étape 1 — Observer la hauteur : le terrain est bas. Étape 2 — Observer la forme du dessus : la surface est plane. Étape 3 — Comparer : plat et bas, c'est la plaine. Un plateau est plat mais en hauteur.",
+                "answers": [
+                  {
+                    "content": "une plaine",
+                    "correct": true
+                  },
+                  {
+                    "content": "une montagne",
+                    "correct": false
+                  },
+                  {
+                    "content": "un plateau",
+                    "correct": false
+                  },
+                  {
+                    "content": "une vallée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une vallée est un creux allongé, creusé par un cours d'eau entre deux versants.",
+                "question_type": "true_false",
+                "hint": "Pense à une rivière qui coule entre deux côtés inclinés.",
+                "explanation": "Étape 3 — Comparer avec les caractéristiques : la vallée est un creux allongé entre deux versants. Étape 4 — Nommer : la définition donnée est bien celle de la vallée, donc l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un relief arrondi, peu haut, aux versants doux, s'appelle une ___.",
+                "question_type": "fill_blank",
+                "hint": "Elle est plus petite qu'une montagne.",
+                "explanation": "Étape 2 — Observer la forme du dessus : le sommet est arrondi. Étape 3 — Comparer : arrondi et peu haut, c'est la colline ; la montagne est beaucoup plus haute. Étape 4 — Nommer : colline.",
+                "answers": [
+                  {
+                    "content": "colline",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître les cinq formes de relief",
+              "statement": "Dans cet exercice, tu reconnais les cinq formes de relief avec les étapes de la fiche : observer la hauteur, observer la forme, comparer, nommer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un relief très haut, aux versants raides, dont le sommet domine tout autour. Quelle forme de relief est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : le relief est très haut. Étape 2 — Observer la forme du dessus : il y a un sommet et des versants raides. Étape 3 — Comparer : cela correspond à la montagne. Étape 4 — Nommer : montagne. La colline est peu haute, la plaine est plate et la vallée est un creux.",
+                  "answers": [
+                    {
+                      "content": "Une montagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une colline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une vallée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un relief arrondi, peu haut, aux versants doux, s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Observer la forme du dessus : le sommet est arrondi. Étape 3 — Comparer : arrondi et peu haut, c'est la colline. Étape 4 — Nommer : colline, avec le mot-clé « peu haut ». Une montagne serait beaucoup plus haute.",
+                  "answers": [
+                    {
+                      "content": "colline",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plaine est une étendue plane et basse.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer la hauteur : la plaine est basse. Étape 2 — Observer la forme du dessus : sa surface est plane. Étape 3 — Comparer : plat et bas, c'est la définition de la plaine. L'affirmation est donc vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque forme de relief à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Comparer : on rapproche chaque description des caractéristiques de la fiche. Étape 4 — Nommer : montagne, très haut ; colline, arrondi et peu haut ; plateau, plat et en hauteur ; plaine, plat et bas ; vallée, creux allongé.",
+                  "answers": [
+                    {
+                      "content": "Montagne",
+                      "match": "Relief très haut aux versants raides"
+                    },
+                    {
+                      "content": "Colline",
+                      "match": "Relief arrondi et peu haut"
+                    },
+                    {
+                      "content": "Plateau",
+                      "match": "Étendue plane située en hauteur"
+                    },
+                    {
+                      "content": "Plaine",
+                      "match": "Étendue plane et basse"
+                    },
+                    {
+                      "content": "Vallée",
+                      "match": "Creux allongé creusé par un cours d'eau"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grande étendue plate se trouve à 450 m d'altitude (valeur illustrative) et ses bords sont des versants. Est-ce une plaine ou un plateau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : l'étendue est en hauteur. Étape 2 — Observer la forme du dessus : elle est plate. Étape 3 — Comparer : plat et en hauteur, bordé de versants, c'est un plateau. Étape 4 — Nommer : plateau. Dire « plaine » parce que c'est plat est l'erreur du piège : une plaine est plate et basse.",
+                  "answers": [
+                    {
+                      "content": "Un plateau, car elle est plate et en hauteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une plaine, car elle est plate",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une montagne, car elle est à 450 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une vallée, car elle est entourée de versants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux formes de relief qui sont plates ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Observer la forme du dessus : seules la plaine et le plateau ont une surface plane. Étape 3 — Comparer : la plaine est plate et basse, le plateau est plat et en hauteur. La montagne a un sommet, la colline est arrondie, la vallée est un creux.",
+                  "answers": [
+                    {
+                      "content": "La plaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plateau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vallée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La colline",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître des reliefs dans des paysages ivoiriens",
+              "statement": "Dans cet exercice, tu reconnais des formes de relief dans des paysages de Côte d'Ivoire, en gardant les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pose-toi toujours deux questions : est-ce haut ou bas ? Est-ce plat, arrondi ou en creux ?",
+              "questions": [
+                {
+                  "content": "Près de la lagune, à Grand-Bassam, le terrain est plat, bas, et s'étend sur de grandes distances. Quelle forme de relief est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : le terrain est bas, près de la mer et de la lagune. Étape 2 — Observer la forme du dessus : il est plat. Étape 3 — Comparer : plat et bas, c'est une plaine. Étape 4 — Nommer : plaine. Le plateau serait en hauteur.",
+                  "answers": [
+                    {
+                      "content": "Une plaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un plateau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une colline",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une colline est plus haute qu'une montagne.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer la hauteur : la colline est peu haute, la montagne est très haute. Étape 3 — Comparer : c'est l'inverse de ce que dit l'affirmation. Étape 4 — Nommer : la montagne est la plus haute des deux. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître une forme de relief.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer la hauteur, puis Étape 2 — observer la forme du dessus : on commence par observer avant de comparer. On nomme et on justifie en dernier, quand on a les éléments pour le faire.",
+                  "answers": [
+                    {
+                      "content": "Observer la hauteur du relief."
+                    },
+                    {
+                      "content": "Observer la forme du dessus."
+                    },
+                    {
+                      "content": "Comparer avec les cinq formes de relief."
+                    },
+                    {
+                      "content": "Nommer la forme et justifier avec un mot-clé."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une étendue plane située en hauteur et bordée de versants s'appelle un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer la hauteur : elle est en hauteur. Étape 2 — Observer la forme du dessus : elle est plane. Étape 3 — Comparer : plat et en hauteur, c'est le plateau. La plaine est plate mais basse.",
+                  "answers": [
+                    {
+                      "content": "plateau",
+                      "correct": true
+                    },
+                    {
+                      "content": "plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "colline",
+                      "correct": false
+                    },
+                    {
+                      "content": "montagne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le creux allongé creusé par une rivière entre deux versants s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Observer la forme du dessus : c'est un creux allongé, pas un sommet ni une surface plane. Étape 3 — Comparer : un creux allongé creusé par un cours d'eau, c'est la vallée. Étape 4 — Nommer : vallée.",
+                  "answers": [
+                    {
+                      "content": "vallée",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois formes de relief situées en hauteur par rapport au terrain autour ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Observer la hauteur : la montagne, la colline et le plateau dépassent le terrain autour. Étape 3 — Comparer : la plaine est basse et la vallée est un creux. Ce sont donc ces deux formes qui ne conviennent pas.",
+                  "answers": [
+                    {
+                      "content": "La montagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "La colline",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plateau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vallée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lire une altitude et calculer un dénivelé",
+          "remember": "L'**altitude** d'un lieu est sa hauteur au-dessus du **niveau de la mer**. Elle s'écrit en mètres (m). Le niveau de la mer a pour altitude 0 m. Plus l'altitude est grande, plus le lieu est haut. Le **dénivelé** entre deux lieux est l'écart entre leurs altitudes : on retranche la plus petite à la plus grande.",
+          "method": [
+            "Repérer les deux lieux et lire l'altitude de chacun.",
+            "Comparer les deux altitudes pour trouver la plus grande.",
+            "Soustraire la plus petite altitude à la plus grande.",
+            "Conclure par une phrase avec l'unité (m)."
+          ],
+          "example": {
+            "statement": "Valeurs illustratives, inventées pour s'entraîner : le village A est à 340 m d'altitude et le sommet B est à 1 120 m. Quel est le dénivelé entre A et B ?",
+            "steps": [
+              "Repérer : le village A est à 340 m, le sommet B est à 1 120 m.",
+              "Comparer : 1 120 m est plus grand que 340 m ; B est donc le lieu le plus haut.",
+              "Soustraire : 1 120 − 340 = 780.",
+              "Conclure : le dénivelé entre A et B est de 780 m."
+            ]
+          },
+          "pitfall": "Ne les **additionne** pas : le dénivelé est un écart, donc une soustraction. Contre-exemple : avec 340 m et 1 120 m, additionner donne 1 460 m, un dénivelé plus grand que l'altitude du sommet lui-même (1 120 m) : c'est impossible. Le bon calcul est 1 120 − 340 = 780 m. Autre piège : ne confonds pas l'altitude (mesurée depuis le niveau de la mer) avec la hauteur d'un relief au-dessus de la plaine voisine.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à calculer un dénivelé avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Valeurs illustratives : un village est à 250 m d'altitude et une colline voisine est à 700 m. Quel est le dénivelé entre les deux ?",
+                "question_type": "numeric",
+                "hint": "Soustrais la plus petite altitude à la plus grande.",
+                "explanation": "Étape 1 — Repérer : 250 m et 700 m. Étape 2 — Comparer : 700 est la plus grande altitude. Étape 3 — Soustraire : 700 − 250 = 450. Étape 4 — Conclure : le dénivelé est de 450 m.",
+                "answers": [
+                  {
+                    "content": "450",
+                    "correct": true
+                  }
+                ],
+                "unit": "m",
+                "tolerance": 0
+              },
+              {
+                "content": "Trois lieux sont à 85 m, 240 m et 175 m d'altitude (valeurs illustratives). Lequel est le plus haut ?",
+                "question_type": "single_choice",
+                "hint": "Plus l'altitude est grande, plus le lieu est haut.",
+                "explanation": "Étape 1 — Repérer les altitudes : 85 m, 240 m, 175 m. Étape 2 — Comparer : 240 est la plus grande valeur, donc ce lieu est le plus haut. Celui à 85 m est le plus bas.",
+                "answers": [
+                  {
+                    "content": "Celui qui est à 240 m",
+                    "correct": true
+                  },
+                  {
+                    "content": "Celui qui est à 85 m",
+                    "correct": false
+                  },
+                  {
+                    "content": "Celui qui est à 175 m",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'altitude d'un lieu se mesure à partir du niveau de la mer.",
+                "question_type": "true_false",
+                "hint": "Le niveau de la mer vaut 0 m.",
+                "explanation": "Étape 1 — Repérer l'altitude : elle donne la hauteur au-dessus du niveau de la mer, qui a pour altitude 0 m. L'affirmation est donc vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire des altitudes et calculer des dénivelés",
+              "statement": "Dans cet exercice, tu lis des altitudes et tu calcules des dénivelés avec les étapes de la fiche : repérer, comparer, soustraire, conclure. Les valeurs sont illustratives.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un village est à 120 m d'altitude et un autre à 450 m. Quel est le dénivelé entre les deux villages ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 120 m et 450 m. Étape 2 — Comparer : 450 est la plus grande altitude. Étape 3 — Soustraire : 450 − 120 = 330. Étape 4 — Conclure : le dénivelé est de 330 m.",
+                  "answers": [
+                    {
+                      "content": "330",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Trois lieux sont à 85 m, 240 m et 175 m d'altitude. Lequel est le plus bas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les trois altitudes. Étape 2 — Comparer : 85 est la plus petite valeur, donc ce lieu est le plus bas. 240 m est le lieu le plus haut.",
+                  "answers": [
+                    {
+                      "content": "Celui qui est à 85 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celui qui est à 240 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui qui est à 175 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le niveau de la mer a pour altitude 0 m.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'altitude est la hauteur au-dessus du niveau de la mer. Étape 4 — Conclure : le niveau de la mer sert de point de départ, il vaut donc 0 m. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sommet est à 1 050 m d'altitude et une plaine à 275 m. Quel est le dénivelé entre le sommet et la plaine ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 1 050 m et 275 m. Étape 2 — Comparer : 1 050 est la plus grande altitude. Étape 3 — Soustraire : 1 050 − 275 = 775. Étape 4 — Conclure : le dénivelé est de 775 m.",
+                  "answers": [
+                    {
+                      "content": "775",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux lieux sont à 300 m et à 900 m d'altitude. Quel est leur dénivelé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 300 m et 900 m. Étape 2 — Comparer : 900 est le plus grand. Étape 3 — Soustraire : 900 − 300 = 600. Étape 4 — Conclure : 600 m. Additionner (1 200 m) est l'erreur du piège : le dénivelé est un écart.",
+                  "answers": [
+                    {
+                      "content": "600 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 200 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "300 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "900 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies sur l'altitude ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer ce qu'est l'altitude : une hauteur au-dessus du niveau de la mer, écrite en mètres. Les autres propositions sont fausses : on ne part pas d'un sommet, l'altitude change d'un lieu à l'autre et le litre mesure un volume.",
+                  "answers": [
+                    {
+                      "content": "Elle se mesure à partir du niveau de la mer.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle s'écrit en mètres.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle se mesure à partir du sommet de la montagne.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est toujours la même pour tous les lieux.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle s'écrit en litres.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer des lieux selon leur altitude",
+              "statement": "Dans cet exercice, tu compares des lieux et tu calcules des écarts d'altitude, avec les étapes de la fiche. Les valeurs sont illustratives.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le dénivelé est un écart : tu retranches la plus petite altitude à la plus grande.",
+              "questions": [
+                {
+                  "content": "Une ville est à 415 m d'altitude et un sommet voisin à 960 m. Quel est le dénivelé entre la ville et le sommet ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 415 m et 960 m. Étape 2 — Comparer : 960 est la plus grande altitude. Étape 3 — Soustraire : 960 − 415 = 545. Étape 4 — Conclure : le dénivelé est de 545 m.",
+                  "answers": [
+                    {
+                      "content": "545",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Relie chaque couple d'altitudes à son dénivelé.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Soustraire pour chaque couple : 500 − 340 = 160 ; 650 − 200 = 450 ; 400 − 90 = 310. On retranche toujours la plus petite altitude à la plus grande.",
+                  "answers": [
+                    {
+                      "content": "340 m et 500 m",
+                      "match": "160 m"
+                    },
+                    {
+                      "content": "200 m et 650 m",
+                      "match": "450 m"
+                    },
+                    {
+                      "content": "90 m et 400 m",
+                      "match": "310 m"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'altitude se mesure à partir du niveau de la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer ce qu'est l'altitude : la hauteur au-dessus du niveau de la mer. Le niveau de la mer a pour altitude 0 m.",
+                  "answers": [
+                    {
+                      "content": "mer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer un dénivelé.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer et lire les altitudes. Étape 2 — Comparer pour trouver la plus grande. Étape 3 — Soustraire. Étape 4 — Conclure par une phrase avec l'unité (m).",
+                  "answers": [
+                    {
+                      "content": "Repérer les deux lieux et lire leur altitude."
+                    },
+                    {
+                      "content": "Comparer les deux altitudes."
+                    },
+                    {
+                      "content": "Soustraire la plus petite à la plus grande."
+                    },
+                    {
+                      "content": "Conclure par une phrase avec l'unité."
+                    }
+                  ]
+                },
+                {
+                  "content": "L'altitude s'exprime en ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure avec l'unité : l'altitude est une hauteur, donc elle s'exprime en mètres (m).",
+                  "answers": [
+                    {
+                      "content": "mètres",
+                      "correct": true
+                    },
+                    {
+                      "content": "litres",
+                      "correct": false
+                    },
+                    {
+                      "content": "degrés",
+                      "correct": false
+                    },
+                    {
+                      "content": "grammes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer un dénivelé, on additionne les deux altitudes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Soustraire : le dénivelé est un écart entre deux altitudes, donc une soustraction. Avec 400 m et 1 000 m, additionner donne 1 400 m, alors que le dénivelé est 1 000 − 400 = 600 m. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lire un profil de relief",
+          "remember": "Un **profil de relief** est un dessin en coupe : il montre comment l'altitude change le long d'une ligne, par exemple de l'ouest vers l'est. Sur l'axe vertical, on lit l'**altitude** en mètres. Sur l'axe horizontal, on suit la ligne, de gauche à droite. Quand la courbe **monte**, le terrain monte. Quand elle **descend**, le terrain descend. Le point le plus haut est un **sommet** ; le point le plus bas est un **fond** (de vallée ou de plaine).",
+          "method": [
+            "Lire ce que montre le profil : les nombres en mètres donnent l'altitude, l'ordre des points suit la ligne.",
+            "Repérer le point le plus haut et le point le plus bas, avec leur altitude.",
+            "Suivre la courbe de gauche à droite : elle monte, descend ou reste plate.",
+            "Décrire les formes de relief traversées et calculer le dénivelé demandé."
+          ],
+          "example": {
+            "statement": "Un profil schématique, aux altitudes illustratives, donne : A 200 m (plaine), B 350 m, C 700 m, D 1 000 m (sommet), E 650 m, F 180 m (fond de vallée) et G 300 m (colline). Décris ce profil et calcule le dénivelé entre son point le plus haut et son point le plus bas.",
+            "steps": [
+              "Lire : le profil montre l'altitude le long d'une ligne ; les nombres en mètres donnent l'altitude, et les points se suivent de A à G.",
+              "Repérer : le point le plus haut est D (1 000 m) ; le point le plus bas est F (180 m).",
+              "Suivre : la courbe monte de A à D, puis descend de D à F, puis remonte un peu de F à G.",
+              "Décrire : on traverse une plaine (A), une montagne (D), une vallée (F) et une colline (G). Dénivelé : 1 000 − 180 = 820 m."
+            ]
+          },
+          "pitfall": "Ne confonds pas les deux axes, et ne crois pas qu'un point situé à droite est un point plus haut. Contre-exemple : F est à droite de D, mais F est à 180 m alors que D est à 1 000 m. La position sur l'axe horizontal dit où l'on est le long de la ligne, pas à quelle altitude. Pour la hauteur, regarde toujours l'axe vertical.",
+          "figure": "profil-schema",
+          "practice": {
+            "statement": "Tu t'entraînes à lire un profil de relief avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Sur un profil de relief, que lit-on sur l'axe vertical ?",
+                "question_type": "single_choice",
+                "hint": "C'est la hauteur, pas la distance.",
+                "explanation": "Étape 1 — Lire les axes : l'axe vertical donne l'altitude en mètres. L'axe horizontal suit la ligne tracée sur le terrain.",
+                "answers": [
+                  {
+                    "content": "L'altitude, en mètres",
+                    "correct": true
+                  },
+                  {
+                    "content": "La distance, en kilomètres",
+                    "correct": false
+                  },
+                  {
+                    "content": "La température",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nom de la région",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur un profil aux altitudes illustratives, le point le plus haut est à 900 m et le point le plus bas à 150 m. Quel est le dénivelé entre ces deux points ?",
+                "question_type": "numeric",
+                "hint": "Soustrais l'altitude la plus basse à la plus haute.",
+                "explanation": "Étape 2 — Repérer : 900 m en haut, 150 m en bas. Étape 4 — Calculer le dénivelé : 900 − 150 = 750. Le dénivelé est de 750 m.",
+                "answers": [
+                  {
+                    "content": "750",
+                    "correct": true
+                  }
+                ],
+                "unit": "m",
+                "tolerance": 0
+              },
+              {
+                "content": "Quand la courbe d'un profil descend de gauche à droite, le terrain descend.",
+                "question_type": "true_false",
+                "hint": "La courbe suit la hauteur du terrain.",
+                "explanation": "Étape 3 — Suivre la courbe : une courbe qui descend montre une altitude qui diminue. Le terrain descend donc. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire les points d'un profil de relief",
+              "statement": "Dans cet exercice, tu lis un profil schématique avec les étapes de la fiche. Ses altitudes sont illustratives : A 200 m, B 350 m, C 700 m, D 1 000 m, E 650 m, F 180 m et G 300 m.",
+              "exercise_type": "fixation",
+              "figure": "profil-schema",
+              "questions": [
+                {
+                  "content": "Sur un profil de relief, que lit-on sur l'axe vertical ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire ce que montre le profil : l'axe vertical donne l'altitude en mètres. L'axe horizontal suit la ligne tracée sur le terrain.",
+                  "answers": [
+                    {
+                      "content": "L'altitude, en mètres",
+                      "correct": true
+                    },
+                    {
+                      "content": "La distance entre deux villes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom des reliefs",
+                      "correct": false
+                    },
+                    {
+                      "content": "La date",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le profil (A 200 m, B 350 m, C 700 m, D 1 000 m, E 650 m, F 180 m, G 300 m), quel point est le plus haut ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer le point le plus haut : on compare les altitudes. 1 000 m (point D) est la plus grande valeur. A, F et G sont bien plus bas.",
+                  "answers": [
+                    {
+                      "content": "D",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "F",
+                      "correct": false
+                    },
+                    {
+                      "content": "G",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce profil, A est à 200 m et D est à 1 000 m. Quel est le dénivelé entre A et D ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer : A 200 m et D 1 000 m. Étape 4 — Calculer le dénivelé : 1 000 − 200 = 800. Le dénivelé est de 800 m.",
+                  "answers": [
+                    {
+                      "content": "800",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quand la courbe d'un profil descend de gauche à droite, l'altitude diminue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre la courbe de gauche à droite : si elle descend, l'altitude diminue. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce profil, F est à droite de D. F est à 180 m et D à 1 000 m. Peut-on dire que F est plus haut que D parce qu'il est plus à droite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire les axes : la hauteur se lit sur l'axe vertical, pas sur l'axe horizontal. Étape 2 — Comparer : F est à 180 m, D est à 1 000 m. F est donc plus bas. Penser qu'un point à droite est plus haut est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Non, car la hauteur se lit sur l'axe vertical",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car il est plus à droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car il vient après D",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car F est sur un autre profil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels points de ce profil sont à plus de 600 m d'altitude ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Repérer les altitudes supérieures à 600 m : 700, 1 000 et 650. Les points A (200 m), B (350 m) et F (180 m) sont plus bas que 600 m.",
+                  "answers": [
+                    {
+                      "content": "C (700 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "D (1 000 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "E (650 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "A (200 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "B (350 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "F (180 m)",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Décrire un profil et calculer des dénivelés",
+              "statement": "Dans cet exercice, tu décris le profil schématique de la fiche et tu calcules des dénivelés. Ses altitudes sont illustratives : A 200 m (plaine), B 350 m, C 700 m, D 1 000 m (sommet), E 650 m, F 180 m (fond de vallée) et G 300 m (colline).",
+              "exercise_type": "fixation",
+              "figure": "profil-schema",
+              "hint": "Pour la hauteur, regarde l'axe vertical. Pour le dénivelé, soustrais la plus petite altitude à la plus grande.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour lire un profil de relief.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire ce que montre le profil pour savoir ce que montre le profil. Puis on repère les points extrêmes, on suit la courbe, et on termine par la description et le calcul.",
+                  "answers": [
+                    {
+                      "content": "Lire ce que montre le profil."
+                    },
+                    {
+                      "content": "Repérer le point le plus haut et le point le plus bas."
+                    },
+                    {
+                      "content": "Suivre la courbe de gauche à droite."
+                    },
+                    {
+                      "content": "Décrire les formes de relief et calculer le dénivelé."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce profil, D est à 1 000 m et F est à 180 m. Quel est le dénivelé entre le point le plus haut et le point le plus bas ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer : le point le plus haut est D (1 000 m), le plus bas est F (180 m). Étape 4 — Calculer : 1 000 − 180 = 820. Le dénivelé est de 820 m.",
+                  "answers": [
+                    {
+                      "content": "820",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans ce profil, le point le plus haut D est le ___ de la montagne.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer le point le plus haut : D est à 1 000 m. Le point le plus haut d'un relief s'appelle le sommet.",
+                  "answers": [
+                    {
+                      "content": "sommet",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque point du profil à la forme de relief qu'il représente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Décrire les formes de relief : A est dans une plaine, D est le sommet d'une montagne, F est le fond d'une vallée et G est une colline. On les reconnaît par leur hauteur et leur forme.",
+                  "answers": [
+                    {
+                      "content": "A (200 m)",
+                      "match": "Plaine"
+                    },
+                    {
+                      "content": "D (1 000 m)",
+                      "match": "Sommet de montagne"
+                    },
+                    {
+                      "content": "F (180 m)",
+                      "match": "Fond de vallée"
+                    },
+                    {
+                      "content": "G (300 m)",
+                      "match": "Colline"
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre D et F, la courbe ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Suivre la courbe de gauche à droite : de D (1 000 m) à F (180 m), l'altitude diminue, donc la courbe descend.",
+                  "answers": [
+                    {
+                      "content": "descend",
+                      "correct": true
+                    },
+                    {
+                      "content": "monte",
+                      "correct": false
+                    },
+                    {
+                      "content": "reste plate",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce profil, la colline G est plus haute que la montagne D.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer les altitudes : G est à 300 m, D est à 1 000 m. G est donc plus bas que D. La colline est moins haute que la montagne. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lire une carte du relief de la Côte d'Ivoire",
+          "remember": "Une **carte du relief** montre les parties hautes et les parties basses d'un territoire ; sa **légende** dit ce que signifie chaque couleur ou chaque motif. En Côte d'Ivoire, le relief est surtout fait de **plaines** et de **plateaux** peu élevés. L'**ouest**, autour de la ville de **Man**, est la région des **montagnes** : c'est la partie la plus élevée du pays. Au **sud**, le long du **golfe de Guinée**, le relief du littoral est bas : c'est la **plaine côtière**, avec des lagunes, où se trouvent Abidjan et Grand-Bassam.",
+          "method": [
+            "Lire le titre de la carte et sa légende.",
+            "Repérer les zones hautes et les zones basses grâce à la légende.",
+            "Situer ces zones avec des repères : points cardinaux et villes.",
+            "Décrire le relief de chaque zone, puis conclure."
+          ],
+          "example": {
+            "statement": "Sur la carte schématique du relief de la Côte d'Ivoire, la légende indique : « Montagnes de l'ouest : relief élevé » et « Plaine côtière du sud : relief bas ». Décris le relief de la région de Man et celui d'Abidjan.",
+            "steps": [
+              "Lire : le titre annonce le relief de la Côte d'Ivoire ; la légende distingue un relief élevé (montagnes de l'ouest) et un relief bas (plaine côtière du sud).",
+              "Repérer : la zone du relief élevé est à l'ouest ; la zone du relief bas est le long de la côte, au sud.",
+              "Situer : Man est à l'ouest, dans la zone des montagnes ; Abidjan est au sud, au bord du golfe de Guinée, dans la plaine côtière.",
+              "Décrire : la région de Man a un relief élevé, avec des montagnes ; Abidjan a un relief bas, avec une plaine. Conclusion : le relief ivoirien n'est pas partout le même."
+            ]
+          },
+          "pitfall": "Ne dis pas que toute la Côte d'Ivoire est montagneuse parce que Man est dans les montagnes. Contre-exemple (valeurs illustratives) : un lieu de l'ouest à 800 m d'altitude et un lieu de la côte à 10 m d'altitude ont 790 m d'écart. La carte montre des zones différentes : l'ouest est élevé, le sud est bas, et le reste du pays est surtout fait de plaines et de plateaux.",
+          "figure": "carte-relief-ci",
+          "practice": {
+            "statement": "Tu t'entraînes à lire une carte du relief de la Côte d'Ivoire avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans quelle partie de la Côte d'Ivoire se trouve la région de Man, connue pour ses montagnes ?",
+                "question_type": "single_choice",
+                "hint": "Pense à la région des montagnes.",
+                "explanation": "Étape 3 — Situer avec des repères : Man est une ville de l'ouest de la Côte d'Ivoire, dans la région des montagnes. Le bord de la mer, au sud, est une plaine côtière.",
+                "answers": [
+                  {
+                    "content": "À l'ouest",
+                    "correct": true
+                  },
+                  {
+                    "content": "Au sud, au bord de la mer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans l'est, près du Ghana",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La plaine côtière borde le golfe de Guinée, au sud de la Côte d'Ivoire.",
+                "question_type": "true_false",
+                "hint": "La mer est au sud du pays.",
+                "explanation": "Étape 2 — Repérer les zones basses : la plaine côtière est le long de la côte, au sud, face au golfe de Guinée. Étape 3 — Situer : Abidjan et Grand-Bassam en font partie. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur une carte du relief, c'est la ___ qui dit ce que signifie chaque couleur.",
+                "question_type": "fill_blank",
+                "hint": "Elle se trouve souvent dans un encadré.",
+                "explanation": "Étape 1 — Lire le titre et la légende : la légende explique les couleurs ou les motifs de la carte. Sans elle, on ne peut pas dire si une zone est haute ou basse.",
+                "answers": [
+                  {
+                    "content": "légende",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire la carte du relief de la Côte d'Ivoire",
+              "statement": "Dans cet exercice, tu lis la carte schématique du relief de la Côte d'Ivoire avec les étapes de la fiche : l'ouest montagneux autour de Man est en relief élevé, la plaine côtière du sud est en relief bas.",
+              "exercise_type": "fixation",
+              "figure": "carte-relief-ci",
+              "questions": [
+                {
+                  "content": "Dans quelle partie de la Côte d'Ivoire se trouve la région de Man, connue pour ses montagnes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire la carte et sa légende : le relief élevé est dans l'ouest. Étape 3 — Situer : Man est une ville de l'ouest, dans la région des montagnes. Le sud est la plaine côtière et Korhogo est au nord.",
+                  "answers": [
+                    {
+                      "content": "À l'ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au sud, au bord de la mer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'est, près du Ghana",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au nord, près de Korhogo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces villes est dans la plaine côtière, au bord du golfe de Guinée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer les zones basses : la plaine côtière longe le golfe de Guinée, au sud. Étape 3 — Situer : Abidjan est au sud, dans cette plaine. Man est dans les montagnes de l'ouest et Korhogo est au nord.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La plaine côtière est un relief bas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer les zones basses grâce à la légende : la plaine côtière du sud est un relief bas. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une carte du relief, c'est la ___ qui dit ce que signifie chaque couleur.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire le titre et la légende : la légende explique les couleurs ou les motifs. Elle permet de savoir si une zone est haute ou basse.",
+                  "answers": [
+                    {
+                      "content": "légende",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Man est dans les montagnes de l'ouest, donc toute la Côte d'Ivoire est montagneuse.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Décrire le relief de chaque zone : la carte montre un relief élevé à l'ouest, mais un relief bas au sud, avec la plaine côtière. Le reste du pays est surtout fait de plaines et de plateaux. Généraliser à tout le pays est l'erreur du piège. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux villes situées dans la plaine côtière du sud ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Situer : Abidjan et Grand-Bassam sont au bord du golfe de Guinée, dans la plaine côtière. Man est dans l'ouest montagneux, Korhogo est au nord et Bouaké est à l'intérieur du pays.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Grand-Bassam",
+                      "correct": true
+                    },
+                    {
+                      "content": "Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bouaké",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Décrire le relief de l'ouest et du sud ivoiriens",
+              "statement": "Dans cet exercice, tu décris le relief de la région de Man et celui des plaines côtières, en gardant les étapes de la fiche. Les altitudes données sont illustratives.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Rappelle-toi : montagnes à l'ouest, autour de Man ; plaine côtière au sud, au bord du golfe de Guinée.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour lire une carte du relief.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire le titre et la légende pour comprendre la carte. Ensuite on repère les zones hautes et basses, on les situe avec des repères, puis on décrit et on conclut.",
+                  "answers": [
+                    {
+                      "content": "Lire le titre et la légende."
+                    },
+                    {
+                      "content": "Repérer les zones hautes et les zones basses."
+                    },
+                    {
+                      "content": "Situer ces zones avec des repères."
+                    },
+                    {
+                      "content": "Décrire le relief de chaque zone et conclure."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque lieu à son relief.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Situer et Étape 4 — Décrire : l'ouest autour de Man est montagneux ; Abidjan est dans la plaine côtière, au sud ; un sommet qui domine la région est une montagne ; une rivière entre deux versants coule dans une vallée.",
+                  "answers": [
+                    {
+                      "content": "Région de Man, à l'ouest",
+                      "match": "Montagnes, relief élevé"
+                    },
+                    {
+                      "content": "Abidjan, au sud",
+                      "match": "Plaine côtière, relief bas"
+                    },
+                    {
+                      "content": "Un sommet qui domine la région",
+                      "match": "Montagne, point le plus haut"
+                    },
+                    {
+                      "content": "Une rivière entre deux versants",
+                      "match": "Vallée, creux allongé"
+                    }
+                  ]
+                },
+                {
+                  "content": "Valeurs illustratives : un lieu de la région de Man est à 850 m d'altitude et un lieu de la côte à 15 m. Quel est le dénivelé entre les deux ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer la zone haute et la zone basse : 850 m pour l'ouest, 15 m pour la côte. Étape 4 — Décrire et calculer : 850 − 15 = 835. Le dénivelé est de 835 m.",
+                  "answers": [
+                    {
+                      "content": "835",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La région de Man, à l'ouest, est une région de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Situer : Man est à l'ouest, dans la région des montagnes. La plaine côtière et les lagunes sont au sud, au bord du golfe de Guinée.",
+                  "answers": [
+                    {
+                      "content": "montagnes",
+                      "correct": true
+                    },
+                    {
+                      "content": "plaine côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "lagunes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La plaine ___ borde le golfe de Guinée, au sud de la Côte d'Ivoire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer les zones basses : la plaine qui longe la côte, au sud, s'appelle la plaine côtière. Étape 3 — Situer : elle borde le golfe de Guinée.",
+                  "answers": [
+                    {
+                      "content": "côtière",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ouest de la Côte d'Ivoire a un relief plus élevé que le sud.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer les zones hautes et basses : la légende donne un relief élevé à l'ouest (montagnes) et un relief bas au sud (plaine côtière). L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un voyage scolaire d'Abidjan à Man",
+          "statement": "Texte écrit pour Lnclass. La classe de 6ème de Mme Koné part d'Abidjan pour un voyage d'étude à Man. Au départ, le car roule sur un terrain plat et bas, près de la lagune. Au fil du trajet, le relief change. À l'arrivée, les élèves découvrent de hautes montagnes autour de la ville. Les altitudes de cet exercice sont illustratives : Abidjan 10 m et un point de la région de Man 850 m. Ce problème est de niveau interrogation.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Au départ d'Abidjan, le terrain est plat et bas, près de la lagune. Quelle forme de relief est-ce ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode pour reconnaître une forme de relief. 1) Observer la hauteur : le terrain est bas, près de la lagune. 2) Observer la forme du dessus : il est plat. 3) Comparer : plat et bas, c'est une plaine. 4) Nommer : plaine. Le plateau est plat mais en hauteur ; la colline et la montagne ont un sommet.",
+              "answers": [
+                {
+                  "content": "Une plaine",
+                  "correct": true
+                },
+                {
+                  "content": "Une montagne",
+                  "correct": false
+                },
+                {
+                  "content": "Un plateau",
+                  "correct": false
+                },
+                {
+                  "content": "Une colline",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À l'arrivée, les élèves voient des reliefs très hauts, aux versants raides. Quelle forme de relief est-ce ?",
+              "question_type": "single_choice",
+              "explanation": "1) Observer la hauteur : les reliefs sont très hauts. 2) Observer la forme du dessus : les versants sont raides, il y a des sommets. 3) Comparer : très haut et versants raides, ce sont des montagnes. 4) Nommer : montagnes, avec le mot-clé « très haut ». Une plaine est basse, une vallée est un creux.",
+              "answers": [
+                {
+                  "content": "Des montagnes",
+                  "correct": true
+                },
+                {
+                  "content": "Des plaines",
+                  "correct": false
+                },
+                {
+                  "content": "Des vallées",
+                  "correct": false
+                },
+                {
+                  "content": "Des plateaux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Abidjan est dans la plaine côtière, au sud, et Man est dans la région des montagnes, à l'ouest.",
+              "question_type": "true_false",
+              "explanation": "1) Lire la carte : le relief bas est le long de la côte, au sud ; le relief élevé est à l'ouest. 2) Situer : Abidjan est au bord de la mer, dans la plaine côtière. Man est dans l'ouest montagneux. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Abidjan est à 10 m d'altitude et un point de la région de Man est à 850 m (valeurs illustratives). Quel est le dénivelé entre les deux ?",
+              "question_type": "numeric",
+              "explanation": "Méthode du dénivelé. 1) Repérer : 10 m et 850 m. 2) Comparer : 850 est la plus grande altitude. 3) Soustraire : 850 − 10 = 840. 4) Conclure : le dénivelé est de 840 m. Additionner (860 m) est faux : le dénivelé est un écart.",
+              "answers": [
+                {
+                  "content": "840",
+                  "correct": true
+                }
+              ],
+              "unit": "m",
+              "tolerance": 0
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour calculer un dénivelé.",
+              "question_type": "ordering",
+              "explanation": "On lit d'abord les altitudes, on trouve la plus grande, on soustrait, puis on conclut avec l'unité (m). La conclusion ne peut venir qu'après le calcul.",
+              "answers": [
+                {
+                  "content": "Repérer les deux lieux et lire leur altitude."
+                },
+                {
+                  "content": "Comparer les deux altitudes."
+                },
+                {
+                  "content": "Soustraire la plus petite à la plus grande."
+                },
+                {
+                  "content": "Conclure par une phrase avec l'unité."
+                }
+              ]
+            },
+            {
+              "content": "En deux ou trois phrases, décris comment le relief change pendant le voyage, d'Abidjan à Man.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il situe la plaine basse et plate au départ (sud)",
+                "Il situe les montagnes élevées à l'arrivée (ouest)",
+                "Il utilise au moins une forme de relief avec son mot-clé (plat et bas, très haut)"
+              ],
+              "explanation": "Corrigé modèle : « Au départ d'Abidjan, au sud, le relief est une plaine : le terrain est plat et bas. Plus on va vers le nord-ouest, plus le relief s'élève. À Man, on trouve des montagnes très hautes, aux versants raides. » Barème : 1 point pour la plaine au départ, 1 point pour les montagnes à l'arrivée, 1 point pour les mots-clés exacts.",
+              "answers": [],
+              "starter": "Au départ d'Abidjan, le relief est…"
+            }
+          ]
+        },
+        {
+          "title": "Lire le profil du carnet de Kofi",
+          "statement": "Texte écrit pour Lnclass. Kofi a dessiné, dans son carnet de géographie, le profil schématique d'un relief imaginé, de gauche à droite. Les altitudes sont illustratives : A 200 m (plaine), B 350 m, C 700 m, D 1 000 m (sommet d'une montagne), E 650 m, F 180 m (fond d'une vallée) et G 300 m (colline). Ce problème est de niveau interrogation.",
+          "exercise_type": "fixation",
+          "figure": "profil-schema",
+          "questions": [
+            {
+              "content": "Sur le profil de Kofi, que lit-on sur l'axe vertical ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de lecture d'un profil. 1) Lire ce que montre le profil : l'axe vertical donne l'altitude en mètres, l'axe horizontal suit la ligne tracée. Les autres propositions ne sont pas des mesures d'un profil de relief.",
+              "answers": [
+                {
+                  "content": "L'altitude, en mètres",
+                  "correct": true
+                },
+                {
+                  "content": "La distance parcourue",
+                  "correct": false
+                },
+                {
+                  "content": "Le nom des villes",
+                  "correct": false
+                },
+                {
+                  "content": "Le nombre d'habitants",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le profil de Kofi (A 200 m, B 350 m, C 700 m, D 1 000 m, E 650 m, F 180 m, G 300 m), quel est le point le plus bas ?",
+              "question_type": "single_choice",
+              "explanation": "2) Repérer le point le plus bas : on compare les altitudes. 180 m, point F, est la plus petite valeur. A est à 200 m, G à 300 m et B à 350 m, donc plus hauts.",
+              "answers": [
+                {
+                  "content": "F",
+                  "correct": true
+                },
+                {
+                  "content": "A",
+                  "correct": false
+                },
+                {
+                  "content": "G",
+                  "correct": false
+                },
+                {
+                  "content": "B",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le profil de Kofi, D est à 1 000 m et F est à 180 m. Quel est le dénivelé entre D et F ?",
+              "question_type": "numeric",
+              "explanation": "1) Repérer : 1 000 m et 180 m. 2) Comparer : 1 000 est la plus grande altitude. 3) Soustraire : 1 000 − 180 = 820. 4) Conclure : le dénivelé est de 820 m.",
+              "answers": [
+                {
+                  "content": "820",
+                  "correct": true
+                }
+              ],
+              "unit": "m",
+              "tolerance": 0
+            },
+            {
+              "content": "Relie chaque point du profil de Kofi à la forme de relief qu'il représente.",
+              "question_type": "matching",
+              "explanation": "3) Suivre la courbe et 4) décrire les formes : A est dans une plaine, D est le sommet d'une montagne, F est le fond d'une vallée et G est une colline arrondie, peu haute. On reconnaît chaque forme par sa hauteur et sa forme.",
+              "answers": [
+                {
+                  "content": "A (200 m)",
+                  "match": "Plaine"
+                },
+                {
+                  "content": "D (1 000 m)",
+                  "match": "Sommet de montagne"
+                },
+                {
+                  "content": "F (180 m)",
+                  "match": "Fond de vallée"
+                },
+                {
+                  "content": "G (300 m)",
+                  "match": "Colline"
+                }
+              ]
+            },
+            {
+              "content": "Kofi dit que F est plus haut que D, car F est plus à droite sur son dessin. Il a raison.",
+              "question_type": "true_false",
+              "explanation": "1) Lire les axes : la hauteur se lit sur l'axe vertical, pas sur la position à droite ou à gauche. 2) Comparer : F est à 180 m, D à 1 000 m. F est plus bas. Kofi fait l'erreur du piège : confondre l'axe horizontal et l'axe vertical.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Décris en deux phrases ce que montre le profil de Kofi, de A à F.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il dit que la courbe monte de A au sommet D",
+                "Il dit que la courbe descend de D à F",
+                "Il cite des altitudes ou le dénivelé (820 m)"
+              ],
+              "explanation": "Corrigé modèle : « De A à D, la courbe monte : on passe d'une plaine à 200 m au sommet d'une montagne à 1 000 m. Puis la courbe descend jusqu'à F, le fond d'une vallée à 180 m. Le dénivelé entre D et F est de 820 m. » Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "De A à D, la courbe…"
+            }
+          ]
+        },
+        {
+          "title": "Comparer cinq lieux imaginés",
+          "statement": "Texte écrit pour Lnclass. Une élève de 6ème étudie cinq lieux imaginés pour s'entraîner. Leurs altitudes sont illustratives : le village P est à 20 m, le village Q à 150 m, la ville R à 340 m, le village S à 620 m et le sommet T à 1 120 m. Elle les range et calcule des dénivelés. Ce problème est de niveau devoir.",
+          "exercise_type": "evaluation",
+          "figure": "altitudes-lieux",
+          "questions": [
+            {
+              "content": "Range ces lieux du plus bas au plus haut : P (20 m), R (340 m), T (1 120 m), Q (150 m), S (620 m).",
+              "question_type": "ordering",
+              "explanation": "1) Repérer les altitudes : 20, 150, 340, 620 et 1 120 m. 2) Comparer : on classe du plus petit au plus grand nombre. Le plus bas est P (20 m), puis Q, R, S, et le plus haut est T (1 120 m).",
+              "answers": [
+                {
+                  "content": "P (20 m)"
+                },
+                {
+                  "content": "Q (150 m)"
+                },
+                {
+                  "content": "R (340 m)"
+                },
+                {
+                  "content": "S (620 m)"
+                },
+                {
+                  "content": "T (1 120 m)"
+                }
+              ]
+            },
+            {
+              "content": "Le village P est à 20 m et le sommet T à 1 120 m. Quel est le dénivelé entre P et T ?",
+              "question_type": "numeric",
+              "explanation": "1) Repérer : 20 m et 1 120 m. 2) Comparer : 1 120 est la plus grande altitude. 3) Soustraire : 1 120 − 20 = 1 100. 4) Conclure : le dénivelé est de 1 100 m.",
+              "answers": [
+                {
+                  "content": "1100",
+                  "correct": true
+                }
+              ],
+              "unit": "m",
+              "tolerance": 0
+            },
+            {
+              "content": "Le village Q est à 150 m et le village S à 620 m. Quel est le dénivelé entre Q et S ?",
+              "question_type": "numeric",
+              "explanation": "1) Repérer : 150 m et 620 m. 2) Comparer : 620 est la plus grande. 3) Soustraire : 620 − 150 = 470. 4) Conclure : le dénivelé est de 470 m.",
+              "answers": [
+                {
+                  "content": "470",
+                  "correct": true
+                }
+              ],
+              "unit": "m",
+              "tolerance": 0
+            },
+            {
+              "content": "Quel dénivelé est le plus grand : entre P et R (20 m et 340 m), ou entre Q et S (150 m et 620 m) ?",
+              "question_type": "single_choice",
+              "explanation": "1) Calculer le premier dénivelé : 340 − 20 = 320 m. 2) Calculer le second : 620 − 150 = 470 m. 3) Comparer : 470 est plus grand que 320. Le plus grand dénivelé est donc entre Q et S. Comparer seulement les altitudes les plus hautes (340 et 620) ne suffit pas.",
+              "answers": [
+                {
+                  "content": "Entre Q et S, 470 m contre 320 m",
+                  "correct": true
+                },
+                {
+                  "content": "Entre P et R, 320 m contre 470 m",
+                  "correct": false
+                },
+                {
+                  "content": "Ils sont égaux",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas comparer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le village P est à 20 m d'altitude, tout près de la mer, sur un terrain plat. Quelle forme de relief est la plus probable ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de reconnaissance d'une forme. 1) Observer la hauteur : 20 m, c'est très bas. 2) Observer la forme : le terrain est plat. 3) Comparer : plat et bas, c'est une plaine. Un plateau serait plat mais en hauteur.",
+              "answers": [
+                {
+                  "content": "Une plaine",
+                  "correct": true
+                },
+                {
+                  "content": "Une montagne",
+                  "correct": false
+                },
+                {
+                  "content": "Un plateau",
+                  "correct": false
+                },
+                {
+                  "content": "Une colline",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux phrases pourquoi on ne peut pas additionner deux altitudes pour trouver un dénivelé. Prends l'exemple de P (20 m) et T (1 120 m).",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il dit que le dénivelé est un écart, donc une soustraction",
+                "Il donne le calcul juste : 1 120 − 20 = 1 100 m",
+                "Il montre l'absurdité de l'addition (1 140 m, plus que 1 120 m)"
+              ],
+              "explanation": "Corrigé modèle : « Le dénivelé est l'écart entre deux altitudes, donc on soustrait : 1 120 − 20 = 1 100 m. Si on additionnait, on obtiendrait 1 140 m, un écart plus grand que l'altitude du sommet, ce qui est impossible. » Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Le dénivelé est un écart, donc…"
+            }
+          ]
+        },
+        {
+          "title": "Bilan : le relief de l'ouest et du sud de la Côte d'Ivoire",
+          "statement": "Document 1 (texte écrit pour Lnclass) : « Mariam habite à Abidjan, au bord du golfe de Guinée. Son cousin Sékou habite à Man, dans l'ouest. Mariam dit : chez moi, le terrain est plat et bas. Sékou répond : chez moi, on voit de grandes montagnes. » Document 2 : la carte schématique du relief de la Côte d'Ivoire, avec les montagnes de l'ouest en relief élevé et la plaine côtière du sud en relief bas. Les altitudes sont illustratives : un point de la région de Man à 850 m, un point de la plaine côtière à 15 m. Ce problème est de niveau BEPC.",
+          "exercise_type": "evaluation",
+          "figure": "carte-relief-ci",
+          "questions": [
+            {
+              "content": "Quelle forme de relief décrit Mariam, quand elle dit « le terrain est plat et bas » ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de reconnaissance d'une forme. 1) Observer la hauteur : le terrain est bas. 2) Observer la forme du dessus : il est plat. 3) Comparer : plat et bas, c'est la plaine. 4) Nommer : plaine, comme la plaine côtière d'Abidjan. Un plateau serait plat mais en hauteur.",
+              "answers": [
+                {
+                  "content": "Une plaine",
+                  "correct": true
+                },
+                {
+                  "content": "Un plateau",
+                  "correct": false
+                },
+                {
+                  "content": "Une montagne",
+                  "correct": false
+                },
+                {
+                  "content": "Une vallée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément à son relief.",
+              "question_type": "matching",
+              "explanation": "Méthode de lecture de la carte. 1) Lire la légende : relief élevé à l'ouest, relief bas au sud. 2) Repérer et situer : Abidjan est au sud, au bord du golfe de Guinée ; Man est à l'ouest. 3) Décrire : plaine côtière pour Mariam, montagnes pour Sékou. Une rivière entre deux versants coule dans une vallée.",
+              "answers": [
+                {
+                  "content": "Mariam, à Abidjan",
+                  "match": "Plaine côtière, relief bas"
+                },
+                {
+                  "content": "Sékou, à Man",
+                  "match": "Montagnes de l'ouest, relief élevé"
+                },
+                {
+                  "content": "Une rivière entre deux versants",
+                  "match": "Vallée"
+                }
+              ]
+            },
+            {
+              "content": "Un point de la région de Man est à 850 m d'altitude et un point de la plaine côtière à 15 m (valeurs illustratives). Quel est le dénivelé entre les deux ?",
+              "question_type": "numeric",
+              "explanation": "1) Repérer : 850 m et 15 m. 2) Comparer : 850 est la plus grande altitude. 3) Soustraire : 850 − 15 = 835. 4) Conclure : le dénivelé est de 835 m.",
+              "answers": [
+                {
+                  "content": "835",
+                  "correct": true
+                }
+              ],
+              "unit": "m",
+              "tolerance": 0
+            },
+            {
+              "content": "Comme Man est dans les montagnes, on peut dire que tout le relief de la Côte d'Ivoire est montagneux.",
+              "question_type": "true_false",
+              "explanation": "1) Lire la légende : le relief est élevé à l'ouest, bas au sud. 2) Décrire chaque zone : la plaine côtière est basse, et le reste du pays est surtout fait de plaines et de plateaux. Généraliser à tout le pays est l'erreur du piège de la fiche. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Lequel de ces profils décrit le mieux le trajet d'Abidjan à Man, avec des altitudes illustratives ?",
+              "question_type": "single_choice",
+              "explanation": "1) Repérer les altitudes : Abidjan est dans la plaine côtière (15 m), Man est dans les montagnes (850 m). 2) Suivre la courbe : en partant d'Abidjan vers Man, l'altitude augmente. 3) Choisir : le profil qui part bas et monte. Les autres profils inversent le trajet ou ignorent le changement de relief.",
+              "answers": [
+                {
+                  "content": "Le terrain part bas (15 m) puis monte jusqu'à 850 m",
+                  "correct": true
+                },
+                {
+                  "content": "Le terrain part haut (850 m) puis descend à 15 m",
+                  "correct": false
+                },
+                {
+                  "content": "Le terrain reste à 15 m tout le long",
+                  "correct": false
+                },
+                {
+                  "content": "Le terrain reste à 850 m tout le long",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe de quatre phrases qui compare le relief de la région de Man et celui de la plaine côtière : forme, position, altitude.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Il situe Man à l'ouest et la plaine côtière au sud",
+                "Il nomme les montagnes et la plaine avec leurs mots-clés",
+                "Il compare les altitudes en donnant le dénivelé (835 m)",
+                "Il conclut que le relief ivoirien change selon les régions"
+              ],
+              "explanation": "Corrigé modèle : « La région de Man, à l'ouest de la Côte d'Ivoire, est une région de montagnes : le relief y est élevé, avec des versants raides. Au sud, la plaine côtière borde le golfe de Guinée : le terrain est plat et bas. Avec les valeurs illustratives, un point de Man est à 850 m et un point de la côte à 15 m, soit un dénivelé de 835 m. Le relief de la Côte d'Ivoire n'est donc pas partout le même. » Barème : 1,5 point par critère.",
+              "answers": [],
+              "starter": "La région de Man, à l'ouest, est…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "reconnaître les cinq formes de relief ; lire une altitude et calculer un dénivelé ; lire un profil de relief ; lire la carte du relief de la Côte d'Ivoire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu rappelles les cinq formes de relief : la montagne, la colline, le plateau, la plaine et la vallée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Haut ou bas ? Plat, arrondi ou en creux ? Ces deux questions te donnent la forme.",
+              "questions": [
+                {
+                  "content": "Relie chaque forme de relief à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Comparer avec les caractéristiques : montagne, très haut ; colline, arrondie et peu haute ; plateau, plat en hauteur ; plaine, plate et basse ; vallée, creux allongé.",
+                  "answers": [
+                    {
+                      "content": "Montagne",
+                      "match": "Relief très haut aux versants raides"
+                    },
+                    {
+                      "content": "Colline",
+                      "match": "Relief arrondi et peu haut"
+                    },
+                    {
+                      "content": "Plateau",
+                      "match": "Étendue plane située en hauteur"
+                    },
+                    {
+                      "content": "Plaine",
+                      "match": "Étendue plane et basse"
+                    },
+                    {
+                      "content": "Vallée",
+                      "match": "Creux allongé creusé par un cours d'eau"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un relief très haut, aux versants raides, dont le sommet domine tout autour, est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : très haut. Étape 2 — Observer la forme : sommet et versants raides. Étape 3 — Comparer : montagne. La colline est peu haute, la plaine est plate, la vallée est un creux.",
+                  "answers": [
+                    {
+                      "content": "une montagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "une colline",
+                      "correct": false
+                    },
+                    {
+                      "content": "une plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "une vallée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plateau est une étendue plane et basse.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer la hauteur : le plateau est en hauteur, il n'est pas bas. Étape 3 — Comparer : l'étendue plane et basse, c'est la plaine. L'affirmation est fausse : on confond plateau et plaine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le creux allongé creusé par un cours d'eau entre deux versants s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Observer la forme du dessus : un creux allongé, ni sommet ni surface plane. Étape 3 — Comparer : c'est la vallée.",
+                  "answers": [
+                    {
+                      "content": "vallée",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux formes de relief plates ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Observer la forme du dessus : seules la plaine et le plateau ont une surface plane. La montagne a un sommet, la vallée est un creux, la colline est arrondie.",
+                  "answers": [
+                    {
+                      "content": "La plaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plateau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vallée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La colline",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu lis des altitudes et tu calcules des dénivelés. Les valeurs sont illustratives.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le dénivelé est un écart : plus grande altitude moins plus petite altitude.",
+              "questions": [
+                {
+                  "content": "Un village est à 120 m d'altitude et une colline voisine est à 480 m. Quel est le dénivelé entre les deux ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 120 m et 480 m. Étape 2 — Comparer : 480 est la plus grande. Étape 3 — Soustraire : 480 − 120 = 360. Étape 4 — Conclure : 360 m.",
+                  "answers": [
+                    {
+                      "content": "360",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "L'altitude d'un lieu est sa hauteur au-dessus :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer ce qu'est l'altitude : une hauteur mesurée depuis le niveau de la mer, qui vaut 0 m. Les autres points de départ changent d'un lieu à l'autre.",
+                  "answers": [
+                    {
+                      "content": "du niveau de la mer",
+                      "correct": true
+                    },
+                    {
+                      "content": "du sommet le plus proche",
+                      "correct": false
+                    },
+                    {
+                      "content": "du village voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "du niveau de la rivière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'altitude s'exprime en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure avec l'unité : l'altitude est une hauteur, elle s'exprime en mètres (m).",
+                  "answers": [
+                    {
+                      "content": "mètres",
+                      "correct": true
+                    },
+                    {
+                      "content": "m",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour trouver un dénivelé, on additionne les deux altitudes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Soustraire : le dénivelé est un écart. Avec 275 m et 95 m, l'addition donne 370 m, mais le dénivelé est 275 − 95 = 180 m. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lieu à 600 m est ___ qu'un lieu à 200 m.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Comparer : 600 est plus grand que 200, donc le premier lieu est plus haut. Plus l'altitude est grande, plus le lieu est haut.",
+                  "answers": [
+                    {
+                      "content": "plus haut",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "aussi haut",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu lis le profil schématique aux altitudes illustratives : A 200 m, B 350 m, C 700 m, D 1 000 m, E 650 m, F 180 m et G 300 m.",
+              "exercise_type": "evaluation",
+              "figure": "profil-schema",
+              "hint": "Pour la hauteur, regarde l'axe vertical.",
+              "questions": [
+                {
+                  "content": "Sur un profil de relief, l'axe vertical donne :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire ce que montre le profil : l'axe vertical donne l'altitude en mètres, l'axe horizontal suit la ligne.",
+                  "answers": [
+                    {
+                      "content": "l'altitude, en mètres",
+                      "correct": true
+                    },
+                    {
+                      "content": "la distance, en kilomètres",
+                      "correct": false
+                    },
+                    {
+                      "content": "la température",
+                      "correct": false
+                    },
+                    {
+                      "content": "le nom du lieu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le profil (A 200 m, B 350 m, C 700 m, D 1 000 m, E 650 m, F 180 m, G 300 m), quel point est le plus haut ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer le point le plus haut : 1 000 m, point D. E est à 650 m, A à 200 m et F à 180 m.",
+                  "answers": [
+                    {
+                      "content": "D",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "F",
+                      "correct": false
+                    },
+                    {
+                      "content": "E",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce profil, D est à 1 000 m et F est à 180 m. Quel est le dénivelé entre D et F ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer : 1 000 m et 180 m. Étape 4 — Calculer : 1 000 − 180 = 820. Le dénivelé est de 820 m.",
+                  "answers": [
+                    {
+                      "content": "820",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Entre D (1 000 m) et F (180 m), la courbe descend.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre la courbe de gauche à droite : de 1 000 m à 180 m, l'altitude diminue, donc la courbe descend.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels points de ce profil sont à moins de 400 m d'altitude ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Repérer les altitudes inférieures à 400 m : 200, 350 et 180. Les points C, D et E sont à 700, 1 000 et 650 m.",
+                  "answers": [
+                    {
+                      "content": "A (200 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "B (350 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "F (180 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "C (700 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "D (1 000 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "E (650 m)",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu lis la carte schématique du relief de la Côte d'Ivoire : les montagnes de l'ouest autour de Man sont un relief élevé ; la plaine côtière du sud est un relief bas.",
+              "exercise_type": "evaluation",
+              "figure": "carte-relief-ci",
+              "hint": "Montagnes à l'ouest, plaine côtière au sud.",
+              "questions": [
+                {
+                  "content": "La région de Man, connue pour ses montagnes, est située :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Situer avec des repères : Man est dans l'ouest de la Côte d'Ivoire, région des montagnes.",
+                  "answers": [
+                    {
+                      "content": "à l'ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "au sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "à l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "au centre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La plaine côtière est un relief bas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer les zones basses grâce à la légende : la plaine côtière du sud est un relief bas. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une carte du relief, la ___ explique ce que signifient les couleurs.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire le titre et la légende : la légende donne le sens de chaque couleur ou motif.",
+                  "answers": [
+                    {
+                      "content": "légende",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque ville à son relief.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Situer : Man est à l'ouest, dans les montagnes ; Abidjan est au sud, au bord du golfe de Guinée, dans la plaine côtière ; Korhogo est au nord, hors des deux zones de la carte.",
+                  "answers": [
+                    {
+                      "content": "Man",
+                      "match": "Montagnes, relief élevé"
+                    },
+                    {
+                      "content": "Abidjan",
+                      "match": "Plaine côtière, relief bas"
+                    },
+                    {
+                      "content": "Korhogo",
+                      "match": "Au nord, hors des deux zones de la carte"
+                    }
+                  ]
+                },
+                {
+                  "content": "La plaine côtière borde :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Situer : la plaine côtière est au sud du pays, le long du golfe de Guinée. Les autres propositions ne bordent pas la Côte d'Ivoire.",
+                  "answers": [
+                    {
+                      "content": "le golfe de Guinée",
+                      "correct": true
+                    },
+                    {
+                      "content": "le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'océan Pacifique",
+                      "correct": false
+                    },
+                    {
+                      "content": "une montagne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Le relief dans la vie courante",
+          "notions": "reconnaître le relief d'un trajet, d'une sortie ou d'une randonnée ; calculer des dénivelés dans des situations de la vie courante ; lire un profil et une carte à partir de situations en Côte d'Ivoire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation (texte écrit pour Lnclass) : Aya habite à Grand-Bassam, près de la lagune. Le terrain autour de sa maison est plat et bas. Elle se rend à pied au marché sans jamais monter ni descendre beaucoup.",
+              "exercise_type": "evaluation",
+              "figure": "carte-relief-ci",
+              "hint": "Une surface plate et basse : c'est la plaine.",
+              "questions": [
+                {
+                  "content": "Le terrain plat et bas autour de la maison d'Aya est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : bas. Étape 2 — Observer la forme : plat. Étape 3 — Comparer : plat et bas, c'est la plaine. Étape 4 — Nommer : plaine.",
+                  "answers": [
+                    {
+                      "content": "une plaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "une montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "un plateau",
+                      "correct": false
+                    },
+                    {
+                      "content": "une colline",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Grand-Bassam se situe dans la plaine côtière, au sud de la Côte d'Ivoire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Situer : Grand-Bassam est au bord de la mer, au sud, dans la plaine côtière. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya ne monte presque pas pour aller au marché. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Observer la forme du dessus : un terrain plat se parcourt sans monter. Étape 3 — Comparer : plat et bas, c'est la plaine. Les autres propositions décrivent un relief élevé.",
+                  "answers": [
+                    {
+                      "content": "Le terrain est plat et bas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le terrain est très haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le terrain est une montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a un sommet à gravir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le long de la côte, au sud, on trouve la plaine ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer les zones basses : la plaine qui borde la mer s'appelle la plaine côtière.",
+                  "answers": [
+                    {
+                      "content": "côtière",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces villes, lesquelles sont dans la plaine côtière, au sud ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Situer : Grand-Bassam et Abidjan sont au bord du golfe de Guinée. Man est à l'ouest, dans les montagnes ; Korhogo est au nord ; Bouaké est à l'intérieur du pays.",
+                  "answers": [
+                    {
+                      "content": "Grand-Bassam",
+                      "correct": true
+                    },
+                    {
+                      "content": "Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bouaké",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation (texte écrit pour Lnclass) : la classe de Koffi visite la région de Man, dans l'ouest. Les élèves regardent un grand relief très haut, aux versants raides, puis un creux où coule une rivière.",
+              "exercise_type": "evaluation",
+              "figure": "carte-relief-ci",
+              "hint": "Très haut, versants raides : montagne. Creux allongé : vallée.",
+              "questions": [
+                {
+                  "content": "Le grand relief très haut, aux versants raides, est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : très haut. Étape 2 — Observer la forme : versants raides. Étape 3 — Comparer : montagne. Étape 4 — Nommer : montagne.",
+                  "answers": [
+                    {
+                      "content": "une montagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "une plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "une vallée",
+                      "correct": false
+                    },
+                    {
+                      "content": "un plateau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le creux allongé où coule la rivière entre deux versants est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Observer la forme du dessus : un creux allongé. Étape 3 — Comparer : creusé par un cours d'eau entre deux versants, c'est la vallée.",
+                  "answers": [
+                    {
+                      "content": "une vallée",
+                      "correct": true
+                    },
+                    {
+                      "content": "une colline",
+                      "correct": false
+                    },
+                    {
+                      "content": "une plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "un plateau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La région de Man se situe à l'ouest de la Côte d'Ivoire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Situer avec des repères : Man est une ville de l'ouest, au cœur de la région des montagnes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la région de Man, le relief est plus élevé que dans la plaine côtière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer les zones hautes et basses : la légende donne un relief élevé à l'ouest et un relief bas au sud. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour se repérer sur la carte du relief, Koffi lit d'abord le titre et la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire le titre et la légende : c'est la première étape. La légende explique les couleurs ou les motifs de la carte.",
+                  "answers": [
+                    {
+                      "content": "légende",
+                      "correct": true
+                    },
+                    {
+                      "content": "date",
+                      "correct": false
+                    },
+                    {
+                      "content": "signature",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation (texte écrit pour Lnclass) : Yao fait une randonnée. Valeurs illustratives : il part d'un village à 300 m d'altitude, fait une pause à 600 m, puis arrive au sommet à 900 m.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Chaque dénivelé est une soustraction : grande altitude moins petite altitude.",
+              "questions": [
+                {
+                  "content": "Quel est le dénivelé entre le village de départ (300 m) et le sommet (900 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 300 m et 900 m. Étape 2 — Comparer : 900 est la plus grande. Étape 3 — Soustraire : 900 − 300 = 600. Étape 4 — Conclure : 600 m.",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est le dénivelé entre le village (300 m) et le lieu de la pause (600 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 300 m et 600 m. Étape 2 — Comparer : 600 est la plus grande. Étape 3 — Soustraire : 600 − 300 = 300. Étape 4 — Conclure : 300 m.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est le dénivelé entre le lieu de la pause (600 m) et le sommet (900 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 600 m et 900 m. Étape 3 — Soustraire : 900 − 600 = 300. Étape 4 — Conclure : 300 m. Les deux parties (300 m et 300 m) font bien 600 m en tout.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le dénivelé total de 600 m est égal à :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Soustraire : 900 − 300 = 600 m. On vérifie : 300 + 300 = 600 m. Additionner les altitudes (300 + 900 = 1 200 m) est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "la somme des deux dénivelés partiels, 300 m et 300 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "la somme des altitudes de départ et d'arrivée",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'altitude du sommet, 900 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "la différence entre 600 m et 300 m seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le profil de la randonnée, tracé du village (à gauche) au sommet (à droite), la courbe monte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre la courbe de gauche à droite : l'altitude passe de 300 m à 600 m puis à 900 m, elle augmente, donc la courbe monte. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation (texte écrit pour Lnclass) : Fatou compare cinq lieux imaginés. Altitudes illustratives : P 20 m, Q 150 m, R 340 m, S 620 m, T 1 120 m.",
+              "exercise_type": "evaluation",
+              "figure": "altitudes-lieux",
+              "hint": "Pour ranger, compare les nombres. Pour le dénivelé, soustrais.",
+              "questions": [
+                {
+                  "content": "Quel est le lieu le plus haut parmi P (20 m), Q (150 m), R (340 m), S (620 m) et T (1 120 m) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les altitudes. Étape 2 — Comparer : 1 120 m est la plus grande valeur, donc T est le plus haut.",
+                  "answers": [
+                    {
+                      "content": "T",
+                      "correct": true
+                    },
+                    {
+                      "content": "P",
+                      "correct": false
+                    },
+                    {
+                      "content": "R",
+                      "correct": false
+                    },
+                    {
+                      "content": "S",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le dénivelé entre P (20 m) et R (340 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 20 m et 340 m. Étape 3 — Soustraire : 340 − 20 = 320. Étape 4 — Conclure : 320 m.",
+                  "answers": [
+                    {
+                      "content": "320",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Range ces lieux du plus bas au plus haut : S (620 m), P (20 m), R (340 m), Q (150 m).",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Comparer les altitudes : 20, 150, 340 puis 620. On range du plus petit nombre au plus grand.",
+                  "answers": [
+                    {
+                      "content": "P (20 m)"
+                    },
+                    {
+                      "content": "Q (150 m)"
+                    },
+                    {
+                      "content": "R (340 m)"
+                    },
+                    {
+                      "content": "S (620 m)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lieu P (20 m), sur un terrain plat près de la mer, est probablement dans une plaine, car il est très bas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer la hauteur : 20 m est une très faible altitude. Étape 3 — Comparer : un lieu très bas et plat est dans une plaine. Cette affirmation est plausible, donc vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dénivelé entre Q (150 m) et S (620 m) est de ___ m.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : 150 m et 620 m. Étape 3 — Soustraire : 620 − 150 = 470. Étape 4 — Conclure : 470 m.",
+                  "answers": [
+                    {
+                      "content": "470",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "repérer et expliquer des erreurs sur les formes de relief, sur le dénivelé, sur la lecture d'un profil et d'une carte ; justifier un choix avec les mots-clés de la fiche de révision.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Quatre élèves se trompent sur les formes de relief. Tu dois trouver la bonne réponse et dire pourquoi l'erreur est fausse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche toujours la hauteur ET la forme.",
+              "questions": [
+                {
+                  "content": "Moussa dit : « Une étendue plate à 450 m d'altitude, bordée de versants, est une plaine. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : l'étendue est en hauteur. Étape 2 — Observer la forme : elle est plate. Étape 3 — Comparer : plat et en hauteur, c'est un plateau. Moussa oublie la hauteur : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "C'est un plateau, car elle est plate et en hauteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, car elle est plate",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une montagne, car elle est à 450 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une vallée, car elle a des versants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dit : « Une colline est plus haute qu'une montagne. » Elle a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer la hauteur : la colline est peu haute, la montagne est très haute. Awa inverse les deux. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Salif dit : « Une vallée est un sommet entouré de plaines. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Observer la forme du dessus : la vallée est un creux, pas un sommet. Étape 3 — Comparer : creux allongé, creusé par un cours d'eau entre deux versants. Salif confond creux et sommet.",
+                  "answers": [
+                    {
+                      "content": "Faux, la vallée est un creux allongé creusé par un cours d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai, car un sommet est haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux, la vallée est une plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai, car une plaine est plate",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux caractéristiques de la montagne ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Comparer avec les caractéristiques : la montagne est très haute et a des versants raides. « Plate et basse » décrit la plaine ; « creux allongé » décrit la vallée ; « arrondie » décrit plutôt la colline.",
+                  "answers": [
+                    {
+                      "content": "Elle est très haute",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a des versants raides",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est plate et basse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est un creux allongé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est toujours arrondie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta dit : « Plat et bas, c'est une ___. » Elle a raison.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer : plat et bas est la définition de la plaine. Plat et en hauteur serait un plateau.",
+                  "answers": [
+                    {
+                      "content": "plaine",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Quatre élèves se trompent sur le calcul d'un dénivelé. Tu dois trouver le bon résultat et dire pourquoi l'erreur est fausse. Les valeurs sont illustratives.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dénivelé = grande altitude − petite altitude, avec l'unité m.",
+              "questions": [
+                {
+                  "content": "Adama dit : « Pour 340 m et 1 120 m, le dénivelé est de 1 460 m. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Soustraire : le dénivelé est un écart. Étape 4 — Conclure : 1 120 − 340 = 780 m. Adama additionne : c'est l'erreur du piège, et son résultat dépasse même l'altitude du sommet.",
+                  "answers": [
+                    {
+                      "content": "Faux, il faut soustraire : 1 120 − 340 = 780 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai, il faut additionner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux, c'est 340 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux, c'est 1 120 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Binta calcule le dénivelé entre 410 m et 1 250 m. Quel est le bon résultat ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 410 m et 1 250 m. Étape 2 — Comparer : 1 250 est la plus grande. Étape 3 — Soustraire : 1 250 − 410 = 840. Étape 4 — Conclure : 840 m.",
+                  "answers": [
+                    {
+                      "content": "840",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Chantal dit : « L'altitude se mesure depuis le sommet de la montagne la plus proche. » Elle a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer ce qu'est l'altitude : elle se mesure depuis le niveau de la mer (0 m). Chantal prend un point de départ qui change d'un lieu à l'autre. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Drissa écrit « Le dénivelé est de 360 » sans unité. Que lui conseilles-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure par une phrase avec l'unité (m) : le dénivelé est une hauteur, donc il se note en mètres. Kilogramme et litre mesurent une masse et un volume.",
+                  "answers": [
+                    {
+                      "content": "Ajouter l'unité : 360 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ajouter l'unité : 360 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ajouter l'unité : 360 L",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien, il n'y a pas d'unité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies sur le dénivelé ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Soustraire : le dénivelé est un écart, donc une soustraction. L'addition, l'égalité avec la plus haute altitude et le litre sont trois erreurs.",
+                  "answers": [
+                    {
+                      "content": "C'est l'écart entre deux altitudes",
+                      "correct": true
+                    },
+                    {
+                      "content": "On le calcule par une soustraction",
+                      "correct": true
+                    },
+                    {
+                      "content": "On l'obtient en additionnant les altitudes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est toujours égal à l'altitude la plus haute",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se mesure en litres",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Deux élèves lisent le profil schématique aux altitudes illustratives : A 200 m, B 350 m, C 700 m, D 1 000 m, E 650 m, F 180 m et G 300 m. Tu juges leurs réponses.",
+              "exercise_type": "evaluation",
+              "figure": "profil-schema",
+              "hint": "Pour la hauteur, lis l'axe vertical. Pour l'écart, soustrais.",
+              "questions": [
+                {
+                  "content": "Karim dit : « F est à droite de D, donc F est plus haut que D. » Il a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire les axes : la hauteur se lit sur l'axe vertical. Étape 2 — Comparer : F est à 180 m, D à 1 000 m. Karim confond les deux axes : c'est l'erreur du piège. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Nadia calcule le dénivelé entre le sommet D (1 000 m) et la colline G (300 m). Quel est le bon résultat ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer : 1 000 m et 300 m. Étape 4 — Calculer : 1 000 − 300 = 700. Le dénivelé est de 700 m.",
+                  "answers": [
+                    {
+                      "content": "700",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la forme de relief au point G (300 m) dans ce profil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Décrire les formes de relief : G est un relief arrondi et peu haut (300 m), c'est une colline. D est une montagne et F est le fond d'une vallée.",
+                  "answers": [
+                    {
+                      "content": "Une colline",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une vallée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un plateau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre F (180 m) et G (300 m), la courbe :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Suivre la courbe de gauche à droite : de 180 m à 300 m, l'altitude augmente, donc la courbe monte.",
+                  "answers": [
+                    {
+                      "content": "monte",
+                      "correct": true
+                    },
+                    {
+                      "content": "descend",
+                      "correct": false
+                    },
+                    {
+                      "content": "reste plate",
+                      "correct": false
+                    },
+                    {
+                      "content": "disparaît",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels points sont plus bas que le point E (650 m) ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Comparer avec 650 m : A (200), F (180) et G (300) sont plus petits. C (700) et D (1 000) sont plus grands, et E est égal à lui-même.",
+                  "answers": [
+                    {
+                      "content": "A (200 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "F (180 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "G (300 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "C (700 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "D (1 000 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "E (650 m)",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Des élèves discutent de la carte du relief de la Côte d'Ivoire : montagnes de l'ouest autour de Man (relief élevé) et plaine côtière du sud (relief bas). Tu juges leurs affirmations.",
+              "exercise_type": "evaluation",
+              "figure": "carte-relief-ci",
+              "hint": "Une zone haute à l'ouest, une zone basse au sud : ne généralise pas.",
+              "questions": [
+                {
+                  "content": "Ibrahim dit : « Man est dans les montagnes, donc toute la Côte d'Ivoire est montagneuse. » Il a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Décrire le relief de chaque zone : la carte montre un relief élevé à l'ouest et un relief bas au sud. Le reste du pays est surtout fait de plaines et de plateaux. Ibrahim généralise : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sali dit : « Abidjan est dans la plaine côtière. » Que peux-tu dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Situer avec des repères : Abidjan est au sud, au bord du golfe de Guinée, dans la plaine côtière. Les autres propositions donnent une mauvaise position.",
+                  "answers": [
+                    {
+                      "content": "Elle a raison, Abidjan est au sud, au bord du golfe de Guinée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a tort, Abidjan est à l'ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a tort, Abidjan est dans les montagnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a tort, Abidjan est au nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour savoir si une zone est haute ou basse sur une carte du relief, on regarde :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le titre et la légende : la légende explique les couleurs, donc elle dit si une zone est haute ou basse. Le titre seul ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "la légende",
+                      "correct": true
+                    },
+                    {
+                      "content": "la date",
+                      "correct": false
+                    },
+                    {
+                      "content": "le nom de l'auteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "le titre seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Valeurs illustratives : un lieu de l'ouest est à 800 m et un lieu de la côte à 10 m. Quel est le dénivelé entre les deux ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer la zone haute et la zone basse : 800 m et 10 m. Étape 4 — Calculer : 800 − 10 = 790. Le dénivelé est de 790 m.",
+                  "answers": [
+                    {
+                      "content": "790",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour lire une carte du relief.",
+                  "question_type": "ordering",
+                  "explanation": "On lit d'abord le titre et la légende, puis on repère les zones hautes et basses, on les situe, et on termine par la description et la conclusion.",
+                  "answers": [
+                    {
+                      "content": "Lire le titre et la légende."
+                    },
+                    {
+                      "content": "Repérer les zones hautes et les zones basses."
+                    },
+                    {
+                      "content": "Situer ces zones avec des repères."
+                    },
+                    {
+                      "content": "Décrire le relief de chaque zone et conclure."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan du relief",
+          "notions": "bilan de toutes les notions : les cinq formes de relief ; l'altitude et le dénivelé ; la lecture d'un profil ; la lecture d'une carte du relief de la Côte d'Ivoire (région de Man et plaine côtière).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu fais le bilan des cinq formes de relief avec des paysages de Côte d'Ivoire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Haut ou bas ? Plat, arrondi ou en creux ?",
+              "questions": [
+                {
+                  "content": "Près de Man, dans l'ouest, un relief très haut domine la région avec des versants raides. C'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : très haut. Étape 2 — Observer la forme : versants raides. Étape 3 — Comparer : montagne. Étape 4 — Nommer : montagne.",
+                  "answers": [
+                    {
+                      "content": "une montagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "une plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "un plateau",
+                      "correct": false
+                    },
+                    {
+                      "content": "une vallée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Près d'Abidjan, un terrain plat et bas s'étend sur de grandes distances. C'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la hauteur : bas. Étape 2 — Observer la forme : plat. Étape 3 — Comparer : plat et bas, c'est une plaine.",
+                  "answers": [
+                    {
+                      "content": "une plaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "une montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "un plateau",
+                      "correct": false
+                    },
+                    {
+                      "content": "une colline",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque forme de relief à son mot-clé.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Comparer : chaque forme a son mot-clé. Montagne, très haute ; colline, arrondie et peu haute ; plateau, plat en hauteur ; plaine, plate et basse ; vallée, creux allongé.",
+                  "answers": [
+                    {
+                      "content": "Montagne",
+                      "match": "Très haute"
+                    },
+                    {
+                      "content": "Colline",
+                      "match": "Arrondie, peu haute"
+                    },
+                    {
+                      "content": "Plateau",
+                      "match": "Plat, en hauteur"
+                    },
+                    {
+                      "content": "Plaine",
+                      "match": "Plate et basse"
+                    },
+                    {
+                      "content": "Vallée",
+                      "match": "Creux allongé"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plaine est plate, comme un plateau, mais elle est basse.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : la plaine et le plateau sont plats, mais la plaine est basse et le plateau est en hauteur. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois formes de relief situées en hauteur par rapport au terrain autour ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Observer la hauteur : montagne, colline et plateau dépassent le terrain autour. La plaine est basse et la vallée est un creux.",
+                  "answers": [
+                    {
+                      "content": "La montagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "La colline",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plateau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vallée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu fais le bilan sur l'altitude et le dénivelé avec cinq lieux imaginés. Altitudes illustratives : P 20 m, Q 150 m, R 340 m, S 620 m, T 1 120 m.",
+              "exercise_type": "evaluation",
+              "figure": "altitudes-lieux",
+              "hint": "Dénivelé = grande altitude − petite altitude.",
+              "questions": [
+                {
+                  "content": "Quel est le dénivelé entre le village P (20 m) et le sommet T (1 120 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 20 m et 1 120 m. Étape 2 — Comparer : 1 120 est la plus grande. Étape 3 — Soustraire : 1 120 − 20 = 1 100. Étape 4 — Conclure : 1 100 m.",
+                  "answers": [
+                    {
+                      "content": "1100",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est le dénivelé entre la ville R (340 m) et le village S (620 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 340 m et 620 m. Étape 3 — Soustraire : 620 − 340 = 280. Étape 4 — Conclure : 280 m.",
+                  "answers": [
+                    {
+                      "content": "280",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est le lieu le plus bas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : 20 est la plus petite altitude, donc P est le plus bas.",
+                  "answers": [
+                    {
+                      "content": "P (20 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Q (150 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "R (340 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "T (1 120 m)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dénivelé entre Q et T est de 1 270 m.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Soustraire : 1 120 − 150 = 970 m. Le nombre 1 270 s'obtient en additionnant (1 120 + 150) : c'est l'erreur du piège. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'altitude de T, le sommet, est de ___ m.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer l'altitude de T dans l'énoncé : 1 120 m. Elle se mesure depuis le niveau de la mer.",
+                  "answers": [
+                    {
+                      "content": "1120",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu fais le bilan sur la lecture d'un profil schématique aux altitudes illustratives : A 200 m, B 350 m, C 700 m, D 1 000 m, E 650 m, F 180 m et G 300 m.",
+              "exercise_type": "evaluation",
+              "figure": "profil-schema",
+              "hint": "Axe vertical : altitude. Point le plus haut : sommet.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour lire un profil de relief.",
+                  "question_type": "ordering",
+                  "explanation": "On lit d'abord le titre et les axes, puis on repère les points extrêmes, on suit la courbe, et on décrit et calcule en dernier.",
+                  "answers": [
+                    {
+                      "content": "Lire ce que montre le profil."
+                    },
+                    {
+                      "content": "Repérer le point le plus haut et le point le plus bas."
+                    },
+                    {
+                      "content": "Suivre la courbe de gauche à droite."
+                    },
+                    {
+                      "content": "Décrire les formes de relief et calculer le dénivelé."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce profil, quel point est le sommet de la montagne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer le point le plus haut : D, à 1 000 m. C'est le sommet de la montagne.",
+                  "answers": [
+                    {
+                      "content": "D (1 000 m)",
+                      "correct": true
+                    },
+                    {
+                      "content": "A (200 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "F (180 m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "G (300 m)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le dénivelé entre C (700 m) et A (200 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer : 700 m et 200 m. Étape 4 — Calculer : 700 − 200 = 500. Le dénivelé est de 500 m.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Entre A et D, la courbe monte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre la courbe : de A (200 m) à D (1 000 m), l'altitude augmente. La courbe monte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point F, à 180 m, est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Décrire les formes de relief : F est le point le plus bas, au creux entre deux reliefs, c'est le fond d'une vallée.",
+                  "answers": [
+                    {
+                      "content": "le fond d'une vallée",
+                      "correct": true
+                    },
+                    {
+                      "content": "le sommet d'une montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "une plaine haute",
+                      "correct": false
+                    },
+                    {
+                      "content": "un plateau",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu fais le bilan sur le relief de l'ouest et du sud de la Côte d'Ivoire avec la carte schématique : montagnes de l'ouest autour de Man (relief élevé) et plaine côtière du sud (relief bas). Altitudes illustratives : un point de la région de Man à 850 m, un point de la côte à 15 m.",
+              "exercise_type": "evaluation",
+              "figure": "carte-relief-ci",
+              "hint": "Montagnes à l'ouest, plaine côtière au sud.",
+              "questions": [
+                {
+                  "content": "Quelle est la forme de relief de la région de Man ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer les zones hautes : la région de Man, à l'ouest, est en relief élevé. Étape 3 — Situer : c'est la région des montagnes.",
+                  "answers": [
+                    {
+                      "content": "Des montagnes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une plaine côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des lagunes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une vallée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la forme de relief le long du golfe de Guinée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer les zones basses : la côte, au sud, est en relief bas. Étape 3 — Situer : c'est la plaine côtière.",
+                  "answers": [
+                    {
+                      "content": "Une plaine côtière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des montagnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un grand plateau élevé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sommet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le dénivelé entre un point de Man (850 m) et un point de la côte (15 m) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : 850 m et 15 m. Étape 3 — Soustraire : 850 − 15 = 835. Étape 4 — Conclure : 835 m.",
+                  "answers": [
+                    {
+                      "content": "835",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Tout le relief de la Côte d'Ivoire est montagneux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Décrire chaque zone : le relief est élevé à l'ouest, bas au sud, et le reste du pays est surtout fait de plaines et de plateaux. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque ville à son relief.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Situer : Man est à l'ouest, dans les montagnes ; Abidjan est au sud, dans la plaine côtière ; Korhogo est au nord, hors des deux zones de la carte.",
+                  "answers": [
+                    {
+                      "content": "Man",
+                      "match": "Montagnes de l'ouest"
+                    },
+                    {
+                      "content": "Abidjan",
+                      "match": "Plaine côtière"
+                    },
+                    {
+                      "content": "Korhogo",
+                      "match": "Au nord, hors des deux zones de la carte"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

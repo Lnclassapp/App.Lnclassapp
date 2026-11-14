@@ -1,0 +1,3688 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Court - circuit et protection des installations électriques",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Physique-Chimie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "pile-court-circuitee",
+          "kind": "diagram",
+          "description": "Un générateur court-circuité. Un fil de connexion part d'une borne de la pile et revient directement à l'autre borne. Il n'y a aucune lampe ni aucun autre récepteur sur le chemin : rien ne limite le passage du courant, et les fils chauffent.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile",
+                "category": 1
+              },
+              {
+                "id": "fil1",
+                "label": "Fil direct",
+                "category": 3
+              },
+              {
+                "id": "fil2",
+                "label": "Fil direct",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "fil1"
+              },
+              {
+                "from": "fil1",
+                "to": "fil2"
+              },
+              {
+                "from": "fil2",
+                "to": "pile"
+              }
+            ],
+            "legend": [
+              "Générateur",
+              "Récepteur",
+              "Fil de connexion"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lampe-court-circuitee",
+          "kind": "diagram",
+          "description": "Une pile, deux lampes L1 et L2 branchées l'une après l'autre. Un fil relie directement les deux bornes de L1. Le courant passe par ce fil et évite L1, qui reste éteinte. Il traverse encore L2, qui brille. Le chemin dessiné est : pile, L2, fil direct, pile.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile",
+                "category": 1
+              },
+              {
+                "id": "l2",
+                "label": "Lampe L2 qui brille",
+                "category": 2
+              },
+              {
+                "id": "fil",
+                "label": "Fil direct sur L1",
+                "category": 3
+              },
+              {
+                "id": "ret",
+                "label": "Fil de retour",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "l2"
+              },
+              {
+                "from": "l2",
+                "to": "fil"
+              },
+              {
+                "from": "fil",
+                "to": "ret"
+              },
+              {
+                "from": "ret",
+                "to": "pile"
+              }
+            ],
+            "legend": [
+              "Générateur",
+              "Récepteur",
+              "Fil de connexion"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "danger-du-court-circuit",
+          "kind": "diagram",
+          "description": "Une chaîne de causes et de conséquences. Deux fils dont l'isolant est abîmé se touchent : c'est un court-circuit. Le courant devient très fort, les fils s'échauffent, l'isolant fond, puis un incendie peut partir. Chaque case est reliée à la suivante par une flèche.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Fils abîmés qui se touchent",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Court-circuit",
+                "category": 1
+              },
+              {
+                "id": "c",
+                "label": "Courant très fort",
+                "category": 2
+              },
+              {
+                "id": "d",
+                "label": "Fils très chauds",
+                "category": 2
+              },
+              {
+                "id": "e",
+                "label": "Risque d'incendie",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b",
+                "label": "cause"
+              },
+              {
+                "from": "b",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d"
+              },
+              {
+                "from": "d",
+                "to": "e"
+              }
+            ],
+            "legend": [
+              "Cause",
+              "Effet sur les fils",
+              "Danger"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "fusible-coupe-le-circuit",
+          "kind": "diagram",
+          "description": "Le rôle d'un fusible. Un court-circuit fait passer un courant trop fort dans le circuit. Le fil fin du fusible fond. Le circuit devient ouvert et le courant s'arrête. Il faut ensuite chercher la cause, puis remplacer le fusible par un fusible identique.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Court-circuit",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Courant trop fort",
+                "category": 1
+              },
+              {
+                "id": "c",
+                "label": "Le fil du fusible fond",
+                "category": 2
+              },
+              {
+                "id": "d",
+                "label": "Circuit ouvert, courant arrêté",
+                "category": 3
+              },
+              {
+                "id": "e",
+                "label": "Chercher la cause, changer le fusible",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d"
+              },
+              {
+                "from": "d",
+                "to": "e"
+              }
+            ],
+            "legend": [
+              "Problème",
+              "Protection",
+              "Remise en service"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un court-circuit",
+          "remember": "Un **court-circuit** se produit quand un fil (ou un objet qui conduit le courant) relie **directement les deux bornes** d'un même élément du circuit. Le courant prend ce chemin facile et ne passe plus par l'élément. Si l'élément est le **générateur** (la pile), le **générateur est court-circuité** : c'est très dangereux. Si c'est un **récepteur** (une lampe), le **récepteur est court-circuité** : il est éteint ou il ne fonctionne plus. S'il n'y a qu'**un seul récepteur** et qu'on le court-circuite, plus rien ne limite le courant : le générateur est aussi court-circuité, c'est dangereux. Les métaux (cuivre, fer, aluminium) conduisent le courant, donc ils peuvent créer un court-circuit.",
+          "method": [
+            "Repérer le générateur et les récepteurs du montage.",
+            "Chercher un fil ou un objet conducteur qui relie directement les deux bornes d'un même élément.",
+            "Nommer l'élément court-circuité : le générateur ou un récepteur.",
+            "Conclure sur l'effet : un générateur court-circuité est dangereux (même si on court-circuite l'unique récepteur) ; avec plusieurs récepteurs, un récepteur court-circuité ne fonctionne plus."
+          ],
+          "example": {
+            "statement": "Awa monte une pile et deux lampes L1 et L2 l'une après l'autre. Elle pose un fil de cuivre sur les deux bornes de L1. L1 s'éteint et L2 brille. Quel élément est court-circuité ?",
+            "steps": [
+              "Repérer : la pile est le générateur ; L1 et L2 sont les récepteurs.",
+              "Chercher : le fil de cuivre relie directement les deux bornes de L1. C'est un conducteur.",
+              "Nommer : l'élément court-circuité est L1, un récepteur.",
+              "Conclure : un récepteur court-circuité ne fonctionne plus, donc L1 est éteinte. La pile n'est pas court-circuitée, car L2 est toujours sur le chemin : L2 brille."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une lampe éteinte veut toujours dire court-circuit. Contre-exemple : un fil n'est pas relié à la pile, le chemin est coupé et la lampe est éteinte. Aucun fil ne relie directement deux bornes d'un même élément : c'est un **circuit ouvert**, pas un court-circuit. Demande-toi : « Y a-t-il un fil direct entre les deux bornes d'un élément ? » Si oui, c'est un court-circuit ; si le chemin est coupé, c'est un circuit ouvert.",
+          "figure": "pile-court-circuitee",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître l'élément court-circuité dans un montage.",
+            "questions": [
+              {
+                "content": "Un fil de fer touche directement les deux bornes d'une pile. Quel élément est court-circuité ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la pile est le générateur. Étape 2 — Chercher : le fil de fer relie directement ses deux bornes. Étape 3 — Nommer : le générateur est court-circuité. Étape 4 — Conclure : c'est dangereux.",
+                "answers": [
+                  {
+                    "content": "La pile, c'est-à-dire le générateur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une lampe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un interrupteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun élément",
+                    "correct": false
+                  }
+                ],
+                "hint": "Où le fil est-il posé : sur la pile ou sur une lampe ?"
+              },
+              {
+                "content": "Une lampe éteinte parce qu'un fil de la pile est débranché est en court-circuit.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher : aucun fil ne relie directement les deux bornes de la lampe. Étape 4 — Conclure : le chemin est coupé, c'est un circuit ouvert et non un court-circuit.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Y a-t-il un fil direct entre les deux bornes de la lampe ?"
+              },
+              {
+                "content": "Une pile alimente 3 lampes l'une après l'autre. On pose un fil sur les deux bornes d'une seule lampe. Combien de lampes brillent encore ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : 1 pile et 3 lampes. Étape 2 — Chercher : le fil relie les deux bornes d'une lampe. Étape 3 — Nommer : cette lampe est court-circuitée. Étape 4 — Conclure : elle est éteinte, les 3 − 1 = 2 autres lampes brillent encore.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une seule lampe est court-circuitée : retire-la du compte."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un court-circuit dans un montage",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour reconnaître un court-circuit.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un fil de cuivre relie directement les deux bornes d'une pile, sans lampe entre elles. Comment s'appelle cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une pile (générateur) et un fil. Étape 2 — Chercher : le fil relie directement les deux bornes de la pile. Étape 3 — Nommer : le générateur est court-circuité. Étape 4 — Conclure : c'est dangereux. Ce n'est pas un circuit ouvert : le chemin n'est pas coupé, au contraire il est trop facile.",
+                  "answers": [
+                    {
+                      "content": "Un générateur court-circuité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un circuit ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un récepteur court-circuité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un circuit normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un court-circuit se produit quand un fil relie directement les deux bornes d'un même élément.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher un fil conducteur qui relie directement les deux bornes d'un même élément : c'est exactement la définition du court-circuit. Étape 3 — Nommer ensuite l'élément court-circuité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile alimente deux lampes L1 et L2 l'une après l'autre. Un fil relie les deux bornes de L1. Quel élément est court-circuité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : pile, L1, L2. Étape 2 — Chercher : le fil relie directement les deux bornes de L1. Étape 3 — Nommer : L1, un récepteur, est court-circuitée. Étape 4 — Conclure : L1 est éteinte. La pile n'est pas court-circuitée, car L2 reste sur le chemin du courant.",
+                  "answers": [
+                    {
+                      "content": "La lampe L1",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe L2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun élément",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit avec une pile et deux lampes l'une après l'autre, une lampe court-circuitée par un fil reste ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : un récepteur court-circuité ne fonctionne plus. Le courant passe par le fil et évite la lampe : elle est donc éteinte.",
+                  "answers": [
+                    {
+                      "content": "éteinte",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe de Moussa est éteinte. Un fil de sa pile n'est pas relié à la lampe. Moussa dit : « C'est un court-circuit. » A-t-il raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher : aucun fil ne relie directement les deux bornes d'un même élément. Étape 3 — Nommer : il n'y a pas d'élément court-circuité. Étape 4 — Conclure : le chemin est coupé, c'est un circuit ouvert. Une lampe éteinte ne prouve pas un court-circuit.",
+                  "answers": [
+                    {
+                      "content": "Non : le chemin est coupé, c'est un circuit ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : une lampe éteinte veut toujours dire court-circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : un fil est mal relié, donc il y a un court-circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : c'est un circuit fermé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Court-circuit : générateur ou récepteur ?",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les court-circuits d'un montage à piles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à ce qu'elle est.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Chercher le fil direct. Fil sur les bornes de la pile : générateur court-circuité. Fil sur les bornes d'une lampe pendant que l'autre brille : récepteur court-circuité. Fil non relié : le chemin est coupé, c'est un circuit ouvert.",
+                  "answers": [
+                    {
+                      "content": "Un fil relie les deux bornes de la pile",
+                      "match": "Générateur court-circuité"
+                    },
+                    {
+                      "content": "Un fil relie les deux bornes d'une lampe, l'autre lampe brille",
+                      "match": "Récepteur court-circuité"
+                    },
+                    {
+                      "content": "Un fil n'est pas relié à la pile, la lampe est éteinte",
+                      "match": "Circuit ouvert"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un court-circuit.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer d'abord le générateur et les récepteurs. Étape 2 — Chercher le fil direct. Étape 3 — Nommer l'élément court-circuité. Étape 4 — Conclure sur l'effet. On suit toujours cet ordre.",
+                  "answers": [
+                    {
+                      "content": "Repérer le générateur et les récepteurs."
+                    },
+                    {
+                      "content": "Chercher un fil conducteur qui relie directement deux bornes d'un même élément."
+                    },
+                    {
+                      "content": "Nommer l'élément court-circuité."
+                    },
+                    {
+                      "content": "Conclure sur l'effet : danger ou récepteur qui ne fonctionne plus."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels objets, posés sur les deux bornes d'une pile, peuvent créer un court-circuit ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Chercher un objet conducteur. Le cuivre et le fer sont des métaux : ils conduisent le courant et relient les bornes. Le bois sec, le plastique et le caoutchouc sont des isolants : ils ne créent pas de court-circuit.",
+                  "answers": [
+                    {
+                      "content": "Un fil de cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un clou en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un bâton de bois sec",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle en plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un morceau de caoutchouc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un montage a 1 pile et 3 lampes l'une après l'autre. On pose un fil sur les bornes de 2 lampes, un fil par lampe. Combien de lampes brillent encore ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 1 pile et 3 lampes. Étape 2 — Chercher : deux fils, chacun sur une lampe. Étape 3 — Nommer : 2 lampes sont court-circuitées. Étape 4 — Conclure : 3 − 2 = 1 lampe brille encore.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur court-circuité fonctionne toujours normalement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : un récepteur court-circuité ne fonctionne plus. Le courant passe par le fil et évite le récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil relie directement les deux bornes de la pile : c'est un ___ court-circuité.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : la pile est le générateur. Étape 3 — Nommer : l'élément court-circuité est le générateur. Un récepteur est une lampe ou un moteur, pas une pile.",
+                  "answers": [
+                    {
+                      "content": "générateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "interrupteur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche toujours un fil direct entre les deux bornes d'un même élément."
+            }
+          ]
+        },
+        {
+          "name": "Connaître les dangers d'un court-circuit",
+          "remember": "Dans un **générateur court-circuité**, aucun récepteur ne limite le courant : il devient **très fort**. Les fils et la pile **chauffent** (échauffement). L'isolant en plastique des fils peut fondre, des étincelles peuvent jaillir et un **incendie** peut partir. Dans une maison, un court-circuit peut aussi brûler une personne. Causes fréquentes : fils dont l'isolant est abîmé qui se touchent, fil écrasé, câble rongé, objet métallique tombé sur des bornes. Signes : odeur de brûlé, fil très chaud, étincelles.",
+          "method": [
+            "Repérer la cause possible du court-circuit : fils abîmés, fil écrasé ou objet métallique sur des bornes.",
+            "Reconnaître les signes : odeur de brûlé, fil très chaud, étincelles.",
+            "Nommer le danger : échauffement des fils, risque d'incendie ou de brûlure.",
+            "Agir : ne rien toucher du tout, s'éloigner et prévenir tout de suite un adulte, qui coupera le courant au disjoncteur."
+          ],
+          "example": {
+            "statement": "Dans la boutique de Mme Koffi à Yopougon, le fil d'un ventilateur est écrasé sous un meuble. L'isolant est coupé, les deux fils de cuivre se touchent, le fil devient chaud et sent le brûlé. Que faire ?",
+            "steps": [
+              "Repérer : le fil écrasé a l'isolant coupé, donc ses deux fils de cuivre se touchent.",
+              "Reconnaître : le fil est très chaud et sent le brûlé, ce sont des signes de court-circuit.",
+              "Nommer : le danger est l'échauffement du fil et le risque d'incendie dans la boutique.",
+              "Agir : ne rien toucher du tout, s'éloigner et prévenir tout de suite un adulte, qui coupera le courant au disjoncteur."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un court-circuit est sans danger parce que « ce n'est qu'une petite pile ». Contre-exemple : un fil de cuivre posé sur les deux bornes d'une pile devient vite chaud, et un fil chaud peut enflammer du papier ou un tissu. Ne fais jamais cet essai. Un court-circuit chauffe toujours : il faut le traiter comme un risque d'incendie.",
+          "figure": "danger-du-court-circuit",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les signes et les dangers d'un court-circuit.",
+            "questions": [
+              {
+                "content": "Un court-circuit peut faire chauffer les fils et provoquer un incendie.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Nommer le danger : dans un court-circuit, le courant devient très fort et les fils s'échauffent. Un fil très chaud peut enflammer des objets proches : il y a un risque d'incendie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Que deviennent les fils quand le courant est très fort ?"
+              },
+              {
+                "content": "Une odeur de brûlé près d'une prise est un ___ de court-circuit.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Reconnaître les signes : odeur de brûlé, fil très chaud et étincelles montrent un court-circuit. Un signe n'est ni un remède ni un outil.",
+                "answers": [
+                  {
+                    "content": "signe",
+                    "correct": true
+                  },
+                  {
+                    "content": "remède",
+                    "correct": false
+                  },
+                  {
+                    "content": "outil",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cette odeur t'avertit d'un problème."
+              },
+              {
+                "content": "Le câble d'une radio est écrasé sous un lit et son isolant est coupé. Quelle est la cause possible de court-circuit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer la cause possible : l'isolant coupé laisse les fils de cuivre à nu, ils peuvent se toucher et créer un court-circuit. La taille, la longueur du câble ou la couleur de la prise n'en sont pas la cause.",
+                "answers": [
+                  {
+                    "content": "Les fils de cuivre dénudés peuvent se toucher",
+                    "correct": true
+                  },
+                  {
+                    "content": "La radio est trop petite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le câble est trop long",
+                    "correct": false
+                  },
+                  {
+                    "content": "La prise est de couleur blanche",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde l'état de l'isolant."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Les dangers d'un court-circuit",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour reconnaître les dangers d'un court-circuit.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le principal danger d'un générateur court-circuité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Nommer le danger : dans un générateur court-circuité, le courant est très fort et les fils s'échauffent. Le risque est un incendie ou une brûlure. Penser que le circuit s'arrête simplement est faux : le courant circule au contraire sans limite.",
+                  "answers": [
+                    {
+                      "content": "Les fils chauffent et peuvent provoquer un incendie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe brille plus longtemps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le circuit consomme moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucun danger, le circuit s'arrête simplement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations peuvent créer un court-circuit dans une maison ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer la cause possible : un court-circuit vient de fils dénudés qui se touchent, comme l'isolant usé ou le fil écrasé. Une ampoule bien vissée, un interrupteur éteint et un câble en bon état ne relient pas deux bornes entre elles.",
+                  "answers": [
+                    {
+                      "content": "Deux fils dont l'isolant est usé qui se touchent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil écrasé sous un meuble dont l'isolant est coupé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une ampoule bien vissée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un interrupteur éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un câble en bon état rangé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil très chaud lors d'un court-circuit peut provoquer un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Nommer le danger : un fil très chaud peut enflammer du papier ou un tissu. Le danger est l'incendie.",
+                  "answers": [
+                    {
+                      "content": "incendie",
+                      "correct": true
+                    },
+                    {
+                      "content": "feu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui se passe dans un court-circuit non protégé.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la cause : deux fils abîmés se touchent. Puis le courant devient très fort, les fils s'échauffent (Étape 3 — Nommer le danger) et l'isolant fond : un incendie peut partir.",
+                  "answers": [
+                    {
+                      "content": "Deux fils dont l'isolant est abîmé se touchent."
+                    },
+                    {
+                      "content": "Le courant devient très fort."
+                    },
+                    {
+                      "content": "Les fils chauffent."
+                    },
+                    {
+                      "content": "L'isolant fond et un incendie peut partir."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile court-circuitée par un fil de cuivre reste sans danger parce qu'elle est petite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Nommer le danger : même avec une petite pile, le fil de cuivre chauffe vite et peut enflammer du papier ou un tissu. Un court-circuit est toujours un risque, quelle que soit la taille de la pile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Dangers : causes, signes et gestes",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les dangers d'un court-circuit.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels signes peuvent montrer un court-circuit ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Reconnaître les signes : l'odeur de brûlé, les étincelles et le fil très chaud montrent un court-circuit. Une lampe normale et un interrupteur fermé sont des signes de fonctionnement normal.",
+                  "answers": [
+                    {
+                      "content": "Une odeur de brûlé près d'un fil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des étincelles à la prise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil très chaud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe qui éclaire normalement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un interrupteur bien fermé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque étape de la méthode à son action.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer la cause. Étape 2 — Reconnaître les signes. Étape 3 — Nommer le danger. Étape 4 — Agir : ne rien toucher, s'éloigner et prévenir un adulte.",
+                  "answers": [
+                    {
+                      "content": "Repérer",
+                      "match": "Chercher la cause : fils abîmés ou fil écrasé"
+                    },
+                    {
+                      "content": "Reconnaître",
+                      "match": "Noter les signes : odeur de brûlé, étincelles"
+                    },
+                    {
+                      "content": "Nommer",
+                      "match": "Dire le danger : échauffement et incendie"
+                    },
+                    {
+                      "content": "Agir",
+                      "match": "Ne rien toucher, s'éloigner et prévenir un adulte"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un court-circuit a abîmé le fil du salon de Kader. Un mètre de fil coûte 300 F CFA et il faut en remplacer 4 mètres. Combien cela coûte-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : il faut remplacer 4 mètres à 300 F CFA le mètre. Calcul : 4 × 300 = 1 200. Le remplacement coûte 1 200 F CFA. Étape 4 — Agir : un électricien change tout le fil abîmé plutôt que de le garder.",
+                  "answers": [
+                    {
+                      "content": "1200",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F CFA"
+                },
+                {
+                  "content": "Dès que tu sens une odeur de brûlé près d'une prise, tu t'éloignes et tu ___ le problème à un adulte.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Agir : un enfant ne touche à rien, il s'éloigne et signale le problème à un adulte, qui coupe le courant au disjoncteur. Cacher ou oublier le problème laisse le fil chauffer, avec un risque d'incendie.",
+                  "answers": [
+                    {
+                      "content": "signales",
+                      "correct": true
+                    },
+                    {
+                      "content": "caches",
+                      "correct": false
+                    },
+                    {
+                      "content": "oublies",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil qui chauffe sans arrêt peut faire fondre son isolant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Nommer le danger : l'échauffement fait fondre l'isolant en plastique. Les fils nus peuvent alors se toucher et le court-circuit s'aggrave.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tu sens une odeur de brûlé dans la boutique de ta tante. Qui préviens-tu en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Agir : un enfant ne touche à rien du tout ; il s'éloigne et prévient un adulte, qui coupe le courant ou appelle un électricien. Attendre ou prévenir un client fait perdre du temps.",
+                  "answers": [
+                    {
+                      "content": "Un adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Personne : cela passera",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un client",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un camarade de classe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense à la chaîne : fils abîmés, courant très fort, fils chauds, incendie."
+            }
+          ]
+        },
+        {
+          "name": "Protéger une installation avec un fusible ou un disjoncteur",
+          "remember": "Un **fusible** est un élément de sécurité placé dans le circuit. Il contient un **fil fin qui fond** quand le courant devient trop fort : le circuit s'ouvre et le courant s'arrête. Un fusible fondu se **remplace** par un fusible identique : un adulte coupe d'abord le courant au disjoncteur, puis change le fusible. Un **disjoncteur** joue le même rôle, mais il coupe le circuit en **baissant son levier** tout seul. Après avoir supprimé la cause, on le **réarme** en remontant le levier : il n'y a rien à remplacer. Dans une maison, le disjoncteur se trouve en général près du compteur de la CIE.",
+          "method": [
+            "Repérer l'élément de protection du circuit : fusible ou disjoncteur.",
+            "Constater qu'il a coupé le circuit : fil du fusible fondu ou levier du disjoncteur baissé.",
+            "Demander à un adulte de chercher la cause de la coupure et de la supprimer : appareil défectueux débranché, fils abîmés remplacés.",
+            "Faire remettre en service par un adulte : fusible identique (après coupure du courant au disjoncteur) ou levier du disjoncteur remonté.",
+            "Vérifier que le courant revient ; sinon, appeler un électricien."
+          ],
+          "example": {
+            "statement": "Chez M. Koné, à Bouaké, la lumière s'éteint d'un coup quand on branche un vieux fer à repasser dont le fil est abîmé. Près du compteur, le levier du disjoncteur est baissé. Que faire ?",
+            "steps": [
+              "Repérer : l'élément de protection est le disjoncteur placé près du compteur.",
+              "Constater : son levier est baissé, il a coupé le circuit.",
+              "Demander : un adulte cherche la cause. Le fer à repasser a un fil abîmé, l'adulte le débranche et le met de côté.",
+              "Faire remettre en service : l'adulte remonte le levier du disjoncteur pour le réarmer. Aucune pièce n'est à remplacer.",
+              "Vérifier : la lumière revient et le disjoncteur ne se baisse plus. Le fer à repasser sera réparé par un électricien."
+            ]
+          },
+          "pitfall": "Ne jamais remplacer un fusible fondu par un fil de cuivre ou un morceau de papier d'aluminium. Contre-exemple : Koffi met un fil de cuivre à la place du fusible. Au prochain court-circuit, le cuivre ne fond pas : rien ne coupe le courant, les fils chauffent et un incendie peut partir. Un adulte ne réarme pas non plus un disjoncteur sans avoir cherché la cause : il se baissera de nouveau.",
+          "figure": "fusible-coupe-le-circuit",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser un fusible et un disjoncteur.",
+            "questions": [
+              {
+                "content": "Que fait un fusible quand le courant devient trop fort ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le fusible, élément de protection. Étape 2 — Constater : quand le courant est trop fort, son fil fin fond et le circuit s'ouvre. Le courant s'arrête et l'installation est protégée.",
+                "answers": [
+                  {
+                    "content": "Son fil fin fond et le circuit s'ouvre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il fait briller la lampe plus fort",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il ferme le circuit",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il ne change rien",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce que veut dire fondre pour un fil fin."
+              },
+              {
+                "content": "Un fusible fondu peut être remplacé par un fil de cuivre.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Remettre en service : on remplace le fusible par un fusible identique. Un fil de cuivre ne fond pas et ne protège plus : les fils chaufferaient jusqu'à l'incendie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un fil de cuivre fond-il aussi facilement qu'un fil fin de fusible ?"
+              },
+              {
+                "content": "Le levier du disjoncteur est baissé : le circuit est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Constater : un levier baissé montre que le disjoncteur a coupé le circuit. Le circuit est donc ouvert et le courant ne passe plus.",
+                "answers": [
+                  {
+                    "content": "ouvert",
+                    "correct": true
+                  },
+                  {
+                    "content": "fermé",
+                    "correct": false
+                  },
+                  {
+                    "content": "court-circuité",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le courant passe-t-il quand le levier est baissé ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Fusible et disjoncteur : bien les utiliser",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour protéger une installation.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le fil fin d'un fusible a fondu. Que se passe-t-il dans le circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le fusible protège le circuit. Étape 2 — Constater : son fil fin a fondu, donc le circuit est ouvert et le courant s'arrête. Un fusible ne ferme pas le circuit : il le coupe pour éviter l'échauffement.",
+                  "answers": [
+                    {
+                      "content": "Le circuit s'ouvre et le courant s'arrête",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le circuit se ferme et le courant augmente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile se recharge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un disjoncteur qui a coupé le circuit doit être jeté et remplacé comme un fusible.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Remettre en service : un disjoncteur se réarme en remontant le levier, après avoir supprimé la cause. C'est le fusible fondu qu'on remplace.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à ce qui le décrit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Constater : le fusible a un fil qui fond, le disjoncteur a un levier qui descend. Un circuit ouvert est coupé. Un court-circuit est un fil direct entre les bornes d'un élément.",
+                  "answers": [
+                    {
+                      "content": "Fusible",
+                      "match": "Son fil fin fond et il faut le remplacer"
+                    },
+                    {
+                      "content": "Disjoncteur",
+                      "match": "Son levier descend et on peut le réarmer"
+                    },
+                    {
+                      "content": "Circuit ouvert",
+                      "match": "Le courant ne passe plus"
+                    },
+                    {
+                      "content": "Court-circuit",
+                      "match": "Un fil direct relie les bornes d'un élément"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes quand le disjoncteur a baissé son levier.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le disjoncteur. Étape 2 — Constater le levier baissé. Étape 3 — Demander à un adulte de chercher la cause : il débranche l'appareil défectueux. Étape 4 — Faire remettre en service : l'adulte réarme. Étape 5 — Vérifier que le courant revient.",
+                  "answers": [
+                    {
+                      "content": "Repérer le disjoncteur près du compteur."
+                    },
+                    {
+                      "content": "Constater que le levier est baissé."
+                    },
+                    {
+                      "content": "Demander à un adulte de débrancher l'appareil défectueux."
+                    },
+                    {
+                      "content": "Demander à un adulte de remonter le levier pour réarmer."
+                    },
+                    {
+                      "content": "Vérifier que la lumière revient."
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fusible de la boutique de Mme Diallo a fondu. Quelle action est dangereuse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Remettre en service : on remplace par un fusible identique. Le fil de cuivre ne fond pas et ne protège plus l'installation : les fils chaufferaient, avec un risque d'incendie. Les trois autres actions sont correctes.",
+                  "answers": [
+                    {
+                      "content": "Mettre un fil de cuivre à la place du fusible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire débrancher d'abord l'appareil défectueux par un adulte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire remplacer par un fusible identique après avoir cherché la cause",
+                      "correct": false
+                    },
+                    {
+                      "content": "Appeler un électricien",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Protéger la maison : fusible ou disjoncteur",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les éléments de protection d'une maison.",
+              "exercise_type": "fixation",
+              "figure": "fusible-coupe-le-circuit",
+              "questions": [
+                {
+                  "content": "Le fil fin d'un fusible ___ quand le courant est trop fort.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Constater : le fil fin d'un fusible fond quand le courant est trop fort. Le circuit s'ouvre alors.",
+                  "answers": [
+                    {
+                      "content": "fond",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments protègent une installation électrique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer l'élément de protection : le fusible et le disjoncteur coupent le circuit en cas de courant trop fort. L'ampoule est un récepteur, la multiprise ne fait que partager les prises et la pile est un générateur.",
+                  "answers": [
+                    {
+                      "content": "Le fusible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le disjoncteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule",
+                      "correct": false
+                    },
+                    {
+                      "content": "La multiprise",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fusible coûte 250 F CFA. Après trois pannes, M. Diallo en remplace 3 dans sa boutique. Combien paie-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Remettre en service : chaque fusible fondu est remplacé par un fusible identique. Calcul : 3 × 250 = 750. Il paie 750 F CFA.",
+                  "answers": [
+                    {
+                      "content": "750",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F CFA"
+                },
+                {
+                  "content": "Après que le levier d'un disjoncteur est baissé, on peut le réarmer sans chercher la cause.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Chercher la cause avant d'agir (un adulte s'en charge) : si la cause reste, le disjoncteur se baissera de nouveau et le risque demeure. On réarme (Étape 4) seulement après avoir supprimé la cause.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fusible fondu se remplace par un fusible ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Remettre en service : le nouveau fusible doit être identique à l'ancien pour protéger correctement. Un fusible qui supporte plus de courant ou un fil de cuivre ne coupe plus assez tôt.",
+                  "answers": [
+                    {
+                      "content": "identique",
+                      "correct": true
+                    },
+                    {
+                      "content": "qui supporte plus de courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "en fil de cuivre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'avantage du disjoncteur sur le fusible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Remettre en service : après avoir supprimé la cause, on remonte le levier du disjoncteur. Le fusible fondu, lui, doit être remplacé.",
+                  "answers": [
+                    {
+                      "content": "On le réarme sans le remplacer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il ne coupe jamais le courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas besoin de circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne s'échauffe jamais",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Fusible : on le remplace. Disjoncteur : on le réarme."
+            }
+          ]
+        },
+        {
+          "name": "Respecter les règles de sécurité électrique",
+          "remember": "Pour éviter les accidents : 1) ne jamais toucher un fil dénudé ni une prise abîmée ; 2) ne jamais toucher un appareil branché avec les **mains mouillées** (l'eau conduit le courant) ; 3) ne pas brancher trop d'appareils sur une **multiprise**, car elle chauffe ; 4) débrancher en tirant sur la **fiche**, jamais sur le fil ; 5) un adulte coupe le courant avant de changer une ampoule ou de réparer ; 6) ne jamais mettre un objet métallique dans une prise ; 7) laisser les réparations à un électricien. Un câble abîmé se remplace entièrement.",
+          "method": [
+            "Observer la situation : appareils, fils, prises, eau et personnes présentes.",
+            "Repérer le comportement ou l'état dangereux.",
+            "Citer la règle de sécurité qui s'applique.",
+            "Proposer le bon geste à la place."
+          ],
+          "example": {
+            "statement": "Dans une boutique d'Abobo, la commerçante Fatou a les mains mouillées après avoir lavé des légumes. Elle veut brancher un ventilateur sur une multiprise où quatre appareils sont déjà branchés. Que lui dis-tu ?",
+            "steps": [
+              "Observer : Fatou a les mains mouillées et la multiprise porte déjà quatre appareils.",
+              "Repérer : il y a deux dangers, les mains mouillées et la multiprise trop chargée.",
+              "Citer : on ne touche pas un appareil branché avec les mains mouillées, et on ne surcharge pas une multiprise, car elle chauffe.",
+              "Proposer : Fatou se sèche les mains et branche le ventilateur sur une autre prise, ou débranche un appareil avant."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un câble abîmé est réparé avec un bout de ruban de fortune. Contre-exemple : le câble d'un ventilateur est coupé et entouré de ruban en papier. Si le ruban se décolle, les deux fils se touchent : c'est un court-circuit. Un câble abîmé se remplace entièrement par un électricien ; en attendant, on ne s'en sert pas.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à repérer un danger et à citer la règle de sécurité.",
+            "questions": [
+              {
+                "content": "Tantie Mame a les mains mouillées et veut brancher un ventilateur. Que doit-elle faire d'abord ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : Tantie Mame a les mains mouillées. Étape 2 — Repérer le danger : l'eau conduit le courant. Étape 3 — Citer la règle : pas d'appareil branché avec les mains mouillées. Étape 4 — Proposer : se sécher les mains.",
+                "answers": [
+                  {
+                    "content": "Se sécher les mains",
+                    "correct": true
+                  },
+                  {
+                    "content": "Brancher vite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tirer sur le fil",
+                    "correct": false
+                  },
+                  {
+                    "content": "Poser le ventilateur dans l'eau",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'eau conduit-elle le courant ?"
+              },
+              {
+                "content": "On débranche un fer à repasser en tirant sur son fil.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Citer la règle : on tire sur la fiche, jamais sur le fil, qui s'abîmerait et pourrait se couper. Étape 4 — Proposer : tenir la fiche pour débrancher.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Que risque-t-on à tirer sur un fil ?"
+              },
+              {
+                "content": "Avant de réparer un appareil, on le ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Citer la règle : on coupe le courant avant de réparer. Étape 4 — Proposer : débrancher l'appareil.",
+                "answers": [
+                  {
+                    "content": "débranche",
+                    "correct": true
+                  },
+                  {
+                    "content": "mouille",
+                    "correct": false
+                  },
+                  {
+                    "content": "laisse allumé",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le courant doit-il passer pendant une réparation ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Appliquer les règles de sécurité",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour repérer des dangers électriques.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un adulte va changer une ampoule dans la salle. Quelle règle doit-il respecter d'abord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : une ampoule à changer. Étape 3 — Citer la règle : on coupe le courant avant de toucher une douille. Étape 4 — Proposer : couper l'interrupteur ou le disjoncteur. Les autres gestes sont dangereux.",
+                  "answers": [
+                    {
+                      "content": "Couper le courant avant d'y toucher",
+                      "correct": true
+                    },
+                    {
+                      "content": "Se mouiller les mains pour mieux visser",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tirer sur le fil de la douille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rester pieds nus dans l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles règles de sécurité sont correctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Citer la règle : mains sèches, fiche et non fil, multiprise non surchargée. Les trois autres propositions sont des dangers : un clou dans une prise, un fil dénudé et une réparation sous tension.",
+                  "answers": [
+                    {
+                      "content": "Ne pas toucher un appareil branché avec les mains mouillées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Débrancher en tirant sur la fiche et non sur le fil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne pas surcharger une multiprise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre un clou dans une prise pour la tester",
+                      "correct": false
+                    },
+                    {
+                      "content": "Garder un fil dénudé si l'appareil marche encore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réparer un câble sans couper le courant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque danger au bon geste.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer le danger, puis Étape 4 — Proposer le bon geste : sécher les mains, alléger la multiprise, prévenir un adulte pour le fil dénudé, tenir la fiche pour débrancher.",
+                  "answers": [
+                    {
+                      "content": "Mains mouillées",
+                      "match": "Les sécher avant de toucher l'appareil"
+                    },
+                    {
+                      "content": "Multiprise chargée de cinq appareils",
+                      "match": "Débrancher des appareils"
+                    },
+                    {
+                      "content": "Fil dénudé",
+                      "match": "Ne pas le toucher et prévenir un adulte"
+                    },
+                    {
+                      "content": "Câble qu'on arrache",
+                      "match": "Tenir la fiche pour débrancher"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau conduit le courant : on ne touche jamais un appareil branché avec les mains ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Citer la règle : l'eau conduit le courant, donc les mains doivent être sèches. Étape 4 — Proposer : se sécher les mains avant de toucher l'appareil.",
+                  "answers": [
+                    {
+                      "content": "mouillées",
+                      "correct": true
+                    },
+                    {
+                      "content": "humides",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un câble dont l'isolant est abîmé peut être réparé avec du ruban en papier et rester en service.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer le danger : un ruban de fortune peut se décoller et laisser les fils se toucher. Étape 3 — Citer la règle : un câble abîmé se remplace entièrement. Étape 4 — Proposer : ne plus s'en servir et appeler un électricien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La boutique de Mme Koné : danger ou pas ?",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la sécurité électrique d'une boutique.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour analyser une situation électrique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer. Étape 2 — Repérer le danger. Étape 3 — Citer la règle. Étape 4 — Proposer le bon geste. On suit toujours cet ordre.",
+                  "answers": [
+                    {
+                      "content": "Observer la situation."
+                    },
+                    {
+                      "content": "Repérer le comportement ou l'état dangereux."
+                    },
+                    {
+                      "content": "Citer la règle de sécurité qui s'applique."
+                    },
+                    {
+                      "content": "Proposer le bon geste à la place."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une cuisine, on voit : un fil dénudé, des mains mouillées sur une prise, une multiprise surchargée et un ventilateur bien rangé. Combien de situations sont dangereuses ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer : quatre éléments. Étape 2 — Repérer : le fil dénudé, les mains mouillées sur une prise et la multiprise surchargée sont dangereux. Le ventilateur bien rangé ne l'est pas. Il y a 3 situations dangereuses.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que fait-on face à un fil dénudé ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer le danger : un fil dénudé peut causer un court-circuit ou une électrisation. Étape 4 — Proposer : ne pas le toucher et prévenir un adulte. Le saisir, le mouiller ou l'ignorer aggrave le risque.",
+                  "answers": [
+                    {
+                      "content": "Ne pas le toucher",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévenir un adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le saisir pour le replacer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le recouvrir d'un linge mouillé",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ignorer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut enfoncer un clou ou un fil de fer dans une prise pour la nettoyer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Citer la règle : on ne met jamais d'objet métallique dans une prise. Le métal relie des bornes et peut créer un court-circuit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour débrancher un fer à repasser, on tire sur la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Citer la règle : on tient la fiche. Tirer sur le fil l'abîme. Étape 4 — Proposer : tenir la fiche.",
+                  "answers": [
+                    {
+                      "content": "fiche",
+                      "correct": true
+                    },
+                    {
+                      "content": "multiprise",
+                      "correct": false
+                    },
+                    {
+                      "content": "ampoule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui doit réparer un câble de fer à repasser abîmé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Citer la règle : les réparations se laissent à un électricien. Étape 4 — Proposer : ne plus se servir du fer et appeler un réparateur formé.",
+                  "answers": [
+                    {
+                      "content": "Un électricien ou un réparateur formé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'enfant de la maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "N'importe qui avec du ruban",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne : on laisse le câble comme ça",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Observe, repère le danger, cite la règle, puis donne le bon geste."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La multiprise de la boutique de Mme Kouassi",
+          "statement": "À Adjamé, Mme Kouassi branche sur une seule multiprise un ventilateur, un congélateur, une bouilloire, un chargeur de téléphone et une radio. Le fil du ventilateur est écrasé sous un carton : son isolant est coupé et les deux fils de cuivre se touchent presque.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle situation peut créer un court-circuit dans la boutique de Mme Kouassi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la cause : le fil du ventilateur est écrasé et son isolant est coupé. 2. Chercher un contact direct : les deux fils de cuivre dénudés peuvent se toucher. 3. Nommer : ce contact direct entre fils est un court-circuit. La taille ou la couleur des appareils n'ont aucun rapport.",
+              "answers": [
+                {
+                  "content": "Les fils de cuivre dénudés du ventilateur peuvent se toucher",
+                  "correct": true
+                },
+                {
+                  "content": "Le congélateur est plus gros que la radio",
+                  "correct": false
+                },
+                {
+                  "content": "La radio est posée sur une étagère",
+                  "correct": false
+                },
+                {
+                  "content": "Le chargeur est de couleur noire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels signes montreraient que le fil du ventilateur est en court-circuit ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Repérer les signes d'un court-circuit. 2. Reconnaître : l'odeur de brûlé et le fil très chaud montrent un échauffement dangereux. Un ventilateur silencieux, un carton rangé ou une radio qui marche ne sont pas des signes.",
+              "answers": [
+                {
+                  "content": "Une odeur de brûlé près du fil",
+                  "correct": true
+                },
+                {
+                  "content": "Le fil devient très chaud",
+                  "correct": true
+                },
+                {
+                  "content": "Le ventilateur tourne en silence",
+                  "correct": false
+                },
+                {
+                  "content": "Le carton est bien rangé",
+                  "correct": false
+                },
+                {
+                  "content": "La radio donne les nouvelles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mme Kouassi débranche 2 des 5 appareils de la multiprise. Combien d'appareils restent branchés ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer les données : 5 appareils branchés au départ. 2. Calculer : 5 − 2 = 3. Il reste 3 appareils branchés. Alléger la multiprise est une règle de sécurité : elle chauffe moins.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une multiprise sur laquelle on branche trop d'appareils peut chauffer.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Observer : cinq appareils sur une seule multiprise. 2. Citer la règle : on ne surcharge pas une multiprise, car elle chauffe. 3. Conclure : l'affirmation est vraie et le risque est l'incendie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un fil très chaud près de cartons peut provoquer un ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Nommer le danger d'un court-circuit : l'échauffement. 2. Repérer ce qui est proche : les cartons brûlent facilement. 3. Conclure : le risque est l'incendie.",
+              "answers": [
+                {
+                  "content": "incendie",
+                  "correct": true
+                },
+                {
+                  "content": "feu",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que doit faire Mme Kouassi du fil écrasé du ventilateur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Observer : le câble a l'isolant coupé. 2. Citer la règle : un câble abîmé se remplace entièrement. 3. Proposer : ne plus s'en servir et appeler un électricien. Un ruban de fortune peut se décoller, tirer le fil l'abîme encore et l'eau est un danger.",
+              "answers": [
+                {
+                  "content": "Ne plus s'en servir et faire remplacer le câble",
+                  "correct": true
+                },
+                {
+                  "content": "L'entourer d'un ruban de papier et continuer",
+                  "correct": false
+                },
+                {
+                  "content": "Tirer dessus pour le dégager",
+                  "correct": false
+                },
+                {
+                  "content": "Le mouiller pour le refroidir",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La panne du soir à Cocody",
+          "statement": "Un soir, à Cocody, la lumière s'éteint dans toute la maison de la famille Coulibaly quand Mme Coulibaly branche un fer à repasser dont le fil est abîmé. Près du compteur de la CIE, le levier du disjoncteur est baissé.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les gestes de la famille Coulibaly.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Repérer l'élément de protection. 2. Constater qu'il a coupé le circuit. 3. Chercher la cause et la supprimer : débrancher le fer. 4. Remettre en service : réarmer. 5. Vérifier que le courant revient. On ne réarme jamais avant d'avoir supprimé la cause.",
+              "answers": [
+                {
+                  "content": "Repérer le disjoncteur près du compteur."
+                },
+                {
+                  "content": "Constater que le levier est baissé."
+                },
+                {
+                  "content": "Débrancher le fer à repasser abîmé."
+                },
+                {
+                  "content": "Remonter le levier pour réarmer."
+                },
+                {
+                  "content": "Vérifier que la lumière revient."
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi le disjoncteur a-t-il baissé son levier ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Observer : la panne arrive quand on branche le fer au fil abîmé. 2. Chercher la cause : le fil abîmé crée un courant trop fort. 3. Conclure : le disjoncteur coupe le circuit pour éviter l'échauffement.",
+              "answers": [
+                {
+                  "content": "Le fil abîmé a provoqué un courant trop fort, il a coupé le circuit",
+                  "correct": true
+                },
+                {
+                  "content": "La maison manquait d'ampoules",
+                  "correct": false
+                },
+                {
+                  "content": "Mme Coulibaly a fermé la porte",
+                  "correct": false
+                },
+                {
+                  "content": "Le compteur est tombé en panne tout seul",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La famille doit remplacer le disjoncteur par un neuf.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Repérer l'élément de protection : un disjoncteur. 2. Citer la règle : un disjoncteur se réarme en remontant le levier, après suppression de la cause. 3. Conclure : seul un fusible fondu se remplace.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque geste à son étape dans la méthode.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Constater : levier baissé. 2. Chercher la cause : débrancher le fer. 3. Remettre en service : remonter le levier. 4. Vérifier : la lumière est revenue.",
+              "answers": [
+                {
+                  "content": "Voir que le levier est baissé",
+                  "match": "Constater la coupure"
+                },
+                {
+                  "content": "Débrancher le fer abîmé",
+                  "match": "Chercher et supprimer la cause"
+                },
+                {
+                  "content": "Remonter le levier",
+                  "match": "Remettre en service"
+                },
+                {
+                  "content": "Voir revenir la lumière",
+                  "match": "Vérifier"
+                }
+              ]
+            },
+            {
+              "content": "Si le levier se rebaisse tout de suite après le réarmement, la cause n'est pas ___.",
+              "question_type": "select",
+              "explanation": "Méthode : 1. Constater la coupure. 2. Chercher la cause : si le levier se rebaisse, c'est que la cause existe encore. 3. Conclure : la cause n'est pas supprimée ; il faut appeler un électricien. « Ouverte » et « fermée » parlent d'un circuit, pas d'une cause.",
+              "answers": [
+                {
+                  "content": "supprimée",
+                  "correct": true
+                },
+                {
+                  "content": "ouverte",
+                  "correct": false
+                },
+                {
+                  "content": "fermée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'électricien remplace le cordon du fer à repasser et demande 1 500 F CFA pour le cordon et 2 000 F CFA pour son travail. Combien Mme Coulibaly paie-t-elle en tout ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer les données : cordon 1 500 F CFA, travail 2 000 F CFA. 2. Calculer : 1 500 + 2 000 = 3 500. Mme Coulibaly paie 3 500 F CFA en tout.",
+              "answers": [
+                {
+                  "content": "3500",
+                  "correct": true
+                }
+              ],
+              "unit": "F CFA"
+            }
+          ]
+        },
+        {
+          "title": "Le fusible de l'atelier de couture",
+          "statement": "À Daloa, le fusible de l'atelier de couture de Mme Bamba a fondu deux fois en une semaine. Son fils Yao propose : « Mets un fil de cuivre à la place, il ne fondra plus. » Mme Bamba cherche à comprendre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Que montre le fusible qui fond deux fois en une semaine ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Constater : le fusible a coupé le circuit deux fois. 2. Chercher la cause : un fusible fond quand le courant est trop fort. 3. Conclure : la cause existe toujours et doit être trouvée.",
+              "answers": [
+                {
+                  "content": "Une cause de courant trop fort existe encore dans l'installation",
+                  "correct": true
+                },
+                {
+                  "content": "Le fusible est trop fragile pour servir",
+                  "correct": false
+                },
+                {
+                  "content": "L'atelier n'a pas besoin de fusible",
+                  "correct": false
+                },
+                {
+                  "content": "La CIE a changé les fils",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le fil de cuivre proposé par Yao protégerait mieux l'atelier qu'un fusible.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Repérer le rôle du fusible : couper le circuit quand le courant est trop fort. 2. Comparer : le fil de cuivre ne fond pas. 3. Conclure : sans coupure, les fils chauffent jusqu'à l'incendie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles causes possibles Mme Bamba doit-elle chercher ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Chercher les causes d'un courant trop fort. 2. Citer : un fil abîmé peut créer un court-circuit et trop d'appareils sur une multiprise la font chauffer. Une fenêtre, un tissu ou une chaise n'ont aucun rapport avec le courant.",
+              "answers": [
+                {
+                  "content": "Un fil abîmé sur une machine à coudre",
+                  "correct": true
+                },
+                {
+                  "content": "Trop d'appareils sur la même multiprise",
+                  "correct": true
+                },
+                {
+                  "content": "Une fenêtre trop grande",
+                  "correct": false
+                },
+                {
+                  "content": "Un rouleau de tissu trop long",
+                  "correct": false
+                },
+                {
+                  "content": "Une chaise cassée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre ce que doit faire Mme Bamba après la deuxième panne.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Constater la coupure. 2. Chercher et supprimer la cause. 3. Couper le courant au disjoncteur. 4. Remettre en service avec un fusible identique. 5. Vérifier. Remplacer le fusible avant de chercher la cause ferait fondre le nouveau.",
+              "answers": [
+                {
+                  "content": "Constater que le fil du fusible a fondu."
+                },
+                {
+                  "content": "Débrancher les machines et chercher la cause."
+                },
+                {
+                  "content": "Couper le courant au disjoncteur."
+                },
+                {
+                  "content": "Remplacer le fusible par un fusible identique."
+                },
+                {
+                  "content": "Vérifier que le courant revient."
+                }
+              ]
+            },
+            {
+              "content": "Un fusible coûte 250 F CFA et Mme Bamba en a déjà remplacé 2. Combien a-t-elle dépensé pour ces fusibles ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer les données : 250 F CFA par fusible, 2 fusibles. 2. Calculer : 2 × 250 = 500. Elle a dépensé 500 F CFA.",
+              "answers": [
+                {
+                  "content": "500",
+                  "correct": true
+                }
+              ],
+              "unit": "F CFA"
+            },
+            {
+              "content": "Explique à Yao en 3 ou 4 phrases pourquoi un fil de cuivre ne doit jamais remplacer le fusible.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que le fusible coupe le circuit quand le courant est trop fort",
+                "Dit que le fil de cuivre ne fond pas et ne protège plus",
+                "Nomme le risque : fils très chauds et incendie",
+                "Phrases claires et vocabulaire correct"
+              ],
+              "explanation": "Corrigé modèle : « Le fusible contient un fil fin qui fond quand le courant devient trop fort, ce qui coupe le circuit. Un fil de cuivre ne fond pas : il ne coupe plus rien. Les fils chaufferaient alors et un incendie pourrait partir dans l'atelier. Il faut donc remplacer le fusible par un fusible identique après avoir cherché la cause. » Points : 1 pour le rôle du fusible, 1 pour le cuivre qui ne fond pas, 0,5 pour le risque, 0,5 pour la clarté.",
+              "answers": [],
+              "starter": "Le fusible coupe le circuit quand…"
+            }
+          ]
+        },
+        {
+          "title": "L'installation de la maison familiale à San Pedro",
+          "statement": "Dans la maison de la famille Gbané à San Pedro, M. Gbané prépare l'installation avant la saison des pluies. Il remarque : un câble de ventilateur rongé par un rat, une multiprise qui porte six appareils, un fusible de rechange qui est en réalité un fil de cuivre, et un disjoncteur près du compteur dont le levier est baissé. Il demande à ses enfants de l'aider à tout analyser.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Parmi les éléments observés, lesquels sont des dangers ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Observer toute l'installation. 2. Repérer les dangers : un câble rongé (court-circuit possible), une multiprise surchargée (elle chauffe) et un fil de cuivre à la place du fusible (plus de protection). 3. Le disjoncteur est un élément de protection, pas un danger.",
+              "answers": [
+                {
+                  "content": "Le câble rongé par un rat",
+                  "correct": true
+                },
+                {
+                  "content": "La multiprise qui porte six appareils",
+                  "correct": true
+                },
+                {
+                  "content": "Le fil de cuivre qui remplace le fusible",
+                  "correct": true
+                },
+                {
+                  "content": "Le disjoncteur installé près du compteur",
+                  "correct": false
+                },
+                {
+                  "content": "Un ventilateur bien rangé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le câble rongé laisse apparaître deux fils de cuivre. Que risque-t-il de se passer s'ils se touchent ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la cause : l'isolant rongé laisse les fils à nu. 2. Chercher un contact direct entre eux : c'est la définition du court-circuit. 3. Nommer le danger : courant très fort, fils chauds, incendie.",
+              "answers": [
+                {
+                  "content": "Un court-circuit, avec échauffement et risque d'incendie",
+                  "correct": true
+                },
+                {
+                  "content": "Le ventilateur tourne plus vite sans danger",
+                  "correct": false
+                },
+                {
+                  "content": "La pile se recharge",
+                  "correct": false
+                },
+                {
+                  "content": "Rien : un câble rongé reste sûr",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque anomalie au bon geste.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Repérer chaque anomalie. 2. Citer la règle : câble abîmé remplacé, multiprise non surchargée, fusible identique, cause supprimée avant le réarmement. 3. Proposer le geste correspondant.",
+              "answers": [
+                {
+                  "content": "Câble rongé",
+                  "match": "Ne plus s'en servir et le faire remplacer"
+                },
+                {
+                  "content": "Multiprise à six appareils",
+                  "match": "Débrancher des appareils"
+                },
+                {
+                  "content": "Fil de cuivre à la place du fusible",
+                  "match": "Le retirer et mettre un fusible identique"
+                },
+                {
+                  "content": "Levier du disjoncteur baissé",
+                  "match": "Chercher la cause, puis réarmer"
+                }
+              ]
+            },
+            {
+              "content": "M. Gbané peut remonter le levier du disjoncteur sans chercher pourquoi il est baissé.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Constater que le disjoncteur a coupé. 2. Chercher la cause d'abord. 3. Réarmer ensuite. Si la cause existe encore, le levier se baissera de nouveau.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La multiprise porte 6 appareils. M. Gbané en branche 2 sur une autre prise et 1 sur une troisième. Combien d'appareils restent sur la multiprise ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer les données : 6 appareils au départ. 2. Calculer : 6 − 2 − 1 = 3. Il reste 3 appareils sur la multiprise, qui chauffe moins.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige en 4 ou 5 phrases le plan de sécurité que M. Gbané doit appliquer dans sa maison avant la saison des pluies.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Traite le câble rongé : ne plus s'en servir et le remplacer",
+                "Traite la multiprise : débrancher des appareils",
+                "Traite le fusible : un fusible identique, jamais un fil de cuivre",
+                "Traite le disjoncteur : chercher la cause avant de réarmer",
+                "Phrases claires, vocabulaire correct"
+              ],
+              "explanation": "Corrigé modèle : « Le câble rongé ne doit plus servir : on le fait remplacer par un électricien, car ses fils peuvent se toucher et provoquer un court-circuit. On débranche des appareils de la multiprise pour qu'elle ne chauffe pas. Le fil de cuivre est retiré et remplacé par un fusible identique, car le cuivre ne fond pas. Avant de réarmer le disjoncteur, on cherche la cause de sa coupure. » Points : 1 pour chacun des quatre points techniques, 1 pour la clarté.",
+              "answers": [],
+              "starter": "D'abord, je ne me sers plus du câble rongé…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Définition du court-circuit (générateur ou récepteur court-circuité), dangers (échauffement, incendie), fusible et disjoncteur, règles de sécurité électrique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le club de sciences du collège de Man monte un circuit avec une pile, des lampes et des fils. Les élèves étudient le court-circuit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un court-circuit se produit quand un fil relie directement les deux bornes d'un même élément.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer l'élément. 2. Chercher un fil direct entre ses deux bornes. 3. Nommer : c'est un court-circuit. L'affirmation est la définition.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil de cuivre relie les deux bornes de la pile. Quel élément est court-circuité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : la pile est le générateur. 2. Chercher : le fil relie ses deux bornes. 3. Nommer : le générateur est court-circuité. 4. Conclure : c'est dangereux.",
+                  "answers": [
+                    {
+                      "content": "Le générateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun élément",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil qui relie directement les deux bornes d'une pile crée un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Repérer la pile. 2. Chercher le fil direct entre ses bornes. 3. Nommer : cette situation est un court-circuit.",
+                  "answers": [
+                    {
+                      "content": "court-circuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "court circuit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Chercher le fil direct. 2. Fil sur la pile : générateur court-circuité. Fil sur une lampe, l'autre brille : récepteur court-circuité. Fil débranché : le chemin est coupé, circuit ouvert.",
+                  "answers": [
+                    {
+                      "content": "Un fil relie les deux bornes de la pile",
+                      "match": "Générateur court-circuité"
+                    },
+                    {
+                      "content": "Un fil relie les bornes d'une lampe, l'autre lampe brille",
+                      "match": "Récepteur court-circuité"
+                    },
+                    {
+                      "content": "Un fil est débranché de la pile",
+                      "match": "Circuit ouvert"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un montage a 4 lampes l'une après l'autre. On pose un fil sur les bornes d'une seule lampe. Combien de lampes brillent encore ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 4 lampes. 2. Chercher : le fil relie les bornes d'une lampe. 3. Nommer : cette lampe est court-circuitée donc éteinte. 4. Conclure : 4 − 1 = 3 lampes brillent.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche le fil direct entre deux bornes d'un même élément."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la maison de Yao à Divo, un fil d'ampoule est abîmé. Yao veut comprendre les risques d'un court-circuit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le principal danger d'un court-circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer la cause : fils abîmés qui se touchent. 2. Nommer le danger : courant très fort, fils chauds, incendie. Les autres propositions sont fausses : le court-circuit ne recharge ni n'économise rien.",
+                  "answers": [
+                    {
+                      "content": "L'échauffement des fils, avec un risque d'incendie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe qui brille moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile qui se recharge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une économie de courant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels signes peuvent montrer un court-circuit ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Reconnaître les signes : odeur de brûlé, étincelles et fil très chaud. Une lampe normale et un interrupteur éteint ne montrent pas de court-circuit.",
+                  "answers": [
+                    {
+                      "content": "Une odeur de brûlé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des étincelles à la prise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil très chaud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe qui éclaire normalement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un interrupteur éteint",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui se passe dans un court-circuit non protégé.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer la cause : fils abîmés qui se touchent. 2. Le courant devient très fort. 3. Les fils chauffent. 4. Le danger final est l'incendie.",
+                  "answers": [
+                    {
+                      "content": "Deux fils abîmés se touchent."
+                    },
+                    {
+                      "content": "Le courant devient très fort."
+                    },
+                    {
+                      "content": "Les fils chauffent."
+                    },
+                    {
+                      "content": "Un incendie peut partir."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une petite pile court-circuitée par un fil de cuivre ne chauffe jamais.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer le montage. 2. Nommer le danger : même une petite pile chauffe le fil de cuivre. Ne fais jamais cet essai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En cas d'odeur de brûlé près d'une prise, tu dois ___ un adulte.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Reconnaître le signe : l'odeur de brûlé. 2. Agir : prévenir un adulte, qui coupera l'alimentation sans danger. Cacher le problème laisse le risque d'incendie.",
+                  "answers": [
+                    {
+                      "content": "prévenir",
+                      "correct": true
+                    },
+                    {
+                      "content": "éviter de prévenir",
+                      "correct": false
+                    },
+                    {
+                      "content": "cacher le problème à",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense à la chaîne : fils abîmés, courant fort, chaleur, incendie."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le tableau électrique de la famille Konan contient un disjoncteur près du compteur de la CIE. Un ancien fusible est rangé dans un tiroir.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que fait un fusible quand le courant est trop fort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le fusible. 2. Constater : son fil fin fond. 3. Conclure : le circuit s'ouvre et le courant s'arrête.",
+                  "answers": [
+                    {
+                      "content": "Son fil fin fond et le circuit s'ouvre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il ferme le circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il augmente le courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne fait rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un disjoncteur dont le levier est baissé se réarme en remontant le levier, après suppression de la cause.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Constater le levier baissé. 2. Chercher et supprimer la cause. 3. Remettre en service en remontant le levier. 4. Vérifier le courant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fil fin qui fond quand le courant est trop fort se trouve dans le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Repérer l'élément de protection dont le fil fin fond : c'est le fusible. Le disjoncteur, lui, baisse un levier.",
+                  "answers": [
+                    {
+                      "content": "fusible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Repérer l'élément. 2. Constater : fil fondu pour le fusible, levier baissé pour le disjoncteur. 3. Un circuit ouvert est un circuit coupé.",
+                  "answers": [
+                    {
+                      "content": "Fusible",
+                      "match": "Son fil fond, il faut le remplacer"
+                    },
+                    {
+                      "content": "Disjoncteur",
+                      "match": "Son levier descend, on le réarme"
+                    },
+                    {
+                      "content": "Circuit ouvert",
+                      "match": "Le courant ne passe plus"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fusible a fondu. Quelle action est dangereuse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Constater : le fusible a fondu. 2. Remettre en service : par un fusible identique. Le fil de cuivre ne fond pas : plus de protection, risque d'incendie.",
+                  "answers": [
+                    {
+                      "content": "Mettre un fil de cuivre à sa place",
+                      "correct": true
+                    },
+                    {
+                      "content": "Remplacer par un fusible identique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chercher d'abord la cause",
+                      "correct": false
+                    },
+                    {
+                      "content": "Appeler un électricien",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Fusible : on le remplace. Disjoncteur : on le réarme."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À Korhogo, la famille Soro rappelle les règles de sécurité électrique à ses enfants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles règles sont correctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Observer les règles. 2. Les trois bonnes : mains sèches, fiche, multiprise non surchargée. Les trois autres sont des dangers.",
+                  "answers": [
+                    {
+                      "content": "Ne pas toucher un appareil branché avec les mains mouillées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Débrancher en tirant sur la fiche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne pas surcharger une multiprise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre un clou dans une prise",
+                      "correct": false
+                    },
+                    {
+                      "content": "Garder un fil dénudé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réparer sans couper le courant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau conduit le courant, donc on ne touche pas une prise avec les mains mouillées.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Observer : eau et prise. 2. Citer la règle : l'eau conduit le courant. 3. Proposer : se sécher les mains.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour débrancher une radio, on tire sur la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Observer le geste. 2. Citer la règle : on tient la fiche, pas le fil. 3. Proposer : tenir la fiche.",
+                  "answers": [
+                    {
+                      "content": "fiche",
+                      "correct": true
+                    },
+                    {
+                      "content": "multiprise",
+                      "correct": false
+                    },
+                    {
+                      "content": "pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cuisine présente : un fil dénudé, des mains mouillées sur une prise, une multiprise surchargée, un ventilateur bien rangé, un câble en bon état. Combien de situations sont dangereuses ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Observer les cinq éléments. 2. Repérer les dangers : fil dénudé, mains mouillées, multiprise surchargée. 3. Compter : 3 situations dangereuses.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui doit réparer un câble abîmé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Observer : câble abîmé. 2. Citer la règle : les réparations sont laissées à un électricien. 3. Proposer : ne plus s'en servir.",
+                  "answers": [
+                    {
+                      "content": "Un électricien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un enfant",
+                      "correct": false
+                    },
+                    {
+                      "content": "N'importe qui avec du ruban",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne, on le garde",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Observe, repère le danger, cite la règle, propose le geste."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Court-circuit d'un câble de ventilateur au marché, disjoncteur du compteur CIE, multiprise du salon, prise mouillée après la pluie.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Treichville, Mme Traoré éclaire son étal avec une ampoule reliée à une rallonge. Un rat a rongé l'isolant de la rallonge : les deux fils de cuivre sont à nu.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que peut-il arriver si les deux fils de cuivre se touchent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : isolant rongé, fils à nu. 2. Chercher : si les fils se touchent, ils sont reliés directement. 3. Nommer : c'est un court-circuit.",
+                  "answers": [
+                    {
+                      "content": "Un court-circuit se produit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un circuit ouvert se crée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe brille deux fois plus longtemps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne peut arriver",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels risques courent Mme Traoré et les commerçants voisins ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Repérer la cause. 2. Nommer le danger : échauffement, donc incendie ou brûlure. La panne d'eau, l'orage et les clients n'ont aucun rapport.",
+                  "answers": [
+                    {
+                      "content": "Un incendie de l'étal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une brûlure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une panne d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un orage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un manque de clients",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Traoré peut entourer les fils nus d'un bout de tissu humide et continuer.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Observer : fils nus. 2. Citer la règle : un câble abîmé se remplace ; l'eau conduit le courant. 3. Proposer : ne plus s'en servir et appeler un électricien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un câble dont l'isolant est rongé doit être ___ entièrement.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Observer : isolant rongé. 2. Citer la règle : on remplace tout le câble. 3. Proposer : faire changer le câble par un électricien.",
+                  "answers": [
+                    {
+                      "content": "remplacé",
+                      "correct": true
+                    },
+                    {
+                      "content": "changé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La rallonge neuve coûte 2 500 F CFA et Mme Traoré en achète 2, une pour son étal et une pour celui de sa sœur. Combien paie-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 2 500 F CFA la rallonge, 2 rallonges. 2. Calculer : 2 × 2 500 = 5 000. Elle paie 5 000 F CFA.",
+                  "answers": [
+                    {
+                      "content": "5000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un isolant rongé laisse les fils à nu : qu'arrive-t-il s'ils se touchent ?"
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Yamoussoukro, la lumière s'éteint chez les Kouadio. Près du compteur de la CIE, le levier du disjoncteur est baissé. Juste avant, M. Kouadio avait branché un chargeur au câble abîmé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les gestes de la famille Kouadio.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer. 2. Constater. 3. Chercher et supprimer la cause. 4. Remettre en service. 5. Vérifier.",
+                  "answers": [
+                    {
+                      "content": "Repérer le disjoncteur près du compteur."
+                    },
+                    {
+                      "content": "Constater que le levier est baissé."
+                    },
+                    {
+                      "content": "Débrancher le chargeur au câble abîmé."
+                    },
+                    {
+                      "content": "Remonter le levier."
+                    },
+                    {
+                      "content": "Vérifier que la lumière revient."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi faut-il débrancher le chargeur avant de réarmer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Constater la coupure. 2. Chercher la cause : le chargeur au câble abîmé. 3. La supprimer avant de réarmer, sinon le disjoncteur se rebaisse.",
+                  "answers": [
+                    {
+                      "content": "Pour supprimer la cause de la coupure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour économiser des piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour changer de couleur de câble",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le disjoncteur déteste les chargeurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le disjoncteur se rebaisse aussitôt après le réarmement, la cause n'est pas supprimée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Constater la coupure répétée. 2. Conclure : la cause persiste. 3. Appeler un électricien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un disjoncteur dont le levier est baissé a ___ le circuit.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Constater le levier baissé. 2. Conclure : le circuit est ouvert, le courant ne passe plus.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "rechargé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que fait la famille du chargeur au câble abîmé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Observer : câble abîmé. 2. Citer la règle : un câble abîmé se remplace. 3. Proposer : ne plus s'en servir.",
+                  "answers": [
+                    {
+                      "content": "Elle ne s'en sert plus et le fait réparer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle le garde avec du ruban",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle le branche plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle le mouille",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Constate, cherche la cause, supprime-la, puis réarme."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour la fête de fin d'année à Bouaké, la famille Ouattara branche sur une multiprise du salon : un téléviseur, un ventilateur, une bouilloire, un fer à repasser et un chargeur. La multiprise devient chaude.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une multiprise qui devient chaude est un signe de danger.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Observer : multiprise chaude. 2. Repérer : trop d'appareils. 3. Citer la règle : ne pas surcharger une multiprise. 4. Proposer : débrancher des appareils.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La multiprise porte 5 appareils. La famille en débranche 3. Combien d'appareils restent branchés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 5 appareils. 2. Calculer : 5 − 3 = 2. Il reste 2 appareils.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel geste proposer en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Observer la multiprise chaude. 2. Repérer le danger : surcharge. 3. Citer la règle. 4. Proposer : débrancher des appareils. Couvrir ou arroser aggrave le risque.",
+                  "answers": [
+                    {
+                      "content": "Débrancher des appareils",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brancher un sixième appareil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Couvrir la multiprise d'un tissu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Arroser la multiprise",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles bonnes habitudes la famille doit-elle prendre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Observer. 2. Citer les règles : répartir les appareils, tenir la fiche. Brancher plus, tirer sur le fil et cacher la multiprise augmentent le risque.",
+                  "answers": [
+                    {
+                      "content": "Répartir les appareils sur plusieurs prises",
+                      "correct": true
+                    },
+                    {
+                      "content": "Débrancher en tirant sur la fiche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brancher toujours plus d'appareils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tirer sur le fil pour débrancher",
+                      "correct": false
+                    },
+                    {
+                      "content": "Garder la multiprise cachée sous un tapis",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une multiprise surchargée risque de ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Observer la multiprise chaude. 2. Citer la règle : une multiprise surchargée chauffe. 3. Conclure : elle risque de chauffer, puis de provoquer un incendie.",
+                  "answers": [
+                    {
+                      "content": "chauffer",
+                      "correct": true
+                    },
+                    {
+                      "content": "refroidir",
+                      "correct": false
+                    },
+                    {
+                      "content": "s'éteindre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une multiprise chargée de trop d'appareils chauffe."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Après une forte pluie à Abobo, de l'eau est entrée dans la cuisine des Diabaté. Un enfant, les pieds dans l'eau, veut brancher un ventilateur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que fais-tu face à cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Observer : eau et prise. 2. Repérer le danger : l'eau conduit le courant. 3. Citer la règle. 4. Proposer : ne rien toucher, s'éloigner et prévenir tout de suite un adulte.",
+                  "answers": [
+                    {
+                      "content": "Je lui dis de ne rien toucher et je préviens tout de suite un adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Je lui tends la fiche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je branche à sa place",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je verse encore de l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau et l'électricité ne vont pas ensemble.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Observer. 2. Citer la règle : l'eau conduit le courant, donc on ne touche rien d'électrique dans l'eau.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels gestes sont corrects dans cette cuisine ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Observer. 2. Citer les règles. 3. Proposer : un adulte coupe le courant au disjoncteur et vérifie que tout est sec avant de brancher. Les autres gestes sont dangereux.",
+                  "answers": [
+                    {
+                      "content": "Prévenir un adulte pour qu'il coupe le courant au disjoncteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Laisser l'adulte vérifier que tout est sec avant de brancher",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brancher le ventilateur tout de suite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toucher la prise avec des mains mouillées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Poser la multiprise dans l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On ne touche jamais un appareil branché avec les mains ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Observer : mains. 2. Citer la règle : l'eau conduit le courant. Il faut des mains sèches.",
+                  "answers": [
+                    {
+                      "content": "mouillées",
+                      "correct": true
+                    },
+                    {
+                      "content": "humides",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la cuisine, 6 appareils sont posés : 2 sont sur la table et les autres sont au sol, dans l'eau. Combien d'appareils sont dans l'eau ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 6 appareils, 2 sur la table. 2. Calculer : 6 − 2 = 4. Il y a 4 appareils dans l'eau : on n'y touche pas, un adulte s'en occupe.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Eau et électricité : que dit la règle ?"
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Distinguer court-circuit et circuit ouvert, justifier le rôle du fusible, raisonner sur une guirlande de lampes, comparer fusible et disjoncteur.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Awa a deux montages. Dans le montage A, la lampe est éteinte parce qu'un fil est débranché de la pile. Dans le montage B, la lampe est éteinte parce qu'un fil relie directement les deux bornes de cette lampe, alors qu'une seconde lampe brille.",
+              "exercise_type": "evaluation",
+              "figure": "lampe-court-circuitee",
+              "questions": [
+                {
+                  "content": "Quel est le montage A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : fil débranché. 2. Chercher un fil direct entre deux bornes : il n'y en a pas. 3. Nommer : le chemin est coupé, c'est un circuit ouvert.",
+                  "answers": [
+                    {
+                      "content": "Un circuit ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un récepteur court-circuité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un générateur court-circuité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un circuit normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le montage B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : deux lampes. 2. Chercher : un fil relie directement les bornes d'une lampe. 3. Nommer : cette lampe est un récepteur court-circuité. L'autre lampe brille : la pile n'est pas court-circuitée.",
+                  "answers": [
+                    {
+                      "content": "Un récepteur court-circuité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un circuit ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un générateur court-circuité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un circuit normal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe éteinte prouve toujours qu'il y a un court-circuit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer deux causes possibles. 2. Comparer : un circuit ouvert aussi éteint la lampe. 3. Conclure : une lampe éteinte ne prouve pas un court-circuit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque montage à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Chercher le fil direct. 2. Aucun fil direct, chemin coupé : circuit ouvert. Fil sur une lampe : récepteur. Fil sur la pile : générateur.",
+                  "answers": [
+                    {
+                      "content": "Fil débranché de la pile",
+                      "match": "Circuit ouvert"
+                    },
+                    {
+                      "content": "Fil sur les bornes d'une lampe, l'autre brille",
+                      "match": "Récepteur court-circuité"
+                    },
+                    {
+                      "content": "Fil direct sur les bornes de la pile",
+                      "match": "Générateur court-circuité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le montage B, il y a 2 lampes. Combien de lampes brillent ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 2 lampes, 1 court-circuitée. 2. Conclure : 2 − 1 = 1 lampe brille.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche un fil direct entre deux bornes d'un même élément."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mme Bamba, couturière à Daloa, dit à son fils : « Le fusible a fondu, remplaçons-le par un fil de cuivre pour qu'il ne fonde plus. » Tu dois lui expliquer.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi le fusible a-t-il fondu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Constater : le fil du fusible a fondu. 2. Chercher la cause : le courant était trop fort. 3. Conclure : le fusible a fait son travail.",
+                  "answers": [
+                    {
+                      "content": "Le courant était trop fort",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il était trop propre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il était de la mauvaise couleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a eu froid",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil de cuivre ne fond pas aussi facilement que le fil fin d'un fusible.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Comparer les deux fils. 2. Conclure : le fil de cuivre est plus solide, il ne coupe pas le circuit à temps.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que se passe-t-il au prochain court-circuit avec le fil de cuivre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Comparer : un fusible coupe, le cuivre non. 2. Conclure : sans coupure, les fils chauffent et peuvent causer un incendie.",
+                  "answers": [
+                    {
+                      "content": "Rien ne coupe le courant, les fils chauffent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le courant s'arrête seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile se recharge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil de cuivre devient un fusible",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels gestes sont corrects après la fonte du fusible ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Constater. 2. Chercher et supprimer la cause. 3. Remplacer par un fusible identique. Le cuivre, l'inaction et un fusible qui supporte plus de courant n'assurent plus la protection.",
+                  "answers": [
+                    {
+                      "content": "Chercher la cause",
+                      "correct": true
+                    },
+                    {
+                      "content": "Remplacer par un fusible identique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre un fil de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien faire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mettre un fusible qui supporte plus de courant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fusible fondu se remplace par un fusible ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Constater le fusible fondu. 2. Remettre en service : par un fusible identique.",
+                  "answers": [
+                    {
+                      "content": "identique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Qui coupe le courant : le fusible ou le fil de cuivre ?"
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour la fête, Moussa à Man branche une guirlande de 4 lampes l'une après l'autre sur une pile. Un fil dénudé touche les deux bornes de l'une des lampes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle lampe est court-circuitée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : 4 lampes. 2. Chercher : le fil dénudé relie les deux bornes d'une lampe. 3. Nommer : cette lampe est court-circuitée.",
+                  "answers": [
+                    {
+                      "content": "Celle dont le fil dénudé touche les deux bornes",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe tombée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les lampes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de lampes brillent encore ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 4 lampes, 1 court-circuitée. 2. Calculer : 4 − 1 = 3 lampes brillent.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile de Moussa est court-circuitée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Chercher un fil direct entre les deux bornes de la pile : il n'y en a pas. 2. Conclure : d'autres lampes sont toujours sur le chemin, la pile n'est pas court-circuitée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe court-circuitée est un ___ court-circuité.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Nommer : une lampe utilise l'énergie, c'est un récepteur. Le récepteur est court-circuité.",
+                  "answers": [
+                    {
+                      "content": "récepteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "interrupteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement de Moussa.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer. 2. Chercher. 3. Nommer. 4. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer la pile et les lampes."
+                    },
+                    {
+                      "content": "Chercher le fil qui relie directement les bornes d'une lampe."
+                    },
+                    {
+                      "content": "Nommer la lampe court-circuitée."
+                    },
+                    {
+                      "content": "Conclure : elle est éteinte, les autres brillent."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compte les lampes, retire celle qui est court-circuitée."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Les Gbané hésitent entre un fusible et un disjoncteur pour protéger leur nouvelle maison à San Pedro.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est l'avantage du disjoncteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Comparer. 2. Le disjoncteur se réarme en remontant le levier, alors que le fusible fondu se remplace.",
+                  "answers": [
+                    {
+                      "content": "On le réarme sans le remplacer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il ne coupe jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il remplace les fils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il économise du courant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fusible fondu se réarme en remontant un levier.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Comparer. 2. Un fusible n'a pas de levier : on le remplace par un fusible identique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque protection ou moment au bon geste.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Comparer les deux protections. 2. Fusible : remplacement. Disjoncteur : réarmement.",
+                  "answers": [
+                    {
+                      "content": "Fusible",
+                      "match": "Remplacer par un fusible identique"
+                    },
+                    {
+                      "content": "Disjoncteur",
+                      "match": "Remonter le levier"
+                    },
+                    {
+                      "content": "Juste après la coupure",
+                      "match": "Chercher et supprimer la cause"
+                    }
+                  ]
+                },
+                {
+                  "content": "Après la coupure, on supprime la ___ avant de remettre en service.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Constater. 2. Chercher la cause. 3. La supprimer avant de remettre en service.",
+                  "answers": [
+                    {
+                      "content": "cause",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles protections sont efficaces ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Comparer. 2. Le fusible identique et le disjoncteur réarmé protègent. Le cuivre, le fer et l'aluminium ne fondent pas assez vite.",
+                  "answers": [
+                    {
+                      "content": "Un fusible identique à l'ancien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un disjoncteur réarmé après suppression de la cause",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil de fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un papier d'aluminium",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Fusible : remplacer. Disjoncteur : réarmer."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : reconnaître un court-circuit, ses dangers, la protection par fusible et disjoncteur, les règles de sécurité électrique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Korhogo, l'atelier de couture de Mme Yao a un ventilateur dont le câble est écrasé. Une odeur de brûlé se répand et le fusible fond.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la cause la plus probable de l'odeur de brûlé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : câble écrasé. 2. Reconnaître : odeur de brûlé. 3. Nommer : court-circuit.",
+                  "answers": [
+                    {
+                      "content": "Un court-circuit du câble écrasé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un circuit ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une ampoule neuve",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un interrupteur éteint",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fusible a fondu parce que le courant était trop fort.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Constater : fusible fondu. 2. Conclure : le courant était trop fort et le fusible a coupé le circuit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels gestes sont corrects ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Agir : couper le courant au disjoncteur. 2. Appeler un électricien pour chercher la cause. 3. Faire remplacer par un fusible identique. Le cuivre, tirer sur le câble et le garder sont des dangers.",
+                  "answers": [
+                    {
+                      "content": "Couper le courant au disjoncteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Appeler un électricien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre un fil de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tirer sur le câble",
+                      "correct": false
+                    },
+                    {
+                      "content": "Garder le câble écrasé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les actions de Mme Yao.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer. 2. Reconnaître. 3. Nommer. 4. Agir : couper le courant et appeler un électricien.",
+                  "answers": [
+                    {
+                      "content": "Repérer le câble écrasé."
+                    },
+                    {
+                      "content": "Reconnaître l'odeur de brûlé."
+                    },
+                    {
+                      "content": "Nommer le danger."
+                    },
+                    {
+                      "content": "Agir : couper le courant et appeler un électricien."
+                    }
+                  ]
+                },
+                {
+                  "content": "Il faut remplacer 3 mètres de câble à 400 F CFA le mètre. Quel est le coût ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 3 m à 400 F CFA. 2. Calculer : 3 × 400 = 1 200. Le coût est de 1 200 F CFA.",
+                  "answers": [
+                    {
+                      "content": "1200",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Odeur de brûlé, câble écrasé, fusible fondu : que dit la méthode ?"
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "La boutique de Mme Soro utilise un disjoncteur près du compteur CIE. Un jour, le levier se baisse quand elle branche un fer à repasser au câble abîmé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que doit-elle faire en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Constater. 2. Chercher la cause : débrancher le fer. 3. Réarmer ensuite.",
+                  "answers": [
+                    {
+                      "content": "Débrancher le fer au câble abîmé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Remonter le levier tout de suite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Brancher un autre appareil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mouiller le sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un disjoncteur se réarme sans remplacer de pièce.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Réarmer en remontant le levier. 2. Aucune pièce n'est à remplacer.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il ne faut jamais brancher trop d'appareils sur une ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Observer. 2. Citer la règle : une multiprise surchargée chauffe.",
+                  "answers": [
+                    {
+                      "content": "multiprise",
+                      "correct": true
+                    },
+                    {
+                      "content": "lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un câble abîmé se ___ entièrement.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Observer. 2. Citer la règle : un câble abîmé se remplace.",
+                  "answers": [
+                    {
+                      "content": "remplace",
+                      "correct": true
+                    },
+                    {
+                      "content": "change",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui répare le câble du fer à repasser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Citer la règle : les réparations sont laissées à un électricien.",
+                  "answers": [
+                    {
+                      "content": "Un électricien",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'enfant de la maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un client",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cause d'abord, réarmement ensuite."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au club de sciences, Kader monte un circuit avec une pile, une lampe, un interrupteur et des fils. Il pose un fil sur les deux bornes de la lampe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que se passe-t-il quand Kader ferme l'interrupteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : une seule lampe. 2. Chercher : le fil relie les bornes de la lampe. 3. Conclure : le fil court-circuite la lampe et il n'y a plus de récepteur sur le chemin, donc la pile est court-circuitée : danger.",
+                  "answers": [
+                    {
+                      "content": "La pile est court-circuitée, les fils chauffent",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne se passe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le circuit est ouvert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'interrupteur est ouvert, il n'y a pas de court-circuit actif.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Constater : l'interrupteur ouvert coupe le circuit. 2. Conclure : le courant ne passe pas, le danger apparaît à la fermeture.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un interrupteur ouvert rend le circuit ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Repérer l'interrupteur. 2. Constater : ouvert, il coupe le circuit.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles précautions Kader doit-il prendre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Agir. 2. Retirer le fil avant de fermer et prévenir le professeur. Les autres gestes sont dangereux.",
+                  "answers": [
+                    {
+                      "content": "Retirer le fil avant de fermer l'interrupteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévenir son professeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fermer vite l'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toucher le fil à mains nues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ajouter une pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kader monte un autre circuit : 1 pile et 3 lampes l'une après l'autre. Il pose un fil sur les bornes de 2 lampes, un fil par lampe. Combien de lampes brillent ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 3 lampes. 2. Chercher : 2 lampes sont court-circuitées. 3. Calculer : 3 − 2 = 1 lampe brille.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une seule lampe court-circuitée : que reste-t-il sur le chemin ?"
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "La famille Cissé rédige un plan de sécurité électrique pour sa maison de Gagnoa.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles règles ajoute-t-elle ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Observer. 2. Citer les règles. Les trois bonnes : couper, ne pas surcharger, prévenir. Les trois autres sont dangereuses.",
+                  "answers": [
+                    {
+                      "content": "Couper le courant avant de réparer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne pas brancher trop d'appareils sur une multiprise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prévenir un adulte en cas d'odeur de brûlé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toucher un fil dénudé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mouiller les prises",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tirer sur le fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les réparations électriques sont laissées à un électricien.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Citer la règle. 2. Proposer : appeler un électricien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour débrancher un appareil, on tire sur la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Citer la règle : tenir la fiche.",
+                  "answers": [
+                    {
+                      "content": "fiche",
+                      "correct": true
+                    },
+                    {
+                      "content": "multiprise",
+                      "correct": false
+                    },
+                    {
+                      "content": "lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau conduit le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Citer la règle : l'eau conduit le courant. 2. Proposer : mains sèches.",
+                  "answers": [
+                    {
+                      "content": "courant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que fait la famille en cas de court-circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Agir : couper le courant au disjoncteur. 2. Appeler un électricien.",
+                  "answers": [
+                    {
+                      "content": "Elle coupe le courant au disjoncteur et appelle un électricien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle ignore l'odeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ajoute des appareils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle mouille le fil",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Dangers, règles, gestes : fais le bilan."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

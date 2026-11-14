@@ -1,0 +1,3370 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le circuit électrique",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Physique-Chimie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "circuit-ferme",
+          "kind": "diagram",
+          "description": "Un circuit fermé simple dessiné en boucle. La pile est reliée par un premier fil à la lampe, puis la lampe est reliée par un second fil à la pile. Le chemin revient à son point de départ sans aucune coupure : la lampe brille. Les couleurs distinguent le générateur, le récepteur et les fils.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile",
+                "category": 1
+              },
+              {
+                "id": "fil1",
+                "label": "Fil 1",
+                "category": 3
+              },
+              {
+                "id": "lampe",
+                "label": "Lampe",
+                "category": 2
+              },
+              {
+                "id": "fil2",
+                "label": "Fil 2",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "fil1"
+              },
+              {
+                "from": "fil1",
+                "to": "lampe"
+              },
+              {
+                "from": "lampe",
+                "to": "fil2"
+              },
+              {
+                "from": "fil2",
+                "to": "pile"
+              }
+            ],
+            "legend": [
+              "Générateur",
+              "Récepteur",
+              "Fil de connexion"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "circuit-ouvert",
+          "kind": "diagram",
+          "description": "Un circuit ouvert. La pile est reliée par un premier fil à la lampe et la lampe est reliée à un second fil, mais ce second fil n'est pas relié à la pile : il n'y a aucune flèche entre lui et la pile. Le chemin est coupé à cet endroit, donc la lampe reste éteinte.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile",
+                "category": 1
+              },
+              {
+                "id": "fil1",
+                "label": "Fil 1",
+                "category": 3
+              },
+              {
+                "id": "lampe",
+                "label": "Lampe",
+                "category": 2
+              },
+              {
+                "id": "fil2",
+                "label": "Fil 2 non relié",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "fil1"
+              },
+              {
+                "from": "fil1",
+                "to": "lampe"
+              },
+              {
+                "from": "lampe",
+                "to": "fil2"
+              }
+            ],
+            "legend": [
+              "Générateur",
+              "Récepteur",
+              "Fil de connexion"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître les éléments d'un circuit électrique",
+          "remember": "Un **circuit électrique** est un ensemble d'éléments reliés entre eux par des **fils de connexion**. Il contient au moins un **générateur** et un **récepteur**. Le **générateur** fournit l'énergie électrique : c'est une pile ou une batterie. Le **récepteur** utilise cette énergie : c'est une lampe (elle éclaire), un moteur (il fait tourner), une sonnerie (elle sonne). Chaque élément a deux **bornes** : on le branche par ses bornes avec les fils.",
+          "method": [
+            "Repérer tous les éléments reliés entre eux dans le montage.",
+            "Identifier le générateur : l'élément qui fournit l'énergie électrique.",
+            "Identifier les récepteurs : les éléments qui utilisent cette énergie.",
+            "Compter les fils de connexion qui relient les éléments, puis conclure."
+          ],
+          "example": {
+            "statement": "Kouamé relie une pile, une ampoule et deux fils pour faire briller l'ampoule. Quels sont les éléments de ce circuit ?",
+            "steps": [
+              "Repérer : le montage contient une pile, une ampoule et deux fils.",
+              "Identifier le générateur : la pile fournit l'énergie électrique, c'est le générateur.",
+              "Identifier les récepteurs : l'ampoule utilise l'énergie pour éclairer, c'est le récepteur.",
+              "Compter : il y a 2 fils de connexion, qui relient les bornes de la pile à celles de l'ampoule. Le circuit a donc 1 générateur, 1 récepteur et 2 fils."
+            ]
+          },
+          "pitfall": "Ne pas prendre la lampe pour le générateur sous prétexte qu'elle « donne » la lumière. La lampe ne produit pas d'énergie électrique : elle la reçoit de la pile et la transforme en lumière. Contre-exemple : dans un circuit avec 1 pile, 1 lampe et 2 fils, il y a 1 générateur (la pile) et 1 récepteur (la lampe), jamais 2 générateurs. Demande-toi toujours : « Cet élément fournit l'énergie ou il l'utilise ? »",
+          "figure": "circuit-ferme",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître le générateur, les récepteurs et les fils d'un circuit.",
+            "questions": [
+              {
+                "content": "Dans un montage avec une pile et une lampe, la pile est le ___ du circuit.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : le montage contient une pile et une lampe. Étape 2 — Identifier le générateur : la pile fournit l'énergie électrique, c'est le générateur. La lampe, elle, est le récepteur.",
+                "answers": [
+                  {
+                    "content": "générateur",
+                    "correct": true
+                  },
+                  {
+                    "content": "récepteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "fil de connexion",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qui fournit l'énergie : la pile ou la lampe ?"
+              },
+              {
+                "content": "Un montage a 1 pile, 2 lampes et 4 fils. Combien y a-t-il de récepteurs ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : 1 pile, 2 lampes, 4 fils. Étape 2 — Identifier le générateur : la pile. Étape 3 — Identifier les récepteurs : les 2 lampes utilisent l'énergie. Il y a 2 récepteurs. Les 4 fils ne sont pas des récepteurs : ils relient seulement les éléments.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte seulement les éléments qui utilisent l'énergie."
+              },
+              {
+                "content": "Relie chaque élément à son rôle dans le circuit.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier le générateur : la pile. Étape 3 — Identifier les récepteurs : la lampe éclaire et le moteur fait tourner, ils utilisent l'énergie. Étape 4 — Compter les fils : ils servent seulement à relier les bornes des éléments.",
+                "answers": [
+                  {
+                    "content": "Pile",
+                    "match": "Générateur"
+                  },
+                  {
+                    "content": "Lampe",
+                    "match": "Récepteur qui éclaire"
+                  },
+                  {
+                    "content": "Moteur",
+                    "match": "Récepteur qui fait tourner"
+                  },
+                  {
+                    "content": "Fil de connexion",
+                    "match": "Relie les bornes des éléments"
+                  }
+                ],
+                "hint": "Un générateur fournit, un récepteur utilise, un fil relie."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître le générateur et les récepteurs",
+              "statement": "Dans cet exercice, tu analyses des circuits simples avec la méthode de la fiche : repérer, identifier le générateur, identifier les récepteurs, compter les fils.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans une lampe de poche, quel élément est le générateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une lampe de poche contient une pile, une ampoule et des fils ou lamelles métalliques. Étape 2 — Identifier le générateur : la pile fournit l'énergie électrique. L'ampoule est un récepteur : elle utilise l'énergie. Le fil sert seulement à relier.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil de connexion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre de l'ampoule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ampoule est un récepteur électrique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Identifier les récepteurs : un récepteur utilise l'énergie fournie par le générateur. L'ampoule reçoit l'énergie de la pile et la transforme en lumière : c'est bien un récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouamé relie une pile à un petit moteur avec deux fils. Quel est le récepteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une pile, un moteur, deux fils. Étape 2 — Identifier le générateur : la pile. Étape 3 — Identifier les récepteurs : le moteur utilise l'énergie pour tourner, c'est le récepteur. Les fils ne sont pas des récepteurs : ils relient.",
+                  "answers": [
+                    {
+                      "content": "Le moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux fils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de récepteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un circuit contient 1 pile, 1 lampe, 1 moteur et 3 fils. Combien y a-t-il de récepteurs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 1 pile, 1 lampe, 1 moteur, 3 fils. Étape 2 — Identifier le générateur : la pile. Étape 3 — Identifier les récepteurs : la lampe et le moteur, soit 2 récepteurs. Étape 4 — Compter les fils : les 3 fils relient, ils ne comptent pas parmi les récepteurs.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe donne de la lumière, donc c'est le générateur du circuit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier le générateur : c'est l'élément qui fournit l'énergie électrique, ici la pile. Étape 3 — Identifier les récepteurs : la lampe reçoit l'énergie de la pile et la transforme en lumière, c'est un récepteur. L'erreur est de confondre « donner de la lumière » et « fournir de l'énergie électrique ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le générateur fournit l'énergie, le récepteur l'utilise."
+            },
+            {
+              "title": "Analyser des montages à piles",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les éléments d'un circuit, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces éléments d'un montage à piles, lesquels sont des récepteurs ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer les éléments. Étape 3 — Identifier les récepteurs : la lampe (elle éclaire) et le moteur (il fait tourner) utilisent l'énergie. La pile est le générateur et le fil sert à relier : ce ne sont pas des récepteurs.",
+                  "answers": [
+                    {
+                      "content": "La lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moteur d'un petit ventilateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le boîtier de la pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une lampe de poche, la pile joue le rôle de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Identifier le générateur : la pile fournit l'énergie électrique à l'ampoule. Elle est le générateur, pas le récepteur.",
+                  "answers": [
+                    {
+                      "content": "générateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "fil de connexion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour analyser un circuit.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer d'abord tous les éléments. Étape 2 — Identifier le générateur. Étape 3 — Identifier les récepteurs. Étape 4 — Compter les fils. On suit toujours cet ordre pour ne rien oublier.",
+                  "answers": [
+                    {
+                      "content": "Repérer tous les éléments reliés entre eux."
+                    },
+                    {
+                      "content": "Identifier le générateur."
+                    },
+                    {
+                      "content": "Identifier les récepteurs."
+                    },
+                    {
+                      "content": "Compter les fils de connexion."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit, l'ampoule qui utilise l'énergie de la pile s'appelle un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Identifier les récepteurs : un élément qui utilise l'énergie électrique est un récepteur. L'ampoule est donc un récepteur, alors que la pile, qui la fournit, est le générateur.",
+                  "answers": [
+                    {
+                      "content": "récepteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aminata relie 1 pile, 1 lampe, 1 moteur et 4 fils. Combien y a-t-il de récepteurs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 1 pile, 1 lampe, 1 moteur, 4 fils. Étape 2 — Identifier le générateur : la pile. Étape 3 — Identifier les récepteurs : la lampe et le moteur, soit 2. Étape 4 — Compter les fils : 4 fils qui relient, sans être des récepteurs.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile est un récepteur parce qu'elle « contient » de l'énergie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier le générateur : la pile fournit l'énergie électrique au circuit, c'est donc le générateur. Un récepteur utilise l'énergie, il ne la fournit pas. Dire que la pile est un récepteur confond « contenir » et « utiliser ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pose-toi la question : cet élément fournit l'énergie ou il l'utilise ?"
+            }
+          ]
+        },
+        {
+          "name": "Distinguer un circuit fermé d'un circuit ouvert",
+          "remember": "Un circuit est **fermé** quand il forme une boucle sans coupure qui passe par le générateur et le récepteur : le courant électrique circule et la lampe brille. Un circuit est **ouvert** quand la boucle est coupée : le courant ne circule pas et la lampe reste éteinte. Une coupure peut être un fil débranché, un fil cassé, une ampoule dévissée ou une ampoule **grillée** (son filament est coupé).",
+          "method": [
+            "Partir d'une borne de la pile.",
+            "Suivre le chemin de fil en fil, en passant par chaque élément.",
+            "Chercher une coupure sur ce chemin : fil débranché ou cassé, ampoule dévissée ou grillée.",
+            "Conclure : sans coupure jusqu'à l'autre borne, le circuit est fermé ; avec une coupure, il est ouvert."
+          ],
+          "example": {
+            "statement": "Un élève relie une pile et une lampe avec deux fils. Le premier fil va de la pile à la lampe. Le second fil est fixé à la lampe, mais pas à la borne de la pile. La lampe brille-t-elle ?",
+            "steps": [
+              "Partir : on part de la borne + de la pile et on suit le premier fil.",
+              "Suivre : le premier fil arrive à la lampe, on traverse la lampe, puis on suit le second fil.",
+              "Chercher : le second fil s'arrête avant la borne de la pile : c'est une coupure.",
+              "Conclure : le chemin n'est pas complet, le circuit est ouvert et la lampe reste éteinte."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un seul fil suffit à faire briller la lampe. Une lampe a deux bornes et une pile a deux bornes : il faut un chemin complet qui revient à la pile. Contre-exemple : une pile, une lampe et 1 seul fil forment une boucle incomplète. Le circuit est ouvert et la lampe ne brille pas. Quand la lampe est sur son support (la douille), loin de la pile, et que chaque élément est relié par des fils, une boucle simple pile et lampe demande 2 fils.",
+          "figure": "circuit-ouvert",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un circuit fermé et un circuit ouvert.",
+            "questions": [
+              {
+                "content": "Une lampe est reliée à une pile par deux fils bien fixés et elle brille. Le circuit est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Partir de la pile. Étape 2 — Suivre le chemin de fil en fil jusqu'à la lampe puis au retour. Étape 3 — Chercher une coupure : il n'y en a pas. Étape 4 — Conclure : le circuit est fermé, ce qui explique que la lampe brille.",
+                "answers": [
+                  {
+                    "content": "fermé",
+                    "correct": true
+                  },
+                  {
+                    "content": "ouvert",
+                    "correct": false
+                  },
+                  {
+                    "content": "grillé",
+                    "correct": false
+                  }
+                ],
+                "hint": "La lampe brille : y a-t-il une coupure ?"
+              },
+              {
+                "content": "Un fil de cuivre cassé en deux dans un circuit rend ce circuit ouvert.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Chercher une coupure : un fil cassé coupe le chemin. Étape 4 — Conclure : le chemin n'est pas complet, le circuit est ouvert et la lampe reste éteinte.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un fil cassé laisse-t-il le chemin complet ?"
+              },
+              {
+                "content": "Un circuit pile et lampe a ses deux fils bien branchés, mais l'ampoule est dévissée. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Suivre le chemin : il passe par l'ampoule. Étape 3 — Chercher une coupure : l'ampoule dévissée ne touche plus le douille, le chemin est coupé. Étape 4 — Conclure : le circuit est ouvert, la lampe reste éteinte.",
+                "answers": [
+                  {
+                    "content": "La lampe reste éteinte, car le circuit est ouvert",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lampe brille, car les deux fils sont branchés",
+                    "correct": false
+                  },
+                  {
+                    "content": "La lampe brille faiblement",
+                    "correct": false
+                  },
+                  {
+                    "content": "La pile devient le récepteur",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le chemin passe-t-il encore par l'ampoule ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un circuit fermé ou ouvert",
+              "statement": "Dans cet exercice, tu décides si un circuit est fermé ou ouvert avec la méthode de la fiche : partir de la pile, suivre le chemin, chercher une coupure, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un circuit fermé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : un circuit est fermé quand le chemin revient à l'autre borne de la pile sans coupure. C'est cette boucle complète qui permet à la lampe de briller.",
+                  "answers": [
+                    {
+                      "content": "Une boucle sans coupure qui passe par le générateur et le récepteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un circuit qui contient une boîte fermée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un circuit sans générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un circuit où les fils sont enroulés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un fil est débranché de la pile, le circuit est ouvert.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Chercher une coupure : un fil débranché coupe le chemin. Étape 4 — Conclure : le circuit est ouvert.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dévisse l'ampoule de sa lampe de poche. Que devient le circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Suivre le chemin : il passe par l'ampoule. Étape 3 — Chercher une coupure : l'ampoule dévissée ne touche plus le douille. Étape 4 — Conclure : le circuit est ouvert et la lampe est éteinte.",
+                  "answers": [
+                    {
+                      "content": "Il devient ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il reste fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il devient plus court",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a plus de pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la boucle est coupée, le circuit est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Chercher une coupure : s'il y en a une, le chemin n'est pas complet. Étape 4 — Conclure : le circuit est ouvert.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul fil relie la pile à la lampe. La lampe brille.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Partir de la pile. Étape 2 — Suivre le fil : il arrive à la lampe, mais rien ne ramène à l'autre borne de la pile. Étape 3 — Chercher une coupure : le retour manque. Étape 4 — Conclure : circuit ouvert, la lampe ne brille pas. Quand la lampe est sur sa douille, loin de la pile, et que chaque élément est relié par des fils, il en faut 2.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Suis le chemin avec ton doigt : revient-il à la pile ?"
+            },
+            {
+              "title": "Trouver pourquoi une lampe ne brille pas",
+              "statement": "Dans cet exercice, tu cherches la coupure dans des circuits de la maison et de l'école, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une lampe branchée sur une pile reste éteinte. Quelles causes sont des coupures du circuit ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Chercher une coupure : un fil débranché coupe le chemin, et une ampoule grillée a un filament coupé. Les fils bien fixés et l'ampoule bien vissée ne coupent rien. Étape 4 — Conclure : dans les deux cas le circuit est ouvert.",
+                  "answers": [
+                    {
+                      "content": "Un fil est débranché de la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule est grillée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux fils sont bien fixés aux bornes",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ampoule est bien vissée dans son douille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si un circuit est fermé.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Partir de la pile. Étape 2 — Suivre le chemin. Étape 3 — Chercher une coupure. Étape 4 — Conclure. Conclure avant d'avoir cherché la coupure est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Partir d'une borne de la pile."
+                    },
+                    {
+                      "content": "Suivre le chemin de fil en fil."
+                    },
+                    {
+                      "content": "Chercher une coupure sur ce chemin."
+                    },
+                    {
+                      "content": "Conclure : circuit fermé ou ouvert."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le filament d'une ampoule est coupé, on dit que l'ampoule est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Chercher une coupure : un filament coupé arrête le chemin, comme un fil cassé. On dit que l'ampoule est grillée. Étape 4 — Conclure : le circuit est ouvert.",
+                  "answers": [
+                    {
+                      "content": "grillée",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile, deux lampes sur leurs douilles et des fils forment une seule boucle, chaque élément étant relié par des fils. Combien de fils faut-il au minimum pour relier ces trois éléments en boucle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Partir de la pile. Étape 2 — Suivre le chemin : fil 1 de la pile à la lampe 1, fil 2 de la lampe 1 à la lampe 2, fil 3 de la lampe 2 à la pile. Étape 4 — Conclure : il faut 3 fils pour fermer la boucle.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "La lampe de Yao brille. Son circuit est donc ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : une lampe ne brille que si le chemin est complet, sans coupure. Le circuit de Yao est donc fermé.",
+                  "answers": [
+                    {
+                      "content": "fermé",
+                      "correct": true
+                    },
+                    {
+                      "content": "ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "coupé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ampoule grillée ne coupe pas le circuit, car elle est toujours reliée aux fils.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Chercher une coupure : même reliée aux fils, une ampoule grillée a un filament coupé et le chemin s'arrête dans l'ampoule. Étape 4 — Conclure : le circuit est ouvert. Être relié ne suffit pas, le chemin doit être complet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche toujours l'endroit où le chemin peut être coupé."
+            }
+          ]
+        },
+        {
+          "name": "Représenter un circuit par un schéma normalisé",
+          "remember": "Un **schéma** représente un circuit avec des **symboles normalisés**, les mêmes pour tout le monde. La **pile** est dessinée par deux traits parallèles : le **trait long** est la borne **+**, le **trait court** est la borne **−**. La **lampe** est un cercle traversé d'une croix. Le **moteur** est un cercle qui contient la lettre M. Un **fil** est un trait droit. Dans le symbole de la pile, le trait **−** est court et plus épais. La croix de la lampe est en **X**. On dessine à la règle, avec des angles droits, et on ne dessine pas l'objet réel.",
+          "method": [
+            "Lister les éléments du montage et le symbole de chacun.",
+            "Dessiner à la règle le symbole du générateur, puis ceux des récepteurs.",
+            "Relier les symboles par des fils : des traits droits, avec des angles droits.",
+            "Vérifier que la pile a un trait long (borne +) et un trait court (borne −), et que la boucle est fermée."
+          ],
+          "example": {
+            "statement": "Schématiser un circuit formé d'une pile, d'une lampe et d'un moteur reliés en boucle par des fils.",
+            "steps": [
+              "Lister : pile (deux traits parallèles), lampe (cercle avec une croix), moteur (cercle avec la lettre M).",
+              "Dessiner : à la règle, la pile en bas, puis la lampe en haut et le moteur sur le côté droit.",
+              "Relier : trois fils en traits droits forment un rectangle avec des angles droits, de la pile à la lampe, au moteur, puis retour à la pile.",
+              "Vérifier : le trait long de la pile est la borne +, le trait court est la borne −, et la boucle est complète, sans coupure."
+            ]
+          },
+          "pitfall": "Ne pas dessiner la pile ou la lampe comme sur une photo, ni tracer des fils courbes ou en diagonale. Un schéma se lit avec des symboles. Contre-exemple : le schéma d'un circuit de 3 éléments (pile, lampe, moteur) doit montrer exactement 3 symboles, pas 3 petits dessins d'objets. Un cercle sans croix ne représente pas une lampe. Revois toujours le symbole avant de dessiner.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à choisir les symboles et à construire un schéma.",
+            "questions": [
+              {
+                "content": "Le symbole de la lampe est un cercle traversé par ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lister le symbole de chaque élément : la lampe est un cercle traversé d'une croix. La lettre M est dans le cercle du moteur, et le trait long appartient à la pile.",
+                "answers": [
+                  {
+                    "content": "une croix",
+                    "correct": true
+                  },
+                  {
+                    "content": "la lettre M",
+                    "correct": false
+                  },
+                  {
+                    "content": "un trait long",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au cercle de la lampe."
+              },
+              {
+                "content": "Dans le symbole de la pile, le trait ___ (long ou court) représente la borne +.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Vérifier : dans le symbole de la pile, le trait long est la borne +. Le trait court est la borne −.",
+                "answers": [
+                  {
+                    "content": "long",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le trait le plus long est la borne +."
+              },
+              {
+                "content": "Quels symboles dessines-tu pour schématiser un circuit avec une pile et un moteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : la pile est deux traits parallèles, un long et un court. Le moteur est un cercle contenant M. Le cercle avec une croix est la lampe, et un dessin d'objet n'est pas un symbole normalisé.",
+                "answers": [
+                  {
+                    "content": "Deux traits parallèles, un long et un court, et un cercle contenant la lettre M",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un cercle avec une croix et deux traits égaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un dessin de la pile et un dessin du moteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Deux cercles avec une croix",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un symbole pour la pile, un symbole pour le moteur."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Connaître les symboles normalisés",
+              "statement": "Dans cet exercice, tu utilises les symboles et les règles du schéma, avec la méthode de la fiche : lister, dessiner, relier, vérifier.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque symbole à l'élément qu'il représente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lister le symbole de chaque élément : la lampe est un cercle avec une croix, la pile deux traits parallèles (un long, un court), le moteur un cercle avec M, le fil un trait droit.",
+                  "answers": [
+                    {
+                      "content": "Un cercle traversé d'une croix",
+                      "match": "Lampe"
+                    },
+                    {
+                      "content": "Deux traits parallèles, un long et un court",
+                      "match": "Pile"
+                    },
+                    {
+                      "content": "Un cercle contenant la lettre M",
+                      "match": "Moteur"
+                    },
+                    {
+                      "content": "Un trait droit",
+                      "match": "Fil de connexion"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le symbole de la pile, que représente le trait long ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Vérifier : le trait long est la borne + et le trait court la borne −. Confondre les deux inverse le sens de la pile.",
+                  "answers": [
+                    {
+                      "content": "La borne +",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne −",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil de connexion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le récepteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les symboles des schémas sont normalisés : ils sont les mêmes pour tous.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lister les symboles : ils sont normalisés, c'est-à-dire fixés une fois pour toutes. Ainsi, tout le monde lit un schéma de la même façon, même sans parler la même langue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment trace-t-on les fils sur un schéma ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Relier les symboles par des fils : des traits droits, avec des angles droits, tracés à la règle. Les courbes et les diagonales rendent le schéma difficile à lire.",
+                  "answers": [
+                    {
+                      "content": "En traits droits, à la règle, avec des angles droits",
+                      "correct": true
+                    },
+                    {
+                      "content": "En courbes, à main levée",
+                      "correct": false
+                    },
+                    {
+                      "content": "En diagonale, pour aller plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne trace pas les fils",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour schématiser une lampe de poche, je dessine l'ampoule comme sur une photo.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Dessiner le symbole : un schéma n'utilise jamais le dessin réel de l'objet mais son symbole normalisé. L'ampoule est représentée par un cercle traversé d'une croix.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un schéma se fait avec des symboles et une règle."
+            },
+            {
+              "title": "Construire et vérifier un schéma",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur le schéma d'un circuit, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Awa schématise un circuit avec une pile et une lampe. Combien de symboles dessine-t-elle, sans compter les fils ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : un symbole par élément. Il y a une pile et une lampe, donc 2 symboles, plus les fils en traits droits.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles règles respecte un schéma bien fait ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Dessiner les symboles normalisés. Étape 3 — Relier par des traits droits à angles droits. Les fils courbes et les dessins d'objets sont les erreurs de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Les fils sont des traits droits, avec des angles droits",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque élément est dessiné avec son symbole normalisé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fils sont des courbes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile est dessinée comme sur une photo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour construire un schéma.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lister. Étape 2 — Dessiner. Étape 3 — Relier. Étape 4 — Vérifier. La vérification vient en dernier, quand tout est dessiné.",
+                  "answers": [
+                    {
+                      "content": "Lister les éléments et le symbole de chacun."
+                    },
+                    {
+                      "content": "Dessiner à la règle le générateur puis les récepteurs."
+                    },
+                    {
+                      "content": "Relier les symboles par des traits droits."
+                    },
+                    {
+                      "content": "Vérifier le trait long et le trait court de la pile, et la boucle."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le symbole de la pile, le trait court représente la borne ___ (signe + ou −, écris plus ou moins).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Vérifier : le trait court de la pile est la borne −, c'est-à-dire la borne moins. Le trait long est la borne plus.",
+                  "answers": [
+                    {
+                      "content": "moins",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un schéma représente 1 pile, 2 lampes et 1 moteur reliés en boucle. Combien de symboles faut-il dessiner, sans compter les fils ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lister : 1 pile, 2 lampes, 1 moteur. Étape 2 — Dessiner : 1 + 2 + 1 = 4 symboles. Les fils s'ajoutent ensuite en traits droits (étape 3).",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole d'un moteur est un cercle qui contient ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lister le symbole de chaque élément : le moteur est un cercle qui contient la lettre M. La croix est dans le cercle de la lampe, et les deux traits sont ceux de la pile.",
+                  "answers": [
+                    {
+                      "content": "la lettre M",
+                      "correct": true
+                    },
+                    {
+                      "content": "une croix",
+                      "correct": false
+                    },
+                    {
+                      "content": "deux traits",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un symbole par élément, des fils droits, et on vérifie à la fin."
+            }
+          ]
+        },
+        {
+          "name": "Distinguer un conducteur d'un isolant",
+          "remember": "Un **conducteur** laisse passer le courant électrique. Les **métaux** sont conducteurs : cuivre, fer, aluminium. Le graphite de la mine d'un crayon l'est aussi. Un **isolant** ne laisse pas passer le courant : plastique, caoutchouc, verre, bois sec, papier, tissu. Un fil électrique a un cœur en cuivre (conducteur) entouré d'une **gaine** en plastique (isolant). On teste un objet avec une **pile**, jamais avec la prise de la maison, qui est dangereuse.",
+          "method": [
+            "Monter un circuit avec une pile et une lampe, dont deux fils ont chacun une extrémité libre.",
+            "Placer l'objet à tester entre les deux extrémités libres, en le touchant par ses deux bouts.",
+            "Observer la lampe : brille-t-elle ?",
+            "Conclure : si la lampe brille, l'objet est conducteur ; si elle reste éteinte, il est isolant."
+          ],
+          "example": {
+            "statement": "Awa veut savoir si un clou en fer est conducteur ou isolant.",
+            "steps": [
+              "Monter : elle relie une pile et une lampe avec deux fils dont les bouts sont libres.",
+              "Placer : elle pose le clou entre les deux bouts libres, en touchant le clou par la tête et par la pointe.",
+              "Observer : la lampe brille.",
+              "Conclure : la lampe brille, donc le clou en fer est un conducteur."
+            ]
+          },
+          "pitfall": "Ne pas tester un fil électrique par sa gaine et conclure que le cuivre est isolant. Pour tester le métal, il faut toucher le métal nu. Contre-exemple : tu poses la gaine en plastique d'un fil entre les deux bouts libres, la lampe reste éteinte. Tu ne peux pas conclure que le fil de cuivre est isolant : tu as testé le plastique, pas le cuivre. Dénude le fil, ou touche le métal.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à classer des objets en conducteurs et isolants.",
+            "questions": [
+              {
+                "content": "Pendant un test, la lampe reste éteinte. L'objet testé est ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Observer la lampe : elle reste éteinte, le courant ne passe pas. Étape 4 — Conclure : l'objet est un isolant.",
+                "answers": [
+                  {
+                    "content": "un isolant",
+                    "correct": true
+                  },
+                  {
+                    "content": "un conducteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "un générateur",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une lampe éteinte signifie que le courant ne passe pas."
+              },
+              {
+                "content": "Quel matériau est un conducteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : les métaux sont conducteurs, donc le fer. Le bois sec, le verre et le caoutchouc sont des isolants.",
+                "answers": [
+                  {
+                    "content": "Le fer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le bois sec",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le verre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le caoutchouc",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les métaux conduisent."
+              },
+              {
+                "content": "Le caoutchouc est un conducteur électrique.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : lors d'un test, une gomme en caoutchouc laisse la lampe éteinte. Le caoutchouc est un isolant.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à la gaine des fils."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Classer des matériaux en conducteurs et isolants",
+              "statement": "Dans cet exercice, tu reconnais des conducteurs et des isolants avec la méthode de la fiche : monter, placer, observer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un conducteur électrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : un conducteur laisse passer le courant, donc la lampe du montage brille. Il ne produit pas de courant : c'est le rôle du générateur.",
+                  "answers": [
+                    {
+                      "content": "Un matériau qui laisse passer le courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un matériau qui produit du courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un matériau qui bloque toujours le courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un matériau qui brille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lequel de ces matériaux est un conducteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : les métaux sont conducteurs, donc le cuivre. Le bois sec, le verre et le caoutchouc sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "Le cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bois sec",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caoutchouc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plastique est un isolant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Observer la lampe : avec un objet en plastique, elle reste éteinte. Étape 4 — Conclure : le plastique est un isolant, c'est pourquoi il entoure les fils.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le test d'un objet, la lampe brille. Que conclus-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Observer la lampe : elle brille, le courant passe dans l'objet. Étape 4 — Conclure : l'objet est un conducteur.",
+                  "answers": [
+                    {
+                      "content": "L'objet est un conducteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'objet est un isolant",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'objet est un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile est un récepteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La gaine d'un fil de cuivre est en plastique, la lampe reste éteinte : le cuivre est donc isolant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Placer l'objet : on a posé la gaine, pas le métal. Étape 4 — Conclure : on a testé le plastique, qui est un isolant. Le cuivre, lui, est un conducteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "La lampe qui brille te dit que le courant passe."
+            },
+            {
+              "title": "Réaliser un test avec une pile et une lampe",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur le test des conducteurs et des isolants, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont trois matériaux isolants ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Conclure : le plastique, le verre et le caoutchouc laissent la lampe éteinte, ce sont des isolants. Le cuivre et le fer sont des métaux, donc des conducteurs.",
+                  "answers": [
+                    {
+                      "content": "Le plastique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le verre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le caoutchouc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du test d'un objet.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Monter le circuit. Étape 2 — Placer l'objet. Étape 3 — Observer la lampe. Étape 4 — Conclure. On conclut seulement après avoir observé.",
+                  "answers": [
+                    {
+                      "content": "Monter un circuit avec une pile, une lampe et deux bouts de fil libres."
+                    },
+                    {
+                      "content": "Placer l'objet entre les deux bouts libres."
+                    },
+                    {
+                      "content": "Observer la lampe."
+                    },
+                    {
+                      "content": "Conclure : conducteur ou isolant."
+                    }
+                  ]
+                },
+                {
+                  "content": "La gaine d'un fil électrique est en plastique, qui est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : le plastique ne laisse pas passer le courant, c'est un isolant. La gaine protège donc celui qui touche le fil.",
+                  "answers": [
+                    {
+                      "content": "isolant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cœur d'un fil électrique est en cuivre, qui est un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : le cuivre est un métal, donc un conducteur. Il laisse passer le courant dans le fil.",
+                  "answers": [
+                    {
+                      "content": "conducteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "isolant",
+                      "correct": false
+                    },
+                    {
+                      "content": "générateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao teste 5 objets. La lampe brille pour 2 d'entre eux. Combien sont des isolants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Observer : la lampe brille pour 2 objets, ce sont des conducteurs. Étape 4 — Conclure : les 5 − 2 = 3 autres objets laissent la lampe éteinte, ce sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut tester un objet en le branchant sur la prise de la maison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Monter le circuit : on utilise une pile, jamais la prise de la maison. La prise est dangereuse et peut blesser gravement. Avec une pile, le test est sans danger.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une lampe qui brille veut dire : le courant passe, l'objet est conducteur."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La lampe de poche d'Awa",
+          "statement": "Awa habite à Yopougon. Pendant une coupure de courant à la maison, elle prend sa lampe de poche. Elle contient une pile, une ampoule et des lamelles métalliques qui relient la pile à l'ampoule. Un soir, la lampe ne s'allume plus. Tu aides Awa à comprendre.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans la lampe de poche d'Awa, quel élément est le générateur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer les éléments : pile, ampoule, lamelles. 2. Identifier le générateur : c'est l'élément qui fournit l'énergie électrique, la pile. 3. L'ampoule utilise l'énergie, c'est le récepteur. Les lamelles ne font que relier : elles ne fournissent ni n'utilisent d'énergie.",
+              "answers": [
+                {
+                  "content": "La pile",
+                  "correct": true
+                },
+                {
+                  "content": "L'ampoule",
+                  "correct": false
+                },
+                {
+                  "content": "Les lamelles métalliques",
+                  "correct": false
+                },
+                {
+                  "content": "Le boîtier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'ampoule de la lampe de poche est un récepteur.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Un récepteur utilise l'énergie électrique d'un générateur. 2. L'ampoule reçoit l'énergie de la pile et la transforme en lumière. 3. Conclusion : c'est un récepteur. L'idée qu'elle serait un générateur parce qu'elle donne de la lumière est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa regarde l'intérieur de la lampe. Quelles causes peuvent expliquer que l'ampoule reste éteinte ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Partir d'une borne de la pile. 2. Suivre le chemin lamelle, ampoule, lamelle. 3. Chercher une coupure : une ampoule grillée (filament coupé) ou une lamelle qui ne touche plus la pile coupent le chemin. 4. Conclure : le circuit est ouvert. Le fait que l'ampoule soit un récepteur ou que la pile soit un générateur n'est pas une panne : c'est leur rôle normal.",
+              "answers": [
+                {
+                  "content": "L'ampoule est grillée",
+                  "correct": true
+                },
+                {
+                  "content": "Une lamelle ne touche plus la pile",
+                  "correct": true
+                },
+                {
+                  "content": "L'ampoule est un récepteur",
+                  "correct": false
+                },
+                {
+                  "content": "La pile est le générateur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand le chemin est coupé, le circuit est ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Suivre le chemin du courant. 2. S'il y a une coupure, le chemin n'est pas complet. 3. Le circuit est donc ouvert et l'ampoule ne s'allume pas. Un circuit fermé est une boucle sans coupure.",
+              "answers": [
+                {
+                  "content": "ouvert",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la démarche d'Awa pour trouver la panne.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le chemin. 3. Chercher la coupure. 4. Conclure. Cet ordre évite de conclure avant d'avoir cherché.",
+              "answers": [
+                {
+                  "content": "Partir d'une borne de la pile."
+                },
+                {
+                  "content": "Suivre le chemin de pièce en pièce."
+                },
+                {
+                  "content": "Chercher la coupure sur le chemin."
+                },
+                {
+                  "content": "Conclure : circuit fermé ou ouvert."
+                }
+              ]
+            },
+            {
+              "content": "Awa remplace l'ampoule grillée. Le circuit contient alors 1 pile, 1 ampoule et 2 lamelles. Combien y a-t-il de récepteurs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer : 1 pile, 1 ampoule, 2 lamelles. 2. Le générateur est la pile. 3. Le récepteur est l'ampoule : il y en a 1. Les lamelles relient, elles ne sont pas des récepteurs.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le schéma du montage de Yao",
+          "statement": "Yao, élève de 6ème à Bouaké, monte un circuit avec une pile, une lampe et un petit moteur, reliés en une seule boucle par des fils. Son professeur lui demande de le représenter par un schéma normalisé.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Aide Yao : relie chaque élément à son symbole.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Lister les éléments. 2. Pour chacun, choisir le symbole normalisé : la pile a un trait long (+) et un trait court (−), la lampe est un cercle avec une croix, le moteur un cercle avec M, le fil un trait droit.",
+              "answers": [
+                {
+                  "content": "Pile",
+                  "match": "Deux traits parallèles, l'un long, l'autre court"
+                },
+                {
+                  "content": "Lampe",
+                  "match": "Un cercle traversé d'une croix"
+                },
+                {
+                  "content": "Moteur",
+                  "match": "Un cercle contenant la lettre M"
+                },
+                {
+                  "content": "Fil",
+                  "match": "Un trait droit"
+                }
+              ]
+            },
+            {
+              "content": "Combien de symboles Yao dessine-t-il, sans compter les fils ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Lister : 1 pile, 1 lampe, 1 moteur. 2. Un symbole par élément : 3 symboles. 3. Les fils sont tracés ensuite, en traits droits.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Comment Yao doit-il tracer les fils ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3. Relier les symboles par des fils : des traits droits, avec des angles droits, tracés à la règle. Les fils courbes ou en diagonale sont une erreur de présentation qui rend le schéma difficile à lire.",
+              "answers": [
+                {
+                  "content": "En traits droits à la règle, avec des angles droits",
+                  "correct": true
+                },
+                {
+                  "content": "À main levée, en courbes",
+                  "correct": false
+                },
+                {
+                  "content": "En diagonale entre les symboles",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'a pas à les tracer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le symbole de la pile, quelle borne est représentée par le trait long ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 4. Vérifier le symbole de la pile : trait long = borne +, trait court = borne −. Les deux traits ne sont jamais de même longueur.",
+              "answers": [
+                {
+                  "content": "La borne +",
+                  "correct": true
+                },
+                {
+                  "content": "La borne −",
+                  "correct": false
+                },
+                {
+                  "content": "La lampe",
+                  "correct": false
+                },
+                {
+                  "content": "Le fil",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao peut dessiner la lampe avec son ampoule en forme de poire, comme sur une photo.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 2. Dessiner le symbole normalisé, jamais le dessin de l'objet. La lampe est un cercle traversé d'une croix. Un schéma n'est lisible par tous que s'il utilise les symboles de tout le monde.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles vérifications Yao fait-il à la fin ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 4. Vérifier que la pile a un trait long (+) et un trait court (−), et que la boucle est fermée. Un dessin comme sur une photo ou des fils à main levée ne sont pas des vérifications mais des erreurs.",
+              "answers": [
+                {
+                  "content": "Le trait long de la pile est la borne +",
+                  "correct": true
+                },
+                {
+                  "content": "La boucle est fermée, sans coupure",
+                  "correct": true
+                },
+                {
+                  "content": "La lampe est dessinée comme sur une photo",
+                  "correct": false
+                },
+                {
+                  "content": "Les fils sont tracés à main levée",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La panne d'une lampe à Bouaké",
+          "statement": "Kouassi vit à Bouaké. Il a monté un circuit avec une pile, une ampoule et deux fils pour s'éclairer. Un matin, l'ampoule ne s'allume plus. Il vérifie le montage, puis, avec une autre ampoule en bon état, teste plusieurs objets pour fabriquer un nouveau fil. Tu l'aides à trouver la panne.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Classe dans l'ordre la démarche de Kouassi pour savoir si son circuit est fermé.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le chemin de fil en fil, en passant par l'ampoule. 3. Chercher une coupure (fil débranché ou cassé, ampoule dévissée ou grillée). 4. Conclure. On ne conclut qu'après avoir cherché.",
+              "answers": [
+                {
+                  "content": "Partir d'une borne de la pile."
+                },
+                {
+                  "content": "Suivre le chemin de fil en fil."
+                },
+                {
+                  "content": "Chercher une coupure sur le chemin."
+                },
+                {
+                  "content": "Conclure : fermé ou ouvert."
+                }
+              ]
+            },
+            {
+              "content": "Kouassi voit qu'un fil est tombé de la borne de la pile. Que peut-il dire du circuit ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le chemin : le fil tombé ne touche plus la borne. 3. Chercher une coupure : c'est la coupure. 4. Conclure : le circuit est ouvert. Que les deux fils existent ne suffit pas : ils doivent être reliés aux deux bornes.",
+              "answers": [
+                {
+                  "content": "Il est ouvert, donc la lampe est éteinte",
+                  "correct": true
+                },
+                {
+                  "content": "Il est fermé, car les deux fils existent",
+                  "correct": false
+                },
+                {
+                  "content": "Il est fermé, mais l'ampoule est grillée",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'a plus de générateur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une ampoule grillée coupe le circuit même si les deux fils sont bien branchés.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 3. Chercher une coupure : le filament d'une ampoule grillée est coupé, le chemin s'arrête dans l'ampoule. 4. Conclure : le circuit est ouvert, même avec des fils bien branchés.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour fabriquer un fil de rechange, Kouassi teste des matériaux. Lesquels font briller la lampe ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Monter un circuit avec deux bouts libres. 2. Placer l'objet entre les bouts. 3. Observer la lampe. 4. Conclure : les métaux (fer, cuivre) laissent passer le courant, la lampe brille, ce sont des conducteurs. Le plastique et le caoutchouc sont des isolants, la lampe reste éteinte.",
+              "answers": [
+                {
+                  "content": "Un fil de fer",
+                  "correct": true
+                },
+                {
+                  "content": "Un morceau de fil de cuivre",
+                  "correct": true
+                },
+                {
+                  "content": "Un trombone en métal",
+                  "correct": true
+                },
+                {
+                  "content": "Une règle en plastique",
+                  "correct": false
+                },
+                {
+                  "content": "Une gomme en caoutchouc",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouassi veut protéger les doigts sur son nouveau fil. Il l'entoure de ___.",
+              "question_type": "select",
+              "explanation": "Méthode : 4. Conclure : une gaine doit être faite d'un isolant. Le plastique ne laisse pas passer le courant. Entourer le fil de cuivre ou de fer ne protège pas, car ces métaux sont conducteurs.",
+              "answers": [
+                {
+                  "content": "plastique, qui est un isolant",
+                  "correct": true
+                },
+                {
+                  "content": "cuivre, qui est un conducteur",
+                  "correct": false
+                },
+                {
+                  "content": "fer, qui est un conducteur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouassi teste la gaine d'un fil, la lampe reste éteinte : il en conclut que le cuivre est un isolant.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 2. Placer l'objet : il a placé la gaine. 4. Conclure : la lampe est éteinte parce que le plastique est un isolant. Il n'a pas testé le cuivre. Pour tester le métal, il doit toucher le métal nu.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le testeur d'objets de l'atelier",
+          "statement": "Pour le club de sciences de son collège à Daloa, Mariam construit un testeur d'objets : une pile, une lampe et trois fils, dont deux ont un bout libre pour poser l'objet à tester. Elle dessine d'abord le schéma de son testeur. Elle teste ensuite plusieurs objets : une clé en fer, un bâton de bois sec, une feuille d'aluminium et une règle en plastique.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Mariam prépare son schéma. Relie chaque élément à son symbole.",
+              "question_type": "matching",
+              "explanation": "Méthode du schéma : 1. Lister les éléments. 2. Dessiner leur symbole normalisé. 3. Relier par des traits droits à angles droits. 4. Vérifier la pile (trait long +, trait court −) et la boucle.",
+              "answers": [
+                {
+                  "content": "Pile",
+                  "match": "Deux traits parallèles, l'un long et l'autre court"
+                },
+                {
+                  "content": "Lampe",
+                  "match": "Un cercle traversé d'une croix"
+                },
+                {
+                  "content": "Fil de connexion",
+                  "match": "Un trait droit tracé à la règle"
+                }
+              ]
+            },
+            {
+              "content": "Quand le testeur de Mariam fonctionne avec un objet conducteur, comment appelle-t-on le circuit ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du circuit fermé : 1. Partir de la pile. 2. Suivre le chemin : pile, fil, objet, lampe, fil. 3. Chercher une coupure : l'objet conducteur n'en fait pas. 4. Conclure : le circuit est fermé, la lampe brille. Sans l'objet, il est ouvert.",
+              "answers": [
+                {
+                  "content": "Un circuit fermé",
+                  "correct": true
+                },
+                {
+                  "content": "Un circuit ouvert",
+                  "correct": false
+                },
+                {
+                  "content": "Un circuit sans générateur",
+                  "correct": false
+                },
+                {
+                  "content": "Un circuit sans fil",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi les objets testés par Mariam, lesquels font briller la lampe ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode du test : 1. Monter le circuit. 2. Placer l'objet entre les bouts libres. 3. Observer la lampe. 4. Conclure : la clé en fer et la feuille d'aluminium sont des métaux, donc des conducteurs : la lampe brille. Le bois sec et le plastique sont des isolants, la lampe reste éteinte.",
+              "answers": [
+                {
+                  "content": "La clé en fer",
+                  "correct": true
+                },
+                {
+                  "content": "La feuille d'aluminium",
+                  "correct": true
+                },
+                {
+                  "content": "Le bâton de bois sec",
+                  "correct": false
+                },
+                {
+                  "content": "La règle en plastique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam teste 4 objets. La lampe brille pour 2 d'entre eux. Combien d'objets sont des isolants ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 3. Observer : la lampe brille pour 2 objets, ce sont des conducteurs. 4. Conclure : les 4 − 2 = 2 autres laissent la lampe éteinte, ce sont des isolants.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le testeur, la pile est le générateur et la lampe est le ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 2. Identifier le générateur : la pile fournit l'énergie. 3. Identifier les récepteurs : la lampe l'utilise pour éclairer, c'est le récepteur.",
+              "answers": [
+                {
+                  "content": "récepteur",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mariam peut aussi tester ses objets en les branchant sur la prise de la maison.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Monter le circuit avec une pile, jamais avec la prise de la maison. La prise est dangereuse, alors qu'une pile ne l'est pas. Le test fonctionne très bien avec une pile.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Éléments d'un circuit (générateur, récepteur, fils, bornes), circuit fermé et ouvert, symboles et schéma normalisés, conducteurs et isolants.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur la table de la classe, le professeur a monté un circuit avec une pile, une lampe et deux fils. Tu identifies les éléments du circuit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel élément fournit l'énergie électrique au circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer les éléments : pile, lampe, fils. 2. Identifier le générateur : celui qui fournit l'énergie électrique, la pile. La lampe l'utilise et les fils relient.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La table",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment appelle-t-on la lampe dans ce circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Identifier les récepteurs : la lampe utilise l'énergie de la pile pour éclairer, c'est un récepteur. Un générateur fournit l'énergie, ce que la lampe ne fait pas.",
+                  "answers": [
+                    {
+                      "content": "Un récepteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un isolant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une borne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les fils de connexion sont des récepteurs.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un fil relie les bornes des éléments, il n'utilise pas l'énergie. Les récepteurs sont par exemple la lampe, le moteur ou la sonnerie. Le fil n'est ni générateur ni récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le circuit du professeur a 1 pile, 1 lampe et 2 fils. Combien y a-t-il d'éléments en tout, fils compris ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Repérer : 1 pile + 1 lampe + 2 fils = 4 éléments. 2. Le générateur est la pile et le récepteur est la lampe. Les 2 fils s'ajoutent pour relier leurs bornes.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque élément d'un circuit se branche par ses deux ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Compter les fils qui relient les éléments : un fil est fixé à une borne de la pile et à une borne de la lampe. Chaque élément a deux bornes.",
+                  "answers": [
+                    {
+                      "content": "bornes",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le générateur fournit l'énergie, le récepteur l'utilise."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Fatou monte une lampe de poche avec une pile, une ampoule sur sa douille et deux fils, chaque élément étant relié par des fils. Elle regarde si le circuit est fermé ou ouvert.",
+              "exercise_type": "evaluation",
+              "figure": "circuit-ferme",
+              "questions": [
+                {
+                  "content": "Le circuit est fermé quand la lampe brille. Qu'est-ce qu'un circuit fermé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : un circuit est fermé quand le chemin, de borne en borne, est complet sans coupure. C'est ce qui fait briller la lampe.",
+                  "answers": [
+                    {
+                      "content": "Une boucle sans coupure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une boucle avec un fil cassé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un circuit sans pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un circuit où l'ampoule est dévissée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un fil est débranché de la pile, le circuit est ouvert.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Chercher une coupure : un fil débranché coupe le chemin. 4. Conclure : le circuit est ouvert, la lampe est éteinte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles causes rendent le circuit ouvert ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Chercher une coupure : un fil cassé ou une ampoule dévissée coupent le chemin. La pile générateur et les fils bien fixés sont des situations normales.",
+                  "answers": [
+                    {
+                      "content": "Un fil est cassé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule est dévissée",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile est le générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux fils sont bien fixés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le filament de l'ampoule grillée est coupé : le circuit est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 3. Chercher une coupure : le filament d'une ampoule grillée est coupé. 4. Conclure : le circuit est ouvert.",
+                  "answers": [
+                    {
+                      "content": "ouvert",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul fil entre la pile et la lampe suffit pour que la lampe brille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le fil : il arrive à la lampe mais rien ne retourne à la pile. 3. Il y a une coupure. 4. Le circuit est ouvert. Quand la lampe est sur sa douille, loin de la pile, et que chaque élément est relié par des fils, il faut 2 fils pour une boucle pile et lampe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Suis le chemin de la pile à la pile : est-il complet ?"
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour son cahier de sciences, Moussa veut dessiner le schéma d'un circuit avec une pile, une lampe et des fils.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque symbole à l'élément qu'il représente.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Lister le symbole de chaque élément. La lampe est un cercle avec une croix, la pile deux traits parallèles, le fil un trait droit.",
+                  "answers": [
+                    {
+                      "content": "Un cercle traversé d'une croix",
+                      "match": "Lampe"
+                    },
+                    {
+                      "content": "Deux traits parallèles, l'un long, l'autre court",
+                      "match": "Pile"
+                    },
+                    {
+                      "content": "Un trait droit",
+                      "match": "Fil de connexion"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le symbole de la pile, quelle borne représente le trait long ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Vérifier : le trait long de la pile est la borne +, le trait court la borne −.",
+                  "answers": [
+                    {
+                      "content": "La borne +",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne −",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa trace ses fils en courbes, à main levée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Relier les symboles par des traits droits, avec des angles droits, tracés à la règle. Les fils courbes sont une erreur de présentation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa schématise 1 pile et 2 lampes. Combien de symboles dessine-t-il, sans compter les fils ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lister : 1 pile + 2 lampes. 2. Dessiner : 1 + 2 = 3 symboles. 3. Les fils se tracent ensuite.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un schéma utilise des symboles ___ , les mêmes pour tout le monde.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Lister les symboles : ils sont normalisés, c'est-à-dire fixés pour tous. Ainsi, tout le monde lit le même schéma de la même façon.",
+                  "answers": [
+                    {
+                      "content": "normalisés",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un symbole par élément, des fils droits à la règle."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pendant un cours, un élève teste des objets avec un circuit formé d'une pile, d'une lampe et de deux fils aux bouts libres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La lampe brille quand l'élève pose une pièce de métal entre les bouts libres. Que conclut-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Observer : la lampe brille, le courant passe. 4. Conclure : la pièce de métal est un conducteur.",
+                  "answers": [
+                    {
+                      "content": "La pièce est un conducteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pièce est un isolant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pièce est un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile est grillée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bois sec est un isolant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Observer : avec du bois sec, la lampe reste éteinte. 4. Conclure : le bois sec est un isolant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels matériaux sont des conducteurs ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 4. Conclure : les métaux (cuivre, fer) sont conducteurs. Le verre et le caoutchouc sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "Le cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caoutchouc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un matériau qui ne laisse pas passer le courant est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : la lampe reste éteinte, donc l'objet est un isolant.",
+                  "answers": [
+                    {
+                      "content": "isolant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tester des objets, on peut utiliser la prise de la maison.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Monter le circuit avec une pile. La prise de la maison est dangereuse : on ne l'utilise jamais pour un test.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "La lampe qui brille te dit que le courant passe."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Le circuit dans la vie courante",
+          "notions": "Lampe à piles, veilleuse, petite voiture à moteur et fil électrique : éléments d'un circuit, circuit fermé ou ouvert, symboles, conducteurs et isolants.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un soir, à Treichville, un commerçant éclaire son étal avec une lampe à piles. Elle contient une pile, une ampoule et des fils. Tu l'aides à la comprendre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel élément de la lampe de l'étal est le générateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : pile, ampoule, fils. 2. Identifier le générateur : la pile fournit l'énergie électrique.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'étal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ampoule de la lampe est un récepteur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Identifier les récepteurs : l'ampoule utilise l'énergie de la pile pour éclairer, c'est un récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe a 1 pile, 1 ampoule et 2 fils. Combien y a-t-il de récepteurs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 2. Le générateur est la pile. 3. L'ampoule est le seul récepteur : il y en a 1. Les 2 fils relient sans utiliser d'énergie.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En fin de soirée, il débranche un fil de la pile : le circuit est ouvert. La lampe ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 3. Chercher une coupure : quand le circuit est ouvert, le chemin est coupé. 4. Conclure : la lampe s'éteint.",
+                  "answers": [
+                    {
+                      "content": "s'éteint",
+                      "correct": true
+                    },
+                    {
+                      "content": "brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "devient un générateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe qui éclaire parce que le circuit est complet est dans un circuit ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : une lampe ne brille que si le chemin est complet, sans coupure. Le circuit est donc fermé.",
+                  "answers": [
+                    {
+                      "content": "fermé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pile : fournit l'énergie. Ampoule : l'utilise."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans sa chambre à Abidjan, Kofi a fabriqué une petite veilleuse avec une pile, une lampe et deux fils. Un jour, elle ne s'allume plus. Il cherche la panne.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre la démarche de Kofi.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le chemin. 3. Chercher une coupure. 4. Conclure. On ne conclut qu'à la fin.",
+                  "answers": [
+                    {
+                      "content": "Partir d'une borne de la pile."
+                    },
+                    {
+                      "content": "Suivre le chemin de fil en fil."
+                    },
+                    {
+                      "content": "Chercher une coupure."
+                    },
+                    {
+                      "content": "Conclure : fermé ou ouvert."
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi voit qu'un fil est détaché de la lampe. Que dit-il du circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Chercher une coupure : le fil détaché coupe le chemin. 4. Conclure : le circuit est ouvert.",
+                  "answers": [
+                    {
+                      "content": "Il est ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas de pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est neuf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ampoule grillée peut expliquer une veilleuse éteinte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Chercher une coupure : le filament d'une ampoule grillée est coupé. 4. Le circuit est ouvert, la veilleuse est éteinte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi reconnaît les éléments de sa veilleuse. Lesquels sont des éléments du circuit ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Repérer les éléments reliés entre eux : la pile et la lampe, plus les fils. Le lit et le mur ne font pas partie du circuit.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mur de la chambre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La veilleuse a 1 pile, 1 lampe et 2 fils. Kofi ajoute une seconde lampe dans la même boucle. Les récepteurs sont sur leurs supports, loin de la pile, et chaque élément est relié par des fils. De combien de fils a-t-il besoin au minimum ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le chemin : fil 1 de la pile à la lampe 1, fil 2 de la lampe 1 à la lampe 2, fil 3 de la lampe 2 à la pile. Il faut 3 fils.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                }
+              ],
+              "hint": "Cherche la coupure sur le chemin de la pile à la pile."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À Korhogo, Salif a une petite voiture jouet. Un moteur la fait avancer. Le moteur est alimenté par une pile, et les éléments sont reliés par des fils.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans la petite voiture, quel élément est le récepteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : pile, moteur, fils. 2. Générateur : la pile. 3. Récepteur : le moteur utilise l'énergie pour faire avancer la voiture.",
+                  "answers": [
+                    {
+                      "content": "Le moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les roues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette voiture, la pile est le générateur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Identifier le générateur : la pile fournit l'énergie électrique au moteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Salif dessine le schéma. Relie chaque élément à son symbole.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Lister les symboles : le moteur est un cercle avec M, la pile deux traits parallèles (un long, un court), le fil un trait droit.",
+                  "answers": [
+                    {
+                      "content": "Moteur",
+                      "match": "Un cercle contenant la lettre M"
+                    },
+                    {
+                      "content": "Pile",
+                      "match": "Deux traits parallèles, l'un long, l'autre court"
+                    },
+                    {
+                      "content": "Fil",
+                      "match": "Un trait droit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Que se passe-t-il si un fil se détache de la pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Chercher une coupure : un fil détaché coupe le chemin. 4. Conclure : le circuit est ouvert, le moteur s'arrête.",
+                  "answers": [
+                    {
+                      "content": "Le moteur s'arrête, car le circuit est ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moteur tourne plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moteur devient le générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Salif ajoute une lampe pour les phares. Il y a alors 1 pile, 1 moteur, 1 lampe. Combien de récepteurs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 2. Générateur : la pile. 3. Récepteurs : le moteur et la lampe, soit 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le moteur utilise l'énergie, la pile la fournit."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À Man, Aïcha répare un fil de lampe. Elle veut savoir de quoi sont faits le cœur et la gaine d'un fil électrique. Elle teste des objets avec une pile et une lampe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De quoi est fait le cœur d'un fil électrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : le cœur du fil laisse passer le courant, il est en cuivre, un métal conducteur. Le plastique, le verre et le caoutchouc sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "De cuivre, un conducteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "De plastique, un isolant",
+                      "correct": false
+                    },
+                    {
+                      "content": "De verre, un isolant",
+                      "correct": false
+                    },
+                    {
+                      "content": "De caoutchouc, un isolant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la gaine du fil est-elle en plastique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : le plastique est un isolant, il protège celui qui touche le fil.",
+                  "answers": [
+                    {
+                      "content": "Parce que c'est un isolant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que c'est un conducteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que c'est un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il brille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels objets font briller la lampe du testeur ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Observer la lampe : elle brille avec les métaux (fer, aluminium), qui sont conducteurs. Le bois sec et le plastique sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "Une clé en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une feuille d'aluminium",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un morceau de bois sec",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha teste la gaine d'un fil, la lampe reste éteinte : elle en conclut que le cuivre est isolant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Placer l'objet : elle a testé la gaine, donc le plastique. 4. Le plastique est isolant, mais le cuivre, lui, est conducteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tester, Aïcha utilise une pile et jamais la prise de la maison, qui est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Monter le circuit avec une pile. La prise de la maison est dangereuse, on ne l'utilise jamais pour un test.",
+                  "answers": [
+                    {
+                      "content": "dangereuse",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le métal est conducteur, la gaine en plastique est isolante."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier le rôle du générateur et du récepteur, expliquer pourquoi un circuit est ouvert, raisonner sur les conducteurs et les isolants, vérifier un schéma.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Fanta affirme : « Ma lampe contient deux générateurs : la pile et l'ampoule, car l'ampoule donne de la lumière. » Tu vérifies son raisonnement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'affirmation de Fanta est exacte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Identifier le générateur : celui qui fournit l'énergie électrique, la pile. 3. Identifier les récepteurs : l'ampoule reçoit l'énergie et la transforme en lumière. Fanta confond « donner de la lumière » et « fournir de l'énergie ». Il y a 1 générateur et 1 récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase corrige le mieux Fanta ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le générateur fournit l'énergie, le récepteur l'utilise. Ici, la pile fournit et l'ampoule utilise. Les autres phrases inversent les rôles ou nient le générateur.",
+                  "answers": [
+                    {
+                      "content": "La pile fournit l'énergie, l'ampoule l'utilise pour éclairer",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule fournit l'énergie à la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux fournissent de l'énergie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun élément ne fournit d'énergie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe de Fanta a 1 pile, 1 ampoule et 2 fils. Combien y a-t-il de générateurs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 2. Identifier le générateur : la pile seule. L'ampoule est un récepteur et les fils relient : il y a 1 générateur.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments d'un circuit utilisent l'énergie électrique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Les récepteurs utilisent l'énergie : lampe et moteur. La pile la fournit et le fil la laisse passer.",
+                  "answers": [
+                    {
+                      "content": "Une lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta doit écrire : « La lampe est un ___ et la pile un générateur. »",
+                  "question_type": "select",
+                  "explanation": "Méthode : 3. La lampe utilise l'énergie, c'est un récepteur. La pile est le générateur.",
+                  "answers": [
+                    {
+                      "content": "récepteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "fil",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un générateur fournit, un récepteur utilise."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Ibrahim a relié une pile et une lampe posée sur sa douille, loin de la pile, avec un seul fil, puis il dit : « La lampe est reliée à la pile, donc elle doit briller. » Tu justifies le résultat.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La lampe d'Ibrahim brille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le fil jusqu'à la lampe. 3. Chercher une coupure : rien ne ramène à l'autre borne de la pile. 4. Conclure : circuit ouvert, la lampe ne brille pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la lampe ne brille-t-elle pas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une boucle complète est nécessaire. Avec un seul fil, le chemin est interrompu à la lampe. Le fil n'est pas isolant, il est simplement seul.",
+                  "answers": [
+                    {
+                      "content": "Le chemin ne revient pas à l'autre borne de la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe est un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fil est un isolant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile n'a pas de bornes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe est sur sa douille, loin de la pile, et chaque élément est relié par des fils. Combien de fils faut-il au minimum pour la faire briller avec la pile ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Partir d'une borne de la pile. 2. Un premier fil va à la lampe. 4. Un second fil ramène de la lampe à l'autre borne de la pile : 2 fils.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Remets dans l'ordre ce qu'Ibrahim doit faire pour réparer son montage.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Partir de la pile. 2. Suivre le chemin. 3. Trouver la coupure. Puis le réparer en ajoutant le fil manquant. On répare après avoir trouvé.",
+                  "answers": [
+                    {
+                      "content": "Partir d'une borne de la pile."
+                    },
+                    {
+                      "content": "Suivre le chemin de fil en fil."
+                    },
+                    {
+                      "content": "Trouver la coupure."
+                    },
+                    {
+                      "content": "Ajouter le second fil."
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim a fermé son circuit : le chemin n'a plus de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : un circuit est fermé quand le chemin est complet, donc sans coupure.",
+                  "answers": [
+                    {
+                      "content": "coupure",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Il faut un chemin complet de la pile à la pile."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans l'atelier de son oncle à Yamoussoukro, Edmond hésite : il doit choisir ce qui est conducteur ou isolant pour réparer une lampe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le cœur du fil doit laisser passer le courant. Quel matériau choisir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : le fil doit être conducteur, donc en métal comme le cuivre. Le plastique, le caoutchouc et le verre sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "Le cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caoutchouc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La poignée d'un tournevis est en plastique pour protéger la main, car le plastique est un isolant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Conclure : un isolant protège. Le plastique ne laisse pas passer le courant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois objets laissent la lampe du testeur éteinte ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 3. Observer : le bois sec, le plastique et le caoutchouc sont des isolants, la lampe reste éteinte. Le clou en fer et la feuille d'aluminium sont des conducteurs.",
+                  "answers": [
+                    {
+                      "content": "Un bâton de bois sec",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une règle en plastique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un morceau de caoutchouc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un clou en fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une feuille d'aluminium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet brillant (qui reflète la lumière) est toujours un conducteur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : seul le test avec la pile et la lampe permet de conclure. Le verre est brillant, mais c'est un isolant. L'apparence ne prouve rien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Edmond teste 6 objets. Il note que la lampe brille pour 4 d'entre eux. Combien d'isolants a-t-il trouvés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Observer : 4 objets font briller la lampe, ce sont des conducteurs. 4. Conclure : les 6 − 4 = 2 autres sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Seul le test de la lampe permet de conclure, pas l'apparence."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Aya a monté un circuit avec une pile, une lampe et un moteur. Elle veut le schématiser et vérifier s'il est fermé. Elle sait qu'elle doit justifier chaque réponse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les trois symboles à dessiner ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Lister les symboles normalisés : pile = deux traits (un long, un court), lampe = cercle avec une croix, moteur = cercle avec M. Un dessin d'objet n'est pas un symbole.",
+                  "answers": [
+                    {
+                      "content": "Deux traits parallèles, l'un long, l'autre court (pile)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un cercle traversé d'une croix (lampe)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un cercle contenant la lettre M (moteur)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un dessin de moteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un dessin de pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya peut tracer les fils à main levée, en courbes.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Relier les symboles par des traits droits, avec des angles droits, tracés à la règle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la pile dessinée par Aya, le trait long indique :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Vérifier : trait long = borne +, trait court = borne −.",
+                  "answers": [
+                    {
+                      "content": "La borne +",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne −",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si Aya dessine un fil coupé dans sa boucle, son circuit est fermé.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Chercher une coupure : un fil coupé est une coupure. 4. Conclure : circuit ouvert, ni la lampe ni le moteur ne fonctionnent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya a 1 pile, 1 lampe et 1 moteur en boucle. Les récepteurs sont sur leurs supports, loin de la pile, et chaque élément est relié par des fils. Combien de fils au minimum pour fermer la boucle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Partir de la pile. 2. Fil 1 : pile vers lampe. Fil 2 : lampe vers moteur. Fil 3 : moteur vers pile. Il faut 3 fils.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                }
+              ],
+              "hint": "Un symbole par élément, des fils droits, une boucle complète."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan du circuit électrique",
+          "notions": "Bilan de toutes les notions : éléments d'un circuit, circuit fermé ou ouvert, schéma normalisé, conducteurs et isolants.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour la fête de l'école à Divo, Léa relie une pile, une ampoule et deux fils pour éclairer une affiche. Tu reconnais les éléments de son montage.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans le montage de Léa, quel est le générateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : pile, ampoule, fils. 2. Générateur : la pile fournit l'énergie.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'affiche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ampoule est un récepteur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Récepteur : l'ampoule utilise l'énergie pour éclairer.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ampoule est sur sa douille, loin de la pile, et chaque élément est relié par des fils. Combien de fils faut-il au minimum pour la faire briller avec la pile ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Un fil de la pile à l'ampoule et un fil de l'ampoule à la pile : 2 fils pour fermer la boucle.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                },
+                {
+                  "content": "Le montage de Léa est un circuit ___ quand l'ampoule brille.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : une boucle sans coupure passe par la pile et l'ampoule : le circuit est fermé.",
+                  "answers": [
+                    {
+                      "content": "fermé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont dans le circuit ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Repérer les éléments reliés par des fils : la pile et l'ampoule. L'affiche et la salle n'en font pas partie.",
+                  "answers": [
+                    {
+                      "content": "La pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'affiche",
+                      "correct": false
+                    },
+                    {
+                      "content": "La salle de classe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pile : générateur. Ampoule : récepteur."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le circuit de Léa ne s'allume plus. Elle cherche pourquoi, en suivant le chemin du courant.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre la démarche de Léa.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Partir. 2. Suivre. 3. Chercher. 4. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Partir d'une borne de la pile."
+                    },
+                    {
+                      "content": "Suivre le chemin de fil en fil."
+                    },
+                    {
+                      "content": "Chercher une coupure."
+                    },
+                    {
+                      "content": "Conclure : fermé ou ouvert."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil est tombé de l'ampoule. Le circuit est :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Chercher une coupure : un fil tombé est une coupure. 4. Circuit ouvert.",
+                  "answers": [
+                    {
+                      "content": "Ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sans pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ampoule grillée coupe le circuit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Chercher une coupure : le filament de l'ampoule grillée est coupé. 4. Circuit ouvert.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles actions peuvent rallumer l'ampoule ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : pour fermer le circuit, on supprime la coupure : on rebranche le fil ou on remplace l'ampoule grillée. Enlever la pile ou couper un fil ouvre encore plus le circuit.",
+                  "answers": [
+                    {
+                      "content": "Rebrancher le fil tombé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Remplacer l'ampoule grillée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Enlever la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Couper un autre fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Léa ajoute une seconde ampoule dans la boucle avec la première et la pile. Les récepteurs sont sur leurs supports, loin de la pile, et chaque élément est relié par des fils. De combien de fils a-t-elle besoin au minimum ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : pile vers ampoule 1, ampoule 1 vers ampoule 2, ampoule 2 vers pile : 3 fils.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fils"
+                }
+              ],
+              "hint": "Une coupure rend le circuit ouvert."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Léa dessine ensuite le schéma de son montage, puis un camarade en propose un autre. Tu corriges les schémas.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque symbole à son élément.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Lister les symboles : ampoule = cercle avec croix, pile = deux traits, fil = trait droit.",
+                  "answers": [
+                    {
+                      "content": "Un cercle traversé d'une croix",
+                      "match": "Ampoule"
+                    },
+                    {
+                      "content": "Deux traits parallèles, l'un long, l'autre court",
+                      "match": "Pile"
+                    },
+                    {
+                      "content": "Un trait droit",
+                      "match": "Fil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle erreur trouve-t-on dans un schéma où les fils sont des courbes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Relier par des traits droits, avec des angles droits.",
+                  "answers": [
+                    {
+                      "content": "Les fils doivent être des traits droits",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile est manquante",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croix de la lampe est en trop",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le schéma est trop grand",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le symbole de la pile, le trait court est la borne +.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Vérifier : le trait long est la borne +, le trait court la borne −. Confondre les deux est le piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un schéma montre 1 pile, 1 lampe et 1 moteur. Combien de symboles, sans les fils ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lister : 1 + 1 + 1 = 3 symboles.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole du moteur est un cercle qui contient la lettre ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Lister les symboles : le moteur est un cercle avec la lettre M.",
+                  "answers": [
+                    {
+                      "content": "M",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un symbole par élément, des fils droits."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Léa veut fabriquer un testeur de conducteurs. Elle teste plusieurs objets avec sa pile et son ampoule, puis en choisit un pour la poignée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels objets font briller la lampe du testeur ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 3. Observer : les métaux (fer, aluminium) font briller la lampe, ce sont des conducteurs. Le bois sec et le plastique sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "Un clou en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une feuille d'aluminium",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un bâton de bois sec",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que doit-elle choisir pour la poignée qu'on tient dans la main ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : une poignée doit protéger, donc être en isolant. Le plastique convient. Le fer et le cuivre nu sont des conducteurs.",
+                  "answers": [
+                    {
+                      "content": "Un isolant, comme le plastique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un conducteur, comme le fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil de cuivre nu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil de cuivre entouré de plastique a une gaine isolante.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : la gaine en plastique est un isolant, le cœur en cuivre est un conducteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Léa teste 6 objets : 3 font briller la lampe. Combien sont isolants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Observer : 3 objets font briller la lampe. 4. Les 6 − 3 = 3 autres sont des isolants.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tester les objets, elle utilise une pile, jamais la ___ de la maison.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Monter le circuit avec une pile. La prise de la maison est dangereuse.",
+                  "answers": [
+                    {
+                      "content": "prise",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Conducteur : la lampe brille. Isolant : elle reste éteinte."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
