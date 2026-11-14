@@ -182,3 +182,8 @@ La politique de protection des données ne peut donc pas promettre « 30 jours �
 - Un test de repository sur base réelle : les sessions, réponses, badges et lacunes de l'élève sont effacés, ceux d'un autre élève restent ; une lacune résolue par une session d'un autre élève ne bloque pas l'effacement.
 - Un test de la réussite de la classe (UDR-0029) avant et après une suppression.
 - Les tests des demandes : enregistrer, annuler, traiter ; une seule en attente par compte ; date future refusée ; refus pour `content`, `field` et tout autre rôle ; la carte en ambre au 25e jour, « En retard » au 31e.
+
+## Amendement du 2026-11-14 — suppression d'une leçon sans activité d'élève · Statut : Accepté (porteur, 2026-11-14)
+
+Amende §4, ligne « Cours, fiche, exercice, question, réponse ». Une leçon entière (notions, exercices, questions, réponses, images, sujets, texte du cours) se supprime physiquement, **quel que soit son statut**, tant qu'aucune activité d'élève ne s'y rattache (séances, réponses, badges, lectures de notion, lacunes, packs hors ligne, devoirs actifs ou archivés). Sinon la suppression est refusée et l'équipe modifie la leçon. Jamais une notion, un exercice ou une question seuls. La suppression n'est pas une transition du cycle de vie : elle en sort une leçon jamais utilisée, qui peut ensuite être réimportée. Détail, verrous et vérification : ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve (chantier `suppression-lecon`).
+

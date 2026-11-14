@@ -70,8 +70,10 @@ scope "teams/blog", as: :teams do
 end
 
 namespace :teams do
-  resources :courses, only: %i[new create edit update], param: :slug do
-    member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
+  # ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve, UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche : la confirmation de suppression,
+  # lue à la demande dans le frame « modal », et la suppression d'une leçon sans activité d'élève.
+  resources :courses, only: %i[new create edit update destroy], param: :slug do
+    member { patch :publish; patch :archive; patch :publish_all, path: "publish-all"; get :deletion }
     # UDR-0141 §3.5 : le corrigé de l'équipe (Teams::AnswerKeysController, Lot C) ; route teams_course answer_key.
     get "answer-key", to: "answer_keys#show", as: :answer_key, on: :member
   end

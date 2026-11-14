@@ -273,6 +273,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`sujet-comme-une-epreuve`](sujet-comme-une-epreuve/memo.md) | livré | feature | 2026-11-04 | Le sujet se lit comme une vraie épreuve |
 | [`sujets-cahier-noir-blanc`](sujets-cahier-noir-blanc/memo.md) | livré | feature | 2026-11-05 | Les sujets d'interrogation en cahier noir et blanc |
 | [`sujets-thales-feuilles`](sujets-thales-feuilles/memo.md) | livré | feature | 2026-10-31 | Sujets de devoir Thalès, titres numérotés des feuilles, correction en bloc |
+| [`suppression-lecon`](suppression-lecon/memo.md) | livré | feature | 2026-11-14 | Supprimer une leçon qui n'a jamais servi à un élève |
 | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré | bugfix | 2026-09-23 | Le tableau de bord Team plante en 500 |
 | [`test-date-figee`](test-date-figee/memo.md) | livré | bugfix | 2026-10-30 | Un test de suivi d'exercice rouge depuis le 30 octobre 2026 |
 | [`tester-pr-en-local`](tester-pr-en-local/memo.md) | livré | feature | 2026-10-21 | Tester une PR sur sa machine |

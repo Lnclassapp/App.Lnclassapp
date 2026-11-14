@@ -232,6 +232,19 @@ module Repositories
         assert_not @repository.resolve_assignable(type: "Exercise", key: wide.public_id).parents_published
       end
 
+      # CA-08 (ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve §4.4) : le lien polymorphe n'a pas de clé étrangère ; l'envoi
+      # verrouille l'exercice et refuse un exercice disparu (leçon supprimée), sans écrire de devoir orphelin.
+      test "un exercice disparu entre la lecture et l'envoi refuse le devoir (not_found), seul ou dans un envoi groupé" do
+        gone = exercise_assignable
+        Orm::Answer.where(question_id: @exercise.questions.select(:id)).delete_all
+        Orm::Question.where(exercise_id: @exercise.id).delete_all
+        @exercise.delete
+
+        assert_equal :not_found, @repository.create(assignment: assignment_of(gone)).code
+        assert_equal [ gone ], @repository.create_batch(assignments: [ assignment_of(gone) ]).value.skipped
+        assert_equal 0, Orm::ClassroomAssignment.count
+      end
+
       # B-022 (audit 2026-11-08): only the « one active » index means already assigned; a public_id collision rises loud.
       test "B-022: une collision de public_id n'est pas un exercice déjà assigné : elle monte" do
         first = @repository.create(assignment: assignment_of(exercise_assignable)).value

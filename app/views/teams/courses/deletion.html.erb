@@ -1,0 +1,13 @@
+<%# 🌐 UI · teams/courses/deletion — confirmation « Supprimer la leçon <nom> ? », ou son refus si des élèves s'en sont servis %>
+<%# Rôle : servie dans le frame « modal » depuis le menu ⋮ de la page de la leçon ; sans frame (sans JavaScript), page complète utilisable %>
+<%# ADR  : 0036, XXXX-suppression-d-une-lecon-sans-activite-eleve · UDR : 0006, 0054, XXXX-supprimer-une-lecon-depuis-sa-fiche %>
+<% page_title @refused ? t("teams.courses.deletion.refused_title") : t("teams.courses.deletion.title", name: @course.name) %>
+<% content_for :nav_key, "courses" %>
+<%# Page complète seulement : le retour à la leçon, puisque « Annuler » ne fait rien sans JavaScript (UDR-0054). %>
+<% unless turbo_frame_request? %>
+  <%= link_to t("teams.courses.deletion.back"), course_path(@course.slug), id: "back-to-course",
+              class: "mb-4 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+<% end %>
+<%= turbo_frame_tag "modal" do %>
+  <%= render "teams/courses/deletion_dialog", course: @course, refused: @refused %>
+<% end %>

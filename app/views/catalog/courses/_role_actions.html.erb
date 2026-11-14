@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_role_actions — actions de la page d'un cours selon le rôle %>
-<%# Rôle : équipe → badge de statut (B2) et menu ⋮ (modifier en modale, corrigé ; publier, archiver, tout publier) ; rien pour les autres rôles %>
-<%# ADR  : 0028, 0035, 0072 · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.5, 0006, 0013 (un cours ne s'assigne plus), 0014, 0042, 0062 %>
+<%# Rôle : équipe → badge de statut (B2) et menu ⋮ (modifier en modale, corrigé ; publier, archiver, tout publier ; supprimer) ; rien pour les autres rôles %>
+<%# ADR  : 0028, 0035, 0072 · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.5, 0006, 0013 (un cours ne s'assigne plus), 0014, 0042, 0062, XXXX-supprimer-une-lecon-depuis-sa-fiche %>
 <% if status_record %>
   <div class="flex flex-wrap items-center gap-2 lg:shrink-0 lg:justify-end">
     <%= content_status_panel(record: status_record) %>
@@ -11,6 +11,8 @@
       <%= content_transition_items(record: status_record) %>
       <%= ui_dropdown_item t("catalog.content_status.actions.publish_all"), href: publish_all_teams_course_path(course.slug),
                            method: :patch, icon: "check-badge" %>
+      <%# UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche : la seule entrée destructive, toujours la dernière, jamais sans modale. %>
+      <%= ui_dropdown_item t(".delete"), href: deletion_teams_course_path(course.slug), icon: "trash", tone: :danger, frame: "modal" %>
     <% end %>
   </div>
 <% end %>

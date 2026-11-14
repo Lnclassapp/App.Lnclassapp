@@ -167,3 +167,8 @@ Le refus répond `:not_found`, pas `:forbidden` : on ne confirme pas l'existence
 - **Remplace** : « Élève sans classe de l'année : catalogue vide » (chantier `catalogue-niveau-eleve`).
 - **Coût consenti** : un élève retiré de sa classe garde la lecture du catalogue publié de son ancien niveau. Il ne voit ni la classe, ni ses camarades, ni ses devoirs.
 - **Comment vérifier** : `test/infrastructure/queries/catalog/student_audience_query_test.rb` et le test « eleve-sans-prof CA-2 » de `test/controllers/classroom/student_homes_controller_test.rb` (un autre niveau reste introuvable).
+
+## Amendement du 2026-11-14 — suppression d'une leçon sans activité d'élève · Statut : Accepté (porteur, 2026-11-14)
+
+Amende §4. Une leçon entière (notions, exercices, questions, réponses, images, sujets, texte du cours) se supprime physiquement, **quel que soit son statut**, tant qu'aucune activité d'élève ne s'y rattache (séances, réponses, badges, lectures de notion, lacunes, packs hors ligne, devoirs actifs ou archivés). Sinon la suppression est refusée et l'équipe modifie la leçon. Jamais une notion, un exercice ou une question seuls. La suppression n'est pas une transition du cycle de vie : elle en sort une leçon jamais utilisée, qui peut ensuite être réimportée. Détail, verrous et vérification : ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve (chantier `suppression-lecon`).
+

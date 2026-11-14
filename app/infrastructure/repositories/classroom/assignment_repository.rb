@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
 # Rôle : assignations d'une classe et leur échéance ; résout l'exercice assigné, seul type assignable, sans association polymorphe
-# ADR  : 0035, 0048, 0071, 0072, sujets-de-devoir (ajout du 2026-10-30)
+# ADR  : 0035, 0048, 0071, 0072, sujets-de-devoir (ajout du 2026-10-30), XXXX-suppression-d-une-lecon-sans-activite-eleve
 module Repositories
   module Classroom
     class AssignmentRepository
@@ -31,8 +31,16 @@ module Repositories
           assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at, due_on: assignment.due_on,
           batch_public_id: assignment.batch_public_id
         )
-        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
-        Orm::ClassroomAssignment.transaction(requires_new: true) { record.save! }
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case. Le lien polymorphe n'a
+        # pas de clé étrangère : l'exercice est verrouillé comme le ferait la base (FOR KEY SHARE), pour qu'une suppression de sa leçon
+        # en cours attende ou soit attendue, jamais un devoir vers un exercice disparu (ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve).
+        written = Orm::ClassroomAssignment.transaction(requires_new: true) do
+          next false unless lock_assignable(assignment.assignable)
+
+          record.save!
+        end
+        return ::Shared::Result.failure(:not_found) unless written
+
         ::Shared::Result.success(map_to_entity(record, assignment.assignable))
       rescue ActiveRecord::RecordNotUnique => e
         # Seul l'index « une assignation active » dit « déjà assigné » ; une collision de public_id monte, bruyante (B-022).
@@ -80,6 +88,11 @@ module Repositories
       end
 
       private
+
+      def lock_assignable(assignable)
+        model, = RESOURCES.fetch(assignable.type)
+        model.constantize.where(id: assignable.id).lock("FOR KEY SHARE").pick(:id).present?
+      end
 
       def resolve_exercise(public_id)
         record = Orm::Exercise.includes(:essential, :course).find_by(public_id:)
