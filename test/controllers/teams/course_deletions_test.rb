@@ -100,6 +100,19 @@ class Teams::CourseDeletionsTest < ActionDispatch::IntegrationTest
     assert_equal tc("destroy.refused", name: "Les suites"), flash[:alert]
   end
 
+  test "a lesson refused, then deleted by another member before it is read again, is not found rather than an error" do
+    refused = Shared::Result.failure(:conflict, errors: { base: [ :student_activity ] })
+    slug = @course.slug
+    sign_in_as @member
+    Orm::Course.transaction { Repositories::Catalog::CourseRepository.new.delete(id: @course.id) }
+
+    stub_any_instance(UseCases::Catalog::DeleteCourse, :call, ->(**) { refused }) do
+      delete teams_course_path(slug), as: :turbo_stream
+    end
+
+    assert_response :not_found
+  end
+
   test "an unknown lesson is not found, for the confirmation and for the deletion" do
     sign_in_as @member
 

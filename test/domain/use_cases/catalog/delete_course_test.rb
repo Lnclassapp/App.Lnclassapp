@@ -102,6 +102,14 @@ module UseCases
         end
       end
 
+      test "une leçon supprimée entre la lecture et le verrou rend not_found, sans rien supprimer ni journaliser" do
+        courses(activity: nil)
+
+        assert_equal :not_found, delete("optique").code
+        assert_equal [ [ :lock, 3 ] ], @courses.calls
+        assert_empty @audit_log.entries
+      end
+
       test "une leçon inconnue rend not_found sans verrou" do
         courses
 

@@ -22,7 +22,9 @@
 
 ## Ce qui a dérapé
 
-- Rien de bloquant. Les tests de contrôleur ont d'abord échoué faute d'assets compilés (`yarn build`, `yarn build:css`) dans le conteneur neuf.
+- La revue « échecs muets » a trouvé qu'un envoi groupé de devoirs croisant une suppression annonçait l'exercice disparu « Déjà assigné » : corrigé (envoi refusé entier, `unknown_exercise`).
+- Deux suites de tests lancées en parallèle sur la même base de test se sont interbloquées : une suite à la fois.
+- Rien de bloquant par ailleurs. Les tests de contrôleur ont d'abord échoué faute d'assets compilés (`yarn build`, `yarn build:css`) dans le conteneur neuf.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -34,7 +36,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Un envoi groupé de devoirs qui croise une suppression range l'exercice disparu parmi les « déjà assignés ». | Course rarissime (leçon sans aucune activité, envoyée à la seconde même) ; aucun devoir orphelin n'est écrit. | — |
+| Une trace d'élève oubliée par la lecture donne une erreur 500 (la clé RESTRICT lève, rien n'est perdu) au lieu de la modale de refus. | Voulu (ADR §5) : une source oubliée est un défaut, pas un refus. | — |
 
 ## Clôture
 

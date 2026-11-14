@@ -65,7 +65,8 @@ ADR-0036 §4, ligne « Cours, fiche, exercice, question, réponse », se lit dé
 
 - Une leçon supprimée ne se restaure pas : seul le fichier d'import la recrée, avec un nouveau slug possible ; les liens partagés vers l'ancienne page donnent 404.
 - Un devoir envoyé puis archivé suffit à bloquer la suppression, même si aucun élève ne l'a ouvert. L'équipe modifie alors la leçon.
-- L'envoi d'un devoir prend un verrou de plus sur l'exercice (une requête courte par exercice envoyé).
+- L'envoi d'un devoir prend un verrou de plus sur l'exercice (une requête courte par exercice envoyé). Un envoi groupé qui croise une suppression est refusé entier (`unknown_exercise`, « Un exercice choisi n'existe plus… »), jamais présenté comme « déjà assigné ».
+- Une trace d'élève que la lecture aurait oubliée fait lever la clé `RESTRICT` : la transaction est annulée, rien n'est perdu, mais l'équipe voit une erreur 500 et non la modale de refus. C'est voulu : une source oubliée est un défaut à corriger dans `student_activity`, pas un refus métier à maquiller.
 - La suppression a sa propre purge, qui ne touche que le contenu, à côté de celle de `ContentTreeWriter` (import hors production, qui efface aussi l'activité). Deux listes de tables à tenir à jour quand le contenu gagne une table ; mélanger les deux exposerait la suppression à effacer une trace d'élève.
 
 ## 6. Notes d'implémentation

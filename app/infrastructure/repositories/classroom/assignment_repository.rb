@@ -57,8 +57,13 @@ module Repositories
           # croissant d'assignable.id ; created et skipped, eux, gardent l'ordre demandé.
           assignments.each_with_index.sort_by { |assignment, index| [ assignment.assignable.id, index ] }.each do |assignment, index|
             results[index] = create(assignment:)
+            # Un exercice disparu (sa leçon vient d'être supprimée) n'est pas « déjà assigné » : tout l'envoi est annulé et refusé
+            # comme un exercice inconnu, que le use case rend aussi avant l'écriture.
+            raise ActiveRecord::Rollback if results[index].code == :not_found
           end
         end
+        return ::Shared::Result.failure(:invalid, errors: { base: [ :unknown_exercise ] }) if results.values.any? { it.code == :not_found }
+
         created = []
         skipped = []
         assignments.each_with_index do |assignment, index|

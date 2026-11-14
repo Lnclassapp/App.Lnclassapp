@@ -100,6 +100,9 @@ module Teams
 
     def refuse_destroy
       @course = courses.find_by_slug(slug: params[:slug])
+      # Refusée puis supprimée par un autre membre avant cette relecture : il n'y a plus rien à montrer.
+      return render_not_found if @course.nil?
+
       @refused = true
       message = t(".refused", name: @course.name)
       respond_to do |format|
