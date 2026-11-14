@@ -154,4 +154,82 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("transition.refusals.image_missing", number: 2))
     assert_equal "draft", exercise.reload.status
   end
+
+  # edition-lecon-equipe, Lot B (ADR-0113 §4.6, amendement du 2026-11-14) : l'exercice se corrige à l'écran, en modale, même déjà tenté ;
+  # la bonne réponse peut changer, les tentatives passées gardent leur résultat.
+  def text_params(exercise, title: "Titre corrigé", key_rank: 1, choice: "Proposition corrigée")
+    question = exercise.questions.first
+    answers = question.answers.order(:position).to_a
+    { exercise_text: { title:, statement: "Sujet corrigé.", hint: "",
+                       questions: { question.id.to_s => { content: "Énoncé corrigé", explanation: "", hint: "", key: answers[key_rank].id.to_s,
+                                                          answers: answers.to_h { [ it.id.to_s, { content: "#{choice} #{it.position}" } ] } } } } }
+  end
+
+  test "edition-lecon-equipe: the team opens the text of a published exercise in the modal, the right choice checked" do
+    exercise = create_exercise(essential: @essential, questions: 1, statement: "Sujet.")
+    question = exercise.questions.first
+    sign_in_as @member
+
+    get text_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :success
+    assert_select "turbo-frame#modal form#exercise-text-form[action='#{text_teams_exercise_path(exercise.public_id)}']" do
+      assert_select "input[name='exercise_text[title]'][value='#{exercise.title}']"
+      assert_select "textarea[name='exercise_text[statement]']", text: "Sujet."
+      assert_select "textarea[name='exercise_text[questions][#{question.id}][content]']"
+      assert_select "input[type=radio][name='exercise_text[questions][#{question.id}][key]']", 4
+      assert_select "input[type=radio][checked][value='#{question.answers.find_by(correct: true).id}']"
+    end
+  end
+
+  test "edition-lecon-equipe: after a student's attempt, the team changes the texts and the right choice; the attempt keeps its result" do
+    exercise = create_exercise(essential: @essential, questions: 1, statement: "Sujet.")
+    attempt = create_attempt(session: create_exercise_session(exercise:), question: exercise.questions.first, correct: true)
+    sign_in_as @member
+
+    patch text_teams_exercise_path(exercise.public_id), params: text_params(exercise), as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("update_text.updated", title: "Titre corrigé"))
+    question = exercise.questions.first.reload
+    assert_equal [ "Titre corrigé", "Énoncé corrigé" ], [ exercise.reload.title, question.content ]
+    assert_equal [ 2 ], question.answers.where(correct: true).pluck(:position)
+    assert attempt.reload.correct
+  end
+
+  test "edition-lecon-equipe: a blank title is refused in 422 with its message; nothing is written" do
+    exercise = create_exercise(essential: @essential, questions: 1, statement: "Sujet.")
+    sign_in_as @member
+
+    patch text_teams_exercise_path(exercise.public_id), params: text_params(exercise, title: " "), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "#exercise_text_title_error"
+    assert_equal "Sujet.", exercise.reload.statement
+  end
+
+  test "edition-texte-lecon: a forged question (text instead of fields) is refused in 422, nothing is written" do
+    exercise = create_exercise(essential: @essential, questions: 1, statement: "Sujet.")
+    sign_in_as @member
+
+    patch text_teams_exercise_path(exercise.public_id),
+          params: { exercise_text: { title: "Titre corrigé", questions: { exercise.questions.first.id.to_s => "x" } } }, as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "[role=alert]", text: including(tl("text_errors.structure_changed"))
+    assert_not_equal "Titre corrigé", exercise.reload.title
+  end
+
+  test "edition-lecon-equipe: a teacher or a student cannot open nor save the text of an exercise" do
+    exercise = create_exercise(essential: @essential, questions: 1)
+
+    [ create_teacher, create_student ].each do |user|
+      sign_in_as user
+      get text_teams_exercise_path(exercise.public_id)
+      assert_response :forbidden
+      patch text_teams_exercise_path(exercise.public_id), params: text_params(exercise), as: :turbo_stream
+      assert_response :forbidden
+    end
+    assert_not_equal "Titre corrigé", exercise.reload.title
+  end
 end

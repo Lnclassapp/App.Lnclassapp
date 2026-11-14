@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/essentials/update_text — succès de la correction du texte d'une notion %>
+<%# Rôle : toast ; la modale se ferme ; la page de la leçon est re-demandée et fusionnée par morphing %>
+<%# ADR  : 0113 (§4.6, amendement du 2026-11-14) · UDR : 0006, 0042 (amendement du 2026-11-14) %>
+<%= turbo_stream_toast t(".updated", name: @essential.name), type: :success %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.refresh(request_id: nil) %>

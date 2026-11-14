@@ -189,4 +189,73 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to courses_path
     assert_equal tl("transition.parent_not_published"), flash[:alert]
   end
+
+  # edition-lecon-equipe, Lot B (ADR-0113 §4.6, amendement du 2026-11-14) : la notion se corrige à l'écran, en modale, même publiée.
+  SHEET = { "remember" => "Retiens.", "method" => [ "Étape 1", "Étape 2" ], "example" => { "statement" => "Énoncé", "steps" => [ "Pas 1", "Pas 2" ] },
+            "pitfall" => "Piège.", "practice" => { "kept" => true } }.freeze
+
+  def text_params(remember: "Retiens bien.", method_steps: [ "Étape un", "Étape deux" ], name: "La méiose corrigée")
+    { notion_text: { name:, remember:, method_steps:, example_statement: "Énoncé corrigé", example_steps: [ "Pas un", "Pas deux" ],
+                     pitfall: "Piège corrigé." } }
+  end
+
+  test "edition-lecon-equipe: the team opens the text of a published notion in the modal, every block filled" do
+    essential = create_essential(course: @course, name: "La méiose", sheet: SHEET)
+    sign_in_as @member
+
+    get text_teams_essential_path(essential.slug), headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :success
+    assert_select "turbo-frame#modal form#notion-text-form[action='#{text_teams_essential_path(essential.slug)}']" do
+      assert_select "input[name=_method][value=patch]"
+      assert_select "input[name='notion_text[name]'][value='La méiose']"
+      assert_select "textarea[name='notion_text[remember]']", text: "Retiens."
+      assert_select "textarea[name='notion_text[method_steps][]']", 2
+      assert_select "textarea[name='notion_text[example_steps][]']", text: "Pas 2"
+      assert_select "textarea[name='notion_text[pitfall]']", text: "Piège."
+    end
+  end
+
+  test "edition-lecon-equipe: the corrected text is saved, the modal closes and the page is refreshed; the practice is kept" do
+    essential = create_essential(course: @course, name: "La méiose", sheet: SHEET)
+    sign_in_as @member
+
+    patch text_teams_essential_path(essential.slug), params: text_params, as: :turbo_stream
+
+    assert_response :success
+    assert_match including(tl("update_text.updated", name: "La méiose corrigée")), response.body
+    assert_match "<turbo-stream action=\"refresh\"", response.body
+    essential.reload
+    assert_equal [ "La méiose corrigée", "Retiens bien.", [ "Étape un", "Étape deux" ], { "kept" => true } ],
+                 [ essential.name, essential.sheet["remember"], essential.sheet["method"], essential.sheet["practice"] ]
+    assert_equal "content.corrected", Orm::AuditEvent.last.action
+  end
+
+  test "edition-lecon-equipe: a blank block or a step added is refused in 422, the modal shows why, nothing is written" do
+    essential = create_essential(course: @course, name: "La méiose", sheet: SHEET)
+    sign_in_as @member
+
+    patch text_teams_essential_path(essential.slug), params: text_params(remember: " "), as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_select "#notion_text_remember_error", text: tl("text_errors.blank")
+
+    patch text_teams_essential_path(essential.slug), params: text_params(method_steps: %w[Un Deux Trois]), as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_select "[role=alert]", text: including(tl("text_errors.structure_changed"))
+
+    assert_equal SHEET, essential.reload.sheet
+  end
+
+  test "edition-lecon-equipe: a teacher or a student cannot open nor save the text of a notion" do
+    essential = create_essential(course: @course, name: "La méiose", sheet: SHEET)
+
+    [ create_teacher, create_student ].each do |user|
+      sign_in_as user
+      get text_teams_essential_path(essential.slug)
+      assert_response :forbidden
+      patch text_teams_essential_path(essential.slug), params: text_params, as: :turbo_stream
+      assert_response :forbidden
+    end
+    assert_equal SHEET, essential.reload.sheet
+  end
 end

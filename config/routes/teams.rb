@@ -78,9 +78,13 @@ namespace :teams do
   # ADR-0113 §4.6 : ni création ni édition d'une notion ou d'un exercice à l'écran ; la leçon se réimporte. Restent les transitions.
   resources :essentials, only: [], param: :slug do
     member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
+    # edition-lecon-equipe (ADR-0113 §4.6, amendement du 2026-11-14) : le texte d'une notion se corrige à l'écran ; la structure reste à l'import.
+    member { get "texte", action: :edit_text, as: :text; patch "texte", action: :update_text }
   end
   resources :exercises, only: [], param: :public_id do
     member { patch :publish; patch :archive }
+    # edition-lecon-equipe : le texte d'un exercice et la bonne réponse de ses questions se corrigent à l'écran.
+    member { get "texte", action: :edit_text, as: :text; patch "texte", action: :update_text }
   end
   resources :imports, only: %i[index new create show], param: :public_id
   # ADR-0081 §4.3, UDR-0075 §3.5 : la bibliothèque d'illustrations d'annonce, une illustration par son public_id. Ni

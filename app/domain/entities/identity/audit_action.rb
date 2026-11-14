@@ -7,7 +7,7 @@ module Entities
       ALL = %w[
         login.locked totp.enrolled totp.reset backup_code.used
         pin.recovery_code_issued pin.reset invitation.sent invitation.accepted team_role.changed
-        content.published content.archived taxonomy.changed school.changed import.run classroom_plan.changed
+        content.published content.archived content.corrected taxonomy.changed school.changed import.run classroom_plan.changed
         profile.name_changed contact.changed pin.changed
         profile.photo_changed profile.photo_removed profile.materials_changed
         teacher.detached teacher.reinstated teacher.left
