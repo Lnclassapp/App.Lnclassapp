@@ -12,8 +12,8 @@
 
 ## À trancher
 
-- [ ] 2026-11-14 · suppression-lecon · Après suppression, où renvoyer l'équipe ? — appliqué : le catalogue (« Cours ») avec un message qui cite Imports ; autres : l'écran Imports directement ; recommandé : le catalogue
-- [ ] 2026-11-14 · suppression-lecon · Un devoir envoyé puis archivé par l'enseignant, sans qu'aucun élève l'ait ouvert, bloque-t-il la suppression ? — appliqué : oui (option prudente) ; autres : ne compter que les devoirs actifs ; recommandé : oui
+- [x] 2026-11-14 · suppression-lecon · Après suppression, où renvoyer l'équipe ? — appliqué : le catalogue (« Cours ») avec un message qui cite Imports ; autres : l'écran Imports directement ; recommandé : le catalogue · tranché par le porteur le 2026-11-14 : option appliquée confirmée
+- [x] 2026-11-14 · suppression-lecon · Un devoir envoyé puis archivé par l'enseignant, sans qu'aucun élève l'ait ouvert, bloque-t-il la suppression ? — appliqué : oui (option prudente) ; autres : ne compter que les devoirs actifs ; recommandé : oui · tranché par le porteur le 2026-11-14 : option appliquée confirmée
 - [x] 2026-11-14 · suppression-lecon · Libellé « leçon » ou « fiche de cours » à l'écran — tranché par la règle : UDR-0007 et UDR-0130 interdisent « leçon » et « notion » à l'écran (test `test/i18n/locale_files_test.rb`) ; la modale, les messages et le lien disent « fiche de cours » et « fiches de révision »
 
 ## Retouches
