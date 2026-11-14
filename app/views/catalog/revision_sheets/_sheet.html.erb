@@ -8,6 +8,8 @@
 <% rest_data = { catalog__revision_more_target: "rest" } %>
 <% preview = Entities::Catalog::RevisionPreview %>
 <%# Un bloc après la coupe porte la cible `rest` ; une notion entièrement après elle la porte sur sa section. %>
+<%# team (edition-lecon-equipe) : le statut et le menu ⋮ de chaque notion ; faux par défaut. %>
+<% team = local_assigns.fetch(:team, false) %>
 <% rest_for = ->(notion_index, block) { cut&.rest?(notion_index) ? {} : (cut&.rest?(notion_index, block) ? rest_data : {}) } %>
 <%= tag.div class: "sheet-screen", data: { sheet_theme: sheet.theme.presence || "blue", seyes: "true", embedded: "true", controller: "math" } do %>
   <article class="sheet-page">
@@ -27,6 +29,11 @@
         <%= tag.section id: notion.anchor, class: "sheet-section", aria: { labelledby: "#{notion.anchor}-title" },
                         data: (cut&.rest?(index) ? rest_data : {}) do %>
           <h4 class="sheet-h2" id="<%= notion.anchor %>-title"><span class="sheet-h2-number"><%= index + 1 %>.</span> <%= notion.name %></h4>
+          <%# edition-lecon-equipe : la notion n'a plus de page (ADR-0113) ; son statut et ses transitions sont ici, pour l'équipe. %>
+          <% if team %>
+            <%= content_status_menu(type: :essential, key: notion.slug, status: notion.status,
+                                    label: t("catalog.content_status.menu.essential", name: notion.name)) %>
+          <% end %>
 
           <% if (proposal = proposals&.dig(notion.slug)) %>
             <%= render "catalog/revision_sheets/todo", proposal: %>

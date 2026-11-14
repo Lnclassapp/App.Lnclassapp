@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::CoursesController
-# Rôle : l'équipe crée et modifie un cours en modale (éditeur riche), le publie, l'archive ou publie tout son contenu (menu ⋮)
-# ADR  : 0026, 0035, 0037 · UDR : 0006, 0014
+# Rôle : l'équipe crée et modifie un cours en modale (éditeur riche), le publie, l'archive, publie tout son contenu ou le supprime (menu ⋮)
+# ADR  : 0026, 0035, 0037, XXXX-suppression-d-une-lecon-sans-activite-eleve · UDR : 0006, 0014, XXXX-supprimer-une-lecon-depuis-sa-fiche
 module Teams
   class CoursesController < BaseController
     include PublishCascade
@@ -41,6 +41,26 @@ module Teams
     def publish = transition(publish_course)
     def archive = transition(archive_course)
 
+    # La confirmation, lue à la demande dans le frame « modal » : refus montré dès l'ouverture si des élèves se sont servis de la leçon.
+    # Réservée à l'équipe (allow_roles :team), comme la modification.
+    def deletion
+      @course = courses.find_by_slug(slug: params[:slug])
+      return render_not_found if @course.nil?
+
+      @refused = courses.student_activity(id: @course.id).any?
+    end
+
+    # Succès : la page de la leçon n'existe plus, retour au catalogue (303, suivi par Turbo hors du frame). Refus (:conflict, activité
+    # apparue depuis l'ouverture) : 422, la modale passe à l'état de refus.
+    def destroy
+      result = delete_course.call(actor: current_actor, slug: params[:slug])
+      return refuse_destroy if result.code == :conflict
+
+      render_result result, success: lambda { |course|
+        redirect_to courses_path, notice: t(".deleted", name: course.name), status: :see_other
+      }
+    end
+
     private
 
     def cascade_root = :course
@@ -78,6 +98,23 @@ module Teams
       end
     end
 
+    def refuse_destroy
+      @course = courses.find_by_slug(slug: params[:slug])
+      # Refusée puis supprimée par un autre membre avant cette relecture : il n'y a plus rien à montrer.
+      return render_not_found if @course.nil?
+
+      @refused = true
+      message = t(".refused", name: @course.name)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [ helpers.turbo_stream_toast(message, type: :error),
+                                 turbo_stream.update("modal", partial: "teams/courses/deletion_dialog", locals: { course: @course, refused: true }) ],
+                 status: :unprocessable_entity
+        end
+        format.html { redirect_to course_path(@course.slug), alert: message, status: :see_other }
+      end
+    end
+
     def slug_of(rows, id)
       row = rows.find { |item| item.id == id }
       row.slug if row
@@ -96,6 +133,7 @@ module Teams
     def update_course = UseCases::Catalog::UpdateCourse.new(courses:, taxonomy: Repositories::Catalog::TaxonomyRepository.new, policy:)
     def publish_course = UseCases::Catalog::PublishCourse.new(**transition_dependencies)
     def archive_course = UseCases::Catalog::ArchiveCourse.new(**transition_dependencies)
+    def delete_course = UseCases::Catalog::DeleteCourse.new(**transition_dependencies)
 
     def transition_dependencies
       { courses:, audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,

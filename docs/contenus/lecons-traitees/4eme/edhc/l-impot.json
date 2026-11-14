@@ -1,0 +1,3657 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'impôt",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "EDHC",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "impot-direct-indirect",
+          "kind": "diagram",
+          "description": "Un arbre qui part des impôts et se divise en deux branches : l'impôt direct, que le contribuable paie lui-même sur ses revenus ou ses biens (impôt sur le salaire, impôt foncier), et l'impôt indirect, compris dans le prix d'un achat (la TVA).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "imp",
+                "label": "Les impôts"
+              },
+              {
+                "id": "dir",
+                "label": "Impôt direct : payé sur un revenu ou un bien",
+                "category": 1
+              },
+              {
+                "id": "ind",
+                "label": "Impôt indirect : compris dans le prix d'un achat (TVA)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "imp",
+                "to": "dir"
+              },
+              {
+                "from": "imp",
+                "to": "ind"
+              }
+            ],
+            "legend": [
+              "Payé directement",
+              "Compris dans le prix"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "circuit-de-l-impot",
+          "kind": "diagram",
+          "description": "Un schéma en cinq étapes qui suit le chemin de l'impôt : le contribuable paie, la DGI collecte et contrôle, les sommes rejoignent le Trésor public, l'État finance les services publics, et toute la population en profite.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "c",
+                "label": "Le contribuable paie",
+                "category": 1
+              },
+              {
+                "id": "d",
+                "label": "La DGI collecte et contrôle",
+                "category": 1
+              },
+              {
+                "id": "t",
+                "label": "Le Trésor public reçoit les recettes",
+                "category": 2
+              },
+              {
+                "id": "e",
+                "label": "L'État finance les services publics",
+                "category": 2
+              },
+              {
+                "id": "p",
+                "label": "Tous les habitants en profitent",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "c",
+                "to": "d",
+                "label": "verse"
+              },
+              {
+                "from": "d",
+                "to": "t",
+                "label": "reverse"
+              },
+              {
+                "from": "t",
+                "to": "e"
+              },
+              {
+                "from": "e",
+                "to": "p"
+              }
+            ],
+            "legend": [
+              "Avant la caisse de l'État",
+              "Après la caisse de l'État"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "consequences-fraude",
+          "kind": "diagram",
+          "description": "Un arbre qui part de la fraude fiscale et se divise en deux branches de conséquences : pour la population (l'État perd des recettes, donc moins d'écoles, de centres de santé et de routes) et pour le fraudeur (contrôle, paiement de ce qui manquait avec une pénalité, poursuites possibles).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "f",
+                "label": "Fraude fiscale"
+              },
+              {
+                "id": "a",
+                "label": "Pour la population : l'État perd des recettes",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Moins d'écoles, de centres de santé et de routes",
+                "category": 1
+              },
+              {
+                "id": "c",
+                "label": "Pour le fraudeur : un contrôle",
+                "category": 2
+              },
+              {
+                "id": "d",
+                "label": "Paiement du manque avec une pénalité",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "f",
+                "to": "a"
+              },
+              {
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "from": "f",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d"
+              }
+            ],
+            "legend": [
+              "Conséquences pour tous",
+              "Conséquences pour le fraudeur"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir l'impôt",
+          "remember": "Un **impôt** est une somme d'argent que les personnes et les entreprises doivent verser à l'**État** ou à la **commune**. La loi le fixe. Il a trois caractères : il est **obligatoire**, il est **sans contrepartie directe** (le contribuable ne reçoit pas en échange un service précis pour lui seul), et il sert à financer les **dépenses publiques**. Celui qui paie l'impôt s'appelle le **contribuable**. L'impôt n'est pas un **don**, qui est volontaire, ni un **achat**, où l'on reçoit un objet contre son prix.",
+          "method": [
+            "Identifier la somme demandée et la personne ou l'institution à qui elle est versée.",
+            "Chercher si le paiement est obligatoire ou volontaire.",
+            "Chercher si le contribuable reçoit en échange un service précis et personnel.",
+            "Conclure : c'est un impôt si la somme est obligatoire, versée à l'État ou à la commune, sans contrepartie directe."
+          ],
+          "example": {
+            "statement": "Mme Koffi, commerçante, verse chaque année à l'administration des impôts une somme fixée par la loi. Elle ne reçoit aucun service précis en échange. Cette somme est-elle un impôt ?",
+            "steps": [
+              "Identifier : la somme est versée à l'administration des impôts, donc à l'État.",
+              "Chercher : la loi fixe la somme, Mme Koffi doit la payer même si elle ne le souhaite pas ; elle est obligatoire.",
+              "Chercher : elle ne reçoit aucun service précis et personnel en échange.",
+              "Conclure : la somme est obligatoire, versée à l'État, sans contrepartie directe ; c'est un impôt."
+            ]
+          },
+          "pitfall": "Ne pense pas que l'impôt est le prix d'un service pour toi seul. Contre-exemple : M. Yao n'envoie aucun enfant à l'école publique, mais son impôt aide quand même à construire des salles de classe pour les élèves du quartier. L'impôt finance les dépenses de tous : on le paie même si l'on n'utilise pas tous les services.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un impôt : identifier la somme, chercher si elle est obligatoire, chercher la contrepartie, conclure.",
+            "questions": [
+              {
+                "content": "Un impôt est une somme d'argent…",
+                "question_type": "single_choice",
+                "hint": "Trois mots à retenir : obligatoire, État, sans contrepartie directe.",
+                "explanation": "Étape 1 — Identifier la somme : un impôt est versé à l'État ou à la commune. Étape 2 — Chercher si elle est obligatoire : oui, la loi l'impose. Étape 3 — Chercher la contrepartie : aucun service précis et personnel en échange. Étape 4 — Conclure : obligatoire, versé à l'État, sans contrepartie directe. Un don libre ou un achat au marché ne sont pas des impôts.",
+                "answers": [
+                  {
+                    "content": "reçue de l'État chaque mois par le contribuable",
+                    "correct": false
+                  },
+                  {
+                    "content": "donnée librement à une association de quartier",
+                    "correct": false
+                  },
+                  {
+                    "content": "obligatoire, versée à l'État ou à la commune, sans service précis en échange",
+                    "correct": true
+                  },
+                  {
+                    "content": "payée pour acheter un objet précis au marché",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le contribuable est la personne qui paie l'impôt.",
+                "question_type": "true_false",
+                "hint": "Contribuer veut dire apporter sa part.",
+                "explanation": "Étape 1 — Identifier qui verse la somme : c'est celui qui paie l'impôt. Étape 4 — Conclure : cette personne s'appelle le contribuable. La réponse est Vrai.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Celui qui paie l'impôt s'appelle le ___.",
+                "question_type": "fill_blank",
+                "hint": "Le mot commence par « contri… ».",
+                "explanation": "Étape 1 — Identifier qui verse la somme : la personne ou l'entreprise qui paie l'impôt. Étape 4 — Conclure : on l'appelle le contribuable, car elle contribue aux dépenses publiques.",
+                "answers": [
+                  {
+                    "content": "contribuable",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un impôt",
+              "statement": "Dans cet exercice, tu reconnais un impôt avec la méthode de la fiche : identifier la somme, chercher si elle est obligatoire, chercher la contrepartie, conclure.",
+              "exercise_type": "fixation",
+              "hint": "Un impôt est obligatoire, versé à l'État ou à la commune, et sans service précis en échange.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Laquelle de ces sommes est un impôt ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la somme : seule la somme due chaque année selon la loi est versée à l'État. Étape 2 — Chercher si elle est obligatoire : la loi l'impose, M. Bamba ne choisit pas. Étape 3 — Chercher la contrepartie : aucun service précis en échange. Étape 4 — Conclure : c'est un impôt. La cotisation libre et l'aide à un cousin sont volontaires ; le repas est un achat dont on reçoit l'objet.",
+                  "answers": [
+                    {
+                      "content": "La cotisation que M. Bamba verse librement à une association de quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix du repas que M. Bamba achète au maquis",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'argent que M. Bamba donne à son cousin pour l'aider",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme que M. Bamba doit verser à l'État chaque année, selon la loi",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un impôt est facultatif : on le paie seulement si on en a envie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher si le paiement est obligatoire ou volontaire : l'impôt est fixé par la loi, donc obligatoire. Étape 4 — Conclure : la réponse est Faux. Dire qu'il est facultatif, c'est le confondre avec un don.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un impôt est une somme ___ : le contribuable ne peut pas choisir de ne pas la payer.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher si le paiement est obligatoire ou volontaire : la loi impose l'impôt. Étape 4 — Conclure : l'impôt est obligatoire. Le mot « volontaire » serait faux, car il désigne un don.",
+                  "answers": [
+                    {
+                      "content": "obligatoire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations décrivent bien l'impôt ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier à qui la somme est versée : à l'État ou à la commune. Étape 2 — Chercher si elle est obligatoire : oui, la loi la fixe. Étape 3 — Chercher la contrepartie : il n'y en a pas de directe. Les deux autres affirmations sont fausses : l'impôt n'est pas un achat de service pour soi seul, et il n'est pas un cadeau.",
+                  "answers": [
+                    {
+                      "content": "Il est versé à l'État ou à la commune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est fixé par la loi",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est un cadeau que le contribuable fait à l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il donne droit à un service précis réservé à celui qui paie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argent des impôts sert à financer les dépenses ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Chercher la contrepartie : le contribuable ne reçoit pas un service pour lui seul. Étape 4 — Conclure : l'impôt finance les dépenses publiques, c'est-à-dire celles qui servent à tous (école, route, hôpital). Les autres réponses attribuent l'argent à des intérêts privés.",
+                  "answers": [
+                    {
+                      "content": "des seuls commerçants",
+                      "correct": false
+                    },
+                    {
+                      "content": "personnelles de l'agent qui l'encaisse",
+                      "correct": false
+                    },
+                    {
+                      "content": "publiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "privées de chaque contribuable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim n'a pas d'enfant à l'école publique et dit : « Je ne paie pas d'impôt pour l'école, car je n'en profite pas. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Chercher si le contribuable reçoit un service précis et personnel : non, l'impôt n'a pas de contrepartie directe. Étape 4 — Conclure : il finance les dépenses de tous, dont l'école. L'erreur d'Ibrahim est de croire que l'impôt est un achat de service pour soi seul.",
+                  "answers": [
+                    {
+                      "content": "L'impôt est un don : il peut refuser de le payer",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'impôt n'achète pas un service pour lui seul : il finance les dépenses de tous",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, on ne paie que ce que l'on utilise soi-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il doit demander un remboursement à l'école",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Impôt, don ou achat ?",
+              "statement": "Dans cet exercice, tu distingues l'impôt d'un don et d'un achat, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Pour chaque somme, demande-toi : est-elle obligatoire ? reçoit-on un service précis en échange ?",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier à qui va la somme. Étape 2 — Chercher si elle est obligatoire : seule la somme versée à l'État et fixée par la loi l'est. Étape 3 — Chercher la contrepartie : le client reçoit le pain en échange, l'élève donne librement. Étape 4 — Conclure : impôt, don et achat sont trois choses différentes.",
+                  "answers": [
+                    {
+                      "content": "Une famille verse à l'État une somme fixée par la loi",
+                      "match": "Un impôt"
+                    },
+                    {
+                      "content": "Un élève donne 100 F à un camarade qui a faim",
+                      "match": "Un don"
+                    },
+                    {
+                      "content": "Un client paie son pain à la boulangerie",
+                      "match": "Un achat"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un impôt.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la somme. Étape 2 — Chercher si le paiement est obligatoire. Étape 3 — Chercher la contrepartie. Étape 4 — Conclure. On conclut en dernier, une fois les trois vérifications faites.",
+                  "answers": [
+                    {
+                      "content": "Identifier la somme et à qui elle est versée"
+                    },
+                    {
+                      "content": "Chercher si le paiement est obligatoire"
+                    },
+                    {
+                      "content": "Chercher si le contribuable reçoit un service précis en échange"
+                    },
+                    {
+                      "content": "Conclure que c'est un impôt"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un village fictif, 50 contribuables paient chacun 2 000 F d'impôt. Quelle somme totale l'État reçoit-il, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Étape 1 — Identifier la somme : 2 000 F par contribuable. Étape 2 — L'impôt est obligatoire : les 50 contribuables paient. Étape 4 — Conclure par le calcul : 50 × 2 000 = 100 000 F. Oublier un zéro donnerait 10 000 F.",
+                  "answers": [
+                    {
+                      "content": "100000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un impôt est une punition que l'on reçoit après avoir désobéi à la loi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher si le paiement est obligatoire : il l'est pour tout contribuable, qu'il ait désobéi ou non. Étape 4 — Conclure : l'impôt n'est pas une punition, c'est une participation aux dépenses publiques. La punition s'appelle une sanction ou une amende.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sommes sont des impôts ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier à qui va la somme. Étape 2 — Chercher si elle est obligatoire. Étape 3 — Chercher la contrepartie. Étape 4 — Conclure : les trois sommes obligatoires, fixées par la loi et sans service précis en échange, remplissent les trois conditions. La cotisation est volontaire et le cahier est un achat.",
+                  "answers": [
+                    {
+                      "content": "Une cotisation volontaire à un club de sport",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix d'un cahier acheté à la librairie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une somme obligatoire, fixée par la loi, sans service précis en échange",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une somme obligatoire versée à l'État, sans service précis en échange",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une somme obligatoire versée à la commune, sans service précis en échange",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase définit le mieux le contribuable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier qui verse la somme. Étape 4 — Conclure : celui qui paie l'impôt est le contribuable. L'agent qui encaisse est un collecteur et le ministre dépense : ce sont d'autres rôles.",
+                  "answers": [
+                    {
+                      "content": "L'agent qui encaisse l'impôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le client qui achète au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ministre qui dépense l'argent de l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "La personne ou l'entreprise qui paie l'impôt",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Distinguer impôts directs et impôts indirects",
+          "remember": "Un **impôt direct** est payé **directement** à l'administration par le contribuable, sur ses **revenus** ou ses **biens** : par exemple l'impôt sur les revenus d'un salarié ou l'impôt foncier d'un propriétaire. Un **impôt indirect** est **compris dans le prix** d'un produit ou d'un service : le client le paie sans toujours le voir, et le commerçant le reverse à l'administration. La **TVA** (taxe sur la valeur ajoutée) est un impôt indirect. Prix hors taxe + TVA = prix **TTC** (toutes taxes comprises). Le taux de la TVA est fixé par la loi ; dans les exercices, il est fictif.",
+          "method": [
+            "Repérer qui verse l'argent à l'administration et à quelle occasion : un revenu, un bien ou un achat.",
+            "Regarder si la somme est demandée directement au contribuable ou ajoutée au prix d'un achat.",
+            "Classer : impôt direct s'il est versé par le contribuable sur ses revenus ou ses biens, impôt indirect s'il est compris dans le prix.",
+            "Calculer, si le taux est donné : TVA = prix hors taxe × taux, puis prix TTC = prix hors taxe + TVA."
+          ],
+          "example": {
+            "statement": "Un commerçant vend un sac à 2 000 F hors taxe. On prend un taux fictif de TVA de 10 %. Quel est le type d'impôt et le prix TTC du sac ?",
+            "steps": [
+              "Repérer : le client achète un sac ; le commerçant reversera la TVA à l'administration.",
+              "Regarder : la TVA est ajoutée au prix du sac ; l'administration ne la demande pas directement au client.",
+              "Classer : la TVA est comprise dans le prix, c'est un impôt indirect.",
+              "Calculer : TVA = 2 000 × 10 % = 200 F ; prix TTC = 2 000 + 200 = 2 200 F."
+            ]
+          },
+          "pitfall": "Ne pense pas que seuls ceux qui gagnent de l'argent paient des impôts. Contre-exemple : un élève sans aucun revenu achète un cahier à 550 F TTC (avec un taux fictif de 10 %) ; la TVA comprise dans ce prix est un impôt qu'il paie, même s'il ne la voit pas. Tout consommateur paie des impôts indirects.",
+          "figure": "impot-direct-indirect",
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer un impôt direct d'un impôt indirect : repérer, regarder, classer, calculer.",
+            "questions": [
+              {
+                "content": "Quel impôt est un impôt direct ?",
+                "question_type": "single_choice",
+                "hint": "Direct : le contribuable paie lui-même, sur un revenu ou un bien.",
+                "explanation": "Étape 1 — Repérer : le propriétaire paie à propos d'un bien, sa maison. Étape 2 — Regarder : la somme lui est demandée directement. Étape 3 — Classer : c'est un impôt direct. Les trois autres sont compris dans le prix d'un achat : ce sont des impôts indirects.",
+                "answers": [
+                  {
+                    "content": "La TVA ajoutée au prix d'un sac",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'impôt foncier payé par le propriétaire d'une maison",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'impôt compris dans le prix d'une boisson",
+                    "correct": false
+                  },
+                  {
+                    "content": "La TVA comprise dans le prix d'un cahier",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La TVA est comprise dans le prix que le client paie.",
+                "question_type": "true_false",
+                "hint": "Pense au prix toutes taxes comprises.",
+                "explanation": "Étape 2 — Regarder si la somme est ajoutée au prix d'un achat : pour la TVA, oui. Étape 3 — Classer : c'est un impôt indirect, que le client paie sans toujours le voir. La réponse est Vrai.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cahier coûte 500 F hors taxe. On prend un taux fictif de TVA de 10 %. Quel est son prix TTC, en francs ?",
+                "question_type": "numeric",
+                "hint": "10 % de 500, c'est 500 divisé par 10.",
+                "tolerance": 0,
+                "unit": "F",
+                "explanation": "Étape 4 — Calculer : TVA = 500 × 10 % = 50 F. Prix TTC = 500 + 50 = 550 F. Donner 50 F, c'est oublier d'ajouter le prix hors taxe.",
+                "answers": [
+                  {
+                    "content": "550",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Distinguer impôt direct et impôt indirect",
+              "statement": "Dans cet exercice, tu classes des impôts et tu calcules une TVA avec la méthode de la fiche : repérer, regarder, classer, calculer. Les taux sont fictifs.",
+              "exercise_type": "fixation",
+              "hint": "Direct : le contribuable paie lui-même. Indirect : l'impôt est caché dans le prix.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un salarié reçoit un avis lui demandant de payer un impôt sur ses revenus. De quel impôt s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le salarié paie à propos de ses revenus. Étape 2 — Regarder : la somme lui est demandée directement. Étape 3 — Classer : c'est un impôt direct. Un impôt indirect serait compris dans le prix d'un achat.",
+                  "answers": [
+                    {
+                      "content": "Un impôt indirect",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une taxe comprise dans un prix",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un impôt direct",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un don à l'État",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa achète un jus dont le prix contient de la TVA. Qui supporte cet impôt ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer qui paie à l'occasion d'un achat : la cliente. Étape 2 — Regarder : la TVA est ajoutée au prix. Étape 3 — Classer : impôt indirect, supporté par le client. Le commerçant le reverse à l'administration mais ne le supporte pas seul.",
+                  "answers": [
+                    {
+                      "content": "Le commerçant seul, car c'est lui qui le verse",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État, qui le paie à lui-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne, car l'impôt est gratuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Awa, la cliente, car la TVA est comprise dans le prix qu'elle paie",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un impôt compris dans le prix d'un produit est un impôt ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Regarder si la somme est ajoutée au prix d'un achat : oui. Étape 3 — Classer : c'est un impôt indirect. Écrire « direct » serait faux, car l'impôt direct est demandé directement au contribuable.",
+                  "answers": [
+                    {
+                      "content": "indirect",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève sans revenu ne paie jamais aucun impôt.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'élève achète des produits. Étape 2 — Regarder : leur prix contient de la TVA. Étape 3 — Classer : c'est un impôt indirect. La réponse est Faux. L'élève paie donc des impôts sans le voir.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac coûte 2 000 F hors taxe. On prend un taux fictif de TVA de 10 %. Quel est le montant de la TVA, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Étape 4 — Calculer : TVA = prix hors taxe × taux = 2 000 × 10 % = 200 F. Répondre 2 200 F, c'est donner le prix TTC et non le montant de la TVA.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi dit : « Je ne gagne pas d'argent, donc je ne paie aucun impôt. » Il achète pourtant du pain et des cahiers. Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Koffi paie à l'occasion de ses achats. Étape 2 — Regarder : la TVA est ajoutée aux prix. Étape 3 — Classer : c'est un impôt indirect. Tout consommateur en paie. Croire que seuls les revenus sont taxés est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Il paie un impôt seulement s'il possède une maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il paie des impôts indirects, comme la TVA comprise dans les prix",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison : seuls ceux qui gagnent de l'argent paient des impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il paie un impôt direct sur ses revenus",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Impôts directs, impôts indirects et TVA",
+              "statement": "Dans cet exercice, tu classes des impôts, tu ranges des étapes et tu calcules un prix TTC avec la méthode de la fiche. Le taux de TVA est fictif.",
+              "exercise_type": "fixation",
+              "hint": "Pour un prix TTC : calcule d'abord la TVA, puis ajoute-la au prix hors taxe.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque impôt à son type.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer sur quoi porte l'impôt : un bien, un revenu ou un achat. Étape 2 — Regarder qui paie et comment. Étape 3 — Classer : l'impôt foncier et l'impôt sur les revenus sont demandés directement au contribuable ; la TVA est comprise dans le prix.",
+                  "answers": [
+                    {
+                      "content": "L'impôt foncier sur une maison",
+                      "match": "Impôt direct sur un bien"
+                    },
+                    {
+                      "content": "L'impôt sur les revenus d'un salarié",
+                      "match": "Impôt direct sur un revenu"
+                    },
+                    {
+                      "content": "La TVA comprise dans le prix d'un pain",
+                      "match": "Impôt indirect compris dans le prix"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le calcul d'un prix TTC.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 4 — Calculer : on commence par repérer les données, puis on calcule la TVA, puis on l'ajoute. Le prix TTC est la somme du prix hors taxe et de la TVA ; on ne peut donc l'écrire qu'à la fin.",
+                  "answers": [
+                    {
+                      "content": "Repérer le prix hors taxe et le taux donné"
+                    },
+                    {
+                      "content": "Calculer la TVA : prix hors taxe × taux"
+                    },
+                    {
+                      "content": "Ajouter la TVA au prix hors taxe"
+                    },
+                    {
+                      "content": "Écrire le prix TTC avec son unité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pantalon coûte 8 000 F hors taxe. On prend un taux fictif de TVA de 10 %. Quel est son prix TTC, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Étape 4 — Calculer : TVA = 8 000 × 10 % = 800 F. Prix TTC = 8 000 + 800 = 8 800 F. Répondre 800 F serait donner seulement la TVA.",
+                  "answers": [
+                    {
+                      "content": "8800",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La TVA est un impôt indirect.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Regarder : la TVA est ajoutée au prix d'un achat. Étape 3 — Classer : c'est un impôt indirect, malgré le mot « taxe » dans son nom. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels impôts sont des impôts directs ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : revenus et biens d'un côté, achats de l'autre. Étape 2 — Regarder : l'impôt sur les revenus et l'impôt foncier sont demandés directement au contribuable. Étape 3 — Classer : ce sont des impôts directs ; les deux autres sont compris dans un prix, donc indirects.",
+                  "answers": [
+                    {
+                      "content": "L'impôt compris dans le prix d'une boisson",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'impôt sur les revenus d'une commerçante",
+                      "correct": true
+                    },
+                    {
+                      "content": "La TVA comprise dans le prix d'un cahier",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'impôt foncier d'un propriétaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerçant reçoit la TVA du client, puis il la ___ à l'administration.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer qui verse quoi : le client paie la TVA dans le prix, le commerçant l'encaisse. Étape 2 — Regarder où va l'argent : à l'administration. Étape 3 — Classer : impôt indirect, que le commerçant reverse. Le garder serait de la fraude.",
+                  "answers": [
+                    {
+                      "content": "efface",
+                      "correct": false
+                    },
+                    {
+                      "content": "rend au client",
+                      "correct": false
+                    },
+                    {
+                      "content": "reverse",
+                      "correct": true
+                    },
+                    {
+                      "content": "garde pour lui",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dire à quoi sert l'impôt et quel est le rôle de la DGI",
+          "remember": "L'argent des impôts finance les **dépenses publiques**, c'est-à-dire ce qui sert à tous : les **écoles**, les **centres de santé et hôpitaux**, les **routes**, l'eau, la sécurité, et les salaires des enseignants ou des infirmiers de l'État. On appelle ces services des **services publics**. La **Direction générale des impôts (DGI)** est l'administration chargée des impôts : elle informe les contribuables, reçoit leurs déclarations, **collecte** les impôts et **contrôle** qu'ils sont bien payés. Les sommes collectées rejoignent le **Trésor public**, la caisse de l'État. Celui qui collecte n'est pas propriétaire de l'argent.",
+          "method": [
+            "Identifier le service public ou la dépense dont parle la situation.",
+            "Chercher d'où vient l'argent qui la finance : les impôts versés par les contribuables.",
+            "Repérer le rôle de chacun : la DGI collecte et contrôle, les recettes rejoignent le Trésor public, l'État les dépense.",
+            "Conclure en reliant l'impôt payé au service rendu à tous."
+          ],
+          "example": {
+            "statement": "Une nouvelle salle de classe est construite dans l'école publique du quartier. Un élève demande d'où vient l'argent et qui collecte les impôts. Analyser la situation.",
+            "steps": [
+              "Identifier : la dépense est la construction d'une salle de classe dans une école publique, un service public.",
+              "Chercher : l'argent vient des impôts que les contribuables ont versés.",
+              "Repérer : la DGI a collecté et contrôlé les impôts, les recettes ont rejoint le Trésor public, puis l'État a payé la salle.",
+              "Conclure : l'impôt payé par les contribuables permet à tous les élèves du quartier d'étudier dans de bonnes conditions."
+            ]
+          },
+          "pitfall": "Ne confonds pas celui qui collecte avec celui qui possède l'argent. Contre-exemple : un agent de la DGI qui encaisse 500 000 F (somme fictive) en une journée ne garde rien : les 500 000 F rejoignent le Trésor public. L'argent de l'impôt appartient à l'État, donc à tous.",
+          "figure": "circuit-de-l-impot",
+          "practice": {
+            "statement": "Tu t'entraînes à relier l'impôt aux services publics et à préciser le rôle de la DGI : identifier, chercher, repérer, conclure.",
+            "questions": [
+              {
+                "content": "Quel est le rôle de la Direction générale des impôts (DGI) ?",
+                "question_type": "single_choice",
+                "hint": "Collecter veut dire récupérer pour le compte de l'État.",
+                "explanation": "Étape 1 — Identifier : on cherche le rôle de la DGI. Étape 3 — Repérer le rôle de chacun : la DGI collecte et contrôle ; voter la loi appartient au Parlement ; juger appartient aux tribunaux ; l'argent rejoint le Trésor public. Étape 4 — Conclure : la DGI collecte et contrôle.",
+                "answers": [
+                  {
+                    "content": "Voter les lois sur les impôts",
+                    "correct": false
+                  },
+                  {
+                    "content": "Garder pour elle l'argent des impôts",
+                    "correct": false
+                  },
+                  {
+                    "content": "Collecter les impôts et contrôler que les contribuables les paient bien",
+                    "correct": true
+                  },
+                  {
+                    "content": "Juger les contribuables qui ne paient pas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'agent des impôts qui encaisse une somme peut la garder pour lui.",
+                "question_type": "true_false",
+                "hint": "Collecter n'est pas posséder.",
+                "explanation": "Étape 3 — Repérer le rôle de chacun : l'agent collecte, il ne possède pas l'argent. Étape 4 — Conclure : la somme rejoint le Trésor public. La réponse est Faux.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque acteur à son rôle.",
+                "question_type": "matching",
+                "hint": "Suis le chemin de l'argent.",
+                "explanation": "Étape 3 — Repérer le rôle de chacun : le contribuable verse, la DGI collecte et contrôle, le Trésor public reçoit les recettes de l'État. Étape 4 — Conclure : chaque acteur a un rôle différent dans le circuit de l'impôt.",
+                "answers": [
+                  {
+                    "content": "Le contribuable",
+                    "match": "Il paie l'impôt"
+                  },
+                  {
+                    "content": "La DGI",
+                    "match": "Elle collecte et contrôle les impôts"
+                  },
+                  {
+                    "content": "Le Trésor public",
+                    "match": "Il reçoit les recettes de l'État"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "À quoi sert l'impôt, et que fait la DGI ?",
+              "statement": "Dans cet exercice, tu relies l'impôt aux services publics et tu précises le rôle de la DGI, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "L'impôt finance ce qui sert à tous. La DGI collecte, elle ne garde pas.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Laquelle de ces dépenses est financée par l'impôt ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la dépense : seule la route est publique. Étape 2 — Chercher d'où vient l'argent : des impôts versés par les contribuables. Étape 4 — Conclure : l'impôt finance les services publics qui servent à tous. Les trois autres dépenses sont privées.",
+                  "answers": [
+                    {
+                      "content": "L'achat d'un téléphone par un particulier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le loyer d'une boutique privée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réparation de la voiture d'un voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "La construction d'une route publique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels services publics sont financés grâce aux impôts ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le service dont on parle. Étape 2 — Chercher d'où vient l'argent : les impôts financent l'école et la santé publiques. Étape 4 — Conclure : une boutique et une maison appartiennent à des personnes privées, elles ne sont pas financées par l'impôt.",
+                  "answers": [
+                    {
+                      "content": "Les salles de classe d'une école publique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les équipements d'un centre de santé public",
+                      "correct": true
+                    },
+                    {
+                      "content": "La boutique privée d'un commerçant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La maison d'un particulier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sigle DGI signifie Direction générale des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Repérer le rôle de chacun : la Direction générale des impôts est l'administration qui s'occupe des impôts. Étape 4 — Conclure : on écrit « impôts ». Écrire « douanes » désignerait une autre administration.",
+                  "answers": [
+                    {
+                      "content": "impôts",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La DGI collecte les impôts et contrôle les déclarations des contribuables.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer le rôle de chacun : la DGI reçoit les déclarations, collecte les impôts et vérifie qu'ils sont bien payés. Étape 4 — Conclure : la réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les impôts collectés rejoignent le ___ public, qui est la caisse de l'État.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Chercher où va l'argent : les recettes arrivent à la caisse de l'État, appelée Trésor public. Étape 3 — Repérer le rôle de chacun : la DGI collecte, le Trésor reçoit. Les autres mots ne désignent pas une caisse de l'État.",
+                  "answers": [
+                    {
+                      "content": "Trésor",
+                      "correct": true
+                    },
+                    {
+                      "content": "quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "collège",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un agent de la DGI encaisse 300 000 F d'impôts fictifs. À qui appartient cette somme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer le rôle de chacun : l'agent collecte pour le compte de l'État. Étape 4 — Conclure : la somme appartient à l'État et rejoint le Trésor public. Confondre celui qui collecte et celui qui possède est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "À la DGI, qui peut l'utiliser comme elle veut",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'État : elle rejoint le Trésor public",
+                      "correct": true
+                    },
+                    {
+                      "content": "À l'agent qui l'a encaissée",
+                      "correct": false
+                    },
+                    {
+                      "content": "À la personne qui l'a payée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le chemin de l'impôt",
+              "statement": "Dans cet exercice, tu suis le chemin de l'argent des impôts, de celui qui paie jusqu'au service public, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Suis le chemin de l'argent : contribuable, DGI, Trésor public, service public.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre le chemin de l'impôt.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le départ : le contribuable paie. Étape 3 — Repérer le rôle de chacun : la DGI collecte et contrôle, le Trésor public reçoit, l'État dépense. Étape 4 — Conclure : les recettes servent ensuite à financer les services publics.",
+                  "answers": [
+                    {
+                      "content": "Le contribuable déclare ses revenus et paie son impôt"
+                    },
+                    {
+                      "content": "La DGI collecte l'impôt et contrôle la déclaration"
+                    },
+                    {
+                      "content": "Les sommes collectées rejoignent le Trésor public"
+                    },
+                    {
+                      "content": "L'État finance les services publics avec ces recettes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque service public à ceux qui en profitent.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le service. Étape 2 — Chercher d'où vient l'argent : des impôts. Étape 4 — Conclure : chaque service public profite à une partie de la population, et tous contribuent à les financer.",
+                  "answers": [
+                    {
+                      "content": "Une école publique",
+                      "match": "Les élèves"
+                    },
+                    {
+                      "content": "Un centre de santé public",
+                      "match": "Les malades"
+                    },
+                    {
+                      "content": "Une route publique",
+                      "match": "Les conducteurs et les voyageurs"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles missions appartiennent à la DGI ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Repérer le rôle de chacun : la DGI informe, reçoit les déclarations, collecte et contrôle. Voter la loi est le rôle du Parlement, juger celui d'un tribunal. Étape 4 — Conclure : contrôler, informer et recevoir les déclarations sont les missions de la DGI.",
+                  "answers": [
+                    {
+                      "content": "Contrôler que les impôts sont bien payés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Informer les contribuables sur leurs obligations",
+                      "correct": true
+                    },
+                    {
+                      "content": "Juger et emprisonner les fraudeurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Recevoir les déclarations",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus les contribuables paient honnêtement leurs impôts, plus l'État peut financer de services publics.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher d'où vient l'argent : des impôts versés. Étape 4 — Conclure : avec plus de recettes, l'État a plus de moyens pour les écoles, les centres de santé et les routes. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une commune fictive reçoit 12 000 000 F d'impôts. Elle consacre le quart de cette somme à l'école. Combien consacre-t-elle à l'école, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Étape 2 — Chercher d'où vient l'argent : 12 000 000 F d'impôts. Étape 4 — Conclure par le calcul : un quart = 12 000 000 ÷ 4 = 3 000 000 F. Diviser par 3 donnerait un tiers, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "3000000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un habitant dit : « Cette route est gratuite pour moi, donc personne ne la paie. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la dépense : une route publique. Étape 2 — Chercher d'où vient l'argent : des impôts versés par tous les contribuables. Étape 4 — Conclure : le service paraît gratuit pour l'usager, mais il est financé par l'impôt.",
+                  "answers": [
+                    {
+                      "content": "Elle est payée par les impôts de l'ensemble des contribuables",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle ne coûte rien à l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est payée par l'agent des impôts avec son salaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est payée seulement par ceux qui l'utilisent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Payer l'impôt, un devoir civique : la fraude et l'évasion fiscales",
+          "remember": "Payer l'impôt est un **devoir civique** : chaque citoyen doit contribuer aux dépenses publiques selon la loi. La Constitution ivoirienne rappelle ce devoir. Le **civisme fiscal** consiste à **déclarer honnêtement** ses revenus ou ses ventes, à **payer à temps** et à **demander une facture ou un reçu**. La **fraude fiscale** est le fait de **tromper l'administration pour payer moins**, par exemple cacher une partie de ses ventes. L'**évasion fiscale** est le fait de **chercher à échapper à l'impôt en le contournant**, par exemple en faisant sortir son argent du pays pour qu'il y soit moins taxé ; elle n'est pas toujours illégale, mais elle prive aussi l'État de recettes. Conséquences : l'État perd des recettes, donc des moyens pour les services publics ; les citoyens honnêtes sont désavantagés ; le fraudeur risque un contrôle, une pénalité et des poursuites.",
+          "method": [
+            "Identifier ce que le contribuable a gagné ou vendu et ce qu'il déclare.",
+            "Comparer avec ce que la loi lui demande de déclarer et de payer.",
+            "Nommer le comportement : civisme fiscal, fraude fiscale s'il cache ou trompe, évasion fiscale s'il contourne l'impôt.",
+            "Mesurer les conséquences pour l'État, pour les autres citoyens et pour lui, puis dire le bon comportement."
+          ],
+          "example": {
+            "statement": "Un commerçant a vendu pour 400 000 F de marchandises ce mois-ci mais il déclare 100 000 F à l'administration des impôts. Analyser son comportement.",
+            "steps": [
+              "Identifier : le commerçant a vendu pour 400 000 F et en déclare 100 000 F.",
+              "Comparer : la loi lui demande de déclarer toutes ses ventes ; il en cache 300 000 F.",
+              "Nommer : il cache des ventes pour payer moins, c'est une fraude fiscale.",
+              "Mesurer : l'État perd des recettes pour les écoles et les routes, les commerçants honnêtes sont désavantagés, et lui risque un contrôle et une pénalité ; le bon comportement est de déclarer 400 000 F."
+            ]
+          },
+          "pitfall": "Ne dis pas qu'une petite fraude ne fait de mal à personne. Contre-exemple : si 100 commerçants cachent chacun 10 000 F d'impôts (somme fictive), il manque 1 000 000 F à l'État pour ses écoles, ses hôpitaux et ses routes. Et le commerçant honnête, qui paie tout, est désavantagé.",
+          "figure": "consequences-fraude",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître le civisme fiscal et la fraude : identifier, comparer, nommer, mesurer les conséquences.",
+            "questions": [
+              {
+                "content": "Un artisan a gagné 200 000 F ce mois-ci mais n'en déclare que 50 000 F. Comment appelle-t-on ce comportement ?",
+                "question_type": "single_choice",
+                "hint": "Il cache une partie de ses gains pour payer moins.",
+                "explanation": "Étape 1 — Identifier : il a gagné 200 000 F et en déclare 50 000 F. Étape 2 — Comparer : la loi demande de déclarer tout ce qu'il a gagné. Étape 3 — Nommer : il cache 150 000 F pour payer moins, c'est une fraude fiscale. Le civisme fiscal serait de déclarer la somme exacte.",
+                "answers": [
+                  {
+                    "content": "Le civisme fiscal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une fraude fiscale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une erreur sans importance",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un impôt indirect",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Payer ses impôts honnêtement est un devoir civique.",
+                "question_type": "true_false",
+                "hint": "Un devoir civique est un devoir du citoyen.",
+                "explanation": "Étape 2 — Comparer avec ce que la loi demande : chaque citoyen doit contribuer aux dépenses publiques. Étape 3 — Nommer : déclarer et payer honnêtement, c'est le civisme fiscal. La réponse est Vrai.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Tromper l'administration pour payer moins d'impôt s'appelle la ___ fiscale.",
+                "question_type": "fill_blank",
+                "hint": "Le mot commence par « fr… ».",
+                "explanation": "Étape 2 — Comparer avec ce que la loi demande : déclarer la vérité. Étape 3 — Nommer le comportement : tromper l'administration pour payer moins est une fraude fiscale. Le mot « civisme » désigne le contraire.",
+                "answers": [
+                  {
+                    "content": "fraude",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître le civisme fiscal et la fraude",
+              "statement": "Dans cet exercice, tu reconnais le civisme fiscal et la fraude fiscale et tu en mesures les conséquences, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Déclarer toute la vérité, c'est le civisme. Cacher pour payer moins, c'est la fraude.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un commerçant a vendu pour 400 000 F de marchandises ce mois-ci, mais il déclare 100 000 F à l'administration. Comment appelle-t-on ce comportement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : il a vendu pour 400 000 F et déclare 100 000 F. Étape 2 — Comparer : la loi demande de déclarer toutes ses ventes. Étape 3 — Nommer : il cache une partie de ses ventes pour payer moins, c'est une fraude fiscale. Le civisme fiscal serait de déclarer 400 000 F.",
+                  "answers": [
+                    {
+                      "content": "Une erreur sans conséquence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du civisme fiscal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un impôt direct",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fraude fiscale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerçant a vendu pour 400 000 F et déclare 100 000 F. Quelle somme de ventes cache-t-il, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Étape 1 — Identifier : ventes réelles 400 000 F, ventes déclarées 100 000 F. Étape 2 — Comparer : la différence est ce qui n'est pas déclaré. Calcul : 400 000 − 100 000 = 300 000 F. Répondre 100 000 F, c'est donner la somme déclarée.",
+                  "answers": [
+                    {
+                      "content": "300000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les conséquences d'une fraude fiscale répétée ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Mesurer les conséquences : la fraude diminue les recettes de l'État, donc les moyens des services publics, et elle désavantage ceux qui paient honnêtement. Dire que les services publics reçoivent plus de moyens, ou que personne n'est touché, c'est ignorer ces pertes.",
+                  "answers": [
+                    {
+                      "content": "Les services publics reçoivent plus de moyens",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État reçoit moins d'argent pour les écoles et les routes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Personne n'est touché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les commerçants honnêtes sont désavantagés",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fraudeur risque un contrôle, une pénalité à payer et même des poursuites.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Mesurer les conséquences pour lui : l'administration peut contrôler, faire payer ce qui manquait avec une pénalité, et dans les cas graves la justice peut poursuivre. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Demander une facture ou un reçu est un geste de ___ fiscal.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Nommer le comportement : demander une facture aide à déclarer toutes les ventes, c'est du civisme fiscal. Les trois autres mots désignent des comportements contraires à la loi ou à la morale civique.",
+                  "answers": [
+                    {
+                      "content": "incivisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "civisme",
+                      "correct": true
+                    },
+                    {
+                      "content": "fraude",
+                      "correct": false
+                    },
+                    {
+                      "content": "corruption",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant dit : « Cacher 10 000 F d'impôts, ce n'est rien. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Nommer le comportement : cacher de l'argent pour payer moins est une fraude, même petite. Étape 4 — Mesurer les conséquences : si 100 commerçants cachent 10 000 F chacun, l'État perd 1 000 000 F. Croire qu'une petite fraude ne fait de mal à personne est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "L'État n'a pas besoin de cet argent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison : une petite fraude ne fait de mal à personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il peut cacher cette somme, car elle est trop petite pour être contrôlée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si beaucoup de commerçants font de même, l'État perd beaucoup d'argent pour les services publics",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Fraude, évasion et bons comportements",
+              "statement": "Dans cet exercice, tu distingues les bons et les mauvais comportements face à l'impôt, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Compare toujours ce que la personne fait avec ce que la loi demande.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque comportement à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier ce que fait la personne. Étape 2 — Comparer avec ce que la loi demande. Étape 3 — Nommer : déclarer et payer est du civisme fiscal, cacher est une fraude, offrir de l'argent à un agent est de la corruption.",
+                  "answers": [
+                    {
+                      "content": "Déclarer toutes ses ventes et payer à temps",
+                      "match": "Le civisme fiscal"
+                    },
+                    {
+                      "content": "Cacher une partie de ses ventes pour payer moins",
+                      "match": "La fraude fiscale"
+                    },
+                    {
+                      "content": "Donner de l'argent à un agent pour éviter de payer",
+                      "match": "La corruption"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre l'analyse d'un comportement fiscal.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier d'abord les faits. Étape 2 — Comparer avec la loi. Étape 3 — Nommer le comportement. Étape 4 — Mesurer les conséquences et conclure. On ne peut pas conclure avant d'avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Identifier ce que la personne a gagné et ce qu'elle déclare"
+                    },
+                    {
+                      "content": "Comparer avec ce que la loi demande de déclarer et de payer"
+                    },
+                    {
+                      "content": "Nommer le comportement"
+                    },
+                    {
+                      "content": "Mesurer les conséquences et dire le bon comportement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont des conséquences possibles de la fraude fiscale ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Mesurer les conséquences : la fraude réduit les recettes de l'État, elle expose à un contrôle et à des pénalités. Elle n'augmente pas les services publics et elle ne rend pas le fraudeur exemplaire.",
+                  "answers": [
+                    {
+                      "content": "Moins d'argent pour les écoles, les hôpitaux et les routes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un contrôle de l'administration",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'État construit plus de services publics",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fraudeur devient un modèle de civisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pénalité à payer en plus de ce qui manquait",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'évasion fiscale consiste à chercher à échapper à l'impôt, en le contournant, par exemple en faisant sortir son argent du pays.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Nommer le comportement : chercher à échapper à l'impôt en le contournant, par exemple en faisant sortir son argent du pays, est de l'évasion fiscale. Étape 4 — Mesurer les conséquences : l'État perd des recettes, comme pour la fraude. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une ville fictive, 100 commerçants cachent chacun 10 000 F d'impôts. Quelle somme manque à la ville, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Étape 1 — Identifier : 100 commerçants, 10 000 F cachés chacun. Étape 4 — Mesurer les conséquences par le calcul : 100 × 10 000 = 1 000 000 F. Une petite fraude répétée par beaucoup de personnes devient une grosse perte.",
+                  "answers": [
+                    {
+                      "content": "1000000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un vendeur dit à une cliente : « Sans facture, c'est moins cher. » Quel est le bon comportement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer avec ce que la loi demande : les ventes doivent être déclarées. Étape 3 — Nommer : vendre sans facture aide à cacher des ventes. Étape 4 — Dire le bon comportement : demander une facture ou un reçu.",
+                  "answers": [
+                    {
+                      "content": "Accepter, car c'est moins cher",
+                      "correct": false
+                    },
+                    {
+                      "content": "Payer en cachette pour que personne ne le sache",
+                      "correct": false
+                    },
+                    {
+                      "content": "Demander une facture ou un reçu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne rien dire, car cela ne regarde pas la cliente",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le club EDHC enquête sur l'impôt à la boutique",
+          "statement": "Au collège de Yaokro, le club EDHC prépare un exposé sur l'impôt. Les élèves interrogent Mme Tano, qui tient une boutique. Elle paie chaque année un impôt sur ses revenus et ajoute la TVA au prix de ce qu'elle vend. Dans les calculs, on prend un taux de TVA fictif de 10 %.",
+          "exercise_type": "fixation",
+          "hint": "Pense à l'impôt direct sur les revenus et à l'impôt indirect compris dans les prix.",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle phrase décrit le mieux un impôt ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier la somme et à qui elle est versée : à l'État ou à la commune. 2. Chercher si elle est obligatoire : oui, la loi la fixe. 3. Chercher la contrepartie : aucun service précis en échange. 4. Conclure. Un don libre, un prix de service ou une punition ne remplissent pas ces trois conditions.",
+              "answers": [
+                {
+                  "content": "Une punition infligée à celui qui désobéit à la loi",
+                  "correct": false
+                },
+                {
+                  "content": "Une somme obligatoire, fixée par la loi, versée à l'État ou à la commune, sans service précis en échange",
+                  "correct": true
+                },
+                {
+                  "content": "Une somme que l'on donne librement à une association",
+                  "correct": false
+                },
+                {
+                  "content": "Le prix d'un service précis que l'on a demandé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque somme à sa nature.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Repérer sur quoi porte la somme : un revenu, un achat ou un choix libre. 2. Regarder si elle est demandée directement ou comprise dans le prix. 3. Classer : direct pour le revenu, indirect pour la TVA. La cotisation est volontaire : ce n'est pas un impôt.",
+              "answers": [
+                {
+                  "content": "L'impôt sur les revenus de Mme Tano",
+                  "match": "Un impôt direct"
+                },
+                {
+                  "content": "La TVA comprise dans le prix d'un cahier",
+                  "match": "Un impôt indirect"
+                },
+                {
+                  "content": "La cotisation libre de Mme Tano à une association",
+                  "match": "Pas un impôt"
+                }
+              ]
+            },
+            {
+              "content": "Mme Tano vend un cartable à 3 000 F hors taxe. Avec la TVA fictive de 10 %, quel est son prix TTC, en francs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "F",
+              "explanation": "Méthode : 1. Repérer le prix hors taxe (3 000 F) et le taux (10 %). 2. Calculer la TVA : 3 000 × 10 % = 300 F. 3. Ajouter : 3 000 + 300 = 3 300 F. Répondre 300 F serait donner seulement la TVA.",
+              "answers": [
+                {
+                  "content": "3300",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mme Tano peut garder pour elle la TVA qu'elle a encaissée auprès de ses clients.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Repérer qui paie la TVA : le client, dans le prix. 2. Repérer qui la reverse : le commerçant, à l'administration. 3. Conclure : celui qui collecte n'est pas propriétaire de l'argent. La réponse est Faux ; la garder serait une fraude.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève du club dit : « Moi, je n'ai pas de salaire, donc je ne paie aucun impôt. » Explique en deux phrases pourquoi il se trompe.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que le prix des achats contient de la TVA",
+                "Dit que la TVA est un impôt indirect payé par le client",
+                "Écrit des phrases claires et complètes"
+              ],
+              "starter": "L'élève se trompe, car…",
+              "explanation": "Corrigé modèle : « L'élève se trompe, car le prix de ce qu'il achète contient de la TVA. La TVA est un impôt indirect : tout client la paie, même sans salaire. » Le premier critère vaut 1 point, le deuxième 0,5 point, la clarté 0,5 point.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Les salles de classe de Kouadiokro",
+          "statement": "Dans le village de Kouadiokro, la commune ouvre deux nouvelles salles de classe à l'école publique et répare la route qui mène au centre de santé. Le chef du village explique aux habitants que l'argent vient des impôts. Un habitant sans enfant réplique : « Cela ne me regarde pas. »",
+          "exercise_type": "fixation",
+          "hint": "L'impôt finance les dépenses de tous, pas seulement celles de celui qui paie.",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle phrase du chef du village est exacte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier la dépense : des salles de classe publiques. 2. Chercher d'où vient l'argent : des impôts versés par tous les contribuables. 3. Repérer les rôles : l'agent collecte, il ne donne pas l'argent. 4. Conclure : l'impôt finance les dépenses de tous.",
+              "answers": [
+                {
+                  "content": "Les salles de classe ne coûtent rien à personne",
+                  "correct": false
+                },
+                {
+                  "content": "Les salles de classe sont financées par les seuls parents d'élèves",
+                  "correct": false
+                },
+                {
+                  "content": "Les salles de classe sont offertes par l'agent des impôts",
+                  "correct": false
+                },
+                {
+                  "content": "Les salles de classe sont financées grâce aux impôts de l'ensemble des contribuables",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le chemin de l'argent jusqu'aux salles de classe.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Identifier le départ : les contribuables paient. 2. Repérer les rôles : la DGI collecte, le Trésor reçoit, l'État et la commune dépensent. 3. Conclure : les enfants profitent des salles à la fin du chemin.",
+              "answers": [
+                {
+                  "content": "Les habitants et les commerçants paient leurs impôts"
+                },
+                {
+                  "content": "La DGI collecte les impôts et contrôle les déclarations"
+                },
+                {
+                  "content": "Les sommes collectées rejoignent le Trésor public"
+                },
+                {
+                  "content": "L'État et la commune paient les travaux"
+                },
+                {
+                  "content": "Les enfants s'installent dans les nouvelles salles"
+                }
+              ]
+            },
+            {
+              "content": "Les sommes collectées par la DGI rejoignent le ___ public, la caisse de l'État.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Identifier où va l'argent collecté. 2. Repérer le rôle de chacun : la DGI collecte, elle ne garde rien. 3. Conclure : les recettes rejoignent le Trésor public.",
+              "answers": [
+                {
+                  "content": "Trésor",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un habitant sans enfant n'a pas à payer d'impôt, car l'école ne lui sert pas.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier la règle : l'impôt est obligatoire. 2. Chercher la contrepartie : il n'y en a pas de directe. 3. Conclure : l'impôt finance les dépenses de tous, dont l'école, la route et le centre de santé. La réponse est Faux.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la mission de la DGI dans cette histoire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le rôle de la DGI : administration des impôts. 2. Repérer ce qu'elle fait : informer, recevoir les déclarations, collecter, contrôler. 3. Conclure. Construire relève des entreprises payées par l'État ; décider relève des élus ; juger relève des tribunaux.",
+              "answers": [
+                {
+                  "content": "Collecter les impôts et contrôler qu'ils sont bien payés",
+                  "correct": true
+                },
+                {
+                  "content": "Décider quelles routes il faut réparer",
+                  "correct": false
+                },
+                {
+                  "content": "Construire elle-même les salles de classe",
+                  "correct": false
+                },
+                {
+                  "content": "Juger les habitants qui ne paient pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'habitant dit : « Cela ne me regarde pas. » Réponds-lui en trois phrases : dis ce que l'impôt finance et pourquoi il doit le payer aussi.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que l'impôt finance des services publics pour tous",
+                "Dit que l'impôt n'est pas le prix d'un service pour soi seul",
+                "Donne un exemple comme la route ou le centre de santé",
+                "Écrit des phrases claires et polies"
+              ],
+              "starter": "L'impôt finance les services publics pour tous, donc…",
+              "explanation": "Corrigé modèle : « L'impôt finance les services publics dont tout le village profite, comme les salles de classe, la route et le centre de santé. Il n'est pas le prix d'un service pour soi seul : on le paie même si l'on n'utilise pas tout. Vous aussi, vous pouvez avoir besoin de la route ou du centre de santé. » Les trois premiers critères valent 1 point chacun si l'idée est exprimée.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "La quincaillerie de M. Kouassi",
+          "statement": "M. Kouassi tient une quincaillerie dans un quartier de Bouaké. Ce mois-ci, il a vendu pour 600 000 F de marchandises. Il ne déclare à la DGI que 200 000 F de ventes. Pour l'exercice, on suppose que l'impôt à payer est un taux fictif de 10 % des ventes. Ce taux est pris pour l'exercice et ne correspond à aucun impôt réel.",
+          "exercise_type": "evaluation",
+          "hint": "Compare ce qu'il a vendu avec ce qu'il déclare.",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle somme de ventes M. Kouassi ne déclare-t-il pas, en francs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "F",
+              "explanation": "Méthode : 1. Identifier ce qu'il a vendu (600 000 F) et ce qu'il déclare (200 000 F). 2. Comparer : la différence est la part cachée. 3. Calculer : 600 000 − 200 000 = 400 000 F. Répondre 200 000 F, c'est donner la somme déclarée.",
+              "answers": [
+                {
+                  "content": "400000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec le taux fictif de 10 %, quelle somme d'impôt manque-t-il à l'État, en francs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "F",
+              "explanation": "Méthode : 1. Identifier les ventes cachées : 400 000 F. 2. Appliquer le taux fictif : 400 000 × 10 % = 40 000 F. 3. Conclure : 40 000 F d'impôt manquent. Autre façon : impôt dû 60 000 F, impôt payé 20 000 F, manque 40 000 F.",
+              "answers": [
+                {
+                  "content": "40000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Comment appelle-t-on le comportement de M. Kouassi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier les faits : 600 000 F vendus, 200 000 F déclarés. 2. Comparer avec la loi : toutes les ventes doivent être déclarées. 3. Nommer : cacher des ventes pour payer moins est une fraude fiscale. Le civisme serait de tout déclarer.",
+              "answers": [
+                {
+                  "content": "Un don à l'État",
+                  "correct": false
+                },
+                {
+                  "content": "Du civisme fiscal",
+                  "correct": false
+                },
+                {
+                  "content": "Une fraude fiscale",
+                  "correct": true
+                },
+                {
+                  "content": "Un impôt indirect",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles conséquences peuvent frapper M. Kouassi si la DGI découvre la fraude ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Identifier la fraude : des ventes cachées. 2. Chercher ce que l'administration peut faire : contrôler, faire payer ce qui manquait, ajouter une pénalité. 3. Conclure : la fraude ne se récompense pas, elle se sanctionne.",
+              "answers": [
+                {
+                  "content": "Les félicitations de la DGI",
+                  "correct": false
+                },
+                {
+                  "content": "Un contrôle de sa comptabilité",
+                  "correct": true
+                },
+                {
+                  "content": "Une baisse de ses impôts de l'an prochain",
+                  "correct": false
+                },
+                {
+                  "content": "L'obligation de payer ce qui manquait",
+                  "correct": true
+                },
+                {
+                  "content": "Une pénalité à payer en plus",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le rôle de la DGI dans cette situation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le rôle de la DGI. 2. Repérer ce qu'elle fait : recevoir les déclarations, les contrôler, collecter. 3. Conclure. L'argent va au Trésor public, et seul un tribunal juge.",
+              "answers": [
+                {
+                  "content": "Garder l'argent des impôts pour ses agents",
+                  "correct": false
+                },
+                {
+                  "content": "Juger M. Kouassi et fixer sa peine de prison",
+                  "correct": false
+                },
+                {
+                  "content": "Contrôler que la déclaration de M. Kouassi est exacte",
+                  "correct": true
+                },
+                {
+                  "content": "Décider seule de ne plus faire payer d'impôts",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en quatre lignes ce que M. Kouassi devrait faire et pourquoi, en citant une conséquence de sa fraude pour les habitants du quartier.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit qu'il doit déclarer toutes ses ventes et payer l'impôt",
+                "Rappelle que payer l'impôt est un devoir civique",
+                "Cite une conséquence pour les habitants (moins de moyens pour les écoles, routes ou hôpitaux)",
+                "Écrit des phrases claires et complètes"
+              ],
+              "starter": "M. Kouassi devrait…",
+              "explanation": "Corrigé modèle : « M. Kouassi devrait déclarer ses 600 000 F de ventes et payer l'impôt correspondant, car payer l'impôt est un devoir civique. Sa fraude prive l'État de 40 000 F, donc de moyens pour les écoles, les routes et les centres de santé du quartier. » Les trois premiers critères valent 1 point chacun.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le bulletin de la commune de Ténin",
+          "statement": "Document 1 (texte écrit pour Lnclass, extrait d'un bulletin communal fictif) : « Cette année, la commune de Ténin a utilisé l'argent des impôts pour réparer deux routes et équiper le centre de santé. Les recettes ont été plus faibles que prévu, car plusieurs commerçants n'ont pas déclaré toutes leurs ventes. » Document 2 (chiffres fictifs) : recettes prévues, 20 000 000 F ; recettes reçues, 15 000 000 F.",
+          "exercise_type": "evaluation",
+          "hint": "Appuie-toi sur les deux documents et sur le devoir civique.",
+          "figure": null,
+          "questions": [
+            {
+              "content": "D'après le document 2, quelle somme manque à la commune, en francs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "F",
+              "explanation": "Méthode : 1. Identifier les données : prévu 20 000 000 F, reçu 15 000 000 F. 2. Comparer : on cherche la différence. 3. Calculer : 20 000 000 − 15 000 000 = 5 000 000 F.",
+              "answers": [
+                {
+                  "content": "5000000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après le document 1, quelle est la cause de cette baisse des recettes ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Lire le document 1 : il parle de commerçants qui ne déclarent pas toutes leurs ventes. 2. Relier cause et conséquence : moins de ventes déclarées, moins de recettes. 3. Conclure. Rien dans le document n'accuse la DGI, et réparer des routes est une dépense, pas la cause d'une baisse de recettes.",
+              "answers": [
+                {
+                  "content": "Les habitants ont refusé de payer la TVA dans les prix",
+                  "correct": false
+                },
+                {
+                  "content": "La commune a réparé trop de routes",
+                  "correct": false
+                },
+                {
+                  "content": "Des commerçants n'ont pas déclaré toutes leurs ventes",
+                  "correct": true
+                },
+                {
+                  "content": "La DGI a gardé une partie de l'argent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque comportement à sa conséquence pour la commune.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Identifier chaque comportement. 2. Comparer avec la loi. 3. Mesurer les conséquences : déclarer donne des recettes, cacher en retire, une facture garde la trace de la vente.",
+              "answers": [
+                {
+                  "content": "Déclarer toutes ses ventes",
+                  "match": "Plus de moyens pour les services publics"
+                },
+                {
+                  "content": "Cacher une partie de ses ventes",
+                  "match": "Moins de recettes pour la commune"
+                },
+                {
+                  "content": "Demander une facture",
+                  "match": "Aide à déclarer toutes les ventes"
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces comportements, lesquels relèvent du civisme fiscal ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Identifier ce que fait la personne. 2. Comparer avec ce que la loi demande. 3. Nommer : déclarer honnêtement et payer à temps sont du civisme fiscal ; cacher des ventes est une fraude ; donner de l'argent à un agent est de la corruption.",
+              "answers": [
+                {
+                  "content": "Déclarer honnêtement toutes ses ventes",
+                  "correct": true
+                },
+                {
+                  "content": "Cacher une partie de ses ventes",
+                  "correct": false
+                },
+                {
+                  "content": "Payer ses impôts à temps",
+                  "correct": true
+                },
+                {
+                  "content": "Donner de l'argent à un agent pour ne pas payer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le document 1, l'argent des impôts finance des dépenses qui profitent à tous les habitants.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Lire le document 1 : routes réparées et centre de santé équipé. 2. Relier : ces dépenses sont des services publics. 3. Conclure : elles profitent à tous. La réponse est Vrai.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La TVA comprise dans le prix des produits vendus à Ténin est…",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer : la TVA est comprise dans le prix d'un achat. 2. Classer : c'est un impôt indirect. 3. Repérer qui la reverse : le commerçant. Elle n'est ni un impôt sur le revenu, ni un don, ni une amende.",
+              "answers": [
+                {
+                  "content": "un don volontaire du client",
+                  "correct": false
+                },
+                {
+                  "content": "un impôt direct payé sur les revenus du client",
+                  "correct": false
+                },
+                {
+                  "content": "une amende payée par le commerçant",
+                  "correct": false
+                },
+                {
+                  "content": "un impôt indirect, que les commerçants reversent à l'administration",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un camarade dit : « Payer l'impôt, c'est de l'argent perdu. » Es-tu d'accord ? Réponds en cinq lignes avec deux arguments appuyés sur la situation de Ténin et sur le devoir civique.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Prend position clairement",
+                "Donne un premier argument : l'impôt finance des services publics (routes, centre de santé)",
+                "Donne un second argument : payer est un devoir civique, la fraude prive la commune de moyens",
+                "Appuie un argument sur les documents (5 000 000 F manquants)",
+                "Écrit des phrases claires et polies"
+              ],
+              "starter": "Je ne suis pas d'accord, car…",
+              "explanation": "Corrigé modèle : « Je ne suis pas d'accord. L'impôt n'est pas de l'argent perdu : à Ténin, il a servi à réparer deux routes et à équiper le centre de santé, dont tout le monde profite. De plus, payer l'impôt est un devoir civique, et quand des commerçants cachent leurs ventes, la commune perd 5 000 000 F de recettes. » On accorde 1 point à la prise de position, 1 point à chaque argument, 1 point à l'appui sur les documents, et la clarté peut compléter le barème.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "La définition de l'impôt et du contribuable ; la différence entre impôt, don et achat ; les impôts directs et indirects, la TVA et le prix TTC ; les services publics financés par l'impôt et le rôle de la DGI ; le devoir civique, la fraude et ses conséquences.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur d'EDHC demande aux élèves de définir l'impôt et de le distinguer d'un don et d'un achat.",
+              "exercise_type": "evaluation",
+              "hint": "Un impôt est obligatoire, fixé par la loi et sans service précis en échange.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui est le contribuable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier qui verse la somme. 2. Chercher son rôle : il paie. 3. Conclure : celui qui paie l'impôt est le contribuable. L'agent qui encaisse est un collecteur et le ministre dépense.",
+                  "answers": [
+                    {
+                      "content": "La personne ou l'entreprise qui paie l'impôt",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'agent qui encaisse l'impôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le client qui paie un achat au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ministre qui dépense les recettes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un impôt est une somme que l'on verse librement à l'État si l'on en a envie.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier la nature de la somme. 2. Chercher si elle est obligatoire : la loi impose l'impôt. 3. Conclure : la réponse est Faux ; un paiement libre est un don.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'impôt finance les dépenses ___, c'est-à-dire celles qui servent à tous.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier à quoi sert l'impôt. 2. Chercher le bénéficiaire : tous les citoyens. 3. Conclure : il finance les dépenses publiques. Écrire « privées » serait contraire au sens de l'impôt.",
+                  "answers": [
+                    {
+                      "content": "publiques",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier à qui va la somme. 2. Chercher si elle est obligatoire. 3. Chercher la contrepartie : le ballon est reçu en échange du prix, le cadeau est libre, l'impôt est obligatoire et sans contrepartie directe.",
+                  "answers": [
+                    {
+                      "content": "Le prix d'un ballon acheté en magasin",
+                      "match": "Un achat"
+                    },
+                    {
+                      "content": "Un élève offre un cadeau à sa mère",
+                      "match": "Un don"
+                    },
+                    {
+                      "content": "Une somme obligatoire, fixée par la loi, versée à la commune",
+                      "match": "Un impôt"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels caractères appartiennent à l'impôt ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier la somme. 2. Chercher si elle est obligatoire : oui. 3. Chercher la contrepartie : aucune de directe. 4. Conclure : l'impôt est obligatoire et fixé par la loi. Il n'est ni volontaire ni le prix d'un service personnel.",
+                  "answers": [
+                    {
+                      "content": "Il est obligatoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est volontaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il paie un service réservé à celui qui le verse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est fixé par la loi",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le club EDHC classe des impôts et fait un calcul. Les taux sont fictifs.",
+              "exercise_type": "evaluation",
+              "hint": "Hors taxe : sans la TVA. TTC : avec la TVA.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un impôt compris dans le prix d'un produit est un impôt…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer l'occasion du paiement : un achat. 2. Regarder : l'impôt est ajouté au prix. 3. Classer : c'est un impôt indirect. L'impôt direct est demandé directement au contribuable.",
+                  "answers": [
+                    {
+                      "content": "indirect",
+                      "correct": true
+                    },
+                    {
+                      "content": "volontaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "direct",
+                      "correct": false
+                    },
+                    {
+                      "content": "local seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque impôt à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Repérer sur quoi porte l'impôt : un bien, un revenu ou un achat. 2. Regarder comment il est payé. 3. Classer : foncier et salaire sont demandés directement, la TVA est comprise dans le prix.",
+                  "answers": [
+                    {
+                      "content": "L'impôt foncier sur une maison",
+                      "match": "Impôt direct sur un bien"
+                    },
+                    {
+                      "content": "L'impôt sur le salaire d'un employé",
+                      "match": "Impôt direct sur un revenu"
+                    },
+                    {
+                      "content": "La TVA sur un cahier",
+                      "match": "Impôt indirect compris dans le prix"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un téléphone coûte 20 000 F hors taxe. Avec un taux fictif de TVA de 10 %, quel est le montant de la TVA, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Repérer le prix hors taxe (20 000 F) et le taux (10 %). 2. Calculer : 20 000 × 10 % = 2 000 F. Répondre 22 000 F, c'est donner le prix TTC.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un impôt indirect est payé par le client sans que celui-ci le voie toujours.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer : l'impôt est compris dans le prix. 2. Regarder : le client paie le prix total. 3. Conclure : il paie l'impôt sans toujours le voir. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prix ___ est le prix qui contient la TVA.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Repérer la TVA dans le prix. 2. Classer : le prix TTC est celui qui contient toutes les taxes. 3. Conclure : on choisit « TTC ». Le prix hors taxe est le prix sans la TVA.",
+                  "answers": [
+                    {
+                      "content": "de revient",
+                      "correct": false
+                    },
+                    {
+                      "content": "de gros",
+                      "correct": false
+                    },
+                    {
+                      "content": "TTC",
+                      "correct": true
+                    },
+                    {
+                      "content": "hors taxe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le professeur demande à quoi sert l'impôt et ce que fait la DGI.",
+              "exercise_type": "evaluation",
+              "hint": "La DGI informe, collecte et contrôle. L'argent va au Trésor public.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que signifie le sigle DGI ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire le sigle : D, G, I. 2. Associer : Direction, générale, impôts. 3. Conclure. Les autres propositions inventent un nom qui ne correspond pas à l'administration des impôts.",
+                  "answers": [
+                    {
+                      "content": "Direction générale des intérêts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Délégation générale des industries",
+                      "correct": false
+                    },
+                    {
+                      "content": "Direction générale des impôts",
+                      "correct": true
+                    },
+                    {
+                      "content": "Direction générale des institutions",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels services publics sont financés par les impôts ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier les services publics. 2. Chercher d'où vient l'argent : des impôts. 3. Conclure : école, santé et routes publiques sont financées par l'impôt ; une boutique ou une maison sont privées.",
+                  "answers": [
+                    {
+                      "content": "Les routes publiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "La boutique privée d'un commerçant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La maison d'un particulier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les écoles publiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les centres de santé publics",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'agent de la DGI qui encaisse un impôt peut garder l'argent pour lui.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier son rôle : il collecte. 2. Repérer le propriétaire de l'argent : l'État. 3. Conclure : la somme rejoint le Trésor public. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Trésor public est la ___ de l'État.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier où va l'argent collecté. 2. Repérer le rôle du Trésor public : il reçoit les recettes. 3. Conclure : c'est la caisse de l'État.",
+                  "answers": [
+                    {
+                      "content": "caisse",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle mission appartient à la DGI ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'administration : les impôts. 2. Repérer ses missions : informer, recevoir les déclarations, collecter, contrôler. 3. Conclure. Voter relève du Parlement, juger d'un tribunal, construire de l'État et des entreprises.",
+                  "answers": [
+                    {
+                      "content": "Construire les écoles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Contrôler que les déclarations des contribuables sont exactes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Juger les fraudeurs",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le club EDHC réfléchit au devoir de payer l'impôt et à la fraude.",
+              "exercise_type": "evaluation",
+              "hint": "Cacher pour payer moins, c'est la fraude. Elle réduit les moyens de tous.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une commerçante vend pour 90 000 F et ne déclare que 30 000 F pour payer moins. Quel est le nom de ce comportement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : 90 000 F vendus, 30 000 F déclarés. 2. Comparer avec la loi : tout doit être déclaré. 3. Nommer : cacher pour payer moins est une fraude fiscale.",
+                  "answers": [
+                    {
+                      "content": "La fraude fiscale",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'impôt direct",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le don",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le civisme fiscal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Demander une facture ou un reçu est un geste de civisme fiscal.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le geste : demander une facture. 2. Comparer avec la loi : les ventes doivent être déclarées, et la facture en garde la trace. 3. Nommer : civisme fiscal. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels comportements relèvent du civisme fiscal ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier ce que fait la personne. 2. Comparer avec la loi. 3. Nommer : déclarer et payer à temps sont civiques ; cacher est une fraude, donner de l'argent à un agent est de la corruption.",
+                  "answers": [
+                    {
+                      "content": "Payer ses impôts à temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Donner de l'argent à un agent pour ne pas payer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Déclarer honnêtement ses revenus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Cacher une partie de ses ventes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une ville fictive, 20 commerçants cachent chacun 5 000 F d'impôts. Quelle somme manque à la ville, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Identifier : 20 commerçants, 5 000 F chacun. 2. Calculer : 20 × 5 000 = 100 000 F. 3. Conclure : de petites fraudes répétées font une grosse perte pour les services publics.",
+                  "answers": [
+                    {
+                      "content": "100000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une conséquence de la fraude fiscale pour la population ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la fraude : des sommes cachées. 2. Mesurer les conséquences : l'État reçoit moins d'argent. 3. Conclure : moins de moyens pour les services publics. Les autres propositions ignorent cette perte.",
+                  "answers": [
+                    {
+                      "content": "Moins de moyens pour les écoles, les hôpitaux et les routes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus de services publics",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une baisse du prix de tous les produits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune conséquence",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante",
+          "notions": "L'impôt dans la vie quotidienne en Côte d'Ivoire : la TVA dans le prix d'un achat, les impôts directs dans une famille, les services publics du quartier et de la commune, la facture et la déclaration d'un commerçant.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Daloa, Mariam achète un pagne chez une commerçante. Le prix affiché est de 5 000 F hors taxe. Pour l'exercice, on prend un taux de TVA fictif de 10 %.",
+              "exercise_type": "evaluation",
+              "hint": "Calcule d'abord la TVA, puis ajoute-la au prix hors taxe.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le montant de la TVA sur le pagne, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Repérer le prix hors taxe (5 000 F) et le taux fictif (10 %). 2. Calculer : 5 000 × 10 % = 500 F.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le prix TTC du pagne, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Repérer : prix hors taxe 5 000 F, TVA 500 F. 2. Ajouter : 5 000 + 500 = 5 500 F. Répondre 500 F serait donner la TVA seule.",
+                  "answers": [
+                    {
+                      "content": "5500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui supporte la TVA dans cette vente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer qui paie : la cliente. 2. Regarder : la TVA est ajoutée au prix. 3. Classer : impôt indirect, supporté par le client. La commerçante le reverse mais ne le supporte pas.",
+                  "answers": [
+                    {
+                      "content": "Mariam, la cliente, car la TVA est comprise dans le prix",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'agent des impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "La commerçante seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La commerçante doit reverser la TVA à l'administration.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer qui encaisse la TVA : la commerçante. 2. Repérer qui possède l'argent : l'État. 3. Conclure : elle la reverse à l'administration. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur la TVA sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Repérer l'occasion du paiement : un achat. 2. Regarder : la TVA est ajoutée au prix. 3. Classer : indirect. Elle n'est ni un impôt direct sur le revenu ni un cadeau.",
+                  "answers": [
+                    {
+                      "content": "Elle est un cadeau volontaire à la commerçante",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un impôt direct sur le revenu du client",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est comprise dans le prix payé par le client",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un impôt indirect",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À l'école publique du quartier, des travaux ont permis de construire un préau et de réparer le toit. Le directeur explique que la commune a utilisé l'argent des impôts. Pour l'exercice, on suppose que la commune dispose de 8 000 000 F d'impôts.",
+              "exercise_type": "evaluation",
+              "hint": "L'impôt finance ce qui sert à tous les habitants.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "D'où vient l'argent qui a payé ces travaux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la dépense : des travaux d'école publique. 2. Chercher l'origine : les impôts. 3. Conclure. L'agent collecte pour l'État ; les parents ne sont pas les seuls contribuables.",
+                  "answers": [
+                    {
+                      "content": "De l'agent des impôts personnellement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des seuls parents d'élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'aucune source",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des impôts versés par les contribuables",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune consacre le quart de ses 8 000 000 F d'impôts à l'école. Quelle somme consacre-t-elle à l'école, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Identifier la somme : 8 000 000 F. 2. Calculer le quart : 8 000 000 ÷ 4 = 2 000 000 F.",
+                  "answers": [
+                    {
+                      "content": "2000000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dont les parents ne paient aucun impôt direct profite quand même de l'école publique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le service : l'école publique est ouverte à tous. 2. Chercher le financement : l'ensemble des impôts, dont la TVA que tous paient dans les prix. 3. Conclure : la réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels autres services publics l'impôt peut-il financer dans le quartier ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier les services publics. 2. Chercher le financement : l'impôt. 3. Conclure : route, centre de santé et éclairage public servent à tous ; un magasin privé et un téléphone ne sont pas publics.",
+                  "answers": [
+                    {
+                      "content": "Le téléphone d'un voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'éclairage d'une rue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une route publique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un magasin privé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un centre de santé public",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les services qui servent à tous les habitants s'appellent les services ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier ce qui sert à tous. 2. Nommer : ce sont les services publics. Écrire « privés » serait faux, car ils servent à une seule personne ou entreprise.",
+                  "answers": [
+                    {
+                      "content": "publics",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la famille d'Aya, la mère est salariée, le père achète souvent des appareils au magasin et la grand-mère est propriétaire d'une maison.",
+              "exercise_type": "evaluation",
+              "hint": "Revenu ou bien : impôt direct. Achat : impôt indirect.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque membre de la famille à l'impôt qu'il paie.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Repérer sur quoi porte l'impôt de chacun : revenu, bien ou achat. 2. Regarder comment il est payé. 3. Classer : direct pour le salaire et la maison, indirect pour l'achat.",
+                  "answers": [
+                    {
+                      "content": "La mère, qui touche un salaire",
+                      "match": "Impôt direct sur un revenu"
+                    },
+                    {
+                      "content": "La grand-mère, propriétaire de sa maison",
+                      "match": "Impôt direct sur un bien"
+                    },
+                    {
+                      "content": "Le père, qui achète un appareil",
+                      "match": "Impôt indirect compris dans le prix"
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya n'a aucun revenu et achète un cahier. Paie-t-elle un impôt ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : elle fait un achat. 2. Regarder : la TVA est ajoutée au prix. 3. Classer : impôt indirect. Elle n'a pas de revenu ni de maison, donc ni impôt sur le revenu ni impôt foncier.",
+                  "answers": [
+                    {
+                      "content": "Non, car elle n'a pas de revenu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, un impôt indirect compris dans le prix du cahier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, un impôt foncier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, un impôt direct sur ses revenus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Seule la mère d'Aya contribue aux dépenses publiques dans cette famille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer les paiements de chacun. 2. Classer : salaire, maison et achats sont tous concernés. 3. Conclure : chacun contribue, d'une manière ou d'une autre. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le père d'Aya achète une radio à 10 000 F hors taxe. Avec un taux fictif de TVA de 10 %, quel est le prix TTC, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Repérer : 10 000 F hors taxe, taux 10 %. 2. Calculer la TVA : 10 000 × 10 % = 1 000 F. 3. Ajouter : 10 000 + 1 000 = 11 000 F.",
+                  "answers": [
+                    {
+                      "content": "11000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'impôt foncier de la grand-mère est un impôt ___ sur un bien.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Repérer : l'impôt porte sur une maison, donc sur un bien. 2. Regarder : le propriétaire le paie directement. 3. Classer : impôt direct.",
+                  "answers": [
+                    {
+                      "content": "indirect",
+                      "correct": false
+                    },
+                    {
+                      "content": "volontaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "gratuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "direct",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mme Aka tient une boutique dans son quartier. Un client lui demande une facture, un autre lui dit : « Sans facture, ce sera moins cher pour tous les deux. »",
+              "exercise_type": "evaluation",
+              "hint": "Une facture garde la trace de la vente.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que doit répondre Mme Aka au client qui propose de vendre sans facture ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : une vente proposée sans trace. 2. Comparer avec la loi : toutes les ventes doivent être déclarées. 3. Nommer : vendre sans facture pour payer moins est de la fraude. 4. Dire le bon comportement : donner une facture.",
+                  "answers": [
+                    {
+                      "content": "Que la loi ne regarde pas les petites ventes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Qu'elle va garder la différence pour elle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que c'est une bonne idée, car cela fait payer moins d'impôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Qu'elle doit déclarer toutes ses ventes et donner une facture",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche honnête de Mme Aka.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Identifier la vente : elle a lieu d'abord. 2. Garder une trace avec la facture ou le reçu remis au client. 3. Déclarer à l'administration toutes les ventes. 4. Payer l'impôt à temps. On ne peut déclarer une vente qu'après l'avoir faite et facturée, et on paie l'impôt calculé sur ce qui est déclaré.",
+                  "answers": [
+                    {
+                      "content": "Vendre un produit au client"
+                    },
+                    {
+                      "content": "Donner une facture ou un reçu au client"
+                    },
+                    {
+                      "content": "Déclarer toutes ses ventes à l'administration"
+                    },
+                    {
+                      "content": "Payer l'impôt à temps"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une facture aide la commerçante à déclarer toutes ses ventes.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le rôle de la facture : elle garde la trace de la vente. 2. Comparer avec la loi : toutes les ventes doivent être déclarées. 3. Conclure : la réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Aka a vendu pour 250 000 F ce mois-ci. Elle en déclare 100 000 F. Quelle somme cache-t-elle, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Identifier : 250 000 F vendus, 100 000 F déclarés. 2. Calculer : 250 000 − 100 000 = 150 000 F cachés.",
+                  "answers": [
+                    {
+                      "content": "150000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les conséquences possibles si l'administration découvre la fraude ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier la fraude. 2. Mesurer les conséquences pour la personne : contrôle, paiement de ce qui manque, pénalité. 3. Conclure : une fraude n'est jamais récompensée.",
+                  "answers": [
+                    {
+                      "content": "Une récompense pour la commerçante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le paiement de ce qui manquait avec une pénalité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une baisse automatique de tous ses impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un contrôle de la boutique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Répondre à des idées reçues sur l'impôt en les justifiant : l'impôt n'est pas un vol ni un don, tout consommateur paie des impôts indirects, celui qui collecte ne possède pas l'argent, une petite fraude répétée fait une grande perte.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Lors d'un débat au collège, plusieurs élèves répètent des idées reçues sur l'impôt. Tu dois choisir la bonne réponse et la justifier.",
+              "exercise_type": "evaluation",
+              "hint": "Pour répondre à une idée reçue, rappelle la règle et à quoi sert l'impôt.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève dit : « L'impôt, c'est du vol. » Quelle réponse est la mieux justifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'idée reçue. 2. Chercher la règle : l'impôt est fixé par la loi, il n'est pas pris par une personne pour elle-même. 3. Chercher l'usage : il finance l'école, la santé, les routes. 4. Conclure. L'impôt est obligatoire, ce n'est donc pas un don.",
+                  "answers": [
+                    {
+                      "content": "Non : l'impôt est fixé par la loi et finance des services publics pour tous",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non : l'impôt est un don que l'on peut refuser",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : l'agent des impôts garde l'argent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : on ne reçoit jamais rien en échange",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un autre dit : « Seuls les riches paient des impôts. » Quelle réponse est la mieux justifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'idée reçue. 2. Chercher la règle : la TVA est comprise dans les prix. 3. Conclure : tout acheteur la paie. Elle n'est pas un impôt sur le revenu, et l'affirmation que personne ne paie est absurde.",
+                  "answers": [
+                    {
+                      "content": "Faux : tout consommateur paie des impôts indirects comme la TVA",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai : les autres personnes n'achètent rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : personne ne paie d'impôt en Côte d'Ivoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai : la TVA est un impôt sur le revenu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève dit : « Les agents des impôts s'enrichissent avec l'argent qu'ils collectent. » Quelle réponse est la mieux justifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'idée reçue. 2. Chercher le rôle : l'agent collecte pour le compte de l'État. 3. Conclure : celui qui collecte n'est pas propriétaire. Si un agent gardait l'argent, ce serait une faute grave.",
+                  "answers": [
+                    {
+                      "content": "Oui : celui qui collecte devient propriétaire de la somme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : la DGI vote la loi et garde les recettes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : ils collectent pour l'État et l'argent rejoint le Trésor public",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non : ils ne collectent rien du tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affirmation « Une petite fraude ne fait de mal à personne » est fausse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier l'idée reçue. 2. Mesurer les conséquences : 100 fraudes de 10 000 F font 1 000 000 F de pertes. 3. Conclure : l'affirmation est fausse, la réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels arguments répondent bien à quelqu'un qui dit « Payer l'impôt ne sert à rien » ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier l'idée reçue. 2. Chercher l'usage de l'impôt : services publics. 3. Conclure : les arguments sur le financement des écoles, des centres de santé et des routes, et sur les moyens de l'État, sont exacts. Dire que l'impôt enrichit les agents ou qu'il est un don est faux.",
+                  "answers": [
+                    {
+                      "content": "L'impôt finance les écoles, les centres de santé et les routes",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'impôt sert à enrichir les agents des impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sans impôts, l'État aurait moins de moyens pour les services publics",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'impôt est un don dont on peut se passer",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le professeur propose des phrases à juger. Tu justifies chaque réponse en citant la règle.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque phrase, cherche la règle qui montre l'erreur.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "« Mon voisin n'a pas d'enfant, il n'a donc pas à payer d'impôt pour l'école. » Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'affirmation. 2. Chercher la règle : l'impôt n'a pas de contrepartie directe. 3. Conclure : il finance les dépenses de tous, dont l'école.",
+                  "answers": [
+                    {
+                      "content": "Parce que l'école publique est payée par un don",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que l'impôt finance les dépenses de tous, pas seulement celles de celui qui paie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que l'impôt est le prix de l'école pour chaque enfant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que seuls les parents sont contribuables",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« La TVA est un impôt direct, puisque le client la paie lui-même au commerçant. » Cette affirmation est exacte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier l'affirmation. 2. Chercher la règle : la TVA est comprise dans le prix, le commerçant la reverse. 3. Conclure : c'est un impôt indirect. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "« La fraude, c'est seulement une affaire entre le commerçant et l'administration. » Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'affirmation. 2. Mesurer les conséquences : moins de recettes. 3. Conclure : tous les habitants sont touchés par la perte des services publics.",
+                  "answers": [
+                    {
+                      "content": "Parce que la fraude profite à l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la fraude est un devoir civique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la fraude diminue les moyens des services publics de toute la population",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la fraude est un impôt indirect",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels arguments montrent que payer l'impôt est un devoir civique ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier le devoir. 2. Chercher les raisons : contribution de chacun, services pour tous, justice entre citoyens. 3. Conclure : les services pour tous, la contribution de chacun et la justice envers les contribuables honnêtes sont des arguments justes. Dire que seul l'État a des dépenses, ou qu'on ne paie que ce qu'on utilise, reprend des erreurs du cours.",
+                  "answers": [
+                    {
+                      "content": "Les services publics profitent à tous",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chacun doit contribuer aux dépenses publiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seul l'État a des dépenses à financer",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne paie que pour les services qu'on utilise",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ceux qui fraudent désavantagent ceux qui paient honnêtement",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Celui qui collecte l'impôt n'est pas le ___ de l'argent : celui-ci appartient à l'État.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier le rôle de l'agent : il collecte. 2. Chercher à qui appartient l'argent : à l'État. 3. Conclure : l'agent n'en est pas le propriétaire.",
+                  "answers": [
+                    {
+                      "content": "propriétaire",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour un exposé, des élèves doivent classer des situations et reconstituer des raisonnements.",
+              "exercise_type": "evaluation",
+              "hint": "Chaque étape d'un raisonnement s'appuie sur la précédente.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre le raisonnement : « Pourquoi un élève paie-t-il quand même des impôts ? »",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer l'achat. 2. Regarder le prix : il contient la TVA. 3. Classer : impôt indirect. 4. Conclure. Chaque étape appuie la suivante.",
+                  "answers": [
+                    {
+                      "content": "L'élève achète un cahier"
+                    },
+                    {
+                      "content": "Le prix du cahier contient de la TVA"
+                    },
+                    {
+                      "content": "La TVA est un impôt indirect"
+                    },
+                    {
+                      "content": "L'élève paie donc un impôt sans le voir"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque affirmation à l'erreur qu'elle contient ou à sa vérité.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier chaque affirmation. 2. Comparer avec la règle du cours. 3. Conclure : l'impôt est obligatoire, la TVA est dans le prix, l'argent collecté appartient à l'État.",
+                  "answers": [
+                    {
+                      "content": "« L'impôt est un don libre »",
+                      "match": "Faux : il est obligatoire"
+                    },
+                    {
+                      "content": "« La TVA est comprise dans le prix »",
+                      "match": "Vrai : c'est un impôt indirect"
+                    },
+                    {
+                      "content": "« L'agent garde l'argent collecté »",
+                      "match": "Faux : il appartient à l'État"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une commune fictive, 200 contribuables paient chacun 1 000 F d'un impôt fictif. Quelle somme la commune reçoit-elle, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Identifier : 200 contribuables, 1 000 F chacun. 2. Calculer : 200 × 1 000 = 200 000 F.",
+                  "answers": [
+                    {
+                      "content": "200000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune fictive reçoit 200 000 F au lieu de 250 000 F prévus. Quelle explication est la mieux justifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le manque : 250 000 − 200 000 = 50 000 F. 2. Chercher les causes possibles : des impôts non payés ou des ventes cachées. 3. Conclure. Les autres explications ne sont pas appuyées par les faits.",
+                  "answers": [
+                    {
+                      "content": "Les contribuables ont payé deux fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "La DGI a décidé de supprimer l'impôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Trésor public a rendu l'argent aux contribuables",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plusieurs contribuables ont peut-être fraudé ou n'ont pas payé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si tous les contribuables déclarent honnêtement, la commune a plus de moyens pour ses services publics.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier la condition : déclarations honnêtes. 2. Chercher la conséquence : plus de recettes. 3. Conclure : plus de moyens pour les services publics. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une cliente, Kadi, achète un sac chez un vendeur qui lui dit : « Je ne donne pas de facture, comme ça tu ne paies pas la TVA. » Pour l'exercice, le sac coûte 4 000 F hors taxe et le taux fictif de TVA est de 10 %.",
+              "exercise_type": "evaluation",
+              "hint": "Facture = trace de la vente = TVA déclarée.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le prix TTC du sac avec facture, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Repérer : 4 000 F hors taxe, taux 10 %. 2. Calculer la TVA : 4 000 × 10 % = 400 F. 3. Ajouter : 4 000 + 400 = 4 400 F.",
+                  "answers": [
+                    {
+                      "content": "4400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que fait le vendeur en proposant de ne pas donner de facture ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : une vente sans facture. 2. Comparer avec la loi : toute vente doit être déclarée. 3. Nommer : c'est une fraude. Le civisme serait de facturer.",
+                  "answers": [
+                    {
+                      "content": "Il respecte la loi sur la TVA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il cherche à cacher une vente pour éviter de verser la TVA",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il rend un service à l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il pratique le civisme fiscal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le bon comportement de Kadi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la situation. 2. Comparer avec la loi : la vente doit être déclarée. 3. Dire le bon comportement : demander la facture.",
+                  "answers": [
+                    {
+                      "content": "Accepter sans rien dire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Demander une facture ou un reçu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Cacher la vente à ses parents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Payer plus cher pour encourager la fraude",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut risquer le vendeur si l'administration découvre la fraude ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier la fraude. 2. Mesurer les conséquences pour lui : contrôle, paiement du manque, pénalité. 3. Conclure : aucune récompense.",
+                  "answers": [
+                    {
+                      "content": "Un contrôle de ses ventes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pénalité à payer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une réduction de ses impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une prime de la DGI",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En refusant la facture, Kadi gagnerait vraiment, car la TVA ne serait payée par personne et personne n'en souffrirait.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier l'affirmation. 2. Mesurer les conséquences : la TVA non reversée prive l'État de recettes. 3. Conclure : toute la population en souffre. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : la définition de l'impôt, les impôts directs et indirects et la TVA, l'usage de l'impôt et le rôle de la DGI, le devoir civique et les conséquences de la fraude et de l'évasion fiscales.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Fiche de révision : le professeur demande de rappeler les mots du cours.",
+              "exercise_type": "evaluation",
+              "hint": "Relis les définitions de la leçon.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier chaque mot du cours. 2. Chercher sa définition. 3. Relier : le contribuable paie, la TVA est dans le prix, la DGI collecte et contrôle, le Trésor public reçoit les recettes.",
+                  "answers": [
+                    {
+                      "content": "Contribuable",
+                      "match": "Personne qui paie l'impôt"
+                    },
+                    {
+                      "content": "TVA",
+                      "match": "Impôt indirect compris dans le prix"
+                    },
+                    {
+                      "content": "DGI",
+                      "match": "Administration chargée des impôts"
+                    },
+                    {
+                      "content": "Trésor public",
+                      "match": "Caisse de l'État"
+                    }
+                  ]
+                },
+                {
+                  "content": "Prix hors taxe + TVA = prix ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Repérer la formule du cours. 2. Compléter : prix hors taxe + TVA donne le prix TTC (toutes taxes comprises).",
+                  "answers": [
+                    {
+                      "content": "TTC",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase définit l'évasion fiscale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la notion. 2. Chercher la définition du cours : chercher à échapper à l'impôt en le contournant. 3. Conclure. Les autres phrases décrivent des comportements honnêtes.",
+                  "answers": [
+                    {
+                      "content": "Demander une facture",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chercher à échapper à l'impôt en le contournant, par exemple en faisant sortir son argent du pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Verser une cotisation libre à une association",
+                      "correct": false
+                    },
+                    {
+                      "content": "Payer l'impôt à temps",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La TVA est un impôt indirect.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer : la TVA est comprise dans le prix. 2. Classer : impôt indirect. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont des impôts directs ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Repérer revenu, bien ou achat. 2. Regarder qui paie directement. 3. Classer : l'impôt foncier et l'impôt sur les revenus sont directs ; l'impôt sur la boisson et la TVA du cahier sont compris dans le prix.",
+                  "answers": [
+                    {
+                      "content": "L'impôt foncier d'un propriétaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'impôt sur les revenus d'un salarié",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'impôt compris dans le prix d'une boisson",
+                      "correct": false
+                    },
+                    {
+                      "content": "La TVA d'un cahier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une ville fictive, le service des impôts a collecté 40 000 000 F pour l'année. Pour l'exercice, on suppose que la moitié de cette somme finance l'école et la santé.",
+              "exercise_type": "evaluation",
+              "hint": "Suis le chemin de l'argent.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle somme finance l'école et la santé, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Identifier : 40 000 000 F de recettes. 2. Calculer la moitié : 40 000 000 ÷ 2 = 20 000 000 F.",
+                  "answers": [
+                    {
+                      "content": "20000000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Où cet argent est-il d'abord reçu avant d'être dépensé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le chemin de l'argent. 2. Repérer le rôle de chacun : la DGI collecte, le Trésor reçoit. 3. Conclure : au Trésor public.",
+                  "answers": [
+                    {
+                      "content": "Chez chaque contribuable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la caisse d'une boutique privée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au Trésor public, la caisse de l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chez l'agent qui l'a encaissé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les écoles et les hôpitaux publics sont des exemples de services publics financés par l'impôt.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier les services. 2. Chercher le financement : l'impôt. 3. Conclure. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles missions appartiennent à la DGI ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier l'administration. 2. Repérer ses missions : informer, recevoir, collecter, contrôler. 3. Conclure : voter et juger sont d'autres pouvoirs.",
+                  "answers": [
+                    {
+                      "content": "Informer les contribuables",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter les lois sur l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Contrôler le paiement des impôts",
+                      "correct": true
+                    },
+                    {
+                      "content": "Juger les fraudeurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Recevoir les déclarations",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le chemin de l'impôt.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Identifier le départ : le contribuable. 2. Repérer le rôle de la DGI puis du Trésor. 3. Conclure : l'État dépense en dernier.",
+                  "answers": [
+                    {
+                      "content": "Le contribuable paie"
+                    },
+                    {
+                      "content": "La DGI collecte et contrôle"
+                    },
+                    {
+                      "content": "Le Trésor public reçoit les recettes"
+                    },
+                    {
+                      "content": "L'État finance les services publics"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un commerçant fictif a vendu pour 500 000 F de marchandises. Il déclare 200 000 F. Pour l'exercice, on prend un taux fictif de 10 % des ventes comme impôt.",
+              "exercise_type": "evaluation",
+              "hint": "Calcule d'abord la part cachée, puis le manque d'impôt.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle somme de ventes cache-t-il, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Identifier : 500 000 F vendus, 200 000 F déclarés. 2. Calculer : 500 000 − 200 000 = 300 000 F.",
+                  "answers": [
+                    {
+                      "content": "300000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle somme d'impôt manque à l'État avec le taux fictif de 10 %, en francs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "F",
+                  "explanation": "Méthode : 1. Identifier les ventes cachées : 300 000 F. 2. Appliquer le taux : 300 000 × 10 % = 30 000 F.",
+                  "answers": [
+                    {
+                      "content": "30000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment appelle-t-on son comportement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier les faits. 2. Comparer avec la loi : tout doit être déclaré. 3. Nommer : fraude fiscale.",
+                  "answers": [
+                    {
+                      "content": "Le civisme fiscal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fraude fiscale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un don",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un impôt indirect",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conséquences peuvent frapper ce commerçant ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier la fraude. 2. Mesurer les conséquences : contrôle, paiement du manque, pénalité. 3. Conclure : aucune récompense.",
+                  "answers": [
+                    {
+                      "content": "Un remboursement de ses impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une récompense",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pénalité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un contrôle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce commerçant remplit son devoir civique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier les faits. 2. Comparer avec le devoir civique : payer l'impôt selon la loi. 3. Conclure : il ne le remplit pas, la réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le chef de quartier réunit les habitants pour parler de l'impôt. Plusieurs personnes donnent leur avis.",
+              "exercise_type": "evaluation",
+              "hint": "Répondre à un avis, c'est rappeler la règle et l'usage de l'impôt.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un habitant dit : « Je paie la TVA en achetant du pain, c'est un impôt. » A-t-il raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer l'achat. 2. Regarder le prix : il contient la TVA. 3. Classer : impôt indirect. Le client la supporte, elle n'est pas un don.",
+                  "answers": [
+                    {
+                      "content": "Oui, mais c'est un don",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, c'est un impôt direct",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, la TVA comprise dans les prix est un impôt indirect",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, la TVA n'est jamais payée par le client",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un autre dit : « Je n'ai pas d'enfant, je ne vois pas l'utilité de l'impôt. » Quelle réponse est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'objection. 2. Chercher l'usage de l'impôt : tous les services publics. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "L'impôt finance aussi les routes, les centres de santé et tous les services publics",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'impôt finance seulement l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison : il ne doit pas payer",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'impôt sert à payer l'agent des impôts",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une commerçante qui déclare toutes ses ventes fait preuve de civisme fiscal.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le comportement. 2. Comparer avec la loi. 3. Nommer : civisme fiscal. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fait de tromper l'administration pour payer moins d'impôt s'appelle la ___ fiscale.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier le comportement. 2. Nommer : fraude fiscale.",
+                  "answers": [
+                    {
+                      "content": "fraude",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels gestes relèvent du civisme fiscal ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier chaque geste. 2. Comparer avec la loi. 3. Nommer : déclarer, payer à temps et demander une facture sont civiques ; refuser la facture ou cacher des ventes est de la fraude.",
+                  "answers": [
+                    {
+                      "content": "Payer ses impôts à temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Cacher une partie de ses ventes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Refuser la facture pour payer moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Déclarer honnêtement ses ventes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Demander une facture",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

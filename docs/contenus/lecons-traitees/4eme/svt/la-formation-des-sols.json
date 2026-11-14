@@ -1,0 +1,4048 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La formation des sols",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "SVT",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "profil-sol",
+          "kind": "plate",
+          "description": "Coupe verticale d'un sol, de la surface à la roche dure. De haut en bas : une couche de débris de végétaux, une couche de terre sombre traversée de racines, une couche plus claire, une couche de fragments de roche, puis la roche dure. Chaque couche et les racines sont légendées par leur nom : litière, horizon humifère, horizon d'accumulation, roche mère altérée, roche mère et racines.",
+          "controls": [],
+          "params": {
+            "plate": "soil_profile",
+            "numbering": "names",
+            "labels": [
+              {
+                "part": "litter"
+              },
+              {
+                "part": "humus_horizon"
+              },
+              {
+                "part": "accumulation_horizon"
+              },
+              {
+                "part": "weathered_rock"
+              },
+              {
+                "part": "bedrock"
+              },
+              {
+                "part": "roots"
+              }
+            ]
+          }
+        },
+        {
+          "key": "profil-sol-numeros",
+          "kind": "plate",
+          "description": "Coupe verticale d'un sol, de la surface à la roche dure. De haut en bas : une couche de débris de végétaux, une couche de terre sombre traversée de racines, une couche plus claire, une couche de fragments de roche, puis la roche dure. Les couches et les racines sont repérées par les numéros 1 à 6, sans légende : c'est à l'élève de les légender en s'aidant de ce qu'il observe.",
+          "controls": [],
+          "params": {
+            "plate": "soil_profile",
+            "numbering": "numbers",
+            "labels": [
+              {
+                "part": "litter"
+              },
+              {
+                "part": "humus_horizon"
+              },
+              {
+                "part": "accumulation_horizon"
+              },
+              {
+                "part": "weathered_rock"
+              },
+              {
+                "part": "bedrock"
+              },
+              {
+                "part": "roots"
+              }
+            ]
+          }
+        },
+        {
+          "key": "roche-sol",
+          "kind": "diagram",
+          "description": "Schéma fléché qui montre comment une roche mère donne un sol. La roche mère est dure et compacte. L'eau, les variations de température et les racines la fissurent. Elle se réduit en roche mère altérée, faite de blocs et de sable grossier. Mêlée à la matière organique, la roche mère altérée donne le sol.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "rm",
+                "label": "Roche mère : roche dure et compacte",
+                "category": 1
+              },
+              {
+                "id": "alt",
+                "label": "Altération : fissures, blocs, fragments",
+                "category": 2
+              },
+              {
+                "id": "rma",
+                "label": "Roche mère altérée : blocs et sable grossier",
+                "category": 2
+              },
+              {
+                "id": "sol",
+                "label": "Sol : roche altérée + matière organique",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "rm",
+                "to": "alt",
+                "label": "eau, température, racines"
+              },
+              {
+                "from": "alt",
+                "to": "rma"
+              },
+              {
+                "from": "rma",
+                "to": "sol",
+                "label": "+ matière organique"
+              }
+            ],
+            "legend": [
+              "Roche dure",
+              "Étape de l'altération",
+              "Sol formé"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "formation-humus",
+          "kind": "diagram",
+          "description": "Schéma fléché de la formation de l'humus. Les feuilles mortes et les débris tombent à la surface et forment la litière. Les décomposeurs (champignons, bactéries, vers de terre, termites) s'en nourrissent. Les débris sont fragmentés puis décomposés. Il en résulte l'humus brun noir, mélangé à la partie minérale dans l'horizon humifère.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "lit",
+                "label": "Litière : feuilles et débris à la surface",
+                "category": 1
+              },
+              {
+                "id": "dec",
+                "label": "Décomposeurs : champignons, bactéries, vers, termites",
+                "category": 2
+              },
+              {
+                "id": "frag",
+                "label": "Débris fragmentés puis décomposés",
+                "category": 2
+              },
+              {
+                "id": "hum",
+                "label": "Humus brun noir mêlé à la terre",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "lit",
+                "to": "dec",
+                "label": "nourrit"
+              },
+              {
+                "from": "dec",
+                "to": "frag"
+              },
+              {
+                "from": "frag",
+                "to": "hum"
+              }
+            ],
+            "legend": [
+              "Débris",
+              "Action des êtres vivants",
+              "Humus"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "facteurs-sol",
+          "kind": "diagram",
+          "description": "Arbre des facteurs de formation d'un sol. En haut, la formation d'un sol. En dessous, trois facteurs : le climat, les êtres vivants et le temps. Chacun est relié à son action : la chaleur et la pluie accélèrent l'altération et la décomposition ; les racines fissurent la roche et les décomposeurs fabriquent l'humus ; la formation est très lente.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "sol",
+                "label": "Formation d'un sol",
+                "category": 1
+              },
+              {
+                "id": "cli",
+                "label": "Climat",
+                "category": 2
+              },
+              {
+                "id": "viv",
+                "label": "Êtres vivants",
+                "category": 2
+              },
+              {
+                "id": "tps",
+                "label": "Temps",
+                "category": 2
+              },
+              {
+                "id": "c1",
+                "label": "Chaleur et pluie : altération rapide",
+                "category": 3
+              },
+              {
+                "id": "v1",
+                "label": "Racines et décomposeurs : humus",
+                "category": 3
+              },
+              {
+                "id": "t1",
+                "label": "Formation très lente",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "sol",
+                "to": "cli"
+              },
+              {
+                "from": "sol",
+                "to": "viv"
+              },
+              {
+                "from": "sol",
+                "to": "tps"
+              },
+              {
+                "from": "cli",
+                "to": "c1"
+              },
+              {
+                "from": "viv",
+                "to": "v1"
+              },
+              {
+                "from": "tps",
+                "to": "t1"
+              }
+            ],
+            "legend": [
+              "Formation",
+              "Facteur",
+              "Action"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "matiere-organique-profondeur",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la part de matière organique d'un sol de forêt, en pourcentage de la masse, à trois profondeurs (valeurs fictives mais plausibles) : 8 pour la tranche de 0 à 10 cm, 3 pour la tranche de 30 à 40 cm et 1 pour la tranche de 80 à 90 cm. La part diminue quand on descend.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              8,
+              3,
+              1
+            ],
+            "labels": [
+              "0 à 10 cm (%)",
+              "30 à 40 cm (%)",
+              "80 à 90 cm (%)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "epaisseur-sols",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de l'épaisseur de deux sols formés sur le même granite et du même âge (valeurs fictives mais plausibles) : 300 cm pour le sol A, en forêt dense chaude et pluvieuse du Sud, et 50 cm pour le sol B, en zone sèche du Nord. Le sol A est six fois plus épais que le sol B.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              300,
+              50
+            ],
+            "labels": [
+              "Sol A, forêt du Sud (cm)",
+              "Sol B, zone sèche (cm)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "decomposition-feuilles",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la masse de feuilles restant après 30 jours, au départ 100 g dans chaque pot (valeurs fictives mais plausibles) : pot A, terre normale arrosée, 40 g ; pot B, terre chauffée arrosée, 92 g ; pot C, terre normale sèche, 85 g. Les feuilles disparaissent surtout dans le pot A.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              40,
+              92,
+              85
+            ],
+            "labels": [
+              "Pot A : normal, arrosé (g)",
+              "Pot B : chauffé, arrosé (g)",
+              "Pot C : normal, sec (g)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Distinguer la partie minérale et la matière organique d'un sol",
+          "remember": "Un **sol** est la couche meuble qui recouvre la roche à la surface de la Terre. Il est fait de deux grands constituants. La **partie minérale** vient de la roche mère altérée : ce sont des grains et des fragments de roche (quartz, argile…). La **matière organique** vient des êtres vivants : débris de feuilles, racines mortes, et **humus**, une matière sombre issue de leur décomposition. Un sol contient aussi de l'eau, de l'air et des êtres vivants (vers de terre, termites, champignons, bactéries). En résumé : **sol = roche mère altérée + matière organique**.",
+          "method": [
+            "Observer l'échantillon de sol : couleur, grains, débris visibles.",
+            "Repérer ce qui vient de la roche : grains durs, brillants, fragments de roche (partie minérale).",
+            "Repérer ce qui vient des êtres vivants : morceaux de feuilles, racines, matière sombre (matière organique).",
+            "Conclure : nommer les deux constituants et dire d'où vient chacun."
+          ],
+          "example": {
+            "statement": "Koffi prend une poignée de terre sous un manguier, dans la cour de l'école. Il voit des grains transparents et brillants, de petits fragments de granite, des morceaux de feuilles, des fils de racines et une matière brun noir friable. Quels sont les constituants de cette terre ?",
+            "steps": [
+              "Observer : la poignée de terre contient des grains, des fragments, des débris végétaux et une matière brun noir.",
+              "Repérer ce qui vient de la roche : les grains transparents brillants (quartz) et les fragments de granite sont durs. Ils forment la partie minérale.",
+              "Repérer ce qui vient des êtres vivants : les morceaux de feuilles, les racines et la matière brun noir (humus) forment la matière organique.",
+              "Conclure : cette terre est faite d'une partie minérale, venue de la roche mère altérée, et d'une matière organique, venue des êtres vivants."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un sol n'est fait que de grains de roche. Contre-exemple : un tas de sable pris dans une carrière est fait de grains de roche, mais il n'a pas de racines, pas de débris de feuilles, pas d'humus. Ce n'est pas un sol : un sol contient toujours de la matière organique en plus de la partie minérale.",
+          "practice": {
+            "statement": "Tu t'entraînes à trier les constituants d'un sol avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un échantillon de sol, des grains durs et brillants de quartz font partie de…",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer ce qui vient de la roche : le quartz est un minéral du granite, c'est de la partie minérale. L'humus et la litière viennent des êtres vivants.",
+                "answers": [
+                  {
+                    "content": "la partie minérale",
+                    "correct": true
+                  },
+                  {
+                    "content": "la matière organique",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'humus",
+                    "correct": false
+                  },
+                  {
+                    "content": "la litière",
+                    "correct": false
+                  }
+                ],
+                "hint": "Demande-toi si ce grain vient de la roche ou d'un être vivant."
+              },
+              {
+                "content": "La matière sombre qui vient de la décomposition de débris de plantes s'appelle l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Repérer ce qui vient des êtres vivants : la matière brun noir issue de la décomposition des débris est l'humus. Elle fait partie de la matière organique.",
+                "answers": [
+                  {
+                    "content": "humus",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est un mot de 5 lettres qui commence par h."
+              },
+              {
+                "content": "Un morceau de racine morte dans un sol fait partie de la partie minérale.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Repérer ce qui vient des êtres vivants : une racine est un morceau de plante, donc de la matière organique. La partie minérale vient de la roche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une racine vient d'une plante."
+              }
+            ]
+          },
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Reconnaître les constituants d'un échantillon de sol",
+              "statement": "Dans cet exercice, tu observes des échantillons de sol et tu appliques la méthode de la fiche. Commence par séparer ce qui vient de la roche et ce qui vient des êtres vivants.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sol est formé de matière organique et de…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : sol = roche mère altérée + matière organique. Le granite sain est une roche dure qui n'est pas encore altérée, et le magma est une roche fondue en profondeur.",
+                  "answers": [
+                    {
+                      "content": "roche mère altérée",
+                      "correct": true
+                    },
+                    {
+                      "content": "magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "granite sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "eau salée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les morceaux de feuilles et les fils de racines d'un sol font partie de la matière organique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer ce qui vient des êtres vivants : feuilles et racines viennent de plantes. Ce sont des débris organiques.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément d'un sol à son origine.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer ce qui vient de la roche : le fragment de granite vient de la roche mère, et l'argile vient de l'altération du feldspath de cette roche. Étape 3 — Repérer ce qui vient des êtres vivants : la feuille vient d'une plante, et l'humus vient de débris décomposés.",
+                  "answers": [
+                    {
+                      "content": "Un grain d'argile",
+                      "match": "L'altération du feldspath"
+                    },
+                    {
+                      "content": "Un morceau de feuille",
+                      "match": "Une plante"
+                    },
+                    {
+                      "content": "L'humus",
+                      "match": "Des débris décomposés"
+                    },
+                    {
+                      "content": "Un fragment de granite",
+                      "match": "La roche mère"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux grands constituants d'un sol ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure : on nomme la partie minérale (venue de la roche) et la matière organique (venue des êtres vivants). Le magma et le basalte frais ne sont pas des constituants d'un sol.",
+                  "answers": [
+                    {
+                      "content": "La partie minérale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La matière organique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte frais",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dit : « Un tas de sable pris dans une carrière est un sol ». Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer ce qui vient des êtres vivants : le sable de carrière n'a ni racines, ni débris, ni humus. Il est fait de grains de roche, mais un sol a aussi de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "Il n'a pas de matière organique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sable n'est pas fait de grains de roche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sol ne contient jamais de grains",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sable est de l'humus",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque élément, demande-toi s'il vient de la roche ou d'un être vivant."
+            },
+            {
+              "title": "Trier les constituants d'une poignée de terre",
+              "statement": "Dans cet exercice, tu tries les constituants d'une poignée de terre, comme Koffi dans la cour de l'école.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La matière sombre venue de la décomposition de débris de plantes s'appelle l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Repérer ce qui vient des êtres vivants : cette matière sombre est l'humus, un constituant de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "humus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi trie 200 g de terre. Il obtient 150 g de grains et de fragments de roche. Le reste est de la matière organique. Quelle est la masse de matière organique ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer ce qui vient de la roche : la partie minérale pèse 150 g. Étape 3 : le reste est de la matière organique, soit 200 − 150 = 50 g. Il ne faut pas répondre 150, qui est la masse de la partie minérale.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La partie minérale d'un sol vient de la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer ce qui vient de la roche : la partie minérale est faite de grains et de fragments de la roche mère altérée. La litière et les racines sont de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "roche mère altérée",
+                      "correct": true
+                    },
+                    {
+                      "content": "litière",
+                      "correct": false
+                    },
+                    {
+                      "content": "racine",
+                      "correct": false
+                    },
+                    {
+                      "content": "matière organique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois éléments font partie de la matière organique d'un sol ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Repérer ce qui vient des êtres vivants : la feuille, la racine morte et l'humus viennent de plantes. Le grain de quartz et le fragment de granite viennent de la roche.",
+                  "answers": [
+                    {
+                      "content": "Une feuille en décomposition",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une racine morte",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'humus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un grain de quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fragment de granite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sol est fait seulement de grains venus de la roche.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : un sol contient aussi de la matière organique (feuilles, racines, humus), de l'eau, de l'air et des êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier un échantillon de sol.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode : Étape 1 — Observer, Étape 2 — repérer ce qui vient de la roche, Étape 3 — repérer ce qui vient des êtres vivants, Étape 4 — conclure.",
+                  "answers": [
+                    {
+                      "content": "Observer l'échantillon"
+                    },
+                    {
+                      "content": "Repérer ce qui vient de la roche"
+                    },
+                    {
+                      "content": "Repérer ce qui vient des êtres vivants"
+                    },
+                    {
+                      "content": "Conclure sur les deux constituants"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis les quatre étapes de la méthode : observer, repérer la roche, repérer le vivant, conclure."
+            }
+          ]
+        },
+        {
+          "name": "Expliquer l'origine de la partie minérale d'un sol",
+          "remember": "La partie minérale d'un sol vient de la **roche mère**, la roche dure située sous le sol. Sous l'action de l'eau, des variations de température et des racines, la roche mère s'altère : elle se fissure, se fragmente, puis se réduit en **roche mère altérée** (blocs, cailloux, sable grossier ou arène). Ces fragments, mêlés à la matière organique, forment le sol. Un sol formé sur du granite contient donc les mêmes minéraux que lui : des grains de quartz, des paillettes de mica et de l'argile (venue de l'altération du feldspath). Plus on descend dans le sol, plus les fragments sont gros et plus on se rapproche de la roche mère.",
+          "method": [
+            "Observer la partie minérale du sol : nature des grains et des minéraux.",
+            "Comparer avec la roche mère : retrouve-t-on les mêmes minéraux ?",
+            "Placer les couches de la plus profonde à la plus proche de la surface : roche mère, roche mère altérée, sol.",
+            "Conclure : le sol vient de l'altération de la roche mère."
+          ],
+          "example": {
+            "statement": "Awa étudie un sol de colline. Il contient des grains de quartz brillants, des paillettes de mica et de l'argile. Sous le sol, elle trouve des cailloux de granite, puis un granite dur. Dans le granite dur, elle voit du quartz, du feldspath et du mica. D'où vient la partie minérale de ce sol ?",
+            "steps": [
+              "Observer : la partie minérale du sol contient du quartz, du mica et de l'argile.",
+              "Comparer : le granite dur contient du quartz, du feldspath et du mica. On retrouve le quartz et le mica dans le sol, et l'argile vient de l'altération du feldspath.",
+              "Placer les couches, de la plus profonde à la plus proche de la surface : le granite dur (roche mère), puis les cailloux de granite (roche mère altérée), puis le sol.",
+              "Conclure : la partie minérale de ce sol vient de l'altération du granite, la roche mère située dessous."
+            ]
+          },
+          "pitfall": "Ne pas inverser la cause et l'effet. C'est la roche mère qui donne le sol en s'altérant, et le sol ne se transforme pas en roche. Contre-exemple : quand on creuse un sol de colline, plus on descend, plus les fragments sont gros, jusqu'à la roche dure. Cela montre que les fragments viennent de la roche.",
+          "practice": {
+            "statement": "Tu t'entraînes à retrouver l'origine de la partie minérale d'un sol avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un sol de colline, on trouve des grains de quartz. On trouve aussi du quartz dans le granite dur situé dessous. Que peut-on en conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer avec la roche mère : on retrouve le même minéral dans le sol et dans le granite. Étape 4 — Conclure : le sol vient de l'altération de la roche mère.",
+                "answers": [
+                  {
+                    "content": "Le sol vient de l'altération du granite",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le granite vient de l'altération du sol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le quartz a été fabriqué par les racines",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sol vient du magma",
+                    "correct": false
+                  }
+                ],
+                "hint": "On retrouve le même minéral dans les deux."
+              },
+              {
+                "content": "La roche dure située sous le sol s'appelle la ___ mère.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Placer les couches : la couche la plus profonde est la roche mère, dure et saine. Elle donne les fragments de la roche mère altérée, puis le sol.",
+                "answers": [
+                  {
+                    "content": "roche",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est un matériau dur, comme le granite."
+              },
+              {
+                "content": "Range ces couches de la plus profonde à la plus proche de la surface.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Placer les couches : on part de la roche mère dure, puis on trouve les fragments de la roche mère altérée, et le sol est au-dessus.",
+                "answers": [
+                  {
+                    "content": "Roche mère dure"
+                  },
+                  {
+                    "content": "Roche mère altérée"
+                  },
+                  {
+                    "content": "Sol"
+                  }
+                ],
+                "hint": "On part du fond, là où la roche est encore intacte."
+              }
+            ]
+          },
+          "figure": "roche-sol",
+          "exercise": [
+            {
+              "title": "Retrouver la roche mère d'un sol",
+              "statement": "Dans cet exercice, tu compares la partie minérale d'un sol avec sa roche mère, avec la méthode de la fiche. Cherche d'abord les minéraux que l'on retrouve des deux côtés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel minéral du granite retrouve-t-on en grains brillants dans un sol formé sur du granite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer avec la roche mère : le quartz résiste à l'altération, donc on le retrouve en grains dans le sol. L'humus vient des êtres vivants, pas de la roche.",
+                  "answers": [
+                    {
+                      "content": "Le quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'humus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche mère d'un sol est la roche dure située sous lui.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Placer les couches : la roche mère est la couche la plus profonde, dure et peu altérée. Le sol est au-dessus.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'où vient l'argile d'un sol formé sur du granite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer avec la roche mère : le feldspath du granite se transforme en argile sous l'action de l'eau. La décomposition des feuilles donne de l'humus, pas de l'argile.",
+                  "answers": [
+                    {
+                      "content": "De la transformation des feldspaths du granite",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la décomposition des feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la transformation du quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des racines des arbres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces couches de la plus profonde à la plus proche de la surface.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Placer les couches : le granite dur est la roche mère. Au-dessus, la roche se fissure en blocs, puis se réduit en arène, et le sol est tout en haut.",
+                  "answers": [
+                    {
+                      "content": "Granite dur et compact"
+                    },
+                    {
+                      "content": "Blocs de granite fissurés"
+                    },
+                    {
+                      "content": "Sable grossier (arène)"
+                    },
+                    {
+                      "content": "Sol brun avec des racines"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Le sol de la colline a été apporté d'une autre région ». Quel indice montre plutôt qu'il vient du granite situé dessous ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer avec la roche mère : les mêmes minéraux dans le sol et dans le granite montrent que le sol vient de ce granite. La couleur, les racines et la pluie ne disent rien de l'origine de la partie minérale.",
+                  "answers": [
+                    {
+                      "content": "On y retrouve les mêmes minéraux que dans ce granite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est plus sombre que le granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il contient des racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est mouillé par la pluie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche les minéraux que l'on retrouve à la fois dans le sol et dans la roche mère."
+            },
+            {
+              "title": "Suivre le chemin de la roche au sol",
+              "statement": "Dans cet exercice, tu retrouves la partie minérale d'un sol sur une colline de granite et tu places les couches dans le bon ordre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les grains brillants et transparents d'un sol formé sur du granite sont des grains de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Comparer avec la roche mère : le quartz du granite résiste à l'altération et se retrouve en grains dans le sol.",
+                  "answers": [
+                    {
+                      "content": "quartz",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une colline, Koffi mesure 30 cm de sol, 50 cm de roche mère altérée, puis la roche dure. Quelle est la hauteur de terrain altéré au-dessus de la roche dure ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Placer les couches : au-dessus de la roche mère dure, il y a la roche mère altérée (50 cm) et le sol (30 cm). 50 + 30 = 80 cm.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La partie minérale d'un sol vient de l'altération de la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : la partie minérale vient de l'altération de la roche mère. La litière et les racines sont de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "roche mère",
+                      "correct": true
+                    },
+                    {
+                      "content": "litière",
+                      "correct": false
+                    },
+                    {
+                      "content": "racine",
+                      "correct": false
+                    },
+                    {
+                      "content": "eau de pluie seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux agents qui aident à altérer la roche mère ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer : la roche mère se fissure sous l'action de l'eau, des variations de température et des racines. L'eau et les racines en font partie.",
+                  "answers": [
+                    {
+                      "content": "L'eau de pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines qui s'enfoncent dans les fissures",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière de la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vent de l'harmattan seul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus on descend dans un sol, plus les fragments de roche sont petits.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Placer les couches : plus on descend, plus on se rapproche de la roche mère, donc plus les fragments sont gros. Ils sont petits près de la surface.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase résume l'origine de la partie minérale d'un sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : le sol vient de l'altération de la roche mère. La décomposition des feuilles donne la matière organique, pas la partie minérale.",
+                  "answers": [
+                    {
+                      "content": "Elle vient de l'altération de la roche mère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle vient de la décomposition des feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est apportée par les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se forme dans l'air",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Rappelle-toi l'ordre : roche mère, roche mère altérée, sol."
+            }
+          ]
+        },
+        {
+          "name": "Lire le profil d'un sol",
+          "remember": "Un **profil de sol** est la coupe verticale d'un sol, de la surface à la roche mère. Chaque couche s'appelle un **horizon**. De haut en bas on trouve : la **litière** (débris de végétaux peu transformés), l'**horizon humifère** (sombre, riche en humus, traversé de racines), l'**horizon d'accumulation** (plus clair, avec peu d'humus ; des éléments entraînés par l'eau depuis le haut s'y accumulent), la **roche mère altérée** (fragments de roche) et la **roche mère** (roche dure). Plus on descend, moins il y a d'humus et plus on se rapproche de la roche dure.",
+          "method": [
+            "Repérer la surface et le fond du profil : le haut est la litière, le bas est la roche dure.",
+            "Observer chaque couche en descendant : couleur, racines, débris, taille des fragments.",
+            "Nommer chaque couche d'après ce qu'on y voit : litière, horizon humifère, horizon d'accumulation, roche mère altérée, roche mère.",
+            "Conclure : dire ce qui change de haut en bas (humus, couleur, taille des fragments)."
+          ],
+          "example": {
+            "statement": "Dans une tranchée, Awa note de haut en bas : des feuilles mortes entières ; une terre brun noir avec beaucoup de racines ; une terre plus claire avec peu de racines ; des cailloux anguleux ; puis une roche très dure. Nomme chaque couche et dis ce qui change de haut en bas.",
+            "steps": [
+              "Repérer : le haut du profil est fait de feuilles mortes (litière), le bas est une roche très dure.",
+              "Observer : on passe d'une terre sombre à racines, à une terre claire, puis à des cailloux, puis à la roche.",
+              "Nommer : les feuilles entières sont la litière ; la terre brun noir à racines est l'horizon humifère ; la terre claire est l'horizon d'accumulation ; les cailloux sont la roche mère altérée ; la roche dure est la roche mère.",
+              "Conclure : de haut en bas, il y a de moins en moins d'humus et de racines, la terre s'éclaircit et les fragments deviennent plus gros jusqu'à la roche dure."
+            ]
+          },
+          "pitfall": "Ne pas confondre la litière et l'horizon humifère. Dans la litière, on reconnaît encore les débris (une feuille entière, une brindille). Dans l'horizon humifère, ils sont devenus de l'humus brun noir mêlé à la terre et on ne les reconnaît plus. Contre-exemple : une feuille entière posée sur le sol est de la litière, pas de l'humus.",
+          "practice": {
+            "statement": "Tu t'entraînes à nommer les couches d'un profil de sol avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un profil de sol, quelle couche est faite de feuilles mortes encore reconnaissables, posées à la surface ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Nommer chaque couche : des débris encore reconnaissables, en surface, forment la litière. L'horizon humifère est dessous, avec de l'humus.",
+                "answers": [
+                  {
+                    "content": "La litière",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'horizon humifère",
+                    "correct": false
+                  },
+                  {
+                    "content": "La roche mère",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'horizon d'accumulation",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce qui est tout en haut."
+              },
+              {
+                "content": "La couche sombre, riche en humus et traversée de racines, s'appelle l'horizon ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Nommer chaque couche : la terre sombre à racines, riche en humus, est l'horizon humifère.",
+                "answers": [
+                  {
+                    "content": "humifere",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot vient de humus."
+              },
+              {
+                "content": "Dans un profil de sol, la roche mère se trouve tout en haut.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer la surface et le fond : la roche mère dure est en bas du profil. En haut, on trouve la litière.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "La roche dure est la couche la plus profonde."
+              }
+            ]
+          },
+          "figure": "profil-sol",
+          "exercise": [
+            {
+              "title": "Nommer les couches d'un profil de sol",
+              "statement": "Dans cet exercice, tu nommes les couches d'un profil de sol, de la surface à la roche dure, avec la méthode de la fiche. Descends couche après couche.",
+              "exercise_type": "fixation",
+              "figure": "profil-sol-numeros",
+              "questions": [
+                {
+                  "content": "Relie chaque observation faite dans une tranchée à la couche qu'elle désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Nommer chaque couche d'après ce qu'on y voit : feuilles entières = litière ; terre sombre à racines = horizon humifère ; terre claire = horizon d'accumulation ; cailloux = roche mère altérée ; roche dure = roche mère.",
+                  "answers": [
+                    {
+                      "content": "Feuilles mortes entières",
+                      "match": "Litière"
+                    },
+                    {
+                      "content": "Terre brun noir avec beaucoup de racines",
+                      "match": "Horizon humifère"
+                    },
+                    {
+                      "content": "Terre claire avec peu de racines",
+                      "match": "Horizon d'accumulation"
+                    },
+                    {
+                      "content": "Cailloux anguleux de roche",
+                      "match": "Roche mère altérée"
+                    },
+                    {
+                      "content": "Roche très dure",
+                      "match": "Roche mère"
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le schéma du profil de sol, relie chaque repère à ce qu'il désigne. Les repères 2 à 5 vont de l'horizon sous la litière jusqu'à la roche dure, et le repère 6 désigne les racines.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Nommer chaque couche : en descendant sous la litière, on trouve l'horizon humifère (2), l'horizon d'accumulation (3), la roche mère altérée (4) et la roche mère (5). Le repère 6 désigne les racines, qui traversent surtout l'horizon humifère.",
+                  "answers": [
+                    {
+                      "content": "Repère 2",
+                      "match": "Horizon humifère"
+                    },
+                    {
+                      "content": "Repère 3",
+                      "match": "Horizon d'accumulation"
+                    },
+                    {
+                      "content": "Repère 4",
+                      "match": "Roche mère altérée"
+                    },
+                    {
+                      "content": "Repère 5",
+                      "match": "Roche mère"
+                    },
+                    {
+                      "content": "Repère 6",
+                      "match": "Racines"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'horizon humifère est-il sombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Observer chaque couche : la couleur brun noir vient de l'humus, matière organique décomposée. Le granite sain est clair, et le magma n'existe pas dans un sol.",
+                  "answers": [
+                    {
+                      "content": "Il contient beaucoup d'humus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il contient du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est fait de granite sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est plein d'eau salée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un profil de sol, les fragments de roche deviennent plus gros quand on descend vers la roche mère.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : plus on descend, plus on se rapproche de la roche dure, donc plus les fragments sont gros.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces couches de la surface vers la profondeur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la surface et le fond : on commence par la litière et on termine par la roche mère. Étape 3 : l'horizon humifère vient avant l'horizon d'accumulation.",
+                  "answers": [
+                    {
+                      "content": "Litière"
+                    },
+                    {
+                      "content": "Horizon humifère"
+                    },
+                    {
+                      "content": "Horizon d'accumulation"
+                    },
+                    {
+                      "content": "Roche mère altérée"
+                    },
+                    {
+                      "content": "Roche mère"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève prend une feuille entière posée sur le sol pour de l'humus. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Nommer chaque couche : l'humus est de la matière où l'on ne reconnaît plus les débris. Une feuille entière est de la litière.",
+                  "answers": [
+                    {
+                      "content": "Elle est encore reconnaissable : c'est de la litière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une feuille est de la roche",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'humus est toujours en surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une feuille n'est jamais organique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Descends du haut vers le bas du profil en regardant la couleur, les racines et la taille des fragments."
+            },
+            {
+              "title": "Lire la coupe d'un sol de plantation",
+              "statement": "Dans cet exercice, tu lis la coupe d'un sol de plantation de cacaoyers. Les épaisseurs sont fictives mais plausibles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La couche sombre, riche en humus et en racines, s'appelle l'horizon ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Nommer chaque couche : l'horizon humifère est la couche sombre, riche en humus et en racines.",
+                  "answers": [
+                    {
+                      "content": "humifere",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une plantation, la litière fait 2 cm, l'horizon humifère 18 cm, l'horizon d'accumulation 30 cm et la roche mère altérée 50 cm. Quelle est l'épaisseur totale au-dessus de la roche mère dure ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Observer chaque couche : on additionne les épaisseurs. 2 + 18 + 30 + 50 = 100 cm.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Plus on descend dans un profil, ___ il y a d'humus.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : l'humus vient de la surface, donc il y en a de moins en moins quand on descend.",
+                  "answers": [
+                    {
+                      "content": "moins",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "dix fois plus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois couches se trouvent au-dessus de la roche mère altérée dans un profil de sol ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer la surface et le fond : de haut en bas viennent la litière, l'horizon humifère, l'horizon d'accumulation, puis la roche mère altérée et la roche mère. La roche mère est plus bas.",
+                  "answers": [
+                    {
+                      "content": "La litière",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'horizon humifère",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'horizon d'accumulation",
+                      "correct": true
+                    },
+                    {
+                      "content": "La roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'horizon d'accumulation est plus clair que l'horizon humifère.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Observer chaque couche : l'horizon d'accumulation contient peu d'humus, donc il est plus clair que l'horizon humifère.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la couche la plus profonde d'un profil de sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la surface et le fond : la roche dure est au fond du profil. La litière est en surface.",
+                  "answers": [
+                    {
+                      "content": "La roche mère",
+                      "correct": true
+                    },
+                    {
+                      "content": "La litière",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'horizon humifère",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'horizon d'accumulation",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le profil se lit de la surface (litière) vers le fond (roche mère)."
+            }
+          ]
+        },
+        {
+          "name": "Expliquer la formation de l'humus",
+          "remember": "À la surface du sol, les feuilles, les brindilles, les fruits et les animaux morts forment la **litière**. Des **décomposeurs** s'en nourrissent : les petits animaux du sol (vers de terre, termites) mangent et **fragmentent** les débris, puis les **champignons** et les **bactéries** les **décomposent** peu à peu en **humus**, une matière brun noir où l'on ne reconnaît plus les débris. Les animaux du sol mélangent l'humus à la partie minérale : c'est ce qui donne l'horizon humifère. Cette transformation est plus rapide dans un milieu chaud et humide.",
+          "method": [
+            "Repérer la litière : les débris de végétaux et d'animaux déposés à la surface.",
+            "Identifier les êtres vivants du sol qui s'en nourrissent (les décomposeurs).",
+            "Décrire la transformation : les débris sont fragmentés, puis décomposés jusqu'à ne plus être reconnaissables.",
+            "Conclure : nommer l'humus et dire où il se trouve (mélangé à la partie minérale, dans l'horizon humifère)."
+          ],
+          "example": {
+            "statement": "Sous un manguier, Koffi soulève un tas de feuilles mortes. Il y voit des vers de terre, des termites et des filaments blancs de champignons. Plus bas, les feuilles sont réduites en une pâte brun noir mêlée à la terre. Comment cette pâte s'est-elle formée ?",
+            "steps": [
+              "Repérer la litière : les feuilles mortes tombées du manguier forment la litière.",
+              "Identifier les décomposeurs : les vers de terre, les termites et les champignons s'en nourrissent.",
+              "Décrire la transformation : les vers de terre et les termites mangent et fragmentent les feuilles, puis les champignons (et les bactéries, invisibles à l'œil nu) les décomposent, jusqu'à une pâte où l'on ne reconnaît plus rien.",
+              "Conclure : cette pâte brun noir est de l'humus. Elle est mêlée à la partie minérale, dans l'horizon humifère."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'humus vient de la roche. L'humus vient de débris de végétaux et d'animaux. Contre-exemple : la roche mère altérée, même réduite en arène, reste minérale et claire. On n'y trouve pas de matière brun noir tant que des débris vivants n'y ont pas été décomposés.",
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer la formation de l'humus avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Comment s'appelle l'ensemble des feuilles mortes et des brindilles posées sur le sol ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer la litière : les débris encore reconnaissables, posés à la surface, forment la litière. L'humus est la matière brun noir qui en vient.",
+                "answers": [
+                  {
+                    "content": "La litière",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'humus",
+                    "correct": false
+                  },
+                  {
+                    "content": "La roche mère",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'arène",
+                    "correct": false
+                  }
+                ],
+                "hint": "Ce sont des débris encore reconnaissables."
+              },
+              {
+                "content": "Les êtres vivants qui transforment la litière en humus sont les ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier les êtres vivants du sol : champignons, bactéries, vers de terre et termites décomposent la litière. On les appelle les décomposeurs.",
+                "answers": [
+                  {
+                    "content": "decomposeurs",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ils décomposent les débris."
+              },
+              {
+                "content": "L'humus vient de la roche mère.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : l'humus vient de la décomposition de débris de végétaux et d'animaux, pas de la roche mère.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "L'humus est une matière organique."
+              }
+            ]
+          },
+          "figure": "formation-humus",
+          "exercise": [
+            {
+              "title": "Suivre la transformation de la litière",
+              "statement": "Dans cet exercice, tu suis la transformation de la litière en humus avec la méthode de la fiche. Repère d'abord les débris, puis ceux qui les décomposent.",
+              "exercise_type": "fixation",
+              "figure": "formation-humus",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que l'humus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : l'humus est de la matière organique décomposée. Le fragment de roche et le quartz sont de la partie minérale.",
+                  "answers": [
+                    {
+                      "content": "Une matière brun noir issue de la décomposition de débris",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fragment de roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un grain de quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une eau de pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois éléments sont des décomposeurs ou des animaux du sol qui participent à la formation de l'humus ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Identifier les êtres vivants du sol : champignons, bactéries et termites s'en nourrissent. Le granite et le quartz sont des roches ou des minéraux.",
+                  "answers": [
+                    {
+                      "content": "Les champignons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les bactéries",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les termites",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la litière, on reconnaît encore les feuilles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la litière : ses débris sont peu transformés, donc encore reconnaissables.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la formation de l'humus.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la litière, Étape 2 — identifier les décomposeurs, Étape 3 — décrire la transformation, Étape 4 — conclure : l'humus est mélangé à la partie minérale.",
+                  "answers": [
+                    {
+                      "content": "Les feuilles tombent et forment la litière"
+                    },
+                    {
+                      "content": "Les décomposeurs s'en nourrissent"
+                    },
+                    {
+                      "content": "Les débris sont fragmentés puis décomposés"
+                    },
+                    {
+                      "content": "L'humus se mélange à la partie minérale"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « L'humus vient du granite ». Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : l'humus est de la matière organique issue de la décomposition de débris vivants. Le granite est une roche, il donne la partie minérale.",
+                  "answers": [
+                    {
+                      "content": "L'humus vient de débris de plantes et d'animaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le granite est trop dur",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'humus est un minéral",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'humus ne se forme jamais",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense au trajet : feuilles mortes, puis décomposeurs, puis humus."
+            },
+            {
+              "title": "Observer la décomposition dans un jardin",
+              "statement": "Dans cet exercice, tu étudies la décomposition des feuilles dans le jardin de l'école. Les nombres sont fictifs mais plausibles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La couche de feuilles mortes encore reconnaissables posée sur le sol s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer la litière : les débris peu transformés à la surface forment la litière.",
+                  "answers": [
+                    {
+                      "content": "litiere",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dépose 100 g de feuilles mortes sur de la terre. Après un mois, les décomposeurs en ont fait disparaître 60 g. Quelle masse de feuilles reste-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Décrire la transformation : 60 g de feuilles ont été décomposés, il en reste 100 − 60 = 40 g. Il ne faut pas répondre 60, qui est la masse disparue.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les vers de terre et les termites ___ l'humus à la partie minérale.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : les animaux du sol mélangent l'humus à la terre, ce qui donne l'horizon humifère. Ils ne fabriquent pas l'humus à partir de la roche.",
+                  "answers": [
+                    {
+                      "content": "mélangent",
+                      "correct": true
+                    },
+                    {
+                      "content": "séparent",
+                      "correct": false
+                    },
+                    {
+                      "content": "détruisent",
+                      "correct": false
+                    },
+                    {
+                      "content": "fabriquent à partir de la roche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conditions accélèrent la décomposition de la litière ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Décrire la transformation : les décomposeurs agissent plus vite dans un milieu chaud et humide. Le froid et la sécheresse les ralentissent.",
+                  "answers": [
+                    {
+                      "content": "La chaleur",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'humidité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le froid",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sécheresse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les décomposeurs sont des êtres vivants.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier les êtres vivants du sol : champignons, bactéries, vers de terre et termites sont vivants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel horizon trouve-t-on l'humus mélangé à la terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : l'humus mélangé à la partie minérale forme l'horizon humifère, sombre. La roche mère n'en contient pas.",
+                  "answers": [
+                    {
+                      "content": "L'horizon humifère",
+                      "correct": true
+                    },
+                    {
+                      "content": "La roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche mère altérée",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'horizon d'accumulation",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Les décomposeurs sont des êtres vivants : ils ont besoin de chaleur et d'eau pour agir vite."
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître les facteurs de formation d'un sol",
+          "remember": "La formation d'un sol dépend d'abord de la **roche mère**, qui fournit la partie minérale, puis de trois autres facteurs. Le **climat** : la chaleur et la pluie accélèrent l'altération de la roche et l'action des décomposeurs, alors que le froid ou la sécheresse les ralentissent. Les **êtres vivants** : les racines fissurent la roche, la végétation fournit la litière, les décomposeurs fabriquent l'humus. Le **temps** : un sol se forme très lentement et, à conditions égales, un sol ancien est plus épais qu'un sol jeune.",
+          "method": [
+            "Lire la situation : relever le climat, la végétation, l'âge et la roche.",
+            "Associer chaque condition au facteur qui lui correspond : climat, êtres vivants ou temps.",
+            "Dire l'action de chaque facteur : il accélère ou ralentit, il fissure la roche ou apporte de l'humus.",
+            "Conclure : comparer les sols ou expliquer l'épaisseur du sol."
+          ],
+          "example": {
+            "statement": "Sur le même granite, un sol A se trouve en forêt dense du Sud, chaud et pluvieux, et son épaisseur est de 3 m. Un sol B se trouve en zone sèche du Nord et son épaisseur est de 50 cm. Les deux ont le même âge. Pourquoi A est-il plus épais ?",
+            "steps": [
+              "Lire la situation : même granite et même âge ; le climat et la végétation diffèrent.",
+              "Associer : chaud et pluvieux correspond au climat ; forêt dense correspond aux êtres vivants.",
+              "Dire l'action : la chaleur et la pluie accélèrent l'altération du granite ; la forêt apporte beaucoup de litière et de racines.",
+              "Conclure : le sol A est plus épais parce que son climat et sa végétation ont accéléré sa formation."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un sol se forme vite. Contre-exemple : une pluie violente peut emporter en quelques heures la terre d'un champ nu, alors qu'il a fallu très longtemps pour la fabriquer. Un sol se forme lentement : c'est le facteur temps.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les facteurs de formation d'un sol avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un climat chaud et pluvieux accélère la formation d'un sol. De quel facteur parle-t-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Associer chaque condition au facteur : chaleur et pluie relèvent du climat. Étape 3 : ils accélèrent l'altération et la décomposition.",
+                "answers": [
+                  {
+                    "content": "Du climat",
+                    "correct": true
+                  },
+                  {
+                    "content": "Du temps",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la roche mère seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des êtres vivants",
+                    "correct": false
+                  }
+                ],
+                "hint": "Chaleur et pluie, c'est le temps qu'il fait."
+              },
+              {
+                "content": "Les racines des arbres peuvent élargir les fissures d'une roche.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Dire l'action de chaque facteur : les racines des êtres vivants s'enfoncent dans les fissures et les élargissent, ce qui aide à altérer la roche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une racine pousse et pousse fort."
+              },
+              {
+                "content": "Un sol se forme très ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : le temps est un facteur essentiel, car la formation d'un sol est très lente.",
+                "answers": [
+                  {
+                    "content": "lentement",
+                    "correct": true
+                  }
+                ],
+                "hint": "L'adverbe est l'inverse de vite."
+              }
+            ]
+          },
+          "figure": "facteurs-sol",
+          "exercise": [
+            {
+              "title": "Associer chaque condition à son facteur",
+              "statement": "Dans cet exercice, tu associes des conditions à des facteurs de formation d'un sol et tu en dis l'action, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "facteurs-sol",
+              "questions": [
+                {
+                  "content": "Relie chaque condition au facteur de formation du sol qu'elle illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Associer chaque condition au facteur : climat chaud et pluvieux = climat ; vers et champignons = êtres vivants ; sol très ancien = temps.",
+                  "answers": [
+                    {
+                      "content": "Un climat chaud et pluvieux",
+                      "match": "Climat"
+                    },
+                    {
+                      "content": "Des vers de terre et des champignons",
+                      "match": "Êtres vivants"
+                    },
+                    {
+                      "content": "Un sol vieux de très longtemps",
+                      "match": "Temps"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un climat sec, la décomposition de la litière est plus rapide que dans un climat humide.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Dire l'action de chaque facteur : la sécheresse ralentit les décomposeurs, donc la décomposition est plus lente qu'en climat humide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois facteurs interviennent dans la formation d'un sol, en plus de la roche mère ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Associer chaque condition au facteur : on retient le climat, les êtres vivants et le temps. La Lune et le granite seul ne sont pas des facteurs de formation.",
+                  "answers": [
+                    {
+                      "content": "Le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les êtres vivants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le granite seul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À roche et climat identiques, quel sol est le plus épais ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : un sol se forme lentement, donc à conditions égales le plus ancien est le plus épais.",
+                  "answers": [
+                    {
+                      "content": "Le plus ancien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plus jeune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui qui n'a aucune végétation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont toujours la même épaisseur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Un sol se forme en une semaine ». Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : le temps est un facteur essentiel. Un sol met très longtemps à se former, alors qu'une forte pluie peut l'emporter vite.",
+                  "answers": [
+                    {
+                      "content": "Un sol se forme très lentement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un sol est fabriqué par l'homme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sol n'a pas besoin de temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sol n'est fait que d'eau",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Chaleur et pluie relèvent du climat, les vers et les racines des êtres vivants, la lenteur du temps."
+            },
+            {
+              "title": "Comparer deux sols formés sur le même granite",
+              "statement": "Dans cet exercice, tu compares deux sols formés sur le même granite avec la méthode de la fiche. Les nombres sont fictifs mais plausibles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sol A est épais de 300 cm et un sol B de 50 cm. De combien de centimètres A est-il plus épais que B ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire la situation : A mesure 300 cm et B 50 cm. Étape 4 : la différence est 300 − 50 = 250 cm.",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un climat chaud et humide ___ l'altération de la roche mère.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Dire l'action de chaque facteur : la chaleur et la pluie accélèrent l'altération. Le froid ou la sécheresse la ralentissent.",
+                  "answers": [
+                    {
+                      "content": "accélère",
+                      "correct": true
+                    },
+                    {
+                      "content": "ralentit",
+                      "correct": false
+                    },
+                    {
+                      "content": "arrête",
+                      "correct": false
+                    },
+                    {
+                      "content": "supprime",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux facteurs expliquent qu'un sol de forêt dense soit épais ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Associer chaque condition au facteur : le climat et les êtres vivants (litière, racines) accélèrent la formation du sol. Un temps nul ne forme aucun sol.",
+                  "answers": [
+                    {
+                      "content": "Un climat chaud et pluvieux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Beaucoup de litière et de racines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une roche mère toujours différente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un temps de formation nul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À conditions égales, un sol jeune est aussi épais qu'un sol ancien.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : le sol se forme lentement, donc un sol jeune est moins épais qu'un sol ancien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En zone sèche, quel facteur ralentit surtout la décomposition de la litière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Dire l'action de chaque facteur : la sécheresse ralentit les décomposeurs, donc la formation d'humus. C'est une action du climat.",
+                  "answers": [
+                    {
+                      "content": "Le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sol ancien est plus ___ qu'un sol jeune.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : à conditions égales, plus le sol est ancien, plus il est épais.",
+                  "answers": [
+                    {
+                      "content": "epais",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare les deux sols facteur par facteur : climat, êtres vivants, temps."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une tranchée dans le jardin de l'école",
+          "statement": "Les élèves creusent une tranchée dans le jardin de l'école. De la surface vers le fond, ils notent : des feuilles mortes entières sur 2 cm ; une terre brun noir avec beaucoup de racines sur 25 cm ; une terre plus claire avec peu de racines sur 40 cm ; des cailloux anguleux de granite mêlés à de la terre claire sur 30 cm ; puis une roche grise très dure. Les mesures sont fictives mais plausibles.",
+          "exercise_type": "fixation",
+          "figure": "profil-sol",
+          "questions": [
+            {
+              "content": "Relie chaque observation de la tranchée à la couche qu'elle désigne.",
+              "question_type": "matching",
+              "explanation": "Méthode. 1) Repérer la surface et le fond : feuilles en haut, roche dure en bas. 2) Observer chaque couche en descendant. 3) Nommer chaque couche d'après ce qu'on y voit : feuilles entières = litière ; terre sombre à racines = horizon humifère ; terre claire = horizon d'accumulation ; cailloux = roche mère altérée ; roche dure = roche mère.",
+              "answers": [
+                {
+                  "content": "Feuilles mortes entières",
+                  "match": "Litière"
+                },
+                {
+                  "content": "Terre brun noir avec beaucoup de racines",
+                  "match": "Horizon humifère"
+                },
+                {
+                  "content": "Terre claire avec peu de racines",
+                  "match": "Horizon d'accumulation"
+                },
+                {
+                  "content": "Cailloux anguleux de granite",
+                  "match": "Roche mère altérée"
+                },
+                {
+                  "content": "Roche grise très dure",
+                  "match": "Roche mère"
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la hauteur totale des quatre premières couches (feuilles, terre brun noir, terre claire, cailloux) au-dessus de la roche dure ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire les épaisseurs : 2 cm, 25 cm, 40 cm et 30 cm. 2) Les additionner : 2 + 25 + 40 + 30 = 97 cm. Il ne faut pas oublier la couche de feuilles mortes de 2 cm, sinon on trouve 95 cm.",
+              "answers": [
+                {
+                  "content": "97",
+                  "correct": true
+                }
+              ],
+              "unit": "cm",
+              "tolerance": 0
+            },
+            {
+              "content": "Pourquoi la couche de 25 cm est-elle sombre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer la couleur : brun noir. 2) Relier la couleur à la matière organique : l'humus vient de la décomposition des feuilles et des racines. 3) Conclure : la couche est sombre parce qu'elle est riche en humus. Le granite sain et l'arène sont clairs.",
+              "answers": [
+                {
+                  "content": "Elle contient beaucoup d'humus",
+                  "correct": true
+                },
+                {
+                  "content": "Elle contient du magma",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est faite de granite sain",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est faite d'arène pure",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les cailloux de granite de la couche de 30 cm viennent de l'altération de la roche grise dure située dessous.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Comparer : ce sont des cailloux de granite, comme la roche dure. 2) Placer les couches : la roche dure est la plus profonde. 3) Conclure : la roche mère s'altère et donne ces cailloux, qui forment la roche mère altérée.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux observations montrent que la couche de 25 cm contient de la matière organique ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Repérer ce qui vient des êtres vivants : la couleur brun noir (humus) et les racines. 2) Écarter ce qui vient de la roche : les cailloux anguleux sont minéraux, et la position près de la roche dure ne prouve rien sur la matière organique.",
+              "answers": [
+                {
+                  "content": "Elle est brun noir",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est traversée de nombreuses racines",
+                  "correct": true
+                },
+                {
+                  "content": "Elle contient des cailloux anguleux",
+                  "correct": false
+                },
+                {
+                  "content": "Elle touche la roche dure",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "De la roche mère au sol sur une colline de granite",
+          "statement": "Sur une colline, Koffi observe un granite gris et rose, dur et compact. Juste au-dessus, il voit des blocs fissurés et du sable grossier. Plus haut vient un sol brun avec des racines. Dans le granite, il reconnaît du quartz, du feldspath et du mica. Dans le sol, il trouve des grains de quartz brillants, des paillettes de mica, de l'argile et des débris de végétaux.",
+          "exercise_type": "fixation",
+          "figure": "roche-sol",
+          "questions": [
+            {
+              "content": "Quel minéral du granite retrouve-t-on en grains brillants dans le sol ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer la partie minérale du sol : grains brillants. 2) Comparer avec la roche mère : le granite contient du quartz, qui résiste à l'altération. 3) Conclure : ces grains sont du quartz. L'humus vient des êtres vivants.",
+              "answers": [
+                {
+                  "content": "Le quartz",
+                  "correct": true
+                },
+                {
+                  "content": "L'humus",
+                  "correct": false
+                },
+                {
+                  "content": "Le basalte",
+                  "correct": false
+                },
+                {
+                  "content": "Le magma",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'où vient l'argile du sol ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : le sol contient de l'argile. 2) Comparer avec la roche mère : le feldspath du granite est attaqué par l'eau et se transforme en argile. 3) Conclure : l'argile vient du feldspath. La décomposition des feuilles donne de l'humus, pas de l'argile.",
+              "answers": [
+                {
+                  "content": "De la transformation des feldspaths du granite",
+                  "correct": true
+                },
+                {
+                  "content": "De la décomposition des feuilles",
+                  "correct": false
+                },
+                {
+                  "content": "De la transformation du quartz",
+                  "correct": false
+                },
+                {
+                  "content": "Des racines des arbres",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Range ces éléments de la plus profonde à la plus proche de la surface.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Repérer la roche mère : le granite dur est le plus profond. 2) Suivre l'altération : la roche se fissure en blocs, puis se réduit en arène. 3) Terminer par le sol, en surface, où s'ajoute la matière organique.",
+              "answers": [
+                {
+                  "content": "Granite dur et compact"
+                },
+                {
+                  "content": "Blocs de granite fissurés"
+                },
+                {
+                  "content": "Sable grossier (arène)"
+                },
+                {
+                  "content": "Sol brun avec des racines"
+                }
+              ]
+            },
+            {
+              "content": "Le sol de la colline a été apporté d'une autre région par des camions.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Comparer : le sol contient les mêmes minéraux que le granite situé dessous. 2) Placer les couches : les blocs et l'arène font la transition entre le granite et le sol. 3) Conclure : le sol s'est formé sur place par l'altération du granite.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La partie minérale de ce sol vient de l'altération du ___.",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Comparer le sol et la roche située dessous. 2) Retrouver les mêmes minéraux : quartz, mica, argile venue du feldspath. 3) Conclure : le sol vient du granite. L'humus est de la matière organique.",
+              "answers": [
+                {
+                  "content": "granite",
+                  "correct": true
+                },
+                {
+                  "content": "basalte",
+                  "correct": false
+                },
+                {
+                  "content": "humus",
+                  "correct": false
+                },
+                {
+                  "content": "mica seul",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux sols sur le même granite",
+          "statement": "Awa compare deux sols formés sur le même granite et du même âge. Le sol A est en forêt dense du Sud, chaud et pluvieux, avec beaucoup d'arbres. Le sol B est en zone sèche du Nord, avec peu de pluie et peu de végétation. Le diagramme donne l'épaisseur de chaque sol, en centimètres : sol A 300 et sol B 50 (valeurs fictives mais plausibles).",
+          "exercise_type": "evaluation",
+          "figure": "epaisseur-sols",
+          "questions": [
+            {
+              "content": "De combien de centimètres le sol A est-il plus épais que le sol B ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire les valeurs : A mesure 300 cm, B mesure 50 cm. 2) Calculer la différence : 300 − 50 = 250 cm.",
+              "answers": [
+                {
+                  "content": "250",
+                  "correct": true
+                }
+              ],
+              "unit": "cm",
+              "tolerance": 0
+            },
+            {
+              "content": "Quels deux facteurs expliquent que le sol A soit plus épais, puisque la roche et l'âge sont les mêmes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Lire la situation : même roche, même âge. 2) Associer les conditions aux facteurs : chaud et pluvieux = climat ; forêt dense = êtres vivants. 3) Dire l'action : ils accélèrent l'altération et la formation d'humus. La roche et l'âge sont les mêmes, ils n'expliquent pas la différence.",
+              "answers": [
+                {
+                  "content": "Un climat chaud et pluvieux qui accélère l'altération",
+                  "correct": true
+                },
+                {
+                  "content": "Une végétation abondante qui apporte de la litière et des racines",
+                  "correct": true
+                },
+                {
+                  "content": "Une roche mère différente",
+                  "correct": false
+                },
+                {
+                  "content": "Un temps de formation plus court",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le climat chaud et humide du sol A, la décomposition de la litière est ___ que dans la zone sèche du sol B.",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Lire la situation : A est chaud et humide, B est sec. 2) Dire l'action du climat : la chaleur et l'humidité accélèrent les décomposeurs. 3) Conclure : la décomposition est plus rapide en A.",
+              "answers": [
+                {
+                  "content": "plus rapide",
+                  "correct": true
+                },
+                {
+                  "content": "plus lente",
+                  "correct": false
+                },
+                {
+                  "content": "aussi lente",
+                  "correct": false
+                },
+                {
+                  "content": "impossible",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un sol C est formé sur le même granite que A, avec le même climat et la même forêt, mais il est très jeune. Que peut-on prévoir ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Lire la situation : même roche, même climat et même végétation que A, seul l'âge est plus petit. 2) Dire l'action du temps : un sol se forme lentement. 3) Conclure : un sol jeune est moins épais qu'un sol ancien.",
+              "answers": [
+                {
+                  "content": "Il sera moins épais que le sol A",
+                  "correct": true
+                },
+                {
+                  "content": "Il sera aussi épais que le sol A",
+                  "correct": false
+                },
+                {
+                  "content": "Il sera plus épais que le sol A",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'aura pas d'humus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en 3 à 4 phrases pourquoi le sol A est plus épais que le sol B.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Cite le climat chaud et pluvieux du sol A",
+                "Dit que ce climat accélère l'altération du granite",
+                "Cite la végétation abondante (litière, racines)",
+                "Conclut sur l'épaisseur du sol A"
+              ],
+              "explanation": "Corrigé modèle : « Le sol A est en forêt dense du Sud, où il fait chaud et où il pleut beaucoup. La chaleur et la pluie accélèrent l'altération du granite et l'action des décomposeurs. La forêt apporte beaucoup de litière et de racines, qui fabriquent de l'humus et fissurent la roche. Le sol A s'est donc formé plus vite et il est plus épais que le sol B. » Barème : 1 point pour le climat, 1 point pour son action, 1 point pour la végétation.",
+              "answers": [],
+              "starter": "Le sol A est plus épais parce que..."
+            }
+          ]
+        },
+        {
+          "title": "L'expérience des trois pots",
+          "statement": "Pour comprendre comment se forme l'humus, le professeur prépare trois pots identiques. Chacun reçoit 100 g de feuilles mortes séchées posées sur de la terre de forêt. Pot A : terre normale, arrosée. Pot B : terre chauffée longtemps pour tuer les êtres vivants, puis arrosée. Pot C : terre normale, gardée sèche. Après 30 jours, il pèse les feuilles qui restent (valeurs fictives mais plausibles) : pot A 40 g, pot B 92 g, pot C 85 g.",
+          "exercise_type": "evaluation",
+          "figure": "decomposition-feuilles",
+          "questions": [
+            {
+              "content": "Quelle masse de feuilles a disparu dans le pot A ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire les données : au départ 100 g, il reste 40 g. 2) Calculer : 100 − 40 = 60 g ont disparu. Il ne faut pas répondre 40, qui est la masse restante.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "unit": "g",
+              "tolerance": 0
+            },
+            {
+              "content": "Pour montrer le rôle des êtres vivants du sol, quels pots faut-il comparer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer ce qui change : A et B ont la même eau, mais seul A a des êtres vivants. 2) Choisir les pots qui ne diffèrent que d'un facteur : A et B. Dans A et C, c'est l'humidité qui change ; dans B et C, deux conditions changent.",
+              "answers": [
+                {
+                  "content": "Les pots A et B",
+                  "correct": true
+                },
+                {
+                  "content": "Les pots A et C",
+                  "correct": false
+                },
+                {
+                  "content": "Les pots B et C",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun couple",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que montre la comparaison des pots A et C ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Lire les résultats : A garde 40 g de feuilles, C en garde 85 g. 2) Repérer la différence : A est arrosé, C est sec. 3) Conclure : sans eau, la décomposition est bien plus faible.",
+              "answers": [
+                {
+                  "content": "L'humidité est nécessaire à la décomposition",
+                  "correct": true
+                },
+                {
+                  "content": "Les feuilles ne se décomposent jamais",
+                  "correct": false
+                },
+                {
+                  "content": "Les êtres vivants du sol sont inutiles",
+                  "correct": false
+                },
+                {
+                  "content": "Les feuilles sèches se décomposent plus vite",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les feuilles de la litière sont transformées en ___ par les décomposeurs.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. 1) Repérer la litière : les feuilles mortes. 2) Identifier les décomposeurs. 3) Conclure : ils transforment les débris en humus, matière brun noir.",
+              "answers": [
+                {
+                  "content": "humus",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le pot B, la plus grande partie des feuilles est restée intacte.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Lire les résultats : il reste 92 g sur 100 g. 2) Relier au traitement : la terre chauffée n'a plus d'êtres vivants. 3) Conclure : presque rien n'a été décomposé.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige une conclusion de 3 à 4 phrases : comment la litière devient-elle de l'humus d'après l'expérience, et quelles conditions sont nécessaires ?",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Cite les êtres vivants du sol comme responsables (pot A et pot B)",
+                "Cite l'humidité comme condition nécessaire (pot A et pot C)",
+                "S'appuie sur des masses restantes du tableau",
+                "Conclut que la litière devient de l'humus"
+              ],
+              "explanation": "Corrigé modèle : « Dans le pot A, il reste seulement 40 g de feuilles : les êtres vivants du sol les ont décomposées. Dans le pot B, dont la terre a été chauffée, il en reste 92 g : sans êtres vivants, la décomposition est presque nulle. Dans le pot C, gardé sec, il en reste 85 g : l'eau est aussi nécessaire. La litière devient donc de l'humus grâce aux êtres vivants du sol, en milieu humide. » Barème : 1 point pour les êtres vivants, 1 point pour l'humidité, 1 point pour les masses, 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "D'après l'expérience, la litière devient de l'humus parce que..."
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Constituants d'un sol (partie minérale, matière organique, humus) ; origine de la partie minérale ; profil d'un sol ; formation de l'humus ; facteurs de formation d'un sol.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur de SVT interroge la classe sur la composition d'un sol.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sol est formé de matière organique et de…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Rappeler les deux grands constituants. 2) La partie minérale vient de la roche mère altérée, la matière organique des êtres vivants. 3) Conclure : sol = roche mère altérée + matière organique. Le granite sain n'est pas altéré.",
+                  "answers": [
+                    {
+                      "content": "roche mère altérée",
+                      "correct": true
+                    },
+                    {
+                      "content": "granite sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "eau salée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'humus fait partie de la partie minérale du sol.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer l'origine de l'humus : des débris de plantes et d'animaux décomposés. 2) Conclure : c'est de la matière organique, pas de la partie minérale, qui vient de la roche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les morceaux de feuilles et de racines d'un sol forment la matière ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer ce qui vient des êtres vivants : feuilles et racines. 2) Conclure : ils forment la matière organique du sol.",
+                  "answers": [
+                    {
+                      "content": "organique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément d'un sol à ce qui le caractérise.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Observer chaque élément. 2) Séparer ce qui vient de la roche (quartz) de ce qui vient des êtres vivants (racine, humus, ver). 3) Associer chaque élément à son origine.",
+                  "answers": [
+                    {
+                      "content": "Un grain de quartz",
+                      "match": "Il vient de la roche"
+                    },
+                    {
+                      "content": "Une racine morte",
+                      "match": "Elle vient d'une plante"
+                    },
+                    {
+                      "content": "L'humus",
+                      "match": "Il vient de débris décomposés"
+                    },
+                    {
+                      "content": "Un ver de terre",
+                      "match": "Il vit dans le sol"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments font partie de la partie minérale d'un sol ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer ce qui vient de la roche : le quartz et les fragments de granite. 2) Écarter ce qui vient des êtres vivants : la feuille morte et l'humus sont de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "Un grain de quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fragment de granite altéré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une feuille morte",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'humus",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur une colline de granite, un sol repose sur de la roche mère altérée, elle-même posée sur du granite dur.",
+              "exercise_type": "evaluation",
+              "figure": "roche-sol",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que la roche mère d'un sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Placer les couches : la roche mère est la plus profonde. 2) Conclure : c'est la roche dure sous le sol. La couche de feuilles est la litière.",
+                  "answers": [
+                    {
+                      "content": "La roche dure située sous le sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "La couche de feuilles mortes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sol lui-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'humus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces éléments de la plus profonde à la plus proche de la surface.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Repérer la roche mère dure, au fond. 2) Au-dessus, la roche s'altère et donne la roche mère altérée. 3) Le sol est tout en haut.",
+                  "answers": [
+                    {
+                      "content": "Roche mère dure"
+                    },
+                    {
+                      "content": "Roche mère altérée"
+                    },
+                    {
+                      "content": "Sol"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quartz d'un sol formé sur du granite vient du granite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Comparer le sol et la roche mère. 2) Le quartz résiste à l'altération et se retrouve en grains dans le sol. 3) Conclure : il vient du granite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argile d'un sol formé sur du granite vient de la transformation du ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Comparer avec la roche mère. 2) Le feldspath du granite est attaqué par l'eau et devient de l'argile. Le quartz résiste, et l'humus vient des êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "humus",
+                      "correct": false
+                    },
+                    {
+                      "content": "bois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus on descend dans un sol, plus on trouve…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Placer les couches. 2) Plus on descend, plus on se rapproche de la roche mère. 3) Conclure : les fragments sont de plus en plus gros. L'humus se trouve surtout en surface.",
+                  "answers": [
+                    {
+                      "content": "de gros fragments de roche",
+                      "correct": true
+                    },
+                    {
+                      "content": "de feuilles entières",
+                      "correct": false
+                    },
+                    {
+                      "content": "d'humus",
+                      "correct": false
+                    },
+                    {
+                      "content": "de racines fines",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Les élèves observent la coupe d'un sol, de la surface jusqu'à la roche dure.",
+              "exercise_type": "evaluation",
+              "figure": "profil-sol",
+              "questions": [
+                {
+                  "content": "Relie chaque couche à la description qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer la surface et le fond. 2) Observer chaque couche en descendant. 3) Nommer chaque couche d'après ce qu'on y voit : débris = litière, terre sombre = horizon humifère, terre claire = horizon d'accumulation, fragments = roche mère altérée, roche dure = roche mère.",
+                  "answers": [
+                    {
+                      "content": "Litière",
+                      "match": "Débris de végétaux peu transformés"
+                    },
+                    {
+                      "content": "Horizon humifère",
+                      "match": "Terre sombre riche en humus"
+                    },
+                    {
+                      "content": "Horizon d'accumulation",
+                      "match": "Terre plus claire avec peu d'humus"
+                    },
+                    {
+                      "content": "Roche mère altérée",
+                      "match": "Fragments de roche"
+                    },
+                    {
+                      "content": "Roche mère",
+                      "match": "Roche dure et saine"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle couche trouve-t-on le plus d'humus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer la couleur des couches. 2) L'humus rend la terre sombre : c'est dans l'horizon humifère. 3) Plus on descend, moins il y en a.",
+                  "answers": [
+                    {
+                      "content": "Dans l'horizon humifère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans la roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la roche mère altérée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'horizon d'accumulation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche mère est la couche la plus proche de la surface.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer la surface : la litière. 2) Repérer le fond : la roche mère. 3) Conclure : la roche mère est en bas du profil, pas en haut.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La couche de fragments juste au-dessus de la roche dure est la roche mère ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Nommer les couches en descendant. 2) Juste au-dessus de la roche dure, on trouve des fragments : c'est la roche mère altérée.",
+                  "answers": [
+                    {
+                      "content": "alteree",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces couches de la surface vers la profondeur.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Commencer par la litière, en surface. 2) Descendre : horizon humifère, puis horizon d'accumulation. 3) Finir par la roche mère altérée, puis la roche mère.",
+                  "answers": [
+                    {
+                      "content": "Litière"
+                    },
+                    {
+                      "content": "Horizon humifère"
+                    },
+                    {
+                      "content": "Horizon d'accumulation"
+                    },
+                    {
+                      "content": "Roche mère altérée"
+                    },
+                    {
+                      "content": "Roche mère"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur rappelle que la litière devient de l'humus et que la formation d'un sol dépend de trois facteurs.",
+              "exercise_type": "evaluation",
+              "figure": "facteurs-sol",
+              "questions": [
+                {
+                  "content": "Quels êtres vivants transforment la litière en humus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer la litière. 2) Identifier ceux qui s'en nourrissent : champignons, bactéries, vers de terre, termites, appelés décomposeurs. 3) Conclure : ils fabriquent l'humus.",
+                  "answers": [
+                    {
+                      "content": "Les décomposeurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les grains de quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cailloux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les nuages",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'humus se forme à partir de débris de végétaux et d'animaux.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer la litière, faite de débris. 2) Décrire la transformation : ils sont décomposés. 3) Conclure : le résultat est l'humus.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois facteurs interviennent dans la formation d'un sol, en plus de la roche mère ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 1) Lire la situation. 2) Associer chaque condition à un facteur : climat, êtres vivants, temps. La Lune et le granite seul ne sont pas des facteurs de formation.",
+                  "answers": [
+                    {
+                      "content": "Le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les êtres vivants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le granite seul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un climat chaud et humide ___ la formation d'un sol.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Associer la chaleur et la pluie au climat. 2) Dire son action : il accélère l'altération et la décomposition. 3) Conclure : il accélère la formation du sol.",
+                  "answers": [
+                    {
+                      "content": "accélère",
+                      "correct": true
+                    },
+                    {
+                      "content": "ralentit",
+                      "correct": false
+                    },
+                    {
+                      "content": "empêche",
+                      "correct": false
+                    },
+                    {
+                      "content": "ne change pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sol se forme très ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Associer la durée au facteur temps. 2) Conclure : un sol se forme très lentement, alors qu'une forte pluie peut l'emporter vite.",
+                  "answers": [
+                    {
+                      "content": "lentement",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Compost du jardin du collège (formation de l'humus) ; coupe d'un puits (profil du sol et roche mère) ; forêt et champ nu (êtres vivants et humus) ; climats comparés (décomposition de la litière).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Les élèves du collège font un tas de compost avec des épluchures de banane plantain et d'igname et des feuilles mortes. Ils l'arrosent et le retournent. Après trois mois, le tas s'est transformé en un terreau brun noir. Au départ, il pesait 50 kg ; il pèse maintenant 20 kg (valeurs fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que contient surtout le terreau obtenu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer ce que contient le tas au départ : des débris de végétaux. 2) Identifier ce qui agit : les décomposeurs. 3) Conclure : le terreau brun noir est de l'humus. Le granite et le magma n'y sont pour rien.",
+                  "answers": [
+                    {
+                      "content": "De l'humus venu de la décomposition des débris",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des fragments de roche mère altérée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du granite sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux êtres vivants aident à décomposer le tas ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Identifier les êtres vivants du sol qui se nourrissent des débris. 2) Champignons et bactéries décomposent la matière. Les grains de quartz et les cailloux sont minéraux, ils ne sont pas vivants.",
+                  "answers": [
+                    {
+                      "content": "Les champignons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les bactéries",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les grains de quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cailloux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Arroser le tas aide la décomposition.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Décrire la transformation. 2) Les décomposeurs agissent plus vite dans un milieu humide. 3) Conclure : arroser le tas aide la décomposition.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle masse a disparu entre le début et la fin ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 50 kg au départ, 20 kg à la fin. 2) Calculer : 50 − 20 = 30 kg. Il ne faut pas répondre 20, qui est la masse restante.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le terreau brun noir est riche en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Observer la couleur brun noir. 2) La relier à la matière organique décomposée. 3) Conclure : il est riche en humus.",
+                  "answers": [
+                    {
+                      "content": "humus",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Pour creuser un puits au village, les habitants traversent : 3 cm de feuilles mortes ; 20 cm de terre noire avec des racines ; 50 cm de terre claire ; 60 cm de cailloux anguleux ; puis une roche très dure qu'ils cassent au marteau (mesures fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": "profil-sol",
+              "questions": [
+                {
+                  "content": "Quelle profondeur atteignent-ils avant la roche dure ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les épaisseurs : 3, 20, 50 et 60 cm. 2) Les additionner : 3 + 20 + 50 + 60 = 133 cm.",
+                  "answers": [
+                    {
+                      "content": "133",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Comment s'appelle la couche de terre noire avec des racines ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : terre noire, racines. 2) Nommer : c'est l'horizon humifère. La litière est faite de feuilles encore reconnaissables, en surface.",
+                  "answers": [
+                    {
+                      "content": "L'horizon humifère",
+                      "correct": true
+                    },
+                    {
+                      "content": "La litière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'horizon d'accumulation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que sont les cailloux anguleux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : fragments de roche. 2) Placer la couche : juste au-dessus de la roche dure. 3) Nommer : roche mère altérée.",
+                  "answers": [
+                    {
+                      "content": "De la roche mère altérée",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la litière",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'humus",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'horizon humifère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche très dure du fond du puits est la roche mère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer le fond du profil. 2) La roche dure et saine, la plus profonde, est la roche mère.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus on creuse, plus les fragments de roche sont ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Placer les couches. 2) Plus on descend, plus on se rapproche de la roche mère. 3) Conclure : les fragments sont de plus en plus gros.",
+                  "answers": [
+                    {
+                      "content": "gros",
+                      "correct": true
+                    },
+                    {
+                      "content": "petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "fins comme de la farine",
+                      "correct": false
+                    },
+                    {
+                      "content": "absents",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une forêt, le sol est couvert d'une épaisse litière et traversé de racines. Dans un champ voisin, désherbé et brûlé chaque année, le sol est nu. Awa mesure l'épaisseur de la terre brun noir : 15 cm en forêt et 4 cm dans le champ (valeurs fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De combien de centimètres la terre brun noir est-elle plus épaisse en forêt que dans le champ ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 15 cm et 4 cm. 2) Calculer : 15 − 4 = 11 cm.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pourquoi y a-t-il plus d'humus en forêt ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la situation : litière abondante en forêt, sol nu dans le champ. 2) Associer au facteur êtres vivants. 3) Conclure : la forêt fournit beaucoup de débris que les décomposeurs transforment en humus.",
+                  "answers": [
+                    {
+                      "content": "La litière y est abondante et elle est décomposée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le granite y est plus dur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La terre y est faite de magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de décomposeurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le champ nu, peu de litière vient nourrir les décomposeurs.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Lire la situation : le champ est désherbé et brûlé. 2) Dire l'action : il reste peu de débris à décomposer. 3) Conclure : l'humus se forme moins.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux effets les racines et les plantes ont-elles sur le sol ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Associer les plantes au facteur êtres vivants. 2) Dire l'action : les racines s'enfoncent dans les fissures, et les plantes fournissent la litière. Elles ne fabriquent pas de magma.",
+                  "answers": [
+                    {
+                      "content": "Les racines fissurent la roche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Leurs débris forment de la matière organique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles fabriquent du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles transforment le quartz en argile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sol couvert de végétation reçoit ___ de litière qu'un sol nu.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Comparer. 2) La végétation fournit des feuilles mortes. 3) Conclure : un sol couvert reçoit plus de litière qu'un sol nu.",
+                  "answers": [
+                    {
+                      "content": "plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucune",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur compare deux régions. Il place 100 g de feuilles mortes sur la terre dans chaque région. Après 30 jours, 60 g ont disparu dans la forêt chaude et humide du Sud, et 20 g dans une région fraîche et sèche (valeurs fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle masse de feuilles reste-t-il dans la forêt chaude et humide ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 100 g au départ, 60 g disparus. 2) Calculer : 100 − 60 = 40 g.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle masse de feuilles reste-t-il dans la région fraîche et sèche ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 100 g au départ, 20 g disparus. 2) Calculer : 100 − 20 = 80 g.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Combien de fois plus de feuilles ont disparu dans la forêt que dans la région fraîche et sèche ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 60 g contre 20 g. 2) Diviser : 60 ÷ 20 = 3. Il ne faut pas soustraire, car la question demande combien de fois.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fois",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Que montre cette comparaison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la situation. 2) Associer la chaleur et l'humidité au climat. 3) Conclure : le climat chaud et humide accélère la décomposition.",
+                  "answers": [
+                    {
+                      "content": "La décomposition est plus rapide en milieu chaud et humide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La décomposition est plus rapide en milieu frais et sec",
+                      "correct": false
+                    },
+                    {
+                      "content": "La décomposition ne dépend pas du climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les feuilles ne se décomposent jamais",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le climat est un facteur de formation d'un sol.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Rappeler les facteurs : climat, êtres vivants, temps. 2) Conclure : le climat agit sur l'altération et la décomposition.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Lecture d'un diagramme (matière organique selon la profondeur) ; expérience sur les vers de terre ; raisonnement sur l'origine d'un sol ; comparaison d'un sol jeune et d'un sol ancien.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur prélève des échantillons à trois profondeurs dans un sol de forêt et mesure la part de matière organique, en pourcentage de la masse. Résultats fictifs mais plausibles : 8 % de 0 à 10 cm, 3 % de 30 à 40 cm et 1 % de 80 à 90 cm.",
+              "exercise_type": "evaluation",
+              "figure": "matiere-organique-profondeur",
+              "questions": [
+                {
+                  "content": "Quelle est la part de matière organique de 0 à 10 cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire le diagramme : la barre de 0 à 10 cm. 2) Lire sa valeur : 8 %.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%",
+                  "tolerance": 0
+                },
+                {
+                  "content": "De combien de points la part de matière organique diminue-t-elle entre 0-10 cm et 80-90 cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les valeurs : 8 % et 1 %. 2) Calculer : 8 − 1 = 7 points. Il ne faut pas répondre 1, qui est la valeur la plus basse.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "points",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Comment varie la matière organique quand on descend ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire les trois valeurs dans l'ordre de la profondeur : 8, 3, 1. 2) Comparer : elles baissent. 3) Conclure : la matière organique diminue en profondeur.",
+                  "answers": [
+                    {
+                      "content": "Elle diminue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle augmente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle reste la même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle disparaît à 30 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle explication est la bonne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Relier la donnée au profil : l'humus se forme à la surface, dans la litière et l'horizon humifère. 2) Conclure : il y en a de moins en moins quand on descend. L'humus ne vient pas de la roche mère.",
+                  "answers": [
+                    {
+                      "content": "Les débris et l'humus viennent de la surface",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'humus vient de la roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines fabriquent du granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma remonte en surface",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À 80-90 cm, la matière organique est plus abondante qu'à 30-40 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Lire les valeurs : 1 % à 80-90 cm et 3 % à 30-40 cm. 2) Comparer : 1 est plus petit que 3. 3) Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Pour étudier le rôle des vers de terre, Awa prépare deux bacs identiques. Chacun reçoit la même terre, la même quantité d'eau et 100 g de feuilles mortes, et reste à la même température. Le bac 1 contient des vers de terre, le bac 2 n'en contient pas. Après 20 jours, il reste 30 g de feuilles dans le bac 1 et 75 g dans le bac 2 (valeurs fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle masse de feuilles a disparu dans le bac 1 ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 100 g au départ, 30 g restants. 2) Calculer : 100 − 30 = 70 g.",
+                  "answers": [
+                    {
+                      "content": "70",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle masse de feuilles a disparu dans le bac 2 ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 100 g au départ, 75 g restants. 2) Calculer : 100 − 75 = 25 g.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Que conclut-on de la comparaison des deux bacs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer ce qui change : la présence de vers. 2) Comparer les résultats : 70 g disparus contre 25 g. 3) Conclure : les vers accélèrent la disparition des feuilles.",
+                  "answers": [
+                    {
+                      "content": "Les vers de terre accélèrent la disparition des feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les vers de terre ralentissent la décomposition",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les vers de terre n'ont aucun effet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les feuilles disparaissent seulement sans vers",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La comparaison n'est valable que si les deux bacs ont la même terre, la même eau et la même température.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer ce qui doit rester identique. 2) Si plusieurs conditions changent, on ne sait plus laquelle agit. 3) Conclure : un seul facteur doit changer, ici les vers.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les deux bacs reçoivent-ils la même quantité d'eau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer le facteur étudié : les vers. 2) Garder tout le reste identique. 3) Conclure : la différence de résultat ne peut venir que des vers.",
+                  "answers": [
+                    {
+                      "content": "Pour qu'un seul facteur change : les vers de terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour que les feuilles pèsent plus lourd",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour que les vers de terre ne meurent jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour fabriquer de la roche",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Koffi observe une colline. Le sol contient des grains de quartz brillants, des paillettes de mica et de l'argile. Sous le sol, il trouve de l'arène avec des grains de quartz et de mica, puis du granite dur. Trois élèves proposent : Aya dit que le sol vient du granite situé dessous ; Moussa dit que les racines ont fabriqué le sol ; Fanta dit que la pluie a apporté le sol des nuages.",
+              "exercise_type": "evaluation",
+              "figure": "roche-sol",
+              "questions": [
+                {
+                  "content": "Quelle explication est soutenue par les observations de Koffi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer la partie minérale du sol. 2) Comparer avec la roche mère : mêmes minéraux, quartz et mica. 3) Placer les couches : granite, arène, sol. 4) Conclure : le sol vient du granite.",
+                  "answers": [
+                    {
+                      "content": "Celle d'Aya : le sol vient du granite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celle de Moussa : les racines ont fabriqué le sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celle de Fanta : la pluie a apporté le sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune explication n'est possible",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Retrouver les mêmes minéraux dans le sol et dans le granite soutient l'idée que le sol vient du granite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Comparer le sol et la roche. 2) Les mêmes minéraux indiquent une même origine. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel argument s'oppose à l'idée de Moussa ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : le sol contient du quartz, du mica et de l'argile. 2) Les racines font partie de la matière organique. 3) Conclure : elles aident à fissurer la roche, mais ne fabriquent pas ces minéraux.",
+                  "answers": [
+                    {
+                      "content": "Les racines sont des organes de plantes : elles ne fabriquent pas de grains de quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines sont trop longues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines n'existent pas dans un sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quartz est un être vivant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier l'origine d'un sol, on compare ses ___ avec ceux de la roche mère.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Observer la partie minérale. 2) La comparer à la roche mère : ce sont les minéraux qui permettent de conclure. La couleur seule ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "couleurs seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "feuilles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche pour trouver l'origine d'un sol.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Observer d'abord. 2) Comparer avec la roche mère. 3) Placer les couches. 4) Conclure en dernier, avec les preuves rassemblées.",
+                  "answers": [
+                    {
+                      "content": "Observer la partie minérale du sol"
+                    },
+                    {
+                      "content": "Comparer avec la roche mère"
+                    },
+                    {
+                      "content": "Placer les couches du plus profond au plus proche de la surface"
+                    },
+                    {
+                      "content": "Conclure sur l'origine du sol"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Sur une colline, une terrasse ancienne porte un sol épais de 150 cm. Un talus récemment découvert, taillé il y a quelques années, porte un sol épais de 10 cm. Le granite, le climat et la végétation sont les mêmes (valeurs fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De combien de centimètres le sol de la terrasse est-il plus épais que celui du talus ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 150 cm et 10 cm. 2) Calculer : 150 − 10 = 140 cm.",
+                  "answers": [
+                    {
+                      "content": "140",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel facteur explique cette différence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la situation : roche, climat et végétation sont les mêmes. 2) Il reste l'âge : la terrasse est ancienne, le talus récent. 3) Conclure : le temps explique la différence.",
+                  "answers": [
+                    {
+                      "content": "Le temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La végétation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À conditions égales, un sol jeune est moins épais qu'un sol ancien.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Rappeler que la formation d'un sol est lente. 2) Plus le sol est ancien, plus il a eu de temps pour s'épaissir. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sol se forme ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Associer la durée au facteur temps. 2) Conclure : un sol se forme très lentement.",
+                  "answers": [
+                    {
+                      "content": "très lentement",
+                      "correct": true
+                    },
+                    {
+                      "content": "en une journée",
+                      "correct": false
+                    },
+                    {
+                      "content": "en une heure",
+                      "correct": false
+                    },
+                    {
+                      "content": "instantanément",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sol ancien est plus ___ qu'un sol jeune.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Comparer. 2) Plus un sol est ancien, plus il est épais. 3) Conclure : le mot attendu est épais.",
+                  "answers": [
+                    {
+                      "content": "epais",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la formation des sols",
+          "notions": "Toutes les notions : constituants d'un sol ; origine de la partie minérale ; profil d'un sol ; formation de l'humus ; facteurs de formation (climat, êtres vivants, temps).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un échantillon prélevé dans l'horizon humifère d'un jardin contient des fragments de granite altéré, des grains de quartz, de l'argile, des débris de feuilles à demi décomposés, de l'humus brun noir, des vers de terre et des racines fines.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels trois éléments font partie de la partie minérale ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 1) Observer l'échantillon. 2) Repérer ce qui vient de la roche : quartz, granite altéré, argile. 3) Écarter l'humus et les racines, qui viennent des êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Des grains de quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des fragments de granite altéré",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'argile",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'humus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des racines fines",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'où vient la partie minérale de cet échantillon ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer ce qui vient de la roche. 2) La partie minérale vient de la roche mère altérée. 3) Conclure. Les feuilles décomposées donnent l'humus, pas les minéraux.",
+                  "answers": [
+                    {
+                      "content": "De l'altération de la roche mère",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la décomposition des feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du travail des vers de terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la litière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les débris de feuilles à demi décomposés sont de la matière organique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer ce qui vient des êtres vivants. 2) Les feuilles viennent de plantes. 3) Conclure : c'est de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vers de terre font partie des animaux du sol qui participent à la formation de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Identifier les êtres vivants du sol. 2) Les vers se nourrissent des débris et les mélangent à la terre. 3) Conclure : ils participent à la formation de l'humus.",
+                  "answers": [
+                    {
+                      "content": "humus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément de l'échantillon à son origine.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Observer chaque élément. 2) Le quartz vient de la roche mère, la racine d'une plante, l'humus de débris décomposés, l'argile de la transformation du feldspath du granite.",
+                  "answers": [
+                    {
+                      "content": "Grain de quartz",
+                      "match": "La roche mère"
+                    },
+                    {
+                      "content": "Racine fine",
+                      "match": "Une plante"
+                    },
+                    {
+                      "content": "Humus",
+                      "match": "Des débris décomposés"
+                    },
+                    {
+                      "content": "Argile",
+                      "match": "Le feldspath altéré"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle couche du profil trouve-t-on cet échantillon ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la description : humus, racines, vers. 2) Nommer la couche : horizon humifère. La roche mère n'en contient pas.",
+                  "answers": [
+                    {
+                      "content": "L'horizon humifère",
+                      "correct": true
+                    },
+                    {
+                      "content": "La roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche mère altérée",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'horizon d'accumulation",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur une colline, la coupe d'un sol montre de haut en bas : 3 cm de litière, 22 cm d'horizon humifère, 35 cm d'horizon d'accumulation, 40 cm de roche mère altérée, puis la roche mère dure (mesures fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": "profil-sol",
+              "questions": [
+                {
+                  "content": "Range ces couches de la surface vers la profondeur.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Repérer la surface et le fond. 2) Descendre couche après couche. 3) La litière est en haut et la roche mère dure au fond.",
+                  "answers": [
+                    {
+                      "content": "Litière"
+                    },
+                    {
+                      "content": "Horizon humifère"
+                    },
+                    {
+                      "content": "Horizon d'accumulation"
+                    },
+                    {
+                      "content": "Roche mère altérée"
+                    },
+                    {
+                      "content": "Roche mère"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'épaisseur totale au-dessus de la roche mère dure ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les épaisseurs : 3, 22, 35 et 40 cm. 2) Les additionner : 3 + 22 + 35 + 40 = 100 cm.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle couche est la plus sombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer la couleur. 2) La couche la plus riche en humus est la plus sombre : l'horizon humifère.",
+                  "answers": [
+                    {
+                      "content": "L'horizon humifère",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'horizon d'accumulation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche mère altérée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche mère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les fragments de roche sont plus gros dans la roche mère altérée que dans l'horizon humifère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Placer les couches. 2) Plus on descend, plus on se rapproche de la roche mère. 3) Conclure : les fragments sont plus gros en bas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche dure située sous toutes les couches s'appelle la roche ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer le fond du profil. 2) La roche dure est la roche mère.",
+                  "answers": [
+                    {
+                      "content": "mere",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couche à son rôle ou à son contenu.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Observer ce que contient chaque couche. 2) Associer chacune à son contenu : litière = feuilles reconnaissables, horizon humifère = humus et racines, roche mère altérée = fragments, roche mère = roche dure.",
+                  "answers": [
+                    {
+                      "content": "Litière",
+                      "match": "Feuilles mortes encore reconnaissables"
+                    },
+                    {
+                      "content": "Horizon humifère",
+                      "match": "Humus et racines"
+                    },
+                    {
+                      "content": "Roche mère altérée",
+                      "match": "Fragments de roche"
+                    },
+                    {
+                      "content": "Roche mère",
+                      "match": "Roche dure"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Deux sols sont formés sur le même granite et ont le même âge. Le sol A est en forêt dense du Sud, chaud et pluvieux, et mesure 300 cm. Le sol B est en zone sèche du Nord et mesure 50 cm (valeurs fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": "epaisseur-sols",
+              "questions": [
+                {
+                  "content": "Combien de fois le sol A est-il plus épais que le sol B ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 300 cm et 50 cm. 2) Diviser : 300 ÷ 50 = 6. Il ne faut pas soustraire.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "fois",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel facteur explique le mieux cette différence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la situation : même roche, même âge. 2) Le climat diffère : chaud et pluvieux contre sec. 3) Conclure : le climat explique la différence.",
+                  "answers": [
+                    {
+                      "content": "Le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'âge des sols",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nature de la roche mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux effets le climat chaud et pluvieux a-t-il ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Associer la chaleur et la pluie au climat. 2) Dire son action : il accélère l'altération et la décomposition. Il ne les arrête pas.",
+                  "answers": [
+                    {
+                      "content": "Il accélère l'altération de la roche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il accélère la décomposition de la litière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il arrête l'altération de la roche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il tue tous les décomposeurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La forêt dense du sol A apporte beaucoup de litière.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Associer la forêt aux êtres vivants. 2) Les arbres perdent leurs feuilles. 3) Conclure : la litière est abondante, donc l'humus aussi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À conditions égales, un sol plus âgé est ___ épais.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Associer l'âge au facteur temps. 2) Un sol se forme lentement. 3) Conclure : plus il est âgé, plus il est épais.",
+                  "answers": [
+                    {
+                      "content": "plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "aussi",
+                      "correct": false
+                    },
+                    {
+                      "content": "jamais",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur place 100 g de feuilles mortes sur de la terre dans trois pots. Pot A : terre normale, arrosée. Pot B : terre chauffée pour tuer les êtres vivants, arrosée. Pot C : terre normale, gardée sèche. Après 30 jours, il reste 40 g de feuilles dans le pot A, 92 g dans le pot B et 85 g dans le pot C (valeurs fictives mais plausibles).",
+              "exercise_type": "evaluation",
+              "figure": "decomposition-feuilles",
+              "questions": [
+                {
+                  "content": "Quelle masse de feuilles a disparu dans le pot C ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 100 g au départ, 85 g restants. 2) Calculer : 100 − 85 = 15 g.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle masse de feuilles a disparu dans le pot B ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 100 g au départ, 92 g restants. 2) Calculer : 100 − 92 = 8 g.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans quel pot la décomposition est-elle la plus forte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire les masses restantes : 40, 92 et 85 g. 2) Plus il en reste peu, plus la décomposition est forte. 3) Conclure : le pot A, avec 40 g restants.",
+                  "answers": [
+                    {
+                      "content": "Le pot A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pot B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pot C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois pareillement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux conditions la décomposition de la litière exige-t-elle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Comparer A et B : sans êtres vivants, presque rien ne disparaît. 2) Comparer A et C : sans eau, très peu disparaît. 3) Conclure : il faut des êtres vivants et de l'humidité.",
+                  "answers": [
+                    {
+                      "content": "Des êtres vivants du sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'humidité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du granite sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les débris de la litière sont transformés en ___ par les décomposeurs.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer la litière. 2) Identifier les décomposeurs. 3) Conclure : ils fabriquent l'humus.",
+                  "answers": [
+                    {
+                      "content": "humus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le pot B, les êtres vivants du sol ont été tués par le chauffage.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Lire le protocole : la terre est chauffée pour tuer les êtres vivants. 2) Conclure : le pot B n'a plus de décomposeurs, ce qui explique les 92 g restants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la fiche de révision de la notion avant de répondre."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

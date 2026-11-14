@@ -1,0 +1,3600 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Aimant et bobine",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Physique-Chimie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "materiaux-attires",
+          "kind": "diagram",
+          "description": "Un arbre de classement des matériaux. La racine « Matériaux » se divise en deux branches : « Attirés par un aimant », qui regroupe le fer, le nickel et le cobalt, et « Non attirés », qui regroupe le cuivre, l'aluminium et le bois. Les deux familles se distinguent par la légende.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "m",
+                "label": "Matériaux"
+              },
+              {
+                "id": "a",
+                "label": "Attirés par un aimant",
+                "category": 1
+              },
+              {
+                "id": "n",
+                "label": "Non attirés",
+                "category": 2
+              },
+              {
+                "id": "fer",
+                "label": "Fer",
+                "category": 1
+              },
+              {
+                "id": "ni",
+                "label": "Nickel",
+                "category": 1
+              },
+              {
+                "id": "co",
+                "label": "Cobalt",
+                "category": 1
+              },
+              {
+                "id": "cu",
+                "label": "Cuivre",
+                "category": 2
+              },
+              {
+                "id": "al",
+                "label": "Aluminium",
+                "category": 2
+              },
+              {
+                "id": "bo",
+                "label": "Bois",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "m",
+                "to": "a"
+              },
+              {
+                "from": "m",
+                "to": "n"
+              },
+              {
+                "from": "a",
+                "to": "fer"
+              },
+              {
+                "from": "a",
+                "to": "ni"
+              },
+              {
+                "from": "a",
+                "to": "co"
+              },
+              {
+                "from": "n",
+                "to": "cu"
+              },
+              {
+                "from": "n",
+                "to": "al"
+              },
+              {
+                "from": "n",
+                "to": "bo"
+              }
+            ],
+            "legend": [
+              "Attiré par un aimant",
+              "Non attiré"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "circuit-electroaimant",
+          "kind": "diagram",
+          "description": "Le fonctionnement d'un électroaimant, de gauche à droite : le générateur envoie un courant continu, l'interrupteur fermé laisse passer le courant dans la bobine, la bobine aimante le noyau de fer, et le noyau aimanté attire les objets en fer. Si l'interrupteur est ouvert, la chaîne s'arrête dès le début.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "g",
+                "label": "Générateur"
+              },
+              {
+                "id": "i",
+                "label": "Interrupteur fermé"
+              },
+              {
+                "id": "b",
+                "label": "Bobine"
+              },
+              {
+                "id": "n",
+                "label": "Noyau de fer aimanté"
+              },
+              {
+                "id": "o",
+                "label": "Objets en fer attirés"
+              }
+            ],
+            "edges": [
+              {
+                "from": "g",
+                "to": "i",
+                "label": "courant"
+              },
+              {
+                "from": "i",
+                "to": "b",
+                "label": "courant"
+              },
+              {
+                "from": "b",
+                "to": "n",
+                "label": "aimante"
+              },
+              {
+                "from": "n",
+                "to": "o",
+                "label": "attire"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître les matériaux attirés par un aimant",
+          "remember": "Un **aimant** attire certains objets sans les toucher : c'est une action à distance. Il attire le **fer**, le **nickel**, le **cobalt**, ainsi que l'**acier** et la **fonte**, qui sont des **alliages** de fer (un alliage est un mélange de métaux). Exception : certains aciers inoxydables (« inox ») ne sont pas attirés. Il n'attire pas le **cuivre**, l'**aluminium**, le bois, le plastique, le verre, le papier. Beaucoup de métaux ne sont donc pas attirés : « métal » ne veut pas dire « attiré par un aimant ».",
+          "method": [
+            "Identifier le matériau dont l'objet est fait.",
+            "Comparer ce matériau à ceux que l'aimant attire : le fer, le nickel, le cobalt, l'acier et la fonte (alliages de fer).",
+            "Conclure : l'objet est attiré s'il est fait de l'un d'eux, sinon il n'est pas attiré."
+          ],
+          "example": {
+            "statement": "Pour fabriquer un porte-clés magnétique, Awa essaie un aimant sur un clou en fer, un fil de cuivre et une règle en plastique. Lesquels sont attirés ?",
+            "steps": [
+              "Identifier : le clou est en fer, le fil est en cuivre, la règle est en plastique.",
+              "Comparer : le fer est dans la liste (fer, nickel, cobalt, acier, fonte) ; le cuivre et le plastique n'y sont pas.",
+              "Conclure : seul le clou en fer est attiré ; le fil de cuivre et la règle en plastique ne sont pas attirés."
+            ]
+          },
+          "pitfall": "Ne pas croire que tous les métaux sont attirés par un aimant. Contre-exemple : le cuivre et l'aluminium sont des métaux, mais un aimant n'attire ni un fil de cuivre ni une casserole en aluminium. Sur 3 métaux (fer, cuivre, aluminium), un seul est attiré. Pour décider, ne regarde pas si l'objet est brillant ou en métal : cherche si le matériau est du fer, du nickel, du cobalt, de l'acier ou de la fonte.",
+          "figure": "materiaux-attires",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les matériaux attirés par un aimant.",
+            "questions": [
+              {
+                "content": "Un aimant est approché d'un boulon en acier. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "hint": "Pense à l'acier : de quel métal est-il fait en grande partie ?",
+                "explanation": "Étape 1 — Identifier : le boulon est en acier. Étape 2 — Comparer : l'acier est un alliage de fer, donc il fait partie des matériaux attirés. Étape 3 — Conclure : le boulon est attiré. Dire que l'alliage n'est pas attiré est faux : l'acier, alliage de fer, l'est aussi.",
+                "answers": [
+                  {
+                    "content": "Le boulon est attiré, car l'acier est un alliage de fer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le boulon n'est pas attiré, car l'acier est un alliage et non un métal pur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le boulon est repoussé, car c'est un métal",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'aluminium est un métal, donc un aimant l'attire.",
+                "question_type": "true_false",
+                "hint": "Compare l'aluminium à la liste fer, nickel, cobalt.",
+                "explanation": "Étape 1 — Identifier : l'aluminium. Étape 2 — Comparer : il n'est ni du fer, ni du nickel, ni du cobalt. Étape 3 — Conclure : il n'est pas attiré. L'erreur est de croire que tout métal est attiré.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le métal des fils électriques, le ___, n'est pas attiré par un aimant.",
+                "question_type": "fill_blank",
+                "hint": "Ce métal est de couleur rougeâtre.",
+                "explanation": "Étape 1 — Identifier : le métal des fils électriques est le cuivre. Étape 2 — Comparer : le cuivre n'est ni du fer, ni du nickel, ni du cobalt. Étape 3 — Conclure : il n'est pas attiré.",
+                "answers": [
+                  {
+                    "content": "cuivre",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une aiguille à coudre en acier est attirée parce que l'acier est un alliage de ___.",
+                "question_type": "fill_blank",
+                "hint": "Quel métal est le principal composant de l'acier ?",
+                "explanation": "Étape 1 — Identifier : l'aiguille est en acier. Étape 2 — Comparer : l'acier est un alliage de fer, et le fer est attiré. Étape 3 — Conclure : l'aiguille est attirée.",
+                "answers": [
+                  {
+                    "content": "fer",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître les matériaux attirés par un aimant",
+              "statement": "Au laboratoire du collège, tu testes des objets avec un aimant et la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel objet est attiré par un aimant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le boulon est en acier, la cuillère en aluminium, le fil en cuivre. Étape 2 — Comparer : seul l'acier (alliage de fer) est dans la liste. Étape 3 — Conclure : le boulon est attiré. L'aluminium et le cuivre sont des métaux, mais l'aimant ne les attire pas.",
+                  "answers": [
+                    {
+                      "content": "Un boulon en acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une cuillère en aluminium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil électrique en cuivre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bois est attiré par un aimant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le matériau est le bois. Étape 2 — Comparer : le bois n'est ni du fer, ni du nickel, ni du cobalt. Étape 3 — Conclure : il n'est pas attiré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels matériaux sont attirés par un aimant ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on te donne cinq matériaux. Étape 2 — Comparer : seuls le nickel et le cobalt sont dans la liste fer, nickel, cobalt. Étape 3 — Conclure : ce sont les deux bonnes réponses. Le cuivre et l'aluminium sont des métaux mais ne sont pas attirés ; le verre n'est pas un métal.",
+                  "answers": [
+                    {
+                      "content": "Le nickel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cobalt",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aluminium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cuivre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'acier est un alliage de ___, donc un aimant l'attire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : l'acier. Étape 2 — Comparer : c'est un alliage de fer, et le fer est attiré. Étape 3 — Conclure : l'acier est attiré.",
+                  "answers": [
+                    {
+                      "content": "fer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une casserole est en aluminium : un aimant ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la casserole est en aluminium. Étape 2 — Comparer : l'aluminium n'est pas dans la liste fer, nickel, cobalt. Étape 3 — Conclure : l'aimant ne l'attire pas. Il ne la repousse pas non plus : il ne se passe rien.",
+                  "answers": [
+                    {
+                      "content": "ne l'attire pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'attire",
+                      "correct": false
+                    },
+                    {
+                      "content": "la repousse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi dit : « Le cuivre est un métal, donc un aimant l'attire. » Pourquoi a-t-il tort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le matériau est le cuivre. Étape 2 — Comparer : il n'est pas dans la liste des matériaux attirés. Étape 3 — Conclure : il n'est pas attiré, même si c'est un métal. La masse et la couleur ne comptent pas : l'aluminium est gris mais n'est pas attiré non plus.",
+                  "answers": [
+                    {
+                      "content": "Seuls le fer, le nickel, le cobalt, l'acier et la fonte sont attirés, pas tous les métaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cuivre est trop léger pour être attiré",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seuls les métaux de couleur grise sont attirés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Trier des objets de la maison avec un aimant",
+              "statement": "Dans cet exercice, tu tries des objets de la maison et de l'atelier avec un aimant, en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque objet, trouve d'abord le matériau, puis compare-le à la liste fer, nickel, cobalt.",
+              "questions": [
+                {
+                  "content": "Trois de ces objets sont attirés par un aimant. Lesquels ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : on repère le matériau de chaque objet. Étape 2 — Comparer : le fer et l'acier (alliage de fer) sont attirés ; le cuivre, le plastique et le verre ne le sont pas. Étape 3 — Conclure : le clou, l'aiguille et le boulon sont attirés.",
+                  "answers": [
+                    {
+                      "content": "Un clou en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une aiguille à coudre en acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un boulon en acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un bouchon en plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un verre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque objet au matériau dont il est fait.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : c'est l'étape qui commence la méthode. Le clou est en fer, le fil de la bobine en cuivre, la règle en plastique, la vitre en verre. Une fois le matériau connu, tu peux comparer à la liste et conclure : seul le clou est attiré.",
+                  "answers": [
+                    {
+                      "content": "Un clou",
+                      "match": "Le fer"
+                    },
+                    {
+                      "content": "Le fil d'une bobine",
+                      "match": "Le cuivre"
+                    },
+                    {
+                      "content": "Une règle d'écolier",
+                      "match": "Le plastique"
+                    },
+                    {
+                      "content": "Une vitre",
+                      "match": "Le verre"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si un objet est attiré par un aimant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le matériau. Étape 2 — Comparer à la liste fer, nickel, cobalt, acier, fonte. Étape 3 — Conclure. On ne peut pas conclure avant d'avoir identifié le matériau, ni comparer avant de le connaître.",
+                  "answers": [
+                    {
+                      "content": "Identifier le matériau dont l'objet est fait."
+                    },
+                    {
+                      "content": "Comparer ce matériau à ceux que l'aimant attire : le fer, le nickel, le cobalt, l'acier et la fonte (alliages de fer)."
+                    },
+                    {
+                      "content": "Conclure : l'objet est attiré s'il est fait de l'un d'eux, sinon il n'est pas attiré."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève teste 8 objets : 3 sont en fer, 2 en acier, 2 en cuivre et 1 en bois. Combien d'objets sont attirés par un aimant ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "objets",
+                  "explanation": "Étape 1 — Identifier : 3 objets en fer, 2 en acier, 2 en cuivre, 1 en bois. Étape 2 — Comparer : le fer et l'acier sont attirés, le cuivre et le bois non. Étape 3 — Conclure : $3 + 2 = 5$ objets attirés. Si tu comptes les 8 objets, tu oublies que le cuivre et le bois ne sont pas attirés.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un aimant peut attirer un clou à travers une feuille de papier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le clou est en fer ; le papier est seulement entre l'aimant et le clou. Étape 2 — Comparer : le fer est attiré. Étape 3 — Conclure : l'aimant agit à distance, à travers le papier, donc l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plaque en nickel est ___ par un aimant.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : le matériau est le nickel. Étape 2 — Comparer : le nickel est dans la liste (fer, nickel, cobalt). Étape 3 — Conclure : la pièce est attirée.",
+                  "answers": [
+                    {
+                      "content": "attirée",
+                      "correct": true
+                    },
+                    {
+                      "content": "non attirée",
+                      "correct": false
+                    },
+                    {
+                      "content": "repoussée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Prévoir l'action entre deux pôles d'aimants",
+          "remember": "Un aimant a deux **pôles** : le **pôle nord** (N) et le **pôle sud** (S). Ils sont aux extrémités d'un barreau aimanté, là où l'aimant attire le plus. Deux pôles de **même nom se repoussent** (N et N, ou S et S). Deux pôles de **noms contraires s'attirent** (N et S). On ne peut pas séparer les pôles : un aimant cassé en deux donne **deux aimants**, chacun avec un pôle nord et un pôle sud. Une **aiguille aimantée** est un petit aimant qui tourne librement : seule, elle s'oriente dans la direction nord-sud, sa pointe nord vers le nord (à quelques degrés près, le nord géographique). C'est le principe de la **boussole**.",
+          "method": [
+            "Repérer les deux pôles qui se font face.",
+            "Comparer leurs noms : même nom ou noms contraires.",
+            "Conclure : deux pôles de même nom se repoussent, deux pôles de noms contraires s'attirent."
+          ],
+          "example": {
+            "statement": "On approche le pôle nord d'un barreau aimanté du pôle sud d'un autre barreau. Que se passe-t-il ?",
+            "steps": [
+              "Repérer : le pôle nord du premier barreau fait face au pôle sud du second.",
+              "Comparer : nord et sud sont deux noms contraires.",
+              "Conclure : deux pôles de noms contraires s'attirent, donc les deux barreaux s'attirent."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'on peut séparer le pôle nord du pôle sud en cassant un aimant. Contre-exemple : on casse un barreau en 2 morceaux. On n'obtient pas un morceau « tout nord » et un morceau « tout sud » : on obtient 2 aimants, donc 4 pôles (2 nord et 2 sud). Chaque morceau a toujours un pôle nord et un pôle sud. Et retiens la règle sans la confondre avec une règle de « ressemblance » : ce sont les pôles de noms contraires qui s'attirent.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir l'action entre deux pôles d'aimants.",
+            "questions": [
+              {
+                "content": "On approche deux pôles sud l'un de l'autre. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "hint": "Compare les noms des deux pôles.",
+                "explanation": "Étape 1 — Repérer : un pôle sud fait face à un pôle sud. Étape 2 — Comparer : ils ont le même nom. Étape 3 — Conclure : deux pôles de même nom se repoussent. Dire qu'ils s'attirent confond avec le cas nord et sud.",
+                "answers": [
+                  {
+                    "content": "Ils se repoussent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils s'attirent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il ne se passe rien",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux pôles de noms contraires s'attirent.",
+                "question_type": "true_false",
+                "hint": "Pense à un pôle nord face à un pôle sud.",
+                "explanation": "Étape 1 — Repérer : un pôle nord et un pôle sud. Étape 2 — Comparer : les noms sont contraires. Étape 3 — Conclure : ils s'attirent, c'est la règle.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La pointe nord d'une aiguille aimantée est approchée du pôle sud d'un barreau : la pointe est ___.",
+                "question_type": "select",
+                "hint": "L'aiguille est un petit aimant.",
+                "explanation": "Étape 1 — Repérer : une pointe nord face à un pôle sud. Étape 2 — Comparer : nord et sud sont contraires. Étape 3 — Conclure : la pointe est attirée.",
+                "answers": [
+                  {
+                    "content": "attirée",
+                    "correct": true
+                  },
+                  {
+                    "content": "repoussée",
+                    "correct": false
+                  },
+                  {
+                    "content": "sans effet",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un aimant cassé en deux donne ___ aimants.",
+                "question_type": "fill_blank",
+                "hint": "Chaque morceau garde-t-il ses deux pôles ?",
+                "explanation": "Étape 1 — Repérer : les deux morceaux obtenus. Étape 2 — Comparer : chaque morceau a ses deux extrémités, donc un pôle nord et un pôle sud. Étape 3 — Conclure : on obtient 2 aimants complets.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Prévoir l'action entre deux pôles d'aimants",
+              "statement": "Avec deux barreaux aimantés et une boussole, tu appliques la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les deux pôles d'un aimant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : un aimant a deux extrémités actives. Étape 2 — Comparer : on les nomme nord et sud. Étape 3 — Conclure : les deux pôles sont le pôle nord et le pôle sud. Positif et négatif viennent de l'électricité : ce n'est pas le vocabulaire des aimants.",
+                  "answers": [
+                    {
+                      "content": "Le pôle nord et le pôle sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pôle positif et le pôle négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pôle chaud et le pôle froid",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pôle nord d'un barreau fait face au pôle nord d'un autre barreau. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : nord face à nord. Étape 2 — Comparer : même nom. Étape 3 — Conclure : les barreaux se repoussent. S'attirer est la réponse pour deux noms contraires.",
+                  "answers": [
+                    {
+                      "content": "Les barreaux se repoussent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les barreaux s'attirent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les barreaux ne réagissent pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces paires de pôles s'attire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on examine chaque paire. Étape 2 — Comparer : seule la paire nord et sud a des noms contraires. Étape 3 — Conclure : c'est elle qui s'attire. Les paires de même nom se repoussent.",
+                  "answers": [
+                    {
+                      "content": "Un pôle nord et un pôle sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux pôles nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux pôles sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux pôles sud s'attirent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : deux pôles sud en face. Étape 2 — Comparer : ils ont le même nom. Étape 3 — Conclure : ils se repoussent, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord d'une boussole indique le ___ géographique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'aiguille de la boussole est un petit aimant libre. Étape 2 — Comparer : elle s'oriente dans la direction nord-sud. Étape 3 — Conclure : sa pointe nord indique le nord géographique.",
+                  "answers": [
+                    {
+                      "content": "nord",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On casse un aimant en deux. Qu'obtient-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les deux morceaux. Étape 2 — Comparer : chaque morceau a deux extrémités, donc deux pôles. Étape 3 — Conclure : on obtient deux aimants complets. Les pôles ne se séparent jamais, c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Deux aimants, chacun avec un pôle nord et un pôle sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un morceau avec seulement un pôle nord et un morceau avec seulement un pôle sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux morceaux qui ne sont plus des aimants",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Prévoir le comportement d'aimants et d'une boussole",
+              "statement": "Dans cet exercice, tu prévois ce que font des aimants et une boussole, en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compare toujours les noms des deux pôles qui se font face avant de conclure.",
+              "questions": [
+                {
+                  "content": "Quelles situations produisent une répulsion ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on lit les deux pôles de chaque situation. Étape 2 — Comparer : nord et nord ont le même nom, sud et sud aussi. Étape 3 — Conclure : ces deux situations repoussent. Les deux autres ont des noms contraires et attirent.",
+                  "answers": [
+                    {
+                      "content": "Un pôle nord face à un pôle nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pôle sud face à un pôle sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pôle nord face à un pôle sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pôle sud face à un pôle nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à son effet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : les deux éléments qui se font face. Étape 2 — Comparer : noms contraires ou même nom pour deux pôles ; fer ou cuivre pour un objet. Étape 3 — Conclure : nord et sud s'attirent, sud et sud se repoussent, le fer est attiré, le cuivre ne l'est pas.",
+                  "answers": [
+                    {
+                      "content": "Un pôle nord face à un pôle sud",
+                      "match": "Les aimants s'attirent"
+                    },
+                    {
+                      "content": "Un pôle sud face à un pôle sud",
+                      "match": "Les aimants se repoussent"
+                    },
+                    {
+                      "content": "Un aimant face à un clou en fer",
+                      "match": "Le clou est attiré"
+                    },
+                    {
+                      "content": "Un aimant face à un fil de cuivre",
+                      "match": "Le fil n'est pas attiré"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour prévoir l'action entre deux pôles.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer les pôles qui se font face. Étape 2 — Comparer leurs noms. Étape 3 — Conclure : attraction ou répulsion. La conclusion vient en dernier, car elle dépend de la comparaison.",
+                  "answers": [
+                    {
+                      "content": "Repérer les deux pôles qui se font face."
+                    },
+                    {
+                      "content": "Comparer leurs noms : même nom ou noms contraires."
+                    },
+                    {
+                      "content": "Conclure : deux pôles de même nom se repoussent, deux pôles de noms contraires s'attirent."
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord d'une boussole est approchée du pôle nord d'un barreau : la pointe est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : une pointe nord face à un pôle nord. Étape 2 — Comparer : même nom. Étape 3 — Conclure : la pointe est repoussée.",
+                  "answers": [
+                    {
+                      "content": "repoussée",
+                      "correct": true
+                    },
+                    {
+                      "content": "attirée",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans effet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On casse un aimant en trois morceaux. Combien y a-t-il de pôles nord en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "pôles",
+                  "explanation": "Étape 1 — Repérer : on obtient trois morceaux. Étape 2 — Comparer : chaque morceau est un aimant complet, avec un pôle nord et un pôle sud. Étape 3 — Conclure : $3 \\times 1 = 3$ pôles nord. Penser qu'il en reste un seul est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un morceau d'aimant peut n'avoir qu'un pôle nord, si on coupe la partie sud.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le morceau qu'on garde. Étape 2 — Comparer : couper un aimant crée de nouveaux pôles à l'endroit de la coupure. Étape 3 — Conclure : le morceau a toujours un pôle nord et un pôle sud, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Repérer les faces nord et sud d'une bobine",
+          "remember": "Une **bobine** est un fil électrique enroulé en cercles, les **spires**. Quand un **courant continu** la traverse, elle se comporte comme un **aimant** : elle a une **face nord** et une **face sud**, elle attire le fer et fait tourner une aiguille aimantée. Si on **inverse le sens du courant** (en échangeant les fils aux bornes du générateur), les faces nord et sud **s'échangent**. Quand le courant ne passe plus, la bobine n'agit plus comme un aimant.",
+          "method": [
+            "Vérifier que le circuit est fermé et qu'un courant continu traverse la bobine.",
+            "Approcher la pointe nord d'une aiguille aimantée d'une face de la bobine.",
+            "Lire la réaction de la pointe : attirée, la face est une face sud ; repoussée, la face est une face nord.",
+            "Conclure sur les deux faces, et rappeler que si on inverse le courant, les deux faces s'échangent."
+          ],
+          "example": {
+            "statement": "Awa relie une bobine à une pile et ferme l'interrupteur. La pointe nord d'une aiguille aimantée, approchée de la face A, est attirée. Quelle est la nature de la face A ? Que devient-elle si Awa échange les fils de la pile ?",
+            "steps": [
+              "Vérifier : l'interrupteur est fermé, le circuit est fermé et le courant continu de la pile traverse la bobine.",
+              "Approcher : Awa place la pointe nord de l'aiguille devant la face A.",
+              "Lire : la pointe nord est attirée ; elle n'est attirée que par un pôle sud, donc la face A est une face sud.",
+              "Conclure : A est la face sud et l'autre face est la face nord ; si Awa échange les fils de la pile, A devient la face nord."
+            ]
+          },
+          "pitfall": "Ne pas croire que la face nord de la bobine est toujours la même. Elle dépend du sens du courant. Contre-exemple : avec un premier branchement, la face A attire la pointe nord (A est sud). On échange les 2 fils de la pile : la pointe nord est maintenant repoussée par A (A est nord). Une seule manipulation a changé les 2 faces. Et si l'interrupteur est ouvert, aucun courant ne passe : la bobine n'a ni face nord ni face sud.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à repérer les faces nord et sud d'une bobine.",
+            "questions": [
+              {
+                "content": "Une bobine est traversée par un courant continu. Elle se comporte comme :",
+                "question_type": "single_choice",
+                "hint": "Que fait une aiguille aimantée près d'une bobine parcourue par un courant ?",
+                "explanation": "Étape 1 — Vérifier : le courant continu traverse la bobine. Étape 2 et 3 — Approcher et lire : une aiguille aimantée y réagit comme près d'un aimant. Étape 4 — Conclure : la bobine se comporte comme un aimant.",
+                "answers": [
+                  {
+                    "content": "un aimant",
+                    "correct": true
+                  },
+                  {
+                    "content": "un isolant",
+                    "correct": false
+                  },
+                  {
+                    "content": "une pile",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si on échange les fils aux bornes de la pile, les faces nord et sud de la bobine s'échangent.",
+                "question_type": "true_false",
+                "hint": "Le sens du courant décide quelle face est nord.",
+                "explanation": "Étape 4 — Conclure : inverser le sens du courant échange les deux faces. Avant l'échange, la face A était par exemple sud ; après, elle est nord.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La pointe nord d'une aiguille est repoussée par une face de la bobine. Cette face est une face ___.",
+                "question_type": "select",
+                "hint": "Deux pôles de même nom se repoussent.",
+                "explanation": "Étape 3 — Lire : pointe nord repoussée, donc la face a le même nom que la pointe. Étape 4 — Conclure : c'est une face nord. Une face sud attirerait la pointe nord.",
+                "answers": [
+                  {
+                    "content": "nord",
+                    "correct": true
+                  },
+                  {
+                    "content": "sud",
+                    "correct": false
+                  },
+                  {
+                    "content": "neutre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une bobine est un fil enroulé en ___.",
+                "question_type": "fill_blank",
+                "hint": "Chaque tour de fil porte un nom.",
+                "explanation": "Étape 1 — Vérifier : on parle d'un fil enroulé. Chaque cercle du fil s'appelle une spire ; la bobine est faite de plusieurs spires.",
+                "answers": [
+                  {
+                    "content": "spires",
+                    "correct": true
+                  },
+                  {
+                    "content": "spire",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Repérer les faces d'une bobine",
+              "statement": "Avec une bobine, une pile et une aiguille aimantée, tu appliques la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le point commun entre une bobine parcourue par un courant continu et un aimant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : le courant continu traverse la bobine. Étape 4 — Conclure : elle a une face nord et une face sud, comme un aimant a un pôle nord et un pôle sud. La bobine est en cuivre et elle n'agit que si le courant passe.",
+                  "answers": [
+                    {
+                      "content": "Chacun a une face ou un pôle nord et une face ou un pôle sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chacun est entièrement fait de fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chacun agit sans qu'aucun courant ne passe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord d'une aiguille aimantée est attirée par la face A d'une bobine parcourue par un courant. La face A est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : le courant passe. Étape 2 — Approcher : la pointe nord est devant A. Étape 3 — Lire : elle est attirée, donc A est une face sud. Étape 4 — Conclure : A est sud. Une face nord repousserait la pointe nord.",
+                  "answers": [
+                    {
+                      "content": "une face sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "une face nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "ni nord ni sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord d'une aiguille est repoussée par la face B d'une bobine parcourue par un courant. La face B est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Lire : la pointe nord est repoussée, donc la face a le même nom : c'est une face nord. Étape 4 — Conclure : B est nord. Le cas « face sud » attirerait la pointe.",
+                  "answers": [
+                    {
+                      "content": "une face nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "une face sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "ni nord ni sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "une face de fer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On ouvre l'interrupteur : la bobine garde ses faces nord et sud.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : avec l'interrupteur ouvert, le circuit n'est pas fermé et aucun courant ne passe. Sans courant, la bobine n'a plus ni face nord ni face sud : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On échange les fils sur les bornes de la pile. La face qui était nord devient la face ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : inverser le sens du courant échange les deux faces. La face nord devient la face sud. La garder nord est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "neutre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La face A est une face sud. On inverse le sens du courant. Que fait la pointe nord de l'aiguille près de A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : le courant passe toujours, mais dans l'autre sens. Étape 3 — Lire : A est maintenant une face nord, donc elle repousse la pointe nord. Étape 4 — Conclure : la pointe est repoussée. Penser que rien ne change oublie que les faces s'échangent.",
+                  "answers": [
+                    {
+                      "content": "Elle est repoussée, car A est devenue une face nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste attirée par A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'est ni attirée ni repoussée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Explorer une bobine avec une aiguille aimantée",
+              "statement": "Dans cet exercice, tu explores une bobine avec une aiguille aimantée, en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense à ce que fait une pointe nord près d'une face sud, puis près d'une face nord.",
+              "questions": [
+                {
+                  "content": "Quelles propriétés a une bobine traversée par un courant continu ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : le courant passe. Étape 4 — Conclure : la bobine a deux faces et agit sur l'aiguille. Elle n'agit plus sans courant, et inverser le courant échange ses faces. Elle est en fil de cuivre, pas de fer.",
+                  "answers": [
+                    {
+                      "content": "Elle a une face nord et une face sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fait tourner une aiguille aimantée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste un aimant quand l'interrupteur est ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle garde ses faces quand on inverse le courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est faite d'un fil de fer pur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Lire : pointe nord attirée, face sud ; pointe nord repoussée, face nord. Étape 4 — Conclure : échanger les fils échange les faces. Étape 1 — Vérifier : interrupteur ouvert, pas de courant, pas d'effet d'aimant.",
+                  "answers": [
+                    {
+                      "content": "La pointe nord est attirée par une face",
+                      "match": "Cette face est une face sud"
+                    },
+                    {
+                      "content": "La pointe nord est repoussée par une face",
+                      "match": "Cette face est une face nord"
+                    },
+                    {
+                      "content": "On échange les fils de la pile",
+                      "match": "Les deux faces s'échangent"
+                    },
+                    {
+                      "content": "L'interrupteur est ouvert",
+                      "match": "La bobine n'agit plus comme un aimant"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour repérer les faces d'une bobine.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier le courant. Étape 2 — Approcher la pointe nord. Étape 3 — Lire la réaction. Étape 4 — Conclure sur les faces. Sans courant, l'aiguille ne réagit pas : la vérification vient avant tout.",
+                  "answers": [
+                    {
+                      "content": "Vérifier que le circuit est fermé et qu'un courant continu traverse la bobine."
+                    },
+                    {
+                      "content": "Approcher la pointe nord d'une aiguille aimantée d'une face de la bobine."
+                    },
+                    {
+                      "content": "Lire la réaction de la pointe : attirée, la face est une face sud ; repoussée, la face est une face nord."
+                    },
+                    {
+                      "content": "Conclure sur les deux faces, et rappeler que si on inverse le courant, les deux faces s'échangent."
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois bobines identiques sont chacune traversées par un courant continu. Combien de faces nord y a-t-il en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "faces",
+                  "explanation": "Étape 1 — Vérifier : le courant passe dans les trois bobines. Étape 4 — Conclure : chaque bobine a une face nord et une face sud. Il y a donc $3 \\times 1 = 3$ faces nord. Compter 6 revient à confondre faces nord et nombre total de faces.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour échanger les faces d'une bobine, on inverse le ___ du courant.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : inverser le sens du courant, en échangeant les fils aux bornes de la pile, échange la face nord et la face sud.",
+                  "answers": [
+                    {
+                      "content": "sens",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bobine parcourue par un courant continu peut faire tourner une aiguille aimantée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : le courant continu passe. Étape 2 — Approcher : l'aiguille près de la bobine. Étape 3 — Lire : une face attire sa pointe nord et repousse sa pointe sud, ce qui la fait tourner. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Expliquer le fonctionnement d'un électroaimant",
+          "remember": "Un **électroaimant** est une **bobine** qui entoure un **noyau de fer**. Quand un courant continu traverse la bobine, le noyau devient un aimant : il attire les objets en fer, en acier, en nickel ou en cobalt. Quand on **coupe le courant**, l'effet **disparaît** et les objets tombent. Avec le noyau de fer, l'effet est bien **plus fort** qu'avec la bobine seule. On utilise du **fer doux**, un fer qui ne reste pas aimanté. Usages : grue de casse et de tri, sonnette électrique.",
+          "method": [
+            "Repérer la bobine et son noyau de fer dans le dispositif.",
+            "Observer l'interrupteur : le circuit est-il fermé ou ouvert ?",
+            "Prévoir l'effet : circuit fermé, le noyau devient un aimant et attire le fer ; circuit ouvert, il n'attire plus rien.",
+            "Conclure : on commande l'électroaimant avec l'interrupteur, et il n'attire que le fer, le nickel, le cobalt, l'acier et la fonte."
+          ],
+          "example": {
+            "statement": "Dans une casse automobile près d'Abidjan, une grue porte un électroaimant au-dessus d'une carcasse en acier. L'opérateur ferme l'interrupteur, puis, au-dessus du tas, il l'ouvre. Que se passe-t-il ?",
+            "steps": [
+              "Repérer : la grue porte une bobine qui entoure un noyau de fer.",
+              "Observer : l'interrupteur est d'abord fermé, puis ouvert.",
+              "Prévoir : circuit fermé, le noyau est un aimant et soulève la carcasse en acier ; circuit ouvert, il n'attire plus rien et la carcasse tombe.",
+              "Conclure : l'opérateur commande la grue avec l'interrupteur, et elle ne peut soulever que du fer ou de l'acier."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un électroaimant attire tous les métaux. Il attire seulement le fer, le nickel, le cobalt, l'acier et la fonte, comme un aimant ordinaire. Contre-exemple : une grue, circuit fermé, passe au-dessus de 10 plaques, 5 en acier et 5 en aluminium. Elle soulève les 5 plaques d'acier et aucune des 5 plaques d'aluminium.",
+          "figure": "circuit-electroaimant",
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer le fonctionnement d'un électroaimant.",
+            "questions": [
+              {
+                "content": "Qu'est-ce qu'un électroaimant ?",
+                "question_type": "single_choice",
+                "hint": "Il y a deux éléments : une bobine et un noyau.",
+                "explanation": "Étape 1 — Repérer : on cherche la bobine et le noyau de fer. Un électroaimant, c'est la bobine autour du noyau de fer, traversée par un courant. Un aimant ordinaire, lui, garde toujours son pouvoir.",
+                "answers": [
+                  {
+                    "content": "Une bobine qui entoure un noyau de fer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un fil de cuivre sans noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un aimant qui garde toujours son pouvoir d'attraction",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On ouvre l'interrupteur : l'électroaimant continue d'attirer les clous.",
+                "question_type": "true_false",
+                "hint": "Que devient le courant quand l'interrupteur est ouvert ?",
+                "explanation": "Étape 2 — Observer : l'interrupteur est ouvert, donc le circuit est ouvert. Étape 3 — Prévoir : plus de courant, le noyau n'attire plus rien. Les clous tombent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un électroaimant attire un clou en fer mais ___ un morceau d'aluminium.",
+                "question_type": "select",
+                "hint": "Pense aux matériaux attirés par un aimant.",
+                "explanation": "Étape 4 — Conclure : il n'attire que le fer, le nickel, le cobalt, l'acier et la fonte. L'aluminium n'en fait pas partie : il n'est pas attiré.",
+                "answers": [
+                  {
+                    "content": "n'attire pas",
+                    "correct": true
+                  },
+                  {
+                    "content": "attire aussi",
+                    "correct": false
+                  },
+                  {
+                    "content": "repousse",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le noyau d'un électroaimant est en ___.",
+                "question_type": "fill_blank",
+                "hint": "Ce métal est attiré par un aimant.",
+                "explanation": "Étape 1 — Repérer : le noyau entouré par la bobine est un noyau de fer. C'est ce qui rend l'effet bien plus fort qu'avec la bobine seule.",
+                "answers": [
+                  {
+                    "content": "fer",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Expliquer le fonctionnement d'un électroaimant",
+              "statement": "Avec une grue de casse et une sonnette, tu appliques la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel appareil utilise un électroaimant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une sonnette électrique contient une bobine avec un noyau de fer. Étape 3 — Prévoir : quand le courant passe, le noyau attire un marteau qui frappe le timbre. Une boussole contient un aimant ordinaire, et une lampe de poche n'a pas de noyau de fer.",
+                  "answers": [
+                    {
+                      "content": "Une sonnette électrique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe de poche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une boussole",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un électroaimant, où est placé le noyau de fer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la bobine entoure le noyau de fer. Le noyau est donc à l'intérieur de la bobine, là où l'effet est utile.",
+                  "answers": [
+                    {
+                      "content": "À l'intérieur de la bobine",
+                      "correct": true
+                    },
+                    {
+                      "content": "À côté de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Autour de l'interrupteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un électroaimant est plus puissant que la même bobine sans noyau de fer, avec le même courant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la bobine et le noyau de fer. Étape 3 — Prévoir : le noyau de fer devient un aimant et renforce l'effet de la bobine. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que la grue lâche les objets, l'opérateur doit ___ l'interrupteur.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Observer : circuit fermé, les objets sont tenus. Étape 3 — Prévoir : circuit ouvert, plus de courant, plus d'aimant. Il faut donc ouvrir l'interrupteur. Inverser les fils échangerait les faces mais l'électroaimant attirerait toujours.",
+                  "answers": [
+                    {
+                      "content": "ouvrir",
+                      "correct": true
+                    },
+                    {
+                      "content": "fermer",
+                      "correct": false
+                    },
+                    {
+                      "content": "inverser les fils de",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un électroaimant, circuit fermé, est approché d'une plaque d'aluminium. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Prévoir : le noyau est un aimant. Étape 4 — Conclure : un aimant n'attire que le fer, le nickel, le cobalt, l'acier et la fonte. L'aluminium n'en fait pas partie. La puissance ne change pas la liste des matériaux attirés.",
+                  "answers": [
+                    {
+                      "content": "Rien : l'aluminium n'est pas attiré",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plaque est attirée, car l'électroaimant est puissant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plaque est repoussée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels objets l'électroaimant soulève-t-il, circuit fermé ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Prévoir : circuit fermé, le noyau attire le fer et l'acier. Étape 4 — Conclure : seuls la tôle en acier et le boulon en fer sont soulevés. Le cuivre, le verre et le bois ne sont pas attirés.",
+                  "answers": [
+                    {
+                      "content": "Une tôle en acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un boulon en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un tuyau en cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une bouteille en verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une planche de bois",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Faire fonctionner un électroaimant",
+              "statement": "Dans cet exercice, tu étudies un circuit qui contient une bobine à noyau de fer, en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "circuit-electroaimant",
+              "hint": "Le courant est la cause de tout : sans lui, le noyau n'est plus un aimant.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre ce qui se passe quand l'opérateur de la grue ferme l'interrupteur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Observer : tout part de l'interrupteur qui se ferme. Étape 3 — Prévoir : le courant traverse la bobine, le noyau devient un aimant, puis les objets en fer sont attirés. Chaque phase est la cause de la suivante.",
+                  "answers": [
+                    {
+                      "content": "L'opérateur ferme l'interrupteur."
+                    },
+                    {
+                      "content": "Un courant traverse la bobine."
+                    },
+                    {
+                      "content": "Le noyau de fer devient un aimant."
+                    },
+                    {
+                      "content": "Les objets en fer sont attirés."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque usage à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Prévoir : dans chaque cas, le courant aimante un noyau de fer. La grue soulève l'acier, la sonnette attire un marteau, le tri retire les objets en fer d'un tas de déchets, car seul le fer est attiré.",
+                  "answers": [
+                    {
+                      "content": "Grue de casse",
+                      "match": "Soulever des carcasses en acier"
+                    },
+                    {
+                      "content": "Sonnette électrique",
+                      "match": "Attirer un marteau qui frappe le timbre"
+                    },
+                    {
+                      "content": "Tri des déchets",
+                      "match": "Séparer le fer des autres matériaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments faut-il pour faire fonctionner un électroaimant ? Choisis trois réponses.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : une bobine entoure un noyau de fer. Étape 2 — Observer : le générateur, par le circuit fermé, envoie le courant. Le plastique et le bois ne sont pas attirés ; il n'y a pas d'aimant permanent dans un électroaimant.",
+                  "answers": [
+                    {
+                      "content": "Une bobine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un noyau de fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un générateur qui envoie un courant continu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un noyau de plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un morceau de bois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un aimant permanent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas contient 6 plaques d'acier, 4 plaques d'aluminium et 2 plaques de cuivre. Circuit fermé, combien de plaques l'électroaimant soulève-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "plaques",
+                  "explanation": "Étape 3 — Prévoir : circuit fermé, l'électroaimant attire le fer et l'acier. Étape 4 — Conclure : il soulève les 6 plaques d'acier, et ni les 4 plaques d'aluminium ni les 2 plaques de cuivre. Compter 12 plaques est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La grue ne soulève plus rien dès que le courant est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Observer : couper le courant revient à ouvrir le circuit. Étape 3 — Prévoir : le noyau n'est plus un aimant. Inverser le courant échangerait les faces mais l'électroaimant continuerait à attirer.",
+                  "answers": [
+                    {
+                      "content": "coupé",
+                      "correct": true
+                    },
+                    {
+                      "content": "inversé",
+                      "correct": false
+                    },
+                    {
+                      "content": "fermé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un aimant en U ordinaire peut être « éteint » avec un interrupteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : un aimant ordinaire n'a pas de bobine ni de courant, donc pas d'interrupteur. Il attire toujours. Seul l'électroaimant se commande en coupant le courant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Trier les objets d'une boîte avec un aimant",
+          "statement": "Au club de sciences du collège, Kouamé verse dans une boîte 4 clous en fer, 3 boulons en acier, 5 fils de cuivre et 2 cuillères en aluminium. Il passe un aimant au-dessus de la boîte.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Pour chaque objet, trouve le matériau, puis compare-le à la liste fer, nickel, cobalt.",
+          "questions": [
+            {
+              "content": "Quels objets l'aimant attire-t-il ? Choisis deux réponses.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Identifier : clous en fer, boulons en acier, fils en cuivre, cuillères en aluminium. Étape 2 — Comparer : le fer et l'acier (alliage de fer) sont dans la liste fer, nickel, cobalt, acier, fonte ; le cuivre et l'aluminium n'y sont pas. Étape 3 — Conclure : les clous et les boulons sont attirés. Le cuivre et l'aluminium sont des métaux mais ils ne sont pas attirés.",
+              "answers": [
+                {
+                  "content": "Les clous en fer",
+                  "correct": true
+                },
+                {
+                  "content": "Les boulons en acier",
+                  "correct": true
+                },
+                {
+                  "content": "Les fils de cuivre",
+                  "correct": false
+                },
+                {
+                  "content": "Les cuillères en aluminium",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun objet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'objets l'aimant soulève-t-il en tout ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "objets",
+              "explanation": "Étape 1 — Identifier : 4 clous en fer et 3 boulons en acier sont attirés. Étape 2 — Calculer : $4 + 3 = 7$. Étape 3 — Conclure : l'aimant soulève 7 objets. Compter 14 objets reviendrait à croire que tout est attiré.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien d'objets restent dans la boîte après le passage de l'aimant ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "objets",
+              "explanation": "Étape 1 — Compter le total : $4 + 3 + 5 + 2 = 14$ objets. Étape 2 — Retirer les 7 objets soulevés : $14 - 7 = 7$. Étape 3 — Vérifier : les 5 fils de cuivre et les 2 cuillères en aluminium donnent $5 + 2 = 7$. Il reste 7 objets.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Kouamé dit : « Le cuivre et l'aluminium sont des métaux, donc l'aimant les attire. » Que lui réponds-tu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Identifier : cuivre et aluminium. Étape 2 — Comparer : ils ne sont ni du fer, ni du nickel, ni du cobalt. Étape 3 — Conclure : ils ne sont pas attirés. Être un métal ne suffit pas, et l'éclat ne compte pas.",
+              "answers": [
+                {
+                  "content": "Faux : seuls le fer, le nickel, le cobalt, l'acier et la fonte sont attirés",
+                  "correct": true
+                },
+                {
+                  "content": "Vrai : tous les métaux sont attirés",
+                  "correct": false
+                },
+                {
+                  "content": "Vrai : mais seulement s'ils sont brillants",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'acier est attiré par un aimant parce qu'il est fait en grande partie de fer.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Identifier : l'acier. Étape 2 — Comparer : c'est un alliage de fer, et le fer est attiré. Étape 3 — Conclure : l'acier est attiré. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le nickel et le ___ sont, comme le fer, attirés par un aimant.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Les matériaux attirés par un aimant sont le fer, le nickel et le cobalt, ainsi que l'acier et la fonte (alliages de fer). Le troisième est donc le cobalt.",
+              "answers": [
+                {
+                  "content": "cobalt",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une boussole et deux barreaux aimantés",
+          "statement": "Au club scientifique, Yao dispose d'une boussole et de deux barreaux aimantés A et B. Il étudie les pôles et l'aiguille aimantée.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Compare toujours les noms des deux pôles qui se font face.",
+          "questions": [
+            {
+              "content": "Loin de tout aimant et de tout objet en fer, vers où se tourne la pointe nord de la boussole ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : l'aiguille est un petit aimant libre de tourner. Étape 2 — Comparer : seule, elle s'oriente dans la direction nord-sud. Étape 3 — Conclure : la pointe nord indique le nord géographique. Elle ne reste pas dans une direction quelconque.",
+              "answers": [
+                {
+                  "content": "Vers le nord géographique",
+                  "correct": true
+                },
+                {
+                  "content": "Vers le sud",
+                  "correct": false
+                },
+                {
+                  "content": "Dans une direction quelconque",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao fait face au pôle nord du barreau A avec le pôle sud du barreau B. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : pôle nord de A face au pôle sud de B. Étape 2 — Comparer : nord et sud sont des noms contraires. Étape 3 — Conclure : les barreaux s'attirent. Se repousser est la réponse pour un même nom.",
+              "answers": [
+                {
+                  "content": "Les barreaux s'attirent",
+                  "correct": true
+                },
+                {
+                  "content": "Les barreaux se repoussent",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne se passe rien",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao approche la pointe nord de la boussole du pôle nord du barreau A : la pointe est ___.",
+              "question_type": "select",
+              "explanation": "Méthode. Étape 1 — Repérer : pointe nord face à un pôle nord. Étape 2 — Comparer : même nom. Étape 3 — Conclure : la pointe est repoussée.",
+              "answers": [
+                {
+                  "content": "repoussée",
+                  "correct": true
+                },
+                {
+                  "content": "attirée",
+                  "correct": false
+                },
+                {
+                  "content": "sans effet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao approche la pointe nord de la boussole d'une extrémité du barreau B : elle est attirée. De quel pôle s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : la pointe nord est attirée. Étape 2 — Comparer : une pointe nord n'est attirée que par un pôle de nom contraire. Étape 3 — Conclure : l'extrémité est un pôle sud.",
+              "answers": [
+                {
+                  "content": "Du pôle sud",
+                  "correct": true
+                },
+                {
+                  "content": "Du pôle nord",
+                  "correct": false
+                },
+                {
+                  "content": "D'aucun pôle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao casse le barreau A en 2 morceaux et le barreau B en 3 morceaux. Combien de pôles nord y a-t-il en tout ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "pôles",
+              "explanation": "Méthode. Étape 1 — Repérer : $2 + 3 = 5$ morceaux. Étape 2 — Comparer : chaque morceau est un aimant complet, avec un pôle nord et un pôle sud. Étape 3 — Conclure : il y a 5 pôles nord (et 5 pôles sud). Croire qu'un seul morceau garde le pôle nord est le piège classique.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quand on casse un barreau aimanté en deux, un des morceaux a deux pôles nord.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer : les deux morceaux. Étape 2 — Comparer : chacun est un aimant complet avec un pôle nord et un pôle sud. Étape 3 — Conclure : aucun morceau n'a deux pôles nord.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les faces d'une bobine",
+          "statement": "Au laboratoire, Mariam monte en série une pile, un interrupteur et une bobine. Une aiguille aimantée est posée près de la face A de la bobine. L'interrupteur est d'abord ouvert. Elle le ferme : la pointe nord de l'aiguille est attirée par la face A. Puis elle échange les fils aux bornes de la pile.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Une pointe nord est attirée par une face sud et repoussée par une face nord.",
+          "questions": [
+            {
+              "content": "L'interrupteur est ouvert. Que fait l'aiguille aimantée, loin de tout aimant ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Vérifier : l'interrupteur est ouvert, aucun courant ne traverse la bobine. Étape 4 — Conclure : la bobine n'agit pas comme un aimant, donc l'aiguille s'oriente seule dans la direction nord-sud.",
+              "answers": [
+                {
+                  "content": "Elle s'oriente dans la direction nord-sud",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est attirée par la bobine",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est repoussée par la bobine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'interrupteur est fermé et la pointe nord est attirée par la face A. Quelle est la nature de la face A ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Vérifier : le circuit est fermé, le courant continu passe. Étape 2 — Approcher : la pointe nord est devant A. Étape 3 — Lire : elle est attirée, donc A est une face sud. Étape 4 — Conclure : A est sud. Une face nord repousserait la pointe nord.",
+              "answers": [
+                {
+                  "content": "Une face sud",
+                  "correct": true
+                },
+                {
+                  "content": "Une face nord",
+                  "correct": false
+                },
+                {
+                  "content": "Ni nord ni sud",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la nature de l'autre face de la bobine, la face B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 4 — Conclure : une bobine traversée par un courant continu a une face nord et une face sud. La face A est sud, donc la face B est nord.",
+              "answers": [
+                {
+                  "content": "Une face nord",
+                  "correct": true
+                },
+                {
+                  "content": "Une face sud",
+                  "correct": false
+                },
+                {
+                  "content": "Une face neutre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après l'échange des fils de la pile, la pointe nord placée devant la face A est ___.",
+              "question_type": "select",
+              "explanation": "Méthode. Étape 4 — Conclure : échanger les fils inverse le sens du courant, donc les faces s'échangent : A devient la face nord. Étape 3 — Lire : une pointe nord est repoussée par une face nord. La pointe est repoussée.",
+              "answers": [
+                {
+                  "content": "repoussée",
+                  "correct": true
+                },
+                {
+                  "content": "attirée",
+                  "correct": false
+                },
+                {
+                  "content": "sans effet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si Mariam rouvre l'interrupteur, la face A reste une face sud.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Vérifier : interrupteur ouvert, plus de courant. Sans courant, la bobine n'a plus de face nord ni de face sud : A ne reste pas une face sud.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique, avec les mots de la leçon, pourquoi la pointe nord est repoussée par la face A après l'échange des fils de la pile.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le sens du courant est inversé",
+                "Les faces nord et sud s'échangent",
+                "La face A devient une face nord",
+                "Deux pôles de même nom se repoussent"
+              ],
+              "starter": "En échangeant les fils, le courant…",
+              "explanation": "Corrigé modèle : En échangeant les fils de la pile, Mariam inverse le sens du courant dans la bobine. Quand on inverse le courant, les faces nord et sud de la bobine s'échangent : la face A, qui était une face sud, devient une face nord. Une pointe nord est repoussée par un pôle ou une face de même nom, donc la pointe nord est repoussée. Barème : sens du courant inversé (1 point), faces échangées (1 point), A devient nord (0,5 point), même nom donc répulsion (0,5 point).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "La grue de la casse automobile",
+          "statement": "Dans une casse automobile près d'Abidjan, une grue porte un électroaimant : une bobine autour d'un noyau en fer, reliée à un générateur de courant continu par un interrupteur. Le tas devant la grue contient 8 carcasses en acier, 3 pièces en aluminium et 2 pièces en cuivre.",
+          "exercise_type": "evaluation",
+          "figure": "circuit-electroaimant",
+          "hint": "Circuit fermé : aimant. Circuit ouvert : plus d'aimant. Et seuls le fer, l'acier, le nickel et le cobalt sont attirés.",
+          "questions": [
+            {
+              "content": "Quels éléments faut-il pour faire fonctionner l'électroaimant de la grue ? Choisis trois réponses.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Repérer : la bobine entoure le noyau de fer. Étape 2 — Observer : le générateur, par l'interrupteur, envoie le courant continu. Le plastique et le bois ne sont pas attirés par un aimant ; l'électroaimant ne contient pas d'aimant permanent.",
+              "answers": [
+                {
+                  "content": "Une bobine",
+                  "correct": true
+                },
+                {
+                  "content": "Un noyau de fer",
+                  "correct": true
+                },
+                {
+                  "content": "Un générateur de courant continu",
+                  "correct": true
+                },
+                {
+                  "content": "Un noyau de plastique",
+                  "correct": false
+                },
+                {
+                  "content": "Un morceau de bois",
+                  "correct": false
+                },
+                {
+                  "content": "Un aimant permanent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le circuit est fermé. Combien de pièces du tas la grue soulève-t-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "pièces",
+              "explanation": "Méthode. Étape 2 — Observer : le circuit est fermé. Étape 3 — Prévoir : le noyau est un aimant qui attire le fer et l'acier. Étape 4 — Conclure : la grue soulève les 8 carcasses en acier, et ni les 3 pièces en aluminium ni les 2 pièces en cuivre. Compter $8 + 3 + 2 = 13$ est le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au-dessus d'un camion, l'opérateur ouvre l'interrupteur. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 2 — Observer : l'interrupteur est ouvert, donc le circuit est ouvert. Étape 3 — Prévoir : plus de courant, le noyau (fer doux) n'est plus un aimant. Étape 4 — Conclure : les carcasses tombent. Elles ne sont pas repoussées : sans courant, il n'y a plus aucune action.",
+              "answers": [
+                {
+                  "content": "Les carcasses tombent, car le noyau n'est plus un aimant",
+                  "correct": true
+                },
+                {
+                  "content": "Les carcasses restent accrochées, car le noyau garde son aimantation",
+                  "correct": false
+                },
+                {
+                  "content": "Les carcasses sont repoussées vers le haut",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la grue ne soulève-t-elle pas les pièces en aluminium ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 4 — Conclure : l'électroaimant n'attire que le fer, le nickel, le cobalt, l'acier et la fonte. L'aluminium n'en fait pas partie. Le poids ou la force du courant ne changent pas cette liste.",
+              "answers": [
+                {
+                  "content": "Parce que l'aluminium n'est pas attiré par un aimant",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que l'aluminium est trop léger",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que le courant est trop faible pour les pièces en aluminium",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si on remplace le noyau de fer par un noyau en plastique, l'électroaimant est aussi puissant.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer : le noyau de fer rend l'effet bien plus fort qu'avec la bobine seule. Le plastique n'est pas attiré par un aimant : il ne renforce pas l'effet. L'électroaimant devient beaucoup moins puissant.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi on utilise un électroaimant plutôt qu'un aimant ordinaire pour cette grue.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Un aimant ordinaire attire toujours",
+                "L'électroaimant se commande avec l'interrupteur",
+                "Il permet de lâcher les objets",
+                "Le noyau de fer renforce l'effet de la bobine"
+              ],
+              "starter": "Un aimant ordinaire attire…",
+              "explanation": "Corrigé modèle : Un aimant ordinaire attire toujours les objets en fer : une fois les carcasses soulevées, l'opérateur ne pourrait pas les lâcher au-dessus du camion. Avec un électroaimant, l'opérateur ouvre l'interrupteur, le courant s'arrête, le noyau de fer n'est plus un aimant et les carcasses tombent. De plus, le noyau de fer renforce l'effet de la bobine. Barème : l'aimant ordinaire attire toujours (1 point), l'électroaimant se commande avec l'interrupteur (1,5 point), on peut lâcher les objets (1 point), le noyau de fer renforce l'effet (0,5 point).",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "matériaux attirés par un aimant (fer, nickel, cobalt, acier, fonte), pôles nord et sud, attraction et répulsion, aiguille aimantée et boussole, bobine parcourue par un courant continu, faces nord et sud, inversion du courant, électroaimant.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans le laboratoire de ton collège, tu sépares des objets avec un aimant. Tu appliques la méthode de la fiche : identifier le matériau, comparer à la liste, conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche le matériau, puis compare-le à la liste fer, nickel, cobalt.",
+              "questions": [
+                {
+                  "content": "Quel matériau est attiré par un aimant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : on te donne quatre matériaux. Étape 2 — Comparer : seul le nickel est dans la liste fer, nickel, cobalt. Étape 3 — Conclure : le nickel est attiré. Le cuivre et l'aluminium sont des métaux mais ils ne sont pas dans la liste, et le verre n'est pas un métal.",
+                  "answers": [
+                    {
+                      "content": "Le nickel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aluminium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plastique est attiré par un aimant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : le plastique. Étape 2 — Comparer : il n'est ni du fer, ni du nickel, ni du cobalt. Étape 3 — Conclure : il n'est pas attiré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels objets sont attirés par un aimant ? Choisis trois réponses.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Identifier : fer, acier, nickel, cuivre, verre, plastique. Étape 2 — Comparer : le fer, l'acier (alliage de fer) et le nickel sont dans la liste. Étape 3 — Conclure : le clou, le boulon et le fil en nickel sont attirés. Le cuivre, le verre et le plastique ne le sont pas.",
+                  "answers": [
+                    {
+                      "content": "Un clou en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un boulon en acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil en nickel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fil de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une vitre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fer, le nickel et le ___ sont les trois métaux courants attirés par un aimant.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 2 — Comparer : la liste des matériaux attirés est le fer, le nickel et le cobalt, avec l'acier et la fonte. Le métal qui manque est le cobalt.",
+                  "answers": [
+                    {
+                      "content": "cobalt",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vis en acier est ___ par un aimant.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Identifier : l'acier. Étape 2 — Comparer : c'est un alliage de fer. Étape 3 — Conclure : la vis est attirée. Elle n'est pas repoussée : un aimant repousse seulement un autre aimant.",
+                  "answers": [
+                    {
+                      "content": "attirée",
+                      "correct": true
+                    },
+                    {
+                      "content": "non attirée",
+                      "correct": false
+                    },
+                    {
+                      "content": "repoussée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu travailles avec deux barreaux aimantés et une boussole pour étudier les pôles d'un aimant.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les noms des deux pôles qui se font face.",
+              "questions": [
+                {
+                  "content": "Le pôle nord d'un barreau est approché du pôle nord d'un autre barreau. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : nord face à nord. Étape 2 — Comparer : même nom. Étape 3 — Conclure : les barreaux se repoussent.",
+                  "answers": [
+                    {
+                      "content": "Ils se repoussent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils s'attirent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ne réagissent pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pôle nord et un pôle sud s'attirent.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : un pôle nord et un pôle sud. Étape 2 — Comparer : noms contraires. Étape 3 — Conclure : ils s'attirent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à son résultat.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 2 — Comparer : noms contraires, attraction ; même nom, répulsion. Un aimant cassé en deux donne deux aimants complets, chacun avec un pôle nord et un pôle sud.",
+                  "answers": [
+                    {
+                      "content": "La pointe nord d'une aiguille près d'un pôle sud",
+                      "match": "Elle est attirée"
+                    },
+                    {
+                      "content": "La pointe nord d'une aiguille près d'un pôle nord",
+                      "match": "Elle est repoussée"
+                    },
+                    {
+                      "content": "Un barreau cassé en deux",
+                      "match": "On obtient deux aimants"
+                    }
+                  ]
+                },
+                {
+                  "content": "On casse un barreau aimanté en 4 morceaux. Combien d'aimants obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "aimants",
+                  "explanation": "Méthode. Étape 1 — Repérer : 4 morceaux. Étape 2 — Comparer : chaque morceau garde un pôle nord et un pôle sud. Étape 3 — Conclure : on obtient 4 aimants. Croire qu'il n'y a qu'un aimant est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'objet qui contient une aiguille aimantée et qui sert à s'orienter est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Une boussole contient une aiguille aimantée libre de tourner. Sa pointe nord indique le nord géographique, ce qui permet de s'orienter.",
+                  "answers": [
+                    {
+                      "content": "boussole",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une bobine est reliée à une pile par un interrupteur. Tu étudies ses faces avec une aiguille aimantée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une pointe nord est attirée par une face sud, repoussée par une face nord.",
+              "questions": [
+                {
+                  "content": "Quand un courant continu traverse la bobine, elle se comporte comme :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Vérifier : le courant continu passe. Étape 4 — Conclure : la bobine a une face nord et une face sud, comme un aimant.",
+                  "answers": [
+                    {
+                      "content": "un aimant",
+                      "correct": true
+                    },
+                    {
+                      "content": "un morceau de bois",
+                      "correct": false
+                    },
+                    {
+                      "content": "une pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bobine traversée par un courant continu a une face nord et une face sud.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Vérifier : le courant passe. Étape 4 — Conclure : la bobine a deux faces, l'une nord et l'autre sud.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord d'une aiguille est attirée par une face de la bobine : c'est une face ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 3 — Lire : une pointe nord est attirée par un pôle de nom contraire, donc par une face sud.",
+                  "answers": [
+                    {
+                      "content": "sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "neutre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On échange les fils aux bornes de la pile. Que deviennent les faces de la bobine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 4 — Conclure : inverser le sens du courant échange les faces nord et sud. Elles ne disparaissent pas, puisque le courant passe toujours.",
+                  "answers": [
+                    {
+                      "content": "Elles s'échangent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles ne changent pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles disparaissent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour repérer les faces d'une bobine.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Vérifier le courant. Étape 2 — Approcher la pointe nord. Étape 3 — Lire la réaction. Étape 4 — Conclure. Sans courant, l'aiguille ne réagit pas : on vérifie d'abord.",
+                  "answers": [
+                    {
+                      "content": "Vérifier que le circuit est fermé et qu'un courant continu traverse la bobine."
+                    },
+                    {
+                      "content": "Approcher la pointe nord d'une aiguille aimantée d'une face de la bobine."
+                    },
+                    {
+                      "content": "Lire la réaction de la pointe : attirée ou repoussée."
+                    },
+                    {
+                      "content": "Conclure sur les deux faces."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu étudies un électroaimant : une bobine autour d'un noyau de fer, reliée à une pile par un interrupteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "L'électroaimant n'agit que si le courant passe.",
+              "questions": [
+                {
+                  "content": "De quoi est formé un électroaimant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : on cherche la bobine et le noyau de fer. Un électroaimant, c'est l'ensemble des deux. Un fil seul ou un noyau de plastique ne donnent pas un électroaimant.",
+                  "answers": [
+                    {
+                      "content": "D'une bobine qui entoure un noyau de fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "D'un fil de cuivre seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'un barreau de plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un électroaimant attire encore des clous quand le courant est coupé.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 2 — Observer : le courant est coupé, le circuit est ouvert. Étape 3 — Prévoir : le noyau n'est plus un aimant et les clous tombent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels objets un électroaimant attire-t-il, circuit fermé ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 3 — Prévoir : circuit fermé, le noyau est un aimant. Étape 4 — Conclure : il attire le fer et l'acier, pas l'aluminium, le cuivre ni le bois.",
+                  "answers": [
+                    {
+                      "content": "Une barre en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une tôle en acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une plaque d'aluminium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une planche en bois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En ajoutant un noyau de fer dans la bobine, l'effet d'aimant devient ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Repérer : le noyau de fer s'aimante sous l'action de la bobine et renforce l'effet. L'effet devient beaucoup plus fort qu'avec la bobine seule.",
+                  "answers": [
+                    {
+                      "content": "beaucoup plus fort",
+                      "correct": true
+                    },
+                    {
+                      "content": "beaucoup plus faible",
+                      "correct": false
+                    },
+                    {
+                      "content": "identique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque dispositif à sa propriété.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 2 — Observer : l'électroaimant n'agit que si le courant passe, donc il se commande avec un interrupteur. L'aimant ordinaire n'a pas besoin de courant. La bobine seule agit moins qu'avec un noyau de fer.",
+                  "answers": [
+                    {
+                      "content": "Électroaimant",
+                      "match": "Se commande avec un interrupteur"
+                    },
+                    {
+                      "content": "Aimant ordinaire",
+                      "match": "Attire toujours le fer"
+                    },
+                    {
+                      "content": "Bobine seule",
+                      "match": "Effet bien plus faible qu'avec un noyau de fer"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "tri de matériaux avec un aimant dans un atelier de recyclage, boussole en sortie scoute, sonnette électrique d'une maison, grue à électroaimant d'une casse automobile.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un atelier de recyclage d'Abidjan, Adjoua trie avec un aimant un tas de déchets : des clous en fer, des tôles d'acier, des boulons en acier, des fils de cuivre, des casseroles en aluminium et des bidons en plastique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche le matériau de chaque déchet, puis compare à la liste.",
+              "questions": [
+                {
+                  "content": "Quels déchets l'aimant attire-t-il ? Choisis trois réponses.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Identifier : fer, acier, cuivre, aluminium, plastique. Étape 2 — Comparer : le fer et l'acier (alliage de fer) sont attirés. Étape 3 — Conclure : les clous, les tôles et les boulons sont attirés. Le cuivre, l'aluminium et le plastique ne sont pas dans la liste.",
+                  "answers": [
+                    {
+                      "content": "Les clous en fer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les tôles d'acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les boulons en acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fils de cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les casseroles en aluminium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les bidons en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tas contient 12 clous en fer, 8 fils de cuivre, 5 casseroles en aluminium et 10 tôles d'acier. Combien d'objets l'aimant attire-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "objets",
+                  "explanation": "Méthode. Étape 1 — Identifier : 12 clous en fer et 10 tôles d'acier sont attirés. Étape 2 — Calculer : $12 + 10 = 22$. Étape 3 — Conclure : 22 objets. Les 8 fils de cuivre et les 5 casseroles en aluminium ne sont pas attirés.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua veut séparer les casseroles en aluminium des fils de cuivre avec son aimant. Pourquoi n'y parvient-elle pas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : aluminium et cuivre. Étape 2 — Comparer : aucun des deux n'est dans la liste fer, nickel, cobalt. Étape 3 — Conclure : l'aimant n'attire ni l'un ni l'autre, donc il ne peut pas les séparer. Le poids n'intervient pas dans la liste des matériaux attirés.",
+                  "answers": [
+                    {
+                      "content": "Ni l'aluminium ni le cuivre ne sont attirés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les casseroles sont trop lourdes pour l'aimant",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aimant attire les deux, mais trop faiblement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aimant attire les clous en fer sans les toucher.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : les clous sont en fer. Étape 2 — Comparer : le fer est attiré. Étape 3 — Conclure : un aimant agit à distance, donc il attire les clous sans les toucher.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seau en plastique est ___ par l'aimant.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Identifier : le plastique. Étape 2 — Comparer : il n'est pas dans la liste. Étape 3 — Conclure : le seau n'est pas attiré.",
+                  "answers": [
+                    {
+                      "content": "non attiré",
+                      "correct": true
+                    },
+                    {
+                      "content": "attiré",
+                      "correct": false
+                    },
+                    {
+                      "content": "repoussé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Lors d'une sortie scoute près de Yamoussoukro, Fatou utilise une boussole. Un camarade apporte un barreau aimanté.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare toujours les noms des deux pôles.",
+              "questions": [
+                {
+                  "content": "Fatou pose sa boussole loin de tout aimant et de tout objet en fer. Vers où se tourne la pointe nord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'aiguille est un petit aimant libre. Étape 2 — Comparer : seule, elle s'oriente dans la direction nord-sud. Étape 3 — Conclure : sa pointe nord indique le nord.",
+                  "answers": [
+                    {
+                      "content": "Vers le nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vers le sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vers le sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camarade présente le pôle sud de son barreau près de la boussole. Que fait la pointe nord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : pointe nord face à un pôle sud. Étape 2 — Comparer : noms contraires. Étape 3 — Conclure : la pointe est attirée.",
+                  "answers": [
+                    {
+                      "content": "Elle est attirée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est repoussée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne bouge pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi faut-il éloigner la boussole des objets en fer et des aimants ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'aiguille est un aimant. Étape 2 — Comparer : un aimant ou un objet en fer proche agit sur elle. Étape 3 — Conclure : l'aiguille ne s'oriente plus seule dans la direction nord-sud, la boussole se trompe. Le nord géographique, lui, ne change pas.",
+                  "answers": [
+                    {
+                      "content": "Ils attirent ou repoussent l'aiguille et faussent la direction",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils rendent l'aiguille plus lourde",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils changent la direction du nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le club reçoit 1 barreau aimanté. Fatou le casse en 2, puis casse l'un des morceaux en 2 encore. Combien d'aimants a-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "aimants",
+                  "explanation": "Méthode. Étape 1 — Repérer : on compte les morceaux. Après une cassure, on a 2 morceaux ; en cassant l'un d'eux, on obtient $2 - 1 + 2 = 3$ morceaux. Étape 2 — Comparer : chaque morceau est un aimant complet. Étape 3 — Conclure : 3 aimants.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord de la boussole est attirée par le pôle nord d'un barreau.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : pointe nord face à pôle nord. Étape 2 — Comparer : même nom. Étape 3 — Conclure : elle est repoussée, pas attirée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "La sonnette de la maison de Kouadio contient une bobine avec un noyau de fer, un marteau en acier et un timbre. Quand on appuie sur le bouton, le courant passe dans la bobine.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le courant ne passe que quand le bouton est enfoncé.",
+              "questions": [
+                {
+                  "content": "Le bouton est enfoncé et le courant passe. Que devient le noyau de fer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : la bobine et son noyau de fer. Étape 2 — Observer : le bouton est enfoncé, le circuit est fermé. Étape 3 — Prévoir : le noyau devient un aimant.",
+                  "answers": [
+                    {
+                      "content": "Il devient un aimant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il fond",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il devient un isolant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le marteau est-il attiré par le noyau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 3 — Prévoir : le noyau est un aimant. Étape 4 — Conclure : le marteau en acier, alliage de fer, est attiré. Un marteau en plastique ne serait pas attiré.",
+                  "answers": [
+                    {
+                      "content": "Il est en acier, donc attiré par un aimant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est en plastique léger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est repoussé par le noyau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on relâche le bouton, le courant ne passe plus et le noyau n'attire plus le marteau.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 2 — Observer : bouton relâché, circuit ouvert. Étape 3 — Prévoir : plus de courant, plus d'aimant. Le marteau n'est plus attiré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le marteau est attiré parce qu'il est en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 4 — Conclure : un électroaimant n'attire que le fer, le nickel, le cobalt, l'acier et la fonte. Le marteau est en acier, alliage de fer, donc attiré.",
+                  "answers": [
+                    {
+                      "content": "acier",
+                      "correct": true
+                    },
+                    {
+                      "content": "fer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le marteau était en plastique, la sonnette ___ quand on appuie sur le bouton.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 4 — Conclure : le plastique n'est pas attiré par un aimant. Le marteau ne bougerait pas et ne frapperait pas le timbre.",
+                  "answers": [
+                    {
+                      "content": "ne sonnerait pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "sonnerait quand même",
+                      "correct": false
+                    },
+                    {
+                      "content": "sonnerait plus fort",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une grue de casse automobile utilise un électroaimant pour déplacer des carcasses en acier. Elle les dépose sur un camion.",
+              "exercise_type": "evaluation",
+              "figure": "circuit-electroaimant",
+              "hint": "Circuit fermé : aimant. Circuit ouvert : plus d'aimant.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre ce qui se passe quand la grue dépose les carcasses sur le camion.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 2 — Observer : tout part de l'ouverture de l'interrupteur. Étape 3 — Prévoir : le courant s'arrête, le noyau n'est plus un aimant, les carcasses tombent. Chaque phase est la cause de la suivante.",
+                  "answers": [
+                    {
+                      "content": "L'opérateur amène la grue au-dessus du camion."
+                    },
+                    {
+                      "content": "Il ouvre l'interrupteur."
+                    },
+                    {
+                      "content": "Le courant ne passe plus dans la bobine."
+                    },
+                    {
+                      "content": "Le noyau de fer n'est plus un aimant."
+                    },
+                    {
+                      "content": "Les carcasses tombent sur le camion."
+                    }
+                  ]
+                },
+                {
+                  "content": "La grue fait 6 voyages et soulève 3 carcasses en acier par voyage. Combien de carcasses déplace-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "carcasses",
+                  "explanation": "Méthode. Étape 3 — Prévoir : à chaque voyage, circuit fermé, 3 carcasses en acier sont soulevées. Étape 4 — Calculer : $6 \\times 3 = 18$ carcasses.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas contient de l'acier et de l'aluminium. Quel outil les sépare ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 4 — Conclure : l'électroaimant attire l'acier et pas l'aluminium. Il attire donc seulement l'acier et laisse l'aluminium. Il n'attire pas tous les métaux, et une boussole ne soulève rien.",
+                  "answers": [
+                    {
+                      "content": "Un électroaimant ou un aimant, car seul l'acier est attiré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un électroaimant, car il attire tous les métaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une boussole",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un aimant ordinaire serait pratique pour cette grue, car il lâche les objets quand on le décide.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 4 — Conclure : un aimant ordinaire attire toujours ; on ne peut pas l'arrêter. Seul l'électroaimant se commande avec l'interrupteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi un électroaimant est-il adapté à cette grue ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 2 — Observer : l'interrupteur coupe le courant, donc l'opérateur peut lâcher les carcasses. Étape 1 — Repérer : le noyau de fer renforce l'effet. L'électroaimant n'attire pas tous les métaux et il ne fonctionne pas sans courant.",
+                  "answers": [
+                    {
+                      "content": "On coupe le courant pour lâcher les objets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le noyau de fer renforce l'effet de la bobine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il attire tous les métaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fonctionne sans courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il repousse le plastique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "reconnaître un véritable aimant à l'aide d'une boussole, déduire la nature des faces d'une bobine après un ou plusieurs échanges de fils, rôle du noyau de fer, identifier les pôles de deux barreaux.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu disposes de deux barres identiques, A et B, et d'une boussole. L'une des barres est un aimant, l'autre est en fer. Tu cherches laquelle est l'aimant.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Seule la répulsion prouve qu'un objet est un aimant.",
+              "questions": [
+                {
+                  "content": "La barre A attire la pointe nord de la boussole et la barre B l'attire aussi. Peut-on dire que A est un aimant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : la barre A attire la pointe. Étape 2 — Comparer : le fer attire aussi une aiguille aimantée, comme il est attiré par un aimant. Étape 3 — Conclure : attirer ne prouve pas qu'on est un aimant.",
+                  "answers": [
+                    {
+                      "content": "Non : une barre en fer attire aussi la pointe nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : tout objet qui attire est un aimant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : seul un aimant attire une aiguille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On retourne la barre A : une extrémité attire la pointe nord et l'autre la repousse. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 2 — Comparer : seul un pôle de même nom repousse une pointe nord. Étape 3 — Conclure : une barre en fer ne repousse jamais, donc A est l'aimant.",
+                  "answers": [
+                    {
+                      "content": "A est un aimant, car elle repousse la pointe",
+                      "correct": true
+                    },
+                    {
+                      "content": "A est en fer, car elle attire",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une barre en fer non aimantée peut repousser la pointe nord d'une boussole.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 2 — Comparer : la répulsion vient d'un pôle de même nom, et le fer non aimanté n'a pas de pôle. Étape 3 — Conclure : il ne fait qu'attirer.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La barre B attire les deux pointes de l'aiguille sans jamais les repousser. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 2 — Comparer : un aimant repousserait une des deux pointes ; une barre qui attire seulement est en fer. Étape 3 — Conclure : B est en fer. Le plastique n'attirerait rien.",
+                  "answers": [
+                    {
+                      "content": "B est en fer, non aimantée",
+                      "correct": true
+                    },
+                    {
+                      "content": "B est un aimant",
+                      "correct": false
+                    },
+                    {
+                      "content": "B est en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles observations prouvent qu'une barre est un aimant ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 3 — Conclure : seule la répulsion prouve un aimant. Attirer un clou ou la pointe d'une aiguille, une barre en fer le fait aussi. La couleur ne prouve rien.",
+                  "answers": [
+                    {
+                      "content": "Une de ses extrémités repousse la pointe nord de la boussole",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une extrémité attire la pointe nord et l'autre la repousse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle attire un clou en fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle attire la pointe nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est grise",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Awa étudie une bobine reliée à une pile par un interrupteur. Elle note les réactions de la pointe nord d'une aiguille aimantée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Chaque échange des fils échange les deux faces.",
+              "questions": [
+                {
+                  "content": "Dans le montage de départ, la pointe nord est attirée par la face A. Quelle est la nature de la face B, l'autre face de la bobine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 3 — Lire : la pointe nord est attirée, donc A est sud. Étape 4 — Conclure : une bobine a une face nord et une face sud, donc B est nord.",
+                  "answers": [
+                    {
+                      "content": "Une face nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une face sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni nord ni sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa échange les fils de la pile. La pointe nord est placée devant la face B, qui était nord. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 4 — Conclure : les faces s'échangent, donc B devient une face sud. Étape 3 — Lire : une pointe nord est attirée par une face sud.",
+                  "answers": [
+                    {
+                      "content": "Elle est attirée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est repoussée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne réagit pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa ouvre l'interrupteur et la pointe nord ne réagit plus. Cela montre que l'effet venait du courant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Vérifier : avec le circuit ouvert, plus de courant. Étape 3 — Lire : si l'aiguille ne réagit plus, l'effet d'aimant venait du courant qui traversait la bobine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 3 — Lire : pointe nord attirée, face sud ; pointe nord repoussée, face nord. Les trois conclusions suivent directement de cette règle.",
+                  "answers": [
+                    {
+                      "content": "La pointe nord est attirée par la face A",
+                      "match": "A est une face sud"
+                    },
+                    {
+                      "content": "La pointe nord est repoussée par la face B",
+                      "match": "B est une face nord"
+                    },
+                    {
+                      "content": "La pointe nord est attirée par la face B",
+                      "match": "B est une face sud"
+                    }
+                  ]
+                },
+                {
+                  "content": "La face A est une face sud au départ. Awa échange les fils de la pile 5 fois de suite. À la fin, A est une face ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 4 — Conclure : chaque échange change la nature de la face. Après 1 échange, A est nord ; après 2, sud ; après 3, nord ; et ainsi de suite. Avec 5 échanges (un nombre impair), A est nord.",
+                  "answers": [
+                    {
+                      "content": "nord",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève compare une bobine seule et un électroaimant, c'est-à-dire la même bobine avec un noyau de fer, avec le même courant continu.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un noyau qui n'est pas attiré par un aimant ne renforce rien.",
+              "questions": [
+                {
+                  "content": "Pourquoi l'électroaimant soulève-t-il plus de clous que la bobine seule ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : le noyau de fer entouré par la bobine. Étape 3 — Prévoir : il devient un aimant et renforce l'effet. Il ne fournit pas de courant, et son poids n'intervient pas.",
+                  "answers": [
+                    {
+                      "content": "Le noyau de fer s'aimante et renforce l'effet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le noyau de fer fournit du courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau de fer est plus lourd",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève remplace le noyau de fer par un noyau de cuivre. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : le noyau est en cuivre. Étape 4 — Conclure : le cuivre n'est pas attiré par un aimant, il ne s'aimante pas et ne renforce rien. L'effet reste celui de la bobine seule, et la bobine agit toujours puisque le courant passe.",
+                  "answers": [
+                    {
+                      "content": "L'effet reste proche de celui de la bobine seule",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'effet est aussi fort qu'avec le fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bobine n'agit plus du tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un noyau de verre renforce l'effet de la bobine comme un noyau de fer.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : le noyau de verre. Étape 4 — Conclure : le verre n'est pas attiré par un aimant, il ne s'aimante pas, donc il ne renforce pas l'effet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels effets a l'ajout d'un noyau de fer dans la bobine ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 3 — Prévoir : le noyau s'aimante et renforce l'effet, donc la bobine soulève plus de clous. Il ne remplace pas le courant : sans courant, plus d'effet. Il n'inverse pas le courant et n'attire pas le cuivre.",
+                  "answers": [
+                    {
+                      "content": "L'effet d'aimant devient beaucoup plus fort",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bobine soulève plus de clous",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bobine devient un aimant sans courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le courant s'inverse tout seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bobine attire le cuivre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « L'électroaimant est plus fort qu'un aimant ordinaire, donc il attire tous les métaux. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 4 — Conclure : un électroaimant attire les mêmes matériaux qu'un aimant ordinaire. La puissance ne change pas la liste : le cuivre et l'aluminium restent non attirés.",
+                  "answers": [
+                    {
+                      "content": "Faux : il n'attire que le fer, le nickel, le cobalt, l'acier et la fonte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai : un électroaimant attire tous les métaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai, mais seulement le cuivre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux barreaux aimantés ont chacun une extrémité peinte en rouge et l'autre en blanc. On ne sait pas si le rouge est un pôle nord ou un pôle sud.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une répulsion montre que les deux pôles ont le même nom.",
+              "questions": [
+                {
+                  "content": "Les extrémités rouges des deux barreaux se repoussent. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : rouge face à rouge. Étape 2 — Comparer : elles se repoussent. Étape 3 — Conclure : deux pôles se repoussent s'ils ont le même nom, donc les deux extrémités rouges ont le même nom.",
+                  "answers": [
+                    {
+                      "content": "Les deux extrémités rouges ont le même nom",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux extrémités rouges ont des noms contraires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux barreaux ne sont pas des aimants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'extrémité rouge du barreau A attire l'extrémité blanche du barreau B. Que peut-on dire de leurs noms ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 2 — Comparer : deux pôles s'attirent s'ils ont des noms contraires. Étape 3 — Conclure : le rouge de A et le blanc de B ont des noms contraires.",
+                  "answers": [
+                    {
+                      "content": "Ils sont contraires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont identiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord d'une boussole est repoussée par l'extrémité rouge du barreau A. Quel pôle est le rouge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 2 — Comparer : une pointe nord n'est repoussée que par un pôle de même nom. Étape 3 — Conclure : le rouge de A est un pôle nord.",
+                  "answers": [
+                    {
+                      "content": "Le pôle nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pôle sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le rouge du barreau A est un pôle nord et il repousse le rouge du barreau B. Le rouge de B est donc un pôle nord.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 2 — Comparer : une répulsion entre deux pôles signifie qu'ils ont le même nom. Étape 3 — Conclure : le rouge de B est un pôle nord.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'extrémité rouge du barreau B est un pôle nord. Son extrémité blanche est un pôle ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : un barreau a deux pôles. Étape 3 — Conclure : s'il a un pôle nord à une extrémité, il a un pôle sud à l'autre.",
+                  "answers": [
+                    {
+                      "content": "sud",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan",
+          "notions": "bilan de la leçon : matériaux attirés par un aimant, pôles et boussole, faces d'une bobine, électroaimant et ses usages.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un atelier de soudure à Yopougon, un ouvrier passe un aimant sur différentes pièces métalliques pour les trier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche le matériau de chaque pièce, puis compare à la liste.",
+              "questions": [
+                {
+                  "content": "L'aimant est passé sur un fût en tôle d'acier. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : la tôle d'acier. Étape 2 — Comparer : l'acier est un alliage de fer, donc dans la liste. Étape 3 — Conclure : le fût est attiré.",
+                  "answers": [
+                    {
+                      "content": "Le fût est attiré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fût est repoussé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne se passe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles pièces ne sont pas attirées par l'aimant ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 2 — Comparer : l'aluminium et le cuivre ne sont pas dans la liste fer, nickel, cobalt, acier, fonte. Étape 3 — Conclure : la barre en aluminium et le tuyau en cuivre ne sont pas attirés. Les trois autres le sont.",
+                  "answers": [
+                    {
+                      "content": "Une barre en aluminium",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un tuyau en cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une barre en fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil en nickel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un boulon en acier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atelier contient 15 pièces : 9 en acier, 4 en cuivre et 2 en aluminium. Combien de pièces ne sont pas attirées par l'aimant ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "pièces",
+                  "explanation": "Méthode. Étape 1 — Identifier : acier, cuivre, aluminium. Étape 2 — Comparer : seul l'acier est attiré. Étape 3 — Calculer : $4 + 2 = 6$ pièces non attirées. Se tromper en comptant les 9 pièces en acier revient à confondre « attirées » et « non attirées ».",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un aimant peut attirer une pièce en fer à travers une planche de bois mince.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : la pièce est en fer. Étape 2 — Comparer : le fer est attiré. Étape 3 — Conclure : l'aimant agit à distance, à travers le bois mince, donc l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le métal principal de l'acier, attiré par un aimant, est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. L'acier est un alliage de fer. C'est le fer qui explique pourquoi l'acier est attiré par un aimant.",
+                  "answers": [
+                    {
+                      "content": "fer",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Chloé a deux aimants et une boussole. Elle explore les pôles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les noms des pôles avant de conclure.",
+              "questions": [
+                {
+                  "content": "Chloé rapproche le pôle nord d'un aimant du pôle nord d'un autre. Que ressent-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : nord face à nord. Étape 2 — Comparer : même nom. Étape 3 — Conclure : les aimants se repoussent.",
+                  "answers": [
+                    {
+                      "content": "Une répulsion",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une attraction",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune force",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ? Choisis trois réponses.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 2 — Comparer : noms contraires, attraction ; même nom, répulsion. Un aimant cassé garde ses deux pôles, et une boussole contient une aiguille aimantée. Un pôle ne s'isole pas, et un aimant n'attire que le fer, le nickel, le cobalt, l'acier et la fonte.",
+                  "answers": [
+                    {
+                      "content": "Un aimant cassé en deux donne deux aimants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux pôles de noms contraires s'attirent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une boussole contient une aiguille aimantée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux pôles de même nom s'attirent",
+                      "correct": false
+                    },
+                    {
+                      "content": "On peut isoler un pôle nord seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un aimant attire tous les métaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chloé casse un aimant en 2, puis casse chacun des morceaux en 2. Combien d'aimants a-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "aimants",
+                  "explanation": "Méthode. Étape 1 — Repérer : après une cassure, on a 2 morceaux ; en cassant chacun en 2, $2 \\times 2 = 4$ morceaux. Étape 2 — Comparer : chaque morceau est un aimant complet. Étape 3 — Conclure : 4 aimants.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pointe nord d'une boussole est attirée par un pôle ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 2 — Comparer : une pointe nord est attirée par un pôle de nom contraire. Étape 3 — Conclure : le pôle est un pôle sud.",
+                  "answers": [
+                    {
+                      "content": "sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "neutre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aiguille d'une boussole est un petit aimant libre de tourner.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'aiguille de la boussole est aimantée et pivote. Étape 3 — Conclure : c'est un petit aimant libre de tourner, ce qui lui permet de s'orienter.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève étudie une bobine reliée à une pile par un interrupteur, avec une aiguille aimantée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une bobine n'agit que si le courant passe.",
+              "questions": [
+                {
+                  "content": "Pour qu'une bobine agisse comme un aimant, il faut :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Vérifier : la bobine agit seulement si le circuit est fermé et si un courant continu la traverse. Interrupteur ouvert, aucun courant, aucun effet.",
+                  "answers": [
+                    {
+                      "content": "que le circuit soit fermé et traversé par un courant continu",
+                      "correct": true
+                    },
+                    {
+                      "content": "que l'interrupteur soit ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "qu'elle soit posée sur un aimant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fil de cuivre d'une bobine est attiré par un aimant, même sans courant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : le fil est en cuivre. Étape 2 — Comparer : le cuivre n'est pas dans la liste des matériaux attirés. Étape 3 — Conclure : il n'est pas attiré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La face A repousse la pointe nord. On échange les fils de la pile : la face A ___ la pointe nord.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 3 — Lire : au départ A repousse la pointe nord, donc A est nord. Étape 4 — Conclure : en échangeant les fils, A devient sud, donc elle attire la pointe nord.",
+                  "answers": [
+                    {
+                      "content": "attire",
+                      "correct": true
+                    },
+                    {
+                      "content": "repousse encore",
+                      "correct": false
+                    },
+                    {
+                      "content": "ne touche pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on faire pour que la bobine n'agisse plus comme un aimant ? Choisis deux réponses.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Vérifier : l'effet disparaît sans courant. Ouvrir l'interrupteur ou débrancher la pile coupe le courant. Échanger les fils inverse seulement les faces, et fermer l'interrupteur laisse passer le courant.",
+                  "answers": [
+                    {
+                      "content": "Ouvrir l'interrupteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Débrancher la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Échanger les fils de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer l'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Approcher un clou",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux bobines identiques sont chacune traversées par un courant continu. Combien de faces ces deux bobines ont-elles en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "faces",
+                  "explanation": "Méthode. Étape 4 — Conclure : chaque bobine a deux faces, une nord et une sud. Pour 2 bobines : $2 \\times 2 = 4$ faces.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une grue de casse automobile soulève des tôles d'acier avec un électroaimant. L'opérateur la commande avec un interrupteur.",
+              "exercise_type": "evaluation",
+              "figure": "circuit-electroaimant",
+              "hint": "L'électroaimant n'attire que le fer, le nickel, le cobalt, l'acier et la fonte.",
+              "questions": [
+                {
+                  "content": "Quel est le rôle de l'interrupteur dans la grue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 2 — Observer : l'interrupteur ouvre ou ferme le circuit, donc il commande le courant. Il ne fournit pas le courant, c'est le rôle du générateur.",
+                  "answers": [
+                    {
+                      "content": "Commander le courant dans la bobine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fournir le courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fabriquer le noyau de fer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Circuit fermé, la grue soulève une tôle d'acier mais ___ une tôle de cuivre.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 4 — Conclure : l'électroaimant n'attire que le fer, le nickel, le cobalt, l'acier et la fonte. Le cuivre n'en fait pas partie.",
+                  "answers": [
+                    {
+                      "content": "ne soulève pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "soulève aussi",
+                      "correct": false
+                    },
+                    {
+                      "content": "repousse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles différences entre un électroaimant et un aimant ordinaire sont vraies ? Choisis trois réponses.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 2 — Observer : l'électroaimant a besoin de courant et se commande avec un interrupteur ; l'aimant ordinaire n'en a pas besoin. Aucun des deux n'attire le cuivre ni tous les métaux, et l'électroaimant a un noyau de fer.",
+                  "answers": [
+                    {
+                      "content": "L'électroaimant n'attire que si le courant passe",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'électroaimant se commande avec un interrupteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aimant ordinaire attire sans courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aimant ordinaire attire le cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'électroaimant attire tous les métaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'électroaimant n'a pas de noyau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La grue soulève 5 tôles d'acier par voyage et fait 4 voyages. Combien de tôles soulève-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "tôles",
+                  "explanation": "Méthode. Étape 3 — Prévoir : à chaque voyage, circuit fermé, 5 tôles sont soulevées. Étape 4 — Calculer : $5 \\times 4 = 20$ tôles.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le noyau de fer d'un électroaimant est attiré par un aimant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : le noyau est en fer. Étape 4 — Conclure : le fer fait partie des matériaux attirés par un aimant, donc le noyau est attiré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

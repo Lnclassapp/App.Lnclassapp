@@ -1,0 +1,4059 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Analyse et synthèse de la lumière blanche",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "prisme-et-spectre",
+          "kind": "geometry",
+          "description": "Un faisceau fin de lumière blanche arrive de la gauche sur un prisme en forme de triangle. À la sortie, la lumière est étalée vers un écran vertical à droite : le rayon rouge est le moins dévié, le rayon violet est le plus dévié. Sur l'écran, le rouge et le violet sont aux deux bords du spectre.",
+          "params": {
+            "points": [
+              {
+                "id": "P1",
+                "x": -4,
+                "y": -4
+              },
+              {
+                "id": "P2",
+                "x": 4,
+                "y": -4
+              },
+              {
+                "id": "P3",
+                "x": 0,
+                "y": 5
+              },
+              {
+                "id": "S",
+                "x": -17,
+                "y": 0,
+                "label": "Lumière blanche"
+              },
+              {
+                "id": "I",
+                "x": -2,
+                "y": 0
+              },
+              {
+                "id": "J",
+                "x": 2,
+                "y": 0
+              },
+              {
+                "id": "R",
+                "x": 15,
+                "y": -6,
+                "label": "Rouge"
+              },
+              {
+                "id": "V",
+                "x": 15,
+                "y": -11,
+                "label": "Violet"
+              },
+              {
+                "id": "E1",
+                "x": 15,
+                "y": -15
+              },
+              {
+                "id": "E2",
+                "x": 15,
+                "y": 3
+              }
+            ],
+            "segments": [
+              [
+                "P1",
+                "P2"
+              ],
+              [
+                "P2",
+                "P3"
+              ],
+              [
+                "P3",
+                "P1"
+              ],
+              [
+                "S",
+                "I"
+              ],
+              [
+                "I",
+                "J"
+              ],
+              [
+                "J",
+                "R"
+              ],
+              [
+                "J",
+                "V"
+              ],
+              [
+                "E1",
+                "E2"
+              ]
+            ],
+            "labels": [
+              {
+                "from": "S",
+                "to": "I",
+                "text": "lumière blanche"
+              },
+              {
+                "from": "J",
+                "to": "R",
+                "text": "rouge"
+              },
+              {
+                "from": "J",
+                "to": "V",
+                "text": "violet"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "spectre-continu",
+          "kind": "diagram",
+          "description": "Le spectre continu de la lumière blanche, de gauche à droite sur l'écran : rouge, orange, jaune, vert, bleu, violet. Les six couleurs se suivent sans aucun trou. Une lumière colorée simple n'en montrerait qu'une seule.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Rouge",
+                "category": 1
+              },
+              {
+                "id": "o",
+                "label": "Orange",
+                "category": 1
+              },
+              {
+                "id": "j",
+                "label": "Jaune",
+                "category": 1
+              },
+              {
+                "id": "v",
+                "label": "Vert",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Bleu",
+                "category": 1
+              },
+              {
+                "id": "vi",
+                "label": "Violet",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "o"
+              },
+              {
+                "from": "o",
+                "to": "j"
+              },
+              {
+                "from": "j",
+                "to": "v"
+              },
+              {
+                "from": "v",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "vi"
+              }
+            ],
+            "legend": [
+              "Couleurs du spectre de la lumière blanche"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "disque-de-newton",
+          "kind": "diagram",
+          "description": "Un disque de Newton à six secteurs égaux, qui se suivent en cercle : rouge, orange, jaune, vert, bleu, violet, puis de nouveau rouge. À l'arrêt, on voit les six couleurs. Quand le disque tourne très vite, il paraît blanc.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Rouge",
+                "category": 1
+              },
+              {
+                "id": "o",
+                "label": "Orange",
+                "category": 1
+              },
+              {
+                "id": "j",
+                "label": "Jaune",
+                "category": 1
+              },
+              {
+                "id": "v",
+                "label": "Vert",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Bleu",
+                "category": 1
+              },
+              {
+                "id": "vi",
+                "label": "Violet",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "o"
+              },
+              {
+                "from": "o",
+                "to": "j"
+              },
+              {
+                "from": "j",
+                "to": "v"
+              },
+              {
+                "from": "v",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "vi"
+              },
+              {
+                "from": "vi",
+                "to": "r"
+              }
+            ],
+            "legend": [
+              "Secteur du disque"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "synthese-additive",
+          "kind": "diagram",
+          "description": "Arbre de la synthèse additive, sur un écran blanc dans la pénombre. Rouge plus vert donne du jaune. Vert plus bleu donne du cyan. Rouge plus bleu donne du magenta. Rouge plus vert plus bleu donne du blanc. Les trois lumières primaires sont le rouge, le vert et le bleu.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "t",
+                "label": "Superposer des lumières primaires"
+              },
+              {
+                "id": "a",
+                "label": "Rouge + vert : JAUNE",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Vert + bleu : CYAN",
+                "category": 2
+              },
+              {
+                "id": "c",
+                "label": "Rouge + bleu : MAGENTA",
+                "category": 3
+              },
+              {
+                "id": "d",
+                "label": "Rouge + vert + bleu : BLANC",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "t",
+                "to": "a"
+              },
+              {
+                "from": "t",
+                "to": "b"
+              },
+              {
+                "from": "t",
+                "to": "c"
+              },
+              {
+                "from": "t",
+                "to": "d"
+              }
+            ],
+            "legend": [
+              "Deux lumières : jaune",
+              "Deux lumières : cyan",
+              "Deux lumières : magenta",
+              "Trois lumières : blanc"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "filtre-jaune",
+          "kind": "diagram",
+          "description": "Une lumière formée de rouge, de vert et de bleu arrive sur un filtre jaune. Le filtre laisse passer le rouge et le vert, qui forment le jaune, et il absorbe le bleu. Il sort donc une lumière jaune.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "e",
+                "label": "Lumière : rouge + vert + bleu",
+                "category": 1
+              },
+              {
+                "id": "f",
+                "label": "Filtre jaune",
+                "category": 2
+              },
+              {
+                "id": "p",
+                "label": "Passent : rouge et vert",
+                "category": 1
+              },
+              {
+                "id": "a",
+                "label": "Absorbé : bleu",
+                "category": 3
+              },
+              {
+                "id": "s",
+                "label": "Sort : lumière jaune",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "e",
+                "to": "f"
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "label": "laisse passer"
+              },
+              {
+                "from": "f",
+                "to": "a",
+                "label": "arrête"
+              },
+              {
+                "from": "p",
+                "to": "s"
+              }
+            ],
+            "legend": [
+              "Lumière",
+              "Filtre",
+              "Lumière absorbée"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Décomposer la lumière blanche avec un prisme",
+          "remember": "Un **prisme** est un bloc de verre transparent en forme de triangle. Quand un faisceau de **lumière blanche** (celle du Soleil ou d'une lampe à incandescence) le traverse, il en sort étalé en une bande de couleurs : le prisme **décompose** la lumière blanche. Cette bande s'appelle le **spectre**. Ses couleurs vont du **rouge** au **violet**, en passant par l'orange, le jaune, le vert et le bleu. Le rouge est la couleur la moins déviée, le violet la plus déviée. La lumière blanche n'est donc pas « sans couleur » : c'est un **mélange** de toutes ces couleurs. L'arc-en-ciel est le même phénomène : les gouttelettes d'eau de la pluie décomposent la lumière blanche du Soleil.",
+          "method": [
+            "Envoyer un faisceau fin de lumière blanche sur une face du prisme.",
+            "Placer un écran blanc derrière le prisme, du côté où la lumière sort.",
+            "Observer la bande colorée qui apparaît sur l'écran et noter l'ordre des couleurs.",
+            "Conclure : la lumière blanche est un mélange de couleurs que le prisme a séparées."
+          ],
+          "example": {
+            "statement": "Awa envoie la lumière d'une lampe à incandescence sur un prisme. Sur le mur blanc, elle voit une bande allant du rouge au violet. Conclure sur la lumière de la lampe.",
+            "steps": [
+              "Envoyer : le faisceau fin de la lampe à incandescence tombe sur une face du prisme.",
+              "Placer : le mur blanc joue le rôle d'écran, derrière le prisme.",
+              "Observer : une bande colorée apparaît, avec le rouge à un bord, le violet à l'autre, et l'orange, le jaune, le vert et le bleu entre les deux.",
+              "Conclure : la lampe donne de la lumière blanche, un mélange de couleurs que le prisme a séparées."
+            ]
+          },
+          "pitfall": "Ne pas croire que le prisme « fabrique » ou « ajoute » des couleurs. Il sépare celles qui sont déjà dans la lumière blanche. Contre-exemple : on envoie une lumière rouge seule sur le prisme. Sur l'écran, il n'y a qu'une tache rouge : 1 couleur, pas 6. Si le prisme fabriquait les couleurs, on les verrait toutes, même avec une lumière rouge. Pour l'éviter, retiens que le spectre de la lumière blanche s'étend du rouge à un bord jusqu'au violet à l'autre bord.",
+          "figure": "prisme-et-spectre",
+          "practice": {
+            "statement": "Tu t'entraînes à décomposer la lumière blanche avec un prisme, en suivant la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Comment s'appelle la bande de couleurs obtenue en décomposant la lumière blanche avec un prisme ?",
+                "question_type": "single_choice",
+                "hint": "Pense au nom donné à la bande de couleurs sur l'écran.",
+                "explanation": "Étape 3 — Observer : la bande colorée qui apparaît sur l'écran s'appelle le spectre. Un faisceau est un ensemble de rayons de lumière, un filtre est un milieu coloré et l'ombre portée est une zone sans lumière : aucun ne désigne cette bande.",
+                "answers": [
+                  {
+                    "content": "Le spectre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le faisceau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le filtre",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ombre portée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La lumière blanche du Soleil est un mélange de lumières de plusieurs couleurs.",
+                "question_type": "true_false",
+                "hint": "Que montre le prisme quand on l'éclaire avec le Soleil ?",
+                "explanation": "Étape 4 — Conclure : le prisme sépare en rouge, orange, jaune, vert, bleu et violet la lumière blanche, donc elle les contient toutes. L'affirmation est vraie. Dire que la lumière blanche est « sans couleur » est l'erreur classique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour décomposer la lumière blanche avec un prisme.",
+                "question_type": "ordering",
+                "hint": "Commence par la lumière, termine par la conclusion.",
+                "explanation": "Étape 1 — Envoyer le faisceau sur le prisme. Étape 2 — Placer l'écran derrière. Étape 3 — Observer la bande colorée. Étape 4 — Conclure. On ne peut pas observer avant d'avoir envoyé la lumière et placé l'écran.",
+                "answers": [
+                  {
+                    "content": "Envoyer un faisceau fin de lumière blanche sur le prisme"
+                  },
+                  {
+                    "content": "Placer un écran blanc derrière le prisme"
+                  },
+                  {
+                    "content": "Observer la bande colorée sur l'écran"
+                  },
+                  {
+                    "content": "Conclure que la lumière blanche est un mélange de couleurs"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Le prisme de la salle de sciences",
+              "statement": "Dans la salle de sciences, des élèves décomposent la lumière d'une lampe à incandescence avec un prisme, en suivant la méthode de la fiche : envoyer, placer, observer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur l'écran, derrière le prisme, un élève voit une bande colorée. Comment appelle-t-on ce phénomène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Observer : la bande colorée vient du fait que le prisme sépare les couleurs de la lumière blanche, c'est la décomposition. La propagation rectiligne et l'ombre portée concernent des lumières qui ne sont pas étalées en couleurs.",
+                  "answers": [
+                    {
+                      "content": "La décomposition de la lumière blanche",
+                      "correct": true
+                    },
+                    {
+                      "content": "La propagation rectiligne de la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La formation d'une ombre portée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La production de lumière par une source primaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux couleurs placées aux bords du spectre de la lumière blanche sont le rouge et le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Observer et noter l'ordre des couleurs : le spectre va du rouge au violet. Le rouge est à un bord, le violet à l'autre. Le bleu n'est pas au bord : il est avant le violet.",
+                  "answers": [
+                    {
+                      "content": "violet",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur la lumière blanche et le prisme ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Observer : l'écran montre du rouge, de l'orange, du jaune, du vert, du bleu et du violet. Étape 4 — Conclure : ces couleurs étaient déjà dans la lumière blanche, le prisme les sépare seulement. « Il ajoute des couleurs » et « sans aucune couleur » sont des erreurs.",
+                  "answers": [
+                    {
+                      "content": "Le prisme sépare les couleurs déjà présentes dans la lumière blanche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le spectre de la lumière blanche contient du rouge et du violet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le prisme ajoute des couleurs à la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lumière blanche est une lumière sans aucune couleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prisme transforme la lumière blanche en lumière rouge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arc-en-ciel se forme quand les gouttelettes d'eau de la pluie décomposent la lumière blanche du Soleil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : chaque gouttelette joue le rôle d'un petit prisme et sépare les couleurs de la lumière blanche. L'arc-en-ciel est donc le même phénomène que celui de l'écran.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dit : « Le prisme a fabriqué toutes ces couleurs. » On envoie ensuite sur le prisme une lumière rouge seule. Que voit-on sur l'écran ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Observer : avec une lumière rouge seule, il n'y a qu'une couleur sur l'écran. Étape 4 — Conclure : le prisme ne fabrique aucune couleur, il sépare celles qui existent. Si Awa avait raison, on verrait toutes les couleurs même avec du rouge.",
+                  "answers": [
+                    {
+                      "content": "Seulement du rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toutes les couleurs du rouge au violet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement du violet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien, car le prisme absorbe la lumière rouge",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le spectre sur le mur du laboratoire",
+              "statement": "Dans cet exercice, tu vérifies ce que tu sais du prisme et du spectre de la lumière blanche, avec des questions de types différents.",
+              "hint": "Rappelle-toi : le prisme sépare les couleurs, il n'en fabrique pas.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque mot à ce qu'il désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Envoyer : la lumière blanche entre dans le prisme, qui sépare les couleurs. Étape 2 — Placer : l'écran reçoit la lumière. Étape 3 — Observer : la bande colorée sur l'écran est le spectre.",
+                  "answers": [
+                    {
+                      "content": "Le prisme",
+                      "match": "Sépare les couleurs de la lumière blanche"
+                    },
+                    {
+                      "content": "Le spectre",
+                      "match": "Bande de couleurs obtenue sur l'écran"
+                    },
+                    {
+                      "content": "L'écran",
+                      "match": "Reçoit la bande colorée qui sort du prisme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Range les couleurs du spectre de la lumière blanche, du bord rouge au bord violet.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Observer et noter l'ordre des couleurs : rouge, orange, jaune, vert, bleu, violet. Le rouge est au bord le moins dévié, le violet au bord le plus dévié.",
+                  "answers": [
+                    {
+                      "content": "Rouge"
+                    },
+                    {
+                      "content": "Orange"
+                    },
+                    {
+                      "content": "Jaune"
+                    },
+                    {
+                      "content": "Vert"
+                    },
+                    {
+                      "content": "Bleu"
+                    },
+                    {
+                      "content": "Violet"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le spectre de la lumière blanche, le violet est la couleur la moins déviée par le prisme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Observer : la couleur la moins déviée est le rouge, la plus déviée est le violet. L'affirmation est fausse : elle inverse les deux bords du spectre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le prisme ___ la lumière blanche en plusieurs couleurs.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : le prisme décompose la lumière blanche, c'est-à-dire qu'il sépare ses couleurs. Il ne produit pas de lumière (ce n'est pas une source), ne filtre pas et n'éteint rien.",
+                  "answers": [
+                    {
+                      "content": "décompose",
+                      "correct": true
+                    },
+                    {
+                      "content": "produit",
+                      "correct": false
+                    },
+                    {
+                      "content": "filtre",
+                      "correct": false
+                    },
+                    {
+                      "content": "éteint",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cet exercice, le spectre compte six couleurs : rouge, orange, jaune, vert, bleu, violet. Pierre en a déjà noté trois : rouge, orange et jaune. Combien de couleurs lui reste-t-il à noter ?",
+                  "question_type": "numeric",
+                  "unit": "couleurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Observer et noter : le spectre a 6 couleurs. Pierre en a noté 3. Il lui en reste $6 - 3 = 3$ : le vert, le bleu et le violet.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations exactes sur l'arc-en-ciel ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Envoyer : la lumière du Soleil arrive sur les gouttelettes. Étape 3 — Observer : les couleurs sortent séparées, du rouge au violet. Un prisme de verre dans le ciel et la nuit sont des erreurs : il faut du Soleil et de l'eau.",
+                  "answers": [
+                    {
+                      "content": "Il apparaît quand le Soleil brille et qu'il y a des gouttelettes d'eau de pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les gouttelettes décomposent la lumière blanche du Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ses couleurs vont du rouge au violet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est fabriqué par un prisme placé dans le ciel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il apparaît seulement la nuit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître le spectre d'une lumière",
+          "remember": "Le **spectre** d'une lumière est la bande de couleurs obtenue quand on la décompose avec un prisme. La lumière blanche donne un spectre **continu** : toutes les couleurs, du rouge au violet, se suivent sans trou. Une lumière colorée **simple** (une seule couleur, comme un faisceau rouge) ne donne qu'une tache de sa couleur : le prisme la dévie mais ne l'étale pas. Une lumière qui paraît colorée peut aussi être un **mélange** de quelques couleurs : le prisme les sépare et on les compte. L'œil ne suffit pas pour trancher, le prisme oui.",
+          "method": [
+            "Décomposer la lumière étudiée avec un prisme et un écran blanc.",
+            "Compter les couleurs qui apparaissent sur l'écran.",
+            "Regarder si ces couleurs se suivent sans trou, du rouge au violet.",
+            "Conclure : toutes les couleurs sans trou donnent de la lumière blanche, une seule couleur donne une lumière colorée simple, quelques couleurs donnent un mélange."
+          ],
+          "example": {
+            "statement": "On décompose la lumière d'une lampe de poche : l'écran montre seulement du rouge et du vert. Quelle est la nature de cette lumière ?",
+            "steps": [
+              "Décomposer : la lumière d'une lampe de poche passe par le prisme, et l'écran blanc est placé derrière.",
+              "Compter : l'écran montre deux couleurs seulement, le rouge et le vert.",
+              "Regarder : l'orange, le jaune, le bleu et le violet manquent, donc les couleurs ne se suivent pas du rouge au violet.",
+              "Conclure : ce n'est pas de la lumière blanche, c'est un mélange de lumière rouge et de lumière verte."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une lumière qui paraît jaune ne contient que du jaune. Contre-exemple : une lampe paraît jaune, mais le prisme montre 2 couleurs, le rouge et le vert : c'est un mélange. Une autre lampe jaune ne donne qu'1 couleur, le jaune : c'est une lumière colorée simple. Les deux paraissent pareilles à l'œil, seul le prisme les distingue. Compte toujours les couleurs sur l'écran.",
+          "figure": "spectre-continu",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître le spectre d'une lumière avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Avec un prisme, la lumière d'une lampe ne donne qu'une seule tache verte sur l'écran. Quelle est la nature de cette lumière ?",
+                "question_type": "single_choice",
+                "hint": "Compte les couleurs sur l'écran.",
+                "explanation": "Étape 2 — Compter : une seule couleur apparaît, le vert. Étape 4 — Conclure : une seule couleur signifie une lumière colorée simple. La lumière blanche donnerait toutes les couleurs, du rouge au violet.",
+                "answers": [
+                  {
+                    "content": "Une lumière colorée simple, d'une seule couleur",
+                    "correct": true
+                  },
+                  {
+                    "content": "De la lumière blanche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un mélange de toutes les couleurs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une lumière qui n'a pas de spectre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le spectre de la lumière blanche est continu : toutes les couleurs, du rouge au violet, se suivent sans trou.",
+                "question_type": "true_false",
+                "hint": "Y a-t-il une couleur absente entre le rouge et le violet ?",
+                "explanation": "Étape 3 — Regarder : pour la lumière blanche, aucune couleur ne manque entre le rouge et le violet. Étape 4 — Conclure : le spectre est continu, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète : une lumière dont le prisme montre toutes les couleurs sans trou est de la lumière ___.",
+                "question_type": "select",
+                "hint": "Pense au spectre continu.",
+                "explanation": "Étape 3 — Regarder : les couleurs se suivent du rouge au violet. Étape 4 — Conclure : c'est de la lumière blanche. Une lumière rouge ou verte ne donnerait qu'une couleur, et le noir est l'absence de lumière.",
+                "answers": [
+                  {
+                    "content": "blanche",
+                    "correct": true
+                  },
+                  {
+                    "content": "rouge",
+                    "correct": false
+                  },
+                  {
+                    "content": "verte",
+                    "correct": false
+                  },
+                  {
+                    "content": "noire",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Le prisme et les lampes de la fête",
+              "statement": "Pour la fête de l'école, le club de sciences examine les lampes avec un prisme. Il suit la méthode : décomposer, compter, regarder, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le prisme montre toutes les couleurs, du rouge au violet, sans aucun trou. Quelle est cette lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Compter : toutes les couleurs sont là. Étape 3 — Regarder : elles se suivent sans trou. Étape 4 — Conclure : c'est de la lumière blanche. Un mélange de rouge et de vert ne montrerait que deux couleurs.",
+                  "answers": [
+                    {
+                      "content": "De la lumière blanche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lumière rouge simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mélange de rouge et de vert seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lumière qui n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le spectre de la lumière blanche est dit ___ parce qu'aucune couleur ne manque entre le rouge et le violet.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Regarder : les couleurs se suivent sans trou. Étape 4 — Conclure : on dit que le spectre est continu.",
+                  "answers": [
+                    {
+                      "content": "continu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lumière qui paraît jaune ne contient forcément que du jaune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Compter : le prisme peut montrer deux couleurs, le rouge et le vert, pour une lumière qui paraît jaune. Étape 4 — Conclure : c'est alors un mélange. L'affirmation est fausse, et c'est l'erreur de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un prisme étale une lumière en deux couleurs séparées, le rouge et le bleu. Quelles sont les deux conclusions exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Compter : 2 couleurs. Étape 3 — Regarder : l'orange, le jaune, le vert et le violet manquent. Étape 4 — Conclure : ce n'est pas du blanc, c'est un mélange de deux lumières. Une lumière simple n'aurait donné qu'une couleur.",
+                  "answers": [
+                    {
+                      "content": "La lumière n'est pas de la lumière blanche",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un mélange de lumière rouge et de lumière bleue",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est une lumière colorée simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est de la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le spectre de cette lumière est continu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes paraissent jaunes. Le prisme montre 1 couleur (le jaune) pour la lampe A et 2 couleurs (le rouge et le vert) pour la lampe B. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Compter : 1 couleur pour A, 2 couleurs pour B. Étape 4 — Conclure : A est une lumière colorée simple, B est un mélange. L'œil ne voit pas la différence, c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "A est une lumière colorée simple et B est un mélange",
+                      "correct": true
+                    },
+                    {
+                      "content": "A et B sont toutes les deux de la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "A et B sont toutes les deux des lumières colorées simples",
+                      "correct": false
+                    },
+                    {
+                      "content": "B est une lumière colorée simple et A est un mélange",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le tri des lumières au club de sciences",
+              "statement": "Dans cet exercice, tu tries des lumières en comptant les couleurs que montre un prisme, avec des questions de types différents.",
+              "hint": "Compte d'abord les couleurs sur l'écran, puis regarde s'il y a des trous.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître le spectre d'une lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Décomposer. Étape 2 — Compter. Étape 3 — Regarder s'il y a des trous. Étape 4 — Conclure. On ne peut pas conclure avant d'avoir compté et regardé.",
+                  "answers": [
+                    {
+                      "content": "Décomposer la lumière avec un prisme et un écran"
+                    },
+                    {
+                      "content": "Compter les couleurs sur l'écran"
+                    },
+                    {
+                      "content": "Regarder si les couleurs se suivent sans trou"
+                    },
+                    {
+                      "content": "Conclure sur la nature de la lumière"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation sur l'écran à la nature de la lumière.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Compter les couleurs. Étape 3 — Regarder s'il y a des trous. Étape 4 — Conclure : toutes les couleurs sans trou donnent le blanc, une couleur donne une lumière simple, deux couleurs donnent un mélange.",
+                  "answers": [
+                    {
+                      "content": "Toutes les couleurs, du rouge au violet, sans trou",
+                      "match": "Lumière blanche"
+                    },
+                    {
+                      "content": "Une seule tache rouge",
+                      "match": "Lumière colorée simple"
+                    },
+                    {
+                      "content": "Du rouge et du vert seulement",
+                      "match": "Mélange de deux lumières colorées"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un prisme étale la lumière d'une lampe en trois couleurs : le rouge, le vert et le bleu. Combien de couleurs Aya doit-elle compter ?",
+                  "question_type": "numeric",
+                  "unit": "couleurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Compter : rouge, vert, bleu, cela fait 3 couleurs. Étape 4 — Conclure : 3 couleurs seulement ne donnent pas un spectre continu, c'est un mélange.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un prisme étale une lumière rouge simple en une bande qui va du rouge au violet.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Compter : une lumière rouge simple ne donne qu'une couleur. Étape 4 — Conclure : le prisme la dévie sans l'étaler. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : un spectre qui montre seulement quelques couleurs séparées est celui d'un ___ de lumières colorées.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Regarder : il y a des trous entre les couleurs. Étape 4 — Conclure : c'est un mélange de lumières colorées. Un filtre ou un prisme est un objet, pas une lumière.",
+                  "answers": [
+                    {
+                      "content": "mélange",
+                      "correct": true
+                    },
+                    {
+                      "content": "filtre",
+                      "correct": false
+                    },
+                    {
+                      "content": "prisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "ombre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Compter, Étape 3 — Regarder et Étape 4 — Conclure donnent : spectre continu pour le blanc, une couleur pour une lumière simple. L'œil ne distingue pas un jaune simple d'un mélange rouge et vert, seul le prisme le fait.",
+                  "answers": [
+                    {
+                      "content": "La lumière blanche a un spectre continu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lumière colorée simple donne une seule couleur sur l'écran",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seul le prisme permet de dire si une lumière jaune est un mélange",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œil suffit toujours pour savoir combien de couleurs une lumière contient",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lumière colorée simple donne toutes les couleurs du spectre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Recomposer la lumière blanche avec un disque de Newton",
+          "remember": "Un **disque de Newton** est un disque partagé en secteurs peints des couleurs du spectre : rouge, orange, jaune, vert, bleu, violet. À l'arrêt, on voit chaque couleur à part. Quand on le fait tourner **très vite**, l'œil reçoit toutes les couleurs presque en même temps et ne peut plus les séparer : le disque paraît **blanc** (un blanc un peu grisâtre, car les peintures ne sont pas parfaites). On a **recomposé** la lumière blanche. Décomposer avec un prisme et recomposer avec un disque sont deux opérations inverses. Ce disque porte le nom du physicien Isaac Newton, qui a étudié la décomposition de la lumière blanche.",
+          "method": [
+            "Vérifier que le disque porte toutes les couleurs du spectre.",
+            "Fixer le disque sur un axe et le faire tourner très vite.",
+            "Observer la couleur du disque pendant la rotation.",
+            "Conclure : toutes les couleurs mélangées redonnent du blanc ; si le disque reste coloré, il manque des couleurs ou il tourne trop lentement."
+          ],
+          "example": {
+            "statement": "Yao découpe un disque en carton, le partage en 6 secteurs égaux (rouge, orange, jaune, vert, bleu, violet) et le fait tourner très vite sur un crayon. Que voit-il ?",
+            "steps": [
+              "Vérifier : le disque de Yao a 6 secteurs égaux, rouge, orange, jaune, vert, bleu et violet, donc toutes les couleurs du spectre sont présentes.",
+              "Fixer : Yao plante un crayon au centre du disque et le fait tourner très vite entre ses doigts.",
+              "Observer : les secteurs ne se distinguent plus, le disque paraît blanc grisâtre.",
+              "Conclure : les couleurs du spectre mélangées redonnent du blanc, la lumière blanche est recomposée."
+            ]
+          },
+          "pitfall": "Ne pas croire que n'importe quel disque coloré devient blanc en tournant. Contre-exemple : un disque de 2 secteurs seulement, un rouge et un bleu, tourne très vite. Il manque 4 couleurs sur 6 (orange, jaune, vert, violet) : il ne paraît pas blanc, il reste coloré. De même, un disque à 6 couleurs qui tourne doucement montre encore ses secteurs. Il faut toutes les couleurs et une rotation très rapide.",
+          "figure": "disque-de-newton",
+          "practice": {
+            "statement": "Tu t'entraînes à recomposer la lumière blanche avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un disque de Newton qui tourne très vite paraît blanc.",
+                "question_type": "true_false",
+                "hint": "Que fait l'œil quand les couleurs défilent très vite ?",
+                "explanation": "Étape 1 — Vérifier : le disque porte toutes les couleurs du spectre. Étape 3 — Observer : en tournant vite, l'œil ne sépare plus les couleurs. Étape 4 — Conclure : le disque paraît blanc, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Que voit-on sur un disque de Newton à l'arrêt ?",
+                "question_type": "single_choice",
+                "hint": "Le blanc vient du mouvement.",
+                "explanation": "Étape 1 — Vérifier : le disque porte les couleurs du spectre dans des secteurs. À l'arrêt, rien ne les mélange : on voit chaque couleur à part. Le blanc n'apparaît qu'en rotation rapide.",
+                "answers": [
+                  {
+                    "content": "Chaque couleur dans son secteur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un disque entièrement blanc",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un disque entièrement noir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une seule couleur, le rouge",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un disque de Newton qui tourne très vite paraît ___.",
+                "question_type": "fill_blank",
+                "hint": "C'est la couleur de la lumière du Soleil.",
+                "explanation": "Étape 3 — Observer : les secteurs ne se distinguent plus. Étape 4 — Conclure : toutes les couleurs mélangées redonnent du blanc.",
+                "answers": [
+                  {
+                    "content": "blanc",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Le disque de Newton de Yao",
+              "statement": "Yao fabrique un disque de Newton en carton pour le club de sciences. Il suit la méthode de la fiche : vérifier, fixer, observer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Yao colorie son disque avec les couleurs du spectre et le fait tourner très vite. Que voit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : toutes les couleurs sont présentes. Étape 3 — Observer : à grande vitesse, l'œil les mélange. Étape 4 — Conclure : le disque paraît blanc. Rouge ou noir serait faux car aucune couleur ne domine.",
+                  "answers": [
+                    {
+                      "content": "Un disque blanc grisâtre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un disque noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un disque rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un disque dont les secteurs sont plus nets qu'à l'arrêt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Décomposer la lumière blanche avec un prisme et la recomposer avec un disque de Newton sont deux opérations inverses.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : le prisme sépare les couleurs, le disque les mélange pour redonner du blanc. Les deux opérations sont inverses.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conditions pour qu'un disque de Newton paraisse blanc ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : il faut toutes les couleurs du spectre. Étape 2 — Fixer et faire tourner : il faut une rotation très rapide. Un disque immobile ou peint d'une seule couleur ne donne pas du blanc.",
+                  "answers": [
+                    {
+                      "content": "Il porte toutes les couleurs du spectre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il tourne très vite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est peint d'une seule couleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste immobile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est éclairé dans le noir complet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le disque de Yao est partagé en 6 secteurs égaux, un par couleur du spectre. Quel est l'angle de chaque secteur ? On rappelle qu'un tour complet fait 360 degrés.",
+                  "question_type": "numeric",
+                  "unit": "°",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 6 secteurs égaux, un par couleur. Un tour complet fait 360°, donc chaque secteur mesure $360 \\div 6 = 60$ degrés.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le disque de Yao a seulement 2 secteurs, un rouge et un bleu. Il tourne très vite. Que voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : il manque 4 couleurs du spectre sur 6. Étape 4 — Conclure : sans toutes les couleurs, le disque ne devient pas blanc. C'est l'erreur de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Un disque coloré, pas blanc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un disque blanc, comme avec 6 couleurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un disque noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un disque transparent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le club de sciences et ses disques",
+              "statement": "Dans cet exercice, tu étudies plusieurs disques de Newton construits par le club de sciences, avec des questions de types différents.",
+              "hint": "Le blanc apparaît seulement si toutes les couleurs sont présentes et si le disque tourne très vite.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de l'expérience du disque de Newton.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier d'abord le disque. Étape 2 — Le fixer et le faire tourner très vite. Étape 4 — Conclure à la fin. On ne conclut jamais avant d'avoir observé la rotation.",
+                  "answers": [
+                    {
+                      "content": "Vérifier que le disque porte toutes les couleurs du spectre"
+                    },
+                    {
+                      "content": "Fixer le disque sur un axe"
+                    },
+                    {
+                      "content": "Le faire tourner très vite"
+                    },
+                    {
+                      "content": "Conclure que les couleurs mélangées redonnent du blanc"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque disque à ce qu'on voit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Vérifier les couleurs présentes. Étape 3 — Observer selon la vitesse. Avec toutes les couleurs et une rotation rapide, le disque est blanc. À l'arrêt ou avec 2 couleurs seulement, il ne l'est pas.",
+                  "answers": [
+                    {
+                      "content": "6 couleurs du spectre, rotation très rapide",
+                      "match": "Un disque blanc grisâtre"
+                    },
+                    {
+                      "content": "6 couleurs du spectre, à l'arrêt",
+                      "match": "Six secteurs bien séparés"
+                    },
+                    {
+                      "content": "Rouge et bleu seulement, rotation très rapide",
+                      "match": "Un disque coloré, pas blanc"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un disque de Newton tourne très lentement : il paraît blanc.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Observer : à faible vitesse, l'œil voit encore les secteurs séparés. Étape 4 — Conclure : le disque ne paraît pas blanc, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mélanger toutes les couleurs du spectre redonne de la lumière ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : toutes les couleurs mélangées redonnent la lumière blanche, c'est la recomposition.",
+                  "answers": [
+                    {
+                      "content": "blanche",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un disque de Newton est partagé en 12 secteurs égaux : 2 secteurs pour chacune des 6 couleurs du spectre. Combien de secteurs ont la couleur rouge ?",
+                  "question_type": "numeric",
+                  "unit": "secteurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 12 secteurs et 6 couleurs, donc $12 \\div 6 = 2$ secteurs par couleur. Il y a 2 secteurs rouges.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le disque de Newton sert à ___ la lumière blanche.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : le disque mélange les couleurs du spectre et redonne du blanc, il recompose la lumière blanche. C'est le prisme qui la décompose.",
+                  "answers": [
+                    {
+                      "content": "recomposer",
+                      "correct": true
+                    },
+                    {
+                      "content": "décomposer",
+                      "correct": false
+                    },
+                    {
+                      "content": "absorber",
+                      "correct": false
+                    },
+                    {
+                      "content": "produire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Prévoir la couleur obtenue en superposant des lumières colorées",
+          "remember": "Le **rouge**, le **vert** et le **bleu** sont les trois lumières **primaires**. Quand on les superpose sur un écran blanc, dans la pénombre, on obtient : rouge + vert = **jaune** ; vert + bleu = **cyan** (un bleu clair) ; rouge + bleu = **magenta** (un rose violacé) ; rouge + vert + bleu = **blanc**. Fabriquer des couleurs en ajoutant des lumières s'appelle la **synthèse additive**. L'écran d'un téléphone fabrique ses couleurs de cette façon, avec de minuscules points rouges, verts et bleus.",
+          "method": [
+            "Repérer les lumières primaires qui se superposent dans la zone étudiée.",
+            "Compter combien il y en a dans cette zone.",
+            "Appliquer la règle de la synthèse additive : deux lumières donnent jaune, cyan ou magenta, trois lumières donnent du blanc.",
+            "Conclure en nommant la couleur de la zone."
+          ],
+          "example": {
+            "statement": "Trois lampes, rouge, verte et bleue, éclairent un mur blanc dans la pénombre. Quelle est la couleur de la zone où seules la lumière rouge et la lumière verte se recouvrent ?",
+            "steps": [
+              "Repérer : trois lampes, rouge, verte et bleue, éclairent un mur blanc ; dans la zone étudiée, la lumière rouge et la lumière verte se recouvrent.",
+              "Compter : 2 lumières primaires arrivent dans cette zone, car la bleue ne l'éclaire pas.",
+              "Appliquer : en synthèse additive, rouge + vert donne du jaune.",
+              "Conclure : la zone où se recouvrent le rouge et le vert est jaune."
+            ]
+          },
+          "pitfall": "Ne pas mélanger les lumières comme des peintures. En peinture, bleu + jaune donne du vert et le mélange de toutes les peintures donne une couleur sombre. Avec des lumières, c'est l'inverse : rouge + vert donne du jaune, et rouge + vert + bleu donne du blanc, une lumière plus claire que chacune. Contre-exemple : 3 lumières superposées donnent du blanc, alors que 3 peintures superposées donnent un brun sombre. Ajouter des lumières éclaire davantage.",
+          "figure": "synthese-additive",
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir la couleur de lumières superposées avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Sur un mur blanc dans la pénombre, une lumière rouge et une lumière verte se recouvrent. De quelle couleur est la zone commune ?",
+                "question_type": "single_choice",
+                "hint": "Rouge + vert, sans bleu.",
+                "explanation": "Étape 1 — Repérer : rouge et vert. Étape 2 — Compter : 2 lumières. Étape 3 — Appliquer : rouge + vert donne du jaune. Étape 4 — Conclure : la zone est jaune. Le blanc demanderait aussi du bleu.",
+                "answers": [
+                  {
+                    "content": "Jaune",
+                    "correct": true
+                  },
+                  {
+                    "content": "Blanche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Bleue",
+                    "correct": false
+                  },
+                  {
+                    "content": "Magenta",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète : vert + bleu donne du ___.",
+                "question_type": "select",
+                "hint": "Il manque le rouge.",
+                "explanation": "Étape 1 — Repérer : vert et bleu. Étape 3 — Appliquer : vert + bleu donne du cyan. Le magenta vient de rouge + bleu et le jaune de rouge + vert.",
+                "answers": [
+                  {
+                    "content": "cyan",
+                    "correct": true
+                  },
+                  {
+                    "content": "magenta",
+                    "correct": false
+                  },
+                  {
+                    "content": "jaune",
+                    "correct": false
+                  },
+                  {
+                    "content": "blanc",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Superposer les trois lumières primaires, rouge, vert et bleu, donne de la lumière blanche.",
+                "question_type": "true_false",
+                "hint": "Ajouter des lumières éclaire plus.",
+                "explanation": "Étape 2 — Compter : 3 lumières primaires. Étape 3 — Appliquer : trois lumières primaires donnent du blanc. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque superposition à la couleur obtenue.",
+                "question_type": "matching",
+                "hint": "Cherche la lumière absente à chaque fois.",
+                "explanation": "Étape 1 — Repérer les deux lumières. Étape 3 — Appliquer la règle : rouge + vert = jaune, vert + bleu = cyan, rouge + bleu = magenta.",
+                "answers": [
+                  {
+                    "content": "Rouge + vert",
+                    "match": "Jaune"
+                  },
+                  {
+                    "content": "Vert + bleu",
+                    "match": "Cyan"
+                  },
+                  {
+                    "content": "Rouge + bleu",
+                    "match": "Magenta"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Les spots de la scène de l'école",
+              "statement": "Pour le spectacle de l'école, trois spots, un rouge, un vert et un bleu, éclairent un grand mur blanc dans la pénombre. Les élèves prévoient les couleurs avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les spots vert et bleu se recouvrent sur le mur. Quelle est la couleur de la zone commune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : vert et bleu. Étape 2 — Compter : 2 lumières. Étape 3 — Appliquer : vert + bleu donne du cyan. Étape 4 — Conclure : la zone est cyan.",
+                  "answers": [
+                    {
+                      "content": "Cyan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Magenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Blanc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le spot rouge et le spot bleu se recouvrent, la zone commune est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : rouge et bleu. Étape 3 — Appliquer : rouge + bleu donne du magenta. Étape 4 — Conclure : la zone est magenta.",
+                  "answers": [
+                    {
+                      "content": "magenta",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux lumières primaires qui donnent du jaune quand on les superpose ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche le jaune. Étape 3 — Appliquer : rouge + vert donne du jaune. Le bleu est absent de ce mélange, cyan et magenta ne sont pas des lumières primaires.",
+                  "answers": [
+                    {
+                      "content": "Le rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bleu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cyan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magenta",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la zone du mur où les trois spots se recouvrent, combien de lumières primaires arrivent ?",
+                  "question_type": "numeric",
+                  "unit": "lumières",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : rouge, vert et bleu. Étape 2 — Compter : 3 lumières primaires. Étape 3 — Appliquer : trois lumières donnent du blanc.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Rouge + vert + bleu donnent du noir, comme avec trois peintures. » Qu'obtient-on vraiment avec les trois spots ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Compter : 3 lumières. Étape 3 — Appliquer : en synthèse additive, trois lumières primaires donnent du blanc. L'élève confond lumières et peintures : on ajoute de la lumière, la zone est plus claire.",
+                  "answers": [
+                    {
+                      "content": "Du blanc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un brun sombre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La synthèse des lumières au club de sciences",
+              "statement": "Dans cet exercice, tu prévois des couleurs obtenues en superposant des lumières, avec des questions de types différents.",
+              "hint": "Pour deux lumières, cherche celle qui manque parmi rouge, vert et bleu.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque superposition à la couleur obtenue.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Compter les lumières. Étape 3 — Appliquer la règle : deux lumières donnent jaune, magenta ou cyan, trois lumières donnent du blanc.",
+                  "answers": [
+                    {
+                      "content": "Rouge + vert",
+                      "match": "Jaune"
+                    },
+                    {
+                      "content": "Rouge + bleu",
+                      "match": "Magenta"
+                    },
+                    {
+                      "content": "Vert + bleu",
+                      "match": "Cyan"
+                    },
+                    {
+                      "content": "Rouge + vert + bleu",
+                      "match": "Blanc"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour prévoir la couleur d'une zone.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Compter. Étape 3 — Appliquer la règle. Étape 4 — Conclure. La règle ne s'applique qu'une fois les lumières repérées et comptées.",
+                  "answers": [
+                    {
+                      "content": "Repérer les lumières primaires qui se superposent"
+                    },
+                    {
+                      "content": "Compter combien il y en a dans la zone"
+                    },
+                    {
+                      "content": "Appliquer la règle de la synthèse additive"
+                    },
+                    {
+                      "content": "Conclure en nommant la couleur de la zone"
+                    }
+                  ]
+                },
+                {
+                  "content": "En synthèse additive, rouge + vert donne du bleu.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer : rouge + vert donne du jaune, et non du bleu. Le bleu est une lumière primaire, on ne l'obtient pas avec le rouge et le vert. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : trois lumières primaires superposées donnent du ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Compter : 3 lumières. Étape 3 — Appliquer : trois lumières primaires donnent du blanc. Le noir est l'absence de lumière.",
+                  "answers": [
+                    {
+                      "content": "blanc",
+                      "correct": true
+                    },
+                    {
+                      "content": "noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "cyan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un écran de téléphone fabrique du jaune avec 2 lumières primaires. Combien de lumières primaires reste-t-il pour en fabriquer 3 au total et obtenir du blanc ? On rappelle qu'il y a 3 lumières primaires.",
+                  "question_type": "numeric",
+                  "unit": "lumière",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Compter : le jaune utilise 2 lumières, le rouge et le vert. Le blanc en demande 3, donc $3 - 2 = 1$ : il faut ajouter le bleu.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois lumières primaires ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : les lumières primaires sont le rouge, le vert et le bleu. Jaune, cyan et magenta s'obtiennent en superposant deux de ces lumières.",
+                  "answers": [
+                    {
+                      "content": "Le rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bleu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cyan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magenta",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Prévoir la lumière qui sort d'un filtre coloré",
+          "remember": "Un **filtre coloré** est un morceau de plastique ou de verre coloré. Il **laisse passer** la lumière de sa couleur et **absorbe** (arrête) les autres. Un filtre ne fabrique pas de lumière : il trie celle qui arrive. Lumière blanche + filtre rouge : il sort de la lumière rouge. Filtre rouge + lumière verte : rien ne sort, c'est l'obscurité. Un filtre **jaune** laisse passer le rouge et le vert (qui forment le jaune) et arrête le bleu. Pour un filtre vert, seul le vert passe.",
+          "method": [
+            "Lister les couleurs présentes dans la lumière qui arrive sur le filtre.",
+            "Chercher les couleurs que le filtre laisse passer.",
+            "Barrer les couleurs que le filtre absorbe.",
+            "Conclure : la lumière qui sort est formée des couleurs restantes, ou il n'y a aucune lumière si rien ne reste."
+          ],
+          "example": {
+            "statement": "Une lumière formée de rouge et de vert traverse un filtre vert. Quelle lumière sort ?",
+            "steps": [
+              "Lister : la lumière qui arrive est formée de rouge et de vert.",
+              "Chercher : le filtre vert laisse passer le vert.",
+              "Barrer : le rouge est absorbé par le filtre vert.",
+              "Conclure : il ne reste que le vert, donc il sort une lumière verte."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un filtre « ajoute » sa couleur à la lumière. Un filtre ne fait que trier. Contre-exemple : une lumière verte arrive sur un filtre rouge. On pourrait croire qu'il sort du jaune ou du rouge, mais le filtre rouge arrête le vert : 0 couleur reste, il ne sort rien. Si la couleur du filtre n'est pas dans la lumière qui arrive, la lumière est entièrement absorbée.",
+          "figure": "filtre-jaune",
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir la lumière qui traverse un filtre avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "De la lumière blanche traverse un filtre bleu. Quelle lumière sort ?",
+                "question_type": "single_choice",
+                "hint": "Que laisse passer un filtre bleu ?",
+                "explanation": "Étape 1 — Lister : la lumière blanche contient toutes les couleurs. Étape 2 — Chercher : le filtre bleu laisse passer le bleu. Étape 3 — Barrer : les autres couleurs sont absorbées. Étape 4 — Conclure : il sort du bleu.",
+                "answers": [
+                  {
+                    "content": "De la lumière bleue",
+                    "correct": true
+                  },
+                  {
+                    "content": "De la lumière blanche",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la lumière rouge",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune lumière",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lumière bleue arrive sur un filtre rouge : aucune lumière ne sort.",
+                "question_type": "true_false",
+                "hint": "Le bleu est-il laissé passer par un filtre rouge ?",
+                "explanation": "Étape 1 — Lister : il n'y a que du bleu. Étape 2 — Chercher : le filtre rouge laisse passer le rouge, pas le bleu. Étape 3 — Barrer : le bleu est absorbé. Étape 4 — Conclure : rien ne sort.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lumière formée de rouge et de vert traverse un filtre rouge. Elle devient une lumière ___.",
+                "question_type": "select",
+                "hint": "Barre la couleur que le filtre arrête.",
+                "explanation": "Étape 2 — Chercher : le filtre rouge laisse passer le rouge. Étape 3 — Barrer : le vert est absorbé. Étape 4 — Conclure : il sort une lumière rouge.",
+                "answers": [
+                  {
+                    "content": "rouge",
+                    "correct": true
+                  },
+                  {
+                    "content": "jaune",
+                    "correct": false
+                  },
+                  {
+                    "content": "verte",
+                    "correct": false
+                  },
+                  {
+                    "content": "blanche",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Les filtres du photographe",
+              "statement": "Au marché, un photographe place des filtres colorés devant ses lampes. Il prévoit la lumière qui sort avec la méthode de la fiche : lister, chercher, barrer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De la lumière blanche traverse un filtre rouge. Quelle lumière sort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : la lumière blanche contient toutes les couleurs. Étape 2 — Chercher : le filtre rouge laisse passer le rouge. Étape 3 — Barrer : les autres sont absorbées. Étape 4 — Conclure : il sort du rouge.",
+                  "answers": [
+                    {
+                      "content": "De la lumière rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière verte",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière jaune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De la lumière blanche qui traverse un filtre vert devient une lumière ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher : le filtre vert laisse passer le vert. Étape 3 — Barrer : les autres couleurs sont absorbées. Étape 4 — Conclure : la lumière devient verte.",
+                  "answers": [
+                    {
+                      "content": "verte",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un filtre bleu placé devant une lumière rouge donne une lumière violette.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher : le filtre bleu laisse passer le bleu. Étape 3 — Barrer : le rouge est absorbé. Étape 4 — Conclure : rien ne sort. Un filtre ne mélange pas sa couleur à celle de la lumière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lumière formée de rouge, de vert et de bleu traverse un filtre jaune. Quelles sont les deux couleurs qui passent ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lister : rouge, vert et bleu. Étape 2 — Chercher : le jaune est formé de rouge et de vert, que le filtre laisse passer. Étape 3 — Barrer : le bleu est absorbé.",
+                  "answers": [
+                    {
+                      "content": "Le rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bleu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le violet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cyan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lumière verte arrive sur un filtre rouge. Que voit-on de l'autre côté du filtre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : il n'y a que du vert. Étape 2 — Chercher : le filtre rouge ne laisse pas passer le vert. Étape 3 — Barrer : le vert est absorbé. Étape 4 — Conclure : rien ne sort. Jaune ou rouge supposerait que le filtre ajoute sa couleur.",
+                  "answers": [
+                    {
+                      "content": "Rien, la lumière est absorbée",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la lumière jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière verte",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les filtres du club de sciences",
+              "statement": "Dans cet exercice, tu prévois la lumière qui sort de différents filtres, avec des questions de types différents.",
+              "hint": "Barre ce que le filtre arrête : il ne reste que sa couleur, si elle est présente.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à la lumière qui sort.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lister les couleurs qui arrivent. Étape 2 — Chercher ce que laisse passer le filtre. Étape 3 — Barrer le reste. Étape 4 — Conclure : bleu, rien, vert, et rouge plus vert qui forment le jaune.",
+                  "answers": [
+                    {
+                      "content": "Lumière blanche et filtre bleu",
+                      "match": "Lumière bleue"
+                    },
+                    {
+                      "content": "Lumière verte et filtre rouge",
+                      "match": "Aucune lumière"
+                    },
+                    {
+                      "content": "Rouge et vert avec un filtre vert",
+                      "match": "Lumière verte"
+                    },
+                    {
+                      "content": "Rouge, vert et bleu avec un filtre jaune",
+                      "match": "Lumière jaune"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour prévoir la lumière qui sort d'un filtre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lister. Étape 2 — Chercher. Étape 3 — Barrer. Étape 4 — Conclure. On barre seulement après avoir cherché ce que le filtre laisse passer.",
+                  "answers": [
+                    {
+                      "content": "Lister les couleurs de la lumière qui arrive"
+                    },
+                    {
+                      "content": "Chercher les couleurs que le filtre laisse passer"
+                    },
+                    {
+                      "content": "Barrer les couleurs absorbées"
+                    },
+                    {
+                      "content": "Conclure sur la lumière qui sort"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lumière est formée des trois lumières primaires rouge, vert et bleu. Un filtre jaune absorbe une de ces trois lumières. Combien de lumières primaires laisse-t-il passer ?",
+                  "question_type": "numeric",
+                  "unit": "lumières",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lister : 3 lumières primaires. Étape 3 — Barrer : le filtre jaune absorbe le bleu, soit 1 lumière. Il en passe $3 - 1 = 2$ : le rouge et le vert.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un filtre coloré fabrique de la lumière de sa couleur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Barrer : un filtre trie la lumière qui arrive et absorbe le reste. Sans la couleur du filtre dans la lumière qui arrive, rien ne sort. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : un filtre ___ les couleurs qu'il ne laisse pas passer.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Barrer : le filtre absorbe les couleurs qu'il arrête. Le prisme décompose, une source produit, et un filtre n'ajoute rien.",
+                  "answers": [
+                    {
+                      "content": "absorbe",
+                      "correct": true
+                    },
+                    {
+                      "content": "produit",
+                      "correct": false
+                    },
+                    {
+                      "content": "décompose",
+                      "correct": false
+                    },
+                    {
+                      "content": "ajoute",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces situations, lesquelles donnent une lumière rouge en sortie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Chercher : le filtre rouge laisse passer le rouge. Étape 1 — Lister : le rouge est présent dans le blanc, dans rouge plus vert et dans le rouge seul. Il manque dans la lumière verte et dans la lumière bleue, qui sont absorbées.",
+                  "answers": [
+                    {
+                      "content": "Lumière blanche et filtre rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rouge et vert avec un filtre rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Lumière rouge et filtre rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Lumière verte et filtre rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lumière bleue et filtre rouge",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le prisme de la classe de Kouadio",
+          "statement": "En classe de sciences, Kouadio envoie un faisceau fin de la lumière du Soleil sur un prisme. Sur une feuille blanche placée derrière, il voit une bande colorée allant du rouge au violet.",
+          "exercise_type": "fixation",
+          "figure": "prisme-et-spectre",
+          "questions": [
+            {
+              "content": "Comment s'appelle la bande de couleurs que Kouadio voit sur la feuille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Observer la bande colorée sur l'écran. 2. Se rappeler que la bande obtenue en décomposant la lumière blanche s'appelle le spectre. Le faisceau divergent, l'ombre portée et le filtre sont d'autres notions qui ne désignent pas une bande de couleurs.",
+              "answers": [
+                {
+                  "content": "Le spectre de la lumière blanche",
+                  "correct": true
+                },
+                {
+                  "content": "Le faisceau divergent",
+                  "correct": false
+                },
+                {
+                  "content": "L'ombre portée du prisme",
+                  "correct": false
+                },
+                {
+                  "content": "Le filtre coloré",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La couleur la moins déviée par le prisme est le ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Observer les deux bords de la bande. 2. Retenir que le rouge est le moins dévié et le violet le plus dévié. La réponse est donc rouge ; mettre violet inverse les bords.",
+              "answers": [
+                {
+                  "content": "rouge",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Range les couleurs du spectre dans l'ordre, du rouge au violet.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Partir du bord rouge, le moins dévié. 2. Suivre la bande : orange, jaune, vert, bleu. 3. Finir au bord violet, le plus dévié. Le bleu est avant le violet, pas au bord.",
+              "answers": [
+                {
+                  "content": "Rouge"
+                },
+                {
+                  "content": "Orange"
+                },
+                {
+                  "content": "Jaune"
+                },
+                {
+                  "content": "Vert"
+                },
+                {
+                  "content": "Bleu"
+                },
+                {
+                  "content": "Violet"
+                }
+              ]
+            },
+            {
+              "content": "Kouadio dit : « Le prisme a ajouté des couleurs à la lumière du Soleil. » Il a raison.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Observer le spectre : six couleurs. 2. Conclure que le prisme ne crée rien, il sépare les couleurs déjà présentes dans la lumière blanche du Soleil. Kouadio a donc tort.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Kouadio a noté rouge, orange, jaune, vert et bleu. Le spectre compte six couleurs dans cette leçon. Combien lui en manque-t-il ?",
+              "question_type": "numeric",
+              "unit": "couleur",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Compter les couleurs du spectre : 6. 2. Compter celles notées : 5. 3. Calculer $6 - 5 = 1$. Il manque le violet.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les spots du spectacle de l'école",
+          "statement": "Pour le spectacle de fin d'année, la maîtresse place trois spots devant la scène : un rouge, un vert et un bleu. Ils éclairent le mur blanc de la salle dans la pénombre. Les élèves prévoient les couleurs des zones où les spots se recouvrent.",
+          "exercise_type": "fixation",
+          "figure": "synthese-additive",
+          "questions": [
+            {
+              "content": "Les spots rouge et vert se recouvrent. Quelle couleur voit-on dans cette zone ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer les lumières : rouge et vert. 2. Compter : 2 lumières. 3. Appliquer la synthèse additive : rouge + vert donne du jaune. 4. Conclure : la zone est jaune. Le blanc demanderait aussi le bleu.",
+              "answers": [
+                {
+                  "content": "Jaune",
+                  "correct": true
+                },
+                {
+                  "content": "Cyan",
+                  "correct": false
+                },
+                {
+                  "content": "Magenta",
+                  "correct": false
+                },
+                {
+                  "content": "Blanc",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Là où le spot rouge et le spot bleu se recouvrent, la zone est ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Repérer : rouge et bleu. 2. Compter : 2 lumières. 3. Appliquer : rouge + bleu donne du magenta. 4. Conclure : la zone est magenta.",
+              "answers": [
+                {
+                  "content": "magenta",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de lumières primaires arrivent dans la zone où les trois spots se recouvrent ?",
+              "question_type": "numeric",
+              "unit": "lumières",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer : rouge, vert et bleu. 2. Compter : 3 lumières primaires. 3. Retenir que trois lumières primaires donnent du blanc.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux affirmations exactes sur la zone commune aux trois spots ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Repérer les trois lumières. 2. Appliquer la synthèse additive : trois lumières primaires donnent du blanc. 3. Comparer : ajouter une lumière éclaire davantage. Le noir est l'erreur de ceux qui mélangent des lumières comme des peintures.",
+              "answers": [
+                {
+                  "content": "Elle est blanche",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est plus claire que chaque zone de deux spots",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est noire, comme avec trois peintures mélangées",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est jaune",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque zone du mur à sa couleur.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Repérer les lumières de chaque zone. 2. Les compter. 3. Appliquer la règle : deux lumières donnent jaune, cyan ou magenta, trois lumières donnent du blanc.",
+              "answers": [
+                {
+                  "content": "Vert + bleu",
+                  "match": "Cyan"
+                },
+                {
+                  "content": "Rouge + vert",
+                  "match": "Jaune"
+                },
+                {
+                  "content": "Rouge + vert + bleu",
+                  "match": "Blanc"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le filtre du photographe et le prisme",
+          "statement": "Au marché de nuit, un photographe éclaire un mur avec une lampe dont la lumière est formée seulement de rouge, de vert et de bleu, et place devant elle un filtre jaune. Plus tard, il envoie la lumière qui sort du filtre sur un prisme pour la décomposer.",
+          "exercise_type": "evaluation",
+          "figure": "filtre-jaune",
+          "questions": [
+            {
+              "content": "Quelles couleurs le filtre jaune laisse-t-il passer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Lister les couleurs qui arrivent : rouge, vert, bleu. 2. Chercher ce que laisse passer le filtre jaune : le rouge et le vert, qui forment le jaune. 3. Barrer le bleu, absorbé. Le filtre ne laisse pas tout passer, sinon il ne filtrerait rien.",
+              "answers": [
+                {
+                  "content": "Le rouge et le vert",
+                  "correct": true
+                },
+                {
+                  "content": "Le bleu seulement",
+                  "correct": false
+                },
+                {
+                  "content": "Le rouge, le vert et le bleu",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune couleur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le filtre jaune ___ le bleu.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Lister les couleurs. 2. Chercher ce qui passe. 3. Barrer le reste : le bleu est arrêté, on dit qu'il est absorbé par le filtre.",
+              "answers": [
+                {
+                  "content": "absorbe",
+                  "correct": true
+                },
+                {
+                  "content": "arrête",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "De quelle couleur est la lumière qui sort du filtre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 4. Conclure : il reste le rouge et le vert, et rouge + vert donne du jaune en synthèse additive. La lumière qui sort est jaune. Elle ne peut pas être blanche, car le bleu a été absorbé.",
+              "answers": [
+                {
+                  "content": "Jaune",
+                  "correct": true
+                },
+                {
+                  "content": "Blanche",
+                  "correct": false
+                },
+                {
+                  "content": "Bleue",
+                  "correct": false
+                },
+                {
+                  "content": "Cyan",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le prisme décompose la lumière qui sort du filtre. Combien de couleurs voit-on sur l'écran ?",
+              "question_type": "numeric",
+              "unit": "couleurs",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Décomposer la lumière avec le prisme. 2. Compter : seules les couleurs qui sont passées apparaissent, le rouge et le vert. 3. Cela fait 2 couleurs, pas un spectre continu.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi on ne voit que deux couleurs sur l'écran alors que la lumière de départ en avait trois.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dire que le filtre jaune laisse passer le rouge et le vert",
+                "Dire que le filtre absorbe le bleu",
+                "Conclure que le prisme ne sépare que les couleurs qui restent"
+              ],
+              "starter": "Le filtre jaune laisse passer…",
+              "explanation": "Corrigé modèle : « La lumière de départ contient du rouge, du vert et du bleu. Le filtre jaune laisse passer le rouge et le vert, mais il absorbe le bleu. Le prisme ne peut séparer que ce qui arrive sur lui : on voit donc seulement le rouge et le vert. » Barème : 1 point pour ce que le filtre laisse passer, 1 point pour le bleu absorbé, 1 point pour la conclusion sur le prisme.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "L'exposition du club de sciences",
+          "statement": "Pour l'exposition de l'école, le club de sciences présente trois expériences. 1) Un prisme décompose la lumière d'une lampe à incandescence. 2) Un disque de Newton à 6 secteurs égaux, un par couleur du spectre, tourne très vite. 3) Trois spots, rouge, vert et bleu, éclairent un mur blanc, et un filtre vert est placé devant une lampe qui envoie une lumière formée de rouge et de vert.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Que voit-on sur l'écran dans la première expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Envoyer la lumière sur le prisme. 2. Placer l'écran. 3. Observer. 4. Conclure : une lampe à incandescence donne de la lumière blanche, dont le spectre est continu, du rouge au violet. Une tache blanche supposerait qu'il n'y a pas de décomposition.",
+              "answers": [
+                {
+                  "content": "Un spectre continu allant du rouge au violet",
+                  "correct": true
+                },
+                {
+                  "content": "Une seule tache blanche",
+                  "correct": false
+                },
+                {
+                  "content": "Seulement du rouge et du vert",
+                  "correct": false
+                },
+                {
+                  "content": "Rien, car le prisme absorbe la lumière",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est l'angle de chaque secteur du disque de Newton ? Un tour complet fait 360 degrés.",
+              "question_type": "numeric",
+              "unit": "°",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Lire les données : 6 secteurs égaux. 2. Diviser le tour complet par le nombre de secteurs : $360 \\div 6 = 60$. 3. Conclure : chaque secteur mesure 60 degrés.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le disque tourne très vite. Que voit-on ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Vérifier que toutes les couleurs sont présentes : oui. 2. Observer la rotation rapide : l'œil ne sépare plus les couleurs. 3. Conclure : les couleurs mélangées redonnent du blanc. Les secteurs ne sont nets qu'à l'arrêt.",
+              "answers": [
+                {
+                  "content": "Un disque blanc grisâtre",
+                  "correct": true
+                },
+                {
+                  "content": "Un disque rouge",
+                  "correct": false
+                },
+                {
+                  "content": "Un disque noir",
+                  "correct": false
+                },
+                {
+                  "content": "Six secteurs plus nets",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une lumière formée de rouge et de vert traverse le filtre vert. Quelle lumière sort ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Lister : rouge et vert. 2. Chercher : le filtre vert laisse passer le vert. 3. Barrer : le rouge est absorbé. 4. Conclure : il sort une lumière verte. Le jaune supposerait que le filtre laisse passer le rouge aussi.",
+              "answers": [
+                {
+                  "content": "De la lumière verte",
+                  "correct": true
+                },
+                {
+                  "content": "De la lumière jaune",
+                  "correct": false
+                },
+                {
+                  "content": "De la lumière rouge",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune lumière",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les trois spots, rouge, vert et bleu, se recouvrent au centre du mur. Donne la couleur au centre et explique comment les élèves l'obtiennent.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Nommer la couleur : blanc",
+                "Dire qu'on superpose les trois lumières primaires",
+                "Parler de synthèse additive ou d'ajout de lumières"
+              ],
+              "starter": "Au centre, la couleur est…",
+              "explanation": "Corrigé modèle : « Au centre, les trois lumières primaires, rouge, vert et bleu, se superposent. En synthèse additive, on ajoute des lumières : trois lumières primaires donnent du blanc. La zone est blanche. » Barème : 1 point pour le blanc, 1 point pour les trois lumières, 1 point pour la synthèse additive.",
+              "answers": []
+            },
+            {
+              "content": "Compare ce que font le prisme et le disque de Newton avec la lumière blanche.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dire que le prisme décompose la lumière blanche en couleurs",
+                "Dire que le disque recompose le blanc en mélangeant les couleurs",
+                "Dire que ce sont deux opérations inverses"
+              ],
+              "starter": "Le prisme… ; le disque…",
+              "explanation": "Corrigé modèle : « Le prisme décompose la lumière blanche : il sépare ses couleurs et donne un spectre. Le disque de Newton fait l'inverse : en tournant très vite, il mélange les couleurs du spectre et redonne du blanc. Ce sont deux opérations inverses. » Barème : 1 point par idée.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Décomposer la lumière blanche avec un prisme, reconnaître le spectre d'une lumière, recomposer le blanc avec un disque de Newton, superposer des lumières primaires, prévoir l'effet d'un filtre coloré.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "En classe de sciences, un élève envoie la lumière blanche d'une lampe à incandescence sur un prisme et observe un écran blanc.",
+              "hint": "Le prisme sépare les couleurs, il n'en fabrique pas.",
+              "exercise_type": "evaluation",
+              "figure": "prisme-et-spectre",
+              "questions": [
+                {
+                  "content": "Que fait le prisme de la lumière blanche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Envoyer la lumière sur le prisme. Étape 2. Observer l'écran : une bande colorée apparaît. Étape 3. Conclure : le prisme décompose la lumière blanche, c'est-à-dire qu'il sépare ses couleurs. Il ne fabrique rien : les couleurs étaient déjà dans la lumière blanche.",
+                  "answers": [
+                    {
+                      "content": "Il la décompose en plusieurs couleurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il l'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il la transforme en lumière rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il en fabrique de nouvelles couleurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La bande de couleurs obtenue sur l'écran s'appelle le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1. Observer la bande colorée. Étape 2. Retenir son nom : c'est le spectre de la lumière blanche.",
+                  "answers": [
+                    {
+                      "content": "spectre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le violet est une couleur du spectre de la lumière blanche.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Lister les couleurs du spectre : rouge, orange, jaune, vert, bleu, violet. Étape 2. Le violet en fait partie, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : les couleurs aux bords du spectre sont le rouge et le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1. Ranger les couleurs : rouge, orange, jaune, vert, bleu, violet. Étape 2. Les bords sont le rouge et le violet. Le vert est au milieu.",
+                  "answers": [
+                    {
+                      "content": "violet",
+                      "correct": true
+                    },
+                    {
+                      "content": "vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "blanc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle couleur est la moins déviée par le prisme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Observer les deux bords du spectre. Étape 2. Retenir que le rouge est le moins dévié et le violet le plus dévié.",
+                  "answers": [
+                    {
+                      "content": "Le rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le violet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le bleu",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au club de sciences, on étudie des lumières en les faisant passer par un prisme et en comptant les couleurs sur l'écran.",
+              "hint": "Compte les couleurs, puis cherche s'il y a des trous.",
+              "exercise_type": "evaluation",
+              "figure": "spectre-continu",
+              "questions": [
+                {
+                  "content": "Le prisme montre toutes les couleurs sans trou, du rouge au violet. Quelle est cette lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Compter les couleurs : toutes. Étape 2. Regarder les trous : il n'y en a pas. Étape 3. Conclure : lumière blanche, spectre continu.",
+                  "answers": [
+                    {
+                      "content": "De la lumière blanche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lumière rouge simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mélange de rouge et de vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lumière colorée simple donne une seule couleur sur l'écran.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Décomposer avec le prisme. Étape 2. Compter : une couleur. Étape 3. Conclure : lumière colorée simple. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prisme étale une lumière en trois couleurs : rouge, vert et bleu. Combien de couleurs compte-t-on ?",
+                  "question_type": "numeric",
+                  "unit": "couleurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 1. Décomposer la lumière. Étape 2. Compter les couleurs sur l'écran : rouge, vert, bleu, soit 3.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à la nature de la lumière.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1. Compter les couleurs. Étape 2. Regarder les trous. Étape 3. Conclure : blanc pour toutes les couleurs, simple pour une seule, mélange pour quelques-unes.",
+                  "answers": [
+                    {
+                      "content": "Toutes les couleurs sans trou",
+                      "match": "Lumière blanche"
+                    },
+                    {
+                      "content": "Une seule tache verte",
+                      "match": "Lumière colorée simple"
+                    },
+                    {
+                      "content": "Rouge et bleu seulement",
+                      "match": "Mélange de deux lumières"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lumière paraît jaune. Que montre le prisme si c'est un mélange de rouge et de vert ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Décomposer. Étape 2. Compter : deux couleurs. Étape 3. Conclure : c'est un mélange. Seul le prisme peut le montrer, l'œil seul croit voir du jaune.",
+                  "answers": [
+                    {
+                      "content": "Du rouge et du vert séparés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement du jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout le spectre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien du tout",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Awa construit un disque de Newton à 6 secteurs égaux, un pour chaque couleur du spectre, et le fait tourner.",
+              "hint": "Le blanc apparaît seulement avec toutes les couleurs et une rotation très rapide.",
+              "exercise_type": "evaluation",
+              "figure": "disque-de-newton",
+              "questions": [
+                {
+                  "content": "Que voit Awa quand le disque tourne très vite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Vérifier les couleurs : toutes sont là. Étape 2. Observer la rotation rapide. Étape 3. Conclure : les couleurs mélangées redonnent du blanc.",
+                  "answers": [
+                    {
+                      "content": "Un disque blanc grisâtre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un disque noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un disque rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Six secteurs plus nets",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À l'arrêt, le disque de Newton paraît blanc.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Observer le disque à l'arrêt : chaque secteur garde sa couleur. Étape 2. Le blanc n'apparaît qu'en rotation très rapide. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'angle de chaque secteur ? Un tour complet fait 360 degrés.",
+                  "question_type": "numeric",
+                  "unit": "°",
+                  "tolerance": 0,
+                  "explanation": "Étape 1. Lire : 6 secteurs égaux. Étape 2. Calculer $360 \\div 6 = 60$. Chaque secteur mesure 60 degrés.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le disque de Newton sert à ___ la lumière blanche.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1. Les couleurs sont mélangées par la rotation. Étape 2. Le blanc est recomposé. Le prisme, lui, décompose.",
+                  "answers": [
+                    {
+                      "content": "recomposer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conditions pour obtenir du blanc ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1. Il faut toutes les couleurs. Étape 2. Il faut une rotation très rapide pour que l'œil ne les sépare plus.",
+                  "answers": [
+                    {
+                      "content": "Toutes les couleurs du spectre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une rotation très rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule couleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un disque immobile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un prisme derrière le disque",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Trois spots, rouge, vert et bleu, éclairent un mur blanc dans la pénombre. Un filtre est placé devant une lampe pour tester ce qu'il laisse passer.",
+              "hint": "Pense à la synthèse additive, et à ce que laisse passer un filtre.",
+              "exercise_type": "evaluation",
+              "figure": "synthese-additive",
+              "questions": [
+                {
+                  "content": "Les spots vert et bleu se recouvrent. Quelle couleur voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Repérer : vert et bleu. Étape 2. Compter : 2 lumières. Étape 3. Appliquer : vert + bleu donne du cyan.",
+                  "answers": [
+                    {
+                      "content": "Cyan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Magenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Blanc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Rouge + bleu donne du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1. Repérer : rouge et bleu. Étape 2. Appliquer la synthèse additive : rouge + bleu donne du magenta.",
+                  "answers": [
+                    {
+                      "content": "magenta",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les trois lumières primaires superposées donnent du blanc.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Compter : 3 lumières primaires. Étape 2. Appliquer : trois lumières primaires donnent du blanc.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De la lumière blanche traverse un filtre rouge. Que sort-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Lister : le blanc contient toutes les couleurs. Étape 2. Chercher : le filtre rouge laisse passer le rouge. Étape 3. Barrer le reste. Étape 4. Conclure : du rouge.",
+                  "answers": [
+                    {
+                      "content": "De la lumière rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière bleue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lumière verte traverse un filtre rouge : il sort de la lumière jaune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Lister : du vert. Étape 2. Le filtre rouge ne laisse pas passer le vert. Étape 3. Le vert est absorbé. Il ne sort rien, un filtre n'ajoute pas sa couleur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Lumière blanche et arc-en-ciel après la pluie, lampes et spots à la fête, écran de téléphone, disque de Newton en classe, filtres colorés devant une lampe de marché.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Après une averse à Bouaké, Yao voit un arc-en-ciel dans le ciel, avec le Soleil derrière lui. Il se demande comment il se forme.",
+              "hint": "Pense à ce que font les gouttelettes d'eau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le rôle des gouttelettes d'eau de la pluie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Envoyer : la lumière du Soleil arrive sur les gouttelettes. Étape 2. Observer : les couleurs ressortent séparées. Étape 3. Conclure : les gouttelettes jouent le rôle de prismes.",
+                  "answers": [
+                    {
+                      "content": "Elles décomposent la lumière blanche du Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles produisent la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles absorbent les couleurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles recomposent le blanc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arc-en-ciel montre les couleurs qui sont déjà dans la lumière blanche du Soleil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Observer les couleurs de l'arc. Étape 2. Conclure : elles étaient déjà dans la lumière blanche, les gouttelettes les ont séparées.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux couleurs placées aux bords de l'arc-en-ciel ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1. Observer l'ordre des couleurs du spectre. Étape 2. Les bords sont le rouge et le violet.",
+                  "answers": [
+                    {
+                      "content": "Le rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le violet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le blanc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range les couleurs de l'arc-en-ciel, du rouge au violet.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1. Partir du rouge. Étape 2. Suivre l'ordre du spectre : orange, jaune, vert, bleu. Étape 3. Finir par le violet.",
+                  "answers": [
+                    {
+                      "content": "Rouge"
+                    },
+                    {
+                      "content": "Orange"
+                    },
+                    {
+                      "content": "Jaune"
+                    },
+                    {
+                      "content": "Vert"
+                    },
+                    {
+                      "content": "Bleu"
+                    },
+                    {
+                      "content": "Violet"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour voir un arc-en-ciel, il faut du Soleil et des gouttelettes d'eau de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1. Il faut des gouttelettes d'eau en suspension, comme celles de la pluie. Étape 2. Le Soleil fournit la lumière blanche.",
+                  "answers": [
+                    {
+                      "content": "pluie",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À la fête du quartier, un technicien éclaire un mur blanc avec trois projecteurs, un rouge, un vert et un bleu, dans la pénombre.",
+              "hint": "Trouve la lumière qui manque pour chaque zone.",
+              "exercise_type": "evaluation",
+              "figure": "synthese-additive",
+              "questions": [
+                {
+                  "content": "Les projecteurs rouge et vert se recouvrent. Quelle couleur voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Repérer : rouge et vert. Étape 2. Compter : 2. Étape 3. Appliquer : rouge + vert donne du jaune.",
+                  "answers": [
+                    {
+                      "content": "Jaune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Blanc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cyan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bleu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque zone du mur à sa couleur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1. Repérer les lumières. Étape 2. Les compter. Étape 3. Appliquer la règle de la synthèse additive.",
+                  "answers": [
+                    {
+                      "content": "Rouge + bleu",
+                      "match": "Magenta"
+                    },
+                    {
+                      "content": "Vert + bleu",
+                      "match": "Cyan"
+                    },
+                    {
+                      "content": "Rouge + vert + bleu",
+                      "match": "Blanc"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de projecteurs éclairent la zone qui paraît blanche ?",
+                  "question_type": "numeric",
+                  "unit": "spots",
+                  "tolerance": 0,
+                  "explanation": "Étape 1. Repérer : le blanc vient des trois lumières primaires. Étape 2. Compter : 3 projecteurs.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En éteignant le projecteur bleu, la zone blanche devient jaune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Repérer : il reste le rouge et le vert. Étape 2. Compter : 2 lumières. Étape 3. Appliquer : rouge + vert donne du jaune. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un technicien dit : « Avec les trois projecteurs, ce sera noir. » Qu'obtient-on vraiment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Compter : 3 lumières primaires. Étape 2. Appliquer : trois lumières donnent du blanc. Le noir est l'erreur de ceux qui mélangent des lumières comme des peintures.",
+                  "answers": [
+                    {
+                      "content": "Du blanc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du bleu",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur un téléphone, l'écran fabrique ses couleurs avec de minuscules points rouges, verts et bleus. Aya regarde l'écran de près avec une loupe.",
+              "hint": "Pense à la synthèse additive.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles lumières primaires les points de l'écran envoient-ils ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Repérer : les lumières primaires sont le rouge, le vert et le bleu. Étape 2. Ce sont celles de l'écran. Jaune, cyan et magenta s'obtiennent en les superposant.",
+                  "answers": [
+                    {
+                      "content": "Le rouge, le vert et le bleu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le jaune, le cyan et le magenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rouge, le jaune et le noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le blanc seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour afficher du jaune, l'écran allume les points rouges et verts.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Repérer : rouge et vert. Étape 2. Appliquer : rouge + vert donne du jaune. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour afficher du blanc, l'écran allume les points rouges, verts et ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1. Compter : trois lumières primaires sont nécessaires. Étape 2. Il manque les bleus.",
+                  "answers": [
+                    {
+                      "content": "bleus",
+                      "correct": true
+                    },
+                    {
+                      "content": "bleu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour afficher du cyan, combien de couleurs de points l'écran allume-t-il ?",
+                  "question_type": "numeric",
+                  "unit": "couleurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 1. Repérer : le cyan est vert + bleu. Étape 2. Compter : 2 couleurs de points.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'œil voit-il du jaune alors que l'écran n'a pas de point jaune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Repérer : points rouges et verts allumés. Étape 2. Appliquer : rouge + vert donne du jaune. Étape 3. Conclure : l'œil mélange les deux lumières.",
+                  "answers": [
+                    {
+                      "content": "Il reçoit du rouge et du vert en même temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les points rouges deviennent jaunes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un filtre jaune est collé sur l'écran",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'écran fabrique de la lumière blanche",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au marché de nuit, une vendeuse met un filtre coloré devant sa lampe à incandescence pour attirer les clients. Sa lampe donne de la lumière blanche.",
+              "hint": "Barre ce que le filtre arrête.",
+              "exercise_type": "evaluation",
+              "figure": "filtre-jaune",
+              "questions": [
+                {
+                  "content": "Elle met un filtre vert devant la lampe. Quelle lumière sort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Lister : la lumière blanche contient toutes les couleurs. Étape 2. Chercher : le filtre vert laisse passer le vert. Étape 3. Barrer le reste. Étape 4. Conclure : du vert.",
+                  "answers": [
+                    {
+                      "content": "De la lumière verte",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec un filtre rouge devant une lampe verte, la lumière sort rouge.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Lister : du vert. Étape 2. Le filtre rouge laisse passer le rouge, pas le vert. Étape 3. Le vert est absorbé. Rien ne sort.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un filtre bleu ___ les lumières qui ne sont pas bleues.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3. Barrer : le filtre arrête, c'est-à-dire absorbe, les couleurs qu'il ne laisse pas passer.",
+                  "answers": [
+                    {
+                      "content": "absorbe",
+                      "correct": true
+                    },
+                    {
+                      "content": "arrête",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un filtre jaune éclairé par du rouge, du vert et du bleu laisse passer quelles couleurs ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1. Lister : rouge, vert, bleu. Étape 2. Chercher : le jaune est rouge + vert. Étape 3. Barrer le bleu.",
+                  "answers": [
+                    {
+                      "content": "Le rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bleu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cyan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magenta",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un filtre ne fait que ___ la lumière qui arrive.",
+                  "question_type": "select",
+                  "explanation": "Étape 1. Un filtre n'est pas une source. Étape 2. Il laisse passer sa couleur et absorbe les autres : il trie.",
+                  "answers": [
+                    {
+                      "content": "trier",
+                      "correct": true
+                    },
+                    {
+                      "content": "fabriquer",
+                      "correct": false
+                    },
+                    {
+                      "content": "décomposer",
+                      "correct": false
+                    },
+                    {
+                      "content": "multiplier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Corriger des affirmations fausses sur le prisme et le spectre, justifier la nature d'une lumière, raisonner sur le disque de Newton, les lumières superposées et les filtres.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Kofi affirme plusieurs choses sur la lumière après avoir regardé un prisme en classe. Tu dois dire si elles sont justes.",
+              "hint": "Pense toujours à ce que fait réellement le prisme.",
+              "exercise_type": "evaluation",
+              "figure": "prisme-et-spectre",
+              "questions": [
+                {
+                  "content": "Kofi dit : « Le prisme ajoute le rouge à la lumière blanche. » C'est juste.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Observer le spectre : le rouge est déjà dans la lumière blanche. Étape 2. Le prisme ne fait que séparer les couleurs. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi dit : « Une lumière rouge simple donne tout le spectre. » C'est juste.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Compter : une lumière rouge simple ne donne qu'une couleur. Étape 2. Le prisme la dévie sans l'étaler. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase justifie qu'une lumière est blanche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Décomposer avec le prisme. Étape 2. Regarder les couleurs : toutes, sans trou. Étape 3. Conclure : c'est de la lumière blanche. L'intensité ou l'aspect ne suffisent pas.",
+                  "answers": [
+                    {
+                      "content": "Le prisme montre toutes les couleurs du rouge au violet sans trou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle éclaire fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle vient d'une lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle paraît claire à l'œil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux phrases justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1. Observer les bords du spectre. Étape 2. Le violet est le plus dévié, le rouge le moins. Le prisme décompose, il ne fabrique rien.",
+                  "answers": [
+                    {
+                      "content": "Le violet est plus dévié que le rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le prisme décompose la lumière blanche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le prisme fabrique des couleurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rouge est plus dévié que le violet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa veut prouver que la lumière blanche contient du rouge et du violet. Explique en trois phrases comment elle peut le faire.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Utiliser un prisme et un écran",
+                    "Dire qu'on voit une bande allant du rouge au violet",
+                    "Conclure que ces couleurs étaient dans la lumière blanche"
+                  ],
+                  "starter": "Awa envoie…",
+                  "explanation": "Corrigé modèle : « Awa envoie un faisceau de lumière blanche sur un prisme et place un écran blanc derrière. Elle observe une bande colorée avec du rouge à un bord et du violet à l'autre. Le prisme ne crée pas de couleurs, donc ces couleurs étaient déjà dans la lumière blanche. » Barème : 1 point par critère.",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le club de sciences examine deux lampes qui paraissent toutes les deux jaunes. Le prisme montre 1 couleur pour la lampe A et 2 couleurs pour la lampe B.",
+              "hint": "Compte les couleurs pour chaque lampe.",
+              "exercise_type": "evaluation",
+              "figure": "spectre-continu",
+              "questions": [
+                {
+                  "content": "Que peut-on dire de la lampe A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Décomposer. Étape 2. Compter : 1 couleur. Étape 3. Conclure : lumière colorée simple.",
+                  "answers": [
+                    {
+                      "content": "C'est une lumière colorée simple",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est de la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un mélange de rouge et de vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas de spectre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prisme montre du rouge et du vert pour la lampe B. Que peut-on dire de B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2. Compter : 2 couleurs. Étape 3. Regarder : les autres couleurs manquent. Étape 4. Conclure : c'est un mélange.",
+                  "answers": [
+                    {
+                      "content": "C'est un mélange de rouge et de vert",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est de la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une lumière colorée simple",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une lumière bleue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les lampes A et B sont identiques parce qu'elles paraissent jaunes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. L'œil ne voit pas la différence. Étape 2. Le prisme montre 1 couleur pour A et 2 pour B. Elles ne sont pas identiques.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de couleurs de plus la lampe B montre-t-elle que la lampe A ?",
+                  "question_type": "numeric",
+                  "unit": "couleur",
+                  "tolerance": 0,
+                  "explanation": "Étape 1. Compter : A en montre 1, B en montre 2. Étape 2. Calculer $2 - 1 = 1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Seul le ___ permet de savoir si une lumière jaune est un mélange.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1. L'œil ne distingue pas les deux cas. Étape 2. Le prisme sépare les couleurs et permet de les compter.",
+                  "answers": [
+                    {
+                      "content": "prisme",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève fabrique un disque de Newton avec seulement 3 secteurs égaux : un rouge, un vert, un bleu. Il le fait tourner très vite.",
+              "hint": "Pense aux lumières primaires.",
+              "exercise_type": "evaluation",
+              "figure": "disque-de-newton",
+              "questions": [
+                {
+                  "content": "Quel est l'angle de chaque secteur ? Un tour complet fait 360 degrés.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Lire : 3 secteurs égaux. Étape 2. Calculer $360 \\div 3 = 120$. Chaque secteur mesure 120 degrés.",
+                  "answers": [
+                    {
+                      "content": "120°",
+                      "correct": true
+                    },
+                    {
+                      "content": "60°",
+                      "correct": false
+                    },
+                    {
+                      "content": "90°",
+                      "correct": false
+                    },
+                    {
+                      "content": "180°",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À l'arrêt, ce disque paraît entièrement blanc.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. À l'arrêt, chaque secteur garde sa couleur. Étape 2. Le mélange n'a lieu qu'en rotation rapide. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En rotation très rapide, l'œil reçoit du rouge, du vert et du bleu en même temps. Que voit-il à peu près ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Repérer : rouge, vert, bleu. Étape 2. Compter : 3 lumières primaires. Étape 3. Appliquer : trois lumières primaires donnent du blanc.",
+                  "answers": [
+                    {
+                      "content": "Un blanc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un magenta",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec seulement un secteur rouge et un secteur vert, le disque rapide paraît bleu.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Repérer : rouge et vert. Étape 2. Rouge + vert donne du jaune, pas du bleu. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un disque a 6 secteurs : 5 couleurs du spectre et un secteur noir. Il tourne très vite. Dis s'il paraît blanc et justifie.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Dire qu'il ne paraît pas vraiment blanc ou qu'il est plus sombre",
+                    "Dire qu'une couleur manque ou qu'un secteur ne renvoie pas de lumière",
+                    "Rappeler qu'il faut toutes les couleurs pour le blanc"
+                  ],
+                  "starter": "Le disque…",
+                  "explanation": "Corrigé modèle : « Le disque ne paraît pas vraiment blanc : il est plus sombre, gris ou légèrement coloré. Une couleur du spectre manque et le secteur noir ne renvoie pas de lumière. Pour obtenir du blanc, il faut toutes les couleurs du spectre et une rotation très rapide. » Barème : 1 point par critère.",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans le noir, trois lampes colorées, rouge, verte et bleue, éclairent un mur blanc. On place des filtres devant certaines lampes.",
+              "hint": "Barre d'abord, additionne ensuite.",
+              "exercise_type": "evaluation",
+              "figure": "filtre-jaune",
+              "questions": [
+                {
+                  "content": "La lampe verte est devant un filtre rouge. La lampe rouge et la lampe bleue sont libres. Quelle couleur voit-on sur le mur si les trois lumières se recouvrent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Lister : la lumière verte arrive sur un filtre rouge. Étape 2. Chercher : il ne laisse pas passer le vert. Étape 3. Barrer le vert. Étape 4. Conclure : il reste rouge et bleu, soit du magenta.",
+                  "answers": [
+                    {
+                      "content": "Magenta",
+                      "correct": true
+                    },
+                    {
+                      "content": "Blanc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cyan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sans filtre, les trois lampes donnent du blanc au centre du mur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Compter : 3 lumières primaires. Étape 2. Appliquer : trois lumières primaires donnent du blanc.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On met un filtre bleu devant une lampe qui envoie du rouge et du vert. Que voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Lister : rouge et vert. Étape 2. Le filtre bleu laisse passer le bleu seulement. Étape 3. Barrer le rouge et le vert. Étape 4. Conclure : rien ne sort.",
+                  "answers": [
+                    {
+                      "content": "Rien, tout est absorbé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du bleu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du blanc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux phrases justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2. Un filtre laisse passer sa couleur. Étape 3. Il absorbe les autres. Il ne transforme pas une lumière en une autre.",
+                  "answers": [
+                    {
+                      "content": "Un filtre n'ajoute aucune couleur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un filtre vert laisse passer le vert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un filtre vert transforme le rouge en vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un filtre produit de la lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un filtre qui laisse passer le rouge et le vert est un filtre ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2. Rouge + vert donne du jaune. Le filtre jaune laisse donc passer le rouge et le vert et arrête le bleu.",
+                  "answers": [
+                    {
+                      "content": "jaune",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : décomposer la lumière blanche, reconnaître un spectre, recomposer le blanc avec un disque de Newton, superposer des lumières primaires, prévoir la lumière qui sort d'un filtre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans la salle de sciences du collège, une lampe à incandescence éclaire un prisme. Les élèves observent l'écran et notent leurs résultats.",
+              "hint": "Suis la méthode : envoyer, placer, observer, conclure.",
+              "exercise_type": "evaluation",
+              "figure": "prisme-et-spectre",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de l'expérience du prisme.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1. Envoyer. Étape 2. Placer l'écran. Étape 3. Observer. Étape 4. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Envoyer un faisceau fin de lumière blanche sur le prisme"
+                    },
+                    {
+                      "content": "Placer un écran blanc derrière"
+                    },
+                    {
+                      "content": "Observer la bande colorée"
+                    },
+                    {
+                      "content": "Conclure que la lumière blanche est un mélange"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel nom a la bande observée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3. Observer : la bande de couleurs de la lumière blanche s'appelle le spectre.",
+                  "answers": [
+                    {
+                      "content": "Le spectre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le filtre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le faisceau parallèle",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ombre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le spectre de la lumière blanche est continu.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3. Regarder : aucune couleur ne manque entre le rouge et le violet. Le spectre est continu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves comptent les couleurs du spectre : rouge, orange, jaune, vert, bleu, violet. Combien y en a-t-il ?",
+                  "question_type": "numeric",
+                  "unit": "couleurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 3. Observer et compter les couleurs : rouge, orange, jaune, vert, bleu, violet, soit 6.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3. Observer : les bords sont le rouge, le moins dévié, et le violet, le plus dévié. Le prisme sépare, il ne fabrique pas.",
+                  "answers": [
+                    {
+                      "content": "Le prisme sépare les couleurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le rouge est la couleur la moins déviée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le violet est la couleur la plus déviée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le prisme fabrique les couleurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le violet est la couleur la moins déviée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un électricien du village teste trois lampes avec un prisme. La lampe 1 donne toutes les couleurs sans trou. La lampe 2 ne donne que du bleu. La lampe 3 donne du vert et du rouge.",
+              "hint": "Compte les couleurs de chaque lampe.",
+              "exercise_type": "evaluation",
+              "figure": "spectre-continu",
+              "questions": [
+                {
+                  "content": "Relie chaque lampe à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1. Décomposer chaque lumière. Étape 2. Compter les couleurs : toutes, une, deux. Étape 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Lampe 1",
+                      "match": "Lumière blanche"
+                    },
+                    {
+                      "content": "Lampe 2",
+                      "match": "Lumière colorée simple"
+                    },
+                    {
+                      "content": "Lampe 3",
+                      "match": "Mélange de deux lumières"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de couleurs la lampe 3 montre-t-elle sur l'écran ?",
+                  "question_type": "numeric",
+                  "unit": "couleurs",
+                  "tolerance": 0,
+                  "explanation": "Étape 2. Compter : le vert et le rouge, soit 2 couleurs.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe 3 donne de la lumière blanche.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3. Regarder : il y a des trous, il manque l'orange, le jaune, le bleu et le violet. Ce n'est pas du blanc.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "De quelle couleur la lampe 3 paraît-elle à l'œil, d'après la synthèse additive ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Repérer : rouge et vert. Étape 3. Appliquer : rouge + vert donne du jaune.",
+                  "answers": [
+                    {
+                      "content": "Jaune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cyan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Magenta",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe 2 est une lumière colorée ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2. Une seule couleur apparaît. Étape 4. C'est une lumière colorée simple.",
+                  "answers": [
+                    {
+                      "content": "simple",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour le club de sciences, on fabrique un disque de Newton à 6 secteurs égaux, puis on étudie des superpositions de spots.",
+              "hint": "Pense aux deux manières d'obtenir du blanc.",
+              "exercise_type": "evaluation",
+              "figure": "disque-de-newton",
+              "questions": [
+                {
+                  "content": "Que voit-on quand le disque, peint des 6 couleurs du spectre, tourne très vite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Vérifier les couleurs. Étape 2. Faire tourner très vite. Étape 3. Observer. Étape 4. Conclure : blanc.",
+                  "answers": [
+                    {
+                      "content": "Du blanc grisâtre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les 6 secteurs plus nets",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'angle de chaque secteur ? Un tour complet fait 360 degrés.",
+                  "question_type": "numeric",
+                  "unit": "°",
+                  "tolerance": 0,
+                  "explanation": "Étape 1. Lire : 6 secteurs. Étape 2. Calculer $360 \\div 6 = 60$.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux manières d'obtenir du blanc étudiées dans la leçon ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1. Recomposer le blanc avec le disque de Newton. Étape 2. Ou superposer les trois lumières primaires. Rouge + vert donne du jaune, et un filtre jaune ne donne pas du blanc.",
+                  "answers": [
+                    {
+                      "content": "Faire tourner très vite un disque aux couleurs du spectre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Superposer le rouge, le vert et le bleu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Superposer le rouge et le vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Placer un filtre jaune devant une lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Rouge + vert + bleu donnent du noir.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1. Compter : 3 lumières primaires. Étape 2. Elles donnent du blanc. Le noir est l'absence de lumière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Rouge + bleu donne du ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1. Repérer : rouge et bleu. Étape 2. Appliquer : magenta.",
+                  "answers": [
+                    {
+                      "content": "magenta",
+                      "correct": true
+                    },
+                    {
+                      "content": "jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "cyan",
+                      "correct": false
+                    },
+                    {
+                      "content": "blanc",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une lampe envoie une lumière formée de rouge, de vert et de bleu. Elle est placée devant différents filtres colorés.",
+              "hint": "Lister, chercher, barrer, conclure.",
+              "exercise_type": "evaluation",
+              "figure": "filtre-jaune",
+              "questions": [
+                {
+                  "content": "Quelle lumière sort du filtre rouge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Lister : rouge, vert, bleu. Étape 2. Chercher : le filtre rouge laisse passer le rouge. Étape 3. Barrer le vert et le bleu. Étape 4. Conclure : du rouge.",
+                  "answers": [
+                    {
+                      "content": "De la lumière rouge",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la lumière verte",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle lumière sort du filtre jaune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1. Lister : rouge, vert, bleu. Étape 2. Le filtre jaune laisse passer le rouge et le vert. Étape 3. Barrer le bleu. Étape 4. Conclure : rouge + vert donne du jaune.",
+                  "answers": [
+                    {
+                      "content": "De la lumière jaune",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la lumière blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lumière bleue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de lumières primaires le filtre jaune absorbe-t-il ?",
+                  "question_type": "numeric",
+                  "unit": "lumière",
+                  "tolerance": 0,
+                  "explanation": "Étape 3. Barrer : le filtre jaune absorbe le bleu, soit 1 lumière primaire.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le filtre bleu laisse passer le rouge et le vert.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2. Chercher : le filtre bleu laisse passer le bleu seulement. Étape 3. Le rouge et le vert sont absorbés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un filtre vert placé devant une lumière rouge ne laisse passer ___ lumière.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1. Lister : du rouge. Étape 2. Le filtre vert ne laisse pas passer le rouge. Étape 4. Conclure : aucune lumière ne sort.",
+                  "answers": [
+                    {
+                      "content": "aucune",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

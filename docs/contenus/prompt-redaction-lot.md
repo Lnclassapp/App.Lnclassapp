@@ -2,7 +2,7 @@
 
 > Utilisation : ouvrir une session **dans le dépôt Lnclass** (le prompt lit des fichiers de `docs/contenus/` et lance un script), copier tout ce qui suit la ligne `---`, puis remplir le bloc **ENTRÉE** en bas. Un appel = une **matière** et un **niveau** (et sa série) : les leçons demandées pour ce niveau (en général les 10 premières de la progression). Exemples : Mathématiques 3ème (chantier refonte-contenus-maths), Français 3ème (chantier contenus-3e-francais).
 >
-> Ce prompt ne répète pas les règles de rédaction : elles vivent dans [`prompt-redaction.md`](prompt-redaction.md), la source unique. Il ajoute ce qu'un lot demande en plus : composer le plan du niveau, rédiger les leçons sans qu'elles se ressemblent, les contrôler, les ranger. Pipeline d'une leçon : **rédaction → script → relecture IA → import en brouillon → validation équipe → publication**.
+> Ce prompt ne répète pas les règles de rédaction : elles vivent dans [`prompt-redaction.md`](prompt-redaction.md), la source unique. Il ajoute ce qu'un lot demande en plus : composer le plan du niveau, rédiger les leçons sans qu'elles se ressemblent, les contrôler, les ranger. Pipeline d'une leçon : **rédaction → script → relecture IA indépendante → validateur pédagogique (agent) → script → PR → import → publication**. Aucun point n'est renvoyé à un enseignant (ADR-0135).
 
 ---
 
@@ -43,7 +43,7 @@ Chaque sous-agent reçoit, et lui seul le lit :
 
 Règles de fond, pour toutes les leçons :
 
-- **Programme officiel.** La progression ne donne que des intitulés. Appuie-toi sur le programme éducatif officiel ivoirien du niveau et de la série. Si tu n'es pas certain qu'une notion y figure, ne l'écris pas : mets-la dans « À compléter : … » et dans les points à faire valider (étape 5). Une notion fausse ou hors programme est pire qu'une notion absente.
+- **Programme officiel.** La progression ne donne que des intitulés. Appuie-toi sur le programme éducatif officiel ivoirien du niveau et de la série. Si tu n'es pas certain qu'une notion y figure, ne l'écris pas : signale-la dans les points à trancher, que le validateur pédagogique tranche (étape 3). Une notion fausse ou hors programme est pire qu'une notion absente.
 - **Aucune invention.** Pas de date, de chiffre, de citation, de nom d'auteur ou de valeur numérique dont tu ne sois sûr. En Histoire-Géographie, Français et Philosophie, cela vaut surtout pour les dates, les auteurs, les œuvres et les citations.
 - **Types de questions** : ceux de `prompt-redaction.md`, variés ; **au moins 50 % de questions corrigées automatiquement** par leçon ; chaque question rédigée a son corrigé modèle, son barème et ses critères. **Deux exercices par notion (le second de 6 questions de types mêlés), exactement quatre problèmes et quatre sujets de devoir de 4 exercices, sans exception**, de 5 questions au moins chacun, avec une correction qui reprend la méthode.
 - **La série du fichier** est celle de l'ENTRÉE (`series_name`). Au 1er cycle, pas de `series_name`.
@@ -61,7 +61,9 @@ Règles de fond, pour toutes les leçons :
    - les paramètres de chaque figure décrivent bien la situation annoncée par sa description ;
    - aucune question ne dépend d'une figure ou d'une autre question absente.
 
-   Il rend la liste des défauts, avec leur chemin dans le JSON (`courses[0].notions[1].exercise.questions[3]`). L'auteur les corrige, puis le contrôle mécanique est relancé. Un seul tour de relecture ; ce qui reste est écrit dans le bilan.
+   Il rend la liste des défauts, avec leur chemin dans le JSON (`courses[0].notions[1].exercise.questions[3]`). L'auteur les corrige, puis le contrôle mécanique est relancé. Un seul tour de relecture. Ce qui reste, et tout point où l'auteur ou le relecteur hésite (fait, date, chiffre, rattachement au programme, niveau, barème, méthode, figure), va au validateur pédagogique.
+3. **Validation pédagogique**, par l'agent `validateur-pedagogique` (`.claude/agents/validateur-pedagogique.md`), jamais auteur ni relecteur de la leçon. Il reçoit la leçon et les points à trancher, et **tranche chacun** : il corrige la leçon ou confirme avec la source ou la raison (calculs refaits avec sympy, faits sur des sources sûres, progression DPFC 2026-2027). Un point qu'il ne peut établir avec certitude est retiré ou reformulé de façon sûre. Il écrit chaque décision au journal du chantier (point, décision, justification). **Rien ne reste « à faire valider par un enseignant ».**
+4. **Contrôle mécanique relancé** après ses corrections : `ruby script/contenus/valider.rb <fichier>`, sans erreur.
 
 ## Étape 4 — Ranger
 
@@ -75,10 +77,10 @@ Règles de fond, pour toutes les leçons :
 Rends, dans la conversation, **sans recopier les JSON** :
 
 1. Un tableau rang × intitulé : fichier, nombre de notions, de figures, de questions, résultat du contrôle (✓ ou erreur restante).
-2. **À faire valider par un enseignant de la matière** : pour chaque leçon, les notions dont le rattachement au programme est incertain et les points où la relecture a hésité. Pour le pilote 3ème, l'enseignant relit avant publication.
+2. **Décisions du validateur pédagogique** : pour chaque leçon, les points tranchés (Confirmé, Corrigé, Retiré ou reformulé) et leur justification, recopiés du journal du chantier. Aucun point n'est laissé à un enseignant.
 3. Les **défauts restants** de la relecture, s'il y en a.
 4. Les **figures** pour lesquelles aucune sorte ne convenait (situation décrite dans l'énoncé à la place) : elles nourrissent une demande de sorte nouvelle.
-5. Le rappel d'import : l'écran **Imports** (leçon complète, format v3). L'import crée la leçon **en brouillon** ; une leçon déjà publiée est refusée, une leçon encore en brouillon est remplacée. L'équipe relit dans l'application (fiche, figures, exercices, corrections), puis publie.
+5. Le rappel d'import : l'écran **Imports** (leçon complète, format v3). L'import crée la leçon **en brouillon** ; une leçon déjà publiée est refusée, une leçon encore en brouillon est remplacée. Le contenu a été tranché avant la PR : l'équipe vérifie le rendu dans l'application, puis publie.
 
 Selon le champ **Livraison** de l'ENTRÉE :
 

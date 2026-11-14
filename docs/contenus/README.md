@@ -8,7 +8,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 30 leçons de 6ème (les 5 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 30 leçons de 4ème (les 5 premières de la progression dans les mêmes 6 matières), les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 30 de 5ème (les 5 premières de la progression dans les mêmes 6 matières, chantier `lecons-5eme`), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
 | [`a-reprendre/`](a-reprendre/) | Les 275 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
@@ -17,18 +17,20 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 ## Le pipeline d'une leçon
 
-**rédaction → script → relecture IA → import en brouillon → validation équipe → publication**
+**rédaction → script → relecture IA indépendante → validateur pédagogique (agent) → script → PR → import → publication**
+
+Aucune leçon n'attend plus d'enseignant : l'étape « à faire valider par un enseignant » est remplacée par l'agent `validateur-pedagogique`, qui tranche chaque point avant la PR (ADR-0135).
 
 1. **Rédiger.** Copier `prompt-redaction.md`, remplir son bloc **ENTRÉE** (intitulé exact de la progression, niveau, rang). Le résultat est un fichier JSON `lnclass.course-tree` version 3 : les versions 1 et 2 sont **retirées** et refusées à l'import (`format_retired`).
 2. **Contrôler avec le script.** `ruby script/contenus/valider.rb fichier.json`. Il refuse ce que l'import refuserait (gabarit, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, correction absente `blank`, `too_short` ou `too_long`, figures hors règles), avec le code que l'import rend (test de parité `test/script/contenus/parite_import_test.rb`) et avertit des défauts de rédaction : correction qui ne cite aucune étape de La méthode, mots interdits, question qui dépend d'un élément absent. Il ne vérifie pas les calculs.
-3. **Relecture IA indépendante.** Un autre modèle que l'auteur refait chaque calcul et vérifie que chaque correction suit la méthode. Les défauts sont corrigés, puis le script est relancé.
-4. **Importer en brouillon** depuis l'écran **Imports**. Rien n'est visible des élèves. Une leçon encore en brouillon peut être réimportée (elle garde son adresse) ; une leçon publiée est refusée.
-5. **Validation par l'équipe** dans l'application : la fiche de révision, les figures, les exercices et leurs corrections. Pour le pilote 3ème, un enseignant de mathématiques relit avant publication.
-6. **Publier.**
+3. **Relecture IA indépendante.** Un autre modèle que l'auteur refait chaque calcul et vérifie que chaque correction suit la méthode. Les défauts sont corrigés, puis le script est relancé. Les points où l'auteur ou le relecteur hésite vont à l'étape suivante.
+4. **Validateur pédagogique** ([`.claude/agents/validateur-pedagogique.md`](../../.claude/agents/validateur-pedagogique.md), Opus, jamais auteur ni relecteur de la leçon). Il tranche chaque point qu'on aurait renvoyé à un enseignant (fait, date, chiffre, rattachement au programme et à la progression DPFC 2026-2027, niveau de la classe et de la série, barème, méthode, planches et figures) : il corrige la leçon ou confirme avec la source ou la raison, et retire ou reformule de façon sûre ce qu'il ne peut établir avec certitude. Chaque décision va au journal du chantier (point, décision, justification). Puis `valider.rb` est relancé.
+5. **PR**, puis **import** depuis l'écran **Imports**. Une leçon encore en brouillon peut être réimportée (elle garde son adresse) ; une leçon publiée est refusée.
+6. **Publier**, après une vérification du rendu par l'équipe.
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `3eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `6eme/` (rangs 1 à 5), `4eme/`, `3eme/`, `5eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
 
 ## Boucle courte : corriger une leçon
 
@@ -53,11 +55,77 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ## Leçons traitées
 
+### 6ème, 5 premières leçons de chaque matière (chantier `lecons-6eme`)
+
+Depuis le 2026-11-14, les rangs 1 à 5 de la progression DPFC 2026-2027 de 6ème sont rédigés au format v3 complet, comme les 60 leçons de 3ème, à un niveau de langue et de difficulté de 6ème : 4 blocs et 2 exercices par notion (le second en `fixation`, 6 questions d'au moins 4 types), 4 problèmes, 4 sujets de devoir de 4 exercices. Lot A : Mathématiques et Physique-Chimie ; lot B : Français et SVT ; lot C : Histoire-Géographie et EDHC. Hors Mathématiques et Physique-Chimie, les sujets sont entièrement corrigés automatiquement.
+
+Vérification hors dépôt : format, intitulé et rang de la progression, `valider.rb` sur la leçon et sur chaque sujet, relecture IA indépendante qui refait chaque calcul (sympy) ; les défauts trouvés ont été corrigés. Points pédagogiques tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) ; relevés dans le [journal du chantier](../chantiers/lecons-6eme/journal.md).
+
+| Rang | Fichier | Leçon | Notions | Figures | Exercices | Questions |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `6eme/mathematiques/nombres-entiers-naturels.json` | Nombres entiers naturels | 5 | 5 | 30 | 175 |
+| 2 | `6eme/mathematiques/droites-et-points.json` | Droites et points | 5 | 4 | 30 | 180 |
+| 3 | `6eme/mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 5 | 28 | 174 |
+| 4 | `6eme/mathematiques/segments.json` | Segments | 3 | 9 | 26 | 146 |
+| 5 | `6eme/mathematiques/paves-droits-et-cylindres-droits.json` | Pavés droits et cylindres droits | 5 | 4 | 30 | 181 |
+| 1 | `6eme/francais/la-phrase.json` | La phrase | 3 | 0 | 26 | 148 |
+| 2 | `6eme/francais/le-dialogue-oral.json` | Le dialogue oral | 5 | 0 | 30 | 174 |
+| 3 | `6eme/francais/la-lettre-personnelle.json` | La lettre personnelle | 3 | 0 | 26 | 153 |
+| 4 | `6eme/francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 5 | 0 | 30 | 195 |
+| 5 | `6eme/francais/orthographe-lexicale.json` | Orthographe lexicale | 4 | 0 | 28 | 177 |
+| 1 | `6eme/physique-chimie/le-circuit-electrique.json` | Le circuit électrique | 4 | 2 | 28 | 160 |
+| 2 | `6eme/physique-chimie/commande-d-un-circuit-electrique.json` | Commande d'un circuit électrique | 4 | 3 | 28 | 162 |
+| 3 | `6eme/physique-chimie/court-circuit-et-protection-des-installations-electriques.json` | Court - circuit et protection des installations électriques | 4 | 4 | 28 | 160 |
+| 4 | `6eme/physique-chimie/solides-et-liquides.json` | Solides et liquides | 4 | 2 | 28 | 159 |
+| 5 | `6eme/physique-chimie/les-gaz.json` | Les gaz | 4 | 3 | 28 | 161 |
+| 1 | `6eme/svt/les-actions-nefastes-de-l-homme-et-leurs-consequences-sur-l-environnement.json` | Les actions néfastes de l'Homme et leurs conséquences sur l'environnement | 4 | 5 | 28 | 158 |
+| 2 | `6eme/svt/la-lutte-contre-la-degradation-de-l-environnement.json` | La lutte contre la dégradation de l'environnement | 4 | 2 | 28 | 158 |
+| 3 | `6eme/svt/les-facteurs-de-croissance-chez-les-plantes-a-fleurs.json` | Les facteurs de croissance chez les plantes à fleurs | 4 | 4 | 28 | 160 |
+| 4 | `6eme/svt/l-influence-des-aliments-sur-la-croissance-des-vertebres.json` | L'influence des aliments sur la croissance des vertébrés | 3 | 3 | 26 | 147 |
+| 5 | `6eme/svt/la-formation-d-une-graine.json` | La formation d'une graine | 3 | 4 | 26 | 144 |
+| 1 | `6eme/histoire-geographie/histoire-l-histoire-et-son-objet.json` | Histoire — L'histoire et son objet | 4 | 0 | 28 | 156 |
+| 2 | `6eme/histoire-geographie/geographie-la-geographie-et-son-objet.json` | Géographie — La géographie et son objet | 4 | 3 | 28 | 165 |
+| 3 | `6eme/histoire-geographie/histoire-les-sources-de-l-histoire.json` | Histoire — Les sources de l'histoire | 4 | 2 | 28 | 158 |
+| 4 | `6eme/histoire-geographie/geographie-le-relief.json` | Géographie — Le relief | 4 | 4 | 28 | 164 |
+| 5 | `6eme/histoire-geographie/histoire-les-sources-d-information-et-la-dignite-humaine-en-temps-de-guerre-ou-de-violence.json` | Histoire — Les sources d'information et la dignité humaine en temps de guerre ou de violence | 3 | 1 | 26 | 145 |
+| 1 | `6eme/edhc/les-droits-a-la-survie-et-les-droits-a-la-protection-de-l-enfant.json` | Les droits à la survie et les droits à la protection de l'enfant | 4 | 2 | 28 | 159 |
+| 2 | `6eme/edhc/les-droits-humains.json` | Les droits humains | 4 | 2 | 28 | 167 |
+| 3 | `6eme/edhc/le-droit-international-humanitaire-dih.json` | Le droit international humanitaire (DIH) | 4 | 3 | 28 | 160 |
+| 4 | `6eme/edhc/la-constitution.json` | La Constitution | 4 | 3 | 28 | 161 |
+| 5 | `6eme/edhc/le-president-de-la-republique.json` | Le Président de la République | 3 | 1 | 26 | 149 |
+
+### 2nde, leçons 4 et 5 de chaque série et matière, en v3 complet (chantier `lecons-2nde-4-5`)
+
+Depuis le 2026-11-14, les leçons 4 et 5 de la progression DPFC 2026-2027 de 2nde A, 2nde C (Français, Mathématiques, Physique-Chimie, SVT) et d'Histoire-Géographie de 2nde sont rédigées au format v3 complet, comme les 3 premières : 18 fichiers, 14 leçons distinctes (Français et Physique-Chimie sont communs à A et C, écrits une fois et recopiés avec le `series_name` de chaque série ; Généralités sur les fonctions est écrite à part en A et en C). Chaque notion a son « Je m'entraîne » et 2 exercices (le second de 6 questions d'au moins 4 types), chaque leçon 4 problèmes et 4 sujets de devoir de 4 exercices. Hors Mathématiques et Physique-Chimie, les seconds exercices et les sujets sont entièrement corrigés automatiquement.
+
+Vérification : `valider.rb` sur la leçon et sur chaque sujet mis à la place des problèmes, format, aucune formule en ligne de 40 caractères ou plus ; relecture IA indépendante de chaque leçon (sympy sur chaque calcul en Mathématiques et Physique-Chimie). Points pédagogiques tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) ; relevés dans le [journal du chantier](../chantiers/lecons-2nde-4-5/journal.md#à-trancher).
+
+| Fichier | Titre | Rang | Notions | Exercices | Questions | Figures |
+|---|---|---:|---:|---:|---:|---:|
+| `2nde-a/francais/groupement-de-textes-poetiques.json` | Groupement de textes poétiques | 5 | 5 | 30 | 171 | 0 |
+| `2nde-a/francais/les-outils-de-l-argumentation.json` | Les outils de l'argumentation | 4 | 5 | 30 | 178 | 0 |
+| `2nde-a/mathematiques/equations-et-inequations-dans.json` | Équations et inéquations dans ℝ | 4 | 5 | 30 | 179 | 3 |
+| `2nde-a/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 5 | 30 | 179 | 6 |
+| `2nde-a/physique-chimie/actions-mecaniques-ou-forces.json` | Actions mécaniques ou forces | 4 | 5 | 30 | 192 | 3 |
+| `2nde-a/physique-chimie/classification-periodique-des-elements-chimiques.json` | Classification périodique des éléments chimiques | 5 | 4 | 28 | 169 | 3 |
+| `2nde-a/svt/la-production-de-la-matiere-organique.json` | La production de la matière organique | 4 | 3 | 26 | 144 | 4 |
+| `2nde-a/svt/le-changement-climatique.json` | Le changement climatique | 5 | 5 | 30 | 175 | 9 |
+| `2nde-c/francais/groupement-de-textes-poetiques.json` | Groupement de textes poétiques | 5 | 5 | 30 | 171 | 0 |
+| `2nde-c/francais/les-outils-de-l-argumentation.json` | Les outils de l'argumentation | 4 | 5 | 30 | 178 | 0 |
+| `2nde-c/mathematiques/droites-et-plans-de-l-espace.json` | Droites et plans de l'espace | 5 | 4 | 28 | 161 | 3 |
+| `2nde-c/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 4 | 4 | 28 | 166 | 4 |
+| `2nde-c/physique-chimie/actions-mecaniques-ou-forces.json` | Actions mécaniques ou forces | 4 | 5 | 30 | 192 | 3 |
+| `2nde-c/physique-chimie/classification-periodique-des-elements-chimiques.json` | Classification périodique des éléments chimiques | 5 | 4 | 28 | 169 | 3 |
+| `2nde-c/svt/le-devenir-des-substances-absorbees-par-la-plante-verte.json` | Le devenir des substances absorbées par la plante verte | 4 | 4 | 28 | 160 | 6 |
+| `2nde-c/svt/les-relations-entre-les-etres-vivants-dans-un-ecosysteme.json` | Les relations entre les êtres vivants dans un écosystème | 5 | 4 | 28 | 160 | 8 |
+| `2nde/histoire-geographie/geographie-la-planete-terre.json` | Géographie — La planète terre | 4 | 4 | 28 | 156 | 3 |
+| `2nde/histoire-geographie/histoire-la-methodologie-de-la-dissertation-du-commentaire-de-document-et-de-la-situation-d-evaluation.json` | Histoire — La méthodologie de la dissertation, du commentaire de document et de la situation d'évaluation | 5 | 4 | 28 | 160 | 3 |
+
 ### 2nde, 3 premières leçons de chaque série et matière, réécrites en v3 complet (chantier `lecons-1ere-2nde-debut`)
 
 Depuis le 2026-11-12, les 3 premières leçons de la progression DPFC 2026-2027 de 2nde A, 2nde C (Français, Mathématiques, Physique-Chimie, SVT) et d'Histoire-Géographie de 2nde sont revenues de `a-reprendre/format-v1/`, réécrites au format v3 complet comme Thalès : 27 fichiers (Français et Physique-Chimie sont communs à A et C, écrits une fois et recopiés avec le `series_name` de chaque série). Chaque notion a 2 exercices (le second en `fixation`, 6 questions d'au moins 4 types), chaque leçon 4 problèmes et 4 sujets de devoir de 4 exercices. Hors Mathématiques et Physique-Chimie, les seconds exercices et les sujets sont entièrement corrigés automatiquement.
 
-Même vérification hors dépôt que pour la 1ère (format, `valider.rb` sur la leçon et chaque sujet, sympy sur les calculs). Points à faire valider par un enseignant : [journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
+Même vérification hors dépôt que pour la 1ère (format, `valider.rb` sur la leçon et chaque sujet, sympy sur les calculs). Points pédagogiques tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) ; relevés dans le [journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
 
 | Fichier | Titre | Notions | Exercices | Questions |
 |---|---|---:|---:|---:|
@@ -90,11 +158,61 @@ Même vérification hors dépôt que pour la 1ère (format, `valider.rb` sur la 
 | `2nde/histoire-geographie/histoire-les-methodes-d-etude-de-l-histoire.json` | Histoire — Les méthodes d'étude de l'histoire | 3 | 26 | 137 |
 | **Total** | | | | **3769** |
 
+### 1ère, leçons 4 et 5 de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
+
+Depuis le 2026-11-13, les leçons 4 et 5 de la progression DPFC 2026-2027 de 1ère reviennent de `a-reprendre/` au format complet, avec la même méthode et la même vérification que les 3 premières (section suivante) : un second exercice en `fixation` par notion, 4 sujets de devoir, et un « Je m'entraîne » ajouté là où il manquait (Philosophie, Histoire-Géographie). Points pédagogiques (tranchés par le validateur pédagogique le 2026-11-14) : [journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
+
+| Fichier | Titre | Notions | Exercices | Questions |
+|---|---|---:|---:|---:|
+| `1ere-a1/francais/la-focalisation.json` | La focalisation | 4 | 28 | 169 |
+| `1ere-a1/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-a1/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
+| `1ere-a1/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a1/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-a1/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-a1/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
+| `1ere-a1/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-a1/svt/la-regulation-des-naissances.json` | La régulation des naissances | 3 | 26 | 147 |
+| `1ere-a1/svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 165 |
+| `1ere-a2/francais/la-focalisation.json` | La focalisation | 4 | 28 | 169 |
+| `1ere-a2/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-a2/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
+| `1ere-a2/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a2/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-a2/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-a2/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
+| `1ere-a2/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-a2/svt/la-regulation-des-naissances.json` | La régulation des naissances | 3 | 26 | 147 |
+| `1ere-a2/svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 165 |
+| `1ere-c/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-c/francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 30 | 179 |
+| `1ere-c/mathematiques/barycentre.json` | Barycentre | 5 | 30 | 183 |
+| `1ere-c/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 170 |
+| `1ere-c/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-c/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-c/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
+| `1ere-c/physique-chimie/hydrocarbures-satures-les-alcanes.json` | Hydrocarbures saturés : les alcanes | 7 | 34 | 213 |
+| `1ere-c/svt/la-fecondation-chez-les-mammiferes.json` | La fécondation chez les mammifères | 3 | 26 | 151 |
+| `1ere-c/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 28 | 177 |
+| `1ere-d/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-d/francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 30 | 179 |
+| `1ere-d/mathematiques/denombrement.json` | Dénombrement | 4 | 28 | 167 |
+| `1ere-d/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 166 |
+| `1ere-d/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-d/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-d/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
+| `1ere-d/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | Hydrocarbures insaturés : les alcènes et les alcynes | 5 | 30 | 186 |
+| `1ere-d/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 28 | 177 |
+| `1ere-d/svt/la-transmission-d-un-caractere-hereditaire-le-monohybridisme.json` | La transmission d'un caractère héréditaire : le monohybridisme | 4 | 28 | 168 |
+| `1ere/histoire-geographie/geographie-la-croissance-demographique-mondiale-et-ses-consequences.json` | Géographie — La croissance démographique mondiale et ses conséquences | 5 | 30 | 193 |
+| `1ere/histoire-geographie/histoire-le-mouvement-imperialiste-et-le-congres-de-berlin.json` | Histoire — Le mouvement impérialiste et le congrès de Berlin | 4 | 28 | 171 |
+| **Total** | | | | **7294** |
+
 ### 1ère, 3 premières leçons de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
 
 Depuis le 2026-11-12, les 3 premières leçons de la progression DPFC 2026-2027 de chaque série (A1, A2, C, D) et matière (Français, Mathématiques, Physique-Chimie, SVT, Philosophie, Histoire-Géographie) de 1ère sont revenues de `a-reprendre/` au format complet : 63 fichiers, 36 fiches distinctes (une fiche commune à plusieurs séries est écrite une fois et recopiée avec le `series_name` et le `theme` de chaque série). Chaque notion a reçu un second exercice en `fixation` de 6 questions d'au moins 4 types, et chaque leçon 4 sujets de devoir de 4 exercices de 5 ou 6 questions. Le cours, les fiches, le premier exercice, le `practice` et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement.
 
-Un script hors dépôt a vérifié chaque fichier : format, `valider.rb` sur la leçon et sur chaque sujet mis à la place des problèmes, contenu d'origine identique ; sympy sur chaque calcul en Mathématiques et Physique-Chimie. Détail et points à faire valider dans [le journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
+Un script hors dépôt a vérifié chaque fichier : format, `valider.rb` sur la leçon et sur chaque sujet mis à la place des problèmes, contenu d'origine identique ; sympy sur chaque calcul en Mathématiques et Physique-Chimie. Détail et points pédagogiques (tranchés par le validateur pédagogique le 2026-11-14) dans [le journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
 
 | Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
 |---|---|---:|---:|---:|---:|
@@ -285,20 +403,20 @@ Depuis le 2026-11-07, les 45 leçons de Tle D au format 3 (Mathématiques 10, Fr
 > **Histoire-Géographie** : les 3 leçons v1 de Tle (L'ONU, les fondements du développement économique de la Côte d'Ivoire, la bipolarisation), copiées dans `tle-d/`, `tle-a1/`, `tle-a2/` et `tle-c/`, sont remplacées par les 10 leçons v3 communes à toutes les séries de `lecons-traitees/tle/histoire-geographie/` (section « Tle, Histoire-Géographie au format 3 » plus bas).
 Les 3 leçons de mathématiques de ce tableau (format v1) sont remplacées par leur version au format 3 : voir « Tle C et D, mathématiques au format 3 ».
 
-Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français ont d'abord eu **un exercice par fiche de révision** (format court de démonstration, 2026-10-06). Elles ont été **complétées le 2026-10-10** à 3 exercices par fiche de révision (Comprendre, Appliquer, S'évaluer), soit 54 exercices et 311 questions ajoutés, avec le prompt [`prompt-redaction.md`](prompt-redaction.md). Chacune a ensuite été relue par un second rédacteur (calculs refaits, dates et faits vérifiés), et les défauts trouvés ont été corrigés, dans l'ancien contenu comme dans le nouveau : par exemple « 17 États africains entrent à l'ONU en 1960 » (16 États africains, 17 nouveaux membres avec Chypre), la citation de Socrate donnée comme texte exact, ou « le dernier mot du poème » qui était l'avant-dernier vers. Les 18 leçons de Tle D passent `script/contenus/valider.rb` et s'importent ensemble sans erreur sur une base jetable : 18 cours, 55 fiches, 165 exercices, 949 questions, 3 835 propositions. Aucun enseignant ne les a encore relues.
+Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français ont d'abord eu **un exercice par fiche de révision** (format court de démonstration, 2026-10-06). Elles ont été **complétées le 2026-10-10** à 3 exercices par fiche de révision (Comprendre, Appliquer, S'évaluer), soit 54 exercices et 311 questions ajoutés, avec le prompt [`prompt-redaction.md`](prompt-redaction.md). Chacune a ensuite été relue par un second rédacteur (calculs refaits, dates et faits vérifiés), et les défauts trouvés ont été corrigés, dans l'ancien contenu comme dans le nouveau : par exemple « 17 États africains entrent à l'ONU en 1960 » (16 États africains, 17 nouveaux membres avec Chypre), la citation de Socrate donnée comme texte exact, ou « le dernier mot du poème » qui était l'avant-dernier vers. Les 18 leçons de Tle D passent `script/contenus/valider.rb` et s'importent ensemble sans erreur sur une base jetable : 18 cours, 55 fiches, 165 exercices, 949 questions, 3 835 propositions. Leurs points pédagogiques ont été tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)).
 
 **Attention à l'import.** Une fiche de cours déjà présente est ignorée, jamais mise à jour. Si l'ancienne version de ces 9 leçons est déjà dans une base (développement, Staging ou main), il faut **renommer puis archiver** l'ancienne fiche de cours avant d'importer la version complète.
 
-À faire valider par un enseignant, en plus de la liste ci-dessous :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Philosophie** : « La connaissance de l'homme » présente Durkheim et le fait social, proches de la leçon 4 (La vie en société). Le titre de sa dernière fiche parle de « la découverte de l'inconscient ». Dans « La dissertation philosophique » et « Le commentaire de texte philosophique », la méthode (problème, enjeu, plan dialectique) doit être cohérente avec celle de l'enseignant.
 - **Français** : « Préparation à l'oral du Baccalauréat » décrit un déroulement de l'épreuve en quatre temps que personne n'a confronté au programme ivoirien ; sa méthode est proche du commentaire composé (leçon 4). Le niveau de certains sujets inventés de « La dissertation littéraire » est peut-être bas pour une Terminale.
 
-Les 5 leçons 2 et 3 de Maths, de Physique et de SVT (2026-10-06) suivent le prompt complet, 3 exercices par fiche de révision. Elles ont été importées sans erreur par la vraie chaîne d'import. Aucun enseignant ne les a encore relues. « Mouvement du centre d'inertie d'un solide » a 4 fiches de révision : le mouvement circulaire uniforme, confirmé au programme par le porteur, en a une à lui.
+Les 5 leçons 2 et 3 de Maths, de Physique et de SVT (2026-10-06) suivent le prompt complet, 3 exercices par fiche de révision. Elles ont été importées sans erreur par la vraie chaîne d'import. Leurs points pédagogiques ont été tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)). « Mouvement du centre d'inertie d'un solide » a 4 fiches de révision : le mouvement circulaire uniforme, confirmé au programme par le porteur, en a une à lui.
 
 Les 4 premiers fichiers ont été importés le 2026-09-29 sur une base neuve, par la vraie chaîne d'import, **sans aucune erreur** : 4 fiches de cours, 12 fiches de révision, 36 exercices, 203 questions, 786 propositions. Les progressions de Maths, Physique-Chimie et SVT importées ensuite ont ignoré ces 4 fiches de cours comme doublons et créé les autres.
 
-À faire valider par un enseignant, car le programme détaillé n'était pas disponible :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Maths** : les asymptotes ne sont pas traitées, faute de place en 3 fiches de révision. Dans « Dérivabilité et étude de fonctions », l'inégalité des accroissements finis et les dérivées successives ne le sont pas non plus (signalées dans le sous-titre de la dernière fiche de révision). Deux explications de « Limites et continuité » dépassent 400 caractères (450 et 444).
 - **Physique-Chimie** : leçons réécrites au format 3, voir « Tle C et D, Physique-Chimie au format 3 ».
@@ -333,7 +451,7 @@ Les 10 premières leçons de Physique-Chimie de Tle C et de Tle D (progression D
 
 Leçons distinctes : 53 notions, 634 questions notées, 159 questions « Je m'entraîne », 57 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et le contrôle de « Je m'entraîne » des tests de 3e. Chaque leçon a été relue par un sous-agent distinct de son auteur, qui a refait chaque calcul ; les défauts trouvés (une courbe d'énergie fausse, des arrondis intermédiaires, des étapes de méthode mal citées, des distracteurs peu plausibles) sont corrigés.
 
-**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Si les cours v1 de Tle C ou D sont déjà dans une base, les renommer et les archiver avant d'importer.
+Points pédagogiques tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)), relevés dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés). Si les cours v1 de Tle C ou D sont déjà dans une base, les renommer et les archiver avant d'importer.
 
 ### 6ème, 5ème et 4ème — `lecons-traitees/6eme/`, `5eme/`, `4eme/`
 
@@ -409,7 +527,7 @@ Au total : **54 cours, 160 fiches, 480 exercices, 2 612 questions**, réparties 
 
 **Attention à l'import.** Les 54 fichiers dépassent la limite de 50 par import : envoyer en deux fois. La matière **EDHC** n'existe pas encore dans le référentiel Lnclass : les 9 cours d'EDHC (3 par niveau) seront rejetés (`unknown_material`) tant qu'elle n'est pas créée. Si la progression a déjà été importée, renommer puis archiver les cours vides avant d'importer (voir « Ordre des imports »).
 
-Aucun enseignant ne les a encore relues. À faire valider par un enseignant :
+Leurs points pédagogiques ont été tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)). Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Toutes les leçons** : le sous-titre de la dernière fiche peut porter un « À compléter : … » qui liste les notions laissées de côté. L'élève le voit : à compléter ou à effacer après validation.
 - **Mathématiques** : « Nombres décimaux relatifs » apparaît en 6ème et en 4ème dans la progression du dépôt : les deux leçons se recouvrent peut-être. Le rattachement à la 4ème des « angles alternes-internes et correspondants » et de l'inverse et du quotient de nombres rationnels est incertain.
@@ -418,6 +536,44 @@ Aucun enseignant ne les a encore relues. À faire valider par un enseignant :
 - **Histoire-Géographie** : le rôle du gouverneur de district et des préfets de région et de département, le Poro chez les Sénoufo, la reine Pokou et le passage du Comoé (présentés sans date).
 - **Français** : le périmètre du Débat I et le plan du texte explicatif, à confirmer au programme. La proposition relative est laissée de côté.
 - **EDHC** : la Constitution ivoirienne est citée sans numéro d'article ni date, et les textes de loi ivoiriens (numéros, dates) ne sont pas cités. Les dates des textes internationaux, et le seuil de 15 ans de l'article 38 de la Convention relative aux droits de l'enfant, sont cités de mémoire. Le mot « interdépendance » (5ème), et la règle des 18 ans pour la participation aux combats (5ème), sont à confirmer.
+
+### 4ème — `lecons-traitees/4eme/` (chantier `lecons-4eme`)
+
+Les 5 premières leçons de la progression DPFC 2026-2027 en Mathématiques, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC, rédigées le 2026-11-14 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), au format complet de la 3ème : 4 blocs, un `practice` et 2 exercices par notion, 4 problèmes, 4 sujets de devoir de 4 exercices de 5 ou 6 questions. Chaque leçon et chacun de ses sujets passent `valider.rb` sans avertissement. Chacune a été relue par un second rédacteur, qui a refait chaque calcul avec sympy en Mathématiques et en Physique-Chimie et corrigé les défauts certains. Les points pédagogiques (tranchés par le validateur pédagogique le 2026-11-14) par un enseignant sont dans [le journal du chantier](../chantiers/lecons-4eme/journal.md#à-trancher). Le jeu standard charge la leçon 1 de chaque matière.
+
+| # | Fichier | Titre | Notions | Exercices | Questions |
+|---:|---|---|---:|---:|---:|
+| 1 | `mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 28 | 152 |
+| 2 | `mathematiques/angles.json` | Angles | 4 | 28 | 145 |
+| 3 | `mathematiques/nombres-rationnels.json` | Nombres rationnels | 5 | 30 | 166 |
+| 4 | `mathematiques/distances.json` | Distances | 4 | 28 | 146 |
+| 5 | `mathematiques/perspective-cavaliere.json` | Perspective cavalière | 4 | 28 | 153 |
+| 1 | `francais/le-groupe-nominal.json` | Le groupe nominal | 4 | 28 | 154 |
+| 2 | `francais/le-debat-i.json` | Le débat I | 4 | 28 | 162 |
+| 3 | `francais/le-texte-explicatif.json` | Le texte explicatif | 4 | 28 | 162 |
+| 4 | `francais/orthographe-lexicale.json` | Orthographe lexicale | 4 | 28 | 159 |
+| 5 | `francais/la-pronominalisation.json` | La pronominalisation | 4 | 28 | 163 |
+| 1 | `histoire-geographie/histoire-la-mise-en-place-des-peuples-de-cote-d-ivoire-du-xvie-au-xviiie-siecle.json` | Histoire — La mise en place des peuples de Côte d'Ivoire du XVIe au XVIIIe siècle | 4 | 28 | 145 |
+| 2 | `histoire-geographie/geographie-la-deconcentration-administrative-en-cote-d-ivoire.json` | Géographie — La déconcentration administrative en Côte d'Ivoire | 4 | 28 | 150 |
+| 3 | `histoire-geographie/histoire-l-organisation-sociopolitique-des-peuples-de-cote-d-ivoire.json` | Histoire — L'organisation sociopolitique des peuples de Côte d'Ivoire | 4 | 28 | 146 |
+| 4 | `histoire-geographie/geographie-la-decentralisation-administrative-en-cote-d-ivoire.json` | Géographie — La décentralisation administrative en Côte d'Ivoire | 4 | 28 | 148 |
+| 5 | `histoire-geographie/histoire-les-mecanismes-de-prevention-et-de-resolution-des-conflits-chez-les-peuples-de-cote-d-ivoire.json` | Histoire — Les mécanismes de prévention et de résolution des conflits chez les peuples de Côte d'Ivoire | 4 | 28 | 146 |
+| 1 | `svt/les-differentes-transformations-du-corps-humain-de-l-enfance-a-l-adolescence.json` | Les différentes transformations du corps humain de l'enfance à l'adolescence | 4 | 28 | 147 |
+| 2 | `svt/le-devenir-des-cellules-sexuelles-chez-l-homme.json` | Le devenir des cellules sexuelles chez l'Homme | 4 | 28 | 147 |
+| 3 | `svt/la-formation-des-roches-endogenes.json` | La formation des roches endogènes | 4 | 28 | 149 |
+| 4 | `svt/la-degradation-des-roches-endogenes.json` | La dégradation des roches endogènes | 4 | 28 | 150 |
+| 5 | `svt/la-formation-des-sols.json` | La formation des sols | 5 | 30 | 160 |
+| 1 | `physique-chimie/sources-et-recepteurs-de-lumiere.json` | Sources et récepteurs de lumière | 3 | 26 | 143 |
+| 2 | `physique-chimie/propagation-de-la-lumiere.json` | Propagation de la lumière | 6 | 32 | 171 |
+| 3 | `physique-chimie/les-phases-de-la-lune-et-les-eclipses.json` | Les phases de la Lune et les éclipses | 5 | 30 | 158 |
+| 4 | `physique-chimie/analyse-et-synthese-de-la-lumiere-blanche.json` | Analyse et synthèse de la lumière blanche | 5 | 30 | 156 |
+| 5 | `physique-chimie/aimant-et-bobine.json` | Aimant et bobine | 4 | 28 | 152 |
+| 1 | `edhc/la-promotion-des-droits-de-l-enfant.json` | La promotion des droits de l'enfant | 3 | 26 | 138 |
+| 2 | `edhc/la-lutte-contre-le-recrutement-des-enfants-soldats.json` | La lutte contre le recrutement des enfants soldats | 4 | 28 | 147 |
+| 3 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-discriminations.json` | Les instruments et les mécanismes de protection contre les discriminations | 4 | 28 | 152 |
+| 4 | `edhc/les-institutions-consultatives-le-cesec-le-mediateur-de-la-republique-et-la-cnrctci.json` | Les institutions consultatives : Le CESEC, le Médiateur de la République et la CNRCTCI | 4 | 28 | 151 |
+| 5 | `edhc/l-impot.json` | L'impôt | 4 | 28 | 152 |
+| | **Total** | 30 leçons | **124** | **848** | **4570** |
 
 ### 3ème — `lecons-traitees/3eme/`
 
@@ -441,7 +597,7 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 
 Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le même nom (sections suivantes) : ce tableau et ses réserves ne décrivent plus que la version 1. En version 1, ces fichiers suivaient le prompt complet : 4 fiches par cours, 3 exercices par fiche. Chacun a passé `script/contenus/valider.rb`, puis une relecture par un second rédacteur, qui a refait les calculs et vérifié les faits. Les défauts trouvés ont été corrigés. Importés ensemble sur une base jetable par la vraie chaîne d'import : **18 cours, 72 fiches, 216 exercices, 1 194 questions, 4 370 propositions, sans erreur**, une fois la matière EDHC créée. Sans elle, les 3 cours d'EDHC sont rejetés (`unknown_material`) et les 15 autres passent. Aucun enseignant ne les a encore relus.
 
-À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Toutes les leçons** : le champ `subtitle` de la dernière fiche porte un « À compléter : … » qui liste ce que le rédacteur a laissé de côté. L'élève le voit. À compléter ou à effacer après validation.
 - **Maths** : les fractions rationnelles, la rationalisation du dénominateur et les triangles semblables ne sont pas traités (rattachement à la 3ème incertain). Le « papillon » de Thalès et le non-parallélisme y sont.
@@ -450,6 +606,45 @@ Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le mê
 - **SVT** : les valeurs énergétiques 17 / 17 / 38 kJ par gramme, les tests de Fehling et du biuret, les noms d'enzymes et leurs conditions d'action, la fibrine, la phagocytose et la coagulation.
 - **Histoire-Géographie** : les « atouts institutionnels » (OHADA, BCEAO, code des investissements), et les dates de la leçon sur l'indépendance (loi-cadre de 1956, référendum de 1958, indépendance du 7 août 1960, présidence fin 1960). L'AOF et les traités de protectorat sont cités sans date.
 - **EDHC** : aucun article de loi, aucune date, aucun numéro d'urgence. Les noms des conventions et chartes citées (femmes, personnes handicapées, enfant, Protocole de Maputo) sont écrits de mémoire, et la ratification par la Côte d'Ivoire n'est pas affirmée. La matière EDHC n'existe pas dans le référentiel : il faut la créer avant d'importer les 3 cours.
+
+### 5ème — `lecons-traitees/5eme/` (chantier `lecons-5eme`)
+
+Les 5 premières leçons de la progression DPFC 2026-2027 de 5ème en Mathématiques, Physique-Chimie, Français, SVT, Histoire-Géographie et EDHC (30 leçons), rédigées le 2026-11-14 au format v3 complet, comme les leçons de 3ème : 4 blocs et 2 exercices par notion (le second de 6 questions de 4 types au moins), 4 problèmes, 4 sujets de devoir de 4 exercices. Langue et difficulté de 5ème : phrases courtes, petits nombres, aucune notion des leçons suivantes. Chaque leçon a eu un rédacteur puis un relecteur indépendant qui a refait chaque calcul avec sympy (Maths, Physique-Chimie) ou vérifié chaque bonne réponse dans la fiche, le texte ou un fait sûr (Français, SVT, Histoire-Géographie, EDHC) ; tous les défauts relevés sont corrigés. Un script hors dépôt passe `valider.rb` sur la leçon et sur chaque sujet, puis les règles du format complet. Les points qu'un enseignant doit valider sont dans [le journal du chantier](../chantiers/lecons-5eme/journal.md).
+
+| # | Fichier | Cours | Notions | Figures | Exercices | Questions |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `mathematiques/nombres-premiers.json` | Nombres premiers | 3 | 1 | 26 | 141 |
+| 2 | `mathematiques/segments.json` | Segments | 4 | 6 | 28 | 150 |
+| 3 | `mathematiques/angles.json` | Angles | 4 | 18 | 28 | 145 |
+| 4 | `mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 6 | 28 | 160 |
+| 5 | `mathematiques/figures-symetriques-par-rapport-a-une-droite.json` | Figures symétriques par rapport à une droite | 4 | 8 | 28 | 144 |
+| 1 | `physique-chimie/adaptation-d-un-generateur-a-un-recepteur.json` | Adaptation d'un générateur à un récepteur | 3 | 1 | 26 | 134 |
+| 2 | `physique-chimie/association-de-lampes-electriques.json` | Association de lampes électriques | 4 | 2 | 28 | 146 |
+| 3 | `physique-chimie/association-de-piles-en-serie.json` | Association de piles en série | 3 | 1 | 26 | 134 |
+| 4 | `physique-chimie/intensite-du-courant-electrique.json` | Intensité du courant électrique | 4 | 4 | 28 | 148 |
+| 5 | `physique-chimie/tension-electrique.json` | Tension électrique | 4 | 2 | 28 | 148 |
+| 1 | `francais/le-groupe-nominal.json` | Le groupe nominal | 4 | 0 | 28 | 159 |
+| 2 | `francais/l-expose-oral.json` | L'exposé oral | 4 | 0 | 28 | 171 |
+| 3 | `francais/le-portrait.json` | Le portrait | 5 | 0 | 30 | 181 |
+| 4 | `francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 4 | 0 | 28 | 156 |
+| 5 | `francais/le-groupe-adjectif.json` | Le groupe adjectif | 4 | 0 | 28 | 161 |
+| 1 | `svt/les-consequences-de-la-proliferation-du-criquet.json` | Les conséquences de la prolifération du criquet | 4 | 6 | 28 | 157 |
+| 2 | `svt/les-consequences-de-la-proliferation-du-moustique.json` | Les conséquences de la prolifération du moustique | 4 | 4 | 28 | 167 |
+| 3 | `svt/la-lutte-contre-le-criquet-et-le-moustique.json` | La lutte contre le criquet et le moustique | 4 | 4 | 28 | 160 |
+| 4 | `svt/la-reproduction-chez-les-champignons-a-chapeau.json` | La reproduction chez les champignons à chapeau | 4 | 3 | 28 | 161 |
+| 5 | `svt/la-croissance-chez-les-insectes.json` | La croissance chez les insectes | 4 | 6 | 28 | 166 |
+| 1 | `histoire-geographie/histoire-les-premiers-habitants-de-la-cote-d-ivoire.json` | Histoire — Les premiers habitants de la Côte d'Ivoire | 4 | 1 | 28 | 158 |
+| 2 | `histoire-geographie/geographie-le-milieu-physique-en-cote-d-ivoire-et-l-installation-des-populations.json` | Géographie — Le milieu physique en Côte d'Ivoire et l'installation des populations | 5 | 4 | 30 | 174 |
+| 3 | `histoire-geographie/histoire-les-premiers-mouvements-migratoires-en-cote-d-ivoire.json` | Histoire — Les premiers mouvements migratoires en Côte d'Ivoire | 4 | 2 | 28 | 156 |
+| 4 | `histoire-geographie/geographie-la-croissance-demographique-en-cote-d-ivoire.json` | Géographie — La croissance démographique en Côte d'Ivoire | 4 | 4 | 28 | 162 |
+| 5 | `histoire-geographie/histoire-l-origine-et-l-installation-des-peuples-des-regions-de-cote-d-ivoire.json` | Histoire — L'origine et l'installation des peuples des régions de Côte d'Ivoire | 3 | 2 | 26 | 144 |
+| 1 | `edhc/les-droits-au-developpement-et-les-droits-a-la-participation-de-l-enfant.json` | Les droits au développement et les droits à la participation de l'enfant | 4 | 1 | 28 | 158 |
+| 2 | `edhc/les-principes-des-droits-humains.json` | Les principes des droits humains | 4 | 1 | 28 | 156 |
+| 3 | `edhc/les-regles-de-protection-des-victimes-des-conflits-armes.json` | Les règles de protection des victimes des conflits armés | 4 | 1 | 28 | 166 |
+| 4 | `edhc/le-parlement.json` | Le Parlement | 4 | 3 | 28 | 157 |
+| 5 | `edhc/les-droits-et-les-devoirs-du-citoyen.json` | Les droits et les devoirs du citoyen | 4 | 0 | 28 | 156 |
+
+Aucune sorte de figure ne dessine un schéma électrique : les circuits de Physique-Chimie sont décrits en mots, parfois avec un `diagram`. Aucune planche ne montre un criquet, un moustique ou un champignon : la SVT passe par des `diagram`, des courbes et des descriptions. Le fond de carte de la Côte d'Ivoire ne trace ni fleuves ni relief, et aucune sorte ne dessine une flèche venue de l'extérieur du pays : les migrations de l'Histoire-Géographie sont dessinées vers une ville repère.
 
 ### 3ème au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-3eme-comme-thales`, #484)
 
@@ -495,7 +690,7 @@ Les 10 premières leçons de Français de la progression DPFC 2026-2027, rédig�
 
 Au total : 38 notions, 276 exercices et 1 614 questions. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second rédacteur, et les défauts trouvés ont été corrigés : règles de grammaire fausses, faits d'œuvre inexacts, fautes de langue, réponses justes refusées.
 
-À faire valider par un enseignant :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Leçon 4** : les faits cités sur *Une vie de boy* (Ferdinand Oyono, 1956) et *L'Enfant noir* (Camara Laye, 1953). Le choix des œuvres reste à aligner sur la liste de l'établissement.
 - **Leçon 7** : la façon de compter les mots d'un résumé (trait d'union, « c'est-à-dire », chiffres). La leçon la soumet à la consigne du sujet.
@@ -540,7 +735,7 @@ Les 10 premières leçons de SVT de la progression DPFC 2026-2027, rédigées le
 
 Au total : 38 notions, 276 exercices, 1 557 questions et 51 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
 
-À faire valider par un enseignant de SVT avant publication : les 8 planches (captures envoyées au porteur), le vocabulaire du programme et les valeurs données à titre d'exemple dans les leçons.
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les 8 planches (captures envoyées au porteur), le vocabulaire du programme et les valeurs données à titre d'exemple dans les leçons.
 
 ### 3ème, Physique-Chimie au format 3 (chantier `contenus-3e-physique-chimie`)
 
@@ -561,7 +756,7 @@ Les 10 premières leçons de Physique-Chimie de la progression DPFC 2026-2027, r
 
 Au total : 41 notions, 282 exercices, 1 638 questions et 53 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
 
-À faire valider par un enseignant de Physique-Chimie avant publication : les 3 planches, et les chiffres des exercices.
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les 3 planches, et les chiffres des exercices.
 
 ### 3ème, EDHC au format 3 (chantier `contenus-3e-edhc`)
 
@@ -582,7 +777,7 @@ Les 10 premières leçons d'EDHC de la progression DPFC 2026-2027, rédigées le
 
 Au total : 42 notions, 284 exercices, 1 556 questions et 24 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second modèle (Opus) qui n'en était pas l'auteur, et les défauts trouvés ont été corrigés : questions à deux bonnes réponses, faits inexacts (CEDEF, Croix-Rouge), noms à connotation régionale ou ethnique, district oublié sur la carte, corrections qui désignaient une proposition par sa position.
 
-À faire valider par un enseignant :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Textes** : aucun numéro d'article n'est cité ; les renvois à la Constitution de 2016 et aux lois (scolarité obligatoire, partis politiques, Code pénal) sont à confirmer dans leur formulation.
 - **Leçon 2** : le rangement de la Croix-Rouge (branche à part, ni ONG ni organisation des États), à aligner sur le manuel en usage.
@@ -607,7 +802,7 @@ Les 10 premières leçons d'Histoire-Géographie de Tle de la progression DPFC 2
 | 9 | `histoire-geographie/geographie-les-fondements-de-l-economie-de-la-france.json` | Géographie — Les fondements de l'économie de la France | 5 | 9 | 58 | 91 % | 15 | 6 | `diagram`, `map world`, `stat_chart bars`, `timeline` |
 | 10 | `histoire-geographie/histoire-l-accession-de-l-algerie-a-l-independance.json` | Histoire — L'accession de l'Algérie à l'indépendance | 5 | 9 | 54 | 91 % | 15 | 5 | `diagram`, `map africa`, `timeline` |
 
-Au total : 50 notions, 90 exercices, 549 questions notées, 164 questions d'entraînement et 39 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement et `test/integration/contenus/tle_histoire_geographie_je_m_entraine_test.rb`. Chacun a été relu par un second rédacteur qui n'en était pas l'auteur ; défauts corrigés, dont : l'UEMOA créée à huit États (sept en 1994, huit depuis 1997), la CEI créée « le mois précédent » la démission de Gorbatchev (même mois), le GPRA situé au Caire en 1959 (Tunis), le charbon lorrain dit « national », des parts du PIB attribuées à une source non vérifiée (présentées désormais comme ordres de grandeur d'illustration). Points à faire valider par un enseignant : journal du chantier et du programme. Les leçons restent en brouillon jusqu'à cette relecture.
+Au total : 50 notions, 90 exercices, 549 questions notées, 164 questions d'entraînement et 39 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement et `test/integration/contenus/tle_histoire_geographie_je_m_entraine_test.rb`. Chacun a été relu par un second rédacteur qui n'en était pas l'auteur ; défauts corrigés, dont : l'UEMOA créée à huit États (sept en 1994, huit depuis 1997), la CEI créée « le mois précédent » la démission de Gorbatchev (même mois), le GPRA situé au Caire en 1959 (Tunis), le charbon lorrain dit « national », des parts du PIB attribuées à une source non vérifiée (présentées désormais comme ordres de grandeur d'illustration). Points pédagogiques (tranchés par le validateur pédagogique le 2026-11-14) par un enseignant : journal du chantier et du programme. Les leçons restent en brouillon jusqu'à cette relecture.
 ### Tle A1 et A2, mathématiques au format 3 (chantier `contenus-tle-mathematiques-a`)
 
 Toutes les leçons de Mathématiques de la progression DPFC 2026-2027 de Tle A1 (8) et de Tle A2 (7), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague T2 du programme `contenus-v3-tous-niveaux`), au niveau d'une série littéraire : calculs simples, contextes concrets (atelier de couture, kermesse, plantation, mobile money, marché, tontine, gbaka, tournoi de football). 9 leçons distinctes, 15 fichiers : les 6 leçons communes aux deux séries ont un fichier par série, identiques hors série et rang (la version A2 de l'exponentielle remplace la question de primitive par une dérivée, celle du logarithme définit ln sans primitive). Les fichiers remplacent les 6 fichiers v1 du même nom (Fonctions, Probabilité et variable aléatoire, Primitives en A1 ; Fonctions, Probabilité, Logarithme en A2). Chaque notion a sa fiche en 4 blocs, un exercice et « Je m'entraîne » ; chaque leçon a 4 problèmes (2 de fixation, 2 d'évaluation dont un au niveau du baccalauréat A). Aucune sorte de figure nouvelle.
@@ -643,7 +838,7 @@ Au total : 33 notions, 61 exercices, 386 questions notées et 17 figures.
 
 Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte les règles de `Entities::Catalog::NotionPractice`. Chaque leçon a été relue par un second rédacteur (calculs refaits), et les défauts trouvés ont été corrigés. Les leçons restent en brouillon.
 
-À faire valider par un enseignant de mathématiques avant publication : le rattachement de chaque notion au programme de la série A, le niveau des problèmes de type bac et leurs barèmes. La liste par leçon est dans le journal du chantier [`contenus-tle-mathematiques-a`](../chantiers/contenus-tle-mathematiques-a/journal.md).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : le rattachement de chaque notion au programme de la série A, le niveau des problèmes de type bac et leurs barèmes. La liste par leçon est dans le journal du chantier [`contenus-tle-mathematiques-a`](../chantiers/contenus-tle-mathematiques-a/journal.md).
 ### Tle C et D, mathématiques au format 3 (chantier `contenus-tle-mathematiques-cd`)
 
 Les 10 leçons de Mathématiques de la progression DPFC 2026-2027 de Tle C et de Tle D, rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague T1 du programme `contenus-v3-tous-niveaux`). 14 leçons distinctes, 20 fichiers : les 6 leçons communes aux deux séries (Limites et continuité, Dérivabilité et étude de fonctions, Primitives, Fonctions logarithmes, Fonctions exponentielles, Nombres complexes) ont un fichier par série, avec les mêmes notions et des problèmes 3 et 4 au niveau de chaque série. « Fonctions exponentielles et fonctions puissances » (C) et « Fonctions exponentielles et puissances » (D) gardent le titre de leur progression. Les fichiers remplacent les 6 fichiers v1 du même nom (Barycentre, Limites et Divisibilité en C ; Limites, Probabilité et Dérivabilité en D). Chaque notion a sa fiche en 4 blocs, un exercice et « Je m'entraîne » ; chaque leçon a 4 problèmes (2 de fixation, 2 d'évaluation dont un au niveau du baccalauréat). Aucune sorte de figure nouvelle : les courbes, tableaux de variations, solides et coniques sont décrits par des points, segments et droites (dette notée au journal du chantier).
@@ -684,7 +879,7 @@ Au total : 48 notions, 88 exercices, 569 questions notées et 27 figures.
 
 Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte les règles de `Entities::Catalog::NotionPractice`. Chaque leçon a été relue par un second rédacteur (calculs refaits), et les défauts trouvés ont été corrigés. Les leçons restent en brouillon.
 
-À faire valider par un enseignant de mathématiques avant publication : le rattachement de chaque notion au programme de la série, le niveau des problèmes de type bac et leurs barèmes. La liste par leçon est dans le journal du chantier [`contenus-tle-mathematiques-cd`](../chantiers/contenus-tle-mathematiques-cd/journal.md).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : le rattachement de chaque notion au programme de la série, le niveau des problèmes de type bac et leurs barèmes. La liste par leçon est dans le journal du chantier [`contenus-tle-mathematiques-cd`](../chantiers/contenus-tle-mathematiques-cd/journal.md).
 
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 
@@ -761,7 +956,7 @@ Les 3 leçons de mathématiques de ce tableau (format v1) sont remplacées par l
 - Un cours déjà présent est ignoré, jamais mis à jour. Si une progression de A1, A2 ou C a déjà été importée, le cours de la leçon existe vide : le **renommer, l'archiver**, puis importer le cours complet.
 - Chaque fichier peut être importé séparément : l'ordre n'a pas d'importance entre eux.
 
-À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Toutes les leçons** : le champ `subtitle` de la dernière fiche porte un « À compléter : … » qui liste ce que le rédacteur a laissé de côté. L'élève le voit. À compléter ou à effacer après validation.
 - **Maths C** : « Barycentre et lignes de niveaux » traite la fonction de Leibniz et le cercle d'Apollonius ; la place de chaque notion dans la leçon est à confirmer. L'algorithme d'Euclide de « Divisibilité dans ℤ » suppose b non nul avec un dernier reste non nul.
@@ -791,7 +986,7 @@ Au total : 41 notions, 81 exercices, 518 questions notées, 163 questions d'entr
 
 Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : arbre généalogique, coupe d'ovaire et endomètre, mitochondrie, sarcomère et fibre musculaire, myogramme, anticorps et phagocytose, cycle du VIH dans la cellule, neurone, synapse et plaque motrice, circuit de la récompense, coupe géologique et piège pétrolier, plateforme et forage rotatif, coupe sismique. Les courbes de potentiel sont décalées de +100 mV (`stat_chart` refuse les valeurs négatives) et chaque courbe ne porte qu'une série.
 
-À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague T4).
 
 ### Tle D, SVT au format 3 (chantier `contenus-tle-svt-cd`)
 
@@ -812,7 +1007,7 @@ Les 10 premières leçons de SVT de Tle D, rédigées le 2026-10-31 au même for
 
 Au total : 40 notions, 80 exercices, 497 questions notées, 167 questions d'entraînement et 54 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement ; chaque leçon propre à la série D a été relue par un agent distinct de son auteur.
 
-Schémas qu'aucune sorte ne dessine, en plus de ceux de la Tle C : spermatozoïde, ovocyte et stades de segmentation, testicule et tube séminifère, fleur, ovule et grain de pollen, paire de chromosomes et crossing-over, échiquier, îlot de Langerhans, cortex et bulbe. Points à faire valider : [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
+Schémas qu'aucune sorte ne dessine, en plus de ceux de la Tle C : spermatozoïde, ovocyte et stades de segmentation, testicule et tube séminifère, fleur, ovule et grain de pollen, paire de chromosomes et crossing-over, échiquier, îlot de Langerhans, cortex et bulbe. Points pédagogiques (tranchés par le validateur pédagogique le 2026-11-14) : [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague T4).
 
 ### Tle A1 et A2, SVT au format 3 (chantier `contenus-tle-svt-a`)
 
@@ -832,7 +1027,7 @@ Au total, par série : 31 notions, 59 exercices, 356 questions notées, 107 ques
 
 Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : cerveau et aires corticales, tracé d'électroencéphalogramme et hypnogramme, système nerveux et glandes surrénales, frise en millions ou milliards d'années (`timeline` s'arrête à −3000), crânes et squelettes, caryotype, échiquier de croisement, arbre généalogique, cellule et ribosome, double hélice d'ADN, hématies falciformes.
 
-À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T5).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague T5).
 
 ### Tle, Philosophie au format 3 (chantier `contenus-tle-philosophie`)
 
@@ -853,7 +1048,7 @@ Les 10 premières leçons de Philosophie de la progression DPFC 2026-2027 pour l
 
 Au total : 39 notions, 79 exercices et 480 questions par série complète (A1, A2). Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chaque leçon a été relue par un relecteur indépendant (autre modèle que l'auteur) : 0 défaut bloquant, 5 à 7 défauts à corriger par leçon (attributions, barèmes, réponses justes refusées, corrections qui désignaient une proposition par son rang), tous corrigés.
 
-Les leçons restent en brouillon. À faire valider par un enseignant de philosophie :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **L1 Dissertation** : Terminologie des plans (dialectique thèse/antithèse/dépassement ou synthèse ; analytique/progressif) et lien forme du sujet → plan présenté comme tendance ; structure de l'introduction (amorce, sujet, problème/problématique, annonce du plan) ; paragraphe idée-argument-exemple-bilan avec référence d'auteur facultative.
 - **L2 Commentaire** : Explication en 5 gestes (situer, définir, reformuler/justifier, illustrer, relier) ; place de l'évaluation de l'intérêt (dernier moment du développement) ; 4 temps de l'introduction ; connecteurs (certes… mais, sans doute… mais, ainsi) ; textes supports tous écrits pour Lnclass ; Usage de « problème » (la difficulté) et « problématique » (la question) dans le commentaire, aligné sur L1.
@@ -883,7 +1078,7 @@ Les 7 leçons distinctes de Français de Terminale (progression DPFC 2026-2027),
 
 Au total : 28 notions, 56 exercices, 351 questions notées et 114 questions d'entraînement. Chacun des 26 fichiers passe `script/contenus/valider.rb` sans erreur ni avertissement, ainsi que le contrôle de l'entraînement (règles du test de 3e), et chaque leçon a été relue par un agent distinct de son auteur.
 
-À faire valider par un enseignant de Français avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T7).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague T7).
 
 ### 1ère C et D, Physique-Chimie au format 3 (chantier `contenus-1ere-physique-chimie-cd`)
 
@@ -914,7 +1109,7 @@ Les 10 premières leçons de Physique-Chimie de 1ère C et de 1ère D (progressi
 
 Leçons distinctes : 60 notions, 752 questions notées, 180 questions « Je m'entraîne », 41 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et le contrôle de « Je m'entraîne » de session (4 blocs, 1 à 6 questions par notion, case multiple et indice, `tolerance` numérique). Chaque leçon a été relue par un sous-agent Opus distinct de son auteur (Sonnet), qui a refait chaque calcul. Aucune sorte de figure nouvelle, aucun code.
 
-**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Les lignes de Physique-Chimie du tableau « 1ère C » et « 1ère D » ci-dessous (v1, rangs 1 à 3) sont remplacées par ce tableau. Si les cours v1 sont déjà dans une base, les renommer et les archiver avant d'importer.
+Points pédagogiques tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)), relevés dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés). Les lignes de Physique-Chimie du tableau « 1ère C » et « 1ère D » ci-dessous (v1, rangs 1 à 3) sont remplacées par ce tableau. Si les cours v1 sont déjà dans une base, les renommer et les archiver avant d'importer.
 
 ### 1ère A1 et A2, Physique-Chimie au format 3 (chantier `contenus-1ere-a-physique-chimie`)
 
@@ -935,7 +1130,7 @@ Les 10 premières leçons de Physique-Chimie de 1ère A (progression DPFC 2026-2
 
 Au total (par série) : 43 notions, 568 questions notées, 129 questions « Je m'entraîne », 32 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement (Ruby 3.4). Chaque leçon a été relue par un sous-agent Opus distinct de son auteur (calculs refaits, chiffres et données vérifiés).
 
-**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Aucune sorte ne dessine un circuit électrique ni une sinusoïde : circuits décrits dans les énoncés, sinusoïdes approchées par segments.
+Points pédagogiques tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)), relevés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés). Aucune sorte ne dessine un circuit électrique ni une sinusoïde : circuits décrits dans les énoncés, sinusoïdes approchées par segments.
 
 ### 1ère A1, A2, C et D, Philosophie au format 3 (chantier `contenus-1ere-philosophie`)
 
@@ -952,7 +1147,7 @@ Les 8 leçons de Philosophie de la progression DPFC 2026-2027 de 1ère (identiqu
 | 7 | `philosophie/la-periode-moderne.json` | La période moderne | 5 | 9 | 54 | 89 % |
 | 8 | `philosophie/la-periode-contemporaine.json` | La période contemporaine | 5 | 9 | 57 | 88 % |
 
-À faire valider par un enseignant de philosophie : voir le journal du chantier (`docs/chantiers/contenus-1ere-philosophie/journal.md`).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : voir le journal du chantier (`docs/chantiers/contenus-1ere-philosophie/journal.md`).
 
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
@@ -1064,7 +1259,7 @@ Les 11 leçons distinctes de Français de 1ère de la progression DPFC 2026-2027
 
 **164 notions, 324 exercices, 2118 questions notées et 546 d’entraînement** pour les 40 fichiers. Tous passent `script/contenus/valider.rb` sans erreur ni avertissement et le contrôle de l’entraînement.
 
-À faire valider par un enseignant de Français avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P8).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague P8).
 
 **Ce qui a été repris, ce qui a été rédigé.**
 
@@ -1079,7 +1274,7 @@ Les 11 leçons distinctes de Français de 1ère de la progression DPFC 2026-2027
 - Un cours déjà présent est ignoré, jamais mis à jour. Si une progression de 1ère a déjà été importée, le cours de la leçon existe vide : le **renommer, l'archiver**, puis importer le cours complet.
 - Un import accepte jusqu'à 50 fichiers : ce lot en compte 48, à importer en un seul envoi.
 
-À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Toutes les leçons** : le champ `subtitle` de la dernière fiche porte parfois un « À compléter : … » qui liste ce que le rédacteur a laissé de côté. L'élève le voit. À compléter ou à effacer après validation.
 - **Maths** : le rattachement de la valeur absolue, des équations avec |x| et des équations bicarrées au programme de chaque série.
@@ -1137,7 +1332,7 @@ Au total : 80 notions, 160 exercices, 1008 questions notées, 257 questions d'en
 
 Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : testicule et tube séminifère, méiose, fécondation, ribosome et traduction, coupe du globe et coupe de subduction, complexe argilo-humique, chloroplaste, moelle épinière et œil. Les courbes sont à une seule série et à valeurs positives.
 
-À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P5).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague P5).
 ### 1ère A1 et A2, SVT au format 3 (chantier `contenus-1ere-a-svt`)
 
 Les 9 leçons de SVT de 1ère A1 et A2 (progression DPFC 2026-2027, identique dans les deux séries ; le référentiel n'a pas de série « A » en 1ère), rédigées le 2026-11-02 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), vague P6 du programme `contenus-v3-tous-niveaux`, pour des élèves de série littéraire : documents à analyser plutôt que calculs. Chaque leçon est écrite dans `1ere-a1/svt/` et copiée dans `1ere-a2/svt/`, où seule `series_name` change (18 fichiers). Elles remplacent les 3 fichiers v1 de chacun de ces dossiers (lignes SVT du tableau « 1ère A1 et A2 » ci-dessus). Aucune des 9 leçons n'existe en 1ère D (#435) : toutes sont des rédactions complètes. Rédaction par des agents Sonnet, relecture indépendante de chaque leçon par un agent Opus (qui vérifie aussi les faits médicaux des leçons 2, 4, 5 et 9). Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes.
@@ -1158,7 +1353,7 @@ Au total, par série : 34 notions, 70 exercices, 413 questions notées, 110 ques
 
 Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : caryotype, cerveau et aires corticales, cellule et mitochondrie, coupe de l'ovaire (follicule, corps jaune) et utérus avec nidation, échiquier de croisement en tableau, arbre généalogique, courbe de température (le `stat_chart` part de zéro).
 
-À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P6).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague P6).
 
 ### 1ère C et D, mathématiques au format 3 (chantier `contenus-1ere-mathematiques-cd`)
 
@@ -1216,9 +1411,9 @@ Les 7 leçons de Mathématiques de la progression DPFC 2026-2027 de la série A 
 
 Au total : 28 notions, 56 exercices, 354 questions notées.
 
-Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte `Entities::Catalog::NotionPractice` (contrôle `docs/chantiers/contenus-1ere-mathematiques-a/controle-entrainement.rb`). **Brouillon** : points à faire valider par un enseignant dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P2). Courbes de fonction et tableaux de variations : décrits dans les énoncés (dette notée au journal du chantier).
+Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte `Entities::Catalog::NotionPractice` (contrôle `docs/chantiers/contenus-1ere-mathematiques-a/controle-entrainement.rb`). Points pédagogiques tranchés par le validateur pédagogique le 2026-11-14, relevés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés) (vague P2). Courbes de fonction et tableaux de variations : décrits dans les énoncés (dette notée au journal du chantier).
 
-À faire valider par un enseignant de mathématiques avant publication : le périmètre de chaque notion (ce qui est traité ou non), les modèles de situation et les barèmes des problèmes. La liste par leçon est dans le journal du chantier [`contenus-1ere-mathematiques-cd`](../chantiers/contenus-1ere-mathematiques-cd/journal.md).
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) : le périmètre de chaque notion (ce qui est traité ou non), les modèles de situation et les barèmes des problèmes. La liste par leçon est dans le journal du chantier [`contenus-1ere-mathematiques-cd`](../chantiers/contenus-1ere-mathematiques-cd/journal.md).
 
 ### 2nde — `lecons-traitees/2nde-a/`, `2nde-c/`, `2nde/`
 
@@ -1279,7 +1474,7 @@ Les 3 premières leçons de chaque matière de Seconde (progression DPFC 2026-20
 - Un cours déjà présent est ignoré, jamais mis à jour. Si une progression de 2nde a déjà été importée, les cours de ces leçons existent vides : le **renommer, l'archiver**, puis importer le cours complet.
 - Histoire-Géographie : les cours rédigés n'ont pas de série, comme la progression. Un cours vide de la progression, créé avec une série, ne sera pas reconnu comme doublon.
 
-À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
+Points relevés à la rédaction, tranchés par le validateur pédagogique le 2026-11-14 ([décisions](../chantiers/validation-pedagogique-agent/journal.md#décisions-du-validateur)) :
 
 - **Toutes les leçons** : le champ `subtitle` de la dernière fiche porte parfois un « À compléter : … » qui liste ce que le rédacteur a laissé de côté. L'élève le voit. À compléter ou à effacer après validation.
 - **Mathématiques** : les pourcentages et les identités remarquables (A), le critère de colinéarité et la valeur absolue (C), la démonstration de l'irrationalité de √2 (C).

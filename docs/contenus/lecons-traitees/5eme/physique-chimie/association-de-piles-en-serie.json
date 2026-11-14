@@ -1,0 +1,2881 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Association de piles en série",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Physique-Chimie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "montage-serie",
+          "kind": "diagram",
+          "description": "Un montage de trois piles en série qui alimentent une lampe : la pile A, la pile B, la pile C, puis la lampe, disposées en boucle. Chaque flèche indique la liaison entre deux éléments : la borne + d'une pile est reliée à la borne − de la pile suivante, et la lampe ferme le circuit sur les deux bornes libres.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Pile A (1,5 V)"
+              },
+              {
+                "id": "b",
+                "label": "Pile B (1,5 V)"
+              },
+              {
+                "id": "c",
+                "label": "Pile C (1,5 V)"
+              },
+              {
+                "id": "l",
+                "label": "Lampe (4,5 V)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b",
+                "label": "+ de A vers − de B"
+              },
+              {
+                "from": "b",
+                "to": "c",
+                "label": "+ de B vers − de C"
+              },
+              {
+                "from": "c",
+                "to": "l",
+                "label": "+ de C vers la lampe"
+              },
+              {
+                "from": "l",
+                "to": "a",
+                "label": "la lampe rejoint − de A"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Brancher des piles en série",
+          "remember": "Une **pile** a deux bornes : la borne **+** et la borne **−**, marquées sur la pile. **Associer des piles en série**, c'est les brancher l'une après l'autre, sans embranchement : la borne **+** d'une pile est reliée à la borne **−** de la pile suivante. Les deux bornes qui restent libres, aux deux bouts de la chaîne, sont les bornes de l'**association**. C'est là qu'on branche le récepteur (lampe, radio, télécommande). Dans une lampe torche, les piles sont placées bout à bout, toutes dans le même sens : c'est un montage en série.",
+          "method": [
+            "Repérer la borne + et la borne − de chaque pile.",
+            "Relier la borne + d'une pile à la borne − de la pile suivante, et recommencer pour chaque pile.",
+            "Contrôler que toutes les piles sont dans le même sens, puis brancher le récepteur sur les deux bornes libres."
+          ],
+          "example": {
+            "statement": "Tu veux alimenter une lampe torche avec trois piles rondes A, B et C. Comment les monter en série ?",
+            "steps": [
+              "Repérer : chaque pile a une borne + et une borne − ; on note +A et −A, +B et −B, +C et −C.",
+              "Relier : on relie +A à −B, puis +B à −C.",
+              "Contrôler : les trois piles sont dans le même sens ; les bornes −A et +C restent libres, et la lampe se branche entre ces deux bornes."
+            ]
+          },
+          "pitfall": "Ne relie pas deux bornes de même signe, et ne laisse pas une pile à l'envers. Si tu relies +A à +B, la pile B est retournée par rapport à A : le montage n'est plus un bon montage en série. Contre-exemple : dans une télécommande de deux piles de 1,5 V, une pile mise à l'envers donne 0 V au lieu de 3 V, et l'appareil ne marche pas. À chaque contact entre deux piles, vérifie que tu as un + contre un −.",
+          "figure": "montage-serie",
+          "practice": {
+            "statement": "Tu t'entraînes à brancher des piles en série.",
+            "questions": [
+              {
+                "content": "Pour monter deux piles en série, comment relie-t-on la première pile à la seconde ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on a deux piles, chacune avec une borne + et une borne −. Étape 2 — Relier : on relie le + de la première pile au − de la seconde. Étape 3 — Contrôler : les deux autres bornes restent libres. Relier deux bornes de même signe retournerait une pile : c'est l'erreur à éviter.",
+                "answers": [
+                  {
+                    "content": "La borne + de la première à la borne − de la seconde",
+                    "correct": true
+                  },
+                  {
+                    "content": "La borne + de la première à la borne + de la seconde",
+                    "correct": false
+                  },
+                  {
+                    "content": "La borne − de la première à la borne − de la seconde",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne les relie pas : on les pose côte à côte",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la règle : un + contre un −."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour monter trois piles en série et une lampe.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on suit la méthode dans l'ordre. Étape 2 — Relier : on repère d'abord les bornes, puis on les relie : + contre −. Étape 3 — Contrôler : enfin on contrôle le sens des piles et on branche la lampe aux deux bornes libres.",
+                "answers": [
+                  {
+                    "content": "Repérer la borne + et la borne − de chaque pile"
+                  },
+                  {
+                    "content": "Relier la borne + d'une pile à la borne − de la suivante"
+                  },
+                  {
+                    "content": "Contrôler le sens des piles et brancher la lampe sur les bornes libres"
+                  }
+                ],
+                "hint": "On repère avant de relier, et on contrôle à la fin."
+              },
+              {
+                "content": "Dans une lampe torche à deux piles montées en série, la borne + de la première pile touche la borne − de la seconde.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la lampe torche contient deux piles bout à bout. Étape 2 — Relier : en série, un + est relié à un −. Étape 3 — Contrôler : l'affirmation est vraie. Si deux bornes + se touchaient, une pile serait retournée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Dans une chaîne de piles, un + touche un −."
+              },
+              {
+                "content": "Des piles reliées l'une après l'autre, sans embranchement, forment un montage en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : les piles sont reliées l'une après l'autre. Étape 2 — Relier : c'est le mot qui désigne ce type de montage. Étape 3 — Contrôler : on dit qu'elles sont montées en série.",
+                "answers": [
+                  {
+                    "content": "série",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est aussi le mot utilisé pour des lampes branchées l'une après l'autre."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un montage de piles en série",
+              "statement": "Dans cet exercice, tu reconnais un montage de piles en série et ses bornes libres.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle description correspond à deux piles montées en série, dans le même sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on lit où chaque borne est reliée. Étape 2 — Relier : en série dans le même sens, un + touche un −. Étape 3 — Contrôler : c'est la description « + contre − ». Deux bornes de même signe reliées retournent une pile.",
+                  "answers": [
+                    {
+                      "content": "La borne + de la pile 1 touche la borne − de la pile 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne + de la pile 1 touche la borne + de la pile 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "La borne − de la pile 1 touche la borne − de la pile 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux piles sont éloignées l'une de l'autre, sans contact",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les bornes libres d'une chaîne de piles montées en série sont celles où l'on branche la lampe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on regarde la chaîne : les piles sont reliées entre elles. Étape 2 — Relier : il reste deux bornes libres, une à chaque bout de la chaîne. Étape 3 — Contrôler : la lampe se branche sur ces deux bornes : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une lampe torche à trois piles, les piles sont placées ___, toutes dans le même sens.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on observe la lampe torche : les trois piles forment une chaîne. Étape 2 — Relier : le + d'une pile touche le − de la suivante, ce qui demande de les placer l'une derrière l'autre. Étape 3 — Contrôler : elles sont donc bout à bout. Les placer au hasard risquerait de retourner une pile.",
+                  "answers": [
+                    {
+                      "content": "bout à bout",
+                      "correct": true
+                    },
+                    {
+                      "content": "côte à côte, sans contact",
+                      "correct": false
+                    },
+                    {
+                      "content": "en croix",
+                      "correct": false
+                    },
+                    {
+                      "content": "au hasard",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux appareils qui peuvent être alimentés par plusieurs piles montées en série.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche les appareils qui contiennent des piles. Étape 2 — Relier : la lampe torche et la télécommande ont des piles, placées l'une après l'autre. Étape 3 — Contrôler : ces deux appareils conviennent. La lampe du plafond et le fer à repasser n'ont pas de piles : ils sont branchés sur le courant de la maison.",
+                  "answers": [
+                    {
+                      "content": "Une lampe torche à trois piles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une télécommande à deux piles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe du plafond branchée sur le courant de la maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fer à repasser branché sur le courant de la maison",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à ce qu'elle désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on classe quatre situations. Étape 2 — Relier : un + contre un − : c'est la règle d'un montage en série ; les bornes libres sont celles de l'association. Étape 3 — Contrôler : deux + reliés : une pile est retournée ; la lampe ou la radio est le récepteur.",
+                  "answers": [
+                    {
+                      "content": "Le + d'une pile touche le − de la suivante",
+                      "match": "Montage en série"
+                    },
+                    {
+                      "content": "Les deux bornes qui restent libres aux bouts de la chaîne",
+                      "match": "Bornes de l'association"
+                    },
+                    {
+                      "content": "Deux bornes + reliées entre elles",
+                      "match": "Une pile est retournée"
+                    },
+                    {
+                      "content": "Lampe ou radio qui utilise l'énergie",
+                      "match": "Récepteur"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Brancher des piles dans des appareils",
+              "statement": "Dans cet exercice, tu branches des piles en série dans une lampe torche, une télécommande et une radio.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Un + touche toujours un −. Avec n piles, il y a n − 1 contacts, et deux bornes libres aux bouts.",
+              "questions": [
+                {
+                  "content": "Dans une télécommande, deux piles A et B sont placées bout à bout, sans retourner B. La borne + de A touche B. Quelle borne de B touche A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la borne + de A touche la pile B. Étape 2 — Relier : en série dans le même sens, un + doit toucher un −. Étape 3 — Contrôler : c'est donc la borne − de B qui touche A. Si c'était la borne + de B, la pile B serait retournée.",
+                  "answers": [
+                    {
+                      "content": "La borne − de B",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne + de B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux bornes de B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune borne de B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une radio contient quatre piles montées en série. Combien de fois une borne + touche-t-elle une borne − dans la chaîne ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la radio contient quatre piles A, B, C et D. Étape 2 — Relier : on relie +A à −B, +B à −C et +C à −D : trois liaisons. Étape 3 — Contrôler : il y a trois contacts + contre −. Les bornes −A et +D restent libres. Compter quatre contacts oublierait que les bouts de la chaîne sont libres.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une radio à quatre piles montées en série, une pile peut être placée à l'envers sans conséquence.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la radio contient quatre piles, dont l'une est à l'envers. Étape 2 — Relier : une pile retournée n'est plus dans le même sens que les autres : le montage n'est plus un bon montage en série. Étape 3 — Contrôler : la tension de l'association baisse et la radio fonctionne mal. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux bornes qui restent libres aux bouts d'une chaîne de piles sont les bornes de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on regarde la chaîne de piles en série. Étape 2 — Relier : les deux bornes libres servent à brancher le récepteur. Étape 3 — Contrôler : ce sont les bornes de l'association de piles.",
+                  "answers": [
+                    {
+                      "content": "association",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque appareil au nombre de contacts + contre − entre ses piles montées en série.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on compte les liaisons entre les piles de chaque appareil. Étape 2 — Relier : avec n piles en série, il y a n − 1 contacts + contre −. Étape 3 — Contrôler : trois piles donnent 2 contacts, deux piles 1 contact, quatre piles 3 contacts.",
+                  "answers": [
+                    {
+                      "content": "Lampe torche à 3 piles",
+                      "match": "2 contacts"
+                    },
+                    {
+                      "content": "Télécommande à 2 piles",
+                      "match": "1 contact"
+                    },
+                    {
+                      "content": "Radio à 4 piles",
+                      "match": "3 contacts"
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois affirmations vraies sur un montage de piles en série.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on rappelle la règle du montage en série. Étape 2 — Relier : les piles se suivent, un + touche un −, et le récepteur se branche aux deux bornes libres. Étape 3 — Contrôler : relier tous les + entre eux ou séparer les récepteurs n'est pas un montage en série.",
+                  "answers": [
+                    {
+                      "content": "Les piles sont reliées l'une après l'autre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne + d'une pile touche la borne − de la suivante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le récepteur se branche sur les deux bornes libres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toutes les bornes + sont reliées entre elles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque pile alimente un récepteur différent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Calculer la tension d'une association de piles",
+          "remember": "La **tension d'une association de piles** est la tension entre ses deux bornes libres ; elle se donne en volts (V). Si toutes les piles sont montées en série **dans le même sens** (association « concordante »), la tension de l'association est la **somme** des tensions des piles. Si une pile est **retournée** (association « en opposition »), sa tension se **retranche** : avec deux piles, la tension de l'association est la plus grande tension moins la plus petite. Deux piles identiques, l'une retournée, donnent 0 V. Dans la vie courante, une pile retournée est une panne : on la remet dans le bon sens.",
+          "method": [
+            "Repérer le sens de chaque pile dans le montage : même sens que les autres, ou retournée.",
+            "Choisir l'opération : additionner les tensions si toutes les piles sont dans le même sens, retrancher la tension de la pile retournée sinon.",
+            "Calculer la tension de l'association et l'écrire avec l'unité V."
+          ],
+          "example": {
+            "statement": "Deux piles, de 4,5 V et de 1,5 V, sont montées en série. La pile de 1,5 V est retournée. Quelle est la tension de l'association ?",
+            "steps": [
+              "Repérer : la pile de 4,5 V est dans le sens normal ; la pile de 1,5 V est retournée.",
+              "Choisir : une pile est retournée, donc l'association est en opposition ; on retranche la plus petite tension de la plus grande.",
+              "Calculer : 4,5 − 1,5 = 3, donc la tension de l'association est 3 V."
+            ]
+          },
+          "pitfall": "N'additionne pas toutes les tensions sans regarder le sens des piles. Contre-exemple : trois piles de 1,5 V, dont une retournée. Si tu additionnes, tu trouves 1,5 + 1,5 + 1,5 = 4,5 V, ce qui est faux. La bonne tension est 1,5 + 1,5 − 1,5 = 1,5 V. Commence toujours par repérer le sens de chaque pile. Une pile retournée gêne les autres : on ne s'en sert jamais pour régler une tension.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à calculer la tension d'une association de piles.",
+            "questions": [
+              {
+                "content": "Trois piles de 1,5 V sont montées en série dans le même sens. Quelle est la tension de l'association, en volts ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 = 4,5 V.",
+                "answers": [
+                  {
+                    "content": "4,5",
+                    "correct": true
+                  }
+                ],
+                "unit": "V",
+                "hint": "Toutes les piles sont dans le même sens : on additionne."
+              },
+              {
+                "content": "Une pile de 9 V et une pile de 4,5 V sont montées en série dans le même sens. Quelle est la tension de l'association ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on a une pile de 9 V et une pile de 4,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 9 + 4,5 = 13,5 V. Soustraire (4,5 V) serait traiter une pile comme retournée ; multiplier (40,5 V) n'a pas de sens ici.",
+                "answers": [
+                  {
+                    "content": "13,5 V",
+                    "correct": true
+                  },
+                  {
+                    "content": "4,5 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "9 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "40,5 V",
+                    "correct": false
+                  }
+                ],
+                "hint": "Même sens : additionne 9 et 4,5."
+              },
+              {
+                "content": "Une pile de 9 V et une pile de 1,5 V sont montées en série, la pile de 1,5 V étant retournée. Quelle est la tension de l'association, en volts ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : on a une pile de 9 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 9 − 1,5 = 7,5 V.",
+                "answers": [
+                  {
+                    "content": "7,5",
+                    "correct": true
+                  }
+                ],
+                "unit": "V",
+                "hint": "Une pile est retournée : retranche sa tension."
+              },
+              {
+                "content": "Deux piles identiques de 1,5 V, montées en série avec l'une retournée, donnent une tension de 3 V.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on a une pile de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 − 1,5 = 0 V. L'affirmation est fausse : 3 V serait la tension de deux piles dans le même sens.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une pile retournée annule l'autre quand elles sont identiques."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Calculer la tension d'une association",
+              "statement": "Dans cet exercice, tu calcules la tension d'une association de piles avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une radio contient quatre piles de 1,5 V montées en série dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a quatre piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 + 1,5 = 6 V.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Une pile de 1,5 V et une pile de 4,5 V sont montées en série dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 1,5 V et une pile de 4,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 4,5 = 6 V.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Deux piles de 4,5 V sont montées en série, l'une étant retournée. Quelle est la tension de l'association ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V et une pile de 4,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 4,5 − 4,5 = 0 V. Trouver 9 V serait additionner sans tenir compte de la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "0 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles de 1,5 V montées en série dans le même sens donnent une tension de 3 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 = 3 V. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois piles de 1,5 V sont montées en série, dont une retournée. Quelle est la tension de l'association ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 − 1,5 = 1,5 V. 4,5 V est la réponse du piège : elle additionne la pile retournée. 3 V oublierait de retrancher sa tension.",
+                  "answers": [
+                    {
+                      "content": "1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Tensions de piles dans des appareils",
+              "statement": "Dans cet exercice, tu calcules la tension fournie par les piles d'une télécommande, d'une lampe torche et d'une radio.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Regarde d'abord le sens des piles : dans le même sens, on additionne ; une pile retournée, on retranche sa tension.",
+              "questions": [
+                {
+                  "content": "Une télécommande contient deux piles de 1,5 V montées en série dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 = 3 V.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Relie chaque association de piles à sa tension.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on a quatre associations à étudier : le sens de chaque pile décide de l'opération. Étape 2 — Choisir : dans le même sens on additionne : 1,5 + 1,5 = 3 et 4,5 + 1,5 = 6 ; avec une pile retournée on retranche : 1,5 − 1,5 = 0 et 9 − 1,5 = 7,5. Étape 3 — Calculer : chaque association est reliée à sa tension, en volts.",
+                  "answers": [
+                    {
+                      "content": "Deux piles de 1,5 V, dans le même sens",
+                      "match": "3 V"
+                    },
+                    {
+                      "content": "Deux piles de 1,5 V, l'une retournée",
+                      "match": "0 V"
+                    },
+                    {
+                      "content": "Une pile de 4,5 V et une pile de 1,5 V, dans le même sens",
+                      "match": "6 V"
+                    },
+                    {
+                      "content": "Une pile de 9 V et une pile de 1,5 V retournée",
+                      "match": "7,5 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le même sens, choisis les deux associations qui donnent 4,5 V.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : pour chaque association, on regarde le sens des piles : toutes sont dans le même sens. Étape 2 — Choisir : on additionne : 1,5 + 1,5 + 1,5 = 4,5 V ; 3 + 1,5 = 4,5 V ; 1,5 + 1,5 = 3 V ; 4,5 + 1,5 = 6 V. Étape 3 — Calculer : les deux bonnes associations donnent 4,5 V.",
+                  "answers": [
+                    {
+                      "content": "Trois piles de 1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile de 3 V et une pile de 1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux piles de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 4,5 V et une pile de 1,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer la tension d'une association.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on suit la méthode de la fiche. Étape 2 — Choisir : on regarde le sens des piles avant de choisir l'opération. Étape 3 — Calculer : on calcule enfin la tension et on écrit l'unité V.",
+                  "answers": [
+                    {
+                      "content": "Repérer le sens de chaque pile"
+                    },
+                    {
+                      "content": "Choisir d'additionner ou de retrancher"
+                    },
+                    {
+                      "content": "Calculer la tension et écrire l'unité V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de 9 V et une pile de 1,5 V sont montées en série dans le même sens : la tension de l'association est ___ V.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 9 V et une pile de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 9 + 1,5 = 10,5 V.",
+                  "answers": [
+                    {
+                      "content": "10,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "10.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une radio contient quatre piles de 1,5 V montées en série, dont une retournée par erreur. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 − 1,5 = 3 V. Additionner les quatre piles donnerait 6 V : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Choisir une association de piles adaptée à un récepteur",
+          "remember": "Un récepteur fonctionne normalement quand la tension de l'association de piles est égale à sa **tension nominale**. Si la tension de l'association est plus petite, le récepteur fonctionne mal ou pas du tout (une lampe est **sous-voltée**). Si elle est plus grande, il risque d'être abîmé (une lampe est **survoltée** et peut griller). Pour obtenir la tension voulue, on monte en série, dans le même sens, plusieurs piles. Exemples : une lampe torche de 4,5 V avec trois piles de 1,5 V ; une télécommande de 3 V avec deux piles de 1,5 V ; une radio de 6 V avec quatre piles de 1,5 V.",
+          "method": [
+            "Lire la tension nominale du récepteur.",
+            "Chercher les piles à monter en série, dans le même sens, dont la somme des tensions est égale à cette tension nominale.",
+            "Vérifier la tension de l'association en l'additionnant, puis conclure : adaptée, sous-voltée ou survoltée."
+          ],
+          "example": {
+            "statement": "Une radio porte l'inscription « 6 V ». On dispose de piles rondes de 1,5 V. Combien de piles faut-il monter en série, dans le même sens ?",
+            "steps": [
+              "Lire : la tension nominale de la radio est 6 V.",
+              "Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V, puis 6 V : il faut quatre piles.",
+              "Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V, égal à la tension nominale ; l'association est adaptée et la radio fonctionne normalement."
+            ]
+          },
+          "pitfall": "Ne mets pas plus de piles pour que l'appareil marche « mieux ». Contre-exemple : une lampe de 3 V avec quatre piles de 1,5 V reçoit 1,5 + 1,5 + 1,5 + 1,5 = 6 V, deux fois sa tension nominale : elle est survoltée et risque de griller. Avec deux piles, 1,5 + 1,5 = 3 V, elle est adaptée. Vise la tension nominale, ni moins, ni plus.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à choisir les piles d'un récepteur.",
+            "questions": [
+              {
+                "content": "Une télécommande porte l'inscription « 3 V ». Combien de piles de 1,5 V faut-il monter en série dans le même sens ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : la télécommande porte 3 V. Étape 2 — Chercher : en ajoutant des piles de 1,5 V : 1,5 V, puis 3 V ; il en faut deux. Étape 3 — Vérifier : 1,5 + 1,5 = 3 V, égal à la tension nominale : l'association est adaptée.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ajoute des piles de 1,5 V jusqu'à atteindre 3 V."
+              },
+              {
+                "content": "Une lampe porte « 4,5 V ». On monte en série deux piles de 1,5 V dans le même sens. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : la lampe porte 4,5 V. Étape 2 — Chercher : on monte deux piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 = 3 V ; la tension de l'association est plus petite que la tension nominale. Elle brille faiblement : la lampe est sous-voltée.",
+                "answers": [
+                  {
+                    "content": "Elle brille faiblement : la lampe est sous-voltée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle brille normalement : la lampe est adaptée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle brille comme avec une pile de 4,5 V",
+                    "correct": false
+                  }
+                ],
+                "hint": "Calcule la tension des deux piles, puis compare à 4,5 V."
+              },
+              {
+                "content": "Pour une radio de 9 V, on monte en série, dans le même sens, une pile de 4,5 V et une seconde pile de ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire : la radio porte 9 V. Étape 2 — Chercher : il manque 9 − 4,5 = 4,5 V pour atteindre la tension nominale. Étape 3 — Vérifier : 4,5 + 4,5 = 9 V : la seconde pile est de 4,5 V. Une pile de 9 V donnerait 13,5 V, trop grand.",
+                "answers": [
+                  {
+                    "content": "4,5 V",
+                    "correct": true
+                  },
+                  {
+                    "content": "1,5 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "9 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "13,5 V",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche la tension qui manque pour arriver à 9 V."
+              },
+              {
+                "content": "Une lampe de 3 V branchée sur quatre piles de 1,5 V montées en série dans le même sens est survoltée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : la lampe porte 3 V. Étape 2 — Chercher : on monte quatre piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V ; la tension de l'association est plus grande que la tension nominale. Elle brille très fort et risque de griller : la lampe est survoltée. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Additionne les quatre tensions et compare à 3 V."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Choisir les piles d'un récepteur",
+              "statement": "Dans cet exercice, tu choisis les piles adaptées à une lampe, une radio ou une télécommande.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'ampoule d'une lampe torche porte « 4,5 V ». Combien de piles de 1,5 V monter en série dans le même sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V. Étape 2 — Chercher : 1,5 V, puis 3 V, puis 4,5 V : il faut trois piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 = 4,5 V, égal à la tension nominale. Deux piles donneraient 3 V (trop peu), quatre piles 6 V (trop).",
+                  "answers": [
+                    {
+                      "content": "Trois piles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une radio porte « 9 V ». On dispose de piles plates de 4,5 V. Combien en faut-il, montées en série dans le même sens ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la radio porte 9 V. Étape 2 — Chercher : 4,5 V, puis 9 V : il faut deux piles plates. Étape 3 — Vérifier : 4,5 + 4,5 = 9 V, égal à la tension nominale : l'association est adaptée.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une télécommande de 3 V reçoit trois piles de 1,5 V montées en série dans le même sens. Que risque-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la télécommande porte 3 V. Étape 2 — Chercher : on monte trois piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 = 4,5 V ; la tension de l'association est plus grande que la tension nominale. Elle risque d'être abîmée, car la tension est trop grande.",
+                  "answers": [
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fonctionne mal, car la tension est trop petite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien, car la tension n'a pas d'importance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une lampe de 6 V, quatre piles de 1,5 V montées en série dans le même sens sont adaptées.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V. Étape 2 — Chercher : on monte quatre piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V ; la tension de l'association est égale à la tension nominale. Elle brille normalement : la lampe est adaptée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de 6 V peut aussi fonctionner avec deux piles de 3 V montées en série dans le même sens : 3 + 3 = ___ V.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V. Étape 2 — Chercher : avec deux piles de 3 V, on additionne 3 V et 3 V. Étape 3 — Vérifier : 3 + 3 = 6 V, égal à la tension nominale : l'association est adaptée.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Piles pour une lampe, une radio et une télécommande",
+              "statement": "Dans cet exercice, tu associes les bonnes piles à une télécommande, une lampe torche et une radio.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Ajoute les tensions des piles, dans le même sens, jusqu'à atteindre exactement la tension nominale.",
+              "questions": [
+                {
+                  "content": "Relie chaque appareil à l'association de piles adaptée, montées en série dans le même sens.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on lit les tensions nominales : 3 V, 4,5 V, 6 V et 9 V. Étape 2 — Chercher : on ajoute les piles jusqu'à la tension nominale : 1,5 + 1,5 = 3 ; 1,5 × 3 = 4,5 ; 1,5 × 4 = 6 ; 4,5 + 4,5 = 9. Étape 3 — Vérifier : chaque appareil est relié à l'association qui donne exactement sa tension nominale.",
+                  "answers": [
+                    {
+                      "content": "Télécommande de 3 V",
+                      "match": "Deux piles de 1,5 V"
+                    },
+                    {
+                      "content": "Lampe torche de 4,5 V",
+                      "match": "Trois piles de 1,5 V"
+                    },
+                    {
+                      "content": "Radio de 6 V",
+                      "match": "Quatre piles de 1,5 V"
+                    },
+                    {
+                      "content": "Radio de 9 V",
+                      "match": "Deux piles de 4,5 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe porte « 4,5 V ». On dispose d'une pile de 3 V et d'une pile de 1,5 V. Quelle association est adaptée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V. Étape 2 — Chercher : 3 + 1,5 = 4,5 V si les deux piles sont dans le même sens. Étape 3 — Vérifier : l'association est adaptée. Une pile seule donne 3 V ou 1,5 V (trop peu) ; avec une pile retournée, 3 − 1,5 = 1,5 V.",
+                  "answers": [
+                    {
+                      "content": "La pile de 3 V et la pile de 1,5 V, dans le même sens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile de 3 V seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 1,5 V seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 3 V et la pile de 1,5 V, la seconde retournée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe porte « 3 V ». Choisis les deux générateurs qui lui conviennent.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : la lampe porte 3 V. Étape 2 — Chercher : une pile de 3 V donne 3 V ; 1,5 + 1,5 = 3 V ; trois piles donnent 4,5 V ; deux piles dont une retournée donnent 0 V. Étape 3 — Vérifier : seuls la pile de 3 V et les deux piles de 1,5 V dans le même sens donnent exactement 3 V.",
+                  "answers": [
+                    {
+                      "content": "Une pile de 3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux piles de 1,5 V montées en série dans le même sens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles de 1,5 V montées en série dans le même sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux piles de 1,5 V montées en série, l'une retournée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une radio de 9 V est alimentée par des piles de 1,5 V. Combien de piles faut-il monter en série dans le même sens ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la radio porte 9 V. Étape 2 — Chercher : 1,5 ; 3 ; 4,5 ; 6 ; 7,5 ; 9 : on atteint 9 V avec six piles. Étape 3 — Vérifier : 1,5 × 6 = 9 V, égal à la tension nominale : il faut six piles.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une télécommande de 3 V alimentée par une seule pile de 1,5 V est survoltée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la télécommande porte 3 V. Étape 2 — Chercher : une seule pile de 1,5 V est montée : la tension est celle de cette pile, il n'y a rien à additionner. Étape 3 — Vérifier : 1,5 V est plus petit que 3 V. Elle fonctionne mal ou pas du tout, car la tension est trop petite. L'affirmation est fausse : la tension est trop petite, non trop grande.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour choisir les piles d'un récepteur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on suit la méthode de la fiche. Étape 2 — Chercher : on lit d'abord la tension nominale, puis on cherche les piles. Étape 3 — Vérifier : on vérifie ensuite la tension de l'association pour conclure.",
+                  "answers": [
+                    {
+                      "content": "Lire la tension nominale du récepteur"
+                    },
+                    {
+                      "content": "Chercher les piles dont la somme des tensions est égale à cette valeur"
+                    },
+                    {
+                      "content": "Vérifier la tension de l'association et conclure"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La lampe torche de Kouassi",
+          "statement": "Kouassi fabrique une lampe torche avec une lampe de 4,5 V. Il dispose de piles rondes de 1,5 V.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pour monter deux piles en série, comment Kouassi doit-il les relier ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : chaque pile a une borne + et une borne −. Étape 2 — Relier : on relie le + de la première pile au − de la seconde. Étape 3 — Contrôler : les deux autres bornes restent libres et servent à brancher la lampe. Relier deux bornes de même signe retournerait une pile : c'est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "La borne + de la première à la borne − de la seconde",
+                  "correct": true
+                },
+                {
+                  "content": "La borne + de la première à la borne + de la seconde",
+                  "correct": false
+                },
+                {
+                  "content": "La borne − de la première à la borne − de la seconde",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne les relie pas, il les pose côte à côte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de piles de 1,5 V Kouassi doit-il monter en série, dans le même sens, pour la lampe de 4,5 V ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V : il faut trois piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 = 4,5 V, égal à la tension nominale : l'association est adaptée.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Kouassi monte ses trois piles de 1,5 V en série dans le même sens. Quelle est la tension de l'association, en volts ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 = 4,5 V.",
+              "answers": [
+                {
+                  "content": "4,5",
+                  "correct": true
+                }
+              ],
+              "unit": "V"
+            },
+            {
+              "content": "Kouassi retourne par erreur une des trois piles. Quelle est alors la tension de l'association, en volts ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 − 1,5 = 1,5 V. Additionner les trois piles (4,5 V) est l'erreur tentante : la pile retournée se retranche.",
+              "answers": [
+                {
+                  "content": "1,5",
+                  "correct": true
+                }
+              ],
+              "unit": "V"
+            },
+            {
+              "content": "Kouassi a monté trois piles de 1,5 V, dont une retournée par erreur, dans sa lampe de 4,5 V. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : on monte deux piles de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 + 1,5 − 1,5 = 1,5 V ; la tension de l'association est plus petite que la tension nominale. Elle brille faiblement : la lampe est sous-voltée.",
+              "answers": [
+                {
+                  "content": "Elle brille faiblement : la lampe est sous-voltée",
+                  "correct": true
+                },
+                {
+                  "content": "Elle brille normalement : la lampe est adaptée",
+                  "correct": false
+                },
+                {
+                  "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                  "correct": false
+                },
+                {
+                  "content": "Elle ne brille pas, car la tension est nulle",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La radio de Mariam",
+          "statement": "Mariam possède une radio qui porte l'inscription « 6 V ». Elle a des piles rondes de 1,5 V et une pile plate de 4,5 V.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans le circuit de la radio, quel est le rôle des piles ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : la radio utilise l'énergie électrique : c'est un récepteur ; les piles sont l'autre partie du circuit. Étape 2 — Chercher : les piles fournissent cette énergie : ce sont des générateurs. Étape 3 — Vérifier : les piles fournissent donc l'énergie à la radio. Dire que les piles utilisent l'énergie de la radio inverse les rôles du générateur et du récepteur.",
+              "answers": [
+                {
+                  "content": "Elles fournissent l'énergie électrique à la radio",
+                  "correct": true
+                },
+                {
+                  "content": "Elles utilisent l'énergie électrique de la radio",
+                  "correct": false
+                },
+                {
+                  "content": "Elles mesurent la tension de la radio",
+                  "correct": false
+                },
+                {
+                  "content": "Elles remplacent l'interrupteur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de piles rondes de 1,5 V Mariam doit-elle monter en série dans le même sens pour sa radio de 6 V ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V, puis 6 V : il faut quatre piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V, égal à la tension nominale : l'association est adaptée.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mariam veut utiliser la pile plate de 4,5 V. Quelle autre pile doit-elle lui associer, dans le même sens, pour sa radio de 6 V ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : la radio porte 6 V. Étape 2 — Chercher : il manque 6 − 4,5 = 1,5 V : on ajoute une pile de 1,5 V, dans le même sens. Étape 3 — Vérifier : 4,5 + 1,5 = 6 V, égal à la tension nominale. Avec la pile retournée, 4,5 − 1,5 = 3 V ; avec une seconde pile plate, 9 V : aucun des deux ne convient.",
+              "answers": [
+                {
+                  "content": "Une pile ronde de 1,5 V",
+                  "correct": true
+                },
+                {
+                  "content": "Une pile ronde de 1,5 V, retournée",
+                  "correct": false
+                },
+                {
+                  "content": "Une seconde pile plate de 4,5 V",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune autre pile",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam place par erreur une des quatre piles de 1,5 V à l'envers. Quelle est la tension de l'association, en volts ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 − 1,5 = 3 V. Additionner les quatre piles (6 V) est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "V"
+            },
+            {
+              "content": "Mariam monte quatre piles de 1,5 V, dont une retournée par erreur, dans sa radio de 6 V. La radio fonctionne normalement.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : on monte trois piles de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 − 1,5 = 3 V ; la tension de l'association est plus petite que la tension nominale. Elle fonctionne mal ou pas du tout, car la tension est trop petite. L'affirmation est fausse : la tension de 3 V est inférieure à 6 V.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La télécommande de la famille Traoré",
+          "statement": "La télécommande du téléviseur de la famille Traoré porte l'inscription « 3 V ». Le père a rangé deux piles de 1,5 V, une pile de 3 V et une pile de 4,5 V.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien de piles de 1,5 V faut-il monter en série, dans le même sens, pour cette télécommande ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : La télécommande porte 3 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V : il faut deux piles. Étape 3 — Vérifier : 1,5 + 1,5 = 3 V, égal à la tension nominale : l'association est adaptée.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un enfant monte en série les deux piles de 1,5 V, la seconde étant à l'envers. Quelle est la tension de l'association, en volts ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on a une pile de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 − 1,5 = 0 V. Additionner donnerait 3 V : c'est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ],
+              "unit": "V"
+            },
+            {
+              "content": "Un enfant monte les deux piles de 1,5 V d'une télécommande de 3 V, la seconde étant à l'envers. Que se passe-t-il pour la télécommande ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : La télécommande porte 3 V. Étape 2 — Chercher : on monte une pile de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 − 1,5 = 0 V ; la tension de l'association est nulle. Elle ne fonctionne pas, car la tension est nulle.",
+              "answers": [
+                {
+                  "content": "Elle ne fonctionne pas, car la tension est nulle",
+                  "correct": true
+                },
+                {
+                  "content": "Elle fonctionne normalement, car la tension est la bonne",
+                  "correct": false
+                },
+                {
+                  "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                  "correct": false
+                },
+                {
+                  "content": "Elle fonctionne avec la moitié de la tension",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le père a une pile de 3 V, une pile de 4,5 V et deux piles de 1,5 V. Choisis les deux montages qui donnent 3 V, les piles étant dans le même sens.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : toutes les piles sont dans le même sens. Étape 2 — Choisir : on additionne les tensions des piles montées en série. Étape 3 — Calculer : 1,5 + 1,5 = 3 V ; la pile de 3 V seule donne 3 V ; 4,5 + 1,5 = 6 V ; 3 + 1,5 = 4,5 V. Seuls les deux premiers montages donnent 3 V ; les deux autres donnent trop de tension.",
+              "answers": [
+                {
+                  "content": "Les deux piles de 1,5 V montées en série",
+                  "correct": true
+                },
+                {
+                  "content": "La pile de 3 V seule",
+                  "correct": true
+                },
+                {
+                  "content": "La pile de 4,5 V et une pile de 1,5 V montées en série",
+                  "correct": false
+                },
+                {
+                  "content": "La pile de 3 V et une pile de 1,5 V montées en série",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un enfant veut mettre trois piles de 1,5 V, dans le même sens, dans la télécommande de 3 V. Explique pourquoi ce n'est pas une bonne idée.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Calcule la tension de l'association : 1,5 + 1,5 + 1,5 = 4,5 V",
+                "Compare 4,5 V à la tension nominale de 3 V",
+                "Conclus : la tension est trop grande, la télécommande risque d'être abîmée"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Lire : la télécommande porte 3 V. Étape 2 — Chercher : trois piles de 1,5 V dans le même sens donnent 1,5 + 1,5 + 1,5 = 4,5 V. Étape 3 — Vérifier : 4,5 V est plus grand que 3 V, donc la tension est trop grande et la télécommande risque d'être abîmée. Il faut deux piles seulement. Barème sur 3 points : 1 point pour le calcul de 4,5 V, 1 point pour la comparaison avec 3 V, 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "Trois piles donnent…"
+            }
+          ]
+        },
+        {
+          "title": "Le poste radio d'Awa",
+          "statement": "Le poste radio d'Awa porte l'inscription « 9 V ». Awa a une boîte de piles rondes de 1,5 V, deux piles plates de 4,5 V et une pile de 9 V. Pour son devoir de fin de trimestre, elle teste plusieurs montages en série.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien de piles rondes de 1,5 V faut-il monter en série, dans le même sens, pour ce poste radio ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : Le poste radio porte 9 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V, puis 6 V, puis 7,5 V, puis 9 V : il faut six piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 + 1,5 + 1,5 = 9 V, égal à la tension nominale : l'association est adaptée.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque montage d'Awa à ce qui se passe pour la radio de 9 V.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer : on regarde le sens des piles de chaque montage. Étape 2 — Choisir : dans le même sens on additionne, avec une pile retournée on retranche. Étape 3 — Calculer : 4,5 + 4,5 = 9 V ; 4,5 − 4,5 = 0 V ; 9 + 1,5 = 10,5 V ; 1,5 × 4 = 6 V, puis on compare à 9 V. Seul le premier montage donne la tension nominale ; 6 V est trop petit et 10,5 V trop grand.",
+              "answers": [
+                {
+                  "content": "Deux piles plates de 4,5 V, dans le même sens",
+                  "match": "9 V : fonctionne normalement"
+                },
+                {
+                  "content": "Deux piles plates de 4,5 V, l'une retournée",
+                  "match": "0 V : ne fonctionne pas"
+                },
+                {
+                  "content": "La pile de 9 V et une pile ronde de 1,5 V, dans le même sens",
+                  "match": "10,5 V : risque d'être abîmée"
+                },
+                {
+                  "content": "Quatre piles rondes de 1,5 V, dans le même sens",
+                  "match": "6 V : fonctionne mal"
+                }
+              ]
+            },
+            {
+              "content": "Awa monte quatre piles rondes de 1,5 V, dont une retournée par erreur. Quelle est la tension de l'association, en volts ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 − 1,5 = 3 V. Additionner les quatre piles (6 V) est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "V"
+            },
+            {
+              "content": "Awa monte quatre piles rondes de 1,5 V, dont une retournée par erreur, dans son poste radio de 9 V. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : Le poste radio porte 9 V. Étape 2 — Chercher : on monte trois piles de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 − 1,5 = 3 V ; la tension de l'association est plus petite que la tension nominale. Il fonctionne mal ou pas du tout, car la tension est trop petite.",
+              "answers": [
+                {
+                  "content": "Il fonctionne mal ou pas du tout, car la tension est trop petite",
+                  "correct": true
+                },
+                {
+                  "content": "Il fonctionne normalement, car la tension est la bonne",
+                  "correct": false
+                },
+                {
+                  "content": "Il risque d'être abîmé, car la tension est trop grande",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne fonctionne pas, car la tension est nulle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La pile de 9 V seule convient au poste radio de 9 V.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : le poste radio porte 9 V. Étape 2 — Chercher : la pile de 9 V a exactement cette tension. Étape 3 — Vérifier : 9 V est égal à 9 V : le poste radio fonctionne normalement. L'affirmation est vraie : une seule pile suffit quand sa tension est la tension nominale.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa n'a que des piles rondes de 1,5 V. Rédige la démarche en trois étapes pour trouver combien en monter en série pour son poste radio de 9 V, et explique comment les brancher.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Lis la tension nominale : 9 V",
+                "Cherche le nombre de piles : 1,5 × 6 = 9, soit six piles",
+                "Précise le branchement : le + de chaque pile relié au − de la suivante, toutes dans le même sens",
+                "Vérifie et conclus : 9 V, la radio est adaptée"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Lire : le poste radio porte 9 V. Étape 2 — Chercher : en ajoutant des piles de 1,5 V, on trouve 1,5 ; 3 ; 4,5 ; 6 ; 7,5 ; 9 : il faut six piles. On les relie en série : la borne + de chaque pile est reliée à la borne − de la suivante, toutes dans le même sens. Étape 3 — Vérifier : 1,5 × 6 = 9 V, égal à la tension nominale : la radio est adaptée. Barème sur 4 points : 1 point par critère.",
+              "answers": [],
+              "starter": "Étape 1 — Lire : …"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Brancher des piles en série (bornes + et −) ; calculer la tension d'une association concordante ou en opposition ; choisir les piles adaptées à une lampe, une radio ou une télécommande.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Léa étudie une lampe torche qui contient trois piles montées en série, toutes dans le même sens.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans une chaîne de piles, un + touche un −. Avec n piles, il y a n − 1 contacts.",
+              "questions": [
+                {
+                  "content": "Dans la lampe torche de Léa, quelle borne de la deuxième pile touche la borne + de la première pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : chaque pile a une borne + et une borne −. Étape 2 — Relier : dans un montage en série dans le même sens, la borne + d'une pile est reliée à la borne − de la suivante. Étape 3 — Contrôler : la borne qui touche le + de la première pile est donc un −. Si c'était un +, la deuxième pile serait retournée, ce qui n'est pas le cas ici.",
+                  "answers": [
+                    {
+                      "content": "La borne −",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne +",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux bornes en même temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune borne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la lampe torche de Léa, la lampe est branchée sur les deux bornes libres de la chaîne de piles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les trois piles forment une chaîne : A, B et C. Étape 2 — Relier : les piles sont reliées par deux contacts + contre − ; il reste la borne − de A et la borne + de C. Étape 3 — Contrôler : la lampe se branche sur ces deux bornes libres : l'affirmation est vraie. Brancher la lampe entre deux piles couperait la chaîne et ce ne serait plus le montage prévu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de contacts + contre − y a-t-il entre les trois piles de la lampe torche de Léa ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la lampe torche contient trois piles A, B et C. Étape 2 — Relier : on relie +A à −B puis +B à −C : deux contacts. Étape 3 — Contrôler : il y a deux contacts, car avec n piles on a n − 1 contacts. Répondre 3 compterait un contact de trop : les deux bouts de la chaîne restent libres.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand une pile est mise à l'envers dans une chaîne, on dit que l'association est en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : une pile de la chaîne n'est plus dans le même sens que les autres. Étape 2 — Relier : son sens est contraire à celui des autres piles : on parle d'une association en opposition. Étape 3 — Contrôler : le mot cherché est opposition. Le mot « série » ne convient pas : il décrit le montage en chaîne, pas le sens contraire d'une pile.",
+                  "answers": [
+                    {
+                      "content": "opposition",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à ce qu'il désigne dans la lampe torche de Léa.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on a trois mots à classer : pile, lampe, volt. Étape 2 — Relier : la pile fournit l'énergie électrique, la lampe l'utilise, et la tension se donne en volts. Étape 3 — Contrôler : la pile est le générateur, la lampe le récepteur, le volt l'unité de la tension. Confondre pile et lampe reviendrait à inverser le générateur et le récepteur.",
+                  "answers": [
+                    {
+                      "content": "Pile",
+                      "match": "Générateur"
+                    },
+                    {
+                      "content": "Lampe",
+                      "match": "Récepteur"
+                    },
+                    {
+                      "content": "Volt (V)",
+                      "match": "Unité de la tension"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Rokia calcule la tension de piles montées en série, toutes dans le même sens.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans le même sens, on additionne les tensions des piles.",
+              "questions": [
+                {
+                  "content": "Deux piles plates de 4,5 V sont montées en série, dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 4,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 4,5 + 4,5 = 9 V. Prendre 4,5 V serait ne compter qu'une seule pile.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Une lampe de Rokia est alimentée par cinq piles de 1,5 V montées en série dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a cinq piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 + 1,5 + 1,5 = 7,5 V. Il faut additionner les cinq tensions, pas les multiplier au hasard.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Une pile de 9 V et une pile de 1,5 V sont montées en série, dans le même sens. Quelle est la tension de l'association ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 9 V et une pile de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 9 + 1,5 = 10,5 V. 7,5 V serait la tension si la pile de 1,5 V était retournée ; 13,5 V viendrait d'une confusion avec une pile de 4,5 V à la place de la pile de 1,5 V.",
+                  "answers": [
+                    {
+                      "content": "10,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "7,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "13,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois piles de 1,5 V montées en série dans le même sens donnent une tension de 3 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 = 4,5 V. L'affirmation est fausse : 3 V serait la tension de deux piles seulement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de 6 V et une pile de 3 V montées en série dans le même sens donnent une tension de ___ V.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 6 V et une pile de 3 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 6 + 3 = 9 V. Retrancher (3 V) serait traiter la pile de 3 V comme retournée, ce qui n'est pas dit.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Awa monte des piles en série, avec une pile retournée dans chaque montage.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une pile retournée : on retranche sa tension. La plus grande tension moins la plus petite avec deux piles.",
+              "questions": [
+                {
+                  "content": "Une pile de 4,5 V et une pile de 1,5 V sont montées en série, la pile de 1,5 V étant retournée. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 4,5 − 1,5 = 3 V. Trouver 6 V serait additionner sans regarder le sens.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Une pile de 9 V et une pile de 4,5 V sont montées en série, la pile de 4,5 V étant retournée. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 9 V et une pile de 4,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 9 − 4,5 = 4,5 V. Trouver 13,5 V serait oublier que la pile est retournée.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Deux piles de 3 V sont montées en série, l'une étant retournée. Quelle est la tension de l'association ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 3 V et une pile de 3 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 3 − 3 = 0 V. 6 V serait la tension de deux piles dans le même sens ; 3 V ne compterait qu'une pile.",
+                  "answers": [
+                    {
+                      "content": "0 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles identiques montées en série, l'une étant retournée, donnent une tension nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 − 1,5 = 0 V. L'affirmation est vraie : dès que les deux tensions sont égales, leur différence est nulle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec deux piles dont l'une est retournée, la tension de l'association est la ___ des deux tensions.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on a deux piles dont l'une est retournée. Étape 2 — Choisir : dans ce cas on retranche la plus petite tension de la plus grande. Étape 3 — Calculer : la tension de l'association est la différence des deux tensions. La somme est la bonne opération seulement quand les piles sont dans le même sens.",
+                  "answers": [
+                    {
+                      "content": "différence",
+                      "correct": true
+                    },
+                    {
+                      "content": "somme",
+                      "correct": false
+                    },
+                    {
+                      "content": "moyenne",
+                      "correct": false
+                    },
+                    {
+                      "content": "somme doublée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Yao choisit des piles pour une lampe de 3 V, une radio de 6 V et une télécommande de 3 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Ajoute des piles jusqu'à la tension nominale, puis compare l'association à cette valeur.",
+              "questions": [
+                {
+                  "content": "Une radio porte « 6 V ». Combien de piles de 1,5 V faut-il monter en série, dans le même sens ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V, puis 6 V : il faut quatre piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V, égal à la tension nominale : l'association est adaptée. Cinq piles donneraient 7,5 V, ce qui est trop.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe porte « 3 V ». Combien de piles de 1,5 V faut-il monter en série, dans le même sens ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : La lampe porte 3 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V : il faut deux piles. Étape 3 — Vérifier : 1,5 + 1,5 = 3 V, égal à la tension nominale : l'association est adaptée. Trois piles donneraient 4,5 V : la lampe serait survoltée.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao monte trois piles de 1,5 V, dans le même sens, dans une télécommande de 3 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La télécommande porte 3 V. Étape 2 — Chercher : on monte trois piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 = 4,5 V ; la tension de l'association est plus grande que la tension nominale. Elle risque d'être abîmée, car la tension est trop grande.",
+                  "answers": [
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fonctionne mal ou pas du tout, car la tension est trop petite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao monte une seule pile de 1,5 V dans sa lampe de 3 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 3 V. Étape 2 — Chercher : une seule pile de 1,5 V est montée : la tension est celle de cette pile, il n'y a rien à additionner. Étape 3 — Vérifier : 1,5 V est plus petit que 3 V. Elle brille faiblement : la lampe est sous-voltée.",
+                  "answers": [
+                    {
+                      "content": "Elle brille faiblement : la lampe est sous-voltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille normalement : la lampe est adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne brille pas, car la tension est nulle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une radio de 6 V est adaptée à deux piles de 3 V montées en série dans le même sens.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : on monte deux piles de 3 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 3 + 3 = 6 V ; la tension de l'association est égale à la tension nominale. Elle fonctionne normalement, car la tension est la bonne. L'affirmation est vraie : 3 + 3 = 6 V.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Les piles dans la vie de tous les jours",
+          "notions": "Piles d'une lampe torche, d'une radio et d'une télécommande ; calcul de la tension d'une association ; piles mal placées ; choix des piles dans des situations de la vie courante.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pendant une coupure de courant, Kouadio fait ses devoirs avec une lampe torche. Sa lampe porte « 4,5 V » et il a des piles de 1,5 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour une lampe de 4,5 V, ajoute des piles de 1,5 V jusqu'à 4,5 V.",
+              "questions": [
+                {
+                  "content": "Combien de piles de 1,5 V Kouadio doit-il monter en série, dans le même sens, pour sa lampe de 4,5 V ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V : il faut trois piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 = 4,5 V, égal à la tension nominale : l'association est adaptée.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En plaçant ses piles, Kouadio relie une borne + à une borne +. Que devient la pile concernée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Kouadio a relié deux bornes de même signe. Étape 2 — Relier : en série, il faut relier un + à un − ; deux + reliés signifient que l'une des piles est dans le sens contraire. Étape 3 — Contrôler : la pile concernée est retournée par rapport aux autres. Penser qu'elle est dans le bon sens serait oublier la règle « un + contre un − ».",
+                  "answers": [
+                    {
+                      "content": "Elle est retournée par rapport aux autres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est dans le bon sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle devient un récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne change rien au montage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouadio a retourné une de ses trois piles de 1,5 V. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 − 1,5 = 1,5 V. Trouver 4,5 V serait additionner la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Kouadio monte trois piles de 1,5 V, dont une retournée, dans sa lampe de 4,5 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : on monte deux piles de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 + 1,5 − 1,5 = 1,5 V ; la tension de l'association est plus petite que la tension nominale. Elle brille faiblement : la lampe est sous-voltée.",
+                  "answers": [
+                    {
+                      "content": "Elle brille faiblement : la lampe est sous-voltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille normalement : la lampe est adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si Kouadio ajoute une quatrième pile de 1,5 V dans le même sens, sa lampe de 4,5 V reste adaptée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : on monte quatre piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V ; la tension de l'association est plus grande que la tension nominale. Elle brille très fort et risque de griller : la lampe est survoltée. L'affirmation est fausse : plus de piles ne veut pas dire « mieux ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au marché, Adjoua achète des piles pour la radio de sa grand-mère. La radio porte « 6 V ». Le vendeur propose des piles rondes de 1,5 V, des piles plates de 4,5 V et des piles de 3 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche deux piles du vendeur dont la somme des tensions fait 6 V.",
+              "questions": [
+                {
+                  "content": "Adjoua veut acheter seulement deux piles. Lesquelles convient-il de monter en série dans le même sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la radio porte 6 V. Étape 2 — Chercher : 4,5 + 1,5 = 6 V, ou 3 + 3 = 6 V ; les autres couples donnent 9 V (4,5 + 4,5), 3 V (1,5 + 1,5) et 7,5 V (4,5 + 3). Étape 3 — Vérifier : l'association d'une pile de 4,5 V et d'une pile de 1,5 V est adaptée. Choisir les deux piles plates donnerait 9 V : la radio risquerait d'être abîmée.",
+                  "answers": [
+                    {
+                      "content": "Une pile plate de 4,5 V et une pile ronde de 1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux piles plates de 4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux piles rondes de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile plate de 4,5 V et une pile de 3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua préfère n'acheter que des piles de 3 V. Combien en faut-il, montées en série dans le même sens ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : en ajoutant les piles de 3 V une à une, on obtient 3 V, puis 6 V : il faut deux piles. Étape 3 — Vérifier : 3 + 3 = 6 V, égal à la tension nominale : l'association est adaptée.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua monte par erreur deux piles plates de 4,5 V dans le même sens dans la radio. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : on monte deux piles de 4,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 4,5 + 4,5 = 9 V ; la tension de l'association est plus grande que la tension nominale. Elle risque d'être abîmée, car la tension est trop grande.",
+                  "answers": [
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fonctionne mal ou pas du tout, car la tension est trop petite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la radio, Adjoua monte une pile de 4,5 V et une pile de 3 V dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V et une pile de 3 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 4,5 + 3 = 7,5 V. Retrancher donnerait 1,5 V : c'est valable seulement si une pile est retournée.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "La grand-mère d'Adjoua dit : « Plus on met de volts, mieux la radio de 6 V marche. » Elle a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la radio de 6 V attend une tension de 6 V. Étape 2 — Chercher : avec deux piles plates de 4,5 V dans le même sens, on aurait 4,5 + 4,5 = 9 V, plus que la tension nominale. Étape 3 — Vérifier : une tension trop grande risque d'abîmer la radio : la grand-mère a tort, car il faut la tension nominale, ni moins, ni plus. Plus de volts ne veut donc pas dire « mieux ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "La télécommande du téléviseur de Yao porte « 3 V » et contient deux piles rondes de 1,5 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Regarde si les deux piles sont dans le même sens, puis calcule la tension.",
+              "questions": [
+                {
+                  "content": "Les deux piles de la télécommande de Yao sont dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 = 3 V. Prendre 1,5 V serait ne compter qu'une seule des deux piles.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Les deux piles sont dans le même sens. Que se passe-t-il pour la télécommande de 3 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La télécommande porte 3 V. Étape 2 — Chercher : on monte deux piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 = 3 V ; la tension de l'association est égale à la tension nominale. Elle fonctionne normalement, car la tension est la bonne.",
+                  "answers": [
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne mal ou pas du tout, car la tension est trop petite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le petit frère de Yao retourne une des deux piles. Quelle est alors la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 − 1,5 = 0 V. Trouver 3 V serait oublier que la pile est retournée.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Avec une pile retournée, que se passe-t-il pour la télécommande ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La télécommande porte 3 V. Étape 2 — Chercher : on monte une pile de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 − 1,5 = 0 V ; la tension de l'association est nulle. Elle ne fonctionne pas, car la tension est nulle.",
+                  "answers": [
+                    {
+                      "content": "Elle ne fonctionne pas, car la tension est nulle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fonctionne avec la moitié de la tension",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce que Yao doit faire pour réparer sa télécommande.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la télécommande ne marche pas : une pile est à l'envers. Étape 2 — Relier : on repère d'abord les bornes, on les relie ensuite + contre −, puis on contrôle le sens. Étape 3 — Contrôler : on refait donc les trois étapes dans cet ordre avant de refermer le compartiment. Refermer d'abord le compartiment empêcherait de vérifier le sens des piles.",
+                  "answers": [
+                    {
+                      "content": "Repérer le + et le − de chaque pile"
+                    },
+                    {
+                      "content": "Relier le + d'une pile au − de l'autre"
+                    },
+                    {
+                      "content": "Contrôler que les piles sont dans le même sens et refermer le compartiment"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Fatou veut alimenter sa lampe de poche de 3 V. Elle a trois piles : deux piles de 1,5 V et une pile de 4,5 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Ajoute les tensions des piles, dans le même sens, et compare le total à 3 V.",
+              "questions": [
+                {
+                  "content": "Quelle association donne exactement 3 V à la lampe de poche de Fatou ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe de poche porte 3 V. Étape 2 — Chercher : 1,5 + 1,5 = 3 V ; les trois piles donnent 7,5 V ; 4,5 + 1,5 = 6 V ; la pile de 4,5 V seule donne 4,5 V. Étape 3 — Vérifier : seules les deux piles de 1,5 V donnent 3 V. Les autres associations donnent trop de tension : la lampe serait survoltée.",
+                  "answers": [
+                    {
+                      "content": "Les deux piles de 1,5 V, dans le même sens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les trois piles, dans le même sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 4,5 V et une pile de 1,5 V, dans le même sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 4,5 V seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par erreur, Fatou monte la pile de 4,5 V et une pile de 1,5 V retournée. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 4,5 − 1,5 = 3 V. Ce montage donne 3 V par hasard : une pile retournée gêne les autres, on ne s'en sert jamais pour régler une tension.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "La pile de 4,5 V et une pile de 1,5 V, montées en série dans le même sens, donnent une tension de ___ V.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V et une pile de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 4,5 + 1,5 = 6 V. Cette tension est le double de celle de la lampe de poche de 3 V : ce montage ne lui convient pas.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou monte les trois piles dans le même sens dans sa lampe de poche de 3 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La lampe de poche porte 3 V. Étape 2 — Chercher : on monte une pile de 4,5 V et deux piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 4,5 + 1,5 + 1,5 = 7,5 V ; la tension de l'association est plus grande que la tension nominale. Elle brille très fort et risque de griller : la lampe est survoltée.",
+                  "answers": [
+                    {
+                      "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille normalement : la lampe est adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille faiblement : la lampe est sous-voltée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile de 4,5 V seule convient à la lampe de poche de 3 V de Fatou.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe de poche porte 3 V. Étape 2 — Chercher : une seule pile de 4,5 V est montée : la tension est celle de cette pile, il n'y a rien à additionner. Étape 3 — Vérifier : 4,5 V est plus grand que 3 V. Elle brille très fort et risque de griller : la lampe est survoltée. L'affirmation est fausse : 4,5 V est plus grand que 3 V.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Trouver la cause d'une panne de piles ; comparer des montages ; chercher la pile manquante ; juger des affirmations d'élèves en justifiant avec le sens des piles et les tensions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "La radio de grand-père porte « 6 V » et contient quatre piles de 1,5 V montées en série. Elle ne marche pas bien. Tu cherches la cause.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche d'abord si une pile est retournée, puis calcule la tension.",
+              "questions": [
+                {
+                  "content": "Les quatre piles sont dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a quatre piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 + 1,5 = 6 V. Cette tension est celle que la radio attend.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "En réalité, une des quatre piles est retournée. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 − 1,5 = 3 V. Trouver 6 V serait additionner la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "La radio de 6 V de grand-père contient quatre piles de 1,5 V montées en série et ne reçoit en fait qu'une tension de 3 V. Quelle est la cause de la panne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : on monte trois piles de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 − 1,5 = 3 V ; la tension de l'association est plus petite que la tension nominale. Elle fonctionne mal ou pas du tout, car la tension est trop petite. Il n'y a pas trop de piles : quatre piles dans le même sens conviendraient. Relier + contre − est le bon montage.",
+                  "answers": [
+                    {
+                      "content": "Une pile est retournée, donc la tension est trop petite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a trop de piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "La radio est survoltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les piles sont reliées + contre −",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour réparer la radio, il suffit de retourner la pile mal placée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : on monte quatre piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V ; la tension de l'association est égale à la tension nominale. Elle fonctionne normalement, car la tension est la bonne. L'affirmation est vraie : les quatre piles dans le même sens donnent 6 V.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi la radio de grand-père marchait mal avec une pile retournée, en citant les tensions.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Donne la tension nominale de la radio : 6 V",
+                    "Calcule la tension avec une pile retournée : 1,5 + 1,5 + 1,5 − 1,5 = 3 V",
+                    "Conclus : 3 V est plus petit que 6 V, la radio fonctionne mal"
+                  ],
+                  "explanation": "Corrigé modèle. Étape 1 — Repérer : trois piles sont dans le bon sens et une est retournée. Étape 2 — Choisir : on retranche la tension de la pile retournée. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 − 1,5 = 3 V. La tension de l'association, 3 V, est plus petite que la tension nominale de 6 V : la radio fonctionne mal. Barème sur 3 points : 1 point pour la tension nominale, 1 point pour le calcul de 3 V, 1 point pour la conclusion.",
+                  "answers": [],
+                  "starter": "La radio porte 6 V, mais…"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux élèves comparent deux montages pour une lampe de 6 V. Le montage A : une pile de 4,5 V et une pile de 1,5 V dans le même sens. Le montage B : une pile de 4,5 V et une pile de 1,5 V, cette dernière retournée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule la tension de chaque montage, puis compare-la à 6 V.",
+              "questions": [
+                {
+                  "content": "Quelle est la tension du montage A, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V et une pile de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 4,5 + 1,5 = 6 V.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Quelle est la tension du montage B, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 4,5 − 1,5 = 3 V. Trouver 6 V serait oublier la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Que se passe-t-il pour la lampe de 6 V avec le montage B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La lampe porte 6 V. Étape 2 — Chercher : on monte une pile de 4,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 4,5 − 1,5 = 3 V ; la tension de l'association est plus petite que la tension nominale. Elle brille faiblement : la lampe est sous-voltée.",
+                  "answers": [
+                    {
+                      "content": "Elle brille faiblement : la lampe est sous-voltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille normalement : la lampe est adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel montage convient à la lampe de 6 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V. Étape 2 — Chercher : le montage A donne 4,5 + 1,5 = 6 V ; le montage B donne 4,5 − 1,5 = 3 V. Étape 3 — Vérifier : seul le montage A donne exactement 6 V. Les deux montages utilisent les mêmes piles, mais le sens de la pile de 1,5 V change tout.",
+                  "answers": [
+                    {
+                      "content": "Le montage A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le montage B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux montages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux montages faits avec les mêmes piles donnent toujours la même tension.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on compare les montages A et B, qui utilisent les mêmes piles. Étape 2 — Choisir : dans le même sens on additionne, avec une pile retournée on retranche. Étape 3 — Calculer : 4,5 + 1,5 = 6 V pour A et 4,5 − 1,5 = 3 V pour B : les tensions sont différentes. L'affirmation est fausse : le sens des piles compte autant que leurs tensions.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une radio de 9 V est alimentée par une pile de 4,5 V et une pile inconnue, montées en série dans le même sens. Tu cherches la pile manquante.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La tension manquante est la tension nominale moins la tension de la pile connue.",
+              "questions": [
+                {
+                  "content": "Quelle doit être la tension de la pile inconnue, en volts, pour que la radio soit adaptée ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la radio porte 9 V. Étape 2 — Chercher : il manque 9 − 4,5 = 4,5 V pour atteindre la tension nominale, donc la pile inconnue doit être de 4,5 V. Étape 3 — Vérifier : 4,5 + 4,5 = 9 V, égal à la tension nominale : l'association est adaptée. Choisir 9 V serait oublier la pile déjà présente.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "La pile inconnue est de 1,5 V, dans le même sens. Que se passe-t-il pour la radio de 9 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La radio porte 9 V. Étape 2 — Chercher : on monte une pile de 4,5 V et une pile de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 4,5 + 1,5 = 6 V ; la tension de l'association est plus petite que la tension nominale. Elle fonctionne mal ou pas du tout, car la tension est trop petite.",
+                  "answers": [
+                    {
+                      "content": "Elle fonctionne mal ou pas du tout, car la tension est trop petite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile inconnue est de 9 V, dans le même sens. Que se passe-t-il pour la radio de 9 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La radio porte 9 V. Étape 2 — Chercher : on monte une pile de 4,5 V et une pile de 9 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 4,5 + 9 = 13,5 V ; la tension de l'association est plus grande que la tension nominale. Elle risque d'être abîmée, car la tension est trop grande.",
+                  "answers": [
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fonctionne mal ou pas du tout, car la tension est trop petite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile inconnue est de 4,5 V. Choisis les deux affirmations vraies sur la radio de 9 V.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : la pile connue et la pile inconnue ont toutes les deux 4,5 V. Étape 2 — Choisir : dans le même sens on additionne, avec une pile retournée on retranche. Étape 3 — Calculer : 4,5 + 4,5 = 9 V (radio adaptée) et 4,5 − 4,5 = 0 V (tension nulle). Les deux autres affirmations échangent les deux cas.",
+                  "answers": [
+                    {
+                      "content": "Si la pile inconnue est dans le même sens, la radio est adaptée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si la pile inconnue est retournée, la tension est nulle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si la pile inconnue est retournée, la radio est adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si la pile inconnue est dans le même sens, la tension est nulle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec une pile inconnue de 4,5 V retournée, la radio de 9 V fonctionne normalement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : La radio porte 9 V. Étape 2 — Chercher : on monte une pile de 4,5 V et une pile de 4,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 4,5 − 4,5 = 0 V ; la tension de l'association est nulle. Elle ne fonctionne pas, car la tension est nulle. L'affirmation est fausse : une tension nulle ne fait pas fonctionner la radio.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Quatre élèves donnent leur avis sur des piles montées en série. Tu juges chaque avis en calculant.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque avis, regarde le sens des piles puis calcule la tension.",
+              "questions": [
+                {
+                  "content": "Mariam dit : « Trois piles de 1,5 V, dont une retournée, donnent 4,5 V. » Elle a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 − 1,5 = 1,5 V. Mariam a tort : elle a additionné la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi dit : « Une pile de 6 V et une pile de 4,5 V retournée donnent 1,5 V. » Il a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 6 V et une pile de 4,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 6 − 4,5 = 1,5 V. Koffi a raison : il a retranché la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya dit que deux piles de 1,5 V suffisent pour une lampe de 4,5 V. Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : on monte deux piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 = 3 V ; la tension de l'association est plus petite que la tension nominale. Elle brille faiblement : la lampe est sous-voltée.",
+                  "answers": [
+                    {
+                      "content": "Elles donnent 3 V : la lampe sera sous-voltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles donnent 4,5 V : la lampe sera adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles donnent 3 V : la lampe sera survoltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles donnent 0 V : la lampe ne brillera pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois affirmations vraies sur des piles montées en série.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on rappelle les règles de la leçon. Étape 2 — Choisir : dans le même sens on additionne ; une pile retournée se retranche ; on vise la tension nominale. Étape 3 — Calculer : on additionne dans le même sens, on retranche une pile retournée et on vise la tension nominale : ces trois affirmations sont vraies. Une pile retournée diminue la tension, et trop de volts abîme le récepteur : les deux autres affirmations sont fausses.",
+                  "answers": [
+                    {
+                      "content": "Dans le même sens, on additionne les tensions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile retournée fait retrancher sa tension",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour un récepteur de 6 V, on cherche une association de 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile retournée augmente toujours la tension",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus l'association a de volts, mieux le récepteur marche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao dit : « Pour une lampe de 6 V, il faut six piles de 1,5 V dans le même sens. » Combien de piles de 1,5 V faut-il vraiment ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : La lampe porte 6 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V, puis 6 V : il faut quatre piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V, égal à la tension nominale : l'association est adaptée. Yao a tort : six piles donneraient 9 V, trop pour la lampe.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur les piles en série",
+          "notions": "Toutes les notions de la leçon : brancher des piles en série, calculer la tension d'une association dans le même sens ou en opposition, choisir les piles adaptées à un récepteur.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans une lampe torche de 4,5 V, on place trois piles rondes de 1,5 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Suis la méthode : repérer, relier, contrôler.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour monter les trois piles de la lampe torche.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la lampe torche contient trois piles. Étape 2 — Relier : on repère les bornes, on relie un + à un −, puis on contrôle le sens avant de brancher la lampe. Étape 3 — Contrôler : les trois étapes se font dans cet ordre. Brancher la lampe avant de relier les piles ne donnerait aucun circuit.",
+                  "answers": [
+                    {
+                      "content": "Repérer le + et le − de chaque pile"
+                    },
+                    {
+                      "content": "Relier le + d'une pile au − de la suivante"
+                    },
+                    {
+                      "content": "Contrôler le sens des piles et brancher la lampe sur les bornes libres"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les trois piles sont dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 = 4,5 V.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Avec ces trois piles dans le même sens, que se passe-t-il pour la lampe de 4,5 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : on monte trois piles de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 = 4,5 V ; la tension de l'association est égale à la tension nominale. Elle brille normalement : la lampe est adaptée.",
+                  "answers": [
+                    {
+                      "content": "Elle brille normalement : la lampe est adaptée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille faiblement : la lampe est sous-voltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile est mise à l'envers. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a deux piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 − 1,5 = 1,5 V. Trouver 4,5 V serait additionner la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Quand une pile est retournée, la lampe de 4,5 V reste adaptée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : La lampe porte 4,5 V. Étape 2 — Chercher : on monte deux piles de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 + 1,5 − 1,5 = 1,5 V ; la tension de l'association est plus petite que la tension nominale. Elle brille faiblement : la lampe est sous-voltée. L'affirmation est fausse : 1,5 V est bien plus petit que 4,5 V.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un atelier prépare des piles pour une télécommande de 3 V, une radio de 6 V et une lampe de 9 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque appareil, cherche l'association dont la tension est égale à sa tension nominale.",
+              "questions": [
+                {
+                  "content": "Relie chaque appareil à l'association adaptée, montée en série dans le même sens.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on lit les trois tensions nominales : 3 V, 6 V et 9 V. Étape 2 — Chercher : 1,5 + 1,5 = 3 V ; 3 + 3 = 6 V ; 4,5 + 4,5 = 9 V. Étape 3 — Vérifier : chaque appareil est relié à l'association qui donne sa tension nominale. Une association de deux piles de 3 V pour la télécommande donnerait 6 V, deux fois trop.",
+                  "answers": [
+                    {
+                      "content": "Télécommande de 3 V",
+                      "match": "Deux piles de 1,5 V"
+                    },
+                    {
+                      "content": "Radio de 6 V",
+                      "match": "Deux piles de 3 V"
+                    },
+                    {
+                      "content": "Lampe de 9 V",
+                      "match": "Deux piles de 4,5 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de piles de 1,5 V faut-il monter en série, dans le même sens, pour la lampe de 9 V ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : La lampe porte 9 V. Étape 2 — Chercher : en ajoutant les piles de 1,5 V une à une, on obtient 1,5 V, puis 3 V, puis 4,5 V, puis 6 V, puis 7,5 V, puis 9 V : il faut six piles. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 + 1,5 + 1,5 = 9 V, égal à la tension nominale : l'association est adaptée.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atelier monte une pile de 9 V et une pile de 3 V dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 9 V et une pile de 3 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 9 + 3 = 12 V.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "L'atelier monte deux piles de 4,5 V dans le même sens dans la radio de 6 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : on monte deux piles de 4,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 4,5 + 4,5 = 9 V ; la tension de l'association est plus grande que la tension nominale. Elle risque d'être abîmée, car la tension est trop grande.",
+                  "answers": [
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fonctionne mal ou pas du tout, car la tension est trop petite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de 9 V et une pile de 3 V montées en série dans le même sens donnent une tension de 12 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on a une pile de 9 V et une pile de 3 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 9 + 3 = 12 V. L'affirmation est vraie : 12 V est la somme, et non la différence 6 V qui supposerait une pile retournée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une radio de 6 V possède un compartiment pour quatre piles de 1,5 V. Awa vérifie son montage.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense au sens de chaque pile et à la tension nominale de 6 V.",
+              "questions": [
+                {
+                  "content": "Awa place les quatre piles dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a quatre piles de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 + 1,5 = 6 V.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Une radio de 6 V contient quatre piles de 1,5 V. Awa met l'une des piles à l'envers par erreur. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a trois piles de 1,5 V et une pile de 1,5 V retournée, montées en série. Étape 2 — Choisir : une pile est retournée (association en opposition) : on retranche sa tension. Étape 3 — Calculer : 1,5 + 1,5 + 1,5 − 1,5 = 3 V. Trouver 6 V serait additionner la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Awa a monté quatre piles de 1,5 V dans sa radio de 6 V, dont une à l'envers. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La radio porte 6 V. Étape 2 — Chercher : on monte trois piles de 1,5 V et une pile de 1,5 V retournée en série ; on retranche la tension de la pile retournée. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 − 1,5 = 3 V ; la tension de l'association est plus petite que la tension nominale. Elle fonctionne mal ou pas du tout, car la tension est trop petite.",
+                  "answers": [
+                    {
+                      "content": "Elle fonctionne mal ou pas du tout, car la tension est trop petite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement, car la tension est la bonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle risque d'être abîmée, car la tension est trop grande",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa a une pile de 3 V. Avec laquelle des piles suivantes l'associe-t-elle pour la radio de 6 V, dans le même sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la radio porte 6 V. Étape 2 — Chercher : il manque 6 − 3 = 3 V pour atteindre la tension nominale. Étape 3 — Vérifier : 3 + 3 = 6 V : la seconde pile est de 3 V. Une pile de 1,5 V donnerait 4,5 V (trop peu), 4,5 V donnerait 7,5 V et 9 V donnerait 12 V (trop).",
+                  "answers": [
+                    {
+                      "content": "Une pile de 3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 9 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique en quelques lignes comment Awa doit monter quatre piles de 1,5 V pour sa radio de 6 V, et pourquoi.",
+                  "question_type": "written",
+                  "points": 4,
+                  "criteria": [
+                    "Lis la tension nominale : 6 V",
+                    "Précise le montage : le + de chaque pile relié au − de la suivante, toutes dans le même sens",
+                    "Calcule 1,5 + 1,5 + 1,5 + 1,5 = 6 V",
+                    "Conclus : l'association est adaptée"
+                  ],
+                  "explanation": "Corrigé modèle. Étape 1 — Lire : la radio porte 6 V. Étape 2 — Chercher : on monte les quatre piles en série, la borne + de chaque pile reliée à la borne − de la suivante, toutes dans le même sens. Étape 3 — Vérifier : 1,5 + 1,5 + 1,5 + 1,5 = 6 V, égal à la tension nominale : l'association est adaptée. Barème sur 4 points : 1 point par critère.",
+                  "answers": [],
+                  "starter": "Awa lit 6 V sur la radio…"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mariam a un coffret de piles : trois piles de 1,5 V, une pile de 3 V et une pile de 4,5 V. Elle veut alimenter une lampe de 6 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Teste chaque association en additionnant les tensions dans le même sens, puis compare le total à 6 V.",
+              "questions": [
+                {
+                  "content": "Quelle association donne exactement 6 V, dans le même sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V. Étape 2 — Chercher : 4,5 + 1,5 = 6 V ; 3 + 1,5 = 4,5 V ; 1,5 × 3 = 4,5 V ; 4,5 + 3 = 7,5 V. Étape 3 — Vérifier : seule l'association de la pile de 4,5 V et d'une pile de 1,5 V donne 6 V. Les autres associations donnent 4,5 V (trop peu) ou 7,5 V (trop).",
+                  "answers": [
+                    {
+                      "content": "La pile de 4,5 V et une pile de 1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 3 V et une pile de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois piles de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 4,5 V et la pile de 3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam associe la pile de 4,5 V, la pile de 3 V et une pile de 1,5 V, toutes dans le même sens. Quelle est la tension de l'association, en volts ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on a une pile de 4,5 V, une pile de 3 V et une pile de 1,5 V, montées en série. Étape 2 — Choisir : toutes les piles sont dans le même sens : on additionne les tensions. Étape 3 — Calculer : 4,5 + 3 + 1,5 = 9 V. Trouver 6 V serait retrancher la pile de 1,5 V, ce qui suppose qu'elle est retournée.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V"
+                },
+                {
+                  "content": "Mariam monte la pile de 4,5 V, la pile de 3 V et une pile de 1,5 V dans le même sens dans sa lampe de 6 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : La lampe porte 6 V. Étape 2 — Chercher : on monte une pile de 4,5 V, une pile de 3 V et une pile de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 4,5 + 3 + 1,5 = 9 V ; la tension de l'association est plus grande que la tension nominale. Elle brille très fort et risque de griller : la lampe est survoltée.",
+                  "answers": [
+                    {
+                      "content": "Elle brille très fort et risque de griller : la lampe est survoltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille normalement : la lampe est adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille faiblement : la lampe est sous-voltée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le même sens, choisis les deux associations qui rendent une lampe de 6 V survoltée.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on regarde les associations : toutes les piles sont dans le même sens. Étape 2 — Choisir : on additionne : 4,5 + 3 = 7,5 V ; 4,5 + 3 + 1,5 = 9 V ; 4,5 + 1,5 = 6 V ; 3 + 1,5 = 4,5 V. Étape 3 — Calculer : une lampe est survoltée quand la tension dépasse 6 V : 7,5 V et 9 V. 6 V est la tension nominale (lampe adaptée) et 4,5 V est trop petit (lampe sous-voltée).",
+                  "answers": [
+                    {
+                      "content": "La pile de 4,5 V et la pile de 3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 4,5 V, la pile de 3 V et une pile de 1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 4,5 V et une pile de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 3 V et une pile de 1,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus Mariam met de piles dans le même sens, mieux sa lampe de 6 V brille.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : La lampe porte 6 V. Étape 2 — Chercher : on monte une pile de 4,5 V, une pile de 3 V et une pile de 1,5 V en série ; on additionne leurs tensions, car elles sont dans le même sens. Étape 3 — Vérifier : 4,5 + 3 + 1,5 = 9 V ; la tension de l'association est plus grande que la tension nominale. Elle brille très fort et risque de griller : la lampe est survoltée. L'affirmation est fausse : trop de tension fait griller la lampe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

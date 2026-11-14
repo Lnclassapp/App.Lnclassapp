@@ -32,7 +32,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Relecture par un enseignant de Français : faits d'œuvre (L4), décompte des mots (L7), pronoms à l'impératif et participes (L8, L9), barèmes | Aucun enseignant disponible dans le chantier | Liste dans `docs/contenus/README.md`, section 3ème Français |
+| Relecture par un enseignant de Français : faits d'œuvre (L4), décompte des mots (L7), pronoms à l'impératif et participes (L8, L9), barèmes — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Aucun enseignant disponible dans le chantier | Liste dans `docs/contenus/README.md`, section 3ème Français |
 | `valider.rb` ne contrôle ni `statement_blocks`, ni les clés inconnues du cours, de la notion, de l'exemple et de l'exercice ; l'import les refuse (constat de revue) | Défaut antérieur à ce chantier, hors du périmètre du Lot A | À ouvrir : parité complète du contrôle avec le schéma v3 |
 | Le contrôle n'avertit pas d'un `*` ou d'un `**` dans une question, et les autres leçons v3 (maths 3ème) peuvent en contenir | Hors périmètre ; à trancher : avertir dans le contrôle, ou rendre l'italique dans les questions | À ouvrir |
 | Liste des œuvres intégrales de l'établissement : la leçon 4 n'en suppose aucune en particulier | Varie selon l'établissement | — |

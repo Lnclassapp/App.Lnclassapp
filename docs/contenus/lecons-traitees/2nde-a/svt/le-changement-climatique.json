@@ -1,0 +1,4195 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le changement climatique",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "A",
+      "material_name": "SVT",
+      "figures": [
+        {
+          "key": "temps-climat",
+          "kind": "diagram",
+          "description": "Schéma fléché qui distingue le temps et le climat : le temps est l'état de l'atmosphère à un instant ; on en fait la moyenne sur de nombreuses années ; cette moyenne donne le climat ; si cette moyenne change durablement, on parle de changement climatique.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "t",
+                "label": "Temps : état de l'atmosphère à un instant"
+              },
+              {
+                "id": "m",
+                "label": "Moyenne sur de nombreuses années"
+              },
+              {
+                "id": "c",
+                "label": "Climat"
+              },
+              {
+                "id": "k",
+                "label": "Changement climatique : moyenne qui change durablement"
+              }
+            ],
+            "edges": [
+              {
+                "from": "t",
+                "to": "m",
+                "label": "on calcule"
+              },
+              {
+                "from": "m",
+                "to": "c",
+                "label": "donne"
+              },
+              {
+                "from": "c",
+                "to": "k",
+                "label": "peut évoluer"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "releve-temperatures",
+          "kind": "stat_chart",
+          "description": "Courbe d'un relevé fictif : la température moyenne d'un village du Nord, en degrés Celsius, par décennie. Décennie 1 : 26,0 ; décennie 2 : 26,2 ; décennie 3 : 26,5 ; décennie 4 : 26,8. Chaque valeur est plus grande que la précédente : la courbe monte.",
+          "params": {
+            "chart": "line",
+            "series": [
+              26.0,
+              26.2,
+              26.5,
+              26.8
+            ],
+            "labels": [
+              "Décennie 1",
+              "Décennie 2",
+              "Décennie 3",
+              "Décennie 4"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "effet-de-serre",
+          "kind": "diagram",
+          "description": "Schéma fléché de l'effet de serre : le rayonnement du Soleil chauffe le sol ; le sol renvoie de la chaleur vers l'espace ; les gaz à effet de serre retiennent une partie de cette chaleur ; l'atmosphère reste plus chaude. Plus il y a de gaz à effet de serre, plus la chaleur retenue est importante.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "s",
+                "label": "Rayonnement du Soleil"
+              },
+              {
+                "id": "g",
+                "label": "Sol chauffé"
+              },
+              {
+                "id": "c",
+                "label": "Chaleur renvoyée vers l'espace"
+              },
+              {
+                "id": "z",
+                "label": "Gaz à effet de serre : ils en retiennent une partie"
+              },
+              {
+                "id": "a",
+                "label": "Atmosphère plus chaude"
+              }
+            ],
+            "edges": [
+              {
+                "from": "s",
+                "to": "g",
+                "label": "chauffe"
+              },
+              {
+                "from": "g",
+                "to": "c",
+                "label": "renvoie"
+              },
+              {
+                "from": "c",
+                "to": "z",
+                "label": "arrive sur"
+              },
+              {
+                "from": "z",
+                "to": "a",
+                "label": "réchauffe"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rendements-pluies",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres d'un relevé fictif : la récolte de maïs d'un champ, en sacs, sur quatre années où la pluie diminue. Année 1 : 8 sacs ; année 2 : 6 sacs ; année 3 : 4 sacs ; année 4 : 2 sacs. La récolte baisse d'année en année.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              8,
+              6,
+              4,
+              2
+            ],
+            "labels": [
+              "Année 1",
+              "Année 2",
+              "Année 3",
+              "Année 4"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "mesures-climat",
+          "kind": "diagram",
+          "description": "Arbre des actions face au changement climatique. Deux branches : l'atténuation, qui réduit les causes (reboisement, énergies renouvelables, économies d'énergie, gestion des déchets), et l'adaptation, qui limite les dégâts (cultures résistantes à la sécheresse, digues, système d'alerte contre les inondations).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Agir face au changement climatique"
+              },
+              {
+                "id": "a",
+                "label": "Atténuation : réduire les causes"
+              },
+              {
+                "id": "d",
+                "label": "Adaptation : limiter les dégâts"
+              },
+              {
+                "id": "a1",
+                "label": "Reboisement"
+              },
+              {
+                "id": "a2",
+                "label": "Énergies renouvelables"
+              },
+              {
+                "id": "a3",
+                "label": "Économies d'énergie"
+              },
+              {
+                "id": "a4",
+                "label": "Gestion des déchets"
+              },
+              {
+                "id": "d1",
+                "label": "Cultures résistantes"
+              },
+              {
+                "id": "d2",
+                "label": "Digues"
+              },
+              {
+                "id": "d3",
+                "label": "Alerte inondations"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "a"
+              },
+              {
+                "from": "r",
+                "to": "d"
+              },
+              {
+                "from": "a",
+                "to": "a1"
+              },
+              {
+                "from": "a",
+                "to": "a2"
+              },
+              {
+                "from": "a",
+                "to": "a3"
+              },
+              {
+                "from": "a",
+                "to": "a4"
+              },
+              {
+                "from": "d",
+                "to": "d1"
+              },
+              {
+                "from": "d",
+                "to": "d2"
+              },
+              {
+                "from": "d",
+                "to": "d3"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pluies-decennies",
+          "kind": "stat_chart",
+          "description": "Courbe d'un relevé fictif : la pluie annuelle moyenne d'un village du Nord, en millimètres, par décennie. Décennie 1 : 1 100 ; décennie 2 : 1 050 ; décennie 3 : 950 ; décennie 4 : 850. La moyenne baisse de décennie en décennie.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1100,
+              1050,
+              950,
+              850
+            ],
+            "labels": [
+              "Décennie 1",
+              "Décennie 2",
+              "Décennie 3",
+              "Décennie 4"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "sources-emissions",
+          "kind": "stat_chart",
+          "description": "Diagramme circulaire fictif : la part de chaque activité dans les émissions de gaz à effet de serre d'un pays imaginaire. Combustion de combustibles fossiles : 50 % ; déforestation : 25 % ; élevage : 15 % ; décharges : 10 %. Le total fait 100 %.",
+          "params": {
+            "chart": "pie",
+            "series": [
+              50,
+              25,
+              15,
+              10
+            ],
+            "labels": [
+              "Combustibles fossiles",
+              "Déforestation",
+              "Élevage",
+              "Décharges"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-zones",
+          "kind": "map",
+          "description": "Carte schématique de la Côte d'Ivoire montrant deux zones prises comme exemples généraux : la savane du Nord, où se trouve la ville repère de Korhogo, et la bande côtière du sud, où se trouvent Abidjan et Grand-Lahou. Les contours sont schématiques ; aucune mesure réelle n'est donnée.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "savanna",
+                "category": 1
+              },
+              {
+                "id": "coastal_strip",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "korhogo"
+              },
+              {
+                "id": "abidjan"
+              },
+              {
+                "id": "grand_lahou"
+              }
+            ],
+            "legend": [
+              "Savane du Nord",
+              "Bande côtière"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "chaine-causes",
+          "kind": "diagram",
+          "description": "Schéma fléché de la chaîne des causes : les activités humaines émettent plus de gaz à effet de serre ; l'effet de serre est renforcé ; la planète se réchauffe ; les sécheresses, les inondations et la montée de la mer deviennent plus marquées.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Activités humaines"
+              },
+              {
+                "id": "b",
+                "label": "Plus de gaz à effet de serre"
+              },
+              {
+                "id": "c",
+                "label": "Effet de serre renforcé"
+              },
+              {
+                "id": "d",
+                "label": "Réchauffement"
+              },
+              {
+                "id": "e",
+                "label": "Sécheresses, inondations, montée de la mer"
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b",
+                "label": "émettent"
+              },
+              {
+                "from": "b",
+                "to": "c",
+                "label": "provoquent"
+              },
+              {
+                "from": "c",
+                "to": "d",
+                "label": "entraîne"
+              },
+              {
+                "from": "d",
+                "to": "e",
+                "label": "aggrave"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Distinguer le temps et le climat",
+          "remember": "Le **temps** est l'état de l'atmosphère à un moment précis et en un lieu précis : température, pluie, vent, nuages. Il change d'une heure à l'autre. Le **climat** est la moyenne du temps observée dans un lieu pendant de nombreuses années (plusieurs dizaines d'années ; on retient en général 30 ans). Il décrit les saisons habituelles, les pluies moyennes et les températures moyennes d'une région. Le **changement climatique** est une modification durable du climat : on la voit en comparant des moyennes sur de longues périodes, pas en regardant un seul jour.",
+          "method": [
+            "Repérer la durée de l'observation : un instant, une journée ou de nombreuses années.",
+            "Identifier la nature de l'information : un état de l'atmosphère ou une moyenne.",
+            "Conclure : une observation courte et ponctuelle décrit le temps ; une moyenne sur de nombreuses années décrit le climat."
+          ],
+          "example": {
+            "statement": "Classer ces deux phrases. (a) « Ce matin, il pleut sur le village. » (b) « Dans la région, la saison sèche dure plusieurs mois chaque année et il tombe en moyenne 1 000 mm de pluie par an. »",
+            "steps": [
+              "Repérer : la phrase (a) porte sur un matin ; la phrase (b) porte sur chaque année, donc sur de nombreuses années.",
+              "Identifier : (a) donne un état de l'atmosphère à un moment précis ; (b) donne une moyenne et un rythme de saisons.",
+              "Conclure : (a) décrit le temps ; (b) décrit le climat."
+            ]
+          },
+          "pitfall": "Ne conclus pas à un changement climatique à partir d'une seule journée ou d'une seule année exceptionnelle. Contre-exemple : une journée très chaude en février n'est qu'un fait de temps ; un seul été très pluvieux ne change pas la moyenne de plusieurs dizaines d'années. Pour parler de climat, compare toujours des moyennes sur longue durée.",
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer le temps et le climat.",
+            "questions": [
+              {
+                "content": "« Demain, le ciel sera nuageux et le vent faible. » Cette phrase décrit :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer la durée : la phrase parle de demain, donc d'un seul jour. Étape 2 — Identifier la nature de l'information : c'est un état de l'atmosphère, pas une moyenne. Étape 3 — Conclure : c'est le temps. Le climat serait une moyenne sur de nombreuses années.",
+                "answers": [
+                  {
+                    "content": "le temps",
+                    "correct": true
+                  },
+                  {
+                    "content": "le climat",
+                    "correct": false
+                  },
+                  {
+                    "content": "le changement climatique",
+                    "correct": false
+                  },
+                  {
+                    "content": "une moyenne sur plusieurs dizaines d'années",
+                    "correct": false
+                  }
+                ],
+                "hint": "Demande-toi sur combien de temps porte la phrase."
+              },
+              {
+                "content": "Le climat d'une région est la moyenne du temps observée pendant de nombreuses années.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer la durée : de nombreuses années. Étape 2 — Identifier la nature de l'information : une moyenne du temps. Étape 3 — Conclure : c'est bien la définition du climat, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Relis la définition du climat dans « À retenir »."
+              },
+              {
+                "content": "L'état de l'atmosphère à un moment précis s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer la durée : un moment précis. Étape 2 — Identifier la nature : un état de l'atmosphère. Étape 3 — Conclure : cela s'appelle le temps.",
+                "answers": [
+                  {
+                    "content": "temps",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce mot s'oppose à « climat »."
+              }
+            ]
+          },
+          "figure": "temps-climat",
+          "exercise": [
+            {
+              "title": "Reconnaître le temps et le climat",
+              "statement": "Dans cet exercice, tu distingues le temps et le climat avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la définition du climat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la durée : le climat se construit sur de nombreuses années. Étape 2 — Identifier la nature de l'information : c'est une moyenne. Étape 3 — Conclure : le climat est la moyenne du temps sur longue durée. Les autres propositions décrivent le temps, qui change d'un jour à l'autre.",
+                  "answers": [
+                    {
+                      "content": "La moyenne du temps observée dans un lieu pendant de nombreuses années",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'état de l'atmosphère ce matin",
+                      "correct": false
+                    },
+                    {
+                      "content": "La prévision de la pluie pour demain",
+                      "correct": false
+                    },
+                    {
+                      "content": "La température mesurée à midi aujourd'hui",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Hier soir, un orage violent a éclaté sur le village. Cette phrase décrit :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la durée : un seul soir. Étape 2 — Identifier la nature de l'information : un état de l'atmosphère à un moment précis. Étape 3 — Conclure : c'est le temps. Un orage isolé ne dit rien sur le climat.",
+                  "answers": [
+                    {
+                      "content": "le temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "le climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "une saison entière",
+                      "correct": false
+                    },
+                    {
+                      "content": "le changement climatique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une très forte chaleur un jour de mars prouve à elle seule que le climat a changé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la durée : un seul jour. Étape 2 — Identifier la nature : un fait de temps, pas une moyenne. Étape 3 — Conclure : un seul jour ne prouve rien sur le climat ; il faut comparer des moyennes sur de nombreuses années. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer la durée de chaque définition : un moment, de nombreuses années, un changement durable. Étape 2 — Identifier la nature : un état, une moyenne, une modification de cette moyenne. Étape 3 — Conclure : temps, climat et changement climatique se relient comme indiqué.",
+                  "answers": [
+                    {
+                      "content": "Temps",
+                      "match": "État de l'atmosphère à un moment précis"
+                    },
+                    {
+                      "content": "Climat",
+                      "match": "Moyenne du temps sur de nombreuses années"
+                    },
+                    {
+                      "content": "Changement climatique",
+                      "match": "Modification durable du climat"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une moyenne de pluie calculée sur plusieurs dizaines d'années décrit le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer la durée : plusieurs dizaines d'années. Étape 2 — Identifier la nature : une moyenne. Étape 3 — Conclure : c'est le climat. Le temps ne porte que sur un moment précis.",
+                  "answers": [
+                    {
+                      "content": "climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "vent",
+                      "correct": false
+                    },
+                    {
+                      "content": "jour",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer des observations : temps ou climat",
+              "statement": "Dans cet exercice, tu classes des observations faites dans un village du Nord (valeurs fictives) avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Ce matin, l'harmattan souffle et un voile de poussière couvre le ciel du village. Cette phrase décrit :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la durée : ce matin. Étape 2 — Identifier la nature : un état de l'atmosphère à un moment précis. Étape 3 — Conclure : c'est le temps.",
+                  "answers": [
+                    {
+                      "content": "le temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "le climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "le changement climatique",
+                      "correct": false
+                    },
+                    {
+                      "content": "une moyenne sur trente ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le Nord, une longue saison sèche revient chaque année et les pluies moyennes sont faibles. Cette phrase décrit :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la durée : chaque année, donc de nombreuses années. Étape 2 — Identifier la nature : un rythme de saisons et des moyennes. Étape 3 — Conclure : c'est le climat.",
+                  "answers": [
+                    {
+                      "content": "le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "le temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "un orage",
+                      "correct": false
+                    },
+                    {
+                      "content": "la météo de demain",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la durée de l'observation. Étape 2 — Identifier la nature de l'information. Étape 3 — Conclure : temps ou climat. On commence par la durée, car c'est elle qui sépare un fait de temps d'une moyenne.",
+                  "answers": [
+                    {
+                      "content": "Repérer la durée de l'observation"
+                    },
+                    {
+                      "content": "Identifier la nature de l'information"
+                    },
+                    {
+                      "content": "Conclure : temps ou climat"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un relevé fictif donne les pluies de cinq années : 900, 1 000, 1 100, 950 et 1 050 mm. Calcule la moyenne, en mm.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer la durée : cinq années de relevé. Étape 2 — Identifier la nature : on calcule une moyenne. On additionne : 900 + 1 000 + 1 100 + 950 + 1 050 = 5 000, puis on divise par 5 : 1 000. Étape 3 — Conclure : la moyenne est 1 000 mm ; c'est une valeur de climat, pas de temps.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mm"
+                },
+                {
+                  "content": "Le temps change d'une heure à l'autre, alors que le climat ne change que très lentement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la durée : une heure pour le temps, de nombreuses années pour le climat. Étape 2 — Identifier la nature : un état contre une moyenne. Étape 3 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux phrases qui décrivent le climat.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer la durée de chaque phrase : seules deux portent sur chaque année. Étape 2 — Identifier la nature : une moyenne et un rythme de saisons. Étape 3 — Conclure : ces deux phrases décrivent le climat. Hier soir, cet après-midi et ce matin sont des faits de temps.",
+                  "answers": [
+                    {
+                      "content": "Il tombe en moyenne 1 000 mm de pluie par an dans la région.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La saison sèche dure plusieurs mois chaque année.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a plu fort hier soir.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vent est fort cet après-midi.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ciel est couvert ce matin.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche les mots qui donnent la durée : « hier », « ce matin » (temps) ou « chaque année », « en moyenne » (climat)."
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître les manifestations du changement climatique",
+          "remember": "Le changement climatique se reconnaît à ses **manifestations**, observées sur de nombreuses années : la **hausse des températures moyennes** ; la **perturbation des saisons des pluies** (début retardé, pluies irrégulières, saison plus courte ou plus longue) ; les **sécheresses**, longues périodes sans assez de pluie ; les **inondations** après de fortes pluies ; l'**élévation du niveau de la mer**, due à la dilatation de l'eau qui se réchauffe et à la fonte des glaces posées sur les continents ; l'**érosion côtière**, recul de la côte rongée par les vagues. Un pays qui possède un littoral, comme la Côte d'Ivoire, est concerné par la montée de la mer et l'érosion côtière.",
+          "method": [
+            "Lire la donnée relevée : la grandeur mesurée (température, pluie, niveau de la mer) et la période étudiée.",
+            "Comparer les valeurs d'une période à l'autre.",
+            "Repérer le sens du changement : hausse, baisse ou décalage durable.",
+            "Nommer la manifestation du changement climatique qui correspond."
+          ],
+          "example": {
+            "statement": "Un relevé fictif donne la température moyenne d'un village du Nord, par décennie : 26,0 °C ; 26,2 °C ; 26,5 °C ; 26,8 °C. Quelle manifestation observe-t-on ?",
+            "steps": [
+              "Lire : la grandeur est la température moyenne, relevée sur quatre décennies.",
+              "Comparer : 26,0 puis 26,2 puis 26,5 puis 26,8 ; chaque valeur est plus grande que la précédente.",
+              "Repérer : le sens du changement est une hausse, régulière sur quatre décennies, donc durable.",
+              "Nommer : c'est la hausse des températures moyennes."
+            ]
+          },
+          "pitfall": "Ne confonds pas l'élévation du niveau de la mer et l'érosion côtière. Contre-exemple : une plage qui recule de plusieurs mètres montre l'érosion côtière (un recul de la côte, mesuré en mètres) ; un repère gradué sur lequel l'eau monte montre l'élévation du niveau de la mer (une hauteur d'eau). Les deux peuvent se produire ensemble, mais ce sont deux phénomènes distincts : nomme celui que la donnée mesure vraiment.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les manifestations du changement climatique.",
+            "questions": [
+              {
+                "content": "Un relevé fictif montre que, d'une décennie à l'autre, la température moyenne d'un village augmente. Quelle manifestation observe-t-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : la grandeur est la température moyenne. Étape 2 — Comparer : elle augmente d'une décennie à l'autre. Étape 3 — Repérer : c'est une hausse durable. Étape 4 — Nommer : la hausse des températures moyennes. L'érosion et la montée de la mer concernent la côte, pas la température.",
+                "answers": [
+                  {
+                    "content": "La hausse des températures moyennes",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'érosion côtière",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élévation du niveau de la mer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une inondation",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quelle grandeur le relevé mesure-t-il ?"
+              },
+              {
+                "content": "Relie chaque manifestation à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire chaque description : manque de pluie, excès d'eau, recul de la côte. Étape 2 — Comparer les grandeurs concernées : pluie en moins, pluie en trop, position de la côte. Étape 3 — Repérer le sens : manque, excès, recul. Étape 4 — Nommer : sécheresse, inondation, érosion côtière.",
+                "answers": [
+                  {
+                    "content": "Sécheresse",
+                    "match": "Longue période sans assez de pluie"
+                  },
+                  {
+                    "content": "Inondation",
+                    "match": "Terrain couvert d'eau après de fortes pluies"
+                  },
+                  {
+                    "content": "Érosion côtière",
+                    "match": "Recul de la côte rongée par les vagues"
+                  }
+                ],
+                "hint": "Cherche le mot clé de chaque description : « sans assez de pluie », « couvert d'eau », « recul »."
+              },
+              {
+                "content": "Le recul de la côte rongée par les vagues s'appelle l'érosion côtière.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : le phénomène décrit est un recul de la côte. Étape 2 — Comparer avec la liste des manifestations. Étape 3 — Repérer : il s'agit d'un recul durable. Étape 4 — Nommer : l'érosion côtière. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à une plage qui rétrécit."
+              }
+            ]
+          },
+          "figure": "releve-temperatures",
+          "exercise": [
+            {
+              "title": "Nommer les manifestations",
+              "statement": "Dans cet exercice, tu reconnais les manifestations du changement climatique avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Laquelle de ces situations est une manifestation du changement climatique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on cherche une donnée de climat. Étape 2 — Comparer d'une période à l'autre : seules les pluies changent d'une période à l'autre. Étape 3 — Repérer un changement durable. Étape 4 — Nommer : la perturbation des saisons des pluies. Une éclipse, un séisme et le lever du Soleil ne sont pas des manifestations du changement climatique : ils ne traduisent aucune modification durable du climat.",
+                  "answers": [
+                    {
+                      "content": "La perturbation des saisons des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse de Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un tremblement de terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lever du Soleil chaque matin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux causes de l'élévation du niveau de la mer.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : on étudie le niveau de la mer. Étape 2 — Comparer ce qui ajoute de l'eau ou du volume : l'eau chaude se dilate, les glaces continentales fondues ajoutent de l'eau. Étape 3 — Repérer le sens : le niveau monte. Étape 4 — Nommer les deux causes. Des vagues d'un jour, l'absence de nuages et la plantation d'arbres ne font pas monter la mer.",
+                  "answers": [
+                    {
+                      "content": "La dilatation de l'eau qui se réchauffe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fonte des glaces posées sur les continents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les vagues plus fortes un seul jour",
+                      "correct": false
+                    },
+                    {
+                      "content": "La disparition des nuages",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plantation d'arbres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une longue période sans assez de pluie s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la donnée est le manque de pluie. Étape 2 — Comparer avec la pluie habituelle : il en tombe trop peu. Étape 3 — Repérer le sens : une baisse prolongée. Étape 4 — Nommer : une sécheresse.",
+                  "answers": [
+                    {
+                      "content": "sécheresse",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'érosion côtière et l'élévation du niveau de la mer désignent exactement le même phénomène.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : l'une est un recul de la côte, l'autre une hausse de la hauteur d'eau. Étape 2 — Comparer ce que chacune mesure : des mètres de recul contre une hauteur d'eau. Étape 3 — Repérer qu'elles sont distinctes. Étape 4 — Nommer chaque phénomène : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un relevé fictif donne la température moyenne d'un village : 26,0 °C à la première décennie et 26,8 °C à la quatrième. De combien a-t-elle augmenté ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 26,0 puis 26,8. Étape 2 — Comparer en soustrayant : 26,8 - 26,0 = 0,8. Étape 3 — Repérer le sens : une hausse. Étape 4 — Nommer : la hausse est de 0,8 °C.",
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                }
+              ]
+            },
+            {
+              "title": "Lire un relevé et nommer la manifestation",
+              "statement": "Dans cet exercice, tu lis des relevés fictifs et tu nommes la manifestation du changement climatique.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un relevé fictif montre que la saison des pluies commençait autrefois en avril et commence maintenant en juin, avec des pluies irrégulières. Quelle manifestation observe-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on étudie le début de la saison des pluies. Étape 2 — Comparer : avril autrefois, juin aujourd'hui. Étape 3 — Repérer : un décalage durable, avec des pluies irrégulières. Étape 4 — Nommer : la perturbation des saisons des pluies. Aucune température ni aucune côte n'est mentionnée.",
+                  "answers": [
+                    {
+                      "content": "La perturbation des saisons des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'érosion côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'élévation du niveau de la mer",
+                      "correct": false
+                    },
+                    {
+                      "content": "La hausse des températures moyennes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élévation du niveau de la ___ menace le littoral.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la donnée concerne le littoral. Étape 2 — Comparer le niveau de l'eau d'une période à l'autre. Étape 3 — Repérer le sens : une hausse. Étape 4 — Nommer : l'élévation du niveau de la mer.",
+                  "answers": [
+                    {
+                      "content": "mer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire la donnée relevée. Étape 2 — Comparer les valeurs d'une période à l'autre. Étape 3 — Repérer le sens du changement. Étape 4 — Nommer la manifestation. On ne peut pas nommer avant d'avoir lu et comparé.",
+                  "answers": [
+                    {
+                      "content": "Lire la donnée relevée"
+                    },
+                    {
+                      "content": "Comparer les valeurs d'une période à l'autre"
+                    },
+                    {
+                      "content": "Repérer le sens du changement"
+                    },
+                    {
+                      "content": "Nommer la manifestation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque relevé fictif à la manifestation qu'il montre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire chaque relevé : niveau d'eau, plage, température. Étape 2 — Comparer d'une période à l'autre. Étape 3 — Repérer le sens : montée, recul, hausse. Étape 4 — Nommer : élévation du niveau de la mer, érosion côtière, hausse des températures moyennes.",
+                  "answers": [
+                    {
+                      "content": "Le niveau de l'eau sur un repère gradué monte chaque année",
+                      "match": "Élévation du niveau de la mer"
+                    },
+                    {
+                      "content": "Une plage recule de plusieurs mètres en quelques années",
+                      "match": "Érosion côtière"
+                    },
+                    {
+                      "content": "La température moyenne augmente d'une décennie à l'autre",
+                      "match": "Hausse des températures moyennes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul jour de forte pluie suffit à prouver une perturbation des saisons des pluies.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la donnée est un seul jour. Étape 2 — Comparer : aucune autre période n'est comparée. Étape 3 — Repérer : il n'y a pas de changement durable. Étape 4 — Nommer : on ne peut pas conclure ; il faut des relevés sur de nombreuses années. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après de fortes pluies, l'eau recouvre les rues et les champs d'un quartier. Quelle manifestation est décrite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la grandeur est l'eau qui recouvre le terrain. Étape 2 — Comparer avec un niveau d'eau habituel : il y en a beaucoup trop. Étape 3 — Repérer le sens : un excès d'eau. Étape 4 — Nommer : une inondation. La sécheresse est le contraire : un manque de pluie.",
+                  "answers": [
+                    {
+                      "content": "Une inondation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une sécheresse",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'érosion côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La hausse des températures moyennes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque relevé, demande-toi d'abord quelle grandeur est mesurée, puis dans quel sens elle change."
+            }
+          ]
+        },
+        {
+          "name": "Expliquer l'effet de serre et ses causes",
+          "remember": "Le Soleil chauffe la Terre, qui renvoie de la chaleur vers l'espace. Des gaz de l'atmosphère, les **gaz à effet de serre**, en retiennent une partie : c'est l'**effet de serre naturel**. Sans lui, la Terre serait trop froide pour la vie. Les principaux gaz à effet de serre sont le **dioxyde de carbone** (CO₂), le **méthane** (CH₄), le **protoxyde d'azote** (N₂O) et la **vapeur d'eau**. Les **activités humaines** augmentent leur quantité : la combustion du pétrole, du charbon et du gaz, les **combustibles fossiles** (CO₂) ; la déforestation et les feux de brousse (CO₂, et moins d'arbres pour absorber le CO₂ par photosynthèse) ; l'élevage, les décharges et les fuites lors de l'extraction du pétrole, du gaz et du charbon (CH₄) ; les engrais azotés (N₂O). Quand ces gaz augmentent, l'effet de serre est **renforcé** et la planète se réchauffe.",
+          "method": [
+            "Rappeler le rôle de l'effet de serre naturel : les gaz à effet de serre retiennent une partie de la chaleur.",
+            "Identifier l'activité humaine ou le gaz en cause.",
+            "Relier l'activité à l'augmentation d'un gaz à effet de serre, ou à la baisse de l'absorption du CO₂.",
+            "Conclure : plus de gaz à effet de serre renforce l'effet de serre et réchauffe la planète."
+          ],
+          "example": {
+            "statement": "De nombreux véhicules brûlent chaque jour beaucoup d'essence. Explique le lien avec le changement climatique.",
+            "steps": [
+              "Rappeler : l'effet de serre naturel existe ; les gaz à effet de serre retiennent une partie de la chaleur de la Terre.",
+              "Identifier : l'activité en cause est la combustion de l'essence, un combustible fossile dérivé du pétrole.",
+              "Relier : cette combustion libère du CO₂, un gaz à effet de serre, dont la quantité dans l'atmosphère augmente.",
+              "Conclure : avec plus de gaz à effet de serre, l'effet de serre est renforcé et la planète se réchauffe."
+            ]
+          },
+          "pitfall": "Ne crois pas que l'effet de serre est mauvais en lui-même. Contre-exemple : sans effet de serre naturel, la Terre serait trop froide pour que la vie s'y développe. Le problème n'est pas l'effet de serre naturel, c'est son renforcement par les gaz que les activités humaines ajoutent à l'atmosphère.",
+          "practice": {
+            "statement": "Tu t'entraînes à relier une activité humaine à un gaz à effet de serre.",
+            "questions": [
+              {
+                "content": "Quel gaz à effet de serre est libéré par la combustion du pétrole ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Rappeler : les gaz à effet de serre retiennent la chaleur. Étape 2 — Identifier l'activité : la combustion du pétrole. Étape 3 — Relier : elle libère du CO₂. Étape 4 — Conclure : plus de CO₂ renforce l'effet de serre. Le dioxygène est au contraire consommé par la combustion.",
+                "answers": [
+                  {
+                    "content": "Le dioxyde de carbone (CO₂)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hélium",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'argon",
+                    "correct": false
+                  }
+                ],
+                "hint": "Brûler un combustible fossile libère un gaz bien connu."
+              },
+              {
+                "content": "Relie chaque gaz à une activité humaine qui en libère.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Rappeler que ces trois gaz retiennent la chaleur. Étape 2 — Identifier l'activité de chaque ligne. Étape 3 — Relier : combustion et CO₂, élevage et décharges et CH₄, engrais azotés et N₂O. Étape 4 — Conclure : chaque activité renforce l'effet de serre.",
+                "answers": [
+                  {
+                    "content": "Dioxyde de carbone (CO₂)",
+                    "match": "Combustion du pétrole et du charbon"
+                  },
+                  {
+                    "content": "Méthane (CH₄)",
+                    "match": "Élevage et décharges"
+                  },
+                  {
+                    "content": "Protoxyde d'azote (N₂O)",
+                    "match": "Engrais azotés"
+                  }
+                ],
+                "hint": "Le méthane vient surtout des animaux d'élevage et des déchets qui pourrissent."
+              },
+              {
+                "content": "Les arbres absorbent le CO₂ par la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Rappeler le rôle des gaz à effet de serre. Étape 2 — Identifier le gaz : le CO₂. Étape 3 — Relier : les plantes vertes absorbent le CO₂ pour fabriquer leur matière organique, c'est la photosynthèse. Étape 4 — Conclure : moins d'arbres, c'est moins de CO₂ absorbé.",
+                "answers": [
+                  {
+                    "content": "photosynthèse",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est le mécanisme étudié dans la leçon sur la production de la matière organique."
+              },
+              {
+                "content": "Sans effet de serre naturel, la Terre serait trop froide pour que la vie s'y développe.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Rappeler : l'effet de serre naturel retient une partie de la chaleur. Étape 2 — Identifier le gaz ou l'activité : aucun, il s'agit du phénomène naturel. Étape 3 — Relier : sans lui, la chaleur partirait vers l'espace. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au rôle utile de l'effet de serre naturel."
+              }
+            ]
+          },
+          "figure": "effet-de-serre",
+          "exercise": [
+            {
+              "title": "Comprendre l'effet de serre",
+              "statement": "Dans cet exercice, tu expliques l'effet de serre et ses causes avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le rôle de l'effet de serre naturel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : les gaz à effet de serre retiennent une partie de la chaleur. Étape 2 — Identifier le gaz ou l'activité : aucun apport humain ici, c'est le phénomène naturel. Étape 3 — Relier : cette chaleur retenue garde la Terre assez chaude. Étape 4 — Conclure : son rôle est de retenir une partie de la chaleur.",
+                  "answers": [
+                    {
+                      "content": "Retenir une partie de la chaleur renvoyée par la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Produire la lumière du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire pleuvoir chaque jour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Absorber tout le CO₂ de l'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois gaz à effet de serre.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Rappeler : un gaz à effet de serre retient la chaleur. Étape 2 — Identifier les gaz de la liste du cours : CO₂, CH₄, N₂O et la vapeur d'eau. Étape 3 — Relier à la liste proposée : trois gaz du cours y figurent. Étape 4 — Conclure : le dioxygène et l'argon ne sont pas des gaz à effet de serre.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone (CO₂)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le méthane (CH₄)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le protoxyde d'azote (N₂O)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'argon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la déforestation renforce-t-elle l'effet de serre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le CO₂ est un gaz à effet de serre. Étape 2 — Identifier l'activité : la déforestation. Étape 3 — Relier : moins d'arbres, donc moins de CO₂ absorbé par photosynthèse, et le bois brûlé libère du CO₂. Étape 4 — Conclure : l'effet de serre est renforcé.",
+                  "answers": [
+                    {
+                      "content": "Il y a moins d'arbres pour absorber le CO₂, et le bois brûlé libère du CO₂",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les arbres coupés absorbent davantage de CO₂",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les arbres libèrent du protoxyde d'azote pendant la photosynthèse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La déforestation n'a aucun lien avec le CO₂",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rappeler le rôle de l'effet de serre naturel. Étape 2 — Identifier l'activité ou le gaz. Étape 3 — Relier l'activité à l'augmentation d'un gaz. Étape 4 — Conclure sur l'effet de serre renforcé. Le raisonnement va de la cause vers l'effet.",
+                  "answers": [
+                    {
+                      "content": "Rappeler le rôle de l'effet de serre naturel"
+                    },
+                    {
+                      "content": "Identifier l'activité humaine ou le gaz en cause"
+                    },
+                    {
+                      "content": "Relier l'activité à l'augmentation d'un gaz à effet de serre"
+                    },
+                    {
+                      "content": "Conclure sur l'effet de serre renforcé"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'effet de serre naturel est un phénomène néfaste qu'il faudrait supprimer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : l'effet de serre naturel retient une partie de la chaleur. Étape 2 — Identifier : il n'est pas causé par les activités humaines. Étape 3 — Relier : sans lui, la Terre serait trop froide pour la vie. Étape 4 — Conclure : c'est son renforcement qui pose problème. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Relier une activité humaine à un gaz",
+              "statement": "Dans cet exercice, tu relies des activités humaines aux gaz à effet de serre avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un grand élevage de bovins libère surtout un gaz à effet de serre. Lequel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler le rôle des gaz à effet de serre. Étape 2 — Identifier l'activité : l'élevage de ruminants. Étape 3 — Relier : leur digestion libère du méthane. Étape 4 — Conclure : l'effet de serre est renforcé par le méthane.",
+                  "answers": [
+                    {
+                      "content": "Le méthane (CH₄)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hélium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'argon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les déchets organiques qui pourrissent dans une décharge libèrent surtout du ___, un gaz à effet de serre.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler les gaz à effet de serre. Étape 2 — Identifier l'activité : les décharges. Étape 3 — Relier : la décomposition des déchets libère du méthane. Étape 4 — Conclure : les décharges renforcent l'effet de serre.",
+                  "answers": [
+                    {
+                      "content": "méthane",
+                      "correct": true
+                    },
+                    {
+                      "content": "hélium",
+                      "correct": false
+                    },
+                    {
+                      "content": "argon",
+                      "correct": false
+                    },
+                    {
+                      "content": "dioxygène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Brûler du charbon, du pétrole ou du gaz, c'est brûler des combustibles ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler le rôle des gaz à effet de serre. Étape 2 — Identifier l'activité : brûler charbon, pétrole et gaz. Étape 3 — Relier : ces matières s'appellent les combustibles fossiles et leur combustion libère du CO₂. Étape 4 — Conclure : l'effet de serre est renforcé.",
+                  "answers": [
+                    {
+                      "content": "fossiles",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces actions ne renforce pas l'effet de serre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le CO₂ est un gaz à effet de serre. Étape 2 — Identifier chaque activité. Étape 3 — Relier : brûler une forêt, du gasoil ou des ordures libère des gaz à effet de serre ; des arbres plantés absorbent du CO₂ par photosynthèse. Étape 4 — Conclure : seule la plantation d'arbres ne renforce pas l'effet de serre.",
+                  "answers": [
+                    {
+                      "content": "Planter des arbres qui absorbent le CO₂",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brûler une forêt pour libérer des terres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire tourner un groupe électrogène au gasoil toute la journée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Laisser brûler des ordures à l'air libre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un pays fictif, la combustion de combustibles fossiles émet 60 unités de CO₂ par an, la déforestation 25 unités et les feux de brousse 15 unités. Quelle quantité totale ces trois activités émettent-elles, en unités ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Rappeler : le CO₂ est un gaz à effet de serre. Étape 2 — Identifier les trois activités : combustion, déforestation, feux de brousse. Étape 3 — Relier : chacune libère du CO₂, donc on additionne : 60 + 25 + 15 = 100. Étape 4 — Conclure : 100 unités de CO₂ par an, qui renforcent l'effet de serre.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "unités"
+                },
+                {
+                  "content": "Choisis les deux activités qui libèrent du méthane.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rappeler : le méthane est un gaz à effet de serre. Étape 2 — Identifier les activités de la liste. Étape 3 — Relier : l'élevage de ruminants et les décharges libèrent du méthane. Étape 4 — Conclure : planter des arbres, installer des panneaux solaires ou marcher n'en libèrent pas.",
+                  "answers": [
+                    {
+                      "content": "L'élevage de ruminants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les décharges de déchets organiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plantation d'arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les panneaux solaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "La marche à pied",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque question, nomme l'activité, puis le gaz qu'elle libère."
+            }
+          ]
+        },
+        {
+          "name": "Relier une manifestation à ses conséquences",
+          "remember": "Les manifestations du changement climatique ont des **conséquences** sur la vie des populations. **Agriculture** : la sécheresse et les pluies irrégulières font baisser les récoltes, car les plantes manquent d'eau pour fabriquer leur matière organique ; une inondation détruit des champs. **Santé** : la forte chaleur fatigue et déshydrate ; l'eau stagnante laissée par les inondations favorise les moustiques et des maladies liées à l'eau ; de mauvaises récoltes peuvent causer la faim. **Biodiversité** : des espèces perdent leur habitat, se déplacent ou peuvent disparaître. **Littoral** : la montée de la mer et l'érosion côtière menacent les habitations, les terres et les activités de pêche.",
+          "method": [
+            "Identifier la manifestation du changement climatique (sécheresse, inondation, hausse de température, montée de la mer…).",
+            "Chercher ce qu'elle touche : les cultures, la santé, les êtres vivants ou le littoral.",
+            "Expliquer le lien de cause à effet avec le mot « parce que ».",
+            "Conclure en nommant le domaine touché et la conséquence."
+          ],
+          "example": {
+            "statement": "Une sécheresse longue touche un village du Nord. Quelle est la conséquence sur l'agriculture ?",
+            "steps": [
+              "Identifier : la manifestation est une sécheresse prolongée.",
+              "Chercher : elle touche d'abord les cultures du village.",
+              "Expliquer : les récoltes baissent parce que le sol est sec et que les plantes manquent d'eau pour fabriquer de la matière organique par photosynthèse.",
+              "Conclure : le domaine touché est l'agriculture, avec une baisse des récoltes."
+            ]
+          },
+          "pitfall": "Ne confonds pas une manifestation et sa conséquence. Contre-exemple : « la baisse des récoltes » n'est pas une manifestation du changement climatique, c'est la conséquence d'une sécheresse. La sécheresse est la cause, la baisse des récoltes est l'effet. Place toujours la flèche dans le bon sens : manifestation puis conséquence.",
+          "practice": {
+            "statement": "Tu t'entraînes à relier une manifestation à ses conséquences.",
+            "questions": [
+              {
+                "content": "Des moustiques se développent dans l'eau stagnante laissée par des inondations et les cas de paludisme augmentent. Quel domaine est touché ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : la manifestation est l'inondation. Étape 2 — Chercher ce qu'elle touche : ici, des maladies. Étape 3 — Expliquer : l'eau stagne parce que le terrain est inondé, donc les moustiques se multiplient. Étape 4 — Conclure : le domaine touché est la santé.",
+                "answers": [
+                  {
+                    "content": "La santé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le littoral",
+                    "correct": false
+                  },
+                  {
+                    "content": "La biodiversité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les glaces des continents",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel mot de l'énoncé parle de maladie ?"
+              },
+              {
+                "content": "Une baisse des récoltes est une conséquence possible de la sécheresse.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la manifestation est la sécheresse. Étape 2 — Chercher : elle touche les cultures. Étape 3 — Expliquer : les récoltes baissent parce que les plantes manquent d'eau. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce dont les plantes ont besoin pour pousser."
+              },
+              {
+                "content": "Relie chaque manifestation à une conséquence.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier chaque manifestation. Étape 2 — Chercher ce qu'elle touche : les cultures, le littoral, la santé. Étape 3 — Expliquer : le sol sec prive les plantes d'eau, la mer monte vers les habitations, la chaleur fait perdre de l'eau au corps. Étape 4 — Conclure : agriculture, littoral et santé.",
+                "answers": [
+                  {
+                    "content": "Sécheresse prolongée",
+                    "match": "Baisse des récoltes"
+                  },
+                  {
+                    "content": "Montée de la mer",
+                    "match": "Habitations du littoral menacées"
+                  },
+                  {
+                    "content": "Forte chaleur",
+                    "match": "Risque de déshydratation"
+                  }
+                ],
+                "hint": "Demande-toi ce que chaque manifestation touche en premier."
+              }
+            ]
+          },
+          "figure": "rendements-pluies",
+          "exercise": [
+            {
+              "title": "Des manifestations aux conséquences",
+              "statement": "Dans cet exercice, tu relies des manifestations du changement climatique à leurs conséquences avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi une sécheresse fait-elle baisser les récoltes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la manifestation est la sécheresse. Étape 2 — Chercher : elle touche les cultures. Étape 3 — Expliquer : les récoltes baissent parce que les plantes manquent d'eau pour la photosynthèse. Étape 4 — Conclure : agriculture touchée. Un sol riche en eau serait le contraire d'une sécheresse.",
+                  "answers": [
+                    {
+                      "content": "Les plantes manquent d'eau pour fabriquer leur matière organique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les plantes reçoivent trop de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sol devient plus riche en eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les plantes absorbent moins de dioxygène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux conséquences de manifestations du changement climatique sur la santé.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier les manifestations : forte chaleur, inondation. Étape 2 — Chercher ce qu'elles touchent : le corps et les maladies. Étape 3 — Expliquer : la chaleur fait perdre de l'eau au corps, l'eau stagnante favorise les moustiques et les microbes. Étape 4 — Conclure : ce sont deux conséquences sur la santé.",
+                  "answers": [
+                    {
+                      "content": "Un risque de déshydratation lors des fortes chaleurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des maladies liées à l'eau stagnante après des inondations",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une disparition de toutes les maladies",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une meilleure croissance des plantes sans eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un retour de l'eau potable sans effort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand une espèce perd son habitat, la ___ diminue.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la manifestation : un milieu qui se modifie sous l'effet du climat. Étape 2 — Chercher ce qu'elle touche : les êtres vivants. Étape 3 — Expliquer : sans habitat, des espèces se déplacent ou disparaissent. Étape 4 — Conclure : la biodiversité diminue.",
+                  "answers": [
+                    {
+                      "content": "biodiversité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La baisse des récoltes est une manifestation du changement climatique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la baisse des récoltes est un effet. Étape 2 — Chercher sa cause : la sécheresse ou les pluies irrégulières. Étape 3 — Expliquer : la baisse des récoltes arrive parce que les plantes manquent d'eau. Étape 4 — Conclure : c'est une conséquence, pas une manifestation. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La montée de la mer et l'érosion côtière menacent surtout :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la montée de la mer et l'érosion côtière. Étape 2 — Chercher ce qu'elles touchent : la côte. Étape 3 — Expliquer : l'eau gagne du terrain et la côte recule parce que la mer monte et ronge le sable. Étape 4 — Conclure : le littoral est touché. Les terres du Nord sont loin de la mer.",
+                  "answers": [
+                    {
+                      "content": "Les habitations, les terres et les activités de pêche du littoral",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les terres cultivées du Nord, loin de la mer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les nuages de haute altitude",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les glaces des continents",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Du village du Nord au littoral : des conséquences à relier",
+              "statement": "Dans cet exercice, tu relies des manifestations à leurs conséquences dans des situations fictives, avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les pluies arrivent très tard et un paysan a déjà semé : les graines germent mal. Quel domaine est touché ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les pluies sont perturbées. Étape 2 — Chercher : les semis sont des cultures. Étape 3 — Expliquer : les graines germent mal parce que le sol est resté sec. Étape 4 — Conclure : l'agriculture est touchée.",
+                  "answers": [
+                    {
+                      "content": "L'agriculture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le littoral",
+                      "correct": false
+                    },
+                    {
+                      "content": "La santé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les glaces des continents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la manifestation. Étape 2 — Chercher ce qu'elle touche. Étape 3 — Expliquer le lien de cause à effet. Étape 4 — Conclure en nommant le domaine touché. On part de la cause pour arriver à l'effet.",
+                  "answers": [
+                    {
+                      "content": "Identifier la manifestation"
+                    },
+                    {
+                      "content": "Chercher ce qu'elle touche"
+                    },
+                    {
+                      "content": "Expliquer le lien de cause à effet"
+                    },
+                    {
+                      "content": "Conclure en nommant le domaine touché"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque conséquence au domaine touché.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la manifestation derrière chaque conséquence. Étape 2 — Chercher ce qu'elle touche. Étape 3 — Expliquer : récoltes et plantes, corps, êtres vivants, côte. Étape 4 — Conclure : agriculture, santé, biodiversité, littoral.",
+                  "answers": [
+                    {
+                      "content": "Baisse des récoltes",
+                      "match": "Agriculture"
+                    },
+                    {
+                      "content": "Déshydratation en forte chaleur",
+                      "match": "Santé"
+                    },
+                    {
+                      "content": "Perte d'habitat de certaines espèces",
+                      "match": "Biodiversité"
+                    },
+                    {
+                      "content": "Recul de la côte sous les habitations",
+                      "match": "Littoral"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les récoltes baissent ___ le sol est sec et les plantes manquent d'eau.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la manifestation : la sécheresse. Étape 2 — Chercher ce qu'elle touche : les récoltes. Étape 3 — Expliquer le lien de cause à effet avec « parce que ». Étape 4 — Conclure : la cause est le manque d'eau. Les autres mots expriment l'opposition, pas la cause.",
+                  "answers": [
+                    {
+                      "content": "parce que",
+                      "correct": true
+                    },
+                    {
+                      "content": "bien que",
+                      "correct": false
+                    },
+                    {
+                      "content": "alors que",
+                      "correct": false
+                    },
+                    {
+                      "content": "même si",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les conséquences du changement climatique ne touchent que l'agriculture.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier les manifestations : sécheresse, chaleur, inondation, montée de la mer. Étape 2 — Chercher ce qu'elles touchent : les cultures, la santé, les êtres vivants, le littoral. Étape 3 — Expliquer : chaque manifestation a ses effets propres. Étape 4 — Conclure : plusieurs domaines sont touchés. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois conséquences possibles sur la biodiversité.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : les milieux se modifient avec le climat. Étape 2 — Chercher : les êtres vivants sont touchés. Étape 3 — Expliquer : sans habitat adapté, les espèces se déplacent ou disparaissent. Étape 4 — Conclure : trois conséquences possibles. Dire que toutes les espèces se multiplient ou que la photosynthèse s'arrête partout est faux.",
+                  "answers": [
+                    {
+                      "content": "Des espèces perdent leur habitat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des espèces se déplacent vers d'autres zones",
+                      "correct": true
+                    },
+                    {
+                      "content": "Certaines espèces peuvent disparaître",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toutes les espèces se multiplient",
+                      "correct": false
+                    },
+                    {
+                      "content": "La photosynthèse s'arrête sur toute la Terre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque situation, demande-toi quelle manifestation est en cause et ce qu'elle touche."
+            }
+          ]
+        },
+        {
+          "name": "Distinguer atténuation et adaptation",
+          "remember": "Face au changement climatique, on agit de deux façons. L'**atténuation** consiste à **réduire les causes** : émettre moins de gaz à effet de serre ou absorber plus de CO₂. Exemples : le **reboisement** (les arbres absorbent le CO₂ par photosynthèse), les **énergies renouvelables** (solaire, hydraulique, éolienne), les **économies d'énergie**, la **gestion des déchets** (tri, moins de décharges sauvages), la lutte contre les feux de brousse. L'**adaptation** consiste à **limiter les dégâts** : cultures résistantes à la sécheresse, calendrier agricole ajusté, récupération de l'eau de pluie, digues et protection du littoral, systèmes d'alerte contre les inondations.",
+          "method": [
+            "Identifier l'action décrite.",
+            "Se demander son but : réduire les causes ou limiter les dégâts.",
+            "Relier l'action à la cause (gaz à effet de serre) ou à la conséquence qu'elle vise.",
+            "Classer l'action : atténuation ou adaptation."
+          ],
+          "example": {
+            "statement": "Classer ces deux actions. (a) Planter des arbres sur un terrain nu. (b) Construire une digue le long d'une plage qui recule.",
+            "steps": [
+              "Identifier : (a) planter des arbres ; (b) construire une digue.",
+              "Se demander le but : (a) retirer du CO₂ de l'atmosphère ; (b) protéger la côte.",
+              "Relier : (a) agit sur la cause, car les arbres absorbent le CO₂ par photosynthèse ; (b) agit sur la conséquence, le recul de la côte.",
+              "Classer : (a) est une atténuation ; (b) est une adaptation."
+            ]
+          },
+          "pitfall": "Ne classe pas une action selon qu'elle est « bonne pour la nature », mais selon son but. Contre-exemple : cultiver une variété de mil résistante à la sécheresse est utile, mais elle ne réduit aucun gaz à effet de serre : c'est une adaptation. Réduire les causes, c'est atténuer ; limiter les dégâts, c'est s'adapter.",
+          "practice": {
+            "statement": "Tu t'entraînes à classer des actions face au changement climatique.",
+            "questions": [
+              {
+                "content": "Installer des panneaux solaires à la place d'un groupe électrogène au gasoil est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : installer des panneaux solaires. Étape 2 — Se demander le but : produire de l'électricité sans brûler de combustible fossile. Étape 3 — Relier : l'action agit sur la cause, les émissions de CO₂. Étape 4 — Classer : c'est une atténuation.",
+                "answers": [
+                  {
+                    "content": "une atténuation",
+                    "correct": true
+                  },
+                  {
+                    "content": "une adaptation",
+                    "correct": false
+                  },
+                  {
+                    "content": "une manifestation",
+                    "correct": false
+                  },
+                  {
+                    "content": "une conséquence",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'action réduit-elle une cause ou limite-t-elle des dégâts ?"
+              },
+              {
+                "content": "Récupérer l'eau de pluie pour les périodes sèches est une adaptation.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : récupérer l'eau de pluie. Étape 2 — Se demander le but : avoir de l'eau en saison sèche. Étape 3 — Relier : l'action vise la conséquence, le manque d'eau. Étape 4 — Classer : c'est une adaptation. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'action ne réduit aucun gaz : elle aide à supporter la sécheresse."
+              },
+              {
+                "content": "Réduire les émissions de gaz à effet de serre est une action d'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : réduire les émissions. Étape 2 — Se demander le but : réduire les causes. Étape 3 — Relier : l'action vise les gaz à effet de serre. Étape 4 — Classer : c'est une atténuation.",
+                "answers": [
+                  {
+                    "content": "atténuation",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce mot commence par la lettre « a » et veut dire « rendre plus faible »."
+              }
+            ]
+          },
+          "figure": "mesures-climat",
+          "exercise": [
+            {
+              "title": "Définir et reconnaître l'atténuation",
+              "statement": "Dans cet exercice, tu reconnais les actions d'atténuation et d'adaptation avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que signifie « atténuer » le changement climatique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le mot : atténuer. Étape 2 — Se demander le but : réduire les causes. Étape 3 — Relier : les causes sont les gaz à effet de serre. Étape 4 — Classer : c'est l'atténuation. Limiter les dégâts, c'est l'adaptation.",
+                  "answers": [
+                    {
+                      "content": "Réduire ses causes, en émettant moins de gaz à effet de serre ou en absorbant plus de CO₂",
+                      "correct": true
+                    },
+                    {
+                      "content": "Limiter les dégâts déjà subis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Attendre que le climat redevienne normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Supprimer l'effet de serre naturel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux actions d'atténuation.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier chaque action. Étape 2 — Se demander le but : reboiser absorbe du CO₂, économiser l'énergie réduit les émissions. Étape 3 — Relier à la cause : les gaz à effet de serre. Étape 4 — Classer : atténuation. Les trois autres actions limitent les dégâts : ce sont des adaptations.",
+                  "answers": [
+                    {
+                      "content": "Le reboisement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les économies d'énergie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Construire une digue contre l'érosion côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Semer une variété résistante à la sécheresse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Installer un système d'alerte contre les inondations",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Utiliser le soleil, l'eau ou le vent pour produire de l'électricité relève des énergies ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier l'action : produire de l'électricité avec le soleil, l'eau ou le vent. Étape 2 — Se demander le but : éviter les combustibles fossiles. Étape 3 — Relier : on émet moins de CO₂. Étape 4 — Classer : ce sont des énergies renouvelables, une atténuation.",
+                  "answers": [
+                    {
+                      "content": "renouvelables",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Cultiver une variété résistante à la sécheresse réduit les émissions de gaz à effet de serre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : cultiver une variété résistante. Étape 2 — Se demander le but : mieux supporter la sécheresse. Étape 3 — Relier : l'action vise la conséquence, pas les gaz. Étape 4 — Classer : c'est une adaptation, elle ne réduit pas les émissions. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le reboisement est-il une atténuation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le reboisement. Étape 2 — Se demander le but : retirer du CO₂ de l'atmosphère. Étape 3 — Relier : les arbres en absorbent par photosynthèse. Étape 4 — Classer : c'est une atténuation. Les arbres n'arrêtent ni la montée de la mer ni toutes les sécheresses.",
+                  "answers": [
+                    {
+                      "content": "Les arbres absorbent du CO₂ par photosynthèse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les arbres produisent du méthane en grande quantité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les arbres empêchent la mer de monter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les arbres rendent la sécheresse impossible",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer des actions face au changement climatique",
+              "statement": "Dans cet exercice, tu classes des actions en atténuation ou en adaptation avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un village trie ses déchets et réduit la taille de sa décharge. Cette action est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : trier les déchets et réduire la décharge. Étape 2 — Se demander le but : libérer moins de méthane. Étape 3 — Relier : l'action agit sur une cause, les gaz à effet de serre. Étape 4 — Classer : c'est une atténuation.",
+                  "answers": [
+                    {
+                      "content": "une atténuation",
+                      "correct": true
+                    },
+                    {
+                      "content": "une adaptation",
+                      "correct": false
+                    },
+                    {
+                      "content": "une manifestation",
+                      "correct": false
+                    },
+                    {
+                      "content": "une conséquence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action à son but.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier chaque action. Étape 2 — Se demander son but. Étape 3 — Relier : reboisement et énergie solaire agissent sur les causes ; digue et récupération d'eau agissent sur les conséquences. Étape 4 — Classer : les deux premières sont des atténuations, les deux autres des adaptations.",
+                  "answers": [
+                    {
+                      "content": "Reboisement",
+                      "match": "Absorber du CO₂"
+                    },
+                    {
+                      "content": "Énergie solaire",
+                      "match": "Remplacer les combustibles fossiles"
+                    },
+                    {
+                      "content": "Digue",
+                      "match": "Protéger la côte"
+                    },
+                    {
+                      "content": "Récupération de l'eau de pluie",
+                      "match": "Avoir de l'eau en saison sèche"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier l'action décrite. Étape 2 — Se demander son but. Étape 3 — Relier l'action à la cause ou à la conséquence. Étape 4 — Classer l'action. Le classement vient en dernier, une fois le but compris.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'action décrite"
+                    },
+                    {
+                      "content": "Se demander son but"
+                    },
+                    {
+                      "content": "Relier l'action à la cause ou à la conséquence"
+                    },
+                    {
+                      "content": "Classer l'action"
+                    }
+                  ]
+                },
+                {
+                  "content": "Décaler les semis selon l'arrivée des pluies est une action de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : décaler les semis. Étape 2 — Se demander le but : mieux cultiver malgré des pluies perturbées. Étape 3 — Relier : l'action vise la conséquence, pas les gaz. Étape 4 — Classer : c'est une adaptation.",
+                  "answers": [
+                    {
+                      "content": "adaptation",
+                      "correct": true
+                    },
+                    {
+                      "content": "atténuation",
+                      "correct": false
+                    },
+                    {
+                      "content": "émission",
+                      "correct": false
+                    },
+                    {
+                      "content": "érosion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les économies d'énergie font partie de l'atténuation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : économiser l'énergie. Étape 2 — Se demander le but : brûler moins de combustibles. Étape 3 — Relier : on émet moins de CO₂. Étape 4 — Classer : c'est une atténuation. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois actions d'adaptation.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier chaque action. Étape 2 — Se demander le but : limiter les dégâts pour trois d'entre elles. Étape 3 — Relier : elles visent la sécheresse, l'érosion et les inondations. Étape 4 — Classer : ce sont des adaptations. Le reboisement et l'énergie solaire sont des atténuations.",
+                  "answers": [
+                    {
+                      "content": "Cultiver des variétés résistantes à la sécheresse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Construire des digues contre l'érosion côtière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Installer un système d'alerte contre les inondations",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le reboisement",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'énergie solaire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque action, demande-toi si elle agit sur la cause (gaz) ou sur la conséquence (dégâts)."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le relevé des pluies d'un village du Nord",
+          "statement": "Un instituteur d'un village du Nord compare des relevés fictifs de la pluie annuelle moyenne, décennie après décennie : 1 100 mm, 1 050 mm, 950 mm, puis 850 mm. Sur la même période, les sécheresses sont devenues plus longues.",
+          "exercise_type": "fixation",
+          "figure": "pluies-decennies",
+          "questions": [
+            {
+              "content": "Les valeurs données par décennie sont des moyennes sur de longues périodes. Elles décrivent :",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer la durée : chaque valeur résume dix ans. 2. Identifier la nature de l'information : une moyenne. 3. Conclure : une moyenne sur de nombreuses années décrit le climat, pas le temps.",
+              "answers": [
+                {
+                  "content": "le climat",
+                  "correct": true
+                },
+                {
+                  "content": "le temps",
+                  "correct": false
+                },
+                {
+                  "content": "un orage isolé",
+                  "correct": false
+                },
+                {
+                  "content": "la météo de la semaine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de millimètres la pluie annuelle moyenne a-t-elle baissé entre la première et la quatrième décennie ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Lire la donnée : 1 100 mm puis 850 mm. 2. Comparer en soustrayant : 1 100 - 850 = 250. 3. Repérer le sens : une baisse. 4. Nommer : la pluie a baissé de 250 mm.",
+              "answers": [
+                {
+                  "content": "250",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mm"
+            },
+            {
+              "content": "Cette baisse durable des pluies moyennes favorise quelle manifestation du changement climatique ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Lire : la pluie diminue. 2. Comparer d'une période à l'autre : la moyenne baisse chaque décennie. 3. Repérer le sens : un manque d'eau durable. 4. Nommer : des sécheresses. L'érosion et la montée de la mer concernent la côte ; des inondations viendraient d'un excès de pluie.",
+              "answers": [
+                {
+                  "content": "Des sécheresses plus longues",
+                  "correct": true
+                },
+                {
+                  "content": "L'érosion côtière",
+                  "correct": false
+                },
+                {
+                  "content": "L'élévation du niveau de la mer",
+                  "correct": false
+                },
+                {
+                  "content": "Des inondations plus fréquentes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle conséquence probable sur les cultures du village ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier la manifestation : la sécheresse. 2. Chercher ce qu'elle touche : les cultures. 3. Expliquer avec « parce que » : les plantes manquent d'eau pour la photosynthèse. 4. Conclure : les récoltes baissent.",
+              "answers": [
+                {
+                  "content": "Les récoltes baissent parce que les plantes manquent d'eau",
+                  "correct": true
+                },
+                {
+                  "content": "Les récoltes augmentent parce que le sol reçoit plus de pluie",
+                  "correct": false
+                },
+                {
+                  "content": "Les cultures ne sont pas touchées",
+                  "correct": false
+                },
+                {
+                  "content": "Les plantes n'ont plus besoin d'eau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une seule année à 700 mm suffirait à prouver un changement climatique.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Repérer la durée : une seule année. 2. Identifier la nature : un fait isolé, pas une moyenne. 3. Conclure : il faut comparer des moyennes sur de nombreuses années. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle action est une adaptation à ce manque de pluie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier chaque action. 2. Se demander le but : récupérer l'eau aide à supporter le manque de pluie. 3. Relier : elle vise la conséquence, non les gaz. 4. Classer : adaptation. Les trois autres actions réduisent des causes : ce sont des atténuations.",
+              "answers": [
+                {
+                  "content": "Récupérer l'eau de pluie pour la saison sèche",
+                  "correct": true
+                },
+                {
+                  "content": "Installer des panneaux solaires",
+                  "correct": false
+                },
+                {
+                  "content": "Planter des arbres pour absorber le CO₂",
+                  "correct": false
+                },
+                {
+                  "content": "Trier les déchets",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Lis le relevé décennie par décennie, puis classe chaque question : climat, manifestation, conséquence ou action."
+        },
+        {
+          "title": "Les sources d'émissions d'un pays fictif",
+          "statement": "Un diagramme circulaire fictif donne la part de chaque activité dans les émissions de gaz à effet de serre d'un pays imaginaire : combustion de combustibles fossiles 50 %, déforestation 25 %, élevage 15 %, décharges 10 %.",
+          "exercise_type": "fixation",
+          "figure": "sources-emissions",
+          "questions": [
+            {
+              "content": "Quelle activité émet la plus grande part ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Lire les parts : 50, 25, 15 et 10 %. 2. Comparer : 50 est la plus grande valeur. 3. Conclure : c'est la combustion de combustibles fossiles.",
+              "answers": [
+                {
+                  "content": "La combustion de combustibles fossiles",
+                  "correct": true
+                },
+                {
+                  "content": "La déforestation",
+                  "correct": false
+                },
+                {
+                  "content": "L'élevage",
+                  "correct": false
+                },
+                {
+                  "content": "Les décharges",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle part des émissions, en pourcentage, vient ensemble de l'élevage et des décharges ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Identifier les deux activités : élevage 15 %, décharges 10 %. 2. Additionner : 15 + 10 = 25. 3. Conclure : 25 % des émissions, surtout du méthane.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "L'élevage et les décharges libèrent surtout du ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. 1. Identifier les activités : élevage et décharges. 2. Relier au gaz : la digestion des ruminants et la décomposition des déchets libèrent du méthane (CH₄). 3. Conclure : le méthane est un gaz à effet de serre.",
+              "answers": [
+                {
+                  "content": "méthane",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque activité au gaz à effet de serre qu'elle libère surtout.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Rappeler que ces gaz retiennent la chaleur. 2. Identifier l'activité de chaque ligne. 3. Relier : combustion et CO₂, ruminants et CH₄, engrais azotés et N₂O. 4. Conclure : chaque activité renforce l'effet de serre.",
+              "answers": [
+                {
+                  "content": "Combustion du pétrole",
+                  "match": "Dioxyde de carbone (CO₂)"
+                },
+                {
+                  "content": "Élevage de ruminants",
+                  "match": "Méthane (CH₄)"
+                },
+                {
+                  "content": "Engrais azotés",
+                  "match": "Protoxyde d'azote (N₂O)"
+                }
+              ]
+            },
+            {
+              "content": "La déforestation renforce l'effet de serre de deux façons : le bois brûlé libère du CO₂ et il y a moins d'arbres pour en absorber.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Rappeler : le CO₂ est un gaz à effet de serre. 2. Identifier l'activité : la déforestation. 3. Relier : le bois brûlé libère du CO₂ et moins d'arbres absorbent du CO₂ par photosynthèse. 4. Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le raisonnement qui mène des activités humaines aux manifestations.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Les activités humaines émettent plus de gaz. 2. L'effet de serre est renforcé. 3. La température moyenne augmente. 4. Les manifestations deviennent plus marquées. On va de la cause vers les effets.",
+              "answers": [
+                {
+                  "content": "Les activités humaines émettent plus de gaz à effet de serre"
+                },
+                {
+                  "content": "L'effet de serre est renforcé"
+                },
+                {
+                  "content": "La température moyenne augmente"
+                },
+                {
+                  "content": "Sécheresses, inondations et montée de la mer deviennent plus marquées"
+                }
+              ]
+            }
+          ],
+          "hint": "Additionne les parts lues sur le diagramme et relie chaque activité à son gaz."
+        },
+        {
+          "title": "Deux villages, deux situations",
+          "statement": "La carte schématique montre la savane du Nord et la bande côtière. Une classe étudie deux situations fictives, présentées comme des exemples généraux : un village de la savane du Nord, où la saison sèche avec l'harmattan s'allonge, et un village du littoral, où la plage recule.",
+          "exercise_type": "evaluation",
+          "figure": "carte-zones",
+          "questions": [
+            {
+              "content": "Dans quelle zone de la carte l'érosion côtière et la montée de la mer sont-elles à craindre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier les manifestations : érosion côtière et montée de la mer. 2. Chercher ce qu'elles touchent : le littoral. 3. Expliquer : elles concernent la mer, donc la côte. 4. Conclure : la bande côtière.",
+              "answers": [
+                {
+                  "content": "La bande côtière",
+                  "correct": true
+                },
+                {
+                  "content": "La savane du Nord",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux zones de la même façon",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune zone",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Choisis les deux causes de l'élévation du niveau de la mer.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Lire : on étudie le niveau de la mer. 2. Comparer ce qui ajoute du volume : l'eau chaude se dilate, les glaces continentales fondues ajoutent de l'eau. 3. Conclure : ce sont les deux causes. Les marées sont quotidiennes, l'érosion est un effet, la saison sèche ne concerne pas la mer.",
+              "answers": [
+                {
+                  "content": "La dilatation de l'eau qui se réchauffe",
+                  "correct": true
+                },
+                {
+                  "content": "La fonte des glaces posées sur les continents",
+                  "correct": true
+                },
+                {
+                  "content": "Le rythme des marées chaque jour",
+                  "correct": false
+                },
+                {
+                  "content": "L'érosion d'une plage",
+                  "correct": false
+                },
+                {
+                  "content": "Une saison sèche plus longue",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le village du Nord, la saison sèche s'allonge. Quelle conséquence probable sur l'agriculture ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier : une saison sèche plus longue. 2. Chercher : les cultures. 3. Expliquer avec « parce que » : sans eau, la photosynthèse ralentit. 4. Conclure : les récoltes baissent.",
+              "answers": [
+                {
+                  "content": "Les récoltes baissent parce que les plantes manquent d'eau",
+                  "correct": true
+                },
+                {
+                  "content": "Les récoltes augmentent parce que le sol reste sec",
+                  "correct": false
+                },
+                {
+                  "content": "Les cultures ne sont pas touchées",
+                  "correct": false
+                },
+                {
+                  "content": "Les plantes absorbent plus d'eau qu'avant",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque situation à une action d'adaptation.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Identifier chaque situation. 2. Se demander le but : protéger, évacuer, stocker de l'eau. 3. Relier à la conséquence visée : recul, excès d'eau, manque d'eau. 4. Classer : ce sont des adaptations.",
+              "answers": [
+                {
+                  "content": "Une plage qui recule",
+                  "match": "Digue ou protection du littoral"
+                },
+                {
+                  "content": "Un quartier inondé à chaque forte pluie",
+                  "match": "Canaux d'évacuation de l'eau"
+                },
+                {
+                  "content": "Des puits qui s'assèchent en saison sèche",
+                  "match": "Récupération de l'eau de pluie"
+                }
+              ]
+            },
+            {
+              "content": "Un habitant dit : « La mer a mangé deux mètres de plage cette année, donc le climat a changé. » Que lui réponds-tu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer la durée : une seule année. 2. Identifier la nature : un fait isolé. 3. Conclure : on parle de changement du climat seulement si des moyennes changent durablement. L'érosion est bien liée à la mer, mais un fait isolé ne prouve rien.",
+              "answers": [
+                {
+                  "content": "Un seul fait ne suffit pas : il faut des mesures sur de nombreuses années",
+                  "correct": true
+                },
+                {
+                  "content": "Il a raison : un seul fait prouve le changement climatique",
+                  "correct": false
+                },
+                {
+                  "content": "Il a tort : l'érosion côtière n'a aucun lien avec la mer",
+                  "correct": false
+                },
+                {
+                  "content": "Il a raison : une plage ne bouge jamais naturellement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le reboisement est une action d'atténuation et non d'adaptation.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Identifier : le reboisement. 2. Se demander le but : absorber du CO₂ par photosynthèse. 3. Relier : il agit sur la cause. 4. Classer : atténuation. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Distingue ce qui concerne la côte et ce qui concerne la savane."
+        },
+        {
+          "title": "Du CO₂ aux solutions : un dossier de classe",
+          "statement": "Une classe prépare un dossier fictif qui suit la chaîne des causes, des activités humaines jusqu'aux manifestations, puis propose des solutions.",
+          "exercise_type": "evaluation",
+          "figure": "chaine-causes",
+          "questions": [
+            {
+              "content": "Remets dans l'ordre la chaîne des causes et des effets.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Partir de la cause : les activités humaines. 2. Relier : plus de gaz, effet de serre renforcé. 3. Suivre l'effet : réchauffement, manifestations. 4. Conclure : les domaines touchés.",
+              "answers": [
+                {
+                  "content": "Les activités humaines émettent plus de gaz à effet de serre"
+                },
+                {
+                  "content": "L'effet de serre est renforcé"
+                },
+                {
+                  "content": "La température moyenne augmente"
+                },
+                {
+                  "content": "Sécheresses, inondations et montée de la mer deviennent plus marquées"
+                },
+                {
+                  "content": "Les cultures, la santé et le littoral sont touchés"
+                }
+              ]
+            },
+            {
+              "content": "Choisis les trois activités humaines qui augmentent les gaz à effet de serre.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode détaillée. 1. Rappeler : le CO₂ et le méthane retiennent la chaleur. 2. Identifier chaque activité. 3. Relier : pétrole et feu libèrent du CO₂, les décharges du méthane. 4. Conclure : le reboisement absorbe du CO₂ et l'énergie solaire n'en libère pas.",
+              "answers": [
+                {
+                  "content": "La combustion du pétrole",
+                  "correct": true
+                },
+                {
+                  "content": "La déforestation par le feu",
+                  "correct": true
+                },
+                {
+                  "content": "Les décharges de déchets organiques",
+                  "correct": true
+                },
+                {
+                  "content": "Le reboisement",
+                  "correct": false
+                },
+                {
+                  "content": "L'énergie solaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une région fictive, 60 hectares de forêt sont détruits chaque année et 15 hectares sont replantés. Quelle surface de forêt est perdue en 4 ans, en hectares ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Lire : 60 détruits et 15 replantés par an. 2. Calculer la perte nette par an : 60 - 15 = 45. 3. Multiplier par 4 ans : 45 × 4 = 180. 4. Conclure : 180 hectares.",
+              "answers": [
+                {
+                  "content": "180",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "ha"
+            },
+            {
+              "content": "Pourquoi cette perte de forêt renforce-t-elle l'effet de serre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Rappeler le rôle du CO₂. 2. Identifier l'activité : la déforestation. 3. Relier : moins de photosynthèse, donc moins de CO₂ absorbé, et la combustion du bois en libère. 4. Conclure : l'effet de serre est renforcé.",
+              "answers": [
+                {
+                  "content": "Moins d'arbres absorbent le CO₂ par photosynthèse, et le bois brûlé en libère",
+                  "correct": true
+                },
+                {
+                  "content": "Les arbres coupés absorbent davantage de CO₂",
+                  "correct": false
+                },
+                {
+                  "content": "Les arbres produisent le méthane des décharges",
+                  "correct": false
+                },
+                {
+                  "content": "Le CO₂ n'est pas un gaz à effet de serre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque conséquence à une action d'adaptation.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Identifier la conséquence. 2. Se demander le but : protéger, économiser l'eau, prévenir. 3. Relier à la conséquence visée. 4. Classer : adaptations.",
+              "answers": [
+                {
+                  "content": "Recul de la côte",
+                  "match": "Digue ou protection du littoral"
+                },
+                {
+                  "content": "Sécheresse longue",
+                  "match": "Variétés résistantes et récupération de l'eau"
+                },
+                {
+                  "content": "Inondations",
+                  "match": "Système d'alerte et évacuation de l'eau"
+                }
+              ]
+            },
+            {
+              "content": "Un conseil de village décide de planter des arbres, de trier les déchets et de construire une digue. Combien de ces trois actions sont des atténuations ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Identifier chaque action. 2. Se demander le but : planter des arbres absorbe du CO₂, trier les déchets réduit le méthane, la digue protège la côte. 3. Relier à la cause ou à la conséquence. 4. Classer : deux atténuations (arbres, déchets) et une adaptation (digue).",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "actions"
+            }
+          ],
+          "hint": "Suis la flèche du schéma, de la cause vers l'effet, puis classe les solutions."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base du changement climatique",
+          "notions": "Temps et climat, manifestations, effet de serre et gaz, atténuation et adaptation (vocabulaire).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un schéma fléché rappelle la différence entre le temps et le climat.",
+              "exercise_type": "evaluation",
+              "figure": "temps-climat",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que le temps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer la durée : un moment. 2. Identifier la nature : un état de l'atmosphère. 3. Conclure : c'est le temps.",
+                  "answers": [
+                    {
+                      "content": "L'état de l'atmosphère à un moment précis",
+                      "correct": true
+                    },
+                    {
+                      "content": "La moyenne sur trente ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une saison entière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une modification durable du climat",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase décrit le climat d'une région ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer la durée : chaque année. 2. Identifier la nature : un rythme de saisons. 3. Conclure : c'est le climat. Les autres phrases décrivent le temps.",
+                  "answers": [
+                    {
+                      "content": "Les pluies sont abondantes de mai à octobre chaque année.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il pleut en ce moment.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ciel est dégagé ce soir.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un orage a éclaté hier.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le changement climatique est une modification durable du climat.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer la durée : durable. 2. Identifier la nature : une modification des moyennes. 3. Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ___ change d'une heure à l'autre.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Repérer la durée : une heure. 2. Identifier la nature : un état de l'atmosphère. 3. Conclure : c'est le temps.",
+                  "answers": [
+                    {
+                      "content": "temps",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour distinguer le temps et le climat.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Repérer la durée. 2. Identifier la nature. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer la durée de l'observation"
+                    },
+                    {
+                      "content": "Identifier la nature de l'information"
+                    },
+                    {
+                      "content": "Conclure : temps ou climat"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche la durée : un instant ou de nombreuses années."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un relevé fictif donne la température moyenne d'un village du Nord par décennie : 26,0 ; 26,2 ; 26,5 ; 26,8 degrés Celsius.",
+              "exercise_type": "evaluation",
+              "figure": "releve-temperatures",
+              "questions": [
+                {
+                  "content": "Quelle manifestation montre ce relevé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire : la température moyenne. 2. Comparer : chaque valeur est plus grande. 3. Repérer le sens : une hausse. 4. Nommer : la hausse des températures moyennes.",
+                  "answers": [
+                    {
+                      "content": "La hausse des températures moyennes",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'érosion côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une inondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une sécheresse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien la température moyenne a-t-elle augmenté entre la décennie 2 et la décennie 4 ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Lire : 26,2 et 26,8. 2. Comparer : 26,8 - 26,2 = 0,6. 3. Nommer : une hausse de 0,6 °C.",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                },
+                {
+                  "content": "Relie chaque manifestation à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Lire chaque description. 2. Comparer avec la liste des manifestations. 3. Nommer chacune.",
+                  "answers": [
+                    {
+                      "content": "Élévation du niveau de la mer",
+                      "match": "Hausse de la hauteur d'eau de la mer"
+                    },
+                    {
+                      "content": "Perturbation des saisons des pluies",
+                      "match": "Début des pluies retardé et pluies irrégulières"
+                    },
+                    {
+                      "content": "Érosion côtière",
+                      "match": "Recul de la côte rongée par les vagues"
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux causes de l'élévation du niveau de la mer.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Lire : le niveau de la mer monte. 2. Comparer ce qui ajoute du volume : eau chaude dilatée, glaces continentales fondues. 3. Nommer les deux causes.",
+                  "answers": [
+                    {
+                      "content": "La dilatation de l'eau qui se réchauffe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fonte des glaces posées sur les continents",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie d'un seul jour",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'érosion d'une plage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rythme des marées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'érosion côtière est le recul de la côte rongée par les vagues.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Lire : un recul de la côte. 2. Comparer avec la liste. 3. Nommer : érosion côtière. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare chaque valeur à la précédente."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le schéma montre comment des gaz de l'atmosphère retiennent une partie de la chaleur renvoyée par la Terre.",
+              "exercise_type": "evaluation",
+              "figure": "effet-de-serre",
+              "questions": [
+                {
+                  "content": "Quel est le rôle de l'effet de serre naturel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Rappeler : les gaz retiennent la chaleur. 2. Relier : la Terre reste assez chaude. 3. Conclure : c'est son rôle.",
+                  "answers": [
+                    {
+                      "content": "Retenir une partie de la chaleur renvoyée par la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Produire la lumière du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Absorber tout le CO₂",
+                      "correct": false
+                    },
+                    {
+                      "content": "Refroidir la Terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois gaz à effet de serre.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Rappeler la liste des gaz à effet de serre. 2. Identifier ceux de la liste proposée. 3. Conclure : dioxygène et hélium n'en sont pas.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le méthane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vapeur d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hélium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La vapeur d'eau est un gaz à effet de serre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler la liste : CO₂, CH₄, N₂O, vapeur d'eau. 2. Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle activité libère le plus directement du CO₂ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'activité. 2. Relier : brûler un combustible fossile libère du CO₂. 3. Conclure : les autres actions n'en libèrent pas.",
+                  "answers": [
+                    {
+                      "content": "Brûler du pétrole dans un moteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Planter des arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Utiliser un panneau solaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Récupérer l'eau de pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sans effet de serre naturel, la Terre serait plus froide et la vie y serait difficile.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler : il retient une partie de la chaleur. 2. Conclure : sans lui, la Terre serait trop froide. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense au rôle utile de l'effet de serre naturel."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "L'arbre des actions montre deux familles d'actions face au changement climatique.",
+              "exercise_type": "evaluation",
+              "figure": "mesures-climat",
+              "questions": [
+                {
+                  "content": "Que signifie atténuer le changement climatique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le mot. 2. Se demander le but : réduire les causes. 3. Classer : atténuation.",
+                  "answers": [
+                    {
+                      "content": "Réduire ses causes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Limiter les dégâts déjà subis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Supprimer la pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Attendre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que signifie s'adapter au changement climatique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le mot. 2. Se demander le but : limiter les dégâts. 3. Classer : adaptation.",
+                  "answers": [
+                    {
+                      "content": "Limiter les dégâts",
+                      "correct": true
+                    },
+                    {
+                      "content": "Réduire les émissions de CO₂",
+                      "correct": false
+                    },
+                    {
+                      "content": "Planter des arbres seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Brûler moins de bois seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux actions d'atténuation.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier chaque action. 2. Se demander le but. 3. Classer : économies d'énergie et énergies renouvelables réduisent les causes.",
+                  "answers": [
+                    {
+                      "content": "Les économies d'énergie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les énergies renouvelables",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les digues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le système d'alerte contre les inondations",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cultures résistantes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une digue est une action d'adaptation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier : une digue. 2. But : protéger la côte. 3. Classer : adaptation. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La baisse des récoltes est une ___ de la sécheresse.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier : la baisse des récoltes est un effet. 2. Conclure : c'est une conséquence.",
+                  "answers": [
+                    {
+                      "content": "conséquence",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Atténuer, c'est agir sur les causes ; s'adapter, c'est limiter les dégâts."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Le changement climatique autour de nous",
+          "notions": "Village du Nord, littoral, ville et déchets, champ : exemples généraux en contexte ivoirien.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un village du Nord, l'harmattan souffle en saison sèche. Un paysan note, sur quatre années fictives, le nombre de mois secs : 5, 5, 6 et 6. La courbe donne aussi un relevé fictif de la pluie annuelle moyenne de ce village, décennie après décennie : elle baisse.",
+              "exercise_type": "evaluation",
+              "figure": "pluies-decennies",
+              "questions": [
+                {
+                  "content": "« Ce matin, l'harmattan souffle sur le village. » Cette phrase décrit :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer la durée : ce matin. 2. Identifier la nature : un état de l'atmosphère. 3. Conclure : le temps.",
+                  "answers": [
+                    {
+                      "content": "le temps",
+                      "correct": true
+                    },
+                    {
+                      "content": "le climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "le changement climatique",
+                      "correct": false
+                    },
+                    {
+                      "content": "une moyenne sur plusieurs années",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la moyenne du nombre de mois secs sur ces quatre années ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Lire : 5, 5, 6, 6. 2. Additionner : 22. 3. Diviser par 4 : 5,5. 4. Nommer : c'est une valeur de climat.",
+                  "answers": [
+                    {
+                      "content": "5,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mois"
+                },
+                {
+                  "content": "Les pluies arrivent plus tard chaque année. Quelle manifestation est décrite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire : la date d'arrivée des pluies. 2. Comparer d'une année à l'autre : plus tard. 3. Repérer : un décalage durable. 4. Nommer : perturbation des saisons des pluies.",
+                  "answers": [
+                    {
+                      "content": "La perturbation des saisons des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'érosion côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'élévation du niveau de la mer",
+                      "correct": false
+                    },
+                    {
+                      "content": "La hausse du niveau des lagunes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conséquence pour le paysan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : pluies perturbées. 2. Chercher : les cultures. 3. Expliquer : les graines manquent d'eau. 4. Conclure : l'agriculture est touchée.",
+                  "answers": [
+                    {
+                      "content": "Ses semis risquent de mal germer parce que le sol reste sec",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ses récoltes augmentent automatiquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ses cultures ne dépendent plus de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucune conséquence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle action est une adaptation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'action. 2. But : mieux cultiver malgré des pluies perturbées. 3. Classer : adaptation. Les autres actions réduisent des causes.",
+                  "answers": [
+                    {
+                      "content": "Semer des variétés à cycle court selon l'arrivée des pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "Installer des panneaux solaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trier les déchets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Planter des arbres pour absorber le CO₂",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Distingue le fait du jour (temps) de la moyenne sur plusieurs années (climat)."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Les exemples de la carte sont généraux : la plage d'un village du littoral recule, et des maisons sont menacées.",
+              "exercise_type": "evaluation",
+              "figure": "carte-zones",
+              "questions": [
+                {
+                  "content": "Quelle manifestation touche surtout le littoral ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : une côte qui recule. 2. Chercher ce qu'elle touche : le littoral. 3. Conclure : érosion côtière.",
+                  "answers": [
+                    {
+                      "content": "L'érosion côtière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La saison sèche de la savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'harmattan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une sécheresse de la savane",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'érosion côtière menace des habitations proches de la plage.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier : recul de la côte. 2. Expliquer : la mer gagne du terrain. 3. Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle activité du littoral est menacée par la montée de la mer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : la montée de la mer. 2. Chercher : le littoral. 3. Conclure : habitations et pêche.",
+                  "answers": [
+                    {
+                      "content": "La pêche et les habitations proches du rivage",
+                      "correct": true
+                    },
+                    {
+                      "content": "La culture du mil en savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chasse en haute montagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les glaces des continents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à une adaptation.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier la situation. 2. But : protéger, évacuer, stocker. 3. Classer : adaptations.",
+                  "answers": [
+                    {
+                      "content": "Une plage qui recule",
+                      "match": "Digue"
+                    },
+                    {
+                      "content": "Un quartier inondé",
+                      "match": "Canaux d'évacuation de l'eau"
+                    },
+                    {
+                      "content": "Des puits à sec",
+                      "match": "Récupération de l'eau de pluie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ___ de la côte rongée par les vagues s'appelle l'érosion côtière.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Lire : la côte se déplace. 2. Comparer : elle est plus près des terres. 3. Nommer : le recul.",
+                  "answers": [
+                    {
+                      "content": "recul",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Ne cherche que ce qui concerne la côte."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une ville fictive, des ordures sont brûlées à l'air libre, une décharge reçoit les déchets organiques et des groupes électrogènes fonctionnent au gasoil.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Brûler des ordures ou du gasoil libère surtout :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Rappeler : le CO₂ retient la chaleur. 2. Identifier : combustion. 3. Relier : elle libère du CO₂.",
+                  "answers": [
+                    {
+                      "content": "du dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "de l'hélium",
+                      "correct": false
+                    },
+                    {
+                      "content": "de l'argon",
+                      "correct": false
+                    },
+                    {
+                      "content": "du dioxygène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les déchets organiques qui pourrissent dans la décharge libèrent surtout :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Rappeler les gaz. 2. Identifier : décharge. 3. Relier : la décomposition libère du méthane.",
+                  "answers": [
+                    {
+                      "content": "du méthane",
+                      "correct": true
+                    },
+                    {
+                      "content": "de l'hélium",
+                      "correct": false
+                    },
+                    {
+                      "content": "de l'argon",
+                      "correct": false
+                    },
+                    {
+                      "content": "du dioxygène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux actions d'atténuation pour cette ville.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier chaque action. 2. But : trier réduit le méthane, le solaire remplace le gasoil. 3. Classer : atténuations.",
+                  "answers": [
+                    {
+                      "content": "Trier les déchets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Installer des panneaux solaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Récupérer l'eau de pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Semer des variétés résistantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Construire une digue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les économies d'énergie réduisent les émissions de gaz à effet de serre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier : économiser l'énergie. 2. Relier : on brûle moins de combustibles. 3. Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un quartier brûle 40 sacs d'ordures par jour. Après la mise en place du tri, il n'en brûle plus que 15. Combien de sacs en moins par jour ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Lire : 40 puis 15. 2. Soustraire : 40 - 15 = 25. 3. Conclure : 25 sacs en moins.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "sacs"
+                }
+              ],
+              "hint": "Relie chaque activité au gaz qu'elle libère."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un champ fictif, les pluies arrivent en retard : les semis germent mal et la récolte baisse.",
+              "exercise_type": "evaluation",
+              "figure": "rendements-pluies",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre le raisonnement.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. La cause : pluies perturbées. 2. L'effet : mauvaise germination. 3. La conséquence : récolte en baisse. 4. La réaction : adaptation.",
+                  "answers": [
+                    {
+                      "content": "Les pluies sont perturbées"
+                    },
+                    {
+                      "content": "Les semis germent mal"
+                    },
+                    {
+                      "content": "La récolte baisse"
+                    },
+                    {
+                      "content": "Le paysan adapte son calendrier de semis"
+                    }
+                  ]
+                },
+                {
+                  "content": "La baisse de la récolte est :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : un effet. 2. Chercher sa cause : les pluies. 3. Conclure : conséquence.",
+                  "answers": [
+                    {
+                      "content": "une conséquence",
+                      "correct": true
+                    },
+                    {
+                      "content": "une manifestation",
+                      "correct": false
+                    },
+                    {
+                      "content": "une atténuation",
+                      "correct": false
+                    },
+                    {
+                      "content": "un gaz à effet de serre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Décaler les semis est une adaptation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier l'action. 2. But : mieux cultiver. 3. Classer : adaptation. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les graines germent mal ___ le sol reste sec.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Identifier la cause. 2. Expliquer avec « parce que ».",
+                  "answers": [
+                    {
+                      "content": "parce que",
+                      "correct": true
+                    },
+                    {
+                      "content": "bien que",
+                      "correct": false
+                    },
+                    {
+                      "content": "alors que",
+                      "correct": false
+                    },
+                    {
+                      "content": "même si",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel domaine est touché ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : pluies perturbées. 2. Chercher : cultures. 3. Conclure : agriculture.",
+                  "answers": [
+                    {
+                      "content": "L'agriculture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le littoral",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les glaces des continents",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'astronomie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Suis la chaîne : cause, effet, conséquence, réaction."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Ne pas conclure sur un fait isolé, chaîne de causes et d'effets, classer des actions, vérifier des affirmations.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Quatre élèves commentent un relevé fictif de températures.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel élève raisonne correctement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer la durée. 2. Identifier la nature : le climat est une moyenne. 3. Conclure : seul Léa a raison.",
+                  "answers": [
+                    {
+                      "content": "Léa : « Il faut comparer des moyennes sur de nombreuses années. »",
+                      "correct": true
+                    },
+                    {
+                      "content": "Koffi : « Il a plu fort hier, donc le climat a changé. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "Awa : « Une seule année chaude prouve le changement climatique. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "Yao : « Le climat, c'est la météo de ce matin. »",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul jour de chaleur suffit à prouver un changement climatique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Repérer la durée : un jour. 2. Conclure : il faut des moyennes sur longue durée. Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre années fictives donnent des températures moyennes annuelles de 28, 30, 31 et 31 °C. Quelle est la moyenne de ces quatre valeurs ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Additionner : 28 + 30 + 31 + 31 = 120. 2. Diviser par 4 : 30.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                },
+                {
+                  "content": "Les moyennes par décennie sont 26,0 ; 26,4 ; 26,1 ; 26,3. Peut-on parler d'une hausse régulière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire. 2. Comparer : 26,4 puis 26,1 puis 26,3. 3. Repérer : pas de sens régulier. 4. Nommer : pas de hausse régulière.",
+                  "answers": [
+                    {
+                      "content": "Non : les valeurs montent et descendent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : chaque valeur est plus grande que la précédente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : 26,3 est un nombre élevé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : un relevé ne prouve jamais rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Lire. 2. Comparer. 3. Repérer. 4. Nommer.",
+                  "answers": [
+                    {
+                      "content": "Lire la donnée relevée"
+                    },
+                    {
+                      "content": "Comparer les valeurs d'une période à l'autre"
+                    },
+                    {
+                      "content": "Repérer le sens du changement"
+                    },
+                    {
+                      "content": "Nommer la manifestation"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare toujours des moyennes, jamais un fait isolé."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le schéma suit une chaîne de causes et d'effets.",
+              "exercise_type": "evaluation",
+              "figure": "chaine-causes",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre la chaîne.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Cause. 2. Mécanisme. 3. Effet. 4. Manifestations.",
+                  "answers": [
+                    {
+                      "content": "Les activités humaines émettent plus de gaz à effet de serre"
+                    },
+                    {
+                      "content": "L'effet de serre est renforcé"
+                    },
+                    {
+                      "content": "La planète se réchauffe"
+                    },
+                    {
+                      "content": "Sécheresses, inondations et montée de la mer s'aggravent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel maillon manque : plus de gaz à effet de serre, puis ..., puis réchauffement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Rappeler : les gaz retiennent la chaleur. 2. Relier : plus de gaz, plus de chaleur retenue.",
+                  "answers": [
+                    {
+                      "content": "Un effet de serre renforcé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une baisse du CO₂",
+                      "correct": false
+                    },
+                    {
+                      "content": "La disparition de l'atmosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un effet de serre supprimé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La montée du niveau de la mer est une cause du changement climatique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier : la montée de la mer est un effet. Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La déforestation est :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'activité. 2. Relier : moins d'arbres, plus de CO₂. 3. Conclure : une cause.",
+                  "answers": [
+                    {
+                      "content": "une cause qui renforce l'effet de serre",
+                      "correct": true
+                    },
+                    {
+                      "content": "une conséquence de la montée de la mer",
+                      "correct": false
+                    },
+                    {
+                      "content": "une adaptation à la sécheresse",
+                      "correct": false
+                    },
+                    {
+                      "content": "une énergie renouvelable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moins d'arbres absorbent le CO₂ par la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Rappeler le mécanisme. 2. Relier. 3. Conclure : photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "photosynthèse",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Remonte toujours de l'effet vers sa cause."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On classe des actions face au changement climatique.",
+              "exercise_type": "evaluation",
+              "figure": "mesures-climat",
+              "questions": [
+                {
+                  "content": "Relie chaque action à son but.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier l'action. 2. Se demander le but. 3. Classer.",
+                  "answers": [
+                    {
+                      "content": "Reboisement",
+                      "match": "Absorber du CO₂"
+                    },
+                    {
+                      "content": "Énergie solaire",
+                      "match": "Remplacer les combustibles fossiles"
+                    },
+                    {
+                      "content": "Digue",
+                      "match": "Protéger la côte"
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois actions d'atténuation.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier chaque action. 2. But : réduire les causes. 3. Classer : atténuations.",
+                  "answers": [
+                    {
+                      "content": "Le reboisement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les énergies renouvelables",
+                      "correct": true
+                    },
+                    {
+                      "content": "La gestion des déchets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les digues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le système d'alerte contre les inondations",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi une digue n'est-elle pas une atténuation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : la digue. 2. But : protéger. 3. Relier : conséquence, non cause. 4. Classer : adaptation.",
+                  "answers": [
+                    {
+                      "content": "Elle protège la côte mais ne réduit aucun gaz à effet de serre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle libère du CO₂",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle empêche la photosynthèse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est trop petite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les énergies renouvelables sont une adaptation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier. 2. But : réduire les émissions. 3. Classer : atténuation. Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Limiter les dégâts déjà causés par le changement climatique s'appelle l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. But : limiter les dégâts. 2. Classer : adaptation.",
+                  "answers": [
+                    {
+                      "content": "adaptation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cause ou conséquence : voilà la question à te poser."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On examine des affirmations sur le changement climatique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'effet de serre naturel est inutile.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler : il garde la Terre assez chaude. 2. Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle affirmation est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Rappeler les définitions. 2. Vérifier chaque proposition. 3. Conclure : seule la première est exacte.",
+                  "answers": [
+                    {
+                      "content": "Le CO₂ est un gaz à effet de serre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le temps et le climat sont la même chose",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'érosion côtière est une cause du réchauffement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le méthane vient surtout de la photosynthèse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La sécheresse peut faire baisser la production de matière organique des plantes.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier : sécheresse. 2. Expliquer : sans eau, moins de photosynthèse. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le reboisement ne sert à rien contre le CO₂.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier. 2. Relier : les arbres absorbent du CO₂. Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux affirmations exactes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Vérifier chaque affirmation. 2. Conclure : deux sont exactes.",
+                  "answers": [
+                    {
+                      "content": "Le CO₂ est un gaz à effet de serre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les glaces continentales qui fondent font monter le niveau de la mer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le temps et le climat sont la même chose",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'érosion côtière est une cause du réchauffement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le méthane vient surtout de la photosynthèse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Vérifie chaque affirmation avec les définitions du cours."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan du changement climatique",
+          "notions": "Toutes les notions : temps et climat, manifestations, causes, conséquences, atténuation et adaptation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un relevé fictif donne la température moyenne d'un village du Nord par décennie : 26,0 ; 26,2 ; 26,5 ; 26,8 degrés Celsius.",
+              "exercise_type": "evaluation",
+              "figure": "releve-temperatures",
+              "questions": [
+                {
+                  "content": "Ces valeurs décrivent :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer la durée : des décennies. 2. Conclure : climat.",
+                  "answers": [
+                    {
+                      "content": "le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "le temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "un orage",
+                      "correct": false
+                    },
+                    {
+                      "content": "la météo de demain",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien la température moyenne a-t-elle augmenté entre la première et la quatrième décennie ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Lire. 2. Soustraire : 26,8 - 26,0 = 0,8.",
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                },
+                {
+                  "content": "Ce relevé montre une hausse des températures moyennes.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Comparer. 2. Repérer la hausse. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Durée. 2. Nature. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Temps",
+                      "match": "État de l'atmosphère à un moment précis"
+                    },
+                    {
+                      "content": "Climat",
+                      "match": "Moyenne du temps sur de nombreuses années"
+                    },
+                    {
+                      "content": "Changement climatique",
+                      "match": "Modification durable du climat"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une longue période sans assez de pluie s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Lire. 2. Nommer : sécheresse.",
+                  "answers": [
+                    {
+                      "content": "sécheresse",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare la première et la dernière valeur."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un diagramme circulaire fictif donne la part des activités dans les émissions d'un pays imaginaire : combustibles fossiles 50 %, déforestation 25 %, élevage 15 %, décharges 10 %.",
+              "exercise_type": "evaluation",
+              "figure": "sources-emissions",
+              "questions": [
+                {
+                  "content": "Quelle part vient ensemble de la déforestation et de la combustion de combustibles fossiles ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Lire : 50 et 25. 2. Additionner : 75.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "%"
+                },
+                {
+                  "content": "Quelle activité libère surtout du méthane ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier. 2. Relier : l'élevage libère du méthane.",
+                  "answers": [
+                    {
+                      "content": "L'élevage",
+                      "correct": true
+                    },
+                    {
+                      "content": "La combustion du pétrole",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le reboisement",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'énergie solaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque gaz à une activité.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Rappeler les gaz. 2. Identifier. 3. Relier.",
+                  "answers": [
+                    {
+                      "content": "CO₂",
+                      "match": "Combustion du pétrole"
+                    },
+                    {
+                      "content": "CH₄",
+                      "match": "Décharges"
+                    },
+                    {
+                      "content": "N₂O",
+                      "match": "Engrais azotés"
+                    }
+                  ]
+                },
+                {
+                  "content": "La déforestation réduit l'absorption du CO₂ par la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Rappeler. 2. Relier. 3. Nommer.",
+                  "answers": [
+                    {
+                      "content": "photosynthèse",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La déforestation ne change rien au CO₂ de l'atmosphère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier. 2. Relier : bois brûlé, moins d'arbres. Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Additionne les parts demandées."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un relevé fictif donne la récolte de maïs d'un champ en sacs, sur quatre années où la pluie diminue : 8, 6, 4 puis 2.",
+              "exercise_type": "evaluation",
+              "figure": "rendements-pluies",
+              "questions": [
+                {
+                  "content": "De combien de sacs la récolte a-t-elle baissé entre l'année 1 et l'année 4 ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Lire : 8 et 2. 2. Soustraire : 6.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "sacs"
+                },
+                {
+                  "content": "Quelle manifestation explique cette baisse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier. 2. Relier : manque de pluie.",
+                  "answers": [
+                    {
+                      "content": "Une sécheresse",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'érosion côtière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La montée de la mer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éclipse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux conséquences possibles d'une sécheresse.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier. 2. Chercher. 3. Expliquer. 4. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Une baisse des récoltes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un risque de faim",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une inondation du littoral",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une hausse des récoltes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La baisse des récoltes est une manifestation du changement climatique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier : un effet. Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les récoltes baissent ___ les plantes manquent d'eau.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Expliquer avec « parce que ».",
+                  "answers": [
+                    {
+                      "content": "parce que",
+                      "correct": true
+                    },
+                    {
+                      "content": "bien que",
+                      "correct": false
+                    },
+                    {
+                      "content": "alors que",
+                      "correct": false
+                    },
+                    {
+                      "content": "même si",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une récolte qui baisse est un effet, pas une cause."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie les actions face au changement climatique.",
+              "exercise_type": "evaluation",
+              "figure": "mesures-climat",
+              "questions": [
+                {
+                  "content": "Planter des arbres est :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier. 2. But : absorber du CO₂. 3. Classer.",
+                  "answers": [
+                    {
+                      "content": "une atténuation",
+                      "correct": true
+                    },
+                    {
+                      "content": "une adaptation",
+                      "correct": false
+                    },
+                    {
+                      "content": "une manifestation",
+                      "correct": false
+                    },
+                    {
+                      "content": "une conséquence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois adaptations.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier. 2. But : limiter les dégâts. 3. Classer.",
+                  "answers": [
+                    {
+                      "content": "Cultiver des variétés résistantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Construire des digues",
+                      "correct": true
+                    },
+                    {
+                      "content": "Installer un système d'alerte contre les inondations",
+                      "correct": true
+                    },
+                    {
+                      "content": "Reboiser",
+                      "correct": false
+                    },
+                    {
+                      "content": "Utiliser l'énergie solaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action à son but.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier. 2. But. 3. Classer.",
+                  "answers": [
+                    {
+                      "content": "Reboisement",
+                      "match": "Absorber du CO₂"
+                    },
+                    {
+                      "content": "Digue",
+                      "match": "Protéger la côte"
+                    },
+                    {
+                      "content": "Récupération de l'eau de pluie",
+                      "match": "Avoir de l'eau en saison sèche"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Identifier. 2. But. 3. Relier. 4. Classer.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'action décrite"
+                    },
+                    {
+                      "content": "Se demander son but"
+                    },
+                    {
+                      "content": "Relier l'action à la cause ou à la conséquence"
+                    },
+                    {
+                      "content": "Classer l'action"
+                    }
+                  ]
+                },
+                {
+                  "content": "Utiliser le soleil ou le vent pour produire de l'électricité relève des énergies ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier. 2. Nommer.",
+                  "answers": [
+                    {
+                      "content": "renouvelables",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cause (atténuation) ou conséquence (adaptation) ?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

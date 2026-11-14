@@ -1,0 +1,3236 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Sources et récepteurs de lumière",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "classement-des-sources",
+          "kind": "diagram",
+          "description": "Arbre de classement des sources de lumière. La racine « Sources de lumière » se sépare en source primaire (elle produit sa lumière) et source secondaire (elle renvoie la lumière reçue). La source primaire se sépare en naturelle (Soleil, étoile, éclair) et artificielle (lampe, bougie, écran allumé). La Lune et un mur sont des sources secondaires.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "sources",
+                "label": "Sources de lumière"
+              },
+              {
+                "id": "primaire",
+                "label": "Source primaire (elle produit sa lumière)",
+                "category": 1
+              },
+              {
+                "id": "secondaire",
+                "label": "Source secondaire (elle renvoie la lumière)",
+                "category": 2
+              },
+              {
+                "id": "naturelle",
+                "label": "Naturelle : Soleil, étoile, éclair",
+                "category": 1
+              },
+              {
+                "id": "artificielle",
+                "label": "Artificielle : lampe, bougie, écran allumé",
+                "category": 1
+              },
+              {
+                "id": "exemples-secondaires",
+                "label": "Exemples : Lune, mur, livre",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "sources",
+                "to": "primaire"
+              },
+              {
+                "from": "sources",
+                "to": "secondaire"
+              },
+              {
+                "from": "primaire",
+                "to": "naturelle"
+              },
+              {
+                "from": "primaire",
+                "to": "artificielle"
+              },
+              {
+                "from": "secondaire",
+                "to": "exemples-secondaires"
+              }
+            ],
+            "legend": [
+              "Elle produit sa lumière",
+              "Elle renvoie la lumière reçue"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lampadaire-solaire",
+          "kind": "diagram",
+          "description": "Schéma du lampadaire solaire de la rue, de gauche à droite. Le Soleil, source primaire, envoie sa lumière au panneau solaire, qui est un récepteur. Le panneau produit de l'électricité et charge la batterie. La nuit, la batterie alimente la lampe, qui est une source primaire et produit de la lumière.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "soleil",
+                "label": "Soleil",
+                "category": 1
+              },
+              {
+                "id": "panneau",
+                "label": "Panneau solaire",
+                "category": 2
+              },
+              {
+                "id": "batterie",
+                "label": "Batterie",
+                "category": 3
+              },
+              {
+                "id": "lampe",
+                "label": "Lampe",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "soleil",
+                "to": "panneau",
+                "label": "lumière reçue"
+              },
+              {
+                "from": "panneau",
+                "to": "batterie",
+                "label": "électricité"
+              },
+              {
+                "from": "batterie",
+                "to": "lampe",
+                "label": "alimente"
+              }
+            ],
+            "legend": [
+              "Source primaire",
+              "Récepteur",
+              "Stocke l'électricité"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "chaine-lumineuse",
+          "kind": "diagram",
+          "description": "Chaîne de la lumière pour lire un livre le soir, de gauche à droite. La lampe allumée est la source primaire et éclaire le livre. Le livre est un objet éclairé : il renvoie une partie de la lumière reçue. Cette lumière entre dans l'œil, qui est le récepteur. L'œil est toujours le dernier maillon de la chaîne.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "lampe",
+                "label": "Lampe allumée",
+                "category": 1
+              },
+              {
+                "id": "livre",
+                "label": "Livre",
+                "category": 2
+              },
+              {
+                "id": "oeil",
+                "label": "Œil",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "lampe",
+                "to": "livre",
+                "label": "éclaire"
+              },
+              {
+                "from": "livre",
+                "to": "oeil",
+                "label": "renvoie de la lumière"
+              }
+            ],
+            "legend": [
+              "Source primaire",
+              "Objet éclairé",
+              "Récepteur"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Distinguer source primaire et source secondaire",
+          "remember": "Une **source primaire** de lumière produit elle-même la lumière qu'elle envoie : le Soleil, une étoile, un éclair, une lampe allumée, une flamme, un écran allumé. On la voit même dans le noir complet. Une **source secondaire** (ou **objet éclairé**) ne produit pas de lumière : elle renvoie une partie de la lumière qu'elle reçoit d'une source primaire. Exemples : la Lune, un mur, un livre, un miroir, un nuage. Sans source primaire, elle devient invisible. Une source primaire est **naturelle** (Soleil, étoile, éclair) ou **artificielle**, c'est-à-dire fabriquée par l'homme (lampe, bougie, écran).",
+          "method": [
+            "Identifier l'objet observé et la situation (jour ou nuit, lampe allumée ou éteinte).",
+            "Tester si l'objet produit lui-même de la lumière : imaginer qu'on supprime toutes les autres sources et se demander s'il reste visible.",
+            "Conclure : s'il reste visible, c'est une source primaire (naturelle ou artificielle) ; s'il disparaît, c'est une source secondaire, et on nomme la source primaire qui l'éclaire."
+          ],
+          "example": {
+            "statement": "La nuit, dans sa chambre, Koffi allume sa lampe torche et éclaire son cahier. Classer la lampe torche et le cahier.",
+            "steps": [
+              "Identifier : on observe une lampe torche allumée et un cahier, dans une chambre sans autre lumière.",
+              "Tester : si Koffi éteint tout sauf la lampe torche, elle reste visible car elle produit sa lumière. Si elle s'éteint, le cahier disparaît dans le noir.",
+              "Conclure : la lampe torche allumée est une source primaire artificielle. Le cahier est une source secondaire, éclairée par la lampe torche."
+            ]
+          },
+          "pitfall": "Ne pas croire que tout objet qu'on voit produit de la lumière. Contre-exemple : dans une chambre éclairée par une seule lampe, on voit 4 objets (la lampe, le lit, le mur, le cahier), mais il n'y a qu'une source primaire. Les 3 autres sont des sources secondaires. De même, la Lune brille la nuit, mais elle renvoie la lumière du Soleil. Pose-toi toujours la question : « Cet objet reste-t-il visible si j'éteins les autres sources ? »",
+          "figure": "classement-des-sources",
+          "practice": {
+            "statement": "Tu t'entraînes à classer des objets en sources primaires ou secondaires avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une bougie allumée est posée sur la table, dans une pièce sans autre lumière. Quelle est sa nature ?",
+                "question_type": "single_choice",
+                "hint": "Reste-t-elle visible quand il n'y a aucune autre lumière ?",
+                "explanation": "Étape 1 — Identifier : une bougie allumée dans une pièce sans autre lumière. Étape 2 — Tester : si on supprime les autres sources, la flamme reste visible, car elle produit sa lumière. Étape 3 — Conclure : c'est une source primaire (artificielle). Une source secondaire disparaîtrait dans le noir.",
+                "answers": [
+                  {
+                    "content": "Une source primaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une source secondaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni l'une ni l'autre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un récepteur de lumière",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le mur blanc de la cour est une source primaire de lumière.",
+                "question_type": "true_false",
+                "hint": "Le mur est-il visible dans le noir complet ?",
+                "explanation": "Étape 1 — Identifier : un mur blanc, éclairé par le Soleil ou par une lampe. Étape 2 — Tester : si on supprime les autres sources, le mur disparaît dans le noir. Étape 3 — Conclure : c'est une source secondaire, qui renvoie la lumière reçue. Il est brillant, mais il ne produit pas de lumière.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour classer un objet.",
+                "question_type": "ordering",
+                "hint": "On conclut en dernier.",
+                "explanation": "Étape 1 — Identifier l'objet et la situation. Étape 2 — Tester s'il reste visible quand on supprime les autres sources. Étape 3 — Conclure : primaire s'il reste visible, secondaire s'il disparaît. On ne peut pas conclure avant d'avoir testé.",
+                "answers": [
+                  {
+                    "content": "Identifier l'objet et la situation."
+                  },
+                  {
+                    "content": "Tester si l'objet reste visible quand on supprime les autres sources."
+                  },
+                  {
+                    "content": "Conclure : source primaire ou source secondaire."
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître les sources primaires et secondaires",
+              "statement": "Dans cet exercice, tu classes des objets de la maison et du quartier en sources primaires ou secondaires, avec la méthode de la fiche : identifier, tester, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces objets vus le soir dans la rue, lequel est une source primaire de lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : quatre objets vus le soir. Étape 2 — Tester : si on supprime les autres sources, seule la lampe de rue allumée reste visible, car elle produit sa lumière ; le mur, la Lune et le trottoir disparaissent. Étape 3 — Conclure : la lampe de rue allumée est une source primaire. Erreur tentante : choisir la Lune parce qu'elle brille ; elle renvoie la lumière du Soleil, c'est une source secondaire.",
+                  "answers": [
+                    {
+                      "content": "Une lampe de rue allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mur d'une maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le trottoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le miroir du couloir ne produit pas de lumière : c'est une source ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : un miroir dans un couloir. Étape 2 — Tester : dans le noir complet, le miroir n'est pas visible. Étape 3 — Conclure : il disparaît, donc c'est une source secondaire. Il renvoie la lumière qu'il reçoit, mais il n'en produit pas.",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux objets qui sont des sources primaires de lumière ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : cinq objets. Étape 2 — Tester : la lampe torche allumée et l'écran allumé restent visibles dans le noir, parce qu'ils produisent leur lumière. Le rideau, le livre et la Lune disparaissent si on supprime les autres sources. Étape 3 — Conclure : seuls la lampe torche et l'écran sont des sources primaires. Les autres sont des sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "Une lampe torche allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'écran d'un téléphone allumé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un rideau blanc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un livre ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le salon, on voit 5 objets : la lampe allumée, la table, le canapé, le poster et la télévision allumée. Combien sont des sources secondaires ?",
+                  "question_type": "numeric",
+                  "unit": "objets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : cinq objets dans le salon. Étape 2 — Tester : la lampe allumée et la télévision allumée restent visibles sans autre lumière ; la table, le canapé et le poster disparaissent. Étape 3 — Conclure : il y a 2 sources primaires et donc 5 − 2 = 3 sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au coucher du soleil, on voit la Lune. Elle renvoie la lumière du Soleil : c'est une source ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la Lune, visible dans le ciel du soir. Étape 2 — Tester : sans le Soleil, la Lune n'est plus visible, car elle ne produit pas de lumière. Étape 3 — Conclure : c'est une source secondaire, car elle renvoie la lumière du Soleil. Dire « primaire » est l'erreur du piège : la Lune brille, mais ne produit rien.",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "primaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "naturelle primaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque objet à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : trois objets. Étape 2 — Tester : le Soleil et la lampe de rue restent visibles car ils produisent leur lumière ; le mur disparaît dans le noir. Étape 3 — Conclure : le Soleil est naturel, la lampe de rue a été fabriquée par l'homme donc elle est artificielle, le mur est une source secondaire.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "match": "Source primaire naturelle"
+                    },
+                    {
+                      "content": "Une lampe de rue allumée",
+                      "match": "Source primaire artificielle"
+                    },
+                    {
+                      "content": "Le mur d'une cour",
+                      "match": "Source secondaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet que l'on voit produit forcément de la lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'affirmation parle de tout objet visible. Étape 2 — Tester : on voit le mur, le cahier ou la Lune, mais ils disparaissent si on supprime les autres sources. Étape 3 — Conclure : voir un objet ne prouve pas qu'il produit de la lumière. Il peut être une source secondaire qui renvoie celle d'une autre source.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les sources de lumière pendant une coupure de courant",
+              "statement": "Dans cet exercice, tu classes des objets d'un quartier plongé dans le noir par une coupure de courant, avec la méthode de la fiche : identifier, tester, conclure.",
+              "hint": "Pour chaque objet, imagine le noir complet : s'il reste visible, il produit sa lumière.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque objet à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : trois objets. Étape 2 — Tester : l'éclair et l'écran allumé sont visibles dans le noir ; le panneau routier disparaît. Étape 3 — Conclure : l'éclair est naturel, l'écran est fabriqué par l'homme donc artificiel, le panneau est une source secondaire.",
+                  "answers": [
+                    {
+                      "content": "Un éclair",
+                      "match": "Source primaire naturelle"
+                    },
+                    {
+                      "content": "L'écran d'une télévision allumée",
+                      "match": "Source primaire artificielle"
+                    },
+                    {
+                      "content": "Un panneau routier",
+                      "match": "Source secondaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant la coupure de courant, quel objet de la maison reste visible dans le noir complet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : quatre objets dans une maison plongée dans le noir. Étape 2 — Tester : seule la bougie allumée produit de la lumière ; l'ampoule éteinte n'en produit plus, le mur et le rideau n'ont aucune lumière à renvoyer. Étape 3 — Conclure : la bougie allumée est la seule source primaire.",
+                  "answers": [
+                    {
+                      "content": "Une bougie allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une ampoule éteinte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mur du salon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un rideau blanc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant la coupure, le mur du salon devient invisible parce que c'est une source secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le mur du salon, sans lampe allumée. Étape 2 — Tester : plus aucune source primaire n'éclaire le mur, il disparaît. Étape 3 — Conclure : le mur est une source secondaire, il ne fait que renvoyer la lumière reçue ; sans lumière reçue, il n'est plus visible. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une étoile, comme le Soleil, est une source ___ de lumière.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : une étoile, vue la nuit. Étape 2 — Tester : on la voit dans le noir complet, sans qu'aucun autre objet ne l'éclaire. Étape 3 — Conclure : elle produit sa lumière, c'est une source primaire naturelle.",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois objets qui sont des sources secondaires ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : cinq objets. Étape 2 — Tester : la bougie allumée et l'étoile restent visibles sans autre lumière. La Lune, le mur et le livre disparaissent si on supprime les autres sources. Étape 3 — Conclure : la Lune, le mur et le livre sont des sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "La Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mur d'une maison",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un livre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une bougie allumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une étoile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la rue, pendant la coupure, on voit : une lampe torche allumée, l'écran d'un téléphone allumé, la Lune, un portail, un mur et une étoile. Combien sont des sources primaires ?",
+                  "question_type": "numeric",
+                  "unit": "objets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : six objets. Étape 2 — Tester : la lampe torche, l'écran allumé et l'étoile restent visibles dans le noir. La Lune, le portail et le mur disparaissent. Étape 3 — Conclure : il y a 3 sources primaires (et 3 sources secondaires).",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître un récepteur de lumière",
+          "remember": "Un **récepteur de lumière** est un objet qui reçoit de la lumière et en fait quelque chose. L'**œil** reçoit la lumière et envoie un message au cerveau par le nerf optique : c'est ce qui permet de voir. Le **capteur** d'un appareil photo ou d'un téléphone (ou la pellicule d'un ancien appareil) reçoit la lumière et enregistre une image. La **cellule photovoltaïque**, dans un panneau solaire, reçoit la lumière et produit de l'électricité. Un récepteur ne produit pas de lumière : il ne faut pas le confondre avec une source.",
+          "method": [
+            "Repérer la lumière que l'objet reçoit et d'où elle vient.",
+            "Repérer ce que l'objet fait de cette lumière (message envoyé au cerveau, image enregistrée, électricité produite).",
+            "Conclure : un objet qui reçoit de la lumière et la transforme est un récepteur ; nommer le récepteur et son effet."
+          ],
+          "example": {
+            "statement": "Un lampadaire solaire du quartier porte un petit panneau sur le dessus. Le jour, le panneau est tourné vers le ciel. Quel est le rôle du panneau ?",
+            "steps": [
+              "Repérer : le panneau reçoit la lumière du Soleil pendant la journée.",
+              "Repérer l'effet : il transforme cette lumière en électricité, qui charge la batterie du lampadaire.",
+              "Conclure : le panneau reçoit de la lumière et la transforme en électricité, donc c'est un récepteur (une cellule photovoltaïque). Il ne produit pas de lumière."
+            ]
+          },
+          "pitfall": "Ne pas confondre récepteur et source. Un lampadaire solaire a deux éléments qui jouent des rôles opposés : le panneau est un récepteur, car il reçoit la lumière du Soleil le jour ; la lampe est une source primaire, car elle produit de la lumière la nuit. Le panneau brille au soleil, mais il ne produit pas de lumière : il en reçoit. Demande-toi toujours : « Cet objet reçoit-il de la lumière ou en produit-il ? »",
+          "figure": "lampadaire-solaire",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître des récepteurs de lumière avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel objet reçoit la lumière du Soleil et produit de l'électricité ?",
+                "question_type": "single_choice",
+                "hint": "Cherche l'objet qui reçoit la lumière et la transforme.",
+                "explanation": "Étape 1 — Repérer : le panneau solaire reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur. La lampe de poche et la bougie produisent de la lumière, le miroir renvoie la lumière sans la transformer.",
+                "answers": [
+                  {
+                    "content": "Le panneau solaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lampe de poche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le miroir",
+                    "correct": false
+                  },
+                  {
+                    "content": "La bougie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'œil reçoit la lumière et envoie un message au ___.",
+                "question_type": "fill_blank",
+                "hint": "Quel organe analyse le message de l'œil ?",
+                "explanation": "Étape 1 — Repérer : l'œil reçoit la lumière des objets. Étape 2 — Repérer l'effet : il envoie un message au cerveau par le nerf optique. Étape 3 — Conclure : l'œil est un récepteur, et le message arrive au cerveau.",
+                "answers": [
+                  {
+                    "content": "cerveau",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un panneau solaire est une source primaire de lumière.",
+                "question_type": "true_false",
+                "hint": "Reçoit-il de la lumière ou en produit-il ?",
+                "explanation": "Étape 1 — Repérer : le panneau solaire reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il la transforme en électricité. Étape 3 — Conclure : il reçoit de la lumière et n'en produit pas, c'est un récepteur et non une source.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître des récepteurs et leurs effets",
+              "statement": "Dans cet exercice, tu reconnais des récepteurs de lumière et ce qu'ils font de la lumière reçue, avec la méthode de la fiche : repérer la lumière reçue, repérer l'effet, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le capteur d'un téléphone qui prend une photo du quartier est un récepteur. Qu'en fait-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le capteur reçoit la lumière venant du quartier. Étape 2 — Repérer l'effet : il enregistre une image. Étape 3 — Conclure : c'est un récepteur dont l'effet est l'image enregistrée. Il ne produit pas de lumière, c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Il enregistre une image",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il produit de la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il produit de la chaleur uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il renvoie la lumière sans la recevoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque récepteur à ce qu'il fait de la lumière reçue.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : trois objets qui reçoivent de la lumière. Étape 2 — Repérer l'effet : l'œil envoie un message au cerveau, le capteur enregistre une image, le panneau solaire produit de l'électricité. Étape 3 — Conclure : chaque récepteur a son effet.",
+                  "answers": [
+                    {
+                      "content": "L'œil",
+                      "match": "Envoie un message au cerveau"
+                    },
+                    {
+                      "content": "Le capteur d'un téléphone",
+                      "match": "Enregistre une image"
+                    },
+                    {
+                      "content": "Le panneau solaire",
+                      "match": "Produit de l'électricité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux récepteurs de lumière ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche les objets qui reçoivent de la lumière. Étape 2 — Repérer l'effet : l'œil envoie un message au cerveau, le panneau solaire produit de l'électricité. Étape 3 — Conclure : ce sont les deux récepteurs. La lampe, l'écran et l'étoile produisent leur lumière : ce sont des sources primaires.",
+                  "answers": [
+                    {
+                      "content": "L'œil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le panneau solaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe torche allumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'écran d'un téléphone allumé",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'étoile Polaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La cellule photovoltaïque d'un panneau solaire transforme la lumière en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la cellule reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : elle produit de l'électricité. Étape 3 — Conclure : c'est un récepteur qui transforme la lumière en électricité.",
+                  "answers": [
+                    {
+                      "content": "électricité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le panneau d'un lampadaire solaire produit de la lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur. La lumière de nuit est produite par la lampe, qui est une source primaire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur de lumière ___ de la lumière.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : un récepteur est placé là où arrive la lumière. Étape 2 — Repérer l'effet : il en fait un message, une image ou de l'électricité. Étape 3 — Conclure : un récepteur reçoit de la lumière. Dire qu'il en produit est la confusion avec une source.",
+                  "answers": [
+                    {
+                      "content": "reçoit",
+                      "correct": true
+                    },
+                    {
+                      "content": "produit",
+                      "correct": false
+                    },
+                    {
+                      "content": "éteint",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un panneau solaire brille fortement au soleil. Pourquoi n'est-ce pas une source de lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il la transforme en électricité et ne produit pas de lumière. Étape 3 — Conclure : il brille parce qu'il renvoie un peu de la lumière reçue, mais c'est un récepteur. Sa taille et sa couleur ne décident pas de sa nature.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il reçoit la lumière du Soleil et ne produit pas la sienne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il est trop petit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il est noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il n'est pas allumé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les récepteurs de la maison et du quartier",
+              "statement": "Dans cet exercice, tu repères les récepteurs de lumière de la maison et du quartier avec la méthode de la fiche : repérer la lumière reçue, repérer l'effet, conclure.",
+              "hint": "Pour chaque objet, demande-toi : reçoit-il de la lumière, et qu'en fait-il ?",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le soir, tu observes ces objets. Quels sont les trois récepteurs de lumière ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on cherche les objets qui reçoivent de la lumière. Étape 2 — Repérer l'effet : l'œil envoie un message au cerveau, le capteur enregistre une image, le panneau produit de l'électricité. Étape 3 — Conclure : ce sont les trois récepteurs. L'ampoule et la flamme produisent de la lumière : ce sont des sources primaires.",
+                  "answers": [
+                    {
+                      "content": "L'œil de ta sœur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le capteur du téléphone qui prend une photo",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le panneau solaire du lampadaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampoule allumée du salon",
+                      "correct": false
+                    },
+                    {
+                      "content": "La flamme d'une bougie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître un récepteur de lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la lumière que l'objet reçoit. Étape 2 — Repérer ce que l'objet en fait. Étape 3 — Conclure : c'est un récepteur et on donne son effet. On ne peut pas conclure avant d'avoir regardé l'effet.",
+                  "answers": [
+                    {
+                      "content": "Repérer la lumière que l'objet reçoit."
+                    },
+                    {
+                      "content": "Repérer ce que l'objet fait de cette lumière."
+                    },
+                    {
+                      "content": "Conclure : c'est un récepteur, avec son effet."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lampadaire solaire a 1 panneau, 1 lampe et 1 batterie. Combien de ces éléments sont des récepteurs de lumière ?",
+                  "question_type": "numeric",
+                  "unit": "élément",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil ; la lampe produit de la lumière ; la batterie stocke l'électricité. Étape 2 — Repérer l'effet : seul le panneau transforme de la lumière reçue en électricité. Étape 3 — Conclure : il y a 1 seul récepteur, le panneau.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le jour, la batterie d'un lampadaire solaire se recharge. Grâce à quoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil le jour. Étape 2 — Repérer l'effet : il produit de l'électricité, qui charge la batterie. Étape 3 — Conclure : la recharge vient du panneau, qui est un récepteur. La lampe, elle, est éteinte le jour.",
+                  "answers": [
+                    {
+                      "content": "Au panneau, qui transforme la lumière du Soleil en électricité",
+                      "correct": true
+                    },
+                    {
+                      "content": "À la lampe, qui produit de la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au poteau en métal",
+                      "correct": false
+                    },
+                    {
+                      "content": "À la lumière de la Lune uniquement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un appareil photo enregistre une ___ grâce à son capteur.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le capteur reçoit la lumière venant de la scène. Étape 2 — Repérer l'effet : il enregistre une image. Étape 3 — Conclure : c'est un récepteur qui garde une image (une photo).",
+                  "answers": [
+                    {
+                      "content": "image",
+                      "correct": true
+                    },
+                    {
+                      "content": "photo",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le téléphone qui prend la photo d'un lampadaire reçoit de la lumière avec son capteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le téléphone est tourné vers le lampadaire, et le capteur reçoit sa lumière. Étape 2 — Repérer l'effet : le capteur enregistre une image. Étape 3 — Conclure : le capteur est un récepteur, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Décrire la chaîne de la lumière : source, objet, récepteur",
+          "remember": "Pour voir un objet, de la lumière venant de cet objet doit **entrer dans l'œil**. Si l'objet est une source primaire, sa lumière va directement vers l'œil : **source primaire → œil**. Si l'objet est éclairé, la lumière va d'abord de la source primaire vers l'objet, puis de l'objet vers l'œil : **source primaire → objet éclairé → œil**. L'œil ne produit pas de lumière : il en reçoit. Sans source primaire, dans le noir complet, on ne voit rien, même les yeux grands ouverts.",
+          "method": [
+            "Repérer la source primaire de la situation.",
+            "Repérer l'objet vu et dire si c'est une source primaire ou un objet éclairé.",
+            "Repérer le récepteur (l'œil, le capteur d'un appareil photo…).",
+            "Écrire la chaîne avec des flèches : source primaire → objet éclairé (s'il y en a un) → récepteur."
+          ],
+          "example": {
+            "statement": "Le soir, Mariam lit un livre posé sur son bureau. Seule la lampe du bureau est allumée. Écrire la chaîne qui lui permet de voir le livre.",
+            "steps": [
+              "Repérer : la source primaire est la lampe du bureau, seule lumière allumée.",
+              "Repérer l'objet vu : le livre ne produit pas de lumière, c'est un objet éclairé par la lampe.",
+              "Repérer le récepteur : c'est l'œil de Mariam.",
+              "Écrire la chaîne : lampe du bureau → livre → œil de Mariam."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'on voit parce que l'œil envoie de la lumière vers l'objet. Contre-exemple : dans une chambre toute noire (lampe éteinte, volets fermés), tu ouvres grand les yeux et tu ne vois pas ton cahier. Il n'y a aucune lumière à recevoir. La chaîne lampe → cahier → œil a 3 maillons : si le premier manque, la chaîne est coupée. L'œil est le dernier maillon, jamais le premier.",
+          "figure": "chaine-lumineuse",
+          "practice": {
+            "statement": "Tu t'entraînes à écrire la chaîne de la lumière avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une lampe éclaire un cahier et tu regardes le cahier. Remets dans l'ordre la chaîne de la lumière.",
+                "question_type": "ordering",
+                "hint": "La source primaire est toujours en premier.",
+                "explanation": "Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le cahier est éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : lampe → cahier → œil. Le cahier ne peut pas être avant la lampe, car il n'a pas de lumière à renvoyer sans elle.",
+                "answers": [
+                  {
+                    "content": "La lampe"
+                  },
+                  {
+                    "content": "Le cahier"
+                  },
+                  {
+                    "content": "L'œil"
+                  }
+                ]
+              },
+              {
+                "content": "Tu regardes directement l'écran allumé d'un téléphone. Quelle est la chaîne de la lumière ?",
+                "question_type": "single_choice",
+                "hint": "L'objet vu produit lui-même sa lumière.",
+                "explanation": "Étape 1 — Repérer : l'écran allumé est une source primaire. Étape 2 — Repérer l'objet vu : c'est l'écran lui-même, il n'y a pas d'objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : écran → œil. « Œil → écran » est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Écran → œil",
+                    "correct": true
+                  },
+                  {
+                    "content": "Œil → écran",
+                    "correct": false
+                  },
+                  {
+                    "content": "Écran → mur → œil",
+                    "correct": false
+                  },
+                  {
+                    "content": "Mur → écran → œil",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'œil envoie de la lumière vers l'objet qu'il regarde.",
+                "question_type": "true_false",
+                "hint": "Où se place l'œil dans la chaîne ?",
+                "explanation": "Étape 1 — Repérer : la source primaire produit la lumière. Étape 2 — Repérer l'objet vu : il envoie sa lumière ou celle qu'il reçoit. Étape 3 — Repérer le récepteur : l'œil reçoit cette lumière. Étape 4 — Écrire la chaîne : l'œil est à la fin, il ne produit rien. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Écrire la chaîne de la lumière",
+              "statement": "Dans cet exercice, tu écris la chaîne de la lumière dans des situations du soir, avec la méthode de la fiche : repérer la source primaire, repérer l'objet vu, repérer le récepteur, écrire la chaîne.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le soir, tu vois le mur d'une maison éclairé par un lampadaire de la rue. Quelle est la chaîne de la lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la source primaire est le lampadaire. Étape 2 — Repérer l'objet vu : le mur est un objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : lampadaire → mur → œil. « Lampadaire → œil » oublie le mur que tu regardes.",
+                  "answers": [
+                    {
+                      "content": "Lampadaire → mur → œil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mur → lampadaire → œil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Œil → mur → lampadaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lampadaire → œil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tu regardes la Lune. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est le Soleil. Étape 2 — Repérer l'objet vu : la Lune, objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : Soleil → Lune → œil.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil"
+                    },
+                    {
+                      "content": "La Lune"
+                    },
+                    {
+                      "content": "L'œil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la chaîne lampe → livre → œil, le livre est un objet ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le livre ne produit pas de lumière, c'est un objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : lampe → livre → œil.",
+                  "answers": [
+                    {
+                      "content": "éclairé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Tu regardes une télévision allumée. Combien d'éléments contient la chaîne de la lumière, de la source jusqu'au récepteur ?",
+                  "question_type": "numeric",
+                  "unit": "éléments",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la télévision allumée est une source primaire. Étape 2 — Repérer l'objet vu : c'est la télévision, il n'y a pas d'objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : télévision → œil, soit 2 éléments.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour voir un livre dans une chambre le soir, quels sont les trois éléments nécessaires ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : il faut une source primaire. Étape 2 — Repérer l'objet vu : le livre, qui renvoie la lumière reçue. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : source primaire → livre → œil. Un œil qui envoie de la lumière est l'erreur du piège, et le panneau solaire n'est pas nécessaire.",
+                  "answers": [
+                    {
+                      "content": "Une source primaire qui éclaire le livre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le livre, qui renvoie de la lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un récepteur, ici l'œil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un œil qui envoie de la lumière vers le livre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un panneau solaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une chambre totalement noire, on voit son cahier si on ouvre grand les yeux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : dans le noir complet, il n'y a aucune source primaire. Étape 2 — Repérer l'objet vu : le cahier n'a aucune lumière à renvoyer. Étape 3 — Repérer le récepteur : l'œil ne reçoit rien. Étape 4 — Écrire la chaîne : elle est coupée dès le premier maillon, donc on ne voit pas le cahier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La lampe torche pendant la coupure de courant",
+              "statement": "Dans cet exercice, tu écris la chaîne de la lumière pendant une coupure de courant, avec la méthode de la fiche : repérer la source primaire, repérer l'objet vu, repérer le récepteur, écrire la chaîne.",
+              "hint": "Commence toujours par la source primaire, termine toujours par le récepteur.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à la chaîne de la lumière.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la bougie, ou le Soleil pour la Lune. Étape 2 — Repérer l'objet vu : la flamme est elle-même une source, le cahier et la Lune sont éclairés. Étape 3 — Repérer le récepteur : l'œil, ou le capteur de l'appareil. Étape 4 — Écrire la chaîne : une chaîne à deux éléments pour la flamme, trois pour le cahier et pour la Lune.",
+                  "answers": [
+                    {
+                      "content": "Tu regardes la flamme d'une bougie",
+                      "match": "Bougie → œil"
+                    },
+                    {
+                      "content": "Tu regardes ton cahier éclairé par la bougie",
+                      "match": "Bougie → cahier → œil"
+                    },
+                    {
+                      "content": "Un appareil photo photographie la Lune",
+                      "match": "Soleil → Lune → capteur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour écrire la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la source primaire. Étape 2 — Repérer l'objet vu. Étape 3 — Repérer le récepteur. Étape 4 — Écrire la chaîne avec des flèches. On écrit la chaîne en dernier, quand tous les maillons sont connus.",
+                  "answers": [
+                    {
+                      "content": "Repérer la source primaire."
+                    },
+                    {
+                      "content": "Repérer l'objet vu."
+                    },
+                    {
+                      "content": "Repérer le récepteur."
+                    },
+                    {
+                      "content": "Écrire la chaîne avec des flèches."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant la coupure de courant, Ama allume une lampe torche et éclaire son cahier. Quelle est la chaîne de la lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe torche. Étape 2 — Repérer l'objet vu : le cahier, objet éclairé. Étape 3 — Repérer le récepteur : l'œil d'Ama. Étape 4 — Écrire la chaîne : lampe torche → cahier → œil d'Ama. La chaîne qui commence par l'œil est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Lampe torche → cahier → œil d'Ama",
+                      "correct": true
+                    },
+                    {
+                      "content": "Œil d'Ama → cahier → lampe torche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cahier → lampe torche → œil d'Ama",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lampe torche → œil d'Ama",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la chaîne Soleil → Lune → œil, la source primaire est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la source primaire est celle qui produit la lumière, au début de la chaîne. Étape 2 — Repérer l'objet vu : la Lune, objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : Soleil → Lune → œil. La source primaire est le Soleil.",
+                  "answers": [
+                    {
+                      "content": "Soleil",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe torche éclaire un mur, puis un téléphone photographie le mur. Combien d'éléments contient la chaîne de la lumière ?",
+                  "question_type": "numeric",
+                  "unit": "éléments",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe torche. Étape 2 — Repérer l'objet vu : le mur, objet éclairé. Étape 3 — Repérer le récepteur : le capteur du téléphone. Étape 4 — Écrire la chaîne : lampe torche → mur → capteur, soit 3 éléments.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on éteint la seule source primaire de la pièce, l'objet éclairé continue d'être vu.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la source primaire éteinte ne produit plus de lumière. Étape 2 — Repérer l'objet vu : l'objet éclairé n'a plus de lumière à renvoyer. Étape 3 — Repérer le récepteur : l'œil ne reçoit plus rien. Étape 4 — Écrire la chaîne : elle est coupée, l'objet n'est plus vu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le soir au salon",
+          "statement": "Le soir, la famille Koné est au salon. Une lampe est allumée sur la table. Sur la table, il y a un livre et un téléphone dont l'écran est allumé. Au mur, il y a un poster. Par la fenêtre, on voit la Lune. Fatou lit le livre, puis elle le prend en photo avec le téléphone.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelles sont les deux sources primaires de lumière du salon ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Identifier : on observe la lampe, le livre, l'écran, le poster et la Lune. Étape 2 — Tester : si on supprime les autres sources, seules la lampe et l'écran restent visibles, car ils produisent leur lumière. Étape 3 — Conclure : ce sont les deux sources primaires. Le livre et le poster disparaissent. La Lune brille, mais elle renvoie la lumière du Soleil.",
+              "answers": [
+                {
+                  "content": "La lampe allumée",
+                  "correct": true
+                },
+                {
+                  "content": "L'écran du téléphone allumé",
+                  "correct": true
+                },
+                {
+                  "content": "Le livre",
+                  "correct": false
+                },
+                {
+                  "content": "Le poster",
+                  "correct": false
+                },
+                {
+                  "content": "La Lune",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La Lune est visible parce qu'elle produit sa propre lumière.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : la Lune, vue par la fenêtre le soir. Étape 2 — Tester : sans le Soleil qui l'éclaire, la Lune n'est plus visible. Étape 3 — Conclure : c'est une source secondaire qui renvoie la lumière du Soleil. L'affirmation est fausse, c'est l'erreur du piège de la fiche sur les sources.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi les cinq objets (la lampe, le livre, l'écran, le poster, la Lune), combien sont des sources secondaires ?",
+              "question_type": "numeric",
+              "unit": "objets",
+              "tolerance": 0,
+              "explanation": "Méthode de la fiche sur les sources. Étape 1 — Identifier : cinq objets. Étape 2 — Tester : la lampe et l'écran restent visibles sans autre lumière ; le livre, le poster et la Lune disparaissent. Étape 3 — Conclure : 2 sources primaires, donc 5 − 2 = 3 sources secondaires.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Fatou lit son livre. Remets dans l'ordre la chaîne de la lumière qui lui permet de le voir.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la fiche sur la chaîne. Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le livre, objet éclairé. Étape 3 — Repérer le récepteur : l'œil de Fatou. Étape 4 — Écrire la chaîne : lampe → livre → œil de Fatou.",
+              "answers": [
+                {
+                  "content": "La lampe"
+                },
+                {
+                  "content": "Le livre"
+                },
+                {
+                  "content": "L'œil de Fatou"
+                }
+              ]
+            },
+            {
+              "content": "Fatou prend le livre en photo avec le téléphone. Quel élément du téléphone est le récepteur de lumière ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la fiche sur les récepteurs. Étape 1 — Repérer : le capteur reçoit la lumière renvoyée par le livre. Étape 2 — Repérer l'effet : il enregistre une image. Étape 3 — Conclure : le capteur est le récepteur. L'écran allumé produit de la lumière, c'est une source primaire.",
+              "answers": [
+                {
+                  "content": "Le capteur de l'appareil photo",
+                  "correct": true
+                },
+                {
+                  "content": "L'écran allumé",
+                  "correct": false
+                },
+                {
+                  "content": "La batterie",
+                  "correct": false
+                },
+                {
+                  "content": "Le haut-parleur",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La coupure de courant dans le quartier",
+          "statement": "À 19 h, une coupure de courant plonge le quartier dans le noir. Dans la cour d'Adjoua, un lampadaire solaire reste allumé. Sa batterie a été rechargée le jour par son panneau. Dans la maison, Adjoua allume une bougie et éclaire le mur du couloir.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Au moment de la coupure, avant qu'Adjoua allume sa bougie, la lampe du couloir s'éteint. Pourquoi le mur du couloir devient-il invisible ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : le mur du couloir, sans lampe. Étape 2 — Tester : si on supprime les autres sources, le mur disparaît, car il ne produit pas de lumière. Étape 3 — Conclure : c'est une source secondaire, invisible sans source primaire qui l'éclaire. Dire qu'il est une source primaire éteinte est faux : un mur n'est jamais une source primaire.",
+              "answers": [
+                {
+                  "content": "Parce que le mur ne produit pas de lumière et plus aucune source ne l'éclaire",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que le mur est une source primaire éteinte",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que les yeux ne fonctionnent pas dans le noir",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que le mur absorbe la lumière de la bougie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le panneau du lampadaire solaire est un récepteur de lumière.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la fiche sur les récepteurs. Étape 1 — Repérer : le panneau reçoit la lumière du Soleil le jour. Étape 2 — Repérer l'effet : il produit de l'électricité qui charge la batterie. Étape 3 — Conclure : c'est un récepteur. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément de la cour à son rôle.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer ce qui reçoit, produit ou renvoie la lumière. Étape 2 — Le panneau reçoit la lumière du Soleil et en fait de l'électricité : c'est un récepteur. La lampe produit de la lumière : c'est une source primaire. Le mur renvoie la lumière reçue : c'est une source secondaire. Étape 3 — Conclure : chaque élément a un rôle différent.",
+              "answers": [
+                {
+                  "content": "Le panneau",
+                  "match": "Reçoit la lumière du Soleil et produit de l'électricité"
+                },
+                {
+                  "content": "La lampe allumée",
+                  "match": "Produit de la lumière la nuit"
+                },
+                {
+                  "content": "Le mur de la cour éclairé par le lampadaire",
+                  "match": "Renvoie la lumière qu'il reçoit"
+                }
+              ]
+            },
+            {
+              "content": "La bougie d'Adjoua est une source ___ de lumière.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la fiche sur les sources. Étape 1 — Identifier : la bougie allumée dans une maison noire. Étape 2 — Tester : elle reste visible dans le noir complet, car elle produit sa lumière. Étape 3 — Conclure : c'est une source primaire artificielle.",
+              "answers": [
+                {
+                  "content": "primaire",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Adjoua éclaire le mur du couloir avec sa bougie et le regarde. Remets dans l'ordre la chaîne de la lumière.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la fiche sur la chaîne. Étape 1 — Repérer : la source primaire est la bougie. Étape 2 — Repérer l'objet vu : le mur, objet éclairé. Étape 3 — Repérer le récepteur : l'œil d'Adjoua. Étape 4 — Écrire la chaîne : bougie → mur → œil d'Adjoua.",
+              "answers": [
+                {
+                  "content": "La bougie"
+                },
+                {
+                  "content": "Le mur du couloir"
+                },
+                {
+                  "content": "L'œil d'Adjoua"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La veillée dans la cour",
+          "statement": "Le soir, des enfants font leurs devoirs dans la cour d'une maison. Un lampadaire solaire éclaire la table. Sur la table, il y a un cahier et un petit miroir. Awa observe le cahier. Son frère Yao prend une photo de la table avec le téléphone de son père. Plus tard, le lampadaire s'éteint : sa batterie est vide parce que, depuis trois jours, des feuilles recouvrent son panneau.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels sont les trois objets de la table et de la cour qui sont des sources secondaires ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Identifier : cinq objets. Étape 2 — Tester : la lampe allumée et l'écran allumé restent visibles sans autre lumière. Le cahier, le miroir et la table disparaissent. Étape 3 — Conclure : ce sont des sources secondaires, car ils renvoient la lumière du lampadaire sans en produire. Le miroir brille, mais il n'en produit pas.",
+              "answers": [
+                {
+                  "content": "Le cahier",
+                  "correct": true
+                },
+                {
+                  "content": "Le petit miroir",
+                  "correct": true
+                },
+                {
+                  "content": "La table",
+                  "correct": true
+                },
+                {
+                  "content": "La lampe du lampadaire solaire allumée",
+                  "correct": false
+                },
+                {
+                  "content": "L'écran du téléphone allumé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa regarde son cahier. Remets dans l'ordre la chaîne de la lumière.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer : la source primaire est la lampe du lampadaire. Étape 2 — Repérer l'objet vu : le cahier, objet éclairé. Étape 3 — Repérer le récepteur : l'œil d'Awa. Étape 4 — Écrire la chaîne : lampe du lampadaire → cahier → œil d'Awa.",
+              "answers": [
+                {
+                  "content": "La lampe du lampadaire"
+                },
+                {
+                  "content": "Le cahier"
+                },
+                {
+                  "content": "L'œil d'Awa"
+                }
+              ]
+            },
+            {
+              "content": "Yao photographie la table éclairée par le lampadaire. Combien d'éléments contient la chaîne de la lumière jusqu'au capteur du téléphone ?",
+              "question_type": "numeric",
+              "unit": "éléments",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : la source primaire est la lampe du lampadaire. Étape 2 — Repérer l'objet vu : la table, objet éclairé. Étape 3 — Repérer le récepteur : le capteur du téléphone. Étape 4 — Écrire la chaîne : lampe → table → capteur, soit 3 éléments.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi le lampadaire s'est-il éteint après trois jours de feuilles sur son panneau ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le panneau doit recevoir la lumière du Soleil. Étape 2 — Repérer l'effet : couvert de feuilles, il reçoit moins de lumière et produit moins d'électricité. Étape 3 — Conclure : la batterie ne se charge plus et la lampe ne peut plus produire de lumière la nuit.",
+              "answers": [
+                {
+                  "content": "Le panneau a reçu très peu de lumière, donc il a produit peu d'électricité",
+                  "correct": true
+                },
+                {
+                  "content": "Le panneau a produit trop d'électricité",
+                  "correct": false
+                },
+                {
+                  "content": "La lampe a perdu sa lumière naturelle",
+                  "correct": false
+                },
+                {
+                  "content": "Les feuilles ont éclairé la batterie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi le petit miroir de la table est visible alors qu'il n'est pas une source primaire.",
+              "question_type": "written",
+              "points": 2,
+              "starter": "Le miroir ne produit pas de lumière, il…",
+              "criteria": [
+                "Dire que le miroir ne produit pas de lumière",
+                "Dire qu'il renvoie la lumière reçue du lampadaire",
+                "Conclure que c'est une source secondaire"
+              ],
+              "explanation": "Corrigé modèle : Le miroir ne produit pas de lumière : si on éteint le lampadaire, on ne le voit plus. Il est visible parce qu'il renvoie une partie de la lumière que le lampadaire lui envoie, et cette lumière entre dans nos yeux. C'est donc une source secondaire. Points : 1 pour dire qu'il ne produit pas de lumière, 0,5 pour la lumière renvoyée, 0,5 pour la conclusion.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le panneau solaire de Kouadio",
+          "statement": "Kouadio vit dans un village sans électricité. Pour s'éclairer, il installe sur son toit un panneau solaire relié à une batterie et à une lampe. Le jour, la batterie se charge. La nuit, la lampe éclaire sa table, où il lit un livre. Un voisin prend en photo la maison avec un téléphone, la nuit, à la lumière de la lampe.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans l'installation de Kouadio, le panneau solaire est une source primaire de lumière.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la fiche sur les récepteurs. Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur, pas une source. La source primaire de la nuit est la lampe.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément de l'installation à sa nature.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer le rôle de chaque élément. Étape 2 — Le panneau reçoit la lumière du Soleil et produit de l'électricité : récepteur. La lampe allumée produit sa lumière et a été fabriquée : source primaire artificielle. Le livre ne produit rien et renvoie la lumière de la lampe : source secondaire. Étape 3 — Conclure : trois rôles différents.",
+              "answers": [
+                {
+                  "content": "Le panneau solaire",
+                  "match": "Récepteur de lumière"
+                },
+                {
+                  "content": "La lampe allumée",
+                  "match": "Source primaire artificielle"
+                },
+                {
+                  "content": "Le livre sur la table",
+                  "match": "Source secondaire"
+                }
+              ]
+            },
+            {
+              "content": "Kouadio lit son livre la nuit. Remets dans l'ordre la chaîne de la lumière qui lui permet de le voir.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la fiche sur la chaîne. Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le livre, objet éclairé. Étape 3 — Repérer le récepteur : l'œil de Kouadio. Étape 4 — Écrire la chaîne : lampe → livre → œil de Kouadio.",
+              "answers": [
+                {
+                  "content": "La lampe"
+                },
+                {
+                  "content": "Le livre"
+                },
+                {
+                  "content": "L'œil de Kouadio"
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les deux récepteurs de lumière de cette situation ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : on cherche les objets qui reçoivent de la lumière. Étape 2 — Repérer l'effet : le panneau produit de l'électricité, le capteur enregistre une image. Étape 3 — Conclure : ce sont deux récepteurs. La lampe produit de la lumière, le livre la renvoie, la batterie stocke l'électricité.",
+              "answers": [
+                {
+                  "content": "Le panneau solaire",
+                  "correct": true
+                },
+                {
+                  "content": "Le capteur du téléphone du voisin",
+                  "correct": true
+                },
+                {
+                  "content": "La lampe allumée",
+                  "correct": false
+                },
+                {
+                  "content": "Le livre",
+                  "correct": false
+                },
+                {
+                  "content": "La batterie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un jour, Kouadio place son panneau à l'ombre d'un grand arbre. Que se passe-t-il le soir ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le panneau doit recevoir la lumière du Soleil. Étape 2 — Repérer l'effet : à l'ombre, il reçoit moins de lumière et produit moins d'électricité. Étape 3 — Conclure : la batterie est moins chargée et la lampe fonctionne moins longtemps.",
+              "answers": [
+                {
+                  "content": "La batterie est moins chargée, donc la lampe éclaire moins longtemps",
+                  "correct": true
+                },
+                {
+                  "content": "La lampe éclaire plus fort",
+                  "correct": false
+                },
+                {
+                  "content": "Le panneau produit sa propre lumière",
+                  "correct": false
+                },
+                {
+                  "content": "Rien ne change",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Écris la chaîne de la lumière qui permet au voisin de photographier la maison la nuit, puis explique pourquoi la maison est visible sur la photo.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "La source primaire est… ; la chaîne est…",
+              "criteria": [
+                "Chaîne complète : lampe → maison → capteur du téléphone",
+                "Dire que la maison est un objet éclairé qui ne produit pas de lumière",
+                "Dire que le capteur est le récepteur qui enregistre l'image",
+                "Phrases claires, vocabulaire juste"
+              ],
+              "explanation": "Corrigé modèle : La source primaire est la lampe allumée. La maison est un objet éclairé : elle ne produit pas de lumière, elle renvoie celle de la lampe. Le récepteur est le capteur du téléphone. La chaîne est : lampe → maison → capteur du téléphone. La maison est visible sur la photo parce que sa lumière renvoyée arrive dans le capteur, qui enregistre l'image. Points : 1 pour la chaîne, 1 pour la maison objet éclairé, 0,5 pour le capteur récepteur, 0,5 pour la clarté.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Distinguer source primaire et source secondaire, reconnaître un récepteur de lumière (œil, capteur, panneau solaire) et écrire la chaîne de la lumière : source primaire, objet éclairé, récepteur.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On classe des objets de la maison en sources primaires et sources secondaires.",
+              "hint": "Un objet qui reste visible dans le noir complet produit sa lumière.",
+              "exercise_type": "evaluation",
+              "figure": "classement-des-sources",
+              "questions": [
+                {
+                  "content": "Quelle est la définition d'une source primaire de lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question porte sur la définition. Étape 2 — Tester : une source primaire reste visible dans le noir complet, car elle produit sa lumière. Étape 3 — Conclure : c'est un objet qui produit lui-même la lumière. Renvoyer la lumière reçue est la définition d'une source secondaire ; produire de l'électricité est l'effet d'une cellule photovoltaïque.",
+                  "answers": [
+                    {
+                      "content": "Un objet qui produit lui-même la lumière qu'il envoie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un objet qui renvoie la lumière reçue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un objet qui reçoit la lumière et produit de l'électricité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un objet que l'on voit dans la journée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La flamme d'une bougie allumée est une source primaire de lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : une flamme de bougie dans une pièce sans autre lumière. Étape 2 — Tester : elle reste visible dans le noir, car elle produit de la lumière. Étape 3 — Conclure : c'est une source primaire. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque objet à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : trois objets. Étape 2 — Tester : l'étoile et l'ampoule allumée restent visibles dans le noir ; le livre disparaît. Étape 3 — Conclure : l'étoile est naturelle, l'ampoule est fabriquée donc artificielle, le livre est une source secondaire.",
+                  "answers": [
+                    {
+                      "content": "Une étoile",
+                      "match": "Source primaire naturelle"
+                    },
+                    {
+                      "content": "Une ampoule allumée",
+                      "match": "Source primaire artificielle"
+                    },
+                    {
+                      "content": "Un livre",
+                      "match": "Source secondaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux objets qui sont des sources secondaires ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : cinq objets. Étape 2 — Tester : la lampe torche, l'éclair et le Soleil produisent leur lumière. La Lune et le mur disparaissent si on supprime les autres sources. Étape 3 — Conclure : la Lune et le mur blanc sont des sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "La Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un mur blanc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe torche allumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un éclair",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet qui renvoie la lumière reçue est une source ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : l'objet renvoie de la lumière qu'il reçoit. Étape 2 — Tester : sans source primaire, il disparaît. Étape 3 — Conclure : c'est une source secondaire, ou objet éclairé.",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie les récepteurs de lumière que l'on rencontre à la maison et dans le quartier.",
+              "hint": "Un récepteur reçoit de la lumière et en fait quelque chose : message, image ou électricité.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les trois récepteurs de lumière ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on cherche les objets qui reçoivent de la lumière. Étape 2 — Repérer l'effet : l'œil envoie un message au cerveau, le capteur enregistre une image, le panneau produit de l'électricité. Étape 3 — Conclure : ce sont les trois récepteurs. La lampe torche et l'écran produisent leur lumière.",
+                  "answers": [
+                    {
+                      "content": "L'œil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le capteur d'un téléphone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le panneau solaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe torche allumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un écran de télévision allumé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque récepteur à son effet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : trois récepteurs. Étape 2 — Repérer l'effet : message au cerveau pour l'œil, image pour le capteur, électricité pour la cellule photovoltaïque. Étape 3 — Conclure : chaque récepteur a son effet.",
+                  "answers": [
+                    {
+                      "content": "L'œil",
+                      "match": "Envoie un message au cerveau"
+                    },
+                    {
+                      "content": "Le capteur d'un appareil photo",
+                      "match": "Enregistre une image"
+                    },
+                    {
+                      "content": "La cellule photovoltaïque",
+                      "match": "Produit de l'électricité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un panneau solaire transforme la lumière du Soleil en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur dont l'effet est l'électricité.",
+                  "answers": [
+                    {
+                      "content": "électricité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur de lumière produit de la lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : un récepteur est placé là où arrive la lumière. Étape 2 — Repérer l'effet : il la transforme en message, image ou électricité. Étape 3 — Conclure : un récepteur reçoit de la lumière, il n'en produit pas. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le capteur d'un téléphone qui prend une photo reçoit de la lumière. Que devient cette lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le capteur reçoit la lumière de la scène. Étape 2 — Repérer l'effet : il enregistre une image. Étape 3 — Conclure : la lumière devient une image enregistrée. Le message au nerf optique est l'effet de l'œil.",
+                  "answers": [
+                    {
+                      "content": "Une image enregistrée",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'électricité pour la batterie du lampadaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un message envoyé au nerf optique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une nouvelle source de lumière",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On écrit la chaîne de la lumière dans des situations de la vie courante.",
+              "hint": "Commence par la source primaire et termine par le récepteur.",
+              "exercise_type": "evaluation",
+              "figure": "chaine-lumineuse",
+              "questions": [
+                {
+                  "content": "Tu regardes un livre éclairé par une lampe. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le livre, objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : lampe → livre → œil.",
+                  "answers": [
+                    {
+                      "content": "La lampe"
+                    },
+                    {
+                      "content": "Le livre"
+                    },
+                    {
+                      "content": "L'œil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Tu regardes directement une ampoule allumée. Quelle est la chaîne de la lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'ampoule allumée est une source primaire. Étape 2 — Repérer l'objet vu : c'est l'ampoule elle-même. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : ampoule → œil.",
+                  "answers": [
+                    {
+                      "content": "Ampoule → œil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Œil → ampoule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ampoule → mur → œil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mur → ampoule → œil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On voit un objet parce que notre œil envoie de la lumière vers lui.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la lumière vient d'une source primaire. Étape 2 — Repérer l'objet vu : il envoie vers l'œil la lumière qu'il produit ou qu'il renvoie. Étape 3 — Repérer le récepteur : l'œil reçoit. Étape 4 — Écrire la chaîne : l'œil est le dernier maillon. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un téléphone photographie un mur éclairé par une lampe. Combien d'éléments contient la chaîne de la lumière ?",
+                  "question_type": "numeric",
+                  "unit": "éléments",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le mur. Étape 3 — Repérer le récepteur : le capteur du téléphone. Étape 4 — Écrire la chaîne : lampe → mur → capteur, soit 3 éléments.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la chaîne Soleil → Lune → œil, la Lune est un objet ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la source primaire est le Soleil. Étape 2 — Repérer l'objet vu : la Lune ne produit pas de lumière, c'est un objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : Soleil → Lune → œil.",
+                  "answers": [
+                    {
+                      "content": "éclairé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le soir, dans la chambre de Salif, une seule lampe est allumée. Salif regarde son cahier posé sur le lit. Son téléphone, dont l'écran est éteint, est à côté du cahier.",
+              "hint": "Pour chaque objet, imagine la lampe éteinte : reste-t-il visible ?",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans la chambre, le cahier posé sur le lit est une source ___ de lumière.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : le cahier, éclairé par la lampe. Étape 2 — Tester : si on éteint la lampe, le cahier disparaît car il ne produit pas de lumière. Étape 3 — Conclure : le cahier est une source secondaire. La lampe allumée, elle, est une source primaire.",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "primaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "artificielle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux objets qui ne sont pas visibles si Salif éteint la lampe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : les objets de la chambre. Étape 2 — Tester : le cahier et le lit ne produisent pas de lumière, ils disparaissent quand la lampe s'éteint. L'étoile, le Soleil et l'éclair restent visibles, car ils produisent leur lumière. Étape 3 — Conclure : le cahier et le lit sont des sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "Le cahier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un éclair vu par la fenêtre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une étoile vue par la fenêtre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil en plein jour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'écran éteint du téléphone est une source secondaire quand la lampe est allumée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : un écran éteint ne produit pas de lumière. Étape 2 — Tester : on le voit parce que la lampe l'éclaire ; sans la lampe, il disparaît. Étape 3 — Conclure : c'est une source secondaire. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la chaîne de la lumière qui permet à Salif de voir son cahier.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le cahier. Étape 3 — Repérer le récepteur : l'œil de Salif. Étape 4 — Écrire la chaîne : lampe → cahier → œil de Salif.",
+                  "answers": [
+                    {
+                      "content": "La lampe"
+                    },
+                    {
+                      "content": "Le cahier"
+                    },
+                    {
+                      "content": "L'œil de Salif"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la chambre, il y a la lampe allumée, le cahier, le lit, l'écran éteint du téléphone et le mur. Combien sont des sources secondaires ?",
+                  "question_type": "numeric",
+                  "unit": "objets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : cinq objets. Étape 2 — Tester : seule la lampe allumée reste visible sans autre lumière. Étape 3 — Conclure : 1 source primaire, donc 5 − 1 = 4 sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Salif prend son cahier en photo avec le téléphone, écran allumé. Quel est le récepteur de lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le capteur reçoit la lumière renvoyée par le cahier. Étape 2 — Repérer l'effet : il enregistre une image. Étape 3 — Conclure : le capteur est le récepteur. La lampe est une source, le cahier et le lit sont des objets éclairés.",
+                  "answers": [
+                    {
+                      "content": "Le capteur de l'appareil photo",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cahier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Sources, objets éclairés et récepteurs rencontrés au marché le soir, sur la route la nuit, dans la cour d'une école avec un lampadaire solaire et pendant une photo du coucher du soleil.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le soir, sur le marché de quartier, une vendeuse de légumes s'éclaire avec une lampe tempête. Elle étale des tomates rouges sur un pagne bleu. Un client regarde l'écran allumé de son téléphone pour compter sa monnaie.",
+              "hint": "Une source primaire reste visible dans le noir : les objets du marché, eux, disparaissent.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les deux objets qui sont des sources primaires de lumière sur ce marché ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : cinq objets sur le marché le soir. Étape 2 — Tester : si on supprime les autres sources, la lampe tempête et l'écran restent visibles car ils produisent leur lumière. Les tomates, le pagne et le sol disparaissent. Étape 3 — Conclure : ce sont les deux sources primaires. Les trois autres sont des sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "La lampe tempête allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'écran allumé du téléphone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les tomates rouges",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pagne bleu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sol du marché",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les tomates sont rouges, donc elles produisent de la lumière rouge.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : les tomates posées sur le pagne. Étape 2 — Tester : si on éteint la lampe tempête, on ne voit plus les tomates. Étape 3 — Conclure : ce sont des sources secondaires qui renvoient la lumière de la lampe. Leur couleur ne prouve pas qu'elles produisent de la lumière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La vendeuse regarde ses tomates. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe tempête. Étape 2 — Repérer l'objet vu : les tomates, objets éclairés. Étape 3 — Repérer le récepteur : l'œil de la vendeuse. Étape 4 — Écrire la chaîne : lampe tempête → tomates → œil.",
+                  "answers": [
+                    {
+                      "content": "La lampe tempête"
+                    },
+                    {
+                      "content": "Les tomates"
+                    },
+                    {
+                      "content": "L'œil de la vendeuse"
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le marché, il y a 6 objets visibles : la lampe tempête, les tomates, le pagne, la table, le sac de riz et l'écran du téléphone allumé. Combien sont des sources secondaires ?",
+                  "question_type": "numeric",
+                  "unit": "objets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : six objets. Étape 2 — Tester : la lampe tempête et l'écran allumé restent visibles sans autre lumière. Étape 3 — Conclure : 2 sources primaires, donc 6 − 2 = 4 sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe tempête est une source ___ artificielle.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : une lampe tempête allumée. Étape 2 — Tester : elle reste visible dans le noir, car elle produit de la lumière. Étape 3 — Conclure : c'est une source primaire, artificielle car fabriquée par l'homme.",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "La nuit, un gbaka (minibus) roule dans une rue du quartier. Ses phares sont allumés. Le chauffeur voit un panneau routier et le bord de la route. Un passager photographie la rue avec son téléphone.",
+              "hint": "Pense à la chaîne : phares, panneau, œil.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les phares allumés du gbaka sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les phares allumés, la nuit. Étape 2 — Tester : ils restent visibles dans le noir, car ils produisent de la lumière. Étape 3 — Conclure : ce sont des sources primaires ; elles sont artificielles car fabriquées par l'homme.",
+                  "answers": [
+                    {
+                      "content": "Des sources primaires artificielles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des sources secondaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des récepteurs de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des sources primaires naturelles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le panneau routier que voit le chauffeur est une source secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le panneau routier, la nuit. Étape 2 — Tester : si les phares s'éteignent, le panneau disparaît. Étape 3 — Conclure : il renvoie la lumière des phares, c'est une source secondaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chauffeur voit le panneau routier. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est formée par les phares. Étape 2 — Repérer l'objet vu : le panneau, objet éclairé. Étape 3 — Repérer le récepteur : l'œil du chauffeur. Étape 4 — Écrire la chaîne : phares → panneau → œil.",
+                  "answers": [
+                    {
+                      "content": "Les phares"
+                    },
+                    {
+                      "content": "Le panneau routier"
+                    },
+                    {
+                      "content": "L'œil du chauffeur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux récepteurs de lumière de cette situation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche les objets qui reçoivent de la lumière. Étape 2 — Repérer l'effet : l'œil envoie un message au cerveau, le capteur enregistre une image. Étape 3 — Conclure : ce sont les deux récepteurs. Les phares produisent de la lumière, le panneau la renvoie, le moteur n'en reçoit pas.",
+                  "answers": [
+                    {
+                      "content": "L'œil du chauffeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le capteur du téléphone du passager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les phares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le panneau routier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moteur du gbaka",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le passager prend une photo : le capteur de son téléphone enregistre une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le capteur reçoit la lumière renvoyée par la rue. Étape 2 — Repérer l'effet : il enregistre une image. Étape 3 — Conclure : c'est un récepteur qui enregistre une image, c'est-à-dire une photo.",
+                  "answers": [
+                    {
+                      "content": "image",
+                      "correct": true
+                    },
+                    {
+                      "content": "photo",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les phares tombent en panne dans une rue sans lampadaire, que se passe-t-il pour le chauffeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les phares étaient la source primaire. Étape 2 — Repérer l'objet vu : le panneau est un objet éclairé, sans lumière propre. Étape 3 — Repérer le récepteur : l'œil ne reçoit plus rien. Étape 4 — Écrire la chaîne : elle est coupée au premier maillon. Penser que l'œil produit de la lumière est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Il ne voit plus le panneau, car plus aucune source primaire ne l'éclaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il voit mieux le panneau car ses yeux produisent de la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il voit le panneau car il est source primaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la cour de l'école, un lampadaire solaire éclaire la table du gardien. Il comprend un panneau, une batterie et une lampe. Le gardien lit un journal posé sur la table.",
+              "hint": "Panneau : reçoit. Lampe : produit. Journal et table : renvoient.",
+              "exercise_type": "evaluation",
+              "figure": "lampadaire-solaire",
+              "questions": [
+                {
+                  "content": "Relie chaque élément à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer ce que fait chaque élément avec la lumière. Étape 2 — Le panneau reçoit la lumière et produit de l'électricité : récepteur. La lampe allumée produit de la lumière : source primaire. Le journal renvoie la lumière reçue : source secondaire. Étape 3 — Conclure : trois rôles différents.",
+                  "answers": [
+                    {
+                      "content": "Le panneau",
+                      "match": "Reçoit la lumière du Soleil et produit de l'électricité"
+                    },
+                    {
+                      "content": "La lampe allumée",
+                      "match": "Produit de la lumière"
+                    },
+                    {
+                      "content": "Le journal sur la table",
+                      "match": "Renvoie la lumière de la lampe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le jour, le panneau du lampadaire reçoit la lumière du Soleil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le panneau est tourné vers le ciel. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur, il reçoit bien la lumière du Soleil.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La batterie du lampadaire est chargée par l'___ produite par le panneau.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : cette électricité charge la batterie.",
+                  "answers": [
+                    {
+                      "content": "électricité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gardien lit son journal la nuit. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe du lampadaire. Étape 2 — Repérer l'objet vu : le journal, objet éclairé. Étape 3 — Repérer le récepteur : l'œil du gardien. Étape 4 — Écrire la chaîne : lampe → journal → œil.",
+                  "answers": [
+                    {
+                      "content": "La lampe du lampadaire"
+                    },
+                    {
+                      "content": "Le journal"
+                    },
+                    {
+                      "content": "L'œil du gardien"
+                    }
+                  ]
+                },
+                {
+                  "content": "La nuit, la lampe allumée du lampadaire éclaire le journal et la table. Parmi la lampe allumée, le journal et la table, combien d'éléments sont des sources secondaires ?",
+                  "question_type": "numeric",
+                  "unit": "éléments",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : trois éléments. Étape 2 — Tester : la lampe allumée reste visible sans autre lumière. Le journal et la table disparaissent si la lampe s'éteint. Étape 3 — Conclure : il y a 2 sources secondaires, le journal et la table.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au coucher du soleil, Mariam prend en photo la Lune et un grand arbre avec le téléphone de sa mère. Le ciel est clair. Le téléphone a un capteur et un écran.",
+              "hint": "La Lune brille, mais elle ne produit pas sa lumière.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la source primaire naturelle qui éclaire la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la Lune et les objets de la scène. Étape 2 — Tester : le Soleil produit sa lumière ; l'arbre et le téléphone n'éclairent pas la Lune ; la Lune ne produit pas la sienne. Étape 3 — Conclure : le Soleil est la source primaire naturelle qui éclaire la Lune.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le grand arbre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le téléphone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune elle-même",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Lune est une source secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la Lune dans le ciel. Étape 2 — Tester : sans le Soleil, elle disparaît. Étape 3 — Conclure : c'est une source secondaire, qui renvoie la lumière du Soleil.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le capteur du téléphone reçoit la lumière de la Lune. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est le Soleil. Étape 2 — Repérer l'objet vu : la Lune, objet éclairé. Étape 3 — Repérer le récepteur : le capteur du téléphone. Étape 4 — Écrire la chaîne : Soleil → Lune → capteur.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil"
+                    },
+                    {
+                      "content": "La Lune"
+                    },
+                    {
+                      "content": "Le capteur du téléphone"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le rôle de chaque élément. Étape 2 — Le Soleil produit sa lumière : source primaire naturelle. La Lune renvoie la lumière reçue : source secondaire. Le capteur reçoit la lumière et enregistre une image : récepteur. Étape 3 — Conclure : trois natures différentes.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "match": "Source primaire naturelle"
+                    },
+                    {
+                      "content": "La Lune",
+                      "match": "Source secondaire"
+                    },
+                    {
+                      "content": "Le capteur du téléphone",
+                      "match": "Récepteur de lumière"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux éléments qui reçoivent de la lumière pour enregistrer une image ou pour voir ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche ceux qui reçoivent de la lumière et en font un message ou une image. Étape 2 — Repérer l'effet : le capteur enregistre une image, l'œil envoie un message au cerveau. Étape 3 — Conclure : ce sont deux récepteurs. Le Soleil et l'écran produisent leur lumière, l'arbre la renvoie.",
+                  "answers": [
+                    {
+                      "content": "Le capteur du téléphone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œil de Mariam",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'écran allumé du téléphone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le grand arbre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier la nature d'un objet (source primaire, source secondaire, récepteur), corriger des affirmations fausses et expliquer le fonctionnement d'un lampadaire solaire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Salimata est dans sa chambre. Elle éteint la lampe de chevet : tout devient noir. Elle allume la lampe torche de son téléphone : elle voit de nouveau son cahier. Elle éteint la lampe torche : le noir revient, alors que son écran de téléphone, resté allumé, se voit encore.",
+              "hint": "Pour justifier, appuie-toi sur ce qui se passe quand on éteint la source.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi le cahier n'est-il plus visible quand la lampe torche est éteinte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le cahier, lampe torche éteinte. Étape 2 — Tester : le cahier ne produit pas de lumière et disparaît dès qu'on supprime les sources. Étape 3 — Conclure : c'est une source secondaire, invisible sans source primaire. Les autres propositions confondent le cahier avec une source ou ignorent la chaîne de la lumière.",
+                  "answers": [
+                    {
+                      "content": "Il ne produit pas de lumière et plus aucune source ne l'éclaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est devenu une source primaire éteinte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les yeux de Salimata ne fonctionnent plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il renvoie toute la lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'écran de téléphone, resté allumé, est une source primaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'écran allumé dans le noir. Étape 2 — Tester : il reste visible alors que les autres sources sont éteintes. Étape 3 — Conclure : il produit sa lumière, c'est une source primaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la chaîne de la lumière quand Salimata regarde son cahier éclairé par la lampe torche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe torche. Étape 2 — Repérer l'objet vu : le cahier, objet éclairé. Étape 3 — Repérer le récepteur : l'œil. Étape 4 — Écrire la chaîne : lampe torche → cahier → œil. Les autres chaînes oublient un maillon ou inversent le sens.",
+                  "answers": [
+                    {
+                      "content": "Lampe torche → cahier → œil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Œil → cahier → lampe torche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lampe torche → œil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cahier → lampe torche → œil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Justifie par une phrase que le cahier est une source secondaire.",
+                  "question_type": "written",
+                  "points": 2,
+                  "starter": "Le cahier ne produit pas de lumière, car…",
+                  "criteria": [
+                    "Dire que le cahier ne produit pas de lumière",
+                    "S'appuyer sur la disparition du cahier quand la lampe est éteinte",
+                    "Conclure que c'est une source secondaire"
+                  ],
+                  "explanation": "Corrigé modèle : Le cahier est une source secondaire, car il ne produit pas de lumière : quand Salimata éteint la lampe torche, on ne le voit plus. Il renvoie seulement la lumière que la lampe torche lui envoie. Points : 1 pour la disparition du cahier, 0,5 pour dire qu'il renvoie la lumière, 0,5 pour la conclusion.",
+                  "answers": []
+                },
+                {
+                  "content": "Dans la chambre, quand seule la lampe torche est allumée, on voit : la lampe torche, le cahier, le lit et le mur. Combien de sources primaires y a-t-il ?",
+                  "question_type": "numeric",
+                  "unit": "source",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : quatre objets. Étape 2 — Tester : seule la lampe torche reste visible sans autre lumière. Étape 3 — Conclure : il y a 1 seule source primaire.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mamadou veut comprendre pourquoi on voit un objet. Il dispose d'une boîte en carton fermée, avec un petit trou pour regarder, et d'un cahier. Il place le cahier dans la boîte, regarde par le trou et ne voit rien. Il perce un second trou, pour faire entrer la lumière d'une lampe, et il voit le cahier.",
+              "hint": "Cherche quel maillon de la chaîne manque.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans la boîte fermée, Mamadou ne voit rien parce qu'aucune lumière n'éclaire le cahier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la boîte fermée n'a pas de source primaire. Étape 2 — Repérer l'objet vu : le cahier ne produit pas de lumière. Étape 3 — Repérer le récepteur : l'œil ne reçoit rien. Étape 4 — Écrire la chaîne : elle est coupée au premier maillon. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la lumière entrant par le second trou, quelle est la chaîne de la lumière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe. Étape 2 — Repérer l'objet vu : le cahier, objet éclairé. Étape 3 — Repérer le récepteur : l'œil de Mamadou. Étape 4 — Écrire la chaîne : lampe → cahier → œil. Les autres chaînes inversent le sens ou oublient le cahier.",
+                  "answers": [
+                    {
+                      "content": "Lampe → cahier → œil de Mamadou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Œil de Mamadou → cahier → lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lampe → œil de Mamadou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cahier → lampe → œil de Mamadou",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conclusions justes de cette expérience ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer ce que l'expérience montre. Étape 2 — Sans lampe, on ne voit rien ; avec la lampe, on voit : une source primaire est nécessaire et l'œil reçoit la lumière. Étape 3 — Conclure : ce sont les deux conclusions justes. Dire que l'œil produit la lumière est faux, et le cahier disparaît dans le noir, donc il n'est pas une source primaire.",
+                  "answers": [
+                    {
+                      "content": "Il faut une source primaire pour voir un objet éclairé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œil est un récepteur de lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œil produit la lumière qui éclaire le cahier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cahier est une source primaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "On voit aussi dans le noir complet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette expérience, la lampe est la source ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la lampe allumée. Étape 2 — Tester : elle produit la lumière qui éclaire le cahier. Étape 3 — Conclure : c'est la source primaire.",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi Mamadou ne voit pas le cahier dans la boîte fermée, même s'il a les yeux grands ouverts.",
+                  "question_type": "written",
+                  "points": 3,
+                  "starter": "Il n'y a aucune source primaire, donc…",
+                  "criteria": [
+                    "Dire qu'il n'y a pas de source primaire dans la boîte",
+                    "Dire que le cahier ne produit pas de lumière",
+                    "Dire que l'œil ne produit pas de lumière : il en reçoit",
+                    "Phrases claires et vocabulaire juste"
+                  ],
+                  "explanation": "Corrigé modèle : Il n'y a aucune source primaire dans la boîte fermée. Le cahier ne produit pas de lumière, il ne peut que renvoyer celle qu'il reçoit : il est donc invisible. L'œil de Mamadou ne produit pas de lumière : il reçoit seulement celle qui arrive. Aucune lumière n'arrive, donc il ne voit rien. Points : 1 pour l'absence de source, 1 pour le cahier, 0,5 pour l'œil récepteur, 0,5 pour la clarté.",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Trois élèves discutent. Ali dit : « La Lune est une source primaire car elle brille la nuit. » Bintou dit : « Un panneau solaire est une source primaire car il est brillant au soleil. » Clarisse dit : « On voit parce que nos yeux envoient de la lumière. »",
+              "hint": "Pour chaque élève, cherche si l'objet produit, renvoie ou reçoit de la lumière.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Ali a raison : la Lune est une source primaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la Lune brille la nuit. Étape 2 — Tester : sans le Soleil, on ne la verrait pas. Étape 3 — Conclure : c'est une source secondaire. Brillante ne veut pas dire source primaire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Bintou a raison : le panneau solaire est une source primaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur, pas une source. Il brille parce qu'il renvoie un peu de la lumière reçue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Clarisse a raison : nos yeux envoient de la lumière vers les objets.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la lumière vient d'une source primaire. Étape 2 — Repérer l'objet vu : il envoie vers l'œil de la lumière. Étape 3 — Repérer le récepteur : l'œil reçoit la lumière. Étape 4 — Écrire la chaîne : l'œil est le dernier maillon, il ne produit rien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élève à l'erreur qu'il commet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier chaque affirmation. Étape 2 — Ali prend la Lune pour une source primaire. Bintou prend un récepteur pour une source. Clarisse pense que l'œil envoie de la lumière, alors qu'il en reçoit. Étape 3 — Conclure : chaque élève commet une erreur différente.",
+                  "answers": [
+                    {
+                      "content": "Ali",
+                      "match": "Il confond source secondaire et source primaire"
+                    },
+                    {
+                      "content": "Bintou",
+                      "match": "Elle confond récepteur et source"
+                    },
+                    {
+                      "content": "Clarisse",
+                      "match": "Elle pense que l'œil produit de la lumière"
+                    }
+                  ]
+                },
+                {
+                  "content": "Corrige l'erreur d'Ali en deux phrases.",
+                  "question_type": "written",
+                  "points": 2,
+                  "starter": "La Lune ne produit pas de lumière, elle…",
+                  "criteria": [
+                    "Dire que la Lune ne produit pas sa lumière",
+                    "Dire qu'elle renvoie la lumière du Soleil",
+                    "Nommer la Lune source secondaire"
+                  ],
+                  "explanation": "Corrigé modèle : La Lune ne produit pas de lumière : elle renvoie celle du Soleil, donc c'est une source secondaire. Si le Soleil ne l'éclairait pas, on ne la verrait pas. Points : 1 pour la lumière renvoyée, 0,5 pour le Soleil, 0,5 pour la conclusion.",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le lampadaire solaire de la cour d'Issa ne s'allume plus la nuit. Pourtant, la lampe est en bon état. Issa remarque que le panneau est couvert de poussière épaisse et de feuilles mortes.",
+              "hint": "Suis le chemin : panneau, électricité, batterie, lampe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la cause la plus probable de la panne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le panneau doit recevoir la lumière du Soleil. Étape 2 — Repérer l'effet : couvert de poussière, il en reçoit peu et produit peu d'électricité. Étape 3 — Conclure : la batterie se charge mal et la lampe ne s'allume pas. Les autres causes ne changent rien à l'électricité produite.",
+                  "answers": [
+                    {
+                      "content": "Le panneau reçoit peu de lumière, donc la batterie se charge mal",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe produit trop de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le panneau est un objet éclairé",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'œil d'Issa ne reçoit plus la lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Nettoyer le panneau permet au panneau de recevoir plus de lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la poussière arrête une partie de la lumière. Étape 2 — Repérer l'effet : propre, le panneau reçoit plus de lumière et produit plus d'électricité. Étape 3 — Conclure : nettoyer le panneau aide. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le panneau est un ___ de lumière, la lampe est une source primaire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur de lumière.",
+                  "answers": [
+                    {
+                      "content": "récepteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le fonctionnement du lampadaire solaire.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Le panneau reçoit la lumière du Soleil le jour. Étape 2 — Il produit de l'électricité. Étape 3 — La batterie se charge avec cette électricité. Étape 4 — La nuit, la lampe, alimentée par la batterie, produit de la lumière. On ne peut pas allumer la lampe avant de charger la batterie.",
+                  "answers": [
+                    {
+                      "content": "Le panneau reçoit la lumière du Soleil"
+                    },
+                    {
+                      "content": "Le panneau produit de l'électricité"
+                    },
+                    {
+                      "content": "La batterie se charge"
+                    },
+                    {
+                      "content": "La lampe produit de la lumière la nuit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique en trois phrases pourquoi un panneau couvert de poussière empêche le lampadaire de s'allumer la nuit.",
+                  "question_type": "written",
+                  "points": 3,
+                  "starter": "Le panneau est un récepteur : il…",
+                  "criteria": [
+                    "Dire que le panneau est un récepteur de lumière",
+                    "Dire qu'il reçoit moins de lumière quand il est couvert",
+                    "Dire qu'il produit alors moins d'électricité et que la batterie se charge mal",
+                    "Conclure que la lampe ne peut pas s'allumer"
+                  ],
+                  "explanation": "Corrigé modèle : Le panneau est un récepteur : il reçoit la lumière du Soleil et produit de l'électricité. Couvert de poussière, il reçoit moins de lumière, donc il produit moins d'électricité. La batterie se charge mal et la lampe ne peut pas s'allumer la nuit. Points : 1 pour le récepteur, 1 pour la lumière reçue en moins, 1 pour la batterie et la lampe.",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : classer des objets en sources primaires et secondaires, reconnaître les récepteurs de lumière et écrire la chaîne de la lumière dans des situations variées.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un village, la nuit, il n'y a pas de lampadaire. Un enfant allume une lampe torche pour retrouver le chemin. Il éclaire le portail de sa maison, puis la façade. La Lune est visible dans le ciel.",
+              "hint": "Ne confonds pas ce qui brille et ce qui produit de la lumière.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les trois objets qui sont des sources secondaires ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : cinq objets. Étape 2 — Tester : la lampe torche allumée et l'étoile restent visibles sans autre lumière. La Lune, le portail et la façade disparaissent si on supprime les autres sources. Étape 3 — Conclure : ce sont les trois sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "La Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le portail",
+                      "correct": true
+                    },
+                    {
+                      "content": "La façade",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe torche allumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une étoile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'enfant regarde son portail éclairé. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la lampe torche. Étape 2 — Repérer l'objet vu : le portail, objet éclairé. Étape 3 — Repérer le récepteur : l'œil de l'enfant. Étape 4 — Écrire la chaîne : lampe torche → portail → œil.",
+                  "answers": [
+                    {
+                      "content": "La lampe torche"
+                    },
+                    {
+                      "content": "Le portail"
+                    },
+                    {
+                      "content": "L'œil de l'enfant"
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'enfant éteint sa lampe torche, il voit encore la Lune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la Lune, éclairée par le Soleil. Étape 2 — Tester : la lampe torche n'est pas la source qui éclaire la Lune. Étape 3 — Conclure : la chaîne Soleil → Lune → œil existe encore, donc l'enfant voit la Lune. En revanche il ne voit plus le portail.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la chaîne Soleil → Lune → œil, l'objet éclairé est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la source primaire est le Soleil. Étape 2 — Repérer l'objet vu : la Lune est l'objet éclairé, car elle renvoie la lumière du Soleil. Étape 3 — Repérer le récepteur : l'œil de l'enfant. Étape 4 — Écrire la chaîne : Soleil → Lune → œil.",
+                  "answers": [
+                    {
+                      "content": "Lune",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la lampe torche éclaire le portail et que la Lune est visible, combien de sources primaires y a-t-il parmi : la lampe torche, le portail, la façade, la Lune ?",
+                  "question_type": "numeric",
+                  "unit": "source",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : quatre objets. Étape 2 — Tester : seule la lampe torche reste visible sans autre lumière. Étape 3 — Conclure : il y a 1 seule source primaire.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un atelier de couture, la lumière du jour passe par une fenêtre. Une couturière travaille sur un tissu jaune. Sur le toit, un panneau solaire charge une batterie. Un client prend le tissu en photo avec son téléphone.",
+              "hint": "Cherche pour chaque élément : produit, renvoie ou reçoit la lumière ?",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le tissu jaune est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le tissu jaune éclairé par le jour. Étape 2 — Tester : dans le noir, il disparaît. Étape 3 — Conclure : c'est une source secondaire qui renvoie la lumière du jour. Sa couleur jaune ne change pas sa nature.",
+                  "answers": [
+                    {
+                      "content": "Une source secondaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source primaire naturelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source primaire artificielle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un récepteur de lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le rôle de chaque élément. Étape 2 — Le Soleil produit la lumière. Le panneau la reçoit et produit de l'électricité. Le tissu la renvoie. Étape 3 — Conclure : source primaire, récepteur et source secondaire.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "match": "Produit la lumière du jour"
+                    },
+                    {
+                      "content": "Le panneau solaire",
+                      "match": "Reçoit la lumière et produit de l'électricité"
+                    },
+                    {
+                      "content": "Le tissu jaune",
+                      "match": "Renvoie la lumière reçue"
+                    }
+                  ]
+                },
+                {
+                  "content": "La couturière regarde le tissu. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est le Soleil, dont la lumière passe par la fenêtre. Étape 2 — Repérer l'objet vu : le tissu, objet éclairé. Étape 3 — Repérer le récepteur : l'œil de la couturière. Étape 4 — Écrire la chaîne : Soleil → tissu → œil.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil"
+                    },
+                    {
+                      "content": "Le tissu"
+                    },
+                    {
+                      "content": "L'œil de la couturière"
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces éléments de l'atelier, quels sont les deux récepteurs de lumière ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche les objets qui reçoivent de la lumière. Étape 2 — Repérer l'effet : le capteur enregistre une image, l'œil envoie un message au cerveau. Étape 3 — Conclure : ce sont deux récepteurs. Le Soleil produit sa lumière, le tissu la renvoie. Le panneau solaire du toit est aussi un récepteur, mais il n'est pas proposé ici.",
+                  "answers": [
+                    {
+                      "content": "Le capteur du téléphone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œil de la couturière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tissu",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fenêtre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le panneau solaire du toit produit de la lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le panneau reçoit la lumière du Soleil. Étape 2 — Repérer l'effet : il produit de l'électricité. Étape 3 — Conclure : c'est un récepteur qui ne produit pas de lumière. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'atelier, il y a : le Soleil, le tissu, le panneau solaire, le capteur du téléphone et l'œil de la couturière. Combien sont des récepteurs de lumière ?",
+                  "question_type": "numeric",
+                  "unit": "éléments",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le panneau, le capteur et l'œil reçoivent de la lumière. Étape 2 — Repérer l'effet : le panneau produit de l'électricité, le capteur enregistre une image, l'œil envoie un message au cerveau. Étape 3 — Conclure : il y a 3 récepteurs. Le Soleil produit de la lumière, le tissu la renvoie.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Rokia fait ses devoirs le soir. Sa lampe est allumée. La coupure de courant arrive : la lampe s'éteint. Elle prend une bougie. Plus tard, le courant revient. Elle remarque que son cahier, son stylo et le mur ne sont visibles que lorsqu'une des deux lumières est allumée.",
+              "hint": "Un objet qui disparaît quand on éteint la source ne produit pas de lumière.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi le cahier n'est-il visible que si la lampe ou la bougie est allumée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le cahier. Étape 2 — Tester : sans lampe ni bougie, il disparaît. Étape 3 — Conclure : il ne produit pas de lumière, c'est une source secondaire. Il a besoin d'une source primaire pour être vu.",
+                  "answers": [
+                    {
+                      "content": "C'est une source secondaire qui a besoin d'une source primaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est une source primaire éteinte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est un récepteur de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il produit sa lumière par moments",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Rokia éteint la lampe et la bougie. Quels sont les trois objets qui deviennent invisibles ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : cinq objets. Étape 2 — Tester : le cahier, le stylo et le mur ne produisent pas de lumière et disparaissent quand les sources s'éteignent. L'écran allumé et l'étoile produisent leur lumière et restent visibles. Étape 3 — Conclure : le cahier, le stylo et le mur sont des sources secondaires.",
+                  "answers": [
+                    {
+                      "content": "Le cahier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le stylo",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mur",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'écran allumé de son téléphone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une étoile vue par la fenêtre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Rokia regarde son cahier à la lumière de la bougie. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est la bougie. Étape 2 — Repérer l'objet vu : le cahier. Étape 3 — Repérer le récepteur : l'œil de Rokia. Étape 4 — Écrire la chaîne : bougie → cahier → œil de Rokia.",
+                  "answers": [
+                    {
+                      "content": "La bougie"
+                    },
+                    {
+                      "content": "Le cahier"
+                    },
+                    {
+                      "content": "L'œil de Rokia"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la bougie est le seul éclairage, le mur est une source primaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le mur, éclairé par la bougie. Étape 2 — Tester : si la bougie s'éteint, le mur disparaît. Étape 3 — Conclure : c'est une source secondaire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Rokia dit : « Mon cahier est visible parce qu'il produit de la lumière. » Explique pourquoi c'est faux.",
+                  "question_type": "written",
+                  "points": 2,
+                  "starter": "Le cahier ne produit pas de lumière, car…",
+                  "criteria": [
+                    "Dire que le cahier ne produit pas de lumière",
+                    "S'appuyer sur sa disparition quand la source est éteinte",
+                    "Conclure que c'est une source secondaire"
+                  ],
+                  "explanation": "Corrigé modèle : C'est faux. Le cahier ne produit pas de lumière : quand la lampe et la bougie sont éteintes, Rokia ne le voit plus. Il renvoie seulement la lumière de la source qui l'éclaire, c'est une source secondaire. Points : 1 pour la disparition, 0,5 pour la lumière renvoyée, 0,5 pour la conclusion.",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pour sa fête, un village installe des guirlandes de lampes. Elles sont alimentées par une batterie rechargée le jour par un grand panneau solaire. Un photographe prend des photos de la fête avec un appareil à capteur. Les lampes éclairent des danseurs en tenue blanche.",
+              "hint": "Pour chaque élément, demande-toi : produit-il, renvoie-t-il ou reçoit-il de la lumière ?",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque élément à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le rôle de chaque élément. Étape 2 — Les lampes produisent de la lumière : sources primaires. Le panneau reçoit la lumière et produit de l'électricité : récepteur. Le capteur reçoit la lumière et enregistre une image : récepteur. Étape 3 — Conclure : un élément de chaque rôle.",
+                  "answers": [
+                    {
+                      "content": "Les lampes allumées",
+                      "match": "Produisent de la lumière"
+                    },
+                    {
+                      "content": "Le panneau solaire",
+                      "match": "Reçoit la lumière du Soleil et produit de l'électricité"
+                    },
+                    {
+                      "content": "Le capteur de l'appareil",
+                      "match": "Reçoit la lumière et enregistre une image"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les tenues blanches des danseurs sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les tenues blanches. Étape 2 — Tester : si on éteint les lampes, elles disparaissent. Étape 3 — Conclure : ce sont des sources secondaires. Elles sont blanches, mais ne produisent pas de lumière.",
+                  "answers": [
+                    {
+                      "content": "Des sources secondaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des sources primaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des récepteurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des sources primaires naturelles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le photographe photographie un danseur. Remets dans l'ordre la chaîne de la lumière.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : la source primaire est constituée par les lampes. Étape 2 — Repérer l'objet vu : la tenue du danseur, objet éclairé. Étape 3 — Repérer le récepteur : le capteur de l'appareil. Étape 4 — Écrire la chaîne : lampes → tenue → capteur.",
+                  "answers": [
+                    {
+                      "content": "Les lampes"
+                    },
+                    {
+                      "content": "La tenue du danseur"
+                    },
+                    {
+                      "content": "Le capteur de l'appareil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le panneau solaire est caché par un nuage épais toute la journée, la batterie se charge moins.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le panneau doit recevoir la lumière du Soleil. Étape 2 — Repérer l'effet : avec peu de lumière reçue, il produit peu d'électricité. Étape 3 — Conclure : la batterie se charge moins. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les guirlandes allumées sont des sources ___ artificielles.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : les lampes allumées des guirlandes. Étape 2 — Tester : elles restent visibles dans le noir, car elles produisent leur lumière. Étape 3 — Conclure : ce sont des sources primaires artificielles.",
+                  "answers": [
+                    {
+                      "content": "primaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Écris la chaîne de la lumière qui permet à un spectateur de voir un danseur, puis dis laquelle des trois natures (source primaire, source secondaire, récepteur) correspond à chaque élément.",
+                  "question_type": "written",
+                  "points": 3,
+                  "starter": "La chaîne est : …",
+                  "criteria": [
+                    "Chaîne complète : lampes → tenue du danseur → œil du spectateur",
+                    "Lampes : source primaire",
+                    "Tenue du danseur : source secondaire",
+                    "Œil du spectateur : récepteur"
+                  ],
+                  "explanation": "Corrigé modèle : La chaîne est : lampes → tenue du danseur → œil du spectateur. Les lampes sont des sources primaires, car elles produisent la lumière. La tenue du danseur est une source secondaire, car elle renvoie la lumière reçue. L'œil du spectateur est un récepteur, car il reçoit la lumière. Points : 1 pour la chaîne, 0,5 pour chacune des trois natures, 0,5 pour la clarté.",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

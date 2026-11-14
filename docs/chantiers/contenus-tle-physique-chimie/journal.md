@@ -11,7 +11,9 @@
 | 2026-10-31 | « Je m'entraîne » contrôlé par un script de session reprenant les assertions des tests de 3e (schéma v3, NotionPractice, ≥ 1 question à cases, ≥ 1 indice, ≤ 1 rédigée), sans test ajouté au dépôt. | La vague ne livre pas de code | Non |
 | 2026-10-31 | Leçons communes écrites en C puis copiées en D par script (série, rang, intitulé de la leçon 6). | Un contenu, deux cours | Non |
 
-## À faire valider par un enseignant
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 | Leçon | Point à valider |
 |---|---|

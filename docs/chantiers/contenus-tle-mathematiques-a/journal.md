@@ -19,7 +19,9 @@
 - Fautes mineures répétées malgré le brief : étapes de correction renommées ou numérotées d'après une autre méthode, leurres non expliqués, renvois à « la question précédente », critères plus nombreux que les points du barème.
 - Le scratchpad partagé : un rédacteur a écrasé le générateur d'un autre (`gen/build.py`) ; le JSON a été corrigé à la main. Donner à chaque rédacteur son propre dossier.
 
-## À faire valider par un enseignant
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 | Leçon | Point à valider |
 |---|---|

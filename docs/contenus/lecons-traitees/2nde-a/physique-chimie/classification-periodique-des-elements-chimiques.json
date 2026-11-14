@@ -1,0 +1,3479 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Classification périodique des éléments chimiques",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Physique-Chimie",
+      "series_name": "A",
+      "figures": [
+        {
+          "key": "couches-chlore",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres qui donne le nombre d'électrons de l'atome de chlore sur chacune de ses couches : 2 électrons sur la couche K, 8 électrons sur la couche L et 7 électrons sur la couche M. La structure électronique du chlore s'écrit donc (K)² (L)⁸ (M)⁷ et sa couche externe M porte 7 électrons de valence.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              2,
+              8,
+              7
+            ],
+            "labels": [
+              "K",
+              "L",
+              "M"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "electrons-externes",
+          "kind": "stat_chart",
+          "description": "Une courbe qui donne le nombre d'électrons de la couche externe des 18 premiers éléments, de l'hydrogène H (Z = 1) à l'argon Ar (Z = 18). Le nombre monte de 1 à 8 pour le lithium jusqu'au néon, puis de 1 à 8 pour le sodium jusqu'à l'argon. Le motif se répète à chaque période : les éléments d'une même colonne ont le même nombre.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1,
+              2,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "labels": [
+              "H",
+              "He",
+              "Li",
+              "Be",
+              "B",
+              "C",
+              "N",
+              "O",
+              "F",
+              "Ne",
+              "Na",
+              "Mg",
+              "Al",
+              "Si",
+              "P",
+              "S",
+              "Cl",
+              "Ar"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "familles-chimiques",
+          "kind": "diagram",
+          "description": "Un arbre qui range les éléments de numéro atomique inférieur ou égal à 18 en quatre familles. Les alcalins (Li, Na) ont 1 électron de valence, les alcalino-terreux (Be, Mg) en ont 2, les halogènes (F, Cl) en ont 7 et les gaz rares (He, Ne, Ar) ont une couche externe saturée.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Éléments de numéro atomique Z ≤ 18"
+              },
+              {
+                "id": "a",
+                "label": "Alcalins : 1 électron de valence (Li, Na)"
+              },
+              {
+                "id": "t",
+                "label": "Alcalino-terreux : 2 électrons (Be, Mg)"
+              },
+              {
+                "id": "h",
+                "label": "Halogènes : 7 électrons (F, Cl)"
+              },
+              {
+                "id": "g",
+                "label": "Gaz rares : couche externe saturée (He, Ne, Ar)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "a"
+              },
+              {
+                "from": "r",
+                "to": "t"
+              },
+              {
+                "from": "r",
+                "to": "h"
+              },
+              {
+                "from": "r",
+                "to": "g"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Structure électronique et électrons de valence",
+          "remember": "Les électrons d'un atome occupent des **couches** notées K, L, M. Pour $Z \\leq 18$, la couche K contient au plus 2 électrons, la couche L au plus 8 et la couche M au plus 8. On remplit K, puis L, puis M : on n'entame une couche que si la précédente est pleine. La **couche externe** est la dernière couche occupée ; ses électrons sont les **électrons de valence**. Une couche externe pleine (2 électrons sur K, 8 sur L ou M) est dite **saturée**. Exemple : le chlore ($Z = 17$) s'écrit (K)² (L)⁸ (M)⁷ et a 7 électrons de valence.",
+          "method": [
+            "Déterminer le nombre d'électrons de l'atome neutre : il est égal à Z.",
+            "Remplir la couche K avec 2 électrons au plus, puis la couche L avec 8 au plus, puis la couche M avec les électrons restants.",
+            "Écrire la structure électronique et vérifier que la somme des électrons vaut Z.",
+            "Repérer la couche externe, la dernière occupée, et compter ses électrons de valence."
+          ],
+          "example": {
+            "statement": "Écrire la structure électronique de l'atome de chlore ($Z = 17$), l'élément de l'eau de Javel, et donner son nombre d'électrons de valence.",
+            "steps": [
+              "Déterminer : l'atome neutre de chlore a 17 électrons.",
+              "Remplir : la couche K reçoit 2 électrons (il en reste 15), la couche L en reçoit 8 (il en reste 7), la couche M reçoit les 7 restants.",
+              "Écrire : la structure est (K)² (L)⁸ (M)⁷ ; vérification : $2 + 8 + 7 = 17$.",
+              "Repérer : la couche externe est la couche M, qui porte 7 électrons de valence."
+            ]
+          },
+          "pitfall": "Ne confonds pas le nombre d'électrons de valence avec le nombre total d'électrons. Contre-exemple : le chlore a 17 électrons au total, mais seulement 7 électrons de valence, ceux de la couche M. Ne dépasse pas non plus 8 électrons sur la couche L : pour 12 électrons, (K)² (L)¹⁰ est faux, la bonne structure est (K)² (L)⁸ (M)². Compte toujours : la somme des électrons doit valoir Z.",
+          "figure": "couches-chlore",
+          "practice": {
+            "statement": "Tu t'entraînes à remplir les couches K, L et M et à compter les électrons de valence.",
+            "questions": [
+              {
+                "content": "Quelle est la structure électronique de l'atome d'azote, de numéro atomique Z = 7 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer : l'atome neutre d'azote a 7 électrons. Étape 2 — Remplir : K : 2 ; L : 5. Étape 3 — Écrire : (K)² (L)⁵, et 2 + 5 = 7. Étape 4 — Repérer : la couche externe est la couche L, avec 5 électrons de valence. Mettre les 7 électrons sur K est impossible, K contient 2 électrons au plus.",
+                "answers": [
+                  {
+                    "content": "(K)² (L)⁵",
+                    "correct": true
+                  },
+                  {
+                    "content": "(K)⁷",
+                    "correct": false
+                  },
+                  {
+                    "content": "(K)⁵ (L)²",
+                    "correct": false
+                  },
+                  {
+                    "content": "(K)² (L)⁴ (M)¹",
+                    "correct": false
+                  }
+                ],
+                "hint": "K prend 2 électrons, puis L prend le reste."
+              },
+              {
+                "content": "Combien d'électrons de valence l'atome de phosphore (Z = 15) possède-t-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Déterminer : l'atome neutre de phosphore a 15 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 5. Étape 3 — Écrire : (K)² (L)⁸ (M)⁵, et 2 + 8 + 5 = 15. Étape 4 — Repérer : la couche externe est la couche M, avec 5 électrons de valence.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "hint": "Remplis K, L puis M ; compte ceux de M."
+              },
+              {
+                "content": "L'atome de néon (Z = 10) a sa couche externe L saturée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Déterminer : l'atome neutre de néon a 10 électrons. Étape 2 — Remplir : K : 2 ; L : 8. Étape 3 — Écrire : (K)² (L)⁸, et 2 + 8 = 10. Étape 4 — Repérer : la couche externe est la couche L, avec 8 électrons de valence. La couche L contient 8 électrons, c'est son maximum : elle est saturée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare le nombre d'électrons de L à son maximum."
+              },
+              {
+                "content": "Les électrons de la couche externe s'appellent les électrons de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Déterminer : on cherche le nom des électrons de la dernière couche. Étape 2 — Remplir : K, L puis M se remplissent dans l'ordre. Étape 3 — Écrire la structure obtenue. Étape 4 — Repérer : les électrons de la couche externe sont les électrons de valence.",
+                "answers": [
+                  {
+                    "content": "valence",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce sont eux qui décident des propriétés chimiques."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Écrire une structure électronique et trouver les électrons de valence",
+              "statement": "Dans cet exercice, tu écris la structure électronique d'atomes de numéro atomique $Z \\leq 18$ et tu comptes leurs électrons de valence.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la structure électronique de l'atome de carbone, de numéro atomique Z = 6 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de carbone a 6 électrons. Étape 2 — Remplir : K : 2 ; L : 4. Étape 3 — Écrire : (K)² (L)⁴, et 2 + 4 = 6. Étape 4 — Repérer : la couche externe est la couche L, avec 4 électrons de valence. (K)⁴ (L)² remplit mal K, qui contient 2 électrons au plus.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁴",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)⁶",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)⁴ (L)²",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)² (M)²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de chlore a pour numéro atomique Z = 17. Combien d'électrons la couche L contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de chlore a 17 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Écrire : (K)² (L)⁸ (M)⁷, et 2 + 8 + 7 = 17. Étape 4 — Repérer : la couche externe est la couche M, avec 7 électrons de valence. La couche L est pleine avec 8 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence l'atome de soufre (Z = 16) possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de soufre a 16 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 6. Étape 3 — Écrire : (K)² (L)⁸ (M)⁶, et 2 + 8 + 6 = 16. Étape 4 — Repérer : la couche externe est la couche M, avec 6 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome d'aluminium a pour numéro atomique Z = 13. Sa couche externe est la couche ___ (une lettre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre d'aluminium a 13 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 3. Étape 3 — Écrire : (K)² (L)⁸ (M)³, et 2 + 8 + 3 = 13. Étape 4 — Repérer : la couche externe est la couche M, avec 3 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "M",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de chlore (Z = 17) a 17 électrons de valence.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de chlore a 17 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Écrire : (K)² (L)⁸ (M)⁷, et 2 + 8 + 7 = 17. Étape 4 — Repérer : la couche externe est la couche M, avec 7 électrons de valence. Les 17 électrons sont le total ; seuls les 7 électrons de la couche externe sont de valence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de l'atome de silicium, de numéro atomique Z = 14 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de silicium a 14 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 4. Étape 3 — Écrire : (K)² (L)⁸ (M)⁴, et 2 + 8 + 4 = 14. Étape 4 — Repérer : la couche externe est la couche M, avec 4 électrons de valence. (K)² (L)¹² dépasse 8 électrons sur L ; (K)² (L)⁶ (M)⁶ entame M avant que L soit pleine.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁸ (M)⁴",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)² (L)¹²",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁶ (M)⁶",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)⁸ (L)⁶",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Structures électroniques de plusieurs atomes du laboratoire",
+              "statement": "Dans cet exercice, tu relies des atomes à leur structure, tu comptes des électrons de valence et tu ranges les étapes de la méthode. Un atome neutre a Z électrons ; K contient 2 électrons au plus, L et M 8 au plus. Le diagramme montre la structure du chlore.",
+              "hint": "Remplis K, puis L, puis M. Vérifie que la somme vaut Z.",
+              "exercise_type": "fixation",
+              "figure": "couches-chlore",
+              "questions": [
+                {
+                  "content": "Relie chaque atome à sa structure électronique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Déterminer : 8, 12, 3 et 16 électrons. Étapes 2 et 3 — Remplir et écrire : oxygène (K)² (L)⁶ ; magnésium (K)² (L)⁸ (M)² ; lithium (K)² (L)¹ ; soufre (K)² (L)⁸ (M)⁶. Étape 4 — Repérer : les couches externes portent 6, 2, 1 et 6 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "L'oxygène (Z = 8)",
+                      "match": "(K)² (L)⁶"
+                    },
+                    {
+                      "content": "Le magnésium (Z = 12)",
+                      "match": "(K)² (L)⁸ (M)²"
+                    },
+                    {
+                      "content": "Le lithium (Z = 3)",
+                      "match": "(K)² (L)¹"
+                    },
+                    {
+                      "content": "Le soufre (Z = 16)",
+                      "match": "(K)² (L)⁸ (M)⁶"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de sodium a pour numéro atomique Z = 11. Combien d'électrons de valence possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de sodium a 11 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 1. Étape 3 — Écrire : (K)² (L)⁸ (M)¹, et 2 + 8 + 1 = 11. Étape 4 — Repérer : la couche externe est la couche M, avec 1 électron de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels atomes ont exactement 2 électrons de valence ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Déterminer : 4, 12, 10, 6 et 11 électrons. Étapes 2 et 3 — Remplir et écrire : béryllium (K)² (L)² ; magnésium (K)² (L)⁸ (M)² ; néon (K)² (L)⁸ ; carbone (K)² (L)⁴ ; sodium (K)² (L)⁸ (M)¹. Étape 4 — Repérer : seuls le béryllium et le magnésium ont 2 électrons sur leur couche externe ; le néon en a 8, le carbone 4, le sodium 1.",
+                  "answers": [
+                    {
+                      "content": "Le béryllium (Z = 4)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magnésium (Z = 12)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carbone (Z = 6)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour écrire une structure électronique et trouver les électrons de valence.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Déterminer le nombre d'électrons (égal à Z). Étape 2 — Remplir K, L puis M. Étape 3 — Écrire la structure et vérifier la somme. Étape 4 — Repérer la couche externe et ses électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "Déterminer le nombre d'électrons de l'atome neutre"
+                    },
+                    {
+                      "content": "Remplir K, puis L, puis M avec les électrons restants"
+                    },
+                    {
+                      "content": "Écrire la structure et vérifier que la somme vaut Z"
+                    },
+                    {
+                      "content": "Repérer la couche externe et compter ses électrons"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome a pour structure électronique (K)² (L)⁸ (M)⁵. Combien d'électrons de valence a-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : la somme $2 + 8 + 5 = 15$ donne le total d'électrons. Étapes 2 et 3 — la structure est déjà écrite et la somme vaut bien 15. Étape 4 — Repérer : la couche externe est M, avec 5 électrons de valence ; 15 est le total, pas le nombre d'électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "15",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "13",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un atome de néon (Z = 10) a pour structure (K)² (L)⁸ : sa couche externe est saturée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de néon a 10 électrons. Étape 2 — Remplir : K : 2 ; L : 8. Étape 3 — Écrire : (K)² (L)⁸, et 2 + 8 = 10. Étape 4 — Repérer : la couche externe est la couche L, avec 8 électrons de valence. La couche L est pleine, la couche externe est saturée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Principe de la classification périodique",
+          "remember": "Dans la **classification périodique**, les éléments sont rangés par **numéro atomique $Z$ croissant**, en lignes et en colonnes. Une **ligne** est une **période** : son numéro est le **nombre de couches occupées**. Une **colonne** regroupe les éléments qui ont le **même nombre d'électrons de valence** : ils ont des propriétés chimiques semblables et forment une **famille**. Pour les 18 premiers éléments, on numérote les colonnes de 1 à 8 d'après ce nombre ; l'hélium (2 électrons de valence sur K saturée) est placé dans la colonne des gaz rares. Période 1 : H, He. Période 2 : Li, Be, B, C, N, O, F, Ne. Période 3 : Na, Mg, Al, Si, P, S, Cl, Ar.",
+          "method": [
+            "Écrire la structure électronique de l'atome à partir de son numéro atomique Z.",
+            "Compter les couches occupées : leur nombre donne la période (la ligne).",
+            "Relever les électrons de la couche externe : leur nombre donne la colonne.",
+            "Conclure en donnant la position (période, colonne) et les éléments de la même colonne."
+          ],
+          "example": {
+            "statement": "Placer l'élément phosphore ($Z = 15$) dans la classification et nommer un autre élément de sa colonne.",
+            "steps": [
+              "Écrire : le phosphore a 15 électrons ; sa structure est (K)² (L)⁸ (M)⁵.",
+              "Compter les couches occupées : K, L et M, soit 3 couches, donc la période 3.",
+              "Relever les électrons de la couche externe : la couche M en porte 5, donc la colonne 5.",
+              "Conclure : le phosphore est en période 3, colonne 5 ; l'azote ($Z = 7$, structure (K)² (L)⁵) est dans la même colonne."
+            ]
+          },
+          "pitfall": "Ne confonds pas la période et la colonne. La période est le nombre de **couches**, la colonne est le nombre d'**électrons de valence**. Contre-exemple : le soufre ($Z = 16$) a pour structure (K)² (L)⁸ (M)⁶ : 3 couches, donc période 3 ; 6 électrons de valence, donc colonne 6. Écrire « période 6 » est faux, il n'a que 3 couches.",
+          "figure": "electrons-externes",
+          "practice": {
+            "statement": "Tu t'entraînes à placer un élément dans la classification à partir de sa structure électronique.",
+            "questions": [
+              {
+                "content": "Quel est le numéro de la période de l'atome d'oxygène (Z = 8) ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : l'oxygène (Z = 8) a pour structure (K)² (L)⁶. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 6, donc colonne 6. Étape 4 — Conclure : l'oxygène est en période 2, colonne 6.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Combien de couches sont occupées ?"
+              },
+              {
+                "content": "Dans quelle colonne se trouve l'atome de fluor (Z = 9) ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 7, donc colonne 7. Étape 4 — Conclure : le fluor est en période 2, colonne 7.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte les électrons de la couche externe."
+              },
+              {
+                "content": "Où se trouve l'élément silicium (Z = 14) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : le silicium (Z = 14) a pour structure (K)² (L)⁸ (M)⁴. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 4, donc colonne 4. Étape 4 — Conclure : le silicium est en période 3, colonne 4. Période 4 et colonne 3 inverse les deux nombres.",
+                "answers": [
+                  {
+                    "content": "Période 3, colonne 4",
+                    "correct": true
+                  },
+                  {
+                    "content": "Période 4, colonne 3",
+                    "correct": false
+                  },
+                  {
+                    "content": "Période 3, colonne 14",
+                    "correct": false
+                  },
+                  {
+                    "content": "Période 2, colonne 4",
+                    "correct": false
+                  }
+                ],
+                "hint": "Période = couches ; colonne = électrons de valence."
+              },
+              {
+                "content": "Le lithium (Z = 3) et le sodium (Z = 11) sont dans la même colonne.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : lithium (K)² (L)¹ et sodium (K)² (L)⁸ (M)¹. Étape 2 — Compter les couches : 2 et 3, ce sont des périodes différentes. Étape 3 — Relever les électrons de la couche externe : 1 pour chacun, donc la colonne 1 pour les deux. Étape 4 — Conclure : même colonne, périodes différentes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare leurs électrons de valence."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Trouver la période et la colonne d'un élément",
+              "statement": "Dans cet exercice, tu écris la structure d'un atome, tu comptes ses couches et ses électrons de valence, puis tu donnes sa position.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Où se trouve le magnésium (Z = 12) dans la classification ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le magnésium (Z = 12) a pour structure (K)² (L)⁸ (M)². Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 2, donc colonne 2. Étape 4 — Conclure : le magnésium est en période 3, colonne 2. Période 2 et colonne 3 inverse les deux nombres.",
+                  "answers": [
+                    {
+                      "content": "Période 3, colonne 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Période 2, colonne 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Période 3, colonne 12",
+                      "correct": false
+                    },
+                    {
+                      "content": "Période 1, colonne 2",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de la période du phosphore (Z = 15) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le phosphore (Z = 15) a pour structure (K)² (L)⁸ (M)⁵. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 5, donc colonne 5. Étape 4 — Conclure : le phosphore est en période 3, colonne 5.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les éléments d'une même ___ ont le même nombre d'électrons de valence.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : par exemple Li (K)² (L)¹ et Na (K)² (L)⁸ (M)¹. Étape 2 — Compter les couches : elles diffèrent, ce n'est pas la période. Étape 3 — Relever les électrons de la couche externe : 1 pour les deux, ils sont dans la même colonne. Étape 4 — Conclure : c'est la colonne qui regroupe un même nombre d'électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "colonne",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le soufre (Z = 16) se trouve en période 6.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : le soufre (Z = 16) a pour structure (K)² (L)⁸ (M)⁶. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 6, donc colonne 6. Étape 4 — Conclure : le soufre est en période 3, colonne 6. Le numéro 6 est le nombre d'électrons de valence, pas la période.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est dans la même colonne que le carbone (Z = 6) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le carbone (Z = 6) a pour structure (K)² (L)⁴. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 4, donc colonne 4. Étape 4 — Conclure : le carbone est en période 2, colonne 4. Le silicium (K)² (L)⁸ (M)⁴ a aussi 4 électrons de valence. L'azote est dans la même période que le carbone, pas dans la même colonne.",
+                  "answers": [
+                    {
+                      "content": "Le silicium (Z = 14)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'azote (Z = 7)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le bore (Z = 5)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'oxygène (Z = 8)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'éléments la période 2 contient-elle, du lithium au néon ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : les éléments de Z = 3 à Z = 10. Étape 2 — Compter les couches : tous ont 2 couches occupées, c'est la période 2. Étape 3 — Relever les électrons de la couche externe : de 1 à 8, soit une colonne par valeur. Étape 4 — Conclure : $10 - 3 + 1 = 8$ éléments.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire la classification des 18 premiers éléments",
+              "statement": "Dans cet exercice, tu relies des éléments à leur position, tu cherches des éléments d'une même période et tu lis le graphique du nombre d'électrons de valence selon Z. Période = nombre de couches ; colonne = nombre d'électrons de valence.",
+              "hint": "Écris d'abord la structure de chaque atome, puis compte couches et électrons de valence.",
+              "exercise_type": "fixation",
+              "figure": "electrons-externes",
+              "questions": [
+                {
+                  "content": "Relie chaque élément à sa position.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire : lithium (K)² (L)¹ ; oxygène (K)² (L)⁶ ; aluminium (K)² (L)⁸ (M)³ ; argon (K)² (L)⁸ (M)⁸. Étape 2 — Compter les couches : 2, 2, 3 et 3. Étape 3 — Relever les électrons de la couche externe : 1, 6, 3 et 8. Étape 4 — Conclure avec les positions données.",
+                  "answers": [
+                    {
+                      "content": "Le lithium (Z = 3)",
+                      "match": "Période 2, colonne 1"
+                    },
+                    {
+                      "content": "L'oxygène (Z = 8)",
+                      "match": "Période 2, colonne 6"
+                    },
+                    {
+                      "content": "L'aluminium (Z = 13)",
+                      "match": "Période 3, colonne 3"
+                    },
+                    {
+                      "content": "L'argon (Z = 18)",
+                      "match": "Période 3, colonne 8"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont en période 3 ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Écrire : sodium (K)² (L)⁸ (M)¹ ; silicium (K)² (L)⁸ (M)⁴ ; chlore (K)² (L)⁸ (M)⁷ ; lithium (K)² (L)¹ ; oxygène (K)² (L)⁶. Étape 2 — Compter les couches : le sodium, le silicium et le chlore en ont 3 ; le lithium et l'oxygène en ont 2. Étapes 3 et 4 — Conclure : les trois premiers sont en période 3.",
+                  "answers": [
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le silicium (Z = 14)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le chlore (Z = 17)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lithium (Z = 3)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'oxygène (Z = 8)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour placer un élément dans la classification.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire la structure. Étape 2 — Compter les couches : c'est la période. Étape 3 — Relever les électrons de la couche externe : c'est la colonne. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Écrire la structure électronique à partir de Z"
+                    },
+                    {
+                      "content": "Compter les couches occupées pour la période"
+                    },
+                    {
+                      "content": "Relever les électrons de la couche externe pour la colonne"
+                    },
+                    {
+                      "content": "Conclure avec la position et les éléments de la même colonne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les 18 premiers éléments (de H à Ar), combien ont exactement 1 électron de valence ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : les structures de H à Ar. Étape 2 — Compter les couches : sans intérêt ici. Étape 3 — Relever les électrons de la couche externe : 1 électron pour H (K)¹, Li (K)² (L)¹ et Na (K)² (L)⁸ (M)¹. Étape 4 — Conclure : 3 éléments, ceux de la colonne 1.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le néon et l'argon sont dans la même ___ du tableau.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Écrire : le néon (Z = 10) a pour structure (K)² (L)⁸. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 8, donc colonne 8. Étape 4 — Conclure : le néon est en période 2, colonne 8. Pour l'argon (K)² (L)⁸ (M)⁸ : 8 électrons de valence, colonne 8. Le néon est en période 2 et l'argon en période 3 : pas la même période.",
+                  "answers": [
+                    {
+                      "content": "colonne",
+                      "correct": true
+                    },
+                    {
+                      "content": "période",
+                      "correct": false
+                    },
+                    {
+                      "content": "couche",
+                      "correct": false
+                    },
+                    {
+                      "content": "masse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hélium (Z = 2) est placé dans la colonne du lithium.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : l'hélium (Z = 2) a pour structure (K)². Étape 2 — Compter les couches occupées : 1, donc période 1. Étape 3 — Relever les électrons de la couche externe : 2, donc colonne 8 (l'hélium est placé avec les gaz rares). Étape 4 — Conclure : l'hélium est en période 1, colonne 8. Le lithium n'a qu'un électron de valence, il est en colonne 1.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les familles chimiques",
+          "remember": "Les éléments d'une même colonne forment une **famille chimique** : ils ont des propriétés chimiques semblables. Quatre familles à connaître : les **alcalins** (1 électron de valence : lithium Li, sodium Na, potassium K ; métaux tendres, qui réagissent vivement avec l'eau), les **alcalino-terreux** (2 électrons de valence : béryllium Be, magnésium Mg, calcium Ca), les **halogènes** (7 électrons de valence : fluor F, chlore Cl) et les **gaz rares**, ou gaz nobles (couche externe saturée : hélium He, néon Ne, argon Ar ; ce sont des gaz peu réactifs). L'hydrogène, avec 1 électron de valence, n'est pas un alcalin.",
+          "method": [
+            "Écrire la structure électronique de l'élément à partir de son numéro atomique Z.",
+            "Compter les électrons de valence, ceux de la couche externe.",
+            "Nommer la famille correspondant à ce nombre d'électrons de valence.",
+            "Conclure en donnant une propriété de la famille et un autre élément qui en fait partie."
+          ],
+          "example": {
+            "statement": "À quelle famille appartient le sodium ($Z = 11$), l'élément du sel de cuisine ?",
+            "steps": [
+              "Écrire : le sodium a 11 électrons ; sa structure est (K)² (L)⁸ (M)¹.",
+              "Compter les électrons de valence : la couche externe M en porte 1.",
+              "Nommer : 1 électron de valence correspond à la famille des alcalins.",
+              "Conclure : le sodium est un métal tendre qui réagit vivement avec l'eau, comme le lithium, autre alcalin."
+            ]
+          },
+          "pitfall": "Ne classe pas un élément dans une famille avec le seul nombre d'électrons de valence : regarde la couche. Contre-exemple : l'hélium (K)² et le magnésium (K)² (L)⁸ (M)² ont tous deux 2 électrons de valence. Pourtant l'hélium est un gaz rare, car sa couche externe K est saturée, alors que le magnésium est un alcalino-terreux.",
+          "figure": "familles-chimiques",
+          "practice": {
+            "statement": "Tu t'entraînes à nommer la famille d'un élément à partir de sa structure électronique.",
+            "questions": [
+              {
+                "content": "À quelle famille appartient le lithium (Z = 3) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : le lithium (Z = 3) a pour structure (K)² (L)¹. Étape 2 — Compter les électrons de valence : 1. Étape 3 — Nommer : famille des alcalins. Étape 4 — Conclure : le lithium est un métal tendre, comme le sodium. Avec 2 électrons de valence, il serait alcalino-terreux, mais il n'en a qu'un.",
+                "answers": [
+                  {
+                    "content": "Les alcalins",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les halogènes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les gaz rares",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les alcalino-terreux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Combien d'électrons sur la couche externe ?"
+              },
+              {
+                "content": "Le néon appartient à la famille des gaz rares.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : le néon (Z = 10) a pour structure (K)² (L)⁸. Étape 2 — Compter les électrons de valence : 8. Étape 3 — Nommer : famille des gaz rares. Étape 4 — Conclure : sa couche externe L est saturée, c'est un gaz peu réactif comme l'argon.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde si la couche externe est pleine."
+              },
+              {
+                "content": "Le chlore (Z = 17) appartient à la famille des ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : 7 électrons de valence, comme le fluor.",
+                "answers": [
+                  {
+                    "content": "halogènes",
+                    "correct": true
+                  },
+                  {
+                    "content": "halogène",
+                    "correct": true
+                  }
+                ],
+                "hint": "Sa couche M porte 7 électrons."
+              },
+              {
+                "content": "Combien d'électrons de valence les atomes de la famille des alcalino-terreux possèdent-ils ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : par exemple le magnésium (K)² (L)⁸ (M)². Étape 2 — Compter les électrons de valence : 2. Étape 3 — Nommer : c'est la famille des alcalino-terreux. Étape 4 — Conclure : le béryllium (K)² (L)² a aussi 2 électrons de valence.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Prends l'exemple du magnésium."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la famille d'un élément",
+              "statement": "Dans cet exercice, tu écris la structure d'éléments, tu comptes leurs électrons de valence et tu nommes leur famille.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "À quelle famille appartient le magnésium (Z = 12) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le magnésium (Z = 12) a pour structure (K)² (L)⁸ (M)². Étape 2 — Compter les électrons de valence : 2. Étape 3 — Nommer : famille des alcalino-terreux. Étape 4 — Conclure : métal comme le béryllium. Les alcalins n'ont qu'un électron de valence.",
+                  "answers": [
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les alcalins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les halogènes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle famille appartient le fluor (Z = 9) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : comme le chlore. Le néon, juste après lui, est un gaz rare : sa couche externe est saturée avec 8 électrons.",
+                  "answers": [
+                    {
+                      "content": "Les halogènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont des gaz rares ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : néon (K)² (L)⁸ ; argon (K)² (L)⁸ (M)⁸ ; chlore (K)² (L)⁸ (M)⁷ ; sodium (K)² (L)⁸ (M)¹ ; fluor (K)² (L)⁷. Étape 2 — Compter les électrons de valence : 8, 8, 7, 1 et 7. Étape 3 — Nommer : couche externe saturée pour le néon et l'argon seulement. Étape 4 — Conclure : ce sont des gaz rares ; le chlore et le fluor sont des halogènes, le sodium un alcalin.",
+                  "answers": [
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'argon (Z = 18)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le chlore (Z = 17)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fluor (Z = 9)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence les atomes de la famille des halogènes possèdent-ils ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le fluor (K)² (L)⁷ et le chlore (K)² (L)⁸ (M)⁷. Étape 2 — Compter les électrons de valence : 7 pour chacun. Étape 3 — Nommer : c'est la famille des halogènes. Étape 4 — Conclure : les halogènes ont 7 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hélium, le gaz des ballons de fête, appartient à la famille des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : l'hélium (Z = 2) a pour structure (K)². Étape 2 — Compter les électrons de valence : 2. Étape 3 — Nommer : famille des gaz rares. Étape 4 — Conclure : sa couche externe K est saturée, comme celle du néon ; c'est un gaz peu réactif, ce qui en fait un gaz sûr pour les ballons.",
+                  "answers": [
+                    {
+                      "content": "gaz rares",
+                      "correct": true
+                    },
+                    {
+                      "content": "gaz nobles",
+                      "correct": true
+                    },
+                    {
+                      "content": "gaz rare",
+                      "correct": true
+                    },
+                    {
+                      "content": "gaz noble",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hélium (Z = 2) est un alcalino-terreux parce qu'il a 2 électrons de valence.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : l'hélium (Z = 2) a pour structure (K)². Étape 2 — Compter les électrons de valence : 2. Étape 3 — Nommer : famille des gaz rares. Étape 4 — Conclure : sa couche K est saturée avec 2 électrons, c'est un gaz rare. Le magnésium, lui, a 2 électrons sur une couche M non saturée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les familles dans le laboratoire et la vie courante",
+              "statement": "Dans cet exercice, tu relies chaque famille à ses éléments, tu repères des alcalins et des gaz rares, et tu expliques le cas de l'hélium. Le schéma montre les quatre familles. Alcalins : 1 électron de valence ; alcalino-terreux : 2 ; halogènes : 7 ; gaz rares : couche externe saturée.",
+              "hint": "Écris la structure, compte les électrons de valence, puis nomme la famille.",
+              "exercise_type": "fixation",
+              "figure": "familles-chimiques",
+              "questions": [
+                {
+                  "content": "Relie chaque famille à deux de ses éléments.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire : Li (K)² (L)¹ ; Na (K)² (L)⁸ (M)¹ ; Be (K)² (L)² ; Mg (K)² (L)⁸ (M)² ; F (K)² (L)⁷ ; Cl (K)² (L)⁸ (M)⁷ ; Ne (K)² (L)⁸ ; Ar (K)² (L)⁸ (M)⁸. Étape 2 — Compter les électrons de valence : 1, 1, 2, 2, 7, 7, 8, 8. Étape 3 — Nommer les quatre familles. Étape 4 — Conclure avec les couples proposés.",
+                  "answers": [
+                    {
+                      "content": "Les alcalins",
+                      "match": "le lithium et le sodium"
+                    },
+                    {
+                      "content": "Les alcalino-terreux",
+                      "match": "le béryllium et le magnésium"
+                    },
+                    {
+                      "content": "Les halogènes",
+                      "match": "le fluor et le chlore"
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "match": "le néon et l'argon"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont des alcalins ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : Li (K)² (L)¹ ; Na (K)² (L)⁸ (M)¹ ; Be (K)² (L)² ; Cl (K)² (L)⁸ (M)⁷ ; Ne (K)² (L)⁸. Étape 2 — Compter les électrons de valence : 1, 1, 2, 7 et 8. Étape 3 — Nommer : 1 électron de valence, c'est un alcalin. Étape 4 — Conclure : le lithium et le sodium.",
+                  "answers": [
+                    {
+                      "content": "Le lithium (Z = 3)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le béryllium (Z = 4)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chlore (Z = 17)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les 18 premiers éléments, combien sont des gaz rares ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : la couche externe est saturée pour He (K)², Ne (K)² (L)⁸ et Ar (K)² (L)⁸ (M)⁸. Étape 2 — Compter les électrons de valence : 2, 8 et 8. Étape 3 — Nommer : ce sont les gaz rares. Étape 4 — Conclure : 3 gaz rares, l'hélium, le néon et l'argon.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les éléments d'une même famille ont des propriétés chimiques ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Écrire : exemple, Li et Na (K)² (L)¹ et (K)² (L)⁸ (M)¹. Étape 2 — Compter les électrons de valence : 1 pour chacun. Étape 3 — Nommer : même famille, les alcalins. Étape 4 — Conclure : ils ont des propriétés semblables, car ce sont les électrons de valence qui décident des propriétés chimiques.",
+                  "answers": [
+                    {
+                      "content": "semblables",
+                      "correct": true
+                    },
+                    {
+                      "content": "opposées",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans rapport",
+                      "correct": false
+                    },
+                    {
+                      "content": "identiques à celles de toute la classification",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la famille d'un élément.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire la structure. Étape 2 — Compter les électrons de valence. Étape 3 — Nommer la famille. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Écrire la structure électronique à partir de Z"
+                    },
+                    {
+                      "content": "Compter les électrons de valence"
+                    },
+                    {
+                      "content": "Nommer la famille correspondante"
+                    },
+                    {
+                      "content": "Conclure avec une propriété et un autre élément de la famille"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'hélium (Z = 2) est-il un gaz rare et non un alcalino-terreux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : l'hélium (Z = 2) a pour structure (K)². Étape 2 — Compter les électrons de valence : 2. Étape 3 — Nommer : famille des gaz rares. Étape 4 — Conclure : 2 électrons sur K, c'est le maximum de cette couche. Il n'a ni 8 électrons de valence ni 3 couches : il n'a que la couche K.",
+                  "answers": [
+                    {
+                      "content": "Sa couche externe K est saturée avec 2 électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a 8 électrons de valence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a un seul électron de valence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a trois couches occupées",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Position d'un élément et structure électronique",
+          "remember": "La position d'un élément dans la classification et sa structure électronique se déduisent l'une de l'autre. La **période** donne le nombre de couches occupées ; la **colonne** donne le nombre d'électrons de la couche externe. Les couches situées avant la couche externe sont **pleines** : K contient 2 électrons, L en contient 8. Le numéro atomique $Z$ est le total des électrons de l'atome neutre. Pour $Z \\leq 18$, un élément est donc connu dès qu'on donne sa période et sa colonne.",
+          "method": [
+            "Lire la période (nombre de couches occupées) et la colonne (nombre d'électrons de valence).",
+            "Remplir les couches : les couches avant la dernière sont pleines, la couche externe reçoit les électrons de valence.",
+            "Additionner tous les électrons : le total est le numéro atomique Z.",
+            "Conclure en nommant l'élément de numéro atomique Z dans la liste des 18 premiers."
+          ],
+          "example": {
+            "statement": "Un élément de la marmite en aluminium est en période 3 et en colonne 3. Trouver son numéro atomique et son nom.",
+            "steps": [
+              "Lire : la période 3 donne 3 couches occupées ; la colonne 3 donne 3 électrons de valence.",
+              "Remplir : la couche K est pleine (2 électrons), la couche L est pleine (8 électrons), la couche externe M reçoit 3 électrons.",
+              "Additionner : $2 + 8 + 3 = 13$, donc $Z = 13$.",
+              "Conclure : l'élément de numéro atomique 13 est l'aluminium, de symbole Al."
+            ]
+          },
+          "pitfall": "Ne prends pas le numéro de la colonne pour le numéro atomique, et n'oublie pas les couches pleines. Contre-exemple : l'élément de la période 3 et de la colonne 3 n'a pas $Z = 3$ : il a deux couches pleines ($2 + 8 = 10$ électrons) plus 3 électrons de valence, soit $Z = 13$. Attention aussi à la période 1 : il n'y a que la couche K, donc pas de couche L.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à retrouver un élément à partir de sa période et de sa colonne.",
+            "questions": [
+              {
+                "content": "Quel est le numéro atomique Z de l'élément de la période 3 et de la colonne 1 ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 1, donc 1 électron de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 1. Étape 3 — Additionner : 2 + 8 + 1 = 11, donc Z = 11. Étape 4 — Conclure : c'est le sodium (symbole Na).",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "11",
+                    "correct": true
+                  }
+                ],
+                "hint": "Deux couches pleines, puis 1 électron sur M."
+              },
+              {
+                "content": "Quel élément est en période 2 et en colonne 4 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 4, donc 4 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 4. Étape 3 — Additionner : 2 + 4 = 6, donc Z = 6. Étape 4 — Conclure : c'est le carbone (symbole C). Le silicium a aussi 4 électrons de valence mais 3 couches : il est en période 3.",
+                "answers": [
+                  {
+                    "content": "Le carbone",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le silicium",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le béryllium",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le magnésium",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une couche pleine, puis 4 électrons sur L."
+              },
+              {
+                "content": "L'élément de la période 2 et de la colonne 8 est le néon.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 8, donc 8 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8. Étape 3 — Additionner : 2 + 8 = 10, donc Z = 10. Étape 4 — Conclure : c'est le néon (symbole Ne).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la couche L pleine."
+              },
+              {
+                "content": "Le symbole de l'élément de la période 3 et de la colonne 7 est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 7, donc 7 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Additionner : 2 + 8 + 7 = 17, donc Z = 17. Étape 4 — Conclure : c'est le chlore (symbole Cl).",
+                "answers": [
+                  {
+                    "content": "Cl",
+                    "correct": true
+                  }
+                ],
+                "hint": "Deux couches pleines, puis 7 électrons."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Retrouver un élément à partir de sa position",
+              "statement": "Dans cet exercice, tu lis la période et la colonne d'un élément, tu remplis ses couches, puis tu retrouves son numéro atomique et son nom.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le numéro atomique Z de l'élément de la période 2 et de la colonne 5 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 5, donc 5 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 5. Étape 3 — Additionner : 2 + 5 = 7, donc Z = 7. Étape 4 — Conclure : c'est l'azote (symbole N).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est en période 3 et en colonne 6 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 6, donc 6 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 6. Étape 3 — Additionner : 2 + 8 + 6 = 16, donc Z = 16. Étape 4 — Conclure : c'est le soufre (symbole S). L'oxygène a aussi 6 électrons de valence mais seulement 2 couches : il est en période 2.",
+                  "answers": [
+                    {
+                      "content": "Le soufre",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'oxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chlore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le phosphore",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole de l'élément de la période 2 et de la colonne 7 est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 7, donc 7 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 7. Étape 3 — Additionner : 2 + 7 = 9, donc Z = 9. Étape 4 — Conclure : c'est le fluor (symbole F).",
+                  "answers": [
+                    {
+                      "content": "F",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élément de la période 3 et de la colonne 3 a pour numéro atomique Z = 3.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 3, donc 3 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 3. Étape 3 — Additionner : 2 + 8 + 3 = 13, donc Z = 13. Étape 4 — Conclure : c'est l'aluminium (symbole Al). Prendre Z = 3 oublie les deux couches pleines.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro atomique Z de l'élément de la période 3 et de la colonne 2 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 2, donc 2 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 2. Étape 3 — Additionner : 2 + 8 + 2 = 12, donc Z = 12. Étape 4 — Conclure : c'est le magnésium (symbole Mg).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est en période 1 et a 2 électrons de valence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : période 1, donc une seule couche, la couche K ; 2 électrons de valence. Étape 2 — Remplir : la couche K reçoit 2 électrons, il n'y a pas de couche L. Étape 3 — Additionner : $Z = 2$. Étape 4 — Conclure : c'est l'hélium. Le béryllium a aussi 2 électrons de valence mais sa couche L est occupée : il est en période 2.",
+                  "answers": [
+                    {
+                      "content": "L'hélium",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le béryllium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lithium",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hydrogène",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Identifier des éléments du laboratoire",
+              "statement": "Dans cet exercice, tu associes des positions à des éléments, tu calcules des numéros atomiques et tu ranges les étapes de la méthode. Les couches avant la couche externe sont pleines : K a 2 électrons, L en a 8.",
+              "hint": "Compte les couches pleines, ajoute les électrons de valence, puis cherche l'élément de ce numéro atomique.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque position à l'élément correspondant.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : 2 et 1 ; 2 et 6 ; 3 et 4 ; 3 et 8. Étape 2 — Remplir les couches pleines, puis la couche externe. Étape 3 — Additionner : $2 + 1 = 3$ ; $2 + 6 = 8$ ; $2 + 8 + 4 = 14$ ; $2 + 8 + 8 = 18$. Étape 4 — Conclure : Z = 3, 8, 14 et 18, soit le lithium, l'oxygène, le silicium et l'argon.",
+                  "answers": [
+                    {
+                      "content": "Période 2, colonne 1",
+                      "match": "le lithium"
+                    },
+                    {
+                      "content": "Période 2, colonne 6",
+                      "match": "l'oxygène"
+                    },
+                    {
+                      "content": "Période 3, colonne 4",
+                      "match": "le silicium"
+                    },
+                    {
+                      "content": "Période 3, colonne 8",
+                      "match": "l'argon"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le nombre total d'électrons de l'atome de l'élément de la période 3 et de la colonne 4 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 4, donc 4 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 4. Étape 3 — Additionner : 2 + 8 + 4 = 14, donc Z = 14. Étape 4 — Conclure : c'est le silicium (symbole Si).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont en période 2 et ont plus de 5 électrons de valence ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Lire : période 2 (deux couches) et colonne supérieure à 5. Étape 2 — Remplir : K pleine, puis 6, 7 ou 8 électrons sur L. Étape 3 — Additionner : $2 + 6 = 8$ ; $2 + 7 = 9$ ; $2 + 8 = 10$. Étape 4 — Conclure : l'oxygène, le fluor et le néon. L'azote a seulement 5 électrons de valence ; le chlore est en période 3.",
+                  "answers": [
+                    {
+                      "content": "L'oxygène (Z = 8)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fluor (Z = 9)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'azote (Z = 7)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chlore (Z = 17)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour retrouver un élément à partir de sa position.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire la période et la colonne. Étape 2 — Remplir les couches. Étape 3 — Additionner : le total est Z. Étape 4 — Conclure en nommant l'élément.",
+                  "answers": [
+                    {
+                      "content": "Lire la période et la colonne"
+                    },
+                    {
+                      "content": "Remplir les couches pleines puis la couche externe"
+                    },
+                    {
+                      "content": "Additionner les électrons pour obtenir Z"
+                    },
+                    {
+                      "content": "Conclure en nommant l'élément de numéro atomique Z"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est en période 3 et dans la colonne des gaz rares ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 8, donc 8 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 8. Étape 3 — Additionner : 2 + 8 + 8 = 18, donc Z = 18. Étape 4 — Conclure : c'est l'argon (symbole Ar). Le néon est dans la même colonne mais en période 2 ; l'hélium est en période 1.",
+                  "answers": [
+                    {
+                      "content": "L'argon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le néon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chlore",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hélium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élément de la période 2 et de la colonne 1 est le sodium.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 1, donc 1 électron de valence. Étape 2 — Remplir : K : 2 ; L : 1. Étape 3 — Additionner : 2 + 1 = 3, donc Z = 3. Étape 4 — Conclure : c'est le lithium (symbole Li). Le sodium est en colonne 1 mais en période 3.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le sel de cuisine et l'eau de Javel",
+          "statement": "Au laboratoire du lycée, le professeur présente deux éléments : le sodium (Z = 11), présent dans le sel de cuisine, et le chlore (Z = 17), présent dans l'eau de Javel. Il demande de les placer dans la classification et de les classer en familles.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la structure électronique de l'atome de sodium (Z = 11) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer : l'atome neutre de sodium a 11 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 1. Étape 3 — Écrire : (K)² (L)⁸ (M)¹, et 2 + 8 + 1 = 11. Étape 4 — Repérer : la couche externe est la couche M, avec 1 électron de valence. (K)² (L)⁹ dépasse 8 électrons sur L, ce qui est impossible.",
+              "answers": [
+                {
+                  "content": "(K)² (L)⁸ (M)¹",
+                  "correct": true
+                },
+                {
+                  "content": "(K)² (L)⁹",
+                  "correct": false
+                },
+                {
+                  "content": "(K)¹¹",
+                  "correct": false
+                },
+                {
+                  "content": "(K)² (L)⁷ (M)²",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'électrons de valence l'atome de chlore (Z = 17) possède-t-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Déterminer : l'atome neutre de chlore a 17 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Écrire : (K)² (L)⁸ (M)⁷, et 2 + 8 + 7 = 17. Étape 4 — Repérer : la couche externe est la couche M, avec 7 électrons de valence. Ne confonds pas 7 électrons de valence avec les 17 électrons de l'atome.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le sodium et le chlore se trouvent dans la même période.",
+              "question_type": "true_false",
+              "explanation": "Méthode pour trouver la période : Étape 1 — Écrire la structure : sodium (K)² (L)⁸ (M)¹ ; chlore (K)² (L)⁸ (M)⁷. Étape 2 — Compter les couches occupées : 3 pour chacun, donc période 3. Étape 3 — Relever les électrons de la couche externe : 1 et 7, donc colonnes 1 et 7. Étape 4 — Conclure : même période 3, colonnes différentes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À quelle famille appartient le sodium ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : le sodium (Z = 11) a pour structure (K)² (L)⁸ (M)¹. Étape 2 — Compter les électrons de valence : 1. Étape 3 — Nommer : famille des alcalins. Étape 4 — Conclure : le sodium est un métal tendre qui réagit vivement avec l'eau. Les halogènes ont 7 électrons de valence, et c'est le chlore qui en fait partie.",
+              "answers": [
+                {
+                  "content": "Les alcalins",
+                  "correct": true
+                },
+                {
+                  "content": "Les halogènes",
+                  "correct": false
+                },
+                {
+                  "content": "Les alcalino-terreux",
+                  "correct": false
+                },
+                {
+                  "content": "Les gaz rares",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le chlore (Z = 17) appartient à la famille des ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : 7 électrons de valence, comme le fluor.",
+              "answers": [
+                {
+                  "content": "halogènes",
+                  "correct": true
+                },
+                {
+                  "content": "halogène",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les ballons d'hélium et le néon des enseignes",
+          "statement": "Une fête de l'école utilise des ballons gonflés à l'hélium (Z = 2). À côté, une enseigne lumineuse contient du néon (Z = 10). On étudie ces deux éléments et l'argon (Z = 18).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la structure électronique de l'atome d'hélium ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer : l'atome neutre d'hélium a 2 électrons. Étape 2 — Remplir : K : 2. Étape 3 — Écrire : (K)², et 2 = 2. Étape 4 — Repérer : la couche externe est la couche K, avec 2 électrons de valence. La couche K est remplie en premier : (L)² oublie la couche K, et (K)² (L)² suppose 4 électrons.",
+              "answers": [
+                {
+                  "content": "(K)²",
+                  "correct": true
+                },
+                {
+                  "content": "(K)¹ (L)¹",
+                  "correct": false
+                },
+                {
+                  "content": "(L)²",
+                  "correct": false
+                },
+                {
+                  "content": "(K)² (L)²",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'électrons de valence l'atome de néon (Z = 10) possède-t-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Déterminer : l'atome neutre de néon a 10 électrons. Étape 2 — Remplir : K : 2 ; L : 8. Étape 3 — Écrire : (K)² (L)⁸, et 2 + 8 = 10. Étape 4 — Repérer : la couche externe est la couche L, avec 8 électrons de valence.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'hélium et le néon sont dans la même période.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Écrire : l'hélium (Z = 2) a pour structure (K)². Étape 2 — Compter les couches occupées : 1, donc période 1. Étape 3 — Relever les électrons de la couche externe : 2, donc colonne 8 (l'hélium est placé avec les gaz rares). Étape 4 — Conclure : l'hélium est en période 1, colonne 8. Pour le néon : Étape 1 — Écrire : le néon (Z = 10) a pour structure (K)² (L)⁸. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 8, donc colonne 8. Étape 4 — Conclure : le néon est en période 2, colonne 8. Période 1 et période 2 : ce ne sont pas les mêmes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi les gaz rares sont-ils très peu réactifs ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : He (K)², Ne (K)² (L)⁸, Ar (K)² (L)⁸ (M)⁸. Étape 2 — Compter les électrons de valence : 2, 8 et 8. Étape 3 — Nommer : couche externe pleine, donc famille des gaz rares. Étape 4 — Conclure : leur couche externe saturée explique qu'ils réagissent très peu. Avoir 1 ou 7 électrons de valence est le cas des alcalins et des halogènes, qui sont réactifs.",
+              "answers": [
+                {
+                  "content": "Leur couche externe est saturée",
+                  "correct": true
+                },
+                {
+                  "content": "Ils ont un seul électron de valence",
+                  "correct": false
+                },
+                {
+                  "content": "Ils n'ont aucun électron",
+                  "correct": false
+                },
+                {
+                  "content": "Ils ont 7 électrons de valence",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels éléments sont des gaz rares ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Écrire : hélium (K)² ; néon (K)² (L)⁸ ; argon (K)² (L)⁸ (M)⁸ ; chlore (K)² (L)⁸ (M)⁷ ; sodium (K)² (L)⁸ (M)¹. Étape 2 — Compter les électrons de valence : 2, 8, 8, 7 et 1. Étape 3 — Nommer : la couche externe est saturée pour l'hélium, le néon et l'argon. Étape 4 — Conclure : ce sont les gaz rares ; le chlore est un halogène et le sodium un alcalin.",
+              "answers": [
+                {
+                  "content": "L'hélium (Z = 2)",
+                  "correct": true
+                },
+                {
+                  "content": "Le néon (Z = 10)",
+                  "correct": true
+                },
+                {
+                  "content": "L'argon (Z = 18)",
+                  "correct": true
+                },
+                {
+                  "content": "Le chlore (Z = 17)",
+                  "correct": false
+                },
+                {
+                  "content": "Le sodium (Z = 11)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le numéro de la période de l'argon (Z = 18) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : l'argon (Z = 18) a pour structure (K)² (L)⁸ (M)⁸. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 8, donc colonne 8. Étape 4 — Conclure : l'argon est en période 3, colonne 8.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La marmite en aluminium",
+          "statement": "Dans de nombreuses cuisines, les marmites sont en aluminium (Z = 13). Au laboratoire, on compare l'aluminium au bore (Z = 5) et au magnésium (Z = 12).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la structure électronique de l'atome d'aluminium ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer : l'atome neutre d'aluminium a 13 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 3. Étape 3 — Écrire : (K)² (L)⁸ (M)³, et 2 + 8 + 3 = 13. Étape 4 — Repérer : la couche externe est la couche M, avec 3 électrons de valence. (K)² (L)¹¹ met 11 électrons sur L, qui en contient 8 au plus.",
+              "answers": [
+                {
+                  "content": "(K)² (L)⁸ (M)³",
+                  "correct": true
+                },
+                {
+                  "content": "(K)² (L)¹¹",
+                  "correct": false
+                },
+                {
+                  "content": "(K)² (L)⁶ (M)⁵",
+                  "correct": false
+                },
+                {
+                  "content": "(K)¹³",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Où se trouve l'aluminium dans la classification ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : l'aluminium (Z = 13) a pour structure (K)² (L)⁸ (M)³. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 3, donc colonne 3. Étape 4 — Conclure : l'aluminium est en période 3, colonne 3. Le nombre 13 est le numéro atomique, pas la colonne.",
+              "answers": [
+                {
+                  "content": "Période 3, colonne 3",
+                  "correct": true
+                },
+                {
+                  "content": "Période 3, colonne 13",
+                  "correct": false
+                },
+                {
+                  "content": "Période 2, colonne 3",
+                  "correct": false
+                },
+                {
+                  "content": "Période 13, colonne 3",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Lequel de ces éléments est dans la même colonne que l'aluminium ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : Al (K)² (L)⁸ (M)³ ; B (K)² (L)³ ; Mg (K)² (L)⁸ (M)² ; C (K)² (L)⁴ ; Na (K)² (L)⁸ (M)¹. Étape 2 — Compter les couches : sans importance pour la colonne. Étape 3 — Relever les électrons de la couche externe : 3, 3, 2, 4 et 1. Étape 4 — Conclure : seul le bore a 3 électrons de valence comme l'aluminium. Le magnésium est voisin dans la même période, mais pas dans la même colonne.",
+              "answers": [
+                {
+                  "content": "Le bore (Z = 5)",
+                  "correct": true
+                },
+                {
+                  "content": "Le magnésium (Z = 12)",
+                  "correct": false
+                },
+                {
+                  "content": "Le carbone (Z = 6)",
+                  "correct": false
+                },
+                {
+                  "content": "Le sodium (Z = 11)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le numéro atomique Z de l'élément de la période 2 et de la colonne 3 ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 3, donc 3 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 3. Étape 3 — Additionner : 2 + 3 = 5, donc Z = 5. Étape 4 — Conclure : c'est le bore (symbole B).",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le magnésium et l'aluminium appartiennent à la même famille.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Écrire : Mg (K)² (L)⁸ (M)² ; Al (K)² (L)⁸ (M)³. Étape 2 — Compter les électrons de valence : 2 et 3. Étape 3 — Nommer : le magnésium est un alcalino-terreux (2 électrons de valence) ; l'aluminium, avec 3, n'est dans aucune des quatre familles étudiées. Étape 4 — Conclure : ils ne sont pas dans la même famille, malgré leur voisinage dans la même période.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi l'aluminium et le bore ont des propriétés chimiques semblables.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Écrire : l'aluminium (Z = 13) a pour structure (K)² (L)⁸ (M)³ et le bore (Z = 5) a pour structure (K)² (L)³. Étape 2 — Compter les électrons de valence : 3 pour chacun. Étape 3 — Nommer : ils ont le même nombre d'électrons de valence, donc ils sont dans la même colonne. Étape 4 — Conclure : les électrons de valence décident des propriétés chimiques, donc les éléments d'une même colonne ont des propriétés semblables. Barème : structures des deux atomes (1 pt), même nombre d'électrons de valence (1 pt), conclusion sur la colonne et les propriétés (1 pt).",
+              "points": 3,
+              "criteria": [
+                "Écrit la structure des deux atomes",
+                "Dit que les deux ont 3 électrons de valence",
+                "Conclut qu'ils sont dans la même colonne donc ont des propriétés semblables"
+              ],
+              "answers": [],
+              "starter": "L'aluminium et le bore ont tous deux…"
+            }
+          ]
+        },
+        {
+          "title": "Quatre éléments à identifier",
+          "statement": "Un professeur remet quatre fiches. L'élément A a pour structure (K)² (L)⁸ (M)¹. L'élément B a pour structure (K)² (L)⁷. L'élément C est en période 3 et dans la colonne des gaz rares. L'élément D a pour numéro atomique Z = 4.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le numéro atomique Z de l'élément A ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Lire : la structure est donnée, (K)² (L)⁸ (M)¹. Étape 2 — Remplir : les couches K et L sont pleines, M porte 1 électron. Étape 3 — Additionner : $2 + 8 + 1 = 11$ électrons, donc $Z = 11$ pour un atome neutre. Étape 4 — Conclure : A est le sodium.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "11",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est l'élément B ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : (K)² (L)⁷, donc 2 couches et 7 électrons de valence. Étape 2 — Remplir : K pleine (2), L avec 7. Étape 3 — Additionner : $2 + 7 = 9$, donc Z = 9. Étape 4 — Conclure : c'est le fluor. Le chlore a aussi 7 électrons de valence mais 3 couches ; le néon a 10 électrons ; l'oxygène en a 8.",
+              "answers": [
+                {
+                  "content": "Le fluor",
+                  "correct": true
+                },
+                {
+                  "content": "Le chlore",
+                  "correct": false
+                },
+                {
+                  "content": "Le néon",
+                  "correct": false
+                },
+                {
+                  "content": "L'oxygène",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le numéro atomique Z de l'élément C ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 8, donc 8 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 8. Étape 3 — Additionner : 2 + 8 + 8 = 18, donc Z = 18. Étape 4 — Conclure : c'est l'argon (symbole Ar).",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément à sa famille.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Écrire : A (K)² (L)⁸ (M)¹ ; B (K)² (L)⁷ ; C est l'argon (K)² (L)⁸ (M)⁸ ; D (Z = 4) est (K)² (L)². Étape 2 — Compter les électrons de valence : 1, 7, 8 (couche saturée) et 2. Étape 3 — Nommer : alcalins, halogènes, gaz rares, alcalino-terreux. Étape 4 — Conclure avec les liens proposés.",
+              "answers": [
+                {
+                  "content": "A",
+                  "match": "Les alcalins"
+                },
+                {
+                  "content": "B",
+                  "match": "Les halogènes"
+                },
+                {
+                  "content": "C",
+                  "match": "Les gaz rares"
+                },
+                {
+                  "content": "D",
+                  "match": "Les alcalino-terreux"
+                }
+              ]
+            },
+            {
+              "content": "Quel élément est dans la même colonne que D ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : D (Z = 4) a pour structure (K)² (L)², soit 2 électrons de valence. Étape 2 — Compter : le magnésium (K)² (L)⁸ (M)² en a aussi 2. Étape 3 — Nommer : tous deux sont des alcalino-terreux. Étape 4 — Conclure : même colonne 2. Le lithium n'a qu'un électron de valence, le bore 3 ; l'hélium en a 2 mais sa couche K est saturée, il est avec les gaz rares.",
+              "answers": [
+                {
+                  "content": "Le magnésium (Z = 12)",
+                  "correct": true
+                },
+                {
+                  "content": "Le lithium (Z = 3)",
+                  "correct": false
+                },
+                {
+                  "content": "L'hélium (Z = 2)",
+                  "correct": false
+                },
+                {
+                  "content": "Le bore (Z = 5)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'élément A et le lithium (Z = 3) sont dans la même famille. Justifie-le en écrivant leurs structures électroniques.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Écrire : A a pour structure (K)² (L)⁸ (M)¹ et le lithium (Z = 3) a pour structure (K)² (L)¹. Étape 2 — Compter les électrons de valence : 1 pour A (couche M) et 1 pour le lithium (couche L). Étape 3 — Nommer : 1 électron de valence correspond à la famille des alcalins. Étape 4 — Conclure : A et le lithium sont dans la même colonne, la colonne 1, donc dans la même famille, celle des alcalins ; ils sont en revanche dans des périodes différentes (3 et 2). Barème : deux structures justes (1,5 pt), nombre d'électrons de valence (1 pt), conclusion sur la famille (1,5 pt).",
+              "points": 4,
+              "criteria": [
+                "Écrit correctement les deux structures électroniques",
+                "Compte 1 électron de valence pour chaque atome",
+                "Nomme la famille des alcalins et conclut",
+                "Précise que les périodes sont différentes"
+              ],
+              "answers": [],
+              "starter": "A et le lithium ont chacun…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Structure électronique des atomes de Z ≤ 18 (couches K, L, M, électrons de valence) ; période et colonne ; familles chimiques ; retrouver un élément à partir de sa position.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie la structure électronique d'atomes de numéro atomique $Z \\leq 18$. La couche K contient 2 électrons au plus, les couches L et M en contiennent 8 au plus.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Remplis K (2 au plus), puis L (8 au plus), puis M. Vérifie que la somme vaut Z.",
+              "questions": [
+                {
+                  "content": "Quelle est la structure électronique de l'atome de fluor (Z = 9) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de fluor a 9 électrons. Étape 2 — Remplir : K : 2 ; L : 7. Étape 3 — Écrire : (K)² (L)⁷, et 2 + 7 = 9. Étape 4 — Repérer : la couche externe est la couche L, avec 7 électrons de valence. (K)⁹ dépasse les 2 électrons permis sur K.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁷",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)⁹",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)⁷ (L)²",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁵ (M)²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons la couche M de l'atome de soufre (Z = 16) contient-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de soufre a 16 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 6. Étape 3 — Écrire : (K)² (L)⁸ (M)⁶, et 2 + 8 + 6 = 16. Étape 4 — Repérer : la couche externe est la couche M, avec 6 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La couche externe de l'atome de magnésium (Z = 12) est la couche ___ (une lettre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de magnésium a 12 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 2. Étape 3 — Écrire : (K)² (L)⁸ (M)², et 2 + 8 + 2 = 12. Étape 4 — Repérer : la couche externe est la couche M, avec 2 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "M",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La couche L de l'atome de néon (Z = 10) est saturée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de néon a 10 électrons. Étape 2 — Remplir : K : 2 ; L : 8. Étape 3 — Écrire : (K)² (L)⁸, et 2 + 8 = 10. Étape 4 — Repérer : la couche externe est la couche L, avec 8 électrons de valence. La couche L contient 8 électrons, son maximum.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence l'atome de silicium (Z = 14) possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de silicium a 14 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 4. Étape 3 — Écrire : (K)² (L)⁸ (M)⁴, et 2 + 8 + 4 = 14. Étape 4 — Repérer : la couche externe est la couche M, avec 4 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On place des éléments dans la classification : la période est le nombre de couches occupées, la colonne est le nombre d'électrons de valence.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la structure, puis compte les couches et les électrons de la couche externe.",
+              "questions": [
+                {
+                  "content": "Quel est le numéro de la période du chlore (Z = 17) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 7, donc colonne 7. Étape 4 — Conclure : le chlore est en période 3, colonne 7.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de la colonne de l'oxygène (Z = 8) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : l'oxygène (Z = 8) a pour structure (K)² (L)⁶. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 6, donc colonne 6. Étape 4 — Conclure : l'oxygène est en période 2, colonne 6.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se trouve le sodium (Z = 11) dans la classification ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le sodium (Z = 11) a pour structure (K)² (L)⁸ (M)¹. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 1, donc colonne 1. Étape 4 — Conclure : le sodium est en période 3, colonne 1. Période 1 et colonne 3 inverse les deux nombres.",
+                  "answers": [
+                    {
+                      "content": "Période 3, colonne 1",
+                      "correct": true
+                    },
+                    {
+                      "content": "Période 1, colonne 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Période 3, colonne 11",
+                      "correct": false
+                    },
+                    {
+                      "content": "Période 2, colonne 1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bore (Z = 5) est en période 3.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : le bore (Z = 5) a pour structure (K)² (L)³. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 3, donc colonne 3. Étape 4 — Conclure : le bore est en période 2, colonne 3. Il n'y a que deux couches occupées.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre de couches occupées donne le numéro de la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Écrire : le phosphore (Z = 15) a pour structure (K)² (L)⁸ (M)⁵. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 5, donc colonne 5. Étape 4 — Conclure : le phosphore est en période 3, colonne 5. Pour le phosphore, 3 couches : c'est le numéro de la période, pas de la colonne.",
+                  "answers": [
+                    {
+                      "content": "période",
+                      "correct": true
+                    },
+                    {
+                      "content": "colonne",
+                      "correct": false
+                    },
+                    {
+                      "content": "famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "masse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie les quatre familles chimiques : alcalins (1 électron de valence), alcalino-terreux (2), halogènes (7) et gaz rares (couche externe saturée).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la structure, compte les électrons de valence, puis nomme la famille.",
+              "questions": [
+                {
+                  "content": "À quelle famille appartient le béryllium (Z = 4) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le béryllium (Z = 4) a pour structure (K)² (L)². Étape 2 — Compter les électrons de valence : 2. Étape 3 — Nommer : famille des alcalino-terreux. Étape 4 — Conclure : métal comme le magnésium.",
+                  "answers": [
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les alcalins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les halogènes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle famille appartient le chlore (Z = 17) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : comme le fluor.",
+                  "answers": [
+                    {
+                      "content": "Les halogènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont des gaz rares ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : hélium (K)² ; néon (K)² (L)⁸ ; fluor (K)² (L)⁷ ; lithium (K)² (L)¹ ; magnésium (K)² (L)⁸ (M)². Étape 2 — Compter les électrons de valence : 2, 8, 7, 1 et 2. Étape 3 — Nommer : l'hélium (K saturée) et le néon (L saturée) sont des gaz rares. Étape 4 — Conclure : le fluor est un halogène, le lithium un alcalin, le magnésium un alcalino-terreux.",
+                  "answers": [
+                    {
+                      "content": "L'hélium (Z = 2)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fluor (Z = 9)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lithium (Z = 3)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magnésium (Z = 12)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence les atomes de la famille des alcalins possèdent-ils ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : lithium (K)² (L)¹ et sodium (K)² (L)⁸ (M)¹. Étape 2 — Compter les électrons de valence : 1 pour chacun. Étape 3 — Nommer : famille des alcalins. Étape 4 — Conclure : 1 électron de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hydrogène (Z = 1), qui a 1 électron de valence, est un alcalin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : l'hydrogène a pour structure (K)¹. Étape 2 — Compter les électrons de valence : 1. Étape 3 — Nommer : malgré ce seul électron, l'hydrogène est un gaz et non un métal tendre ; on ne le range pas dans la famille des alcalins. Étape 4 — Conclure : il n'est pas un alcalin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On retrouve des éléments à partir de leur position. Les couches avant la couche externe sont pleines : K a 2 électrons, L en a 8.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les couches pleines, ajoute les électrons de valence, puis cherche l'élément de ce numéro atomique.",
+              "questions": [
+                {
+                  "content": "Quel est le numéro atomique Z de l'élément de la période 3 et de la colonne 5 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 5, donc 5 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 5. Étape 3 — Additionner : 2 + 8 + 5 = 15, donc Z = 15. Étape 4 — Conclure : c'est le phosphore (symbole P).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est en période 2 et en colonne 3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 3, donc 3 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 3. Étape 3 — Additionner : 2 + 3 = 5, donc Z = 5. Étape 4 — Conclure : c'est le bore (symbole B). L'aluminium a aussi 3 électrons de valence mais il est en période 3.",
+                  "answers": [
+                    {
+                      "content": "Le bore",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aluminium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lithium",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le béryllium",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole de l'élément de la période 3 et de la colonne 2 est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 2, donc 2 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 2. Étape 3 — Additionner : 2 + 8 + 2 = 12, donc Z = 12. Étape 4 — Conclure : c'est le magnésium (symbole Mg).",
+                  "answers": [
+                    {
+                      "content": "Mg",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élément de la période 2 et de la colonne 4 est le carbone.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : période 2, donc 2 couches occupées ; colonne 4, donc 4 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 4. Étape 3 — Additionner : 2 + 4 = 6, donc Z = 6. Étape 4 — Conclure : c'est le carbone (symbole C).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro atomique Z de l'élément de la période 3 et de la colonne 7 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : période 3, donc 3 couches occupées ; colonne 7, donc 7 électrons de valence. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Additionner : 2 + 8 + 7 = 17, donc Z = 17. Étape 4 — Conclure : c'est le chlore (symbole Cl).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Structure électronique et position du sodium, du chlore, du fluor, de l'hélium, du néon, de l'aluminium et du silicium ; familles des alcalins, des halogènes et des gaz rares dans des objets du quotidien.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le sel de cuisine, que l'on trouve sur tous les marchés, est formé de sodium (Z = 11) et de chlore (Z = 17).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la structure de chaque atome, puis compte ses électrons de valence.",
+              "questions": [
+                {
+                  "content": "Combien d'électrons de valence l'atome de sodium possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de sodium a 11 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 1. Étape 3 — Écrire : (K)² (L)⁸ (M)¹, et 2 + 8 + 1 = 11. Étape 4 — Repérer : la couche externe est la couche M, avec 1 électron de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence l'atome de chlore possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de chlore a 17 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Écrire : (K)² (L)⁸ (M)⁷, et 2 + 8 + 7 = 17. Étape 4 — Repérer : la couche externe est la couche M, avec 7 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle famille appartient le sodium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le sodium (Z = 11) a pour structure (K)² (L)⁸ (M)¹. Étape 2 — Compter les électrons de valence : 1. Étape 3 — Nommer : famille des alcalins. Étape 4 — Conclure : un seul électron de valence, comme le lithium.",
+                  "answers": [
+                    {
+                      "content": "Les alcalins",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les halogènes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle famille appartient le chlore ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : 7 électrons de valence, comme le fluor.",
+                  "answers": [
+                    {
+                      "content": "Les halogènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les alcalins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sodium et le chlore sont dans la même période.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : sodium (K)² (L)⁸ (M)¹ ; chlore (K)² (L)⁸ (M)⁷. Étape 2 — Compter les couches occupées : 3 pour chacun. Étape 3 — Relever les électrons de la couche externe : 1 et 7. Étape 4 — Conclure : même période 3, colonnes différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de la période du chlore ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 7, donc colonne 7. Étape 4 — Conclure : le chlore est en période 3, colonne 7.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans les foyers ivoiriens, l'eau de Javel désinfecte avec du chlore (Z = 17). Le dentifrice contient du fluor (Z = 9) qui protège les dents.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la structure, compte les électrons de valence, puis nomme la famille.",
+              "questions": [
+                {
+                  "content": "Quelle est la structure électronique de l'atome de fluor ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de fluor a 9 électrons. Étape 2 — Remplir : K : 2 ; L : 7. Étape 3 — Écrire : (K)² (L)⁷, et 2 + 7 = 9. Étape 4 — Repérer : la couche externe est la couche L, avec 7 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁷",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)⁹",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)⁷ (L)²",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁶ (M)¹",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle colonne se trouve le fluor ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 7, donc colonne 7. Étape 4 — Conclure : le fluor est en période 2, colonne 7.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est dans la même famille que le fluor ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : le chlore (K)² (L)⁸ (M)⁷ a aussi 7 électrons de valence. Le néon a 8 électrons de valence, l'oxygène 6.",
+                  "answers": [
+                    {
+                      "content": "Le chlore (Z = 17)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'oxygène (Z = 8)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atome de chlore a une couche externe saturée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de chlore a 17 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Écrire : (K)² (L)⁸ (M)⁷, et 2 + 8 + 7 = 17. Étape 4 — Repérer : la couche externe est la couche M, avec 7 électrons de valence. Pour une couche M saturée, il faudrait 8 électrons ; il n'en a que 7.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fluor et le chlore appartiennent à la famille des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : fluor et chlore ont 7 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "halogènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "halogène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un vendeur de ballons gonfle ses ballons avec de l'hélium (Z = 2). Une enseigne lumineuse de la ville contient du néon (Z = 10).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la structure de chaque atome et regarde si sa couche externe est pleine.",
+              "questions": [
+                {
+                  "content": "Quelle est la structure électronique de l'atome d'hélium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre d'hélium a 2 électrons. Étape 2 — Remplir : K : 2. Étape 3 — Écrire : (K)², et 2 = 2. Étape 4 — Repérer : la couche externe est la couche K, avec 2 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "(K)²",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)¹",
+                      "correct": false
+                    },
+                    {
+                      "content": "(L)²",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence le néon possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de néon a 10 électrons. Étape 2 — Remplir : K : 2 ; L : 8. Étape 3 — Écrire : (K)² (L)⁸, et 2 + 8 = 10. Étape 4 — Repérer : la couche externe est la couche L, avec 8 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La couche externe de l'hélium est saturée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre d'hélium a 2 électrons. Étape 2 — Remplir : K : 2. Étape 3 — Écrire : (K)², et 2 = 2. Étape 4 — Repérer : la couche externe est la couche K, avec 2 électrons de valence. La couche K contient 2 électrons, son maximum.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle famille appartiennent l'hélium et le néon ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le néon (Z = 10) a pour structure (K)² (L)⁸. Étape 2 — Compter les électrons de valence : 8. Étape 3 — Nommer : famille des gaz rares. Étape 4 — Conclure : l'hélium (K)² a aussi une couche externe saturée ; les deux sont des gaz rares.",
+                  "answers": [
+                    {
+                      "content": "Les gaz rares",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les alcalins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les halogènes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de la période du néon ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le néon (Z = 10) a pour structure (K)² (L)⁸. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 8, donc colonne 8. Étape 4 — Conclure : le néon est en période 2, colonne 8.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Les marmites sont souvent en aluminium (Z = 13). Le sable, utilisé pour fabriquer le verre, contient du silicium (Z = 14).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la structure de chaque atome, compte ses électrons de valence et ses couches.",
+              "questions": [
+                {
+                  "content": "Quelle est la structure électronique de l'atome d'aluminium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre d'aluminium a 13 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 3. Étape 3 — Écrire : (K)² (L)⁸ (M)³, et 2 + 8 + 3 = 13. Étape 4 — Repérer : la couche externe est la couche M, avec 3 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁸ (M)³",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)² (L)¹¹",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)¹³",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁶ (M)⁵",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence l'aluminium possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre d'aluminium a 13 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 3. Étape 3 — Écrire : (K)² (L)⁸ (M)³, et 2 + 8 + 3 = 13. Étape 4 — Repérer : la couche externe est la couche M, avec 3 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se trouve le silicium dans la classification ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le silicium (Z = 14) a pour structure (K)² (L)⁸ (M)⁴. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 4, donc colonne 4. Étape 4 — Conclure : le silicium est en période 3, colonne 4.",
+                  "answers": [
+                    {
+                      "content": "Période 3, colonne 4",
+                      "correct": true
+                    },
+                    {
+                      "content": "Période 4, colonne 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Période 2, colonne 4",
+                      "correct": false
+                    },
+                    {
+                      "content": "Période 3, colonne 14",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aluminium et le silicium sont dans la même période.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : Al (K)² (L)⁸ (M)³ ; Si (K)² (L)⁸ (M)⁴. Étape 2 — Compter les couches occupées : 3 pour chacun. Étape 3 — Relever les électrons de la couche externe : 3 et 4. Étape 4 — Conclure : même période 3, colonnes 3 et 4.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de plus l'atome de silicium possède-t-il par rapport à l'atome d'aluminium ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'aluminium a 13 électrons, le silicium 14. Étape 2 — Remplir : (K)² (L)⁸ (M)³ et (K)² (L)⁸ (M)⁴. Étape 3 — Écrire la différence : $14 - 13 = 1$. Étape 4 — Repérer : l'électron de plus est sur la couche externe M.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Corriger des structures électroniques fausses ; corriger une confusion entre période et colonne ; justifier l'appartenance à une famille ; retrouver un élément à partir de A et du nombre de neutrons.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Des élèves proposent des structures électroniques d'atomes neutres. Tu dois repérer celles qui sont correctes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Vérifie que la somme des électrons vaut Z et que K et L sont pleines avant d'entamer la suivante.",
+              "questions": [
+                {
+                  "content": "Pour le sodium (Z = 11), un élève écrit (K)² (L)⁹.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de sodium a 11 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 1. Étape 3 — Écrire : (K)² (L)⁸ (M)¹, et 2 + 8 + 1 = 11. Étape 4 — Repérer : la couche externe est la couche M, avec 1 électron de valence. L'élève a mis 9 électrons sur la couche L, qui en contient 8 au plus.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le magnésium (Z = 12), un élève écrit (K)² (L)⁸ (M)².",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de magnésium a 12 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 2. Étape 3 — Écrire : (K)² (L)⁸ (M)², et 2 + 8 + 2 = 12. Étape 4 — Repérer : la couche externe est la couche M, avec 2 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure correcte de l'atome de phosphore (Z = 15) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de phosphore a 15 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 5. Étape 3 — Écrire : (K)² (L)⁸ (M)⁵, et 2 + 8 + 5 = 15. Étape 4 — Repérer : la couche externe est la couche M, avec 5 électrons de valence. (K)² (L)⁸ (M)⁴ ne compte que 14 électrons ; (K)² (L)⁷ (M)⁶ entame M avant que L soit pleine.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁸ (M)⁵",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)² (L)⁸ (M)⁴",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁷ (M)⁶",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)¹³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le soufre (Z = 16), un élève écrit (K)² (L)⁸ (M)⁵. Combien d'électrons a-t-il oubliés ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de soufre a 16 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 6. Étape 3 — Écrire : (K)² (L)⁸ (M)⁶, et 2 + 8 + 6 = 16. Étape 4 — Repérer : la couche externe est la couche M, avec 6 électrons de valence. L'élève trouve $2 + 8 + 5 = 15$ électrons au lieu de 16 : il en a oublié $16 - 15 = 1$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles structures sont correctes pour leur atome neutre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Déterminer : 5, 13, 10, 7 et 6 électrons. Étapes 2 et 3 — Remplir et écrire : B (K)² (L)³ et Al (K)² (L)⁸ (M)³ sont justes. Le néon doit être (K)² (L)⁸ : (K)² (L)⁶ (M)² entame M trop tôt. (K)⁷ dépasse 2 électrons sur K. (K)⁴ (L)² remplit mal K. Étape 4 — Repérer : on vérifie chaque fois que la somme vaut Z.",
+                  "answers": [
+                    {
+                      "content": "Bore (Z = 5) : (K)² (L)³",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aluminium (Z = 13) : (K)² (L)⁸ (M)³",
+                      "correct": true
+                    },
+                    {
+                      "content": "Néon (Z = 10) : (K)² (L)⁶ (M)²",
+                      "correct": false
+                    },
+                    {
+                      "content": "Azote (Z = 7) : (K)⁷",
+                      "correct": false
+                    },
+                    {
+                      "content": "Carbone (Z = 6) : (K)⁴ (L)²",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève doit donner la position du phosphore (Z = 15). Il écrit : « période 5, car il a 5 électrons de valence ». Tu dois corriger son raisonnement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Période = nombre de couches ; colonne = nombre d'électrons de valence.",
+              "questions": [
+                {
+                  "content": "Le phosphore a bien 5 électrons de valence.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de phosphore a 15 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 5. Étape 3 — Écrire : (K)² (L)⁸ (M)⁵, et 2 + 8 + 5 = 15. Étape 4 — Repérer : la couche externe est la couche M, avec 5 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'erreur de l'élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le phosphore (Z = 15) a pour structure (K)² (L)⁸ (M)⁵. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 5, donc colonne 5. Étape 4 — Conclure : le phosphore est en période 3, colonne 5. Il a donné la colonne (5) à la place de la période. Le reste de son raisonnement ne se trompe pas sur Z.",
+                  "answers": [
+                    {
+                      "content": "Il a pris les électrons de valence pour le nombre de couches",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a oublié que le phosphore a 15 électrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a inversé le sodium et le phosphore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a compté une couche de trop",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de la période du phosphore ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le phosphore (Z = 15) a pour structure (K)² (L)⁸ (M)⁵. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 5, donc colonne 5. Étape 4 — Conclure : le phosphore est en période 3, colonne 5.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de la colonne du phosphore ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le phosphore (Z = 15) a pour structure (K)² (L)⁸ (M)⁵. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 5, donc colonne 5. Étape 4 — Conclure : le phosphore est en période 3, colonne 5.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est dans la même colonne que le phosphore ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : P (K)² (L)⁸ (M)⁵ ; N (K)² (L)⁵ ; Si (K)² (L)⁸ (M)⁴ ; S (K)² (L)⁸ (M)⁶ ; Ar (K)² (L)⁸ (M)⁸. Étape 2 — Compter les couches : sans importance pour la colonne. Étape 3 — Relever les électrons de la couche externe : 5, 5, 4, 6 et 8. Étape 4 — Conclure : seul l'azote a 5 électrons de valence. Le silicium et le soufre sont dans la même période que le phosphore, pas dans la même colonne.",
+                  "answers": [
+                    {
+                      "content": "L'azote (Z = 7)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le silicium (Z = 14)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le soufre (Z = 16)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'argon (Z = 18)",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On justifie l'appartenance d'éléments à des familles chimiques. Alcalins : 1 électron de valence ; alcalino-terreux : 2 ; halogènes : 7 ; gaz rares : couche externe saturée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les électrons de valence et regarde si la couche externe est saturée.",
+              "questions": [
+                {
+                  "content": "Le lithium, le sodium et le potassium sont des alcalins.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : lithium (K)² (L)¹ ; sodium (K)² (L)⁸ (M)¹. Étape 2 — Compter les électrons de valence : 1 pour chacun ; le potassium, de la même colonne, en a aussi 1. Étape 3 — Nommer : alcalins. Étape 4 — Conclure : ce sont trois alcalins, des métaux tendres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hélium est un alcalino-terreux parce qu'il a 2 électrons de valence.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : l'hélium (Z = 2) a pour structure (K)². Étape 2 — Compter les électrons de valence : 2. Étape 3 — Nommer : famille des gaz rares. Étape 4 — Conclure : sa couche K est saturée, c'est un gaz rare ; le magnésium, lui, est un alcalino-terreux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le néon réagit-il très peu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le néon (Z = 10) a pour structure (K)² (L)⁸. Étape 2 — Compter les électrons de valence : 8. Étape 3 — Nommer : famille des gaz rares. Étape 4 — Conclure : couche externe L pleine, d'où sa faible réactivité. Il a deux couches occupées, pas une.",
+                  "answers": [
+                    {
+                      "content": "Sa couche externe est saturée avec 8 électrons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a 7 électrons de valence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a un seul électron de valence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a qu'une couche occupée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le magnésium et le béryllium sont-ils dans la même famille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : béryllium (K)² (L)² ; magnésium (K)² (L)⁸ (M)². Étape 2 — Compter les électrons de valence : 2 pour chacun. Étape 3 — Nommer : alcalino-terreux. Étape 4 — Conclure : même nombre d'électrons de valence, donc même colonne et même famille. Leurs périodes (2 et 3) et leurs numéros atomiques (4 et 12) diffèrent.",
+                  "answers": [
+                    {
+                      "content": "Tous deux ont 2 électrons de valence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous deux ont la même période",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous deux ont le même numéro atomique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous deux ont une couche externe saturée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fluor et le chlore ont 7 électrons de valence : ce sont des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : le chlore (K)² (L)⁸ (M)⁷ a aussi 7 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "halogènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "halogène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un atome neutre a un nombre de masse A = 35 et contient 18 neutrons. On cherche l'élément, sa structure électronique et sa famille.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Z = A − N ; un atome neutre a Z électrons.",
+              "questions": [
+                {
+                  "content": "Quel est le numéro atomique Z de cet atome ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 35 et N = 18. Étape 2 — Déduire : $N = A - Z$, donc $Z = A - N$. Étape 3 — Calculer : $Z = 35 - 18 = 17$. Étape 4 — Conclure : $Z = 17$, c'est le chlore.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "De quel élément s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $Z = 35 - 18 = 17$. Étape 2 — Remplir : 17 électrons dans l'atome neutre. Étape 3 — Additionner : l'élément de Z = 17 est le chlore. Étape 4 — Conclure : le soufre a Z = 16, l'argon Z = 18, le fluor Z = 9.",
+                  "answers": [
+                    {
+                      "content": "Le chlore",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le soufre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'argon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fluor",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est sa structure électronique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de chlore a 17 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 7. Étape 3 — Écrire : (K)² (L)⁸ (M)⁷, et 2 + 8 + 7 = 17. Étape 4 — Repérer : la couche externe est la couche M, avec 7 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁸ (M)⁷",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)² (L)⁸ (M)⁸",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁷",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁶ (M)⁹",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de sa période ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 7, donc colonne 7. Étape 4 — Conclure : le chlore est en période 3, colonne 7.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle famille appartient-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le chlore (Z = 17) a pour structure (K)² (L)⁸ (M)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : 7 électrons de valence, comme le fluor.",
+                  "answers": [
+                    {
+                      "content": "Les halogènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les gaz rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les alcalino-terreux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : composition de l'atome (A, Z, neutrons), structure électronique, période, colonne et famille du soufre, de l'aluminium, du lithium, du sodium et du fluor.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le soufre s'écrit ${}^{32}_{16}\\mathrm{S}$. On étudie la composition de l'atome neutre, sa structure et sa position.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "N = A − Z ; atome neutre : Z électrons ; période = couches ; colonne = électrons de valence.",
+              "questions": [
+                {
+                  "content": "Combien de neutrons l'atome de soufre contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 32 et Z = 16. Étape 2 — Déduire : 16 protons. Étape 3 — Calculer : $N = A - Z = 32 - 16 = 16$. Étape 4 — Conclure : 16 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est sa structure électronique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de soufre a 16 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 6. Étape 3 — Écrire : (K)² (L)⁸ (M)⁶, et 2 + 8 + 6 = 16. Étape 4 — Repérer : la couche externe est la couche M, avec 6 électrons de valence. (K)² (L)⁶ (M)⁸ entame M avant que L soit pleine.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁸ (M)⁶",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)² (L)⁸ (M)⁶ (N)²",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)¹⁶",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁶ (M)⁸",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de soufre a 16 électrons. Étape 2 — Remplir : K : 2 ; L : 8 ; M : 6. Étape 3 — Écrire : (K)² (L)⁸ (M)⁶, et 2 + 8 + 6 = 16. Étape 4 — Repérer : la couche externe est la couche M, avec 6 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le numéro de sa période ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : le soufre (Z = 16) a pour structure (K)² (L)⁸ (M)⁶. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 6, donc colonne 6. Étape 4 — Conclure : le soufre est en période 3, colonne 6.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le soufre appartient à la famille des halogènes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : le soufre (Z = 16) a pour structure (K)² (L)⁸ (M)⁶. Étape 2 — Compter les électrons de valence : 6. Étape 3 — Nommer : aucune des quatre familles étudiées. Étape 4 — Conclure : 6 électrons de valence, pas 7, donc ce n'est pas un halogène.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "L'aluminium des marmites s'écrit ${}^{27}_{13}\\mathrm{Al}$. On étudie sa composition et sa position.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "N = A − Z ; atome neutre : Z électrons.",
+              "questions": [
+                {
+                  "content": "Combien de neutrons l'atome d'aluminium contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 27 et Z = 13. Étape 2 — Déduire : 13 protons. Étape 3 — Calculer : $N = 27 - 13 = 14$. Étape 4 — Conclure : 14 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons l'atome neutre d'aluminium contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : Z = 13. Étape 2 — Déduire : 13 protons. Étape 3 — Calculer : l'atome neutre a autant d'électrons que de protons. Étape 4 — Conclure : 13 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle colonne se trouve l'aluminium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : l'aluminium (Z = 13) a pour structure (K)² (L)⁸ (M)³. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 3, donc colonne 3. Étape 4 — Conclure : l'aluminium est en période 3, colonne 3.",
+                  "answers": [
+                    {
+                      "content": "Colonne 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "Colonne 13",
+                      "correct": false
+                    },
+                    {
+                      "content": "Colonne 8",
+                      "correct": false
+                    },
+                    {
+                      "content": "Colonne 27",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est dans la même colonne que l'aluminium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : Al (K)² (L)⁸ (M)³ ; B (K)² (L)³ ; Mg (K)² (L)⁸ (M)² ; Si (K)² (L)⁸ (M)⁴ ; Ne (K)² (L)⁸. Étape 2 — Compter les couches : non utile. Étape 3 — Relever les électrons de la couche externe : 3, 3, 2, 4 et 8. Étape 4 — Conclure : le bore a 3 électrons de valence comme l'aluminium.",
+                  "answers": [
+                    {
+                      "content": "Le bore (Z = 5)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magnésium (Z = 12)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le silicium (Z = 14)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aluminium appartient à la période 3.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : l'aluminium (Z = 13) a pour structure (K)² (L)⁸ (M)³. Étape 2 — Compter les couches occupées : 3, donc période 3. Étape 3 — Relever les électrons de la couche externe : 3, donc colonne 3. Étape 4 — Conclure : l'aluminium est en période 3, colonne 3.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On compare le lithium ${}^{7}_{3}\\mathrm{Li}$ et le sodium ${}^{23}_{11}\\mathrm{Na}$, deux atomes neutres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "N = A − Z ; compare les structures électroniques.",
+              "questions": [
+                {
+                  "content": "Combien de neutrons l'atome de lithium contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 7 et Z = 3. Étape 2 — Déduire : 3 protons. Étape 3 — Calculer : $N = 7 - 3 = 4$. Étape 4 — Conclure : 4 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de neutrons l'atome de sodium contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : A = 23 et Z = 11. Étape 2 — Déduire : 11 protons. Étape 3 — Calculer : $N = 23 - 11 = 12$. Étape 4 — Conclure : 12 neutrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lithium et le sodium sont dans la même colonne.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : Li (K)² (L)¹ ; Na (K)² (L)⁸ (M)¹. Étape 2 — Compter les couches : 2 et 3. Étape 3 — Relever les électrons de la couche externe : 1 pour chacun. Étape 4 — Conclure : même colonne 1, donc même famille, les alcalins ; périodes différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'ont en commun les atomes de lithium et de sodium ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : Li (K)² (L)¹ ; Na (K)² (L)⁸ (M)¹. Étape 2 — Compter les électrons de valence : 1 pour chacun. Étape 3 — Nommer : alcalins. Étape 4 — Conclure : même nombre d'électrons de valence. Ils ont 2 et 3 couches, 4 et 12 neutrons, Z = 3 et Z = 11 : tout cela diffère.",
+                  "answers": [
+                    {
+                      "content": "Le même nombre d'électrons de valence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le même nombre de couches",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le même nombre de neutrons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le même numéro atomique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de couches l'atome de sodium a-t-il plus que l'atome de lithium ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : Li (K)² (L)¹ ; Na (K)² (L)⁸ (M)¹. Étape 2 — Compter les couches occupées : 2 pour le lithium, 3 pour le sodium. Étape 3 — Calculer l'écart : $3 - 2 = 1$. Étape 4 — Conclure : le sodium a 1 couche de plus.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élément T est dans la période 2. Son atome neutre contient 9 protons.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Atome neutre : autant d'électrons que de protons.",
+              "questions": [
+                {
+                  "content": "Combien d'électrons l'atome de T contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 9 protons. Étape 2 — Déduire : le numéro atomique est Z = 9. Étape 3 — Calculer : l'atome neutre a autant d'électrons que de protons. Étape 4 — Conclure : 9 électrons.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la structure électronique de T ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de T a 9 électrons, autant que de protons. Étape 2 — Remplir : K : 2 ; L : 7. Étape 3 — Écrire : (K)² (L)⁷, et 2 + 7 = 9. Étape 4 — Repérer : la couche externe est la couche L, avec 7 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "(K)² (L)⁷",
+                      "correct": true
+                    },
+                    {
+                      "content": "(K)⁹",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁸ (M)¹",
+                      "correct": false
+                    },
+                    {
+                      "content": "(K)² (L)⁶ (M)¹",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'électrons de valence T possède-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Déterminer : l'atome neutre de T a 9 électrons, autant que de protons. Étape 2 — Remplir : K : 2 ; L : 7. Étape 3 — Écrire : (K)² (L)⁷, et 2 + 7 = 9. Étape 4 — Repérer : la couche externe est la couche L, avec 7 électrons de valence.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "T appartient à la famille des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : T est le fluor, un halogène.",
+                  "answers": [
+                    {
+                      "content": "halogènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "halogène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est dans la même famille que T ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les électrons de valence : 7. Étape 3 — Nommer : famille des halogènes. Étape 4 — Conclure : le chlore a aussi 7 électrons de valence.",
+                  "answers": [
+                    {
+                      "content": "Le chlore (Z = 17)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le néon (Z = 10)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sodium (Z = 11)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carbone (Z = 6)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "T est dans la même période que le sodium.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : le fluor (Z = 9) a pour structure (K)² (L)⁷. Étape 2 — Compter les couches occupées : 2, donc période 2. Étape 3 — Relever les électrons de la couche externe : 7, donc colonne 7. Étape 4 — Conclure : le fluor est en période 2, colonne 7. Le sodium est en période 3.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

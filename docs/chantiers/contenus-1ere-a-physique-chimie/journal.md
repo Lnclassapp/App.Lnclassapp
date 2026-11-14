@@ -8,7 +8,9 @@
 | 2026-11-02 | Aucune sorte nouvelle de figure. | Les situations s'y ramènent. | Non |
 | 2026-11-02 | La section « Modèles et sobriété » citée dans la demande est absente de `prompt-vague.md` sur Develop : règles de CLAUDE.md appliquées (Sonnet pour rédiger, Opus pour relire). | Section introuvable | Non |
 
-## À faire valider par un enseignant
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 Voir les lignes P4 du [journal du programme](../contenus-v3-tous-niveaux/journal.md).
 

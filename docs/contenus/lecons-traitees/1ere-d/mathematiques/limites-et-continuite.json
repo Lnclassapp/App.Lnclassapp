@@ -1,0 +1,3127 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Limites et continuité",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "theme": "burgundy",
+      "figures": [],
+      "notions": [
+        {
+          "name": "Calculer la limite d'une fonction en un réel",
+          "remember": "$\\lim_{x\\to a}f(x)=\\ell$ signifie que $f(x)$ se rapproche de $\\ell$ quand $x$ se rapproche de $a$ ($x\\neq a$). Pour un polynôme, une fraction rationnelle, $\\sqrt x$ ou $|x|$, si $a$ appartient à l'ensemble de définition, la limite en $a$ est la valeur en $a$ : $\\lim_{x\\to a}f(x)=f(a)$. Règles pour des limites finies $\\ell$ et $\\ell'$ en $a$ : la limite d'une somme est $\\ell+\\ell'$, celle d'un produit est $\\ell\\times\\ell'$, celle d'un quotient est $\\frac{\\ell}{\\ell'}$ (si $\\ell'\\neq0$). Cette fiche ne traite pas le cas où le dénominateur s'annule en $a$.",
+          "method": [
+            "Identifier : repérer le réel $a$ visé et l'ensemble de définition de $f$.",
+            "Substituer : remplacer $x$ par $a$ dans chaque terme (polynôme, racine carrée, valeur absolue), avec des parenthèses si $a$ est négatif.",
+            "Vérifier : contrôler que le dénominateur ne s'annule pas en $a$ et que le radicande est positif ou nul ; sinon cette méthode ne suffit pas.",
+            "Conclure : appliquer les règles sur la somme, le produit et le quotient, puis écrire $\\lim_{x\\to a}f(x)=\\ell$."
+          ],
+          "example": {
+            "statement": "Dans un atelier de couture de Bouaké, le coût moyen d'un lot de $x$ chemises, en milliers de FCFA, est $C(x)=\\dfrac{3x^2-x+4}{x+1}$ pour $x\\geq0$. Calculer $\\lim_{x\\to3}C(x)$.",
+            "steps": [
+              "Identifier : $a=3$ ; $C$ est définie pour $x\\geq0$, donc en $3$.",
+              "Substituer : le numérateur vaut $3\\times3^2-3+4=27-3+4=28$ ; le dénominateur vaut $3+1=4$.",
+              "Vérifier : le dénominateur $4$ est différent de $0$, la méthode s'applique.",
+              "Conclure : $\\lim_{x\\to3}C(x)=\\dfrac{28}{4}=7$. Le coût moyen vaut 7 milliers de FCFA pour 3 chemises."
+            ]
+          },
+          "pitfall": "Ne pas oublier les parenthèses quand $a$ est négatif. Contre-exemple : pour $\\lim_{x\\to-3}(x^2+x)$, écrire $-3^2-3=-12$ est faux, car $-3^2$ n'est pas $(-3)^2$. Le bon calcul est $(-3)^2+(-3)=9-3=6$. Un carré est toujours positif ou nul.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer des limites en un réel",
+              "statement": "Dans cet exercice, tu calcules des limites en un réel avec la méthode de la fiche : identifier, substituer, vérifier, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $x^2-3x+5$ quand $x\\to2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $a=2$ ; le polynôme est défini sur $\\mathbb R$. Étape 2 — Substituer : $2^2-3\\times2+5=4-6+5$. Étape 3 — Vérifier : il n'y a ni quotient ni racine, rien à contrôler. Étape 4 — Conclure : $\\lim_{x\\to2}(x^2-3x+5)=3$. La proposition $5$ ne garde que le terme constant ; la proposition $15$ vient d'un signe oublié : $4+6+5$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\lim_{x\\to-1}(2x^3+x^2-4)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $a=-1$ ; le polynôme est défini sur $\\mathbb R$. Étape 2 — Substituer, avec des parenthèses : $2\\times(-1)^3+(-1)^2-4=-2+1-4$. Étape 3 — Vérifier : aucun quotient ni racine. Étape 4 — Conclure : $\\lim_{x\\to-1}(2x^3+x^2-4)=-5$. Attention : $(-1)^3=-1$ mais $(-1)^2=1$.",
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\lim_{x\\to4}\\sqrt{x}\\,(x-1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $a=4$ ; $\\sqrt x$ est définie pour $x\\geq0$, donc en $4$. Étape 2 — Substituer : $\\sqrt4\\times(4-1)=2\\times3$. Étape 3 — Vérifier : le radicande $4$ est positif. Étape 4 — Conclure : $\\lim_{x\\to4}\\sqrt x\\,(x-1)=6$ (produit des limites $2$ et $3$).",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $\\dfrac{x^2+4}{x+2}$ quand $x\\to2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $a=2$ ; la fraction est définie sur $\\mathbb R\\setminus\\{-2\\}$, donc en $2$. Étape 2 — Substituer : le numérateur vaut $2^2+4=8$, le dénominateur vaut $2+2=4$. Étape 3 — Vérifier : $4\\neq0$. Étape 4 — Conclure : $\\dfrac84=2$. La proposition $8$ oublie de diviser par le dénominateur ; la proposition $4$ remplace $x+2$ par $x$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $\\lim_{x\\to-3}(x^2+x)=-12$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $a=-3$ ; le polynôme est défini sur $\\mathbb R$. Étape 2 — Substituer, avec des parenthèses : $(-3)^2+(-3)=9-3$. Étape 3 — Vérifier : aucun quotient ni racine. Étape 4 — Conclure : la limite vaut $6$. La valeur $-12$ vient de l'erreur $-3^2=-9$ : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles expressions ont pour limite $3$ quand $x\\to1$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : $a=1$ pour chaque polynôme, tous définis sur $\\mathbb R$. Étape 2 — Substituer : $2x+1\\to3$ ; $x^2+2\\to3$ ; $4x-2\\to2$ ; $5-x\\to4$ ; $x+3\\to4$. Étape 3 — Vérifier : aucun quotient ni racine. Étape 4 — Conclure : seules $2x+1$ et $x^2+2$ ont pour limite $3$. Les trois autres donnent $2$, $4$ et $4$.",
+                  "answers": [
+                    {
+                      "content": "$2x+1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2+2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4x-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5-x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Substituer pour calculer une limite",
+              "statement": "Dans cet exercice, tu calcules des limites en un réel avec la méthode de la fiche : identifier, substituer, vérifier, conclure.",
+              "hint": "Remplace $x$ par $a$ avec des parenthèses si $a$ est négatif. Contrôle que le dénominateur ne s'annule pas et que le radicande est positif.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $f(x)=x^2+3x-1$ quand $x$ tend vers $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $a=3$ et $f$ est un polynôme, définie sur tout $\\mathbb{R}$. Étape 2 — Substituer : $f(3)=3^2+3\\times3-1=9+9-1$. Étape 3 — Vérifier : pas de dénominateur ni de racine : la substitution est permise. Étape 4 — Conclure : $\\lim_{x\\to3}f(x)=17$. $18$ oublie le terme $-1$ ; $19$ lit $-1$ comme $+1$ ; $14$ remplace $x^2$ par $6$, erreur de calcul sur le carré.",
+                  "answers": [
+                    {
+                      "content": "$18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$19$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$17$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $f(x)=x^2-x$ quand $x$ tend vers $-2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $a=-2$, polynôme défini sur $\\mathbb{R}$. Étape 2 — Substituer : avec des parenthèses : $(-2)^2-(-2)=4+2$. Étape 3 — Vérifier : aucun dénominateur : la méthode s'applique. Étape 4 — Conclure : $\\lim_{x\\to-2}f(x)=6$. Écrire $-2^2-(-2)=-4+2=-2$ oublie les parenthèses : c'est l'erreur du piège, car $-2^2$ n'est pas $(-2)^2$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La limite de $f(x)=\\sqrt{x}+2$ quand $x$ tend vers $9$ est égale à $5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $a=9$, et $\\sqrt{x}$ est définie en $9$. Étape 2 — Substituer : $\\sqrt{9}+2=3+2$. Étape 3 — Vérifier : le radicande $9$ est positif : la substitution est permise. Étape 4 — Conclure : $\\lim_{x\\to9}f(x)=5$, l'affirmation est vraie. Écrire $\\sqrt{9}=4{,}5$ (moitié de $9$) serait une confusion entre racine carrée et division par $2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=\\dfrac{2x+3}{x+1}$ quand $x$ tend vers $1$ est ___ (écris un nombre décimal).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : $a=1$ et $f$ est définie en $1$ car $1+1=2\\neq0$. Étape 2 — Substituer : le numérateur vaut $2\\times1+3=5$ et le dénominateur $1+1=2$. Étape 3 — Vérifier : le dénominateur vaut $2$, différent de $0$. Étape 4 — Conclure : $\\lim_{x\\to1}f(x)=\\dfrac52=2{,}5$. Écrire $5-2=3$ (soustraire au lieu de diviser) est l'erreur tentante : on applique la règle du quotient $\\dfrac{\\ell}{\\ell'}$.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "2.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=\\dfrac{x^2-1}{x+3}$ quand $x$ tend vers $1$ est ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : $a=1$ et $f$ est définie en $1$ car $1+3=4\\neq0$. Étape 2 — Substituer : le numérateur vaut $1^2-1=0$ et le dénominateur $1+3=4$. Étape 3 — Vérifier : le dénominateur $4$ n'est pas nul. Étape 4 — Conclure : $\\lim_{x\\to1}f(x)=\\dfrac04=0$. Un numérateur nul avec un dénominateur non nul donne $0$ ; $\\dfrac14$ oublie que le numérateur s'annule.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque limite à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : les réels visés sont $2$, $-1$, $4$ et $-7$, tous dans l'ensemble de définition. Étape 2 — Substituer : $3\\times2-1=5$ ; $(-1)^2+2=3$ ; $\\sqrt{4}=2$ ; $|-7|=7$. Étape 3 — Vérifier : aucun dénominateur, radicande $4$ positif. Étape 4 — Conclure : $5$, $3$, $2$ et $7$. $|-7|=-7$ est l'erreur tentante : une valeur absolue est toujours positive ou nulle.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x\\to2}(3x-1)$",
+                      "match": "$5$"
+                    },
+                    {
+                      "content": "$\\lim_{x\\to-1}(x^2+2)$",
+                      "match": "$3$"
+                    },
+                    {
+                      "content": "$\\lim_{x\\to4}\\sqrt{x}$",
+                      "match": "$2$"
+                    },
+                    {
+                      "content": "$\\lim_{x\\to-7}|x|$",
+                      "match": "$7$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à calculer des limites en un réel avec $f(x)=x^2+2x-3$ et $g(x)=\\dfrac{x+5}{x-2}$.",
+            "questions": [
+              {
+                "content": "Pour $\\lim_{x\\to3}f(x)$ avec $f(x)=x^2+2x-3$, on remplace $x$ par $3$ : $3^2+2\\times3-3$ s'écrit ___ $+$ ___ $-3$, soit $12$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $a=3$, $f$ est un polynôme défini sur $\\mathbb R$. Étape 2 — Substituer : $3^2=9$ et $2\\times3=6$, donc $9+6-3$. Étape 3 — Vérifier : aucun quotient. Étape 4 — Conclure : $9+6-3=12$.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Calcule d'abord $3^2$, puis $2\\times3$."
+              },
+              {
+                "content": "Calcule $\\lim_{x\\to1}g(x)$ avec $g(x)=\\dfrac{x+5}{x-2}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $a=1$ ; $g$ est définie sur $\\mathbb R\\setminus\\{2\\}$, donc en $1$. Étape 2 — Substituer : numérateur $1+5=6$, dénominateur $1-2=-1$. Étape 3 — Vérifier : $-1\\neq0$. Étape 4 — Conclure : $\\dfrac{6}{-1}=-6$.",
+                "answers": [
+                  {
+                    "content": "-6",
+                    "correct": true
+                  }
+                ],
+                "hint": "Vérifie d'abord que le dénominateur ne s'annule pas en $1$."
+              },
+              {
+                "content": "Calcule $\\lim_{x\\to9}(\\sqrt x+1)$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $a=9$, $\\sqrt x$ est définie en $9$. Étape 2 — Substituer : $\\sqrt9+1=3+1$. Étape 3 — Vérifier : le radicande $9$ est positif. Étape 4 — Conclure : la limite vaut $4$. Les leurres : $10$ oublie la racine carrée ($9+1$) ; $\\sqrt{10}$ prend la racine de toute la somme ; $3$ oublie d'ajouter $1$.",
+                "answers": [
+                  {
+                    "content": "$4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$10$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sqrt{10}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Remplace $x$ par $9$, puis calcule $\\sqrt9$ avant d'ajouter $1$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Étudier la limite à gauche et à droite",
+          "remember": "La limite à gauche $\\lim_{x\\to a^-}f(x)$ se calcule avec $x< a$ ; la limite à droite $\\lim_{x\\to a^+}f(x)$ avec $x>a$. La fonction $f$ a pour limite $\\ell$ en $a$ si et seulement si ses limites à gauche et à droite en $a$ existent et sont toutes les deux égales à $\\ell$. Si elles sont différentes, $f$ n'a pas de limite en $a$. On les utilise pour une fonction définie par morceaux ou contenant une valeur absolue : $|x-a|=x-a$ si $x>a$, et $|x-a|=a-x$ si $x< a$.",
+          "method": [
+            "Repérer : repérer le réel $a$ où l'expression de $f$ change (définition par morceaux, valeur absolue qui s'annule).",
+            "Écrire : écrire l'expression de $f$ pour $x< a$, puis pour $x>a$.",
+            "Calculer : calculer la limite à gauche, puis la limite à droite, par substitution.",
+            "Conclure : si les deux limites sont égales à $\\ell$, alors $\\lim_{x\\to a}f(x)=\\ell$ ; sinon $f$ n'a pas de limite en $a$."
+          ],
+          "example": {
+            "statement": "Un pêcheur de Grand-Lahou vend son poisson. Le prix $p(x)$ d'un lot, en centaines de FCFA, est $p(x)=3x+10$ si $0< x<4$ et $p(x)=x^2+6$ si $x>4$. Étudier la limite de $p$ en $4$.",
+            "steps": [
+              "Repérer : l'expression de $p$ change en $a=4$.",
+              "Écrire : pour $x<4$, $p(x)=3x+10$ ; pour $x>4$, $p(x)=x^2+6$.",
+              "Calculer : à gauche, $\\lim_{x\\to4^-}p(x)=3\\times4+10=22$ ; à droite, $\\lim_{x\\to4^+}p(x)=4^2+6=22$.",
+              "Conclure : les deux limites valent $22$, donc $\\lim_{x\\to4}p(x)=22$."
+            ]
+          },
+          "pitfall": "Ne pas conclure avec un seul côté. Contre-exemple : $f(x)=\\dfrac{|x|}{x}$ pour $x\\neq0$. Pour $x=0{,}001$, $f(x)=1$ ; pour $x=-0{,}001$, $f(x)=-1$. La limite à droite en $0$ vaut $1$, la limite à gauche vaut $-1$ : $f$ n'a pas de limite en $0$. Calcule toujours les deux limites.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Limites à gauche et à droite",
+              "statement": "Dans cet exercice, tu calcules des limites à gauche et à droite avec la méthode de la fiche : repérer, écrire, calculer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une fonction $f$ est définie par $f(x)=2x-1$ si $x<3$ et $f(x)=x+4$ si $x>3$. Quelle est sa limite à gauche en $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=3$. Étape 2 — Écrire : pour $x<3$, $f(x)=2x-1$. Étape 3 — Calculer : $\\lim_{x\\to3^-}f(x)=2\\times3-1=5$. Étape 4 — Conclure : la limite à gauche vaut $5$. La proposition $7$ est la limite à droite ($3+4$), calculée avec la mauvaise branche ; la proposition $3$ est la valeur de $x$ lui-même, pas celle de $f$.",
+                  "answers": [
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est définie par $f(x)=2x-1$ si $x<3$ et $f(x)=x+4$ si $x>3$. Calcule sa limite à droite en $3$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=3$. Étape 2 — Écrire : pour $x>3$, $f(x)=x+4$. Étape 3 — Calculer : $\\lim_{x\\to3^+}f(x)=3+4=7$. Étape 4 — Conclure : la limite à droite vaut $7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est définie par $f(x)=2x-1$ si $x<3$ et $f(x)=x+4$ si $x>3$. Alors $f$ a une limite en $3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=3$. Étape 2 — Écrire : $2x-1$ à gauche, $x+4$ à droite. Étape 3 — Calculer : à gauche $5$, à droite $7$. Étape 4 — Conclure : $5\\neq7$, donc $f$ n'a pas de limite en $3$ : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $g$ est définie par $g(x)=x^2-1$ si $x<2$ et $g(x)=3x-3$ si $x>2$. Que dire de la limite de $g$ en $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=2$. Étape 2 — Écrire : $x^2-1$ à gauche, $3x-3$ à droite. Étape 3 — Calculer : à gauche $4-1=3$, à droite $6-3=3$. Étape 4 — Conclure : les deux limites valent $3$, donc $\\lim_{x\\to2}g(x)=3$. La proposition « elle n'existe pas » confond la limite avec la valeur de $g$ en $2$, qui n'intervient pas ici. La proposition « elle vaut $0$ » vient d'un calcul de $x^2-1$ en $1$ et non en $2$.",
+                  "answers": [
+                    {
+                      "content": "Elle existe et vaut $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle n'existe pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle vaut $0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\lim_{x\\to2}\\left(|x-2|+3\\right)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la valeur absolue s'annule en $a=2$. Étape 2 — Écrire : pour $x>2$, $|x-2|=x-2$ ; pour $x<2$, $|x-2|=2-x$. Étape 3 — Calculer : à droite, $(2-2)+3=3$ ; à gauche, $(2-2)+3=3$. Étape 4 — Conclure : les deux limites valent $3$, donc la limite est $3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces fonctions définies pour $x\\neq0$, lesquelles ont une limite en $0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : la valeur absolue change d'expression en $a=0$. Étape 2 — Écrire : pour $x>0$, $|x|=x$ ; pour $x<0$, $|x|=-x$. Étape 3 — Calculer : $|x|$ tend vers $0$ des deux côtés ; $x|x|$ vaut $x^2$ à droite et $-x^2$ à gauche, donc tend vers $0$ des deux côtés. En revanche $\\frac{|x|}{x}$ vaut $1$ à droite et $-1$ à gauche ; $\\frac{x}{|x|}+x$ vaut $1+x$ à droite et $-1+x$ à gauche, donc tend vers $1$ à droite et vers $-1$ à gauche ; $\\frac{|x|}{x}+1$ vaut $2$ à droite et $0$ à gauche. Étape 4 — Conclure : seules $|x|$ et $x|x|$ ont une limite en $0$.",
+                  "answers": [
+                    {
+                      "content": "$|x|$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x|x|$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{|x|}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{x}{|x|}+x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{|x|}{x}+1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer les limites à gauche et à droite",
+              "statement": "Dans cet exercice, tu étudies des limites à gauche et à droite avec la méthode de la fiche : repérer, écrire, calculer, conclure.",
+              "hint": "Utilise la bonne expression de chaque côté du réel $a$ : celle de $x < a$ à gauche, celle de $x > a$ à droite. Une limite existe si les deux côtés donnent le même nombre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "On pose $p(x)=3x-2$ si $x<2$ et $p(x)=x^2+2$ si $x>2$. Quelle est la limite à droite de $p$ en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'expression de $p$ change en $a=2$. Étape 2 — Écrire : pour $x>2$, $p(x)=x^2+2$. Étape 3 — Calculer : $\\lim_{x\\to2^+}p(x)=2^2+2=6$. Étape 4 — Conclure : la limite à droite en $2$ vaut $6$ ; la limite à gauche, $3\\times2-2=4$, est différente. Utiliser $3x-2$ donnerait $4$ : c'est l'expression valable seulement pour $x<2$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $p(x)=3x-2$ si $x<2$ et $p(x)=x^2+2$ si $x>2$. Que peut-on dire de la limite de $p$ en $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=2$. Étape 2 — Écrire : $p(x)=3x-2$ pour $x<2$ ; $p(x)=x^2+2$ pour $x>2$. Étape 3 — Calculer : à gauche $3\\times2-2=4$ ; à droite $2^2+2=6$. Étape 4 — Conclure : $4\\neq6$ : $p$ n'a pas de limite en $2$. Retenir $4$ ou $6$ conclut avec un seul côté (erreur du piège) ; $5$, la moyenne, n'a aucun sens pour une limite.",
+                  "answers": [
+                    {
+                      "content": "$p$ a pour limite $4$ en $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$p$ n'a pas de limite en $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$p$ a pour limite $6$ en $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$p$ a pour limite $5$ en $2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x)=|x-1|$, la limite à gauche en $1$ est $0$ et la limite à droite en $1$ est $0$ ; donc $f$ a pour limite $0$ en $1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la valeur absolue s'annule en $a=1$. Étape 2 — Écrire : $|x-1|=1-x$ pour $x<1$ et $|x-1|=x-1$ pour $x>1$. Étape 3 — Calculer : à gauche $1-1=0$ ; à droite $1-1=0$. Étape 4 — Conclure : les deux limites sont égales à $0$ : $\\lim_{x\\to1}f(x)=0$, l'affirmation est vraie. Il ne suffit pas d'un seul côté, mais ici les deux côtés ont été calculés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x)=x+5$ si $x<1$ et $f(x)=3x+3$ si $x>1$. La limite de $f$ en $1$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=1$. Étape 2 — Écrire : $f(x)=x+5$ pour $x<1$ ; $f(x)=3x+3$ pour $x>1$. Étape 3 — Calculer : à gauche $1+5=6$ ; à droite $3\\times1+3=6$. Étape 4 — Conclure : les deux limites valent $6$, donc $\\lim_{x\\to1}f(x)=6$. Mélanger les deux expressions, par exemple $1+3=4$, est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x)=2x$ si $x<3$ et $f(x)=x+3$ si $x>3$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=3$. Étape 2 — Écrire : $f(x)=2x$ pour $x<3$ ; $f(x)=x+3$ pour $x>3$. Étape 3 — Calculer : à gauche $2\\times3=6$ ; à droite $3+3=6$. Étape 4 — Conclure : les deux limites valent $6$, donc $f$ a pour limite $6$ en $3$. Dire que $f$ n'a pas de limite serait vrai si les deux valeurs étaient différentes ; $5$ et $3$ viennent d'une substitution dans la mauvaise expression.",
+                  "answers": [
+                    {
+                      "content": "La limite à gauche de $f$ en $3$ vaut $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite à gauche de $f$ en $3$ vaut $6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite à droite de $f$ en $3$ vaut $6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite à droite de $f$ en $3$ vaut $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'a pas de limite en $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x)=x+2$ si $x<5$ et $f(x)=2x-3$ si $x>5$. Remets dans l'ordre les étapes de l'étude de la limite de $f$ en $5$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : le réel où l'expression change. Étape 2 — Écrire : les deux expressions, à gauche puis à droite. Étape 3 — Calculer : les deux limites par substitution. Étape 4 — Conclure : en comparant les deux nombres. Conclure avant d'avoir calculé les deux côtés ne prouve rien.",
+                  "answers": [
+                    {
+                      "content": "L'expression de $f$ change en $a=5$"
+                    },
+                    {
+                      "content": "Pour $x<5$, $f(x)=x+2$ ; pour $x>5$, $f(x)=2x-3$"
+                    },
+                    {
+                      "content": "À gauche, $5+2=7$ ; à droite, $2\\times5-3=7$"
+                    },
+                    {
+                      "content": "Les deux limites valent $7$, donc $\\lim_{x\\to5}f(x)=7$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un pêcheur de Grand-Lahou vend ses lots de $x$ dizaines de kilos. Son prix total $p(x)$, en FCFA, est $p(x)=1000x$ si $0< x<5$ et $p(x)=900x+400$ si $x>5$.",
+            "questions": [
+              {
+                "content": "À gauche de $5$, on utilise $p(x)=1000x$, donc la limite à gauche vaut ___ ; à droite, $p(x)=900x+400$ donne une limite à droite de ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : l'expression change en $a=5$. Étape 2 — Écrire : $1000x$ pour $x<5$, $900x+400$ pour $x>5$. Étape 3 — Calculer : à gauche $1000\\times5=5000$ ; à droite $900\\times5+400=4900$. Étape 4 — Conclure : $5000\\neq4900$, donc $p$ n'a pas de limite en $5$.",
+                "answers": [
+                  {
+                    "content": "5000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4900",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour la limite à gauche, utilise la formule valable pour $x<5$."
+              },
+              {
+                "content": "Avec $p(x)=1000x$ si $0< x<5$ et $p(x)=900x+400$ si $x>5$, la fonction $p$ a une limite en $5$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'expression change en $a=5$. Étape 2 — Écrire : deux expressions, une de chaque côté. Étape 3 — Calculer : $5000$ à gauche, $4900$ à droite. Étape 4 — Conclure : les limites sont différentes, donc $p$ n'a pas de limite en $5$ : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On change le tarif à droite : $p(x)=1000x$ si $0< x<5$ et $p(x)=900x+k$ si $x>5$. Pour quelle valeur de $k$ la fonction $p$ a-t-elle une limite en $5$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : l'expression change en $a=5$. Étape 2 — Écrire : $1000x$ à gauche, $900x+k$ à droite. Étape 3 — Calculer : à gauche $5000$, à droite $4500+k$. Étape 4 — Conclure : il faut $4500+k=5000$, donc $k=500$.",
+                "answers": [
+                  {
+                    "content": "500",
+                    "correct": true
+                  }
+                ],
+                "hint": "Écris que la limite à gauche est égale à la limite à droite."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer une limite en l'infini avec les fonctions de référence",
+          "remember": "Pour tout entier $n\\geq1$ : $\\lim_{x\\to+\\infty}\\dfrac1{x^n}=0$ et $\\lim_{x\\to-\\infty}\\dfrac1{x^n}=0$ ; de même $\\lim_{x\\to+\\infty}\\dfrac1{\\sqrt x}=0$. Une constante $c$ a pour limite $c$. Si $f$ et $g$ ont des limites réelles $\\ell$ et $\\ell'$ en $+\\infty$ (ou en $-\\infty$), alors $f+g$ a pour limite $\\ell+\\ell'$, $f\\times g$ a pour limite $\\ell\\ell'$, et $\\frac fg$ a pour limite $\\frac{\\ell}{\\ell'}$ si $\\ell'\\neq0$. Attention : $\\frac1x$ ne tend vers $0$ qu'en $\\pm\\infty$. Les limites infinies sont l'objet d'une autre leçon.",
+          "method": [
+            "Repérer : repérer le sens visé ($+\\infty$ ou $-\\infty$) et les termes de référence de l'expression ($\\frac1x$, $\\frac1{x^2}$, constantes).",
+            "Donner : donner la limite de chaque terme avec les limites de référence.",
+            "Opérer : appliquer les règles sur la somme, le produit ou le quotient (dénominateur de limite non nulle).",
+            "Conclure : écrire $\\lim_{x\\to+\\infty}f(x)=\\ell$ (ou en $-\\infty$) et dire ce que représente $\\ell$."
+          ],
+          "example": {
+            "statement": "Une couturière de Bouaké a un coût fixe de $20$ milliers de FCFA par semaine et un coût de $5$ milliers de FCFA par pagne. Le coût moyen d'un pagne est $C(x)=5+\\dfrac{20}{x}$ pour $x$ pagnes ($x>0$). Calculer $\\lim_{x\\to+\\infty}C(x)$.",
+            "steps": [
+              "Repérer : on vise $+\\infty$ ; les termes sont la constante $5$ et le terme de référence $\\frac{20}{x}=20\\times\\frac1x$.",
+              "Donner : la constante $5$ a pour limite $5$ ; $\\frac1x\\to0$, donc $\\frac{20}{x}\\to20\\times0=0$.",
+              "Opérer : la limite d'une somme est la somme des limites : $5+0=5$.",
+              "Conclure : $\\lim_{x\\to+\\infty}C(x)=5$. Quand elle coud beaucoup de pagnes, le coût moyen se rapproche de 5 milliers de FCFA."
+            ]
+          },
+          "pitfall": "Ne pas croire que $\\frac1x$ tend vers $0$ partout. Contre-exemple : en $+\\infty$, $x=1000$ donne $\\frac1x=0{,}001$, tout petit. Mais près de $0$, $x=0{,}001$ donne $\\frac1x=1000$, tout grand. La limite de référence $\\frac1x\\to0$ n'est vraie que quand $x$ devient grand en valeur absolue.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer des limites en l'infini",
+              "statement": "Dans cet exercice, tu calcules des limites en l'infini avec la méthode de la fiche : repérer, donner, opérer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $3+\\dfrac5x$ quand $x\\to+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $3$ et $\\frac5x$. Étape 2 — Donner : $3\\to3$ et $\\frac5x=5\\times\\frac1x\\to0$. Étape 3 — Opérer : $3+0=3$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}\\left(3+\\frac5x\\right)=3$. La proposition $8$ additionne $3$ et $5$ sans tenir compte de $x$ ; la proposition $0$ oublie que la constante $3$ ne tend pas vers $0$ ; la proposition $5$ ne garde que le numérateur de la fraction.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\lim_{x\\to-\\infty}\\left(7-\\dfrac4{x^2}\\right)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on vise $-\\infty$ ; les termes sont $7$ et $\\frac4{x^2}$. Étape 2 — Donner : $7\\to7$ et $\\frac1{x^2}\\to0$ en $-\\infty$, donc $\\frac4{x^2}\\to0$. Étape 3 — Opérer : $7-0=7$. Étape 4 — Conclure : la limite vaut $7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\lim_{x\\to+\\infty}\\left(2+\\dfrac1x\\right)\\left(3-\\dfrac2x\\right)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; l'expression est un produit de deux facteurs. Étape 2 — Donner : $2+\\frac1x\\to2$ et $3-\\frac2x\\to3$. Étape 3 — Opérer : la limite d'un produit est le produit des limites : $2\\times3=6$. Étape 4 — Conclure : la limite vaut $6$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $\\dfrac{4+\\frac2x}{2-\\frac6{x^2}}$ quand $x\\to+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; le numérateur est $4+\\frac2x$, le dénominateur $2-\\frac6{x^2}$. Étape 2 — Donner : le numérateur tend vers $4$, le dénominateur vers $2$. Étape 3 — Opérer : $2\\neq0$, donc la limite du quotient est $\\frac42=2$. Étape 4 — Conclure : la limite vaut $2$. La proposition $4$ oublie le dénominateur ; la proposition $0$ suppose que tout tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $\\lim_{x\\to0}\\dfrac1x=0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on vise $0$ et non l'infini, donc la limite de référence $\\frac1x\\to0$ ne s'applique pas. Étape 2 — Donner : pour $x=0{,}001$, $\\frac1x=1000$ ; pour $x=-0{,}001$, $\\frac1x=-1000$. Étape 3 — Opérer : rien à opérer, ces valeurs sont très grandes en valeur absolue. Étape 4 — Conclure : $\\frac1x$ ne se rapproche pas de $0$ quand $x\\to0$ : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles expressions ont pour limite $5$ quand $x\\to+\\infty$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ pour chaque expression. Étape 2 — Donner : $5+\\frac2x\\to5$ ; $5-\\frac3{x^2}\\to5$ ; $2+\\frac3x\\to2$ ; $\\frac5x\\to0$ ; $10-\\frac5x\\to10$. Étape 3 — Opérer : somme des limites. Étape 4 — Conclure : seules $5+\\frac2x$ et $5-\\frac3{x^2}$ ont pour limite $5$.",
+                  "answers": [
+                    {
+                      "content": "$5+\\dfrac2x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5-\\dfrac3{x^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2+\\dfrac3x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac5x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10-\\dfrac5x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Limites en l'infini avec les fonctions de référence",
+              "statement": "Dans cet exercice, tu calcules des limites en plus l'infini et en moins l'infini avec la méthode de la fiche : repérer, donner, opérer, conclure.",
+              "hint": "Les fonctions $\\dfrac1x$, $\\dfrac1{x^2}$ et $\\dfrac1{\\sqrt{x}}$ tendent vers $0$ en $+\\infty$ ; $\\dfrac1x$ et $\\dfrac1{x^2}$ aussi en $-\\infty$. Isole d'abord la constante.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $C(x)=4+\\dfrac6x$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont la constante $4$ et $\\dfrac6x=6\\times\\dfrac1x$. Étape 2 — Donner : $4\\to4$ et $\\dfrac1x\\to0$, donc $\\dfrac6x\\to6\\times0=0$. Étape 3 — Opérer : la limite d'une somme est la somme des limites : $4+0$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}C(x)=4$. Écrire $4+6=10$ en remplaçant $\\dfrac1x$ par $1$ est faux : $\\dfrac1x$ tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la limite de $f(x)=3-\\dfrac{5}{x^2}$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $3$ et $-5\\times\\dfrac1{x^2}$. Étape 2 — Donner : $3\\to3$ et $\\dfrac1{x^2}\\to0$, donc $-\\dfrac5{x^2}\\to0$. Étape 3 — Opérer : somme : $3+0$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}f(x)=3$. $0$ oublie la constante $3$ ; $-2$ remplace $\\dfrac1{x^2}$ par $1$ ; $-5$ ne garde que le dernier terme.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand $x$ se rapproche de $0$, $\\dfrac1x$ se rapproche de $0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : ici $x$ se rapproche de $0$, et non de l'infini. Étape 2 — Donner : pour $x=0{,}001$, $\\dfrac1x=1000$ ; pour $x=1000$, $\\dfrac1x=0{,}001$. Étape 3 — Opérer : la limite de référence $\\dfrac1x\\to0$ vaut seulement quand $x$ devient grand en valeur absolue. Étape 4 — Conclure : l'affirmation est fausse. C'est l'erreur du piège : la limite de référence ne vaut qu'en $+\\infty$ et $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=7+\\dfrac2x$ quand $x$ tend vers $-\\infty$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on vise $-\\infty$ ; les termes sont $7$ et $2\\times\\dfrac1x$. Étape 2 — Donner : $7\\to7$ et $\\dfrac1x\\to0$ en $-\\infty$. Étape 3 — Opérer : somme : $7+2\\times0$. Étape 4 — Conclure : $\\lim_{x\\to-\\infty}f(x)=7$. Le signe de $x$ ne change rien : $\\dfrac1x\\to0$ aussi en $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux fonctions dont la limite en $+\\infty$ est égale à $2$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; on isole la constante de chaque expression. Étape 2 — Donner : $\\dfrac1x\\to0$, $\\dfrac1{\\sqrt{x}}\\to0$ et $\\dfrac1{x^2}\\to0$. Étape 3 — Opérer : $2+0=2$ pour les deux premières ; $5\\times0=0$, $1+0=1$ et $2\\times0=0$ pour les autres. Étape 4 — Conclure : seules $2+\\dfrac1x$ et $2+\\dfrac3{\\sqrt{x}}$ tendent vers $2$. $\\dfrac2{x^2}$ contient le chiffre $2$ mais tend vers $0$ : le $2$ est un coefficient, pas une constante ajoutée.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac5x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1+\\dfrac1x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2+\\dfrac1x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2+\\dfrac{3}{\\sqrt{x}}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fonction à sa limite quand $x$ tend vers $+\\infty$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ dans les quatre cas. Étape 2 — Donner : $\\dfrac1x$, $\\dfrac1{x^2}$ et $\\dfrac1{\\sqrt{x}}$ tendent vers $0$. Étape 3 — Opérer : $3+0=3$ ; $5\\times0=0$ ; $4-2\\times0=4$ ; $7+0=7$. Étape 4 — Conclure : $3$, $0$, $4$ et $7$. Confondre $\\dfrac5{x^2}$ avec $5$ revient à oublier que le terme en $\\dfrac1{x^2}$ tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$3+\\dfrac1x$",
+                      "match": "$3$"
+                    },
+                    {
+                      "content": "$\\dfrac{5}{x^2}$",
+                      "match": "$0$"
+                    },
+                    {
+                      "content": "$4-\\dfrac{2}{\\sqrt{x}}$",
+                      "match": "$4$"
+                    },
+                    {
+                      "content": "$7+\\dfrac{1}{x}$",
+                      "match": "$7$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Une couturière de Bouaké calcule le coût moyen d'un pagne : $C(x)=6+\\dfrac{15}{x}$, en milliers de FCFA, pour $x$ pagnes ($x>0$).",
+            "questions": [
+              {
+                "content": "Quand $x\\to+\\infty$, la constante $6$ a pour limite ___ et le terme $\\dfrac{15}{x}$ a pour limite ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $6$ et $\\frac{15}{x}=15\\times\\frac1x$. Étape 2 — Donner : la constante $6$ a pour limite $6$ ; $\\frac1x\\to0$, donc $\\frac{15}{x}\\to0$. Étape 3 — Opérer : $6+0=6$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}C(x)=6$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Que devient $\\frac1x$ quand $x$ devient très grand ?"
+              },
+              {
+                "content": "Pour la même couturière, calcule $C(30)=6+\\dfrac{15}{30}$, en milliers de FCFA.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "On remplace $x$ par $30$ : $C(30)=6+\\frac{15}{30}=6+0{,}5=6{,}5$ milliers de FCFA, déjà proche de $6$.",
+                "answers": [
+                  {
+                    "content": "6,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour $D(x)=\\left(4+\\dfrac3x\\right)\\left(5-\\dfrac2x\\right)$, calcule $\\lim_{x\\to+\\infty}D(x)$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; produit de deux facteurs. Étape 2 — Donner : $4+\\frac3x\\to4$ et $5-\\frac2x\\to5$. Étape 3 — Opérer : $4\\times5=20$. Étape 4 — Conclure : la limite vaut $20$. Les leurres : $9$ additionne les limites au lieu de les multiplier ; $-6$ multiplie les numérateurs $3$ et $-2$ des termes qui tendent vers $0$ ; $0$ croit que tout le produit tend vers $0$.",
+                "answers": [
+                  {
+                    "content": "$20$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$9$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ],
+                "hint": "La limite d'un produit est le produit des limites."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Étudier la continuité en un point",
+          "remember": "Une fonction $f$ définie en $a$ est continue en $a$ si $\\lim_{x\\to a}f(x)=f(a)$. Cela revient à : la limite à gauche et la limite à droite en $a$ existent et sont toutes les deux égales à $f(a)$. Les polynômes, les fractions rationnelles (sur leur domaine), $\\sqrt x$ (sur $[0\\,;+\\infty[$) et $|x|$ sont continus sur leur domaine. Une fonction est continue sur un intervalle si elle est continue en chacun de ses points. Pour une fonction définie par morceaux, on étudie la continuité au point où l'expression change.",
+          "method": [
+            "Évaluer : calculer $f(a)$ avec l'expression qui contient $a$ (si $f$ n'est pas définie en $a$, elle n'y est pas continue).",
+            "Calculer : calculer la limite à gauche et la limite à droite de $f$ en $a$.",
+            "Comparer : comparer ces deux limites entre elles et avec $f(a)$.",
+            "Conclure : si les trois nombres sont égaux, $f$ est continue en $a$ ; sinon elle ne l'est pas. Si un paramètre est inconnu, écrire l'égalité des trois nombres et la résoudre."
+          ],
+          "example": {
+            "statement": "Un tailleur de Yamoussoukro facture $f(x)$ centaines de FCFA pour $x$ mètres de tissu : $f(x)=2x+1$ si $x\\leq3$ et $f(x)=x^2-2$ si $x>3$. Étudier la continuité de $f$ en $3$.",
+            "steps": [
+              "Évaluer : $3\\leq3$, donc $f(3)=2\\times3+1=7$.",
+              "Calculer : à gauche, $\\lim_{x\\to3^-}f(x)=2\\times3+1=7$ ; à droite, $\\lim_{x\\to3^+}f(x)=3^2-2=7$.",
+              "Comparer : $7=7=f(3)$.",
+              "Conclure : les trois nombres sont égaux, donc $f$ est continue en $3$."
+            ]
+          },
+          "pitfall": "Ne pas se contenter de l'égalité des limites à gauche et à droite : il faut aussi qu'elles soient égales à $f(a)$. Contre-exemple : $g(x)=x+1$ si $x\\neq2$ et $g(2)=10$. Les deux limites en $2$ valent $3$, mais $g(2)=10$ : $g$ n'est pas continue en $2$. Calcule toujours $f(a)$ avec l'expression qui contient $a$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Étudier la continuité en un point",
+              "statement": "Dans cet exercice, tu étudies la continuité avec la méthode de la fiche : évaluer, calculer, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que signifie « $f$ est continue en $a$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Évaluer : $f$ doit être définie en $a$, avec la valeur $f(a)$. Étape 2 — Calculer : on regarde la limite de $f$ en $a$. Étape 3 — Comparer : cette limite doit être égale à $f(a)$. Étape 4 — Conclure : $f$ est continue en $a$ si $\\lim_{x\\to a}f(x)=f(a)$. La proposition « $f$ est définie en $a$ » ne suffit pas, car la limite peut être différente de $f(a)$ ; la proposition « $f$ a une limite à gauche et une limite à droite en $a$ » ne suffit pas non plus, car ces limites peuvent être différentes entre elles ou de $f(a)$ ; la proposition « $f$ est définie sur un intervalle contenant $a$ » décrit le domaine de $f$, pas sa continuité en $a$.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x\\to a}f(x)=f(a)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est définie en $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ a une limite à gauche et une limite à droite en $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est définie sur un intervalle contenant $a$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x)=3x+m$ si $x\\leq1$ et $f(x)=x^2+4$ si $x>1$, où $m$ est un réel. Pour quelle valeur de $m$ la fonction $f$ est-elle continue en $1$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Évaluer : $1\\leq1$, donc $f(1)=3+m$. Étape 2 — Calculer : à gauche, $3\\times1+m=3+m$ ; à droite, $1^2+4=5$. Étape 3 — Comparer : il faut $3+m=5$. Étape 4 — Conclure : on résout l'égalité, $m=2$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $h(x)=2x-1$ si $x<4$, $h(4)=6$, et $h(x)=x+3$ si $x>4$. La fonction $h$ est-elle continue en $4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Évaluer : $h(4)=6$. Étape 2 — Calculer : à gauche $2\\times4-1=7$ ; à droite $4+3=7$. Étape 3 — Comparer : $7=7$ mais $7\\neq h(4)=6$. Étape 4 — Conclure : $h$ n'est pas continue en $4$. La proposition « oui, car les limites sont égales » oublie de comparer avec $h(4)$ ; la proposition « oui, car $h(4)$ existe » oublie que $h(4)$ doit aussi être égal à la limite ; la proposition « non, car les limites à gauche et à droite sont différentes » est fausse, car elles valent toutes deux $7$.",
+                  "answers": [
+                    {
+                      "content": "Non, car la limite $7$ est différente de $h(4)=6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car les limites à gauche et à droite sont égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $h(4)$ existe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car les limites à gauche et à droite sont différentes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x)=\\dfrac{x^2+1}{x-1}$ est une fraction rationnelle définie en $3$. Calcule $\\lim_{x\\to3}f(x)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Évaluer : $f(3)=\\dfrac{9+1}{3-1}=\\dfrac{10}{2}=5$. Étape 2 — Calculer : $f$ est continue sur son domaine, donc ses limites à gauche et à droite en $3$ sont égales à $f(3)$. Étape 3 — Comparer : tout vaut $5$. Étape 4 — Conclure : $\\lim_{x\\to3}f(x)=5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces fonctions, lesquelles sont continues en $0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Évaluer : on calcule $f(0)$ de chacune. Étape 2 — Calculer : $|x|$ et $x^2-3x+1$ sont continues sur $\\mathbb R$ ; pour $x+1$ si $x<0$ et $x-1$ si $x\\geq0$, la limite à gauche vaut $1$ et $f(0)=-1$ ; pour $x$ si $x\\neq0$ et $f(0)=4$, la limite vaut $0$ ; pour $\\frac{|x|}{x}$ si $x\\neq0$ et $f(0)=0$, les limites à gauche ($-1$) et à droite ($1$) sont différentes. Étape 3 — Comparer : seules deux fonctions ont la limite égale à $f(0)$. Étape 4 — Conclure : $|x|$ et $x^2-3x+1$ sont continues en $0$.",
+                  "answers": [
+                    {
+                      "content": "$x\\mapsto|x|$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x\\mapsto x^2-3x+1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x\\mapsto x+1$ si $x<0$ et $x\\mapsto x-1$ si $x\\geq0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x\\mapsto x$ si $x\\neq0$ et $0\\mapsto4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x\\mapsto\\dfrac{|x|}{x}$ si $x\\neq0$ et $0\\mapsto0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour étudier la continuité de $f$ en $a$.",
+                  "question_type": "ordering",
+                  "explanation": "La méthode se déroule ainsi : Étape 1 — Évaluer $f(a)$, pour savoir ce que la limite doit valoir. Étape 2 — Calculer les limites à gauche et à droite. Étape 3 — Comparer ces limites entre elles et avec $f(a)$. Étape 4 — Conclure sur la continuité. On ne peut pas conclure avant d'avoir comparé, ni comparer avant d'avoir calculé.",
+                  "answers": [
+                    {
+                      "content": "Évaluer $f(a)$ avec l'expression qui contient $a$."
+                    },
+                    {
+                      "content": "Calculer la limite à gauche et la limite à droite en $a$."
+                    },
+                    {
+                      "content": "Comparer ces limites entre elles et avec $f(a)$."
+                    },
+                    {
+                      "content": "Conclure sur la continuité de $f$ en $a$."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Étudier la continuité d'une fonction par morceaux",
+              "statement": "Dans cet exercice, tu étudies la continuité en un point avec la méthode de la fiche : évaluer, calculer, comparer, conclure.",
+              "hint": "Calcule toujours $f(a)$ avec l'expression qui contient $a$, puis les deux limites. Pour trouver un paramètre, écris l'égalité des trois nombres et résous-la.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "On pose $f(x)=x+3$ si $x\\leq2$ et $f(x)=3x-1$ si $x>2$. Que peut-on dire de $f$ en $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Évaluer : $2\\leq2$, donc $f(2)=2+3=5$. Étape 2 — Calculer : à gauche $2+3=5$ ; à droite $3\\times2-1=5$. Étape 3 — Comparer : $5=5=f(2)$. Étape 4 — Conclure : les trois nombres sont égaux : $f$ est continue en $2$. Être définie en $2$ ne suffit pas (dernière proposition) ; les deux autres affirment des écarts qui n'existent pas ici.",
+                  "answers": [
+                    {
+                      "content": "$f$ n'est pas continue en $2$, car les limites à gauche et à droite sont différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est continue en $2$, car $5=5=f(2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ n'est pas continue en $2$, car $f(2)$ n'est pas égal aux limites",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est continue en $2$, car $f$ est définie en $2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $g(x)=x^2-1$ pour $x\\neq2$ et $g(2)=a$. Quelle valeur de $a$ rend $g$ continue en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $g(2)=a$. Étape 2 — Calculer : les limites à gauche et à droite en $2$ valent $2^2-1=3$. Étape 3 — Comparer : pour la continuité, il faut $a=3$. Étape 4 — Conclure : $a=3$. Prendre $a=4$ (la valeur de $x^2$) oublie le $-1$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $h(x)=x+1$ pour $x\\neq2$ et $h(2)=10$. La fonction $h$ est continue en $2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $h(2)=10$. Étape 2 — Calculer : à gauche et à droite, la limite en $2$ vaut $2+1=3$. Étape 3 — Comparer : $3=3$ mais $3\\neq10=h(2)$. Étape 4 — Conclure : $h$ n'est pas continue en $2$ : faux. Il ne suffit pas que les limites à gauche et à droite soient égales : elles doivent aussi être égales à $f(a)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x)=5x-2$ si $x\\leq2$ et $f(x)=x^2+m$ si $x>2$. Quelle valeur de $m$ rend $f$ continue en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(2)=5\\times2-2=8$. Étape 2 — Calculer : à gauche $5\\times2-2=8$ ; à droite $2^2+m=4+m$. Étape 3 — Comparer : il faut $4+m=8$. Étape 4 — Conclure : $m=4$. Contrôle : $4+4=8=f(2)$. Écrire $m=8$ oublie le terme $2^2=4$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=x+1$ si $x<2$, $f(2)=3$ et $f(x)=2x-1$ si $x>2$. Quelles sont les trois affirmations vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Évaluer : $f(2)=3$. Étape 2 — Calculer : à gauche $2+1=3$ ; à droite $2\\times2-1=3$. Étape 3 — Comparer : $3=3=f(2)$. Étape 4 — Conclure : les trois nombres sont égaux : $f$ est continue en $2$. $4$ viendrait de $2\\times2$ au lieu de $2+1$ ; l'écart entre $f(2)$ et la limite n'existe pas ici.",
+                  "answers": [
+                    {
+                      "content": "La limite à gauche de $f$ en $2$ vaut $4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(2)$ est différent de la limite à droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite à gauche de $f$ en $2$ vaut $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est continue en $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite à droite de $f$ en $2$ vaut $3$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x)=2x$ si $x\\leq1$ et $f(x)=x+1$ si $x>1$. Remets dans l'ordre les étapes de l'étude de la continuité de $f$ en $1$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Évaluer : $f(1)$ avec l'expression qui contient $1$. Étape 2 — Calculer : les limites à gauche et à droite. Étape 3 — Comparer : les trois nombres. Étape 4 — Conclure : sur la continuité. Comparer avant d'avoir calculé $f(1)$ oublie la condition sur la valeur en $a$.",
+                  "answers": [
+                    {
+                      "content": "$1\\leq1$, donc $f(1)=2\\times1=2$"
+                    },
+                    {
+                      "content": "À gauche $2\\times1=2$ ; à droite $1+1=2$"
+                    },
+                    {
+                      "content": "$2=2=f(1)$"
+                    },
+                    {
+                      "content": "Les trois nombres sont égaux : $f$ est continue en $1$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un pêcheur de Sassandra paie une taxe $t(x)$, en centaines de FCFA, pour $x$ tonnes de poisson : $t(x)=2x+3$ si $x\\leq4$ et $t(x)=x^2-4$ si $x>4$.",
+            "questions": [
+              {
+                "content": "Pour étudier la continuité de $t$ en $4$, on évalue $t(4)=2\\times4+3=$ ___ , puis on calcule la limite à droite $4^2-4=$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Évaluer : $t(4)=2\\times4+3=11$. Étape 2 — Calculer : à droite, $\\lim_{x\\to4^+}t(x)=4^2-4=12$. Étape 3 — Comparer : $11\\neq12$. Étape 4 — Conclure : $t$ n'est pas continue en $4$.",
+                "answers": [
+                  {
+                    "content": "11",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "12",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Compare deux nombres : la valeur $t(4)$ et la limite à droite."
+              },
+              {
+                "content": "La taxe $t(x)=2x+3$ si $x\\leq4$ et $t(x)=x^2-4$ si $x>4$ définit une fonction continue en $4$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Évaluer : $t(4)=11$. Étape 2 — Calculer : à gauche $11$, à droite $4^2-4=12$. Étape 3 — Comparer : $11\\neq12$. Étape 4 — Conclure : $t$ n'est pas continue en $4$ : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $t(x)=2x+3$ si $x\\leq4$ et $t(x)=x^2+c$ si $x>4$. Pour quelle valeur de $c$ la fonction $t$ est-elle continue en $4$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Évaluer : $t(4)=2\\times4+3=11$. Étape 2 — Calculer : à droite, $4^2+c=16+c$. Étape 3 — Comparer : il faut $16+c=11$. Étape 4 — Conclure : $c=-5$.",
+                "answers": [
+                  {
+                    "content": "-5",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les chemises de l'atelier de Mme Adjoua",
+          "statement": "Mme Adjoua Koffi coud des chemises dans son atelier de Bouaké. Pour un lot de x chemises, son coût de fabrication, en milliers de FCFA, est C(x) = (x² + 8x) / (x + 2) pour x ≥ 0. Son coût moyen par chemise, tous frais fixes compris, est modélisé par M(x) = 3 + 12/x pour x > 0.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pour un lot de x chemises, le coût de fabrication est $C(x)=\\dfrac{x^2+8x}{x+2}$ pour $x\\geq0$. Calcule $\\lim_{x\\to4}C(x)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : $a=4$ ; $C$ est définie pour $x\\geq0$ (le dénominateur $x+2$ est positif), donc en $4$. Étape 2 — Substituer : numérateur $4^2+8\\times4=16+32=48$, dénominateur $4+2=6$. Étape 3 — Vérifier : $6\\neq0$. Étape 4 — Conclure : $\\lim_{x\\to4}C(x)=\\dfrac{48}{6}=8$. Le coût de fabrication d'un lot de 4 chemises vaut 8 milliers de FCFA.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec $C(x)=\\dfrac{x^2+8x}{x+2}$ pour $x\\geq0$, pour combien de chemises le coût de fabrication d'un lot vaut-il $5$ milliers de FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Poser : on écrit $C(x)=5$, soit $\\dfrac{x^2+8x}{x+2}=5$. Étape 2 — Transformer : comme $x+2>0$, on multiplie par $x+2$ : $x^2+8x=5x+10$, donc $x^2+3x-10=0$. Étape 3 — Résoudre : $x^2+3x-10=(x-2)(x+5)$, donc $x=2$ ou $x=-5$. Étape 4 — Conclure : $x\\geq0$, donc seule $x=2$ convient : 2 chemises.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La fonction $C(x)=\\dfrac{x^2+8x}{x+2}$, définie pour $x\\geq0$, est continue en $2$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Évaluer : $C(2)=\\dfrac{4+16}{4}=5$. Étape 2 — Calculer : $C$ est une fraction rationnelle dont le dénominateur $x+2$ ne s'annule pas en $2$ ; ses limites à gauche et à droite en $2$ sont égales à $C(2)$, soit $5$. Étape 3 — Comparer : $5=5=C(2)$. Étape 4 — Conclure : $C$ est continue en $2$ : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen par chemise est $M(x)=3+\\dfrac{12}{x}$ pour $x>0$. Quelle est sa limite quand $x\\to+\\infty$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $3$ et $\\frac{12}{x}=12\\times\\frac1x$. Étape 2 — Donner : $3\\to3$ et $\\frac1x\\to0$, donc $\\frac{12}{x}\\to0$. Étape 3 — Opérer : $3+0=3$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}M(x)=3$. La proposition $15$ vient de $3+12$ ; la proposition $0$ oublie la constante $3$ ; la proposition $12$ ne garde que le numérateur de la fraction.",
+              "answers": [
+                {
+                  "content": "$3$",
+                  "correct": true
+                },
+                {
+                  "content": "$15$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$12$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $M(x)=3+\\dfrac{12}{x}$ avec $x>0$, quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Évaluer des valeurs : $M(4)=3+\\frac{12}{4}=6$, donc « $M(4)=6$ » est juste ; $M(6)=3+2=5$ et non $4$, donc « $M(6)=4$ » est fausse. Étape 2 — Étudier le signe : pour $x>0$, $\\frac{12}{x}>0$, donc $M(x)>3$ : « $M(x)>3$ pour tout $x>0$ » est juste, et $M(x)$ ne devient jamais négatif. Étape 3 — Calculer la limite (Repérer : on vise $+\\infty$, avec le terme $\\frac{12}{x}$ ; Donner : $\\frac{12}{x}\\to0$ ; Opérer : $3+0=3$ ; Conclure : la limite vaut $3$ et non $0$), donc « $M(x)$ a pour limite $0$ en $+\\infty$ » est fausse. Étape 4 — Conclure : les affirmations justes sont $M(4)=6$ et $M(x)>3$.",
+              "answers": [
+                {
+                  "content": "$M(4)=6$",
+                  "correct": true
+                },
+                {
+                  "content": "$M(x)>3$ pour tout $x>0$",
+                  "correct": true
+                },
+                {
+                  "content": "$M(6)=4$",
+                  "correct": false
+                },
+                {
+                  "content": "$M(x)$ devient négatif pour $x$ grand",
+                  "correct": false
+                },
+                {
+                  "content": "$M(x)$ a pour limite $0$ en $+\\infty$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $M(x)=3+\\dfrac{12}{x}$ pour $x>0$, pour combien de chemises le coût moyen par chemise vaut-il $5$ milliers de FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Poser : on écrit $M(x)=5$, soit $3+\\dfrac{12}{x}=5$. Étape 2 — Transformer : $\\dfrac{12}{x}=2$. Étape 3 — Résoudre : $x=\\dfrac{12}{2}=6$. Étape 4 — Conclure : 6 chemises. Contrôle : $M(6)=3+2=5$.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les lots de poisson de Yao à Grand-Lahou",
+          "statement": "Yao Konan est pêcheur à Grand-Lahou. Il vend le poisson de sa pirogue par lots de x dizaines de kilos. Son prix p(x), en milliers de FCFA, suit deux tarifs : p(x) = 4x + 6 si 0 < x < 5, et p(x) = x² + 1 si x > 5.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le prix d'un lot de $x$ dizaines de kilos est $p(x)=4x+6$ si $0< x<5$ et $p(x)=x^2+1$ si $x>5$. Calcule la limite à gauche de $p$ en $5$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : l'expression change en $a=5$. Étape 2 — Écrire : pour $x<5$, $p(x)=4x+6$. Étape 3 — Calculer : $\\lim_{x\\to5^-}p(x)=4\\times5+6=26$. Étape 4 — Conclure : la limite à gauche vaut $26$ milliers de FCFA.",
+              "answers": [
+                {
+                  "content": "26",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le prix d'un lot de $x$ dizaines de kilos est $p(x)=4x+6$ si $0< x<5$ et $p(x)=x^2+1$ si $x>5$. Calcule la limite à droite de $p$ en $5$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : l'expression change en $a=5$. Étape 2 — Écrire : pour $x>5$, $p(x)=x^2+1$. Étape 3 — Calculer : $\\lim_{x\\to5^+}p(x)=5^2+1=26$. Étape 4 — Conclure : la limite à droite vaut $26$ milliers de FCFA.",
+              "answers": [
+                {
+                  "content": "26",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le prix d'un lot de $x$ dizaines de kilos est $p(x)=4x+6$ si $0< x<5$ et $p(x)=x^2+1$ si $x>5$. Que dire de la limite de $p$ en $5$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'expression change en $a=5$. Étape 2 — Écrire : $4x+6$ à gauche, $x^2+1$ à droite. Étape 3 — Calculer : $26$ des deux côtés. Étape 4 — Conclure : les deux limites sont égales, donc $\\lim_{x\\to5}p(x)=26$. La proposition « elle n'existe pas » vient de l'idée que changer d'expression empêche toute limite : ce n'est vrai que si les deux limites diffèrent ; la proposition $6$ ne garde que le terme constant de la branche de gauche.",
+              "answers": [
+                {
+                  "content": "Elle existe et vaut $26$",
+                  "correct": true
+                },
+                {
+                  "content": "Elle n'existe pas",
+                  "correct": false
+                },
+                {
+                  "content": "Elle vaut $6$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le prix d'un lot est $p(x)=4x+6$ si $0< x<5$ et $p(x)=x^2+1$ si $x>5$. Si on décide que $p(5)=30$, la fonction $p$ est continue en $5$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Évaluer : $p(5)=30$. Étape 2 — Calculer : les limites à gauche et à droite valent $26$. Étape 3 — Comparer : $26\\neq30$. Étape 4 — Conclure : $p$ n'est pas continue en $5$ : l'affirmation est fausse, même si les deux limites sont égales.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un autre tarif est $r(x)=4x+6$ si $0< x<5$ et $r(x)=2x+k$ si $x>5$, avec $k$ réel. Pour quelle valeur de $k$ la fonction $r$ a-t-elle une limite en $5$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : l'expression change en $a=5$. Étape 2 — Écrire : $4x+6$ à gauche, $2x+k$ à droite. Étape 3 — Calculer : à gauche $26$, à droite $10+k$. Étape 4 — Conclure : il faut $10+k=26$, donc $k=16$.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec $p(x)=4x+6$ si $0< x<5$ et $p(x)=x^2+1$ si $x>5$, on décide que $p(5)=26$. Que dire de la continuité de $p$ en $5$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Évaluer : $p(5)=26$. Étape 2 — Calculer : à gauche $26$, à droite $26$. Étape 3 — Comparer : $26=26=p(5)$. Étape 4 — Conclure : $p$ est continue en $5$. La proposition « seulement à gauche » oublie que la limite à droite vaut aussi $26$. La proposition « $p$ n'est pas continue en $5$ car l'expression change » est fausse : changer d'expression n'empêche pas la continuité quand les trois nombres sont égaux.",
+              "answers": [
+                {
+                  "content": "$p$ est continue en $5$",
+                  "correct": true
+                },
+                {
+                  "content": "$p$ n'est continue qu'à gauche de $5$",
+                  "correct": false
+                },
+                {
+                  "content": "$p$ n'est pas continue en $5$ car l'expression change",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La facture de l'atelier d'uniformes de Daloa",
+          "statement": "L'atelier de Mme Affoué Brou, couturière à Daloa, confectionne des uniformes scolaires. Pour x dizaines d'uniformes (x ≥ 0), la facture f(x), en milliers de FCFA, est f(x) = 2x + 1 si 0 ≤ x ≤ 3, et f(x) = x + k si x > 3, où k est un réel à déterminer. Le coût moyen d'un uniforme, quand l'atelier en fabrique x dizaines d'uniformes, est M(x) = 5 + 8/x pour x > 0.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une facture est $f(x)=2x+1$ si $0\\leq x\\leq3$ et $f(x)=x+k$ si $x>3$. Calcule la limite à gauche de $f$ en $3$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : l'expression change en $a=3$. Étape 2 — Écrire : pour $x<3$, $f(x)=2x+1$. Étape 3 — Calculer : $2\\times3+1=7$. Étape 4 — Conclure : la limite à gauche vaut $7$.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une facture est $f(x)=2x+1$ si $0\\leq x\\leq3$ et $f(x)=x+k$ si $x>3$. Quelle est la limite à droite de $f$ en $3$, en fonction de $k$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'expression change en $a=3$. Étape 2 — Écrire : pour $x>3$, $f(x)=x+k$. Étape 3 — Calculer : en remplaçant $x$ par $3$, on obtient $3+k$. Étape 4 — Conclure : la limite à droite vaut $3+k$. La proposition $3k$ multiplie au lieu d'additionner ; la proposition $k$ oublie le terme $x$.",
+              "answers": [
+                {
+                  "content": "$3+k$",
+                  "correct": true
+                },
+                {
+                  "content": "$3k$",
+                  "correct": false
+                },
+                {
+                  "content": "$k$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une facture est $f(x)=2x+1$ si $0\\leq x\\leq3$ et $f(x)=x+k$ si $x>3$. Détermine $k$ pour que $f$ soit continue en $3$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Évaluer : $f(3)=2\\times3+1=7$. Étape 2 — Calculer : à gauche $7$, à droite $3+k$. Étape 3 — Comparer : il faut $7=3+k$. Étape 4 — Conclure : $k=7-3=4$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une facture est $f(x)=2x+1$ si $0\\leq x\\leq3$ et $f(x)=x+k$ si $x>3$. Avec $k=2$, la fonction $f$ est continue en $3$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Évaluer : $f(3)=7$. Étape 2 — Calculer : à gauche $7$, à droite $3+2=5$. Étape 3 — Comparer : $7\\neq5$. Étape 4 — Conclure : $f$ n'est pas continue en $3$ : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec $k=4$, la facture est $f(x)=x+4$ pour $x>3$. Calcule la facture $f(5)$, en milliers de FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Comme $5>3$, on utilise l'expression de droite : $f(5)=5+4=9$ milliers de FCFA.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen d'un uniforme est $M(x)=5+\\dfrac8x$ pour $x>0$, en milliers de FCFA. Calcule $\\lim_{x\\to+\\infty}M(x)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $5$ et $\\frac8x$. Étape 2 — Donner : $5\\to5$ et $\\frac8x\\to0$. Étape 3 — Opérer : $5+0=5$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}M(x)=5$.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La réparation des filets de la coopérative de Grand-Bassam",
+          "statement": "La coopérative Akwaba de Grand-Bassam rassemble des couturières et des pêcheurs. Elle répare des filets de pêche. Pour x dizaines de mètres de filet (x ≥ 0), le coût de réparation g(x), en milliers de FCFA, est g(x) = ax + 1 si 0 ≤ x < 2, g(2) = 5, et g(x) = x² + c si x > 2, où a et c sont deux réels à déterminer.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le coût de réparation est $g(x)=ax+1$ si $0\\leq x<2$, $g(2)=5$, et $g(x)=x^2+c$ si $x>2$. Quelle est la limite à gauche de $g$ en $2$, en fonction de $a$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'expression change au point $2$. Étape 2 — Écrire : pour $x<2$, $g(x)=ax+1$. Étape 3 — Calculer : en remplaçant $x$ par $2$, on obtient $2a+1$. Étape 4 — Conclure : la limite à gauche vaut $2a+1$. La proposition $a+1$ oublie de remplacer $x$ par $2$ ; la proposition $2a$ oublie le terme $+1$.",
+              "answers": [
+                {
+                  "content": "$2a+1$",
+                  "correct": true
+                },
+                {
+                  "content": "$a+1$",
+                  "correct": false
+                },
+                {
+                  "content": "$2a$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le coût de réparation est $g(x)=ax+1$ si $0\\leq x<2$, $g(2)=5$, et $g(x)=x^2+c$ si $x>2$. Quelle est la limite à droite de $g$ en $2$, en fonction de $c$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'expression change au point $2$. Étape 2 — Écrire : pour $x>2$, $g(x)=x^2+c$. Étape 3 — Calculer : $2^2+c=4+c$. Étape 4 — Conclure : la limite à droite vaut $4+c$. La proposition $2+c$ remplace $x^2$ par $x$ ; la proposition $c$ oublie le terme $x^2$.",
+              "answers": [
+                {
+                  "content": "$4+c$",
+                  "correct": true
+                },
+                {
+                  "content": "$2+c$",
+                  "correct": false
+                },
+                {
+                  "content": "$c$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le coût de réparation est $g(x)=ax+1$ si $0\\leq x<2$, $g(2)=5$, et $g(x)=x^2+c$ si $x>2$. Détermine $a$ pour que $g$ soit continue en $2$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Évaluer : $g(2)=5$. Étape 2 — Calculer : la limite à gauche vaut $2a+1$. Étape 3 — Comparer : il faut $2a+1=5$. Étape 4 — Conclure : $2a=4$, donc $a=2$.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût de réparation est $g(x)=ax+1$ si $0\\leq x<2$, $g(2)=5$, et $g(x)=x^2+c$ si $x>2$. Détermine $c$ pour que $g$ soit continue en $2$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Évaluer : $g(2)=5$. Étape 2 — Calculer : la limite à droite vaut $4+c$. Étape 3 — Comparer : il faut $4+c=5$. Étape 4 — Conclure : $c=1$.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût de réparation est $g(x)=ax+1$ si $0\\leq x<2$, $g(2)=5$, et $g(x)=x^2+c$ si $x>2$. Avec $a=1$ et $c=1$, la fonction $g$ est continue en $2$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Évaluer : $g(2)=5$. Étape 2 — Calculer : à gauche $2\\times1+1=3$ ; à droite $4+1=5$. Étape 3 — Comparer : $3\\neq5$. Étape 4 — Conclure : $g$ n'est pas continue en $2$ : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec $a=2$ et $c=1$, le coût de réparation est $g(x)=x^2+1$ pour $x>2$. Calcule $g(3)$, en milliers de FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Comme $3>2$, on utilise l'expression de droite : $g(3)=3^2+1=9+1=10$ milliers de FCFA.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La coopérative modélise un autre coût par $k(x)=\\left(4+\\dfrac6x\\right)\\left(2+\\dfrac5{x^2}\\right)$ pour $x>0$. Calcule $\\lim_{x\\to+\\infty}k(x)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; produit de deux facteurs. Étape 2 — Donner : $4+\\frac6x\\to4$ et $2+\\frac5{x^2}\\to2$. Étape 3 — Opérer : $4\\times2=8$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}k(x)=8$.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Limite en un réel par substitution (polynôme, quotient, racine carrée, valeur absolue), limites à gauche et à droite d'une fonction définie par morceaux, limites en l'infini avec les fonctions de référence, continuité en un point.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On calcule des limites en un réel par substitution, avec la méthode de la fiche : identifier le réel visé, substituer, vérifier le dénominateur et le radicande, conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Remplace $x$ par $a$, avec des parenthèses si $a$ est négatif. Vérifie que le dénominateur ne s'annule pas et que le radicande est positif.",
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $f(x)=3x^2-x+1$ quand $x$ tend vers $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $a=2$, polynôme défini sur $\\mathbb{R}$. Étape 2 — Substituer : $3\\times2^2-2+1=12-2+1$. Étape 3 — Vérifier : pas de dénominateur : la substitution est permise. Étape 4 — Conclure : $\\lim_{x\\to2}f(x)=11$. Écrire $3\\times2^2=6^2=36$ est une erreur : le carré ne porte que sur $2$.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la limite de $f(x)=x^2+2x$ quand $x$ tend vers $-1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $a=-1$, polynôme défini sur $\\mathbb{R}$. Étape 2 — Substituer : avec des parenthèses : $(-1)^2+2\\times(-1)=1-2$. Étape 3 — Vérifier : aucun dénominateur. Étape 4 — Conclure : $\\lim_{x\\to-1}f(x)=-1$. $-3$ vient de $-1^2$ pris pour $-1$ ; $1$ oublie le terme en $x$ ; $3$ oublie le signe de $-1$ dans $2x$.",
+                  "answers": [
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $f(x)=\\dfrac{x+5}{x-1}$ quand $x$ tend vers $3$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $a=3$ et $f$ est définie en $3$ car $3-1=2\\neq0$. Étape 2 — Substituer : numérateur $3+5=8$ ; dénominateur $3-1=2$. Étape 3 — Vérifier : le dénominateur $2$ n'est pas nul. Étape 4 — Conclure : $\\lim_{x\\to3}f(x)=\\dfrac82=4$. Calculer $8-2=6$ (soustraction au lieu du quotient) est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La limite de $f(x)=\\sqrt{x}$ quand $x$ tend vers $16$ est égale à $4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $a=16$, et $\\sqrt{x}$ est définie en $16$. Étape 2 — Substituer : $\\sqrt{16}=4$. Étape 3 — Vérifier : le radicande $16$ est positif. Étape 4 — Conclure : $\\lim_{x\\to16}f(x)=4$ : vrai. Diviser $16$ par $2$ pour obtenir $8$ confondrait racine carrée et moitié.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=|x|$ quand $x$ tend vers $-4$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : $a=-4$, la valeur absolue est définie sur $\\mathbb{R}$. Étape 2 — Substituer : $|-4|=4$. Étape 3 — Vérifier : aucun dénominateur. Étape 4 — Conclure : $\\lim_{x\\to-4}|x|=4$. Répondre $-4$ oublie qu'une valeur absolue est positive ou nulle.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie des limites à gauche et à droite avec la méthode de la fiche : repérer le réel où l'expression change, écrire les deux expressions, calculer, conclure. On pose $f(x)=x+1$ si $x<2$ et $f(x)=3x-3$ si $x>2$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour $x<2$ on utilise $x+1$ ; pour $x>2$ on utilise $3x-3$. Une limite en $2$ existe si les deux côtés donnent le même nombre.",
+              "questions": [
+                {
+                  "content": "On pose $f(x)=x+1$ si $x<2$ et $f(x)=3x-3$ si $x>2$. Quelle est la limite à gauche de $f$ en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=2$. Étape 2 — Écrire : pour $x<2$, $f(x)=x+1$. Étape 3 — Calculer : $\\lim_{x\\to2^-}f(x)=2+1=3$. Étape 4 — Conclure : la limite à gauche vaut $3$. Utiliser $3x-3$ donnerait $3$ aussi ici, mais seulement par coïncidence : à gauche, c'est $x+1$ qui définit $f$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=x+1$ si $x<2$ et $f(x)=3x-3$ si $x>2$. Quelle est la limite à droite de $f$ en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=2$. Étape 2 — Écrire : pour $x>2$, $f(x)=3x-3$. Étape 3 — Calculer : $\\lim_{x\\to2^+}f(x)=3\\times2-3=3$. Étape 4 — Conclure : la limite à droite vaut $3$. Contrôle : on retrouve le même nombre qu'à gauche.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=x+1$ si $x<2$ et $f(x)=3x-3$ si $x>2$. La fonction $f$ a pour limite $3$ en $2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=2$. Étape 2 — Écrire : $x+1$ à gauche, $3x-3$ à droite. Étape 3 — Calculer : à gauche $2+1=3$ ; à droite $3\\times2-3=3$. Étape 4 — Conclure : les deux limites sont égales à $3$ : vrai. Un seul côté ne suffirait pas ; ici les deux ont été calculés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $g(x)=x^2$ si $x<1$ et $g(x)=3-x$ si $x>1$. Que peut-on dire de la limite de $g$ en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=1$. Étape 2 — Écrire : $g(x)=x^2$ pour $x<1$ ; $g(x)=3-x$ pour $x>1$. Étape 3 — Calculer : à gauche $1^2=1$ ; à droite $3-1=2$. Étape 4 — Conclure : $1\\neq2$ : $g$ n'a pas de limite en $1$. Retenir $1$ ou $2$ conclut avec un seul côté ; $3$ confond la constante de $3-x$ avec la limite.",
+                  "answers": [
+                    {
+                      "content": "$g$ a pour limite $1$ en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g$ a pour limite $2$ en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g$ n'a pas de limite en $1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g$ a pour limite $3$ en $1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour montrer qu'une fonction a pour limite $\\ell$ en $a$, il faut ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le réel $a$ où l'expression change. Étape 2 — Écrire : les deux expressions. Étape 3 — Calculer : les deux limites. Étape 4 — Conclure : elles doivent être égales à $\\ell$. Un seul côté, la valeur $f(a)$ ou le plus grand des deux nombres ne prouvent pas l'existence de la limite.",
+                  "answers": [
+                    {
+                      "content": "calculer seulement la limite à droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "calculer seulement $f(a)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "choisir la plus grande des deux limites",
+                      "correct": false
+                    },
+                    {
+                      "content": "calculer les limites à gauche et à droite et trouver $\\ell$ deux fois",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une couturière de Bouaké a un coût moyen $C(x)=3+\\dfrac{12}{x}$ milliers de FCFA par pagne pour $x$ pagnes cousus ($x>0$). On calcule des limites en l'infini avec la méthode de la fiche : repérer, donner, opérer, conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Les limites de référence $\\dfrac1x$, $\\dfrac1{x^2}$ et $\\dfrac1{\\sqrt{x}}$ tendent vers $0$ en $+\\infty$. Isole la constante, puis additionne les limites.",
+              "questions": [
+                {
+                  "content": "Le coût moyen d'un pagne est $C(x)=3+\\dfrac{12}{x}$ milliers de FCFA. Quelle est la limite de $C(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $3$ et $12\\times\\dfrac1x$. Étape 2 — Donner : $3\\to3$ et $\\dfrac{12}{x}\\to12\\times0=0$. Étape 3 — Opérer : somme : $3+0$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}C(x)=3$ : le coût moyen se rapproche de 3 milliers de FCFA. Écrire $3+12=15$ remplace $\\dfrac1x$ par $1$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la limite de $f(x)=5-\\dfrac{2}{x^2}$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $5$ et $-2\\times\\dfrac1{x^2}$. Étape 2 — Donner : $5\\to5$ et $\\dfrac1{x^2}\\to0$. Étape 3 — Opérer : $5-2\\times0=5$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}f(x)=5$. $3$ remplace $\\dfrac1{x^2}$ par $1$ ; $0$ oublie la constante ; $-2$ ne garde que le dernier terme.",
+                  "answers": [
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=\\dfrac{1}{\\sqrt{x}}$ quand $x$ tend vers $+\\infty$ est égale à $0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; le terme est la référence $\\dfrac1{\\sqrt{x}}$. Étape 2 — Donner : $\\dfrac1{\\sqrt{x}}\\to0$ en $+\\infty$. Étape 3 — Opérer : un seul terme. Étape 4 — Conclure : la limite vaut $0$ : vrai. Penser que la limite est $1$ confond $\\sqrt{x}$ qui grandit avec une constante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=4+\\dfrac1x$ quand $x$ tend vers $-\\infty$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on vise $-\\infty$ ; les termes sont $4$ et $\\dfrac1x$. Étape 2 — Donner : $4\\to4$ et $\\dfrac1x\\to0$. Étape 3 — Opérer : somme : $4+0$. Étape 4 — Conclure : $\\lim_{x\\to-\\infty}f(x)=4$. Le signe moins de $-\\infty$ ne change pas la limite de référence $\\dfrac1x$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux fonctions dont la limite en $+\\infty$ est égale à $0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ dans chaque cas. Étape 2 — Donner : $\\dfrac1x\\to0$ et $\\dfrac1{x^2}\\to0$. Étape 3 — Opérer : $7\\times0=0$ et $3\\times0=0$ ; mais $7+0=7$, $0+2=2$ et la constante $3$ reste $3$. Étape 4 — Conclure : seules $\\dfrac7x$ et $\\dfrac3{x^2}$ tendent vers $0$. Une constante ajoutée reste dans la limite : $7+\\dfrac1x$ tend vers $7$, pas vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac7x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{x^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7+\\dfrac1x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac1x+2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie la continuité en $1$ de la fonction $f$ définie par $f(x)=2x+1$ si $x\\leq1$ et $f(x)=x^2+2$ si $x>1$, avec la méthode de la fiche : évaluer, calculer, comparer, conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule $f(1)$ avec l'expression qui contient $1$, puis les limites à gauche et à droite. La fonction est continue si les trois nombres sont égaux.",
+              "questions": [
+                {
+                  "content": "On pose $f(x)=2x+1$ si $x\\leq1$ et $f(x)=x^2+2$ si $x>1$. Que vaut $f(1)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $1\\leq1$, donc on utilise $2x+1$ : $f(1)=2\\times1+1=3$. Étape 2 — Calculer : pas de limite demandée ici. Étape 3 — Comparer : ce nombre sera comparé aux limites. Étape 4 — Conclure : $f(1)=3$. Utiliser $x^2+2$ donnerait aussi $3$ ici, mais seule l'expression de $x\\leq1$ définit $f(1)$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=2x+1$ si $x\\leq1$ et $f(x)=x^2+2$ si $x>1$. Quelle est la limite à droite de $f$ en $1$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(1)=3$. Étape 2 — Calculer : pour $x>1$, $f(x)=x^2+2$ : $\\lim_{x\\to1^+}f(x)=1^2+2=3$. Étape 3 — Comparer : $3=3$. Étape 4 — Conclure : la limite à droite vaut $3$. Utiliser $2x+1$ de ce côté est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=2x+1$ si $x\\leq1$ et $f(x)=x^2+2$ si $x>1$. Que peut-on dire de $f$ en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Évaluer : $f(1)=3$. Étape 2 — Calculer : à gauche $2\\times1+1=3$ ; à droite $1^2+2=3$. Étape 3 — Comparer : $3=3=f(1)$. Étape 4 — Conclure : $f$ est continue en $1$. Les deux autres propositions supposent un écart qui n'existe pas : les trois nombres sont égaux.",
+                  "answers": [
+                    {
+                      "content": "$f$ n'est pas continue en $1$ car $f(1)$ est différent de la limite à droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est pas continue en $1$ car la limite à gauche est différente de la limite à droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est continue en $1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "On ne peut pas conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $k(x)=x+3$ si $x\\neq1$ et $k(1)=0$. La fonction $k$ est continue en $1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $k(1)=0$. Étape 2 — Calculer : les limites à gauche et à droite en $1$ valent $1+3=4$. Étape 3 — Comparer : $4\\neq0$. Étape 4 — Conclure : $k$ n'est pas continue en $1$ : faux. Des limites égales entre elles ne suffisent pas : elles doivent aussi égaler $k(1)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x)=x+2$ si $x\\leq2$ et $f(x)=3x+a$ si $x>2$. Quelle valeur de $a$ rend $f$ continue en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(2)=2+2=4$. Étape 2 — Calculer : à gauche $4$ ; à droite $3\\times2+a=6+a$. Étape 3 — Comparer : il faut $6+a=4$. Étape 4 — Conclure : $a=-2$. Contrôle : $6+(-2)=4=f(2)$.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante en Côte d'Ivoire",
+          "notions": "Prix du cacao à Abengourou (limite à gauche et à droite en un réel), coût moyen d'un pagne à Bouaké (limite en l'infini), facture d'un tailleur de Korhogo (continuité en un point avec paramètre), rendement d'une plantation de Daloa (limite en l'infini). Valeurs d'exemple.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un grossiste d'Abengourou achète du cacao. Pour $x$ sacs, le prix $P(x)$, en centaines de FCFA, est $P(x)=5x+20$ si $0 < x < 6$ et $P(x)=x^2+14$ si $x>6$ (valeurs d'exemple). On étudie le prix quand le nombre de sacs se rapproche de 6.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour $x<6$ on utilise $5x+20$ ; pour $x>6$ on utilise $x^2+14$. La limite en $6$ existe si les deux côtés donnent le même nombre.",
+              "questions": [
+                {
+                  "content": "Un grossiste paie $P(x)=5x+20$ centaines de FCFA pour $x$ sacs si $0 < x < 6$. Quelle est la limite de $P$ à gauche en $6$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=6$. Étape 2 — Écrire : pour $x<6$, $P(x)=5x+20$. Étape 3 — Calculer : $\\lim_{x\\to6^-}P(x)=5\\times6+20=50$. Étape 4 — Conclure : la limite à gauche vaut $50$ centaines de FCFA. Utiliser $x^2+14$ de ce côté serait une erreur d'expression : elle ne vaut que pour $x>6$.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $x>6$ sacs, le prix est $P(x)=x^2+14$ centaines de FCFA. Quelle est la limite de $P$ à droite en $6$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=6$. Étape 2 — Écrire : pour $x>6$, $P(x)=x^2+14$. Étape 3 — Calculer : $\\lim_{x\\to6^+}P(x)=6^2+14=36+14=50$. Étape 4 — Conclure : la limite à droite vaut $50$. Écrire $6^2=12$ (double de $6$) est une erreur de calcul sur le carré.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $P(x)=5x+20$ si $0 < x < 6$ et $P(x)=x^2+14$ si $x>6$, le prix $P(x)$ a pour limite $50$ quand $x$ tend vers $6$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=6$. Étape 2 — Écrire : $5x+20$ à gauche, $x^2+14$ à droite. Étape 3 — Calculer : à gauche $50$ ; à droite $36+14=50$. Étape 4 — Conclure : les deux limites sont égales à $50$ : vrai. Les deux côtés ont été calculés, ce qui seul justifie la conclusion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $P(x)=5x+20$ si $0 < x < 6$ et $P(x)=x^2+14$ si $x>6$, vers quel nombre le prix $P(x)$ se rapproche-t-il quand le nombre de sacs se rapproche de 6 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=6$. Étape 2 — Écrire : deux expressions, une de chaque côté. Étape 3 — Calculer : à gauche $50$, à droite $50$. Étape 4 — Conclure : $\\lim_{x\\to6}P(x)=50$. $36$ ne garde que $6^2$ ; $20$ ne garde que la constante de $5x+20$ ; $14$ ne garde que la constante de $x^2+14$.",
+                  "answers": [
+                    {
+                      "content": "$36$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $3$ sacs (donc $0 < x < 6$), le prix est $P(x)=5x+20$ centaines de FCFA. Quel est le prix $P(3)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $3<6$ : on utilise l'expression de gauche. Étape 2 — Écrire : $P(x)=5x+20$. Étape 3 — Calculer : $P(3)=5\\times3+20=35$. Étape 4 — Conclure : le prix est de $35$ centaines de FCFA. Utiliser $x^2+14$ donnerait $23$ : c'est l'expression de $x>6$, qui ne s'applique pas à $3$ sacs.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Bouaké, une couturière a un coût fixe de 18 milliers de FCFA par semaine et un coût de 4 milliers de FCFA par pagne. Le coût moyen d'un pagne est $C(x)=4+\\dfrac{18}{x}$ milliers de FCFA pour $x$ pagnes cousus ($x>0$). On étudie ce coût moyen quand la production devient très grande.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le terme $\\dfrac{18}{x}=18\\times\\dfrac1x$ tend vers $0$ en $+\\infty$. Isole d'abord la constante $4$, puis additionne les limites.",
+              "questions": [
+                {
+                  "content": "Le coût moyen d'un pagne est $C(x)=4+\\dfrac{18}{x}$ milliers de FCFA. Quelle est la limite de $C(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $4$ et $18\\times\\dfrac1x$. Étape 2 — Donner : $4\\to4$ et $\\dfrac{18}{x}\\to0$. Étape 3 — Opérer : somme : $4+0$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}C(x)=4$ : le coût moyen se rapproche de 4 milliers de FCFA. Écrire $4+18=22$ remplace $\\dfrac1x$ par $1$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $x=9$ pagnes cousus, le coût moyen est $C(x)=4+\\dfrac{18}{x}$. Quel est le coût moyen $C(9)$ en milliers de FCFA ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on remplace $x$ par $9$ (pas de limite ici). Étape 2 — Donner : $\\dfrac{18}{9}=2$. Étape 3 — Opérer : $4+2=6$. Étape 4 — Conclure : $C(9)=6$ milliers de FCFA. Contrôle : $C(9)$ est plus grand que la limite $4$, car $\\dfrac{18}{9}>0$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quand le nombre $x$ de pagnes devient très grand, le coût moyen $C(x)=4+\\dfrac{18}{x}$ se rapproche de $4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$. Étape 2 — Donner : $\\dfrac{18}{x}\\to0$. Étape 3 — Opérer : $4+0=4$. Étape 4 — Conclure : le coût moyen se rapproche de $4$ : vrai. Le coût fixe se répartit sur de plus en plus de pagnes : sa part par pagne devient négligeable.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le coût fixe est réparti différemment, le coût moyen devient $C_2(x)=4+\\dfrac{18}{x^2}$. Quelle est la limite de $C_2(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $4$ et $18\\times\\dfrac1{x^2}$. Étape 2 — Donner : $\\dfrac1{x^2}\\to0$. Étape 3 — Opérer : $4+18\\times0=4$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}C_2(x)=4$. $22$ remplace $\\dfrac1{x^2}$ par $1$ ; $0$ oublie la constante ; $18$ oublie le $4$ et le fait que $\\dfrac1{x^2}\\to0$.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$22$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $\\dfrac{18}{x}$ quand $x$ tend vers $+\\infty$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; le terme est $18\\times\\dfrac1x$. Étape 2 — Donner : $\\dfrac1x\\to0$. Étape 3 — Opérer : $18\\times0=0$. Étape 4 — Conclure : la limite est $0$. Répondre $18$ oublie que $\\dfrac1x$ tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un tailleur de Korhogo facture $f(x)$ centaines de FCFA pour $x$ mètres de tissu : $f(x)=3x+2$ si $x\\leq4$ et $f(x)=x^2-2$ si $x>4$ (valeurs d'exemple). On étudie la continuité de $f$ en $4$ avec la méthode de la fiche : évaluer, calculer, comparer, conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule $f(4)$ avec l'expression qui contient $4$, puis les limites à gauche et à droite. La fonction est continue si les trois nombres sont égaux.",
+              "questions": [
+                {
+                  "content": "Pour $x\\leq4$ mètres, la facture est $f(x)=3x+2$ centaines de FCFA. Quelle est la facture $f(4)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $4\\leq4$, donc $f(4)=3\\times4+2$. Étape 2 — Calculer : $12+2=14$. Étape 3 — Comparer : ce nombre sera comparé aux deux limites. Étape 4 — Conclure : $f(4)=14$. Utiliser $x^2-2$ donnerait aussi $14$ ici, mais c'est $3x+2$ qui définit $f(4)$ car $4\\leq4$.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $x>4$ mètres, la facture est $f(x)=x^2-2$ centaines de FCFA. Quelle est la limite de $f$ à droite en $4$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(4)=14$. Étape 2 — Calculer : $\\lim_{x\\to4^+}f(x)=4^2-2=14$. Étape 3 — Comparer : $14=14$. Étape 4 — Conclure : la limite à droite vaut $14$. Écrire $4^2=8$ (double de $4$) est une erreur de calcul sur le carré.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La fonction $f$ définie par $f(x)=3x+2$ si $x\\leq4$ et $f(x)=x^2-2$ si $x>4$ est continue en $4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $f(4)=3\\times4+2=14$. Étape 2 — Calculer : à gauche $14$ ; à droite $4^2-2=14$. Étape 3 — Comparer : $14=14=f(4)$. Étape 4 — Conclure : $f$ est continue en $4$ : vrai. Les trois nombres sont égaux, ce qui est exactement la définition de la continuité en $4$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tailleur change son tarif pour $x>4$ : $f(x)=x^2+a$. Quelle valeur de $a$ rend $f$ continue en $4$, sachant que $f(x)=3x+2$ pour $x\\leq4$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(4)=3\\times4+2=14$. Étape 2 — Calculer : à gauche $14$ ; à droite $4^2+a=16+a$. Étape 3 — Comparer : il faut $16+a=14$. Étape 4 — Conclure : $a=-2$. Contrôle : $16+(-2)=14=f(4)$.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $f(x)=3x+2$ si $x\\leq4$ et $f(x)=x^2-2$ si $x>4$, la facture ne fait pas de saut en $4$, car ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Évaluer : $f(4)=14$. Étape 2 — Calculer : limites à gauche et à droite égales à $14$. Étape 3 — Comparer : les trois nombres sont égaux. Étape 4 — Conclure : pas de saut : $f$ est continue en $4$. Être un polynôme sur chaque morceau ou avoir $4\\leq4$ ne garantit rien : c'est l'égalité des trois nombres qui compte.",
+                  "answers": [
+                    {
+                      "content": "on a $4\\leq4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la limite à gauche, la limite à droite et $f(4)$ sont égales",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est un polynôme sur chaque morceau",
+                      "correct": false
+                    },
+                    {
+                      "content": "la limite à droite est plus grande que $f(4)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une coopérative de Daloa suit le rendement moyen de ses plantations. Pour $x$ hectares cultivés ($x>0$), le rendement moyen est $R(x)=10-\\dfrac5x$ tonnes par hectare (valeurs d'exemple). On étudie ce rendement quand la surface devient très grande.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Les termes $\\dfrac5x$ et $\\dfrac6{\\sqrt{x}}$ tendent vers $0$ en $+\\infty$. Isole la constante, puis additionne les limites.",
+              "questions": [
+                {
+                  "content": "Le rendement moyen est $R(x)=10-\\dfrac5x$ tonnes par hectare. Quelle est la limite de $R(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $10$ et $-5\\times\\dfrac1x$. Étape 2 — Donner : $10\\to10$ et $\\dfrac5x\\to0$. Étape 3 — Opérer : $10-0=10$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}R(x)=10$. Écrire $10-5=5$ remplace $\\dfrac1x$ par $1$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $x=5$ hectares, le rendement moyen est $R(x)=10-\\dfrac5x$. Quel est le rendement moyen $R(5)$ en tonnes par hectare ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on remplace $x$ par $5$. Étape 2 — Donner : $\\dfrac55=1$. Étape 3 — Opérer : $10-1=9$. Étape 4 — Conclure : $R(5)=9$ tonnes par hectare. Le rendement reste inférieur à la limite $10$, car on retranche toujours $\\dfrac5x>0$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour un autre champ, le rendement moyen est $R_2(x)=10-\\dfrac{6}{\\sqrt{x}}$. Quelle est la limite de $R_2(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $10$ et $-6\\times\\dfrac1{\\sqrt{x}}$. Étape 2 — Donner : $\\dfrac1{\\sqrt{x}}\\to0$. Étape 3 — Opérer : $10-6\\times0=10$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}R_2(x)=10$. $4$ remplace $\\dfrac1{\\sqrt{x}}$ par $1$ ; $0$ oublie la constante ; $16$ change le signe.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$16$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le rendement moyen $R(x)=10-\\dfrac5x$ se rapproche de $10$ tonnes par hectare quand la surface $x$ devient très grande.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$. Étape 2 — Donner : $\\dfrac5x\\to0$. Étape 3 — Opérer : $10-0=10$. Étape 4 — Conclure : le rendement se rapproche de $10$ : vrai. Le terme retranché devient négligeable quand $x$ grandit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $R(x)=10-\\dfrac5x$ avec $x>0$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$, puis on remplace $x$ par $5$. Étape 2 — Donner : $\\dfrac5x\\to0$ ; $\\dfrac55=1$. Étape 3 — Opérer : $10-0=10$ ; $10-1=9$. Étape 4 — Conclure : la limite est $10$ et $R(5)=9$. Les valeurs $5$ viennent d'une confusion avec le numérateur ; $R(5)=10$ oublie de retrancher $1$.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x\\to+\\infty}R(x)=5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R(5)=5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R(5)=9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x\\to+\\infty}R(x)=10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R(5)=10$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Limites en un réel avec attention aux signes et à l'ensemble de définition, limites à gauche et à droite avec une valeur absolue ou un paramètre, limites en l'infini avec somme, produit et quotient, continuité en un point et rôle de la valeur de la fonction.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On justifie le calcul de limites en un réel en appliquant la méthode de la fiche : identifier, substituer (avec des parenthèses si $a$ est négatif), vérifier, conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Vérifie à chaque fois que $a$ est dans l'ensemble de définition : dénominateur non nul, radicande positif ou nul.",
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $f(x)=x^2+x$ quand $x$ tend vers $-3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $a=-3$, polynôme défini sur $\\mathbb{R}$. Étape 2 — Substituer : avec des parenthèses : $(-3)^2+(-3)=9-3$. Étape 3 — Vérifier : aucun dénominateur. Étape 4 — Conclure : $\\lim_{x\\to-3}f(x)=6$. $-12$ lit $-3^2$ comme $-9$ (erreur du piège) ; $-6$ remplace $x^2$ par $x$ ; $12$ ajoute $3$ au lieu de le retrancher.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=\\dfrac{x^2-4}{x+2}$ quand $x$ tend vers $0$ est égale à $-2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $a=0$ et $f$ est définie en $0$ car $0+2=2\\neq0$. Étape 2 — Substituer : numérateur $0^2-4=-4$ ; dénominateur $0+2=2$. Étape 3 — Vérifier : le dénominateur vaut $2$, différent de $0$. Étape 4 — Conclure : $\\lim_{x\\to0}f(x)=\\dfrac{-4}{2}=-2$ : vrai. Oublier le signe moins du numérateur donnerait $2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $f(x)=\\sqrt{x-1}$ quand $x$ tend vers $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $a=5$, et $\\sqrt{x-1}$ est définie pour $x\\geq1$. Étape 2 — Substituer : $\\sqrt{5-1}=\\sqrt{4}$. Étape 3 — Vérifier : le radicande $4$ est positif. Étape 4 — Conclure : $\\lim_{x\\to5}f(x)=2$. $4$ oublie la racine ; $\\sqrt{5}$ oublie le $-1$ sous la racine ; $1$ confond $x-1$ avec la limite.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $f(x)=x^3+3x$ quand $x$ tend vers $-2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $a=-2$, polynôme défini sur $\\mathbb{R}$. Étape 2 — Substituer : avec des parenthèses : $(-2)^3+3\\times(-2)=-8-6$. Étape 3 — Vérifier : aucun dénominateur. Étape 4 — Conclure : $\\lim_{x\\to-2}f(x)=-14$. Un cube garde le signe de $x$ : écrire $(-2)^3=8$ serait faux.",
+                  "answers": [
+                    {
+                      "content": "-14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelles sont les deux fonctions dont la limite en $2$ est égale à $7$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : $a=2$ pour toutes les fonctions, qui sont des polynômes. Étape 2 — Substituer : $2^2+3=7$ ; $2\\times2+3=7$ ; $3\\times2+2=8$ ; $2^2+2=6$ ; $2+4=6$. Étape 3 — Vérifier : aucun dénominateur. Étape 4 — Conclure : seules $x^2+3$ et $2x+3$ ont pour limite $7$. $3x+2$ donne $8$ en inversant $2$ et $3$ ; $x^2+x$ et $x+4$ donnent $6$.",
+                  "answers": [
+                    {
+                      "content": "$2x+3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x+2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2+3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2+x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On raisonne sur les limites à gauche et à droite : la valeur absolue $|x-3|$ vaut $3-x$ si $x<3$ et $x-3$ si $x>3$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris l'expression de $f$ de chaque côté du réel visé, calcule les deux limites, puis compare-les. Elles doivent être égales pour que la limite existe.",
+              "questions": [
+                {
+                  "content": "On pose $f(x)=|x-3|+1$. Quelle est la limite à gauche de $f$ en $3$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la valeur absolue s'annule en $a=3$. Étape 2 — Écrire : pour $x<3$, $f(x)=(3-x)+1=4-x$. Étape 3 — Calculer : $\\lim_{x\\to3^-}f(x)=4-3=1$. Étape 4 — Conclure : la limite à gauche vaut $1$. Écrire $x-3+1$ pour $x<3$ oublie que $|x-3|=3-x$ à gauche de $3$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=|x-3|+1$. Quelle est la limite à droite de $f$ en $3$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la valeur absolue s'annule en $a=3$. Étape 2 — Écrire : pour $x>3$, $f(x)=(x-3)+1=x-2$. Étape 3 — Calculer : $\\lim_{x\\to3^+}f(x)=3-2=1$. Étape 4 — Conclure : la limite à droite vaut $1$. Les deux côtés donnent $1$ : la limite en $3$ existe et vaut $1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La fonction $f(x)=|x-3|+1$ a pour limite $1$ en $3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la valeur absolue s'annule en $a=3$. Étape 2 — Écrire : $4-x$ à gauche, $x-2$ à droite. Étape 3 — Calculer : à gauche $1$ ; à droite $1$. Étape 4 — Conclure : les deux limites sont égales à $1$ : vrai. Il fallait calculer les deux côtés avant de conclure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $k(x)=2x$ si $x<1$ et $k(x)=3x-2$ si $x>1$. Que peut-on dire de la limite de $k$ en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=1$. Étape 2 — Écrire : $k(x)=2x$ pour $x<1$ ; $k(x)=3x-2$ pour $x>1$. Étape 3 — Calculer : à gauche $2$ ; à droite $3-2=1$. Étape 4 — Conclure : $2\\neq1$ : pas de limite en $1$. Retenir $2$ ou $1$ conclut avec un seul côté ; $3$ est le coefficient de $x$, non une limite.",
+                  "answers": [
+                    {
+                      "content": "$k$ a pour limite $2$ en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k$ a pour limite $1$ en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k$ a pour limite $3$ en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k$ n'a pas de limite en $1$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x)=2x+3$ si $x<1$ et $f(x)=x^2+a$ si $x>1$. Quelle valeur de $a$ garantit que $f$ a une limite en $1$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'expression change en $a=1$. Étape 2 — Écrire : à gauche $2x+3$ ; à droite $x^2+a$. Étape 3 — Calculer : à gauche $2\\times1+3=5$ ; à droite $1+a$. Étape 4 — Conclure : il faut $1+a=5$, donc $a=4$. Contrôle : $1+4=5$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On justifie des limites en l'infini en appliquant les règles : les limites de $\\dfrac1x$, $\\dfrac1{x^2}$ et $\\dfrac1{\\sqrt{x}}$ en $+\\infty$ valent $0$, puis les règles sur la somme, le produit et le quotient (dénominateur de limite non nulle).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Donne la limite de chaque terme avant d'opérer. Pour un quotient, la limite du dénominateur doit être différente de $0$.",
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $N(x)=\\dfrac{6+\\frac3x}{2-\\frac4x}$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; le numérateur est $6+3\\times\\dfrac1x$ et le dénominateur $2-4\\times\\dfrac1x$. Étape 2 — Donner : le numérateur tend vers $6$ et le dénominateur vers $2$. Étape 3 — Opérer : le dénominateur a une limite non nulle : quotient $\\dfrac62$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}N(x)=3$. $6$ oublie de diviser par la limite du dénominateur ; $2$ oublie le numérateur ; $0$ remplace tout par $\\dfrac1x$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=\\dfrac5x$ quand $x$ tend vers $-\\infty$ est égale à $0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on vise $-\\infty$ ; le terme est $5\\times\\dfrac1x$. Étape 2 — Donner : $\\dfrac1x\\to0$ aussi en $-\\infty$. Étape 3 — Opérer : $5\\times0=0$. Étape 4 — Conclure : la limite vaut $0$ : vrai. Le signe de $x$ ne change pas cette limite de référence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $A(x)=1+\\dfrac2x$ et $B(x)=3-\\dfrac1x$. Quelle est la limite de $g(x)=A(x)\\times B(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; deux facteurs, chacun avec un terme $\\dfrac1x$. Étape 2 — Donner : le premier facteur tend vers $1$, le second vers $3$. Étape 3 — Opérer : la limite d'un produit est le produit des limites : $1\\times3$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}g(x)=3$. Développer ou additionner les limites ($1+3=4$) confond produit et somme.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la limite de $h(x)=\\dfrac{4+\\frac1x}{1-\\frac{2}{\\sqrt{x}}}$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; numérateur $4+\\dfrac1x$ et dénominateur $1-2\\times\\dfrac1{\\sqrt{x}}$. Étape 2 — Donner : le numérateur tend vers $4$ et le dénominateur vers $1$. Étape 3 — Opérer : dénominateur de limite non nulle : $\\dfrac41$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}h(x)=4$. $1$ ne garde que le dénominateur ; $5$ additionne les limites ; $2$ n'a pas de justification.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coût moyen est $C(x)=5+\\dfrac{20}{x}$ pour $x>0$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $5$ et $20\\times\\dfrac1x$. Étape 2 — Donner : $5\\to5$ et $\\dfrac{20}{x}\\to0$. Étape 3 — Opérer : $5+0=5$ ; et $\\dfrac{20}{x}>0$ pour $x>0$, donc $C(x)>5$. Étape 4 — Conclure : la limite est $5$ et $C(x)$ reste au-dessus de $5$. $25$ remplace $\\dfrac1x$ par $1$ ; $C(x)=5$ confond « se rapproche de » et « est égal à ».",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x\\to+\\infty}C(x)=25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x\\to+\\infty}C(x)=5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C(x)=5$ pour $x$ très grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C(x)<5$ pour tout $x>0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C(x)>5$ pour tout $x>0$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie la continuité en $2$ de la fonction $f$ définie par $f(x)=x^2+1$ si $x<2$, $f(2)=5$ et $f(x)=2x+1$ si $x>2$, puis le rôle de la valeur en $2$ et d'un paramètre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare toujours trois nombres : la limite à gauche, la limite à droite et $f(2)$. La continuité exige qu'ils soient tous égaux.",
+              "questions": [
+                {
+                  "content": "On pose $f(x)=x^2+1$ si $x<2$, $f(2)=5$ et $f(x)=2x+1$ si $x>2$. Quelle est la limite à gauche de $f$ en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(2)=5$. Étape 2 — Calculer : pour $x<2$, $f(x)=x^2+1$ : $\\lim_{x\\to2^-}f(x)=2^2+1=5$. Étape 3 — Comparer : $5=f(2)$. Étape 4 — Conclure : la limite à gauche vaut $5$. Écrire $2^2=2$ ou $4$ sans carré serait une erreur de calcul.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=x^2+1$ si $x<2$, $f(2)=5$ et $f(x)=2x+1$ si $x>2$. Quelle est la limite à droite de $f$ en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(2)=5$. Étape 2 — Calculer : pour $x>2$, $f(x)=2x+1$ : $\\lim_{x\\to2^+}f(x)=2\\times2+1=5$. Étape 3 — Comparer : $5=f(2)$. Étape 4 — Conclure : la limite à droite vaut $5$. Utiliser $x^2+1$ de ce côté serait l'erreur d'expression.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La fonction $f$ définie par $f(x)=x^2+1$ si $x<2$, $f(2)=5$ et $f(x)=2x+1$ si $x>2$ est continue en $2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $f(2)=5$. Étape 2 — Calculer : à gauche $5$ ; à droite $5$. Étape 3 — Comparer : $5=5=f(2)$. Étape 4 — Conclure : $f$ est continue en $2$ : vrai. Les trois nombres sont égaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'on remplace $f(2)=5$ par $f(2)=4$ (les deux autres expressions restant les mêmes), la fonction $f$ est encore continue en $2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $f(2)=4$. Étape 2 — Calculer : à gauche $5$ ; à droite $5$. Étape 3 — Comparer : $5=5$ mais $5\\neq4=f(2)$. Étape 4 — Conclure : $f$ n'est plus continue en $2$ : faux. L'égalité des deux limites ne suffit pas : elles doivent aussi être égales à $f(2)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $g(x)=2x+m$ si $x\\leq2$ et $g(x)=x^2+1$ si $x>2$. Quelle valeur de $m$ rend $g$ continue en $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $g(2)=2\\times2+m=4+m$. Étape 2 — Calculer : à droite $2^2+1=5$. Étape 3 — Comparer : il faut $4+m=5$. Étape 4 — Conclure : $m=1$. Contrôle : $4+1=5$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : limites et continuité",
+          "notions": "Bilan de toutes les notions : limite en un réel par substitution, limites à gauche et à droite (fonction par morceaux, valeur absolue), limites en l'infini avec somme, produit et quotient, continuité en un point avec un paramètre. Niveau devoir.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Abidjan, le prix d'une course de taxi est $P(x)$ milliers de FCFA pour $x$ km (valeurs d'exemple) : $P(x)=2x+1$ si $x\\leq5$ et $P(x)=x+b$ si $x>5$, où $b$ est un réel. On étudie la continuité de $P$ en $5$ et le prix moyen au kilomètre pour les longues courses.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule $P(5)$ avec l'expression qui contient $5$ ; à droite, l'expression est $x+b$. Pour le prix moyen, divise $P(x)$ par $x$ et isole la constante.",
+              "questions": [
+                {
+                  "content": "Le prix d'une course est $P(x)=2x+1$ milliers de FCFA si $x\\leq5$ km. Que vaut $P(5)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $5\\leq5$, donc $P(5)=2\\times5+1$. Étape 2 — Calculer : $10+1=11$. Étape 3 — Comparer : ce nombre sera comparé aux limites. Étape 4 — Conclure : $P(5)=11$ milliers de FCFA. Utiliser $x+b$ serait une erreur : $x=5$ vérifie $x\\leq5$, c'est donc $2x+1$ qui s'applique.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $P(x)=2x+1$ si $x\\leq5$ et $P(x)=x+b$ si $x>5$. Quelle valeur de $b$ rend $P$ continue en $5$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $P(5)=2\\times5+1=11$. Étape 2 — Calculer : à gauche $11$ ; à droite $5+b$. Étape 3 — Comparer : il faut $5+b=11$. Étape 4 — Conclure : $b=6$. Contrôle : $5+6=11=P(5)$. Écrire $b=11$ oublie le terme $x=5$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $b=3$, la fonction $P$ définie par $P(x)=2x+1$ si $x\\leq5$ et $P(x)=x+3$ si $x>5$ est continue en $5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $P(5)=11$. Étape 2 — Calculer : à gauche $11$ ; à droite $5+3=8$. Étape 3 — Comparer : $11\\neq8$. Étape 4 — Conclure : $P$ n'est pas continue en $5$ : faux. La limite à droite $8$ diffère de $P(5)=11$ : le prix fait un saut de $3$ milliers de FCFA.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $b=6$, le prix moyen au kilomètre pour $x>5$ est $M(x)=\\dfrac{x+6}{x}=1+\\dfrac6x$. Quelle est la limite de $M(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; les termes sont $1$ et $6\\times\\dfrac1x$. Étape 2 — Donner : $1\\to1$ et $\\dfrac6x\\to0$. Étape 3 — Opérer : $1+0=1$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}M(x)=1$ : le prix moyen se rapproche de 1 millier de FCFA par km. Écrire $1+6=7$ remplace $\\dfrac1x$ par $1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $b=3$, la limite à droite de $P$ en $5$ est $8$ et $P(5)=11$. Pourquoi $P$ n'est-elle pas continue en $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Évaluer : $P(5)=11$, donc $P$ est définie en $5$. Étape 2 — Calculer : à gauche $11$ ; à droite $5+3=8$. Étape 3 — Comparer : $11=11$ mais $8\\neq11$. Étape 4 — Conclure : la limite à droite diffère de $P(5)$. La limite à gauche est égale à $P(5)$ ; une fonction par morceaux peut être continue, comme avec $b=6$.",
+                  "answers": [
+                    {
+                      "content": "Parce que $P$ n'est pas définie en $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la limite à gauche est différente de $P(5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $P$ est une fonction par morceaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la limite à droite est différente de $P(5)$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Bilan sur les limites : en un réel par substitution et en l'infini avec les fonctions de référence $\\dfrac1x$, $\\dfrac1{x^2}$ et $\\dfrac1{\\sqrt{x}}$ (limite $0$ en $+\\infty$), puis les règles sur la somme, le produit et le quotient.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Substitue quand le réel visé est dans l'ensemble de définition. En l'infini, donne d'abord la limite de chaque terme, puis opère : le dénominateur d'un quotient doit avoir une limite non nulle.",
+              "questions": [
+                {
+                  "content": "Quelle est la limite de $Q(x)=\\dfrac{8+\\frac4x}{2+\\frac6x}$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; numérateur $8+4\\times\\dfrac1x$, dénominateur $2+6\\times\\dfrac1x$. Étape 2 — Donner : le numérateur tend vers $8$, le dénominateur vers $2$. Étape 3 — Opérer : dénominateur de limite non nulle : $\\dfrac82$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}Q(x)=4$. Écrire $\\dfrac{8+4}{2+6}=1{,}5$ remplace $\\dfrac1x$ par $1$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $A(x)=3+\\dfrac2x$ et $B(x)=1-\\dfrac1{x^2}$. Quelle est la limite de $g(x)=A(x)\\times B(x)$ quand $x$ tend vers $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; deux facteurs avec des termes $\\dfrac1x$ et $\\dfrac1{x^2}$. Étape 2 — Donner : le premier facteur tend vers $3$, le second vers $1$. Étape 3 — Opérer : produit : $3\\times1$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}g(x)=3$. $4$ additionne les limites ; $2$ oublie un facteur ; $0$ remplace chaque terme par $0$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $f(x)=5+\\dfrac{3}{x^2}$ quand $x$ tend vers $-\\infty$ est égale à $5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on vise $-\\infty$ ; les termes sont $5$ et $3\\times\\dfrac1{x^2}$. Étape 2 — Donner : $\\dfrac1{x^2}\\to0$ aussi en $-\\infty$. Étape 3 — Opérer : $5+3\\times0=5$. Étape 4 — Conclure : la limite vaut $5$ : vrai. Le signe de $x$ ne change pas cette limite de référence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $h(x)=\\dfrac{x^2+1}{x+3}$ quand $x$ tend vers $2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $a=2$ et $h$ est définie en $2$ car $2+3=5\\neq0$. Étape 2 — Substituer : numérateur $2^2+1=5$ ; dénominateur $2+3=5$. Étape 3 — Vérifier : le dénominateur vaut $5$, différent de $0$. Étape 4 — Conclure : $\\lim_{x\\to2}h(x)=\\dfrac55=1$. Écrire $4+1$ sur $2+3$ sans calculer le carré donnerait un résultat faux.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La limite de $\\dfrac{7}{\\sqrt{x}}$ quand $x$ tend vers $+\\infty$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; le terme est $7\\times\\dfrac1{\\sqrt{x}}$. Étape 2 — Donner : $\\dfrac1{\\sqrt{x}}\\to0$. Étape 3 — Opérer : $7\\times0=0$. Étape 4 — Conclure : la limite est $0$. Répondre $7$ oublie que $\\dfrac1{\\sqrt{x}}$ tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On considère la fonction $f$ définie par $f(x)=|x-4|+2x$. La valeur absolue vaut $|x-4|=4-x$ si $x<4$ et $|x-4|=x-4$ si $x>4$. On étudie la limite et la continuité de $f$ en $4$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Remplace d'abord la valeur absolue par son expression de chaque côté de $4$, simplifie, puis calcule les deux limites. Compare-les avec $f(4)$.",
+              "questions": [
+                {
+                  "content": "On pose $f(x)=|x-4|+2x$. Pour $x<4$, on a $f(x)=x+4$. Quelle est la limite à gauche de $f$ en $4$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(4)=|0|+8=8$. Étape 2 — Calculer : $\\lim_{x\\to4^-}f(x)=4+4=8$. Étape 3 — Comparer : $8=f(4)$. Étape 4 — Conclure : la limite à gauche vaut $8$. Écrire $4-4=0$ oublie le terme $2x$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=|x-4|+2x$. Pour $x>4$, on a $f(x)=3x-4$. Quelle est la limite à droite de $f$ en $4$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(4)=8$. Étape 2 — Calculer : $\\lim_{x\\to4^+}f(x)=3\\times4-4=8$. Étape 3 — Comparer : $8=f(4)$. Étape 4 — Conclure : la limite à droite vaut $8$. Utiliser $x+4$ de ce côté serait l'erreur d'expression ; ici, par coïncidence, on retrouve aussi $8$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La fonction $f(x)=|x-4|+2x$ est continue en $4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $f(4)=8$. Étape 2 — Calculer : à gauche $8$ ; à droite $8$. Étape 3 — Comparer : $8=8=f(4)$. Étape 4 — Conclure : $f$ est continue en $4$ : vrai. Les trois nombres sont égaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x<4$, quelle est l'expression de $f(x)=|x-4|+2x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Évaluer : pour $x<4$, $x-4<0$ donc $|x-4|=4-x$. Étape 2 — Calculer : $f(x)=(4-x)+2x$. Étape 3 — Comparer : on regroupe : $4+x$. Étape 4 — Conclure : $f(x)=x+4$. $3x-4$ utilise $|x-4|=x-4$, valable seulement pour $x>4$ ; $3x+4$ mélange les signes ; $-x-4$ oublie le terme $2x$ et change le signe.",
+                  "answers": [
+                    {
+                      "content": "$3x-4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x+4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x-4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x)=|x-4|+2x$, que vaut $f(6)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $6>4$, donc $|6-4|=2$. Étape 2 — Calculer : $f(6)=2+2\\times6=2+12$. Étape 3 — Comparer : pas de comparaison de limites ici. Étape 4 — Conclure : $f(6)=14$. Contrôle avec $3x-4$ pour $x>4$ : $3\\times6-4=14$.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une imprimerie de Yamoussoukro facture $f(x)$ milliers de FCFA pour $x$ centaines de pages (valeurs d'exemple) : $f(x)=kx+2$ si $x<3$ et $f(x)=x^2-1$ si $x\\geq3$, où $k$ est un réel. On cherche $k$ pour que la facture ne fasse pas de saut en $3$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour $x\\geq3$, $f(3)=3^2-1$. À gauche, la limite est $3k+2$. La continuité demande $3k+2=f(3)$.",
+              "questions": [
+                {
+                  "content": "On pose $f(x)=kx+2$ si $x<3$ et $f(x)=x^2-1$ si $x\\geq3$. Que vaut $f(3)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $3\\geq3$, donc on utilise $x^2-1$ : $f(3)=3^2-1$. Étape 2 — Calculer : $9-1=8$. Étape 3 — Comparer : ce nombre sera comparé aux limites. Étape 4 — Conclure : $f(3)=8$. Utiliser $kx+2$ est une erreur : cette expression ne vaut que pour $x<3$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=kx+2$ si $x<3$ et $f(x)=x^2-1$ si $x\\geq3$. Quelle est la limite à droite de $f$ en $3$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(3)=8$. Étape 2 — Calculer : $\\lim_{x\\to3^+}f(x)=3^2-1=8$. Étape 3 — Comparer : $8=f(3)$. Étape 4 — Conclure : la limite à droite vaut $8$. Écrire $3^2=6$ est une erreur de calcul sur le carré.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "On pose $f(x)=kx+2$ si $x<3$ et $f(x)=x^2-1$ si $x\\geq3$. Quelle valeur de $k$ rend $f$ continue en $3$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Évaluer : $f(3)=8$. Étape 2 — Calculer : à gauche $3k+2$ ; à droite $8$. Étape 3 — Comparer : il faut $3k+2=8$, donc $3k=6$. Étape 4 — Conclure : $k=2$. Contrôle : $3\\times2+2=8$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $k=2$, la fonction $f$ définie par $f(x)=2x+2$ si $x<3$ et $f(x)=x^2-1$ si $x\\geq3$ est continue en $3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $f(3)=8$. Étape 2 — Calculer : à gauche $2\\times3+2=8$ ; à droite $8$. Étape 3 — Comparer : $8=8=f(3)$. Étape 4 — Conclure : $f$ est continue en $3$ : vrai. Les trois nombres sont égaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $k=1$, la fonction $f$ définie par $f(x)=x+2$ si $x<3$ et $f(x)=x^2-1$ si $x\\geq3$ a une limite en $3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Évaluer : $f(3)=8$. Étape 2 — Calculer : à gauche $3+2=5$ ; à droite $8$. Étape 3 — Comparer : $5\\neq8$. Étape 4 — Conclure : les deux limites sont différentes : $f$ n'a pas de limite en $3$, l'affirmation est fausse. La facture fait un saut de $3$ milliers de FCFA en $3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $k=1$, la limite à gauche de $f$ en $3$ vaut $5$ et $f(3)=8$. Pourquoi $f$ n'est-elle pas continue en $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Évaluer : $f(3)=8$, donc $f$ est définie en $3$. Étape 2 — Calculer : à gauche $3+2=5$ ; à droite $8$. Étape 3 — Comparer : $5\\neq8$ ; la limite à droite $8$ est égale à $f(3)$. Étape 4 — Conclure : c'est la limite à gauche qui diffère de $f(3)$. La limite à droite est égale à $f(3)$ ; la valeur de $k$ n'empêche pas la continuité (avec $k=2$, elle a lieu).",
+                  "answers": [
+                    {
+                      "content": "Parce que $f$ n'est pas définie en $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la limite à droite est différente de $f(3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la limite à gauche est différente de $f(3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $k$ est différent de $0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

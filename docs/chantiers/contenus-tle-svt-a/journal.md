@@ -31,7 +31,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Points « à faire valider par un enseignant » (journal du programme, vague T5) | Programme officiel détaillé non accessible ici | — (avant publication) |
+| Points « à faire valider par un enseignant » (journal du programme, vague T5) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Programme officiel détaillé non accessible ici | — (avant publication) |
 | Planches manquantes : cerveau (lobes, aires), système nerveux et surrénales, caryotype, cellule (noyau, ribosomes), double hélice d'ADN, hématies normales et falciformes, crânes et squelettes Homme / chimpanzé | Aucune sorte nouvelle dans ce chantier (hors périmètre) | à proposer au programme |
 | Frise en millions d'années, tracé d'EEG, hypnogramme, arbre généalogique (deux parents), échiquier de croisement, courbe à deux séries | Code des figures | à proposer au programme |
 

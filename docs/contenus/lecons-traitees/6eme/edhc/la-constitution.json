@@ -1,0 +1,3586 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La Constitution",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "EDHC",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "roles-constitution",
+          "kind": "diagram",
+          "description": "Schéma en arbre : la Constitution, loi suprême, est au sommet. Elle a trois rôles qui en partent : organiser l'État, garantir les droits et les libertés, fixer les devoirs des citoyens. Chaque rôle est relié à la Constitution par une flèche.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "constitution",
+                "label": "La Constitution (loi suprême)"
+              },
+              {
+                "id": "etat",
+                "label": "Organise l'État",
+                "category": 1
+              },
+              {
+                "id": "droits",
+                "label": "Garantit droits et libertés",
+                "category": 2
+              },
+              {
+                "id": "devoirs",
+                "label": "Fixe les devoirs",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "constitution",
+                "to": "etat"
+              },
+              {
+                "from": "constitution",
+                "to": "droits"
+              },
+              {
+                "from": "constitution",
+                "to": "devoirs"
+              }
+            ],
+            "legend": [
+              "Organisation",
+              "Droits",
+              "Devoirs"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "du-texte-a-la-loi-supreme",
+          "kind": "diagram",
+          "description": "Schéma en flèches, de haut en bas : un texte de Constitution est proposé, le peuple vote OUI ou NON par référendum, les OUI l'emportent et le texte est adopté, puis il est promulgué et s'applique à tous. Trois couleurs : avant le vote, le vote, après le vote.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "texte",
+                "label": "Un texte est proposé",
+                "category": 1
+              },
+              {
+                "id": "vote",
+                "label": "Le peuple vote OUI ou NON",
+                "category": 2
+              },
+              {
+                "id": "adopte",
+                "label": "Les OUI l'emportent : texte adopté",
+                "category": 2
+              },
+              {
+                "id": "promulgue",
+                "label": "Le texte est promulgué",
+                "category": 3
+              },
+              {
+                "id": "applique",
+                "label": "Il s'applique à tous",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "texte",
+                "to": "vote"
+              },
+              {
+                "from": "vote",
+                "to": "adopte"
+              },
+              {
+                "from": "adopte",
+                "to": "promulgue"
+              },
+              {
+                "from": "promulgue",
+                "to": "applique"
+              }
+            ],
+            "legend": [
+              "Avant le vote",
+              "Le vote",
+              "Après le vote"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-2016",
+          "kind": "timeline",
+          "description": "Frise comptée en jours. Le jour 0 est le 30 octobre 2016, jour du référendum où le peuple adopte la Constitution. Le jour 9 est le 8 novembre 2016, jour de la promulgation. Une période relie les deux dates : le texte adopté attend d'être promulgué.",
+          "params": {
+            "start": 0,
+            "end": 10,
+            "step": 1,
+            "unit": "day",
+            "periods": [
+              {
+                "from": 0,
+                "to": 9,
+                "label": "De l'adoption à la promulgation"
+              }
+            ],
+            "events": [
+              {
+                "at": 0,
+                "label": "30 octobre : référendum"
+              },
+              {
+                "at": 9,
+                "label": "8 novembre : promulgation"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Ce qu'est une Constitution",
+          "remember": "La **Constitution** est la loi fondamentale d'un pays. On dit aussi qu'elle est la **loi suprême** : elle est au-dessus de toutes les autres lois, et aucune loi ne peut dire le contraire. Elle a trois rôles. Elle **organise l'État** : elle dit comment le pays est dirigé et comment ses institutions fonctionnent (le rôle du Président de la République est étudié dans la leçon suivante). Elle **garantit les droits et les libertés** des personnes. Elle **fixe les devoirs** des citoyens. C'est comme le règlement d'une classe : il dit comment la classe fonctionne, il protège chaque élève et il demande à chacun de respecter les autres.",
+          "method": [
+            "Identifier la situation ou la phrase à analyser.",
+            "Chercher le rôle de la Constitution qui s'applique : loi suprême, organisation de l'État, droits et libertés, ou devoirs.",
+            "Comparer la situation à ce rôle pour voir si elle le respecte.",
+            "Conclure en nommant le rôle et en disant ce qu'il faut faire."
+          ],
+          "example": {
+            "statement": "Dans le pays imaginaire de Soléa, une loi nouvelle interdit à certains citoyens de s'exprimer, alors que la Constitution de Soléa garantit la liberté d'expression. Que faut-il en conclure ?",
+            "steps": [
+              "Identifier : une loi nouvelle interdit de s'exprimer, alors que la Constitution garantit la liberté d'expression.",
+              "Chercher le rôle : la Constitution est la loi suprême et elle garantit les droits et les libertés.",
+              "Comparer : la loi nouvelle dit le contraire de la Constitution, donc elle ne la respecte pas.",
+              "Conclure : une loi ne peut pas contredire la loi suprême. La loi nouvelle doit être corrigée et la liberté d'expression reste garantie."
+            ]
+          },
+          "pitfall": "Ne crois pas que la Constitution ne donne que des droits. Elle fixe aussi des **devoirs**. Contre-exemple : dans le règlement de ta classe, tu as le droit de donner ton avis, mais tu as aussi le devoir d'écouter les autres. Dans un pays, c'est pareil : les droits et les devoirs vont ensemble. Pour éviter l'erreur, cherche toujours les deux côtés.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les rôles de la Constitution, avec la méthode de la fiche : identifier, chercher le rôle, comparer, conclure.",
+            "questions": [
+              {
+                "content": "Un texte du pays de Soléa dit : « Chaque citoyen doit respecter les lois du pays. » Quel rôle de la Constitution cela montre-t-il ?",
+                "question_type": "single_choice",
+                "hint": "Une phrase qui commence par « doit » exprime-t-elle un droit ou un devoir ?",
+                "explanation": "Étape 1 — Identifier : le texte demande à chaque citoyen de respecter les lois. Étape 2 — Chercher le rôle : la Constitution fixe les devoirs des citoyens. Étape 3 — Comparer : « doit respecter » exprime une obligation, donc un devoir. Étape 4 — Conclure : c'est le rôle « fixer les devoirs ». La réponse « garantit les droits et les libertés » est fausse : un droit protège la personne, il ne lui demande rien.",
+                "answers": [
+                  {
+                    "content": "Elle fixe les devoirs des citoyens",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle garantit les droits et les libertés",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle organise l'État",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle donne une note aux élèves",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une loi ordinaire peut dire le contraire de la Constitution.",
+                "question_type": "true_false",
+                "hint": "Quelle loi est « suprême » ?",
+                "explanation": "Étape 1 — Identifier : on compare une loi ordinaire et la Constitution. Étape 2 — Chercher le rôle : la Constitution est la loi suprême, au-dessus de toutes les autres lois. Étape 3 — Comparer : une loi ordinaire est en dessous d'elle. Étape 4 — Conclure : aucune loi ne peut dire le contraire de la Constitution, l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Constitution est la loi ___ du pays : elle est au-dessus de toutes les autres lois.",
+                "question_type": "fill_blank",
+                "hint": "Le mot commence par la lettre s et veut dire « la plus haute ».",
+                "explanation": "Étape 1 — Identifier : la phrase décrit la loi la plus haute du pays. Étape 2 — Chercher le rôle : la Constitution est la loi suprême, ou loi fondamentale. Étape 3 — Comparer : le mot qui exprime « au-dessus de toutes les autres » est « suprême ». Étape 4 — Conclure : il faut écrire « suprême » ou « fondamentale ».",
+                "answers": [
+                  {
+                    "content": "suprême",
+                    "correct": true
+                  },
+                  {
+                    "content": "fondamentale",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "figure": "roles-constitution",
+          "exercise": [
+            {
+              "title": "Reconnaître le rôle de la Constitution",
+              "statement": "Dans cet exercice, tu reconnais les rôles de la Constitution, avec la méthode de la fiche : identifier, chercher le rôle, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche le mot-clé : droit, devoir, organisation du pays.",
+              "questions": [
+                {
+                  "content": "Quelle phrase définit le mieux la Constitution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question demande de définir la Constitution. Étape 2 — Chercher le rôle : c'est la loi fondamentale, la loi suprême du pays. Étape 3 — Comparer : les autres propositions la réduisent à une école, à une loi ordinaire ou à une liste. Étape 4 — Conclure : la bonne réponse est « la loi fondamentale du pays, au-dessus de toutes les autres lois ».",
+                  "answers": [
+                    {
+                      "content": "La loi fondamentale du pays, au-dessus de toutes les autres lois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un règlement qui ne concerne qu'une seule école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une loi ordinaire qu'on change chaque semaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "La liste des habitants d'un village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un texte du pays de Soléa dit : « Tous les citoyens ont droit à la sécurité. » Quel rôle de la Constitution cela montre-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le texte parle d'un droit à la sécurité. Étape 2 — Chercher le rôle : la Constitution garantit les droits et les libertés. Étape 3 — Comparer : « ont droit » protège les citoyens, ce n'est pas une obligation. Étape 4 — Conclure : c'est le rôle « garantir les droits et les libertés ». La réponse « fixe les devoirs » est fausse, car le texte ne demande rien aux citoyens.",
+                  "answers": [
+                    {
+                      "content": "Elle garantit les droits et les libertés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fixe les devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle organise l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle remplace toutes les autres lois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un texte explique comment les institutions de l'État sont organisées et comment elles travaillent ensemble. Quel rôle de la Constitution cela montre-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le texte parle de l'organisation des institutions. Étape 2 — Chercher le rôle : la Constitution organise l'État : elle dit comment le pays est dirigé. Étape 3 — Comparer : le texte décrit une organisation, pas un droit ni un devoir. Étape 4 — Conclure : c'est le rôle « organiser l'État ».",
+                  "answers": [
+                    {
+                      "content": "Elle organise l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle garantit les droits et les libertés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fixe les devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle décide des notes à l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution ne parle que des droits des citoyens, jamais de leurs devoirs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on juge une affirmation sur la Constitution. Étape 2 — Chercher le rôle : la Constitution garantit des droits et fixe aussi des devoirs. Étape 3 — Comparer : l'affirmation oublie les devoirs : c'est le piège de la fiche. Étape 4 — Conclure : l'affirmation est fausse. Comme le règlement de la classe, la Constitution donne des droits et demande des devoirs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois rôles de la Constitution ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : la question demande les rôles de la Constitution. Étape 2 — Chercher le rôle : elle organise l'État, garantit les droits et les libertés, et fixe les devoirs. Étape 3 — Comparer : on compare chaque proposition à ces trois rôles. Étape 4 — Conclure : les trois bonnes réponses sont l'organisation de l'État, les droits et libertés et les devoirs. Fixer le prix du riz ou les notes n'est pas son rôle.",
+                  "answers": [
+                    {
+                      "content": "Elle organise l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle garantit les droits et les libertés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fixe les devoirs des citoyens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fixe le prix du riz au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle choisit les notes des élèves",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer les rôles de la Constitution à des situations",
+              "statement": "Dans cet exercice, tu appliques les rôles de la Constitution à des situations, avec la méthode de la fiche : identifier, chercher le rôle, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche d'abord le mot-clé : droit, devoir, organisation du pays, loi la plus haute.",
+              "questions": [
+                {
+                  "content": "Relie chaque phrase au rôle de la Constitution qu'elle montre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : on lit chaque phrase. Étape 2 — Chercher le rôle : on cherche le mot-clé : droit, devoir, aucune loi ne peut dire le contraire, comment le pays est dirigé. Étape 3 — Comparer : on associe chaque phrase au rôle qui a ce mot-clé. Étape 4 — Conclure : les quatre paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Chaque enfant a le droit d'être protégé",
+                      "match": "Garantit les droits et les libertés"
+                    },
+                    {
+                      "content": "Chaque citoyen doit respecter les autres",
+                      "match": "Fixe les devoirs"
+                    },
+                    {
+                      "content": "Aucune loi ne peut dire le contraire de ce texte",
+                      "match": "Est la loi suprême"
+                    },
+                    {
+                      "content": "Ce texte explique comment le pays est dirigé",
+                      "match": "Organise l'État"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour analyser une situation.",
+                  "question_type": "ordering",
+                  "explanation": "La méthode de la fiche suit toujours cet ordre : Étape 1 — Identifier. Étape 2 — Chercher le rôle. Étape 3 — Comparer. Étape 4 — Conclure. On ne conclut pas avant d'avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Identifier la situation à analyser."
+                    },
+                    {
+                      "content": "Chercher le rôle de la Constitution qui s'applique."
+                    },
+                    {
+                      "content": "Comparer la situation à ce rôle."
+                    },
+                    {
+                      "content": "Conclure en nommant le rôle et ce qu'il faut faire."
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution organise l'___ : elle dit comment le pays est dirigé.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la phrase parle de l'organisation du pays. Étape 2 — Chercher le rôle : la Constitution organise l'État. Étape 3 — Comparer : le mot qui désigne l'ensemble des institutions d'un pays est « État ». Étape 4 — Conclure : on écrit « État ».",
+                  "answers": [
+                    {
+                      "content": "état",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une loi qui dit le contraire de la Constitution ___ la loi suprême.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la phrase parle d'une loi qui contredit la Constitution. Étape 2 — Chercher le rôle : la Constitution est la loi suprême. Étape 3 — Comparer : une loi qui dit le contraire ne la suit pas. Étape 4 — Conclure : la bonne réponse est « ne respecte pas ». La réponse « remplace » est fausse : une loi ordinaire ne remplace jamais la loi suprême.",
+                  "answers": [
+                    {
+                      "content": "ne respecte pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "respecte",
+                      "correct": false
+                    },
+                    {
+                      "content": "remplace",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le règlement d'une classe ressemble à une Constitution : il organise la classe, protège les élèves et leur fixe des devoirs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on compare le règlement de classe à la Constitution. Étape 2 — Chercher le rôle : la Constitution organise l'État, garantit des droits et fixe des devoirs. Étape 3 — Comparer : le règlement de classe fait les mêmes trois choses à l'échelle de la classe. Étape 4 — Conclure : l'affirmation est vraie : c'est la comparaison de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases montrent un devoir du citoyen ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on cherche les phrases qui demandent un effort au citoyen. Étape 2 — Chercher le rôle : la Constitution fixe les devoirs des citoyens. Étape 3 — Comparer : respecter les lois et les autres sont des obligations ; être protégé, s'exprimer et avoir un nom sont des droits. Étape 4 — Conclure : les deux devoirs sont « respecter les lois du pays » et « respecter les autres ».",
+                  "answers": [
+                    {
+                      "content": "Respecter les lois du pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Respecter les autres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Être protégé contre la violence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pouvoir s'exprimer librement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avoir un nom et une nationalité",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "L'adoption de la Constitution par référendum",
+          "remember": "En Côte d'Ivoire, la Constitution de 2016 a été adoptée par **le peuple**. Le peuple s'est exprimé par un **référendum** : un vote où chaque électeur répond **OUI** ou **NON** à une question précise. Ici, la question est : veux-tu adopter ce texte comme Constitution ? Si les OUI sont plus nombreux que les NON, le texte est **adopté**. Ensuite, il est **promulgué** : il devient officiel et il s'applique à tous. Adopter et promulguer sont donc deux étapes différentes. C'est comme dans une classe : les élèves votent pour adopter leur règlement, puis le règlement est affiché et s'applique.",
+          "method": [
+            "Identifier le texte soumis au vote et la question posée aux électeurs.",
+            "Chercher la règle : le peuple adopte la Constitution par référendum, en répondant OUI ou NON.",
+            "Comparer le nombre de OUI et le nombre de NON.",
+            "Conclure : dire si le texte est adopté, puis rappeler qu'il doit être promulgué pour devenir officiel."
+          ],
+          "example": {
+            "statement": "Dans le pays imaginaire de Soléa, un référendum est organisé pour adopter une Constitution. Sur 10 000 électeurs, 6 500 répondent OUI et 3 500 répondent NON. Le texte est-il adopté ?",
+            "steps": [
+              "Identifier : le texte soumis au vote est le projet de Constitution de Soléa, et la question est « adoptes-tu ce texte ? ».",
+              "Chercher la règle : c'est le peuple qui adopte la Constitution, par un référendum avec les réponses OUI ou NON.",
+              "Comparer : il y a 6 500 OUI contre 3 500 NON, soit 3 000 OUI de plus que de NON.",
+              "Conclure : les OUI l'emportent, donc le texte est adopté. Il doit ensuite être promulgué pour devenir officiel."
+            ]
+          },
+          "pitfall": "Ne confonds pas **adopter** et **promulguer**. Adopter, c'est le vote du peuple qui dit OUI. Promulguer, c'est rendre le texte officiel après ce vote. Contre-exemple : dans ta classe, les élèves votent OUI pour le règlement le lundi, mais il ne s'applique officiellement que le jour où il est affiché. Le vote et la mise en application ne sont pas la même étape.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître comment une Constitution est adoptée, avec la méthode de la fiche : identifier, chercher la règle, comparer, conclure.",
+            "questions": [
+              {
+                "content": "Qui a adopté la Constitution ivoirienne de 2016 ?",
+                "question_type": "single_choice",
+                "hint": "Pour la Constitution de 2016, qui a voté ?",
+                "explanation": "Étape 1 — Identifier : la question demande qui adopte la Constitution. Étape 2 — Chercher la règle : le peuple adopte la Constitution par référendum. Étape 3 — Comparer : les autres propositions ne donnent la parole qu'à une petite partie des gens. Étape 4 — Conclure : la bonne réponse est « le peuple, par un référendum ».",
+                "answers": [
+                  {
+                    "content": "Le peuple, par un référendum",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un seul citoyen, choisi par le hasard",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les commerçants du marché seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les élèves de 6ème seulement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Lors d'un référendum à Soléa, 800 électeurs répondent OUI et 300 répondent NON. Combien y a-t-il de OUI de plus que de NON ?",
+                "question_type": "numeric",
+                "hint": "Soustrais le nombre de NON au nombre de OUI.",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : 800 électeurs répondent OUI et 300 répondent NON. Étape 2 — Chercher la règle : on compare les OUI et les NON. Étape 3 — Comparer : on calcule la différence : 800 − 300. Étape 4 — Conclure : il y a 500 OUI de plus que de NON, donc les OUI l'emportent.",
+                "answers": [
+                  {
+                    "content": "500",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un référendum, l'électeur répond par OUI ou par NON.",
+                "question_type": "true_false",
+                "hint": "Combien de réponses possibles y a-t-il à la question posée ?",
+                "explanation": "Étape 1 — Identifier : on juge une affirmation sur le référendum. Étape 2 — Chercher la règle : un référendum est un vote par OUI ou par NON. Étape 3 — Comparer : l'affirmation donne exactement cette règle. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quand le peuple vote OUI ou NON pour adopter la Constitution, on parle de ___.",
+                "question_type": "fill_blank",
+                "hint": "Le mot commence par r et finit par m.",
+                "explanation": "Étape 1 — Identifier : la phrase décrit un vote par OUI ou NON. Étape 2 — Chercher la règle : ce vote s'appelle un référendum. Étape 3 — Comparer : le mot cherché commence par r et finit par m. Étape 4 — Conclure : on écrit « référendum ».",
+                "answers": [
+                  {
+                    "content": "référendum",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "figure": "du-texte-a-la-loi-supreme",
+          "exercise": [
+            {
+              "title": "Comprendre le référendum",
+              "statement": "Dans cet exercice, tu comprends comment le peuple adopte une Constitution par référendum, avec la méthode de la fiche : identifier, chercher la règle, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": "du-texte-a-la-loi-supreme",
+              "hint": "Pense à l'ordre : on propose, on vote, on compte, on rend officiel.",
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un référendum ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question demande de définir le référendum. Étape 2 — Chercher la règle : c'est un vote par OUI ou par NON sur une question précise. Étape 3 — Comparer : les autres propositions décrivent un tirage au sort, un texte ou une fête. Étape 4 — Conclure : la bonne réponse est « un vote où chaque électeur répond OUI ou NON ».",
+                  "answers": [
+                    {
+                      "content": "Un vote où chaque électeur répond OUI ou NON à une question",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une réunion où l'on tire au sort le gagnant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un texte écrit par un seul citoyen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fête organisée dans la rue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le pays imaginaire de Kipri, un référendum donne 420 OUI et 180 NON. Combien d'électeurs ont voté en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : 420 OUI et 180 NON. Étape 2 — Chercher la règle : chaque électeur répond une seule fois, par OUI ou par NON. Étape 3 — Comparer : on additionne les deux nombres : 420 + 180. Étape 4 — Conclure : il y a 600 électeurs en tout.",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À Kipri, le référendum donne 420 OUI et 180 NON. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : 420 OUI et 180 NON. Étape 2 — Chercher la règle : si les OUI sont plus nombreux que les NON, le texte est adopté. Étape 3 — Comparer : 420 est plus grand que 180. Étape 4 — Conclure : le texte est adopté. La réponse « rejeté, car il y a des NON » est fausse : il y a toujours quelques NON, ce qui compte est de savoir qui l'emporte.",
+                  "answers": [
+                    {
+                      "content": "Le texte est adopté, car les OUI l'emportent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le texte est rejeté, car il y a des NON",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas conclure, il faut recommencer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le texte est adopté, car 420 est un grand nombre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Adopter une Constitution et la promulguer, c'est la même chose.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on juge une affirmation sur l'adoption. Étape 2 — Chercher la règle : adopter, c'est le vote du peuple ; promulguer, c'est rendre le texte officiel ensuite. Étape 3 — Comparer : ce sont deux étapes différentes. Étape 4 — Conclure : l'affirmation est fausse : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour qu'une Constitution devienne officielle.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on a un texte proposé. Étape 2 — Chercher la règle : le peuple vote OUI ou NON. Étape 3 — Comparer : les OUI l'emportent, le texte est adopté. Étape 4 — Conclure : il est promulgué et s'applique à tous. Le vote vient toujours avant la promulgation.",
+                  "answers": [
+                    {
+                      "content": "Un texte de Constitution est proposé."
+                    },
+                    {
+                      "content": "Le peuple vote OUI ou NON par référendum."
+                    },
+                    {
+                      "content": "Les OUI l'emportent : le texte est adopté."
+                    },
+                    {
+                      "content": "Le texte est promulgué et s'applique à tous."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer la méthode du référendum à des situations",
+              "statement": "Dans cet exercice, tu appliques ce que tu sais du référendum à des situations, avec la méthode de la fiche : identifier, chercher la règle, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Retiens : le peuple vote, les OUI l'emportent, puis le texte est promulgué.",
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : on lit chaque mot. Étape 2 — Chercher la règle : on rappelle le sens donné dans la fiche. Étape 3 — Comparer : on associe chaque mot à sa définition. Étape 4 — Conclure : les quatre paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Référendum",
+                      "match": "Vote par OUI ou NON sur un texte"
+                    },
+                    {
+                      "content": "Adopter",
+                      "match": "Dire OUI au texte par le vote"
+                    },
+                    {
+                      "content": "Promulguer",
+                      "match": "Rendre le texte officiel"
+                    },
+                    {
+                      "content": "Peuple",
+                      "match": "L'ensemble des citoyens du pays"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution ivoirienne de 2016 a été adoptée par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la phrase demande qui adopte la Constitution. Étape 2 — Chercher la règle : c'est le peuple, par référendum. Étape 3 — Comparer : un seul citoyen ou un tirage au sort ne représentent pas tout le peuple. Étape 4 — Conclure : la bonne réponse est « le peuple ».",
+                  "answers": [
+                    {
+                      "content": "le peuple",
+                      "correct": true
+                    },
+                    {
+                      "content": "un seul citoyen",
+                      "correct": false
+                    },
+                    {
+                      "content": "un tirage au sort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur 1 000 électeurs, 700 répondent OUI. Tous les électeurs ont répondu par OUI ou par NON. Combien répondent NON ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : 1 000 électeurs, dont 700 OUI. Étape 2 — Chercher la règle : chaque électeur répond OUI ou NON. Étape 3 — Comparer : on calcule 1 000 − 700. Étape 4 — Conclure : il y a 300 NON, et le texte est adopté car 700 est plus grand que 300.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les NON sont plus nombreux que les OUI, le texte est adopté.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on juge une affirmation sur le résultat d'un référendum. Étape 2 — Chercher la règle : le texte est adopté quand les OUI l'emportent. Étape 3 — Comparer : ici ce sont les NON qui l'emportent. Étape 4 — Conclure : l'affirmation est fausse : le texte n'est pas adopté.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après l'adoption, le texte est ___ pour devenir officiel.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on parle de l'étape qui suit le vote. Étape 2 — Chercher la règle : après l'adoption, le texte est promulgué. Étape 3 — Comparer : promulguer, c'est rendre le texte officiel. Étape 4 — Conclure : on écrit « promulgué ».",
+                  "answers": [
+                    {
+                      "content": "promulgué",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles étapes font partie de l'adoption puis de l'entrée en application d'une Constitution ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : on cherche les étapes citées dans la fiche. Étape 2 — Chercher la règle : le peuple vote, les OUI l'emportent, le texte est promulgué. Étape 3 — Comparer : le tirage au sort et l'écriture d'un texte par chaque électeur ne sont pas des étapes du référendum. Étape 4 — Conclure : les trois bonnes réponses sont le vote OUI ou NON, la victoire des OUI et la promulgation.",
+                  "answers": [
+                    {
+                      "content": "Le peuple vote OUI ou NON",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les OUI l'emportent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le texte est promulgué",
+                      "correct": true
+                    },
+                    {
+                      "content": "On tire au sort le gagnant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque électeur écrit un nouveau texte",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La Constitution ivoirienne de 2016",
+          "remember": "La Constitution actuelle de la Côte d'Ivoire est celle de **2016**. Le peuple l'a adoptée par **référendum le 30 octobre 2016**. Elle a été **promulguée le 8 novembre 2016**. Entre les deux dates, il y a 9 jours. Elle est la loi suprême du pays : tout le monde doit la respecter, et elle protège les droits de chacun tout en rappelant ses devoirs. Pour t'en souvenir : le 30 octobre, c'est le vote du peuple (l'adoption) ; le 8 novembre, c'est le texte qui devient officiel (la promulgation).",
+          "method": [
+            "Identifier la date, l'événement ou la question posée.",
+            "Chercher dans la fiche le fait qui correspond : l'année, l'adoption ou la promulgation.",
+            "Comparer les deux dates de 2016 pour ne pas les confondre.",
+            "Conclure en donnant la réponse avec sa date exacte."
+          ],
+          "example": {
+            "statement": "Que s'est-il passé le 30 octobre 2016, et que s'est-il passé le 8 novembre 2016 ?",
+            "steps": [
+              "Identifier : la question porte sur deux dates de l'année 2016, le 30 octobre et le 8 novembre.",
+              "Chercher : dans la fiche, le 30 octobre 2016 est la date du référendum et le 8 novembre 2016 celle de la promulgation.",
+              "Comparer : le vote vient d'abord, la promulgation vient 9 jours après (1 jour jusqu'au 31 octobre, puis 8 jours de novembre).",
+              "Conclure : le 30 octobre 2016, le peuple adopte la Constitution par référendum ; le 8 novembre 2016, elle est promulguée et devient officielle."
+            ]
+          },
+          "pitfall": "Ne confonds pas les deux dates. Le 30 octobre 2016 est le jour du **vote**, pas le jour où la Constitution devient officielle. Contre-exemple : si tu écris « promulguée le 30 octobre », tu oublies que le texte a été promulgué 9 jours plus tard, le 8 novembre 2016. Pour t'en souvenir : on vote d'abord, on promulgue ensuite.",
+          "practice": {
+            "statement": "Tu t'entraînes à retrouver les dates de la Constitution ivoirienne de 2016, avec la méthode de la fiche : identifier, chercher, comparer, conclure.",
+            "questions": [
+              {
+                "content": "En quelle année a été adoptée la Constitution actuelle de la Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "hint": "La fiche donne l'année dans sa première phrase.",
+                "explanation": "Étape 1 — Identifier : la question demande l'année de la Constitution actuelle. Étape 2 — Chercher : la fiche dit que la Constitution actuelle est celle de 2016. Étape 3 — Comparer : les autres années ne sont pas celle de la fiche. Étape 4 — Conclure : la réponse est 2016.",
+                "answers": [
+                  {
+                    "content": "2016",
+                    "correct": true
+                  },
+                  {
+                    "content": "2006",
+                    "correct": false
+                  },
+                  {
+                    "content": "2012",
+                    "correct": false
+                  },
+                  {
+                    "content": "2010",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La Constitution actuelle a été adoptée par référendum le ___ octobre 2016.",
+                "question_type": "fill_blank",
+                "hint": "C'est l'avant-dernier jour d'octobre.",
+                "explanation": "Étape 1 — Identifier : la phrase demande le jour du référendum. Étape 2 — Chercher : la fiche dit que le référendum a eu lieu le 30 octobre 2016. Étape 3 — Comparer : le jour manquant est celui du vote du peuple. Étape 4 — Conclure : il faut écrire 30.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  },
+                  {
+                    "content": "trente",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Constitution actuelle a été promulguée le 8 novembre 2016.",
+                "question_type": "true_false",
+                "hint": "Promulguer, c'est rendre le texte officiel.",
+                "explanation": "Étape 1 — Identifier : on juge une date de promulgation. Étape 2 — Chercher : la fiche dit : promulguée le 8 novembre 2016. Étape 3 — Comparer : la date de l'affirmation est la même. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque date ou année à ce qu'elle désigne.",
+                "question_type": "matching",
+                "hint": "Le vote vient avant la promulgation.",
+                "explanation": "Étape 1 — Identifier : on lit chaque date. Étape 2 — Chercher : la fiche donne le 30 octobre pour le vote, le 8 novembre pour la promulgation, 2016 pour l'année. Étape 3 — Comparer : on associe chaque date à son sens. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                "answers": [
+                  {
+                    "content": "30 octobre 2016",
+                    "match": "Référendum (adoption)"
+                  },
+                  {
+                    "content": "8 novembre 2016",
+                    "match": "Promulgation"
+                  },
+                  {
+                    "content": "2016",
+                    "match": "Année de la Constitution actuelle"
+                  }
+                ]
+              }
+            ]
+          },
+          "figure": "frise-2016",
+          "exercise": [
+            {
+              "title": "Retrouver les dates de la Constitution de 2016",
+              "statement": "Dans cet exercice, tu retrouves les faits de la Constitution ivoirienne de 2016, avec la méthode de la fiche : identifier, chercher, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": "frise-2016",
+              "hint": "Souviens-toi : on vote d'abord (30 octobre), on promulgue ensuite (8 novembre).",
+              "questions": [
+                {
+                  "content": "Que s'est-il passé le 30 octobre 2016 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question porte sur le 30 octobre 2016. Étape 2 — Chercher : la fiche dit que c'est la date du référendum. Étape 3 — Comparer : la promulgation a lieu à une autre date. Étape 4 — Conclure : la bonne réponse est « le peuple a adopté la Constitution par référendum ».",
+                  "answers": [
+                    {
+                      "content": "Le peuple a adopté la Constitution par référendum",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Constitution a été promulguée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution a été abandonnée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le peuple a voté pour changer la devise",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que s'est-il passé le 8 novembre 2016 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question porte sur le 8 novembre 2016. Étape 2 — Chercher : la fiche dit que c'est la date de la promulgation. Étape 3 — Comparer : le vote a eu lieu avant, le 30 octobre. Étape 4 — Conclure : la bonne réponse est « la Constitution a été promulguée ».",
+                  "answers": [
+                    {
+                      "content": "La Constitution a été promulguée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le peuple a voté par référendum",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution a été abandonnée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une nouvelle devise a été choisie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de jours y a-t-il entre le 30 octobre 2016 et le 8 novembre 2016 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "jours",
+                  "explanation": "Étape 1 — Identifier : on part du 30 octobre et on arrive au 8 novembre. Étape 2 — Chercher : octobre a 31 jours. Étape 3 — Comparer : du 30 au 31 octobre il y a 1 jour, puis 8 jours jusqu'au 8 novembre, soit 1 + 8. Étape 4 — Conclure : il y a 9 jours.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution ivoirienne actuelle a été promulguée avant d'être adoptée par référendum.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on juge l'ordre des deux étapes. Étape 2 — Chercher : le vote du peuple a lieu le 30 octobre, la promulgation le 8 novembre. Étape 3 — Comparer : le 30 octobre vient avant le 8 novembre. Étape 4 — Conclure : l'affirmation est fausse : on vote d'abord, on promulgue ensuite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution actuelle de la Côte d'Ivoire date de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la phrase demande l'année de la Constitution actuelle. Étape 2 — Chercher : la fiche dit 2016. Étape 3 — Comparer : 2006 et 2018 sont d'autres années. Étape 4 — Conclure : la bonne réponse est 2016.",
+                  "answers": [
+                    {
+                      "content": "2016",
+                      "correct": true
+                    },
+                    {
+                      "content": "2006",
+                      "correct": false
+                    },
+                    {
+                      "content": "2018",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Ne pas confondre le vote et la promulgation",
+              "statement": "Dans cet exercice, tu distingues l'adoption et la promulgation de la Constitution de 2016, avec la méthode de la fiche : identifier, chercher, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Vote = 30 octobre. Promulgation = 8 novembre.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre ces trois faits.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on lit les trois faits. Étape 2 — Chercher : le vote a lieu le 30 octobre, la promulgation le 8 novembre. Étape 3 — Comparer : on range les faits dans l'ordre du temps. Étape 4 — Conclure : le vote, puis la promulgation, puis l'application à tout le pays.",
+                  "answers": [
+                    {
+                      "content": "Le peuple vote par référendum (30 octobre 2016)."
+                    },
+                    {
+                      "content": "La Constitution est promulguée (8 novembre 2016)."
+                    },
+                    {
+                      "content": "La Constitution de 2016 s'applique à tout le pays."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on cherche les phrases qui respectent la fiche. Étape 2 — Chercher : 2016 est l'année, le référendum est l'adoption. Étape 3 — Comparer : les phrases fausses échangent les deux dates ou nient le vote du peuple. Étape 4 — Conclure : les deux phrases vraies sont « elle date de 2016 » et « elle a été adoptée par référendum ».",
+                  "answers": [
+                    {
+                      "content": "La Constitution actuelle date de 2016",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a été adoptée par référendum",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a été promulguée le 30 octobre 2016",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a été adoptée le 8 novembre 2016",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas été votée par le peuple",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution actuelle a été promulguée le 8 ___ 2016.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on cherche le mois de la promulgation. Étape 2 — Chercher : la fiche dit : 8 novembre 2016. Étape 3 — Comparer : le mois qui suit octobre est novembre. Étape 4 — Conclure : il faut écrire « novembre ».",
+                  "answers": [
+                    {
+                      "content": "novembre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le 8 novembre 2016 est la date du vote du peuple.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on juge la date du vote. Étape 2 — Chercher : le vote a eu lieu le 30 octobre 2016. Étape 3 — Comparer : le 8 novembre est la date de la promulgation. Étape 4 — Conclure : l'affirmation est fausse : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa écrit : « La Constitution ivoirienne a été adoptée par référendum le 8 novembre 2016. » Qu'est-ce qui est faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : Awa donne la date du 8 novembre pour le référendum. Étape 2 — Chercher : le référendum a eu lieu le 30 octobre 2016. Étape 3 — Comparer : le 8 novembre est la date de la promulgation. Étape 4 — Conclure : la phrase d'Awa échange les deux dates. La réponse « le référendum n'a jamais eu lieu » est fausse : il a eu lieu le 30 octobre.",
+                  "answers": [
+                    {
+                      "content": "Le 8 novembre 2016 est la date de la promulgation, pas celle du vote",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le référendum n'a jamais eu lieu",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution date de 2006",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a rien de faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ___ octobre 2016 est la date du référendum.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la phrase demande le jour du référendum. Étape 2 — Chercher : la fiche dit : 30 octobre 2016. Étape 3 — Comparer : le 8 est pour novembre (promulgation). Étape 4 — Conclure : la bonne réponse est 30.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La devise et les symboles de la République",
+          "remember": "Une République a des **symboles** qui la représentent et que tous les citoyens respectent. En Côte d'Ivoire, il y a : la **devise** « Union – Discipline – Travail » ; le **drapeau**, à trois bandes verticales **orange, blanc et vert** ; l'**hymne national**, « L'Abidjanaise ». La devise est une phrase courte qui résume les valeurs du pays. **Union** : rester ensemble malgré les différences. **Discipline** : respecter les règles. **Travail** : faire des efforts pour faire avancer le pays. On respecte le drapeau et on écoute l'hymne avec respect, debout et en silence.",
+          "method": [
+            "Identifier le symbole ou la valeur dont parle la situation.",
+            "Rappeler ce que dit la fiche sur ce symbole : sa forme, ses mots ou son sens.",
+            "Comparer la situation à ce que dit la fiche.",
+            "Conclure en donnant la bonne réponse ou le bon comportement."
+          ],
+          "example": {
+            "statement": "Pendant une cérémonie à l'école, on joue l'hymne national. Deux élèves de 6ème bavardent et se moquent. Quel symbole et quelle valeur de la devise sont concernés ? Que doivent-ils faire ?",
+            "steps": [
+              "Identifier : pendant une cérémonie, deux élèves bavardent et se moquent alors que l'on joue l'hymne national, « L'Abidjanaise ».",
+              "Rappeler : la fiche dit que l'hymne est un symbole du pays qu'on écoute avec respect, debout et en silence, et que la devise demande la discipline.",
+              "Comparer : bavarder et se moquer ne montre ni respect pour l'hymne ni discipline.",
+              "Conclure : les élèves doivent se taire, se tenir debout et écouter l'hymne avec respect, comme le demande la discipline de la devise."
+            ]
+          },
+          "pitfall": "Ne confonds pas les symboles. La devise est une **phrase**, le drapeau est une **image** de trois couleurs, l'hymne est un **chant**. Contre-exemple : « L'Abidjanaise » n'est pas la devise, car c'est un chant ; « Union – Discipline – Travail » n'est pas l'hymne, car ce n'est pas un chant. Pour éviter l'erreur, demande-toi : est-ce une phrase, une image ou un chant ?",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître la devise et les symboles de la République, avec la méthode de la fiche : identifier, rappeler, comparer, conclure.",
+            "questions": [
+              {
+                "content": "Quelle est la devise de la Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "hint": "La devise est faite de trois mots, dont le dernier est « Travail ».",
+                "explanation": "Étape 1 — Identifier : la question demande la devise de la Côte d'Ivoire. Étape 2 — Rappeler : la fiche donne « Union – Discipline – Travail ». Étape 3 — Comparer : les autres propositions changent un ou plusieurs mots. Étape 4 — Conclure : la bonne réponse est « Union – Discipline – Travail ».",
+                "answers": [
+                  {
+                    "content": "Union – Discipline – Travail",
+                    "correct": true
+                  },
+                  {
+                    "content": "Liberté – Égalité – Fraternité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Force – Courage – Gloire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Union – Discipline – Liberté",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le drapeau ivoirien est orange, blanc et vert.",
+                "question_type": "true_false",
+                "hint": "Le drapeau a trois couleurs.",
+                "explanation": "Étape 1 — Identifier : on juge une affirmation sur le drapeau. Étape 2 — Rappeler : la fiche dit : trois bandes verticales, orange, blanc et vert. Étape 3 — Comparer : les couleurs de l'affirmation sont les mêmes. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'hymne national de la Côte d'Ivoire s'appelle « ___ ».",
+                "question_type": "fill_blank",
+                "hint": "Le nom rappelle la ville d'Abidjan.",
+                "explanation": "Étape 1 — Identifier : la phrase demande le nom de l'hymne. Étape 2 — Rappeler : la fiche dit que l'hymne national est « L'Abidjanaise ». Étape 3 — Comparer : le nom vient de la ville d'Abidjan. Étape 4 — Conclure : il faut écrire « L'Abidjanaise ».",
+                "answers": [
+                  {
+                    "content": "L'Abidjanaise",
+                    "correct": true
+                  },
+                  {
+                    "content": "Abidjanaise",
+                    "correct": true
+                  },
+                  {
+                    "content": "LAbidjanaise",
+                    "correct": true
+                  },
+                  {
+                    "content": "L Abidjanaise",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot de la devise à son sens.",
+                "question_type": "matching",
+                "hint": "Discipline veut dire respecter les règles.",
+                "explanation": "Étape 1 — Identifier : on lit chaque mot de la devise. Étape 2 — Rappeler : la fiche explique : union = rester ensemble, discipline = respecter les règles, travail = faire des efforts. Étape 3 — Comparer : on associe chaque mot à son sens. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                "answers": [
+                  {
+                    "content": "Union",
+                    "match": "Rester ensemble malgré les différences"
+                  },
+                  {
+                    "content": "Discipline",
+                    "match": "Respecter les règles"
+                  },
+                  {
+                    "content": "Travail",
+                    "match": "Faire des efforts pour faire avancer le pays"
+                  }
+                ]
+              }
+            ]
+          },
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Reconnaître la devise et les symboles",
+              "statement": "Dans cet exercice, tu reconnais la devise et les symboles de la République, avec la méthode de la fiche : identifier, rappeler, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Un symbole peut être une phrase, une image ou un chant.",
+              "questions": [
+                {
+                  "content": "Combien de couleurs le drapeau ivoirien a-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question porte sur les couleurs du drapeau. Étape 2 — Rappeler : la fiche dit : orange, blanc et vert. Étape 3 — Comparer : on compte trois couleurs. Étape 4 — Conclure : la bonne réponse est trois.",
+                  "answers": [
+                    {
+                      "content": "Trois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cinq",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le drapeau ivoirien, remets les couleurs dans l'ordre, de gauche à droite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on parle des trois bandes du drapeau. Étape 2 — Rappeler : la fiche dit orange, blanc, vert. Étape 3 — Comparer : de gauche à droite, on lit d'abord l'orange. Étape 4 — Conclure : orange, blanc, vert.",
+                  "answers": [
+                    {
+                      "content": "Orange"
+                    },
+                    {
+                      "content": "Blanc"
+                    },
+                    {
+                      "content": "Vert"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel symbole de la République est un chant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question demande quel symbole est un chant. Étape 2 — Rappeler : la fiche dit que l'hymne national est « L'Abidjanaise ». Étape 3 — Comparer : le drapeau est une image, la devise est une phrase. Étape 4 — Conclure : la bonne réponse est « l'hymne national ».",
+                  "answers": [
+                    {
+                      "content": "L'hymne national",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le drapeau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La devise",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le règlement de la classe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La devise demande de respecter les règles : c'est le sens du mot « Discipline ».",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on juge le sens du mot Discipline. Étape 2 — Rappeler : la fiche dit : discipline = respecter les règles. Étape 3 — Comparer : l'affirmation donne le même sens. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves de deux villages différents refusent de jouer ensemble à cause de leurs différences. Quelle valeur de la devise leur manque ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : des élèves refusent de jouer ensemble à cause de leurs différences. Étape 2 — Rappeler : union = rester ensemble malgré les différences. Étape 3 — Comparer : refuser de jouer ensemble est le contraire de rester ensemble. Étape 4 — Conclure : il leur manque l'union. La réponse « Travail » est fausse : il n'est pas question d'efforts ici.",
+                  "answers": [
+                    {
+                      "content": "Union",
+                      "correct": true
+                    },
+                    {
+                      "content": "Travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "Discipline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune valeur n'est en cause",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer la devise et les symboles à des situations",
+              "statement": "Dans cet exercice, tu appliques ce que tu sais de la devise et des symboles à des situations, avec la méthode de la fiche : identifier, rappeler, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Devise = phrase, drapeau = image, hymne = chant.",
+              "questions": [
+                {
+                  "content": "Relie chaque symbole à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : on lit chaque symbole. Étape 2 — Rappeler : la fiche décrit la devise, le drapeau et l'hymne. Étape 3 — Comparer : on associe chaque symbole à sa description. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "La devise",
+                      "match": "Une phrase courte qui résume les valeurs du pays"
+                    },
+                    {
+                      "content": "Le drapeau",
+                      "match": "Trois bandes verticales orange, blanc et vert"
+                    },
+                    {
+                      "content": "L'hymne",
+                      "match": "Un chant national, « L'Abidjanaise »"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois symboles de la République présentés dans la fiche ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : on cherche les symboles cités dans la fiche. Étape 2 — Rappeler : la fiche présente la devise, le drapeau et l'hymne. Étape 3 — Comparer : le blason d'une classe et une chanson personnelle ne sont pas des symboles du pays. Étape 4 — Conclure : les trois bonnes réponses sont la devise, le drapeau et l'hymne national.",
+                  "answers": [
+                    {
+                      "content": "La devise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le drapeau",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hymne national",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le blason de chaque classe",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chanson préférée du maître",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la devise, le mot qui parle du respect des règles est « ___ ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la phrase cherche le mot du respect des règles. Étape 2 — Rappeler : la fiche dit : discipline = respecter les règles. Étape 3 — Comparer : les deux autres mots sont union et travail. Étape 4 — Conclure : on écrit « discipline ».",
+                  "answers": [
+                    {
+                      "content": "discipline",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves de la classe travaillent dur pour améliorer leur moyenne : ils montrent la valeur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : les élèves travaillent dur pour améliorer leur moyenne. Étape 2 — Rappeler : travail = faire des efforts. Étape 3 — Comparer : il s'agit d'efforts, pas de respect des règles ni de vivre ensemble. Étape 4 — Conclure : la bonne réponse est « Travail ». La réponse « Discipline » est fausse : elle concerne le respect des règles.",
+                  "answers": [
+                    {
+                      "content": "Travail",
+                      "correct": true
+                    },
+                    {
+                      "content": "Union",
+                      "correct": false
+                    },
+                    {
+                      "content": "Discipline",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le drapeau ivoirien a trois bandes horizontales.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on juge la forme du drapeau. Étape 2 — Rappeler : la fiche dit : trois bandes verticales. Étape 3 — Comparer : verticales et horizontales sont deux choses différentes. Étape 4 — Conclure : l'affirmation est fausse : les bandes sont verticales.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois mots de la devise de la Côte d'Ivoire.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on cherche la devise. Étape 2 — Rappeler : « Union – Discipline – Travail ». Étape 3 — Comparer : l'ordre des trois mots est fixe. Étape 4 — Conclure : Union, puis Discipline, puis Travail.",
+                  "answers": [
+                    {
+                      "content": "Union"
+                    },
+                    {
+                      "content": "Discipline"
+                    },
+                    {
+                      "content": "Travail"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le règlement de la classe de 6ème A",
+          "statement": "Les élèves de la 6ème A de Daloa écrivent le règlement de leur classe pour comprendre ce qu'est une Constitution. Ils comparent leur règlement à la loi fondamentale d'un pays. La figure montre les trois rôles de la Constitution et sa place de loi suprême.",
+          "exercise_type": "fixation",
+          "figure": "roles-constitution",
+          "questions": [
+            {
+              "content": "Relie chaque article du règlement de la 6ème A au rôle de la Constitution qui lui ressemble.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Lire chaque article du règlement. Étape 2 — Chercher le mot-clé : « a le droit » pour un droit, « doit » pour un devoir, « explique comment la classe fonctionne » pour l'organisation. Étape 3 — Associer chaque article au rôle de la Constitution qui a le même mot-clé. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes. Un article qui commence par « doit » est un devoir, pas un droit.",
+              "answers": [
+                {
+                  "content": "Chaque élève a le droit de donner son avis",
+                  "match": "Garantit les droits et les libertés"
+                },
+                {
+                  "content": "Chaque élève doit arriver à l'heure",
+                  "match": "Fixe les devoirs"
+                },
+                {
+                  "content": "Le règlement explique comment la classe fonctionne",
+                  "match": "Organise l'État"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi peut-on comparer le règlement de la classe à la Constitution d'un pays ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Rappeler les trois rôles de la Constitution : organiser, garantir les droits, fixer les devoirs. Étape 2 — Chercher les mêmes rôles dans le règlement de la classe : il organise la classe, protège les élèves et leur demande des devoirs. Étape 3 — Comparer avec chaque proposition. Étape 4 — Conclure : la bonne réponse est la première. La réponse « ne parlent que des droits » est fausse : la Constitution fixe aussi des devoirs, comme le règlement.",
+              "answers": [
+                {
+                  "content": "Les deux disent comment un groupe fonctionne, protègent chacun et demandent des devoirs",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux sont écrits par un seul élève",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux sont plus importants que toutes les lois",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux ne parlent que des droits",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une règle de l'école qui dit le contraire de la Constitution du pays doit être corrigée.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : une règle de l'école contredit la Constitution. Étape 2 — Chercher la règle : la Constitution est la loi suprême. Étape 3 — Comparer : aucune règle ne peut dire le contraire de la loi suprême. Étape 4 — Conclure : la règle qui la contredit doit être corrigée, l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour que le règlement soit accepté par tous, les élèves votent OUI ou NON, comme dans un ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer le vote par OUI ou NON. Étape 2 — Rappeler le nom de ce vote. Étape 3 — Conclure : c'est un référendum. On écrit « référendum ».",
+              "answers": [
+                {
+                  "content": "référendum",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Écris un droit et un devoir qui pourraient figurer dans le règlement de ta classe. Explique en une phrase pourquoi les droits et les devoirs vont ensemble.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Un droit est donné correctement (par exemple donner son avis)",
+                "Un devoir est donné correctement (par exemple écouter les autres)",
+                "L'explication montre que les droits et les devoirs vont ensemble"
+              ],
+              "starter": "Dans ma classe, j'ai le droit de…",
+              "explanation": "Corrigé modèle : « Dans ma classe, j'ai le droit de donner mon avis et le devoir d'écouter mes camarades. Les droits et les devoirs vont ensemble, car si chacun a des droits, chacun doit aussi respecter ceux des autres. » Barème : 0,5 pour le droit, 0,5 pour le devoir, 1 pour l'explication.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le vote du règlement dans la 6ème B",
+          "statement": "Dans la 6ème B de Bouaké, 24 élèves votent par OUI ou NON pour adopter leur règlement. Le résultat est de 17 OUI et 7 NON. Tous les élèves ont voté. Ils veulent comprendre comment un peuple adopte sa Constitution.",
+          "exercise_type": "fixation",
+          "figure": "du-texte-a-la-loi-supreme",
+          "questions": [
+            {
+              "content": "Combien d'élèves ont voté en tout dans la 6ème B ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : 17 OUI et 7 NON. Étape 2 — Chercher la règle : chaque élève vote une seule fois, par OUI ou par NON. Étape 3 — Comparer : on additionne les deux résultats, 17 + 7. Étape 4 — Conclure : 24 élèves ont voté.",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien y a-t-il de OUI de plus que de NON ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : 17 OUI et 7 NON. Étape 2 — Chercher la règle : on compare les OUI et les NON. Étape 3 — Comparer : on calcule 17 − 7. Étape 4 — Conclure : il y a 10 OUI de plus que de NON.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le règlement est-il adopté ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : 17 OUI contre 7 NON. Étape 2 — Chercher la règle : le texte est adopté si les OUI sont plus nombreux que les NON. Étape 3 — Comparer : 17 est plus grand que 7. Étape 4 — Conclure : le règlement est adopté. La réponse « il faut que tout le monde réponde OUI » est fausse : la règle est que les OUI l'emportent.",
+              "answers": [
+                {
+                  "content": "Oui, car les OUI l'emportent sur les NON",
+                  "correct": true
+                },
+                {
+                  "content": "Non, car il y a eu 7 NON",
+                  "correct": false
+                },
+                {
+                  "content": "Non, car il faut que tout le monde réponde OUI",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de l'adoption du règlement, comme pour une Constitution.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Commencer par le texte proposé. Étape 2 — Faire voter les électeurs. Étape 3 — Compter les OUI et les NON. Étape 4 — Constater que les OUI l'emportent. Étape 5 — Terminer par la mise en application, comme la promulgation pour une Constitution. Le vote vient toujours avant la mise en application.",
+              "answers": [
+                {
+                  "content": "Le texte du règlement est proposé à la classe."
+                },
+                {
+                  "content": "Les élèves votent OUI ou NON."
+                },
+                {
+                  "content": "On compte les OUI et les NON."
+                },
+                {
+                  "content": "Les OUI l'emportent : le règlement est adopté."
+                },
+                {
+                  "content": "Le règlement est affiché et s'applique."
+                }
+              ]
+            },
+            {
+              "content": "Le vote suffit : il n'est pas utile d'afficher le règlement pour qu'il s'applique officiellement.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Rappeler la différence entre adopter et promulguer. Étape 2 — Appliquer à la classe : voter, c'est adopter ; afficher le règlement le rend officiel. Étape 3 — Conclure : l'affirmation oublie la deuxième étape, elle est fausse. C'est le piège de la fiche sur le référendum.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les dates de la Constitution de 2016",
+          "statement": "Mariam prépare un exposé sur la Constitution ivoirienne actuelle. Elle veut retenir les deux dates de 2016 et bien expliquer la différence entre adopter et promulguer. La figure montre ces deux dates sur une frise comptée en jours.",
+          "exercise_type": "evaluation",
+          "figure": "frise-2016",
+          "questions": [
+            {
+              "content": "Relie chaque événement de l'exposé de Mariam à sa date.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Lire chaque événement. Étape 2 — Chercher dans la fiche : référendum le 30 octobre, promulgation le 8 novembre, année 2016. Étape 3 — Associer chaque événement à sa date. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes.",
+              "answers": [
+                {
+                  "content": "Le peuple vote par référendum",
+                  "match": "30 octobre 2016"
+                },
+                {
+                  "content": "La Constitution est promulguée",
+                  "match": "8 novembre 2016"
+                },
+                {
+                  "content": "Année de la Constitution actuelle",
+                  "match": "2016"
+                }
+              ]
+            },
+            {
+              "content": "Combien de jours séparent le référendum de la promulgation ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "jours",
+              "explanation": "Étape 1 — Identifier : du 30 octobre au 8 novembre 2016. Étape 2 — Chercher : octobre a 31 jours. Étape 3 — Comparer : 1 jour du 30 au 31 octobre, puis 8 jours jusqu'au 8 novembre. Étape 4 — Conclure : 1 + 8 = 9 jours.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles phrases de l'exposé de Mariam sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Rappeler les deux dates : 30 octobre pour le vote, 8 novembre pour la promulgation. Étape 2 — Comparer chaque phrase à ces deux faits. Étape 3 — Écarter les phrases qui échangent les dates ou qui nient le vote. Étape 4 — Conclure : les deux phrases vraies sont celles qui respectent les dates. La phrase « promulguée le 30 octobre » est fausse : le 30 octobre est le jour du vote.",
+              "answers": [
+                {
+                  "content": "Le 30 octobre 2016, le peuple a adopté la Constitution",
+                  "correct": true
+                },
+                {
+                  "content": "Le 8 novembre 2016, la Constitution a été promulguée",
+                  "correct": true
+                },
+                {
+                  "content": "Le 30 octobre 2016, la Constitution a été promulguée",
+                  "correct": false
+                },
+                {
+                  "content": "Le peuple n'a pas voté pour la Constitution de 2016",
+                  "correct": false
+                },
+                {
+                  "content": "La promulgation a eu lieu avant le référendum",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel mot désigne le vote du peuple par OUI ou NON sur un texte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Rappeler la définition du référendum. Étape 2 — Comparer avec les autres mots : la promulgation rend le texte officiel, la devise et l'hymne sont des symboles. Étape 3 — Conclure : c'est le référendum.",
+              "answers": [
+                {
+                  "content": "Référendum",
+                  "correct": true
+                },
+                {
+                  "content": "Promulgation",
+                  "correct": false
+                },
+                {
+                  "content": "Devise",
+                  "correct": false
+                },
+                {
+                  "content": "Hymne",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques phrases la différence entre adopter et promulguer la Constitution, en donnant les deux dates de 2016.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Adopter est expliqué comme le vote du peuple par référendum",
+                "Promulguer est expliqué comme le fait de rendre le texte officiel",
+                "Les deux dates sont exactes (30 octobre et 8 novembre 2016)",
+                "Le vote est placé avant la promulgation"
+              ],
+              "starter": "Adopter, c'est…",
+              "explanation": "Corrigé modèle : « Adopter la Constitution, c'est dire OUI par référendum : le peuple l'a fait le 30 octobre 2016. Promulguer, c'est rendre le texte officiel : cela a été fait le 8 novembre 2016. On vote d'abord, on promulgue ensuite. » Barème : 1 pour adopter, 1 pour promulguer, 0,5 pour les dates, 0,5 pour l'ordre.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Exposition sur les symboles du pays",
+          "statement": "Pour la semaine de la citoyenneté, l'école de Korhogo organise une exposition sur la Constitution et les symboles de la Côte d'Ivoire. Les élèves de 6ème présentent la devise, le drapeau et l'hymne, et expliquent pourquoi tout le monde doit les respecter.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la devise de la Côte d'Ivoire ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Rappeler la devise de la fiche. Étape 2 — Comparer avec les propositions : les autres changent un ou plusieurs mots. Étape 3 — Conclure : « Union – Discipline – Travail ».",
+              "answers": [
+                {
+                  "content": "Union – Discipline – Travail",
+                  "correct": true
+                },
+                {
+                  "content": "Liberté – Égalité – Fraternité",
+                  "correct": false
+                },
+                {
+                  "content": "Force – Courage – Gloire",
+                  "correct": false
+                },
+                {
+                  "content": "Union – Paix – Travail",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le drapeau ivoirien, remets les trois couleurs dans l'ordre, de gauche à droite.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Rappeler les couleurs du drapeau : orange, blanc, vert. Étape 2 — Les ranger de gauche à droite. Étape 3 — Conclure : orange, blanc, vert.",
+              "answers": [
+                {
+                  "content": "Orange"
+                },
+                {
+                  "content": "Blanc"
+                },
+                {
+                  "content": "Vert"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque comportement à la valeur de la devise qu'il montre.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Rappeler le sens des trois mots de la devise. Étape 2 — Comparer chaque comportement à ces sens. Étape 3 — Associer : rester ensemble = union, respecter les règles = discipline, faire des efforts = travail. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes.",
+              "answers": [
+                {
+                  "content": "Rester amis malgré nos différences",
+                  "match": "Union"
+                },
+                {
+                  "content": "Respecter les règles de l'école",
+                  "match": "Discipline"
+                },
+                {
+                  "content": "Faire des efforts pour réussir ses études",
+                  "match": "Travail"
+                }
+              ]
+            },
+            {
+              "content": "Quels comportements respectent les symboles du pays ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Rappeler la règle : on respecte le drapeau et on écoute l'hymne avec respect, debout et en silence. Étape 2 — Comparer chaque comportement à cette règle. Étape 3 — Écarter ceux qui se moquent ou salissent. Étape 4 — Conclure : les deux bons comportements sont écouter l'hymne debout et prendre soin du drapeau.",
+              "answers": [
+                {
+                  "content": "Écouter l'hymne debout et en silence",
+                  "correct": true
+                },
+                {
+                  "content": "Prendre soin du drapeau",
+                  "correct": true
+                },
+                {
+                  "content": "Se moquer pendant l'hymne",
+                  "correct": false
+                },
+                {
+                  "content": "Salir le drapeau",
+                  "correct": false
+                },
+                {
+                  "content": "Dire que les symboles ne servent à rien",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "« L'Abidjanaise » est la devise de la Côte d'Ivoire.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Rappeler : « L'Abidjanaise » est l'hymne national, un chant. Étape 2 — Comparer : la devise est une phrase de trois mots. Étape 3 — Conclure : l'affirmation confond l'hymne et la devise, elle est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève dit : « La devise ne sert à rien. » Prends position en quelques phrases et donne un exemple pris à l'école.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "La position est claire (d'accord ou pas d'accord)",
+                "Au moins un mot de la devise est expliqué (union, discipline ou travail)",
+                "Un exemple concret pris à l'école est donné",
+                "Le ton reste respectueux et les phrases sont correctes"
+              ],
+              "starter": "Je pense que… parce que…",
+              "explanation": "Corrigé modèle : « Je ne suis pas d'accord. La devise « Union – Discipline – Travail » rappelle les valeurs du pays. À l'école, la discipline permet d'apprendre dans le calme, l'union nous aide à jouer ensemble malgré nos différences et le travail nous fait réussir. » Barème : 1 pour la position, 1 pour l'explication d'un mot, 1 pour l'exemple, 1 pour le ton et la langue. Toute position argumentée et respectueuse est acceptée.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Définition et rôles de la Constitution, adoption par référendum, dates de la Constitution de 2016, devise et symboles de la République.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour préparer une interrogation, Kofi révise ce qu'est une Constitution avec sa classe de 6ème.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense aux trois rôles : organiser l'État, garantir les droits, fixer les devoirs.",
+              "questions": [
+                {
+                  "content": "Quelle phrase définit le mieux la Constitution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : la Constitution est la loi fondamentale, la loi suprême. Étape 2 — Comparer avec les autres propositions, qui la réduisent à une école, à une loi ordinaire ou à une liste. Étape 3 — Conclure : c'est la loi fondamentale du pays.",
+                  "answers": [
+                    {
+                      "content": "La loi fondamentale du pays, au-dessus de toutes les autres lois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un règlement qui ne concerne qu'une école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une loi ordinaire qu'on change chaque semaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "La liste des habitants d'un village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une loi ordinaire peut dire le contraire de la Constitution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler que la Constitution est la loi suprême. Étape 2 — Appliquer : aucune loi ne peut dire le contraire. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution est la loi ___ du pays.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher le mot qui veut dire « la plus haute ». Étape 2 — Rappeler : loi suprême ou loi fondamentale. Étape 3 — Conclure : on écrit « suprême » ou « fondamentale ».",
+                  "answers": [
+                    {
+                      "content": "suprême",
+                      "correct": true
+                    },
+                    {
+                      "content": "fondamentale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois rôles de la Constitution ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Rappeler les trois rôles de la fiche. Étape 2 — Comparer chaque proposition à ces rôles. Étape 3 — Écarter le prix du riz et les notes, qui n'ont rien à voir. Étape 4 — Conclure : organiser l'État, garantir les droits et libertés, fixer les devoirs.",
+                  "answers": [
+                    {
+                      "content": "Elle organise l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle garantit les droits et les libertés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fixe les devoirs des citoyens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fixe le prix du riz au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle choisit les notes des élèves",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution fixe aussi les ___ des citoyens.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler que la Constitution donne des droits mais aussi des devoirs. Étape 2 — Comparer avec les autres mots : vacances et salaires ne sont pas des rôles de la Constitution. Étape 3 — Conclure : « devoirs ».",
+                  "answers": [
+                    {
+                      "content": "devoirs",
+                      "correct": true
+                    },
+                    {
+                      "content": "vacances",
+                      "correct": false
+                    },
+                    {
+                      "content": "salaires",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans le pays imaginaire de Kipri, les habitants votent pour adopter un texte important.",
+              "exercise_type": "evaluation",
+              "figure": "du-texte-a-la-loi-supreme",
+              "hint": "Retiens : on propose, on vote, on compte, on promulgue.",
+              "questions": [
+                {
+                  "content": "Qui a adopté la Constitution ivoirienne de 2016 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le peuple adopte la Constitution par référendum. Étape 2 — Comparer : les autres propositions ne donnent la parole qu'à une petite partie des gens. Étape 3 — Conclure : le peuple, par un référendum.",
+                  "answers": [
+                    {
+                      "content": "Le peuple, par un référendum",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un seul citoyen choisi par le hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les commerçants du marché seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les élèves de 6ème seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un référendum, l'électeur répond par OUI ou par NON.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler la définition du référendum. Étape 2 — Comparer avec l'affirmation : même définition. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les OUI l'emportent sur les NON, le texte est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler : si les OUI sont plus nombreux, le texte est adopté. Étape 2 — Conclure : on écrit « adopté ».",
+                  "answers": [
+                    {
+                      "content": "adopté",
+                      "correct": true
+                    },
+                    {
+                      "content": "accepté",
+                      "correct": true
+                    },
+                    {
+                      "content": "approuvé",
+                      "correct": true
+                    },
+                    {
+                      "content": "validé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À Kipri, 650 électeurs répondent OUI sur 1 000 électeurs. Tous ont répondu OUI ou NON. Combien répondent NON ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : 1 000 électeurs, dont 650 OUI. Étape 2 — Chaque électeur répond OUI ou NON. Étape 3 — Calculer : 1 000 − 650 = 350. Étape 4 — Conclure : 350 NON.",
+                  "answers": [
+                    {
+                      "content": "350",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour qu'une Constitution devienne officielle.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Commencer par le texte proposé. Étape 2 — Faire voter le peuple. Étape 3 — Constater que les OUI l'emportent. Étape 4 — Terminer par la promulgation. Le vote vient avant la promulgation.",
+                  "answers": [
+                    {
+                      "content": "Un texte est proposé."
+                    },
+                    {
+                      "content": "Le peuple vote OUI ou NON."
+                    },
+                    {
+                      "content": "Les OUI l'emportent : le texte est adopté."
+                    },
+                    {
+                      "content": "Le texte est promulgué."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Aya écrit les dates importantes de la Constitution ivoirienne actuelle sur une affiche.",
+              "exercise_type": "evaluation",
+              "figure": "frise-2016",
+              "hint": "Vote = 30 octobre. Promulgation = 8 novembre.",
+              "questions": [
+                {
+                  "content": "En quelle année a été adoptée la Constitution actuelle de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : la Constitution actuelle est celle de 2016. Étape 2 — Comparer avec les autres années. Étape 3 — Conclure : 2016.",
+                  "answers": [
+                    {
+                      "content": "2016",
+                      "correct": true
+                    },
+                    {
+                      "content": "2006",
+                      "correct": false
+                    },
+                    {
+                      "content": "2012",
+                      "correct": false
+                    },
+                    {
+                      "content": "2010",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le référendum a eu lieu le ___ octobre 2016.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler : référendum le 30 octobre 2016. Étape 2 — Conclure : on écrit 30.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    },
+                    {
+                      "content": "trente",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution actuelle a été promulguée le 8 novembre 2016.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : promulgation le 8 novembre 2016. Étape 2 — Comparer : la date de l'affirmation est la même. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de jours y a-t-il entre le 30 octobre et le 8 novembre 2016 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "jours",
+                  "explanation": "Étape 1 — Compter du 30 au 31 octobre : 1 jour. Étape 2 — Compter du 31 octobre au 8 novembre : 8 jours. Étape 3 — Additionner : 1 + 8. Étape 4 — Conclure : 9 jours.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque événement à sa date.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler les trois dates de la fiche. Étape 2 — Associer chaque événement à sa date. Étape 3 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Référendum",
+                      "match": "30 octobre 2016"
+                    },
+                    {
+                      "content": "Promulgation",
+                      "match": "8 novembre 2016"
+                    },
+                    {
+                      "content": "Année de la Constitution actuelle",
+                      "match": "2016"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "La classe de 6ème prépare un panneau sur les symboles de la Côte d'Ivoire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Devise = phrase, drapeau = image, hymne = chant.",
+              "questions": [
+                {
+                  "content": "Quelle est la devise de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler la devise de la fiche. Étape 2 — Comparer avec les propositions qui changent un mot. Étape 3 — Conclure : « Union – Discipline – Travail ».",
+                  "answers": [
+                    {
+                      "content": "Union – Discipline – Travail",
+                      "correct": true
+                    },
+                    {
+                      "content": "Liberté – Égalité – Fraternité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Force – Courage – Gloire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Union – Discipline – Liberté",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le drapeau ivoirien est orange, blanc et vert.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : trois bandes verticales, orange, blanc et vert. Étape 2 — Comparer avec l'affirmation. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hymne national de la Côte d'Ivoire s'appelle « ___ ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler : l'hymne national est « L'Abidjanaise ». Étape 2 — Conclure : on écrit « L'Abidjanaise ».",
+                  "answers": [
+                    {
+                      "content": "L'Abidjanaise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Abidjanaise",
+                      "correct": true
+                    },
+                    {
+                      "content": "LAbidjanaise",
+                      "correct": true
+                    },
+                    {
+                      "content": "L Abidjanaise",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot de la devise à son sens.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler le sens de chaque mot dans la fiche. Étape 2 — Associer chaque mot à son sens. Étape 3 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Union",
+                      "match": "Rester ensemble malgré les différences"
+                    },
+                    {
+                      "content": "Discipline",
+                      "match": "Respecter les règles"
+                    },
+                    {
+                      "content": "Travail",
+                      "match": "Faire des efforts pour faire avancer le pays"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois symboles de la République présentés dans la fiche ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Rappeler les trois symboles de la fiche. Étape 2 — Écarter le blason d'une classe et la chanson d'une personne. Étape 3 — Conclure : la devise, le drapeau et l'hymne.",
+                  "answers": [
+                    {
+                      "content": "La devise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le drapeau",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hymne national",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le blason de chaque classe",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chanson préférée du maître",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La Constitution dans la vie courante",
+          "notions": "Comparaison du règlement d'une classe avec la Constitution, résultat d'un vote par référendum, dates de 2016, respect de l'hymne, du drapeau et de la devise.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À l'école de Yopougon, les élèves de la 6ème C écrivent un règlement. Leur professeur leur dit que ce règlement ressemble à une petite Constitution.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans un règlement comme dans la Constitution, il y a des droits et des devoirs.",
+              "questions": [
+                {
+                  "content": "Relie chaque article du règlement au rôle de la Constitution qui lui ressemble.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire chaque article. Étape 2 — Chercher le mot-clé : droit, doit, fonctionne. Étape 3 — Associer au rôle de la Constitution. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Chaque élève a le droit de poser des questions",
+                      "match": "Garantit les droits et les libertés"
+                    },
+                    {
+                      "content": "Chaque élève doit respecter ses camarades",
+                      "match": "Fixe les devoirs"
+                    },
+                    {
+                      "content": "Le règlement explique comment la classe fonctionne",
+                      "match": "Organise l'État"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le règlement de la classe, comme la Constitution, donne des droits et demande aussi des devoirs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler que la Constitution garantit des droits et fixe des devoirs. Étape 2 — Comparer avec le règlement de classe : il fait la même chose. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un article du règlement qui dit le contraire d'une règle plus haute doit être ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler que la Constitution est la loi suprême : rien ne peut dire le contraire. Étape 2 — Appliquer à la classe : une règle qui contredit une règle plus haute n'est pas valable. Étape 3 — Conclure : elle doit être corrigée.",
+                  "answers": [
+                    {
+                      "content": "corrigé",
+                      "correct": true
+                    },
+                    {
+                      "content": "gardé",
+                      "correct": false
+                    },
+                    {
+                      "content": "affiché plus grand",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Dans le règlement, il n'y a que des droits. » Que peut répondre le professeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler le piège : la Constitution ne donne pas que des droits. Étape 2 — Appliquer à la classe : le règlement demande aussi des devoirs. Étape 3 — Conclure : il y a aussi des devoirs.",
+                  "answers": [
+                    {
+                      "content": "Il y a aussi des devoirs, comme dans la Constitution",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tu as raison, il n'y a jamais de devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les droits n'existent pas dans un règlement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un règlement ne sert à rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution est la loi ___ : aucune autre loi ne peut la contredire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher le mot « la plus haute ». Étape 2 — Conclure : la loi suprême.",
+                  "answers": [
+                    {
+                      "content": "suprême",
+                      "correct": true
+                    },
+                    {
+                      "content": "fondamentale",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans le pays imaginaire de Kipri, 5 000 électeurs votent pour adopter un texte. Il y a 3 200 OUI et 1 800 NON. Tous les électeurs ont voté.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Additionne pour avoir le total, soustrais pour avoir la différence.",
+              "questions": [
+                {
+                  "content": "Combien d'électeurs ont voté en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : 3 200 OUI et 1 800 NON. Étape 2 — Chaque électeur vote une fois. Étape 3 — Additionner : 3 200 + 1 800. Étape 4 — Conclure : 5 000.",
+                  "answers": [
+                    {
+                      "content": "5000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de OUI de plus que de NON ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : 3 200 OUI et 1 800 NON. Étape 2 — Soustraire : 3 200 − 1 800. Étape 3 — Conclure : 1 400 OUI de plus.",
+                  "answers": [
+                    {
+                      "content": "1400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le texte est-il adopté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le texte est adopté si les OUI sont plus nombreux que les NON. Étape 2 — Comparer : 3 200 est plus grand que 1 800. Étape 3 — Conclure : il est adopté. La réponse « il faut 5 000 OUI » est fausse : il suffit que les OUI l'emportent.",
+                  "answers": [
+                    {
+                      "content": "Oui, car les OUI l'emportent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car il y a 1 800 NON",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car il faut 5 000 OUI",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après le vote, le texte doit encore être promulgué pour devenir officiel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : adopter et promulguer sont deux étapes. Étape 2 — Appliquer : après l'adoption vient la promulgation. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de ce référendum à Kipri.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Commencer par la proposition du texte. Étape 2 — Faire voter. Étape 3 — Compter les voix. Étape 4 — Conclure : adoption, puis promulgation.",
+                  "answers": [
+                    {
+                      "content": "Le texte est proposé aux habitants."
+                    },
+                    {
+                      "content": "Les électeurs votent OUI ou NON."
+                    },
+                    {
+                      "content": "On compte 3 200 OUI et 1 800 NON."
+                    },
+                    {
+                      "content": "Le texte est adopté, puis promulgué."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Mariam fait un exposé sur la Constitution ivoirienne de 2016. Elle montre une frise avec les deux dates importantes.",
+              "exercise_type": "evaluation",
+              "figure": "frise-2016",
+              "hint": "Vote = 30 octobre. Promulgation = 8 novembre.",
+              "questions": [
+                {
+                  "content": "Que s'est-il passé le 30 octobre 2016 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le 30 octobre 2016 est la date du référendum. Étape 2 — Comparer avec les autres propositions. Étape 3 — Conclure : le peuple a adopté la Constitution.",
+                  "answers": [
+                    {
+                      "content": "Le peuple a adopté la Constitution par référendum",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Constitution a été promulguée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution a été abandonnée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La devise a été changée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que s'est-il passé le 8 novembre 2016 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le 8 novembre 2016 est la date de la promulgation. Étape 2 — Comparer avec les autres propositions. Étape 3 — Conclure : la Constitution a été promulguée.",
+                  "answers": [
+                    {
+                      "content": "La Constitution a été promulguée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le peuple a voté par référendum",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution a été abandonnée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nouveau drapeau a été choisi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de jours se sont passés entre le vote et la promulgation ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "jours",
+                  "explanation": "Étape 1 — Compter du 30 au 31 octobre : 1 jour. Étape 2 — Compter jusqu'au 8 novembre : 8 jours. Étape 3 — Additionner : 1 + 8. Étape 4 — Conclure : 9 jours.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution actuelle de la Côte d'Ivoire date de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler l'année de la fiche. Étape 2 — Conclure : 2016.",
+                  "answers": [
+                    {
+                      "content": "2016",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases de l'exposé sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rappeler les deux dates. Étape 2 — Comparer chaque phrase à ces dates. Étape 3 — Écarter celles qui les échangent. Étape 4 — Conclure : les deux phrases vraies respectent les dates.",
+                  "answers": [
+                    {
+                      "content": "Le vote a eu lieu le 30 octobre 2016",
+                      "correct": true
+                    },
+                    {
+                      "content": "La promulgation a eu lieu le 8 novembre 2016",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vote a eu lieu le 8 novembre 2016",
+                      "correct": false
+                    },
+                    {
+                      "content": "La promulgation a eu lieu avant le vote",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution de 2016 n'a pas été votée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pendant la cérémonie de fin de semaine, l'école de Man joue l'hymne national et salue le drapeau. Les élèves rappellent la devise.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "On respecte les symboles : on se tait, on se tient droit, on prend soin du drapeau.",
+              "questions": [
+                {
+                  "content": "Relie chaque comportement à la valeur de la devise qu'il montre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler le sens des trois valeurs. Étape 2 — Comparer chaque comportement. Étape 3 — Associer : union, discipline, travail. Étape 4 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Aider les élèves d'un autre village à jouer avec nous",
+                      "match": "Union"
+                    },
+                    {
+                      "content": "Respecter les consignes de la cérémonie",
+                      "match": "Discipline"
+                    },
+                    {
+                      "content": "Faire des efforts pour progresser en classe",
+                      "match": "Travail"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant l'hymne, que doit faire un élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : on écoute l'hymne avec respect, debout et en silence. Étape 2 — Comparer avec les autres comportements. Étape 3 — Conclure : se tenir debout et écouter en silence.",
+                  "answers": [
+                    {
+                      "content": "Se tenir debout et écouter en silence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Bavarder avec son voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se moquer des chanteurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quitter la cour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le drapeau ivoirien a trois bandes verticales : orange, blanc et vert.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler la description du drapeau. Étape 2 — Comparer avec l'affirmation. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« L'Abidjanaise » est l'___ national de la Côte d'Ivoire.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : « L'Abidjanaise » est un chant. Étape 2 — Comparer : un chant s'appelle un hymne. Étape 3 — Conclure : « hymne ».",
+                  "answers": [
+                    {
+                      "content": "hymne",
+                      "correct": true
+                    },
+                    {
+                      "content": "drapeau",
+                      "correct": false
+                    },
+                    {
+                      "content": "devise",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels comportements respectent le drapeau et l'hymne ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rappeler la règle de respect. Étape 2 — Comparer chaque comportement. Étape 3 — Écarter ceux qui manquent de respect. Étape 4 — Conclure : se taire pendant l'hymne et prendre soin du drapeau.",
+                  "answers": [
+                    {
+                      "content": "Se taire pendant l'hymne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prendre soin du drapeau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Salir le drapeau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se moquer de l'hymne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parler fort pendant la cérémonie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Raisonner sur la loi suprême, sur les résultats d'un référendum, sur la différence entre adopter et promulguer, et sur les valeurs de la devise.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois élèves discutent de la Constitution. Réponds aux questions.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque phrase, demande-toi quel rôle de la Constitution est oublié ou rappelé.",
+              "questions": [
+                {
+                  "content": "Léa dit : « Une loi peut dire le contraire de la Constitution. » Pourquoi a-t-elle tort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : Léa pense qu'une loi peut contredire la Constitution. Étape 2 — Rappeler : la Constitution est la loi suprême. Étape 3 — Comparer : une loi en dessous d'elle ne peut pas la contredire. Étape 4 — Conclure : Léa a tort car la Constitution est la loi suprême.",
+                  "answers": [
+                    {
+                      "content": "Parce que la Constitution est la loi suprême, au-dessus de toutes les autres lois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la Constitution est écrite en grosses lettres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la Constitution est une loi de l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas tort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi dit : « La Constitution ne parle que de droits. » Pourquoi a-t-il tort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : Koffi oublie les devoirs. Étape 2 — Rappeler : la Constitution garantit des droits et fixe des devoirs. Étape 3 — Comparer avec son affirmation. Étape 4 — Conclure : il a tort car elle fixe aussi les devoirs.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'elle fixe aussi les devoirs des citoyens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'elle ne parle que des notes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle ne parle que de l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas tort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dit : « Une Constitution organise l'État. » Pourquoi a-t-elle raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : Awa parle de l'organisation de l'État. Étape 2 — Rappeler : la Constitution dit comment le pays est dirigé. Étape 3 — Comparer avec l'affirmation. Étape 4 — Conclure : Awa a raison.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'elle dit comment le pays est dirigé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'elle fixe le prix du riz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle choisit les élèves de la classe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas raison",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un règlement de classe qui oublie les devoirs ressemble moins à une Constitution qu'un règlement qui contient des droits et des devoirs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : la Constitution contient droits et devoirs. Étape 2 — Comparer : un règlement sans devoirs est incomplet. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les points communs entre le règlement d'une classe et la Constitution ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rappeler les rôles de la Constitution. Étape 2 — Chercher les mêmes rôles dans un règlement. Étape 3 — Écarter les propositions fausses. Étape 4 — Conclure : organiser un groupe et protéger les personnes.",
+                  "answers": [
+                    {
+                      "content": "Ils organisent un groupe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils protègent les personnes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont écrits par un seul élève",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ne parlent jamais de devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ne servent à rien",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans le pays imaginaire de Soléa, un référendum donne 6 000 OUI et 4 000 NON. Les élèves doivent expliquer le résultat.",
+              "exercise_type": "evaluation",
+              "figure": "du-texte-a-la-loi-supreme",
+              "hint": "Les OUI doivent l'emporter. Promulguer vient après voter.",
+              "questions": [
+                {
+                  "content": "Combien d'électeurs ont voté ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : 6 000 OUI et 4 000 NON. Étape 2 — Additionner : 6 000 + 4 000. Étape 3 — Conclure : 10 000.",
+                  "answers": [
+                    {
+                      "content": "10000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le texte est-il adopté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : 6 000 OUI contre 4 000 NON. Étape 2 — Rappeler : le texte est adopté si les OUI l'emportent. Étape 3 — Comparer : 6 000 est plus grand que 4 000. Étape 4 — Conclure : le texte est adopté.",
+                  "answers": [
+                    {
+                      "content": "Parce que les OUI sont plus nombreux que les NON",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il y a 4 000 NON",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le vote a eu lieu un lundi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que tout le monde a répondu OUI",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les NON avaient été plus nombreux, le texte n'aurait pas été adopté.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler la règle du référendum. Étape 2 — Appliquer : si les NON l'emportent, les OUI ne sont pas majoritaires. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rappeler la règle de l'adoption. Étape 2 — Comparer chaque phrase. Étape 3 — Écarter celles qui changent l'ordre ou le votant. Étape 4 — Conclure : deux phrases sont vraies.",
+                  "answers": [
+                    {
+                      "content": "Le peuple adopte la Constitution par référendum",
+                      "correct": true
+                    },
+                    {
+                      "content": "Après l'adoption, le texte est promulgué",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le texte est promulgué avant le vote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un seul citoyen adopte la Constitution",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le référendum se fait sans réponse OUI ou NON",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Adopter et promulguer, c'est pareil. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'élève confond les deux mots. Étape 2 — Rappeler : adopter = vote OUI du peuple ; promulguer = rendre officiel. Étape 3 — Comparer avec les propositions. Étape 4 — Conclure : ce sont deux étapes différentes.",
+                  "answers": [
+                    {
+                      "content": "Adopter, c'est le vote du peuple ; promulguer, c'est rendre le texte officiel après le vote",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tu as raison, c'est le même mot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Promulguer veut dire voter NON",
+                      "correct": false
+                    },
+                    {
+                      "content": "Adopter veut dire afficher le texte",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un camarade te donne des affirmations sur les dates de la Constitution de 2016. Tu dois juger si elles sont justes.",
+              "exercise_type": "evaluation",
+              "figure": "frise-2016",
+              "hint": "Le 30 octobre, c'est le vote. Le 8 novembre, c'est la promulgation.",
+              "questions": [
+                {
+                  "content": "« La Constitution a été promulguée le 30 octobre 2016. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la date de promulgation est donnée comme le 30 octobre. Étape 2 — Rappeler : le 30 octobre 2016 est le référendum ; la promulgation est le 8 novembre. Étape 3 — Comparer : les deux dates sont échangées. Étape 4 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : le 30 octobre est la date du référendum",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : il n'y a pas eu de promulgation",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : elle date de 2006",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« Le peuple a adopté la Constitution par référendum le 30 octobre 2016. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'affirmation donne le 30 octobre 2016 pour le référendum. Étape 2 — Rappeler : c'est bien la date du référendum. Étape 3 — Comparer : l'affirmation respecte la fiche. Étape 4 — Conclure : c'est vrai.",
+                  "answers": [
+                    {
+                      "content": "C'est vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est faux : c'était le 8 novembre",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : le peuple n'a pas voté",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : c'était en 2006",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le vote vient avant la promulgation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : 30 octobre puis 8 novembre. Étape 2 — Comparer : le 30 octobre est avant le 8 novembre. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de jours séparent le 30 octobre 2016 du 8 novembre 2016 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "jours",
+                  "explanation": "Étape 1 — Compter 1 jour jusqu'au 31 octobre. Étape 2 — Compter 8 jours jusqu'au 8 novembre. Étape 3 — Additionner : 1 + 8. Étape 4 — Conclure : 9 jours, l'élève a raison.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ces trois faits.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Placer le vote en premier. Étape 2 — Placer la promulgation ensuite. Étape 3 — Terminer par l'application à tout le pays.",
+                  "answers": [
+                    {
+                      "content": "Le peuple vote par référendum (30 octobre 2016)."
+                    },
+                    {
+                      "content": "La Constitution est promulguée (8 novembre 2016)."
+                    },
+                    {
+                      "content": "La Constitution s'applique à tout le pays."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À l'école de Bouaké, plusieurs situations posent un problème de respect de la devise ou des symboles. Tu dois dire quelle valeur est en cause.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Union = rester ensemble. Discipline = respecter les règles. Travail = faire des efforts.",
+              "questions": [
+                {
+                  "content": "Des élèves refusent de jouer avec les nouveaux, qui viennent d'un autre village. Quelle valeur manque ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : des élèves refusent de jouer avec d'autres. Étape 2 — Rappeler : union = rester ensemble malgré les différences. Étape 3 — Comparer : le refus est le contraire de l'union. Étape 4 — Conclure : il manque l'union.",
+                  "answers": [
+                    {
+                      "content": "Union",
+                      "correct": true
+                    },
+                    {
+                      "content": "Travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "Discipline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Des élèves arrivent en retard tous les matins sans raison. Quelle valeur manque ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : des élèves arrivent toujours en retard. Étape 2 — Rappeler : discipline = respecter les règles. Étape 3 — Comparer : le retard viole la règle des horaires. Étape 4 — Conclure : il manque la discipline.",
+                  "answers": [
+                    {
+                      "content": "Discipline",
+                      "correct": true
+                    },
+                    {
+                      "content": "Union",
+                      "correct": false
+                    },
+                    {
+                      "content": "Travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève ne fait jamais ses devoirs et ne fait aucun effort. Quelle valeur manque ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : un élève ne fait aucun effort. Étape 2 — Rappeler : travail = faire des efforts. Étape 3 — Comparer : l'absence d'effort est le contraire du travail. Étape 4 — Conclure : il manque le travail.",
+                  "answers": [
+                    {
+                      "content": "Travail",
+                      "correct": true
+                    },
+                    {
+                      "content": "Union",
+                      "correct": false
+                    },
+                    {
+                      "content": "Discipline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Salir le drapeau est un manque de respect envers un symbole du pays.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : on respecte le drapeau. Étape 2 — Comparer : salir le drapeau ne le respecte pas. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels comportements respectent l'hymne « L'Abidjanaise » ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rappeler : on écoute l'hymne debout et en silence. Étape 2 — Comparer chaque comportement. Étape 3 — Écarter ceux qui dérangent. Étape 4 — Conclure : se tenir debout et se taire.",
+                  "answers": [
+                    {
+                      "content": "Se tenir debout",
+                      "correct": true
+                    },
+                    {
+                      "content": "Se taire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parler à son voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se moquer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jouer dans la cour",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la Constitution",
+          "notions": "Bilan : définition et rôles de la Constitution, référendum, adoption et promulgation, dates de 2016, devise et symboles de la République.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour terminer la leçon, le professeur d'EDHC pose des questions sur la Constitution à la 6ème A.",
+              "exercise_type": "evaluation",
+              "figure": "roles-constitution",
+              "hint": "Pense aux trois rôles de la Constitution.",
+              "questions": [
+                {
+                  "content": "Quelle phrase définit la Constitution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : la Constitution est la loi suprême. Étape 2 — Comparer avec les autres propositions. Étape 3 — Conclure : la loi fondamentale du pays.",
+                  "answers": [
+                    {
+                      "content": "La loi fondamentale du pays, au-dessus de toutes les autres lois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un règlement d'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une loi ordinaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chant du pays",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois rôles de la Constitution ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Rappeler les trois rôles. Étape 2 — Écarter les notes et le drapeau de classe. Étape 3 — Conclure : organiser, garantir, fixer les devoirs.",
+                  "answers": [
+                    {
+                      "content": "Organiser l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Garantir les droits et les libertés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fixer les devoirs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fixer les notes des élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir la couleur du drapeau de chaque classe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution fixe des devoirs aux citoyens.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : droits et devoirs. Étape 2 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Constitution est la loi ___ du pays.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher le mot « la plus haute ». Étape 2 — Conclure : suprême ou fondamentale.",
+                  "answers": [
+                    {
+                      "content": "suprême",
+                      "correct": true
+                    },
+                    {
+                      "content": "fondamentale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une loi qui dit le contraire de la Constitution ___ la loi suprême.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : la Constitution est la loi suprême. Étape 2 — Comparer : une loi qui la contredit ne la suit pas. Étape 3 — Conclure : « ne respecte pas ».",
+                  "answers": [
+                    {
+                      "content": "ne respecte pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "respecte",
+                      "correct": false
+                    },
+                    {
+                      "content": "remplace",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Soléa, un référendum donne 800 OUI et 200 NON. Tous ont voté.",
+              "exercise_type": "evaluation",
+              "figure": "du-texte-a-la-loi-supreme",
+              "hint": "Les OUI doivent l'emporter pour que le texte soit adopté.",
+              "questions": [
+                {
+                  "content": "Combien d'électeurs ont voté ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : 800 OUI et 200 NON. Étape 2 — Additionner : 800 + 200. Étape 3 — Conclure : 1 000.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le texte est-il adopté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler la règle : les OUI plus nombreux, texte adopté. Étape 2 — Comparer : 800 est plus grand que 200. Étape 3 — Conclure : adopté.",
+                  "answers": [
+                    {
+                      "content": "Oui, car les OUI l'emportent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car il y a des NON",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car il faut 1 000 OUI",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après le vote, le texte est promulgué pour devenir officiel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : adopter puis promulguer. Étape 2 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le vote du peuple par OUI ou NON s'appelle un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler le nom de ce vote. Étape 2 — Conclure : référendum.",
+                  "answers": [
+                    {
+                      "content": "référendum",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler les définitions. Étape 2 — Associer chaque mot. Étape 3 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Référendum",
+                      "match": "Vote par OUI ou NON sur un texte"
+                    },
+                    {
+                      "content": "Adopter",
+                      "match": "Dire OUI au texte par le vote"
+                    },
+                    {
+                      "content": "Promulguer",
+                      "match": "Rendre le texte officiel"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour le bilan, les élèves réécrivent la frise de la Constitution ivoirienne de 2016.",
+              "exercise_type": "evaluation",
+              "figure": "frise-2016",
+              "hint": "Vote = 30 octobre. Promulgation = 8 novembre.",
+              "questions": [
+                {
+                  "content": "En quelle année a été adoptée la Constitution actuelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler l'année de la fiche. Étape 2 — Conclure : 2016.",
+                  "answers": [
+                    {
+                      "content": "2016",
+                      "correct": true
+                    },
+                    {
+                      "content": "2006",
+                      "correct": false
+                    },
+                    {
+                      "content": "2012",
+                      "correct": false
+                    },
+                    {
+                      "content": "2010",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le référendum a eu lieu le ___ octobre 2016.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler la date du référendum. Étape 2 — Conclure : 30.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    },
+                    {
+                      "content": "trente",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que s'est-il passé le 8 novembre 2016 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : promulgation le 8 novembre. Étape 2 — Conclure : la Constitution a été promulguée.",
+                  "answers": [
+                    {
+                      "content": "La Constitution a été promulguée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le peuple a voté",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution a été abandonnée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La devise a été changée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de jours entre le référendum et la promulgation ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "jours",
+                  "explanation": "Étape 1 — Compter 1 jour jusqu'au 31 octobre. Étape 2 — Compter 8 jours jusqu'au 8 novembre. Étape 3 — Additionner. Étape 4 — Conclure : 9 jours.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ces faits.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Le vote d'abord. Étape 2 — La promulgation ensuite. Étape 3 — L'application enfin.",
+                  "answers": [
+                    {
+                      "content": "Le peuple vote par référendum (30 octobre 2016)."
+                    },
+                    {
+                      "content": "La Constitution est promulguée (8 novembre 2016)."
+                    },
+                    {
+                      "content": "La Constitution s'applique à tout le pays."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "La classe fait un dernier jeu sur la devise et les symboles de la Côte d'Ivoire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Devise = phrase, drapeau = image, hymne = chant.",
+              "questions": [
+                {
+                  "content": "Quelle est la devise de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler la devise. Étape 2 — Conclure : « Union – Discipline – Travail ».",
+                  "answers": [
+                    {
+                      "content": "Union – Discipline – Travail",
+                      "correct": true
+                    },
+                    {
+                      "content": "Liberté – Égalité – Fraternité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Force – Courage – Gloire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Union – Discipline – Liberté",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les couleurs du drapeau, de gauche à droite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rappeler les couleurs. Étape 2 — Les ranger de gauche à droite.",
+                  "answers": [
+                    {
+                      "content": "Orange"
+                    },
+                    {
+                      "content": "Blanc"
+                    },
+                    {
+                      "content": "Vert"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel symbole est un chant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : l'hymne est un chant. Étape 2 — Conclure : l'hymne national.",
+                  "answers": [
+                    {
+                      "content": "L'hymne national",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le drapeau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La devise",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Constitution",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot de la devise à son sens.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler les sens. Étape 2 — Associer chaque mot. Étape 3 — Conclure : les trois paires ci-dessus sont les bonnes.",
+                  "answers": [
+                    {
+                      "content": "Union",
+                      "match": "Rester ensemble malgré les différences"
+                    },
+                    {
+                      "content": "Discipline",
+                      "match": "Respecter les règles"
+                    },
+                    {
+                      "content": "Travail",
+                      "match": "Faire des efforts pour faire avancer le pays"
+                    }
+                  ]
+                },
+                {
+                  "content": "« L'Abidjanaise » est l'hymne national de la Côte d'Ivoire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : l'hymne national est « L'Abidjanaise ». Étape 2 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant l'hymne, un élève doit rester ___ et en silence.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : on écoute l'hymne debout et en silence. Étape 2 — Conclure : « debout ».",
+                  "answers": [
+                    {
+                      "content": "debout",
+                      "correct": true
+                    },
+                    {
+                      "content": "assis",
+                      "correct": false
+                    },
+                    {
+                      "content": "allongé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

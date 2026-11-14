@@ -22,7 +22,7 @@ Chaque leçon se teste **au téléphone (390 px) et sur ordinateur**.
 4. **Exercice** de chaque notion (≥ 5 questions) : répondre juste puis faux, la correction explique la méthode.
 5. **4 problèmes** et leurs corrigés.
 6. **Prépare interros / Je m'entraîne** : « À retenir » en gras, questions jouables.
-7. **Fond** : exactitude (chiffres, dates, citations, faits médicaux), niveau adapté à la série, conforme à la progression 2026-2027. Les points déjà relevés sont dans [`journal.md`](journal.md), section « À faire valider par un enseignant ».
+7. **Fond** : exactitude (chiffres, dates, citations, faits médicaux), niveau adapté à la série, conforme à la progression 2026-2027. Les points relevés par les vagues ont été tranchés par le validateur pédagogique ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md)) ; une vague nouvelle les fait trancher par l'agent avant sa PR.
 
 ## Terminale
 

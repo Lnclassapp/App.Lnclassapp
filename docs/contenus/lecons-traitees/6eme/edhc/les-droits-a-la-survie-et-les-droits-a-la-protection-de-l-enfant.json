@@ -1,0 +1,3707 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les droits à la survie et les droits à la protection de l'enfant",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "EDHC",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "droits-survie-protection",
+          "kind": "diagram",
+          "description": "Un arbre qui part des droits de l'enfant, reconnus par la Convention de l'ONU de 1989, et se divise en deux familles. Les droits à la survie regroupent la nourriture, l'eau potable, le logement, les soins et les vaccins. Les droits à la protection regroupent la protection contre la maltraitance, l'abandon et le travail dangereux. Deux couleurs distinguent les deux familles.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "droits",
+                "label": "Droits de l'enfant (ONU, 1989)"
+              },
+              {
+                "id": "survie",
+                "label": "Droits à la survie",
+                "category": 1
+              },
+              {
+                "id": "protection",
+                "label": "Droits à la protection",
+                "category": 2
+              },
+              {
+                "id": "nourriture",
+                "label": "Nourriture",
+                "category": 1
+              },
+              {
+                "id": "eau",
+                "label": "Eau potable",
+                "category": 1
+              },
+              {
+                "id": "logement",
+                "label": "Logement",
+                "category": 1
+              },
+              {
+                "id": "soins",
+                "label": "Soins et vaccins",
+                "category": 1
+              },
+              {
+                "id": "maltraitance",
+                "label": "Contre la maltraitance",
+                "category": 2
+              },
+              {
+                "id": "abandon",
+                "label": "Contre l'abandon",
+                "category": 2
+              },
+              {
+                "id": "travail",
+                "label": "Contre le travail dangereux",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "droits",
+                "to": "survie"
+              },
+              {
+                "from": "droits",
+                "to": "protection"
+              },
+              {
+                "from": "survie",
+                "to": "nourriture"
+              },
+              {
+                "from": "survie",
+                "to": "eau"
+              },
+              {
+                "from": "survie",
+                "to": "logement"
+              },
+              {
+                "from": "survie",
+                "to": "soins"
+              },
+              {
+                "from": "protection",
+                "to": "maltraitance"
+              },
+              {
+                "from": "protection",
+                "to": "abandon"
+              },
+              {
+                "from": "protection",
+                "to": "travail"
+              }
+            ],
+            "legend": [
+              "Vivre et rester en bonne santé",
+              "Être protégé du mal"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "enfant-en-danger-a-qui-parler",
+          "kind": "diagram",
+          "description": "Un schéma en flux intitulé « À qui parler quand un enfant est en danger ? ». On part d'un enfant qui semble en danger, puis on demande si le danger est immédiat. Si oui, on prévient la police ou la gendarmerie et on emmène l'enfant blessé au centre de santé. Sinon, on en parle à un adulte de confiance (parent, enseignant, chef de quartier), puis les services sociaux étudient la situation et aident la famille.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "depart",
+                "label": "Un enfant semble en danger"
+              },
+              {
+                "id": "danger",
+                "label": "Le danger est-il immédiat ?"
+              },
+              {
+                "id": "urgence",
+                "label": "Police, gendarmerie ou centre de santé"
+              },
+              {
+                "id": "adulte",
+                "label": "En parler à un adulte de confiance"
+              },
+              {
+                "id": "social",
+                "label": "Les services sociaux étudient et aident la famille"
+              }
+            ],
+            "edges": [
+              {
+                "from": "depart",
+                "to": "danger"
+              },
+              {
+                "from": "danger",
+                "to": "urgence",
+                "label": "Oui"
+              },
+              {
+                "from": "danger",
+                "to": "adulte",
+                "label": "Non"
+              },
+              {
+                "from": "adulte",
+                "to": "social"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un droit à la survie",
+          "remember": "Les **droits à la survie** permettent à l'enfant de **vivre et de rester en bonne santé** : être nourri, boire une **eau potable** (propre à boire), avoir un toit, être soigné quand il est malade, être vacciné (c'est le **droit à la santé**). Ils sont reconnus par la **Convention relative aux droits de l'enfant**, un texte adopté par l'ONU en 1989. Pour cette Convention, un enfant est une personne de **moins de 18 ans**. Ce sont des droits, pas des faveurs : les parents, le centre de santé et la communauté doivent les faire respecter. Les droits à la protection font l'objet de la fiche suivante.",
+          "method": [
+            "Repérer le besoin de l'enfant dans la situation : manger, boire, avoir un toit, être soigné, être protégé de la maladie.",
+            "Se demander si ce besoin sert à vivre et à rester en bonne santé.",
+            "Nommer le droit à la survie qui correspond : nourriture, eau potable, logement, soins ou vaccins.",
+            "Conclure : droit respecté ou non respecté, et dire qui doit agir."
+          ],
+          "example": {
+            "statement": "Dans un quartier, l'eau du puits est sale. Plusieurs enfants ont mal au ventre et vont au centre de santé. Quel droit à la survie n'est pas respecté ?",
+            "steps": [
+              "Repérer le besoin : les enfants ont besoin de boire une eau propre.",
+              "Se demander : boire une eau sale rend malade, donc cette eau sert à vivre et à rester en bonne santé.",
+              "Nommer le droit : c'est le droit à l'eau potable, un droit à la survie.",
+              "Conclure : ce droit n'est pas respecté. Les adultes du quartier doivent chercher une eau potable, avec l'aide du centre de santé."
+            ]
+          },
+          "pitfall": "Ne confonds pas un **besoin pour vivre** et une **envie**. Contre-exemple : Koffi rêve de baskets de marque, c'est une envie. Mais sans eau potable ni soins, il peut tomber gravement malade : c'est un besoin. Les droits à la survie protègent ce qui sert à vivre et à rester en bonne santé, pas tous les désirs. Autre erreur : croire que la survie, c'est seulement manger. Boire, dormir à l'abri, se soigner et se faire vacciner comptent autant. Enfin, une famille pauvre qui fait tout pour soigner son enfant ne refuse pas ses droits : il faut l'aider, pas l'accuser.",
+          "figure": "droits-survie-protection",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un droit à la survie avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un enfant qui a soif a besoin d'une eau ___ pour ne pas tomber malade.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer le besoin : l'enfant a soif, il doit boire. Étape 2 — Se demander si ce besoin sert à vivre et à rester en bonne santé : oui, une eau sale rend malade. Étape 3 — Nommer le droit : le droit à l'eau potable. Étape 4 — Conclure : potable. Une eau salée ou sucrée ne se boit pas en grande quantité sans danger pour la santé.",
+                "answers": [
+                  {
+                    "content": "potable",
+                    "correct": true
+                  },
+                  {
+                    "content": "salée",
+                    "correct": false
+                  },
+                  {
+                    "content": "sucrée",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une eau propre à boire."
+              },
+              {
+                "content": "À l'entrée du centre de santé, une infirmière vaccine un bébé. Quel droit à la survie est respecté ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le besoin : le bébé doit être protégé de la maladie. Étape 2 — Se demander : un vaccin sert à rester en bonne santé, oui. Étape 3 — Nommer le droit : soins et vaccins. Étape 4 — Conclure : ce droit est respecté. Le logement, la nourriture et l'eau sont d'autres droits à la survie, mais ils ne concernent pas ce geste.",
+                "answers": [
+                  {
+                    "content": "Le droit au logement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit à la nourriture",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit aux soins et aux vaccins",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le droit à l'eau potable",
+                    "correct": false
+                  }
+                ],
+                "hint": "Que fait l'infirmière avec le bébé ?"
+              },
+              {
+                "content": "Un enfant qui mange à sa faim mais n'est jamais soigné quand il est malade a tous ses droits à la survie respectés.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer les besoins : manger, mais aussi être soigné. Étape 2 — Se demander si ces besoins servent à vivre et à rester en bonne santé : oui, les deux. Étape 3 — Nommer les droits : nourriture et soins. Étape 4 — Conclure : le droit aux soins n'est pas respecté, donc l'affirmation est fausse. Répondre Vrai, c'est croire que la survie se limite à manger.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Relis la liste des droits à la survie : y en a-t-il un seul ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître les droits à la survie",
+              "statement": "Tu reconnais les droits à la survie avec la méthode de la fiche : repérer, se demander, nommer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Avoir un toit pour dormir à l'abri est le droit au ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le besoin : dormir à l'abri de la pluie et du froid. Étape 2 — Se demander si ce besoin sert à vivre et à rester en bonne santé : oui. Étape 3 — Nommer le droit : le droit au logement. Étape 4 — Conclure : logement. Le jeu est un autre droit de l'enfant, mais pas un droit à la survie ; un téléphone neuf ou un voyage ne sont pas des besoins pour vivre.",
+                  "answers": [
+                    {
+                      "content": "logement",
+                      "correct": true
+                    },
+                    {
+                      "content": "téléphone neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "voyage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont des besoins qui relèvent des droits à la survie ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer les besoins de chaque proposition. Étape 2 — Se demander lesquels servent à vivre et à rester en bonne santé : l'eau potable et les soins. Étape 3 — Nommer les droits : eau potable, soins. Étape 4 — Conclure : ces deux réponses. Les baskets de marque et le téléphone neuf sont des envies, pas des besoins pour vivre.",
+                  "answers": [
+                    {
+                      "content": "Boire une eau potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avoir des baskets de marque",
+                      "correct": false
+                    },
+                    {
+                      "content": "Être soigné quand on est malade",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avoir un téléphone neuf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au centre de santé, une infirmière explique que plusieurs enfants du quartier ont mal au ventre parce que l'eau du puits est sale. Quel droit à la survie n'est pas respecté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le besoin : boire une eau propre. Étape 2 — Se demander : une eau sale rend malade, donc ce besoin sert à rester en bonne santé. Étape 3 — Nommer le droit : l'eau potable. Étape 4 — Conclure : droit non respecté, les adultes du quartier doivent agir. Dire que c'est la faute des enfants est faux : ils n'ont pas le choix de l'eau du puits.",
+                  "answers": [
+                    {
+                      "content": "Le droit à l'eau potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit au logement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit aux vaccins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun droit : c'est la faute des enfants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque besoin de l'enfant au droit à la survie qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque besoin. Étape 2 — Se demander s'il sert à vivre et à rester en bonne santé : oui pour les quatre. Étape 3 — Nommer le droit : avoir faim relève de la nourriture, la fièvre des soins, la protection contre une maladie grave des vaccins, la pluie du logement. Étape 4 — Conclure : ces quatre liens.",
+                  "answers": [
+                    {
+                      "content": "Avoir faim",
+                      "match": "Nourriture"
+                    },
+                    {
+                      "content": "Avoir de la fièvre",
+                      "match": "Soins"
+                    },
+                    {
+                      "content": "Se protéger d'une maladie grave",
+                      "match": "Vaccins"
+                    },
+                    {
+                      "content": "Dormir à l'abri de la pluie",
+                      "match": "Logement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les baskets de marque font partie des droits à la survie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le besoin : porter des baskets de marque. Étape 2 — Se demander si cela sert à vivre : non, c'est une envie. Étape 3 — Nommer le droit : aucun droit à la survie ne correspond. Étape 4 — Conclure : faux. Répondre Vrai, c'est confondre un besoin et une envie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les droits à la survie au centre de santé du quartier",
+              "statement": "Dans cet exercice, tu reconnais les droits à la survie dans des scènes du centre de santé du quartier, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Mme Kouassi, infirmière du centre de santé, pèse un bébé et lui fait un vaccin. Quel droit à la survie est respecté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le besoin : le bébé doit rester en bonne santé. Étape 2 — Se demander : un vaccin sert à vivre et à éviter la maladie, oui. Étape 3 — Nommer le droit : soins et vaccins. Étape 4 — Conclure : droit respecté, grâce aux parents et au centre de santé.",
+                  "answers": [
+                    {
+                      "content": "Le droit au logement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit aux soins et aux vaccins",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit d'avoir un téléphone neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit à la nourriture",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droits à la survie permettent à l'enfant de vivre et de rester en bonne ___. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer l'idée : ce qui sert à vivre. Étape 2 — Se demander ce que ces droits protègent : la vie et la bonne santé. Étape 3 — Nommer le mot du cours : la santé. Étape 4 — Conclure : santé.",
+                  "answers": [
+                    {
+                      "content": "santé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître un droit à la survie.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le besoin de l'enfant. Étape 2 — Se demander si ce besoin sert à vivre et à rester en bonne santé. Étape 3 — Nommer le droit qui correspond. Étape 4 — Conclure et dire qui doit agir. On ne peut pas nommer un droit avant d'avoir repéré le besoin.",
+                  "answers": [
+                    {
+                      "content": "Repérer le besoin de l'enfant dans la situation : manger, boire, avoir un toit, être soigné, être protégé de la maladie."
+                    },
+                    {
+                      "content": "Se demander si ce besoin sert à vivre et à rester en bonne santé."
+                    },
+                    {
+                      "content": "Nommer le droit à la survie qui correspond : nourriture, eau potable, logement, soins ou vaccins."
+                    },
+                    {
+                      "content": "Conclure : droit respecté ou non respecté, et dire qui doit agir."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont des droits à la survie ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer les besoins dans chaque proposition. Étape 2 — Se demander lesquels servent à vivre et à rester en bonne santé : manger, boire, se soigner. Étape 3 — Nommer les droits : nourriture, eau potable, soins. Étape 4 — Conclure : les trois premières. Les baskets, le jeu vidéo et le téléphone sont des envies.",
+                  "answers": [
+                    {
+                      "content": "Une nourriture suffisante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une eau potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des soins quand on est malade",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des baskets de marque",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un jeu vidéo neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un téléphone neuf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour la Convention relative aux droits de l'enfant, un enfant est une personne de moins de 18 ans.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le besoin : être reconnu comme un enfant qui a des droits. Étape 2 — Se demander qui est concerné : toute personne de moins de 18 ans. Étape 3 — Nommer le texte : la Convention relative aux droits de l'enfant, ONU, 1989. Étape 4 — Conclure : c'est vrai. Un adolescent de 15 ans a donc, lui aussi, ces droits.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le droit d'un enfant malade est d'être ___ au centre de santé.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le besoin : l'enfant est malade. Étape 2 — Se demander si le soigner sert à vivre et à rester en bonne santé : oui. Étape 3 — Nommer le droit : les soins. Étape 4 — Conclure : soigné. Puni ou caché ne répondent à aucun besoin et mettent l'enfant en danger.",
+                  "answers": [
+                    {
+                      "content": "soigné",
+                      "correct": true
+                    },
+                    {
+                      "content": "puni",
+                      "correct": false
+                    },
+                    {
+                      "content": "caché",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque scène, cherche d'abord de quoi l'enfant a besoin pour vivre et rester en bonne santé."
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître un droit à la protection",
+          "remember": "Les **droits à la protection** défendent l'enfant contre ce qui lui fait du mal. La **maltraitance** : les coups, les violences, les humiliations. L'**abandon** : laisser un enfant seul, sans adulte pour s'occuper de lui ni le surveiller. L'**exploitation** : faire travailler un enfant dans des conditions dangereuses ou qui l'empêchent d'aller à l'école. La Convention relative aux droits de l'enfant (ONU, 1989) protège l'enfant contre toute violence. L'enfant ne peut pas se défendre seul : ce sont les adultes, parents, famille, école et communauté, qui doivent le protéger.",
+          "method": [
+            "Repérer le mal ou le danger que subit l'enfant dans la situation.",
+            "Nommer le type de danger : maltraitance, abandon ou exploitation par le travail.",
+            "Se demander qui devrait protéger l'enfant : parents, famille, école ou communauté.",
+            "Conclure : droit à la protection respecté ou non, et ce qu'il faut faire."
+          ],
+          "example": {
+            "statement": "Kouassi, 10 ans, vit chez son oncle. Chaque fois qu'il casse un bol, son oncle le frappe avec un bâton. Kouassi a des marques sur le dos. Son droit à la protection est-il respecté ?",
+            "steps": [
+              "Repérer le mal : Kouassi est frappé avec un bâton et il a des marques sur le dos.",
+              "Nommer le type de danger : ce sont des coups répétés, donc de la maltraitance.",
+              "Se demander qui devrait le protéger : son oncle, chez qui il vit, devrait le protéger, et c'est lui qui lui fait du mal.",
+              "Conclure : le droit à la protection n'est pas respecté. Kouassi doit en parler à un adulte de confiance, par exemple son enseignant."
+            ]
+          },
+          "pitfall": "Ne dis pas « c'est pour son éducation ». **Éduquer, ce n'est pas blesser.** Contre-exemple : un père qui explique l'erreur de son fils et lui retire le téléphone pour la soirée éduque son enfant. Un oncle qui frappe avec un bâton et laisse des marques maltraite l'enfant. Une punition doit être expliquée et ne doit jamais faire mal au corps ni humilier. Autre erreur : croire que la maltraitance, ce sont seulement les coups. Les insultes et les humiliations répétées comptent aussi.",
+          "figure": "droits-survie-protection",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un droit à la protection avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Relie chaque situation au type de danger.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer le mal dans chaque situation. Étape 2 — Nommer le type de danger : les coups sont de la maltraitance, être laissé seul sans adulte est un abandon, porter des charges lourdes toute la journée est une exploitation par le travail. Étape 3 — Se demander qui devrait protéger l'enfant : un adulte responsable. Étape 4 — Conclure : ces trois liens.",
+                "answers": [
+                  {
+                    "content": "Un enfant est frappé avec un bâton",
+                    "match": "Maltraitance"
+                  },
+                  {
+                    "content": "Un enfant de 8 ans reste seul plusieurs jours, sans adulte ni nourriture",
+                    "match": "Abandon"
+                  },
+                  {
+                    "content": "Un enfant porte des charges très lourdes toute la journée",
+                    "match": "Exploitation par le travail"
+                  }
+                ],
+                "hint": "Un mot pour les coups, un pour la solitude sans adulte, un pour le travail."
+              },
+              {
+                "content": "Un adulte a le droit de frapper un enfant pour l'éduquer.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le mal : des coups. Étape 2 — Nommer le danger : de la maltraitance, même si l'adulte dit éduquer. Étape 3 — Se demander qui doit protéger l'enfant : les adultes, qui ne peuvent pas être ceux qui lui font mal. Étape 4 — Conclure : faux. Éduquer, ce n'est pas blesser.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Éduquer veut-il dire faire mal ?"
+              },
+              {
+                "content": "Qu'est-ce que l'abandon d'un enfant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le mal : un enfant sans adulte. Étape 2 — Nommer le type de danger : l'abandon, c'est laisser l'enfant seul, sans adulte pour s'occuper de lui ni le surveiller. Étape 3 — Se demander qui devrait le protéger : ses parents ou les adultes qui l'ont à charge. Étape 4 — Conclure : la deuxième réponse. Les autres réponses décrivent des gestes normaux d'un adulte responsable.",
+                "answers": [
+                  {
+                    "content": "Punir un enfant en lui expliquant son erreur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le laisser seul, sans adulte pour s'occuper de lui ni le surveiller",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lui confier une petite tâche à la maison",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'emmener chez le médecin",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à un enfant que personne ne soigne ni ne surveille."
+              },
+              {
+                "content": "Un enfant laissé seul sans adulte pour s'occuper de lui ni le surveiller est victime d'___. (un mot)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer le mal : l'enfant est seul, sans adulte pour s'occuper de lui. Étape 2 — Nommer le type de danger : l'abandon. Étape 3 — Se demander qui devrait le protéger : les adultes qui ont la charge de l'enfant. Étape 4 — Conclure : le mot attendu est abandon.",
+                "answers": [
+                  {
+                    "content": "abandon",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot du cours qui dit qu'on laisse l'enfant."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la maltraitance, l'abandon et l'exploitation",
+              "statement": "Tu reconnais les dangers contre lesquels l'enfant est protégé, avec la méthode de la fiche : repérer, nommer, se demander qui protège, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel droit protège l'enfant contre les coups et les humiliations ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le mal : coups et humiliations. Étape 2 — Nommer le type de danger : la maltraitance. Étape 3 — Se demander qui doit protéger l'enfant : les adultes. Étape 4 — Conclure : droit à la protection contre la maltraitance. Eau, logement et vaccins sont des droits à la survie.",
+                  "answers": [
+                    {
+                      "content": "Le droit à l'eau potable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit à la protection contre la maltraitance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit au logement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit aux vaccins",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont des exemples de maltraitance ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le mal dans chaque proposition. Étape 2 — Nommer le danger : les coups avec marques et les insultes répétées sont de la maltraitance. Étape 3 — Se demander qui doit protéger : les adultes. Étape 4 — Conclure : ces deux réponses. Expliquer une punition, soigner et confier une petite course sont des gestes normaux.",
+                  "answers": [
+                    {
+                      "content": "Frapper un enfant avec une ceinture jusqu'à laisser des marques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Se moquer d'un enfant et l'insulter tous les jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "Expliquer à un enfant pourquoi il est puni",
+                      "correct": false
+                    },
+                    {
+                      "content": "Soigner un enfant au centre de santé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confier une petite course à une fille de 12 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao, 7 ans, est laissé seul trois jours par son oncle, sans nourriture ni adulte à la maison. De quoi est-il victime ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le mal : Yao est seul, sans nourriture, pendant trois jours. Étape 2 — Nommer le type de danger : l'abandon. Étape 3 — Se demander qui devrait le protéger : son oncle. Étape 4 — Conclure : droit à la protection non respecté. Dire qu'un enfant de 7 ans se débrouille seul est faux : il ne peut pas se protéger seul.",
+                  "answers": [
+                    {
+                      "content": "D'abandon",
+                      "correct": true
+                    },
+                    {
+                      "content": "D'une simple punition",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'exploitation par le travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "De rien : à 7 ans, on se débrouille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Frapper un enfant jusqu'à le blesser n'est pas l'éduquer, c'est le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le mal : des coups qui blessent. Étape 2 — Nommer le type de danger : la maltraitance, donc maltraiter. Étape 3 — Se demander qui doit protéger : les adultes. Étape 4 — Conclure : maltraiter. Protéger et soigner sont le contraire.",
+                  "answers": [
+                    {
+                      "content": "maltraiter",
+                      "correct": true
+                    },
+                    {
+                      "content": "protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "soigner",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adulte a le droit de frapper un enfant s'il dit que c'est pour son éducation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le mal : des coups. Étape 2 — Nommer le danger : de la maltraitance, quelle que soit la raison donnée. Étape 3 — Se demander qui doit protéger l'enfant : les adultes, pas ceux qui le blessent. Étape 4 — Conclure : faux. Éduquer, c'est expliquer et guider, pas faire mal.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître un danger pour l'enfant au quartier",
+              "statement": "Dans cet exercice, tu reconnais les dangers contre lesquels un enfant du quartier doit être protégé, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Contre quels dangers l'enfant a-t-il droit à la protection ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer le type de mal que chaque proposition décrit. Étape 2 — Nommer les dangers de la fiche : maltraitance, abandon, exploitation par le travail. Étape 3 — Se demander qui protège : les adultes. Étape 4 — Conclure : les trois premières. Les vaccins, l'eau potable et les soins sont des droits à la survie.",
+                  "answers": [
+                    {
+                      "content": "Les coups et les violences",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'abandon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail dangereux ou qui empêche d'aller à l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les vaccins",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau potable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les soins au centre de santé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Frapper, humilier ou blesser un enfant s'appelle la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le mal : coups, humiliations, blessures. Étape 2 — Nommer le type de danger : la maltraitance. Étape 3 — Se demander qui doit protéger : les adultes. Étape 4 — Conclure : maltraitance.",
+                  "answers": [
+                    {
+                      "content": "maltraitance",
+                      "correct": true
+                    },
+                    {
+                      "content": "protection",
+                      "correct": false
+                    },
+                    {
+                      "content": "vaccination",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque droit à la protection à ce qu'il demande.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le mal évité dans chaque droit. Étape 2 — Nommer le type de danger : maltraitance, abandon, exploitation. Étape 3 — Se demander qui protège : les adultes. Étape 4 — Conclure : à la maltraitance répond l'interdiction de frapper, à l'abandon l'obligation de s'occuper de l'enfant, au travail dangereux l'interdiction des charges trop lourdes.",
+                  "answers": [
+                    {
+                      "content": "Protection contre la maltraitance",
+                      "match": "Personne ne doit frapper ni humilier l'enfant"
+                    },
+                    {
+                      "content": "Protection contre l'abandon",
+                      "match": "Un adulte doit s'occuper de l'enfant"
+                    },
+                    {
+                      "content": "Protection contre le travail dangereux",
+                      "match": "L'enfant ne porte pas de charges trop lourdes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître un droit à la protection.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le mal subi. Étape 2 — Nommer le type de danger. Étape 3 — Se demander qui devrait protéger l'enfant. Étape 4 — Conclure et dire ce qu'il faut faire. On ne peut pas nommer le danger avant de l'avoir repéré.",
+                  "answers": [
+                    {
+                      "content": "Repérer le mal ou le danger que subit l'enfant dans la situation."
+                    },
+                    {
+                      "content": "Nommer le type de danger : maltraitance, abandon ou exploitation par le travail."
+                    },
+                    {
+                      "content": "Se demander qui devrait protéger l'enfant : parents, famille, école ou communauté."
+                    },
+                    {
+                      "content": "Conclure : droit à la protection respecté ou non, et ce qu'il faut faire."
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui doit d'abord protéger un enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer qui est en danger : l'enfant. Étape 2 — Nommer ce qu'il lui faut : une protection. Étape 3 — Se demander qui peut l'assurer : les adultes qui s'occupent de lui, car il ne peut pas se défendre seul. Étape 4 — Conclure : la première réponse. Les autres réponses laissent l'enfant sans défense.",
+                  "answers": [
+                    {
+                      "content": "Les adultes qui s'occupent de lui : parents, famille, école, communauté",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'enfant tout seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne : il apprend en se débrouillant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les enfants plus grands",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fille de 9 ans est frappée parce qu'elle a cassé un verre. Elle subit de la maltraitance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le mal : la fille est frappée. Étape 2 — Nommer le type de danger : les coups sont de la maltraitance. Étape 3 — Se demander qui devrait la protéger : l'adulte qui la frappe devrait la protéger. Étape 4 — Conclure : vrai. Casser un verre ne justifie pas de frapper.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque situation, cherche d'abord quel mal subit l'enfant, puis quel mot du cours le désigne."
+            }
+          ]
+        },
+        {
+          "name": "Distinguer l'aide à la maison et le travail interdit aux enfants",
+          "remember": "Aider sa famille par de **petites tâches adaptées à son âge** (balayer la cour, faire une course, garder son petit frère un moment) fait partie de la vie en famille. Mais l'enfant est protégé contre le **travail interdit** : un travail **dangereux**, qui **nuit à sa santé** ou qui l'**empêche d'aller à l'école**, de se reposer et de jouer. La Convention relative aux droits de l'enfant (ONU, 1989) protège l'enfant contre l'exploitation par le travail. Ce n'est donc pas le mot « travail » qui compte, mais ce que la tâche fait à l'enfant.",
+          "method": [
+            "Repérer la tâche demandée à l'enfant et le temps qu'elle prend.",
+            "Vérifier si elle est dangereuse ou trop fatigante pour son âge : charges lourdes, outils tranchants, longues heures.",
+            "Vérifier si elle l'empêche d'aller à l'école, d'apprendre, de se reposer ou de jouer.",
+            "Conclure : aide acceptable, ou travail interdit qui ne respecte pas le droit à la protection."
+          ],
+          "example": {
+            "statement": "Tiémoko, 11 ans, garde un étal de mangues au bord de la route de six heures du matin à dix-huit heures. Il n'est plus allé à l'école depuis la rentrée. Est-ce une aide acceptable ?",
+            "steps": [
+              "Repérer la tâche : vendre des mangues à un étal, pendant douze heures chaque jour.",
+              "Vérifier le danger et la fatigue : douze heures debout au soleil, au bord d'une route, c'est trop fatigant et risqué pour un enfant de 11 ans.",
+              "Vérifier l'école et le repos : Tiémoko ne va plus à l'école et n'a presque pas de temps pour se reposer ni jouer.",
+              "Conclure : c'est un travail interdit, qui ne respecte pas son droit à la protection."
+            ]
+          },
+          "pitfall": "Ne dis pas que **toute aide** d'un enfant est interdite, ni que **tout travail** est permis s'il est « habituel ». Contre-exemple 1 : Aminata balaye la cour dix minutes avant l'école et fait ses devoirs ensuite. C'est une aide acceptable. Contre-exemple 2 : « Chez nous, les enfants travaillent depuis toujours » ne justifie pas de garder un enfant loin de l'école ou de lui faire porter des charges lourdes. La tradition ne change pas ce que le travail fait à l'enfant.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer l'aide à la maison et le travail interdit avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Balayer la cour dix minutes avant d'aller à l'école est une aide acceptable.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer la tâche : balayer dix minutes. Étape 2 — Vérifier le danger : aucun, et c'est court. Étape 3 — Vérifier l'école et le repos : l'enfant va à l'école. Étape 4 — Conclure : aide acceptable. Répondre Faux, c'est croire que toute aide est interdite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "La tâche est-elle courte et sans danger ?"
+              },
+              {
+                "content": "Koffi, 12 ans, porte des briques lourdes sur un chantier toute la journée, au lieu d'aller à l'école. Que conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer la tâche : porter des briques lourdes toute la journée. Étape 2 — Vérifier le danger : charges lourdes, donc dangereux et trop fatigant pour son âge. Étape 3 — Vérifier l'école : il n'a plus de temps pour apprendre. Étape 4 — Conclure : travail interdit. Les autres réponses oublient que la tradition ou le sexe de l'enfant ne protègent pas sa santé.",
+                "answers": [
+                  {
+                    "content": "C'est une aide acceptable, car il aide sa famille",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est un travail interdit : dangereux et trop fatigant",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est permis, car c'est la tradition",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est permis, car Koffi est un garçon",
+                    "correct": false
+                  }
+                ],
+                "hint": "Que fait la tâche à la santé de l'enfant ?"
+              },
+              {
+                "content": "Pour juger une tâche, on vérifie si elle est dangereuse et si elle empêche d'aller à l'___. (un mot)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier le danger. Étape 3 — Vérifier si elle empêche d'aller à l'école : le mot attendu est école. Étape 4 — Conclure : aide acceptable ou travail interdit.",
+                "answers": [
+                  {
+                    "content": "école",
+                    "correct": true
+                  }
+                ],
+                "hint": "Où l'enfant apprend à lire et à écrire."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Aide acceptable ou travail interdit ?",
+              "statement": "Tu juges des tâches données à des enfants avec la méthode de la fiche : repérer, vérifier le danger, vérifier l'école et le repos, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Awa, 11 ans, balaye la cour dix minutes avant l'école, puis fait ses devoirs. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la tâche : balayer dix minutes. Étape 2 — Vérifier le danger : aucun. Étape 3 — Vérifier l'école et le repos : Awa va à l'école et fait ses devoirs. Étape 4 — Conclure : aide acceptable. Parler de travail interdit, c'est confondre une petite tâche avec une exploitation.",
+                  "answers": [
+                    {
+                      "content": "C'est un travail interdit",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une aide acceptable",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est de la maltraitance",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un abandon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant qui ne va plus à l'école parce qu'il travaille toute la journée voit son droit à la protection respecté.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la tâche : un travail de toute la journée. Étape 2 — Vérifier le danger et la fatigue : trop de temps pour son âge. Étape 3 — Vérifier l'école : il n'y va plus. Étape 4 — Conclure : travail interdit, donc le droit n'est pas respecté. Répondre Vrai, c'est oublier que l'école fait partie de ce que le travail ne doit pas empêcher.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles tâches sont un travail interdit pour un enfant ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer chaque tâche et sa durée. Étape 2 — Vérifier le danger : les lourdes charges et la machette toute la journée sont dangereuses et fatigantes. Étape 3 — Vérifier l'école et le repos : garder un moment, ranger et faire une course laissent le temps d'apprendre. Étape 4 — Conclure : les deux premières réponses.",
+                  "answers": [
+                    {
+                      "content": "Porter de lourdes charges toute la journée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Couper des broussailles à la machette dans un champ toute la journée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Garder son petit frère un moment pendant que sa mère va au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ranger sa chambre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire une petite course chez la voisine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un travail qui empêche l'enfant d'aller à l'___ ne respecte pas son droit à la protection.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier le danger. Étape 3 — Vérifier l'école : un travail qui empêche d'y aller est interdit. Étape 4 — Conclure : école.",
+                  "answers": [
+                    {
+                      "content": "école",
+                      "correct": true
+                    },
+                    {
+                      "content": "marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "champ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un oncle dit : « Chez nous, les enfants travaillent depuis toujours, donc mon neveu peut rester au champ toute la journée au lieu d'aller à l'école. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la tâche : le champ toute la journée. Étape 2 — Vérifier le danger et la fatigue : trop de travail pour un enfant. Étape 3 — Vérifier l'école : le neveu n'y va plus. Étape 4 — Conclure : la tradition ne change pas ce que le travail fait à l'enfant. La pauvreté ou le sexe de l'enfant n'y changent rien non plus.",
+                  "answers": [
+                    {
+                      "content": "Il a raison, car c'est la tradition",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tradition ne justifie pas un travail qui empêche d'aller à l'école ou qui nuit à la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, car l'enfant est un garçon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison, car la famille est pauvre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Aide à la maison ou travail interdit ?",
+              "statement": "Dans cet exercice, tu distingues l'aide acceptable et le travail interdit dans des scènes de la vie du quartier, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque tâche à son verdict.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque tâche et sa durée. Étape 2 — Vérifier le danger : les sacs de ciment sont dangereux. Étape 3 — Vérifier l'école : garder le petit frère toute la journée empêche d'aller en classe. Étape 4 — Conclure : laver ses assiettes est une aide acceptable, les sacs de ciment un travail dangereux, garder le petit frère au lieu d'aller en classe un travail qui empêche d'aller à l'école.",
+                  "answers": [
+                    {
+                      "content": "Laver ses assiettes après le repas",
+                      "match": "Aide acceptable"
+                    },
+                    {
+                      "content": "Porter des sacs de ciment lourds sur un chantier",
+                      "match": "Travail dangereux"
+                    },
+                    {
+                      "content": "Garder toute la journée le petit frère à la maison, au lieu d'aller en classe",
+                      "match": "Travail qui empêche d'aller à l'école"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour juger la tâche d'un enfant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la tâche et sa durée. Étape 2 — Vérifier le danger et la fatigue. Étape 3 — Vérifier l'école et le repos. Étape 4 — Conclure. On ne peut pas conclure avant d'avoir vérifié.",
+                  "answers": [
+                    {
+                      "content": "Repérer la tâche demandée à l'enfant et le temps qu'elle prend."
+                    },
+                    {
+                      "content": "Vérifier si elle est dangereuse ou trop fatigante pour son âge : charges lourdes, outils tranchants, longues heures."
+                    },
+                    {
+                      "content": "Vérifier si elle l'empêche d'aller à l'école, d'apprendre, de se reposer ou de jouer."
+                    },
+                    {
+                      "content": "Conclure : aide acceptable, ou travail interdit qui ne respecte pas le droit à la protection."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une tâche dangereuse, fatigante ou qui empêche d'aller à l'école est un travail ___ aux enfants. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier le danger. Étape 3 — Vérifier l'école. Étape 4 — Conclure : le mot attendu est interdit.",
+                  "answers": [
+                    {
+                      "content": "interdit",
+                      "correct": true
+                    },
+                    {
+                      "content": "défendu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conditions rendent un travail interdit à un enfant ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer ce que la tâche fait à l'enfant. Étape 2 — Vérifier le danger et la santé : dangereux ou nuisible, la tâche est interdite. Étape 3 — Vérifier l'école : si elle l'empêche d'y aller, elle est interdite. Étape 4 — Conclure : les trois premières. Une petite tâche adaptée, après les devoirs ou une course chez le voisin sont des aides acceptables.",
+                  "answers": [
+                    {
+                      "content": "Il est dangereux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il nuit à la santé de l'enfant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il empêche l'enfant d'aller à l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est une petite tâche adaptée à son âge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se fait après les devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une course chez le voisin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya, 12 ans, vend des beignets pendant une heure le samedi matin avec sa mère. Elle va à l'école et se repose l'après-midi. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la tâche : vendre des beignets une heure, avec sa mère. Étape 2 — Vérifier le danger : aucun, et elle est accompagnée. Étape 3 — Vérifier l'école et le repos : Aya va à l'école et se repose. Étape 4 — Conclure : aide acceptable. Dire que tout travail est interdit confond le mot « vendre » et l'effet sur l'enfant.",
+                  "answers": [
+                    {
+                      "content": "Un travail interdit, car elle vend",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une aide acceptable : pas dangereuse et sans effet sur l'école ni le repos",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la maltraitance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un abandon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Toute aide donnée par un enfant à sa famille est un travail interdit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la tâche : une aide de l'enfant. Étape 2 — Vérifier le danger : une petite tâche adaptée n'en a pas. Étape 3 — Vérifier l'école : elle ne l'empêche pas d'y aller. Étape 4 — Conclure : faux. Seul le travail dangereux, nuisible ou qui empêche d'aller à l'école est interdit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Regarde pour chaque tâche : combien de temps, quel danger, et est-ce que l'enfant va à l'école ?"
+            }
+          ]
+        },
+        {
+          "name": "Savoir à qui s'adresser quand un enfant est en danger",
+          "remember": "Un enfant en danger ne doit pas rester seul. **Si le danger est immédiat** (un enfant blessé, une violence en cours), on prévient sans attendre la **police ou la gendarmerie**, et on emmène l'enfant blessé au **centre de santé**. **Sinon**, on en parle à un **adulte de confiance** : un parent, un enseignant ou le chef de quartier. Les **services sociaux** (le centre social) étudient la situation et aident la famille. En parler n'est pas trahir : c'est protéger. On dit les faits tels qu'on les a vus, sans exagérer.",
+          "method": [
+            "Repérer le danger et dire s'il est immédiat (enfant blessé, violence en cours) ou non.",
+            "Choisir l'adulte ou le service qui peut agir : en urgence, le centre de santé, la police ou la gendarmerie ; sinon un adulte de confiance, puis les services sociaux.",
+            "Dire les faits simplement et sans exagérer : qui, quoi, quand, où.",
+            "Conclure : rester attentif à l'enfant jusqu'à ce qu'il soit en sécurité."
+          ],
+          "example": {
+            "statement": "Fatou, 11 ans, sait que sa voisine Mariam, 9 ans, est enfermée chaque soir sans manger par sa tante, et qu'elle pleure. Que doit faire Fatou ?",
+            "steps": [
+              "Repérer le danger : Mariam est enfermée et privée de nourriture chaque soir. Elle n'est pas blessée en ce moment : le danger est grave mais pas immédiat.",
+              "Choisir l'adulte : Fatou en parle à son enseignante, un adulte de confiance, qui peut prévenir les services sociaux.",
+              "Dire les faits : « Ma voisine Mariam est enfermée chaque soir sans manger, et elle pleure. »",
+              "Conclure : Fatou reste attentive à Mariam et l'aide à rester en contact avec l'adulte, jusqu'à ce qu'elle soit en sécurité."
+            ]
+          },
+          "pitfall": "Ne garde pas le secret par peur et ne règle pas le problème toi-même. Contre-exemple : si Fatou pense « c'est une affaire de famille » et se tait, Mariam reste enfermée chaque soir. Si Fatou va se disputer avec la tante, elle risque de se faire du mal et de rendre la situation pire. Un enfant ne doit pas affronter seul un adulte dangereux : il demande l'aide d'un adulte de confiance. Un adulte qui apprend qu'un enfant est en danger doit lui aussi agir.",
+          "figure": "enfant-en-danger-a-qui-parler",
+          "practice": {
+            "statement": "Tu t'entraînes à choisir à qui s'adresser quand un enfant est en danger, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un enfant saigne après avoir été frappé et l'adulte est encore devant sa porte. Que faire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le danger : un enfant blessé, une violence en cours, donc un danger immédiat. Étape 2 — Choisir qui peut agir : la police ou la gendarmerie, et le centre de santé pour les soins. Étape 3 — Dire les faits : un enfant blessé, frappé par un adulte, devant la porte. Étape 4 — Conclure : rester attentif jusqu'à ce que l'enfant soit en sécurité. Attendre ou se disputer laisse l'enfant en danger.",
+                "answers": [
+                  {
+                    "content": "Attendre la semaine prochaine pour en parler",
+                    "correct": false
+                  },
+                  {
+                    "content": "Prévenir sans attendre la police ou la gendarmerie et emmener l'enfant au centre de santé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Se disputer avec l'adulte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ne rien dire",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le danger est-il immédiat ?"
+              },
+              {
+                "content": "Prévenir un adulte quand un enfant est maltraité, c'est trahir.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le danger : un enfant est maltraité. Étape 2 — Choisir qui peut agir : un adulte de confiance. Étape 3 — Dire les faits. Étape 4 — Conclure : en parler protège l'enfant. Répondre Vrai, c'est confondre protéger et trahir.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Qui protège-t-on quand on en parle ?"
+              },
+              {
+                "content": "Les services ___ étudient la situation de la famille et l'aident. (un mot)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer le danger non immédiat. Étape 2 — Choisir le service : après l'adulte de confiance, ce sont les services sociaux. Étape 3 — Dire les faits. Étape 4 — Conclure : le mot attendu est sociaux.",
+                "answers": [
+                  {
+                    "content": "sociaux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le centre social fait partie de ces services."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Choisir à qui s'adresser",
+              "statement": "Tu choisis à qui s'adresser quand un enfant est en danger, avec la méthode de la fiche : repérer, choisir, dire les faits, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quand le danger n'est pas immédiat, à qui un enfant peut-il en parler ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le danger : il n'est pas immédiat. Étape 2 — Choisir l'adulte qui peut agir : un enseignant de confiance, le chef de quartier, ou un parent. Étape 3 — Dire les faits à cet adulte. Étape 4 — Conclure : ces deux réponses. Régler seul, se confier à un bavard ou se taire laisse l'enfant en danger.",
+                  "answers": [
+                    {
+                      "content": "Un enseignant de confiance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le chef de quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun adulte : on règle tout seul avec l'adulte dangereux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un camarade qui le répétera à tout le monde",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne : il vaut mieux se taire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adulte frappe un enfant devant la porte et l'enfant est blessé. Que faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : un enfant blessé et une violence en cours, donc un danger immédiat. Étape 2 — Choisir qui peut agir : la police ou la gendarmerie, et le centre de santé. Étape 3 — Dire les faits : qui, quoi, où. Étape 4 — Conclure : rester attentif à l'enfant. Frapper l'adulte ajoute de la violence.",
+                  "answers": [
+                    {
+                      "content": "Prévenir sans attendre la police ou la gendarmerie, et soigner l'enfant au centre de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "En parler le mois prochain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Frapper l'adulte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dire que ça ne nous regarde pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour aider un enfant en danger.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le danger et dire s'il est immédiat. Étape 2 — Choisir l'adulte ou le service qui peut agir. Étape 3 — Dire les faits simplement. Étape 4 — Conclure en restant attentif. On ne peut pas choisir qui prévenir avant d'avoir repéré le danger.",
+                  "answers": [
+                    {
+                      "content": "Repérer le danger et dire s'il est immédiat (enfant blessé, violence en cours) ou non."
+                    },
+                    {
+                      "content": "Choisir l'adulte ou le service qui peut agir : en urgence, le centre de santé, la police ou la gendarmerie ; sinon un adulte de confiance, puis les services sociaux."
+                    },
+                    {
+                      "content": "Dire les faits simplement et sans exagérer : qui, quoi, quand, où."
+                    },
+                    {
+                      "content": "Conclure : rester attentif à l'enfant jusqu'à ce qu'il soit en sécurité."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour soigner un enfant blessé, on l'emmène au centre de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le danger : l'enfant est blessé. Étape 2 — Choisir qui peut agir : le centre de santé soigne. Étape 3 — Dire les faits aux soignants. Étape 4 — Conclure : santé.",
+                  "answers": [
+                    {
+                      "content": "santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "commerce",
+                      "correct": false
+                    },
+                    {
+                      "content": "loisirs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un enfant est maltraité dans la cour d'à côté, ça ne nous regarde pas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le danger : un enfant maltraité. Étape 2 — Choisir qui peut agir : un adulte de confiance, les services sociaux. Étape 3 — Dire les faits. Étape 4 — Conclure : faux, on agit. Se dire que ça ne nous regarde pas laisse l'enfant seul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "À qui parler, et que dire ?",
+              "statement": "Dans cet exercice, tu choisis à qui parler et comment dire les faits quand un enfant est en danger, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à la personne ou au service à prévenir.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le danger et dire s'il est immédiat. Étape 2 — Choisir qui peut agir : en urgence, police, gendarmerie ou centre de santé ; une privation répétée appelle un adulte de confiance puis les services sociaux ; une famille sans moyens appelle le centre de santé et les services sociaux. Étape 3 — Dire les faits. Étape 4 — Conclure : ces trois liens.",
+                  "answers": [
+                    {
+                      "content": "Un enfant gravement blessé par des coups, en ce moment",
+                      "match": "La police, la gendarmerie ou le centre de santé"
+                    },
+                    {
+                      "content": "Un enfant privé de nourriture chaque soir par sa tante",
+                      "match": "Un adulte de confiance, puis les services sociaux"
+                    },
+                    {
+                      "content": "Une famille qui ne peut pas payer les soins de son enfant",
+                      "match": "Le centre de santé et les services sociaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour aider un enfant en danger, on dit les faits sans ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le danger. Étape 2 — Choisir qui prévenir. Étape 3 — Dire les faits simplement, sans exagérer. Étape 4 — Conclure : exagérer. Attendre ou hésiter ne concernent pas la manière de dire les faits.",
+                  "answers": [
+                    {
+                      "content": "exagérer",
+                      "correct": true
+                    },
+                    {
+                      "content": "attendre",
+                      "correct": false
+                    },
+                    {
+                      "content": "hésiter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou veut prévenir son enseignante. Quelle phrase dit bien les faits ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : un enfant enfermé et privé de nourriture. Étape 2 — Choisir l'adulte : l'enseignante. Étape 3 — Dire les faits : qui, quoi, quand, sans exagérer ni accuser sans preuve. Étape 4 — Conclure : la première phrase. Les autres insultent, doutent ou inventent.",
+                  "answers": [
+                    {
+                      "content": "Ma voisine Mariam est enfermée chaque soir sans manger.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa tante est méchante et mérite la prison.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je crois que Mariam raconte des histoires.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout le quartier déteste Mariam.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi parler à un adulte quand un enfant est en danger n'est-il pas trahir ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le danger : un enfant a besoin d'aide. Étape 2 — Choisir l'adulte qui peut agir. Étape 3 — Dire les faits. Étape 4 — Conclure : parler protège l'enfant et peut arrêter le danger. Parler pour s'amuser ou garder tous les secrets sont de mauvaises raisons.",
+                  "answers": [
+                    {
+                      "content": "Parce que l'enfant a droit à la protection",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que cela peut mettre fin au danger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'on veut punir quelqu'un pour s'amuser",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les secrets sont toujours bons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le danger n'est pas immédiat, on peut d'abord en parler à un enseignant ou au chef de quartier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le danger : il n'est pas immédiat. Étape 2 — Choisir qui peut agir : un adulte de confiance, comme un enseignant ou le chef de quartier. Étape 3 — Dire les faits. Étape 4 — Conclure : vrai, ce sont les premiers interlocuteurs avant les services sociaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les services sociaux étudient la situation et ___ la famille.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le danger non immédiat. Étape 2 — Choisir le service : les services sociaux. Étape 3 — Dire les faits. Étape 4 — Conclure : ils aident la famille. Punir ou ignorer n'est pas leur rôle.",
+                  "answers": [
+                    {
+                      "content": "aident",
+                      "correct": true
+                    },
+                    {
+                      "content": "punissent",
+                      "correct": false
+                    },
+                    {
+                      "content": "ignorent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Demande-toi d'abord si le danger est immédiat, puis qui peut agir, puis ce que tu vas dire."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une matinée de vaccination au centre de santé",
+          "statement": "Un matin de campagne de vaccination, au centre de santé d'un quartier d'Abidjan, l'infirmière Mme Kouassi reçoit plusieurs familles. Dans cet exercice, tu reconnais des droits à la survie avec la méthode de la fiche : repérer le besoin, se demander s'il sert à vivre, nommer le droit, conclure.",
+          "exercise_type": "fixation",
+          "figure": "droits-survie-protection",
+          "questions": [
+            {
+              "content": "Mme Sanogo amène son fils Konan, 2 ans, se faire vacciner. Quel droit à la survie est respecté ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le besoin : Konan doit être protégé de maladies graves. Étape 2 — Se demander si ce besoin sert à vivre et à rester en bonne santé : oui, un vaccin protège. Étape 3 — Nommer le droit : soins et vaccins. Étape 4 — Conclure : droit respecté, grâce à sa mère et au centre de santé. Le logement et l'eau potable sont d'autres droits à la survie, mais ils ne concernent pas un vaccin.",
+              "answers": [
+                {
+                  "content": "Le droit aux soins et aux vaccins",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit d'avoir un téléphone neuf",
+                  "correct": false
+                },
+                {
+                  "content": "Le droit au logement",
+                  "correct": false
+                },
+                {
+                  "content": "Le droit à l'eau potable",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la salle d'attente, Mme Kouassi rappelle des besoins des enfants. Lesquels relèvent des droits à la survie ? (deux réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer chaque besoin cité. Étape 2 — Se demander lesquels servent à vivre et à rester en bonne santé : manger et boire. Étape 3 — Nommer les droits : nourriture et eau potable. Étape 4 — Conclure : les deux premières réponses. Les baskets et le téléphone sont des envies, pas des besoins pour vivre.",
+              "answers": [
+                {
+                  "content": "Manger à sa faim",
+                  "correct": true
+                },
+                {
+                  "content": "Boire une eau potable",
+                  "correct": true
+                },
+                {
+                  "content": "Avoir des baskets de marque",
+                  "correct": false
+                },
+                {
+                  "content": "Avoir un téléphone neuf",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque besoin d'un enfant au droit à la survie qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer chaque besoin. Étape 2 — Se demander s'il sert à vivre : oui pour les quatre. Étape 3 — Nommer le droit : la pluie renvoie au logement, boire sans être malade à l'eau potable, la fièvre aux soins, éviter une maladie grave aux vaccins. Étape 4 — Conclure : ces quatre liens.",
+              "answers": [
+                {
+                  "content": "Dormir à l'abri de la pluie",
+                  "match": "Logement"
+                },
+                {
+                  "content": "Boire sans tomber malade",
+                  "match": "Eau potable"
+                },
+                {
+                  "content": "Calmer une forte fièvre",
+                  "match": "Soins"
+                },
+                {
+                  "content": "Éviter une maladie grave",
+                  "match": "Vaccins"
+                }
+              ]
+            },
+            {
+              "content": "Mme Sanogo vend des légumes, gagne peu, mais emmène ses enfants au centre de santé dès qu'ils sont malades. On peut dire qu'elle fait respecter leur droit à la santé, donc aux soins.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer le besoin : les enfants doivent être soignés. Étape 2 — Se demander si cela sert à rester en bonne santé : oui. Étape 3 — Nommer le droit : soins. Étape 4 — Conclure : vrai. Elle agit avec ses moyens. Dire que les revenus sont trop petits pour qu'elle respecte ce droit est faux : ce qui compte, c'est ce qu'elle fait.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une eau qu'on peut boire sans danger est une eau ___.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Repérer le besoin : boire sans tomber malade. Étape 2 — Se demander si cela sert à rester en bonne santé : oui. Étape 3 — Nommer le droit : l'eau potable. Étape 4 — Conclure : potable. Une eau salée ou sucrée ne se boit pas sans danger en grande quantité.",
+              "answers": [
+                {
+                  "content": "potable",
+                  "correct": true
+                },
+                {
+                  "content": "salée",
+                  "correct": false
+                },
+                {
+                  "content": "sucrée",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Dangers pour les enfants du quartier",
+          "statement": "À l'école d'un quartier de Bouaké, la directrice rencontre trois élèves. Yao, 10 ans, est frappé à la ceinture par son oncle quand il fait une faute. Aya, 8 ans, reste seule des journées entières sans adulte ni repas. Koffi, 12 ans, porte des charges lourdes au marché toute la journée au lieu de venir en classe. Dans cet exercice, tu reconnais des droits à la protection avec la méthode de la fiche.",
+          "exercise_type": "fixation",
+          "figure": "droits-survie-protection",
+          "questions": [
+            {
+              "content": "Relie chaque élève au type de danger qu'il subit.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer le mal subi par chaque élève. Étape 2 — Nommer le type de danger : les coups sont de la maltraitance, être laissé seul est un abandon, porter des charges toute la journée est une exploitation. Étape 3 — Se demander qui devrait le protéger : l'oncle, les adultes qui ont Aya à charge, la famille de Koffi. Étape 4 — Conclure : ces trois liens.",
+              "answers": [
+                {
+                  "content": "Yao, frappé à la ceinture",
+                  "match": "Maltraitance"
+                },
+                {
+                  "content": "Aya, seule sans adulte ni repas",
+                  "match": "Abandon"
+                },
+                {
+                  "content": "Koffi, qui porte des charges lourdes toute la journée",
+                  "match": "Exploitation par le travail"
+                }
+              ]
+            },
+            {
+              "content": "L'oncle de Yao dit : « Je le frappe pour son éducation. » Que répondre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le mal : des coups de ceinture. Étape 2 — Nommer le danger : de la maltraitance. Étape 3 — Se demander qui doit protéger Yao : son oncle, qui lui fait du mal. Étape 4 — Conclure : le droit à la protection n'est pas respecté. Dire que la faute justifie les coups est faux : une punition s'explique, elle ne blesse pas.",
+              "answers": [
+                {
+                  "content": "Il a raison, car il est l'adulte",
+                  "correct": false
+                },
+                {
+                  "content": "Éduquer, ce n'est pas blesser : frapper un enfant est de la maltraitance",
+                  "correct": true
+                },
+                {
+                  "content": "Il a raison, car Yao a fait une faute",
+                  "correct": false
+                },
+                {
+                  "content": "Il a raison, car c'est un garçon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels dangers Aya et Koffi subissent-ils ? (deux réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer le mal pour chacun : Aya est seule sans adulte, Koffi porte des charges toute la journée. Étape 2 — Nommer le type de danger : abandon pour Aya, exploitation par le travail pour Koffi. Étape 3 — Se demander qui doit les protéger : les adultes qui s'occupent d'eux. Étape 4 — Conclure : les deux premières réponses. Inverser les deux situations ou dire qu'il n'y a pas de danger oublie ce que dit le récit.",
+              "answers": [
+                {
+                  "content": "Aya subit un abandon",
+                  "correct": true
+                },
+                {
+                  "content": "Koffi subit un travail interdit",
+                  "correct": true
+                },
+                {
+                  "content": "Aya subit un travail interdit",
+                  "correct": false
+                },
+                {
+                  "content": "Koffi subit un abandon",
+                  "correct": false
+                },
+                {
+                  "content": "Ni l'un ni l'autre ne subit de danger",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un enfant de 12 ans qui porte des charges lourdes toute la journée au lieu d'aller à l'école voit son droit à la protection respecté.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer la tâche : porter des charges lourdes toute la journée. Étape 2 — Vérifier le danger et l'école : c'est dangereux et l'enfant n'est pas en classe. Étape 3 — Se demander qui doit protéger Koffi : ses adultes responsables. Étape 4 — Conclure : faux, le droit n'est pas respecté. Répondre Vrai, c'est confondre ce travail avec une petite aide à la maison.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En deux ou trois phrases, explique pourquoi l'argument « c'est pour son éducation » ne permet pas de frapper un enfant.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que frapper est de la maltraitance",
+                "Distingue éduquer (expliquer, guider) et blesser",
+                "Écrit des phrases claires et complètes"
+              ],
+              "explanation": "Corrigé modèle : « Frapper un enfant est de la maltraitance, même si l'adulte dit que c'est pour son éducation. Éduquer, c'est expliquer l'erreur et guider l'enfant, pas lui faire mal. L'enfant a droit à la protection contre toute violence. » Ce qui rapporte les points : nommer la maltraitance (1 point), distinguer éduquer et blesser (0,5 point), rédiger des phrases claires (0,5 point).",
+              "answers": [],
+              "starter": "Frapper un enfant est de la maltraitance, car…"
+            }
+          ]
+        },
+        {
+          "title": "Ibrahim, le centre de santé et le champ de son oncle",
+          "statement": "Ibrahim a 11 ans. Depuis la mort de ses parents, il vit chez son oncle, dans un quartier de Daloa. L'oncle ne l'emmène pas au centre de santé, alors qu'Ibrahim a de la fièvre depuis quatre jours, et il a les moyens de payer les soins. Du matin au soir, il oblige Ibrahim à porter des sacs de cacao lourds, sans aller à l'école. Quand Ibrahim se plaint, son oncle le frappe. Dans cet exercice, tu analyses la situation avec les méthodes des fiches. Le schéma sur les adultes à prévenir te sert pour savoir à qui parler.",
+          "exercise_type": "evaluation",
+          "figure": "enfant-en-danger-a-qui-parler",
+          "questions": [
+            {
+              "content": "L'oncle d'Ibrahim a les moyens, mais ne l'emmène pas au centre de santé alors qu'il a de la fièvre depuis quatre jours. Quel droit n'est pas respecté ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le besoin : Ibrahim a de la fièvre, il doit être soigné. Étape 2 — Se demander si ce besoin sert à rester en bonne santé : oui. Étape 3 — Nommer le droit : soins, droit à la survie. Étape 4 — Conclure : droit non respecté, et l'oncle a les moyens d'agir. Dire qu'une fièvre passe seule, c'est ignorer qu'après quatre jours elle peut être grave.",
+              "answers": [
+                {
+                  "content": "Le droit aux soins, un droit à la survie",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit d'avoir un téléphone neuf",
+                  "correct": false
+                },
+                {
+                  "content": "Le droit à la protection contre l'abandon uniquement",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun droit : une fièvre passe seule",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Ibrahim porte des sacs de cacao lourds du matin au soir, sans aller à l'école. Que conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer la tâche : porter des sacs lourds du matin au soir. Étape 2 — Vérifier le danger : charges lourdes et longues heures, trop fatigant pour son âge. Étape 3 — Vérifier l'école et le repos : il n'est pas en classe et se repose peu. Étape 4 — Conclure : travail interdit, droit à la protection non respecté. Parler d'aide acceptable oublie que la durée et le poids de la tâche changent tout.",
+              "answers": [
+                {
+                  "content": "Une aide acceptable à la famille",
+                  "correct": false
+                },
+                {
+                  "content": "Un travail interdit : dangereux et qui l'empêche d'aller à l'école",
+                  "correct": true
+                },
+                {
+                  "content": "Une simple punition",
+                  "correct": false
+                },
+                {
+                  "content": "Un devoir de tout enfant dans cette famille",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'oncle frappe Ibrahim quand il se plaint. De quel danger s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le mal : des coups. Étape 2 — Nommer le type de danger : de la maltraitance. Étape 3 — Se demander qui doit protéger Ibrahim : son oncle, qui le frappe. Étape 4 — Conclure : droit à la protection non respecté. Éduquer, ce n'est pas blesser : parler d'éducation normale est faux.",
+              "answers": [
+                {
+                  "content": "D'abandon",
+                  "correct": false
+                },
+                {
+                  "content": "De maltraitance",
+                  "correct": true
+                },
+                {
+                  "content": "D'une éducation normale",
+                  "correct": false
+                },
+                {
+                  "content": "D'un travail acceptable",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels adultes ou services Ibrahim ou un voisin peut-il aller voir, sans urgence immédiate ? (deux réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer le danger : il est grave et répété, mais Ibrahim n'est pas gravement blessé à cet instant. Étape 2 — Choisir l'adulte qui peut agir : un enseignant de confiance ou le chef de quartier, avant les services sociaux. Étape 3 — Dire les faits simplement. Étape 4 — Conclure : ces deux réponses, et faire soigner Ibrahim au centre de santé à cause de sa fièvre. Se taire ou affronter l'oncle seul laisse Ibrahim en danger.",
+              "answers": [
+                {
+                  "content": "Un enseignant de confiance",
+                  "correct": true
+                },
+                {
+                  "content": "Le chef de quartier",
+                  "correct": true
+                },
+                {
+                  "content": "Personne : il faut se taire",
+                  "correct": false
+                },
+                {
+                  "content": "L'oncle, pour se disputer avec lui",
+                  "correct": false
+                },
+                {
+                  "content": "Un camarade qui dira tout au quartier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour aider un enfant en danger.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer le danger et dire s'il est immédiat. Étape 2 — Choisir l'adulte ou le service qui peut agir. Étape 3 — Dire les faits simplement et sans exagérer. Étape 4 — Conclure en restant attentif jusqu'à ce que l'enfant soit en sécurité. On ne choisit pas qui prévenir avant d'avoir compris le danger.",
+              "answers": [
+                {
+                  "content": "Repérer le danger et dire s'il est immédiat."
+                },
+                {
+                  "content": "Choisir l'adulte ou le service qui peut agir."
+                },
+                {
+                  "content": "Dire les faits simplement et sans exagérer."
+                },
+                {
+                  "content": "Rester attentif jusqu'à ce que l'enfant soit en sécurité."
+                }
+              ]
+            },
+            {
+              "content": "Un voisin dit : « Cette histoire est une affaire de famille, elle ne nous regarde pas. » Es-tu d'accord ? Prends position en quatre phrases au plus, en citant un droit d'Ibrahim et un adulte à prévenir.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Prend clairement position (pas d'accord)",
+                "Cite un droit d'Ibrahim non respecté (soins, protection contre la maltraitance ou le travail interdit)",
+                "Cite un adulte ou un service à prévenir",
+                "Écrit des phrases claires"
+              ],
+              "explanation": "Corrigé modèle : « Je ne suis pas d'accord. Ibrahim a droit à la protection : son oncle le frappe et le fait travailler au lieu de l'envoyer à l'école. Il a aussi droit aux soins. Le voisin peut en parler au chef de quartier, qui peut prévenir les services sociaux. Protéger un enfant, ce n'est pas trahir sa famille. » Ce qui rapporte les points : position claire (1 point), droit cité (1 point), adulte ou service cité (0,5 point), clarté (0,5 point).",
+              "answers": [],
+              "starter": "Je ne suis pas d'accord, parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Adjoua, la tante et le voisinage",
+          "statement": "Adjoua, 12 ans, est orpheline. Elle vit à Bouaké chez sa tante. Depuis des mois, elle ne va plus à l'école : elle vend des beignets du matin au soir. Quand elle a de la fièvre, la tante refuse de l'emmener au centre de santé. Une fois, elle l'a frappée avec un bâton. Une voisine, Mme Traoré, et l'enseignant d'Adjoua, M. Koné, s'en inquiètent. Dans cet exercice, tu analyses la situation avec les méthodes des quatre fiches. Le schéma sur les adultes à prévenir te sert pour savoir à qui parler.",
+          "exercise_type": "evaluation",
+          "figure": "enfant-en-danger-a-qui-parler",
+          "questions": [
+            {
+              "content": "Relie chaque fait au droit d'Adjoua qui n'est pas respecté.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer le mal ou le besoin dans chaque fait. Étape 2 — Nommer le type de danger ou le droit : travail interdit, maltraitance, soins. Étape 3 — Se demander qui devrait la protéger : sa tante, qui est responsable d'elle. Étape 4 — Conclure : ces trois liens.",
+              "answers": [
+                {
+                  "content": "Elle vend des beignets du matin au soir et ne va plus à l'école",
+                  "match": "Protection contre le travail interdit"
+                },
+                {
+                  "content": "Elle est frappée avec un bâton",
+                  "match": "Protection contre la maltraitance"
+                },
+                {
+                  "content": "On refuse de l'emmener au centre de santé quand elle a de la fièvre",
+                  "match": "Droit aux soins, un droit à la survie"
+                }
+              ]
+            },
+            {
+              "content": "Adjoua vend des beignets du matin au soir et ne va plus à l'école. Pourquoi est-ce un travail interdit ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer la tâche : vendre des beignets du matin au soir. Étape 2 — Vérifier la fatigue : de très longues heures pour une enfant de 12 ans. Étape 3 — Vérifier l'école et le repos : elle n'y va plus et ne se repose pas. Étape 4 — Conclure : travail interdit. Gagner de l'argent ou être une fille n'a rien à voir avec la règle.",
+              "answers": [
+                {
+                  "content": "Parce qu'elle gagne de l'argent",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il est trop fatigant pour son âge et l'empêche d'aller à l'école",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que les beignets sont mauvais",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'elle est une fille",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Adjoua a de la fièvre et sa tante refuse de l'emmener au centre de santé. Mme Traoré, qui voit qu'Adjoua a du mal à marcher, veut agir. Que doit-elle faire en priorité ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le danger : une enfant malade, sans soins, qui marche mal : le danger est proche. Étape 2 — Choisir qui peut agir : le centre de santé pour les soins, un adulte de confiance pour la suite. Étape 3 — Dire les faits : fièvre, refus de soins, difficulté à marcher. Étape 4 — Conclure : rester attentive. Attendre ou se disputer laisse Adjoua sans soins.",
+              "answers": [
+                {
+                  "content": "Attendre trois semaines pour voir",
+                  "correct": false
+                },
+                {
+                  "content": "Emmener Adjoua au centre de santé ou prévenir les soignants, et alerter un adulte de confiance",
+                  "correct": true
+                },
+                {
+                  "content": "Se disputer avec la tante",
+                  "correct": false
+                },
+                {
+                  "content": "Ne rien dire, car ce n'est pas sa fille",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "M. Koné, l'enseignant, peut en parler aux services sociaux ou au chef de quartier sans trahir Adjoua.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer le danger : Adjoua subit plusieurs atteintes à ses droits. Étape 2 — Choisir qui peut agir : un enseignant est un adulte de confiance et peut alerter les services sociaux. Étape 3 — Dire les faits : absences, travail, coups, refus de soins. Étape 4 — Conclure : vrai, en parler protège Adjoua. Penser que c'est trahir confond protéger et dénoncer par méchanceté.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe (cinq phrases au plus) qui explique ce que doit faire M. Koné pour aider Adjoua. Cite le danger, l'adulte ou le service à prévenir et la manière de dire les faits.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Nomme les dangers (travail interdit, maltraitance, refus de soins)",
+                "Choisit un adulte ou un service adapté (chef de quartier, services sociaux, centre de santé)",
+                "Dit que les faits sont présentés simplement et sans exagérer",
+                "Explique que l'objectif est de protéger Adjoua",
+                "Écrit un paragraphe clair et organisé"
+              ],
+              "explanation": "Corrigé modèle : « Adjoua subit un travail interdit, de la maltraitance et un refus de soins. M. Koné doit d'abord en parler à la directrice ou au chef de quartier, puis aux services sociaux. Il dit les faits simplement : Adjoua ne vient plus en classe, elle vend toute la journée, elle a été frappée et n'est pas soignée. Il évite d'exagérer ou d'accuser sans preuve. Son but est de protéger Adjoua et de l'aider à retrouver l'école et des soins. » Répartition : dangers nommés (1,5 point), adulte ou service (1,5 point), faits dits sans exagérer (1 point), objectif de protection (1 point), clarté du paragraphe (1 point).",
+              "answers": [],
+              "starter": "Adjoua subit…"
+            },
+            {
+              "content": "Pourquoi la pauvreté d'une famille ne peut-elle pas servir d'excuse aux coups ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le mal : des coups. Étape 2 — Nommer le danger : de la maltraitance. Étape 3 — Se demander ce que la pauvreté change : elle peut empêcher d'acheter des soins, mais elle ne force jamais à frapper. Étape 4 — Conclure : les coups ne sont jamais justifiés par un manque d'argent. Dire que la pauvreté n'existe pas ou que seuls les riches élèvent des enfants est faux.",
+              "answers": [
+                {
+                  "content": "Parce que les coups sont de la maltraitance, quelles que soient les ressources",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que la pauvreté n'existe pas",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que seuls les riches ont le droit d'élever des enfants",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que les coups sont permis quand on a faim",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Définition des droits à la survie et des droits à la protection, maltraitance, abandon, exploitation par le travail, aide à la maison et travail interdit, à qui s'adresser.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au centre de santé de ton quartier, une affiche présente les droits à la survie de l'enfant.",
+              "exercise_type": "evaluation",
+              "figure": "droits-survie-protection",
+              "questions": [
+                {
+                  "content": "Que permettent les droits à la survie à l'enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la notion : les droits à la survie. Étape 2 — Se rappeler leur but : ce qui sert à vivre et à rester en bonne santé. Étape 3 — Nommer les exemples : nourriture, eau potable, logement, soins, vaccins. Étape 4 — Conclure : vivre et rester en bonne santé. Les autres réponses n'ont aucun lien avec le but de ces droits.",
+                  "answers": [
+                    {
+                      "content": "De vivre et de rester en bonne santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "De ne jamais aller à l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "De choisir ses parents",
+                      "correct": false
+                    },
+                    {
+                      "content": "De gagner de l'argent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont des droits à la survie ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer le besoin de chaque proposition. Étape 2 — Se demander lesquels servent à vivre et à rester en bonne santé : boire, se soigner, dormir à l'abri. Étape 3 — Nommer les droits : eau potable, soins, logement. Étape 4 — Conclure : les trois premières. Le téléphone, les baskets et le jeu vidéo sont des envies.",
+                  "answers": [
+                    {
+                      "content": "Une eau potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des soins quand on est malade",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un toit pour dormir à l'abri",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un téléphone neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des baskets de marque",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un jeu vidéo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une eau que l'on peut boire sans danger est une eau ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le besoin : boire sans tomber malade. Étape 2 — Se demander s'il sert à la santé : oui. Étape 3 — Nommer le droit : l'eau potable. Étape 4 — Conclure : potable.",
+                  "answers": [
+                    {
+                      "content": "potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "salée",
+                      "correct": false
+                    },
+                    {
+                      "content": "sucrée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un vaccin protège l'enfant contre des maladies graves et relève du droit à la santé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le besoin : éviter une maladie grave. Étape 2 — Se demander s'il sert à rester en bonne santé : oui. Étape 3 — Nommer le droit : soins et vaccins. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque besoin au droit à la survie qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque besoin. Étape 2 — Se demander si chacun sert à vivre : oui. Étape 3 — Nommer le droit : faim et nourriture, maladie et soins, abri et logement. Étape 4 — Conclure : ces trois liens.",
+                  "answers": [
+                    {
+                      "content": "Avoir faim",
+                      "match": "Nourriture"
+                    },
+                    {
+                      "content": "Être malade",
+                      "match": "Soins"
+                    },
+                    {
+                      "content": "Dormir à l'abri",
+                      "match": "Logement"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque question, cherche si le besoin sert à vivre et à rester en bonne santé."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un panneau à l'entrée de l'école rappelle que l'enfant a droit à la protection.",
+              "exercise_type": "evaluation",
+              "figure": "droits-survie-protection",
+              "questions": [
+                {
+                  "content": "Contre quoi le droit à la protection défend-il l'enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la notion : le droit à la protection. Étape 2 — Se rappeler son but : défendre l'enfant contre le mal. Étape 3 — Nommer les dangers : maltraitance, abandon, exploitation par le travail. Étape 4 — Conclure : la première réponse. Vaccins, eau potable et école ne sont pas des dangers.",
+                  "answers": [
+                    {
+                      "content": "Contre ce qui lui fait du mal : maltraitance, abandon, exploitation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Contre les vaccins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Contre l'eau potable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Contre l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont des exemples de maltraitance ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le mal dans chaque proposition. Étape 2 — Nommer le danger : coups qui blessent et insultes répétées sont de la maltraitance. Étape 3 — Se demander qui doit protéger : les adultes. Étape 4 — Conclure : les deux premières. Expliquer, soigner et demander de ranger sont des gestes normaux.",
+                  "answers": [
+                    {
+                      "content": "Frapper un enfant jusqu'à le blesser",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'insulter chaque jour pour le rabaisser",
+                      "correct": true
+                    },
+                    {
+                      "content": "Lui expliquer son erreur calmement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le conduire au centre de santé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lui demander de ranger son cahier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laisser un enfant seul, sans soins ni surveillance, s'appelle l'___. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer le mal : l'enfant est seul. Étape 2 — Nommer le danger : l'abandon. Étape 3 — Se demander qui doit le protéger : les adultes qui l'ont à charge. Étape 4 — Conclure : abandon.",
+                  "answers": [
+                    {
+                      "content": "abandon",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'enfant est protégé par les adultes qui s'occupent de lui, car il ne peut pas toujours se défendre seul.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer qui est en danger : l'enfant. Étape 2 — Nommer ce qu'il lui faut : une protection. Étape 3 — Se demander qui peut l'assurer : les adultes. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Faire porter des charges trop lourdes à un enfant toute la journée est une ___ par le travail.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer la tâche : charges lourdes toute la journée. Étape 2 — Nommer le danger : l'exploitation par le travail. Étape 3 — Se demander qui doit protéger : les adultes. Étape 4 — Conclure : exploitation.",
+                  "answers": [
+                    {
+                      "content": "exploitation",
+                      "correct": true
+                    },
+                    {
+                      "content": "récompense",
+                      "correct": false
+                    },
+                    {
+                      "content": "protection",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense aux trois dangers de la fiche : maltraitance, abandon, exploitation."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un quartier de Yamoussoukro, on parle des tâches données aux enfants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Balayer la cour dix minutes avant l'école est une aide acceptable.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la tâche : balayer dix minutes. Étape 2 — Vérifier le danger : aucun. Étape 3 — Vérifier l'école et le repos : l'enfant va à l'école. Étape 4 — Conclure : aide acceptable.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant garde un étal au marché de six heures à dix-huit heures et ne va plus à l'école. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la tâche : l'étal douze heures. Étape 2 — Vérifier le danger et la fatigue : trop long pour son âge. Étape 3 — Vérifier l'école : il n'y va plus. Étape 4 — Conclure : travail interdit. Parler d'aide acceptable oublie la durée et l'école.",
+                  "answers": [
+                    {
+                      "content": "Un travail interdit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une aide acceptable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un jeu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un droit à la survie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels critères rendent un travail interdit à un enfant ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer ce que fait la tâche. Étape 2 — Vérifier le danger et la santé. Étape 3 — Vérifier l'école et le repos. Étape 4 — Conclure : danger ou santé, et école. Une tâche courte, adaptée, après les devoirs est une aide acceptable.",
+                  "answers": [
+                    {
+                      "content": "Il est dangereux ou nuit à la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il empêche d'aller à l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est court et adapté à l'âge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se fait avec ses parents après les devoirs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un travail qui empêche l'enfant d'aller à l'___ est interdit. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier le danger. Étape 3 — Vérifier l'école : un travail qui empêche d'y aller est interdit. Étape 4 — Conclure : le mot attendu est école.",
+                  "answers": [
+                    {
+                      "content": "école",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle tâche est une aide acceptable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer chaque tâche et sa durée. Étape 2 — Vérifier le danger : sacs de ciment et pierres sont dangereux ou trop fatigants ; la course n'a pas de danger. Étape 3 — Vérifier l'école : vendre sans aller en classe l'empêche ; la course laisse le temps d'apprendre. Étape 4 — Conclure : la course chez la voisine.",
+                  "answers": [
+                    {
+                      "content": "Porter des sacs de ciment toute la journée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire une petite course chez la voisine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Casser des pierres de l'aube au soir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre sans aller en classe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque tâche, regarde le danger, la durée et l'école."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Awa, 11 ans, voit une camarade pleurer à la sortie de l'école : elle a des marques de coups.",
+              "exercise_type": "evaluation",
+              "figure": "enfant-en-danger-a-qui-parler",
+              "questions": [
+                {
+                  "content": "Les marques sont récentes, mais la camarade n'est pas blessée gravement. Que fait Awa d'abord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : des coups, non immédiat. Étape 2 — Choisir l'adulte : un enseignant, un adulte de confiance. Étape 3 — Dire les faits : « Ma camarade a des marques de coups et elle pleure. » Étape 4 — Conclure : rester attentive. Se battre ou se taire ne protège pas la camarade.",
+                  "answers": [
+                    {
+                      "content": "Elle en parle à un adulte de confiance, par exemple son enseignant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle se bat avec la personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se tait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle rit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adulte frappe un enfant devant Awa et l'enfant saigne. Que faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : violence en cours et enfant blessé, danger immédiat. Étape 2 — Choisir qui peut agir : police ou gendarmerie, et centre de santé. Étape 3 — Dire les faits : qui, quoi, où. Étape 4 — Conclure : rester attentive. Attendre laisse l'enfant en danger.",
+                  "answers": [
+                    {
+                      "content": "Prévenir sans attendre la police ou la gendarmerie, et amener l'enfant au centre de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Attendre la fin du mois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien faire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se moquer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parler d'un enfant en danger à un adulte, c'est trahir.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le danger : un enfant est en danger. Étape 2 — Choisir l'adulte qui peut agir. Étape 3 — Dire les faits. Étape 4 — Conclure : faux, c'est protéger.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les services ___ étudient la situation de la famille et l'aident. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer le danger. Étape 2 — Choisir le service : les services sociaux. Étape 3 — Dire les faits. Étape 4 — Conclure : sociaux.",
+                  "answers": [
+                    {
+                      "content": "sociaux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour aider un enfant en danger.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le danger. Étape 2 — Choisir qui peut agir. Étape 3 — Dire les faits. Étape 4 — Rester attentif. On ne choisit pas avant d'avoir repéré le danger.",
+                  "answers": [
+                    {
+                      "content": "Repérer le danger et dire s'il est immédiat."
+                    },
+                    {
+                      "content": "Choisir l'adulte ou le service qui peut agir."
+                    },
+                    {
+                      "content": "Dire les faits simplement et sans exagérer."
+                    },
+                    {
+                      "content": "Rester attentif jusqu'à ce que l'enfant soit en sécurité."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Demande-toi d'abord si le danger est immédiat."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Droits à la survie et à la protection dans des situations d'un centre de santé, d'un marché, d'une cour commune et d'une école en Côte d'Ivoire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un samedi, au centre de santé d'un quartier d'Abobo, l'infirmière Mme Kouassi organise une journée de vaccination. Beaucoup de familles viennent avec leurs enfants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Aya, 3 ans, reçoit un vaccin. Quel droit à la survie est respecté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le besoin : éviter une maladie grave. Étape 2 — Se demander s'il sert à la santé : oui. Étape 3 — Nommer le droit : soins et vaccins. Étape 4 — Conclure : respecté. Le logement et la nourriture sont d'autres droits à la survie.",
+                  "answers": [
+                    {
+                      "content": "Le droit aux soins et aux vaccins",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit au logement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit d'avoir un téléphone neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit à la nourriture",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère qui vend du poisson, gagne peu et vient quand même faire vacciner ses enfants fait respecter leur droit à la santé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le besoin : vacciner ses enfants. Étape 2 — Se demander s'il sert à la santé : oui. Étape 3 — Nommer le droit : vaccins. Étape 4 — Conclure : vrai. Ce qui compte, c'est ce que la mère fait avec ses moyens.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'infirmière affiche des conseils. Lesquels relèvent des droits à la survie ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer chaque besoin. Étape 2 — Se demander lesquels servent à rester en bonne santé : boire sans danger, se soigner. Étape 3 — Nommer les droits : eau potable et soins. Étape 4 — Conclure : les deux premières. Les baskets et le téléphone sont des envies.",
+                  "answers": [
+                    {
+                      "content": "Faire boire une eau potable aux enfants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Soigner un enfant qui a de la fièvre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Acheter des baskets de marque",
+                      "correct": false
+                    },
+                    {
+                      "content": "Offrir un téléphone neuf",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque affiche du centre de santé au droit qu'elle protège.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le besoin sur chaque affiche. Étape 2 — Se demander s'il sert à la santé : oui. Étape 3 — Nommer le droit : vaccins, eau potable, soins. Étape 4 — Conclure : ces trois liens.",
+                  "answers": [
+                    {
+                      "content": "Vaccination gratuite ce samedi",
+                      "match": "Vaccins"
+                    },
+                    {
+                      "content": "Boire une eau propre",
+                      "match": "Eau potable"
+                    },
+                    {
+                      "content": "Fièvre : venez consulter",
+                      "match": "Soins"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le centre de santé aide à faire respecter le droit à la ___ des enfants.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le rôle du centre : soigner et vacciner. Étape 2 — Se demander ce qu'il protège : la bonne santé. Étape 3 — Nommer le droit : à la santé. Étape 4 — Conclure : santé.",
+                  "answers": [
+                    {
+                      "content": "santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "chasse",
+                      "correct": false
+                    },
+                    {
+                      "content": "vente",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque affiche, cherche le besoin vital qu'elle protège."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au marché de Treichville, Koffi, 12 ans, aide sa tante à vendre des tomates. Un jour, deux élèves du quartier, Moussa et Salimata, discutent de ce qu'ils ont vu.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Koffi aide sa tante une heure le mercredi après-midi, puis fait ses devoirs. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la tâche : une heure d'aide. Étape 2 — Vérifier le danger : aucun. Étape 3 — Vérifier l'école : Koffi va à l'école et fait ses devoirs. Étape 4 — Conclure : aide acceptable. Parler de travail interdit confond une petite aide et une exploitation.",
+                  "answers": [
+                    {
+                      "content": "Une aide acceptable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un travail interdit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une maltraitance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un abandon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Salimata, 10 ans, vend des mouchoirs chaque jour de six heures à dix-huit heures et ne va plus à l'école. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la tâche : vendre douze heures. Étape 2 — Vérifier la fatigue : trop long pour son âge. Étape 3 — Vérifier l'école : elle n'y va plus. Étape 4 — Conclure : travail interdit.",
+                  "answers": [
+                    {
+                      "content": "Un travail interdit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une aide acceptable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un jeu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un droit à la survie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa dit : « Tous les enfants du marché travaillent donc ce n'est pas un problème. » Cet argument est correct.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la tâche : le travail au marché. Étape 2 — Vérifier le danger et l'école au cas par cas. Étape 3 — Constater que le nombre d'enfants ne change rien à ce que le travail fait à chacun. Étape 4 — Conclure : faux. Ce n'est pas parce que beaucoup le font que c'est permis.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut faire Moussa pour aider Salimata ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le danger : travail interdit, non immédiat. Étape 2 — Choisir l'adulte : enseignant ou chef de quartier. Étape 3 — Dire les faits. Étape 4 — Conclure : ces deux réponses. Se taire ou se disputer ne protège pas Salimata.",
+                  "answers": [
+                    {
+                      "content": "En parler à un enseignant de confiance",
+                      "correct": true
+                    },
+                    {
+                      "content": "En parler au chef de quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne rien dire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se disputer avec ses parents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une tâche courte, sans danger, qui laisse le temps d'aller à l'école est une ___ acceptable.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier le danger : aucun. Étape 3 — Vérifier l'école : elle reste possible. Étape 4 — Conclure : aide.",
+                  "answers": [
+                    {
+                      "content": "aide",
+                      "correct": true
+                    },
+                    {
+                      "content": "punition",
+                      "correct": false
+                    },
+                    {
+                      "content": "maltraitance",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque enfant, regarde la durée de la tâche, le danger et l'école."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une cour commune d'Abidjan, tout le monde entend des cris. Kouamé, 11 ans, voit sa voisine Mariam, 9 ans, qui a des marques sur le bras. Elle dit que sa tante la frappe quand elle casse un objet.",
+              "exercise_type": "evaluation",
+              "figure": "enfant-en-danger-a-qui-parler",
+              "questions": [
+                {
+                  "content": "De quel danger Mariam est-elle victime ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le mal : coups et marques. Étape 2 — Nommer le danger : maltraitance. Étape 3 — Se demander qui devrait protéger Mariam : sa tante. Étape 4 — Conclure : droit à la protection non respecté.",
+                  "answers": [
+                    {
+                      "content": "De maltraitance",
+                      "correct": true
+                    },
+                    {
+                      "content": "D'abandon",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'une aide acceptable",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'un manque d'eau potable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La tante peut dire : « C'est pour son éducation » et frapper Mariam sans problème.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le mal : des coups. Étape 2 — Nommer le danger : maltraitance. Étape 3 — Se demander qui doit protéger : la tante. Étape 4 — Conclure : faux, éduquer n'est pas blesser.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le danger est grave mais il n'y a pas de blessure en ce moment. Que doit faire Kouamé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : non immédiat. Étape 2 — Choisir l'adulte : un enseignant. Étape 3 — Dire les faits : « Mariam a des marques et dit que sa tante la frappe. » Étape 4 — Conclure : rester attentif. Frapper la tante ajoute de la violence.",
+                  "answers": [
+                    {
+                      "content": "En parler à un adulte de confiance, comme un enseignant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Frapper la tante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se taire",
+                      "correct": false
+                    },
+                    {
+                      "content": "En rire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases disent bien les faits ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer ce qu'on a vu et entendu. Étape 2 — Choisir ce qui est un fait. Étape 3 — Dire les faits sans exagérer ni accuser sans preuve. Étape 4 — Conclure : les deux premières. Les deux dernières sont des insultes ou des inventions.",
+                  "answers": [
+                    {
+                      "content": "Mariam a des marques sur le bras.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mariam dit que sa tante la frappe.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa tante est méchante et mérite la prison.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout le quartier déteste Mariam.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les services ___ peuvent aider la famille de Mariam. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer le danger. Étape 2 — Choisir le service : les services sociaux. Étape 3 — Dire les faits. Étape 4 — Conclure : sociaux.",
+                  "answers": [
+                    {
+                      "content": "sociaux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche d'abord le mal, puis l'adulte à prévenir."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À l'école, M. Diomandé remarque qu'un élève, Yao, 10 ans, arrive fatigué, a faim et ne s'est pas lavé. Il apprend que Yao dort dehors depuis une semaine.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels droits de Yao ne sont pas respectés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les besoins : dormir à l'abri, manger. Étape 2 — Se demander s'ils servent à vivre : oui. Étape 3 — Nommer les droits : logement, nourriture, et protection contre l'abandon. Étape 4 — Conclure : plusieurs droits ne sont pas respectés. Dire qu'aucun droit n'est atteint ignore le récit.",
+                  "answers": [
+                    {
+                      "content": "Son droit au logement et à la nourriture, droits à la survie, et peut-être sa protection contre l'abandon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement son droit d'avoir un téléphone neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son droit de choisir son école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "M. Diomandé veut aider Yao. Que fait-il d'abord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : grave mais sans violence en cours. Étape 2 — Choisir qui peut agir : la direction, les services sociaux. Étape 3 — Dire les faits : Yao dort dehors depuis une semaine. Étape 4 — Conclure : veiller à ce que Yao mange et soit entendu. Se moquer, attendre ou se taire laisse Yao en danger.",
+                  "answers": [
+                    {
+                      "content": "Il en parle à la direction et aux services sociaux, tout en veillant à ce que Yao mange",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se moque de Yao",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il attend le mois prochain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne dit rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao subit un danger même si personne ne le frappe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le mal : dormir dehors, avoir faim. Étape 2 — Nommer le danger : abandon et droits à la survie non respectés. Étape 3 — Se demander qui doit le protéger : les adultes. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque besoin de Yao à ce qui peut l'aider.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque besoin de Yao. Étape 2 — Choisir ce qui peut y répondre. Étape 3 — Nommer les droits ou services. Étape 4 — Conclure : ces trois liens.",
+                  "answers": [
+                    {
+                      "content": "Manger",
+                      "match": "Nourriture"
+                    },
+                    {
+                      "content": "Dormir à l'abri",
+                      "match": "Logement"
+                    },
+                    {
+                      "content": "Être suivi par un adulte",
+                      "match": "Services sociaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un enfant est laissé seul longtemps, sans adulte pour s'occuper de lui, on parle d'___. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer le mal. Étape 2 — Nommer le danger : abandon. Étape 3 — Se demander qui doit le protéger. Étape 4 — Conclure : abandon.",
+                  "answers": [
+                    {
+                      "content": "abandon",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense à la fois aux droits à la survie et aux droits à la protection."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Classer les droits, distinguer manque de moyens et refus, réfuter les idées reçues, agir en cas de danger immédiat.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un maître demande à ses élèves de classer des situations selon le droit concerné : survie ou protection.",
+              "exercise_type": "evaluation",
+              "figure": "droits-survie-protection",
+              "questions": [
+                {
+                  "content": "Relie chaque situation au type de droit concerné.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le besoin ou le mal. Étape 2 — Se demander s'il s'agit de vivre ou d'être protégé. Étape 3 — Nommer le droit. Étape 4 — Conclure : l'eau et les soins sont des droits à la survie, les coups relèvent de la protection.",
+                  "answers": [
+                    {
+                      "content": "Un enfant n'a pas d'eau potable à boire",
+                      "match": "Droit à la survie : l'eau potable"
+                    },
+                    {
+                      "content": "Un enfant est frappé chaque jour",
+                      "match": "Droit à la protection contre la maltraitance"
+                    },
+                    {
+                      "content": "Un enfant malade n'est pas soigné",
+                      "match": "Droit à la survie : les soins"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant n'est pas vacciné alors que ses parents ont les moyens. Quel droit est atteint ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le besoin : être protégé de la maladie. Étape 2 — Se demander s'il sert à la santé : oui. Étape 3 — Nommer le droit : vaccins, droit à la survie. Étape 4 — Conclure : droit à la survie atteint.",
+                  "answers": [
+                    {
+                      "content": "Un droit à la survie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un droit à la protection contre le travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un droit à la protection contre l'abandon uniquement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant qui mange bien mais qui est frappé chaque jour a tous ses droits respectés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le mal subi : il est frappé chaque jour, même s'il mange bien. Étape 2 — Nommer le type de danger : la maltraitance. Étape 3 — Se demander qui devrait le protéger : les adultes qui s'occupent de lui. Étape 4 — Conclure : faux, son droit à la protection n'est pas respecté. Manger ne compense pas les coups.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels exemples relèvent du droit à la protection ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le type de chaque exemple. Étape 2 — Se demander lesquels défendent contre le mal. Étape 3 — Nommer le droit : protection. Étape 4 — Conclure : abandon et coups. Eau potable et vaccin sont des droits à la survie.",
+                  "answers": [
+                    {
+                      "content": "Ne pas être abandonné",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne pas être frappé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Boire une eau potable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Être vacciné",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Éviter la maltraitance relève du droit à la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le mal : la maltraitance. Étape 2 — Nommer le droit : protection. Étape 3 — Se demander qui doit protéger. Étape 4 — Conclure : protection.",
+                  "answers": [
+                    {
+                      "content": "protection",
+                      "correct": true
+                    },
+                    {
+                      "content": "nourriture",
+                      "correct": false
+                    },
+                    {
+                      "content": "boisson",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Demande-toi : l'enfant a-t-il besoin de vivre ou d'être protégé d'un mal ?"
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une famille de Man vit dans de grandes difficultés. Le père a perdu son travail. Les enfants mangent peu, et la plus jeune, Aya, a de la fièvre. Les parents font tout pour trouver de l'aide.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Cette famille manque volontairement à ses devoirs envers Aya.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le besoin : Aya doit être soignée. Étape 2 — Se demander ce que font les parents : ils cherchent de l'aide, ils agissent. Étape 3 — Nommer la situation : manque de moyens, non refus. Étape 4 — Conclure : faux, il faut les aider, pas les accuser.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peuvent faire les voisins ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : une enfant malade dans une famille sans moyens. Étape 2 — Choisir qui peut agir : le centre de santé, les services sociaux. Étape 3 — Dire les faits : fièvre, manque de moyens. Étape 4 — Conclure : orienter. Se moquer ou punir ne soigne pas Aya.",
+                  "answers": [
+                    {
+                      "content": "Orienter la famille vers le centre de santé et les services sociaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Se moquer de la famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ignorer Aya",
+                      "correct": false
+                    },
+                    {
+                      "content": "Punir les parents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments comparer pour juger la famille ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le besoin : Aya doit être soignée. Étape 2 — Se demander ce qui permet de juger : ce que font les parents et les moyens qu'ils ont. Étape 3 — Nommer ces deux éléments à comparer. Étape 4 — Conclure : ces deux éléments. L'avis du quartier et la taille de la maison ne mesurent pas ce que font les parents.",
+                  "answers": [
+                    {
+                      "content": "Ce que font les parents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les moyens dont ils disposent",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'avis de tout le quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille de la maison",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand une famille n'a pas les moyens de soigner un enfant, elle peut demander l'aide du centre de santé et des services ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le besoin : soigner l'enfant. Étape 2 — Choisir le service : le centre de santé et les services sociaux. Étape 3 — Dire les faits. Étape 4 — Conclure : sociaux.",
+                  "answers": [
+                    {
+                      "content": "sociaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "publicitaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "sportifs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une famille pauvre qui fait tout son possible pour soigner son enfant mérite d'être ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le besoin : l'enfant doit être soigné. Étape 2 — Se demander si les parents font ce qu'ils peuvent : oui, ils agissent. Étape 3 — Nommer la situation : manque de moyens, pas refus des soins. Étape 4 — Conclure : la famille mérite d'être aidée. La punir ou s'en moquer ne soigne pas l'enfant.",
+                  "answers": [
+                    {
+                      "content": "aidée",
+                      "correct": true
+                    },
+                    {
+                      "content": "punie",
+                      "correct": false
+                    },
+                    {
+                      "content": "moquée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Distingue le refus volontaire et le manque de moyens."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Deux élèves, Kofi et Fatou, discutent de ce qu'ils ont entendu dans leur quartier de Daloa.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Kofi dit : « Les adultes ont le droit de frapper les enfants pour les éduquer. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'idée : les coups sont permis. Étape 2 — Nommer le danger : maltraitance. Étape 3 — Se demander qui doit protéger : les adultes. Étape 4 — Conclure : faux. Ni l'âge de l'adulte ni la tradition ne rendent les coups acceptables.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : éduquer, ce n'est pas blesser",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai, car ce sont des adultes",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai, car l'enfant a fait une faute",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai, car c'est la tradition",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou dit : « Tous les enfants travaillent chez nous. » Cela justifie-t-il un travail qui empêche d'aller à l'école ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'argument : tout le monde le fait. Étape 2 — Vérifier le danger et l'école. Étape 3 — Constater que le nombre ne change rien. Étape 4 — Conclure : non.",
+                  "answers": [
+                    {
+                      "content": "Non : ce qui compte, c'est ce que le travail fait à l'enfant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car tout le monde le fait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car c'est l'habitude",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car l'enfant gagne de l'argent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant qui parle à un adulte d'un autre enfant en danger fait un acte de courage.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le danger : un enfant en danger. Étape 2 — Choisir l'adulte qui peut agir. Étape 3 — Dire les faits. Étape 4 — Conclure : vrai, parler protège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles raisons permettent de parler d'un enfant en danger ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer le but : protéger. Étape 2 — Choisir les raisons valables. Étape 3 — Écarter celles qui ne protègent pas. Étape 4 — Conclure : les deux premières.",
+                  "answers": [
+                    {
+                      "content": "L'enfant a droit à la protection",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parler peut arrêter le danger",
+                      "correct": true
+                    },
+                    {
+                      "content": "On veut faire du bruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les secrets sont toujours bons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Éduquer un enfant, c'est expliquer et guider, pas le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer l'idée du cours. Étape 2 — Nommer l'opposé d'éduquer : blesser. Étape 3 — Se demander qui doit protéger. Étape 4 — Conclure : blesser.",
+                  "answers": [
+                    {
+                      "content": "blesser",
+                      "correct": true
+                    },
+                    {
+                      "content": "aider",
+                      "correct": false
+                    },
+                    {
+                      "content": "écouter",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la règle de la fiche avant de juger l'argument."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mme Traoré voit un enfant de 9 ans, Issa, qui pleure à l'entrée d'un chantier. Un homme l'a frappé et l'enfant a une plaie au bras.",
+              "exercise_type": "evaluation",
+              "figure": "enfant-en-danger-a-qui-parler",
+              "questions": [
+                {
+                  "content": "Le danger est immédiat, car l'enfant est blessé. Que doit faire Mme Traoré ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : enfant blessé, donc danger immédiat. Étape 2 — Choisir qui agit : police, gendarmerie, centre de santé. Étape 3 — Dire les faits. Étape 4 — Conclure : agir tout de suite. Attendre ou frapper l'homme aggrave la situation.",
+                  "answers": [
+                    {
+                      "content": "Prévenir sans attendre la police ou la gendarmerie et faire soigner Issa au centre de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Attendre le lendemain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien dire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Frapper l'homme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Traoré doit d'abord s'assurer que l'homme est coupable avant d'aider Issa.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le danger : Issa est blessé. Étape 2 — Choisir ce qui est prioritaire : le protéger et le soigner. Étape 3 — Laisser les autorités chercher les responsabilités. Étape 4 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments dire en parlant de la situation ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer ce qu'on sait. Étape 2 — Choisir les faits. Étape 3 — Éviter suppositions et moqueries. Étape 4 — Conclure : les deux premières.",
+                  "answers": [
+                    {
+                      "content": "Ce qu'elle a vu : l'enfant, la plaie, l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Où et quand",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des suppositions sur l'homme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des moqueries",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour soigner la plaie d'Issa, on l'emmène au centre de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le besoin : soigner. Étape 2 — Choisir le lieu. Étape 3 — Dire les faits aux soignants. Étape 4 — Conclure : santé.",
+                  "answers": [
+                    {
+                      "content": "santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "sport",
+                      "correct": false
+                    },
+                    {
+                      "content": "culture",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de Mme Traoré.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le danger. Étape 2 — Choisir qui prévenir. Étape 3 — Dire les faits. Étape 4 — Rester auprès d'Issa.",
+                  "answers": [
+                    {
+                      "content": "Repérer le danger immédiat."
+                    },
+                    {
+                      "content": "Prévenir la police ou la gendarmerie et le centre de santé."
+                    },
+                    {
+                      "content": "Dire les faits simplement."
+                    },
+                    {
+                      "content": "Rester auprès d'Issa jusqu'à l'arrivée de l'aide."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un danger immédiat appelle une action immédiate."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Les droits à la survie, les droits à la protection, l'aide et le travail interdit, à qui s'adresser quand un enfant est en danger.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Bilan des droits à la survie dans un quartier de Korhogo.",
+              "exercise_type": "evaluation",
+              "figure": "droits-survie-protection",
+              "questions": [
+                {
+                  "content": "Quels besoins relèvent des droits à la survie ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer chaque besoin. Étape 2 — Se demander lesquels servent à vivre. Étape 3 — Nommer les droits. Étape 4 — Conclure : eau, soins, logement. Les trois autres sont des envies.",
+                  "answers": [
+                    {
+                      "content": "Une eau potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des soins",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un logement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un téléphone neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des baskets de marque",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un jeu vidéo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le puits du quartier est sale et des enfants sont malades. Quel droit est atteint ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le besoin : eau propre. Étape 2 — Se demander si cela sert à la santé : oui. Étape 3 — Nommer le droit : eau potable. Étape 4 — Conclure : atteint.",
+                  "answers": [
+                    {
+                      "content": "L'eau potable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit d'avoir un téléphone neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit au travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour la Convention relative aux droits de l'enfant, un enfant est une personne de moins de 18 ans.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer le besoin : être reconnu comme un enfant qui a des droits. Étape 2 — Se demander qui est concerné : toute personne de moins de 18 ans. Étape 3 — Nommer le texte : la Convention relative aux droits de l'enfant, ONU, 1989. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Convention relative aux droits de l'___ a été adoptée par l'ONU en 1989. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer le texte. Étape 2 — Se rappeler son nom. Étape 3 — Nommer le mot manquant. Étape 4 — Conclure : enfant.",
+                  "answers": [
+                    {
+                      "content": "enfant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque droit à son exemple.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le besoin de chaque exemple. Étape 2 — Se demander s'il sert à vivre et à rester en bonne santé : oui. Étape 3 — Nommer le droit correspondant : nourriture, soins, vaccins. Étape 4 — Conclure : ces trois liens.",
+                  "answers": [
+                    {
+                      "content": "Nourriture",
+                      "match": "Manger à sa faim"
+                    },
+                    {
+                      "content": "Soins",
+                      "match": "Être soigné quand on est malade"
+                    },
+                    {
+                      "content": "Vaccins",
+                      "match": "Être protégé de maladies graves"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense aux besoins qui servent à vivre."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Bilan des droits à la protection.",
+              "exercise_type": "evaluation",
+              "figure": "droits-survie-protection",
+              "questions": [
+                {
+                  "content": "Quels sont des dangers contre lesquels l'enfant est protégé ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer les dangers. Étape 2 — Nommer : maltraitance, abandon, exploitation. Étape 3 — Écarter les droits à la survie. Étape 4 — Conclure : les trois premières.",
+                  "answers": [
+                    {
+                      "content": "Les coups",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'abandon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail dangereux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les vaccins",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau potable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les soins",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Frapper un enfant jusqu'à le blesser, ce n'est pas l'éduquer, c'est le ___.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le mal : des coups qui blessent. Étape 2 — Nommer le type de danger : la maltraitance, donc maltraiter. Étape 3 — Se demander qui doit protéger l'enfant : les adultes. Étape 4 — Conclure : maltraiter. Soigner, vacciner et nourrir sont des gestes qui protègent l'enfant.",
+                  "answers": [
+                    {
+                      "content": "maltraiter",
+                      "correct": true
+                    },
+                    {
+                      "content": "soigner",
+                      "correct": false
+                    },
+                    {
+                      "content": "vacciner",
+                      "correct": false
+                    },
+                    {
+                      "content": "nourrir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un travail qui empêche d'aller à l'école est interdit à un enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier l'école. Étape 3 — Appliquer la règle. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail interdit à un enfant est dangereux, nuit à sa santé ou l'empêche d'aller à l'___. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer la règle. Étape 2 — Vérifier les critères. Étape 3 — Nommer le dernier critère. Étape 4 — Conclure : école.",
+                  "answers": [
+                    {
+                      "content": "école",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Laisser un enfant seul sans soins s'appelle l'___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le mal. Étape 2 — Nommer le danger. Étape 3 — Se demander qui doit protéger. Étape 4 — Conclure : abandon.",
+                  "answers": [
+                    {
+                      "content": "abandon",
+                      "correct": true
+                    },
+                    {
+                      "content": "éducation",
+                      "correct": false
+                    },
+                    {
+                      "content": "vaccination",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense aux trois dangers : maltraitance, abandon, exploitation."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Bilan sur les tâches des enfants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle tâche est une aide acceptable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer la tâche et sa durée. Étape 2 — Vérifier le danger. Étape 3 — Vérifier l'école. Étape 4 — Conclure : balayer dix minutes.",
+                  "answers": [
+                    {
+                      "content": "Balayer la cour dix minutes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Porter des sacs de ciment toute la journée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Casser des pierres de l'aube au soir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre au marché sans aller en classe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« C'est la tradition » justifie de garder un enfant loin de l'école pour travailler.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer l'argument. Étape 2 — Vérifier ce que fait le travail. Étape 3 — Constater que la tradition n'y change rien. Étape 4 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles tâches sont interdites à un enfant ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer chaque tâche. Étape 2 — Vérifier les critères. Étape 3 — Appliquer la règle. Étape 4 — Conclure : les deux premières.",
+                  "answers": [
+                    {
+                      "content": "Un travail dangereux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un travail qui l'empêche d'aller à l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une petite course",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ranger sa chambre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une tâche courte, sans danger et adaptée à l'âge est une ___ acceptable. (un mot)",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier le danger et l'école. Étape 3 — Appliquer la règle. Étape 4 — Conclure : aide.",
+                  "answers": [
+                    {
+                      "content": "aide",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour juger la tâche d'un enfant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer la tâche. Étape 2 — Vérifier le danger. Étape 3 — Vérifier l'école et le repos. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer la tâche et le temps qu'elle prend."
+                    },
+                    {
+                      "content": "Vérifier si elle est dangereuse ou trop fatigante."
+                    },
+                    {
+                      "content": "Vérifier si elle empêche d'aller à l'école ou de se reposer."
+                    },
+                    {
+                      "content": "Conclure : aide acceptable ou travail interdit."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Regarde la durée, le danger et l'école."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan : une situation complète à Abidjan. Awa, 10 ans, est chez sa tante. Elle n'est pas soignée quand elle est malade, elle est frappée et elle vend toute la journée.",
+              "exercise_type": "evaluation",
+              "figure": "enfant-en-danger-a-qui-parler",
+              "questions": [
+                {
+                  "content": "Relie chaque fait à l'atteinte qu'il représente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque fait. Étape 2 — Nommer le droit ou le danger. Étape 3 — Se demander qui devrait protéger. Étape 4 — Conclure : ces trois liens.",
+                  "answers": [
+                    {
+                      "content": "Elle n'est pas soignée",
+                      "match": "Droit à la survie atteint"
+                    },
+                    {
+                      "content": "Elle est frappée",
+                      "match": "Maltraitance"
+                    },
+                    {
+                      "content": "Elle vend toute la journée",
+                      "match": "Travail interdit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Que doit faire un voisin qui apprend la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le danger : grave, répété. Étape 2 — Choisir l'adulte. Étape 3 — Dire les faits sans exagérer. Étape 4 — Conclure : rester attentif.",
+                  "answers": [
+                    {
+                      "content": "En parler à un adulte de confiance, puis aux services sociaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Se moquer d'Awa",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se taire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se battre avec la tante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa a droit à la protection même si sa tante est pauvre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer la situation : la tante est pauvre. Étape 2 — Vérifier le droit. Étape 3 — Constater que la pauvreté ne justifie pas les coups. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels adultes ou services peuvent agir ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer qui peut agir. Étape 2 — Choisir les bons relais. Étape 3 — Écarter les mauvais. Étape 4 — Conclure : enseignant et services sociaux.",
+                  "answers": [
+                    {
+                      "content": "Un enseignant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les services sociaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un camarade qui dira tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parler d'un enfant en danger à un adulte, c'est le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer le but de la démarche. Étape 2 — Se demander ce qu'elle apporte. Étape 3 — Nommer le mot. Étape 4 — Conclure : protéger.",
+                  "answers": [
+                    {
+                      "content": "protéger",
+                      "correct": true
+                    },
+                    {
+                      "content": "trahir",
+                      "correct": false
+                    },
+                    {
+                      "content": "punir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Associe chaque fait à un droit ou à un danger."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

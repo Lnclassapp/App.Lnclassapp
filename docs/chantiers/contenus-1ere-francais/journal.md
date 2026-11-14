@@ -28,7 +28,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Points « à faire valider par un enseignant » (journal du programme, vague P8) | Aucun enseignant de Français dans le chantier ; programme détaillé de 1ère non accessible | — (avant publication) |
+| Points « à faire valider par un enseignant » (journal du programme, vague P8) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Aucun enseignant de Français dans le chantier ; programme détaillé de 1ère non accessible | — (avant publication) |
 | Une seule tournée de relecture : les corrections n'ont pas été relues une seconde fois | Règle du lot : un seul tour | — |
 
 ## Clôture

@@ -1,0 +1,3679 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — La mise en place des peuples de Côte d'Ivoire du XVIe au XVIIIe siècle",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "carte-origines",
+          "kind": "map",
+          "description": "Carte de l'Afrique de l'Ouest avec la Côte d'Ivoire actuelle et les pays d'où viennent les grands groupes : le Ghana à l'est pour les Akan, le Libéria à l'ouest pour les Krou, le Mali et la Guinée au nord-ouest pour les Mandé, le Burkina Faso au nord pour les Gour. Les capitales Accra, Monrovia, Bamako, Conakry et Ouagadougou sont repérées. Les frontières sont celles d'aujourd'hui.",
+          "params": {
+            "base": "africa",
+            "areas": [
+              {
+                "id": "gha",
+                "category": 1
+              },
+              {
+                "id": "lbr",
+                "category": 2
+              },
+              {
+                "id": "mli",
+                "category": 3
+              },
+              {
+                "id": "gin",
+                "category": 3
+              },
+              {
+                "id": "bfa",
+                "category": 4
+              },
+              {
+                "id": "civ",
+                "category": 5
+              }
+            ],
+            "places": [
+              {
+                "id": "accra"
+              },
+              {
+                "id": "monrovia"
+              },
+              {
+                "id": "bamako"
+              },
+              {
+                "id": "conakry"
+              },
+              {
+                "id": "ouagadougou"
+              },
+              {
+                "id": "yamoussoukro"
+              }
+            ],
+            "legend": [
+              "Région d'origine des Akan (Ghana actuel)",
+              "Région d'origine des Krou (Libéria actuel)",
+              "Région d'origine des Mandé (Mali et Guinée actuels)",
+              "Région d'origine des Gour (Burkina Faso actuel)",
+              "Côte d'Ivoire actuelle"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-installation",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire avec onze villes repères des zones d'installation : Abengourou (Agni) et Bondoukou (Abron) à l'est, Bouaké (Baoulé) au centre, Daloa (Bété) et Bouaflé (Gouro) au centre-ouest, Divo (Dida) au sud, Guiglo (Guéré) et Man (Dan) à l'ouest, Odienné (Malinké) au nord-ouest, Korhogo (Sénoufo) et Kong (Dioula) au nord.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "places": [
+              {
+                "id": "abengourou",
+                "label": "Abengourou (Agni)"
+              },
+              {
+                "id": "bondoukou",
+                "label": "Bondoukou (Abron)"
+              },
+              {
+                "id": "bouake",
+                "label": "Bouaké (Baoulé)"
+              },
+              {
+                "id": "daloa",
+                "label": "Daloa (Bété)"
+              },
+              {
+                "id": "bouafle",
+                "label": "Bouaflé (Gouro)"
+              },
+              {
+                "id": "divo",
+                "label": "Divo (Dida)"
+              },
+              {
+                "id": "guiglo",
+                "label": "Guiglo (Guéré)"
+              },
+              {
+                "id": "man",
+                "label": "Man (Dan)"
+              },
+              {
+                "id": "odienne",
+                "label": "Odienné (Malinké)"
+              },
+              {
+                "id": "korhogo",
+                "label": "Korhogo (Sénoufo)"
+              },
+              {
+                "id": "kong",
+                "label": "Kong (Dioula)"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-migrations",
+          "kind": "timeline",
+          "description": "Frise chronologique de 1500 à 1800 qui découpe la période des migrations en trois siècles : le XVIe siècle de 1501 à 1600, le XVIIe siècle de 1601 à 1700 et le XVIIIe siècle de 1701 à 1800. Une longue période, de 1500 à 1800, regroupe l'ensemble des migrations vers la Côte d'Ivoire.",
+          "params": {
+            "start": 1500,
+            "end": 1800,
+            "step": 50,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1500,
+                "to": 1600,
+                "label": "XVIe siècle"
+              },
+              {
+                "from": 1600,
+                "to": 1700,
+                "label": "XVIIe siècle"
+              },
+              {
+                "from": 1700,
+                "to": 1800,
+                "label": "XVIIIe siècle"
+              }
+            ],
+            "events": []
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-causes-migrations",
+          "kind": "diagram",
+          "description": "Schéma fléché des causes des migrations vers la Côte d'Ivoire. Deux familles de causes partent vers un même nœud final, les migrations des peuples : les causes politiques et militaires (guerres, conflits de pouvoir) et les causes économiques (recherche de terres fertiles, commerce).",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "pol",
+                "label": "Causes politiques et militaires",
+                "category": 1
+              },
+              {
+                "id": "eco",
+                "label": "Causes économiques",
+                "category": 2
+              },
+              {
+                "id": "mig",
+                "label": "Migrations vers la Côte d'Ivoire"
+              }
+            ],
+            "edges": [
+              {
+                "from": "pol",
+                "to": "mig"
+              },
+              {
+                "from": "eco",
+                "to": "mig"
+              }
+            ],
+            "legend": [
+              "Cause politique et militaire",
+              "Cause économique"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les grands groupes de peuples de Côte d'Ivoire",
+          "remember": "La population de la Côte d'Ivoire s'est formée par des **migrations** (des déplacements de peuples d'une région à une autre), surtout du XVIe au XVIIIe siècle. On range les peuples en **quatre grands groupes** : les **Akan** (Agni, Baoulé, Abron…), les **Krou** (Bété, Dida, Guéré, Bakwé…), les **Mandé** et les **Gour**, ou **Voltaïques** (Sénoufo, Lobi, Koulango…). Les Mandé se divisent en deux : les **Mandé du Nord** (Malinké, Dioula) et les **Mandé du Sud** (Dan, Gouro, Toura…). Un groupe réunit plusieurs peuples qui ont des langues voisines et une origine proche.",
+          "method": [
+            "Identifier le peuple dont on parle.",
+            "Classer ce peuple dans son groupe : Akan, Krou, Mandé du Nord, Mandé du Sud ou Gour.",
+            "Vérifier le classement avec un autre peuple du même groupe."
+          ],
+          "example": {
+            "statement": "À quel groupe appartiennent les Sénoufo ?",
+            "steps": [
+              "Identifier : le peuple est celui des Sénoufo, installés dans le nord de la Côte d'Ivoire.",
+              "Classer : les Sénoufo appartiennent au groupe Gour, appelé aussi Voltaïque.",
+              "Vérifier : les Lobi et les Koulango sont aussi des Gour, comme les Sénoufo."
+            ]
+          },
+          "pitfall": "Ne classe pas un peuple d'après sa seule position sur la carte. Les Sénoufo vivent au nord comme les Malinké, mais les Sénoufo sont des Gour et les Malinké des Mandé du Nord. Ne confonds pas non plus les deux Mandé : les Gouro et les Dan sont des Mandé du Sud, pas du Nord.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à classer des peuples dans leur groupe.",
+            "questions": [
+              {
+                "content": "Les Baoulé appartiennent à quel groupe de peuples ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le peuple est celui des Baoulé, installés au centre du pays. Étape 2 — Classer : les Baoulé font partie du groupe Akan. Étape 3 — Vérifier : les Agni et les Abron sont aussi des Akan. Les Krou, les Mandé du Sud et les Gour sont d'autres groupes, avec d'autres peuples.",
+                "answers": [
+                  {
+                    "content": "Akan",
+                    "correct": true
+                  },
+                  {
+                    "content": "Krou",
+                    "correct": false
+                  },
+                  {
+                    "content": "Mandé du Sud",
+                    "correct": false
+                  },
+                  {
+                    "content": "Gour",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense aux Agni et aux Abron, leurs voisins de l'est."
+              },
+              {
+                "content": "Relie chaque peuple à son groupe.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : trois peuples sont cités. Étape 2 — Classer : les Bété sont Krou, les Malinké sont Mandé du Nord, les Sénoufo sont Gour. Étape 3 — Vérifier : les Dida sont Krou, les Dioula sont Mandé du Nord, les Lobi sont Gour.",
+                "answers": [
+                  {
+                    "content": "Bété",
+                    "match": "Krou"
+                  },
+                  {
+                    "content": "Malinké",
+                    "match": "Mandé du Nord"
+                  },
+                  {
+                    "content": "Sénoufo",
+                    "match": "Gour"
+                  }
+                ],
+                "hint": "Un groupe réunit des peuples de langues voisines."
+              },
+              {
+                "content": "Les Bété appartiennent au groupe ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : le peuple est celui des Bété, au centre-ouest du pays. Étape 2 — Classer : les Bété sont des Krou. Étape 3 — Vérifier : les Dida et les Guéré sont aussi des Krou.",
+                "answers": [
+                  {
+                    "content": "Krou",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un mot de quatre lettres."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Classer des peuples dans leur groupe",
+              "statement": "Dans cet exercice, tu classes des peuples de Côte d'Ivoire dans leur groupe avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les Dida appartiennent à quel groupe de peuples ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le peuple est celui des Dida, au sud-centre du pays. Étape 2 — Classer : les Dida sont des Krou. Étape 3 — Vérifier : les Bété et les Bakwé sont aussi des Krou. Akan est le groupe des Baoulé et des Agni, pas celui des Dida.",
+                  "answers": [
+                    {
+                      "content": "Krou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mandé du Nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque peuple à son groupe.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : quatre peuples sont cités. Étape 2 — Classer : les Gouro sont Mandé du Sud, les Malinké Mandé du Nord, les Lobi Gour, les Guéré Krou. Étape 3 — Vérifier : les Dan sont Mandé du Sud, les Dioula Mandé du Nord, les Koulango Gour, les Bété Krou. Il ne faut pas mélanger les deux Mandé : les Gouro ne sont pas Mandé du Nord.",
+                  "answers": [
+                    {
+                      "content": "Gouro",
+                      "match": "Mandé du Sud"
+                    },
+                    {
+                      "content": "Malinké",
+                      "match": "Mandé du Nord"
+                    },
+                    {
+                      "content": "Lobi",
+                      "match": "Gour"
+                    },
+                    {
+                      "content": "Guéré",
+                      "match": "Krou"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux peuples qui appartiennent au groupe Akan ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : cinq peuples sont proposés. Étape 2 — Classer : les Agni et les Abron sont des Akan. Étape 3 — Vérifier : les Baoulé sont aussi Akan. Les Bété sont des Krou, les Dan des Mandé du Sud et les Sénoufo des Gour.",
+                  "answers": [
+                    {
+                      "content": "Les Agni",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Abron",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Bété",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Dan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Sénoufo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Toura font partie du groupe Mandé du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le peuple est celui des Toura, à l'ouest du pays. Étape 2 — Classer : les Toura sont des Mandé du Sud. Étape 3 — Vérifier : les Dan et les Gouro sont aussi des Mandé du Sud. Les Mandé du Nord sont les Malinké et les Dioula.",
+                  "answers": [
+                    {
+                      "content": "Sud",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Sénoufo vivent au nord, donc ils appartiennent au groupe Mandé du Nord.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le peuple est celui des Sénoufo, installés au nord. Étape 2 — Classer : les Sénoufo sont des Gour, pas des Mandé. Étape 3 — Vérifier : les Lobi et les Koulango sont aussi des Gour. Vivre au nord ne suffit pas : on classe un peuple d'après son groupe, pas d'après sa seule position sur la carte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Retrouver le groupe de plusieurs peuples",
+              "statement": "Dans cet exercice, tu retrouves le groupe de plusieurs peuples et tu remets la méthode dans l'ordre. Chaque correction refait les trois étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les trois peuples qui appartiennent au groupe Krou ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : six peuples sont proposés. Étape 2 — Classer : les Bété, les Dida et les Guéré sont des Krou. Étape 3 — Vérifier : les Bakwé sont aussi des Krou. Les Baoulé sont des Akan, les Gouro des Mandé du Sud et les Lobi des Gour.",
+                  "answers": [
+                    {
+                      "content": "Les Bété",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Dida",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Guéré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Baoulé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Gouro",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Lobi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Gouro appartiennent au groupe ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : le peuple est celui des Gouro, au centre-ouest. Étape 2 — Classer : les Gouro sont des Mandé du Sud. Étape 3 — Vérifier : les Dan et les Toura sont aussi des Mandé du Sud. Mandé du Nord est le groupe des Malinké et des Dioula : c'est la confusion la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "Mandé du Sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mandé du Nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois étapes pour classer un peuple.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le peuple dont on parle. Étape 2 — Classer ce peuple dans son groupe. Étape 3 — Vérifier avec un autre peuple du même groupe. On ne vérifie pas avant d'avoir classé.",
+                  "answers": [
+                    {
+                      "content": "Identifier le peuple dont on parle."
+                    },
+                    {
+                      "content": "Classer ce peuple dans son groupe."
+                    },
+                    {
+                      "content": "Vérifier le classement avec un autre peuple du même groupe."
+                    }
+                  ]
+                },
+                {
+                  "content": "En comptant séparément les Mandé du Nord et les Mandé du Sud, combien de groupes de peuples la fiche distingue-t-elle ? (Akan, Krou, Mandé du Nord, Mandé du Sud, Gour)",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : la fiche cite Akan, Krou, Mandé et Gour. Étape 2 — Classer : les Mandé se coupent en deux, ce qui donne Akan, Krou, Mandé du Nord, Mandé du Sud, Gour. Étape 3 — Vérifier : on compte 5 groupes. Compter 4 oublie de séparer les deux Mandé.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel peuple appartient au groupe Gour ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : quatre peuples sont proposés. Étape 2 — Classer : les Koulango sont des Gour. Étape 3 — Vérifier : les Sénoufo et les Lobi sont aussi des Gour. Les Dan sont Mandé du Sud, les Abron Akan et les Dioula Mandé du Nord.",
+                  "answers": [
+                    {
+                      "content": "Les Koulango",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Dan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Abron",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Dioula",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un groupe de peuples réunit plusieurs peuples qui ont des langues voisines.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on parle d'un groupe, pas d'un seul peuple. Étape 2 — Classer : le groupe Akan réunit les Baoulé, les Agni et les Abron. Étape 3 — Vérifier : chaque groupe a plusieurs peuples. Penser qu'un groupe est un seul peuple est faux : le groupe Krou compte les Bété, les Dida, les Guéré et d'autres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque peuple, pense à deux autres peuples du même groupe."
+            }
+          ]
+        },
+        {
+          "name": "Les régions d'origine des peuples",
+          "remember": "Les peuples de Côte d'Ivoire ne sont pas tous venus du même endroit. Les **Akan** viennent de l'est, de la région du **Ghana** actuel. Les **Krou** viennent de l'ouest, de la région du **Libéria** actuel. Les **Mandé** viennent du nord-ouest, vers le **Mali** et la **Guinée** actuels, et descendent vers le sud. Les **Gour** viennent du nord, vers le **Burkina Faso** actuel (une partie des Sénoufo, du sud du **Mali** actuel). On donne le nom des pays d'aujourd'hui pour se repérer, mais leurs frontières n'existaient pas alors.",
+          "method": [
+            "Repérer le groupe de peuples dont on parle.",
+            "Situer sa région d'origine, en nommant le pays actuel.",
+            "Indiquer le sens de la migration vers la Côte d'Ivoire."
+          ],
+          "example": {
+            "statement": "D'où viennent les Krou et dans quel sens migrent-ils ?",
+            "steps": [
+              "Repérer : le groupe est celui des Krou.",
+              "Situer : leur région d'origine est le Libéria actuel, à l'ouest de la Côte d'Ivoire.",
+              "Indiquer : ils migrent de l'ouest vers l'est, vers le sud-ouest du pays."
+            ]
+          },
+          "pitfall": "Ne confonds pas l'est et l'ouest. Le Ghana est à l'est de la Côte d'Ivoire : c'est l'origine des Akan. Le Libéria est à l'ouest : c'est l'origine des Krou. Si tu fais venir les Krou du Ghana, tu inverses les deux groupes et le sens de leur migration.",
+          "figure": "carte-origines",
+          "practice": {
+            "statement": "Tu t'entraînes à situer l'origine d'un groupe et le sens de sa migration.",
+            "questions": [
+              {
+                "content": "Les Akan viennent de la région de quel pays actuel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le groupe est celui des Akan. Étape 2 — Situer : leur région d'origine est celle du Ghana actuel, à l'est de la Côte d'Ivoire. Étape 3 — Indiquer : ils migrent de l'est vers l'ouest. Le Libéria est la région d'origine des Krou, pas des Akan.",
+                "answers": [
+                  {
+                    "content": "Le Ghana",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Libéria",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Mali",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Burkina Faso",
+                    "correct": false
+                  }
+                ],
+                "hint": "Ce pays est à l'est de la Côte d'Ivoire."
+              },
+              {
+                "content": "Relie chaque groupe à son pays d'origine actuel.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : trois groupes sont cités. Étape 2 — Situer : les Akan viennent du Ghana, les Krou du Libéria, les Gour du nord (Burkina Faso). Étape 3 — Indiquer : les Akan viennent de l'est, les Krou de l'ouest, les Gour du nord.",
+                "answers": [
+                  {
+                    "content": "Akan",
+                    "match": "Ghana"
+                  },
+                  {
+                    "content": "Krou",
+                    "match": "Libéria"
+                  },
+                  {
+                    "content": "Gour",
+                    "match": "Burkina Faso"
+                  }
+                ],
+                "hint": "Pense à l'est, à l'ouest et au nord de la Côte d'Ivoire."
+              },
+              {
+                "content": "Les Krou migrent de l'est vers l'ouest.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le groupe est celui des Krou. Étape 2 — Situer : leur région d'origine est le Libéria actuel, à l'ouest. Étape 3 — Indiquer : ils migrent de l'ouest vers l'est. Dire l'inverse est l'erreur.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le Libéria est à l'ouest de la Côte d'Ivoire."
+              },
+              {
+                "content": "Les Mandé du Nord viennent du nord-___ de la Côte d'Ivoire.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le groupe est celui des Mandé. Étape 2 — Situer : leur région d'origine est le nord-ouest, vers le Mali et la Guinée actuels. Étape 3 — Indiquer : ils migrent du nord-ouest vers le sud.",
+                "answers": [
+                  {
+                    "content": "ouest",
+                    "correct": true
+                  }
+                ],
+                "hint": "Mali et Guinée sont au nord-ouest."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Situer l'origine des peuples",
+              "statement": "Dans cet exercice, tu situes l'origine des grands groupes de peuples avec la méthode de la fiche. Tu peux t'aider de la carte.",
+              "exercise_type": "fixation",
+              "figure": "carte-origines",
+              "questions": [
+                {
+                  "content": "De quel pays actuel viennent les Krou ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le groupe est celui des Krou. Étape 2 — Situer : leur région d'origine est le Libéria actuel. Étape 3 — Indiquer : ils migrent de l'ouest vers l'est, vers le sud-ouest de la Côte d'Ivoire. Le Ghana est la région d'origine des Akan, à l'est.",
+                  "answers": [
+                    {
+                      "content": "Du Libéria",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du Ghana",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du Mali",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la Guinée-Bissau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque groupe au sens de sa migration vers la Côte d'Ivoire.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : quatre groupes sont cités. Étape 2 — Situer : Ghana à l'est, Libéria à l'ouest, nord pour les Gour, nord-ouest pour les Mandé. Étape 3 — Indiquer : chaque peuple va de sa région d'origine vers la Côte d'Ivoire. Il ne faut pas inverser l'est et l'ouest : les Akan ne viennent pas de l'ouest.",
+                  "answers": [
+                    {
+                      "content": "Akan",
+                      "match": "De l'est vers l'ouest"
+                    },
+                    {
+                      "content": "Krou",
+                      "match": "De l'ouest vers l'est"
+                    },
+                    {
+                      "content": "Gour",
+                      "match": "Du nord vers le sud"
+                    },
+                    {
+                      "content": "Mandé",
+                      "match": "Du nord-ouest vers le sud"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux groupes qui viennent de l'extérieur par le nord ou le nord-ouest ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : cinq propositions sont données. Étape 2 — Situer : les Gour viennent du nord, les Mandé du Nord du nord-ouest. Étape 3 — Indiquer : les Akan viennent de l'est et les Krou de l'ouest. Les Akan et les Krou ne viennent pas du nord.",
+                  "answers": [
+                    {
+                      "content": "Les Gour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Mandé du Nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Akan viennent de l'actuel ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le groupe est celui des Akan. Étape 2 — Situer : leur région d'origine est le Ghana actuel. Étape 3 — Indiquer : ils migrent vers l'ouest. Le Libéria est l'origine des Krou.",
+                  "answers": [
+                    {
+                      "content": "Ghana",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Libéria est à l'est de la Côte d'Ivoire, donc les Krou viennent de l'est.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le groupe est celui des Krou. Étape 2 — Situer : le Libéria est à l'ouest de la Côte d'Ivoire, et le Ghana à l'est. Étape 3 — Indiquer : les Krou migrent donc de l'ouest vers l'est. Placer le Libéria à l'est inverse les deux directions.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Retrouver régions d'origine et sens des migrations",
+              "statement": "Dans cet exercice, tu retrouves où naissent les migrations et dans quel sens elles vont. Chaque correction refait les trois étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un groupe de peuples quitte le Ghana actuel pour entrer en Côte d'Ivoire. Dans quel sens se déplace-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le groupe vient du Ghana, ce sont les Akan. Étape 2 — Situer : le Ghana est à l'est de la Côte d'Ivoire. Étape 3 — Indiquer : le sens est de l'est vers l'ouest. De l'ouest vers l'est est le sens des Krou.",
+                  "answers": [
+                    {
+                      "content": "De l'est vers l'ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'ouest vers l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du nord vers le sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sud vers le nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Krou viennent de la région du ___ actuel.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : les Krou. Étape 2 — Situer : le Libéria actuel, à l'ouest. Étape 3 — Indiquer : ils migrent vers l'est. Le Ghana est l'origine des Akan.",
+                  "answers": [
+                    {
+                      "content": "Libéria",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ghana",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mali",
+                      "correct": false
+                    },
+                    {
+                      "content": "Burkina Faso",
+                      "correct": false
+                    },
+                    {
+                      "content": "Togo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois propositions exactes sur l'origine des peuples ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : trois groupes sont en jeu. Étape 2 — Situer : Akan à l'est, Krou à l'ouest, Gour au nord. Étape 3 — Indiquer : chaque groupe migre vers la Côte d'Ivoire. Les trois autres propositions inventent un autre sens.",
+                  "answers": [
+                    {
+                      "content": "Les Akan viennent de l'est",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Krou viennent de l'ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Gour viennent du nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Akan viennent du nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Krou viennent du sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Gour viennent de l'est",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois étapes de la méthode pour décrire une migration.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le groupe. Étape 2 — Situer sa région d'origine. Étape 3 — Indiquer le sens de la migration. On ne peut pas indiquer un sens avant de connaître l'origine.",
+                  "answers": [
+                    {
+                      "content": "Repérer le groupe de peuples dont on parle."
+                    },
+                    {
+                      "content": "Situer sa région d'origine, en nommant le pays actuel."
+                    },
+                    {
+                      "content": "Indiquer le sens de la migration vers la Côte d'Ivoire."
+                    }
+                  ]
+                },
+                {
+                  "content": "Les pays actuels comme le Ghana ou le Libéria existaient déjà avec leurs frontières d'aujourd'hui entre le XVIe et le XVIIIe siècle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on parle des peuples du XVIe au XVIIIe siècle. Étape 2 — Situer : on nomme le pays actuel pour repérer la région d'origine sur une carte d'aujourd'hui. Étape 3 — Indiquer : les frontières actuelles n'existaient pas encore. Croire que les frontières étaient les mêmes est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Akan viennent de l'est et les Krou de l'ouest. Combien de points cardinaux différents comptent ces deux origines ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : deux groupes, Akan et Krou. Étape 2 — Situer : l'est pour les Akan, l'ouest pour les Krou. Étape 3 — Indiquer : on compte 2 points cardinaux. Dire 1 confond les deux origines.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque groupe, retrouve d'abord le pays d'origine, puis le sens."
+            }
+          ]
+        },
+        {
+          "name": "Les causes des migrations",
+          "remember": "Les peuples quittent leur région d'origine pour plusieurs raisons. Il y a des causes **politiques et militaires** : les guerres, les conflits de pouvoir entre familles ou entre chefs, la domination d'un royaume puissant. Il y a des causes **économiques** : la recherche de terres fertiles pour cultiver, et le **commerce** sur de longues routes, surtout chez les Mandé du Nord. Chez les Akan, des conflits de pouvoir dans la région du Ghana actuel poussent des groupes vers la Côte d'Ivoire. Une migration se fait par groupes de familles, par étapes, sur plusieurs générations.",
+          "method": [
+            "Identifier le peuple ou le groupe qui migre.",
+            "Relever ce qui le pousse à quitter sa région d'origine.",
+            "Classer chaque motif : cause politique et militaire, ou cause économique."
+          ],
+          "example": {
+            "statement": "Un récit écrit pour Lnclass dit : « Après la mort du chef, deux familles se disputent le pouvoir. Les perdants partent avec leurs familles vers l'ouest, à la recherche de terres fertiles. » Quelles sont les causes de ce départ ?",
+            "steps": [
+              "Identifier : un groupe de familles quitte son pays vers l'ouest.",
+              "Relever : il y a un conflit de pouvoir et une recherche de terres fertiles.",
+              "Classer : le conflit de pouvoir est une cause politique et militaire ; la recherche de terres est une cause économique."
+            ]
+          },
+          "pitfall": "Ne cherche pas une seule cause pour tous les peuples. Les Akan quittent surtout des conflits de pouvoir, alors que les Mandé du Nord se déplacent d'abord pour le commerce. Une migration n'est pas non plus un seul voyage : elle dure plusieurs générations.",
+          "figure": "schema-causes-migrations",
+          "practice": {
+            "statement": "Tu t'entraînes à relever et à classer les causes des migrations.",
+            "questions": [
+              {
+                "content": "Un conflit entre deux familles pour prendre le pouvoir est une cause ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : un groupe est touché par un conflit de pouvoir. Étape 2 — Relever : les familles se disputent le pouvoir. Étape 3 — Classer : un conflit de pouvoir est une cause politique et militaire. Ce n'est pas une cause économique : personne n'y cherche des terres ou du commerce.",
+                "answers": [
+                  {
+                    "content": "politique et militaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "économique",
+                    "correct": false
+                  },
+                  {
+                    "content": "naturelle",
+                    "correct": false
+                  }
+                ],
+                "hint": "Il s'agit de pouvoir, pas de terres."
+              },
+              {
+                "content": "Relie chaque situation au motif qu'elle illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : trois situations sont décrites. Étape 2 — Relever : un conflit de pouvoir, un manque de terres, des caravanes. Étape 3 — Classer : le conflit est politique et militaire ; la recherche de terres et le commerce sont économiques.",
+                "answers": [
+                  {
+                    "content": "Deux familles se disputent le pouvoir",
+                    "match": "Conflit de pouvoir"
+                  },
+                  {
+                    "content": "Les champs ne nourrissent plus tout le monde",
+                    "match": "Recherche de terres"
+                  },
+                  {
+                    "content": "Des caravanes portent du sel et de la kola",
+                    "match": "Commerce"
+                  }
+                ],
+                "hint": "Cherche le mot-clé de chaque situation."
+              },
+              {
+                "content": "Les Mandé du Nord se sont déplacés surtout pour fuir une guerre.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : le groupe est celui des Mandé du Nord, Malinké et Dioula. Étape 2 — Relever : ils parcourent de longues routes pour échanger leurs produits. Étape 3 — Classer : leur motif principal est économique (le commerce), pas la fuite devant la guerre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense aux commerçants dioula."
+              },
+              {
+                "content": "Chercher de nouvelles terres pour cultiver est une cause ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : un groupe manque de terres. Étape 2 — Relever : il cherche des terres à cultiver. Étape 3 — Classer : c'est une cause économique.",
+                "answers": [
+                  {
+                    "content": "économique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Il s'agit de nourrir les familles."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Classer les causes des migrations",
+              "statement": "Dans cet exercice, tu classes les causes des migrations avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "schema-causes-migrations",
+              "questions": [
+                {
+                  "content": "Après un désaccord pour la succession d'un chef, un groupe quitte le pays avec ses familles. Quelle est la cause ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : un groupe quitte son pays avec ses familles. Étape 2 — Relever : le désaccord pour la succession d'un chef est un conflit de pouvoir. Étape 3 — Classer : c'est une cause politique et militaire. Ce n'est pas une cause économique : le texte ne parle ni de terres ni de commerce.",
+                  "answers": [
+                    {
+                      "content": "Une cause politique et militaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une cause économique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une catastrophe naturelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une invitation de peuples voisins",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au motif qu'elle illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : quatre situations sont décrites. Étape 2 — Relever : guerre, pauvreté des terres, marchés, domination d'un chef. Étape 3 — Classer : guerre et domination sont politiques et militaires ; terres pauvres et marchés sont économiques. Il ne faut pas ranger la domination d'un chef parmi les causes économiques.",
+                  "answers": [
+                    {
+                      "content": "Une guerre éclate dans le royaume",
+                      "match": "Guerre"
+                    },
+                    {
+                      "content": "Les terres sont trop pauvres pour nourrir tous",
+                      "match": "Recherche de terres"
+                    },
+                    {
+                      "content": "Des marchands cherchent de nouveaux marchés",
+                      "match": "Commerce"
+                    },
+                    {
+                      "content": "Un chef puissant domine les peuples voisins",
+                      "match": "Domination d'un royaume"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux propositions qui sont des causes économiques ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : cinq motifs sont proposés. Étape 2 — Relever : chacun correspond à un besoin. Étape 3 — Classer : chercher des terres et suivre le commerce sont économiques. Fuir une guerre, échapper à un chef et succéder à un roi relèvent du pouvoir.",
+                  "answers": [
+                    {
+                      "content": "Chercher des terres fertiles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Suivre des routes de commerce",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fuir une guerre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Échapper à un chef puissant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Succéder à un roi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les marchands dioula se déplacent surtout pour le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le groupe est celui des Mandé du Nord. Étape 2 — Relever : ils échangent des produits sur de longues routes. Étape 3 — Classer : le motif est économique, le commerce. Ce n'est pas la guerre qui les pousse d'abord.",
+                  "answers": [
+                    {
+                      "content": "commerce",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un peuple peut migrer pour plusieurs raisons à la fois : plusieurs causes peuvent se combiner.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on parle des migrations en général. Étape 2 — Relever : un peuple peut fuir un conflit et chercher des terres. Étape 3 — Classer : les causes politiques et économiques se combinent. Croire qu'il n'y a qu'une cause pour tous les peuples est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Expliquer pourquoi des peuples migrent",
+              "statement": "Dans cet exercice, tu relèves et tu classes les causes de migration de plusieurs peuples. Chaque correction refait les trois étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un texte dit : « Les troupeaux et les champs ne nourrissaient plus tout le monde, alors des familles sont parties chercher de bonnes terres. » Quelle cause relève-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : des familles quittent leur village. Étape 2 — Relever : les champs ne nourrissent plus tout le monde. Étape 3 — Classer : le manque de terres est une cause économique. Il n'y a ni guerre ni conflit de pouvoir dans le texte.",
+                  "answers": [
+                    {
+                      "content": "Économique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Politique et militaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Religieuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune cause",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois causes possibles des migrations vues dans la fiche ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : six causes sont proposées. Étape 2 — Relever : la fiche cite guerres, terres et commerce. Étape 3 — Classer : guerres sont politiques et militaires, terres et commerce économiques. Le chemin de fer, l'administration coloniale et l'école sont bien plus tardifs.",
+                  "answers": [
+                    {
+                      "content": "Les guerres",
+                      "correct": true
+                    },
+                    {
+                      "content": "La recherche de terres fertiles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le commerce",
+                      "correct": true
+                    },
+                    {
+                      "content": "La découverte du chemin de fer",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ordre de l'administration coloniale",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'arrivée de l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez les Akan, les conflits de pouvoir dans la région du Ghana actuel sont une cause ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : le groupe est celui des Akan. Étape 2 — Relever : des conflits de pouvoir dans la région du Ghana actuel les poussent à partir. Étape 3 — Classer : cause politique et militaire. La cause économique concerne surtout les terres et le commerce.",
+                  "answers": [
+                    {
+                      "content": "politique et militaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "économique",
+                      "correct": false
+                    },
+                    {
+                      "content": "religieuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "naturelle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le peuple. Étape 2 — Relever ce qui le pousse à partir. Étape 3 — Classer chaque motif. On ne classe un motif qu'après l'avoir relevé.",
+                  "answers": [
+                    {
+                      "content": "Identifier le peuple ou le groupe qui migre."
+                    },
+                    {
+                      "content": "Relever ce qui le pousse à quitter sa région d'origine."
+                    },
+                    {
+                      "content": "Classer chaque motif en cause politique et militaire ou économique."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une migration est un seul voyage qui dure quelques semaines.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on parle des migrations du XVIe au XVIIIe siècle. Étape 2 — Relever : les peuples se déplacent par groupes de familles, par étapes. Étape 3 — Classer : une migration dure souvent plusieurs générations. Penser à un voyage rapide est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les migrations des peuples de Côte d'Ivoire ont lieu du XVIe au XVIIIe ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on parle d'une période longue. Étape 2 — Relever : elle va du XVIe au XVIIIe. Étape 3 — Classer : on la mesure en siècles. Ce ne sont pas des années isolées.",
+                  "answers": [
+                    {
+                      "content": "siècle",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche d'abord ce qui pousse à partir, puis range le motif."
+            }
+          ]
+        },
+        {
+          "name": "Les zones d'installation des peuples",
+          "remember": "Au fil des migrations, les groupes s'installent dans des zones différentes. Les **Akan** sont à l'est (Agni, autour d'Abengourou), au nord-est (Abron, autour de Bondoukou) et au centre (Baoulé, autour de Bouaké). Les **Krou** sont dans le sud-ouest et le centre-ouest forestier (Bété autour de Daloa et de Gagnoa, Dida autour de Divo, Guéré autour de Guiglo). Les **Mandé du Nord** sont au nord-ouest (Malinké, autour d'Odienné), les **Mandé du Sud** à l'ouest (Dan, autour de Man) et au centre-ouest (Gouro, autour de Bouaflé). Les **Gour** sont au nord (Sénoufo, autour de Korhogo) et au nord-est (Lobi et Koulango).",
+          "method": [
+            "Repérer le peuple ou le groupe dont on parle.",
+            "Situer sa zone d'installation avec un point cardinal et une ville repère.",
+            "Relier cette zone à sa région d'origine pour comprendre le chemin parcouru."
+          ],
+          "example": {
+            "statement": "Où se sont installés les Baoulé ?",
+            "steps": [
+              "Repérer : le peuple est celui des Baoulé, du groupe Akan.",
+              "Situer : les Baoulé sont installés au centre du pays, autour de Bouaké.",
+              "Relier : venus du Ghana, à l'est, ils ont avancé vers le centre."
+            ]
+          },
+          "pitfall": "Ne place pas tout un groupe au même endroit. Les Agni et les Baoulé sont tous deux des Akan, mais les Agni sont à l'est, autour d'Abengourou, et les Baoulé au centre, autour de Bouaké. Un même groupe peut occuper plusieurs zones.",
+          "figure": "carte-installation",
+          "practice": {
+            "statement": "Tu t'entraînes à situer la zone d'installation d'un peuple.",
+            "questions": [
+              {
+                "content": "Les Baoulé sont installés surtout dans quelle zone de la Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le peuple est celui des Baoulé, du groupe Akan. Étape 2 — Situer : ils sont installés au centre, autour de Bouaké. Étape 3 — Relier : venus du Ghana, à l'est, ils ont avancé vers le centre. Korhogo est la ville des Sénoufo, Divo celle des Dida, Man celle des Dan.",
+                "answers": [
+                  {
+                    "content": "Au centre, autour de Bouaké",
+                    "correct": true
+                  },
+                  {
+                    "content": "Au nord, autour de Korhogo",
+                    "correct": false
+                  },
+                  {
+                    "content": "Au sud, autour de Divo",
+                    "correct": false
+                  },
+                  {
+                    "content": "À l'ouest, autour de Man",
+                    "correct": false
+                  }
+                ],
+                "hint": "Bouaké est une grande ville du centre."
+              },
+              {
+                "content": "Relie chaque peuple à sa ville repère.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : trois peuples sont cités. Étape 2 — Situer : Sénoufo au nord (Korhogo), Bété au centre-ouest (Daloa), Agni à l'est (Abengourou). Étape 3 — Relier : Gour venus du nord, Krou de l'ouest, Akan de l'est.",
+                "answers": [
+                  {
+                    "content": "Sénoufo",
+                    "match": "Korhogo"
+                  },
+                  {
+                    "content": "Bété",
+                    "match": "Daloa"
+                  },
+                  {
+                    "content": "Agni",
+                    "match": "Abengourou"
+                  }
+                ],
+                "hint": "Chaque ville est le repère d'un peuple différent."
+              },
+              {
+                "content": "Les Dan sont installés à l'ouest du pays, autour de Man.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le peuple est celui des Dan, du groupe Mandé du Sud. Étape 2 — Situer : ils sont installés à l'ouest, autour de Man. Étape 3 — Relier : ils sont venus du nord-ouest.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Man est une ville de l'ouest."
+              },
+              {
+                "content": "Les Malinké sont installés au nord-___ , autour d'Odienné.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le peuple est celui des Malinké. Étape 2 — Situer : ils sont installés au nord-ouest, autour d'Odienné. Étape 3 — Relier : ils sont venus du nord-ouest, vers le Mali et la Guinée actuels.",
+                "answers": [
+                  {
+                    "content": "ouest",
+                    "correct": true
+                  }
+                ],
+                "hint": "Odienné est tout près du Mali et de la Guinée."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Situer les zones d'installation",
+              "statement": "Dans cet exercice, tu situes les zones où les peuples se sont installés avec la méthode de la fiche. Tu peux t'aider de la carte.",
+              "exercise_type": "fixation",
+              "figure": "carte-installation",
+              "questions": [
+                {
+                  "content": "Dans quelle zone sont installés les Agni ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le peuple est celui des Agni, du groupe Akan. Étape 2 — Situer : ils sont installés à l'est, autour d'Abengourou. Étape 3 — Relier : venus du Ghana tout proche, ils s'installent à l'est. Bouaké est la ville des Baoulé, au centre.",
+                  "answers": [
+                    {
+                      "content": "À l'est, autour d'Abengourou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au centre, autour de Bouaké",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au nord, autour de Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'ouest, autour de Man",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque peuple à sa zone d'installation.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : quatre peuples sont cités. Étape 2 — Situer : Sénoufo au nord, Bété au centre-ouest, Baoulé au centre, Malinké au nord-ouest. Étape 3 — Relier : Gour, Krou, Akan et Mandé viennent de directions différentes. Il ne faut pas placer les Baoulé au nord : ils sont au centre.",
+                  "answers": [
+                    {
+                      "content": "Sénoufo",
+                      "match": "Nord"
+                    },
+                    {
+                      "content": "Bété",
+                      "match": "Centre-ouest"
+                    },
+                    {
+                      "content": "Baoulé",
+                      "match": "Centre"
+                    },
+                    {
+                      "content": "Malinké",
+                      "match": "Nord-ouest"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux peuples installés à l'ouest ou au centre-ouest ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : cinq peuples sont cités. Étape 2 — Situer : les Dan sont à l'ouest, autour de Man ; les Bété sont au centre-ouest, autour de Daloa. Étape 3 — Relier : Mandé du Sud et Krou occupent l'ouest. Les Agni et les Abron sont à l'est, les Sénoufo au nord.",
+                  "answers": [
+                    {
+                      "content": "Les Dan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Bété",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Agni",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Sénoufo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Abron",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Sénoufo sont installés au nord, autour de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le peuple est celui des Sénoufo, du groupe Gour. Étape 2 — Situer : ils sont au nord, autour de Korhogo. Étape 3 — Relier : ils sont venus du nord. Daloa est la ville des Bété.",
+                  "answers": [
+                    {
+                      "content": "Korhogo",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Agni et les Baoulé, tous deux Akan, sont installés exactement au même endroit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : Agni et Baoulé sont des Akan. Étape 2 — Situer : les Agni sont à l'est, autour d'Abengourou ; les Baoulé au centre, autour de Bouaké. Étape 3 — Relier : deux peuples d'un même groupe peuvent s'installer dans des zones différentes. Croire qu'un groupe occupe un seul endroit est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Retrouver où vivent les peuples",
+              "statement": "Dans cet exercice, tu retrouves où vivent les peuples et d'où ils viennent. Chaque correction refait les trois étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel peuple est installé autour de Daloa, au centre-ouest ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche le peuple d'une ville du centre-ouest. Étape 2 — Situer : autour de Daloa vivent les Bété. Étape 3 — Relier : les Bété sont des Krou, venus de l'ouest. Les Baoulé sont autour de Bouaké, les Sénoufo autour de Korhogo, les Agni autour d'Abengourou.",
+                  "answers": [
+                    {
+                      "content": "Les Bété",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Baoulé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Sénoufo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Agni",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Dida sont installés autour de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le peuple est celui des Dida. Étape 2 — Situer : ils sont autour de Divo, au sud du centre. Étape 3 — Relier : ce sont des Krou venus de l'ouest. Korhogo est la ville des Sénoufo, Bouaké celle des Baoulé, Odienné celle des Malinké.",
+                  "answers": [
+                    {
+                      "content": "Divo",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bouaké",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abengourou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Odienné",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois villes repères d'un peuple Akan ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on cherche des repères du groupe Akan. Étape 2 — Situer : Abengourou (Agni), Bouaké (Baoulé), Bondoukou (Abron). Étape 3 — Relier : ils viennent du Ghana, tout proche de l'est. Korhogo est Sénoufo, Man est Dan, Daloa est Bété.",
+                  "answers": [
+                    {
+                      "content": "Abengourou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Bouaké",
+                      "correct": true
+                    },
+                    {
+                      "content": "Bondoukou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Daloa",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le peuple. Étape 2 — Situer sa zone d'installation. Étape 3 — Relier cette zone à l'origine. On ne relie à l'origine qu'une fois la zone située.",
+                  "answers": [
+                    {
+                      "content": "Repérer le peuple ou le groupe dont on parle."
+                    },
+                    {
+                      "content": "Situer sa zone d'installation avec un point cardinal et une ville repère."
+                    },
+                    {
+                      "content": "Relier cette zone à sa région d'origine."
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Abron sont installés au nord-est, autour de Bondoukou.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le peuple est celui des Abron, du groupe Akan. Étape 2 — Situer : ils sont au nord-est, autour de Bondoukou. Étape 3 — Relier : ils viennent du Ghana, tout proche. Placer Bondoukou au sud-ouest est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Akan, les Krou, les Gour et les Mandé ont chacun une région d'origine différente. Combien de régions d'origine différentes cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : quatre groupes, Akan, Krou, Gour et Mandé. Étape 2 — Situer : l'est, l'ouest, le nord et le nord-ouest, soit 4 régions. Étape 3 — Relier : chacune correspond à une zone d'arrivée. Dire 3 oublie le nord-ouest des Mandé.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Associe chaque peuple à sa ville repère puis à son point cardinal."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Problème 1 · Classer six peuples de Côte d'Ivoire",
+          "statement": "Document : liste écrite pour Lnclass. Un professeur note six peuples de Côte d'Ivoire : Baoulé, Bété, Malinké, Dan, Sénoufo et Abron. Il demande à ses élèves de les ranger dans leur groupe.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque peuple à son groupe.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Identifier : cinq peuples sont cités. Étape 2 — Classer : Baoulé Akan, Bété Krou, Malinké Mandé du Nord, Dan Mandé du Sud, Sénoufo Gour. Étape 3 — Vérifier : Abron est Akan, Dida est Krou, Dioula est Mandé du Nord, Gouro est Mandé du Sud, Lobi est Gour. Malinké et Dan sont deux Mandé différents.",
+              "answers": [
+                {
+                  "content": "Baoulé",
+                  "match": "Akan"
+                },
+                {
+                  "content": "Bété",
+                  "match": "Krou"
+                },
+                {
+                  "content": "Malinké",
+                  "match": "Mandé du Nord"
+                },
+                {
+                  "content": "Dan",
+                  "match": "Mandé du Sud"
+                },
+                {
+                  "content": "Sénoufo",
+                  "match": "Gour"
+                }
+              ]
+            },
+            {
+              "content": "Les Abron appartiennent au groupe ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Identifier : le peuple est celui des Abron, installés autour de Bondoukou. Étape 2 — Classer : les Abron sont des Akan. Étape 3 — Vérifier : les Agni et les Baoulé sont aussi des Akan. Les Abron ne sont pas des Gour parce qu'ils vivent au nord-est : leur groupe est Akan.",
+              "answers": [
+                {
+                  "content": "Akan",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les Bété et les Dida appartiennent au même groupe, les Krou.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Identifier : Bété et Dida sont deux peuples du centre-ouest et du sud-centre. Étape 2 — Classer : les deux sont des Krou. Étape 3 — Vérifier : les Guéré sont aussi des Krou. Penser qu'ils sont de groupes différents confond groupe et peuple.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les deux peuples qui appartiennent au groupe Gour ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Identifier : cinq peuples sont proposés. Étape 2 — Classer : Lobi et Koulango sont des Gour. Étape 3 — Vérifier : Sénoufo est aussi Gour. Gouro et Toura sont Mandé du Sud, Bakwé est Krou.",
+              "answers": [
+                {
+                  "content": "Les Lobi",
+                  "correct": true
+                },
+                {
+                  "content": "Les Koulango",
+                  "correct": true
+                },
+                {
+                  "content": "Les Gouro",
+                  "correct": false
+                },
+                {
+                  "content": "Les Toura",
+                  "correct": false
+                },
+                {
+                  "content": "Les Bakwé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique, en deux ou trois phrases, ce qu'est un groupe de peuples et donne un exemple.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit qu'un groupe réunit plusieurs peuples",
+                "Précise langues voisines ou origine proche",
+                "Donne un exemple exact de groupe avec deux peuples"
+              ],
+              "explanation": "Corrigé modèle : un groupe de peuples réunit plusieurs peuples qui ont des langues voisines et une origine proche. Par exemple, les Baoulé et les Agni sont deux peuples du groupe Akan. Barème : définition (1), langues ou origine (0,5), exemple exact (0,5).",
+              "answers": [],
+              "starter": "Un groupe de peuples est…"
+            }
+          ],
+          "hint": "Pour chaque peuple, pense à deux autres peuples du même groupe."
+        },
+        {
+          "title": "Problème 2 · D'où viennent les grands groupes ?",
+          "statement": "Document : carte décrite pour Lnclass. Elle montre l'Afrique de l'Ouest : le Ghana est colorié à l'est de la Côte d'Ivoire, le Libéria à l'ouest, le Mali et la Guinée au nord-ouest et le Burkina Faso au nord. Une légende donne le groupe qui vient de chaque pays.",
+          "exercise_type": "fixation",
+          "figure": "carte-origines",
+          "questions": [
+            {
+              "content": "Les Krou viennent de la région de quel pays actuel ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : le groupe est celui des Krou. Étape 2 — Situer : leur région d'origine est le Libéria actuel, à l'ouest. Étape 3 — Indiquer : ils migrent de l'ouest vers l'est. Le Ghana est l'origine des Akan.",
+              "answers": [
+                {
+                  "content": "Du Libéria",
+                  "correct": true
+                },
+                {
+                  "content": "Du Ghana",
+                  "correct": false
+                },
+                {
+                  "content": "Du Mali",
+                  "correct": false
+                },
+                {
+                  "content": "Du Burkina Faso",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque groupe au sens de sa migration vers la Côte d'Ivoire.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Repérer : trois groupes sont cités. Étape 2 — Situer : Ghana à l'est, Libéria à l'ouest, Burkina Faso au nord. Étape 3 — Indiquer : chaque groupe va vers la Côte d'Ivoire. Il ne faut pas inverser Akan et Krou.",
+              "answers": [
+                {
+                  "content": "Akan",
+                  "match": "De l'est vers l'ouest"
+                },
+                {
+                  "content": "Krou",
+                  "match": "De l'ouest vers l'est"
+                },
+                {
+                  "content": "Gour",
+                  "match": "Du nord vers le sud"
+                }
+              ]
+            },
+            {
+              "content": "Les Mandé viennent du nord-ouest, vers le Mali et la Guinée actuels.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer : le groupe est celui des Mandé. Étape 2 — Situer : ils viennent du nord-ouest, vers le Mali et la Guinée. Étape 3 — Indiquer : ils descendent vers le sud. Les placer à l'est les confond avec les Akan.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Classe ces siècles du plus ancien au plus récent.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Situer : les siècles se comptent en chiffres romains. Étape 2 — Comparer : XVI vaut seize, XVII dix-sept, XVIII dix-huit. Étape 3 — Classer : XVIe, puis XVIIe, puis XVIIIe. Mettre XVIIIe en premier prend le plus grand nombre pour le plus ancien.",
+              "answers": [
+                {
+                  "content": "XVIe siècle"
+                },
+                {
+                  "content": "XVIIe siècle"
+                },
+                {
+                  "content": "XVIIIe siècle"
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi on nomme le Ghana ou le Libéria pour situer l'origine des peuples, alors que ces pays n'existaient pas encore avec leurs frontières d'aujourd'hui.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit qu'on utilise les noms d'aujourd'hui pour se repérer",
+                "Précise que les frontières actuelles n'existaient pas entre le XVIe et le XVIIIe siècle",
+                "Donne un exemple (Ghana, Libéria)"
+              ],
+              "explanation": "Corrigé modèle : on utilise le nom des pays actuels pour se repérer sur une carte d'aujourd'hui. Mais leurs frontières n'existaient pas encore entre le XVIe et le XVIIIe siècle. Par exemple, les Akan viennent de la région du Ghana actuel. Barème : repère (1), frontières (0,5), exemple (0,5).",
+              "answers": [],
+              "starter": "On nomme le Ghana pour…"
+            }
+          ],
+          "hint": "Revois l'origine de chaque groupe et le sens de sa migration."
+        },
+        {
+          "title": "Problème 3 · Le récit d'un conteur",
+          "statement": "Document : récit imaginé et écrit pour Lnclass. Un conteur akan raconte : « Mes ancêtres vivaient dans le pays que l'on nomme aujourd'hui le Ghana. Après la mort du chef, deux familles se sont disputé le pouvoir. Les perdants ont pris la route vers l'ouest avec leurs familles. Ils cherchaient aussi de bonnes terres pour cultiver. Après de longues années, ils se sont installés au centre du pays, près de Bouaké. »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "De quelle région viennent les ancêtres du conteur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Identifier : le conteur est un Akan. Étape 2 — Relever : « le pays que l'on nomme aujourd'hui le Ghana ». Étape 3 — Situer : la région d'origine est le Ghana actuel. Le Libéria est l'origine des Krou.",
+              "answers": [
+                {
+                  "content": "Du Ghana actuel",
+                  "correct": true
+                },
+                {
+                  "content": "Du Libéria actuel",
+                  "correct": false
+                },
+                {
+                  "content": "Du Mali actuel",
+                  "correct": false
+                },
+                {
+                  "content": "Du Burkina Faso actuel",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans quel sens ce peuple se déplace-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Identifier : le peuple part du Ghana. Étape 2 — Relever : « la route vers l'ouest ». Étape 3 — Indiquer : le Ghana est à l'est, le sens est de l'est vers l'ouest. De l'ouest vers l'est est le sens des Krou.",
+              "answers": [
+                {
+                  "content": "De l'est vers l'ouest",
+                  "correct": true
+                },
+                {
+                  "content": "De l'ouest vers l'est",
+                  "correct": false
+                },
+                {
+                  "content": "Du nord vers le sud",
+                  "correct": false
+                },
+                {
+                  "content": "Du sud vers le nord",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux causes du départ que relève le récit ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Identifier : un groupe de familles quitte son pays. Étape 2 — Relever : un conflit de pouvoir et la recherche de terres. Étape 3 — Classer : le conflit est politique et militaire ; les terres sont économiques. Le récit ne parle ni d'épidémie, ni d'Européens, ni de commerce de l'or.",
+              "answers": [
+                {
+                  "content": "Un conflit de pouvoir entre deux familles",
+                  "correct": true
+                },
+                {
+                  "content": "La recherche de bonnes terres",
+                  "correct": true
+                },
+                {
+                  "content": "Une épidémie qui touche tout le pays",
+                  "correct": false
+                },
+                {
+                  "content": "Une invitation des Européens",
+                  "correct": false
+                },
+                {
+                  "content": "Le commerce de l'or",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Ce conteur est de groupe ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Identifier : il vient du Ghana actuel. Étape 2 — Classer : un peuple venu du Ghana et installé autour de Bouaké est Akan. Étape 3 — Vérifier : les Baoulé sont des Akan. Les Krou viennent du Libéria, pas du Ghana.",
+              "answers": [
+                {
+                  "content": "Akan",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relève deux causes de la migration de ce peuple et classe chacune dans sa famille de causes.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Relève le conflit de pouvoir entre deux familles",
+                "Le classe comme cause politique et militaire",
+                "Relève la recherche de bonnes terres",
+                "La classe comme cause économique"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : le peuple akan quitte le Ghana actuel. Étape 2 — Relever : deux familles se disputent le pouvoir, et les migrants cherchent de bonnes terres. Étape 3 — Classer : le conflit de pouvoir est une cause politique et militaire ; la recherche de terres est une cause économique. Barème : chaque cause relevée (0,5) et chaque classement juste (1).",
+              "answers": [],
+              "starter": "La première cause est…"
+            }
+          ],
+          "hint": "Relis le récit phrase par phrase : cherche d'où ils viennent, où ils vont et pourquoi."
+        },
+        {
+          "title": "Problème 4 · Bilan sur la mise en place des peuples",
+          "statement": "Document 1 : texte écrit pour Lnclass. Un marchand dioula du XVIIIe siècle (personnage imaginé) dit : « Je viens du nord-ouest, du pays qui est aujourd'hui le Mali. Mes caravanes portent du sel et des étoffes, et je rapporte de la kola. Je m'arrête dans les villes du nord comme Kong. » Document 2 : texte écrit pour Lnclass. Un ancien Bété raconte : « Nos ancêtres sont venus de l'ouest, de la région du Libéria actuel, par groupes de familles, à la recherche de terres. Ils se sont installés dans la forêt, près de Daloa. »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Les deux documents montrent que tous les peuples migrent pour la même raison.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Identifier : le document 1 parle d'un marchand dioula, le document 2 d'un ancien Bété. Étape 2 — Relever : le marchand se déplace pour le commerce ; les Bété cherchent des terres. Étape 3 — Classer : les deux causes sont économiques, mais différentes (commerce, terres). Dire que la raison est la même efface la différence entre commerce et recherche de terres.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque personnage au groupe auquel il appartient.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Identifier : un marchand dioula, un ancien Bété et un cultivateur sénoufo. Étape 2 — Classer : Dioula Mandé du Nord, Bété Krou, Sénoufo Gour. Étape 3 — Vérifier : Malinké est aussi Mandé du Nord, Dida est aussi Krou, Lobi est aussi Gour. Les Bété ne sont pas des Mandé : leur origine est le Libéria à l'ouest.",
+              "answers": [
+                {
+                  "content": "Le marchand dioula du document 1",
+                  "match": "Mandé du Nord"
+                },
+                {
+                  "content": "L'ancien Bété du document 2",
+                  "match": "Krou"
+                },
+                {
+                  "content": "Un cultivateur sénoufo près de Korhogo",
+                  "match": "Gour"
+                }
+              ]
+            },
+            {
+              "content": "Quel est le motif principal du déplacement du marchand dioula ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Identifier : le marchand voyage avec des caravanes. Étape 2 — Relever : il porte du sel et des étoffes et rapporte de la kola. Étape 3 — Classer : le commerce est une cause économique. Rien dans le texte ne parle de guerre ni de succession.",
+              "answers": [
+                {
+                  "content": "Le commerce",
+                  "correct": true
+                },
+                {
+                  "content": "La fuite devant une guerre",
+                  "correct": false
+                },
+                {
+                  "content": "La recherche de terres fertiles",
+                  "correct": false
+                },
+                {
+                  "content": "Un conflit de succession",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois affirmations exactes ? (3 réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Identifier : trois peuples et trois lieux sont cités. Étape 2 — Classer : Bété Krou, Dioula Mandé du Nord. Étape 3 — Situer : Libéria à l'ouest, Mali au nord-ouest, Daloa au centre-ouest. Les trois autres affirmations confondent les groupes ou les directions.",
+              "answers": [
+                {
+                  "content": "Les Bété sont des Krou venus de l'ouest",
+                  "correct": true
+                },
+                {
+                  "content": "Les Dioula sont des Mandé du Nord venus du nord-ouest",
+                  "correct": true
+                },
+                {
+                  "content": "Les Bété sont installés près de Daloa",
+                  "correct": true
+                },
+                {
+                  "content": "Les Dioula sont des Krou",
+                  "correct": false
+                },
+                {
+                  "content": "Les Bété viennent du Ghana actuel",
+                  "correct": false
+                },
+                {
+                  "content": "Daloa est une ville du nord",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Classe ces siècles du plus ancien au plus récent.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Situer : trois siècles sont cités. Étape 2 — Comparer : seize, dix-sept, dix-huit. Étape 3 — Classer : XVIe, XVIIe, puis XVIIIe. Inverser l'ordre est l'erreur des siècles en chiffres romains.",
+              "answers": [
+                {
+                  "content": "XVIe siècle"
+                },
+                {
+                  "content": "XVIIe siècle"
+                },
+                {
+                  "content": "XVIIIe siècle"
+                }
+              ]
+            },
+            {
+              "content": "Question de synthèse : à l'aide des deux documents et de ton cours, présente en quelques lignes, pour un groupe de ton choix (Krou ou Mandé), son origine, une cause de sa migration et sa zone d'installation.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Nomme le groupe choisi",
+                "Situe son origine avec un pays actuel et un sens",
+                "Donne une cause exacte et la classe correctement (économique ou politique et militaire)",
+                "Situe sa zone d'installation avec une ville repère",
+                "Rédige des phrases claires et complètes"
+              ],
+              "explanation": "Corrigé modèle (Krou) : Étape 1 — Situer : les Krou forment un groupe de peuples dont font partie les Bété. Étape 2 — Origine : ils viennent du Libéria actuel, à l'ouest, et migrent de l'ouest vers l'est. Étape 3 — Cause : ils cherchent des terres, ce qui est une cause économique. Étape 4 — Installation : ils s'installent dans la forêt de l'ouest, par exemple autour de Daloa. Barème : groupe (1), origine et sens (1,5), cause et classement (1,5), installation (1,5), rédaction (0,5). Un corrigé pour les Mandé du Nord est aussi accepté : origine nord-ouest, cause le commerce, installation autour d'Odienné ou de Kong.",
+              "answers": [],
+              "starter": "Les Krou viennent du…"
+            }
+          ],
+          "hint": "Pour la synthèse, suis les étapes : groupe, origine, cause, installation."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "groupes de peuples, régions d'origine, causes des migrations, zones d'installation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : liste écrite pour Lnclass. Voici cinq peuples de Côte d'Ivoire : les Agni, les Gouro, les Dioula, les Guéré et les Lobi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à un autre peuple du même groupe pour vérifier chaque classement.",
+              "questions": [
+                {
+                  "content": "Relie chaque peuple à son groupe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Identifier : cinq peuples sont cités. Étape 2 — Classer : Agni Akan, Gouro Mandé du Sud, Dioula Mandé du Nord, Guéré Krou, Lobi Gour. Étape 3 — Vérifier : Baoulé est Akan, Dan est Mandé du Sud, Malinké est Mandé du Nord, Bété est Krou, Sénoufo est Gour. Gouro et Dioula sont deux Mandé différents.",
+                  "answers": [
+                    {
+                      "content": "Agni",
+                      "match": "Akan"
+                    },
+                    {
+                      "content": "Gouro",
+                      "match": "Mandé du Sud"
+                    },
+                    {
+                      "content": "Dioula",
+                      "match": "Mandé du Nord"
+                    },
+                    {
+                      "content": "Guéré",
+                      "match": "Krou"
+                    },
+                    {
+                      "content": "Lobi",
+                      "match": "Gour"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Koulango appartiennent à quel groupe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : le peuple est celui des Koulango. Étape 2 — Classer : ils sont des Gour, ou Voltaïques. Étape 3 — Vérifier : les Sénoufo et les Lobi sont aussi des Gour. Akan est le groupe des Agni et des Baoulé.",
+                  "answers": [
+                    {
+                      "content": "Gour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mandé du Sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Akan, les Krou, les Mandé et les Gour sont les quatre grands groupes de peuples de Côte d'Ivoire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : on cite des groupes, pas des peuples. Étape 2 — Classer : ce sont bien les quatre grands groupes. Étape 3 — Vérifier : les Mandé se divisent en Nord et Sud. Les nommer « peuples » est une erreur : ce sont des groupes de plusieurs peuples.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Dan font partie du groupe Mandé du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Identifier : le peuple est celui des Dan, autour de Man. Étape 2 — Classer : ils sont des Mandé du Sud. Étape 3 — Vérifier : les Gouro et les Toura sont aussi des Mandé du Sud. Les Mandé du Nord sont les Malinké et les Dioula.",
+                  "answers": [
+                    {
+                      "content": "Sud",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux peuples appartiennent au groupe Akan ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : cinq peuples sont proposés. Étape 2 — Classer : Baoulé et Abron sont des Akan. Étape 3 — Vérifier : les Agni sont aussi des Akan. Dida est Krou, Toura Mandé du Sud, Sénoufo Gour.",
+                  "answers": [
+                    {
+                      "content": "Les Baoulé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Abron",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Dida",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Toura",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Sénoufo",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : phrases écrites pour Lnclass. Les peuples de Côte d'Ivoire ne sont pas venus du même endroit. Certains arrivent de l'est, d'autres de l'ouest, d'autres encore du nord.",
+              "exercise_type": "evaluation",
+              "figure": "carte-origines",
+              "hint": "Rappelle-toi : Ghana à l'est, Libéria à l'ouest, Mali et Guinée au nord-ouest, Burkina Faso au nord.",
+              "questions": [
+                {
+                  "content": "Les Akan viennent de la région de quel pays actuel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Akan. Étape 2 — Situer : leur région d'origine est le Ghana actuel. Étape 3 — Indiquer : ils migrent de l'est vers l'ouest. Le Libéria est l'origine des Krou.",
+                  "answers": [
+                    {
+                      "content": "Du Ghana",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du Libéria",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la Guinée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du Burkina Faso",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Krou migrent dans quel sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Krou. Étape 2 — Situer : leur région d'origine est le Libéria, à l'ouest. Étape 3 — Indiquer : ils vont de l'ouest vers l'est. De l'est vers l'ouest est le sens des Akan.",
+                  "answers": [
+                    {
+                      "content": "De l'ouest vers l'est",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'est vers l'ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du nord vers le sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sud vers le nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque groupe à son pays d'origine actuel.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : trois groupes sont cités. Étape 2 — Situer : Ghana, Libéria et Burkina Faso. Étape 3 — Indiquer : est, ouest et nord. Il ne faut pas confondre Ghana et Libéria.",
+                  "answers": [
+                    {
+                      "content": "Akan",
+                      "match": "Ghana"
+                    },
+                    {
+                      "content": "Krou",
+                      "match": "Libéria"
+                    },
+                    {
+                      "content": "Gour",
+                      "match": "Burkina Faso"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Mandé viennent du nord-ouest, vers le Mali et la Guinée actuels.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Mandé. Étape 2 — Situer : nord-ouest, Mali et Guinée. Étape 3 — Indiquer : ils descendent vers le sud. Les placer à l'est les confond avec les Akan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Gour viennent du ___ de la Côte d'Ivoire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Gour, ou Voltaïques. Étape 2 — Situer : ils viennent du nord, vers le Burkina Faso actuel. Étape 3 — Indiquer : ils migrent vers le sud. Ce n'est ni l'est ni l'ouest.",
+                  "answers": [
+                    {
+                      "content": "nord",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : phrases écrites pour Lnclass. Les migrations des peuples de Côte d'Ivoire ont plusieurs causes. Certaines sont liées au pouvoir, d'autres aux terres ou au commerce.",
+              "exercise_type": "evaluation",
+              "figure": "schema-causes-migrations",
+              "hint": "Sépare ce qui touche au pouvoir de ce qui touche aux terres et au commerce.",
+              "questions": [
+                {
+                  "content": "Une guerre entre royaumes est une cause ...",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : un groupe est touché par une guerre. Étape 2 — Relever : la guerre oppose des royaumes. Étape 3 — Classer : c'est une cause politique et militaire. Ce n'est pas économique : il ne s'agit ni de terres ni de commerce.",
+                  "answers": [
+                    {
+                      "content": "Politique et militaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Économique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Naturelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Religieuse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au motif qu'elle illustre.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Identifier : trois motifs. Étape 2 — Relever : conflit, terres, commerce. Étape 3 — Classer : politique et militaire, puis économique (terres), puis économique (commerce). Le commerce n'est pas une cause militaire.",
+                  "answers": [
+                    {
+                      "content": "Fuir un conflit de pouvoir",
+                      "match": "Politique et militaire"
+                    },
+                    {
+                      "content": "Chercher des terres fertiles",
+                      "match": "Économique, les terres"
+                    },
+                    {
+                      "content": "Suivre des routes de commerce",
+                      "match": "Économique, le commerce"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Mandé du Nord se déplacent surtout pour le commerce.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : Malinké et Dioula. Étape 2 — Relever : leurs caravanes échangent des produits. Étape 3 — Classer : le motif principal est économique. D'autres causes, comme des guerres, ont pu s'y ajouter, mais la fiche retient le commerce comme motif principal des Mandé du Nord.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chercher de nouvelles terres pour cultiver est une cause ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Identifier : un groupe manque de terres. Étape 2 — Relever : il cherche des terres à cultiver. Étape 3 — Classer : c'est une cause économique. Ce n'est pas un conflit de pouvoir.",
+                  "answers": [
+                    {
+                      "content": "économique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux propositions sont des causes politiques et militaires ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : cinq motifs. Étape 2 — Relever : guerre de succession, domination d'un royaume, terres, sel, kola. Étape 3 — Classer : les deux premiers touchent au pouvoir. Terres, sel et kola sont des motifs économiques.",
+                  "answers": [
+                    {
+                      "content": "Une guerre de succession",
+                      "correct": true
+                    },
+                    {
+                      "content": "La domination d'un royaume puissant",
+                      "correct": true
+                    },
+                    {
+                      "content": "La recherche de terres fertiles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commerce du sel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des caravanes de kola",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : phrases écrites pour Lnclass. Les peuples se sont installés dans des zones précises du pays. Chaque zone a une ville qui sert de repère.",
+              "exercise_type": "evaluation",
+              "figure": "carte-installation",
+              "hint": "Associe chaque ville à un peuple et à un point cardinal.",
+              "questions": [
+                {
+                  "content": "Autour de quelle ville vivent les Sénoufo ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Sénoufo, du groupe Gour. Étape 2 — Situer : ils sont au nord, autour de Korhogo. Étape 3 — Relier : ils sont venus du nord. Bouaké est la ville des Baoulé, Daloa celle des Bété, Abengourou celle des Agni.",
+                  "answers": [
+                    {
+                      "content": "Korhogo",
+                      "correct": true
+                    },
+                    {
+                      "content": "Bouaké",
+                      "correct": false
+                    },
+                    {
+                      "content": "Daloa",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abengourou",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque peuple à sa zone d'installation.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre peuples. Étape 2 — Situer : centre, est, centre-ouest, nord-ouest. Étape 3 — Relier : chaque zone suit une origine différente. Baoulé et Agni sont tous deux Akan mais dans deux zones.",
+                  "answers": [
+                    {
+                      "content": "Baoulé",
+                      "match": "Centre"
+                    },
+                    {
+                      "content": "Agni",
+                      "match": "Est"
+                    },
+                    {
+                      "content": "Bété",
+                      "match": "Centre-ouest"
+                    },
+                    {
+                      "content": "Malinké",
+                      "match": "Nord-ouest"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Dan sont installés à l'ouest, autour de Man.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Dan, Mandé du Sud. Étape 2 — Situer : ouest, autour de Man. Étape 3 — Relier : venus du nord-ouest. Les placer à l'est les confond avec les Agni.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Abron sont installés autour de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Abron, Akan. Étape 2 — Situer : nord-est, autour de Bondoukou. Étape 3 — Relier : venus du Ghana, tout proche. Abengourou est la ville des Agni.",
+                  "answers": [
+                    {
+                      "content": "Bondoukou",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux peuples sont installés à l'ouest ou au centre-ouest ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq peuples. Étape 2 — Situer : Guéré et Bété sont à l'ouest et au centre-ouest. Étape 3 — Relier : ces Krou viennent de l'ouest. Agni et Abron sont à l'est, Sénoufo au nord.",
+                  "answers": [
+                    {
+                      "content": "Les Guéré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Bété",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Agni",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Sénoufo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Abron",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "villes et peuples d'un voyage, une famille akan, le commerce dioula, un exposé sur les groupes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation : Awa, élève de 4ème à Abidjan (personnage imaginé), prépare un voyage de classe par bus. Le groupe passera par Bouaké, Korhogo, Man et Daloa. Son professeur lui demande quel peuple vit autour de chaque ville.",
+              "exercise_type": "evaluation",
+              "figure": "carte-installation",
+              "hint": "Relie chaque ville à son peuple repère : Bouaké, Korhogo, Man, Daloa.",
+              "questions": [
+                {
+                  "content": "Relie chaque ville au peuple repère de sa région.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre villes sont citées. Étape 2 — Situer : Bouaké au centre (Baoulé), Korhogo au nord (Sénoufo), Man à l'ouest (Dan), Daloa au centre-ouest (Bété). Étape 3 — Relier : quatre groupes différents, Akan, Gour, Mandé du Sud et Krou. Il ne faut pas mettre Sénoufo à Bouaké.",
+                  "answers": [
+                    {
+                      "content": "Bouaké",
+                      "match": "Baoulé"
+                    },
+                    {
+                      "content": "Korhogo",
+                      "match": "Sénoufo"
+                    },
+                    {
+                      "content": "Man",
+                      "match": "Dan"
+                    },
+                    {
+                      "content": "Daloa",
+                      "match": "Bété"
+                    }
+                  ]
+                },
+                {
+                  "content": "À Korhogo, Awa rencontre des Sénoufo. À quel groupe appartiennent-ils ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Sénoufo. Étape 2 — Situer : nord, Korhogo. Étape 3 — Relier : groupe Gour, venu du nord. Malinké sont Mandé du Nord, mais pas les Sénoufo.",
+                  "answers": [
+                    {
+                      "content": "Gour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mandé du Nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Krou",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À Daloa, Awa est dans une région de peuples Krou.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : Daloa, ville des Bété. Étape 2 — Situer : centre-ouest. Étape 3 — Relier : les Bété sont des Krou venus de l'ouest. Penser que Daloa est Akan confond avec Bouaké.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les habitants de Man sont surtout des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : la ville de Man. Étape 2 — Situer : ouest du pays. Étape 3 — Relier : les Dan, Mandé du Sud, y vivent. Les Baoulé sont autour de Bouaké.",
+                  "answers": [
+                    {
+                      "content": "Dan",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle ville est le repère des Agni ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Agni, Akan. Étape 2 — Situer : est, autour d'Abengourou. Étape 3 — Relier : venus du Ghana tout proche. Korhogo, Man et Daloa sont ailleurs.",
+                  "answers": [
+                    {
+                      "content": "Abengourou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Daloa",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation : Koffi (personnage imaginé) dit à sa grand-mère de Bouaké qu'il apprend l'histoire des peuples à l'école. Elle lui raconte que ses ancêtres sont venus de l'est, du pays qu'on nomme aujourd'hui le Ghana.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une famille venue du Ghana appartient à un seul des quatre groupes.",
+              "questions": [
+                {
+                  "content": "À quel groupe appartient la famille de Koffi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : la famille vient du Ghana. Étape 2 — Classer : un peuple venu du Ghana et installé à Bouaké est Akan. Étape 3 — Vérifier : les Agni et les Abron sont aussi Akan. Les Krou viennent du Libéria.",
+                  "answers": [
+                    {
+                      "content": "Akan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mandé du Nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel sens ses ancêtres se sont-ils déplacés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : le Ghana est à l'est. Étape 2 — Situer : la Côte d'Ivoire est à l'ouest du Ghana. Étape 3 — Indiquer : le sens est de l'est vers l'ouest. De l'ouest vers l'est est le sens des Krou.",
+                  "answers": [
+                    {
+                      "content": "De l'est vers l'ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'ouest vers l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du nord vers le sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sud vers le nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un peuple Akan est installé uniquement à l'est de la Côte d'Ivoire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Akan. Étape 2 — Situer : Agni à l'est, Abron au nord-est, Baoulé au centre. Étape 3 — Relier : un groupe occupe plusieurs zones. Dire « uniquement à l'est » oublie les Baoulé du centre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La grand-mère de Koffi vit à ___, au centre du pays.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : un peuple Akan au centre. Étape 2 — Situer : Bouaké est la ville repère des Baoulé. Étape 3 — Relier : venus du Ghana. Daloa est une ville des Bété.",
+                  "answers": [
+                    {
+                      "content": "Bouaké",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux propositions décrivent bien les Akan ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : cinq affirmations. Étape 2 — Classer : origine Ghana, peuples Agni, Baoulé, Abron. Étape 3 — Vérifier : Libéria et Bété et Dida concernent les Krou. La dernière affirmation place les Akan au nord, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "Ils viennent de la région du Ghana actuel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils comptent les Agni, les Baoulé et les Abron",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils viennent du Libéria",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils comptent les Bété et les Dida",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils vivent surtout dans le nord",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation : au marché de Kong, au nord du pays, un commerçant dioula (personnage imaginé) vend du sel, des étoffes et de la kola. Il explique à ses voisins que ses ancêtres faisaient déjà le commerce sur de longues routes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le commerçant dioula appartient à un seul groupe de peuples.",
+              "questions": [
+                {
+                  "content": "À quel groupe appartiennent les Dioula ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : un commerçant dioula. Étape 2 — Classer : les Dioula sont des Mandé du Nord. Étape 3 — Vérifier : les Malinké sont aussi des Mandé du Nord. Mandé du Sud est le groupe des Dan et des Gouro.",
+                  "answers": [
+                    {
+                      "content": "Mandé du Nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mandé du Sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le motif principal des déplacements des Dioula ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : un groupe de commerçants. Étape 2 — Relever : sel, étoffes, kola. Étape 3 — Classer : cause économique, le commerce. La guerre n'est pas leur motif principal.",
+                  "answers": [
+                    {
+                      "content": "Le commerce",
+                      "correct": true
+                    },
+                    {
+                      "content": "La guerre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La recherche de pouvoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les ancêtres des Mandé viennent du nord-ouest.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Mandé. Étape 2 — Situer : nord-ouest, Mali et Guinée. Étape 3 — Indiquer : vers le sud. Les faire venir de l'est les confond avec les Akan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerce est une cause ___ des migrations.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Identifier : le commerce. Étape 2 — Relever : on échange des produits. Étape 3 — Classer : cause économique. Ce n'est pas une cause militaire.",
+                  "answers": [
+                    {
+                      "content": "économique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le marché de Kong est situé au ___ de la Côte d'Ivoire.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Repérer : Kong est une ville de commerce. Étape 2 — Situer : elle est au nord. Étape 3 — Relier : les Mandé du Nord y commercent. Les villes du sud sont ailleurs.",
+                  "answers": [
+                    {
+                      "content": "nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "est",
+                      "correct": false
+                    },
+                    {
+                      "content": "ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "centre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation : Mariam (personnage imaginé) présente un exposé à sa classe sur les groupes de peuples. Elle écrit au tableau les noms Akan, Krou, Mandé et Gour et veut les relier à une cause et à une zone.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rassemble ce que tu as appris sur origine, causes et installation.",
+              "questions": [
+                {
+                  "content": "Relie chaque groupe à sa région d'origine.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : trois groupes. Étape 2 — Situer : Ghana, Libéria, Burkina Faso. Étape 3 — Indiquer : est, ouest, nord. Il ne faut pas inverser les directions.",
+                  "answers": [
+                    {
+                      "content": "Akan",
+                      "match": "Ghana, à l'est"
+                    },
+                    {
+                      "content": "Krou",
+                      "match": "Libéria, à l'ouest"
+                    },
+                    {
+                      "content": "Gour",
+                      "match": "Burkina Faso, au nord"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel groupe est installé surtout dans le sud-ouest et le centre-ouest forestier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : une zone forestière de l'ouest. Étape 2 — Situer : Bété, Dida et Guéré s'y trouvent. Étape 3 — Relier : ces Krou viennent de l'ouest. Les Gour sont au nord.",
+                  "answers": [
+                    {
+                      "content": "Les Krou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Gour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Mandé du Nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Akan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les migrations ont lieu du XVIe au XVIIIe siècle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Situer : trois siècles. Étape 2 — Comparer : seize à dix-huit. Étape 3 — Classer : XVIe au XVIIIe. Les placer au XXe siècle est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Mandé du Sud comptent les Dan, les Gouro et les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Identifier : le groupe Mandé du Sud. Étape 2 — Classer : Dan, Gouro, Toura. Étape 3 — Vérifier : ils sont à l'ouest et au centre-ouest. Les Malinké sont Mandé du Nord.",
+                  "answers": [
+                    {
+                      "content": "Toura",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux causes de migration sont économiques ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : cinq causes. Étape 2 — Relever : terres, commerce, guerre, chef, conflit. Étape 3 — Classer : terres et commerce sont économiques. Guerre, chef et conflit sont politiques et militaires.",
+                  "answers": [
+                    {
+                      "content": "La recherche de terres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le commerce",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une guerre de succession",
+                      "correct": false
+                    },
+                    {
+                      "content": "La domination d'un chef puissant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un conflit de pouvoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "justifier un classement, lire un récit krou, corriger des erreurs, se repérer dans les siècles.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : affirmations écrites pour Lnclass. Un élève affirme : « Les Sénoufo vivent au nord, donc ce sont des Mandé du Nord. » Son camarade répond : « Non, les Sénoufo sont des Gour. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un peuple se classe d'après son groupe, pas d'après sa seule place sur la carte.",
+              "questions": [
+                {
+                  "content": "L'élève a raison de dire que les Sénoufo sont des Mandé du Nord.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : les Sénoufo. Étape 2 — Classer : ils sont des Gour. Étape 3 — Vérifier : Lobi et Koulango sont aussi des Gour. Vivre au nord ne suffit pas à faire un Mandé du Nord.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle justification est la bonne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : le peuple. Étape 2 — Classer : Gour. Étape 3 — Vérifier : Lobi et Koulango. Les autres justifications confondent le groupe avec la place sur la carte.",
+                  "answers": [
+                    {
+                      "content": "Les Sénoufo sont des Gour, comme les Lobi et les Koulango",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les peuples du nord sont Mandé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Sénoufo sont venus de l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Sénoufo sont des Akan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque peuple à la bonne justification.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Identifier : trois peuples. Étape 2 — Classer : Mandé du Nord, Akan, Krou. Étape 3 — Vérifier : origines Mali ou Guinée, Ghana, Libéria. Aucun n'est Gour.",
+                  "answers": [
+                    {
+                      "content": "Malinké",
+                      "match": "Mandé du Nord, venu du nord-ouest"
+                    },
+                    {
+                      "content": "Baoulé",
+                      "match": "Akan, venu du Ghana"
+                    },
+                    {
+                      "content": "Dida",
+                      "match": "Krou, venu du Libéria"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Sénoufo appartiennent au groupe ___, appelé aussi Voltaïque.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Identifier : les Sénoufo. Étape 2 — Classer : Gour. Étape 3 — Vérifier : Lobi, Koulango. Ne pas écrire Mandé.",
+                  "answers": [
+                    {
+                      "content": "Gour",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux peuples sont des Mandé du Nord ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : cinq peuples. Étape 2 — Classer : Malinké et Dioula sont Mandé du Nord. Étape 3 — Vérifier : Dan et Gouro sont du Sud. Dan et Gouro sont Mandé du Sud, Lobi est Gour.",
+                  "answers": [
+                    {
+                      "content": "Les Malinké",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Dioula",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Dan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Gouro",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Lobi",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : texte écrit pour Lnclass. Un conteur krou dit : « Mes ancêtres vivaient près de la côte du pays qu'on appelle aujourd'hui le Libéria. Des guerres et le manque de terres nous ont poussés vers l'est. Nous avons trouvé la forêt autour de Gagnoa. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relève l'origine, le sens, les causes et la zone.",
+              "questions": [
+                {
+                  "content": "Quelle est la région d'origine de ce peuple ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : un conteur krou. Étape 2 — Relever : « le pays qu'on appelle aujourd'hui le Libéria ». Étape 3 — Situer : l'ouest. Le Ghana est l'origine des Akan.",
+                  "answers": [
+                    {
+                      "content": "Le Libéria actuel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Ghana actuel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Mali actuel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Burkina Faso actuel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel sens ce peuple se déplace-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : le peuple part du Libéria. Étape 2 — Relever : « vers l'est ». Étape 3 — Indiquer : sens ouest vers est. De l'est vers l'ouest est le sens des Akan.",
+                  "answers": [
+                    {
+                      "content": "De l'ouest vers l'est",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'est vers l'ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du nord vers le sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sud vers le nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux causes relève le texte ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : un peuple krou. Étape 2 — Relever : guerres et manque de terres. Étape 3 — Classer : guerres politique et militaire, terres économique. Le texte ne parle ni de kola, ni d'invitation, ni d'épidémie.",
+                  "answers": [
+                    {
+                      "content": "Des guerres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le manque de terres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le commerce de la kola",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une invitation d'un roi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une épidémie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le texte prouve que les Krou sont installés dans la forêt de l'ouest.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : les Krou. Étape 2 — Relever : forêt autour de Gagnoa. Étape 3 — Situer : Gagnoa est au centre-ouest. Dire « au nord » est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Bété, installés autour de Gagnoa, appartiennent au groupe ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Identifier : les Bété. Étape 2 — Classer : ils sont des Krou. Étape 3 — Vérifier : Dida, Guéré. Les Bété ne sont pas des Akan.",
+                  "answers": [
+                    {
+                      "content": "Krou",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : copie d'élève écrite pour Lnclass, avec trois erreurs. 1) « Les Akan viennent du Libéria. » 2) « Les Dioula sont des Mandé du Sud. » 3) « Les Baoulé sont installés au nord, autour de Korhogo. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque erreur, retrouve la bonne réponse dans ta fiche.",
+              "questions": [
+                {
+                  "content": "Par quoi corriger l'erreur 1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Akan. Étape 2 — Situer : Ghana actuel. Étape 3 — Indiquer : de l'est vers l'ouest. Le Libéria est l'origine des Krou.",
+                  "answers": [
+                    {
+                      "content": "Les Akan viennent du Ghana",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Akan viennent du Mali",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Akan viennent du Burkina Faso",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Akan viennent de Guinée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par quoi corriger l'erreur 2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : les Dioula. Étape 2 — Classer : Mandé du Nord. Étape 3 — Vérifier : Malinké. Mandé du Sud est le groupe des Dan et des Gouro.",
+                  "answers": [
+                    {
+                      "content": "Les Dioula sont des Mandé du Nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Dioula sont des Gour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Dioula sont des Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Dioula sont des Akan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par quoi corriger l'erreur 3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Baoulé. Étape 2 — Situer : centre, Bouaké. Étape 3 — Relier : venus du Ghana. Korhogo est la ville des Sénoufo.",
+                  "answers": [
+                    {
+                      "content": "Les Baoulé sont installés au centre, autour de Bouaké",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Baoulé sont installés à l'ouest, autour de Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Baoulé sont installés au nord-ouest, autour d'Odienné",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Baoulé sont installés au sud, autour de Divo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la copie, les trois affirmations sont fausses.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : trois affirmations. Étape 2 — Situer : les Akan viennent du Ghana, les Dioula sont des Mandé du Nord, les Baoulé sont au centre, autour de Bouaké. Étape 3 — Relier : aucune des trois affirmations de la copie ne correspond. Il y a bien trois erreurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'erreurs la copie contient-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : trois affirmations. Étape 2 — Vérifier : chacune est fausse. Étape 3 — Compter : trois erreurs. Compter 2 oublie l'erreur sur les Baoulé.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : frise écrite pour Lnclass. Elle montre les trois siècles de 1500 à 1800 pendant lesquels les peuples arrivent en Côte d'Ivoire : le XVIe siècle, le XVIIe siècle et le XVIIIe siècle.",
+              "exercise_type": "evaluation",
+              "figure": "frise-migrations",
+              "hint": "Un siècle XVIe va de 1501 à 1600.",
+              "questions": [
+                {
+                  "content": "Classe ces siècles du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Situer : trois siècles. Étape 2 — Comparer : seize, dix-sept, dix-huit. Étape 3 — Classer : XVIe, XVIIe, XVIIIe. Inverser les chiffres romains est l'erreur.",
+                  "answers": [
+                    {
+                      "content": "XVIe siècle"
+                    },
+                    {
+                      "content": "XVIIe siècle"
+                    },
+                    {
+                      "content": "XVIIIe siècle"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel siècle se situe l'année 1650 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Situer : 1650 est entre 1601 et 1700. Étape 2 — Comparer : c'est le dix-septième siècle. Étape 3 — Classer : XVIIe siècle. Le XVIe va de 1501 à 1600.",
+                  "answers": [
+                    {
+                      "content": "Le XVIIe siècle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le XVIe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XVIIIe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XVe siècle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de siècles couvrent les migrations du XVIe au XVIIIe siècle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Situer : XVIe, XVIIe, XVIIIe. Étape 2 — Comparer : trois siècles différents. Étape 3 — Compter : 3. Compter 2 oublie un siècle.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "siècles"
+                },
+                {
+                  "content": "Les migrations des peuples de Côte d'Ivoire commencent après le XIXe siècle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Situer : elles vont du XVIe au XVIIIe. Étape 2 — Comparer : le XIXe est après. Étape 3 — Classer : donc avant. Les placer après est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le siècle qui suit le XVIIe siècle est le ___ siècle.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Situer : XVIIe. Étape 2 — Comparer : on ajoute un. Étape 3 — Classer : XVIIIe. Le XVIe est le précédent.",
+                  "answers": [
+                    {
+                      "content": "XVIIIe",
+                      "correct": true
+                    },
+                    {
+                      "content": "XVIIIème",
+                      "correct": true
+                    },
+                    {
+                      "content": "18e",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "groupes, origines, causes et installation en lisant des récits et des cartes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : tableau écrit pour Lnclass, donné sous forme de phrases. Un élève résume : les Baoulé sont des Akan ; les Bété, des Krou ; les Malinké, des Mandé du Nord ; les Dan, des Mandé du Sud ; les Lobi, des Gour.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque peuple, pense à son groupe, puis à son origine.",
+              "questions": [
+                {
+                  "content": "Relie chaque peuple à son groupe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Identifier : cinq peuples. Étape 2 — Classer : Akan, Krou, Mandé du Nord, Mandé du Sud, Gour. Étape 3 — Vérifier : un autre peuple par groupe. Il ne faut pas fusionner les deux Mandé.",
+                  "answers": [
+                    {
+                      "content": "Baoulé",
+                      "match": "Akan"
+                    },
+                    {
+                      "content": "Bété",
+                      "match": "Krou"
+                    },
+                    {
+                      "content": "Malinké",
+                      "match": "Mandé du Nord"
+                    },
+                    {
+                      "content": "Dan",
+                      "match": "Mandé du Sud"
+                    },
+                    {
+                      "content": "Lobi",
+                      "match": "Gour"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel groupe vient de l'ouest, du Libéria actuel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : une origine à l'ouest. Étape 2 — Situer : Libéria. Étape 3 — Indiquer : vers l'est. Les Akan viennent de l'est.",
+                  "answers": [
+                    {
+                      "content": "Les Krou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Gour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Mandé du Nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Akan viennent de l'ouest.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Akan. Étape 2 — Situer : Ghana, à l'est. Étape 3 — Indiquer : de l'est vers l'ouest. Les faire venir de l'ouest confond avec les Krou.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Bété sont installés autour de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Bété. Étape 2 — Situer : centre-ouest, Daloa. Étape 3 — Relier : Krou venus de l'ouest. Bouaké est Baoulé.",
+                  "answers": [
+                    {
+                      "content": "Daloa",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerce est surtout la cause de la migration de quel groupe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : des commerçants. Étape 2 — Relever : Dioula. Étape 3 — Classer : économique. Les Akan quittent surtout des conflits de pouvoir.",
+                  "answers": [
+                    {
+                      "content": "Les Mandé du Nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Gour",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : récit écrit pour Lnclass. Un ancien abron raconte : « Nous venons de l'est, du Ghana d'aujourd'hui. Une guerre et des conflits de pouvoir nous ont chassés. Nous nous sommes installés autour de Bondoukou, au nord-est. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Sois précis sur le groupe, l'origine, la cause et la zone.",
+              "questions": [
+                {
+                  "content": "À quel groupe appartient ce peuple ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : un Abron. Étape 2 — Classer : Akan. Étape 3 — Vérifier : Agni, Baoulé. Krou vient du Libéria.",
+                  "answers": [
+                    {
+                      "content": "Akan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mandé du Nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La cause relevée est de nature politique et militaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : le peuple abron. Étape 2 — Relever : une guerre et des conflits de pouvoir. Étape 3 — Classer : politique et militaire. Ce n'est pas le commerce.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la ville repère de ce peuple ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Abron. Étape 2 — Situer : nord-est, Bondoukou. Étape 3 — Relier : Ghana. Korhogo est Sénoufo.",
+                  "answers": [
+                    {
+                      "content": "Bondoukou",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Daloa",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce peuple migre de l'est vers l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : Abron. Étape 2 — Situer : Ghana, est. Étape 3 — Indiquer : vers l'ouest. L'est est le point de départ.",
+                  "answers": [
+                    {
+                      "content": "ouest",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux propositions sont exactes ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : Abron. Étape 2 — Classer : Akan, origine Ghana. Étape 3 — Situer : nord-est. Les autres propositions les confondent avec les Krou.",
+                  "answers": [
+                    {
+                      "content": "Les Abron sont des Akan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Abron viennent du Ghana actuel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Abron sont des Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Abron viennent du Libéria",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Abron vivent au sud-ouest",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : cartes décrites pour Lnclass. Une carte d'origines colorie le Ghana, le Libéria, le Mali, la Guinée et le Burkina Faso. Une carte d'installation place Abengourou, Bouaké, Daloa, Man, Odienné et Korhogo.",
+              "exercise_type": "evaluation",
+              "figure": "carte-installation",
+              "hint": "Passe de la carte d'origine à la carte d'installation.",
+              "questions": [
+                {
+                  "content": "Relie chaque ville au groupe qui s'y trouve.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq villes. Étape 2 — Situer : Akan, Krou, Mandé du Sud, Mandé du Nord, Gour. Étape 3 — Relier : chacun avec son origine. Man est Dan, pas Mandé du Nord.",
+                  "answers": [
+                    {
+                      "content": "Abengourou",
+                      "match": "Akan"
+                    },
+                    {
+                      "content": "Daloa",
+                      "match": "Krou"
+                    },
+                    {
+                      "content": "Man",
+                      "match": "Mandé du Sud"
+                    },
+                    {
+                      "content": "Odienné",
+                      "match": "Mandé du Nord"
+                    },
+                    {
+                      "content": "Korhogo",
+                      "match": "Gour"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel pays colorié est l'origine des Akan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les Akan. Étape 2 — Situer : Ghana. Étape 3 — Indiquer : de l'est. Le Libéria est pour les Krou.",
+                  "answers": [
+                    {
+                      "content": "Le Ghana",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Libéria",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Mali",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Burkina Faso",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Odienné est dans le nord-ouest, tout près du Mali et de la Guinée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : Odienné. Étape 2 — Situer : nord-ouest. Étape 3 — Relier : origine Mandé. La situer à l'est est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel groupe a pour origine le Burkina Faso actuel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : Burkina Faso. Étape 2 — Situer : nord. Étape 3 — Indiquer : vers le sud. Mandé du Nord vient du Mali.",
+                  "answers": [
+                    {
+                      "content": "Les Gour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Mandé du Nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Bouaké est la ville repère des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : Bouaké. Étape 2 — Situer : centre. Étape 3 — Relier : Akan. Agni sont à Abengourou.",
+                  "answers": [
+                    {
+                      "content": "Baoulé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : consigne de devoir écrite pour Lnclass. Pour un devoir, l'élève doit présenter un groupe de peuples en suivant quatre points : son groupe, son origine, ses causes de migration, sa zone d'installation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Suis les quatre points dans l'ordre.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les quatre points de la présentation.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Nommer : on dit de qui on parle. Étape 2 — Situer l'origine : d'où il vient. Étape 3 — Expliquer : pourquoi il part. Étape 4 — Situer l'installation : où il arrive. On ne peut pas expliquer l'arrivée avant le départ.",
+                  "answers": [
+                    {
+                      "content": "Nommer le groupe de peuples"
+                    },
+                    {
+                      "content": "Situer son origine"
+                    },
+                    {
+                      "content": "Expliquer ses causes de migration"
+                    },
+                    {
+                      "content": "Situer sa zone d'installation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour les Mandé du Nord, la cause principale est :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : les Mandé du Nord. Étape 2 — Relever : les caravanes. Étape 3 — Classer : économique. L'invasion coloniale est plus tardive.",
+                  "answers": [
+                    {
+                      "content": "Le commerce",
+                      "correct": true
+                    },
+                    {
+                      "content": "La guerre de succession",
+                      "correct": false
+                    },
+                    {
+                      "content": "La recherche d'un roi",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'invasion coloniale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les Krou viennent du Libéria actuel et s'installent dans l'ouest forestier.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : Krou. Étape 2 — Situer : Libéria. Étape 3 — Relier : forêt de l'ouest. Dire Ghana est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sens de migration des Akan est de l'est vers l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : Akan. Étape 2 — Situer : Ghana. Étape 3 — Indiquer : vers l'ouest. Ne pas inverser.",
+                  "answers": [
+                    {
+                      "content": "ouest",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux groupes vivent au nord du pays ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq propositions. Étape 2 — Situer : Gour à Korhogo, Mandé du Nord à Odienné. Étape 3 — Relier : venus du nord et du nord-ouest. Krou à l'ouest, Akan à l'est.",
+                  "answers": [
+                    {
+                      "content": "Les Gour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Mandé du Nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Krou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Akan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -17,7 +17,9 @@
 - **`script/contenus/valider.rb` exige Ruby 3.4** (`it`) : les rédacteurs l'ont lancé sur une copie patchée ; le contrôle final des 32 fichiers est fait sous Ruby 3.4.9 installé par `rbenv`.
 - Le scratchpad étant partagé entre rédacteurs, des générateurs se sont écrasés ; les corrections ont été appliquées sur les JSON.
 
-## À faire valider par un enseignant de philosophie
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 | Leçon | Point à valider |
 |---|---|
@@ -32,7 +34,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Relecture par un enseignant de philosophie (table ci-dessus) | Aucun enseignant dans le chantier ; les leçons restent en brouillon | Programme `contenus-v3-tous-niveaux` |
+| Relecture par un enseignant de philosophie (table ci-dessus) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Aucun enseignant dans le chantier ; les leçons restent en brouillon | Programme `contenus-v3-tous-niveaux` |
 | « accroche » (1ère) et « amorce » (Tle, La dissertation philosophique) | Hors périmètre ; Tle déjà fusionnée | À harmoniser par l'enseignant |
 | `valider.rb` ne détecte pas une correction qui désigne une proposition par son rang | Aucun code dans cette vague | Dette déjà ouverte par `contenus-tle-philosophie` |
 | Challenger empirique (import en brouillon, captures 390 px et ordinateur) | Pas de base ni de navigateur sur la session de rédaction ; aucune vue modifiée | Avant publication, par l'équipe |

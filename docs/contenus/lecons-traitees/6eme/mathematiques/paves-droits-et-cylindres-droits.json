@@ -1,0 +1,3970 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Pavés droits et cylindres droits",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Mathématiques",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "pave-droit",
+          "kind": "geometry",
+          "description": "Un pavé droit dessiné en perspective. La face avant est un rectangle ABCD de 6 cm de long et 3 cm de haut. La face arrière EFGH est décalée vers le haut et la droite. Toutes les arêtes sont tracées en trait plein, même celles qui seraient cachées. AB, EF, DC et HG mesurent 6 cm, BC, FG, AD et EH mesurent 3 cm, et BF, CG, AE et DH mesurent 4 cm.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0,
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "x": 6,
+                "y": 0,
+                "label": "B"
+              },
+              {
+                "id": "C",
+                "x": 6,
+                "y": 3,
+                "label": "C"
+              },
+              {
+                "id": "D",
+                "x": 0,
+                "y": 3,
+                "label": "D"
+              },
+              {
+                "id": "E",
+                "x": 3.2,
+                "y": 2.4,
+                "label": "E"
+              },
+              {
+                "id": "F",
+                "x": 9.2,
+                "y": 2.4,
+                "label": "F"
+              },
+              {
+                "id": "G",
+                "x": 9.2,
+                "y": 5.4,
+                "label": "G"
+              },
+              {
+                "id": "H",
+                "x": 3.2,
+                "y": 5.4,
+                "label": "H"
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "D",
+                "A"
+              ],
+              [
+                "E",
+                "F"
+              ],
+              [
+                "F",
+                "G"
+              ],
+              [
+                "G",
+                "H"
+              ],
+              [
+                "H",
+                "E"
+              ],
+              [
+                "A",
+                "E"
+              ],
+              [
+                "B",
+                "F"
+              ],
+              [
+                "C",
+                "G"
+              ],
+              [
+                "D",
+                "H"
+              ]
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "B",
+                "text": "6 cm"
+              },
+              {
+                "from": "B",
+                "to": "C",
+                "text": "3 cm"
+              },
+              {
+                "from": "B",
+                "to": "F",
+                "text": "4 cm"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "patron-cube",
+          "kind": "geometry",
+          "description": "Un patron de cube en forme de croix, fait de six carrés identiques de 2 cm de côté. Une rangée de quatre carrés est placée au centre, avec un carré au-dessus du deuxième et un carré au-dessous du deuxième. En pliant les carrés, on obtient un cube de 2 cm d'arête.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 2,
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "x": 8,
+                "y": 2,
+                "label": "B"
+              },
+              {
+                "id": "C",
+                "x": 0,
+                "y": 4,
+                "label": "C"
+              },
+              {
+                "id": "D",
+                "x": 8,
+                "y": 4,
+                "label": "D"
+              },
+              {
+                "id": "E",
+                "x": 2,
+                "y": 0,
+                "label": "E"
+              },
+              {
+                "id": "F",
+                "x": 4,
+                "y": 0,
+                "label": "F"
+              },
+              {
+                "id": "G",
+                "x": 2,
+                "y": 6,
+                "label": "G"
+              },
+              {
+                "id": "H",
+                "x": 4,
+                "y": 6,
+                "label": "H"
+              },
+              {
+                "id": "I",
+                "x": 6,
+                "y": 2,
+                "label": "I"
+              },
+              {
+                "id": "J",
+                "x": 6,
+                "y": 4,
+                "label": "J"
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "E",
+                "F"
+              ],
+              [
+                "G",
+                "H"
+              ],
+              [
+                "A",
+                "C"
+              ],
+              [
+                "E",
+                "G"
+              ],
+              [
+                "F",
+                "H"
+              ],
+              [
+                "I",
+                "J"
+              ],
+              [
+                "B",
+                "D"
+              ]
+            ],
+            "labels": [
+              {
+                "from": "E",
+                "to": "F",
+                "text": "2 cm"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "patron-pave-droit",
+          "kind": "geometry",
+          "description": "Un patron de pavé droit de 5 cm, 3 cm et 2 cm. Quatre rectangles de hauteur 2 cm sont alignés en bande : deux de 5 cm de large et deux de 3 cm de large, en alternance. Un rectangle de 5 cm sur 3 cm est collé au-dessus du premier et un autre au-dessous. Ce sont les six faces du pavé droit. Les rectangles du dessus et du dessous mesurent 5 cm sur 3 cm, et la bande a 2 cm de hauteur.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": -1,
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "x": 5,
+                "y": -1,
+                "label": "B"
+              },
+              {
+                "id": "C",
+                "x": 0,
+                "y": 7,
+                "label": "C"
+              },
+              {
+                "id": "D",
+                "x": 5,
+                "y": 7,
+                "label": "D"
+              },
+              {
+                "id": "E",
+                "x": 0,
+                "y": 2,
+                "label": "E"
+              },
+              {
+                "id": "F",
+                "x": 0,
+                "y": 4,
+                "label": "F"
+              },
+              {
+                "id": "G",
+                "x": 16,
+                "y": 2,
+                "label": "G"
+              },
+              {
+                "id": "H",
+                "x": 16,
+                "y": 4,
+                "label": "H"
+              },
+              {
+                "id": "I",
+                "x": 8,
+                "y": 2,
+                "label": "I"
+              },
+              {
+                "id": "J",
+                "x": 8,
+                "y": 4,
+                "label": "J"
+              },
+              {
+                "id": "K",
+                "x": 13,
+                "y": 2,
+                "label": "K"
+              },
+              {
+                "id": "L",
+                "x": 13,
+                "y": 4,
+                "label": "L"
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "A",
+                "C"
+              ],
+              [
+                "B",
+                "D"
+              ],
+              [
+                "E",
+                "G"
+              ],
+              [
+                "F",
+                "H"
+              ],
+              [
+                "I",
+                "J"
+              ],
+              [
+                "K",
+                "L"
+              ],
+              [
+                "G",
+                "H"
+              ]
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "B",
+                "text": "5 cm"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "patron-cylindre",
+          "kind": "geometry",
+          "description": "Un patron de cylindre droit. Un grand rectangle de 4 cm de haut représente la face latérale déroulée. Deux disques identiques de 2 cm de rayon touchent le rectangle, un au-dessus et un au-dessous : ce sont les deux bases. En pliant le rectangle autour des disques, on obtient le cylindre.",
+          "params": {
+            "points": [
+              {
+                "id": "R1",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "R2",
+                "x": 12.5,
+                "y": 0
+              },
+              {
+                "id": "R3",
+                "x": 12.5,
+                "y": 4
+              },
+              {
+                "id": "R4",
+                "x": 0,
+                "y": 4
+              },
+              {
+                "id": "O1",
+                "x": 3,
+                "y": 6
+              },
+              {
+                "id": "O2",
+                "x": 9,
+                "y": -2
+              }
+            ],
+            "segments": [
+              [
+                "R1",
+                "R2"
+              ],
+              [
+                "R2",
+                "R3"
+              ],
+              [
+                "R3",
+                "R4"
+              ],
+              [
+                "R4",
+                "R1"
+              ]
+            ],
+            "labels": [
+              {
+                "from": "R2",
+                "to": "R3",
+                "text": "4 cm"
+              }
+            ],
+            "circles": [
+              {
+                "center": "O1",
+                "r": 2
+              },
+              {
+                "center": "O2",
+                "r": 2
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Décrire un pavé droit et un cube",
+          "remember": "Un **pavé droit** est un solide qui a **6 faces**, toutes des rectangles. Il a **12 arêtes** (les bords, là où deux faces se rejoignent) et **8 sommets** (les coins). Les **faces opposées** sont identiques. Ses arêtes sont de 3 longueurs, par groupes de 4 : la **longueur**, la **largeur** et la **hauteur**. Un **cube** est un pavé droit dont les 6 faces sont des carrés identiques : ses 12 arêtes ont la même longueur.",
+          "method": [
+            "Compter les faces et reconnaître leur forme (rectangles ou carrés).",
+            "Compter les sommets (les coins) et les arêtes (les bords).",
+            "Repérer les faces opposées et les arêtes de même longueur.",
+            "Conclure : nommer le solide (pavé droit ou cube) et donner ses trois dimensions."
+          ],
+          "example": {
+            "statement": "Une boîte de craies a la forme d'un pavé droit de 10 cm de long, 6 cm de large et 4 cm de haut. La décrire.",
+            "steps": [
+              "Compter les faces : il y a 6 faces, toutes des rectangles (2 de 10 cm sur 6 cm, 2 de 10 cm sur 4 cm, 2 de 6 cm sur 4 cm).",
+              "Compter les sommets et les arêtes : il y a 8 sommets et 12 arêtes.",
+              "Repérer : les faces opposées sont identiques ; il y a 4 arêtes de 10 cm, 4 arêtes de 6 cm et 4 arêtes de 4 cm.",
+              "Conclure : c'est un pavé droit de longueur 10 cm, de largeur 6 cm et de hauteur 4 cm. Ce n'est pas un cube, car ses trois dimensions sont différentes."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un pavé droit est toujours un cube, ni qu'il a seulement 4 faces. Contre-exemple : la boîte de craies de 10 cm, 6 cm et 4 cm a bien 6 faces (le dessus et le dessous comptent) et ses faces ne sont pas toutes des carrés : ce n'est pas un cube. Un cube est un pavé droit particulier, mais un pavé droit n'est cube que si ses trois dimensions sont égales. Pour éviter l'erreur, compte toujours 6 faces, puis compare les trois dimensions.",
+          "figure": "pave-droit",
+          "exercise": [
+            {
+              "title": "Décrire des pavés droits et des cubes",
+              "statement": "Dans cet exercice, tu décris des pavés droits et des cubes avec la méthode de la fiche. La figure montre un pavé droit de 6 cm de long, 4 cm de large et 3 cm de haut.",
+              "exercise_type": "fixation",
+              "figure": "pave-droit",
+              "questions": [
+                {
+                  "content": "Combien de faces a un pavé droit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les faces : un pavé droit a un dessus, un dessous et quatre côtés, soit 6 faces. 4 oublie le dessus et le dessous ; 8 est le nombre de sommets ; 12 est le nombre d'arêtes.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'arêtes a un cube ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Compter les arêtes : un cube a 4 arêtes en haut, 4 arêtes en bas et 4 arêtes qui les relient. Donc $4 + 4 + 4 = 12$ arêtes.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les six faces d'un pavé droit sont des rectangles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter les faces et reconnaître leur forme : un pavé droit a 6 faces et chacune est un rectangle. Un carré est lui-même un rectangle particulier, donc l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boîte a un dessus et un dessous carrés de 5 cm de côté. Elle mesure 12 cm de haut. Quel est ce solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les faces : 6 faces, toutes des rectangles. Étape 3 — Repérer les dimensions : 5 cm, 5 cm et 12 cm. Étape 4 — Conclure : c'est un pavé droit, mais les trois dimensions ne sont pas égales, donc ce n'est pas un cube. Dire « cube » oublie la hauteur de 12 cm ; un cylindre a des bases rondes.",
+                  "answers": [
+                    {
+                      "content": "Un cube",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pavé droit qui n'est pas un cube",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un cylindre droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide à 4 faces",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit a ___ sommets.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Compter les sommets : 4 coins en haut et 4 coins en bas, soit $4 + 4 = 8$ sommets. 12 est le nombre d'arêtes.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "huit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 8 cm, 5 cm et 2 cm. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Repérer les arêtes de même longueur : un pavé droit a 3 groupes de 4 arêtes égales, soit 4 arêtes de 8 cm, 4 arêtes de 5 cm et 4 arêtes de 2 cm (pas 6). Étape 4 — Conclure : les trois dimensions sont différentes, ce n'est pas un cube, et il a 6 faces, pas 4.",
+                  "answers": [
+                    {
+                      "content": "Il a 4 arêtes de 8 cm.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un cube.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a 4 arêtes de 5 cm.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a seulement 4 faces.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a 6 arêtes de 2 cm.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Décrire des solides de la boutique",
+              "statement": "Dans cet exercice, tu décris les cartons et les dés vendus à la boutique, avec des questions de plusieurs sortes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque solide, compte d'abord les faces, les arêtes et les sommets, puis compare les longueurs des arêtes.",
+              "questions": [
+                {
+                  "content": "Relie chaque description à ce qu'elle désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Reconnaître les faces : les faces d'un cube sont des carrés, celles d'une brique (pavé droit) sont des rectangles. Étape 3 — Repérer les arêtes : un cube a ses 12 arêtes égales, alors qu'un pavé droit aux dimensions différentes a 3 groupes de 4 arêtes égales.",
+                  "answers": [
+                    {
+                      "content": "Un cube",
+                      "match": "12 arêtes de même longueur"
+                    },
+                    {
+                      "content": "Un pavé droit aux trois dimensions différentes",
+                      "match": "3 groupes de 4 arêtes égales"
+                    },
+                    {
+                      "content": "Une face d'un cube",
+                      "match": "Un carré"
+                    },
+                    {
+                      "content": "Une face d'une brique",
+                      "match": "Un rectangle qui n'est pas un carré"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cube a une arête de 5 cm. Quelle est la somme des longueurs de ses 12 arêtes, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm",
+                  "explanation": "Étape 2 — Compter les arêtes : un cube a 12 arêtes. Étape 3 — Elles ont toutes la même longueur, 5 cm. Calcul : $12 \\times 5 = 60$ cm. 17 ou 20 viendraient d'un mauvais nombre d'arêtes.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cube est un pavé droit particulier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : un cube a 6 faces rectangulaires (des carrés), 12 arêtes et 8 sommets, comme tout pavé droit. Ses trois dimensions sont de plus égales : c'est un pavé droit particulier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les six faces d'un cube sont des ___ identiques.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Reconnaître les faces : dans un cube, toutes les faces sont des carrés identiques. « Rectangles » serait vrai pour un pavé droit quelconque, mais pas assez précis pour un cube.",
+                  "answers": [
+                    {
+                      "content": "carrés",
+                      "correct": true
+                    },
+                    {
+                      "content": "carré",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour décrire un pavé droit.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode : Étape 1, compter les faces ; Étape 2, compter les sommets et les arêtes ; Étape 3, repérer les faces opposées et les arêtes égales ; Étape 4, conclure. On ne conclut qu'à la fin, quand on a tout observé.",
+                  "answers": [
+                    {
+                      "content": "Compter les faces et reconnaître leur forme."
+                    },
+                    {
+                      "content": "Compter les sommets et les arêtes."
+                    },
+                    {
+                      "content": "Repérer les faces opposées et les arêtes de même longueur."
+                    },
+                    {
+                      "content": "Conclure en nommant le solide et ses trois dimensions."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un carton a 4 arêtes de 40 cm, 4 arêtes de 30 cm et 4 arêtes de 20 cm. C'est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Repérer les arêtes : 3 groupes de 4 arêtes égales, de longueurs différentes. Étape 4 — Conclure : 12 arêtes et 8 sommets, c'est un pavé droit, mais pas un cube, car les dimensions 40 cm, 30 cm et 20 cm sont différentes.",
+                  "answers": [
+                    {
+                      "content": "un cube",
+                      "correct": false
+                    },
+                    {
+                      "content": "un pavé droit qui n'est pas un cube",
+                      "correct": true
+                    },
+                    {
+                      "content": "un cylindre droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "un solide à 8 faces",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à décrire un pavé droit et un cube.",
+            "questions": [
+              {
+                "content": "Combien de sommets a un cube ?",
+                "question_type": "single_choice",
+                "hint": "Compte les coins du haut, puis ceux du bas.",
+                "explanation": "Étape 2 — Compter les sommets : 4 coins en haut et 4 coins en bas, soit 8 sommets. 6 est le nombre de faces ; 12 est le nombre d'arêtes.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": false
+                  },
+                  {
+                    "content": "12",
+                    "correct": false
+                  },
+                  {
+                    "content": "8",
+                    "correct": true
+                  },
+                  {
+                    "content": "4",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un pavé droit mesure 7 cm, 4 cm et 2 cm. Combien a-t-il d'arêtes de 7 cm ?",
+                "question_type": "numeric",
+                "hint": "Chaque dimension se retrouve sur 4 arêtes.",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Repérer les arêtes de même longueur : un pavé droit a 3 groupes de 4 arêtes égales. Il y a donc 4 arêtes de 7 cm.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pavé droit dont les 6 faces sont des carrés identiques est un cube.",
+                "question_type": "true_false",
+                "hint": "Un cube a des faces qui sont toutes des carrés.",
+                "explanation": "Étape 1 — Reconnaître les faces : 6 carrés identiques. Étape 4 — Conclure : toutes les arêtes ont alors la même longueur, c'est un cube.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Décrire un cylindre droit",
+          "remember": "Un **cylindre droit** est un solide qui a **deux bases** : ce sont deux **disques identiques** (des faces rondes et plates, l'une en face de l'autre). Entre les deux bases, il y a une **face latérale courbe** : si on la déroule, on obtient un rectangle. Un cylindre droit a donc **3 faces** (2 plates, 1 courbe) et **aucun sommet**. Sa **hauteur** est la distance entre les deux bases.",
+          "method": [
+            "Repérer les deux bases et vérifier que ce sont deux disques identiques.",
+            "Repérer la face latérale et vérifier qu'elle est courbe.",
+            "Compter les faces et les sommets.",
+            "Mesurer la hauteur (la distance entre les deux bases), puis conclure : cylindre droit."
+          ],
+          "example": {
+            "statement": "Une boîte de tomates a deux fonds ronds et plats, identiques, et un côté courbe. Ses deux fonds sont distants de 11 cm. La décrire.",
+            "steps": [
+              "Repérer les bases : les deux fonds sont deux disques identiques, ce sont les bases.",
+              "Repérer la face latérale : le côté de la boîte est courbe.",
+              "Compter : la boîte a 3 faces (2 bases plates et 1 face latérale courbe) et aucun sommet.",
+              "Mesurer la hauteur : c'est la distance entre les deux bases, soit 11 cm. La boîte a la forme d'un cylindre droit de hauteur 11 cm."
+            ]
+          },
+          "pitfall": "Ne pas confondre la hauteur du cylindre avec sa position. La hauteur est la distance entre les deux bases, même si le cylindre est couché. Contre-exemple : un bidon rond est couché sur le sol ; ses deux fonds sont distants de 40 cm et il est haut de 30 cm quand on le mesure depuis le sol. Sa hauteur de cylindre est 40 cm, car c'est la distance entre ses deux bases. Pour éviter l'erreur, cherche d'abord les deux bases, puis mesure entre elles.",
+          "figure": "patron-cylindre",
+          "exercise": [
+            {
+              "title": "Reconnaître un cylindre droit",
+              "statement": "Dans cet exercice, tu reconnais des cylindres droits et tu mesures leur hauteur avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces objets de la boutique, lequel a la forme d'un cylindre droit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les bases : la boîte de lait concentré a deux fonds ronds identiques. Étape 2 — Son côté est courbe. Étape 4 — C'est un cylindre droit. Le carton de savon, la brique et le dé ont des faces plates et des sommets : ce sont des pavés droits ou des cubes.",
+                  "answers": [
+                    {
+                      "content": "Un carton de savon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une brique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un dé à jouer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une boîte de lait concentré",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de bases a un cylindre droit ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer les bases : un cylindre droit a deux bases, deux disques identiques, l'une en face de l'autre. La face latérale n'est pas une base.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La face latérale d'un cylindre droit est plate.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer la face latérale : elle est courbe, elle entoure le cylindre. Seules les deux bases sont plates. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux bases d'un cylindre droit sont deux ___ identiques.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer les bases : ce sont deux faces rondes et plates, deux disques identiques.",
+                  "answers": [
+                    {
+                      "content": "disques",
+                      "correct": true
+                    },
+                    {
+                      "content": "disque",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boîte de conserve a un fond posé sur la table et un couvercle. Le fond et le couvercle sont distants de 9 cm. Quelle est sa hauteur, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm",
+                  "explanation": "Étape 4 — Mesurer la hauteur : c'est la distance entre les deux bases. Ici, elle est donnée : 9 cm.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bidon rond est couché sur le sol. Ses deux fonds sont distants de 40 cm. Il est haut de 30 cm quand on le mesure depuis le sol. Quelle est la hauteur du cylindre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les bases : ce sont les deux fonds ronds. Étape 4 — La hauteur est la distance entre les deux bases : 40 cm, même si le bidon est couché. 30 cm est la hauteur depuis le sol, pas la distance entre les bases ; 70 cm additionne deux mesures différentes.",
+                  "answers": [
+                    {
+                      "content": "40 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "30 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "70 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer cylindres et pavés droits",
+              "statement": "Dans cet exercice, tu compares les cylindres droits aux pavés droits avec des questions de plusieurs sortes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense aux deux bases rondes, à la face latérale courbe et à l'absence de coins.",
+              "questions": [
+                {
+                  "content": "Quelles affirmations sont vraies pour un cylindre droit ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Les bases sont deux disques identiques. Étape 3 — Compter : un cylindre droit a 3 faces et aucun sommet. Les affirmations « 6 faces » et « 8 sommets » décrivent un pavé droit ; sa face latérale est courbe, pas plate.",
+                  "answers": [
+                    {
+                      "content": "Il a 8 sommets.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa face latérale est plate.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a 6 faces.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a deux bases qui sont des disques.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'a aucun sommet.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque objet au solide qui lui ressemble.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer les bases et la face latérale. Étape 3 — Compter les faces. Le bidon rond a deux bases rondes et un côté courbe : cylindre droit. Le carton de savon a 6 faces rectangulaires : pavé droit. Le dé a 6 faces carrées : cube.",
+                  "answers": [
+                    {
+                      "content": "Un bidon d'huile rond",
+                      "match": "Cylindre droit"
+                    },
+                    {
+                      "content": "Un carton de savon",
+                      "match": "Pavé droit"
+                    },
+                    {
+                      "content": "Un dé à jouer",
+                      "match": "Cube"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boîte de tomates a une hauteur de 8 cm. On en empile 5, les unes sur les autres. Quelle est la hauteur de la pile, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm",
+                  "explanation": "Étape 4 — La hauteur d'une boîte est 8 cm. Les boîtes sont empilées : on ajoute leurs hauteurs, donc $5 \\times 8 = 40$ cm.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cylindre droit a ___ sommet.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Compter : un cylindre droit a deux bases rondes et une face latérale courbe, donc aucun coin : aucun sommet. « Huit » est le nombre de sommets d'un pavé droit.",
+                  "answers": [
+                    {
+                      "content": "aucun",
+                      "correct": true
+                    },
+                    {
+                      "content": "un",
+                      "correct": false
+                    },
+                    {
+                      "content": "deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "huit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cylindre droit peut rouler sur sa face latérale.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — La face latérale est courbe, donc le cylindre roule dessus, comme un bidon couché. Un pavé droit, dont les faces sont plates, ne roule pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour décrire un cylindre droit.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode : Étape 1, les bases ; Étape 2, la face latérale ; Étape 3, compter les faces et les sommets ; Étape 4, mesurer la hauteur et conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer les deux bases (deux disques identiques)."
+                    },
+                    {
+                      "content": "Repérer la face latérale courbe."
+                    },
+                    {
+                      "content": "Compter les faces et les sommets."
+                    },
+                    {
+                      "content": "Mesurer la hauteur puis conclure."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à décrire un cylindre droit.",
+            "questions": [
+              {
+                "content": "Un seau a la forme d'un cylindre droit. Quelle est la forme de ses deux bases ?",
+                "question_type": "single_choice",
+                "hint": "Les bases d'un cylindre sont rondes.",
+                "explanation": "Étape 1 — Repérer les bases : un cylindre droit a deux bases, deux disques identiques. Les carrés et les rectangles sont les faces d'un pavé droit.",
+                "answers": [
+                  {
+                    "content": "Deux carrés identiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Deux disques identiques",
+                    "correct": true
+                  },
+                  {
+                    "content": "Deux rectangles différents",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un disque et un carré",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cylindre droit a des sommets.",
+                "question_type": "true_false",
+                "hint": "Un cylindre n'a pas de coins.",
+                "explanation": "Étape 3 — Compter : un cylindre droit n'a aucun coin, donc aucun sommet. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un seau a deux bases distantes de 25 cm. Quelle est sa hauteur, en cm ?",
+                "question_type": "numeric",
+                "hint": "La hauteur se mesure entre les deux bases.",
+                "tolerance": 0,
+                "unit": "cm",
+                "explanation": "Étape 4 — Mesurer la hauteur : c'est la distance entre les deux bases, soit 25 cm.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître un patron",
+          "remember": "Un **patron** est un dessin à plat qu'on peut découper puis plier pour fabriquer un solide, sans trou ni recouvrement. Le patron d'un **cube** a 6 carrés identiques. Le patron d'un **pavé droit** a 6 rectangles, en 3 paires de rectangles identiques. Le patron d'un **cylindre droit** a 1 rectangle et 2 disques identiques. Les côtés qui se rejoignent au pliage ont la même longueur. Un même solide a plusieurs patrons possibles.",
+          "method": [
+            "Compter les figures planes du patron et noter leur forme.",
+            "Comparer avec les faces du solide (nombre, forme, faces identiques).",
+            "Vérifier que les côtés qui se rejoignent au pliage ont la même longueur.",
+            "Imaginer le pliage, puis conclure."
+          ],
+          "example": {
+            "statement": "Un patron est fait de 6 rectangles : 2 de 5 cm sur 3 cm, 2 de 5 cm sur 2 cm et 2 de 3 cm sur 2 cm. Quel solide fabrique-t-on ?",
+            "steps": [
+              "Compter les figures : il y a 6 figures planes, toutes des rectangles.",
+              "Comparer : un pavé droit a 6 faces rectangulaires en 3 paires identiques ; ici on trouve bien 3 paires (5 sur 3, 5 sur 2, 3 sur 2).",
+              "Vérifier les longueurs : les côtés qui se rejoignent sont de 5 cm avec 5 cm, de 3 cm avec 3 cm et de 2 cm avec 2 cm.",
+              "Imaginer le pliage et conclure : on fabrique un pavé droit de 5 cm de long, 3 cm de large et 2 cm de haut."
+            ]
+          },
+          "pitfall": "Ne pas croire que six carrés suffisent pour faire un patron de cube : leur disposition compte. Contre-exemple : six carrés de 2 cm alignés en une bande ne se plient pas en cube, car après 4 carrés on est revenu au point de départ ; le 5e et le 6e carré se poseraient sur les deux premiers (recouvrement). Par exemple, un patron en croix (il en existe 11) : une rangée de 4 carrés, avec un carré au-dessus et un carré au-dessous. Pour éviter l'erreur, imagine le pliage ou plie une feuille.",
+          "figure": "patron-cube",
+          "exercise": [
+            {
+              "title": "Associer un patron à un solide",
+              "statement": "Dans cet exercice, tu reconnais des patrons avec la méthode de la fiche. La figure montre le patron d'un pavé droit de 5 cm, 3 cm et 2 cm.",
+              "exercise_type": "fixation",
+              "figure": "patron-pave-droit",
+              "questions": [
+                {
+                  "content": "Un patron est fait de 6 carrés identiques, placés en croix. Quel solide fabrique-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les figures : 6 carrés identiques. Étape 2 — Comparer : un cube a 6 faces carrées identiques. Étape 4 — Conclure : on fabrique un cube. Un pavé droit aux dimensions différentes demanderait des rectangles ; un cylindre demande des disques.",
+                  "answers": [
+                    {
+                      "content": "Un pavé droit aux dimensions différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cylindre droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cube",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un solide à 4 faces",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un patron comprend 1 rectangle et 2 disques identiques. Quel solide fabrique-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 3 figures, un rectangle et deux disques. Étape 2 — Comparer : un cylindre droit a deux bases en disques et une face latérale qui devient un rectangle une fois déroulée. Un cube et un pavé droit n'ont aucun disque.",
+                  "answers": [
+                    {
+                      "content": "Un cube",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pavé droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide à 6 faces",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cylindre droit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de rectangles y a-t-il dans le patron d'un pavé droit dont les trois dimensions sont différentes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer : un pavé droit a 6 faces et chacune est un rectangle. Son patron a donc 6 rectangles, en 3 paires identiques.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le patron d'un cylindre droit a 6 figures planes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Compter : le patron d'un cylindre droit a 3 figures planes, un rectangle et deux disques. Le nombre 6 est celui d'un cube ou d'un pavé droit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un patron est fait de 6 rectangles : 2 de 5 cm sur 3 cm, 2 de 5 cm sur 2 cm et 2 de 3 cm sur 2 cm. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Compter : 6 rectangles. Étape 2 — Comparer : trois paires identiques, comme les faces opposées d'un pavé droit. Étape 4 — Conclure : on fabrique un pavé droit. Ce n'est pas un cube (les rectangles ne sont pas des carrés) ni un cylindre (aucun disque) ; il y a 6 faces, pas 4.",
+                  "answers": [
+                    {
+                      "content": "Il se plie en pavé droit.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se plie en cube.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a seulement 4 faces.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a trois paires de faces identiques.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se plie en cylindre droit.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Six carrés identiques sont alignés en une seule bande. Est-ce un patron de cube ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 6 carrés, c'est le bon nombre. Mais Étape 4 — Imaginer le pliage : 4 carrés font le tour du cube ; le 5e et le 6e retombent sur les deux premiers, il y a recouvrement. Ce n'est pas un patron. Le nombre de carrés ne suffit pas : la disposition compte. Un cube a 6 faces, pas 8.",
+                  "answers": [
+                    {
+                      "content": "Oui, car il y a 6 carrés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, si on colle les bords",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car il faudrait 8 carrés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : le 5e et le 6e carré se recouvrent",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Fabriquer des boîtes pour la boutique",
+              "statement": "Dans cet exercice, tu prépares les patrons de boîtes de la boutique, avec des questions de plusieurs sortes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compte les figures du patron, compare-les aux faces du solide, puis imagine le pliage.",
+              "questions": [
+                {
+                  "content": "Relie chaque patron au solide qu'il fabrique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Compter et reconnaître les figures. Étape 2 — Comparer : 6 carrés identiques font un cube ; un rectangle et deux disques font un cylindre droit ; 6 rectangles en 3 paires font un pavé droit.",
+                  "answers": [
+                    {
+                      "content": "6 carrés identiques bien placés",
+                      "match": "Un cube"
+                    },
+                    {
+                      "content": "1 rectangle et 2 disques identiques",
+                      "match": "Un cylindre droit"
+                    },
+                    {
+                      "content": "6 rectangles non carrés en 3 paires identiques",
+                      "match": "Un pavé droit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant fabrique 3 boîtes en forme de cube. Chaque patron est fait de 6 carrés. Combien de carrés faut-il en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Compter : un patron de cube a 6 carrés. Pour 3 boîtes : $3 \\times 6 = 18$ carrés.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le patron d'un cylindre droit se compose d'un rectangle et de deux ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Comparer : les deux bases du cylindre sont des disques identiques, le rectangle est la face latérale déroulée.",
+                  "answers": [
+                    {
+                      "content": "disques",
+                      "correct": true
+                    },
+                    {
+                      "content": "disque",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le patron d'un cylindre droit, les deux disques sont identiques.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : les deux bases d'un cylindre droit sont identiques, donc les deux disques du patron le sont aussi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le patron d'un pavé droit à base carrée, qui n'est pas un cube, comprend ___ carrés.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Comparer : un pavé droit à base carrée a un dessus et un dessous carrés, soit 2 carrés ; ses 4 côtés sont des rectangles. 4 serait le nombre de faces non carrées.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un patron.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode : Étape 1, compter les figures ; Étape 2, comparer avec les faces du solide ; Étape 3, vérifier les longueurs ; Étape 4, imaginer le pliage et conclure.",
+                  "answers": [
+                    {
+                      "content": "Compter les figures planes et noter leur forme."
+                    },
+                    {
+                      "content": "Comparer avec les faces du solide."
+                    },
+                    {
+                      "content": "Vérifier que les côtés qui se rejoignent ont la même longueur."
+                    },
+                    {
+                      "content": "Imaginer le pliage, puis conclure."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un patron.",
+            "questions": [
+              {
+                "content": "Combien de figures planes a le patron d'un cylindre droit ?",
+                "question_type": "numeric",
+                "hint": "Un rectangle et deux disques.",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Compter les figures : un rectangle et deux disques, soit $1 + 2 = 3$ figures.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le patron d'un pavé droit de 6 cm, 4 cm et 2 cm a 6 rectangles. Combien sont de 6 cm sur 4 cm ?",
+                "question_type": "single_choice",
+                "hint": "Les faces opposées sont identiques.",
+                "explanation": "Étape 2 — Comparer : les faces d'un pavé droit vont par paires de faces opposées identiques. Il y a donc 2 rectangles de 6 cm sur 4 cm. 1 oublie la face opposée ; 4 et 6 mélangent les paires.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": false
+                  },
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "4",
+                    "correct": false
+                  },
+                  {
+                    "content": "6",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le patron d'un cube est fait de 6 carrés identiques bien placés.",
+                "question_type": "true_false",
+                "hint": "Pense aux faces d'un dé.",
+                "explanation": "Étape 1 — Compter : 6 carrés. Étape 2 — Comparer : les 6 faces d'un cube sont des carrés identiques. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer l'aire totale d'un pavé droit",
+          "remember": "L'**aire totale** d'un pavé droit est la somme des aires de ses **6 faces**. Les faces opposées étant identiques, il suffit de calculer l'aire de **3 faces différentes**, puis de **doubler**. Avec la longueur $L$, la largeur $l$ et la hauteur $h$ : $A = 2 \\times (L \\times l + L \\times h + l \\times h)$. L'aire d'un rectangle est sa longueur multipliée par sa largeur. L'aire s'exprime en cm² ou en m².",
+          "method": [
+            "Repérer les trois dimensions $L$, $l$ et $h$, dans la même unité.",
+            "Calculer l'aire des trois faces différentes : $L \\times l$, $L \\times h$ et $l \\times h$.",
+            "Additionner ces trois aires, puis doubler le résultat (les faces opposées sont identiques).",
+            "Écrire le résultat avec l'unité d'aire (cm², m²)."
+          ],
+          "example": {
+            "statement": "Calculer l'aire totale d'un pavé droit de 5 cm de long, 3 cm de large et 2 cm de haut.",
+            "steps": [
+              "Repérer : $L = 5$ cm, $l = 3$ cm, $h = 2$ cm, toutes en cm.",
+              "Calculer les trois faces : $5 \\times 3 = 15$ cm², $5 \\times 2 = 10$ cm², $3 \\times 2 = 6$ cm².",
+              "Additionner puis doubler : $15 + 10 + 6 = 31$, et $2 \\times 31 = 62$.",
+              "Écrire l'unité : l'aire totale est de 62 cm²."
+            ]
+          },
+          "pitfall": "Ne pas oublier de doubler, car chaque face a une face opposée identique. Contre-exemple : pour 5 cm, 3 cm et 2 cm, on trouve $15 + 10 + 6 = 31$ cm² ; mais ce nombre ne compte que 3 faces. Il y en a 6, donc l'aire totale est $2 \\times 31 = 62$ cm². N'écris pas non plus cm ou cm³ : une aire s'exprime en cm². Pour éviter l'erreur, compte les faces : il doit y en avoir 6.",
+          "figure": "patron-pave-droit",
+          "exercise": [
+            {
+              "title": "Calculer des aires totales",
+              "statement": "Dans cet exercice, tu calcules des aires de faces et des aires totales de pavés droits avec la méthode de la fiche. La figure montre le patron d'un pavé droit de 5 cm, 3 cm et 2 cm.",
+              "exercise_type": "fixation",
+              "figure": "patron-pave-droit",
+              "questions": [
+                {
+                  "content": "Une face d'un pavé droit est un rectangle de 6 cm sur 4 cm. Quelle est son aire, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 2 — Calculer l'aire d'une face : l'aire d'un rectangle est longueur $\\times$ largeur, donc $6 \\times 4 = 24$ cm².",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 4 cm, 3 cm et 2 cm. Quelle est son aire totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $L = 4$, $l = 3$, $h = 2$. Étape 2 — Faces : $4 \\times 3 = 12$, $4 \\times 2 = 8$, $3 \\times 2 = 6$. Étape 3 — $12 + 8 + 6 = 26$, puis $2 \\times 26 = 52$. Étape 4 — 52 cm². 26 cm² oublie de doubler ; 24 cm² est le volume $4 \\times 3 \\times 2$ ; cm³ est l'unité d'un volume.",
+                  "answers": [
+                    {
+                      "content": "26 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "52 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "52 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cube a une arête de 3 cm. Quelle est son aire totale, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 1 — Les trois dimensions valent 3 cm. Étape 2 — Chaque face a pour aire $3 \\times 3 = 9$ cm². Étape 3 — $9 + 9 + 9 = 27$, puis $2 \\times 27 = 54$. Étape 4 — 54 cm². On retrouve $6 \\times 9 = 54$ : le cube a 6 faces identiques.",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer l'aire totale, on calcule ___ faces différentes, puis on double.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Dans un pavé droit, les faces opposées sont identiques : il y a 3 faces différentes. On les additionne (Étape 3), puis on double.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "trois",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aire totale d'un pavé droit s'exprime en…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Écrire l'unité : une aire se mesure en unités carrées, comme cm². cm est l'unité d'une longueur ; cm³ celle d'un volume ; kg celle d'une masse.",
+                  "answers": [
+                    {
+                      "content": "cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 10 cm, 5 cm et 2 cm. Quelle est son aire totale, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 1 — $L = 10$, $l = 5$, $h = 2$. Étape 2 — $10 \\times 5 = 50$, $10 \\times 2 = 20$, $5 \\times 2 = 10$. Étape 3 — $50 + 20 + 10 = 80$, puis $2 \\times 80 = 160$. Étape 4 — 160 cm². Le résultat 80 oublie de doubler : il ne compte que 3 faces.",
+                  "answers": [
+                    {
+                      "content": "160",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Emballer des cartons",
+              "statement": "Dans cet exercice, tu calcules l'aire du papier nécessaire pour emballer des cartons de la boutique, avec des questions de plusieurs sortes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule les trois aires différentes, additionne-les, puis n'oublie pas de doubler.",
+              "questions": [
+                {
+                  "content": "Un carton a la forme d'un pavé droit de 6 cm, 5 cm et 4 cm. Quelle est son aire totale, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 1 — $L = 6$, $l = 5$, $h = 4$. Étape 2 — $6 \\times 5 = 30$, $6 \\times 4 = 24$, $5 \\times 4 = 20$. Étape 3 — $30 + 24 + 20 = 74$, puis $2 \\times 74 = 148$. Étape 4 — 148 cm². Le résultat 74 oublie de doubler.",
+                  "answers": [
+                    {
+                      "content": "148",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer l'aire totale d'un pavé droit.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode : Étape 1, repérer les dimensions ; Étape 2, calculer les trois aires ; Étape 3, additionner puis doubler ; Étape 4, écrire l'unité.",
+                  "answers": [
+                    {
+                      "content": "Repérer les trois dimensions dans la même unité."
+                    },
+                    {
+                      "content": "Calculer l'aire des trois faces différentes."
+                    },
+                    {
+                      "content": "Additionner les trois aires, puis doubler."
+                    },
+                    {
+                      "content": "Écrire le résultat avec l'unité d'aire."
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux faces opposées d'un pavé droit ont la même aire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Les faces opposées d'un pavé droit sont identiques, donc elles ont la même aire : c'est pour cela qu'on double la somme des trois aires.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 8 cm, 5 cm et 3 cm. Quelles sont les aires des trois faces différentes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Les trois faces différentes ont pour aires $8 \\times 5 = 40$, $8 \\times 3 = 24$ et $5 \\times 3 = 15$. 13 vient d'une addition $8 + 5$ ; 64 est $8 \\times 8$ ; 120 est le produit des trois dimensions, c'est-à-dire un volume.",
+                  "answers": [
+                    {
+                      "content": "120 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "13 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "64 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aire totale d'un cube d'arête 2 cm est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Une face a pour aire $2 \\times 2 = 4$ cm². Étape 3 — $4 + 4 + 4 = 12$, puis $2 \\times 12 = 24$. Étape 4 — 24 cm². 4 cm² est une seule face ; 12 cm² oublie de doubler ; 8 est le volume $2 \\times 2 \\times 2$ (en cm³).",
+                  "answers": [
+                    {
+                      "content": "8 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque solide à son aire totale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Pour le cube : $2 \\times (1 + 1 + 1) = 6$. Pour 2, 1, 1 : $2 \\times (2 + 2 + 1) = 10$. Pour 3, 2, 1 : $2 \\times (6 + 3 + 2) = 22$.",
+                  "answers": [
+                    {
+                      "content": "Cube d'arête 1 cm",
+                      "match": "6 cm²"
+                    },
+                    {
+                      "content": "Pavé droit de 2 cm, 1 cm et 1 cm",
+                      "match": "10 cm²"
+                    },
+                    {
+                      "content": "Pavé droit de 3 cm, 2 cm et 1 cm",
+                      "match": "22 cm²"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à calculer l'aire totale d'un pavé droit.",
+            "questions": [
+              {
+                "content": "Un pavé droit mesure 4 cm, 2 cm et 1 cm. Quelle est son aire totale, en cm² ?",
+                "question_type": "numeric",
+                "hint": "Trois aires, une somme, puis le double.",
+                "tolerance": 0,
+                "unit": "cm²",
+                "explanation": "Étape 2 — $4 \\times 2 = 8$, $4 \\times 1 = 4$, $2 \\times 1 = 2$. Étape 3 — $8 + 4 + 2 = 14$, puis $2 \\times 14 = 28$. Étape 4 — 28 cm².",
+                "answers": [
+                  {
+                    "content": "28",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pavé droit mesure 6 cm, 3 cm et 2 cm. Combien a-t-il de faces de 6 cm sur 3 cm ?",
+                "question_type": "single_choice",
+                "hint": "Chaque face a une face opposée identique.",
+                "explanation": "Étape 3 — Les faces opposées sont identiques, donc la face de 6 cm sur 3 cm existe deux fois. 1 oublie la face opposée.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "1",
+                    "correct": false
+                  },
+                  {
+                    "content": "3",
+                    "correct": false
+                  },
+                  {
+                    "content": "4",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'aire totale d'un cube d'arête 5 cm est 150 cm².",
+                "question_type": "true_false",
+                "hint": "Un cube a 6 faces carrées identiques.",
+                "explanation": "Étape 2 — Une face a pour aire $5 \\times 5 = 25$ cm². Étape 3 — $25 + 25 + 25 = 75$, puis $2 \\times 75 = 150$. Étape 4 — 150 cm². L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer le volume d'un pavé droit",
+          "remember": "Le **volume** d'un solide mesure la place qu'il occupe. Pour un pavé droit de longueur $L$, de largeur $l$ et de hauteur $h$, dans la même unité : $V = L \\times l \\times h$. Pour un cube d'arête $a$ : $V = a \\times a \\times a$. Le volume s'exprime en cm³ si les longueurs sont en cm, en dm³ si elles sont en dm, en m³ si elles sont en m.",
+          "method": [
+            "Relever les trois dimensions $L$, $l$ et $h$ et les exprimer dans la même unité.",
+            "Écrire la formule $V = L \\times l \\times h$ avec les valeurs.",
+            "Calculer le produit, en deux multiplications.",
+            "Écrire le résultat avec l'unité de volume (cm³, dm³, m³)."
+          ],
+          "example": {
+            "statement": "Un carton a la forme d'un pavé droit de 20 cm de long, 10 cm de large et 5 cm de haut. Calculer son volume.",
+            "steps": [
+              "Relever : $L = 20$ cm, $l = 10$ cm, $h = 5$ cm, toutes en cm.",
+              "Écrire la formule : $V = 20 \\times 10 \\times 5$.",
+              "Calculer : $20 \\times 10 = 200$, puis $200 \\times 5 = 1\\,000$.",
+              "Écrire l'unité : le volume est de 1 000 cm³."
+            ]
+          },
+          "pitfall": "Ne pas additionner les dimensions, et ne pas écrire cm ou cm² pour un volume. Contre-exemple : pour 5 cm, 3 cm et 2 cm, on a $5 + 3 + 2 = 10$, ce qui est faux ; le bon calcul est $5 \\times 3 \\times 2 = 30$ cm³. Attention aussi aux unités mélangées : pour 2 m, 50 cm et 10 cm, on convertit d'abord 2 m en 200 cm, puis $200 \\times 50 \\times 10 = 100\\,000$ cm³. Pour éviter l'erreur, écris toujours la formule et vérifie l'unité.",
+          "figure": "pave-droit",
+          "exercise": [
+            {
+              "title": "Calculer des volumes de pavés droits et de cubes",
+              "statement": "Dans cet exercice, tu calcules des volumes avec la méthode de la fiche. La figure montre un pavé droit de 6 cm de long, 4 cm de large et 3 cm de haut.",
+              "exercise_type": "fixation",
+              "figure": "pave-droit",
+              "questions": [
+                {
+                  "content": "Quelle formule donne le volume d'un pavé droit de longueur $L$, de largeur $l$ et de hauteur $h$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — La formule du volume est le produit des trois dimensions : $V = L \\times l \\times h$. La somme $L + l + h$ ne mesure pas une place occupée ; $L \\times l$ est l'aire d'une face ; le double de la somme n'a pas de sens pour un volume.",
+                  "answers": [
+                    {
+                      "content": "$V = L + l + h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = L \\times l \\times h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V = L \\times l$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = 2 \\times (L + l + h)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 6 cm, 4 cm et 3 cm. Quel est son volume, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 1 — $L = 6$, $l = 4$, $h = 3$ (cm). Étape 2 — $V = 6 \\times 4 \\times 3$. Étape 3 — $6 \\times 4 = 24$, puis $24 \\times 3 = 72$. Étape 4 — 72 cm³.",
+                  "answers": [
+                    {
+                      "content": "72",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cube a une arête de 4 cm. Quel est son volume, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 1 — Les trois dimensions valent 4 cm. Étape 2 — $V = 4 \\times 4 \\times 4$. Étape 3 — $4 \\times 4 = 16$, puis $16 \\times 4 = 64$. Étape 4 — 64 cm³. Le nombre 12 serait $4 \\times 3$ ; ce n'est pas le volume.",
+                  "answers": [
+                    {
+                      "content": "64",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le volume d'un pavé droit mesuré en centimètres s'exprime en…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Trois longueurs en cm multipliées donnent des cm³. cm est l'unité d'une longueur, cm² celle d'une aire, kg celle d'une masse.",
+                  "answers": [
+                    {
+                      "content": "cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 10 dm, 5 dm et 4 dm. Quel est son volume, en dm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "dm³",
+                  "explanation": "Étape 1 — Les trois dimensions sont en dm. Étape 2 — $V = 10 \\times 5 \\times 4$. Étape 3 — $10 \\times 5 = 50$, puis $50 \\times 4 = 200$. Étape 4 — 200 dm³.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 5 cm, 3 cm et 2 cm. Quel est son volume, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 5 \\times 3 \\times 2$. Étape 3 — $5 \\times 3 = 15$, puis $15 \\times 2 = 30$. Étape 4 — 30 cm³. Le nombre 10, obtenu avec $5 + 3 + 2$, vient d'une addition : on multiplie les dimensions.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Remplir les étagères de la boutique",
+              "statement": "Dans cet exercice, tu calcules le volume des caisses de la boutique, avec des questions de plusieurs sortes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis d'abord les longueurs dans la même unité, écris la formule, puis multiplie.",
+              "questions": [
+                {
+                  "content": "Une caisse a la forme d'un pavé droit de 50 cm, 40 cm et 30 cm. Quel est son volume, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 1 — $L = 50$, $l = 40$, $h = 30$ (cm). Étape 2 — $V = 50 \\times 40 \\times 30$. Étape 3 — $50 \\times 40 = 2\\,000$, puis $2\\,000 \\times 30 = 60\\,000$. Étape 4 — 60 000 cm³.",
+                  "answers": [
+                    {
+                      "content": "60000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse mesure 2 m de long, 50 cm de large et 10 cm de haut. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Il faut la même unité : $2$ m $= 200$ cm. Étape 2 — $V = 200 \\times 50 \\times 10$. Étape 3 — $200 \\times 50 = 10\\,000$, puis $10\\,000 \\times 10 = 100\\,000$. Étape 4 — 100 000 cm³. 1 000 cm³ garde 2 sans convertir ; 62 vient d'une addition ; 10 000 oublie un facteur.",
+                  "answers": [
+                    {
+                      "content": "1 000 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "62 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 000 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "100 000 cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cube d'arête 3 cm a un volume de 9 cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — $V = 3 \\times 3 \\times 3$. Étape 3 — $3 \\times 3 = 9$, puis $9 \\times 3 = 27$. Étape 4 — 27 cm³. 9 est l'aire d'une face, pas le volume.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le volume d'une boîte de 10 cm, 10 cm et 10 cm vaut ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — $V = 10 \\times 10 \\times 10$. Étape 3 — $10 \\times 10 = 100$, puis $100 \\times 10 = 1\\,000$. Étape 4 — 1 000 cm³. 30 vient d'une addition ; 100 oublie une multiplication ; 300 est $100 \\times 3$.",
+                  "answers": [
+                    {
+                      "content": "1 000 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "30 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "100 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "300 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque solide à son volume.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — $2 \\times 2 \\times 2 = 8$ ; $3 \\times 2 \\times 2 = 12$ ; $5 \\times 4 \\times 1 = 20$. On multiplie les trois dimensions de chaque solide.",
+                  "answers": [
+                    {
+                      "content": "Cube de 2 cm d'arête",
+                      "match": "8 cm³"
+                    },
+                    {
+                      "content": "Pavé droit de 3 cm, 2 cm et 2 cm",
+                      "match": "12 cm³"
+                    },
+                    {
+                      "content": "Pavé droit de 5 cm, 4 cm et 1 cm",
+                      "match": "20 cm³"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer le volume d'un pavé droit.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode : Étape 1, relever les dimensions ; Étape 2, écrire la formule ; Étape 3, calculer ; Étape 4, écrire l'unité.",
+                  "answers": [
+                    {
+                      "content": "Relever les trois dimensions dans la même unité."
+                    },
+                    {
+                      "content": "Écrire la formule avec les valeurs."
+                    },
+                    {
+                      "content": "Calculer le produit en deux multiplications."
+                    },
+                    {
+                      "content": "Écrire le résultat avec l'unité de volume."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à calculer le volume d'un pavé droit.",
+            "questions": [
+              {
+                "content": "Un pavé droit mesure 7 cm, 3 cm et 2 cm. Quel est son volume, en cm³ ?",
+                "question_type": "numeric",
+                "hint": "Multiplie les trois nombres, deux par deux.",
+                "tolerance": 0,
+                "unit": "cm³",
+                "explanation": "Étape 2 — $V = 7 \\times 3 \\times 2$. Étape 3 — $7 \\times 3 = 21$, puis $21 \\times 2 = 42$. Étape 4 — 42 cm³.",
+                "answers": [
+                  {
+                    "content": "42",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un cube a une arête de 5 cm. Quel est son volume, en cm³ ?",
+                "question_type": "numeric",
+                "hint": "Un cube a trois dimensions égales.",
+                "tolerance": 0,
+                "unit": "cm³",
+                "explanation": "Étape 2 — $V = 5 \\times 5 \\times 5$. Étape 3 — $5 \\times 5 = 25$, puis $25 \\times 5 = 125$. Étape 4 — 125 cm³.",
+                "answers": [
+                  {
+                    "content": "125",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pavé droit est mesuré en mètres. En quelle unité s'exprime son volume ?",
+                "question_type": "single_choice",
+                "hint": "Trois dimensions multipliées : unité au cube.",
+                "explanation": "Étape 4 — Si les trois dimensions sont en m, le volume est en m³. m est l'unité d'une longueur, m² celle d'une aire.",
+                "answers": [
+                  {
+                    "content": "m",
+                    "correct": false
+                  },
+                  {
+                    "content": "m³",
+                    "correct": true
+                  },
+                  {
+                    "content": "m²",
+                    "correct": false
+                  },
+                  {
+                    "content": "cm²",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La boutique de Mme Kouassi",
+          "statement": "Mme Kouassi tient une boutique à Bouaké. Elle vend des cartons de savon en forme de pavé droit de 40 cm de long, 30 cm de large et 20 cm de haut, et des boîtes de tomates en forme de cylindre droit.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le solide formé par un carton de savon ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Compter les faces : un carton a 6 faces rectangulaires. Étape 3 — Ses trois dimensions (40 cm, 30 cm et 20 cm) sont différentes. Étape 4 — C'est un pavé droit. Ce n'est pas un cube, car les dimensions ne sont pas égales, ni un cylindre, car il n'a pas de base ronde.",
+              "answers": [
+                {
+                  "content": "Un cube",
+                  "correct": false
+                },
+                {
+                  "content": "Un cylindre droit",
+                  "correct": false
+                },
+                {
+                  "content": "Un pavé droit",
+                  "correct": true
+                },
+                {
+                  "content": "Un solide à 4 faces",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'arêtes a un carton de savon ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Un pavé droit a 4 arêtes en haut, 4 arêtes en bas et 4 arêtes verticales, soit $4 + 4 + 4 = 12$ arêtes. Elles forment 3 groupes de 4 arêtes égales (40 cm, 30 cm et 20 cm).",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le volume d'un carton de savon, en cm³ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm³",
+              "explanation": "Étape 1 — $L = 40$, $l = 30$, $h = 20$ (cm). Étape 2 — $V = 40 \\times 30 \\times 20$. Étape 3 — $40 \\times 30 = 1\\,200$, puis $1\\,200 \\times 20 = 24\\,000$. Étape 4 — 24 000 cm³. Une addition $40 + 30 + 20 = 90$ serait fausse : un volume est un produit.",
+              "answers": [
+                {
+                  "content": "24000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une boîte de tomates cylindrique a 6 faces.",
+              "question_type": "true_false",
+              "explanation": "Un cylindre droit a 3 faces : deux bases qui sont des disques identiques et une face latérale courbe. Il n'a aucun sommet. Les 6 faces sont celles d'un pavé droit, comme le carton de savon.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'aire de la plus grande face d'un carton de savon, en cm² ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm²",
+              "explanation": "Étape 1 — La plus grande face est celle des deux plus grandes dimensions, 40 cm et 30 cm. Étape 2 — L'aire d'un rectangle est longueur $\\times$ largeur : $40 \\times 30 = 1\\,200$ cm². Les autres faces valent $40 \\times 20 = 800$ cm² et $30 \\times 20 = 600$ cm².",
+              "answers": [
+                {
+                  "content": "1200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le patron d'une boîte de tomates cylindrique contient ___ disques.",
+              "question_type": "fill_blank",
+              "explanation": "Le patron d'un cylindre droit comprend un rectangle (la face latérale déroulée) et deux disques identiques (les deux bases). Il y a donc 2 disques.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                },
+                {
+                  "content": "deux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les briques du chantier",
+          "statement": "Sur un chantier de Daloa, un maçon utilise des briques pleines. Une brique a la forme d'un pavé droit de 20 cm de long, 10 cm de large et 5 cm de haut.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le volume d'une brique, en cm³ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm³",
+              "explanation": "Étape 1 — $L = 20$, $l = 10$, $h = 5$ (cm). Étape 2 — $V = 20 \\times 10 \\times 5$. Étape 3 — $20 \\times 10 = 200$, puis $200 \\times 5 = 1\\,000$. Étape 4 — 1 000 cm³.",
+              "answers": [
+                {
+                  "content": "1000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'aire totale d'une brique, en cm² ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm²",
+              "explanation": "Étape 1 — $L = 20$, $l = 10$, $h = 5$. Étape 2 — Trois faces différentes : $20 \\times 10 = 200$, $20 \\times 5 = 100$, $10 \\times 5 = 50$. Étape 3 — $200 + 100 + 50 = 350$, puis on double car les faces opposées sont identiques : $2 \\times 350 = 700$. Étape 4 — 700 cm². Le résultat 350 oublie de doubler.",
+              "answers": [
+                {
+                  "content": "700",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le maçon empile 4 briques les unes sur les autres, chacune posée à plat (sa hauteur est de 5 cm). Quelle est la hauteur de la pile, en cm ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm",
+              "explanation": "Chaque brique ajoute sa hauteur de 5 cm. Pour 4 briques : $4 \\times 5 = 20$ cm. Les autres dimensions (20 cm et 10 cm) ne changent pas la hauteur de la pile.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont vraies pour une brique ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Un pavé droit a 12 arêtes en 3 groupes de 4 égales, donc 4 arêtes de 20 cm, 4 de 10 cm et 4 de 5 cm (pas 6 de 10 cm). Il a 8 sommets et 6 faces (pas 4). Étape 4 — Les dimensions sont différentes, ce n'est pas un cube.",
+              "answers": [
+                {
+                  "content": "Elle a 4 arêtes de 20 cm.",
+                  "correct": true
+                },
+                {
+                  "content": "Elle a 4 faces.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a 8 sommets.",
+                  "correct": true
+                },
+                {
+                  "content": "C'est un cube.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a 6 arêtes de 10 cm.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le volume de 3 briques identiques est ___.",
+              "question_type": "select",
+              "explanation": "Une brique a pour volume 1 000 cm³ (voir $20 \\times 10 \\times 5$). Pour 3 briques identiques : $3 \\times 1\\,000 = 3\\,000$ cm³. 1 000 cm³ ne compte qu'une brique ; 300 et 3 viennent d'une erreur de zéros.",
+              "answers": [
+                {
+                  "content": "1 000 cm³",
+                  "correct": false
+                },
+                {
+                  "content": "300 cm³",
+                  "correct": false
+                },
+                {
+                  "content": "3 000 cm³",
+                  "correct": true
+                },
+                {
+                  "content": "3 cm³",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour calculer le volume d'une brique.",
+              "question_type": "ordering",
+              "explanation": "On suit la méthode du volume : Étape 1, relever les dimensions ; Étape 2, écrire $V = L \\times l \\times h$ avec les valeurs ; Étape 3, calculer ; Étape 4, écrire cm³.",
+              "answers": [
+                {
+                  "content": "Relever les trois dimensions dans la même unité."
+                },
+                {
+                  "content": "Écrire la formule du volume avec les valeurs."
+                },
+                {
+                  "content": "Calculer le produit en deux multiplications."
+                },
+                {
+                  "content": "Écrire le résultat avec l'unité de volume."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le magasin de cartons",
+          "statement": "Awa vend des cartons dans son magasin d'Abidjan. Le carton A est un pavé droit de 50 cm de long, 30 cm de large et 20 cm de haut. Le carton B est un cube de 30 cm d'arête.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le volume du carton A, en cm³ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm³",
+              "explanation": "Étape 1 — $L = 50$, $l = 30$, $h = 20$ (cm). Étape 2 — $V = 50 \\times 30 \\times 20$. Étape 3 — $50 \\times 30 = 1\\,500$, puis $1\\,500 \\times 20 = 30\\,000$. Étape 4 — 30 000 cm³.",
+              "answers": [
+                {
+                  "content": "30000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le volume du carton B, en cm³ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm³",
+              "explanation": "Étape 1 — Les trois dimensions valent 30 cm. Étape 2 — $V = 30 \\times 30 \\times 30$. Étape 3 — $30 \\times 30 = 900$, puis $900 \\times 30 = 27\\,000$. Étape 4 — 27 000 cm³.",
+              "answers": [
+                {
+                  "content": "27000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel carton contient le plus de marchandises ?",
+              "question_type": "single_choice",
+              "explanation": "On compare les volumes : carton A, 30 000 cm³ ; carton B, 27 000 cm³. Comme $30\\,000 > 27\\,000$, le carton A contient le plus. Il n'est pas vrai que les deux contiennent autant, et le calcul du volume permet bien de comparer.",
+              "answers": [
+                {
+                  "content": "Le carton B",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux autant",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                },
+                {
+                  "content": "Le carton A",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'aire totale du carton A, en cm² ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm²",
+              "explanation": "Étape 1 — $L = 50$, $l = 30$, $h = 20$. Étape 2 — $50 \\times 30 = 1\\,500$, $50 \\times 20 = 1\\,000$, $30 \\times 20 = 600$. Étape 3 — $1\\,500 + 1\\,000 + 600 = 3\\,100$, puis $2 \\times 3\\,100 = 6\\,200$. Étape 4 — 6 200 cm². Le résultat 3 100 oublie de doubler.",
+              "answers": [
+                {
+                  "content": "6200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'aire totale du carton B, en cm² ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm²",
+              "explanation": "Étape 2 — Une face a pour aire $30 \\times 30 = 900$ cm². Étape 3 — Le cube a 6 faces identiques : $6 \\times 900 = 5\\,400$ (ou $2 \\times (900 + 900 + 900) = 5\\,400$). Étape 4 — 5 400 cm².",
+              "answers": [
+                {
+                  "content": "5400",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont vraies pour le carton A ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Un pavé droit a des faces opposées identiques, donc de même aire, et 4 arêtes de chaque dimension : 4 arêtes de 50 cm. Ce n'est pas un cube (50, 30 et 20 sont différents), il n'a pas 6 arêtes de 30 cm (il en a 4), et son volume est un produit, $50 \\times 30 \\times 20$, pas une somme.",
+              "answers": [
+                {
+                  "content": "Ses faces opposées ont la même aire.",
+                  "correct": true
+                },
+                {
+                  "content": "Son volume est $50 + 30 + 20$ cm³.",
+                  "correct": false
+                },
+                {
+                  "content": "C'est un cube.",
+                  "correct": false
+                },
+                {
+                  "content": "Il a 4 arêtes de 50 cm.",
+                  "correct": true
+                },
+                {
+                  "content": "Il a 6 arêtes de 30 cm.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'entrepôt du grossiste de Yamoussoukro",
+          "statement": "Un grossiste de Yamoussoukro range des cartons dans une salle en forme de pavé droit de 6 m de long, 4 m de large et 3 m de haut. Chaque carton est un pavé droit de 60 cm de long, 40 cm de large et 30 cm de haut. Il contient des boîtes de conserve cylindriques de 10 cm de haut. On rappelle que 1 m = 100 cm.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le volume d'un carton, en cm³ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "cm³",
+              "explanation": "Étape 1 — $L = 60$, $l = 40$, $h = 30$ (cm). Étape 2 — $V = 60 \\times 40 \\times 30$. Étape 3 — $60 \\times 40 = 2\\,400$, puis $2\\,400 \\times 30 = 72\\,000$. Étape 4 — 72 000 cm³.",
+              "answers": [
+                {
+                  "content": "72000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de cartons peut-on aligner le long de la salle de 6 m, en les posant par leur côté de 60 cm ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Il faut la même unité : $6$ m $= 600$ cm. On cherche combien de fois 60 cm tient dans 600 cm : $600 \\div 60 = 10$ cartons. Garder 6 m avec 60 cm donnerait un résultat faux : les unités ne sont pas les mêmes.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de cartons peut-on aligner sur la largeur de 4 m, en les posant par leur côté de 40 cm ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Conversion : $4$ m $= 400$ cm. Puis $400 \\div 40 = 10$ cartons.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de cartons peut-on empiler jusqu'à 3 m de hauteur, chacun ayant 30 cm de haut ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Conversion : $3$ m $= 300$ cm. Puis $300 \\div 30 = 10$ cartons empilés.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de cartons le grossiste peut-il ranger en tout dans la salle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Les cartons sont rangés en 10 sur la longueur, 10 sur la largeur et 10 en hauteur. Le nombre total est le produit : $10 \\times 10 \\times 10 = 1\\,000$ cartons. Additionner $10 + 10 + 10$ ne compte qu'une rangée dans chaque sens : on multiplie.",
+              "answers": [
+                {
+                  "content": "1000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans un carton de 30 cm de haut, on empile des boîtes de conserve cylindriques de 10 cm de haut, debout. Combien de boîtes peut-on empiler en une seule pile ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "La hauteur d'une pile de boîtes est la somme de leurs hauteurs. On cherche combien de fois 10 cm tient dans 30 cm : $30 \\div 10 = 3$ boîtes. La hauteur d'une boîte cylindrique est la distance entre ses deux bases.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le patron d'un carton ?",
+              "question_type": "single_choice",
+              "explanation": "Un carton est un pavé droit aux dimensions différentes (60, 40 et 30 cm). Son patron comprend ses 6 faces : 6 rectangles, en 3 paires de faces opposées identiques. 6 carrés seraient le patron d'un cube ; un rectangle et deux disques celui d'un cylindre droit ; 4 rectangles ne forment pas un solide fermé.",
+              "answers": [
+                {
+                  "content": "6 carrés identiques",
+                  "correct": false
+                },
+                {
+                  "content": "1 rectangle et 2 disques",
+                  "correct": false
+                },
+                {
+                  "content": "4 rectangles seulement",
+                  "correct": false
+                },
+                {
+                  "content": "6 rectangles non carrés en 3 paires identiques",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Décrire un pavé droit et un cube (faces, arêtes, sommets), décrire un cylindre droit (bases, face latérale, hauteur), reconnaître un patron, premiers calculs d'aire et de volume.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie des solides à faces plates : un pavé droit et un cube. La figure montre un pavé droit.",
+              "exercise_type": "evaluation",
+              "figure": "pave-droit",
+              "hint": "Compte les faces, les arêtes et les sommets, puis compare les dimensions.",
+              "questions": [
+                {
+                  "content": "Une boîte de craies a 6 faces rectangulaires, 12 arêtes et 8 sommets. Quel est ce solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter les faces : 6 faces rectangulaires. Étape 2 — Compter : 12 arêtes et 8 sommets. Étape 4 — Conclure : c'est un pavé droit. Ce n'est pas forcément un cube, car rien ne dit que ses dimensions sont égales ; un cylindre n'a aucun sommet.",
+                  "answers": [
+                    {
+                      "content": "Un pavé droit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un cylindre droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cube obligatoirement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide à 4 faces",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de faces a un cube ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Un cube a un dessus, un dessous et quatre côtés, soit $1 + 1 + 4 = 6$ faces, toutes des carrés identiques.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les six faces d'un cube sont des ___ identiques.",
+                  "question_type": "fill_blank",
+                  "explanation": "Un cube est un pavé droit dont toutes les faces sont des carrés identiques. Les rectangles non carrés sont les faces d'un pavé droit quelconque.",
+                  "answers": [
+                    {
+                      "content": "carrés",
+                      "correct": true
+                    },
+                    {
+                      "content": "carré",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un pavé droit, deux faces opposées ont les mêmes dimensions.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer les faces opposées : dans un pavé droit, elles sont identiques, donc de mêmes dimensions. C'est ce qui permet de doubler la somme de trois aires pour l'aire totale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 9 cm, 6 cm et 6 cm. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Arêtes de même longueur : 4 arêtes de 9 cm, puis 4 + 4 arêtes de 6 cm pour les deux dimensions égales, soit 8 arêtes de 6 cm. Ce n'est pas un cube (9 cm est différent de 6 cm). Il a 8 sommets, pas 10.",
+                  "answers": [
+                    {
+                      "content": "C'est un cube.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a 10 sommets.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a exactement 4 arêtes de 6 cm.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a 4 arêtes de 9 cm.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a 8 arêtes de 6 cm.",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie des objets de la boutique qui ont la forme d'un cylindre droit : boîtes de conserve, bidons, seaux.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense aux deux bases rondes et à la face latérale courbe.",
+              "questions": [
+                {
+                  "content": "Quel objet a la forme d'un cylindre droit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les bases : la boîte de petits pois a deux fonds ronds identiques. Étape 2 — Son côté est courbe. Le carton, la brique et le dé ont des faces plates : ce sont des pavés droits ou un cube.",
+                  "answers": [
+                    {
+                      "content": "Une boîte de petits pois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un carton de savon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une brique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un dé à jouer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de sommets a un cylindre droit ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Compter : un cylindre droit a deux bases rondes et une face latérale courbe. Il n'a aucun coin, donc 0 sommet.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La face latérale d'un cylindre droit est ___ (plate ou courbe).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer la face latérale : elle entoure le cylindre, elle est courbe. Seules les deux bases sont plates.",
+                  "answers": [
+                    {
+                      "content": "courbe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux bases d'un cylindre droit sont deux disques de tailles différentes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer les bases : ce sont deux disques identiques. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bidon rond est couché sur le sol. Ses deux fonds sont distants de 60 cm. Quelle est la hauteur du cylindre, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm",
+                  "explanation": "Étape 4 — Mesurer la hauteur : c'est la distance entre les deux bases, soit 60 cm, même si le bidon est couché.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie des patrons de solides. La figure montre le patron d'un cube de 2 cm d'arête.",
+              "exercise_type": "evaluation",
+              "figure": "patron-cube",
+              "hint": "Compte les figures, compare-les aux faces du solide, puis imagine le pliage.",
+              "questions": [
+                {
+                  "content": "Un patron est fait de 6 carrés identiques placés en croix. Quel solide fabrique-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Compter : 6 carrés identiques. Étape 2 — Comparer : un cube a 6 faces carrées identiques. Étape 4 — Conclure : cube. Un pavé aux dimensions différentes demanderait des rectangles.",
+                  "answers": [
+                    {
+                      "content": "Un cylindre droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cube",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pavé droit aux trois dimensions différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide à 8 faces",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de figures planes a le patron d'un cylindre droit ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Compter : un rectangle (la face latérale déroulée) et deux disques (les bases), soit $1 + 2 = 3$ figures.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le patron d'un cube est fait de six rectangles tous différents.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : les 6 faces d'un cube sont des carrés identiques. Le patron a donc 6 carrés identiques, pas 6 rectangles différents.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un patron.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1, compter les figures ; Étape 2, comparer avec les faces du solide ; Étape 3, vérifier les longueurs ; Étape 4, imaginer le pliage et conclure.",
+                  "answers": [
+                    {
+                      "content": "Compter les figures planes et noter leur forme."
+                    },
+                    {
+                      "content": "Comparer avec les faces du solide."
+                    },
+                    {
+                      "content": "Vérifier que les côtés qui se rejoignent ont la même longueur."
+                    },
+                    {
+                      "content": "Imaginer le pliage, puis conclure."
+                    }
+                  ]
+                },
+                {
+                  "content": "Six carrés identiques sont alignés en une seule bande. Est-ce un patron de cube ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Imaginer le pliage : quatre carrés font le tour, le 5e et le 6e retombent sur les deux premiers. Il y a recouvrement, donc ce n'est pas un patron, même si le nombre de carrés est bon.",
+                  "answers": [
+                    {
+                      "content": "Oui, car il y a 6 carrés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, si on colle les bords",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : le 5e et le 6e carré se recouvrent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car il faudrait 8 carrés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On calcule des aires et des volumes de pavés droits et de cubes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la formule avant de calculer et vérifie l'unité.",
+              "questions": [
+                {
+                  "content": "Quel est le volume d'un pavé droit de 5 cm, 4 cm et 3 cm, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 1 — $L = 5$, $l = 4$, $h = 3$. Étape 2 — $V = 5 \\times 4 \\times 3$. Étape 3 — $5 \\times 4 = 20$, puis $20 \\times 3 = 60$. Étape 4 — 60 cm³.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le volume d'un cube de 2 cm d'arête, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 2 \\times 2 \\times 2$. Étape 3 — $2 \\times 2 = 4$, puis $4 \\times 2 = 8$. Étape 4 — 8 cm³.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une face d'un pavé droit est un rectangle de 7 cm sur 3 cm. Quelle est son aire, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "L'aire d'un rectangle est longueur $\\times$ largeur : $7 \\times 3 = 21$ cm². Le nombre 10 serait la somme $7 + 3$, pas l'aire.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En quelle unité s'exprime le volume d'un solide mesuré en cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Trois dimensions multipliées donnent des cm³. cm est une longueur ; cm² une aire ; kg une masse.",
+                  "answers": [
+                    {
+                      "content": "cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'aire totale d'un pavé droit de 3 cm, 2 cm et 1 cm, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 1 — $L = 3$, $l = 2$, $h = 1$. Étape 2 — $3 \\times 2 = 6$, $3 \\times 1 = 3$, $2 \\times 1 = 2$. Étape 3 — $6 + 3 + 2 = 11$, puis $2 \\times 11 = 22$. Étape 4 — 22 cm². Le résultat 11 oublie de doubler.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La boutique et les cartons",
+          "notions": "Volume et aire d'un carton (pavé droit) et d'un cube, boîtes de conserve (cylindre droit), emballage d'un carton, rangement de caisses dans une salle avec conversion des mètres en centimètres.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Fatou vend du savon en cartons. Un carton est un pavé droit de 50 cm de long, 30 cm de large et 20 cm de haut.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule chaque volume avec la formule, puis compare.",
+              "questions": [
+                {
+                  "content": "Quel est le volume d'un carton, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 1 — $L = 50$, $l = 30$, $h = 20$ (cm). Étape 2 — $V = 50 \\times 30 \\times 20$. Étape 3 — $50 \\times 30 = 1\\,500$, puis $1\\,500 \\times 20 = 30\\,000$. Étape 4 — 30 000 cm³.",
+                  "answers": [
+                    {
+                      "content": "30000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'arêtes de 50 cm a un carton ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Un pavé droit a 3 groupes de 4 arêtes égales. Il y a donc 4 arêtes de 50 cm, 4 de 30 cm et 4 de 20 cm.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'aire de la face du dessus du carton ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le dessus est un rectangle de 50 cm sur 30 cm. Son aire est $50 \\times 30 = 1\\,500$ cm². 80 vient d'une addition ; 600 est l'aire d'une face de 30 cm sur 20 cm ; 30 000 est le volume.",
+                  "answers": [
+                    {
+                      "content": "1 500 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "80 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "600 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 000 cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou vend aussi un carton cubique de 40 cm d'arête. Quel est son volume, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 40 \\times 40 \\times 40$. Étape 3 — $40 \\times 40 = 1\\,600$, puis $1\\,600 \\times 40 = 64\\,000$. Étape 4 — 64 000 cm³.",
+                  "answers": [
+                    {
+                      "content": "64000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le carton cubique de 40 cm d'arête contient plus que le carton de 50 cm, 30 cm et 20 cm.",
+                  "question_type": "true_false",
+                  "explanation": "On compare les volumes : 64 000 cm³ pour le cube et 30 000 cm³ pour le pavé droit. Comme $64\\,000 > 30\\,000$, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une boutique vend des boîtes de conserve cylindriques. Chaque boîte a 12 cm de haut.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La hauteur d'une pile est la somme des hauteurs des boîtes.",
+              "questions": [
+                {
+                  "content": "Quelle est la forme d'une boîte de conserve ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Les deux fonds sont des disques identiques. Étape 2 — Le côté est courbe. Étape 4 — C'est un cylindre droit.",
+                  "answers": [
+                    {
+                      "content": "Un cube",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cylindre droit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pavé droit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide à 6 faces",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On empile 4 boîtes les unes sur les autres. Quelle est la hauteur de la pile, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm",
+                  "explanation": "On ajoute les hauteurs : $4 \\times 12 = 48$ cm.",
+                  "answers": [
+                    {
+                      "content": "48",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le patron d'une boîte de conserve se compose d'un rectangle et de deux ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Les deux bases d'un cylindre droit sont des disques identiques ; le rectangle est la face latérale déroulée.",
+                  "answers": [
+                    {
+                      "content": "disques",
+                      "correct": true
+                    },
+                    {
+                      "content": "disque",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boîte de conserve a deux sommets.",
+                  "question_type": "true_false",
+                  "explanation": "Un cylindre droit n'a aucun sommet : il n'a aucun coin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une étagère mesure 60 cm de haut. Combien de boîtes de 12 cm peut-on empiler en une seule pile sur l'étagère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "On cherche combien de fois 12 cm tient dans 60 cm : $60 \\div 12 = 5$ boîtes.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Awa emballe des cartons dans du papier. La figure montre un carton de 6 cm de long, 4 cm de large et 3 cm de haut.",
+              "exercise_type": "evaluation",
+              "figure": "pave-droit",
+              "hint": "Calcule l'aire totale, puis retire ce qui n'est pas couvert.",
+              "questions": [
+                {
+                  "content": "Quelle est l'aire totale du carton, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 1 — $L = 6$, $l = 4$, $h = 3$. Étape 2 — $6 \\times 4 = 24$, $6 \\times 3 = 18$, $4 \\times 3 = 12$. Étape 3 — $24 + 18 + 12 = 54$, puis $2 \\times 54 = 108$. Étape 4 — 108 cm². Le résultat 54 oublie de doubler.",
+                  "answers": [
+                    {
+                      "content": "108",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cube a 10 cm d'arête. Quelle est son aire totale, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Une face a pour aire $10 \\times 10 = 100$ cm². Le cube a 6 faces identiques : $6 \\times 100 = 600$ cm².",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi double-t-on la somme des trois aires pour trouver l'aire totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un pavé droit a 6 faces, en 3 paires de faces opposées identiques. On calcule les 3 faces différentes, puis on double pour tenir compte des 3 autres. Le nombre 3 n'est pas la raison du doublement ; l'unité et le volume n'interviennent pas.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il y a 3 faces",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'on mesure en cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que chaque face a une face opposée identique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le volume est le double",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aire totale d'un carton s'exprime en ___.",
+                  "question_type": "select",
+                  "explanation": "Une aire se mesure en unités carrées : cm². cm est pour une longueur ; cm³ pour un volume.",
+                  "answers": [
+                    {
+                      "content": "cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa recouvre de papier toutes les faces d'un carton de 5 cm, 3 cm et 2 cm sauf le dessous, qui est une face de 5 cm sur 3 cm. Quelle est l'aire du papier, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 2 — Aire totale du carton : $5 \\times 3 = 15$, $5 \\times 2 = 10$, $3 \\times 2 = 6$ ; $15 + 10 + 6 = 31$ ; puis $2 \\times 31 = 62$ cm². Étape 3 — On enlève le dessous : $62 - 15 = 47$ cm².",
+                  "answers": [
+                    {
+                      "content": "47",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un commerçant range des caisses cubiques de 50 cm d'arête dans une salle en forme de pavé droit de 4 m de long, 3 m de large et 2 m de haut. On rappelle que 1 m = 100 cm.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis les mètres en centimètres, puis cherche combien de caisses tiennent dans chaque sens.",
+              "questions": [
+                {
+                  "content": "Combien de caisses peut-on aligner sur la longueur de 4 m ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "$4$ m $= 400$ cm, et $400 \\div 50 = 8$ caisses.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de caisses peut-on aligner sur la largeur de 3 m ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "$3$ m $= 300$ cm, et $300 \\div 50 = 6$ caisses.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de caisses peut-on empiler jusqu'à 2 m de hauteur ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "$2$ m $= 200$ cm, et $200 \\div 50 = 4$ caisses.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de caisses le commerçant peut-il ranger en tout ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Le nombre total est le produit des trois nombres : $8 \\times 6 = 48$, puis $48 \\times 4 = 192$ caisses. Additionner $8 + 6 + 4 = 18$ ne compte qu'une rangée dans chaque sens : on multiplie.",
+                  "answers": [
+                    {
+                      "content": "192",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le volume d'une caisse, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 50 \\times 50 \\times 50$. Étape 3 — $50 \\times 50 = 2\\,500$, puis $2\\,500 \\times 50 = 125\\,000$. Étape 4 — 125 000 cm³.",
+                  "answers": [
+                    {
+                      "content": "125000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Distinguer cube et pavé droit avec un contre-exemple, repérer des erreurs de volume, d'aire totale et d'unité, comparer deux cartons, chercher une hauteur à partir du volume.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On juge des affirmations sur les pavés droits et les cubes, et on justifie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche un contre-exemple avec des nombres pour les affirmations qui semblent fausses.",
+              "questions": [
+                {
+                  "content": "Un cube est un pavé droit.",
+                  "question_type": "true_false",
+                  "explanation": "Un cube a 6 faces rectangulaires (des carrés), 12 arêtes et 8 sommets : c'est un pavé droit dont les trois dimensions sont égales.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit est toujours un cube.",
+                  "question_type": "true_false",
+                  "explanation": "Contre-exemple : une boîte de 5 cm, 3 cm et 2 cm est un pavé droit dont les dimensions sont différentes : ce n'est pas un cube. Un pavé droit n'est cube que si ses trois dimensions sont égales.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pavé droit mesure 5 cm, 3 cm et 2 cm. Pourquoi n'est-ce pas un cube ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un cube a ses trois dimensions égales. Ici 5 cm, 3 cm et 2 cm sont différentes. Avoir 6 faces, 8 sommets et 12 arêtes est vrai pour tout pavé droit, y compris pour le cube : ce n'est donc pas ce qui les distingue.",
+                  "answers": [
+                    {
+                      "content": "Parce que ses trois dimensions ne sont pas égales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il a 6 faces",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il a 8 sommets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il a 12 arêtes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer le volume d'un pavé droit, on additionne ses trois dimensions.",
+                  "question_type": "true_false",
+                  "explanation": "Le volume est le produit des trois dimensions : $V = L \\times l \\times h$. Pour 5 cm, 3 cm et 2 cm, $5 + 3 + 2 = 10$ est faux ; le bon résultat est $5 \\times 3 \\times 2 = 30$ cm³.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le volume d'un pavé droit de 5 cm, 3 cm et 2 cm est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — $V = 5 \\times 3 \\times 2$. Étape 3 — $5 \\times 3 = 15$, puis $15 \\times 2 = 30$. Étape 4 — 30 cm³. 10 vient d'une addition ; 62 est l'aire totale ; 15 est l'aire d'une seule face.",
+                  "answers": [
+                    {
+                      "content": "10 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "62 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "15 cm³",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Des élèves ont fait des erreurs. Tu les repères et tu les corriges.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Refais le calcul toi-même et compare avec l'élève.",
+              "questions": [
+                {
+                  "content": "Un élève écrit : « Un cylindre droit a 6 faces. » Combien en a-t-il vraiment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un cylindre droit a 3 faces : deux bases qui sont des disques identiques et une face latérale courbe. 6 est le nombre de faces d'un pavé droit ; 2 oublie la face latérale.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève trouve un volume de 9 cm³ pour un pavé droit de 4 cm, 3 cm et 2 cm. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il a calculé $4 + 3 + 2 = 9$. Le volume est un produit : $4 \\times 3 \\times 2 = 24$ cm³. Doubler la somme donnerait 18 ; l'aire d'une face de 4 cm sur 3 cm serait 12 cm².",
+                  "answers": [
+                    {
+                      "content": "Il a doublé la somme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a oublié l'unité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a calculé l'aire d'une face",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a additionné les dimensions",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève trouve une aire totale de 26 cm² pour un pavé droit de 4 cm, 3 cm et 2 cm, avec $12 + 8 + 6 = 26$. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il a bien calculé les trois faces ($12$, $8$ et $6$ cm²) et leur somme, mais $12 + 8 + 6 = 26$ ne compte que 3 faces sur 6. Il faut doubler : $2 \\times 26 = 52$ cm².",
+                  "answers": [
+                    {
+                      "content": "Il a oublié de doubler",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a oublié de multiplier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a mal compté les arêtes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a aucune erreur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la bonne aire totale de ce pavé droit de 4 cm, 3 cm et 2 cm, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 2 — $4 \\times 3 = 12$, $4 \\times 2 = 8$, $3 \\times 2 = 6$. Étape 3 — $12 + 8 + 6 = 26$, puis $2 \\times 26 = 52$. Étape 4 — 52 cm².",
+                  "answers": [
+                    {
+                      "content": "52",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le volume d'un cube d'arête 2 cm s'écrit en ___.",
+                  "question_type": "select",
+                  "explanation": "Un volume s'exprime en unités cubes : cm³. Écrire cm ou cm² est une erreur d'unité : cm est pour une longueur, cm² pour une aire.",
+                  "answers": [
+                    {
+                      "content": "cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "kg",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un commerçant hésite entre le carton A, un pavé droit de 6 cm, 4 cm et 2 cm, et le carton B, un cube de 4 cm d'arête.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule le volume et l'aire totale de chaque carton, puis compare.",
+              "questions": [
+                {
+                  "content": "Quel est le volume du carton A, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 6 \\times 4 \\times 2$. Étape 3 — $6 \\times 4 = 24$, puis $24 \\times 2 = 48$. Étape 4 — 48 cm³.",
+                  "answers": [
+                    {
+                      "content": "48",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le volume du carton B, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 4 \\times 4 \\times 4$. Étape 3 — $4 \\times 4 = 16$, puis $16 \\times 4 = 64$. Étape 4 — 64 cm³.",
+                  "answers": [
+                    {
+                      "content": "64",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel carton contient le plus ?",
+                  "question_type": "single_choice",
+                  "explanation": "On compare les volumes : $64 > 48$, donc le carton B contient le plus. Le calcul des volumes permet de répondre.",
+                  "answers": [
+                    {
+                      "content": "Le carton A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carton B",
+                      "correct": true
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'aire totale du carton A, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 2 — $6 \\times 4 = 24$, $6 \\times 2 = 12$, $4 \\times 2 = 8$. Étape 3 — $24 + 12 + 8 = 44$, puis $2 \\times 44 = 88$. Étape 4 — 88 cm².",
+                  "answers": [
+                    {
+                      "content": "88",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le carton B a une aire totale plus petite que le carton A.",
+                  "question_type": "true_false",
+                  "explanation": "Aire totale de B : $6 \\times 16 = 96$ cm². Aire totale de A : 88 cm². Comme $96 > 88$, l'affirmation est fausse : le carton B a la plus grande aire. Un plus grand volume va ici avec une plus grande aire, mais il faut calculer pour le savoir.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une caisse a la forme d'un pavé droit de 6 cm de long et de 5 cm de large. Son volume est de 120 cm³. On cherche sa hauteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Utilise la formule $V = L \\times l \\times h$ et cherche le facteur qui manque.",
+              "questions": [
+                {
+                  "content": "Quelle est l'aire de la base de la caisse (6 cm sur 5 cm), en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "La base est un rectangle : $6 \\times 5 = 30$ cm².",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la hauteur de la caisse, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm",
+                  "explanation": "On sait que $V = L \\times l \\times h$, donc $120 = 30 \\times h$. Pour trouver $h$, on divise : $h = 120 \\div 30 = 4$ cm. Vérification : $6 \\times 5 \\times 4 = 120$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle opération donne la hauteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "$30 \\times h = 120$ : pour retrouver un facteur, on divise le produit par l'autre facteur, donc $120 \\div 30$. Multiplier, soustraire ou additionner ne redonne pas $h$.",
+                  "answers": [
+                    {
+                      "content": "$120 \\times 30$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120 - 30$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120 + 30$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120 \\div 30$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on double la hauteur de la caisse, son volume double aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Avec $h = 8$ cm : $V = 6 \\times 5 \\times 8 = 240$ cm³, soit $2 \\times 120$. Le volume est un produit : si un facteur double, le produit double.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le volume de la caisse si sa hauteur est de 8 cm, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 6 \\times 5 \\times 8$. Étape 3 — $6 \\times 5 = 30$, puis $30 \\times 8 = 240$. Étape 4 — 240 cm³.",
+                  "answers": [
+                    {
+                      "content": "240",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Toutes les notions : décrire un pavé droit, un cube et un cylindre droit, reconnaître un patron, calculer une aire totale et un volume de pavé droit ou de cube.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un pavé droit mesure 8 cm de long, 5 cm de large et 4 cm de haut.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte d'abord les faces, les sommets et les arêtes.",
+              "questions": [
+                {
+                  "content": "Combien de faces a ce pavé droit ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Un pavé droit a toujours 6 faces rectangulaires : dessus, dessous et quatre côtés.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont trois affirmations vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Un pavé droit a 3 groupes de 4 arêtes égales : 4 arêtes de 8 cm, 4 de 5 cm et 4 de 4 cm. Il a 12 arêtes en tout (pas toutes de 8 cm) et 8 sommets (pas 6).",
+                  "answers": [
+                    {
+                      "content": "Il a 12 arêtes de 8 cm.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a 4 arêtes de 8 cm.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a 6 sommets.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a 4 arêtes de 5 cm.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a 4 arêtes de 4 cm.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de sommets a-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — 4 coins en haut et 4 coins en bas : $4 + 4 = 8$ sommets.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce pavé droit est un cube.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Les trois dimensions (8 cm, 5 cm et 4 cm) sont différentes, donc ce n'est pas un cube.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'aire de la face du dessus (8 cm sur 5 cm) ?",
+                  "question_type": "select",
+                  "explanation": "L'aire d'un rectangle est longueur $\\times$ largeur : $8 \\times 5 = 40$ cm². 13 vient d'une addition ; 160 est le volume ; 20 est l'aire d'une face de 5 cm sur 4 cm.",
+                  "answers": [
+                    {
+                      "content": "13 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "160 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "20 cm²",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une boîte de lait en poudre a la forme d'un cylindre droit de 14 cm de haut.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense aux deux bases rondes et à la face latérale qui devient un rectangle.",
+              "questions": [
+                {
+                  "content": "Combien de bases a cette boîte ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Un cylindre droit a deux bases, deux disques identiques.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le patron de cette boîte contient un rectangle et deux ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Le patron d'un cylindre droit comprend un rectangle (la face latérale déroulée) et deux disques identiques (les bases).",
+                  "answers": [
+                    {
+                      "content": "disques",
+                      "correct": true
+                    },
+                    {
+                      "content": "disque",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette boîte a des sommets.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Un cylindre droit n'a aucun sommet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On empile 3 boîtes identiques. Quelle est la hauteur de la pile, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm",
+                  "explanation": "On ajoute les hauteurs : $3 \\times 14 = 42$ cm.",
+                  "answers": [
+                    {
+                      "content": "42",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque patron au solide qu'il fabrique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — On compte et on reconnaît les figures du patron. Étape 2 — On compare avec les faces du solide : 6 carrés font un cube, un rectangle et deux disques font un cylindre, 6 rectangles en 3 paires font un pavé droit.",
+                  "answers": [
+                    {
+                      "content": "6 carrés identiques bien placés",
+                      "match": "Un cube"
+                    },
+                    {
+                      "content": "1 rectangle et 2 disques identiques",
+                      "match": "Un cylindre droit"
+                    },
+                    {
+                      "content": "6 rectangles non carrés en 3 paires identiques",
+                      "match": "Un pavé droit"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un carton de la boutique est un pavé droit de 30 cm de long, 20 cm de large et 10 cm de haut.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Multiplie les trois dimensions, deux par deux.",
+              "questions": [
+                {
+                  "content": "Quel est son volume, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 1 — $L = 30$, $l = 20$, $h = 10$. Étape 2 — $V = 30 \\times 20 \\times 10$. Étape 3 — $30 \\times 20 = 600$, puis $600 \\times 10 = 6\\,000$. Étape 4 — 6 000 cm³.",
+                  "answers": [
+                    {
+                      "content": "6000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le volume d'un cube de 10 cm d'arête, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 10 \\times 10 \\times 10$. Étape 3 — $10 \\times 10 = 100$, puis $100 \\times 10 = 1\\,000$. Étape 4 — 1 000 cm³.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de cubes de 10 cm d'arête faut-il pour remplir le carton, sans trou ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le volume du carton est 6 000 cm³ et celui d'un cube 1 000 cm³. On cherche $6\\,000 \\div 1\\,000 = 6$ cubes. On peut aussi compter : 3 cubes sur la longueur, 2 sur la largeur et 1 en hauteur, soit $3 \\times 2 \\times 1 = 6$.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "600",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le volume de ce carton s'exprime en ___.",
+                  "question_type": "select",
+                  "explanation": "Un volume s'exprime en unités cubes : cm³. cm et m sont des longueurs ; cm² est une aire.",
+                  "answers": [
+                    {
+                      "content": "cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le carton a un volume de 60 cm³, car $30 + 20 + 10 = 60$.",
+                  "question_type": "true_false",
+                  "explanation": "Le volume est un produit, pas une somme : $30 \\times 20 \\times 10 = 6\\,000$ cm³. Le nombre 60 est la somme des dimensions, qui n'a pas de sens pour un volume.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un pavé droit mesure 5 cm, 4 cm et 3 cm. Un cube a 3 cm d'arête.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule l'aire totale et le volume de chaque solide, puis compare.",
+              "questions": [
+                {
+                  "content": "Quelle est l'aire totale du pavé droit, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Étape 1 — $L = 5$, $l = 4$, $h = 3$. Étape 2 — $5 \\times 4 = 20$, $5 \\times 3 = 15$, $4 \\times 3 = 12$. Étape 3 — $20 + 15 + 12 = 47$, puis $2 \\times 47 = 94$. Étape 4 — 94 cm². Le résultat 47 oublie de doubler.",
+                  "answers": [
+                    {
+                      "content": "94",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le volume du pavé droit, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 5 \\times 4 \\times 3$. Étape 3 — $5 \\times 4 = 20$, puis $20 \\times 3 = 60$. Étape 4 — 60 cm³.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'aire totale du cube, en cm² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm²",
+                  "explanation": "Une face a pour aire $3 \\times 3 = 9$ cm². Le cube a 6 faces identiques : $6 \\times 9 = 54$ cm².",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le volume du cube, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "cm³",
+                  "explanation": "Étape 2 — $V = 3 \\times 3 \\times 3$. Étape 3 — $3 \\times 3 = 9$, puis $9 \\times 3 = 27$. Étape 4 — 27 cm³.",
+                  "answers": [
+                    {
+                      "content": "27",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel solide a le plus grand volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "On compare : pavé droit, 60 cm³ ; cube, 27 cm³. Comme $60 > 27$, c'est le pavé droit. Le calcul des volumes permet de répondre.",
+                  "answers": [
+                    {
+                      "content": "Le cube",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pavé droit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le patron du pavé droit est fait de 6 carrés.",
+                  "question_type": "true_false",
+                  "explanation": "Les trois dimensions du pavé droit (5 cm, 4 cm et 3 cm) sont différentes : son patron est fait de 6 rectangles en 3 paires identiques. Les 6 carrés sont le patron d'un cube.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
