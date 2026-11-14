@@ -942,6 +942,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#notion-#{published.slug}" do
       assert_select "#content_status_essential_#{published.slug}", text: including(status_label(:published))
+      assert_select "a[role=menuitem][data-turbo-frame=modal][href='#{text_teams_essential_path(published.slug)}']",
+                    text: I18n.t("catalog.content_status.actions.edit_text")
       assert_select "#content_transitions_essential_#{published.slug} a[role=menuitem][data-turbo-method=patch]" \
                     "[href='#{archive_teams_essential_path(published.slug)}']"
     end

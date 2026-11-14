@@ -17,8 +17,8 @@ Tu n'as **ni rédigé ni relu** ces leçons. Si on te confie une leçon dont tu 
 
 ## Lis avant de trancher
 
-1. `docs/contenus/prompt-redaction.md` : les règles de rédaction (gabarit en 4 blocs, méthode, corrections, barème, « Selon la matière »).
-2. La progression DPFC 2026-2027 de la matière : `docs/contenus/progressions-2026-2027/progressions-2026-2027-<matière>.json` et son `README.md`. Une leçon voit les leçons **précédentes** de sa progression comme des acquis ; les **suivantes** lui sont interdites.
+1. `prompts/prompt-redaction.md` du dépôt de contenus `Lnclassapp/App.Lnclassapp-contenus` (ADR-0134) : les règles de rédaction (gabarit en 4 blocs, méthode, corrections, barème, « Selon la matière »).
+2. La progression DPFC 2026-2027 de la matière : `progressions/progressions-2026-2027-<matière>.json` du dépôt de contenus et son `README.md`. Une leçon voit les leçons **précédentes** de sa progression comme des acquis ; les **suivantes** lui sont interdites.
 3. La leçon entière, puis chaque point.
 
 ## Ce que tu tranches

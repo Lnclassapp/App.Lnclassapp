@@ -12,6 +12,7 @@ problematique: Les exercices vivent sous des pages de notion que la fiche de ré
 | **Chantier** | `docs/chantiers/refonte-page-lecon` |
 | **Remplace** | — (amende ADR-0035 sur le rattachement d'un exercice, ADR-0090 §4.1 sur le moment de la lecture) |
 | **Remplacé par** | — |
+| **Amendé** | 2026-11-14, §4.6 : correction du texte à l'écran (chantier `docs/chantiers/edition-texte-lecon`) |
 
 ---
 
@@ -64,6 +65,12 @@ Précisions :
 5. **Archivage** : une migration de données archive tous les exercices existants (`status = archived`, `archived_at` posé). Ils ne sont pas supprimés : leurs sessions restent lisibles. Leurs assignations actives sont archivées dans la même migration (pas d'utilisateurs réels, Q5).
 6. **Édition** : les écrans de création et d'édition d'une notion et d'un exercice (espace équipe) sont retirés ; la publication en cascade reste (ADR-0035).
 
+   *Amendement du 2026-11-14 (décision du porteur, chantier `edition-texte-lecon`).* L'équipe corrige à l'écran le **texte** d'une notion ou d'un exercice, quel que soit son statut, même déjà travaillé par des élèves : entrée « Modifier le texte » du menu ⋮ (UDR-0042), modale, `ManageContentPolicy`, inscrit au journal (`content.corrected`).
+   - **Texte modifiable** : notion — nom, « À retenir », étapes de la méthode, énoncé et étapes de l'exemple, piège ; exercice — titre, sujet, indice ; question — énoncé, corrigé, indice ; propositions — textes (et texte relié).
+   - **Structure à l'import (ADR-0116)** : ni ajout ni retrait ni réordonnancement d'une notion, d'un exercice, d'une question, d'une proposition ou d'une étape ; l'entraînement et la figure d'une notion non plus. Un formulaire qui s'écarte de la structure enregistrée est refusé (`structure_changed`), sous verrou.
+   - **Bonne réponse** : elle peut changer, même après des tentatives (types à choix : vrai/faux, choix unique ou multiple, liste). Les résultats passés restent tels quels — ni score, ni note, ni moyenne, ni lacune, ni médaille recalculés (`question_attempts.correct` et `exercise_sessions.score_percent` sont figés) ; la nouvelle réponse vaut pour les tentatives suivantes. Le journal nomme les questions dont la réponse a changé.
+   - **Deux voies de correction** : sans activité d'élève, supprimer la leçon puis la réimporter (chantier `suppression-lecon`, qui amende ADR-0035/0036) ; avec activité, corriger le texte à l'écran.
+
 ## 5. Conséquences
 
 ### 🟢 Positives
@@ -78,7 +85,7 @@ Précisions :
 - Les 215 leçons n'ont aucun exercice visible jusqu'au réimport du chantier contenu (accepté, Q5).
 - La redondance entre `course_id` et la leçon de la notion doit rester cohérente : le repository, seule voie d'écriture, la contrôle (voir §6).
 - Deux formats d'import à lire pendant la transition.
-- L'équipe ne corrige plus une coquille d'exercice à l'écran : elle réimporte la leçon.
+- ~~L'équipe ne corrige plus une coquille d'exercice à l'écran : elle réimporte la leçon.~~ *Amendé le 2026-11-14* : elle corrige le texte à l'écran (§4.6) ; la structure reste à l'import. Un élève qui a répondu avant un changement de bonne réponse garde son résultat, même devenu faux ou juste au regard de la nouvelle clé.
 
 ## 6. Notes d'implémentation
 
@@ -124,3 +131,4 @@ return no_gap if essential_id.nil?
 - `test/controllers/catalog/essentials_controller_test.rb` : 301 vers la page de la leçon, ancre `#notion-<slug>`.
 - Test du repository des exercices : refus d'une notion d'une autre leçon.
 - `bin/rails routes | grep -E "new_team_.*essential|edit_team_.*essential|new_team_.*exercise|edit_team_.*exercise"` ne rend rien.
+- Amendement du 2026-11-14 : `test/domain/use_cases/{catalog/correct_notion_text,assessment/correct_exercise_text}_test.rb` (refus de structure, policy) ; `test/infrastructure/repositories/assessment/exercise_repository_test.rb` (une tentative passée garde son verdict, une nouvelle est jugée avec la nouvelle clé) ; `test/controllers/teams/{essentials,exercises}_controller_test.rb` (modale, 422, 403).

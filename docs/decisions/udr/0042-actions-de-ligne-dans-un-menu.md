@@ -131,6 +131,15 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 *Chantier [`docs/chantiers/edition-lecon-equipe`](../../chantiers/edition-lecon-equipe/memo.md). La notion n'a plus de page (ADR-0113) et l'exercice se lit dans sa feuille (ADR-0121) : leurs menus (UDR-0015, UDR-0021) n'avaient plus d'écran.*
 
 - **Notion** : sous le titre de sa section de la fiche de révision, pour l'équipe seulement, le badge de statut (`#content_status_essential_<slug>`) et un menu ⋮ « Actions pour la notion « … » » (`#essential-actions-menu-<slug>`, `fixed`) avec ses transitions (`#content_transitions_essential_<slug>`).
-- **Exercice** : sous son titre dans la feuille en lecture (`sheets/_paper`, mode `:team`), le badge (`#content_status_exercise_<public_id>`) et un menu ⋮ « Actions pour l'exercice n « … » » (`#exercise-actions-menu-<public_id>`, `fixed`) avec ses transitions ; il remplace le seul libellé « Brouillon ».
+- **Exercice** : sous son titre dans la feuille en lecture (`sheets/_paper`, mode `:team`), le badge (`#content_status_exercise_<public_id>`) et un menu ⋮ « Actions pour l'exercice n « … » » (`#exercise-actions-menu-<public_id>`, `fixed`) avec ses transitions ; le libellé « Brouillon » reste dans le titre (rétabli le 2026-11-14, #601).
 - Les entrées suivent `ContentStatus::TRANSITIONS` (brouillon → Publier ; publié → Archiver ; archivé → Publier) ; les streams de transition existants les remplacent. Ni « Modifier » ni « Supprimer » (ADR-0113 §4.6). En police de l'interface, masqués à l'impression.
 - **Preuve** : `test/controllers/catalog/courses_controller_test.rb` et `test/controllers/catalog/prepare_sheets_controller_test.rb`, tests « edition-lecon-equipe », rouges avant le correctif.
+
+## Amendement du 2026-11-14 (2) — « Modifier le texte »
+
+*Chantier [`docs/chantiers/edition-texte-lecon`](../../chantiers/edition-texte-lecon/memo.md), ADR-0113 §4.6 amendé le même jour.*
+
+- **Entrée** : en tête des menus ⋮ d'une notion et d'un exercice, « Modifier le texte » (icône crayon), quel que soit le statut. Elle ouvre une modale dans le frame `modal`, hors du conteneur des transitions que les streams remplacent.
+- **Modale** : le badge du statut et une phrase qui dit ce qui ne se change pas ici (structure, entraînement, figure : réimport ; une nouvelle bonne réponse ne change pas les résultats déjà rendus). Notion : nom, « À retenir », étapes de la méthode, exemple, piège. Exercice : titre, sujet, indice, puis une carte par question (énoncé, propositions avec la bonne réponse — bouton radio, case à cocher ou un radio par case d'une liste —, corrigé, indice). « Annuler » / « Enregistrer » au pied.
+- **Refus** : 422, la modale garde la saisie ; l'erreur s'affiche sous le champ ou en tête de la question, un refus de structure en bandeau `role=alert`. **Succès** : toast, modale fermée, page fusionnée (morphing).
+- **Preuve** : `test/controllers/teams/{essentials,exercises}_controller_test.rb` et les tests « edition-lecon-equipe » du menu.
