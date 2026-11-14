@@ -98,6 +98,6 @@ CA-1 à CA-5 : `test/script/contenus/synchroniser_test.rb`. CA-6 : `diff -r` à 
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-contenus-dans-un-depot-dedie-copie-figee — leçons dans un dépôt dédié, copie figée versionnée dans l'application.
+- ADR-0134 — leçons dans un dépôt dédié, copie figée versionnée dans l'application.
 - Pas d'UDR : aucune vue ne change.
 - S'appuie sur ADR-0122 et ADR-0123 (chargement automatique hors production), ADR-0131 (rendu ciblé), inchangés.

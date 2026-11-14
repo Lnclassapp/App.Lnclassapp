@@ -1,4 +1,4 @@
-# ADR-XXXX : Les leçons vivent dans le dépôt public `App.Lnclassapp-contenus` ; l'application en garde une copie figée versionnée
+# ADR-0134 : Les leçons vivent dans le dépôt public `App.Lnclassapp-contenus` ; l'application en garde une copie figée versionnée
 <!-- index
 titre: Leçons dans un dépôt dédié, copie figée dans l'application
 statut: Accepté

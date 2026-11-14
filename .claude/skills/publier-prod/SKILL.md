@@ -5,7 +5,7 @@ description: Prépare la publication de leçons Lnclass en production — créat
 
 # Préparer une publication en production
 
-Décision : ADR `contenus-dans-un-depot-dedie-copie-figee` §4.3. La production n'a **aucun** chargement automatique (ADR-0122) : on y importe à la main, depuis **Imports → Fiches de cours complètes**, avec un compte équipe.
+Décision : ADR-0134 §4.3. La production n'a **aucun** chargement automatique (ADR-0122) : on y importe à la main, depuis **Imports → Fiches de cours complètes**, avec un compte équipe.
 
 ## Règle d'or
 

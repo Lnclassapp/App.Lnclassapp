@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copie figée des leçons relues (ADR contenus-dans-un-depot-dedie-copie-figee §4) : les leçons de `lecons/` d'un clone du dépôt
+# Copie figée des leçons relues (ADR-0134 §4) : les leçons de `lecons/` d'un clone du dépôt
 # App.Lnclassapp-contenus sont contrôlées une à une (valider.rb), puis copiées dans docs/contenus/lecons-traitees/, et la version
 # copiée est écrite dans docs/contenus/VERSION. Rien n'est copié si une seule leçon échoue.
 # Usage : ruby script/contenus/synchroniser.rb <clone du dépôt de contenus> [--forcer]   (version plus ancienne : --forcer)
@@ -157,7 +157,7 @@ module Contenus
     def write_version(sha)
       copied = all_files(@target)
       @version_file.write(<<~YAML)
-        # Copie figée des leçons relues : écrite par script/contenus/synchroniser.rb, jamais à la main (ADR contenus-dans-un-depot-dedie-copie-figee).
+        # Copie figée des leçons relues : écrite par script/contenus/synchroniser.rb, jamais à la main (ADR-0134).
         #{YAML.dump('depot' => repository, 'sha' => sha, 'date' => Time.now.utc.iso8601, 'fichiers' => copied.size,
                     'empreinte' => fingerprint(copied)).delete_prefix("---\n")}
       YAML

@@ -5,7 +5,7 @@ description: Rédige une leçon Lnclass au format lnclass.course-tree v3, de bou
 
 # Rédiger une leçon
 
-Décision : ADR `contenus-dans-un-depot-dedie-copie-figee` (chantier `contenus-depot-dedie`). Les règles de rédaction ne sont **pas** ici : elles vivent dans `prompt-redaction.md` (source unique). Cette skill ne fait que jouer le circuit.
+Décision : ADR-0134 (chantier `contenus-depot-dedie`). Les règles de rédaction ne sont **pas** ici : elles vivent dans `prompt-redaction.md` (source unique). Cette skill ne fait que jouer le circuit.
 
 Argument : `<niveau> <matière> <intitulé exact de la progression>` (ex. `3ème Mathématiques Théorème de Thalès`), ou le chemin d'une leçon à corriger. S'il manque l'un des trois, déduis-le de la progression ; sinon arrête-toi et nomme ce qui manque.
 

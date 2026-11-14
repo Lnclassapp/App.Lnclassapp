@@ -3,7 +3,7 @@ require "open3"
 require "yaml"
 require Rails.root.join("script/contenus/synchroniser")
 
-# ADR contenus-dans-un-depot-dedie-copie-figee §4 et §7 : la copie figée des leçons ne s'écrit que depuis une version
+# ADR-0134 §4 et §7 : la copie figée des leçons ne s'écrit que depuis une version
 # du dépôt de contenus, après contrôle de chaque fichier, et la CI repère une leçon modifiée sans nouvelle version.
 class ContenusSynchroniserTest < ActiveSupport::TestCase
   setup do

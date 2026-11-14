@@ -22,7 +22,7 @@ Séquentiel : B et C touchent les mêmes fichiers de contenu.
 - **Couche**       : outillage (hors `app/`)
 - **Fichiers**     : `script/contenus/synchroniser.rb` · `test/script/contenus/synchroniser_test.rb`
                      `.claude/skills/lecon/SKILL.md` · `.claude/skills/publier-prod/SKILL.md` · `.claude/skills/annonce/SKILL.md`
-                     `docs/chantiers/contenus-depot-dedie/*` · `docs/decisions/adr/XXXX-contenus-dans-un-depot-dedie-copie-figee.md`
+                     `docs/chantiers/contenus-depot-dedie/*` · `docs/decisions/adr/0134-contenus-dans-un-depot-dedie-copie-figee.md`
 - **Dépend de**    : —
 - **Test associé** : `test/script/contenus/synchroniser_test.rb` (CA-1 à CA-5) ; répétition à l'échelle : 463 leçons copiées, `diff -r` identique
 - **Done quand**   : synchronisation testée, skills écrits, PR prête avec la preuve `bin/ci-quiet`
@@ -47,7 +47,10 @@ git filter-repo --path docs/contenus/ \
   --path-rename docs/contenus/prompt-redaction.md:prompts/prompt-redaction.md \
   --path-rename docs/contenus/prompt-redaction-lot.md:prompts/prompt-redaction-lot.md \
   --path-rename docs/contenus/:
-git remote add origin https://github.com/Lnclassapp/App.Lnclassapp-contenus && git push -u origin HEAD:main
+# main du dépôt de contenus a déjà un commit README (porteur) : on fusionne les deux historiques, sans réécrire main.
+git remote add origin https://github.com/Lnclassapp/App.Lnclassapp-contenus && git fetch origin main
+git merge --allow-unrelated-histories origin/main -m "Migration des contenus depuis l'application (historique conservé)"   # conflit README.md : garder celui des contenus
+git push -u origin HEAD:main                                                                                                 # avance rapide, jamais --force
 ```
 
 ---

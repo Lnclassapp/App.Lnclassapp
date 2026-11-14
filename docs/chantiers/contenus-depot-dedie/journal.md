@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-14 | Copie figée versionnée au même chemin (`docs/contenus/lecons-traitees/` + `VERSION`), pas de sous-module ni de téléchargement | Develop et Staging chargent les leçons au pré-déploiement depuis l'image : ni jeton ni réseau en plus | Oui, ADR `contenus-dans-un-depot-dedie-copie-figee` |
+| 2026-11-14 | Copie figée versionnée au même chemin (`docs/contenus/lecons-traitees/` + `VERSION`), pas de sous-module ni de téléchargement | Develop et Staging chargent les leçons au pré-déploiement depuis l'image : ni jeton ni réseau en plus | Oui, ADR-0134 |
 | 2026-11-14 | `valider.rb` reste dans l'application | Il charge les entités du domaine et un test de parité le lie à l'import | Oui, même ADR §4.1 |
 | 2026-11-14 | Dépôt : d'abord `Kamkara007/App.Lnclassapp-contenus` (supprimé depuis), puis `Lnclassapp/App.Lnclassapp-contenus` (final) ; rien n'y est poussé avant la migration | Un premier commit README obligerait à réécrire `main` pour y poser l'historique migré | Non |
 
