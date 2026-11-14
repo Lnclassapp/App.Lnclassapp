@@ -367,6 +367,16 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a#subject_svt span.bg-warning-dot", 0
   end
 
+  test "the grid: Philosophie is shown « Philo », its full name left to screen readers" do
+    create_course(material: create_material(name: "Philosophie", category: "literature"), level: @classroom.level)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "a#subject_philosophie span[aria-hidden=true]", text: "Philo"
+    assert_select "a#subject_philosophie .sr-only", text: "Philosophie"
+  end
+
   test "the grid: a round per subject of the student's level, in the charter order, the short names (full name for screen readers), then « Inviter » to WhatsApp" do
     create_course(material: create_material(name: "Physique-Chimie"), level: @classroom.level)
     create_course(material: create_material(name: "Histoire-Géographie", category: "literature"), level: @classroom.level)
