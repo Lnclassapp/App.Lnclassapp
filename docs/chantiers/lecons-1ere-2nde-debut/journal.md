@@ -41,6 +41,7 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **SVT 1ère A (drogues)** : un document fictif montre la cocaïne raccourcissant le temps de réaction, ce que la fiche ne dit pas en ces termes (« stimulante »).
 - **SVT 1ère C et D** : les corrections de sujets sont courtes et complétées d'un rappel automatique de la méthode et du piège de la notion ; à étoffer.
 - **Histoire-Géographie 1ère** : le procédé Bessemer (1856) est rattaché à la seconde révolution industrielle, comme la fiche.
+- **Mathématiques 1ère C et D, vague 2 (Barycentre, Limites et continuité, Dénombrement)** : 2e exercice par notion et 4 sujets ajoutés ; `practice` laissé tel quel. Trois `practice` d'origine n'ont qu'un type de question (`numeric`) : Barycentre notion 4, Limites et continuité notions 1 et 3 (C et D) ; `verif.rb` les signale (« un seul type ») sans pouvoir les corriger en mode `ajout`. À corriger dans un lot dédié. Le contrôle des formules longues signale 10 formules d'origine non coupées en Dénombrement (pas de nouvelle formule). Limites et continuité D : la copie part de l'origine D (sous-titre et problème 3 propres à D conservés), les ajouts sont identiques à ceux de C.
 
 ### 2nde (réécriture complète depuis `format-v1/`)
 
