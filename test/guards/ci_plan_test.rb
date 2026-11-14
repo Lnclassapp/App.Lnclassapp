@@ -159,6 +159,14 @@ class CiPlanTest < Minitest::Test
 
   # ADR-0069 : 45 % of the runs were pushes that merged a tree their pull request had already tested.
   # Pull requests only, and a draft waits until it is ready for review: « plan » is skipped, so is everything after.
+  # A moving head of the contents repository would change what the same tree tests (ADR-0069 §4.3): the clone names a commit.
+  def test_the_contents_repository_is_read_at_a_fixed_commit
+    step = steps("unit").find { it["name"] == "Contents repository (referentiel)" }
+    refute_nil step, "the unit job clones the contents repository"
+    assert_match(/\bCONTENUS_SHA: [0-9a-f]{40}\b/, step.fetch("env", {}).map { |k, v| "#{k}: #{v}" }.join("\n"))
+    assert_includes step["run"], 'git -C "$RUNNER_TEMP/contenus" checkout --quiet "$CONTENUS_SHA"'
+  end
+
   def test_the_workflow_runs_on_ready_pull_requests_only
     assert_equal [ "pull_request" ], triggers.keys
     assert_includes triggers.dig("pull_request", "types"), "ready_for_review"
