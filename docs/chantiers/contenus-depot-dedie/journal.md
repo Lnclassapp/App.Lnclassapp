@@ -21,10 +21,10 @@
 
 - [x] 2026-11-14 · contenus-depot-dedie · Le dépôt de contenus doit-il être privé ? — réponse du porteur (via l'orchestrateur) : **public**, tel quel. Écrit dans l'ADR §4.4 (corrigés visibles, jamais de secret ni de donnée d'élève). Si sa CI récupère l'application (privée), il lui faut un jeton de lecture : `APP_READ_TOKEN`, secret du dépôt de contenus, posé par le porteur.
 - Info : dépôt final `Lnclassapp/App.Lnclassapp-contenus` (porteur, 2026-11-14). Il ne peut pas être attaché à la session du Lot A (même nom que `Kamkara007/App.Lnclassapp-contenus`, déjà attaché) : le Lot B part d'une **nouvelle session** avec `Lnclassapp/App.Lnclassapp-contenus` comme source. `Kamkara007/App.Lnclassapp-contenus` (vide) a été supprimé par le porteur le 2026-11-14 ; la session du Lot A le garde dans ses sources et ne peut toujours pas attacher le dépôt final.
-- [ ] 2026-11-14 · contenus-depot-dedie · Ne pas lancer soi-même les commandes d'initialisation du dépôt (README « first commit ») — appliqué : dépôt laissé vide, la migration (Lot B) y pose l'historique des leçons puis le README ; autres : initialiser maintenant et poser la migration par-dessus ; recommandé : laisser vide.
+- [x] 2026-11-14 · contenus-depot-dedie · Ne pas lancer soi-même les commandes d'initialisation du dépôt (README « first commit ») — appliqué : dépôt laissé vide, la migration (Lot B) y pose l'historique des leçons puis le README ; autres : initialiser maintenant et poser la migration par-dessus ; recommandé : laisser vide. — sans objet : la migration a posé l'historique sur `main` vide.
 - [ ] 2026-11-14 · contenus-depot-dedie · La PR de synchronisation des contenus vers l'application est-elle ouverte à la demande ou automatiquement à chaque fusion sur `main` des contenus ? — appliqué : à la demande ; autres : automatique (jeton d'écriture croisé) ; recommandé : à la demande.
-- [ ] 2026-11-14 · contenus-depot-dedie · Migration (Lot B) en attente de la fusion de la PR de validation pédagogique (session validation-pedagogique-agent) : au 2026-11-14 elle n'est pas ouverte et l'agent `validateur-pedagogique` n'est pas sur `Develop`. — appliqué : attendre ; autres : migrer sans attendre (conflits sur ~460 fichiers) ; recommandé : attendre.
-- [ ] 2026-11-14 · contenus-depot-dedie · La CI du dépôt de contenus (`valider.yml`) récupère `valider.rb` dans l'application privée : il lui faut le secret `APP_READ_TOKEN` (jeton en lecture seule sur `Lnclassapp/App.Lnclassapp`), à poser par le porteur dans le dépôt de contenus (Settings → Secrets and variables → Actions). Sans lui, `valider.yml` échoue (jamais vert à vide). — appliqué : échec explicite tant que le secret manque ; autres : rendre `valider.rb` autonome dans le dépôt de contenus (double source des règles, contraire à l'ADR §4.1) ; recommandé : poser le secret.
+- [x] 2026-11-14 · contenus-depot-dedie · Migration (Lot B) en attente de la fusion de la PR de validation pédagogique (session validation-pedagogique-agent) : au 2026-11-14 elle n'est pas ouverte et l'agent `validateur-pedagogique` n'est pas sur `Develop`. — appliqué : attendre ; autres : migrer sans attendre (conflits sur ~460 fichiers) ; recommandé : attendre. — levé : #599 fusionnée, migration faite le 2026-11-14.
+- [x] 2026-11-14 · contenus-depot-dedie · La CI du dépôt de contenus (`valider.yml`) récupère `valider.rb` dans l'application privée : il lui faut le secret `APP_READ_TOKEN` (jeton en lecture seule sur `Lnclassapp/App.Lnclassapp`), à poser par le porteur dans le dépôt de contenus (Settings → Secrets and variables → Actions). Sans lui, `valider.yml` échoue (jamais vert à vide). — appliqué : échec explicite tant que le secret manque ; autres : rendre `valider.rb` autonome dans le dépôt de contenus (double source des règles, contraire à l'ADR §4.1) ; recommandé : poser le secret. — réponse du porteur : secret posé le 2026-11-14 ; `valider.yml` vert sur `main` (463 leçons).
 - [ ] 2026-11-14 · contenus-depot-dedie · Historique publié du dépôt de contenus : adresses e-mail de `toure-bangaly` et `N'goran` remplacées par `<nom>@auteurs.invalid` (leurs commits ne sont plus rattachés à leur compte GitHub) — appliqué : adresses masquées ; autres : mettre leur adresse `noreply` GitHub (nécessite leur identifiant, réécriture de `main` à faire avant toute PR de contenu) ; recommandé : laisser tel quel.
 - Info (non bloquant) : `/annonce` a besoin de `GOOGLE_TTS_API_KEY` (variable d'environnement Claude Code) ; absente aujourd'hui, la skill livre alors le texte sans audio. `/publier-prod` lit la production avec `RAILWAY_API_TOKEN`, absente de cette session.
 
@@ -40,6 +40,9 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - Première version du script : `git` en échec rendu `nil` et lu comme « plus récente » ou « arbre propre », fichiers ignorés par git copiés, `--verifier` vert sans `VERSION`, échange de dossiers sans retour arrière, dossier à l'intérieur de l'application pris pour un dépôt. Trouvé par les revues (pannes silencieuses, tests), corrigé avant fusion avec un test par cas. Leçon : un outil qui lit git distingue les codes de sortie, il ne rabat pas tout sur `nil`.
 - Le nom du dépôt a changé trois fois dans la journée (`Lnclassapp/contenus`, `Kamkara007/App.Lnclassapp-contenus`, transfert vers `Lnclassapp`) : aucun propriétaire n'est figé dans les outils, le script lit le `remote origin`.
+
+- Lot B : `valider.yml` utilisait `ruby-version-file`, que `ruby/setup-ruby` ne connaît pas ; invisible tant que le secret manquait (l'étape d'avant échouait). Corrigé par contenus#2 (`working-directory: app`). Leçon : une CI qui ne peut pas tourner avant un secret se prouve par un lancement manuel sur une branche dès que le secret est là.
+- Une leçon corrigée directement dans l'application (#603) a été fusionnée pendant la migration : la garde `--verifier` l'a refusée à la mise à jour de #602, comme prévu ; reportée dans le dépôt de contenus (contenus#1), puis resynchronisée.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -63,7 +66,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-11-14 |
+| **PR** | #597, #602 ; contenus#1, contenus#2 |
+| **ADR produits** | ADR-0134 |
+| **UDR produits** | — |

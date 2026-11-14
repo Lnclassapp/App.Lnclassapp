@@ -130,7 +130,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`contenus-3e-histoire-geographie`](contenus-3e-histoire-geographie/memo.md) | en cours | feature | 2026-10-30 | Leçons de 3ème en Histoire-Géographie, et leurs figures (frise, carte, schéma, courbe) |
 | [`contenus-3e-physique-chimie`](contenus-3e-physique-chimie/memo.md) | planifié | feature | 2026-10-30 | Les 10 premières leçons de Physique-Chimie de 3ème, tracé optique, molécule et planches de PC |
 | [`contenus-3e-svt`](contenus-3e-svt/memo.md) | livré | feature | 2026-10-30 | Les 10 premières leçons de SVT de 3ème et leurs planches |
-| [`contenus-depot-dedie`](contenus-depot-dedie/memo.md) | planifié | feature | 2026-11-14 | Les leçons vivent dans leur propre dépôt |
+| [`contenus-depot-dedie`](contenus-depot-dedie/memo.md) | livré | feature | 2026-11-14 | Les leçons vivent dans leur propre dépôt |
 | [`contenus-develop-staging`](contenus-develop-staging/memo.md) | livré | feature | 2026-10-31 | Les leçons arrivent seules sur Develop et Staging |
 | [`contenus-tle-francais`](contenus-tle-francais/memo.md) | livré | feature | 2026-10-31 | Les 7 leçons de Français de Terminale (A1, A2, C, D) |
 | [`contenus-tle-histoire-geographie`](contenus-tle-histoire-geographie/memo.md) | livré | feature | 2026-10-31 | Les 10 premières leçons d'Histoire-Géographie de Tle (progression commune) |

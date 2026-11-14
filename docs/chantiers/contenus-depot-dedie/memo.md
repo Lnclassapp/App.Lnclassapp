@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-11-14 |
 | **Branche** | `feature/contenus-depot-dedie` |
 | **Programme** | — |
