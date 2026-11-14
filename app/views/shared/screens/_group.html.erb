@@ -3,12 +3,12 @@
 <%# UDR  : XXXX écrans minimalistes style Wave §3 (composants, règles 5 et 8), 0057 R3 · locals: (id:, title:, total:) -%>
 <% limit = ComponentsHelper::REVEAL_LIMIT %>
 <%= tag.section id: id, "aria-labelledby": "#{id}_title", data: { turbo_prefetch: false } do %>
-  <h2 id="<%= id %>_title" class="px-1 pb-2 text-sm font-medium text-mute"><%= title %></h2>
+  <h2 id="<%= id %>_title" class="px-1 pb-2 text-sm font-semibold text-mute"><%= title %></h2>
   <%= tag.div class: "overflow-hidden rounded-card bg-white py-1", data: ui_reveal_data do %>
     <ul><%= yield %></ul>
     <% if total > limit %>
       <button type="button" data-reveal-target="button" data-action="reveal#more"
-              class="flex min-h-tap w-full items-center justify-center px-4 text-base font-medium text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand">
+              class="flex min-h-tap w-full items-center justify-center px-4 text-base font-semibold text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand">
         <%= t("shared.screens.more", count: total - limit) %>
       </button>
       <p class="sr-only" role="status" aria-live="polite" data-reveal-target="status"></p>

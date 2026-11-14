@@ -7,7 +7,7 @@
                 data: { controller: "dismissible", dismissible_key_value: "student-invite-teacher" } do %>
   <span class="grid size-10 shrink-0 place-items-center rounded-full bg-white text-brand-strong" aria-hidden="true"><%= ui_icon "user-plus" %></span>
   <div class="min-w-0 flex-1 space-y-1">
-    <h2 id="student_invite_banner_title" class="text-base leading-snug font-medium text-ink"><%= t("#{scope}.prompt") %></h2>
+    <h2 id="student_invite_banner_title" class="text-base leading-snug font-semibold text-ink"><%= t("#{scope}.prompt") %></h2>
     <p class="text-sm text-mute"><%= t("#{scope}.banner_hint") %></p>
     <%= ui_button t("#{scope}.banner_action"), href: invite_href, size: :sm, variant: :secondary, target: "_blank", rel: "noopener", class: "mt-1",
                   "aria-label": t("#{scope}.action_label") %>

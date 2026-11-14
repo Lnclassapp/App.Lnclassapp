@@ -23,7 +23,7 @@
         <% end %>
       <% end %>
     </p>
-    <h3 id="<%= dom_id %>_title" class="text-base leading-snug font-medium"><%= card.title %></h3>
+    <h3 id="<%= dom_id %>_title" class="<%= wave ? "text-base leading-snug font-bold" : "text-base leading-snug font-medium" %>"><%= card.title %></h3>
     <%# Texte simple de l'auteur, toujours échappé (AN-20) : jamais raw ni html_safe. %>
     <%# Dix mots au plus, sur deux lignes au plus (amendement du 2026-10-30, second). %>
     <p class="line-clamp-2 text-sm"><%= announcement_excerpt(card.body) %></p>

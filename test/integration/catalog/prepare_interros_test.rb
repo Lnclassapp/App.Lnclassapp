@@ -36,11 +36,11 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select "#prepare-interros [data-controller=prepare-sheet]", 0
     assert_select "li#notion-#{@notions.first.slug} a[href=?]", read("notion-#{@notions.first.slug}") do
       assert_select "span", text: "Interro 1 · Notion 1"
-      assert_select "span", text: "1 exercice"
+      assert_select "span", text: "2 questions"
     end
     assert_select "li#toute-la-lecon a" do
       assert_select "span", text: "Interro 5 · Toute la leçon"
-      assert_select "span", text: "2 exercices"
+      assert_select "span", text: "4 questions"
     end
 
     get fill

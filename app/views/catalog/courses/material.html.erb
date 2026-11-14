@@ -12,9 +12,9 @@
                 data: { turbo_frame: "courses", turbo_action: "advance", controller: "search" }, class: "flex items-center gap-3" do %>
     <%= hidden_field_tag :material, material.slug, id: nil %>
     <div class="relative min-w-0 flex-1">
-      <%= label_tag :q, t("catalog.courses.index.filters.search"), class: "sr-only" %>
+      <%= label_tag :q, t("catalog.courses.material.search"), class: "sr-only" %>
       <%= ui_icon "magnifying-glass", class: "pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-mute" %>
-      <%= search_field_tag :q, @filters[:q], id: "q", placeholder: t("catalog.courses.index.filters.search"), autocomplete: "off",
+      <%= search_field_tag :q, @filters[:q], id: "q", placeholder: t("catalog.courses.material.search"), autocomplete: "off",
                                              data: { action: "search#queue" },
                                              class: "block min-h-tap w-full rounded-ln border-0 bg-line py-3 pr-4 pl-12 text-base text-ink placeholder:text-mute focus:outline-2 focus:outline-brand" %>
     </div>
@@ -30,7 +30,7 @@
     <% if @page.rows.any? %>
       <% progression = lesson_progression(@page.rows.first.subtitle) %>
       <section id="student_lessons" aria-labelledby="student_lessons_title">
-        <h2 id="student_lessons_title" class="px-1 pb-2 text-sm font-medium text-mute"><%= progression || t(".lessons") %></h2>
+        <h2 id="student_lessons_title" class="px-1 pb-2 text-sm font-semibold text-mute"><%= progression || t(".lessons") %></h2>
         <div class="overflow-hidden rounded-card bg-white">
           <%= render "catalog/courses/lesson_tiles", page: @page %>
         </div>

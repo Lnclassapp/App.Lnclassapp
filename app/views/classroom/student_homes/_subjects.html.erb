@@ -4,7 +4,7 @@
 <%# locals: (subjects:, late_slugs:) -%>
 <% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
 <nav id="student_subjects" aria-labelledby="student_subjects_title">
-  <h2 id="student_subjects_title" class="px-1 pb-3 text-sm font-medium text-mute"><%= t(".label") %></h2>
+  <h2 id="student_subjects_title" class="px-1 pb-3 text-sm font-semibold text-mute"><%= t(".label") %></h2>
   <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-8 lg:gap-x-2">
     <% subjects.first(Classroom::StudentHomesController::MAX_SUBJECTS).each do |subject| %>
       <% late = late_slugs.include?(subject.slug) %>

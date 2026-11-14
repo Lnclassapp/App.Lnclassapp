@@ -472,7 +472,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     get student_home_path
 
     assert_select "section#student_to_do h2", text: tl("to_do.title")
-    assert_equal %w[Un Deux Trois Quatre Cinq], css_select("#student_to_do li a span.text-ink.font-medium.leading-snug").map { it.text.strip }
+    assert_equal %w[Un Deux Trois Quatre Cinq], css_select("#student_to_do li a span.text-brand-strong.font-semibold.leading-snug").map { it.text.strip }
     assert_select "#student_to_do li:not([hidden])", 3
     assert_select "#student_to_do li[hidden]", 2
     assert_select "#student_to_do button[data-reveal-target=button]", text: "Voir plus (2)"

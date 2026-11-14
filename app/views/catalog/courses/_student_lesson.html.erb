@@ -22,7 +22,7 @@
       <% interros.each_with_index do |sheet, index| %>
         <% label = sheet.kind == :lesson_wide ? t("catalog.courses.show.lesson_wide_title") : sheet.title %>
         <%= render "shared/screens/row", id: sheet.dom_id, title: t("catalog.courses.student_lesson.interro", number: sheet.number, title: label), href: course_sheet_path(course.slug, sheet.dom_id),
-                                         detail: t("catalog.courses.sheets.card_exercises", count: sheet.exercises.size), tint: "bg-tint-yellow",
+                                         detail: t("catalog.courses.student_lesson.questions", count: sheet.exercises.sum { it.questions.size }), tint: "bg-warning-soft",
                                          folded: index >= ComponentsHelper::REVEAL_LIMIT, icon: ui_icon("clipboard-document-check") %>
       <% end %>
     <% end %>

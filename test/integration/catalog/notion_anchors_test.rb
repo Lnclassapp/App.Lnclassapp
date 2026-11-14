@@ -30,7 +30,7 @@ class Catalog::NotionAnchorsTest < ActionDispatch::IntegrationTest
 
     # UDR-0149 §3 : une feuille par notion, son repère est l'ancre de la notion ; sur la leçon, c'est la case de la feuille.
     assert_select "#notion-#{@with.slug}", 1
-    assert_select "li#notion-#{@with.slug} a", text: /2 exercices/
+    assert_select "li#notion-#{@with.slug} a", text: /2 questions/
     get fill_course_sheet_path(@course.slug, "notion-#{@with.slug}")
     assert_select ".ps-sheet#notion-#{@with.slug} .ps-exercise", 2
   end

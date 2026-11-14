@@ -6,7 +6,7 @@
 <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, target: "_top" do %>
   <% if sessions.any? %>
     <section id="student_history" aria-labelledby="student_history_title" class="py-3 lg:p-0">
-    <h2 id="student_history_title" class="px-1 pb-2 text-sm font-medium text-mute"><%= t("classroom.student_homes.history.title") %></h2>
+    <h2 id="student_history_title" class="px-1 pb-2 text-sm font-semibold text-mute"><%= t("classroom.student_homes.history.title") %></h2>
     <div class="rounded-card bg-white px-4 pb-1">
     <% grading = Entities::Assessment::Grading %>
     <% today = Time.zone.today %>
@@ -46,7 +46,7 @@
     <% end %>
     <% if sessions.size > shown %>
       <%= link_to t("classroom.student_homes.history.more", count: sessions.size - shown), student_archive_path, id: "student_history_more",
-                  class: "-mx-4 flex min-h-tap items-center justify-center text-base font-medium text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" %>
+                  class: "-mx-4 flex min-h-tap items-center justify-center text-base font-semibold text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" %>
     <% end %>
     </div>
     </section>

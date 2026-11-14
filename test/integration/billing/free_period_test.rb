@@ -163,7 +163,7 @@ class BillingFreePeriodTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_select "h1", text: /#{Regexp.escape(@course.name)}/
       assert_select "#prepare-interros li a", text: /#{Regexp.escape(@exercise.essential.name)}/
-      assert_select "#prepare-interros li a", text: /1 exercice/
+      assert_select "#prepare-interros li a", text: /2 questions/
       get exercise_path(@exercise.public_id)
       assert_response :success
       assert_select "h1", text: /Méiose/

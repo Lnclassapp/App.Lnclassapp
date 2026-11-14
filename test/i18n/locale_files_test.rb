@@ -18,7 +18,8 @@ class LocaleFilesTest < ActiveSupport::TestCase
     "fr.assessment.session_results.show.to_review_lesson_html" => "À revoir dans la leçon : %{questions}",
     "fr.assessment.session_results.show.whole_lesson" => "Toute la leçon",
     # UDR XXXX écrans minimalistes style Wave §3 (décision du porteur, maquettes validées le 2026-11-14) : « Leçon n » sur la tuile et le sous-titre.
-    "fr.catalog.courses.lesson_tile.number" => "Leçon %{number}"
+    "fr.catalog.courses.lesson_tile.number" => "Leçon %{number}",
+    "fr.catalog.courses.material.search" => "Chercher une leçon"
   }.freeze
 
   test "the French locale files exist" do
@@ -75,7 +76,7 @@ class LocaleFilesTest < ActiveSupport::TestCase
   test "the UDR-0130 exceptions are the listed values alone, with their exact wording" do
     assert(ALLOWED.values.all? { it.match?(FORBIDDEN) })
     assert_equal [ "Révisions de la leçon", "Toute la leçon",
-                   "Retour à la leçon", "À revoir dans la leçon : %{questions}", "Leçon %{number}" ], ALLOWED.values.uniq
+                   "Retour à la leçon", "À revoir dans la leçon : %{questions}", "Leçon %{number}", "Chercher une leçon" ], ALLOWED.values.uniq
     ALLOWED.each { |key, value| assert_equal value, I18n.t(key.delete_prefix("fr."), locale: :fr) }
   end
 

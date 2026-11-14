@@ -6,9 +6,9 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-14 | Graisse des titres : `font-medium` (500), pas le 700 des maquettes | Le garde `design_tokens_test` interdit plus de 500 hors page d'accueil publique (UDR palette froide §3.2) | non |
+| 2026-11-14 | Graisse : 600/700 comme les maquettes, exception écrite du garde (`WAVE_WEIGHT_SCREENS`) | Le porteur a validé les maquettes grasses et demande une conformité à 100 % ; remplace la décision `font-medium` du début de chantier | UDR XXXX |
 | 2026-11-14 | La flèche retour des écrans intérieurs amende le garde FU-11 (UDR-0054 §3.2) | Le porteur demande une flèche retour ; seul `shared/screens/_inner_header` est exempté | UDR XXXX |
-| 2026-11-14 | Valeur à droite de « À faire » : l'échéance (« À rendre demain »), pas « 0/4 » | L'exercice assigné n'a pas de total de questions dans `StudentHomeQuery` ; on n'invente pas de donnée | non |
+| 2026-11-14 | Valeur de « À faire » : « répondu/total » (`question_count`, `answered_count` ajoutés à `ExerciseRow`), échéance dans le détail | Conformité aux maquettes validées | UDR XXXX |
 | 2026-11-14 | « Prochain exercice » retiré des écrans élève mais **code conservé** (partial `_next_exercise`, `next_step/`, `NextExerciseQuery` + test, clés I18n) | Précision du porteur : il servira au guidage d'activation après l'inscription ; issue « Réutiliser « Prochain exercice » dans l'activation après l'inscription ». Les tests d'affichage seuls sont retirés, ceux de la query gardés | UDR XXXX §4 |
 | 2026-11-14 | Lot D : skill de projet `ecrans-wave`, branchée dans /retouche, /feature, /test-ecrans ; ligne dans CLAUDE.md | Demande du porteur ; la skill `lnclass-design-system` (claude.ai) est réécrite dans `lnclass-design-system-SKILL.md` pour téléversement par le porteur | non |
 
