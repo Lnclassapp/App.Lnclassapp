@@ -40,7 +40,6 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **Philosophie 1ère** : « Ainsi » est la seule bonne réponse pour ouvrir une conclusion (comme la fiche) ; « Pour conclure » n'est pas proposé.
 - **SVT 1ère A (drogues)** : un document fictif montre la cocaïne raccourcissant le temps de réaction, ce que la fiche ne dit pas en ces termes (« stimulante »).
 - **SVT 1ère C et D** : les corrections de sujets sont courtes et complétées d'un rappel automatique de la méthode et du piège de la notion ; à étoffer.
-- **Français 1ère (vague 2, leçons 4 et 5)** : le `practice` de la notion 3 de « La focalisation » (A1, A2) contient une question `written`, que la règle UDR-0147 refuse ; laissé tel quel (consigne : ne pas toucher au `practice`), donc `verif.rb` y reste en KO sur ce seul point. À corriger à part par une question corrigée automatiquement. Scansion de « Le rythme dans le texte » : seuls des mots sans diérèse ni synérèse ambiguë sont mesurés ; le e muet après voyelle (« pluie », « vie ») est évité en milieu de vers. Un enseignant relit les comptes de syllabes et le classement des focalisations.
 - **Histoire-Géographie 1ère** : le procédé Bessemer (1856) est rattaché à la seconde révolution industrielle, comme la fiche.
 
 ### 2nde (réécriture complète depuis `format-v1/`)
@@ -73,3 +72,22 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **À faire vérifier par un enseignant** :
   - Philosophie : « travail » et « seulement » comme termes à définir ; la thèse sur l'argent et le bonheur ; paraphrase contre explication ; les synonymes acceptés dans les textes à trous (« mais » ou « cependant », « enfin » ou « finalement »).
   - Histoire-Géographie : la vraisemblance des montants en F CFA et des taux démographiques, qui sont des valeurs d'exercice ; la réponse « La sécurité » à la question sur l'IDH ; les écarts de dates calculés à la main.
+
+## Vague 2 : leçons 4 et 5 de 1ère — Français, SVT, Philosophie, Histoire-Géographie
+
+- **Périmètre** : 26 fichiers revenus de `a-reprendre/` au format complet.
+  - Français : Le rythme dans le texte (A1, A2, C, D), La focalisation (A1, A2), Les tonalités littéraires (C, D).
+  - SVT : Les cycles sexuels chez la femme et La régulation des naissances (A1, A2), La fécondation chez les mammifères (C), La synthèse des protéines (C, D), Le monohybridisme (D).
+  - Philosophie : L'essai de problématisation et La période antique, dans les 4 séries.
+  - Histoire-Géographie : La croissance démographique mondiale et ses conséquences ; Le mouvement impérialiste et le congrès de Berlin.
+  - En Philosophie et en Histoire-Géographie, le « Je m'entraîne » a été ajouté à chaque notion.
+- **Contrôles** : le même script hors dépôt que pour la vague 1, et un script pour les proportions génétiques et les traductions du code génétique. Les 26 leçons ont été rendues à 390 px.
+- **`practice` d'origine corrigés** (réversible), parce qu'une question `written` ne peut pas être corrigée automatiquement :
+  - La focalisation (A1, A2), notion 3 : la question `written` est remplacée par un QCM sur le marqueur du changement de focalisation.
+  - Les cycles sexuels (A1, A2) : une question vrai/faux est ajoutée aux notions 2 et 3, qui n'en avaient que 2. La `written` de la notion 4 est remplacée par un vrai/faux.
+- **À faire relire par un enseignant** :
+  - Le rythme : les comptes de syllabes. Les diérèses et synérèses ambiguës ont été évitées.
+  - La focalisation : la focalisation attribuée à chaque texte.
+  - Philosophie : les sujets de problématisation proposés (« Doit-on toujours pardonner ? »…) ; une question qui associe un texte support à la maïeutique.
+  - SVT : les valeurs des courbes de température et d'hormones sont schématiques ; les génotypes sont écrits en toutes lettres (« Hétérozygote R//r ») pour que l'import les distingue.
+  - Histoire-Géographie : les chiffres démographiques autres que ceux de la fiche sont des valeurs d'exercice, vérifiées à la main ; « la Côte d'Ivoire est dominée par la France vers 1914 » s'appuie sur la carte `afrique-1914`.
