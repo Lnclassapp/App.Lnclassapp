@@ -125,3 +125,12 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 - **Règle** : un menu **absolu** (sans `fixed`) est décalé horizontalement à l'ouverture, de ce qui dépasse, pour garder 8 px de marge de chaque côté de l'écran. Le décalage passe par la propriété CSS `translate`. Il est remis à zéro à la fermeture. Le menu `fixed` garde son placement (§3).
 - **Implémentation** : `dropdown_controller#nudge`, appelé par `place` pour tout menu non `fixed`. Aucune vue ne change.
 - **Preuve** : `test/system/teams/row_actions_menu_test.rb`, « on a phone, the menu of a course header opens whole inside the screen ». Ce test était rouge avant le correctif.
+
+## Amendement du 2026-11-14 — notion et exercice dans la leçon
+
+*Chantier [`docs/chantiers/edition-lecon-equipe`](../../chantiers/edition-lecon-equipe/memo.md). La notion n'a plus de page (ADR-0113) et l'exercice se lit dans sa feuille (ADR-0121) : leurs menus (UDR-0015, UDR-0021) n'avaient plus d'écran.*
+
+- **Notion** : sous le titre de sa section de la fiche de révision, pour l'équipe seulement, le badge de statut (`#content_status_essential_<slug>`) et un menu ⋮ « Actions pour la notion « … » » (`#essential-actions-menu-<slug>`, `fixed`) avec ses transitions (`#content_transitions_essential_<slug>`).
+- **Exercice** : sous son titre dans la feuille en lecture (`sheets/_paper`, mode `:team`), le badge (`#content_status_exercise_<public_id>`) et un menu ⋮ « Actions pour l'exercice n « … » » (`#exercise-actions-menu-<public_id>`, `fixed`) avec ses transitions ; il remplace le seul libellé « Brouillon ».
+- Les entrées suivent `ContentStatus::TRANSITIONS` (brouillon → Publier ; publié → Archiver ; archivé → Publier) ; les streams de transition existants les remplacent. Ni « Modifier » ni « Supprimer » (ADR-0113 §4.6). En police de l'interface, masqués à l'impression.
+- **Preuve** : `test/controllers/catalog/courses_controller_test.rb` et `test/controllers/catalog/prepare_sheets_controller_test.rb`, tests « edition-lecon-equipe », rouges avant le correctif.

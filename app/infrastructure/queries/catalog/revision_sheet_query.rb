@@ -9,8 +9,9 @@ module Queries
       Revision = Data.define(:kind, :sheet, :cut)
       # course_slug : l'adresse de la leçon (le formulaire d'entraînement y revient) ; material, level : leurs noms ; theme : blue | teal | burgundy ; notions : [Notion].
       Lesson = Data.define(:course_slug, :name, :subtitle, :material, :level, :theme, :notions)
-      # sheet : Entities::Catalog::NotionSheet ; figure : Entities::Catalog::Figure | nil (la clé citée est absente de la leçon).
-      Notion = Data.define(:slug, :name, :sheet, :figure) do
+      # sheet : Entities::Catalog::NotionSheet ; figure : Entities::Catalog::Figure | nil (la clé citée est absente de la leçon) ;
+      # status : draft | published (edition-lecon-equipe : le menu ⋮ de l'équipe sur la notion).
+      Notion = Data.define(:slug, :name, :sheet, :figure, :status) do
         def anchor = "notion-#{slug}"
 
         # L'entraînement de la notion tel que la page le montre : sans correction, propositions dans l'ordre d'affichage. nil sans entraînement.
@@ -38,10 +39,10 @@ module Queries
 
       def notions_of(course_id, figures, statuses:)
         by_key = Array(figures).to_h { [ it["key"], Entities::Catalog::Figure.from_raw(it) ] }
-        Orm::Essential.where(course_id:, status: statuses).where.not(sheet: {}).order(:position).pluck(:slug, :name, :sheet).map do |slug, name, raw|
+        Orm::Essential.where(course_id:, status: statuses).where.not(sheet: {}).order(:position).pluck(:slug, :name, :sheet, :status).map do |slug, name, raw, status|
           sheet = Entities::Catalog::NotionSheet.from_raw(raw.merge("figure" => raw["figure_key"]))
           sheet = sheet.with(practice: UseCases::Catalog::CheckPractice.shown(sheet.practice)) if sheet.practice
-          Notion.new(slug:, name:, sheet:, figure: by_key[sheet.figure_key])
+          Notion.new(slug:, name:, sheet:, figure: by_key[sheet.figure_key], status:)
         end
       end
     end
