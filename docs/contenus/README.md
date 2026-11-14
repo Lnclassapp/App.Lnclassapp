@@ -53,6 +53,33 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ## Leçons traitées
 
+### 2nde, leçons 4 et 5 de chaque série et matière, en v3 complet (chantier `lecons-2nde-4-5`)
+
+Depuis le 2026-11-14, les leçons 4 et 5 de la progression DPFC 2026-2027 de 2nde A, 2nde C (Français, Mathématiques, Physique-Chimie, SVT) et d'Histoire-Géographie de 2nde sont rédigées au format v3 complet, comme les 3 premières : 18 fichiers, 14 leçons distinctes (Français et Physique-Chimie sont communs à A et C, écrits une fois et recopiés avec le `series_name` de chaque série ; Généralités sur les fonctions est écrite à part en A et en C). Chaque notion a son « Je m'entraîne » et 2 exercices (le second de 6 questions d'au moins 4 types), chaque leçon 4 problèmes et 4 sujets de devoir de 4 exercices. Hors Mathématiques et Physique-Chimie, les seconds exercices et les sujets sont entièrement corrigés automatiquement.
+
+Vérification : `valider.rb` sur la leçon et sur chaque sujet mis à la place des problèmes, format, aucune formule en ligne de 40 caractères ou plus ; relecture IA indépendante de chaque leçon (sympy sur chaque calcul en Mathématiques et Physique-Chimie). Points à faire valider par un enseignant : [journal du chantier](../chantiers/lecons-2nde-4-5/journal.md#à-trancher).
+
+| Fichier | Titre | Rang | Notions | Exercices | Questions | Figures |
+|---|---|---:|---:|---:|---:|---:|
+| `2nde-a/francais/groupement-de-textes-poetiques.json` | Groupement de textes poétiques | 5 | 5 | 30 | 171 | 0 |
+| `2nde-a/francais/les-outils-de-l-argumentation.json` | Les outils de l'argumentation | 4 | 5 | 30 | 178 | 0 |
+| `2nde-a/mathematiques/equations-et-inequations-dans.json` | Équations et inéquations dans ℝ | 4 | 5 | 30 | 179 | 3 |
+| `2nde-a/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 5 | 30 | 179 | 6 |
+| `2nde-a/physique-chimie/actions-mecaniques-ou-forces.json` | Actions mécaniques ou forces | 4 | 5 | 30 | 192 | 3 |
+| `2nde-a/physique-chimie/classification-periodique-des-elements-chimiques.json` | Classification périodique des éléments chimiques | 5 | 4 | 28 | 169 | 3 |
+| `2nde-a/svt/la-production-de-la-matiere-organique.json` | La production de la matière organique | 4 | 3 | 26 | 144 | 4 |
+| `2nde-a/svt/le-changement-climatique.json` | Le changement climatique | 5 | 5 | 30 | 175 | 9 |
+| `2nde-c/francais/groupement-de-textes-poetiques.json` | Groupement de textes poétiques | 5 | 5 | 30 | 171 | 0 |
+| `2nde-c/francais/les-outils-de-l-argumentation.json` | Les outils de l'argumentation | 4 | 5 | 30 | 178 | 0 |
+| `2nde-c/mathematiques/droites-et-plans-de-l-espace.json` | Droites et plans de l'espace | 5 | 4 | 28 | 161 | 3 |
+| `2nde-c/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 4 | 4 | 28 | 166 | 4 |
+| `2nde-c/physique-chimie/actions-mecaniques-ou-forces.json` | Actions mécaniques ou forces | 4 | 5 | 30 | 192 | 3 |
+| `2nde-c/physique-chimie/classification-periodique-des-elements-chimiques.json` | Classification périodique des éléments chimiques | 5 | 4 | 28 | 169 | 3 |
+| `2nde-c/svt/le-devenir-des-substances-absorbees-par-la-plante-verte.json` | Le devenir des substances absorbées par la plante verte | 4 | 4 | 28 | 160 | 6 |
+| `2nde-c/svt/les-relations-entre-les-etres-vivants-dans-un-ecosysteme.json` | Les relations entre les êtres vivants dans un écosystème | 5 | 4 | 28 | 160 | 8 |
+| `2nde/histoire-geographie/geographie-la-planete-terre.json` | Géographie — La planète terre | 4 | 4 | 28 | 156 | 3 |
+| `2nde/histoire-geographie/histoire-la-methodologie-de-la-dissertation-du-commentaire-de-document-et-de-la-situation-d-evaluation.json` | Histoire — La méthodologie de la dissertation, du commentaire de document et de la situation d'évaluation | 5 | 4 | 28 | 160 | 3 |
+
 ### 2nde, 3 premières leçons de chaque série et matière, réécrites en v3 complet (chantier `lecons-1ere-2nde-debut`)
 
 Depuis le 2026-11-12, les 3 premières leçons de la progression DPFC 2026-2027 de 2nde A, 2nde C (Français, Mathématiques, Physique-Chimie, SVT) et d'Histoire-Géographie de 2nde sont revenues de `a-reprendre/format-v1/`, réécrites au format v3 complet comme Thalès : 27 fichiers (Français et Physique-Chimie sont communs à A et C, écrits une fois et recopiés avec le `series_name` de chaque série). Chaque notion a 2 exercices (le second en `fixation`, 6 questions d'au moins 4 types), chaque leçon 4 problèmes et 4 sujets de devoir de 4 exercices. Hors Mathématiques et Physique-Chimie, les seconds exercices et les sujets sont entièrement corrigés automatiquement.

@@ -1,0 +1,3227 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La production de la matière organique",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "A",
+      "material_name": "SVT",
+      "figures": [
+        {
+          "key": "tests-de-mise-en-evidence",
+          "kind": "diagram",
+          "description": "Schéma en arbre des trois résultats qui mettent en évidence la photosynthèse : l'amidon se révèle par l'eau iodée qui devient bleu-noir, le dioxygène par la bûchette incandescente qui se rallume, l'absorption du dioxyde de carbone par l'eau de chaux, qui se trouble moins avec l'air qui a séjourné près de la plante.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Photosynthèse à mettre en évidence"
+              },
+              {
+                "id": "a",
+                "label": "Amidon : l'eau iodée devient bleu-noir"
+              },
+              {
+                "id": "o",
+                "label": "Dioxygène : la bûchette se rallume"
+              },
+              {
+                "id": "c",
+                "label": "CO₂ absorbé : l'eau de chaux se trouble moins"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "a",
+                "label": "test 1"
+              },
+              {
+                "from": "r",
+                "to": "o",
+                "label": "test 2"
+              },
+              {
+                "from": "r",
+                "to": "c",
+                "label": "test 3"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "feuille-panachee",
+          "kind": "diagram",
+          "description": "Schéma en arbre d'une feuille panachée éclairée puis testée à l'eau iodée : la zone verte, qui contient de la chlorophylle, devient bleu-noir car elle contient de l'amidon ; la zone blanche, sans chlorophylle, reste brun-orangé car elle n'en contient pas.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "f",
+                "label": "Feuille panachée éclairée, puis eau iodée"
+              },
+              {
+                "id": "v",
+                "label": "Zone verte : bleu-noir, amidon présent"
+              },
+              {
+                "id": "b",
+                "label": "Zone blanche : brun-orangé, pas d'amidon"
+              }
+            ],
+            "edges": [
+              {
+                "from": "f",
+                "to": "v",
+                "label": "avec chlorophylle"
+              },
+              {
+                "from": "f",
+                "to": "b",
+                "label": "sans chlorophylle"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "bulles-selon-lumiere",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres du nombre de bulles de dioxygène dégagées par minute par une élodée selon la lumière, valeurs fictives : 48 avec la lampe à 10 cm, 24 à 20 cm, 12 à 40 cm et 0 à l'obscurité. Plus la lampe est loin, moins il y a de bulles.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              48,
+              24,
+              12,
+              0
+            ],
+            "labels": [
+              "Lampe à 10 cm",
+              "Lampe à 20 cm",
+              "Lampe à 40 cm",
+              "Obscurité"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "bilan-photosynthese",
+          "kind": "diagram",
+          "description": "Schéma fléché du bilan de la photosynthèse : le dioxyde de carbone de l'air, l'eau du sol et la lumière du Soleil arrivent à la feuille verte qui contient de la chlorophylle ; elle fabrique de la matière organique (amidon, sucres) et rejette du dioxygène.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "co2",
+                "label": "Dioxyde de carbone (air)"
+              },
+              {
+                "id": "eau",
+                "label": "Eau du sol (racines)"
+              },
+              {
+                "id": "lum",
+                "label": "Lumière du Soleil"
+              },
+              {
+                "id": "feu",
+                "label": "Feuille verte (chlorophylle)"
+              },
+              {
+                "id": "mo",
+                "label": "Matière organique (amidon, sucres)"
+              },
+              {
+                "id": "o2",
+                "label": "Dioxygène rejeté"
+              }
+            ],
+            "edges": [
+              {
+                "from": "co2",
+                "to": "feu",
+                "label": "absorbé"
+              },
+              {
+                "from": "eau",
+                "to": "feu",
+                "label": "absorbée"
+              },
+              {
+                "from": "lum",
+                "to": "feu",
+                "label": "énergie"
+              },
+              {
+                "from": "feu",
+                "to": "mo",
+                "label": "fabrique"
+              },
+              {
+                "from": "feu",
+                "to": "o2",
+                "label": "rejette"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Mettre en évidence la photosynthèse",
+          "remember": "La **photosynthèse** est la fabrication de **matière organique** par une plante verte exposée à la lumière. On la met en évidence par trois résultats. 1) Une feuille éclairée contient de l'**amidon** : après décoloration, l'**eau iodée**, brun-orangé au départ, devient **bleu-noir** en sa présence. 2) Une plante aquatique éclairée (l'élodée) **dégage du dioxygène** : une bûchette incandescente s'y rallume. 3) Une plante éclairée **absorbe du dioxyde de carbone** : l'air qui a séjourné près d'elle dans une enceinte trouble moins l'**eau de chaux** que l'air de départ.",
+          "method": [
+            "Identifier la substance ou le gaz que l'expérience cherche à mettre en évidence.",
+            "Choisir le test qui révèle cette substance et noter son résultat positif.",
+            "Lire le résultat observé et le comparer au résultat positif du test.",
+            "Conclure en nommant la substance produite ou absorbée par la plante."
+          ],
+          "example": {
+            "statement": "Une feuille d'une plante verte du jardin de l'école, restée une journée au soleil, est décolorée à l'alcool chaud puis plongée dans l'eau iodée. Elle devient bleu-noir. Qu'a fabriqué la feuille ?",
+            "steps": [
+              "Identifier : on cherche à savoir si la feuille éclairée a fabriqué de l'amidon.",
+              "Choisir : le test de l'amidon est l'eau iodée, qui passe du brun-orangé au bleu-noir si l'amidon est présent.",
+              "Lire : après décoloration, la feuille plongée dans l'eau iodée est devenue bleu-noir, le résultat positif du test.",
+              "Conclure : la feuille éclairée a fabriqué de l'amidon, une matière organique."
+            ]
+          },
+          "pitfall": "Ne pas associer un test au mauvais corps. L'eau iodée ne détecte que l'amidon : une feuille qui devient bleu-noir ne prouve rien sur le dioxygène. Contre-exemple : les bulles dégagées par l'élodée ne se testent pas à l'eau iodée : seule la bûchette incandescente qui se rallume révèle le dioxygène. Une feuille qui reste brun-orangé n'est pas un test raté : elle ne contient simplement pas d'amidon.",
+          "practice": {
+            "statement": "Tu t'entraînes à lire le résultat d'un test de la photosynthèse.",
+            "questions": [
+              {
+                "content": "On plonge une feuille décolorée dans l'eau iodée : elle devient bleu-noir. Que montre ce résultat ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : l'eau iodée teste l'amidon. Étape 3 — Lire : la couleur bleu-noir est le résultat positif. Étape 4 — Conclure : la feuille contient de l'amidon. Elle ne dit rien du dioxygène, que révèle une autre expérience.",
+                "answers": [
+                  {
+                    "content": "La feuille contient de l'amidon",
+                    "correct": true
+                  },
+                  {
+                    "content": "La feuille a dégagé du dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "La feuille contient du dioxyde de carbone",
+                    "correct": false
+                  },
+                  {
+                    "content": "La feuille ne contient pas d'amidon",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel corps l'eau iodée colore-t-elle en bleu-noir ?"
+              },
+              {
+                "content": "L'eau iodée, brun-orangé au départ, devient bleu-noir en présence d'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir le test : l'eau iodée révèle l'amidon. Étape 4 — Conclure : le mot attendu est amidon.",
+                "answers": [
+                  {
+                    "content": "amidon",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est la matière organique que fabrique la feuille éclairée."
+              },
+              {
+                "content": "Une bûchette incandescente qui se rallume dans un gaz prouve que ce gaz est du dioxygène.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Choisir le test : la bûchette incandescente est le test du dioxygène. Étape 3 — Lire : elle se rallume, c'est le résultat positif. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel gaz entretient la combustion ?"
+              }
+            ]
+          },
+          "figure": "tests-de-mise-en-evidence",
+          "exercise": [
+            {
+              "title": "Reconnaître ce que montre chaque expérience",
+              "statement": "Dans cet exercice, tu identifies ce que montre chaque expérience de la photosynthèse avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "tests-de-mise-en-evidence",
+              "questions": [
+                {
+                  "content": "Au jardin de l'école, un élève veut savoir si une feuille de plante verte a fabriqué de l'amidon. Quel test choisit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on cherche l'amidon. Étape 2 — Choisir : le test de l'amidon est l'eau iodée. La bûchette révèle le dioxygène et l'eau de chaux le dioxyde de carbone, pas l'amidon.",
+                  "answers": [
+                    {
+                      "content": "L'eau iodée, après décoloration de la feuille",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bûchette incandescente",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau de chaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pesée de la feuille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque substance au test qui la révèle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier chaque substance. Étape 2 — Choisir son test : eau iodée pour l'amidon, bûchette incandescente pour le dioxygène, eau de chaux pour le dioxyde de carbone.",
+                  "answers": [
+                    {
+                      "content": "L'amidon",
+                      "match": "L'eau iodée"
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "match": "La bûchette incandescente"
+                    },
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "match": "L'eau de chaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une feuille d'igname éclairée est décolorée puis plongée dans l'eau iodée. Elle reste brun-orangé. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Lire : le brun-orangé n'est pas le résultat positif (bleu-noir). Étape 4 — Conclure : il n'y a pas d'amidon. Ce n'est pas un test raté, c'est un résultat négatif qui informe.",
+                  "answers": [
+                    {
+                      "content": "Elle ne contient pas d'amidon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle contient beaucoup d'amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le test est raté, on ne peut rien conclure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a produit du dioxygène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plante aquatique éclairée dégage des bulles. La bûchette incandescente s'y rallume : le gaz est du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Choisir : la bûchette incandescente est le test du dioxygène. Étape 3 — Lire : elle se rallume, résultat positif. Étape 4 — Conclure : le gaz est du dioxygène.",
+                  "answers": [
+                    {
+                      "content": "dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "oxygène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une feuille qui bleuit à l'eau iodée a dégagé du dioxygène.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Choisir : l'eau iodée teste seulement l'amidon. Étape 4 — Conclure : le bleu-noir prouve la présence d'amidon, pas d'un dégagement de dioxygène. C'est l'erreur de la fiche : associer un test au mauvais corps.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Mettre en évidence la photosynthèse : fixation",
+              "statement": "Dans cet exercice, tu retrouves les résultats et les protocoles de la photosynthèse dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour mettre en évidence l'amidon dans une feuille éclairée.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on cherche l'amidon. Étape 2 — Choisir : l'eau iodée. On prélève la feuille, on la décolore (sinon le vert masque la couleur), on la rince, on ajoute l'eau iodée et on observe (Étape 3 — Lire).",
+                  "answers": [
+                    {
+                      "content": "Prélever la feuille éclairée"
+                    },
+                    {
+                      "content": "La décolorer dans l'alcool chaud"
+                    },
+                    {
+                      "content": "La rincer à l'eau"
+                    },
+                    {
+                      "content": "La recouvrir d'eau iodée"
+                    },
+                    {
+                      "content": "Observer la couleur obtenue"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux résultats montrent que la photosynthèse a eu lieu dans une plante éclairée ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Lire les résultats positifs : le bleu-noir de l'eau iodée (amidon) et la bûchette qui se rallume (dioxygène) montrent la photosynthèse. Le brun-orangé est un résultat négatif et le dessèchement ne prouve rien.",
+                  "answers": [
+                    {
+                      "content": "Les feuilles contiennent de l'amidon (bleu-noir à l'eau iodée)",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plante aquatique dégage du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "La feuille reste brun-orangé à l'eau iodée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La feuille se dessèche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élodée éclairée dégage 12 bulles de dioxygène par minute. Combien en dégage-t-elle en 5 minutes si le rythme ne change pas (valeurs fictives) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Lire : le résultat est 12 bulles par minute. Étape 4 — Conclure par un calcul : 12 × 5 = 60 bulles en 5 minutes.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "bulles",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un air qui troublait beaucoup l'eau de chaux passe sur une plante éclairée, puis ne la trouble presque plus : la plante a ___ du dioxyde de carbone.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Lire : l'eau de chaux se trouble moins. Étape 4 — Conclure : il reste moins de dioxyde de carbone dans l'air, donc la plante en a absorbé. Si elle en avait rejeté, l'eau de chaux se troublerait davantage.",
+                  "answers": [
+                    {
+                      "content": "absorbé",
+                      "correct": true
+                    },
+                    {
+                      "content": "rejeté",
+                      "correct": false
+                    },
+                    {
+                      "content": "fabriqué",
+                      "correct": false
+                    },
+                    {
+                      "content": "détecté",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque résultat à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Lire chaque résultat et Étape 4 — Conclure : bleu-noir donne l'amidon, brun-orangé donne son absence, la bûchette qui se rallume donne le dioxygène, l'eau de chaux moins trouble donne le dioxyde de carbone absorbé.",
+                  "answers": [
+                    {
+                      "content": "Eau iodée bleu-noir",
+                      "match": "Présence d'amidon"
+                    },
+                    {
+                      "content": "Eau iodée brun-orangé",
+                      "match": "Absence d'amidon"
+                    },
+                    {
+                      "content": "Bûchette qui se rallume",
+                      "match": "Présence de dioxygène"
+                    },
+                    {
+                      "content": "Eau de chaux moins trouble",
+                      "match": "Dioxyde de carbone absorbé"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'amidon est une matière organique fabriquée par la feuille éclairée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : l'amidon, révélé par l'eau iodée, est fabriqué par la feuille à la lumière. C'est une matière organique, c'est-à-dire fabriquée par un être vivant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Rappelle-toi un test par corps : eau iodée, bûchette incandescente, eau de chaux."
+            }
+          ]
+        },
+        {
+          "name": "Les conditions de la photosynthèse",
+          "remember": "La photosynthèse exige quatre conditions : la **lumière**, la **chlorophylle** (le pigment vert des feuilles), le **dioxyde de carbone** de l'air et l'**eau** absorbée par les racines avec les sels minéraux, nécessaires à la croissance. Pour montrer qu'une condition est nécessaire, on compare un lot **témoin** (tout est présent) à un lot d'**essai** où l'on supprime **un seul** facteur : si l'amidon ou le dégagement de dioxygène disparaît, ce facteur est nécessaire. Dans les expériences de la leçon, la production de dioxygène augmente avec l'intensité lumineuse.",
+          "method": [
+            "Repérer le facteur étudié dans l'expérience : lumière, chlorophylle, dioxyde de carbone ou eau.",
+            "Identifier le lot témoin, où tout est présent, et le lot d'essai, où un seul facteur est supprimé.",
+            "Comparer les résultats des deux lots : amidon, dioxygène ou bulles.",
+            "Conclure : si la production disparaît quand le seul facteur supprimé manque, ce facteur est nécessaire."
+          ],
+          "example": {
+            "statement": "Une feuille panachée (zones vertes et zones blanches) est éclairée toute une journée, décolorée, puis plongée dans l'eau iodée. La zone verte devient bleu-noir, la zone blanche reste brun-orangé. Quelle condition cette expérience montre-t-elle ?",
+            "steps": [
+              "Repérer : le facteur étudié est la chlorophylle, présente dans la zone verte et absente de la zone blanche.",
+              "Identifier : la zone verte est le lot témoin, la zone blanche le lot d'essai ; lumière, dioxyde de carbone et eau sont les mêmes pour les deux.",
+              "Comparer : la zone verte contient de l'amidon (bleu-noir), la zone blanche n'en contient pas (brun-orangé).",
+              "Conclure : seul le facteur chlorophylle diffère et l'amidon disparaît sans lui, donc la chlorophylle est nécessaire à la photosynthèse."
+            ]
+          },
+          "pitfall": "Ne pas conclure sur un facteur quand on en a supprimé plusieurs à la fois. Contre-exemple : une plante laissée à l'obscurité et privée d'eau ne fait pas d'amidon ; on ne sait pas si c'est la lumière ou l'eau qui manque. Pour conclure, on ne change qu'un seul facteur et on garde tous les autres identiques.",
+          "practice": {
+            "statement": "Tu t'entraînes à déduire une condition de la photosynthèse à partir d'une expérience.",
+            "questions": [
+              {
+                "content": "Une partie blanche d'une feuille panachée reste brun-orangé à l'eau iodée alors que la partie verte bleuit. Quel facteur manque à la partie blanche ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les deux zones sont sur la même feuille et reçoivent la même lumière, le même dioxyde de carbone et la même eau. Étape 4 — Conclure : la seule différence est la chlorophylle.",
+                "answers": [
+                  {
+                    "content": "La chlorophylle",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lumière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dioxyde de carbone",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qu'est-ce qui diffère entre une zone verte et une zone blanche ?"
+              },
+              {
+                "content": "Pour montrer que la lumière est nécessaire, on compare deux plantes identiques, l'une à la lumière et l'autre à l'obscurité.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier : la plante à la lumière est le témoin, celle à l'obscurité l'essai. Un seul facteur, la lumière, change. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un seul facteur doit changer."
+              },
+              {
+                "content": "La partie d'une feuille recouverte d'un cache opaque ne reçoit pas de ___ : elle ne fabrique pas d'amidon.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le cache supprime la lumière. Étape 4 — Conclure : sans lumière, la feuille ne fabrique pas d'amidon.",
+                "answers": [
+                  {
+                    "content": "lumière",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un cache opaque arrête quelque chose."
+              },
+              {
+                "content": "On prive une plante à la fois de lumière et d'eau, et elle ne fait pas d'amidon. Peut-on, avec cette seule expérience, dire quelle condition est nécessaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : le lot d'essai diffère du témoin par deux facteurs. Étape 4 — Conclure : on ne peut pas dire lequel est en cause. Il faut un essai par facteur.",
+                "answers": [
+                  {
+                    "content": "Non, car deux facteurs ont changé en même temps",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, c'est la lumière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, c'est l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, les deux sont forcément nécessaires",
+                    "correct": false
+                  }
+                ],
+                "hint": "Combien de facteurs ont changé ?"
+              }
+            ]
+          },
+          "figure": "feuille-panachee",
+          "exercise": [
+            {
+              "title": "Déduire les conditions d'une expérience",
+              "statement": "Dans cet exercice, tu déduis les conditions de la photosynthèse à partir d'expériences, avec la méthode de la fiche. Les résultats sont fictifs mais réalistes.",
+              "exercise_type": "fixation",
+              "figure": "feuille-panachee",
+              "questions": [
+                {
+                  "content": "Parmi ces ensembles, lequel donne les conditions de la photosynthèse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les facteurs étudiés : lumière, chlorophylle, dioxyde de carbone, eau. Les autres ensembles oublient des facteurs nécessaires ou en ajoutent de faux, comme l'obscurité ou la chaleur seule.",
+                  "answers": [
+                    {
+                      "content": "Lumière, chlorophylle, dioxyde de carbone et eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaleur seule, sans lumière ni chlorophylle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lumière et dioxygène seuls",
+                      "correct": false
+                    },
+                    {
+                      "content": "Obscurité, sable et dioxygène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une feuille panachée éclairée, la zone verte bleuit à l'eau iodée et la zone blanche reste brun-orangé. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : zone verte = témoin, zone blanche = essai, avec la même lumière et le même air. Étape 3 — Comparer : amidon d'un côté seulement. Étape 4 — Conclure : la chlorophylle est nécessaire.",
+                  "answers": [
+                    {
+                      "content": "La chlorophylle est nécessaire à la fabrication d'amidon",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière n'est pas nécessaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "La zone blanche a reçu trop de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxyde de carbone n'atteint que la zone verte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plante verte est gardée deux jours à l'obscurité, puis on recouvre une partie d'une de ses feuilles avec un cache opaque pendant la journée. Sous le cache, l'eau iodée reste brun-orangé : il n'y a pas d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer : la partie découverte bleuit, la partie cachée reste brun-orangé. Étape 4 — Conclure : sous le cache, la feuille n'a pas fabriqué d'amidon, donc la lumière est nécessaire.",
+                  "answers": [
+                    {
+                      "content": "amidon",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une feuille d'une plante en pot est placée à la lumière dans une enceinte sans dioxyde de carbone et ne fabrique pas d'amidon. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Identifier : le témoin a du dioxyde de carbone, l'essai n'en a pas. Étape 4 — Conclure : sans lui, pas d'amidon, donc il est nécessaire. La lumière et la chlorophylle sont présentes dans l'essai.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone est une condition nécessaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot témoin doit contenir du dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière est inutile",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chlorophylle a disparu de la feuille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plante est placée à l'obscurité et privée d'eau. Elle ne fait pas d'amidon : on peut en conclure que la lumière est nécessaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier : deux facteurs ont été supprimés, la lumière et l'eau. Étape 4 — Conclure : on ne peut pas attribuer le résultat à la lumière seule. C'est l'erreur de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les conditions de la photosynthèse : fixation",
+              "statement": "Dans cet exercice, tu étudies l'effet de la lumière sur une élodée qui dégage des bulles de dioxygène : 48 bulles par minute avec la lampe à 10 cm, 24 à 20 cm, 12 à 40 cm, aucune dans l'obscurité (valeurs fictives).",
+              "exercise_type": "fixation",
+              "figure": "bulles-selon-lumiere",
+              "questions": [
+                {
+                  "content": "Avec la lampe à 10 cm, l'élodée dégage 48 bulles par minute (valeurs fictives). Combien de bulles dégage-t-elle en 5 minutes si le rythme ne change pas ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Comparer et lire : 48 bulles par minute. Calcul : 48 × 5 = 240 bulles en 5 minutes.",
+                  "answers": [
+                    {
+                      "content": "240",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "bulles",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une élodée dégage 48, 24 puis 12 bulles par minute quand on éloigne la lampe à 10, 20 puis 40 cm (valeurs fictives). Que devient le dégagement de dioxygène quand la lumière devient moins intense ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer : 48, puis 24, puis 12 bulles par minute. Étape 4 — Conclure : plus la lampe s'éloigne, moins la lumière est intense et moins il y a de bulles. Le dégagement ne devient pas nul tant qu'il reste de la lumière.",
+                  "answers": [
+                    {
+                      "content": "Il diminue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il augmente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste le même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il devient aussitôt nul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du raisonnement pour montrer que la lumière est nécessaire.",
+                  "question_type": "ordering",
+                  "explanation": "C'est la méthode de la fiche : Étape 1 — Repérer, Étape 2 — Identifier, Étape 3 — Comparer, Étape 4 — Conclure, dans cet ordre.",
+                  "answers": [
+                    {
+                      "content": "Repérer le facteur étudié : la lumière"
+                    },
+                    {
+                      "content": "Identifier le lot témoin éclairé et le lot d'essai à l'obscurité"
+                    },
+                    {
+                      "content": "Comparer le nombre de bulles dans les deux lots"
+                    },
+                    {
+                      "content": "Conclure que la lumière est nécessaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'obscurité, le nombre de bulles dégagées par l'élodée est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Comparer : à l'obscurité, aucune bulle n'est dégagée. Étape 4 — Conclure : la lumière est nécessaire au dégagement de dioxygène.",
+                  "answers": [
+                    {
+                      "content": "nul",
+                      "correct": true
+                    },
+                    {
+                      "content": "maximal",
+                      "correct": false
+                    },
+                    {
+                      "content": "identique à celui avec la lampe à 10 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "le double de celui avec la lampe à 40 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois conditions montrent respectivement un cache opaque, une feuille panachée et une enceinte privée de dioxyde de carbone ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer le facteur supprimé par chaque montage : le cache supprime la lumière, la zone blanche la chlorophylle, l'enceinte le dioxyde de carbone. Le dioxygène est un produit, pas une condition.",
+                  "answers": [
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chlorophylle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sable du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque montage au facteur qu'il teste.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le facteur étudié : le cache retire la lumière, les zones blanches la chlorophylle, l'enceinte le dioxyde de carbone, l'absence d'arrosage l'eau.",
+                  "answers": [
+                    {
+                      "content": "Un cache opaque sur la feuille",
+                      "match": "La lumière"
+                    },
+                    {
+                      "content": "Une feuille panachée",
+                      "match": "La chlorophylle"
+                    },
+                    {
+                      "content": "Une enceinte sans dioxyde de carbone",
+                      "match": "Le dioxyde de carbone"
+                    },
+                    {
+                      "content": "Une plante jamais arrosée",
+                      "match": "L'eau"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Chaque montage retire un seul facteur."
+            }
+          ]
+        },
+        {
+          "name": "Le bilan de la photosynthèse et le rôle des producteurs",
+          "remember": "Le **bilan** de la photosynthèse s'écrit en mots : dioxyde de carbone + eau → matière organique + dioxygène, en présence de **lumière** et de **chlorophylle**. La **matière minérale** (eau, dioxyde de carbone, sels minéraux) n'est pas fabriquée par les êtres vivants ; la **matière organique** (amidon, sucres) l'est. Les végétaux chlorophylliens sont des **producteurs** : ils transforment de la matière minérale en matière organique. Les animaux et l'homme s'en nourrissent, et le dioxygène rejeté est utile aux êtres vivants.",
+          "method": [
+            "Lister ce que la plante absorbe : dioxyde de carbone, eau et énergie lumineuse.",
+            "Relever ce que la plante fabrique ou rejette : matière organique et dioxygène.",
+            "Écrire le bilan en mots, avec une flèche et, au-dessus d'elle, la lumière et la chlorophylle.",
+            "Déduire le rôle de la plante : elle transforme de la matière minérale en matière organique."
+          ],
+          "example": {
+            "statement": "Dans une plantation de cacao, un cacaoyer feuillu est en plein soleil. Écrire le bilan de sa photosynthèse et dire son rôle.",
+            "steps": [
+              "Lister : le cacaoyer absorbe du dioxyde de carbone (air), de l'eau (sol) et de l'énergie lumineuse (Soleil).",
+              "Relever : il fabrique de la matière organique (amidon, sucres) et rejette du dioxygène.",
+              "Écrire : dioxyde de carbone + eau → matière organique + dioxygène, avec la lumière et la chlorophylle au-dessus de la flèche.",
+              "Déduire : il transforme de la matière minérale en matière organique, c'est un producteur dont se nourrissent animaux et hommes."
+            ]
+          },
+          "pitfall": "Ne pas croire que la plante fabrique sa matière organique à partir de la terre. Contre-exemple (valeurs fictives) : un plant de 1 kg grandit dans un pot de 20 kg de terre sèche ; au bout de deux ans il pèse 6 kg et la terre 19,95 kg. Le plant a gagné 5 kg, la terre n'a perdu que 0,05 kg : la matière vient surtout du dioxyde de carbone et de l'eau, transformés à la lumière.",
+          "practice": {
+            "statement": "Tu t'entraînes à écrire le bilan de la photosynthèse et à dire le rôle des producteurs.",
+            "questions": [
+              {
+                "content": "Quelle écriture est le bilan de la photosynthèse d'un végétal vert éclairé ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : la plante absorbe dioxyde de carbone et eau. Étape 2 — Relever : elle fabrique de la matière organique et rejette du dioxygène. Étape 3 — Écrire le bilan dans ce sens. Les autres écritures inversent les produits.",
+                "answers": [
+                  {
+                    "content": "dioxyde de carbone + eau → matière organique + dioxygène (en présence de lumière et de chlorophylle)",
+                    "correct": true
+                  },
+                  {
+                    "content": "dioxygène + eau → matière organique + dioxyde de carbone",
+                    "correct": false
+                  },
+                  {
+                    "content": "matière organique + dioxygène → dioxyde de carbone + eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "dioxyde de carbone + dioxygène → eau + matière organique",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le dioxygène est rejeté, il est donc à droite de la flèche."
+              },
+              {
+                "content": "Les végétaux chlorophylliens sont appelés ___ car ils fabriquent la matière organique.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Déduire : un végétal chlorophyllien transforme de la matière minérale en matière organique, c'est un producteur.",
+                "answers": [
+                  {
+                    "content": "producteurs",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce mot est le contraire de consommateur."
+              },
+              {
+                "content": "La photosynthèse transforme de la matière minérale en matière organique.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Déduire : le dioxyde de carbone et l'eau sont de la matière minérale ; l'amidon et les sucres, de la matière organique. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare ce que la plante absorbe et ce qu'elle fabrique."
+              }
+            ]
+          },
+          "figure": "bilan-photosynthese",
+          "exercise": [
+            {
+              "title": "Écrire le bilan et dire le rôle du végétal",
+              "statement": "Dans cet exercice, tu écris le bilan de la photosynthèse et tu dégages le rôle des producteurs avec la méthode de la fiche, dans une plantation de cacao et un champ d'igname.",
+              "exercise_type": "fixation",
+              "figure": "bilan-photosynthese",
+              "questions": [
+                {
+                  "content": "Un cacaoyer éclairé fait la photosynthèse. Quelles trois choses absorbe-t-il ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Lister ce que la plante absorbe : dioxyde de carbone, eau et énergie lumineuse. Le dioxygène est rejeté et le sol ne fournit pas d'amidon.",
+                  "answers": [
+                    {
+                      "content": "Du dioxyde de carbone de l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'eau du sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'énergie lumineuse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du dioxygène pour fabriquer sa matière",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'amidon déjà fabriqué par le sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plant d'igname éclairé fait la photosynthèse. Quelles deux choses fabrique-t-il ou rejette-t-il ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Relever ce que la plante fabrique ou rejette : de la matière organique et du dioxygène. Le dioxyde de carbone est absorbé, pas rejeté, par la photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "De la matière organique (amidon, sucres)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des sels minéraux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour établir le bilan de la photosynthèse.",
+                  "question_type": "ordering",
+                  "explanation": "C'est la méthode de la fiche : Étape 1 — Lister, Étape 2 — Relever, Étape 3 — Écrire, Étape 4 — Déduire.",
+                  "answers": [
+                    {
+                      "content": "Lister ce que la plante absorbe"
+                    },
+                    {
+                      "content": "Relever ce qu'elle fabrique ou rejette"
+                    },
+                    {
+                      "content": "Écrire le bilan en mots avec la flèche"
+                    },
+                    {
+                      "content": "Déduire le rôle de la plante"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un champ d'igname, la plante fabrique de la matière organique à partir de matière ___ : dioxyde de carbone, eau et sels.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Déduire : le dioxyde de carbone, l'eau et les sels sont de la matière minérale que la plante transforme en matière organique.",
+                  "answers": [
+                    {
+                      "content": "minérale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit que la plante fabrique sa matière avec la terre. Un plant de 1 kg passe à 6 kg en deux ans dans 20 kg de terre qui pèse 19,95 kg à la fin (valeurs fictives). Que montre cette expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : le plant gagne 6 − 1 = 5 kg. Étape 4 — Déduire : la terre ne perd que 20 − 19,95 = 0,05 kg, trop peu pour expliquer 5 kg. La matière vient surtout du dioxyde de carbone et de l'eau.",
+                  "answers": [
+                    {
+                      "content": "La terre a presque gardé sa masse : l'essentiel de la matière vient du dioxyde de carbone et de l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La terre a fourni les 5 kg gagnés par le plant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plant n'a rien fabriqué",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plant a perdu de la masse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le bilan et les producteurs : fixation",
+              "statement": "Dans cet exercice, tu retrouves le vocabulaire et le rôle des producteurs au jardin de l'école, dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Déduire : le producteur transforme la matière minérale en matière organique ; l'amidon est organique, l'eau minérale ; la chlorophylle est le pigment vert des feuilles.",
+                  "answers": [
+                    {
+                      "content": "Producteur",
+                      "match": "Être vivant qui fabrique de la matière organique à partir de matière minérale"
+                    },
+                    {
+                      "content": "Matière organique",
+                      "match": "Matière fabriquée par les êtres vivants, comme l'amidon"
+                    },
+                    {
+                      "content": "Matière minérale",
+                      "match": "Matière non fabriquée par le vivant, comme l'eau"
+                    },
+                    {
+                      "content": "Chlorophylle",
+                      "match": "Pigment vert qui capte la lumière dans les feuilles"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pot contient 20 kg de terre sèche. Après deux ans de culture d'un plant, elle pèse 19,95 kg (valeurs fictives). Quelle masse de terre a été perdue ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : masse de départ 20 kg, masse finale 19,95 kg. Calcul : 20 − 19,95 = 0,05 kg. La perte est minuscule devant le gain de masse du plant.",
+                  "answers": [
+                    {
+                      "content": "0,05",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les animaux sont des producteurs, car ils fabriquent de la matière organique à partir de matière minérale.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Déduire : seuls les végétaux chlorophylliens transforment la matière minérale en matière organique. Les animaux se nourrissent de matière organique déjà fabriquée, ils ne sont pas des producteurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant la photosynthèse, la plante ___ du dioxygène.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relever : le dioxygène fait partie des produits du bilan, à droite de la flèche. La plante le rejette ; elle absorbe, elle, le dioxyde de carbone.",
+                  "answers": [
+                    {
+                      "content": "rejette",
+                      "correct": true
+                    },
+                    {
+                      "content": "absorbe",
+                      "correct": false
+                    },
+                    {
+                      "content": "transforme en amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "fabrique à partir de la terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les végétaux chlorophylliens sont-ils indispensables aux autres êtres vivants ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Déduire : les producteurs fabriquent la matière organique des aliments et rejettent du dioxygène. Ils ne fabriquent pas de matière minérale et n'absorbent pas de dioxygène pour la photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "Ils fournissent la matière organique dont se nourrissent animaux et hommes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils rejettent du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils absorbent le dioxygène pour le transformer en amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils fabriquent de la matière minérale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le jardin de l'école, quel être vivant est un producteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Déduire : le plant de tomate a de la chlorophylle et fabrique sa matière organique par photosynthèse. Le poulet, la fourmi et le lézard se nourrissent de matière organique déjà fabriquée.",
+                  "answers": [
+                    {
+                      "content": "Le plant de tomate",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poulet",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fourmi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lézard",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un producteur est un végétal chlorophyllien."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Au jardin de l'école : l'expérience du cache",
+          "statement": "Au jardin de l'école, le club de SVT veut savoir si la lumière est nécessaire à la fabrication d'amidon. Après avoir gardé une plante verte deux jours à l'obscurité, il recouvre en partie une de ses feuilles avec un cache opaque pendant une journée ensoleillée, puis décolore la feuille et la plonge dans l'eau iodée. La partie découverte devient bleu-noir ; la partie sous le cache reste brun-orangé.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle substance l'eau iodée révèle-t-elle dans la feuille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier ce que l'on cherche : une matière fabriquée par la feuille. 2. Choisir le test : l'eau iodée, brun-orangé au départ, bleuit en présence d'amidon. 3. Le dioxygène se teste avec la bûchette incandescente et le dioxyde de carbone avec l'eau de chaux.",
+              "answers": [
+                {
+                  "content": "L'amidon",
+                  "correct": true
+                },
+                {
+                  "content": "Le dioxygène",
+                  "correct": false
+                },
+                {
+                  "content": "Le dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cette expérience, la partie découverte est le lot témoin et la partie sous le cache le lot d'essai.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Repérer le facteur étudié : la lumière. 2. Identifier les lots : la partie découverte reçoit la lumière, c'est le témoin ; la partie cachée en est privée, c'est l'essai. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que peut-on conclure de cette expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer : le cache supprime la lumière seule, le reste étant identique. 2. Comparer : amidon sans cache, pas d'amidon sous le cache. 3. Conclure : la lumière est nécessaire. La chlorophylle et l'eau n'ont pas changé, on ne peut rien en dire.",
+              "answers": [
+                {
+                  "content": "La lumière est nécessaire à la fabrication d'amidon",
+                  "correct": true
+                },
+                {
+                  "content": "La chlorophylle est inutile",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau n'est pas nécessaire",
+                  "correct": false
+                },
+                {
+                  "content": "Le cache fabrique de l'amidon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sans lumière, la feuille ne peut pas fabriquer d'___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. Le résultat de l'expérience est que la partie sous le cache n'a pas bleui. Elle ne contient pas d'amidon : sans lumière, pas de fabrication d'amidon.",
+              "answers": [
+                {
+                  "content": "amidon",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes du raisonnement de cette expérience.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée, celle de la fiche sur les conditions : 1. Repérer. 2. Identifier. 3. Comparer. 4. Conclure.",
+              "answers": [
+                {
+                  "content": "Repérer le facteur étudié : la lumière"
+                },
+                {
+                  "content": "Identifier la partie découverte (témoin) et la partie cachée (essai)"
+                },
+                {
+                  "content": "Comparer les couleurs obtenues à l'eau iodée"
+                },
+                {
+                  "content": "Conclure que la lumière est nécessaire"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le cacaoyer, un producteur",
+          "statement": "Dans une plantation de cacao, les cacaoyers en pleine lumière sont feuillus. Le chef de plantation explique à son fils que les cacaoyers fabriquent leurs cabosses avec l'air, l'eau et la lumière du Soleil.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle équation bilan simplifiée décrit la photosynthèse d'un cacaoyer éclairé ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Lister ce qui est absorbé : dioxyde de carbone, eau, énergie lumineuse. 2. Relever ce qui est fabriqué ou rejeté : matière organique, dioxygène. 3. Écrire le bilan dans ce sens. Les autres écritures échangent les rôles du dioxyde de carbone et du dioxygène.",
+              "answers": [
+                {
+                  "content": "dioxyde de carbone + eau → matière organique + dioxygène (en présence de lumière et de chlorophylle)",
+                  "correct": true
+                },
+                {
+                  "content": "dioxygène + eau → matière organique + dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "matière organique + dioxygène → dioxyde de carbone + eau",
+                  "correct": false
+                },
+                {
+                  "content": "dioxyde de carbone + dioxygène → eau + matière organique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément à son origine ou à son devenir pour un cacaoyer.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Lister ce que la plante absorbe : dioxyde de carbone de l'air, eau du sol, énergie du Soleil. 2. Relever ce qu'elle rejette : le dioxygène, dans l'air.",
+              "answers": [
+                {
+                  "content": "Dioxyde de carbone",
+                  "match": "L'air"
+                },
+                {
+                  "content": "Eau",
+                  "match": "Le sol, par les racines"
+                },
+                {
+                  "content": "Énergie lumineuse",
+                  "match": "Le Soleil"
+                },
+                {
+                  "content": "Dioxygène",
+                  "match": "Rejeté dans l'air"
+                }
+              ]
+            },
+            {
+              "content": "Un jeune plant de cacaoyer pèse 2 kg ; trois ans plus tard il pèse 14 kg (valeurs fictives). Quel est son gain de masse ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever les deux valeurs : 2 kg puis 14 kg. 2. Soustraire : 14 − 2 = 12. 3. Donner l'unité : kg. Ce gain vient surtout du dioxyde de carbone et de l'eau transformés en matière organique.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "kg",
+              "tolerance": 0
+            },
+            {
+              "content": "Pourquoi dit-on que le cacaoyer est un producteur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Lister : dioxyde de carbone et eau sont de la matière minérale. 2. Relever : l'amidon et les sucres sont de la matière organique. 3. Déduire : le cacaoyer transforme l'une en l'autre, c'est un producteur.",
+              "answers": [
+                {
+                  "content": "Il fabrique de la matière organique à partir de matière minérale",
+                  "correct": true
+                },
+                {
+                  "content": "Il fabrique de la matière minérale à partir de matière organique",
+                  "correct": false
+                },
+                {
+                  "content": "Il rejette du dioxyde de carbone à la lumière",
+                  "correct": false
+                },
+                {
+                  "content": "Il se nourrit de la terre de la plantation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les cabosses de cacao contiennent de la matière ___ fabriquée par l'arbre.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. Les cabosses sont faites de matière fabriquée par un être vivant à partir de matière minérale : c'est de la matière organique.",
+              "answers": [
+                {
+                  "content": "organique",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le champ d'igname et la lumière",
+          "statement": "Dans un champ d'igname, on compare trois parcelles identiques (même sol, même arrosage, mêmes plants) qui ne diffèrent que par la lumière reçue. Après six semaines, on mesure la quantité d'amidon d'un échantillon de feuilles, en unités arbitraires : 80 en plein soleil, 50 à l'ombre légère, 20 à l'ombre épaisse (valeurs fictives).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la différence de quantité d'amidon entre la parcelle en plein soleil (80) et celle à l'ombre épaisse (20) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever les valeurs : 80 et 20. 2. Soustraire : 80 − 20 = 60. 3. Donner l'unité : unités arbitraires.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "unit": "unités",
+              "tolerance": 0
+            },
+            {
+              "content": "Quelle relation ces mesures montrent-elles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Comparer : 80, 50 puis 20 quand la lumière diminue. 2. Conclure : quand la lumière diminue, la quantité d'amidon diminue ; plus la lumière est intense, plus il y a d'amidon.",
+              "answers": [
+                {
+                  "content": "Plus la lumière est intense, plus la quantité d'amidon est grande",
+                  "correct": true
+                },
+                {
+                  "content": "Plus la lumière est intense, moins il y a d'amidon",
+                  "correct": false
+                },
+                {
+                  "content": "La lumière n'a aucun effet sur l'amidon",
+                  "correct": false
+                },
+                {
+                  "content": "L'ombre épaisse fabrique le plus d'amidon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel pourcentage de la quantité d'amidon du plein soleil (80) la parcelle à l'ombre épaisse (20) atteint-elle ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Rapporter 20 à 80 : 20 ÷ 80 = 0,25. 2. Convertir en pourcentage : 0,25 = 25 %. L'ombre épaisse fabrique donc le quart de l'amidon du plein soleil.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "unit": "%",
+              "tolerance": 0
+            },
+            {
+              "content": "Quelles deux précautions permettent d'attribuer la différence à la lumière seule ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Repérer le facteur étudié : la lumière. 2. Garder tous les autres facteurs identiques (plants, sol, eau). Changer l'arrosage ou l'espèce ajouterait un second facteur.",
+              "answers": [
+                {
+                  "content": "Utiliser des plants identiques",
+                  "correct": true
+                },
+                {
+                  "content": "Ne changer que la lumière, avec le même sol et le même arrosage",
+                  "correct": true
+                },
+                {
+                  "content": "Arroser davantage la parcelle ombragée",
+                  "correct": false
+                },
+                {
+                  "content": "Utiliser des espèces différentes dans chaque parcelle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Cette expérience permet de conclure que la lumière influence la quantité d'amidon fabriquée par les feuilles.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Un seul facteur change (la lumière) et la quantité d'amidon change avec lui. La conclusion est valide : c'est la règle du témoin et de l'essai.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les montages de l'élodée",
+          "statement": "Le club de SVT du lycée étudie une élodée dans trois montages d'eau. Montage A : elle est éclairée, l'eau est ordinaire. Montage B : elle est à l'obscurité, l'eau est ordinaire. Montage C : elle est éclairée, mais l'eau a été bouillie puis refroidie, ce qui supprime le dioxyde de carbone dissous. En A, elle dégage 30 bulles par minute et le gaz recueilli rallume une bûchette incandescente ; en B et en C, aucune bulle (valeurs fictives).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel gaz est dégagé dans le montage A ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier ce qui est cherché : un gaz. 2. Choisir le test : la bûchette incandescente révèle le dioxygène. 3. Lire : elle se rallume. 4. Conclure : le gaz est du dioxygène.",
+              "answers": [
+                {
+                  "content": "Du dioxygène",
+                  "correct": true
+                },
+                {
+                  "content": "Du dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "De l'amidon",
+                  "correct": false
+                },
+                {
+                  "content": "De la vapeur d'eau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels montages faut-il comparer pour montrer que la lumière est nécessaire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer le facteur : la lumière. 2. Prendre deux lots qui ne diffèrent que par elle : A (éclairé) et B (obscurité), tout le reste étant identique. B et C diffèrent par deux facteurs.",
+              "answers": [
+                {
+                  "content": "A et B",
+                  "correct": true
+                },
+                {
+                  "content": "A et C",
+                  "correct": false
+                },
+                {
+                  "content": "B et C",
+                  "correct": false
+                },
+                {
+                  "content": "A, B et C ensemble",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que montre la comparaison de A et de C ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer le facteur : le dioxyde de carbone. 2. A est le témoin, C l'essai. 3. Comparer : bulles en A, aucune en C. 4. Conclure : il est nécessaire. La lumière est la même dans les deux.",
+              "answers": [
+                {
+                  "content": "Le dioxyde de carbone est nécessaire au dégagement de dioxygène",
+                  "correct": true
+                },
+                {
+                  "content": "La lumière est inutile",
+                  "correct": false
+                },
+                {
+                  "content": "La chlorophylle est nécessaire",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau bouillie contient plus de dioxygène",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque observation à sa conclusion.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. Chaque observation compare un lot témoin et un lot d'essai : la lumière change entre A et B, le dioxyde de carbone entre A et C. La bûchette qui se rallume est le résultat positif du test du dioxygène.",
+              "answers": [
+                {
+                  "content": "Bulles en A et pas en B",
+                  "match": "La lumière est nécessaire"
+                },
+                {
+                  "content": "Bulles en A et pas en C",
+                  "match": "Le dioxyde de carbone est nécessaire"
+                },
+                {
+                  "content": "La bûchette se rallume en A",
+                  "match": "Du dioxygène est dégagé"
+                }
+              ]
+            },
+            {
+              "content": "En A, l'élodée dégage 30 bulles par minute. Combien de bulles dégage-t-elle en une heure si le rythme ne change pas ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever : 30 bulles par minute. 2. Convertir : 1 heure = 60 minutes. 3. Calculer : 30 × 60 = 1 800 bulles.",
+              "answers": [
+                {
+                  "content": "1800",
+                  "correct": true
+                }
+              ],
+              "unit": "bulles",
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le montage A, le bilan est : dioxyde de carbone + eau → matière organique + ___, en présence de lumière et de chlorophylle.",
+              "question_type": "select",
+              "explanation": "Méthode détaillée. 1. Lister ce qui est absorbé : dioxyde de carbone, eau. 2. Relever ce qui est rejeté : le dioxygène, que révèle la bûchette. 3. Écrire le bilan avec le dioxygène à droite de la flèche.",
+              "answers": [
+                {
+                  "content": "dioxygène",
+                  "correct": true
+                },
+                {
+                  "content": "eau",
+                  "correct": false
+                },
+                {
+                  "content": "dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "sels minéraux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base de la photosynthèse",
+          "notions": "Tests de l'amidon, du dioxygène et du dioxyde de carbone ; vocabulaire ; conditions ; bilan et producteurs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un schéma fléché donne les trois tests qui mettent en évidence la photosynthèse : l'eau iodée pour l'amidon, la bûchette incandescente pour le dioxygène, l'eau de chaux pour le dioxyde de carbone.",
+              "exercise_type": "evaluation",
+              "figure": "tests-de-mise-en-evidence",
+              "questions": [
+                {
+                  "content": "Quel test choisit-on pour savoir si une feuille éclairée contient de l'amidon ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier : on cherche l'amidon. 2. Choisir le test : l'eau iodée, qui devient bleu-noir en présence d'amidon. La bûchette teste le dioxygène et l'eau de chaux le dioxyde de carbone.",
+                  "answers": [
+                    {
+                      "content": "L'eau iodée",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bûchette incandescente",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau de chaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une balance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque substance à son test.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier la substance. 2. Choisir son test : eau iodée, bûchette incandescente ou eau de chaux selon le corps cherché.",
+                  "answers": [
+                    {
+                      "content": "L'amidon",
+                      "match": "L'eau iodée"
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "match": "La bûchette incandescente"
+                    },
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "match": "L'eau de chaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une feuille qui devient bleu-noir à l'eau iodée contient de l'amidon.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Lire : le bleu-noir est le résultat positif du test de l'amidon. 4. Conclure : la feuille contient de l'amidon.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bûchette incandescente qui se rallume révèle la présence de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le test de la bûchette incandescente est celui du dioxygène. Elle se rallume : le résultat est positif.",
+                  "answers": [
+                    {
+                      "content": "dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "oxygène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un air trouble beaucoup l'eau de chaux. Après passage sur une plante éclairée, il la trouble à peine. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Lire : l'eau de chaux se trouble moins. 4. Conclure : il reste moins de dioxyde de carbone dans l'air, la plante en a absorbé.",
+                  "answers": [
+                    {
+                      "content": "La plante a absorbé du dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plante a rejeté du dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plante a fabriqué de l'amidon dans l'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air contient maintenant plus de dioxyde de carbone",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Associe chaque corps à son test."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le club de SVT d'un lycée prépare un affichage sur le vocabulaire de la photosynthèse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le pigment vert des feuilles s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : la chlorophylle est le pigment vert qui capte la lumière. Elle est nécessaire à la photosynthèse, comme le montre la feuille panachée.",
+                  "answers": [
+                    {
+                      "content": "chlorophylle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux substances sont des matières organiques ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : la matière organique est fabriquée par les êtres vivants (amidon, sucres). L'eau et le dioxyde de carbone sont de la matière minérale.",
+                  "answers": [
+                    {
+                      "content": "L'amidon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sucres",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La photosynthèse se déroule à la lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : la lumière est l'une des conditions de la photosynthèse. Sans elle, pas d'amidon ni de dioxygène. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment appelle-t-on un végétal chlorophyllien qui fabrique de la matière organique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Déduire le rôle : un végétal chlorophyllien transforme de la matière minérale en matière organique, c'est un producteur.",
+                  "answers": [
+                    {
+                      "content": "Un producteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un consommateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un décomposeur de roches",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un prédateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : chaque mot de la leçon a un sens précis : l'amidon se teste à l'eau iodée, la chlorophylle est le pigment vert, le producteur fabrique la matière organique, le témoin garde tous les facteurs.",
+                  "answers": [
+                    {
+                      "content": "Amidon",
+                      "match": "Matière organique révélée par l'eau iodée"
+                    },
+                    {
+                      "content": "Chlorophylle",
+                      "match": "Pigment vert des feuilles"
+                    },
+                    {
+                      "content": "Producteur",
+                      "match": "Être qui fabrique de la matière organique"
+                    },
+                    {
+                      "content": "Témoin",
+                      "match": "Lot où tous les facteurs sont présents"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Reprends les définitions de la leçon."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Trois expériences sont réalisées sur des plantes vertes : un cache opaque sur une feuille, une feuille panachée, une enceinte privée de dioxyde de carbone.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle expérience montre que la chlorophylle est nécessaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le facteur : la chlorophylle, absente des zones blanches. 2. Identifier : zone verte = témoin, zone blanche = essai. La feuille panachée est donc le bon montage.",
+                  "answers": [
+                    {
+                      "content": "La feuille panachée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cache opaque",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'enceinte sans dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dessèchement de la feuille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel facteur le cache opaque supprime-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : le cache arrête la lumière et ne change rien d'autre. Il teste donc la lumière.",
+                  "answers": [
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chlorophylle",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une expérience sur la lumière, on peut aussi supprimer l'eau pour être plus sûr.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Identifier : le lot d'essai ne doit différer du témoin que par un facteur. Supprimer l'eau en plus ajouterait un second facteur et empêcherait de conclure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une enceinte privée de ___ ne permet pas la fabrication d'amidon par une feuille éclairée.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le dioxyde de carbone est une condition nécessaire. Sans lui, la feuille éclairée ne fabrique pas d'amidon.",
+                  "answers": [
+                    {
+                      "content": "dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "co2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour conclure qu'un facteur est nécessaire, on compare un lot témoin à un lot d'essai où ___ facteur est supprimé.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 3. Comparer deux lots qui ne diffèrent que par un facteur. 4. Conclure sur ce facteur seul.",
+                  "answers": [
+                    {
+                      "content": "un seul",
+                      "correct": true
+                    },
+                    {
+                      "content": "tous les",
+                      "correct": false
+                    },
+                    {
+                      "content": "deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucun",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un seul facteur change à la fois."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le bilan de la photosynthèse s'écrit en mots, avec ce que la plante absorbe et ce qu'elle fabrique ou rejette.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le bilan de la photosynthèse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lister ce qui est absorbé : dioxyde de carbone, eau, lumière. 2. Relever ce qui est fabriqué ou rejeté : matière organique, dioxygène. 3. Écrire le bilan dans ce sens.",
+                  "answers": [
+                    {
+                      "content": "dioxyde de carbone + eau → matière organique + dioxygène (en présence de lumière et de chlorophylle)",
+                      "correct": true
+                    },
+                    {
+                      "content": "dioxygène + eau → matière organique + dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "matière organique + dioxygène → dioxyde de carbone + eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les végétaux chlorophylliens sont des ___ de matière organique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Déduire : ils fabriquent la matière organique, ce sont des producteurs.",
+                  "answers": [
+                    {
+                      "content": "producteurs",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les animaux sont des producteurs de matière organique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : seuls les végétaux chlorophylliens fabriquent de la matière organique à partir de matière minérale. Les animaux se nourrissent de matière déjà fabriquée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que rejette ou fabrique une plante verte par la photosynthèse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Relever : la photosynthèse rejette du dioxygène et fabrique de la matière organique. Elle absorbe le dioxyde de carbone.",
+                  "answers": [
+                    {
+                      "content": "Du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la matière organique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la matière minérale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plante gagne 3 kg en un an dans un pot où la terre ne perd que 0,02 kg (valeurs fictives). Quelle part du gain, en kg, ne vient pas de la terre ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2. Relever : gain 3 kg, perte de terre 0,02 kg. Calcul : 3 − 0,02 = 2,98 kg viennent surtout du dioxyde de carbone et de l'eau.",
+                  "answers": [
+                    {
+                      "content": "2,98",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Retiens le sens de la flèche : on part du dioxyde de carbone et de l'eau."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La photosynthèse au village et au jardin",
+          "notions": "Lumière et cacaoyers, feuilles d'igname, plant de tomate, arbres d'une cour ; bilan et rôle des producteurs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans une plantation de cacao, un jeune planteur observe que les cacaoyers en pleine lumière poussent mieux que ceux à l'ombre épaisse d'un grand arbre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle condition de la photosynthèse diffère entre ces deux groupes de cacaoyers ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le facteur qui change : l'ombre diminue la lumière reçue. Les cacaoyers ont tous de la chlorophylle.",
+                  "answers": [
+                    {
+                      "content": "La lumière reçue",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chlorophylle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxygène de l'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus un cacaoyer reçoit de lumière, plus sa photosynthèse peut être importante.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : la production de matière organique augmente avec l'intensité lumineuse dans les expériences de la leçon. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les feuilles du cacaoyer sont vertes grâce à la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le pigment vert des feuilles est la chlorophylle, nécessaire à la photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "chlorophylle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que rejette un cacaoyer éclairé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Relever : la photosynthèse fabrique de la matière organique et rejette du dioxygène dans l'air.",
+                  "answers": [
+                    {
+                      "content": "Du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'amidon pur",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cacaoyer en pleine lumière produit 40 unités de matière organique par mois et un cacaoyer à l'ombre épaisse 10 (valeurs fictives). Quelle est la différence ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2. Relever les valeurs 40 et 10. Calcul : 40 − 10 = 30 unités de différence en faveur du cacaoyer en pleine lumière.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "unités",
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Pense au facteur que l'ombre modifie."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un champ d'igname, un cultivateur garde un jeune plant en pot deux jours à l'obscurité, puis recouvre une partie de ses feuilles avec un carton opaque pendant la journée. Le soir, il décolore une feuille cachée et une feuille découverte, puis les plonge dans l'eau iodée (résultats fictifs).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Comment réagit la feuille découverte à l'eau iodée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Lire : la feuille éclairée a fabriqué de l'amidon, donc l'eau iodée devient bleu-noir.",
+                  "answers": [
+                    {
+                      "content": "Elle devient bleu-noir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste brun-orangé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle devient transparente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se trouble comme l'eau de chaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment réagit la feuille cachée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Lire : sans lumière, pas d'amidon, donc l'eau iodée reste brun-orangé.",
+                  "answers": [
+                    {
+                      "content": "Elle reste brun-orangé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle devient bleu-noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle dégage des bulles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle devient plus verte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette expérience montre que la lumière est nécessaire à la fabrication d'amidon.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Conclure : seul le facteur lumière change entre la feuille découverte et la feuille cachée, et l'amidon disparaît sans lui.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du test de l'amidon.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : le protocole suit la méthode : on prélève, on décolore pour voir la couleur de l'eau iodée, on rince, on teste, on lit (Étape 3).",
+                  "answers": [
+                    {
+                      "content": "Prélever la feuille"
+                    },
+                    {
+                      "content": "La décolorer dans l'alcool chaud"
+                    },
+                    {
+                      "content": "La rincer à l'eau"
+                    },
+                    {
+                      "content": "Ajouter l'eau iodée"
+                    },
+                    {
+                      "content": "Observer la couleur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les feuilles de l'igname fabriquent de l'amidon, une matière ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : l'amidon est fabriqué par un être vivant : c'est de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "organique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare la feuille découverte à la feuille cachée."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au jardin de l'école, les élèves cultivent des plants de tomate. Ils posent une question : à quoi sert la photosynthèse des plants ?",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi le plant de tomate est-il un producteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Déduire : le plant transforme le dioxyde de carbone et l'eau en matière organique, c'est un producteur.",
+                  "answers": [
+                    {
+                      "content": "Il fabrique de la matière organique à partir de matière minérale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il mange de la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fabrique du dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il consomme du dioxygène pour grandir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments le plant absorbe-t-il pour la photosynthèse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Lister : dioxyde de carbone de l'air, eau du sol, énergie lumineuse. Le dioxygène est rejeté et le sol ne contient pas d'amidon.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'amidon du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves qui mangent les tomates profitent de la matière organique fabriquée par le plant.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Déduire : les fruits contiennent de la matière organique fabriquée par photosynthèse, dont se nourrissent les êtres humains.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plant rejette dans l'air du ___ pendant la photosynthèse.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 2. Relever : le dioxygène est rejeté à droite de la flèche dans le bilan.",
+                  "answers": [
+                    {
+                      "content": "dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "oxygène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plant de tomate pèse 150 g puis 900 g après la saison (valeurs fictives). Quel est son gain de masse ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2. Relever les deux valeurs : 150 g puis 900 g. Calcul : 900 − 150 = 750 g.",
+                  "answers": [
+                    {
+                      "content": "750",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Pense aux aliments et au dioxygène."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une famille d'un quartier de la ville plante des arbres dans sa cour. Le grand-père explique que les arbres donnent de l'ombre, des fruits et un air plus agréable.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel gaz les arbres éclairés rejettent-ils dans l'air par la photosynthèse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Relever : le bilan de la photosynthèse rejette du dioxygène.",
+                  "answers": [
+                    {
+                      "content": "Du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'azote pur",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'eau de chaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les fruits de ces arbres contiennent de la matière organique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Déduire : les fruits sont fabriqués par l'arbre à partir de matière minérale transformée à la lumière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les arbres d'une cour ne font-ils pas de photosynthèse la nuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : la lumière est une condition de la photosynthèse. Sans elle, pas de photosynthèse ; la chlorophylle et le dioxyde de carbone sont toujours là.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il n'y a plus de lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'ils n'ont plus de chlorophylle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que l'eau disparaît",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le dioxyde de carbone disparaît de l'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre est un producteur : il fabrique de la matière ___ à partir de matière minérale.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Déduire : la photosynthèse transforme la matière minérale en matière organique.",
+                  "answers": [
+                    {
+                      "content": "organique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque besoin de l'arbre à son origine.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Lister : l'arbre reçoit la lumière du Soleil, absorbe le dioxyde de carbone de l'air et l'eau du sol par ses racines.",
+                  "answers": [
+                    {
+                      "content": "Lumière",
+                      "match": "Le Soleil"
+                    },
+                    {
+                      "content": "Dioxyde de carbone",
+                      "match": "L'air"
+                    },
+                    {
+                      "content": "Eau",
+                      "match": "Le sol"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis les conditions de la photosynthèse."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner à partir d'expériences",
+          "notions": "Feuille panachée, intensité lumineuse, témoin et essai, expérience du pot de terre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Une feuille panachée d'une plante du jardin de l'école reste une journée au soleil. Elle est décolorée, puis plongée dans l'eau iodée. Les zones vertes deviennent bleu-noir ; les zones blanches restent brun-orangé (résultats fictifs).",
+              "exercise_type": "evaluation",
+              "figure": "feuille-panachee",
+              "questions": [
+                {
+                  "content": "Quel est le lot témoin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Identifier : le témoin a tous les facteurs, dont la chlorophylle : ce sont les zones vertes. L'essai est la zone blanche.",
+                  "answers": [
+                    {
+                      "content": "Les zones vertes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les zones blanches",
+                      "correct": false
+                    },
+                    {
+                      "content": "La feuille décolorée",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau iodée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel facteur est étudié ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer : lumière, dioxyde de carbone et eau sont les mêmes pour toute la feuille. Seule la chlorophylle diffère.",
+                  "answers": [
+                    {
+                      "content": "La chlorophylle",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette expérience permet de conclure que la lumière est nécessaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Conclure : toute la feuille a reçu la même lumière. L'expérience ne compare pas lumière et obscurité, elle ne peut pas conclure sur la lumière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les zones blanches ne contiennent pas d'___ : l'eau iodée y reste brun-orangé.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 3. Comparer : brun-orangé veut dire absence d'amidon, bleu-noir sa présence.",
+                  "answers": [
+                    {
+                      "content": "amidon",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Conclure : seul le facteur chlorophylle diffère et l'amidon disparaît sans lui, donc elle est nécessaire.",
+                  "answers": [
+                    {
+                      "content": "La chlorophylle est nécessaire à la fabrication d'amidon",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chlorophylle est un produit de la photosynthèse",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau iodée fabrique l'amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lumière n'a pas d'effet",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche le seul facteur qui diffère."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie une élodée éclairée par une lampe placée à différentes distances : 48 bulles par minute à 10 cm, 24 à 20 cm, 12 à 40 cm, aucune à l'obscurité (valeurs fictives).",
+              "exercise_type": "evaluation",
+              "figure": "bulles-selon-lumiere",
+              "questions": [
+                {
+                  "content": "Combien de bulles l'élodée dégage-t-elle en 3 minutes avec la lampe à 20 cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 3. Lire : 24 bulles par minute. Calcul : 24 × 3 = 72 bulles.",
+                  "answers": [
+                    {
+                      "content": "72",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "bulles",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Que montre la comparaison des lampes à 10 cm et à 40 cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Comparer : 48 bulles contre 12. 4. Conclure : le dégagement augmente avec l'intensité lumineuse.",
+                  "answers": [
+                    {
+                      "content": "Plus la lumière est intense, plus l'élodée dégage de dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière intense réduit le dégagement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La distance de la lampe est sans effet",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'élodée dégage plus de dioxygène à l'obscurité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À l'obscurité, l'élodée dégage plus de bulles qu'avec la lampe à 40 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : 0 bulle à l'obscurité contre 12 à 40 cm. Sans lumière, il n'y a pas de dégagement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la lampe passe de 20 cm à 10 cm, le nombre de bulles par minute passe de 24 à ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 3. Lire : à 10 cm, la mesure est de 48 bulles par minute.",
+                  "answers": [
+                    {
+                      "content": "48",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles précautions doivent être prises pour comparer ces mesures ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Identifier : un seul facteur doit changer, ici la distance de la lampe. Les autres conditions restent identiques.",
+                  "answers": [
+                    {
+                      "content": "Utiliser la même élodée et la même eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne changer que la distance de la lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Changer aussi la quantité d'eau à chaque mesure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Utiliser une autre espèce à chaque distance",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un seul facteur doit varier : la distance de la lampe."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Quatre élèves tirent des conclusions de leurs expériences. Tu dois dire si leur raisonnement est correct.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Léa laisse une plante à l'obscurité et sans eau. Elle ne fait pas d'amidon, donc l'eau est nécessaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Identifier : deux facteurs ont changé, lumière et eau. Pas de conclusion possible sur l'eau seule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi plonge une feuille verte non décolorée dans l'eau iodée : le bleu-noir prouve toujours la présence d'amidon.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le vert de la chlorophylle masque la couleur de l'eau iodée. Il faut d'abord décolorer la feuille pour lire le résultat.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya voit qu'une feuille reste brun-orangé à l'eau iodée. Que doit-elle dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Lire : brun-orangé est un résultat négatif. 4. Conclure : absence d'amidon.",
+                  "answers": [
+                    {
+                      "content": "Il n'y a pas d'amidon dans cette feuille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le test est raté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a beaucoup de dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "La feuille est panachée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao veut montrer que le dioxyde de carbone est nécessaire. Quelle expérience propose-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le facteur : le dioxyde de carbone. 2. Identifier : témoin dans l'air ordinaire, essai sans dioxyde de carbone, tout le reste identique.",
+                  "answers": [
+                    {
+                      "content": "Comparer une feuille éclairée dans l'air ordinaire et une feuille éclairée dans une enceinte sans dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Comparer une feuille à l'obscurité et une feuille éclairée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Comparer une zone verte et une zone blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Arroser une feuille et pas l'autre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux affirmations sont justes sur la méthode du témoin ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Identifier le témoin (tout présent) et l'essai (un seul facteur supprimé). Plusieurs changements empêchent de conclure.",
+                  "answers": [
+                    {
+                      "content": "Le témoin garde tous les facteurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'essai ne diffère que par un facteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'essai diffère par plusieurs facteurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le témoin n'est pas nécessaire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche si un seul facteur change."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève reprend l'expérience du pot de terre : un plant de 1 kg grandit dans un pot de 20 kg de terre sèche. Deux ans plus tard, le plant pèse 6 kg et la terre 19,95 kg (valeurs fictives).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le gain de masse du plant ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2. Relever : 1 kg puis 6 kg. Calcul : 6 − 1 = 5 kg.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle masse de terre a été perdue ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2. Relever : 20 kg puis 19,95 kg. Calcul : 20 − 19,95 = 0,05 kg.",
+                  "answers": [
+                    {
+                      "content": "0,05",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Que montre la comparaison de ces deux valeurs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Déduire : le gain de 5 kg est bien supérieur à la perte de 0,05 kg. La matière vient surtout du dioxyde de carbone et de l'eau.",
+                  "answers": [
+                    {
+                      "content": "La terre n'explique presque pas le gain du plant",
+                      "correct": true
+                    },
+                    {
+                      "content": "La terre a fourni tout le gain du plant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plant n'a rien absorbé",
+                      "correct": false
+                    },
+                    {
+                      "content": "La terre a gagné de la masse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'où vient surtout la matière du plant ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Lister : le plant absorbe dioxyde de carbone, eau et lumière. 2. Il fabrique de la matière organique et rejette du dioxygène.",
+                  "answers": [
+                    {
+                      "content": "Du dioxyde de carbone de l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la terre du pot",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du dioxygène de l'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette expérience montre que la plante fabrique sa matière organique à partir de matière minérale.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Déduire : le plant transforme dioxyde de carbone et eau en matière organique à la lumière, c'est un producteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare le gain du plant à la perte de la terre."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan de la photosynthèse, gain de masse, conditions, rôle des producteurs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un schéma fléché résume la photosynthèse d'une feuille verte : elle absorbe le dioxyde de carbone de l'air, l'eau du sol et la lumière du Soleil, fabrique de la matière organique et rejette du dioxygène.",
+              "exercise_type": "evaluation",
+              "figure": "bilan-photosynthese",
+              "questions": [
+                {
+                  "content": "Quel est le bilan de la photosynthèse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lister ce qui est absorbé. 2. Relever ce qui est fabriqué ou rejeté. 3. Écrire le bilan dans ce sens.",
+                  "answers": [
+                    {
+                      "content": "dioxyde de carbone + eau → matière organique + dioxygène (en présence de lumière et de chlorophylle)",
+                      "correct": true
+                    },
+                    {
+                      "content": "dioxygène + eau → matière organique + dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "matière organique + dioxygène → dioxyde de carbone + eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Lister et 2. Relever : la lumière apporte l'énergie, la chlorophylle la capte, l'eau vient du sol, le dioxygène est rejeté.",
+                  "answers": [
+                    {
+                      "content": "Lumière",
+                      "match": "Source d'énergie"
+                    },
+                    {
+                      "content": "Chlorophylle",
+                      "match": "Capte la lumière"
+                    },
+                    {
+                      "content": "Eau",
+                      "match": "Absorbée par les racines"
+                    },
+                    {
+                      "content": "Dioxygène",
+                      "match": "Rejeté par la feuille"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dioxyde de carbone est un produit de la photosynthèse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Lister : le dioxyde de carbone est absorbé, il est à gauche de la flèche dans le bilan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'amidon est de la matière ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Déduire : l'amidon est fabriqué par un être vivant, c'est de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "organique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le végétal vert qui fait la photosynthèse est un ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 4. Déduire : il transforme la matière minérale en matière organique, c'est un producteur.",
+                  "answers": [
+                    {
+                      "content": "producteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "consommateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "prédateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "décomposeur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Retiens le bilan et le sens de la flèche."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une plantation de cacao, un technicien mesure pendant trois mois le gain de masse de trois plants, en kg : plant A 3 kg, plant B 5 kg, plant C 7 kg (valeurs fictives).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le gain total des trois plants ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2. Relever les gains 3, 5 et 7. Calcul : 3 + 5 + 7 = 15 kg.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est le gain moyen d'un plant ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2. Relever le total, 15 kg. Calcul : 15 ÷ 3 = 5 kg.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel plant a fabriqué le plus de matière organique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Comparer : 7 kg est la plus grande valeur, donc le plant C a gagné le plus de masse.",
+                  "answers": [
+                    {
+                      "content": "Le plant C",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plant A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plant B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les trois autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La matière de ces plants vient surtout du dioxyde de carbone et de l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Déduire : la plante transforme dioxyde de carbone et eau en matière organique à la lumière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux conditions peuvent expliquer qu'un plant gagne plus de masse qu'un autre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Repérer les facteurs : plus de lumière ou plus de chlorophylle augmente la photosynthèse. L'obscurité l'arrête.",
+                  "answers": [
+                    {
+                      "content": "Il reçoit plus de lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a plus de feuilles vertes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il absorbe du dioxygène en plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est planté dans le noir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Additionne puis divise."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève révise les expériences, les tests et le bilan de la photosynthèse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour montrer que la lumière est nécessaire, que doit-il comparer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Identifier : seul le facteur lumière doit changer entre le témoin et l'essai.",
+                  "answers": [
+                    {
+                      "content": "Une plante éclairée et la même plante à l'obscurité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux plantes de tailles différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une plante arrosée et une plante non arrosée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une zone verte et une zone blanche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une feuille panachée montre que la chlorophylle est nécessaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Conclure : la zone blanche, sans chlorophylle, ne fabrique pas d'amidon, la zone verte oui.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tester la présence de dioxygène, on utilise une bûchette ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 2. Choisir : la bûchette incandescente se rallume en présence de dioxygène.",
+                  "answers": [
+                    {
+                      "content": "incandescente",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle expérience permet de montrer que l'eau est nécessaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer le facteur étudié : l'eau. 2. Identifier : un témoin arrosé et un essai privé d'eau, tout le reste identique. Les autres propositions ne font pas varier l'eau seule.",
+                  "answers": [
+                    {
+                      "content": "Comparer une plante arrosée et une plante identique privée d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Observer que la feuille est verte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Comparer une plante éclairée et une plante à l'obscurité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Placer une élodée dans l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois propositions sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : le bilan donne ce qui est absorbé (dioxyde de carbone, eau), fabriqué (matière organique) et rejeté (dioxygène). Elle exige de la lumière.",
+                  "answers": [
+                    {
+                      "content": "La photosynthèse fabrique de la matière organique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle rejette du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle absorbe du dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fabrique de la matière minérale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se déroule la nuit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Utilise la méthode du témoin."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le chef d'un village hésite à abattre les arbres d'un champ d'igname. Le technicien rappelle que les végétaux verts fabriquent la matière organique et le dioxygène.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi les végétaux verts sont-ils indispensables aux êtres vivants ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Déduire : les producteurs fournissent la matière organique et le dioxygène utiles aux êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Ils fabriquent la matière organique des aliments et rejettent du dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils fabriquent de la matière minérale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils absorbent le dioxygène de l'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils produisent de la lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les animaux dépendent des végétaux verts pour leur nourriture.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Déduire : les animaux se nourrissent de végétaux ou d'animaux qui se nourrissent eux-mêmes de végétaux, donc de matière fabriquée par les producteurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un végétal qui fabrique de la matière organique est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Déduire : il transforme la matière minérale en matière organique.",
+                  "answers": [
+                    {
+                      "content": "producteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour établir le bilan de la photosynthèse.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : les quatre étapes de la fiche : Lister, Relever, Écrire, Déduire.",
+                  "answers": [
+                    {
+                      "content": "Lister ce que la plante absorbe"
+                    },
+                    {
+                      "content": "Relever ce qu'elle fabrique ou rejette"
+                    },
+                    {
+                      "content": "Écrire le bilan en mots"
+                    },
+                    {
+                      "content": "Déduire le rôle de la plante"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque cause à sa conséquence.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 3. Comparer : sans lumière, la photosynthèse s'arrête ; elle diminue quand le nombre de feuilles vertes diminue et augmente avec le nombre de plants verts.",
+                  "answers": [
+                    {
+                      "content": "Moins de feuilles vertes",
+                      "match": "Moins de matière organique fabriquée"
+                    },
+                    {
+                      "content": "Obscurité totale",
+                      "match": "Aucun dioxygène dégagé"
+                    },
+                    {
+                      "content": "Plus de plants verts",
+                      "match": "Plus de matière organique fabriquée"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense au rôle des producteurs."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
