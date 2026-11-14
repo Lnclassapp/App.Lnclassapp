@@ -1,0 +1,40 @@
+<%# 🌐 UI · teams/essentials/edit_text — corriger le texte d'une notion, servi dans le frame « modal » %>
+<%# Rôle : nom et quatre blocs de la fiche (étapes en nombre fixe) ; la structure, l'entraînement et la figure restent à l'import ; refus en 422, saisie gardée %>
+<%# ADR  : 0113 (§4.6, amendement du 2026-11-14), 0116 · UDR : 0006, 0042 (amendement du 2026-11-14), 0141 %>
+<% scope = "teams.essentials.text_errors" %>
+<% field = ->(key, name, label, value, **options) { text_correction_field(name:, id: "notion_text_#{key.to_s.tr('[]', '_')}".delete_suffix("_"), label:, value:, errors: @errors, key:, scope:, **options) } %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "notion-text-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "notion-text-form" %>
+    <% end %>
+    <p class="mb-5 flex flex-wrap items-center gap-2 text-sm text-mute">
+      <%= content_status_badge(@essential.status) %> <%= t(".notice") %>
+    </p>
+    <%= form_with url: text_teams_essential_path(@essential.slug), method: :patch, id: "notion-text-form", class: "space-y-5" do %>
+      <% if @errors[:base].present? %>
+        <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+          <p><%= @errors[:base].map { t("#{scope}.#{it}") }.to_sentence %></p>
+        </div>
+      <% end %>
+      <%= field.(:name, "notion_text[name]", t(".name"), @text.name, as: :text, maxlength: Entities::Catalog::Essential::NAME_MAX) %>
+      <%= field.(:remember, "notion_text[remember]", t(".remember"), @text.remember, rows: 4) %>
+      <fieldset class="space-y-3">
+        <legend class="mb-2 text-sm font-medium text-ink"><%= t(".method") %></legend>
+        <% @text.method_steps.each_with_index do |step, index| %>
+          <%= field.(:"method[#{index}]", "notion_text[method_steps][]", t(".step", number: index + 1), step, rows: 2) %>
+        <% end %>
+      </fieldset>
+      <fieldset class="space-y-3">
+        <legend class="mb-2 text-sm font-medium text-ink"><%= t(".example") %></legend>
+        <%= field.(:"example.statement", "notion_text[example_statement]", t(".example_statement"), @text.example_statement, rows: 3) %>
+        <% @text.example_steps.each_with_index do |step, index| %>
+          <%= field.(:"example.steps[#{index}]", "notion_text[example_steps][]", t(".step", number: index + 1), step, rows: 2) %>
+        <% end %>
+      </fieldset>
+      <%= field.(:pitfall, "notion_text[pitfall]", t(".pitfall"), @text.pitfall, rows: 3) %>
+    <% end %>
+  <% end %>
+<% end %>

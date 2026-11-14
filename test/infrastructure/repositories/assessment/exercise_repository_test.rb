@@ -387,6 +387,50 @@ module Repositories
         assert_equal [ "Pense au coefficient.", 2, [ 0, 1 ] ], [ first.hint, first.blanks, first.answers.map(&:blank) ]
         assert_equal [ nil, 1 ], [ second.hint, second.blanks ]
       end
+
+      # edition-lecon-equipe, Lot B (décision du porteur, 2026-11-14) : la bonne réponse changée vaut pour la suite ; une tentative
+      # passée garde son résultat et la session son score ; aucune question ni proposition n'est recréée.
+      test "correct_text rewrites the texts and the key in place; a past attempt keeps its verdict, a new one is judged by the new key" do
+        record = create_exercise(questions: 1)
+        question = record.questions.first
+        old_key, new_key = question.answers.order(:position).first(2)
+        session = create_exercise_session(exercise: record, status: "completed", score_percent: 100)
+        attempt = create_attempt(session:, question:, correct: true)
+        exercise = @repository.find_by_public_id(public_id: record.public_id)
+        corrected = exercise.questions.first.then do |current|
+          current.with(content: "Énoncé corrigé", explanation: "Corrigé.",
+                       answers: current.answers.map { it.with(content: "#{it.content} (corrigée)", correct: it.id == new_key.id) })
+        end
+        exercise.title = "Titre corrigé"
+        exercise.statement = "Sujet corrigé."
+        exercise.hint = "Indice."
+        exercise.questions = [ corrected ]
+
+        assert @repository.correct_text(exercise:)
+
+        reread = @repository.find_by_public_id(public_id: record.public_id)
+        assert_equal [ "Titre corrigé", "Sujet corrigé.", "Indice." ], [ reread.title, reread.statement, reread.hint ]
+        assert_equal [ question.id ], reread.questions.map(&:id)
+        assert_equal question.answers.order(:position).pluck(:id), reread.questions.first.answer_ids
+        assert_equal [ new_key.id ], reread.questions.first.correct_answer_ids
+        assert_equal "Proposition 1 (corrigée)", reread.questions.first.answers.first.content
+        assert attempt.reload.correct, "la tentative passée garde son verdict"
+        assert_equal 100, session.reload.score_percent
+        assert_not reread.questions.first.correct?([ old_key.id ]), "la nouvelle tentative est jugée par la nouvelle clé"
+        assert reread.questions.first.correct?([ new_key.id ])
+      end
+
+      test "correct_text never writes a question or a choice of another exercise" do
+        mine = create_exercise(questions: 1)
+        other = create_exercise(questions: 1)
+        exercise = @repository.find_by_public_id(public_id: mine.public_id)
+        stranger = @repository.find_by_public_id(public_id: other.public_id).questions.first
+        exercise.questions = [ stranger.with(content: "Piraté") ]
+
+        @repository.correct_text(exercise:)
+
+        assert_equal "<p>Question 1</p>", other.questions.first.reload.content
+      end
     end
   end
 end

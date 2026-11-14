@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/exercises/update_text — succès de la correction du texte d'un exercice %>
+<%# Rôle : toast ; la modale se ferme ; la page hôte (feuille de la leçon) est re-demandée et fusionnée par morphing %>
+<%# ADR  : 0113 (§4.6, amendement du 2026-11-14) · UDR : 0006, 0042 (amendement du 2026-11-14) %>
+<%= turbo_stream_toast t(".updated", title: @exercise.title), type: :success %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.refresh(request_id: nil) %>
