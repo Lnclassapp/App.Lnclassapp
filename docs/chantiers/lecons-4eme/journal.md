@@ -4,7 +4,7 @@
 
 Demande : les 5 premières leçons de la progression DPFC 2026-2027 de 4ème en Mathématiques, Français, Physique-Chimie, SVT, Histoire-Géographie et EDHC (30 leçons, format v3 complet comme la 3ème). Méthode : `docs/contenus/prompt-redaction-lot.md`, un rédacteur par leçon, puis un relecteur indépendant par leçon (sympy en Mathématiques et Physique-Chimie), `valider.rb` sur la leçon et sur chaque sujet.
 
-Lots (une PR, trois commits) : A = rang 1 ; B = rangs 2 et 3 ; C = rangs 4 et 5 et README des contenus.
+Lots (une PR, un commit par lot) : A = rang 1 ; B = rang 2 ; C = rangs 3 à 5 et README des contenus.
 
 ## Décisions prises en cours de route
 
@@ -12,10 +12,13 @@ Lots (une PR, trois commits) : A = rang 1 ; B = rangs 2 et 3 ; C = rangs 4 et 5 
 |---|---|---|---|
 | 2026-11-14 | Lots redécoupés : A = rang 1 seul (au lieu des rangs 1 et 2) | Une limite de quota a coupé 7 agents et la machine a redémarré : on met à l'abri ce qui est relu | Non |
 | 2026-11-14 | `db/seeds/standard/jeu.yml` reçoit la leçon 1 de chaque matière de 4ème (en fin de liste) et `PRD_COUPLES` passe de 55 à 61 | `StandardTestSet` refuse un couple v3 oublié : sans cela, le semis standard et `standard_manifest_test` échouent. En fin de liste, les 27 premières leçons du test d'activité ne changent pas | Non |
+| 2026-11-14 | Lots redécoupés une seconde fois : B = rang 2 seul, C = rangs 3 à 5 | Seconde limite de quota : 7 rédacteurs du rang 3 et plus arrêtés ; le rang 2, relu, est mis à l'abri | Non |
+| 2026-11-14 | Districts sans distinction « ordinaires / autonomes » en HG L2 et L4 | La présentation « 12 ordinaires, 2 autonomes » est probablement dépassée depuis la réforme de 2021 ; option prudente : 14 districts dirigés par des gouverneurs nommés | Non |
 
 ## Ce qui a dérapé
 
-- **Limite de quota** à mi-parcours du rang 2 : 7 agents arrêtés, repris après la levée sans perte de fichier.
+- **Limite de quota**, deux fois (au rang 2, puis aux rangs 3 à 5) : 7 agents arrêtés à chaque fois, repris après la levée sans perte de fichier.
+- **Figure jamais citée** (SVT L1, courbe de masse) : `valider.rb` l'accepte, le test d'affichage la refuse (« absente de la page ») ; retirée. Contrôle ajouté à la main sur les fichiers suivants.
 - **Corrections réduites à un squelette** (« Étape 1 — Lire. Étape 2 — … ») dans des sujets d'HG : 17 étoffées à la relecture ; consigne ajoutée aux rédacteurs suivants.
 - **Références de rang** (« les deux premières propositions ») encore produites par les rédacteurs : retirées à chaque relecture.
 
@@ -53,3 +56,17 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - Maths L1 (décimaux relatifs) : repérer et comparer, addition, soustraction, multiplication ; quotient, notation |a| et règle de suppression des parenthèses non traités (le quotient est peut-être au programme de 4ème) ; « distance à zéro » au lieu de « valeur absolue » ; solde mobile money négatif présenté comme une dette ; montants et températures fictifs.
   - Relecture Français L1 : 9 défauts corrigés (genre d'« épithète », analyses). Restent : « que Awa » sans élision ; « groupe nominal introduit par une préposition » au lieu de « groupe prépositionnel ».
   - Relecture Maths L1 : 435 calculs refaits avec sympy, 3 défauts corrigés. Restent : « a − b mesure l'écart de b à a » (écart algébrique) ; modèle « annuler une dette = (−4) × (−3) ».
+
+### Rang 2
+
+- HG L2 (déconcentration) : 14 districts dirigés par des gouverneurs nommés, sans distinction ordinaires/autonomes (voir Décisions) ; 5 niveaux (district, région, département, sous-préfecture, village), nombre de régions et de départements non écrit ; chef de village « choisi selon la tradition puis reconnu par l'administration » ; régions des chefs-lieux (Poro, Gbêkê, Tonkpi, Haut-Sassandra) ; services déconcentrés sans sigle ; village « Bokakro » fictif.
+  - Relecture HG L2 : 17 corrections de sujets étoffées ; questions « nommés par l'État » reformulées en « fonctionnaires que l'État place à la tête d'une circonscription » (le chef de village est reconnu, voire nommé par arrêté : statut à confirmer) ; environ 66 corrections de sujets brèves ; la question sur Bokakro précise « les deux circonscriptions les plus proches ».
+- SVT L2 (devenir des cellules sexuelles) : placenta, cordon et liquide amniotique traités (place au programme à vérifier) ; délivrance, césarienne, échographie et conseils de santé de la femme enceinte inclus ; « embryon » dès les premières divisions, sans seuil embryon/fœtus ; faits : environ 9 mois, un ovule à la fois environ une fois par mois.
+- Français L2 (débat I) : définition, acteurs, règles, thèse/argument/exemple, accord/désaccord, réfutation polie ; modérateur « neutre » ; « secrétaire ou rapporteur » ; « Il est vrai que… mais… » comme formule de réfutation polie ; transcriptions de débats écrites pour Lnclass.
+  - Relecture Français L2 : 17 renvois de rang corrigés. Restent : l'ordre « écouter » puis « lever la main » ; Moussa compté juste ; seul « car » accepté.
+- EDHC L2 (enfants soldats) : 4 notions structurées par l'auteur ; Protocole facultatif de 2000 résumé sans article ni ratification ; Charte africaine (1990) « demande aux États de ne pas recruter d'enfants » ; démobilisation puis réinsertion en termes généraux ; pays, ville et centre fictifs.
+  - Relecture EDHC L2 : 5 défauts corrigés (portée du Protocole de 2000). Restent : « le recrutement avant 18 ans est interdit » en règle générale (vrai pour les groupes armés et sous la Charte africaine ; le Protocole admet l'engagement volontaire dès 16 ans dans l'armée d'un État) ; une fausse proposition « la Convention de 1989 le permet dès 16 ans » (l'article 38 dit 15 ans) que la correction ne relève pas.
+- PC L2 (propagation) : vitesse de la lumière (environ 300 000 km/s, durée = distance ÷ vitesse, « plus lente dans l'eau et le verre ») jugée au programme sans certitude ; chambre noire non traitée ; faisceau convergent montré avec une loupe ; hauteur par l'ombre au Soleil par proportionnalité ; distances arrondies Soleil-Terre 150 000 000 km, Terre-Lune 384 000 km ; mesures fictives.
+  - Relecture PC L2 : 7 défauts corrigés (dont la cause de l'ombre de la lampe). Restent : longueurs d'ombre peu réalistes à 16 h ; une figure aux rayons parallèles pour une lampe proche ; la règle « lampe proche, ombre plus grande ».
+- Maths L2 (angles) : somme des angles du triangle en rappel ; réciproque (angles égaux donc parallèles) absente ; triangles isocèle et équilatéral évités (leçon 7) ; figures sans étiquettes de mesure.
+  - Relecture Maths L2 : 376 égalités et 99 réponses refaites avec sympy, 8 figures recalculées, 6 défauts corrigés et 13 corrections étoffées. Restent : « le complémentaire d'un angle de 90° mesure 0 » ; BDE et DBC supplémentaires (angles « du même côté », en marge du programme).
