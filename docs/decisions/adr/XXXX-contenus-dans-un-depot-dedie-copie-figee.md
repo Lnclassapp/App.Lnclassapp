@@ -85,7 +85,7 @@ Décision du porteur (2026-11-14) : le dépôt de contenus est **public**. Tout 
 
 Il n'y entre **jamais** : de secret (jeton, clé, PIN, mot de passe), de donnée d'élève, d'enseignant ou d'établissement réel (nom, contact, résultat), ni de nom de personne réelle hors auteurs. Un secret poussé par erreur est révoqué, pas seulement effacé : l'historique public l'a déjà exposé.
 
-Nom : `Lnclassapp/App.Lnclassapp-contenus` (confirmé par le porteur le 2026-11-14, après un premier dépôt `Kamkara007/App.Lnclassapp-contenus`). Le script ne fige aucun nom : il lit le `remote origin` du clone.
+Nom : `Lnclassapp/App.Lnclassapp-contenus` (confirmé par le porteur le 2026-11-14, après un premier dépôt `Kamkara007/App.Lnclassapp-contenus`, supprimé). Le script ne fige aucun nom : il lit le `remote origin` du clone.
 
 ### 4.5 Lecture seule
 
