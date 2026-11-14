@@ -17,6 +17,7 @@
 
 ## À trancher
 
+- [ ] 2026-11-14 · corrections-production · Revue sécurité : une cible (notion ou exercice) s'écrit en entier ou pas du tout. Cas réel : `2nde/histoire-geographie/histoire-les-methodes-d-etude-de-l-histoire`, sujet 4 › exercice 4 › question 3, dont la nouvelle explication annonce une réponse « Antiquité » à ajouter ; aucun use case n'ajoute une proposition, donc tout l'exercice reste tel quel et sort en « introuvable ». — appliqué : à reporter à la main ; autres : étendre le use case ; recommandé : à la main.
 - [ ] 2026-11-14 · corrections-production · 4 corrections touchent l'entraînement d'une notion (3) ou l'unité d'une question (1), que la modale « Modifier le texte » ne sait pas écrire. — appliqué : listées, à reporter à la main (ou au prochain import de la leçon, qui les porte déjà) ; autres : étendre `CorrectNotionText` à l'entraînement ; recommandé : le prochain import.
 - [ ] 2026-11-14 · corrections-production · Accès à la production : la variable `RAILWAY_API_TOKEN` (et `LNCLASS_TEAM_CONTACT`, contact du membre équipe qui agit) n'existe pas dans l'environnement de cette session, et la commande `railway` n'y est pas installée. — appliqué : script et PR livrés, exécution en production non faite ; autres : lancer `bin/rails contenus:corriger` depuis une session qui a la variable ; recommandé : ajouter `RAILWAY_API_TOKEN` à l'environnement Claude Code, puis relancer l'étape 5.
 

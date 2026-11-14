@@ -84,6 +84,15 @@ class CorrectionsProductionTest < ActiveSupport::TestCase
     assert_includes out, "[introuvable] 3eme/mathematiques/calcul-litteral.json · notions[0].remember"
   end
 
+  test "corrections-production: a target with one missing Avant is left whole, none of its fields is written" do
+    rows, out = run_script(data(explanation_change, explanation_change.merge("field" => "content", "avant" => "Autre", "apres" => "X")), apply: true)
+
+    assert_equal [ :introuvable, :introuvable ], rows.map(&:status)
+    assert_equal "Ancienne explication.", @question.reload.explanation
+    assert_includes out, "cible laissée telle quelle"
+    assert_equal 0, Orm::AuditEvent.where(action: "content.corrected").count
+  end
+
   test "corrections-production: a missing lesson, notion or exercise is listed, a change without use case is out of scope" do
     gone, = run_script(data(notion_change, course: { "name" => "Absente", "level_name" => @level.name, "material_name" => @material.name }))
     assert_equal [ :introuvable ], gone.map(&:status)

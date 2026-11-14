@@ -89,8 +89,8 @@ module Contenus
     end
 
     def settle_notion(file, record, sheet, values, statuses, apply:)
-      rows = statuses.map { |change, status| row(file, change, status, status == :introuvable ? "la valeur en base n'est pas l'Avant" : nil) }
-      return rows unless apply && statuses.any? { it.last == :a_appliquer }
+      rows = rows_of(file, statuses)
+      return rows unless apply && statuses.any? { it.last == :a_appliquer } && statuses.none? { it.last == :introuvable }
 
       text = UseCases::Catalog::CorrectNotionText::NotionText.new(
         name: values["name"], remember: sheet["remember"].to_s, method_steps: Array(sheet["method"]).map(&:to_s),
@@ -111,8 +111,8 @@ module Contenus
         entity = Repositories::Assessment::ExerciseRepository.new.find(id: record.id)
         edit = ExerciseEdit.new(entity)
         statuses = group.map { |change| [ change, edit.stage(change) ] }
-        rows = statuses.map { |change, status| row(file, change, status, status == :introuvable ? "la valeur en base n'est pas l'Avant" : nil) }
-        next rows unless apply && statuses.any? { it.last == :a_appliquer }
+        rows = rows_of(file, statuses)
+        next rows unless apply && statuses.any? { it.last == :a_appliquer } && statuses.none? { it.last == :introuvable }
 
         conclude(rows, @exercise_use_case.call(actor: @actor, public_id: entity.public_id, text: edit.text))
       end
@@ -187,6 +187,18 @@ module Contenus
       return rows.map { it.status == :a_appliquer ? it.with(status: :appliquee) : it } if result.success?
 
       rows.map { it.status == :a_appliquer ? it.with(status: :echec, detail: "#{result.code} #{result.errors.to_h.to_json}") : it }
+    end
+
+    # Une cible (notion ou exercice) s'écrit en entier ou pas du tout : un champ introuvable laisse les autres à reporter à la main,
+    # sinon le texte écrit se contredirait (ex. une explication qui annonce une réponse que la correction n'a pas pu ajouter).
+    def rows_of(file, statuses)
+      blocked = statuses.any? { it.last == :introuvable }
+      statuses.map do |change, status|
+        next row(file, change, :introuvable, "la valeur en base n'est pas l'Avant") if status == :introuvable
+        next row(file, change, :introuvable, "un autre champ de la même cible est introuvable : cible laissée telle quelle") if blocked && status == :a_appliquer
+
+        row(file, change, status, nil)
+      end
     end
 
     def row(file, change, status, detail)
