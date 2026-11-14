@@ -1,4 +1,4 @@
-# UDR-0135 : Inscription élève en trois étapes — code de classe d'abord, passage automatique, lien qui saute l'étape 1
+# UDR-0135 : Inscription élève en trois étapes — cascade d'abord, code de classe en bascule, lien qui saute l'étape 1
 <!-- index
 titre: Inscription élève en trois étapes avec code de classe
 statut: Accepté *(porteur, 2026-10-23)*
@@ -8,7 +8,7 @@ problematique: L'inscription élève tient sur une page longue en trois rubrique
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) · ordinateur (§3.5 bis) ajouté le 2026-10-24 |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) · ordinateur (§3.5 bis) ajouté le 2026-10-24 · étape 1 réordonnée, cascade d'abord (§2.2, §3.2), validée par le porteur le 2026-11-14 |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | ADR-0109 (le code revient en base) |
@@ -25,7 +25,7 @@ Le pilote du 27 octobre passe par les contacts du porteur : un enseignant écrit
 ## 2. Décision
 
 1. **Trois écrans à la suite : 1. Ta classe → 2. Toi → 3. Ton code secret**, avec « Étape N sur 3 » et une barre en trois segments.
-2. **Le code de classe ouvre l'étape 1.** La case « Je n'ai pas de code » déplie la cascade actuelle, qui reste la voie de secours.
+2. **La cascade ouvre l'étape 1, le code est une bascule.** La cascade DRENA → établissement → niveau → classe s'affiche d'abord et ouvertement ; juste sous la DRENA, un lien « J'ai le code de ma classe › » (plus une case à cocher) la remplace par le champ code, et « ‹ Je n'ai pas de code » la rouvre.
 3. **Le lien de classe saute l'étape 1** : l'élève arrive à l'étape 2 avec sa classe chargée.
 4. **Passage automatique aux étapes 1 et 2, sans bouton « Continuer »** (choix du porteur, contre la recommandation de garder « Continuer » à l'étape 2). La création du compte reste un geste volontaire : bouton « Créer mon compte » à l'étape 3.
 5. **Un seul formulaire découpé dans le navigateur**, sans nouvelle route : on avance et on recule sans rien perdre, l'envoi se fait à l'étape 3. C'est ce qui rend ce découpage tenable avant le 27.
@@ -45,17 +45,21 @@ Le pilote du 27 octobre passe par les contacts du porteur : un enseignant écrit
 ### 3.2 Étape 1 — Ta classe
 
 - Titre « Ta classe » (16 px, graisse 500) ; sous le titre, 13 px `text-mute` : « Tu passes à la suite dès que ta classe est trouvée. »
+- **Ordre (porteur, 2026-11-14).** Cascade ouverte d'abord (`class_picker_controller`, frames `picker_classrooms`) ; la DRENA en premier. Toucher une classe disponible passe à l'étape 2 ; une classe complète reste désactivée.
+- **Lien vers le code** : « J'ai le code de ma classe › » (`text-brand-strong`, 44 px), juste sous la liste des DRENA, avant établissement, niveau et classe (sous la ligne repliée si l'établissement est déjà connu). Un clic cache la cascade, montre le champ code et lui donne le focus ; la région `aria-live` annonce « Saisis le code de ta classe. »
+- **Lien retour** sous le champ code : « ‹ Je n'ai pas de code ». Il rouvre la cascade, vide le champ code (désactivé, il ne part plus avec le formulaire), met le focus sur la DRENA et annonce « Choisis ta classe dans la liste, en commençant par ta DRENA. »
 - Champ « Code de ta classe » : 6 caractères, majuscules automatiques, police mono, aide « 6 caractères, donnés par ton enseignant. », `autocomplete="off"`, `inputmode="text"`, `autocapitalize="characters"`.
 - Au 6ᵉ caractère : vérification serveur (route de vérification à débit limité, ADR du code). Pendant l'appel, l'indication « Vérification… » sous le champ.
-  - **Code reconnu** : on passe à l'étape 2 (voir §3.3, rappel de classe).
+  - **Code reconnu** (inchangé) : on passe à l'étape 2 (voir §3.3, rappel de classe).
   - **Code inconnu** : on reste, message sous le champ « Ce code ne correspond à aucune classe. Vérifie-le avec ton enseignant. » (`aria-describedby`, `aria-invalid="true"`).
-  - **Trop de tentatives** : « Trop de tentatives. Attends une minute, ou coche « Je n'ai pas de code ». »
-- Case « Je n'ai pas de code » : déplie la cascade actuelle (`class_picker_controller`, frames `picker_classrooms`), le champ code se masque. Toucher une classe disponible passe à l'étape 2. Une classe complète reste désactivée.
+  - **Trop de tentatives** : « Trop de tentatives. Attends une minute, ou choisis ta classe dans la liste (« Je n'ai pas de code »). »
+- **Sans JavaScript** : les deux voies restent dans la page, la cascade d'abord, le champ code dessous (les liens sont des ancres) ; le code l'emporte à l'envoi.
+- **Retour à l'étape 1 sur erreur** : le champ code est rouvert si l'erreur porte sur le code, ou si un code est déjà saisi (sa classe est celle du rappel) ; sinon c'est la cascade.
 
 ### 3.3 Étape 2 — Toi
 
 - Titre « Toi » ; sous le titre : « Tu passes à la suite dès que tout est rempli. »
-- Si la classe vient du code ou du lien : carte de rappel en tête, « TA CLASSE » (12 px) · « 3e B » · « Collège Moderne 1 de Tiassalé », et le lien « Ce n'est pas ta classe ? › » qui ramène à l'étape 1 (code vidé, case décochée).
+- Si la classe vient du code ou du lien : carte de rappel en tête, « TA CLASSE » (12 px) · « 3e B » · « Collège Moderne 1 de Tiassalé », et le lien « Ce n'est pas ta classe ? › » qui ramène à l'étape 1 (code vidé, cascade rouverte).
 - Champs inchangés : Nom, Prénom(s), Genre (deux boutons), Numéro de téléphone (10 chiffres, `phone_digits_controller`).
 - **Passage automatique** quand les quatre champs sont valides côté navigateur, **environ 1 s après la dernière frappe** (anti-rebond), jamais au milieu d'une saisie. Le clavier se ferme ; le focus va sur le titre de l'étape 3.
 - Arrivée par le lien : pas de « ‹ Retour » (aucune étape 1 derrière) ; carte de bienvenue et « Déjà un compte ? ».
@@ -79,7 +83,7 @@ Décidé par le porteur le 2026-10-24 (phase ordinateur, maquettes à 1440 et 10
 - **La liste remplace la barre en trois segments** sur ordinateur ; « Étape N sur 3 » reste en haut à droite du formulaire, « ‹ Retour » à gauche (mêmes règles qu'au §3.1).
 - **Le rappel de classe passe dans le panneau**, sous l'étape 1 cochée : « 3e B · Collège Moderne 1 de Tiassalé » (13 px) et « Ce n'est pas ta classe ? › » ; il n'est pas répété au-dessus du formulaire.
 - La carte de bienvenue et le titre « Créer ton compte élève » du téléphone ne sont pas répétés dans la colonne du formulaire : le panneau les porte.
-- Cascade « Je n'ai pas de code » : dans la colonne du formulaire, tuiles inchangées.
+- Cascade et lien du code : dans la colonne du formulaire, tuiles inchangées.
 - Accessibilité : la liste des étapes est une `ol` avec `aria-current="step"` sur l'étape en cours ; la région `aria-live` du §3.8 reste la seule annonce.
 
 ### 3.6 Jetons
@@ -88,7 +92,7 @@ Uniquement les jetons de l'UDR-0136 ; bordures de champ `line-strong`, focus `br
 
 ### 3.7 États obligatoires
 
-- **Vide** : étape 1, champ code vide.
+- **Vide** : étape 1, cascade ouverte, aucune DRENA choisie.
 - **Chargement** : « Vérification… » sous le champ code ; bouton « Créer mon compte » désactivé avec « Création… » après l'envoi.
 - **Erreur** : code inconnu, trop de tentatives, erreurs de champ rouvrant leur étape (§3.5).
 - **Succès** : compte créé, redirection vers l'accueil (comportement actuel).
@@ -97,7 +101,7 @@ Uniquement les jetons de l'UDR-0136 ; bordures de champ `line-strong`, focus `br
 
 - Chaque étape est un `fieldset` avec `legend` (le titre). L'étape cachée porte `hidden`, pas seulement une classe.
 - Le passage automatique est **annoncé avant** (phrase sous le titre) et **après** (région `aria-live`) ; il ne déplace jamais le focus pendant une frappe. Le retour arrière ne perd aucune saisie.
-- Cibles ≥ 44 px (« ‹ Retour », case à cocher, tuiles de classe). Contrastes de l'UDR palette.
+- Cibles ≥ 44 px (« ‹ Retour », liens du code, tuiles de classe). Contrastes de l'UDR palette.
 
 ## 4. Conséquences
 

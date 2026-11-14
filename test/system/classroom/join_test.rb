@@ -26,7 +26,6 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
   test "IL-01, IL-06: the cascade, an unconfirmed secret code shown without reloading, then the arrival in the classroom" do
     visit new_student_registration_path
-    check I18n.t("#{FORM}.no_code"), allow_label_click: true
 
     # IL-06 : un établissement sans classe le dit, et on reste à l'étape 1 tant qu'aucune classe n'est touchée.
     select "Abidjan 1", from: "student_registration[drena_public_id]"
@@ -60,7 +59,6 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       visit new_student_registration_path
-      check I18n.t("#{FORM}.no_code"), allow_label_click: true
       choose_classroom "6ème 1"
       fill_in_the_student
       create_student(classroom: @classroom)
@@ -117,7 +115,6 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_current_path new_student_registration_path
     assert_no_selector "#classroom-link-invalid"
     assert_step 1
-    check I18n.t("#{FORM}.no_code"), allow_label_click: true
     choose_classroom "6ème 2"
     sign_up
 
@@ -135,7 +132,6 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_current_path new_student_registration_path
     assert_selector "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
     assert_step 1
-    check I18n.t("#{FORM}.no_code"), allow_label_click: true
     assert_selector "select[name='student_registration[drena_public_id]']"
     assert_selector "input[name='student_registration[join_code]']", visible: :all
     assert_no_selector "input[name='student_registration[link_token]']", visible: :all

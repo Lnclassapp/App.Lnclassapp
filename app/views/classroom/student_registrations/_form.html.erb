@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/student_registrations/_form — le formulaire d'inscription élève, un seul, découpé en trois fieldset par signup_steps_controller %>
-<%# Rôle : 1 Ta classe (code, ou cascade derrière « Je n'ai pas de code »), 2 Toi (rappel de classe, nom, prénoms, genre, numéro), 3 Ton code secret ; sans JavaScript les trois restent visibles ; 422/403/429 re-rendus %>
+<%# Rôle : 1 Ta classe (cascade d'abord, code derrière « J'ai le code de ma classe »), 2 Toi (rappel de classe, nom, prénoms, genre, numéro), 3 Ton code secret ; sans JavaScript les trois restent visibles ; 422/403/429 re-rendus %>
 <%# ADR  : 0037, 0050, 0083, 0085, 0109 · UDR : 0009, 0054, 0079, 0081 (§3.2), 0135 (§3.1 à §3.8, §3.5 bis) %>
 <%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien) ; recap : [classe, établissement] ou nil %>
 <%# locals: (start:, floor:, recap:) -%>
@@ -32,11 +32,17 @@
       <% end %>
       <%= render "classroom/student_registrations/step_alerts", step: 1, start:, floor: %>
 
-      <%# La case « Je n'ai pas de code » ouvre la cascade et masque le code (le contrôleur) ; sans JavaScript, le code et la cascade
-          restent tous deux dans la page, le code l'emportant à l'envoi. %>
-      <% cascade = @form.join_code.blank? && (@form.drena_public_id || @form.classroom_public_id).present? %>
+      <%# La cascade s'ouvre d'abord (UDR-0135 §3.2) ; le lien « J'ai le code de ma classe › », sous la DRENA, la masque et montre le code,
+          et « ‹ Je n'ai pas de code » la rouvre (le contrôleur). Sans JavaScript, les deux voies restent dans la page, le code l'emportant à l'envoi. %>
+      <% have_code = link_to(safe_join([ t(".have_code"), tag.span("›", "aria-hidden": true, class: "ml-1") ]), "#signup-code-field", id: "signup-have-code",
+                             data: { action: "click->#{steps}#showCode" },
+                             class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand") %>
       <div class="space-y-4"
            data-action="change-><%= steps %>#cascadeChanged">
+        <div id="signup-cascade" data-<%= steps %>-target="cascade">
+          <%= render "classroom/student_registrations/class_picker", form:, scope: :student_registration, after_drena: have_code, **class_picker_lists %>
+        </div>
+
         <div id="signup-code-field" class="space-y-2" data-<%= steps %>-target="codeField">
           <%= ui_field form, :join_code, hint: t(".code_hint"), maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters",
                        spellcheck: false, class: "font-mono uppercase tracking-widest",
@@ -50,18 +56,9 @@
           <template data-<%= steps %>-target="checkFailed">
             <p id="classroom-code-check-failed" role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".check_failed") %></p>
           </template>
-        </div>
-
-        <label id="signup-no-code-label" for="signup-no-code"
-               class="flex min-h-tap cursor-pointer items-center gap-3 text-sm font-medium text-ink">
-          <%= tag.input type: "checkbox", id: "signup-no-code", checked: cascade,
-                            class: "size-5 shrink-0 cursor-pointer accent-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
-                            data: { "#{steps}-target": "noCode", action: "change->#{steps}#toggleCascade" } %>
-          <%= t(".no_code") %>
-        </label>
-
-        <div id="signup-cascade" data-<%= steps %>-target="cascade">
-          <%= render "classroom/student_registrations/class_picker", form:, scope: :student_registration, **class_picker_lists %>
+          <%= link_to safe_join([ tag.span("‹", "aria-hidden": true, class: "mr-1"), t(".no_code") ]), "#signup-cascade", id: "signup-no-code",
+                      data: { action: "click->#{steps}#showCascade" },
+                      class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
         </div>
       </div>
     </fieldset>
