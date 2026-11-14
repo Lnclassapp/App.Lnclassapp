@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::CourseRepositoryPort
 # Rôle : contrat de persistance des cours, un seul agrégat pour lire et écrire
-# ADR  : 0029, 0035, 0039, 0075, 0116, chargement-automatique-des-lecons-hors-production
+# ADR  : 0029, 0035, 0039, 0075, 0116, chargement-automatique-des-lecons-hors-production, XXXX-suppression-d-une-lecon-sans-activite-eleve
 module Ports
   module Catalog
     module CourseRepositoryPort
@@ -48,6 +48,25 @@ module Ports
       # de l'appelant, pour décider un réimport. → { course: "draft" | "published" | "archived", contents: Array<String> } ; nil sans leçon.
       def status_for_update(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #status_for_update"
+      end
+
+      # ADR-0136 : les traces d'élèves de la leçon, sans verrou (la modale de confirmation).
+      # → Entities::Catalog::StudentActivity
+      def student_activity(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #student_activity"
+      end
+
+      # Dans la transaction de l'appelant : verrouille la leçon puis ses notions, exercices et questions (FOR UPDATE), puis lit ses traces
+      # d'élèves. → Entities::Catalog::StudentActivity ; nil sans leçon.
+      def lock_for_deletion(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #lock_for_deletion"
+      end
+
+      # Supprime la leçon et son seul contenu (notions, exercices, questions, réponses, images, sujets, texte du cours), après
+      # lock_for_deletion. Ne touche aucune trace d'élève : s'il en restait une, la base refuse et l'appelant annule.
+      # → { courses:, essentials:, exercises:, questions:, answers:, subjects:, question_images:, course_text: } (lignes supprimées)
+      def delete(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #delete"
       end
 
       # ADR-0075 : une entrée par classe où un exercice d'une fiche du cours est assigné (assignation active).

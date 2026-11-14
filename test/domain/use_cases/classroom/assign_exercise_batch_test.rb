@@ -139,6 +139,16 @@ module UseCases
         assert_equal [ "Exercice 2" ], result.value.skipped.map(&:name)
       end
 
+      # Chantier suppression-lecon : l'exercice a disparu entre la lecture et l'écriture (sa leçon supprimée) ; le dépôt refuse l'envoi.
+      test "un exercice disparu à l'écriture : le refus du dépôt (unknown_exercise) est rendu tel quel, jamais « déjà assigné »" do
+        refusal = Shared::Result.failure(:invalid, errors: { base: [ :unknown_exercise ] })
+        @assignments.define_singleton_method(:create_batch) { |**| refusal }
+
+        result = send_batch(%w[ex1 ex2])
+
+        assert_same refusal, result
+      end
+
       test "tous déjà assignés : un succès sans assignation créée, les exercices nommés" do
         send_batch(%w[ex1 ex2])
 

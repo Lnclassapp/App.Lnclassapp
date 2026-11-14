@@ -1,0 +1,24 @@
+<%# 🌐 UI · teams/courses/_deletion_dialog — la modale de suppression d'une leçon : confirmation, ou refus avec « Modifier la fiche de cours » %>
+<%# Rôle : rendue par deletion (frame « modal ») et par le refus de destroy (Turbo Stream qui remplace le contenu du frame) %>
+<%# ADR  : XXXX-suppression-d-une-lecon-sans-activite-eleve · UDR : 0006, XXXX-supprimer-une-lecon-depuis-sa-fiche %>
+<% id = "delete-course-#{course.slug}" %>
+<% if refused %>
+  <%= ui_modal id:, size: :sm, open: true, title: t("teams.courses.deletion.refused_title") do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t("teams.courses.deletion.close"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t("teams.courses.deletion.edit"), href: edit_teams_course_path(course.slug), variant: :primary, icon: "pencil-square",
+                    data: { turbo_frame: "modal" } %>
+    <% end %>
+    <p class="text-sm text-mute"><%= t("teams.courses.deletion.refused_body", name: course.name) %></p>
+  <% end %>
+<% else %>
+  <%= ui_modal id:, size: :sm, open: true, title: t("teams.courses.deletion.title", name: course.name) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t("teams.courses.deletion.cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= form_with url: teams_course_path(course.slug), method: :delete, id: "#{id}-form", data: { turbo_frame: "_top" } do %>
+        <%= ui_button t("teams.courses.deletion.confirm"), type: :submit, variant: :danger, icon: "trash", full: true %>
+      <% end %>
+    <% end %>
+    <p class="text-sm text-mute"><%= t("teams.courses.deletion.body") %></p>
+  <% end %>
+<% end %>
