@@ -1,0 +1,3764 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les différentes transformations du corps humain de l'enfance à l'adolescence",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "SVT",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "taille-d-un-garcon",
+          "kind": "stat_chart",
+          "description": "Courbe de la taille de Kofi, un garçon, mesurée à chaque anniversaire de 9 à 15 ans : 132, 137, 143, 150, 158, 165 et 170 cm. La courbe monte à chaque âge, plus vite entre 12 et 13 ans (8 cm) qu'avant et qu'après, puis son rythme diminue.",
+          "params": {
+            "chart": "line",
+            "series": [
+              132,
+              137,
+              143,
+              150,
+              158,
+              165,
+              170
+            ],
+            "labels": [
+              "9 ans",
+              "10 ans",
+              "11 ans",
+              "12 ans",
+              "13 ans",
+              "14 ans",
+              "15 ans"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "taille-d-une-fille",
+          "kind": "stat_chart",
+          "description": "Courbe de la taille d'Aya, une fille, mesurée à chaque anniversaire de 9 à 15 ans : 130, 136, 144, 150, 155, 158 et 160 cm. La courbe monte le plus vite entre 10 et 11 ans (8 cm), puis elle s'aplatit : l'augmentation n'est plus que de 3 cm, puis de 2 cm.",
+          "params": {
+            "chart": "line",
+            "series": [
+              130,
+              136,
+              144,
+              150,
+              155,
+              158,
+              160
+            ],
+            "labels": [
+              "9 ans",
+              "10 ans",
+              "11 ans",
+              "12 ans",
+              "13 ans",
+              "14 ans",
+              "15 ans"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "caracteres-sexuels",
+          "kind": "diagram",
+          "description": "Arbre de classement des changements de la puberté. En haut, la puberté. En dessous, deux branches : les caractères sexuels primaires (organes génitaux présents dès la naissance) et les caractères sexuels secondaires (qui apparaissent à la puberté). Chaque branche porte des exemples chez le garçon et chez la fille.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "p",
+                "label": "Les changements de la puberté"
+              },
+              {
+                "id": "pri",
+                "label": "Caractères primaires : organes génitaux"
+              },
+              {
+                "id": "sec",
+                "label": "Caractères secondaires : apparus à la puberté"
+              },
+              {
+                "id": "pg",
+                "label": "Garçon : testicules, pénis"
+              },
+              {
+                "id": "pf",
+                "label": "Fille : ovaires, utérus, vagin"
+              },
+              {
+                "id": "sg",
+                "label": "Garçon : barbe, voix grave, épaules larges"
+              },
+              {
+                "id": "sf",
+                "label": "Fille : seins, hanches larges"
+              },
+              {
+                "id": "sb",
+                "label": "Les deux : poils du pubis et des aisselles"
+              }
+            ],
+            "edges": [
+              {
+                "from": "p",
+                "to": "pri"
+              },
+              {
+                "from": "p",
+                "to": "sec"
+              },
+              {
+                "from": "pri",
+                "to": "pg"
+              },
+              {
+                "from": "pri",
+                "to": "pf"
+              },
+              {
+                "from": "sec",
+                "to": "sg"
+              },
+              {
+                "from": "sec",
+                "to": "sf"
+              },
+              {
+                "from": "sec",
+                "to": "sb"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Lire la croissance en taille et en masse",
+          "remember": "La **croissance** est l'augmentation de la taille (en cm, mesurée avec une toise) et de la masse (en kg, mesurée avec une balance). Pendant l'enfance, on grandit de façon assez régulière. À la puberté, la croissance s'accélère : c'est la **poussée de croissance**. En moyenne, elle commence plus tôt chez la fille que chez le garçon, mais l'âge varie d'une personne à l'autre. Pendant l'adolescence, la croissance ralentit, puis on atteint la taille adulte. Pour la lire, on calcule l'augmentation d'une année à l'autre.",
+          "method": [
+            "Repérer les âges et les mesures données (taille en cm, masse en kg).",
+            "Calculer l'augmentation entre deux âges qui se suivent : mesure récente moins mesure précédente.",
+            "Comparer les augmentations pour trouver la période où elle est la plus grande.",
+            "Conclure : situer la poussée de croissance et dire si la croissance ralentit ensuite."
+          ],
+          "example": {
+            "statement": "Kofi mesure 132 cm à 9 ans, 137 cm à 10 ans, 143 cm à 11 ans, 150 cm à 12 ans, 158 cm à 13 ans et 165 cm à 14 ans. À quel âge a-t-il sa poussée de croissance ?",
+            "steps": [
+              "Repérer : les tailles sont 132, 137, 143, 150, 158 et 165 cm, de 9 à 14 ans.",
+              "Calculer : 137 − 132 = 5 ; 143 − 137 = 6 ; 150 − 143 = 7 ; 158 − 150 = 8 ; 165 − 158 = 7 (en cm).",
+              "Comparer : la plus grande augmentation est 8 cm, entre 12 ans et 13 ans.",
+              "Conclure : la poussée de croissance de Kofi se situe autour de 12-13 ans ; ensuite l'augmentation diminue (7 cm)."
+            ]
+          },
+          "pitfall": "Ne confonds pas la taille et la vitesse de croissance. Kofi mesure 165 cm à 14 ans et 170 cm à 15 ans : sa taille augmente encore (+5 cm), mais moins vite qu'entre 12 et 13 ans (+8 cm). Une courbe qui monte moins vite ne veut pas dire qu'on rétrécit, ni qu'on a fini de grandir : on compare toujours les augmentations.",
+          "figure": "taille-d-un-garcon",
+          "exercise": [
+            {
+              "title": "Lire les mesures de croissance de Kofi",
+              "statement": "Kofi, élève de 4ème, suit sa croissance avec sa mère. Chaque anniversaire, elle note sa taille et sa masse dans le carnet de santé de la famille.",
+              "exercise_type": "fixation",
+              "figure": "taille-d-un-garcon",
+              "questions": [
+                {
+                  "content": "Que désigne le mot « croissance » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche la définition du mot. La croissance est l'augmentation de la taille et de la masse, mesurées avec une toise et une balance. Les autres propositions sont d'autres transformations : la barbe est un caractère sexuel, le caractère relève du comportement, et manger plus est une habitude.",
+                  "answers": [
+                    {
+                      "content": "L'apparition de la barbe chez le garçon",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'augmentation de la taille et de la masse du corps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le changement de caractère à l'adolescence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fait de manger plus à chaque repas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi mesure 150 cm à 12 ans et 158 cm à 13 ans. De combien de centimètres a-t-il grandi entre ces deux âges ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 150 cm à 12 ans, 158 cm à 13 ans. Étape 2 — Calculer : 158 − 150 = 8. Étape 4 — Conclure : il a grandi de 8 cm. Additionner 150 + 158 n'a pas de sens pour mesurer une augmentation.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi mesure 137 cm à 10 ans, 143 cm à 11 ans, 150 cm à 12 ans, 158 cm à 13 ans et 165 cm à 14 ans. Entre quels âges grandit-il le plus vite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : cinq tailles, de 10 à 14 ans. Étape 2 — Calculer : 6 ; 7 ; 8 ; 7 cm. Étape 3 — Comparer : la plus grande augmentation est 8 cm. Étape 4 — Conclure : c'est entre 12 et 13 ans. Entre 13 et 14 ans, l'augmentation (7 cm) est déjà plus petite.",
+                  "answers": [
+                    {
+                      "content": "Entre 10 ans et 11 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 11 ans et 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 12 ans et 13 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 13 ans et 14 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour lire une croissance.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer les mesures. Étape 2 — Calculer les augmentations. Étape 3 — Comparer pour trouver la plus grande. Étape 4 — Conclure. On ne peut pas comparer avant d'avoir calculé, ni conclure avant d'avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Repérer les âges et les mesures données."
+                    },
+                    {
+                      "content": "Calculer l'augmentation entre deux âges qui se suivent."
+                    },
+                    {
+                      "content": "Comparer les augmentations entre elles."
+                    },
+                    {
+                      "content": "Conclure en situant la poussée de croissance."
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi mesure 165 cm à 14 ans et 170 cm à 15 ans. Son grand frère dit : « Sa courbe monte moins vite, donc il a rétréci. » Que peux-tu répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer : 170 − 165 = 5 cm, un nombre positif. Étape 3 — Comparer : 5 cm est plus petit que 8 cm. Étape 4 — Conclure : la taille augmente encore, mais plus lentement. C'est l'erreur du piège : confondre une taille qui augmente moins vite avec une taille qui diminue.",
+                  "answers": [
+                    {
+                      "content": "Vrai : l'augmentation a diminué, donc la taille aussi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : il a grandi de 8 cm entre 14 et 15 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai : après 14 ans, on rétrécit toujours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : il a grandi de 5 cm, mais moins vite qu'entre 12 et 13 ans (8 cm)",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer la croissance d'un garçon et d'une fille",
+              "statement": "Dans la classe de 4ème, Kofi et Aya comparent leurs carnets de santé. Ils veulent savoir à quel âge chacun a eu sa poussée de croissance.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque élève, calcule les augmentations d'une année à l'autre, puis cherche la plus grande.",
+              "questions": [
+                {
+                  "content": "Aya mesure 150 cm à 12 ans et 155 cm à 13 ans. De combien de centimètres a-t-elle grandi entre ces deux âges ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 150 cm puis 155 cm. Étape 2 — Calculer : 155 − 150 = 5. Étape 4 — Conclure : elle a grandi de 5 cm.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya mesure 130 cm à 9 ans, 136 cm à 10 ans, 144 cm à 11 ans et 150 cm à 12 ans. Entre quels âges grandit-elle le plus vite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 130, 136, 144 et 150 cm. Étape 2 — Calculer : 6 ; 8 ; 6 cm. Étape 3 — Comparer : la plus grande augmentation est 8 cm. Étape 4 — Conclure : c'est entre 10 et 11 ans. La période de 9 à 12 ans cumule trois années : ce n'est pas une année.",
+                  "answers": [
+                    {
+                      "content": "Entre 10 ans et 11 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 9 ans et 10 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 11 ans et 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 9 ans et 12 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La poussée de croissance de Kofi est entre 12 et 13 ans, celle d'Aya entre 10 et 11 ans. Cela correspond au fait que la poussée de croissance commence en moyenne plus tôt chez la fille.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : la poussée d'Aya (10-11 ans) vient avant celle de Kofi (12-13 ans). Étape 4 — Conclure : cela correspond à ce que l'on observe en moyenne. L'âge reste variable d'une personne à l'autre : on ne généralise pas à partir de deux élèves, mais la moyenne va dans ce sens.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à ce qu'il désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : la taille se mesure avec une toise, la masse avec une balance. Étape 3 — Comparer les augmentations permet de trouver la poussée de croissance, c'est-à-dire la période où la taille augmente le plus vite.",
+                  "answers": [
+                    {
+                      "content": "La toise",
+                      "match": "Elle mesure la taille"
+                    },
+                    {
+                      "content": "La balance",
+                      "match": "Elle mesure la masse"
+                    },
+                    {
+                      "content": "La poussée de croissance",
+                      "match": "La période où la taille augmente le plus vite"
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya mesure 155 cm à 13 ans et 158 cm à 14 ans : sa taille a augmenté de ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : 155 cm puis 158 cm. Étape 2 — Calculer : 158 − 155 = 3. Étape 4 — Conclure : elle a grandi de 3 cm, moins vite qu'entre 10 et 11 ans (8 cm) : sa croissance ralentit.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies à propos de la croissance à l'adolescence ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on lit des tailles et des masses qui augmentent. Étape 3 — Comparer : après la poussée, les augmentations diminuent (Aya : 8 puis 6, 5, 3, 2 cm). Étape 4 — Conclure : « La taille et la masse augmentent » et « Après la poussée, la croissance ralentit » sont vraies. L'âge de la poussée varie d'un élève à l'autre, et ralentir n'est pas rétrécir.",
+                  "answers": [
+                    {
+                      "content": "Elle commence exactement au même âge chez tous les élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille et la masse augmentent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle s'arrête brusquement à 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Après la poussée, la croissance ralentit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une taille qui augmente moins vite signifie qu'on rétrécit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à lire la croissance avec la méthode de la fiche : repérer, calculer, comparer, conclure.",
+            "questions": [
+              {
+                "content": "Aya mesure 144 cm à 11 ans et 150 cm à 12 ans. De combien de centimètres a-t-elle grandi entre ses 11 ans et ses 12 ans ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "hint": "Soustrais la taille de 11 ans à la taille de 12 ans.",
+                "explanation": "Étape 1 — Repérer : 144 cm à 11 ans, 150 cm à 12 ans. Étape 2 — Calculer : 150 − 144 = 6. Étape 3 — Comparer : il n'y a qu'une période, rien à comparer. Étape 4 — Conclure : elle a grandi de 6 cm.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La masse de Yao est de 33 kg à 10 ans, 37 kg à 11 ans, 42 kg à 12 ans et 48 kg à 13 ans. Entre quels âges sa masse augmente-t-elle le plus ?",
+                "question_type": "single_choice",
+                "hint": "Calcule trois différences, puis compare-les.",
+                "explanation": "Étape 1 — Repérer : 33, 37, 42 et 48 kg. Étape 2 — Calculer : 37 − 33 = 4 ; 42 − 37 = 5 ; 48 − 42 = 6. Étape 3 — Comparer : la plus grande augmentation est 6 kg. Étape 4 — Conclure : c'est entre 12 et 13 ans. La période de 10 à 13 ans est un total sur trois ans, pas une année.",
+                "answers": [
+                  {
+                    "content": "Entre 12 ans et 13 ans",
+                    "correct": true
+                  },
+                  {
+                    "content": "Entre 10 ans et 11 ans",
+                    "correct": false
+                  },
+                  {
+                    "content": "Entre 11 ans et 12 ans",
+                    "correct": false
+                  },
+                  {
+                    "content": "Entre 10 ans et 13 ans",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La taille d'Awa passe de 150 cm à 155 cm, puis à 158 cm. Elle grandit encore, mais moins vite.",
+                "question_type": "true_false",
+                "hint": "Compare les deux augmentations.",
+                "explanation": "Étape 2 — Calculer : 155 − 150 = 5 puis 158 − 155 = 3. Étape 3 — Comparer : 3 est plus petit que 5. Étape 4 — Conclure : la taille augmente encore, mais moins vite, donc l'affirmation est vraie. Une taille qui augmente moins n'est pas une taille qui diminue.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La période où l'on grandit le plus vite à l'adolescence s'appelle la ___ de croissance.",
+                "question_type": "fill_blank",
+                "hint": "C'est le nom de la période où la croissance s'accélère.",
+                "explanation": "Étape 4 — Conclure : à la puberté, la croissance s'accélère pendant une période appelée la poussée de croissance. Elle se repère à l'étape 3, en comparant les augmentations d'une année à l'autre.",
+                "answers": [
+                  {
+                    "content": "poussée",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Distinguer les caractères sexuels primaires et secondaires",
+          "remember": "Les **caractères sexuels primaires** sont les organes génitaux, présents dès la naissance : testicules et pénis chez le garçon ; ovaires, utérus et vagin chez la fille. Les **caractères sexuels secondaires** apparaissent à la puberté : barbe et moustache, voix grave (la mue), épaules larges et muscles chez le garçon ; seins et hanches plus larges chez la fille ; poils du pubis et des aisselles chez les deux. Les premières règles chez la fille et les premières éjaculations chez le garçon montrent que les organes génitaux fonctionnent.",
+          "method": [
+            "Repérer le changement observé et la personne concernée (garçon ou fille).",
+            "Vérifier si cet organe ou ce caractère existe déjà à la naissance.",
+            "Classer : s'il existe à la naissance et qu'il s'agit d'un organe génital, c'est un caractère primaire ; s'il apparaît à la puberté, c'est un caractère secondaire.",
+            "Conclure en nommant la catégorie et le sexe concerné."
+          ],
+          "example": {
+            "statement": "À 13 ans, la voix de Serge devient grave. De quelle sorte de caractère s'agit-il ?",
+            "steps": [
+              "Repérer : le changement est la voix grave, chez un garçon.",
+              "Vérifier : à la naissance, la voix de Serge n'était pas grave ; ce caractère n'existe pas encore.",
+              "Classer : la voix grave n'est pas un organe génital et elle apparaît à la puberté, donc c'est un caractère secondaire.",
+              "Conclure : la voix grave est un caractère sexuel secondaire du garçon."
+            ]
+          },
+          "pitfall": "Ne classe pas d'après ce que l'on voit. Le pénis se voit dès la naissance : c'est un caractère primaire. L'utérus est caché dans le corps, mais il existe aussi dès la naissance : c'est un caractère primaire. Les seins sont visibles et apparaissent à la puberté : ce sont des caractères secondaires. La bonne question est « existe-t-il déjà à la naissance ? », pas « le voit-on ? ».",
+          "figure": "caracteres-sexuels",
+          "exercise": [
+            {
+              "title": "Classer les changements de Serge et de Mariam",
+              "statement": "Au collège, Serge et Mariam, élèves de 4ème, remarquent que leur corps change. L'infirmière du centre de santé leur explique comment classer ces changements.",
+              "exercise_type": "fixation",
+              "figure": "caracteres-sexuels",
+              "questions": [
+                {
+                  "content": "Que sont les caractères sexuels primaires ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Classer : les caractères primaires sont les organes génitaux, présents dès la naissance. Les changements qui apparaissent à la puberté sont les caractères secondaires ; les poils en font partie ; la taille et la masse relèvent de la croissance, pas des caractères sexuels.",
+                  "answers": [
+                    {
+                      "content": "Les changements qui apparaissent à la puberté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les organes génitaux, présents dès la naissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les poils qui poussent sur le corps",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille et la masse du corps",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels changements sont des caractères sexuels secondaires ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Vérifier : la voix grave, les seins et la barbe n'existent pas à la naissance. Étape 3 — Classer : ils apparaissent à la puberté, ce sont des caractères secondaires. Les ovaires, les testicules et le vagin sont des organes génitaux présents dès la naissance : ce sont des caractères primaires.",
+                  "answers": [
+                    {
+                      "content": "Les ovaires de la fille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les testicules du garçon",
+                      "correct": false
+                    },
+                    {
+                      "content": "La voix grave du garçon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le développement des seins de la fille",
+                      "correct": true
+                    },
+                    {
+                      "content": "La barbe du garçon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vagin de la fille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam remarque que ses hanches s'élargissent. C'est un caractère sexuel ___ de la fille.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : les hanches s'élargissent chez une fille. Étape 2 — Vérifier : elles étaient plus étroites avant la puberté. Étape 3 — Classer : ce n'est pas un organe génital et il apparaît à la puberté, donc secondaire. Étape 4 — Conclure : caractère secondaire.",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "secondaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "génital",
+                      "correct": false
+                    },
+                    {
+                      "content": "adulte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour classer un caractère sexuel.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Vérifier l'existence à la naissance. Étape 3 — Classer. Étape 4 — Conclure. On ne peut pas classer avant d'avoir vérifié si le caractère existe déjà à la naissance.",
+                  "answers": [
+                    {
+                      "content": "Repérer le changement et la personne concernée."
+                    },
+                    {
+                      "content": "Vérifier s'il existe déjà à la naissance."
+                    },
+                    {
+                      "content": "Classer en caractère primaire ou secondaire."
+                    },
+                    {
+                      "content": "Conclure en nommant la catégorie et le sexe concerné."
+                    }
+                  ]
+                },
+                {
+                  "content": "L'utérus est caché dans le corps, donc c'est un caractère sexuel secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Vérifier : l'utérus existe dès la naissance, même s'il est caché. Étape 3 — Classer : c'est un organe génital, donc un caractère primaire. C'est l'erreur du piège : classer d'après ce que l'on voit au lieu de demander si le caractère existe à la naissance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître les signes de la puberté",
+              "statement": "Dans le cours de SVT, le professeur demande à la classe de reconnaître les signes de la puberté chez le garçon et chez la fille.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque changement, demande-toi si le caractère existe à la naissance, puis chez qui il apparaît.",
+              "questions": [
+                {
+                  "content": "Quel changement apparaît chez le garçon à la puberté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche un changement du garçon. Étape 2 — Vérifier : la voix grave n'existe pas à la naissance. Étape 3 — Classer : c'est un caractère secondaire. Les seins et les règles concernent la fille, et les poils apparaissent à la puberté au lieu de disparaître.",
+                  "answers": [
+                    {
+                      "content": "Les seins se développent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les premières règles apparaissent",
+                      "correct": false
+                    },
+                    {
+                      "content": "La voix devient grave (la mue)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les poils disparaissent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels changements apparaissent chez la fille à la puberté ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche les changements de la fille. Étape 3 — Classer : les seins et les hanches larges sont des caractères secondaires de la fille. La barbe et la voix grave sont ceux du garçon ; les testicules sont des organes du garçon présents dès la naissance.",
+                  "answers": [
+                    {
+                      "content": "La barbe pousse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La voix devient grave comme celle d'un homme adulte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les testicules se forment",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les hanches s'élargissent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les seins se développent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque changement à la personne qu'il concerne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer qui est concerné. La mue de la voix concerne le garçon, les premières règles concernent la fille, et les poils du pubis apparaissent chez les deux. Étape 4 — Conclure : trois changements, trois personnes concernées différentes.",
+                  "answers": [
+                    {
+                      "content": "La mue de la voix",
+                      "match": "Le garçon"
+                    },
+                    {
+                      "content": "Les premières règles",
+                      "match": "La fille"
+                    },
+                    {
+                      "content": "Les poils du pubis",
+                      "match": "Le garçon et la fille"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les premières règles et les premières éjaculations montrent que les organes ___ fonctionnent.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Classer : les premières règles et les premières éjaculations ne sont pas des caractères secondaires, ce sont des signes que les organes génitaux deviennent fonctionnels. Étape 4 — Conclure : la réponse est « génitaux » (on accepte aussi « sexuels »).",
+                  "answers": [
+                    {
+                      "content": "génitaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "sexuels",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les caractères sexuels secondaires apparaissent à la puberté.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Vérifier : ces caractères n'existent pas à la naissance. Étape 3 — Classer : ils apparaissent à la puberté, c'est leur définition. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les poils du pubis et des aisselles apparaissent chez ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on cherche qui est concerné. Étape 3 — Classer : la pilosité du pubis et des aisselles est un caractère secondaire. Étape 4 — Conclure : elle apparaît chez les deux. Dire « garçon seulement » ou « fille seulement » est une erreur fréquente.",
+                  "answers": [
+                    {
+                      "content": "le garçon seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "le garçon et la fille",
+                      "correct": true
+                    },
+                    {
+                      "content": "la fille seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "personne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à classer les caractères sexuels avec la méthode de la fiche : repérer, vérifier, classer, conclure.",
+            "questions": [
+              {
+                "content": "À 14 ans, Mariam voit ses seins se développer. De quelle sorte de caractère s'agit-il ?",
+                "question_type": "single_choice",
+                "hint": "Demande-toi si les seins se sont développés avant la puberté.",
+                "explanation": "Étape 1 — Repérer : les seins, chez une fille. Étape 2 — Vérifier : ils ne sont pas développés à la naissance. Étape 3 — Classer : ce n'est pas un organe génital et il apparaît à la puberté, donc secondaire. Étape 4 — Conclure : caractère secondaire de la fille.",
+                "answers": [
+                  {
+                    "content": "Un caractère sexuel primaire de la fille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un caractère sexuel secondaire du garçon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un caractère sexuel primaire du garçon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un caractère sexuel secondaire de la fille",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les testicules sont un caractère sexuel secondaire du garçon.",
+                "question_type": "true_false",
+                "hint": "Les testicules existent-ils à la naissance ?",
+                "explanation": "Étape 2 — Vérifier : les testicules existent dès la naissance. Étape 3 — Classer : ce sont des organes génitaux, donc des caractères primaires. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La barbe est un caractère sexuel ___ du garçon.",
+                "question_type": "select",
+                "hint": "La barbe apparaît-elle avant ou après la puberté ?",
+                "explanation": "Étape 2 — Vérifier : la barbe n'existe pas à la naissance. Étape 3 — Classer : elle apparaît à la puberté et n'est pas un organe génital, donc elle est secondaire. Étape 4 — Conclure : la bonne réponse est « secondaire ».",
+                "answers": [
+                  {
+                    "content": "secondaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "primaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "génital",
+                    "correct": false
+                  },
+                  {
+                    "content": "inexistant",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque caractère à la personne qu'il concerne.",
+                "question_type": "matching",
+                "hint": "Un seul caractère concerne les deux.",
+                "explanation": "Étape 1 — Repérer qui est concerné. La barbe apparaît chez le garçon, les seins chez la fille, et les poils des aisselles chez les deux. Étape 4 — Conclure : ce sont des caractères secondaires, mais pas tous chez la même personne.",
+                "answers": [
+                  {
+                    "content": "La barbe",
+                    "match": "Le garçon"
+                  },
+                  {
+                    "content": "Les seins",
+                    "match": "La fille"
+                  },
+                  {
+                    "content": "Les poils des aisselles",
+                    "match": "Le garçon et la fille"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Comprendre les changements psychologiques à l'adolescence",
+          "remember": "L'**adolescence** est la période entre l'enfance et l'âge adulte. Le corps change, mais aussi la façon de penser et de ressentir : besoin d'autonomie, émotions plus fortes et humeur changeante, importance des amis, attirance pour les autres, recherche de sa propre personnalité. Ces changements sont **normaux** et ne durent pas. Ils ne permettent pas tout : l'adolescent respecte les règles de sa famille et du collège et dialogue avec ses parents, ses enseignants ou l'infirmier du centre de santé.",
+          "method": [
+            "Lire la situation et repérer le comportement de l'adolescent.",
+            "Identifier le changement qu'il traduit (autonomie, humeur, relations avec les amis, identité).",
+            "Dire si ce comportement est normal à cet âge et quelles limites s'imposent (respect, sécurité).",
+            "Proposer une attitude responsable : dialoguer avec un adulte de confiance."
+          ],
+          "example": {
+            "statement": "Yao, 14 ans, veut sortir seul avec ses amis le samedi. Sa mère refuse et il s'énerve.",
+            "steps": [
+              "Lire : Yao veut sortir seul avec des amis et il s'énerve devant le refus de sa mère.",
+              "Identifier : il a un besoin d'autonomie, l'importance des amis et une humeur changeante.",
+              "Dire : c'est normal à son âge, mais s'énerver ne règle rien et sa mère doit savoir où il va et avec qui (sécurité).",
+              "Proposer : parler calmement à sa mère, dire où et avec qui il sort, et convenir d'une heure de retour."
+            ]
+          },
+          "pitfall": "Ne crois pas que l'adolescence excuse tout, et ne dis pas qu'un adolescent « a mauvais caractère » parce que son humeur change. Claquer une porte une fois après une dispute, puis s'excuser le soir, est une humeur normale. Frapper un camarade, ou rester triste pendant 2 semaines sans parler à personne, n'est pas normal : il faut en parler à un adulte de confiance.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Comprendre l'attitude de Yao",
+              "statement": "Yao, élève de 4ème, vit avec ses parents et sa petite sœur. Depuis quelques mois, son comportement change à la maison et au collège.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce que l'adolescence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on cherche la définition. L'adolescence est la période entre l'enfance et l'âge adulte, avec des changements du corps, de la pensée et du comportement. Ce n'est pas une maladie, et la croissance ne s'arrête pas au début de l'adolescence.",
+                  "answers": [
+                    {
+                      "content": "La période entre l'enfance et l'âge adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "La période qui précède la naissance",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'âge où l'on arrête de grandir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une maladie passagère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont des changements psychologiques de l'adolescence ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Identifier : l'autonomie et l'humeur changeante sont des changements psychologiques. La voix grave, les seins et la poussée de taille sont des changements du corps.",
+                  "answers": [
+                    {
+                      "content": "La voix devient grave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un besoin de plus d'autonomie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les seins se développent",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille augmente plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des émotions plus fortes et une humeur changeante",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao s'énerve quand sa mère lui demande l'heure de retour. Quelle est la bonne analyse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : Yao s'énerve à propos de l'heure de retour. Étape 2 — Identifier : besoin d'autonomie. Étape 3 — Dire : c'est normal, mais la sécurité impose que ses parents sachent où il est. Un adolescent n'est pas encore un adulte.",
+                  "answers": [
+                    {
+                      "content": "Il a raison : un adolescent n'a de comptes à rendre à personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa mère a tort : un adolescent est un adulte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce comportement prouve qu'il est malade",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a un besoin d'autonomie, mais sa mère a raison de vouloir savoir où il est",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour analyser le comportement d'un adolescent.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Identifier. Étape 3 — Dire si c'est normal et poser les limites. Étape 4 — Proposer une attitude. On ne propose une attitude qu'après avoir compris le comportement.",
+                  "answers": [
+                    {
+                      "content": "Lire la situation et repérer le comportement."
+                    },
+                    {
+                      "content": "Identifier le changement qu'il traduit."
+                    },
+                    {
+                      "content": "Dire s'il est normal et quelles limites s'imposent."
+                    },
+                    {
+                      "content": "Proposer une attitude responsable."
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam, 14 ans, claque la porte après une dispute avec sa sœur, puis s'excuse le soir. Quelle est la bonne analyse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : une humeur changeante. Étape 3 — Dire : claquer la porte une fois, puis s'excuser, est normal à cet âge. Étape 4 — Proposer : s'excuser est l'attitude responsable. C'est l'erreur du piège : croire qu'une humeur passagère est un mauvais caractère, ou que l'adolescence excuse tout.",
+                  "answers": [
+                    {
+                      "content": "C'est une humeur changeante normale à cet âge, et elle a bien fait de s'excuser",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est la preuve qu'elle a un mauvais caractère pour toujours",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est normal : à son âge, elle n'a pas à s'excuser",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une maladie grave qu'il faut soigner",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Réagir face aux changements de comportement",
+              "statement": "Au collège, le professeur principal demande à la classe de 4ème de réagir à plusieurs situations vécues par des adolescents.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque situation, cherche le changement qu'elle traduit, puis l'attitude qui garde le respect et la sécurité.",
+              "questions": [
+                {
+                  "content": "Un adolescent qui change d'humeur dans la journée est forcément malade.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier : l'humeur changeante est un changement psychologique normal à l'adolescence. Étape 3 — Dire : ce n'est pas une maladie. Il faut en parler seulement si la tristesse dure longtemps, par exemple plusieurs semaines.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque comportement au changement qu'il traduit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire chaque comportement. Étape 2 — Identifier le changement : choisir seul ses amis traduit le besoin d'autonomie ; s'énerver puis rire traduit l'humeur changeante ; se soucier de l'avis de ses camarades traduit l'importance des amis.",
+                  "answers": [
+                    {
+                      "content": "Il veut choisir seul ses amis",
+                      "match": "Le besoin d'autonomie"
+                    },
+                    {
+                      "content": "Il s'énerve puis rit quelques minutes après",
+                      "match": "L'humeur changeante"
+                    },
+                    {
+                      "content": "Il s'inquiète de ce que pensent ses camarades",
+                      "match": "L'importance des amis"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un adolescent est triste depuis plusieurs semaines, il en parle à un adulte de confiance, par exemple à l'infirmier du centre de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Dire : une tristesse qui dure plusieurs semaines n'est plus une simple humeur passagère. Étape 4 — Proposer : en parler à un adulte de confiance, comme l'infirmier du centre de santé.",
+                  "answers": [
+                    {
+                      "content": "santé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa veut passer le samedi chez une amie. Quelle attitude est la plus responsable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Dire : le besoin d'autonomie est normal, mais la sécurité demande que les parents sachent où elle est. Étape 4 — Proposer : dire où elle va et l'heure de retour. Partir sans rien dire ou mentir fait perdre la confiance.",
+                  "answers": [
+                    {
+                      "content": "Partir sans rien dire pour montrer son indépendance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dire à ses parents chez qui elle va et à quelle heure elle rentre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Renoncer pour toujours à voir ses amies",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mentir sur l'endroit où elle va",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles attitudes sont responsables face à un désaccord avec ses parents ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Proposer : l'attitude responsable passe par le dialogue : expliquer calmement, écouter et demander conseil. Crier, se taire ou mentir ne règlent pas le désaccord.",
+                  "answers": [
+                    {
+                      "content": "Crier pour obtenir gain de cause",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne plus parler à personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chercher l'avis d'un adulte de confiance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Expliquer son point de vue calmement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mentir pour éviter la discussion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Écouter les raisons de ses parents",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adolescent qui veut plus d'indépendance traduit un besoin d'___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Identifier : vouloir décider plus souvent par soi-même traduit le besoin d'autonomie. Ce n'est pas un besoin d'obéissance, ni un retour à l'enfance, et le besoin d'isolement est autre chose.",
+                  "answers": [
+                    {
+                      "content": "obéissance",
+                      "correct": false
+                    },
+                    {
+                      "content": "autonomie",
+                      "correct": true
+                    },
+                    {
+                      "content": "enfance",
+                      "correct": false
+                    },
+                    {
+                      "content": "isolement",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à analyser le comportement d'un adolescent avec la méthode de la fiche : lire, identifier, dire, proposer.",
+            "questions": [
+              {
+                "content": "Fatou, 13 ans, passe beaucoup de temps avec ses amies et veut choisir seule ses vêtements. Quel changement cela traduit-il ?",
+                "question_type": "single_choice",
+                "hint": "Pense à ce que cherche un adolescent : plus d'indépendance.",
+                "explanation": "Étape 1 — Lire : Fatou est souvent avec ses amies et choisit ses vêtements. Étape 2 — Identifier : cela traduit un besoin d'autonomie et l'importance des amis. Étape 3 — Dire : c'est normal à son âge. Ce n'est ni une maladie ni un manque de respect.",
+                "answers": [
+                  {
+                    "content": "Une maladie du corps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un retour à l'enfance",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un besoin d'autonomie et l'importance des amis",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un manque de respect volontaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À l'adolescence, il est normal d'avoir des humeurs changeantes.",
+                "question_type": "true_false",
+                "hint": "Les émotions changent aussi, pas seulement le corps.",
+                "explanation": "Étape 2 — Identifier : les émotions sont plus fortes à cet âge. Étape 3 — Dire : une humeur qui change est normale à l'adolescence. L'adolescent doit seulement rester respectueux envers les autres. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour régler un désaccord avec ses parents, l'adolescent responsable choisit le ___.",
+                "question_type": "select",
+                "hint": "Quelle attitude permet de s'expliquer et d'être compris ?",
+                "explanation": "Étape 4 — Proposer : l'attitude responsable est de dialoguer calmement avec un adulte de confiance. Le silence, le cri et le mensonge ne règlent pas le désaccord et abîment la confiance.",
+                "answers": [
+                  {
+                    "content": "silence",
+                    "correct": false
+                  },
+                  {
+                    "content": "cri",
+                    "correct": false
+                  },
+                  {
+                    "content": "mensonge",
+                    "correct": false
+                  },
+                  {
+                    "content": "dialogue",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Adopter l'hygiène et les comportements responsables à la puberté",
+          "remember": "À la puberté, le corps transpire davantage et la peau peut avoir des boutons (l'acné). La fille a ses règles. Pour rester en bonne santé : **toilette complète chaque jour** à l'eau propre et au savon, sous-vêtements et vêtements propres, mains lavées, visage lavé doucement sans percer les boutons, protection hygiénique changée régulièrement pendant les règles. Le corps en croissance a besoin d'une alimentation variée, de sommeil et d'activité physique. L'adolescent demande conseil à un adulte de confiance ou au centre de santé, et ne se presse pas d'avoir des rapports sexuels.",
+          "method": [
+            "Repérer le changement du corps ou le besoin de l'adolescent.",
+            "Identifier le risque qu'il crée (odeur, boutons, infection, fatigue).",
+            "Choisir le geste d'hygiène ou le comportement qui répond à ce risque.",
+            "Justifier le choix par son effet sur la santé."
+          ],
+          "example": {
+            "statement": "Depuis ses 13 ans, Kofi transpire beaucoup et sent mauvais en fin de journée.",
+            "steps": [
+              "Repérer : Kofi transpire beaucoup depuis la puberté.",
+              "Identifier : la sueur favorise les microbes sur la peau, ce qui crée une mauvaise odeur et peut irriter la peau.",
+              "Choisir : faire une toilette complète chaque jour avec de l'eau et du savon, surtout aux aisselles, et porter des vêtements propres.",
+              "Justifier : le savon et l'eau enlèvent la sueur et les microbes ; Kofi évite l'odeur, l'irritation et les infections de la peau."
+            ]
+          },
+          "pitfall": "Ne remplace pas la toilette par du parfum. Fatou se parfume 3 fois par jour mais ne se lave pas : le parfum couvre l'odeur quelques heures, mais la sueur et les microbes restent sur sa peau. Une toilette par jour à l'eau et au savon les enlève vraiment. De même, ne perce jamais les boutons : cela peut provoquer une infection.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Les bons gestes d'hygiène de la famille de Kofi",
+              "statement": "À la maison, la mère de Kofi rappelle à ses enfants les gestes d'hygiène à adopter à la puberté. Le soir, la famille en discute.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels gestes d'hygiène sont recommandés à la puberté ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Choisir : la toilette quotidienne, les sous-vêtements propres et le visage lavé doucement protègent la peau. Étape 4 — Justifier : ils enlèvent la sueur et les microbes. Percer les boutons, utiliser du parfum à la place du savon ou garder une protection plusieurs jours est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Percer les boutons avec une aiguille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Laver doucement son visage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Remplacer la toilette par du parfum",
+                      "correct": false
+                    },
+                    {
+                      "content": "Garder une protection hygiénique plusieurs jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire une toilette complète chaque jour à l'eau et au savon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Changer de sous-vêtements chaque jour",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la toilette quotidienne est-elle plus importante à la puberté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : à la puberté, le corps transpire davantage. Étape 2 — Identifier : la sueur favorise les microbes et l'odeur. Étape 3 — Choisir : se laver chaque jour. Le corps ne cesse pas de transpirer et les microbes ne disparaissent pas tout seuls.",
+                  "answers": [
+                    {
+                      "content": "Le corps cesse de transpirer",
+                      "correct": false
+                    },
+                    {
+                      "content": "La peau devient plus épaisse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La transpiration est plus abondante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les microbes disparaissent tout seuls",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour choisir un geste d'hygiène.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Identifier le risque. Étape 3 — Choisir le geste. Étape 4 — Justifier. On choisit le geste après avoir identifié le risque, sinon il risque de ne pas convenir.",
+                  "answers": [
+                    {
+                      "content": "Repérer le changement du corps ou le besoin."
+                    },
+                    {
+                      "content": "Identifier le risque qu'il crée."
+                    },
+                    {
+                      "content": "Choisir le geste ou le comportement qui répond au risque."
+                    },
+                    {
+                      "content": "Justifier le choix par son effet sur la santé."
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant de manger, il faut se laver les ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Identifier : les mains portent des microbes. Étape 3 — Choisir : se laver les mains avec de l'eau propre et du savon. Étape 4 — Justifier : cela évite que les microbes entrent dans le corps avec les aliments.",
+                  "answers": [
+                    {
+                      "content": "cheveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "chaussures",
+                      "correct": false
+                    },
+                    {
+                      "content": "habits",
+                      "correct": false
+                    },
+                    {
+                      "content": "mains",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un parfum remplace la toilette quotidienne.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier : le parfum couvre l'odeur, mais la sueur et les microbes restent sur la peau. Étape 3 — Choisir : l'eau et le savon. C'est l'erreur du piège : le parfum ne nettoie pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Choisir le bon comportement à la maison et au centre de santé",
+              "statement": "Au centre de santé du collège, l'infirmière rencontre des élèves de 4ème et leur conseille des comportements pour rester en bonne santé pendant la puberté.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque situation, trouve le risque pour la santé, puis le geste qui le supprime.",
+              "questions": [
+                {
+                  "content": "Relie chaque besoin au geste qui y répond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque besoin. Étape 3 — Choisir le geste adapté : la sueur appelle la toilette, la croissance appelle une alimentation variée, les boutons appellent un lavage doux sans percer.",
+                  "answers": [
+                    {
+                      "content": "Une peau qui transpire beaucoup",
+                      "match": "Une toilette quotidienne à l'eau et au savon"
+                    },
+                    {
+                      "content": "Un corps en pleine croissance",
+                      "match": "Une alimentation variée"
+                    },
+                    {
+                      "content": "Des boutons sur le visage",
+                      "match": "Un lavage doux, sans percer"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant ses règles, Mariam veut éviter les infections. Que doit-elle faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : une protection gardée trop longtemps favorise les microbes. Étape 3 — Choisir : la changer régulièrement et faire sa toilette. Étape 4 — Justifier : cela évite l'infection. Ne plus se laver est dangereux pour la santé.",
+                  "answers": [
+                    {
+                      "content": "Changer régulièrement sa protection hygiénique et faire sa toilette chaque jour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Garder la même protection toute la semaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne plus se laver pendant les règles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mettre du parfum à la place de la toilette",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une question sur son corps, un adolescent peut demander conseil à un adulte de confiance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Choisir : se renseigner auprès d'un parent, d'un enseignant ou de l'infirmier du centre de santé. Étape 4 — Justifier : une information fiable protège la santé, alors que des rumeurs peuvent induire en erreur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour éviter les boutons infectés, il ne faut jamais ___ les boutons.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Identifier : percer un bouton ouvre la peau aux microbes. Étape 3 — Choisir : laver doucement à l'eau et au savon. Étape 4 — Justifier : on évite l'infection. Le mot attendu est « percer » ; « presser » ou « écraser » sont aussi acceptés.",
+                  "answers": [
+                    {
+                      "content": "percer",
+                      "correct": true
+                    },
+                    {
+                      "content": "presser",
+                      "correct": true
+                    },
+                    {
+                      "content": "écraser",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels comportements aident le corps à bien grandir ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Choisir : une alimentation variée et un sommeil suffisant soutiennent la croissance. Étape 4 — Justifier : le corps a besoin d'énergie et de repos pour grandir. Sauter des repas, boire de l'alcool ou veiller trop tard fatiguent le corps.",
+                  "answers": [
+                    {
+                      "content": "Dormir suffisamment",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sauter des repas pour maigrir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Manger des aliments variés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Boire de l'alcool",
+                      "correct": false
+                    },
+                    {
+                      "content": "Passer ses nuits à regarder des écrans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre une bonne routine de toilette du matin.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Choisir : on se lave d'abord à l'eau et au savon, on rince, on sèche, puis on s'habille avec des vêtements propres. Mettre des vêtements propres avant de se sécher les salirait.",
+                  "answers": [
+                    {
+                      "content": "Se laver le corps à l'eau et au savon"
+                    },
+                    {
+                      "content": "Se rincer à l'eau propre"
+                    },
+                    {
+                      "content": "Se sécher avec une serviette propre"
+                    },
+                    {
+                      "content": "Mettre des vêtements propres"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à choisir le bon geste d'hygiène avec la méthode de la fiche : repérer, identifier, choisir, justifier.",
+            "questions": [
+              {
+                "content": "Fatou a des boutons sur le visage. Quel geste est le bon ?",
+                "question_type": "single_choice",
+                "hint": "Un geste doux protège la peau.",
+                "explanation": "Étape 1 — Repérer : des boutons sur le visage. Étape 2 — Identifier : percer ou frotter fort risque une infection. Étape 3 — Choisir : laver doucement à l'eau et au savon. Étape 4 — Justifier : cela nettoie sans abîmer la peau.",
+                "answers": [
+                  {
+                    "content": "Percer les boutons avec une aiguille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Frotter très fort avec du sable",
+                    "correct": false
+                  },
+                  {
+                    "content": "Laver doucement son visage à l'eau et au savon, sans percer les boutons",
+                    "correct": true
+                  },
+                  {
+                    "content": "Mettre du parfum sur son visage",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pendant les règles, une protection hygiénique peut être gardée plusieurs jours sans la changer.",
+                "question_type": "true_false",
+                "hint": "Pense aux microbes.",
+                "explanation": "Étape 2 — Identifier : une protection gardée trop longtemps favorise les microbes et les infections. Étape 3 — Choisir : la changer régulièrement. Étape 4 — Justifier : c'est ainsi qu'on évite l'infection. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour que la croissance se passe bien, l'adolescent doit avoir une alimentation ___.",
+                "question_type": "fill_blank",
+                "hint": "Il faut manger des aliments de plusieurs sortes.",
+                "explanation": "Étape 1 — Repérer : le corps est en pleine croissance. Étape 3 — Choisir : une alimentation variée ou équilibrée apporte ce dont le corps a besoin. Étape 4 — Justifier : elle protège la santé et soutient la croissance.",
+                "answers": [
+                  {
+                    "content": "variée",
+                    "correct": true
+                  },
+                  {
+                    "content": "équilibrée",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le carnet de santé de Kofi",
+          "statement": "Chaque anniversaire, la mère de Kofi note sa taille et sa masse. Taille : 132 cm à 9 ans, 137 cm à 10 ans, 143 cm à 11 ans, 150 cm à 12 ans, 158 cm à 13 ans, 165 cm à 14 ans, 170 cm à 15 ans. Masse : 30 kg à 9 ans, 33 kg à 10 ans, 37 kg à 11 ans, 42 kg à 12 ans, 48 kg à 13 ans, 55 kg à 14 ans, 60 kg à 15 ans. Tu réponds aux questions comme à une interrogation.",
+          "exercise_type": "fixation",
+          "figure": "taille-d-un-garcon",
+          "questions": [
+            {
+              "content": "Kofi mesure 143 cm à 11 ans et 150 cm à 12 ans. De combien de centimètres a-t-il grandi entre 11 ans et 12 ans ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer : 143 cm à 11 ans, 150 cm à 12 ans. 2) Calculer l'augmentation : 150 − 143 = 7. 3) Conclure : il a grandi de 7 cm. On soustrait toujours la mesure la plus ancienne à la plus récente.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Entre quels âges Kofi a-t-il grandi le plus vite ? (tailles : 132, 137, 143, 150, 158, 165 et 170 cm de 9 à 15 ans)",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer les tailles. 2) Calculer les augmentations : 5, 6, 7, 8, 7 et 5 cm. 3) Comparer : la plus grande est 8 cm. 4) Conclure : entre 12 et 13 ans, c'est la poussée de croissance. Entre 11 et 12 ans l'augmentation n'est que de 7 cm.",
+              "answers": [
+                {
+                  "content": "Entre 9 ans et 10 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 11 ans et 12 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 14 ans et 15 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 12 ans et 13 ans",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Kofi a une masse de 48 kg à 13 ans et de 55 kg à 14 ans. De combien de kilogrammes sa masse a-t-elle augmenté ?",
+              "question_type": "numeric",
+              "unit": "kg",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer : 48 kg puis 55 kg. 2) Calculer l'augmentation : 55 − 48 = 7. 3) Conclure : sa masse a augmenté de 7 kg entre 13 et 14 ans, soit l'augmentation la plus forte de ses masses (3, 4, 5, 6, 7 puis 5 kg).",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont justifiées par les mesures de Kofi ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Pour chaque affirmation, on calcule les augmentations. La taille augmente de 5, 6, 7, 8, 7 et 5 cm : elle monte chaque année mais pas de la même quantité. La masse augmente de 3, 4, 5, 6, 7 et 5 kg. Kofi mesure encore 5 cm de plus entre 14 et 15 ans : il n'a pas fini de grandir à 12 ans et sa taille n'a pas diminué.",
+              "answers": [
+                {
+                  "content": "Sa taille a augmenté chaque année de 9 à 15 ans",
+                  "correct": true
+                },
+                {
+                  "content": "Il a grandi de la même quantité chaque année",
+                  "correct": false
+                },
+                {
+                  "content": "Il a fini de grandir à 12 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Sa masse a augmenté chaque année de 9 à 15 ans",
+                  "correct": true
+                },
+                {
+                  "content": "Sa taille a diminué entre 14 et 15 ans",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de centimètres Kofi a-t-il grandi en tout entre 9 ans (132 cm) et 15 ans (170 cm) ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer : 132 cm à 9 ans, 170 cm à 15 ans. 2) Calculer : 170 − 132 = 38. 3) Vérifier : la somme des augmentations 5 + 6 + 7 + 8 + 7 + 5 donne aussi 38. 4) Conclure : Kofi a grandi de 38 cm en 6 ans.",
+              "answers": [
+                {
+                  "content": "38",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux élèves, deux courbes de croissance",
+          "statement": "Dans la classe de 4ème, Aya et Kofi comparent leurs tailles. Aya mesure 130 cm à 9 ans, 136 cm à 10 ans, 144 cm à 11 ans, 150 cm à 12 ans, 155 cm à 13 ans, 158 cm à 14 ans et 160 cm à 15 ans. Kofi mesure 132 cm à 9 ans, 137 cm à 10 ans, 143 cm à 11 ans, 150 cm à 12 ans, 158 cm à 13 ans, 165 cm à 14 ans et 170 cm à 15 ans.",
+          "exercise_type": "fixation",
+          "figure": "taille-d-une-fille",
+          "questions": [
+            {
+              "content": "Entre quels âges Aya grandit-elle le plus vite ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer les tailles d'Aya. 2) Calculer les augmentations : 6, 8, 6, 5, 3 et 2 cm. 3) Comparer : la plus grande est 8 cm. 4) Conclure : la poussée de croissance d'Aya a lieu entre 10 et 11 ans.",
+              "answers": [
+                {
+                  "content": "Entre 9 ans et 10 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 12 ans et 13 ans",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 10 ans et 11 ans",
+                  "correct": true
+                },
+                {
+                  "content": "Entre 14 ans et 15 ans",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À 13 ans, Aya mesure 155 cm et Kofi 158 cm. Quelle est la différence de taille entre eux ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer : 158 cm pour Kofi, 155 cm pour Aya. 2) Calculer : 158 − 155 = 3. 3) Conclure : Kofi est plus grand de 3 cm à 13 ans. Ici, on compare deux tailles à un même âge, pas deux âges.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Après sa poussée de croissance, la croissance d'Aya ralentit : elle grandit de 6, 5, 3 puis 2 cm.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Repérer les tailles d'Aya après 11 ans : 144, 150, 155, 158 et 160 cm. 2) Calculer : 6, 5, 3 et 2 cm. 3) Comparer : les augmentations diminuent. 4) Conclure : la croissance ralentit après la poussée, donc l'affirmation est vraie. La taille continue pourtant d'augmenter.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aya et Kofi n'ont pas leur poussée de croissance au même âge. Quelle explication est juste ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Comparer les deux poussées : Aya entre 10 et 11 ans, Kofi entre 12 et 13 ans. 2) Conclure : en moyenne, la poussée commence plus tôt chez la fille, mais l'âge varie. Kofi a bien une poussée (8 cm). Sur 9 à 15 ans, Aya grandit de 30 cm et Kofi de 38 cm : Aya n'a donc pas plus grandi.",
+              "answers": [
+                {
+                  "content": "Elle commence toujours au même âge pour tous les élèves",
+                  "correct": false
+                },
+                {
+                  "content": "Kofi n'a pas de poussée de croissance",
+                  "correct": false
+                },
+                {
+                  "content": "Aya a grandi plus que Kofi en tout",
+                  "correct": false
+                },
+                {
+                  "content": "Elle commence en moyenne plus tôt chez la fille que chez le garçon, et l'âge varie d'une personne à l'autre",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La taille d'un élève se mesure avec une ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. La taille se mesure en centimètres avec une toise, et la masse en kilogrammes avec une balance. Le mot à écrire est « toise ».",
+              "answers": [
+                {
+                  "content": "toise",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La visite au centre de santé du collège",
+          "statement": "L'infirmière du centre de santé reçoit la classe de 4ème. Elle explique ce qui change à la puberté, puis elle répond aux questions des élèves sur l'hygiène et les comportements.",
+          "exercise_type": "evaluation",
+          "figure": "caracteres-sexuels",
+          "questions": [
+            {
+              "content": "Quels sont des caractères sexuels secondaires ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. 1) Repérer chaque changement. 2) Vérifier s'il existe à la naissance : testicules, utérus et ovaires existent déjà. 3) Classer : barbe, hanches larges et poils des aisselles apparaissent à la puberté, ce sont des caractères secondaires. Les trois autres sont des organes génitaux, donc primaires.",
+              "answers": [
+                {
+                  "content": "La barbe du garçon",
+                  "correct": true
+                },
+                {
+                  "content": "Les testicules",
+                  "correct": false
+                },
+                {
+                  "content": "Les poils des aisselles",
+                  "correct": true
+                },
+                {
+                  "content": "Les hanches plus larges de la fille",
+                  "correct": true
+                },
+                {
+                  "content": "L'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "Les ovaires",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque caractère à sa catégorie.",
+              "question_type": "matching",
+              "explanation": "Méthode. On vérifie si le caractère existe à la naissance. Les testicules et l'utérus sont des organes génitaux présents dès la naissance : primaires. Les seins et la barbe apparaissent à la puberté : secondaires. Il reste à nommer le sexe concerné.",
+              "answers": [
+                {
+                  "content": "Les seins",
+                  "match": "Caractère secondaire de la fille"
+                },
+                {
+                  "content": "Les testicules",
+                  "match": "Caractère primaire du garçon"
+                },
+                {
+                  "content": "La barbe",
+                  "match": "Caractère secondaire du garçon"
+                },
+                {
+                  "content": "L'utérus",
+                  "match": "Caractère primaire de la fille"
+                }
+              ]
+            },
+            {
+              "content": "Les premières règles montrent que les organes génitaux de la fille fonctionnent.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Les premières règles chez la fille, comme les premières éjaculations chez le garçon, sont le signe que les organes génitaux deviennent fonctionnels. L'affirmation est donc vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Serge transpire beaucoup depuis quelques mois. Quel conseil l'infirmière lui donne-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : la transpiration est plus abondante à la puberté. 2) Identifier le risque : odeur et microbes sur la peau. 3) Choisir : la toilette quotidienne à l'eau et au savon. 4) Justifier : elle enlève la sueur et les microbes. Le parfum couvre l'odeur sans nettoyer.",
+              "answers": [
+                {
+                  "content": "Mettre plus de parfum",
+                  "correct": false
+                },
+                {
+                  "content": "Se laver une fois par mois",
+                  "correct": false
+                },
+                {
+                  "content": "Éviter de boire de l'eau",
+                  "correct": false
+                },
+                {
+                  "content": "Faire une toilette complète chaque jour à l'eau et au savon",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa est triste depuis trois semaines et n'en parle à personne. Que lui conseille l'infirmière ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Lire : une tristesse de trois semaines. 2) Identifier : ce n'est plus une simple humeur changeante. 3) Dire : il faut en parler. 4) Proposer : dialoguer avec un adulte de confiance. Se taire ou s'isoler aggrave le problème.",
+              "answers": [
+                {
+                  "content": "En parler à un adulte de confiance, par exemple à l'infirmier du centre de santé",
+                  "correct": true
+                },
+                {
+                  "content": "Attendre sans rien dire",
+                  "correct": false
+                },
+                {
+                  "content": "Se punir en ne mangeant plus",
+                  "correct": false
+                },
+                {
+                  "content": "Ne plus parler à ses amies",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour choisir un geste d'hygiène.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Repérer. 2) Identifier le risque. 3) Choisir le geste. 4) Justifier. On ne peut pas choisir un geste avant d'avoir identifié le risque.",
+              "answers": [
+                {
+                  "content": "Repérer le changement du corps."
+                },
+                {
+                  "content": "Identifier le risque qu'il crée."
+                },
+                {
+                  "content": "Choisir le geste qui répond au risque."
+                },
+                {
+                  "content": "Justifier le choix par son effet sur la santé."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Enquête sur la croissance des élèves de 4ème",
+          "statement": "Pour un exposé, la classe de 4ème relève la taille moyenne des élèves de son collège. Garçons : 143 cm à 11 ans, 149 cm à 12 ans, 156 cm à 13 ans, 164 cm à 14 ans. Filles : 145 cm à 11 ans, 152 cm à 12 ans, 157 cm à 13 ans, 159 cm à 14 ans. Ces valeurs sont inventées pour l'exercice. Tu réponds comme à un devoir de fin de trimestre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est l'augmentation de la taille moyenne des garçons entre 13 ans et 14 ans ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer : 156 cm à 13 ans, 164 cm à 14 ans. 2) Calculer l'augmentation : 164 − 156 = 8. 3) Conclure : la taille moyenne des garçons augmente de 8 cm entre 13 et 14 ans. Les augmentations successives des garçons sont 6, 7 et 8 cm.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'augmentation de la taille moyenne des filles entre 11 ans et 12 ans ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer : 145 cm à 11 ans, 152 cm à 12 ans. 2) Calculer : 152 − 145 = 7. 3) Conclure : la taille moyenne des filles augmente de 7 cm. Les augmentations successives des filles sont 7, 5 et 2 cm.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que montrent ces moyennes sur la poussée de croissance ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Calculer : garçons 6, 7 et 8 cm ; filles 7, 5 et 2 cm. 2) Comparer : l'augmentation maximale des filles est entre 11 et 12 ans, celle des garçons est entre 13 et 14 ans. 3) Conclure : la poussée des filles vient avant, comme on l'observe en moyenne.",
+              "answers": [
+                {
+                  "content": "La poussée des garçons vient avant celle des filles",
+                  "correct": false
+                },
+                {
+                  "content": "Chez ces élèves, la poussée des filles (11-12 ans) vient avant celle des garçons (13-14 ans)",
+                  "correct": true
+                },
+                {
+                  "content": "Les filles et les garçons ont leur poussée au même âge",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'y a aucune poussée de croissance",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont des caractères sexuels secondaires qui apparaissent à la puberté ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. On vérifie ce qui n'existe pas à la naissance et qui n'est pas un organe génital : barbe, seins et voix grave sont des caractères secondaires. Les testicules et les ovaires existent dès la naissance (caractères primaires). L'augmentation de la taille est la croissance, pas un caractère sexuel.",
+              "answers": [
+                {
+                  "content": "Les testicules du garçon",
+                  "correct": false
+                },
+                {
+                  "content": "L'augmentation de la taille",
+                  "correct": false
+                },
+                {
+                  "content": "La voix grave du garçon",
+                  "correct": true
+                },
+                {
+                  "content": "La barbe du garçon",
+                  "correct": true
+                },
+                {
+                  "content": "Le développement des seins de la fille",
+                  "correct": true
+                },
+                {
+                  "content": "Les ovaires de la fille",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Serge, 14 ans, répond sèchement à son père, puis s'excuse une heure plus tard. Quelle est la bonne analyse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Lire le comportement : réponse sèche puis excuses. 2) Identifier : humeur changeante. 3) Dire : normal à cet âge. 4) Proposer : s'excuser et dialoguer. Croire que l'adolescence excuse tout, ou qu'une humeur est un défaut définitif, est une erreur.",
+              "answers": [
+                {
+                  "content": "C'est la preuve d'une maladie grave",
+                  "correct": false
+                },
+                {
+                  "content": "C'est une humeur changeante normale à cet âge, et s'excuser est l'attitude responsable",
+                  "correct": true
+                },
+                {
+                  "content": "C'est normal, l'adolescent n'a jamais à s'excuser",
+                  "correct": false
+                },
+                {
+                  "content": "C'est le signe d'un mauvais caractère définitif",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève qui transpire davantage à la puberté doit faire une toilette complète ___.",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Repérer : la transpiration augmente. 2) Identifier le risque : odeur et microbes. 3) Choisir : la toilette à l'eau et au savon chaque jour. 4) Justifier : elle élimine la sueur et les microbes.",
+              "answers": [
+                {
+                  "content": "une fois par mois",
+                  "correct": false
+                },
+                {
+                  "content": "seulement le dimanche",
+                  "correct": false
+                },
+                {
+                  "content": "chaque jour",
+                  "correct": true
+                },
+                {
+                  "content": "jamais",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "La croissance en taille et en masse, les caractères sexuels primaires et secondaires, les changements psychologiques de l'adolescence, l'hygiène à la puberté : vocabulaire et savoirs essentiels.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "La mère de Kofi lit son carnet de santé. Taille : 143 cm à 11 ans, 150 cm à 12 ans, 158 cm à 13 ans, 165 cm à 14 ans, 170 cm à 15 ans.",
+              "exercise_type": "evaluation",
+              "figure": "taille-d-un-garcon",
+              "hint": "Calcule les augmentations de taille d'un âge à l'âge suivant, puis compare-les.",
+              "questions": [
+                {
+                  "content": "Que désigne le mot « croissance » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — La croissance est l'augmentation de la taille et de la masse. Étape 2 — On la mesure avec une toise et une balance. Les règles et l'humeur sont d'autres transformations de la puberté, pas la croissance.",
+                  "answers": [
+                    {
+                      "content": "La baisse de la masse du corps",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'apparition des règles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le changement d'humeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'augmentation de la taille et de la masse du corps",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi mesure 165 cm à 14 ans et 170 cm à 15 ans. De combien de centimètres a-t-il grandi ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 165 cm puis 170 cm. Étape 2 — Calculer : 170 − 165 = 5. Étape 3 — Conclure : il a grandi de 5 cm.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre quels âges Kofi a-t-il grandi le plus vite (tailles de 11 à 15 ans : 143, 150, 158, 165 et 170 cm) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer les augmentations : 7, 8, 7 et 5 cm. Étape 2 — Comparer : 8 cm est la plus grande. Étape 3 — Conclure : c'est entre 12 et 13 ans, la poussée de croissance. Entre 11 et 12 ans, l'augmentation n'est que de 7 cm.",
+                  "answers": [
+                    {
+                      "content": "Entre 12 ans et 13 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 11 ans et 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 13 ans et 14 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 14 ans et 15 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'augmentation de la taille diminue, la taille diminue aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Une augmentation plus petite reste une augmentation. Étape 2 — Entre 14 et 15 ans, Kofi gagne 5 cm, moins qu'entre 12 et 13 ans (8 cm), mais sa taille monte encore. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La période où la croissance s'accélère à la puberté s'appelle la ___ de croissance.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Pendant la puberté, la croissance s'accélère. Étape 2 — On nomme cette période la poussée de croissance. Le mot à écrire est « poussée ».",
+                  "answers": [
+                    {
+                      "content": "poussée",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au cours de SVT, le professeur demande de classer des changements du corps à la puberté.",
+              "exercise_type": "evaluation",
+              "figure": "caracteres-sexuels",
+              "hint": "Pour chaque caractère, demande-toi s'il existe déjà à la naissance.",
+              "questions": [
+                {
+                  "content": "Que sont les caractères sexuels primaires ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Les caractères primaires sont les organes génitaux. Étape 2 — Ils existent dès la naissance. Les changements apparus à la puberté sont les caractères secondaires.",
+                  "answers": [
+                    {
+                      "content": "Les changements qui apparaissent à la puberté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les organes génitaux, présents dès la naissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "La taille et la masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les changements d'humeur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels changements sont des caractères sexuels secondaires ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Vérifier si le caractère existe à la naissance. Étape 2 — Barbe, seins et voix grave apparaissent à la puberté : secondaires. Ovaires, testicules et vagin sont des organes génitaux présents dès la naissance : primaires.",
+                  "answers": [
+                    {
+                      "content": "Les ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les seins de la fille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "La barbe du garçon",
+                      "correct": true
+                    },
+                    {
+                      "content": "La voix grave du garçon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vagin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les poils des aisselles apparaissent seulement chez le garçon.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer qui est concerné. Étape 2 — Les poils du pubis et des aisselles apparaissent chez le garçon et chez la fille. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque changement à la personne qu'il concerne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — La mue de la voix concerne le garçon. Étape 2 — Les premières règles concernent la fille. Étape 3 — Les poils des aisselles apparaissent chez les deux.",
+                  "answers": [
+                    {
+                      "content": "La mue de la voix",
+                      "match": "Le garçon"
+                    },
+                    {
+                      "content": "Les premières règles",
+                      "match": "La fille"
+                    },
+                    {
+                      "content": "Les poils des aisselles",
+                      "match": "Le garçon et la fille"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'utérus est un caractère sexuel ___ de la fille.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — L'utérus existe dès la naissance. Étape 2 — C'est un organe génital, donc un caractère primaire. Le fait qu'il soit caché ne change rien.",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "masculin",
+                      "correct": false
+                    },
+                    {
+                      "content": "adulte",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Yao, élève de 4ème, remarque que son comportement change. Sa mère lui explique ce qui se passe à l'adolescence.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Sépare les changements du corps et les changements de la pensée ou du comportement.",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que l'adolescence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — L'adolescence est la période entre l'enfance et l'âge adulte. Étape 2 — Elle comprend des changements du corps et du comportement. Ce n'est pas une maladie.",
+                  "answers": [
+                    {
+                      "content": "L'âge où l'on naît",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une maladie de la peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La période entre l'enfance et l'âge adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'âge de la vieillesse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels changements psychologiques peut-on observer à l'adolescence ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Séparer le corps et le comportement. Étape 2 — L'autonomie et l'humeur changeante sont des changements psychologiques ; la voix, les seins et la taille sont des changements du corps.",
+                  "answers": [
+                    {
+                      "content": "Une voix plus grave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une humeur plus changeante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des seins qui se développent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une taille qui augmente plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un besoin de plus d'autonomie",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les changements d'humeur à l'adolescence sont normaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Les émotions sont plus fortes à cet âge. Étape 2 — Une humeur changeante est normale, à condition de rester respectueux. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour régler un désaccord avec ses parents, l'adolescent responsable choisit le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Le dialogue permet de s'expliquer et d'être compris. Étape 2 — Le silence, le cri et le mensonge ne règlent pas le désaccord.",
+                  "answers": [
+                    {
+                      "content": "silence",
+                      "correct": false
+                    },
+                    {
+                      "content": "dialogue",
+                      "correct": true
+                    },
+                    {
+                      "content": "cri",
+                      "correct": false
+                    },
+                    {
+                      "content": "mensonge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adolescent qui veut décider davantage par lui-même montre un besoin d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vouloir décider plus souvent seul traduit le besoin d'autonomie. Étape 2 — Le mot à écrire est « autonomie ».",
+                  "answers": [
+                    {
+                      "content": "autonomie",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À la maison, la famille de Kofi discute de la toilette et des soins à la puberté.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche le risque pour la santé, puis le geste qui le supprime.",
+              "questions": [
+                {
+                  "content": "Pourquoi faut-il faire une toilette complète chaque jour à la puberté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — La transpiration augmente à la puberté. Étape 2 — La sueur favorise les microbes et l'odeur. Étape 3 — On se lave chaque jour à l'eau et au savon.",
+                  "answers": [
+                    {
+                      "content": "Parce que le corps ne transpire plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la peau devient imperméable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le corps transpire davantage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que les microbes disparaissent la nuit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels gestes sont recommandés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir les gestes qui nettoient la peau. Étape 2 — La toilette quotidienne et les sous-vêtements propres protègent la peau. Percer les boutons, se parfumer sans se laver ou se laver une fois par mois est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Changer de sous-vêtements chaque jour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Percer les boutons du visage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer le savon par du parfum",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se laver une fois par mois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se laver à l'eau et au savon chaque jour",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une protection hygiénique peut rester plusieurs jours sans être changée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Une protection gardée longtemps favorise les microbes. Étape 2 — Il faut la changer régulièrement pour éviter l'infection. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la toilette.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Se laver. Étape 2 — Se rincer. Étape 3 — Se sécher. Étape 4 — S'habiller avec des vêtements propres, après le séchage.",
+                  "answers": [
+                    {
+                      "content": "Se laver à l'eau et au savon"
+                    },
+                    {
+                      "content": "Se rincer à l'eau propre"
+                    },
+                    {
+                      "content": "Se sécher avec une serviette propre"
+                    },
+                    {
+                      "content": "Mettre des vêtements propres"
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant les repas, on se lave les ___ avec de l'eau propre et du savon.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Les mains portent des microbes. Étape 2 — Les laver avant le repas évite de les avaler. Le mot à écrire est « mains ».",
+                  "answers": [
+                    {
+                      "content": "mains",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Lire la croissance dans un carnet de santé, reconnaître les signes de la puberté, réagir aux changements de comportement, adopter les bons gestes d'hygiène, dans des situations de la famille et du collège.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Yao, élève de 4ème, mesure sa taille et sa masse avec sa grande sœur chaque année. Taille : 135 cm à 10 ans, 140 cm à 11 ans, 147 cm à 12 ans, 155 cm à 13 ans, 160 cm à 14 ans. Masse : 27 kg à 10 ans, 30 kg à 11 ans, 34 kg à 12 ans, 40 kg à 13 ans, 44 kg à 14 ans. Ces valeurs sont inventées pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule les augmentations de taille puis de masse, année après année.",
+              "questions": [
+                {
+                  "content": "Quelle est l'augmentation de la taille de Yao entre 12 ans et 13 ans ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 147 cm puis 155 cm. Étape 2 — Calculer : 155 − 147 = 8. Étape 3 — Conclure : 8 cm.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre quels âges la taille de Yao augmente-t-elle le plus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer les augmentations : 5, 7, 8 et 5 cm. Étape 2 — Comparer : 8 cm est la plus grande. Étape 3 — Conclure : la poussée a lieu entre 12 et 13 ans.",
+                  "answers": [
+                    {
+                      "content": "Entre 10 ans et 11 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 12 ans et 13 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 11 ans et 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 13 ans et 14 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'augmentation de la masse de Yao entre 12 ans et 13 ans ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 34 kg puis 40 kg. Étape 2 — Calculer : 40 − 34 = 6. Étape 3 — Conclure : sa masse augmente de 6 kg.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre 13 ans et 14 ans, la taille de Yao a diminué.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : 160 − 155 = 5, un nombre positif. Étape 2 — La taille augmente encore de 5 cm, mais moins vite qu'avant. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer la taille de Yao, on utilise une ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — La taille se mesure avec une toise, la masse avec une balance. Étape 2 — La réponse est « toise ».",
+                  "answers": [
+                    {
+                      "content": "balance",
+                      "correct": false
+                    },
+                    {
+                      "content": "montre",
+                      "correct": false
+                    },
+                    {
+                      "content": "toise",
+                      "correct": true
+                    },
+                    {
+                      "content": "règle de la classe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la cour du collège, Mariam et Serge, élèves de 4ème, comparent ce qui change dans leur corps.",
+              "exercise_type": "evaluation",
+              "figure": "caracteres-sexuels",
+              "hint": "Chaque changement concerne le garçon, la fille ou les deux.",
+              "questions": [
+                {
+                  "content": "Quel changement apparaît à la puberté chez la fille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un changement de la fille. Étape 2 — Le développement des seins est un caractère secondaire de la fille. La barbe et la voix grave concernent le garçon ; les testicules existent dès la naissance.",
+                  "answers": [
+                    {
+                      "content": "La barbe pousse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les testicules se forment",
+                      "correct": false
+                    },
+                    {
+                      "content": "La voix devient très grave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les seins se développent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels changements concernent le garçon à la puberté ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer les changements du garçon. Étape 2 — La mue et la barbe sont des caractères secondaires du garçon. Règles, seins et hanches larges concernent la fille.",
+                  "answers": [
+                    {
+                      "content": "L'apparition de la barbe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La mue de la voix",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les premières règles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le développement des seins",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'élargissement des hanches",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les premières éjaculations montrent que les organes génitaux du garçon fonctionnent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Les premières éjaculations sont, pour le garçon, ce que les premières règles sont pour la fille. Étape 2 — Elles montrent que les organes génitaux fonctionnent. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque caractère à sa catégorie.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Les ovaires sont des organes génitaux présents dès la naissance. Étape 2 — La barbe apparaît à la puberté. Étape 3 — Les premières règles montrent que les organes génitaux fonctionnent.",
+                  "answers": [
+                    {
+                      "content": "Les ovaires",
+                      "match": "Présent dès la naissance"
+                    },
+                    {
+                      "content": "La barbe",
+                      "match": "Apparaît à la puberté"
+                    },
+                    {
+                      "content": "Les premières règles",
+                      "match": "Signe que les organes génitaux fonctionnent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le changement de la voix du garçon à la puberté s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — À la puberté, la voix du garçon devient grave. Étape 2 — Ce changement s'appelle la mue.",
+                  "answers": [
+                    {
+                      "content": "mue",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À la maison, Fatou, 13 ans, veut choisir seule ses amies et ses vêtements. Sa mère s'inquiète parfois, mais elles se parlent.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche l'attitude qui respecte à la fois l'autonomie de l'adolescent et sa sécurité.",
+              "questions": [
+                {
+                  "content": "Que traduit le comportement de Fatou ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : Fatou veut choisir seule. Étape 2 — Identifier : besoin d'autonomie et importance des amis. Étape 3 — C'est normal à son âge.",
+                  "answers": [
+                    {
+                      "content": "Une maladie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un manque d'éducation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un besoin d'autonomie et l'importance des amis",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un retour à l'enfance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sa mère veut savoir chez qui Fatou va le samedi. Que penser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : besoin d'autonomie. Étape 2 — Dire : l'autonomie a des limites, dont la sécurité. Étape 3 — Proposer : dire où elle va et à quelle heure elle rentre.",
+                  "answers": [
+                    {
+                      "content": "C'est interdit : Fatou n'a de comptes à rendre à personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est inutile : Fatou est adulte",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une punition",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est normal : la sécurité impose que les parents sachent où elle est",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adolescent triste depuis plusieurs semaines doit en parler à un adulte de confiance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Une tristesse qui dure n'est plus une simple humeur passagère. Étape 2 — Il faut en parler à un parent, à un enseignant ou à l'infirmier du centre de santé. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles attitudes sont responsables ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Choisir les attitudes qui gardent la confiance. Étape 2 — Dire où l'on va, respecter l'heure et expliquer calmement sont responsables. Mentir, crier et se taire abîment la confiance.",
+                  "answers": [
+                    {
+                      "content": "Dire où l'on va",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mentir sur l'endroit où l'on va",
+                      "correct": false
+                    },
+                    {
+                      "content": "Crier quand on n'est pas d'accord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne plus parler à ses parents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Expliquer calmement son point de vue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Respecter l'heure de retour convenue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour être compris par ses parents, l'adolescent doit leur ___ calmement.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Le dialogue repose sur la parole calme. Étape 2 — Crier, mentir ou tourner le dos ferment la discussion.",
+                  "answers": [
+                    {
+                      "content": "crier",
+                      "correct": false
+                    },
+                    {
+                      "content": "mentir",
+                      "correct": false
+                    },
+                    {
+                      "content": "tourner le dos",
+                      "correct": false
+                    },
+                    {
+                      "content": "parler",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À la cantine du collège, l'infirmière rappelle aux élèves de 4ème les gestes qui protègent la santé pendant la puberté.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque situation, trouve le risque pour la santé, puis le geste qui le supprime.",
+              "questions": [
+                {
+                  "content": "Quel geste est recommandé avant de manger ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Les mains portent des microbes. Étape 2 — Le savon et l'eau propre les enlèvent. Étape 3 — Le parfum ou l'essuyage sur les vêtements ne nettoient pas.",
+                  "answers": [
+                    {
+                      "content": "Se laver les mains à l'eau propre et au savon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Se parfumer les mains",
+                      "correct": false
+                    },
+                    {
+                      "content": "Essuyer les mains sur ses vêtements",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les secouer simplement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou a des boutons sur le visage. Que doit-elle faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : des boutons. Étape 2 — Identifier : percer ou frotter fort risque une infection. Étape 3 — Choisir : un lavage doux.",
+                  "answers": [
+                    {
+                      "content": "Percer les boutons avec une aiguille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Laver doucement son visage et ne pas percer les boutons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Frotter très fort avec du sable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cacher les boutons sous du parfum",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels comportements aident le corps à bien grandir ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Le corps en croissance a besoin d'énergie et de repos. Étape 2 — Une alimentation variée et un sommeil suffisant y répondent. Sauter des repas, boire de l'alcool ou veiller toute la nuit fatiguent le corps.",
+                  "answers": [
+                    {
+                      "content": "Dormir suffisamment",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sauter des repas pour maigrir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Boire de l'alcool",
+                      "correct": false
+                    },
+                    {
+                      "content": "Manger des aliments variés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Veiller toute la nuit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un parfum remplace la toilette quotidienne.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Le parfum couvre l'odeur. Étape 2 — La sueur et les microbes restent sur la peau. Étape 3 — Seuls l'eau et le savon les enlèvent. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au geste qui y répond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer le besoin. Étape 2 — Pendant les règles, on change régulièrement de protection ; la sueur appelle la toilette quotidienne ; les boutons appellent un lavage doux sans percer.",
+                  "answers": [
+                    {
+                      "content": "Mariam a ses règles",
+                      "match": "Changer régulièrement de protection hygiénique"
+                    },
+                    {
+                      "content": "Serge transpire beaucoup",
+                      "match": "Faire une toilette complète chaque jour"
+                    },
+                    {
+                      "content": "Kofi a des boutons sur le visage",
+                      "match": "Laver doucement sans percer"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Comparer deux courbes de croissance, juger des affirmations en justifiant, classer des caractères sexuels, choisir une attitude responsable et le geste d'hygiène adapté.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Awa et Serge, élèves de 4ème, comparent leurs tailles. Awa : 136 cm à 10 ans, 145 cm à 11 ans, 151 cm à 12 ans, 155 cm à 13 ans, 157 cm à 14 ans. Serge : 138 cm à 10 ans, 144 cm à 11 ans, 151 cm à 12 ans, 160 cm à 13 ans, 167 cm à 14 ans. Ces valeurs sont inventées pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule les augmentations de chaque élève, puis compare-les.",
+              "questions": [
+                {
+                  "content": "Quelle est l'augmentation de la taille d'Awa entre 10 ans et 11 ans ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 136 cm puis 145 cm. Étape 2 — Calculer : 145 − 136 = 9. Étape 3 — Conclure : Awa a grandi de 9 cm.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre quels âges Awa a-t-elle sa poussée de croissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer les augmentations d'Awa : 9, 6, 4 et 2 cm. Étape 2 — Comparer : 9 cm est la plus grande. Étape 3 — Conclure : entre 10 et 11 ans. Elle diminue ensuite.",
+                  "answers": [
+                    {
+                      "content": "Entre 10 ans et 11 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 11 ans et 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 12 ans et 13 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 13 ans et 14 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre quels âges Serge a-t-il sa poussée de croissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer les augmentations de Serge : 6, 7, 9 et 7 cm. Étape 2 — Comparer : 9 cm est la plus grande. Étape 3 — Conclure : entre 12 et 13 ans. Entre 13 et 14 ans, l'augmentation (7 cm) est déjà plus petite.",
+                  "answers": [
+                    {
+                      "content": "Entre 10 ans et 11 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 12 ans et 13 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Entre 11 ans et 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Entre 13 ans et 14 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À 14 ans, Serge mesure 10 cm de plus qu'Awa.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : 167 cm pour Serge, 157 cm pour Awa. Étape 2 — Calculer : 167 − 157 = 10. Étape 3 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi Awa et Serge n'ont-ils pas leur poussée au même âge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Comparer les deux poussées : Awa à 10-11 ans, Serge à 12-13 ans. Étape 2 — Conclure : en moyenne, la poussée vient plus tôt chez la fille, et l'âge varie. Serge a bien une poussée, et les deux ont le même âge à chaque anniversaire.",
+                  "answers": [
+                    {
+                      "content": "Parce que Serge a mal mangé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la poussée n'existe que chez la fille",
+                      "correct": false
+                    },
+                    {
+                      "content": "En moyenne, la poussée commence plus tôt chez la fille, et l'âge varie d'une personne à l'autre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'Awa est plus âgée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le professeur de SVT propose des affirmations. Pour chacune, tu dois décider si elle est vraie ou fausse et dire pourquoi.",
+              "exercise_type": "evaluation",
+              "figure": "caracteres-sexuels",
+              "hint": "Pour chaque caractère, demande-toi s'il existe déjà à la naissance.",
+              "questions": [
+                {
+                  "content": "Les seins sont un caractère sexuel primaire de la fille.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : les seins ne sont pas développés à la naissance. Étape 2 — Classer : ils apparaissent à la puberté, ce sont des caractères secondaires. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce qui est caché dans le corps est forcément un caractère secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Le classement dépend de l'existence à la naissance, pas de ce que l'on voit. Étape 2 — L'utérus est caché mais présent dès la naissance : primaire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pénis est visible dès la naissance. Dans quelle catégorie le classe-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le pénis, chez le garçon. Étape 2 — Vérifier : il existe dès la naissance. Étape 3 — Classer : c'est un organe génital, donc primaire.",
+                  "answers": [
+                    {
+                      "content": "Caractère sexuel secondaire du garçon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Caractère sexuel primaire de la fille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Caractère sexuel secondaire de la fille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Caractère sexuel primaire du garçon",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces caractères, lesquels existent déjà à la naissance ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier chaque caractère. Étape 2 — Les testicules et l'utérus sont des organes génitaux présents dès la naissance. La barbe, les seins et la voix grave apparaissent à la puberté.",
+                  "answers": [
+                    {
+                      "content": "Les testicules",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "La barbe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les seins",
+                      "correct": false
+                    },
+                    {
+                      "content": "La voix grave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque caractère à ce qui le justifie.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Les ovaires sont des organes génitaux présents dès la naissance. Étape 2 — La voix grave apparaît à la puberté chez le garçon. Étape 3 — Les poils du pubis apparaissent chez le garçon et la fille.",
+                  "answers": [
+                    {
+                      "content": "Les ovaires",
+                      "match": "Organe génital présent dès la naissance"
+                    },
+                    {
+                      "content": "La voix grave",
+                      "match": "Apparaît à la puberté chez le garçon"
+                    },
+                    {
+                      "content": "Les poils du pubis",
+                      "match": "Apparaissent à la puberté chez les deux"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Quatre élèves de 4ème racontent ce qui leur arrive. Pour chaque situation, tu choisis l'analyse et l'attitude les plus justes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "L'adolescence explique certains comportements mais ne permet pas tout.",
+              "questions": [
+                {
+                  "content": "Kofi, 14 ans, veut décider seul de ses sorties et se fâche quand son père pose des questions. Quelle analyse est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : Kofi veut décider seul et se fâche. Étape 2 — Identifier : besoin d'autonomie. Étape 3 — Dire : normal, mais la sécurité impose que son père sache où il va. Étape 4 — Proposer : expliquer calmement.",
+                  "answers": [
+                    {
+                      "content": "Il a raison : son père ne doit rien demander",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son père a raison de lui interdire toute sortie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a un besoin d'autonomie, mais son père a raison de demander où il va",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est malade",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa pleure sans raison apparente puis rit un peu après. Que penser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : émotions plus fortes et humeur changeante. Étape 3 — Dire : normal à l'adolescence. Ce n'est pas une maladie tant que cela reste passager.",
+                  "answers": [
+                    {
+                      "content": "C'est une maladie grave",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un mauvais caractère définitif",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un signe de mensonge",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une humeur changeante normale à son âge",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam est triste depuis trois semaines et ne veut plus voir ses amies. Quelle attitude est la plus responsable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Dire : une tristesse de trois semaines n'est plus une simple humeur. Étape 4 — Proposer : en parler à un adulte de confiance. Se taire ou cacher sa tristesse ne règle rien.",
+                  "answers": [
+                    {
+                      "content": "En parler à un adulte de confiance, comme l'infirmier du centre de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Attendre que cela passe sans rien dire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cacher sa tristesse à tout le monde",
+                      "correct": false
+                    },
+                    {
+                      "content": "Reprocher à ses amies de l'avoir oubliée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adolescent peut faire tout ce qu'il veut parce qu'il est en pleine adolescence.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Dire : l'adolescence explique certains changements, elle n'excuse pas tout. Étape 4 — L'adolescent respecte les règles de sa famille et du collège, et la sécurité de chacun. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles attitudes sont responsables face à un désaccord avec ses parents ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Proposer : expliquer, écouter et demander conseil sont des attitudes de dialogue. Crier, mentir ou claquer la porte tous les jours ne règlent pas le désaccord.",
+                  "answers": [
+                    {
+                      "content": "Crier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Écouter leurs raisons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Expliquer calmement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Demander conseil à un adulte de confiance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mentir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Claquer la porte tous les jours",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le centre de santé du collège reçoit trois élèves. L'infirmière doit choisir pour chacun le conseil d'hygiène le plus juste.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un bon conseil supprime le risque identifié : cherche le risque avant le geste.",
+              "questions": [
+                {
+                  "content": "Serge transpire beaucoup et utilise du parfum plusieurs fois par jour, sans se laver. Quel conseil est le plus juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : transpiration et parfum sans toilette. Étape 2 — Identifier : la sueur et les microbes restent sur la peau. Étape 3 — Choisir : la toilette quotidienne. Étape 4 — Justifier : l'eau et le savon les enlèvent, le parfum non.",
+                  "answers": [
+                    {
+                      "content": "Faire une toilette à l'eau et au savon chaque jour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre encore plus de parfum",
+                      "correct": false
+                    },
+                    {
+                      "content": "Éviter de boire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Changer de parfum",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou perce ses boutons avec une épingle. Quel est le risque ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : percer un bouton ouvre la peau aux microbes. Étape 3 — Choisir : laver doucement à l'eau et au savon sans percer. Étape 4 — Justifier : on évite l'infection.",
+                  "answers": [
+                    {
+                      "content": "Une meilleure peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infection de la peau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une disparition des boutons pour toujours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun risque",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une protection hygiénique peut être changée seulement une fois par jour, quoi qu'il arrive.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier : une protection gardée trop longtemps favorise les microbes. Étape 3 — Choisir : la changer régulièrement. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour bien grandir, l'adolescent doit manger des aliments ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Le corps en croissance a besoin de plusieurs sortes d'aliments. Étape 2 — Manger toujours la même chose ne couvre pas ces besoins. La réponse est « variés ».",
+                  "answers": [
+                    {
+                      "content": "identiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "sucrés seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "variés",
+                      "correct": true
+                    },
+                    {
+                      "content": "gras seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour choisir un geste d'hygiène.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Identifier le risque. Étape 3 — Choisir. Étape 4 — Justifier. On choisit après avoir identifié le risque.",
+                  "answers": [
+                    {
+                      "content": "Repérer le changement du corps."
+                    },
+                    {
+                      "content": "Identifier le risque."
+                    },
+                    {
+                      "content": "Choisir le geste adapté."
+                    },
+                    {
+                      "content": "Justifier le choix par son effet sur la santé."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan des quatre notions : croissance en taille et en masse, caractères sexuels primaires et secondaires, changements psychologiques de l'adolescence, hygiène et comportements responsables à la puberté.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Mariam, élève de 4ème, relève sa taille et sa masse chaque année avec sa mère. Taille : 140 cm à 10 ans, 147 cm à 11 ans, 154 cm à 12 ans, 158 cm à 13 ans, 160 cm à 14 ans. Masse : 32 kg à 10 ans, 37 kg à 11 ans, 44 kg à 12 ans, 48 kg à 13 ans. Ces valeurs sont inventées pour l'exercice.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule les augmentations de taille et de masse, année après année.",
+              "questions": [
+                {
+                  "content": "Quelle est l'augmentation de la taille de Mariam entre 10 ans et 11 ans ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 140 cm puis 147 cm. Étape 2 — Calculer : 147 − 140 = 7. Étape 3 — Conclure : 7 cm.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'augmentation de la masse de Mariam entre 11 ans et 12 ans ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 37 kg puis 44 kg. Étape 2 — Calculer : 44 − 37 = 7. Étape 3 — Conclure : 7 kg.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après l'âge de 12 ans, que fait la croissance en taille de Mariam (154, 158 puis 160 cm de 12 à 14 ans) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 154, 158 et 160 cm. Étape 2 — Calculer : 158 − 154 = 4 et 160 − 158 = 2. Étape 3 — Comparer : 2 est plus petit que 4. Étape 4 — Conclure : la croissance ralentit, mais la taille augmente encore.",
+                  "answers": [
+                    {
+                      "content": "Elle s'accélère : 4 cm puis 8 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle s'arrête déjà : 0 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille diminue de 2 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ralentit : 4 cm puis 2 cm",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre 12 ans et 13 ans, la masse de Mariam augmente moins vite qu'entre 11 ans et 12 ans.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer les augmentations de masse : 44 − 37 = 7 kg, puis 48 − 44 = 4 kg. Étape 2 — Comparer : 4 est plus petit que 7. Étape 3 — Conclure : la masse augmente encore, mais moins vite. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam mesure 147 cm à 11 ans et 154 cm à 12 ans : sa taille a augmenté de ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : 147 cm puis 154 cm. Étape 2 — Calculer : 154 − 147 = 7. Étape 3 — Conclure : 7 cm.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans le cours de SVT, le professeur résume ce que la classe a appris sur les changements de la puberté.",
+              "exercise_type": "evaluation",
+              "figure": "caracteres-sexuels",
+              "hint": "Un caractère primaire existe à la naissance ; un caractère secondaire apparaît à la puberté.",
+              "questions": [
+                {
+                  "content": "Quels sont des caractères sexuels secondaires ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Vérifier chaque caractère. Étape 2 — Seins, voix grave et poils du pubis apparaissent à la puberté : secondaires. Ovaires, testicules et vagin existent dès la naissance : primaires.",
+                  "answers": [
+                    {
+                      "content": "Les seins de la fille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "La voix grave du garçon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les poils du pubis",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vagin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les premières règles montrent que les organes ___ de la fille fonctionnent.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Les règles sont liées aux organes génitaux. Étape 2 — Leur apparition montre que ces organes fonctionnent.",
+                  "answers": [
+                    {
+                      "content": "digestifs",
+                      "correct": false
+                    },
+                    {
+                      "content": "respiratoires",
+                      "correct": false
+                    },
+                    {
+                      "content": "sensoriels",
+                      "correct": false
+                    },
+                    {
+                      "content": "génitaux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'utérus est un caractère sexuel secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : l'utérus existe à la naissance. Étape 2 — Classer : c'est un organe génital, donc un caractère primaire. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque changement à la personne qu'il concerne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer qui est concerné. Étape 2 — La barbe concerne le garçon, les hanches plus larges concernent la fille, les poils des aisselles les deux.",
+                  "answers": [
+                    {
+                      "content": "La barbe",
+                      "match": "Le garçon"
+                    },
+                    {
+                      "content": "Les hanches plus larges",
+                      "match": "La fille"
+                    },
+                    {
+                      "content": "Les poils des aisselles",
+                      "match": "Le garçon et la fille"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour classer un caractère sexuel.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Vérifier l'existence à la naissance. Étape 3 — Classer. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Repérer le changement et la personne concernée."
+                    },
+                    {
+                      "content": "Vérifier s'il existe déjà à la naissance."
+                    },
+                    {
+                      "content": "Classer en caractère primaire ou secondaire."
+                    },
+                    {
+                      "content": "Conclure en nommant la catégorie."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Yao, 14 ans, rentre tard du collège deux jours de suite sans prévenir. Sa mère s'inquiète et se fâche. Yao s'énerve, puis il s'enferme dans sa chambre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "L'adolescent a un besoin d'autonomie, mais il doit respecter les règles et sa sécurité.",
+              "questions": [
+                {
+                  "content": "Que traduit le désir de Yao de rester avec ses amis après les cours ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : Yao reste avec ses amis. Étape 2 — Identifier : besoin d'autonomie et importance des amis. Étape 3 — C'est normal à son âge.",
+                  "answers": [
+                    {
+                      "content": "Un besoin d'autonomie et l'importance des amis",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une maladie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un désir de désobéir à tout prix",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un retour à l'enfance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi sa mère a-t-elle raison de s'inquiéter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Dire : l'autonomie a des limites, dont la sécurité. Étape 4 — Yao doit prévenir sa mère. Avoir des amis n'est pas interdit.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'un adolescent n'a pas le droit d'avoir des amis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la sécurité impose qu'elle sache où il est",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que Yao est malade",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que rester avec des amis est interdit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles attitudes de Yao seraient responsables ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Proposer : prévenir et expliquer calmement sont des attitudes de dialogue. S'enfermer, mentir ou claquer la porte ne règlent rien.",
+                  "answers": [
+                    {
+                      "content": "S'enfermer sans rien dire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mentir sur l'endroit où il était",
+                      "correct": false
+                    },
+                    {
+                      "content": "Prévenir sa mère de l'heure de retour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Claquer la porte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lui expliquer calmement pourquoi il est resté",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'humeur changeante de Yao prouve qu'il a un mauvais caractère définitif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Dire : l'humeur changeante est normale à l'adolescence et ne dure pas. Ce n'est pas un mauvais caractère définitif. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour régler le désaccord avec sa mère, Yao choisit le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Proposer : le dialogue calme permet de s'expliquer et de retrouver la confiance. Le mot à écrire est « dialogue ».",
+                  "answers": [
+                    {
+                      "content": "dialogue",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au centre de santé du collège, l'infirmière rappelle les gestes d'hygiène et les comportements responsables à une classe de 4ème.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche d'abord le risque, puis le geste qui le supprime.",
+              "questions": [
+                {
+                  "content": "Quels gestes d'hygiène sont recommandés à la puberté ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Choisir : la toilette quotidienne, le visage lavé doucement et le changement régulier de protection protègent la santé. Percer les boutons, utiliser du parfum à la place de la toilette ou se laver une fois par mois est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Changer régulièrement de protection hygiénique pendant les règles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire une toilette complète chaque jour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Laver doucement son visage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Percer les boutons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer la toilette par du parfum",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se laver une fois par mois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi ne faut-il pas percer les boutons du visage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : percer ouvre la peau aux microbes. Étape 4 — Justifier : on évite ainsi l'infection.",
+                  "answers": [
+                    {
+                      "content": "Cela fait grandir plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cela supprime les boutons pour toujours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cela ne change rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cela peut provoquer une infection",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un adolescent qui a une question sur son corps peut demander conseil à l'infirmier du centre de santé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Choisir : se renseigner auprès d'un adulte de confiance. Étape 4 — Justifier : une information fiable protège la santé. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le corps en croissance a besoin d'une alimentation ___ et de sommeil.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Le corps en croissance a besoin d'énergie et de repos. Étape 2 — Une alimentation variée la lui apporte. La réponse est « variée ».",
+                  "answers": [
+                    {
+                      "content": "variée",
+                      "correct": true
+                    },
+                    {
+                      "content": "unique",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans repas",
+                      "correct": false
+                    },
+                    {
+                      "content": "très grasse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour choisir un geste d'hygiène.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer. Étape 2 — Identifier le risque. Étape 3 — Choisir. Étape 4 — Justifier.",
+                  "answers": [
+                    {
+                      "content": "Repérer le changement du corps."
+                    },
+                    {
+                      "content": "Identifier le risque."
+                    },
+                    {
+                      "content": "Choisir le geste adapté."
+                    },
+                    {
+                      "content": "Justifier le choix par son effet sur la santé."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au geste qui y répond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque situation. Étape 3 — Choisir le geste : toilette pour la transpiration, changement régulier pour les règles, lavage doux pour les boutons.",
+                  "answers": [
+                    {
+                      "content": "Serge transpire beaucoup",
+                      "match": "Toilette à l'eau et au savon chaque jour"
+                    },
+                    {
+                      "content": "Mariam a ses règles",
+                      "match": "Changer régulièrement de protection"
+                    },
+                    {
+                      "content": "Awa a des boutons",
+                      "match": "Laver doucement sans percer"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

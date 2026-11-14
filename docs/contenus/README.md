@@ -8,7 +8,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 10 de 5ème (les 5 premières en Maths et en Physique-Chimie, chantier `lecons-5eme`), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 30 leçons de 4ème (les 5 premières de la progression dans les mêmes 6 matières), les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 10 de 5ème (les 5 premières en Maths et en Physique-Chimie, chantier `lecons-5eme`), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
 | [`a-reprendre/`](a-reprendre/) | Les 275 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
@@ -28,7 +28,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `3eme/`, `5eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `4eme/`, `3eme/`, `5eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
 
 ## Boucle courte : corriger une leçon
 
@@ -52,6 +52,33 @@ Un import ne met jamais à jour l'existant : une fiche de cours déjà présente
 Si la progression a déjà été importée, la fiche de cours de la leçon existe vide, et l'import de la fiche de cours complète sera ignoré. Une fiche de cours ne se supprime pas, et une fiche de cours archivée compte encore comme doublon. Il faut donc **renommer** la fiche de cours vide dans l'écran des fiches de cours (par exemple « Limites et continuité (vide) »), l'archiver, puis importer la fiche de cours complète.
 
 ## Leçons traitées
+
+### 2nde, leçons 4 et 5 de chaque série et matière, en v3 complet (chantier `lecons-2nde-4-5`)
+
+Depuis le 2026-11-14, les leçons 4 et 5 de la progression DPFC 2026-2027 de 2nde A, 2nde C (Français, Mathématiques, Physique-Chimie, SVT) et d'Histoire-Géographie de 2nde sont rédigées au format v3 complet, comme les 3 premières : 18 fichiers, 14 leçons distinctes (Français et Physique-Chimie sont communs à A et C, écrits une fois et recopiés avec le `series_name` de chaque série ; Généralités sur les fonctions est écrite à part en A et en C). Chaque notion a son « Je m'entraîne » et 2 exercices (le second de 6 questions d'au moins 4 types), chaque leçon 4 problèmes et 4 sujets de devoir de 4 exercices. Hors Mathématiques et Physique-Chimie, les seconds exercices et les sujets sont entièrement corrigés automatiquement.
+
+Vérification : `valider.rb` sur la leçon et sur chaque sujet mis à la place des problèmes, format, aucune formule en ligne de 40 caractères ou plus ; relecture IA indépendante de chaque leçon (sympy sur chaque calcul en Mathématiques et Physique-Chimie). Points à faire valider par un enseignant : [journal du chantier](../chantiers/lecons-2nde-4-5/journal.md#à-trancher).
+
+| Fichier | Titre | Rang | Notions | Exercices | Questions | Figures |
+|---|---|---:|---:|---:|---:|---:|
+| `2nde-a/francais/groupement-de-textes-poetiques.json` | Groupement de textes poétiques | 5 | 5 | 30 | 171 | 0 |
+| `2nde-a/francais/les-outils-de-l-argumentation.json` | Les outils de l'argumentation | 4 | 5 | 30 | 178 | 0 |
+| `2nde-a/mathematiques/equations-et-inequations-dans.json` | Équations et inéquations dans ℝ | 4 | 5 | 30 | 179 | 3 |
+| `2nde-a/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 5 | 30 | 179 | 6 |
+| `2nde-a/physique-chimie/actions-mecaniques-ou-forces.json` | Actions mécaniques ou forces | 4 | 5 | 30 | 192 | 3 |
+| `2nde-a/physique-chimie/classification-periodique-des-elements-chimiques.json` | Classification périodique des éléments chimiques | 5 | 4 | 28 | 169 | 3 |
+| `2nde-a/svt/la-production-de-la-matiere-organique.json` | La production de la matière organique | 4 | 3 | 26 | 144 | 4 |
+| `2nde-a/svt/le-changement-climatique.json` | Le changement climatique | 5 | 5 | 30 | 175 | 9 |
+| `2nde-c/francais/groupement-de-textes-poetiques.json` | Groupement de textes poétiques | 5 | 5 | 30 | 171 | 0 |
+| `2nde-c/francais/les-outils-de-l-argumentation.json` | Les outils de l'argumentation | 4 | 5 | 30 | 178 | 0 |
+| `2nde-c/mathematiques/droites-et-plans-de-l-espace.json` | Droites et plans de l'espace | 5 | 4 | 28 | 161 | 3 |
+| `2nde-c/mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 4 | 4 | 28 | 166 | 4 |
+| `2nde-c/physique-chimie/actions-mecaniques-ou-forces.json` | Actions mécaniques ou forces | 4 | 5 | 30 | 192 | 3 |
+| `2nde-c/physique-chimie/classification-periodique-des-elements-chimiques.json` | Classification périodique des éléments chimiques | 5 | 4 | 28 | 169 | 3 |
+| `2nde-c/svt/le-devenir-des-substances-absorbees-par-la-plante-verte.json` | Le devenir des substances absorbées par la plante verte | 4 | 4 | 28 | 160 | 6 |
+| `2nde-c/svt/les-relations-entre-les-etres-vivants-dans-un-ecosysteme.json` | Les relations entre les êtres vivants dans un écosystème | 5 | 4 | 28 | 160 | 8 |
+| `2nde/histoire-geographie/geographie-la-planete-terre.json` | Géographie — La planète terre | 4 | 4 | 28 | 156 | 3 |
+| `2nde/histoire-geographie/histoire-la-methodologie-de-la-dissertation-du-commentaire-de-document-et-de-la-situation-d-evaluation.json` | Histoire — La méthodologie de la dissertation, du commentaire de document et de la situation d'évaluation | 5 | 4 | 28 | 160 | 3 |
 
 ### 2nde, 3 premières leçons de chaque série et matière, réécrites en v3 complet (chantier `lecons-1ere-2nde-debut`)
 
@@ -89,6 +116,56 @@ Même vérification hors dépôt que pour la 1ère (format, `valider.rb` sur la 
 | `2nde/histoire-geographie/histoire-l-histoire-et-la-formation-du-citoyen.json` | Histoire — L'Histoire et la formation du citoyen | 3 | 26 | 136 |
 | `2nde/histoire-geographie/histoire-les-methodes-d-etude-de-l-histoire.json` | Histoire — Les méthodes d'étude de l'histoire | 3 | 26 | 137 |
 | **Total** | | | | **3769** |
+
+### 1ère, leçons 4 et 5 de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
+
+Depuis le 2026-11-13, les leçons 4 et 5 de la progression DPFC 2026-2027 de 1ère reviennent de `a-reprendre/` au format complet, avec la même méthode et la même vérification que les 3 premières (section suivante) : un second exercice en `fixation` par notion, 4 sujets de devoir, et un « Je m'entraîne » ajouté là où il manquait (Philosophie, Histoire-Géographie). Points à faire valider : [journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
+
+| Fichier | Titre | Notions | Exercices | Questions |
+|---|---|---:|---:|---:|
+| `1ere-a1/francais/la-focalisation.json` | La focalisation | 4 | 28 | 169 |
+| `1ere-a1/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-a1/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
+| `1ere-a1/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a1/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-a1/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-a1/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
+| `1ere-a1/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-a1/svt/la-regulation-des-naissances.json` | La régulation des naissances | 3 | 26 | 147 |
+| `1ere-a1/svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 165 |
+| `1ere-a2/francais/la-focalisation.json` | La focalisation | 4 | 28 | 169 |
+| `1ere-a2/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-a2/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
+| `1ere-a2/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a2/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-a2/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-a2/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
+| `1ere-a2/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-a2/svt/la-regulation-des-naissances.json` | La régulation des naissances | 3 | 26 | 147 |
+| `1ere-a2/svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 165 |
+| `1ere-c/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-c/francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 30 | 179 |
+| `1ere-c/mathematiques/barycentre.json` | Barycentre | 5 | 30 | 183 |
+| `1ere-c/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 170 |
+| `1ere-c/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-c/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-c/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
+| `1ere-c/physique-chimie/hydrocarbures-satures-les-alcanes.json` | Hydrocarbures saturés : les alcanes | 7 | 34 | 213 |
+| `1ere-c/svt/la-fecondation-chez-les-mammiferes.json` | La fécondation chez les mammifères | 3 | 26 | 151 |
+| `1ere-c/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 28 | 177 |
+| `1ere-d/francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 28 | 166 |
+| `1ere-d/francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 30 | 179 |
+| `1ere-d/mathematiques/denombrement.json` | Dénombrement | 4 | 28 | 167 |
+| `1ere-d/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 166 |
+| `1ere-d/philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 30 | 184 |
+| `1ere-d/philosophie/la-periode-antique.json` | La période antique | 5 | 30 | 184 |
+| `1ere-d/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
+| `1ere-d/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | Hydrocarbures insaturés : les alcènes et les alcynes | 5 | 30 | 186 |
+| `1ere-d/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 28 | 177 |
+| `1ere-d/svt/la-transmission-d-un-caractere-hereditaire-le-monohybridisme.json` | La transmission d'un caractère héréditaire : le monohybridisme | 4 | 28 | 168 |
+| `1ere/histoire-geographie/geographie-la-croissance-demographique-mondiale-et-ses-consequences.json` | Géographie — La croissance démographique mondiale et ses conséquences | 5 | 30 | 193 |
+| `1ere/histoire-geographie/histoire-le-mouvement-imperialiste-et-le-congres-de-berlin.json` | Histoire — Le mouvement impérialiste et le congrès de Berlin | 4 | 28 | 171 |
+| **Total** | | | | **7294** |
 
 ### 1ère, 3 premières leçons de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
 
@@ -418,6 +495,44 @@ Aucun enseignant ne les a encore relues. À faire valider par un enseignant :
 - **Histoire-Géographie** : le rôle du gouverneur de district et des préfets de région et de département, le Poro chez les Sénoufo, la reine Pokou et le passage du Comoé (présentés sans date).
 - **Français** : le périmètre du Débat I et le plan du texte explicatif, à confirmer au programme. La proposition relative est laissée de côté.
 - **EDHC** : la Constitution ivoirienne est citée sans numéro d'article ni date, et les textes de loi ivoiriens (numéros, dates) ne sont pas cités. Les dates des textes internationaux, et le seuil de 15 ans de l'article 38 de la Convention relative aux droits de l'enfant, sont cités de mémoire. Le mot « interdépendance » (5ème), et la règle des 18 ans pour la participation aux combats (5ème), sont à confirmer.
+
+### 4ème — `lecons-traitees/4eme/` (chantier `lecons-4eme`)
+
+Les 5 premières leçons de la progression DPFC 2026-2027 en Mathématiques, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC, rédigées le 2026-11-14 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), au format complet de la 3ème : 4 blocs, un `practice` et 2 exercices par notion, 4 problèmes, 4 sujets de devoir de 4 exercices de 5 ou 6 questions. Chaque leçon et chacun de ses sujets passent `valider.rb` sans avertissement. Chacune a été relue par un second rédacteur, qui a refait chaque calcul avec sympy en Mathématiques et en Physique-Chimie et corrigé les défauts certains. Les points à faire valider par un enseignant sont dans [le journal du chantier](../chantiers/lecons-4eme/journal.md#à-trancher). Le jeu standard charge la leçon 1 de chaque matière.
+
+| # | Fichier | Titre | Notions | Exercices | Questions |
+|---:|---|---|---:|---:|---:|
+| 1 | `mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 28 | 152 |
+| 2 | `mathematiques/angles.json` | Angles | 4 | 28 | 145 |
+| 3 | `mathematiques/nombres-rationnels.json` | Nombres rationnels | 5 | 30 | 166 |
+| 4 | `mathematiques/distances.json` | Distances | 4 | 28 | 146 |
+| 5 | `mathematiques/perspective-cavaliere.json` | Perspective cavalière | 4 | 28 | 153 |
+| 1 | `francais/le-groupe-nominal.json` | Le groupe nominal | 4 | 28 | 154 |
+| 2 | `francais/le-debat-i.json` | Le débat I | 4 | 28 | 162 |
+| 3 | `francais/le-texte-explicatif.json` | Le texte explicatif | 4 | 28 | 162 |
+| 4 | `francais/orthographe-lexicale.json` | Orthographe lexicale | 4 | 28 | 159 |
+| 5 | `francais/la-pronominalisation.json` | La pronominalisation | 4 | 28 | 163 |
+| 1 | `histoire-geographie/histoire-la-mise-en-place-des-peuples-de-cote-d-ivoire-du-xvie-au-xviiie-siecle.json` | Histoire — La mise en place des peuples de Côte d'Ivoire du XVIe au XVIIIe siècle | 4 | 28 | 145 |
+| 2 | `histoire-geographie/geographie-la-deconcentration-administrative-en-cote-d-ivoire.json` | Géographie — La déconcentration administrative en Côte d'Ivoire | 4 | 28 | 150 |
+| 3 | `histoire-geographie/histoire-l-organisation-sociopolitique-des-peuples-de-cote-d-ivoire.json` | Histoire — L'organisation sociopolitique des peuples de Côte d'Ivoire | 4 | 28 | 146 |
+| 4 | `histoire-geographie/geographie-la-decentralisation-administrative-en-cote-d-ivoire.json` | Géographie — La décentralisation administrative en Côte d'Ivoire | 4 | 28 | 148 |
+| 5 | `histoire-geographie/histoire-les-mecanismes-de-prevention-et-de-resolution-des-conflits-chez-les-peuples-de-cote-d-ivoire.json` | Histoire — Les mécanismes de prévention et de résolution des conflits chez les peuples de Côte d'Ivoire | 4 | 28 | 146 |
+| 1 | `svt/les-differentes-transformations-du-corps-humain-de-l-enfance-a-l-adolescence.json` | Les différentes transformations du corps humain de l'enfance à l'adolescence | 4 | 28 | 147 |
+| 2 | `svt/le-devenir-des-cellules-sexuelles-chez-l-homme.json` | Le devenir des cellules sexuelles chez l'Homme | 4 | 28 | 147 |
+| 3 | `svt/la-formation-des-roches-endogenes.json` | La formation des roches endogènes | 4 | 28 | 149 |
+| 4 | `svt/la-degradation-des-roches-endogenes.json` | La dégradation des roches endogènes | 4 | 28 | 150 |
+| 5 | `svt/la-formation-des-sols.json` | La formation des sols | 5 | 30 | 160 |
+| 1 | `physique-chimie/sources-et-recepteurs-de-lumiere.json` | Sources et récepteurs de lumière | 3 | 26 | 143 |
+| 2 | `physique-chimie/propagation-de-la-lumiere.json` | Propagation de la lumière | 6 | 32 | 171 |
+| 3 | `physique-chimie/les-phases-de-la-lune-et-les-eclipses.json` | Les phases de la Lune et les éclipses | 5 | 30 | 158 |
+| 4 | `physique-chimie/analyse-et-synthese-de-la-lumiere-blanche.json` | Analyse et synthèse de la lumière blanche | 5 | 30 | 156 |
+| 5 | `physique-chimie/aimant-et-bobine.json` | Aimant et bobine | 4 | 28 | 152 |
+| 1 | `edhc/la-promotion-des-droits-de-l-enfant.json` | La promotion des droits de l'enfant | 3 | 26 | 138 |
+| 2 | `edhc/la-lutte-contre-le-recrutement-des-enfants-soldats.json` | La lutte contre le recrutement des enfants soldats | 4 | 28 | 147 |
+| 3 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-discriminations.json` | Les instruments et les mécanismes de protection contre les discriminations | 4 | 28 | 152 |
+| 4 | `edhc/les-institutions-consultatives-le-cesec-le-mediateur-de-la-republique-et-la-cnrctci.json` | Les institutions consultatives : Le CESEC, le Médiateur de la République et la CNRCTCI | 4 | 28 | 151 |
+| 5 | `edhc/l-impot.json` | L'impôt | 4 | 28 | 152 |
+| | **Total** | 30 leçons | **124** | **848** | **4570** |
 
 ### 3ème — `lecons-traitees/3eme/`
 

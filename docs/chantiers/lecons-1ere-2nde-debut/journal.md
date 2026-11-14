@@ -41,6 +41,7 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **SVT 1ère A (drogues)** : un document fictif montre la cocaïne raccourcissant le temps de réaction, ce que la fiche ne dit pas en ces termes (« stimulante »).
 - **SVT 1ère C et D** : les corrections de sujets sont courtes et complétées d'un rappel automatique de la méthode et du piège de la notion ; à étoffer.
 - **Histoire-Géographie 1ère** : le procédé Bessemer (1856) est rattaché à la seconde révolution industrielle, comme la fiche.
+- **Mathématiques 1ère C et D, vague 2 (Barycentre, Limites et continuité, Dénombrement)** : 2e exercice par notion et 4 sujets ajoutés ; `practice` laissé tel quel. Trois `practice` d'origine n'ont qu'un type de question (`numeric`) : Barycentre notion 4, Limites et continuité notions 1 et 3 (C et D) ; `verif.rb` les signale (« un seul type ») sans pouvoir les corriger en mode `ajout`. À corriger dans un lot dédié. Le contrôle des formules longues signale 10 formules d'origine non coupées en Dénombrement (pas de nouvelle formule). Limites et continuité D : la copie part de l'origine D (sous-titre et problème 3 propres à D conservés), les ajouts sont identiques à ceux de C.
 
 ### 2nde (réécriture complète depuis `format-v1/`)
 
@@ -72,3 +73,44 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **À faire vérifier par un enseignant** :
   - Philosophie : « travail » et « seulement » comme termes à définir ; la thèse sur l'argent et le bonheur ; paraphrase contre explication ; les synonymes acceptés dans les textes à trous (« mais » ou « cependant », « enfin » ou « finalement »).
   - Histoire-Géographie : la vraisemblance des montants en F CFA et des taux démographiques, qui sont des valeurs d'exercice ; la réponse « La sécurité » à la question sur l'IDH ; les écarts de dates calculés à la main.
+
+## Vague 2 : leçons 4 et 5 de 1ère — Mathématiques et Physique-Chimie
+
+- **Périmètre** : leçons 4 et 5 de la progression DPFC 2026-2027, revenues de `a-reprendre/sujets-manquants/` au format complet (2e exercice par notion, 4 sujets de devoir). 16 fichiers :
+  - Mathématiques A1 et A2 : Dérivabilité et étude de fonctions, Suites numériques.
+  - Mathématiques C : Barycentre, Limites et continuité.
+  - Mathématiques D : Limites et continuité, Dénombrement.
+  - Physique-Chimie A1 et A2 : la pile (loi de Pouillet), Pétroles et gaz naturels.
+  - Physique-Chimie C : Hydrocarbures saturés (les alcanes), Énergie cinétique.
+  - Physique-Chimie D : Énergie cinétique, Hydrocarbures insaturés (les alcènes et les alcynes).
+- **Contrôles** :
+  - Script hors dépôt (format, `valider.rb` sur la leçon et chaque sujet, contenu d'origine inchangé).
+  - sympy sur chaque réponse et chaque distracteur.
+  - Les 16 leçons rendues à 390 px. Un débordement trouvé et corrigé : Barycentre, une réponse d'ordonnancement de 118 caractères d'une seule pièce, coupée.
+- **Alcanes de 1ère C** : c'est la leçon 3 de 1ère D (déjà traitée en vague 1), recopiée avec le `series_name` C. L'origine C de `a-reprendre/` différait légèrement de l'origine D ; la version D, complétée et vérifiée, fait foi.
+- **Énergie cinétique et Limites et continuité** : écrites une fois et recopiées en D. Chaque copie garde son sous-titre de rang (leçon 4 en D, leçon 5 en C).
+- **À trancher (réversible, laissé tel quel)** :
+  - `practice` d'origine n'ayant qu'un type de question (`numeric`) : Barycentre (notion 4) et Limites et continuité (notions 1 et 3, en C et D). La règle de vague 2 en demande deux.
+  - Formules d'origine de 41 à 49 caractères non coupées (Dérivabilité, Suites, Énergie cinétique, Alcènes, Dénombrement) : le rendu à 390 px est vert, on les laisse.
+- **À faire relire par un enseignant** :
+  - Suites (A) : décompte des termes par « dernier rang − premier rang + 1 » ; un sujet commence au mois 1 au lieu de $u_0$.
+  - Physique-Chimie : la composition du gaz naturel est une valeur d'exercice ; Br = 80 g/mol est ajouté aux données (alcènes) ; la loi d'Ohm de 2nde est employée dans un sujet de la pile.
+  - Les contextes ivoiriens et leurs chiffres sont fictifs.
+## Vague 2 : leçons 4 et 5 de 1ère — Français, SVT, Philosophie, Histoire-Géographie
+
+- **Périmètre** : 26 fichiers revenus de `a-reprendre/` au format complet.
+  - Français : Le rythme dans le texte (A1, A2, C, D), La focalisation (A1, A2), Les tonalités littéraires (C, D).
+  - SVT : Les cycles sexuels chez la femme et La régulation des naissances (A1, A2), La fécondation chez les mammifères (C), La synthèse des protéines (C, D), Le monohybridisme (D).
+  - Philosophie : L'essai de problématisation et La période antique, dans les 4 séries.
+  - Histoire-Géographie : La croissance démographique mondiale et ses conséquences ; Le mouvement impérialiste et le congrès de Berlin.
+  - En Philosophie et en Histoire-Géographie, le « Je m'entraîne » a été ajouté à chaque notion.
+- **Contrôles** : le même script hors dépôt que pour la vague 1, et un script pour les proportions génétiques et les traductions du code génétique. Les 26 leçons ont été rendues à 390 px.
+- **`practice` d'origine corrigés** (réversible), parce qu'une question `written` ne peut pas être corrigée automatiquement :
+  - La focalisation (A1, A2), notion 3 : la question `written` est remplacée par un QCM sur le marqueur du changement de focalisation.
+  - Les cycles sexuels (A1, A2) : une question vrai/faux est ajoutée aux notions 2 et 3, qui n'en avaient que 2. La `written` de la notion 4 est remplacée par un vrai/faux.
+- **À faire relire par un enseignant** :
+  - Le rythme : les comptes de syllabes. Les diérèses et synérèses ambiguës ont été évitées.
+  - La focalisation : la focalisation attribuée à chaque texte.
+  - Philosophie : les sujets de problématisation proposés (« Doit-on toujours pardonner ? »…) ; une question qui associe un texte support à la maïeutique.
+  - SVT : les valeurs des courbes de température et d'hormones sont schématiques ; les génotypes sont écrits en toutes lettres (« Hétérozygote R//r ») pour que l'import les distingue.
+  - Histoire-Géographie : les chiffres démographiques autres que ceux de la fiche sont des valeurs d'exercice, vérifiées à la main ; « la Côte d'Ivoire est dominée par la France vers 1914 » s'appuie sur la carte `afrique-1914`.

@@ -1,0 +1,3863 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La formation des roches endogènes",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "SVT",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "volcan",
+          "kind": "diagram",
+          "description": "Schéma fléché du trajet du magma dans un volcan. Le magma se trouve dans la chambre magmatique, en profondeur. Il monte par la cheminée et sort par le cratère. Sur le sol, il devient de la lave, qui refroidit vite et forme une roche volcanique. Une autre flèche part du magma resté en profondeur : il refroidit lentement et forme une roche plutonique.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "ch",
+                "label": "Chambre magmatique : magma en profondeur",
+                "category": 1
+              },
+              {
+                "id": "ck",
+                "label": "Cheminée : le magma monte",
+                "category": 1
+              },
+              {
+                "id": "cr",
+                "label": "Cratère : le magma sort",
+                "category": 1
+              },
+              {
+                "id": "lv",
+                "label": "Lave en surface, refroidissement rapide",
+                "category": 2
+              },
+              {
+                "id": "rv",
+                "label": "Roche volcanique",
+                "category": 2
+              },
+              {
+                "id": "rp",
+                "label": "Magma resté en profondeur, refroidissement lent",
+                "category": 3
+              },
+              {
+                "id": "pl",
+                "label": "Roche plutonique",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "ch",
+                "to": "ck"
+              },
+              {
+                "from": "ck",
+                "to": "cr"
+              },
+              {
+                "from": "cr",
+                "to": "lv"
+              },
+              {
+                "from": "lv",
+                "to": "rv",
+                "label": "durcit"
+              },
+              {
+                "from": "ch",
+                "to": "rp"
+              },
+              {
+                "from": "rp",
+                "to": "pl",
+                "label": "durcit"
+              }
+            ],
+            "legend": [
+              "Trajet du magma",
+              "En surface",
+              "En profondeur"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "structure-basalte",
+          "kind": "diagram",
+          "description": "Arbre de la structure d'un basalte. En haut, le basalte, roche volcanique sombre. En dessous, deux éléments : les microlithes, de très petits cristaux visibles seulement au microscope, et le verre, une partie de la roche qui n'a pas eu le temps de cristalliser. La structure est dite microlithique.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "b",
+                "label": "Basalte : roche volcanique sombre"
+              },
+              {
+                "id": "m",
+                "label": "Microlithes : très petits cristaux"
+              },
+              {
+                "id": "v",
+                "label": "Verre : partie non cristallisée"
+              }
+            ],
+            "edges": [
+              {
+                "from": "b",
+                "to": "m",
+                "label": "contient"
+              },
+              {
+                "from": "b",
+                "to": "v",
+                "label": "contient"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "granite-mineraux",
+          "kind": "diagram",
+          "description": "Arbre des minéraux du granite. En haut, le granite, roche plutonique de structure grenue. En dessous, ses trois minéraux visibles à l'œil nu : le quartz, gris, brillant et translucide ; le feldspath, blanc ou rose ; le mica, noir, en petites paillettes brillantes.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "g",
+                "label": "Granite : roche plutonique grenue"
+              },
+              {
+                "id": "q",
+                "label": "Quartz : gris, brillant, translucide"
+              },
+              {
+                "id": "f",
+                "label": "Feldspath : blanc ou rose"
+              },
+              {
+                "id": "mi",
+                "label": "Mica : noir, en paillettes brillantes"
+              }
+            ],
+            "edges": [
+              {
+                "from": "g",
+                "to": "q"
+              },
+              {
+                "from": "g",
+                "to": "f"
+              },
+              {
+                "from": "g",
+                "to": "mi"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "taille-cristaux",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la taille moyenne des cristaux, en millimètres, obtenus dans une expérience avec une substance fondue (valeurs fictives). Refroidissement très lent : 6 mm. Refroidissement moyen : 3 mm. Refroidissement rapide : 1 mm. Plus le refroidissement est lent, plus les cristaux sont gros.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              6,
+              3,
+              1
+            ],
+            "labels": [
+              "Très lent",
+              "Moyen",
+              "Rapide"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "comparaison-roches",
+          "kind": "diagram",
+          "description": "Arbre de comparaison des roches magmatiques. En haut, les roches magmatiques, formées par le refroidissement du magma. Deux branches : les roches plutoniques, formées en profondeur par un refroidissement lent, comme le granite, à structure grenue ; les roches volcaniques, formées en surface par un refroidissement rapide, comme le basalte, à structure microlithique.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "rm",
+                "label": "Roches magmatiques"
+              },
+              {
+                "id": "pl",
+                "label": "Plutoniques : profondeur, refroidissement lent"
+              },
+              {
+                "id": "vo",
+                "label": "Volcaniques : surface, refroidissement rapide"
+              },
+              {
+                "id": "gr",
+                "label": "Granite : structure grenue"
+              },
+              {
+                "id": "ba",
+                "label": "Basalte : structure microlithique"
+              }
+            ],
+            "edges": [
+              {
+                "from": "rm",
+                "to": "pl"
+              },
+              {
+                "from": "rm",
+                "to": "vo"
+              },
+              {
+                "from": "pl",
+                "to": "gr",
+                "label": "exemple"
+              },
+              {
+                "from": "vo",
+                "to": "ba",
+                "label": "exemple"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le magma, le volcan et les roches magmatiques",
+          "remember": "Une **roche endogène** est d'origine interne : elle provient de matériaux venus de l'intérieur de la Terre. Le **magma** est une roche fondue, très chaude, qui contient des gaz. Il est stocké en profondeur, dans la **chambre magmatique** d'un volcan. Pendant une **éruption**, il monte par la **cheminée** et sort par le **cratère**. Arrivé à la surface du sol, il s'appelle la **lave**. Quand le magma ou la lave refroidit, il durcit et forme une **roche magmatique**. Refroidi en profondeur, il forme une roche **plutonique** ; la lave refroidie en surface forme une roche **volcanique**.",
+          "method": [
+            "Repérer l'endroit où se trouve la matière décrite : en profondeur ou à la surface du sol.",
+            "Nommer la matière : magma en profondeur, lave en surface.",
+            "Suivre son trajet : chambre magmatique, cheminée, puis cratère.",
+            "Conclure sur la roche qui se forme quand elle refroidit : plutonique en profondeur, volcanique en surface."
+          ],
+          "example": {
+            "statement": "Pendant une éruption, une matière rouge très chaude coule sur les flancs du volcan. Comment s'appelle-t-elle, d'où vient-elle et quelle roche forme-t-elle en refroidissant ?",
+            "steps": [
+              "Repérer : la matière est à la surface du sol, sur les flancs du volcan.",
+              "Nommer : en surface, le magma est appelé lave.",
+              "Suivre son trajet : elle était dans la chambre magmatique, elle est montée par la cheminée et elle est sortie par le cratère.",
+              "Conclure : en refroidissant en surface, la lave forme une roche volcanique."
+            ]
+          },
+          "pitfall": "Ne confonds pas **magma** et **lave**. Le magma est en profondeur, sous le sol ; la lave est le magma arrivé à la surface. Contre-exemple : la matière qui attend dans la chambre magmatique est du magma, pas de la lave ; la matière qui coule sur la pente du volcan est de la lave. Retiens : sous le sol, magma ; sur le sol, lave.",
+          "figure": "volcan",
+          "exercise": [
+            {
+              "title": "Reconnaître le magma, la lave et le trajet dans le volcan",
+              "statement": "Pendant une sortie de classe, le professeur de SVT montre aux élèves de 4ème le schéma d'un volcan en éruption.",
+              "exercise_type": "fixation",
+              "figure": "volcan",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que le magma ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche la matière qui se trouve en profondeur dans le volcan. Étape 2 — Nommer : en profondeur, c'est le magma, une roche fondue très chaude qui contient des gaz. Ce n'est ni une roche dure, ni de l'eau, ni un gaz seul.",
+                  "answers": [
+                    {
+                      "content": "Une roche fondue, très chaude, qui contient des gaz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une roche dure formée à la surface du sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'eau bouillante qui sort du volcan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un gaz qui s'échappe seul du cratère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à ce qu'il désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on place chaque mot en profondeur ou en surface. Étape 2 — Nommer : le magma est en profondeur, la lave en surface. Étape 3 — Suivre son trajet : le magma monte par la cheminée et sort par le cratère.",
+                  "answers": [
+                    {
+                      "content": "Magma",
+                      "match": "Roche fondue qui se trouve en profondeur"
+                    },
+                    {
+                      "content": "Lave",
+                      "match": "Magma arrivé à la surface du sol"
+                    },
+                    {
+                      "content": "Cheminée",
+                      "match": "Conduit par où le magma monte"
+                    },
+                    {
+                      "content": "Cratère",
+                      "match": "Ouverture par où sortent lave et gaz"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet du magma pendant une éruption.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Suivre son trajet : le magma part de la chambre magmatique, monte par la cheminée, sort par le cratère. Étape 2 — Nommer : une fois sorti, il devient de la lave, qui coule sur les flancs.",
+                  "answers": [
+                    {
+                      "content": "Le magma est dans la chambre magmatique."
+                    },
+                    {
+                      "content": "Le magma monte dans la cheminée."
+                    },
+                    {
+                      "content": "Le magma sort par le cratère et devient de la lave."
+                    },
+                    {
+                      "content": "La lave coule sur les flancs du volcan."
+                    }
+                  ]
+                },
+                {
+                  "content": "Le magma qui est sorti du cratère et coule sur le sol s'appelle la lave.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la matière est à la surface du sol. Étape 2 — Nommer : en surface, le magma s'appelle la lave. L'affirmation est donc vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lave qui refroidit à la surface du sol forme une roche ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : la lave est en surface. Étape 4 — Conclure : la lave refroidie en surface forme une roche volcanique. La roche plutonique se forme par le refroidissement du magma en profondeur.",
+                  "answers": [
+                    {
+                      "content": "plutonique",
+                      "correct": false
+                    },
+                    {
+                      "content": "volcanique",
+                      "correct": true
+                    },
+                    {
+                      "content": "liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "gazeuse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « La matière qui coule sur les flancs du volcan est du magma. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la matière est sur le sol, donc en surface. Étape 2 — Nommer : en surface, le magma s'appelle la lave. Le piège est de dire « magma » pour toute matière fondue : sous le sol, magma ; sur le sol, lave.",
+                  "answers": [
+                    {
+                      "content": "Il a raison : magma et lave sont toujours le même mot",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est déjà une roche plutonique",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est de la lave, parce qu'elle est arrivée à la surface du sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est seulement du gaz",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Suivre le trajet du magma dans un volcan",
+              "statement": "Dans cet exercice, tu suis le magma depuis la chambre magmatique jusqu'à la roche qui se forme.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Demande-toi à chaque fois si la matière est en profondeur (magma) ou à la surface du sol (lave).",
+              "questions": [
+                {
+                  "content": "Le magma est stocké en profondeur dans la chambre ___ du volcan.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le magma attend en profondeur. Étape 3 — Suivre son trajet : il part de la chambre magmatique avant de monter par la cheminée.",
+                  "answers": [
+                    {
+                      "content": "magmatique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments sortent du cratère pendant une éruption ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Nommer : le magma contient des gaz, qui sortent avec la lave. Étape 3 — Suivre son trajet : tout sort par le cratère. Les roches plutoniques se forment en profondeur et ne sortent pas par le cratère.",
+                  "answers": [
+                    {
+                      "content": "Du granite formé en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des gaz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une roche plutonique déjà dure",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'eau de pluie pure",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le magma contient des gaz.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Nommer : le magma est une roche fondue, très chaude, qui contient des gaz. Quand il arrive en surface, une partie des gaz s'échappe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque endroit à la matière qui s'y trouve.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on regarde si l'endroit est en profondeur ou en surface. Étape 2 — Nommer : magma en profondeur, lave en surface. Étape 4 — Conclure : la lave refroidie donne une roche volcanique.",
+                  "answers": [
+                    {
+                      "content": "Chambre magmatique",
+                      "match": "Magma"
+                    },
+                    {
+                      "content": "Flanc du volcan en éruption",
+                      "match": "Lave qui coule"
+                    },
+                    {
+                      "content": "Sol refroidi après l'éruption",
+                      "match": "Roche volcanique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se trouve le magma avant l'éruption ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : avant l'éruption, le magma n'est pas sorti. Étape 3 — Suivre son trajet : il commence dans la chambre magmatique, en profondeur. Le cratère est la sortie, pas le lieu de stockage.",
+                  "answers": [
+                    {
+                      "content": "Dans le cratère, au sommet du volcan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la chambre magmatique, en profondeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur les flancs du volcan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'air, au-dessus du volcan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un magma qui refroidit lentement en profondeur forme une roche ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le refroidissement a lieu en profondeur. Étape 4 — Conclure : en profondeur, la roche formée est plutonique ; en surface, elle est volcanique.",
+                  "answers": [
+                    {
+                      "content": "volcanique",
+                      "correct": false
+                    },
+                    {
+                      "content": "de surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "plutonique",
+                      "correct": true
+                    },
+                    {
+                      "content": "liquide",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer le magma et la lave et à nommer la roche formée, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une matière très chaude se trouve dans la chambre magmatique d'un volcan. Comment s'appelle-t-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la matière est en profondeur, dans la chambre magmatique. Étape 2 — Nommer : en profondeur, c'est du magma. La lave est le magma sorti à la surface.",
+                "answers": [
+                  {
+                    "content": "La lave",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le granite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cratère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le magma",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde si la matière est sous le sol ou dessus."
+              },
+              {
+                "content": "La matière qui sort du cratère et coule sur le sol s'appelle la ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : la matière est à la surface du sol. Étape 2 — Nommer : en surface, le magma s'appelle la lave.",
+                "answers": [
+                  {
+                    "content": "lave",
+                    "correct": true
+                  },
+                  {
+                    "content": "cheminée",
+                    "correct": false
+                  },
+                  {
+                    "content": "roche plutonique",
+                    "correct": false
+                  },
+                  {
+                    "content": "chambre",
+                    "correct": false
+                  }
+                ],
+                "hint": "En surface, le magma change de nom."
+              },
+              {
+                "content": "Le magma qui refroidit lentement en profondeur forme une roche ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le refroidissement se fait en profondeur. Étape 4 — Conclure : en profondeur, la roche formée est plutonique.",
+                "answers": [
+                  {
+                    "content": "plutonique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Profondeur : plutonique. Surface : volcanique."
+              },
+              {
+                "content": "La lave qui refroidit à la surface forme une roche plutonique.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la lave est à la surface. Étape 4 — Conclure : en surface, la roche formée est volcanique, pas plutonique. La roche plutonique se forme en profondeur.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au lieu où la roche refroidit."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître une roche volcanique : le basalte",
+          "remember": "Une **roche volcanique** se forme quand la lave refroidit **vite**, à la surface du sol. Le **basalte** en est un exemple courant : c'est une roche sombre, grise très foncée ou noire. Sa structure est **microlithique** : au microscope, on voit de très petits cristaux, les **microlithes**, dans du **verre**. Le verre est la partie de la roche qui n'a pas eu le temps de cristalliser. À l'œil nu, on ne distingue pas ces cristaux.",
+          "method": [
+            "Observer la roche à l'œil nu et au microscope : couleur, cristaux visibles ou non.",
+            "Repérer la structure : de très petits cristaux, les microlithes, dans du verre.",
+            "Déduire la vitesse de refroidissement : rapide, car les cristaux n'ont pas eu le temps de grossir.",
+            "Conclure : roche volcanique, formée à la surface du sol ; exemple, le basalte."
+          ],
+          "example": {
+            "statement": "Un élève observe une roche noire. À l'œil nu, il ne voit aucun cristal. Au microscope, il voit de très petits cristaux dans une pâte de verre. De quelle roche s'agit-il et comment s'est-elle formée ?",
+            "steps": [
+              "Observer : la roche est noire et, à l'œil nu, aucun cristal n'est visible.",
+              "Repérer la structure : au microscope, il y a de très petits cristaux (des microlithes) dans du verre, donc une structure microlithique.",
+              "Déduire : les cristaux sont minuscules, donc le refroidissement a été rapide.",
+              "Conclure : c'est une roche volcanique, formée à la surface du sol : un basalte."
+            ]
+          },
+          "pitfall": "Ne dis pas qu'une roche volcanique n'a aucun cristal. Elle en a, mais ils sont trop petits pour l'œil nu. Contre-exemple : une roche noire sans cristal visible à l'œil nu peut contenir des microlithes au microscope, comme le basalte. Retiens : pas de cristal visible ne veut pas dire pas de cristal.",
+          "figure": "structure-basalte",
+          "exercise": [
+            {
+              "title": "Reconnaître la structure d'un basalte",
+              "statement": "Au laboratoire du collège, un groupe d'élèves de 4ème étudie un échantillon de basalte à la loupe, puis au microscope.",
+              "exercise_type": "fixation",
+              "figure": "structure-basalte",
+              "questions": [
+                {
+                  "content": "Quelle est la structure d'un basalte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer la structure : le basalte contient de très petits cristaux, les microlithes, dans du verre : sa structure est microlithique. La structure grenue est celle du granite.",
+                  "answers": [
+                    {
+                      "content": "Grenue : de gros cristaux collés, visibles à l'œil nu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Microlithique : de très petits cristaux dans du verre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Feuilletée : des couches empilées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Liquide : une pâte encore fondue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le basalte se forme par le refroidissement rapide de la lave à la surface.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déduire : les cristaux sont minuscules, donc le refroidissement a été rapide. Étape 4 — Conclure : c'est une roche volcanique, formée en surface. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les très petits cristaux d'un basalte, visibles seulement au microscope, s'appellent des ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer la structure : les très petits cristaux d'un basalte sont des microlithes. Les cendres sortent du volcan, les fossiles sont des restes d'êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "cendres",
+                      "correct": false
+                    },
+                    {
+                      "content": "fossiles",
+                      "correct": false
+                    },
+                    {
+                      "content": "microlithes",
+                      "correct": true
+                    },
+                    {
+                      "content": "gaz",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux caractéristiques d'un basalte ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer : le basalte est une roche sombre. Étape 2 — Repérer la structure : microlithes et verre. Les gros cristaux et le refroidissement lent en profondeur sont ceux du granite.",
+                  "answers": [
+                    {
+                      "content": "Il a de gros cristaux de quartz visibles à l'œil nu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il s'est formé lentement en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a des microlithes dans du verre",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est une roche sombre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À l'œil nu, une roche noire ne montre aucun cristal. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : aucun cristal visible à l'œil nu. Étape 2 — Repérer la structure : il faut regarder au microscope, où l'on peut voir des microlithes. Pas de cristal visible ne veut pas dire pas de cristal ; le granite, lui, a de gros cristaux visibles.",
+                  "answers": [
+                    {
+                      "content": "Elle ne contient aucun cristal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle peut contenir des microlithes visibles au microscope : ce peut être un basalte",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est forcément un granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle s'est formée lentement en profondeur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Identifier un basalte à partir d'observations",
+              "statement": "Dans cet exercice, tu relies des observations sur une roche à sa structure et à sa formation.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour un basalte, pense : surface, refroidissement rapide, cristaux minuscules.",
+              "questions": [
+                {
+                  "content": "Une roche qui contient des microlithes dans du ___ a une structure microlithique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer la structure : un basalte contient de très petits cristaux, les microlithes, dans du verre. Le verre est la partie qui n'a pas cristallisé.",
+                  "answers": [
+                    {
+                      "content": "verre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche pour reconnaître un basalte.",
+                  "question_type": "ordering",
+                  "explanation": "La démarche suit les quatre étapes de la méthode : Observer, Repérer la structure, Déduire la vitesse de refroidissement, Conclure.",
+                  "answers": [
+                    {
+                      "content": "Observer la roche à l'œil nu et au microscope."
+                    },
+                    {
+                      "content": "Repérer les microlithes dans du verre."
+                    },
+                    {
+                      "content": "Déduire que le refroidissement a été rapide."
+                    },
+                    {
+                      "content": "Conclure : roche volcanique, un basalte."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les cristaux du basalte sont-ils très petits ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Déduire : des cristaux minuscules montrent un refroidissement rapide. Un refroidissement lent en profondeur donnerait de gros cristaux, comme dans le granite.",
+                  "answers": [
+                    {
+                      "content": "Le magma a refroidi lentement en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche a été cassée en petits morceaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lave a refroidi vite : les cristaux n'ont pas eu le temps de grossir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le volcan était éteint",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roche volcanique se forme toujours en profondeur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : une roche volcanique se forme à la surface du sol, par le refroidissement de la lave. C'est la roche plutonique qui se forme en profondeur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer la structure : microlithes et verre composent la pâte du basalte. Étape 4 — Conclure : le basalte est une roche volcanique, formée par la lave.",
+                  "answers": [
+                    {
+                      "content": "Microlithe",
+                      "match": "Très petit cristal visible au microscope"
+                    },
+                    {
+                      "content": "Verre",
+                      "match": "Partie de la roche qui n'a pas cristallisé"
+                    },
+                    {
+                      "content": "Basalte",
+                      "match": "Roche volcanique sombre"
+                    },
+                    {
+                      "content": "Lave",
+                      "match": "Magma arrivé à la surface du sol"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux mots décrivent la formation d'un basalte ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Déduire : cristaux minuscules, donc refroidissement rapide. Étape 4 — Conclure : roche volcanique, formée en surface. En profondeur, avec un refroidissement lent, on trouve le granite.",
+                  "answers": [
+                    {
+                      "content": "En profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Refroidissement lent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cristaux de grande taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Refroidissement rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "En surface",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un basalte avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une roche noire contient de très petits cristaux dans du verre. Quelle roche est-ce ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer la structure : microlithes dans du verre, donc structure microlithique. Étape 4 — Conclure : c'est un basalte, roche volcanique. Le granite a de gros cristaux visibles.",
+                "answers": [
+                  {
+                    "content": "Un granite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un basalte",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un quartz",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un magma",
+                    "correct": false
+                  }
+                ],
+                "hint": "Des microlithes dans du verre : de quelle roche est-ce la structure ?"
+              },
+              {
+                "content": "Le basalte a de gros cristaux visibles à l'œil nu.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : à l'œil nu, on ne voit pas les cristaux du basalte. Étape 3 — Déduire : ils sont minuscules car le refroidissement a été rapide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à la taille des cristaux d'une roche qui refroidit vite."
+              },
+              {
+                "content": "La structure du basalte est dite ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer la structure : le basalte contient des microlithes dans du verre, donc sa structure est microlithique.",
+                "answers": [
+                  {
+                    "content": "microlithique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot vient de microlithe."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître une roche plutonique : le granite",
+          "remember": "Une **roche plutonique** se forme quand le magma refroidit **lentement**, en profondeur, sans atteindre la surface. Les cristaux ont le temps de grossir. Le **granite** en est l'exemple le plus connu. Sa structure est **grenue** : on voit à l'œil nu des cristaux collés les uns aux autres, comme des grains. Il contient trois minéraux : le **quartz** (gris, brillant, translucide), le **feldspath** (blanc ou rose) et le **mica** (noir, en petites paillettes brillantes). Le granite est très répandu en Côte d'Ivoire : on l'exploite dans des carrières.",
+          "method": [
+            "Observer la roche à l'œil nu : cristaux visibles ou non, collés les uns aux autres.",
+            "Identifier les minéraux par leur couleur et leur aspect : quartz, feldspath, mica.",
+            "Déduire la vitesse de refroidissement : lente, car les cristaux sont gros.",
+            "Conclure : roche plutonique, formée en profondeur, de structure grenue ; exemple, le granite."
+          ],
+          "example": {
+            "statement": "Dans une carrière, une roche claire montre à l'œil nu des grains gris brillants, des grains blancs ou roses et de petites paillettes noires, tous collés les uns aux autres. Quelle est cette roche et comment s'est-elle formée ?",
+            "steps": [
+              "Observer : on voit à l'œil nu des cristaux, collés les uns aux autres, comme des grains.",
+              "Identifier : les grains gris brillants sont du quartz, les grains blancs ou roses du feldspath, les paillettes noires du mica.",
+              "Déduire : les cristaux sont gros, donc le refroidissement a été lent.",
+              "Conclure : c'est une roche plutonique, formée en profondeur, de structure grenue : un granite."
+            ]
+          },
+          "pitfall": "Ne dis pas que de gros cristaux viennent d'un refroidissement rapide : c'est l'inverse. Plus le refroidissement est lent, plus les cristaux sont gros. Contre-exemple : le granite (gros cristaux) a refroidi lentement en profondeur ; le basalte (cristaux minuscules) a refroidi vite en surface.",
+          "figure": "granite-mineraux",
+          "exercise": [
+            {
+              "title": "Reconnaître un granite et ses minéraux",
+              "statement": "Pendant la sortie de classe à la carrière, un ouvrier montre aux élèves un bloc de granite et leur demande de le décrire.",
+              "exercise_type": "fixation",
+              "figure": "granite-mineraux",
+              "questions": [
+                {
+                  "content": "Quelle est la structure du granite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : dans le granite, on voit les cristaux à l'œil nu, collés les uns aux autres. Cette structure s'appelle grenue. La structure microlithique est celle du basalte.",
+                  "answers": [
+                    {
+                      "content": "Microlithique : de très petits cristaux dans du verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Feuilletée : des couches empilées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Grenue : de gros cristaux collés, visibles à l'œil nu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vitreuse : entièrement en verre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois minéraux du granite ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Identifier : le granite contient trois minéraux, le quartz, le feldspath et le mica. Le verre est un élément du basalte, et la lave est du magma sorti en surface : ce ne sont pas des minéraux du granite.",
+                  "answers": [
+                    {
+                      "content": "Le mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque minéral à son aspect dans le granite.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier : on reconnaît chaque minéral à sa couleur et à son aspect. Le quartz est gris et translucide, le feldspath blanc ou rose, le mica noir en paillettes.",
+                  "answers": [
+                    {
+                      "content": "Quartz",
+                      "match": "Gris, brillant, translucide"
+                    },
+                    {
+                      "content": "Feldspath",
+                      "match": "Blanc ou rose"
+                    },
+                    {
+                      "content": "Mica",
+                      "match": "Noir, en petites paillettes brillantes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite se forme par le refroidissement lent du magma en profondeur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déduire : ses cristaux sont gros, donc le refroidissement a été lent. Étape 4 — Conclure : c'est une roche plutonique, formée en profondeur. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roche a de gros cristaux visibles à l'œil nu. Comment a-t-elle refroidi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : les cristaux sont gros. Étape 3 — Déduire : de gros cristaux demandent du temps, donc un refroidissement lent. Étape 4 — Conclure : roche plutonique, en profondeur. Dire que les gros cristaux se forment vite est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vite, à la surface du sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vite, parce que les gros cristaux se forment rapidement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lentement, en profondeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle n'a pas refroidi",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître un granite à l'œil nu",
+              "statement": "Dans cet exercice, tu décris un granite et tu retrouves comment il s'est formé.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Un granite se reconnaît à ses gros cristaux visibles : quartz, feldspath et mica.",
+              "questions": [
+                {
+                  "content": "Le minéral du granite qui forme de petites paillettes noires brillantes est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Identifier : les paillettes noires brillantes sont du mica. Le quartz est gris et translucide, le feldspath blanc ou rose.",
+                  "answers": [
+                    {
+                      "content": "mica",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cristaux du granite sont visibles à l'œil nu : sa structure est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer : les cristaux sont visibles à l'œil nu et collés. Étape 4 — Conclure : la structure est grenue. Microlithique est la structure du basalte.",
+                  "answers": [
+                    {
+                      "content": "microlithique",
+                      "correct": false
+                    },
+                    {
+                      "content": "vitreuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "grenue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Où le granite s'est-il formé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Déduire : de gros cristaux montrent un refroidissement lent. Étape 4 — Conclure : roche plutonique, formée en profondeur. La lave qui refroidit vite en surface forme des roches volcaniques.",
+                  "answers": [
+                    {
+                      "content": "En profondeur, par le refroidissement lent du magma",
+                      "correct": true
+                    },
+                    {
+                      "content": "À la surface, par le refroidissement rapide de la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le cratère d'un volcan en éruption",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'air, à partir de cendres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche pour reconnaître un granite.",
+                  "question_type": "ordering",
+                  "explanation": "La démarche suit les quatre étapes de la méthode : Observer, Identifier les minéraux, Déduire la vitesse de refroidissement, Conclure.",
+                  "answers": [
+                    {
+                      "content": "Observer les cristaux à l'œil nu."
+                    },
+                    {
+                      "content": "Identifier le quartz, le feldspath et le mica."
+                    },
+                    {
+                      "content": "Déduire que le refroidissement a été lent."
+                    },
+                    {
+                      "content": "Conclure : roche plutonique, un granite."
+                    }
+                  ]
+                },
+                {
+                  "content": "En Côte d'Ivoire, on exploite le granite dans des carrières.",
+                  "question_type": "true_false",
+                  "explanation": "Le granite est très répandu en Côte d'Ivoire. Étape 4 — Conclure : comme roche plutonique, il se forme en profondeur ; on l'exploite ensuite dans des carrières. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux observations font penser à un granite ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer : cristaux visibles à l'œil nu. Étape 2 — Identifier : quartz, feldspath, mica. Une pâte de verre avec des microlithes est la structure du basalte.",
+                  "answers": [
+                    {
+                      "content": "Une pâte de verre avec des microlithes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des cristaux visibles à l'œil nu et collés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une roche qui coule comme de la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des grains de quartz, de feldspath et de mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun cristal, même au microscope",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un granite avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une roche montre à l'œil nu des paillettes noires brillantes, des grains gris et des grains roses. Quelle roche est-ce ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : les cristaux sont visibles à l'œil nu. Étape 2 — Identifier : mica noir, quartz gris, feldspath rose. Étape 4 — Conclure : c'est un granite. Le basalte n'a pas de cristal visible à l'œil nu.",
+                "answers": [
+                  {
+                    "content": "Un basalte",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la lave",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du magma",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un granite",
+                    "correct": true
+                  }
+                ],
+                "hint": "Des gros cristaux de quartz, de feldspath et de mica : quelle roche ?"
+              },
+              {
+                "content": "Le granite est une roche ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Déduire : ses gros cristaux montrent un refroidissement lent. Étape 4 — Conclure : il se forme en profondeur, c'est une roche plutonique.",
+                "answers": [
+                  {
+                    "content": "plutonique",
+                    "correct": true
+                  },
+                  {
+                    "content": "volcanique",
+                    "correct": false
+                  },
+                  {
+                    "content": "gazeuse",
+                    "correct": false
+                  },
+                  {
+                    "content": "liquide",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à l'endroit où il refroidit."
+              },
+              {
+                "content": "Dans le granite, les cristaux sont trop petits pour être vus à l'œil nu.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : dans le granite, les cristaux sont gros et visibles à l'œil nu. Ce sont les microlithes du basalte qui sont invisibles à l'œil nu.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le granite a une structure grenue."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Relier la vitesse de refroidissement à la structure d'une roche",
+          "remember": "La **vitesse de refroidissement** décide de la taille des cristaux. Quand une substance fondue refroidit **lentement**, les cristaux ont le temps de grossir : ils sont gros. Quand elle refroidit **vite**, ils restent très petits, ou il se forme du verre. On le montre par une expérience : on fait fondre une substance, la vanilline, puis on la laisse refroidir de deux façons. Pour les roches : refroidissement lent en profondeur, donc roche plutonique de structure grenue (le granite) ; refroidissement rapide en surface, donc roche volcanique de structure microlithique (le basalte).",
+          "method": [
+            "Observer les résultats de l'expérience : la taille des cristaux dans chaque cas.",
+            "Comparer les conditions : refroidissement lent ou rapide, une seule condition change.",
+            "Conclure sur le lien : refroidissement lent, gros cristaux ; refroidissement rapide, petits cristaux.",
+            "Transposer aux roches : granite (profondeur, lent) et basalte (surface, rapide)."
+          ],
+          "example": {
+            "statement": "Avec l'aide du professeur, on fait fondre de la vanilline sur deux lames de verre identiques. La lame A refroidit lentement, dans un endroit chaud. La lame B refroidit vite, posée sur une plaque de métal froide. On observe de gros cristaux sur A et de très petits cristaux sur B. Que montre l'expérience et que dit-elle sur les roches ?",
+            "steps": [
+              "Observer : la lame A porte de gros cristaux, la lame B de très petits cristaux.",
+              "Comparer : la substance, les lames et la quantité sont identiques ; seule la vitesse de refroidissement change.",
+              "Conclure : un refroidissement lent donne de gros cristaux, un refroidissement rapide de petits cristaux.",
+              "Transposer : le granite, aux gros cristaux, a refroidi lentement en profondeur ; le basalte, aux cristaux minuscules, a refroidi vite en surface."
+            ]
+          },
+          "pitfall": "Ne tire pas de conclusion si deux conditions changent en même temps. Contre-exemple : si la lame A reçoit plus de vanilline que la lame B et refroidit plus lentement, on ne sait pas si la taille des cristaux dépend de la quantité ou de la vitesse. Pour comparer, une seule condition change : la vitesse de refroidissement.",
+          "figure": "taille-cristaux",
+          "exercise": [
+            {
+              "title": "Lire les résultats d'une expérience de refroidissement",
+              "statement": "Au laboratoire, le professeur refroidit la même quantité de vanilline fondue sur trois lames de verre identiques, de trois façons : très lentement, moyennement, rapidement. Les élèves mesurent la taille des cristaux (valeurs fictives : 6 mm, 3 mm et 1 mm).",
+              "exercise_type": "fixation",
+              "figure": "taille-cristaux",
+              "questions": [
+                {
+                  "content": "Quand une substance fondue refroidit lentement, comment sont les cristaux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : le refroidissement très lent donne les cristaux de 6 mm, les plus gros. Étape 3 — Conclure sur le lien : refroidissement lent, gros cristaux.",
+                  "answers": [
+                    {
+                      "content": "Très petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gros",
+                      "correct": true
+                    },
+                    {
+                      "content": "Absents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toujours de la même taille que si elle refroidit vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'expérience, la seule condition qui change d'une lame à l'autre est la vitesse de refroidissement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : la substance, les lames et la quantité sont les mêmes ; seule la vitesse de refroidissement change. L'affirmation est vraie, et c'est ce qui permet de conclure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque cas à ce qu'on observe ou à la roche correspondante.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Conclure sur le lien : lent, gros cristaux ; rapide, petits cristaux. Étape 4 — Transposer : le granite a refroidi lentement en profondeur, le basalte vite en surface.",
+                  "answers": [
+                    {
+                      "content": "Lame refroidie lentement",
+                      "match": "Gros cristaux visibles à l'œil nu"
+                    },
+                    {
+                      "content": "Lame refroidie vite",
+                      "match": "Très petits cristaux"
+                    },
+                    {
+                      "content": "Granite",
+                      "match": "Roche plutonique à structure grenue"
+                    },
+                    {
+                      "content": "Basalte",
+                      "match": "Roche volcanique à structure microlithique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour savoir si la vitesse de refroidissement agit sur la taille des cristaux, que faut-il faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : pour savoir ce qui agit, une seule condition doit changer. Si deux conditions changent, on ne peut pas dire laquelle explique le résultat : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Changer en même temps la vitesse et la quantité de substance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire une seule lame, sans comparaison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne changer que la vitesse de refroidissement et garder le reste identique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Refroidir les deux lames de la même façon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cristaux mesurent 6 mm sur la lame refroidie très lentement et 1 mm sur la lame refroidie vite. Ils sont combien de fois plus longs sur la lame lente ?",
+                  "question_type": "numeric",
+                  "unit": "fois",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer : 6 mm sur la lame lente et 1 mm sur la lame rapide. Étape 2 — Comparer : on divise 6 par 1, soit 6. Étape 3 — Conclure : les cristaux sont 6 fois plus longs quand le refroidissement est lent.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Interpréter une expérience de refroidissement",
+              "statement": "Dans cet exercice, tu relies les résultats d'une expérience sur une substance fondue aux roches magmatiques.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Retiens la règle : lent, gros cristaux ; rapide, petits cristaux.",
+              "questions": [
+                {
+                  "content": "Plus le refroidissement est lent, plus les cristaux sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Conclure sur le lien : refroidissement lent, gros cristaux. Le basalte, qui refroidit vite, a de très petits cristaux.",
+                  "answers": [
+                    {
+                      "content": "gros",
+                      "correct": true
+                    },
+                    {
+                      "content": "grands",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lame refroidie vite donne de très petits cristaux. À quelle roche ressemble-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Transposer : de très petits cristaux correspondent à un refroidissement rapide, comme le basalte en surface. Le granite a de gros cristaux et refroidit lentement.",
+                  "answers": [
+                    {
+                      "content": "Au granite, qui a refroidi vite en surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au granite, qui a refroidi lentement en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au magma, qui est solide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au basalte, qui a refroidi vite à la surface",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux roches illustrent le lien entre vitesse de refroidissement et taille des cristaux ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Transposer : le granite (gros cristaux, refroidissement lent) et le basalte (cristaux minuscules, refroidissement rapide) montrent ce lien. Magma et lave sont des matières fondues, la cheminée un conduit.",
+                  "answers": [
+                    {
+                      "content": "Le basalte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le granite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "La cheminée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement de l'expérience.",
+                  "question_type": "ordering",
+                  "explanation": "Le raisonnement suit les quatre étapes de la méthode : Observer, Comparer, Conclure sur le lien, Transposer.",
+                  "answers": [
+                    {
+                      "content": "Observer la taille des cristaux sur chaque lame."
+                    },
+                    {
+                      "content": "Comparer les deux conditions de refroidissement."
+                    },
+                    {
+                      "content": "Conclure : lent, gros cristaux ; rapide, petits cristaux."
+                    },
+                    {
+                      "content": "Transposer aux roches : granite et basalte."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le granite, les cristaux sont gros parce que le magma a refroidi vite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Conclure sur le lien : de gros cristaux demandent un refroidissement lent. Étape 4 — Transposer : le granite a refroidi lentement en profondeur. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le basalte a des cristaux très petits parce que la lave a refroidi ___ à la surface.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Conclure sur le lien : refroidissement rapide, petits cristaux. Étape 4 — Transposer : la lave refroidit vite à la surface et forme le basalte.",
+                  "answers": [
+                    {
+                      "content": "lentement",
+                      "correct": false
+                    },
+                    {
+                      "content": "très longtemps",
+                      "correct": false
+                    },
+                    {
+                      "content": "vite",
+                      "correct": true
+                    },
+                    {
+                      "content": "à l'abri",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à relier la vitesse de refroidissement à la taille des cristaux, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une substance fondue refroidit vite. Comment sont ses cristaux ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Conclure sur le lien : refroidissement rapide, petits cristaux. Étape 4 — Transposer : c'est le cas du basalte.",
+                "answers": [
+                  {
+                    "content": "Très gros",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aussi gros qu'avec un refroidissement lent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils n'existent jamais",
+                    "correct": false
+                  },
+                  {
+                    "content": "Très petits",
+                    "correct": true
+                  }
+                ],
+                "hint": "Rapide ou lent : lequel donne des petits cristaux ?"
+              },
+              {
+                "content": "Plus le refroidissement est lent, plus les cristaux sont gros.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Conclure sur le lien : les cristaux ont plus de temps pour grossir quand le refroidissement est lent. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les cristaux ont-ils plus de temps pour grossir quand ça refroidit lentement ?"
+              },
+              {
+                "content": "Le granite a de gros cristaux parce qu'il a refroidi ___ en profondeur.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Transposer : le granite a de gros cristaux, donc il a refroidi lentement en profondeur.",
+                "answers": [
+                  {
+                    "content": "lentement",
+                    "correct": true
+                  },
+                  {
+                    "content": "vite",
+                    "correct": false
+                  },
+                  {
+                    "content": "très vite",
+                    "correct": false
+                  },
+                  {
+                    "content": "jamais",
+                    "correct": false
+                  }
+                ],
+                "hint": "Gros cristaux : refroidissement lent."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Sortie de classe à la carrière de granite",
+          "statement": "La classe de 4ème visite une carrière de granite. Un ouvrier montre un gros bloc gris, blanc et rose, avec des paillettes noires. Il explique que cette roche s'est formée très lentement, sous le sol, bien avant qu'on la découvre.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le bloc montre à l'œil nu des cristaux de quartz, de feldspath et de mica collés les uns aux autres. De quelle roche s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : les cristaux sont visibles à l'œil nu et collés. 2) Identifier : quartz gris, feldspath blanc ou rose, mica noir. 3) Déduire : de gros cristaux, donc un refroidissement lent. 4) Conclure : roche plutonique de structure grenue, un granite. Le basalte n'a pas de cristal visible à l'œil nu, la lave et le magma sont des matières fondues.",
+              "answers": [
+                {
+                  "content": "Un basalte",
+                  "correct": false
+                },
+                {
+                  "content": "Un granite",
+                  "correct": true
+                },
+                {
+                  "content": "De la lave",
+                  "correct": false
+                },
+                {
+                  "content": "Du magma",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi voit-on les cristaux du granite à l'œil nu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : les cristaux sont gros. 2) Rappel : plus le refroidissement est lent, plus les cristaux sont gros. 3) Conclure : le magma a refroidi lentement en profondeur. L'idée du refroidissement rapide est l'erreur classique : un refroidissement rapide donne de très petits cristaux, comme dans le basalte.",
+              "answers": [
+                {
+                  "content": "Le magma a refroidi très vite à la surface",
+                  "correct": false
+                },
+                {
+                  "content": "La roche a été fabriquée par les ouvriers de la carrière",
+                  "correct": false
+                },
+                {
+                  "content": "Le magma a refroidi lentement : les cristaux ont eu le temps de grossir",
+                  "correct": true
+                },
+                {
+                  "content": "Le granite est de la lave encore fondue",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le granite s'est formé en profondeur : c'est une roche ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. 1) Repérer : le granite refroidit lentement, sous le sol. 2) Conclure : une roche formée par le refroidissement du magma en profondeur est une roche plutonique. En surface, la lave forme une roche volcanique.",
+              "answers": [
+                {
+                  "content": "plutonique",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si le bloc était un basalte, on verrait aussi de gros cristaux à l'œil nu.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Rappel : le basalte a une structure microlithique. 2) Ses cristaux, les microlithes, sont visibles seulement au microscope. 3) Conclure : l'affirmation est fausse. Seul le granite a de gros cristaux visibles à l'œil nu.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la démarche de l'élève devant le bloc de la carrière.",
+              "question_type": "ordering",
+              "explanation": "Méthode. On suit les quatre étapes de la fiche sur le granite : 1) Observer, 2) Identifier les minéraux, 3) Déduire la vitesse de refroidissement, 4) Conclure sur la roche. On ne conclut qu'après avoir observé.",
+              "answers": [
+                {
+                  "content": "Observer les cristaux à l'œil nu."
+                },
+                {
+                  "content": "Identifier le quartz, le feldspath et le mica."
+                },
+                {
+                  "content": "Déduire que le refroidissement a été lent."
+                },
+                {
+                  "content": "Conclure : roche plutonique, un granite."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les deux cailloux d'Awa",
+          "statement": "Awa rapporte deux cailloux à la maison après une sortie. Le caillou A est noir ; à l'œil nu, elle ne voit aucun cristal, mais au microscope du collège son professeur voit de très petits cristaux dans du verre. Le caillou B est clair ; elle voit des grains gris brillants, des grains roses et des paillettes noires.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la roche du caillou A ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : roche noire, aucun cristal à l'œil nu. 2) Repérer la structure : au microscope, microlithes dans du verre. 3) Déduire : cristaux minuscules, donc refroidissement rapide. 4) Conclure : roche volcanique, un basalte. Le quartz est un minéral, pas une roche.",
+              "answers": [
+                {
+                  "content": "Un granite",
+                  "correct": false
+                },
+                {
+                  "content": "Du magma",
+                  "correct": false
+                },
+                {
+                  "content": "Du quartz",
+                  "correct": false
+                },
+                {
+                  "content": "Un basalte",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la roche du caillou B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : des grains visibles à l'œil nu. 2) Identifier : quartz gris, feldspath rose, mica noir. 3) Déduire : refroidissement lent. 4) Conclure : roche plutonique, un granite.",
+              "answers": [
+                {
+                  "content": "Un granite",
+                  "correct": true
+                },
+                {
+                  "content": "Un basalte",
+                  "correct": false
+                },
+                {
+                  "content": "De la lave",
+                  "correct": false
+                },
+                {
+                  "content": "Du verre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément à ce qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Méthode. Le basalte (caillou A) a de très petits cristaux dans du verre : structure microlithique. Le granite (caillou B) a de gros cristaux collés : structure grenue. On ne confond pas les deux : la taille des cristaux dit la vitesse de refroidissement.",
+              "answers": [
+                {
+                  "content": "Caillou A",
+                  "match": "Structure microlithique"
+                },
+                {
+                  "content": "Caillou B",
+                  "match": "Structure grenue"
+                },
+                {
+                  "content": "Lave",
+                  "match": "Matière fondue, pas encore une roche solide"
+                }
+              ]
+            },
+            {
+              "content": "Dans le caillou B, Awa voit des grains gris brillants (quartz), des grains roses (feldspath) et des paillettes noires (mica). Combien de minéraux différents reconnaît-elle ?",
+              "question_type": "numeric",
+              "unit": "minéraux",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Observer : grains gris brillants, grains roses, paillettes noires. 2) Identifier : quartz, feldspath, mica. 3) Compter : 3 minéraux différents.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le caillou A s'est formé en profondeur, par un refroidissement lent.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Le caillou A est un basalte, dont les cristaux sont minuscules. 2) Des cristaux minuscules montrent un refroidissement rapide. 3) Conclure : il s'est formé à la surface, par le refroidissement de la lave. C'est le granite qui se forme en profondeur.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le caillou B a des cristaux visibles car le magma a refroidi ___.",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Observer : les cristaux de B sont gros. 2) Rappel : gros cristaux, refroidissement lent. 3) Conclure : le magma a refroidi lentement, en profondeur.",
+              "answers": [
+                {
+                  "content": "vite",
+                  "correct": false
+                },
+                {
+                  "content": "lentement",
+                  "correct": true
+                },
+                {
+                  "content": "à la surface",
+                  "correct": false
+                },
+                {
+                  "content": "sans durcir",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une expérience sur le refroidissement",
+          "statement": "Au laboratoire, Koffi fait fondre de la vanilline avec l'aide du professeur. Il en verse la même quantité sur deux lames de verre identiques. La lame 1 est posée dans une salle chaude : elle refroidit lentement. La lame 2 est posée sur une plaque de métal froide : elle refroidit vite. Koffi observe, à la loupe, de gros cristaux sur la lame 1 et de très petits cristaux sur la lame 2.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle condition change entre la lame 1 et la lame 2 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : même vanilline, même quantité, lames identiques. 2) Comparer : la seule différence est l'endroit où la lame est posée, donc la vitesse de refroidissement. Une expérience ne permet de conclure que si une seule condition change.",
+              "answers": [
+                {
+                  "content": "La quantité de vanilline",
+                  "correct": false
+                },
+                {
+                  "content": "Le type de lame de verre",
+                  "correct": false
+                },
+                {
+                  "content": "La vitesse de refroidissement",
+                  "correct": true
+                },
+                {
+                  "content": "La substance utilisée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux observations de Koffi ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Observer : la lame 1, à refroidissement lent, porte de gros cristaux. La lame 2, à refroidissement rapide, porte de très petits cristaux. Les autres propositions inversent les résultats ou les nient.",
+              "answers": [
+                {
+                  "content": "Très petits cristaux sur la lame 1",
+                  "correct": false
+                },
+                {
+                  "content": "Très petits cristaux sur la lame 2",
+                  "correct": true
+                },
+                {
+                  "content": "Gros cristaux sur la lame 2",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun cristal sur les deux lames",
+                  "correct": false
+                },
+                {
+                  "content": "Gros cristaux sur la lame 1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle conclusion Koffi peut-il écrire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 3) Conclure sur le lien : lent, gros cristaux ; rapide, petits cristaux. L'inverse est l'erreur fréquente : les cristaux ont besoin de temps pour grossir.",
+              "answers": [
+                {
+                  "content": "Plus le refroidissement est lent, plus les cristaux sont petits",
+                  "correct": false
+                },
+                {
+                  "content": "Plus le refroidissement est lent, plus les cristaux sont gros",
+                  "correct": true
+                },
+                {
+                  "content": "La taille des cristaux ne dépend pas de la vitesse",
+                  "correct": false
+                },
+                {
+                  "content": "Seule la plaque de métal fabrique des cristaux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément de la nature à celui de l'expérience dont il se rapproche.",
+              "question_type": "matching",
+              "explanation": "Méthode. 4) Transposer : le granite a de gros cristaux, comme la lame refroidie lentement, car il s'est formé lentement en profondeur. Le basalte a des cristaux minuscules, comme la lame refroidie vite, car la lave refroidit vite en surface.",
+              "answers": [
+                {
+                  "content": "Granite",
+                  "match": "Lame refroidie lentement"
+                },
+                {
+                  "content": "Basalte",
+                  "match": "Lame refroidie vite"
+                },
+                {
+                  "content": "Magma ou lave",
+                  "match": "Vanilline fondue de l'expérience"
+                }
+              ]
+            },
+            {
+              "content": "Koffi refait l'expérience en mettant deux fois plus de vanilline sur la lame 2. Peut-il encore comparer les deux lames ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 2) Comparer : si la quantité et la vitesse changent ensemble, on ne sait pas laquelle agit sur la taille des cristaux. Pour comparer, une seule condition doit changer. Koffi doit garder la même quantité sur les deux lames.",
+              "answers": [
+                {
+                  "content": "Oui, car la vitesse de refroidissement est la seule condition qui compte",
+                  "correct": false
+                },
+                {
+                  "content": "Oui, car il y a plus de cristaux",
+                  "correct": false
+                },
+                {
+                  "content": "Non, car deux conditions changent : la quantité et la vitesse",
+                  "correct": true
+                },
+                {
+                  "content": "Non, car la vanilline n'existe plus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la nature, le refroidissement lent en profondeur donne un granite, de structure ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. 4) Transposer : le granite a refroidi lentement en profondeur et a de gros cristaux collés. Sa structure est grenue.",
+              "answers": [
+                {
+                  "content": "grenue",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux roches, une carrière et un volcan",
+          "statement": "Document 1. Dans une carrière, on extrait une roche X : à l'œil nu, elle montre des grains gris brillants, des grains roses et des paillettes noires, collés les uns aux autres. Document 2. Sur le flanc d'un volcan, une matière rouge très chaude coule après une éruption. Quand elle a refroidi, elle forme une roche Y, noire, sans cristal visible à l'œil nu ; au microscope, on voit de très petits cristaux dans du verre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Comment s'appelle la matière rouge qui coule sur le flanc du volcan ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : la matière est à la surface du sol, sur le flanc du volcan. 2) Nommer : en surface, le magma s'appelle la lave. Le magma désigne la matière quand elle est en profondeur.",
+              "answers": [
+                {
+                  "content": "Le magma",
+                  "correct": false
+                },
+                {
+                  "content": "Le granite",
+                  "correct": false
+                },
+                {
+                  "content": "La cheminée",
+                  "correct": false
+                },
+                {
+                  "content": "La lave",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet du magma jusqu'à la roche Y.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 3) Suivre le trajet : chambre magmatique, cheminée, cratère. 2) Nommer : en surface, c'est de la lave. 4) Conclure : en refroidissant vite en surface, la lave forme une roche volcanique.",
+              "answers": [
+                {
+                  "content": "Le magma est dans la chambre magmatique."
+                },
+                {
+                  "content": "Le magma monte dans la cheminée."
+                },
+                {
+                  "content": "Le magma sort par le cratère et devient de la lave."
+                },
+                {
+                  "content": "La lave refroidit vite et forme la roche Y."
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux conditions de formation de la roche Y ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 2) Repérer la structure : microlithes dans du verre. 3) Déduire : cristaux minuscules, donc refroidissement rapide. 4) Conclure : roche volcanique, formée en surface. En profondeur et avec de gros cristaux, on a le granite.",
+              "answers": [
+                {
+                  "content": "Elle s'est formée à la surface",
+                  "correct": true
+                },
+                {
+                  "content": "Le refroidissement a été rapide",
+                  "correct": true
+                },
+                {
+                  "content": "Elle s'est formée en profondeur",
+                  "correct": false
+                },
+                {
+                  "content": "Le refroidissement a été lent",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est faite de gros cristaux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles trois informations permettent d'identifier la roche X comme un granite ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. 1) Observer : cristaux visibles à l'œil nu. 2) Identifier : quartz, feldspath, mica. 3) Déduire : refroidissement lent. 4) Conclure : roche plutonique, un granite. La pâte de verre avec microlithes et la couleur noire sans cristal visible décrivent le basalte, c'est-à-dire la roche Y.",
+              "answers": [
+                {
+                  "content": "Une pâte de verre avec des microlithes",
+                  "correct": false
+                },
+                {
+                  "content": "Une formation lente en profondeur",
+                  "correct": true
+                },
+                {
+                  "content": "Des grains de quartz, de feldspath et de mica",
+                  "correct": true
+                },
+                {
+                  "content": "Une couleur noire sans cristal visible",
+                  "correct": false
+                },
+                {
+                  "content": "Des cristaux visibles à l'œil nu et collés",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle phrase explique le mieux la différence entre X et Y ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Comparer les cristaux : gros pour X, minuscules pour Y. 2) Appliquer la règle : lent, gros cristaux ; rapide, petits cristaux. 3) Conclure : X a refroidi lentement en profondeur, Y vite en surface. Une phrase qui inverse la règle est fausse, et une phrase qui dit que X et Y ont refroidi à la même vitesse oublie que leurs cristaux n'ont pas la même taille.",
+              "answers": [
+                {
+                  "content": "X a refroidi vite en surface, donc ses cristaux sont gros ; Y a refroidi lentement en profondeur",
+                  "correct": false
+                },
+                {
+                  "content": "X a refroidi lentement en profondeur, donc ses cristaux sont gros ; Y a refroidi vite en surface, donc ses cristaux sont très petits",
+                  "correct": true
+                },
+                {
+                  "content": "X et Y ont refroidi à la même vitesse, mais dans des endroits différents",
+                  "correct": false
+                },
+                {
+                  "content": "X est un magma et Y est une lave, ce ne sont pas des roches",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le granite et le basalte viennent tous deux du refroidissement d'un magma.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Toutes les roches magmatiques se forment par le refroidissement du magma ou de la lave. Le granite refroidit en profondeur, lentement ; le basalte en surface, rapidement. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La roche X est une roche ___ et la roche Y est une roche volcanique.",
+              "question_type": "select",
+              "explanation": "Méthode. X a refroidi lentement en profondeur : c'est une roche plutonique. Y a refroidi vite en surface : c'est une roche volcanique. Les deux ne peuvent pas être de même type puisqu'elles n'ont pas refroidi au même endroit.",
+              "answers": [
+                {
+                  "content": "volcanique",
+                  "correct": false
+                },
+                {
+                  "content": "liquide",
+                  "correct": false
+                },
+                {
+                  "content": "plutonique",
+                  "correct": true
+                },
+                {
+                  "content": "gazeuse",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Magma, lave, volcan ; basalte et structure microlithique ; granite et structure grenue ; vitesse de refroidissement et taille des cristaux.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur de SVT interroge la classe sur le volcan.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Sous le sol, magma ; sur le sol, lave.",
+              "questions": [
+                {
+                  "content": "Quelle matière se trouve dans la chambre magmatique d'un volcan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : la chambre magmatique est en profondeur. 2) Nommer : en profondeur, c'est du magma. La lave est le magma arrivé à la surface, le basalte et le granite sont des roches.",
+                  "answers": [
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer : on place chaque mot sous le sol ou à la surface. 2) Nommer : magma en profondeur, lave en surface. 3) Suivre le trajet : le magma monte par la cheminée et sort par le cratère.",
+                  "answers": [
+                    {
+                      "content": "Magma",
+                      "match": "Roche fondue qui contient des gaz, en profondeur"
+                    },
+                    {
+                      "content": "Lave",
+                      "match": "Magma arrivé à la surface du sol"
+                    },
+                    {
+                      "content": "Cheminée",
+                      "match": "Conduit par où le magma monte"
+                    },
+                    {
+                      "content": "Cratère",
+                      "match": "Ouverture par où sortent lave et gaz"
+                    }
+                  ]
+                },
+                {
+                  "content": "La lave qui refroidit en surface forme une roche volcanique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : la lave est à la surface. 4) Conclure : refroidie en surface, elle forme une roche volcanique. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un magma qui refroidit lentement en profondeur forme une roche ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Repérer : le refroidissement a lieu en profondeur. 4) Conclure : une roche plutonique se forme en profondeur, une roche volcanique en surface.",
+                  "answers": [
+                    {
+                      "content": "plutonique",
+                      "correct": true
+                    },
+                    {
+                      "content": "volcanique",
+                      "correct": false
+                    },
+                    {
+                      "content": "gazeuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "de surface",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet du magma pendant une éruption.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 3) Suivre le trajet : chambre magmatique, cheminée, cratère. 2) Nommer : à la sortie, le magma devient de la lave qui coule sur les flancs.",
+                  "answers": [
+                    {
+                      "content": "Le magma est dans la chambre magmatique."
+                    },
+                    {
+                      "content": "Le magma monte dans la cheminée."
+                    },
+                    {
+                      "content": "Le magma sort par le cratère."
+                    },
+                    {
+                      "content": "La lave coule sur les flancs du volcan."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au laboratoire, des élèves de 4ème étudient un échantillon de basalte.",
+              "exercise_type": "evaluation",
+              "figure": "structure-basalte",
+              "hint": "Un basalte : surface, refroidissement rapide, cristaux minuscules.",
+              "questions": [
+                {
+                  "content": "Quelle est la structure du basalte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 2) Repérer la structure : de très petits cristaux, les microlithes, dans du verre. C'est la structure microlithique. La structure grenue est celle du granite.",
+                  "answers": [
+                    {
+                      "content": "Grenue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Microlithique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Feuilletée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Liquide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les très petits cristaux d'un basalte s'appellent des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 2) Repérer la structure : le basalte contient des microlithes dans du verre. Ils ne se voient qu'au microscope.",
+                  "answers": [
+                    {
+                      "content": "microlithes",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À l'œil nu, on voit de gros cristaux dans un basalte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Observer : à l'œil nu, aucun cristal n'est visible dans un basalte. 3) Déduire : ses cristaux sont minuscules car le refroidissement a été rapide. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux caractéristiques du basalte ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Observer : roche sombre. 4) Conclure : roche volcanique, formée en surface. Le refroidissement lent en profondeur et les gros cristaux sont ceux du granite.",
+                  "answers": [
+                    {
+                      "content": "Il s'est formé lentement en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il s'est formé à la surface",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est sombre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il contient de gros cristaux de quartz",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le basalte est une roche ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 3) Déduire : refroidissement rapide. 4) Conclure : la lave a refroidi en surface, c'est une roche volcanique.",
+                  "answers": [
+                    {
+                      "content": "volcanique",
+                      "correct": true
+                    },
+                    {
+                      "content": "plutonique",
+                      "correct": false
+                    },
+                    {
+                      "content": "gazeuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "liquide",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une carrière de la région, un ouvrier présente un bloc de granite aux élèves.",
+              "exercise_type": "evaluation",
+              "figure": "granite-mineraux",
+              "hint": "Un granite : gros cristaux visibles à l'œil nu, collés les uns aux autres.",
+              "questions": [
+                {
+                  "content": "Quelle est la structure du granite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : les cristaux sont visibles à l'œil nu et collés. La structure est grenue. La structure microlithique est celle du basalte.",
+                  "answers": [
+                    {
+                      "content": "Microlithique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Grenue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vitreuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Feuilletée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois minéraux du granite ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 2) Identifier : quartz, feldspath et mica sont les trois minéraux du granite. Le verre appartient au basalte et la lave est du magma sorti en surface.",
+                  "answers": [
+                    {
+                      "content": "Le verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque minéral à son aspect.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 2) Identifier : on reconnaît chaque minéral à sa couleur et à son aspect.",
+                  "answers": [
+                    {
+                      "content": "Quartz",
+                      "match": "Gris, brillant, translucide"
+                    },
+                    {
+                      "content": "Feldspath",
+                      "match": "Blanc ou rose"
+                    },
+                    {
+                      "content": "Mica",
+                      "match": "Noir, en petites paillettes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les paillettes noires brillantes du granite sont du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 2) Identifier : les paillettes noires brillantes sont du mica. Le quartz est gris, le feldspath blanc ou rose.",
+                  "answers": [
+                    {
+                      "content": "mica",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite se forme en profondeur, par un refroidissement lent.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 3) Déduire : gros cristaux, donc refroidissement lent. 4) Conclure : roche plutonique, formée en profondeur. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au laboratoire, le professeur fait refroidir de la vanilline fondue de deux façons, puis les élèves mesurent la taille des cristaux (valeurs fictives : 6 mm et 1 mm).",
+              "exercise_type": "evaluation",
+              "figure": "taille-cristaux",
+              "hint": "Lent, gros cristaux ; rapide, petits cristaux.",
+              "questions": [
+                {
+                  "content": "Quand la vanilline fondue refroidit lentement, comment sont les cristaux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : le refroidissement lent donne les cristaux de 6 mm. 3) Conclure sur le lien : refroidissement lent, gros cristaux.",
+                  "answers": [
+                    {
+                      "content": "Très petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gros",
+                      "correct": true
+                    },
+                    {
+                      "content": "Absents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toujours égaux à ceux d'un refroidissement rapide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour comparer deux lames, il faut changer en même temps la vitesse et la quantité de vanilline.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 2) Comparer : une seule condition doit changer. Si deux changent, on ne sait pas laquelle agit. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite a de gros cristaux car il a refroidi ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 4) Transposer : gros cristaux, donc refroidissement lent, en profondeur.",
+                  "answers": [
+                    {
+                      "content": "vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "en surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "lentement",
+                      "correct": true
+                    },
+                    {
+                      "content": "sans durcir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le basalte a des cristaux très petits car il a refroidi ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 4) Transposer : la lave refroidit vite en surface, ce qui donne des cristaux minuscules.",
+                  "answers": [
+                    {
+                      "content": "vite",
+                      "correct": true
+                    },
+                    {
+                      "content": "rapidement",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cristaux mesurent 6 mm sur la lame lente et 1 mm sur la lame rapide. De combien de millimètres la lame lente a-t-elle des cristaux plus longs ?",
+                  "question_type": "numeric",
+                  "unit": "mm",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Observer : 6 mm et 1 mm. 2) Comparer : on soustrait, 6 − 1 = 5. Les cristaux de la lame lente sont plus longs de 5 mm.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Granite des carrières, sortie de classe, exposition d'échantillons au collège, lecture d'un reportage sur un volcan.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "La classe de 4ème visite une carrière de granite. Un ouvrier montre un bloc et répond aux questions des élèves.",
+              "exercise_type": "evaluation",
+              "figure": "granite-mineraux",
+              "hint": "Un granite : cristaux visibles, refroidissement lent, formation en profondeur.",
+              "questions": [
+                {
+                  "content": "L'ouvrier montre un bloc aux grains gris, roses et noirs, visibles à l'œil nu. Quelle roche est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : cristaux visibles à l'œil nu. 2) Identifier : quartz, feldspath, mica. 4) Conclure : un granite. Le basalte n'a pas de cristal visible à l'œil nu.",
+                  "answers": [
+                    {
+                      "content": "Un basalte",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un granite",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En Côte d'Ivoire, on exploite le granite dans des carrières.",
+                  "question_type": "true_false",
+                  "explanation": "Le granite est très répandu en Côte d'Ivoire et on l'exploite dans des carrières. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où le granite s'est-il formé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Déduire : de gros cristaux montrent un refroidissement lent. 4) Conclure : formation en profondeur. La lave qui refroidit vite en surface forme des roches volcaniques.",
+                  "answers": [
+                    {
+                      "content": "En profondeur, par le refroidissement lent du magma",
+                      "correct": true
+                    },
+                    {
+                      "content": "À la surface, par le refroidissement rapide de la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'air, à partir de cendres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le cratère d'un volcan en éruption",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite est une roche ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 4) Conclure : il s'est formé en profondeur, c'est une roche plutonique.",
+                  "answers": [
+                    {
+                      "content": "volcanique",
+                      "correct": false
+                    },
+                    {
+                      "content": "plutonique",
+                      "correct": true
+                    },
+                    {
+                      "content": "liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "gazeuse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La structure du granite, aux cristaux visibles à l'œil nu, est dite ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Observer : les cristaux sont collés et visibles, comme des grains. La structure est grenue.",
+                  "answers": [
+                    {
+                      "content": "grenue",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Pour l'exposition du club scientifique du collège, Aya prépare des étiquettes pour deux échantillons : un granite et un basalte.",
+              "exercise_type": "evaluation",
+              "figure": "comparaison-roches",
+              "hint": "Granite : cristaux visibles. Basalte : cristaux seulement au microscope.",
+              "questions": [
+                {
+                  "content": "Relie chaque description à l'étiquette qui lui convient.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Observer : la roche claire aux gros cristaux collés est un granite. 2) Repérer la structure : une roche sombre aux microlithes dans du verre est un basalte.",
+                  "answers": [
+                    {
+                      "content": "Roche claire aux gros cristaux collés",
+                      "match": "Granite"
+                    },
+                    {
+                      "content": "Roche sombre aux microlithes dans du verre",
+                      "match": "Basalte"
+                    },
+                    {
+                      "content": "Matière rouge qui coule sur le flanc du volcan",
+                      "match": "Lave"
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur l'étiquette du basalte, Aya écrit le mode de formation. Que doit-elle écrire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Déduire : cristaux minuscules, refroidissement rapide. 4) Conclure : la lave refroidit en surface. Le refroidissement lent en profondeur correspond au granite.",
+                  "answers": [
+                    {
+                      "content": "Refroidissement lent du magma en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dépôt de sable au fond de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Refroidissement rapide de la lave en surface",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fusion d'une roche à la maison",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur l'étiquette du granite, quelle structure doit figurer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : les cristaux du granite sont visibles à l'œil nu. La structure est grenue.",
+                  "answers": [
+                    {
+                      "content": "Microlithique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vitreuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Grenue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux informations qui conviennent à l'étiquette du granite ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 2) Identifier : quartz, feldspath, mica. 4) Conclure : roche plutonique. Roche volcanique et microlithes décrivent le basalte.",
+                  "answers": [
+                    {
+                      "content": "Roche plutonique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Roche volcanique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Contient des microlithes dans du verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Contient du quartz, du feldspath et du mica",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un visiteur de l'exposition peut voir les microlithes du basalte à l'œil nu.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Observer : les microlithes sont de très petits cristaux, visibles seulement au microscope. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pendant la sortie, le professeur demande aux élèves de noter leurs observations dans l'ordre. Voici le carnet de Yao.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Observer d'abord, conclure à la fin.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes du carnet de Yao devant un bloc de granite.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. On suit la fiche : 1) Observer, 2) Identifier les minéraux, 3) Déduire la vitesse de refroidissement, 4) Conclure.",
+                  "answers": [
+                    {
+                      "content": "Observer les cristaux à l'œil nu."
+                    },
+                    {
+                      "content": "Identifier le quartz, le feldspath et le mica."
+                    },
+                    {
+                      "content": "Déduire que le refroidissement a été lent."
+                    },
+                    {
+                      "content": "Conclure : roche plutonique, un granite."
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao écrit : « Les cristaux sont gros. » Que peut-il en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Déduire : plus le refroidissement est lent, plus les cristaux sont gros. Des gros cristaux indiquent donc un refroidissement lent.",
+                  "answers": [
+                    {
+                      "content": "Le refroidissement a été rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche est un magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le refroidissement a été lent",
+                      "correct": true
+                    },
+                    {
+                      "content": "La roche est de la lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao note que les paillettes noires brillantes sont du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 2) Identifier : les paillettes noires brillantes sont du mica.",
+                  "answers": [
+                    {
+                      "content": "mica",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao peut conclure que la roche est un basalte parce qu'elle est dure.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 4) Conclure : on ne conclut pas à cause de la dureté, mais à cause de la structure et des minéraux. Des gros cristaux de quartz, feldspath et mica indiquent un granite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite de la carrière s'est formé en ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 4) Conclure : roche plutonique, donc formée en profondeur.",
+                  "answers": [
+                    {
+                      "content": "surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "plein air",
+                      "correct": false
+                    },
+                    {
+                      "content": "mer",
+                      "correct": false
+                    },
+                    {
+                      "content": "profondeur",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un magazine, Fanta lit un reportage sur une éruption : « Du cratère, des gaz et une matière rouge très chaude s'échappent. Elle coule sur le flanc du volcan puis durcit. »",
+              "exercise_type": "evaluation",
+              "figure": "volcan",
+              "hint": "Sous le sol, magma ; sur le sol, lave.",
+              "questions": [
+                {
+                  "content": "Comment s'appelle la matière rouge qui coule sur le flanc du volcan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : la matière est à la surface. 2) Nommer : en surface, c'est de la lave.",
+                  "answers": [
+                    {
+                      "content": "La lave",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "La cheminée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle roche se forme quand cette matière durcit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 4) Conclure : la lave refroidit en surface et forme une roche volcanique, comme le basalte. Les roches plutoniques se forment en profondeur.",
+                  "answers": [
+                    {
+                      "content": "Une roche plutonique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une roche volcanique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un granite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le magma contient des gaz.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 2) Nommer : le magma est une roche fondue très chaude qui contient des gaz. Ils s'échappent du cratère pendant l'éruption.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les gaz et la lave sortent par le ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 3) Suivre le trajet : le magma monte par la cheminée et sort par le cratère. Le granite et le basalte sont des roches, le mica un minéral.",
+                  "answers": [
+                    {
+                      "content": "granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "basalte",
+                      "correct": false
+                    },
+                    {
+                      "content": "cratère",
+                      "correct": true
+                    },
+                    {
+                      "content": "mica",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque lieu à ce qu'il contient.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer : profondeur ou surface. 2) Nommer : magma en profondeur, lave en surface. 4) Conclure : la lave refroidie forme une roche volcanique.",
+                  "answers": [
+                    {
+                      "content": "Chambre magmatique",
+                      "match": "Du magma"
+                    },
+                    {
+                      "content": "Flanc du volcan en éruption",
+                      "match": "De la lave qui coule"
+                    },
+                    {
+                      "content": "Sol refroidi après l'éruption",
+                      "match": "Une roche volcanique"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Lire un tableau de résultats, critiquer une expérience, retrouver la formation d'une roche à partir de sa description, corriger des affirmations d'élèves.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un groupe d'élèves fait refroidir de la vanilline fondue sur trois lames identiques, avec la même quantité. Résultats (valeurs fictives) : lame A, refroidissement en 30 minutes, cristaux de 6 mm ; lame B, en 10 minutes, cristaux de 3 mm ; lame C, en 1 minute, cristaux de 1 mm.",
+              "exercise_type": "evaluation",
+              "figure": "taille-cristaux",
+              "hint": "Compare la durée de refroidissement et la taille des cristaux.",
+              "questions": [
+                {
+                  "content": "Quelle lame a refroidi le plus lentement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : A refroidit en 30 minutes, B en 10, C en 1. 2) Comparer : la durée la plus longue est la plus lente, c'est la lame A.",
+                  "answers": [
+                    {
+                      "content": "La lame B",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lame C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune, elles ont refroidi à la même vitesse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lame A",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la taille des cristaux de la lame qui a refroidi le plus vite ?",
+                  "question_type": "numeric",
+                  "unit": "mm",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Observer : la lame C refroidit en 1 minute, la plus courte durée. 2) Lire : ses cristaux mesurent 1 mm.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion les résultats permettent-ils ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Conclure : de A à C, le refroidissement accélère et les cristaux passent de 6 à 3 puis à 1 mm. Plus c'est lent, plus ils sont gros.",
+                  "answers": [
+                    {
+                      "content": "Plus le refroidissement est lent, plus les cristaux sont gros",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus le refroidissement est lent, plus les cristaux sont petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "La durée n'a aucun effet sur les cristaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seule la lame B donne des cristaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ces résultats permettent de comparer, car seule la durée de refroidissement change d'une lame à l'autre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 2) Comparer : la substance, la quantité et les lames sont les mêmes ; seule la durée change. On peut donc conclure sur son effet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lame D refroidit en 2 minutes. Ses cristaux seront probablement :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 4) Transposer au cas D : 2 minutes est une durée courte, proche de la lame C. Ses cristaux seront petits, donc plus petits que les 6 mm de la lame A : ils ne peuvent pas être plus gros que ceux de A, ni exactement de la même taille.",
+                  "answers": [
+                    {
+                      "content": "Plus gros que ceux de la lame A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus petits que ceux de la lame A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Exactement de 6 mm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Absents",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mariam veut montrer que la vitesse de refroidissement agit sur la taille des cristaux. Elle prépare la lame X avec 1 g de vanilline posée dans une salle chaude, et la lame Y avec 3 g de vanilline posée sur une plaque froide.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une expérience correcte ne change qu'une seule condition.",
+              "questions": [
+                {
+                  "content": "Quel est le défaut de l'expérience de Mariam ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 2) Comparer : les lames X et Y diffèrent par la quantité et par la vitesse. On ne sait donc pas laquelle agit sur les cristaux. Une seule condition doit changer.",
+                  "answers": [
+                    {
+                      "content": "Elle utilise de la vanilline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle utilise des lames de verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux conditions changent : la quantité de vanilline et la vitesse de refroidissement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle prépare deux lames",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment corriger l'expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 2) Comparer : on garde la même quantité sur les deux lames pour que la vitesse soit la seule condition qui change. Refroidir les deux lames de la même façon supprimerait la comparaison.",
+                  "answers": [
+                    {
+                      "content": "Mettre 3 g sur X et 1 g sur Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Refroidir les deux lames à la même vitesse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne garder que la lame Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mettre la même quantité de vanilline sur les deux lames",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam peut conclure sûrement avec sa première expérience.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 3) Conclure : on ne peut pas conclure quand deux conditions changent en même temps. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux conditions doivent rester identiques pour les deux lames ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 2) Comparer : la substance et la quantité restent identiques. La vitesse est la condition qu'on fait varier, et la taille des cristaux est le résultat qu'on observe.",
+                  "answers": [
+                    {
+                      "content": "La substance utilisée",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse de refroidissement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La quantité de substance",
+                      "correct": true
+                    },
+                    {
+                      "content": "La taille des cristaux obtenus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le temps de refroidissement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une bonne expérience, une seule ___ change : la vitesse de refroidissement.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 2) Comparer : pour savoir ce qui agit, on ne fait varier qu'une seule condition à la fois.",
+                  "answers": [
+                    {
+                      "content": "condition",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève décrit trois matières. R1 : gros cristaux visibles, quartz, feldspath et mica. R2 : noire, aucun cristal visible à l'œil nu, microlithes dans du verre au microscope. R3 : matière rouge qui coule sur le flanc d'un volcan.",
+              "exercise_type": "evaluation",
+              "figure": "comparaison-roches",
+              "hint": "Pour chaque description, observe, déduis la vitesse de refroidissement, puis conclus.",
+              "questions": [
+                {
+                  "content": "Relie chaque description à ce qu'elle désigne.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. R1 : gros cristaux de quartz, feldspath et mica, donc granite. R2 : microlithes dans du verre, donc basalte. R3 : matière fondue en surface, donc lave, qui n'est pas encore une roche solide.",
+                  "answers": [
+                    {
+                      "content": "R1",
+                      "match": "Un granite"
+                    },
+                    {
+                      "content": "R2",
+                      "match": "Un basalte"
+                    },
+                    {
+                      "content": "R3",
+                      "match": "De la lave"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle roche s'est formée par le refroidissement le plus lent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Déduire : R1 a de gros cristaux, donc un refroidissement lent. R2 a des cristaux minuscules, donc un refroidissement rapide. R3 est encore de la lave.",
+                  "answers": [
+                    {
+                      "content": "R2",
+                      "correct": false
+                    },
+                    {
+                      "content": "R3",
+                      "correct": false
+                    },
+                    {
+                      "content": "R1",
+                      "correct": true
+                    },
+                    {
+                      "content": "R2 et R3 de la même façon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que deviendra R3 en refroidissant à la surface ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 4) Conclure : la lave qui refroidit vite en surface forme une roche volcanique, comme le basalte R2. Les roches plutoniques se forment en profondeur.",
+                  "answers": [
+                    {
+                      "content": "Une roche plutonique, comme R1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une roche volcanique, comme R2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux roches volcaniques ou en train de le devenir ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. R2 est un basalte, roche volcanique. R3 est de la lave qui formera une roche volcanique. R1 est un granite, roche plutonique.",
+                  "answers": [
+                    {
+                      "content": "R1",
+                      "correct": false
+                    },
+                    {
+                      "content": "R2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune des trois",
+                      "correct": false
+                    },
+                    {
+                      "content": "R3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "R1 s'est formée en profondeur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 3) Déduire : de gros cristaux, refroidissement lent. 4) Conclure : roche plutonique formée en profondeur. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux élèves discutent. Issa dit : « Le granite a de gros cristaux parce qu'il a refroidi vite. » Rama répond : « Non. Le magma et la lave, c'est la même chose, et le basalte est un magma. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Corrige chaque affirmation avec la règle du cours.",
+              "questions": [
+                {
+                  "content": "Que penses-tu de la phrase d'Issa ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Conclure sur le lien : lent, gros cristaux ; rapide, petits cristaux. Le granite a refroidi lentement en profondeur. La phrase d'Issa inverse la règle.",
+                  "answers": [
+                    {
+                      "content": "Elle est vraie : un refroidissement rapide donne de gros cristaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est vraie, car le granite se forme en surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse : de gros cristaux demandent un refroidissement lent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est fausse, car le granite n'a pas de cristaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que penses-tu de la phrase de Rama sur le magma et la lave ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : sous le sol, magma ; sur le sol, lave. Les deux mots ne sont donc pas interchangeables.",
+                  "answers": [
+                    {
+                      "content": "Elle est vraie : ce sont deux mots pour la même chose en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse, car la lave est un gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est vraie, car le magma est toujours à la surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse : le magma est en profondeur et la lave est le magma arrivé en surface",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le basalte est une roche, et non un magma.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Le basalte est une roche solide formée par le refroidissement de la lave. Le magma est une roche fondue. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour corriger Issa, on dit que le granite a refroidi ___ en profondeur.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 4) Transposer : gros cristaux, donc refroidissement lent en profondeur.",
+                  "answers": [
+                    {
+                      "content": "lentement",
+                      "correct": true
+                    },
+                    {
+                      "content": "vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "en surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "jamais",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 4) Transposer : le basalte est une roche volcanique, formée en surface par un refroidissement rapide. Ses cristaux, les microlithes, sont minuscules, mais ils existent.",
+                  "answers": [
+                    {
+                      "content": "Le basalte refroidit lentement en profondeur et a de gros cristaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte refroidit vite en surface et a de très petits cristaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le basalte est du magma qui refroidit en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte n'a jamais de cristaux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan des roches endogènes",
+          "notions": "Du magma à la roche : volcan, basalte, granite, vitesse de refroidissement et structure ; comparaison des deux roches.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Après la sortie, le professeur demande de résumer la formation d'une roche volcanique à partir du magma.",
+              "exercise_type": "evaluation",
+              "figure": "volcan",
+              "hint": "Chambre, cheminée, cratère, lave, refroidissement rapide.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre la formation d'un basalte.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 3) Suivre le trajet : chambre, cheminée, cratère. 2) Nommer : lave en surface. 4) Conclure : refroidie vite, elle forme une roche volcanique, un basalte.",
+                  "answers": [
+                    {
+                      "content": "Le magma est dans la chambre magmatique."
+                    },
+                    {
+                      "content": "Le magma monte dans la cheminée et sort par le cratère."
+                    },
+                    {
+                      "content": "Le magma devient de la lave en surface."
+                    },
+                    {
+                      "content": "La lave refroidit vite et forme un basalte."
+                    }
+                  ]
+                },
+                {
+                  "content": "La matière arrivée à la surface s'appelle la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 2) Nommer : en surface, le magma s'appelle la lave.",
+                  "answers": [
+                    {
+                      "content": "roche plutonique",
+                      "correct": false
+                    },
+                    {
+                      "content": "cheminée",
+                      "correct": false
+                    },
+                    {
+                      "content": "lave",
+                      "correct": true
+                    },
+                    {
+                      "content": "chambre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les cristaux du basalte sont-ils minuscules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Déduire : un refroidissement rapide empêche les cristaux de grossir. Un refroidissement lent donnerait de gros cristaux.",
+                  "answers": [
+                    {
+                      "content": "Le magma a refroidi lentement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte est du verre pur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a jamais refroidi",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lave a refroidi vite",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le basalte est une roche volcanique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 4) Conclure : formé par la lave refroidie en surface, il est volcanique. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La structure du basalte est dite ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 2) Repérer la structure : microlithes dans du verre, donc microlithique.",
+                  "answers": [
+                    {
+                      "content": "microlithique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On compare deux roches : le granite et le basalte.",
+              "exercise_type": "evaluation",
+              "figure": "comparaison-roches",
+              "hint": "Le granite : profondeur, lent, gros cristaux. Le basalte : surface, rapide, petits cristaux.",
+              "questions": [
+                {
+                  "content": "Relie chaque roche à ses caractères.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Le granite est plutonique et grenu ; le basalte est volcanique et microlithique. Le quartz et le mica sont deux minéraux du granite.",
+                  "answers": [
+                    {
+                      "content": "Granite",
+                      "match": "Plutonique, structure grenue"
+                    },
+                    {
+                      "content": "Basalte",
+                      "match": "Volcanique, structure microlithique"
+                    },
+                    {
+                      "content": "Quartz",
+                      "match": "Minéral gris et translucide du granite"
+                    },
+                    {
+                      "content": "Mica",
+                      "match": "Minéral noir en paillettes du granite"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux caractéristiques du granite ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 3) Déduire : gros cristaux, refroidissement lent. 4) Conclure : plutonique, formé en profondeur. Le refroidissement rapide et les microlithes sont ceux du basalte.",
+                  "answers": [
+                    {
+                      "content": "Il se forme en profondeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se forme par un refroidissement rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il contient des microlithes dans du verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ses cristaux sont visibles à l'œil nu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont trois caractéristiques du basalte ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 1) Observer : roche sombre. 3) Déduire : refroidissement rapide, cristaux minuscules. 4) Conclure : formation en surface. Les gros cristaux et la profondeur sont ceux du granite.",
+                  "answers": [
+                    {
+                      "content": "Gros cristaux visibles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Formation en surface",
+                      "correct": true
+                    },
+                    {
+                      "content": "Formation en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Roche sombre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Refroidissement rapide",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite et le basalte ont la même structure.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Le granite est grenu et le basalte est microlithique. La taille des cristaux est différente, car la vitesse de refroidissement l'est.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roche a de très petits cristaux. Comment a-t-elle refroidi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Déduire : cristaux minuscules, donc refroidissement rapide. 4) Conclure : formation en surface.",
+                  "answers": [
+                    {
+                      "content": "Lentement, en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vite, en surface",
+                      "correct": true
+                    },
+                    {
+                      "content": "Lentement, en surface",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas refroidi",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour étudier la taille des cristaux, un professeur fait refroidir de la vanilline fondue sur deux lames identiques : l'une lentement, l'autre vite. Sur la lame lente, les cristaux mesurent 6 mm ; sur la lame rapide, 1 mm (valeurs fictives).",
+              "exercise_type": "evaluation",
+              "figure": "taille-cristaux",
+              "hint": "Observer, comparer, conclure, transposer aux roches.",
+              "questions": [
+                {
+                  "content": "Quelle est la condition qui change ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 2) Comparer : les lames, la substance et la quantité sont identiques. Seule la vitesse change.",
+                  "answers": [
+                    {
+                      "content": "La substance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La quantité",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse de refroidissement",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lame de verre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cristaux de la lame lente mesurent 6 mm. Ils sont combien de fois plus longs que ceux de la lame rapide (1 mm) ?",
+                  "question_type": "numeric",
+                  "unit": "fois",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Observer : 6 mm et 1 mm. 2) Comparer : 6 ÷ 1 = 6, donc 6 fois plus longs.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 3) Conclure : le refroidissement lent donne 6 mm, le rapide 1 mm. Plus c'est lent, plus ils sont gros.",
+                  "answers": [
+                    {
+                      "content": "Plus le refroidissement est lent, plus les cristaux sont petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse ne change rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seule la lame lente a des cristaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus le refroidissement est lent, plus les cristaux sont gros",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à celui de la nature dont il se rapproche.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 4) Transposer : le granite a refroidi lentement en profondeur, comme la lame lente ; le basalte a refroidi vite en surface, comme la lame rapide.",
+                  "answers": [
+                    {
+                      "content": "Lame lente",
+                      "match": "Granite"
+                    },
+                    {
+                      "content": "Lame rapide",
+                      "match": "Basalte"
+                    },
+                    {
+                      "content": "Vanilline fondue",
+                      "match": "Magma ou lave"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite ressemble à la lame refroidie vite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 4) Transposer : le granite a de gros cristaux, comme la lame refroidie lentement. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur propose un bilan sous forme d'affirmations sur les roches endogènes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Sous le sol, magma ; sur le sol, lave ; en profondeur, roche plutonique.",
+              "questions": [
+                {
+                  "content": "Quelle phrase définit le magma ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 2) Nommer : le magma est une roche fondue très chaude, avec des gaz, en profondeur. La roche dure à cristaux est une roche, le liquide qui coule sur le sol est de la lave, le minéral gris est le quartz.",
+                  "answers": [
+                    {
+                      "content": "Une roche fondue, très chaude, qui contient des gaz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une roche dure qui contient des cristaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un liquide qui coule sur le sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un minéral gris et translucide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lave qui refroidit lentement en profondeur forme du granite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : la lave est en surface, le magma est en profondeur. C'est le magma qui refroidit lentement en profondeur et forme le granite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux roches magmatiques ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Le granite et le basalte sont deux roches formées par le refroidissement du magma ou de la lave. Le quartz et le mica sont des minéraux du granite, et la lave est une matière fondue.",
+                  "answers": [
+                    {
+                      "content": "Le quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le granite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mica",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roche formée en profondeur par un refroidissement lent est une roche ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 4) Conclure : profondeur et refroidissement lent donnent une roche plutonique.",
+                  "answers": [
+                    {
+                      "content": "volcanique",
+                      "correct": false
+                    },
+                    {
+                      "content": "liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "gazeuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "plutonique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le minéral gris, brillant et translucide du granite est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 2) Identifier : le quartz est gris, brillant et translucide. Le feldspath est blanc ou rose, le mica noir.",
+                  "answers": [
+                    {
+                      "content": "quartz",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
