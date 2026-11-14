@@ -32,6 +32,26 @@ class MathRenderingTest < ApplicationSystemTestCase
     assert_no_text "overrightarrow{DC}"
   end
 
+  # PR #626, tâche `lecons` : des éléments math imbriqués (la feuille, l'exercice) dont un texte garde un « $ » seul (une formule coupée
+  # par une case à remplir) se renvoyaient leurs mutations sans fin, et la page ne se reposait jamais. Le rendu doit se poser.
+  test "des éléments math imbriqués avec un « $ » seul se posent, sans mutations sans fin" do
+    visit root_path
+    page.execute_script(<<~JS)
+      window.mutations = 0
+      new MutationObserver((records) => { window.mutations += records.length }).observe(document.body, { childList: true, subtree: true, characterData: true })
+      document.body.insertAdjacentHTML("beforeend", '<div id="sheet" data-controller="math"><p>Feuille $a$</p><section data-controller="math"><span id="cut" data-controller="math">Loi : $I = \\dfrac{E}{ </span><span data-controller="math">Aire $\\pi r^2$</span></section></div>')
+    JS
+    assert_selector "#sheet .katex", count: 2
+
+    sleep 1
+    settled = page.evaluate_script("window.mutations")
+    sleep 1
+
+    assert_operator page.evaluate_script("window.mutations"), :<=, settled + 5, "le DOM mute encore sans que rien ne change"
+    assert_operator settled, :<, 100
+    assert_text "Loi : $I = \\dfrac{E}{"
+  end
+
   def katex_loaded? = page.evaluate_script("performance.getEntriesByType('resource').some((entry) => entry.name.includes('auto-render'))")
 
   test "le point d'entrée commun ne contient pas KaTeX" do
