@@ -7,7 +7,6 @@ class Teams::DrenaImportTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
 
   IMPORT_WAIT = 20
-  DELIVERED = Rails.root.join("db/seeds/data/imports/drenas-2026.json").to_s
 
   # The team home belongs to a later lot: until it is merged, a stand-in answers where the sign-in lands, as in
   # test/system/identity/sign_in_test.rb. A merged controller is autoloadable, so the stand-in steps aside by itself.
@@ -24,7 +23,7 @@ class Teams::DrenaImportTest < ApplicationSystemTestCase
 
   def upload_delivered_file
     within "turbo-frame#modal dialog[open]" do
-      attach_file "import[files][]", DELIVERED
+      attach_file "import[files][]", drenas_file.path
       click_on "Lancer l'import"
     end
     using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }

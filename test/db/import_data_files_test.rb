@@ -4,12 +4,15 @@ require "test_helper"
 # keyed by Entities::School::Drena.slug_for, are exactly the DRENA cited by the 3 851 schools of
 # etablissements-2026.json, so importing the first then the second yields no unknown_drena error.
 class ImportDataFilesTest < ActiveSupport::TestCase
-  DIR = Rails.root.join("db/seeds/data/imports")
+  # The files live in Lnclassapp/App.Lnclassapp-contenus (referentiel/); CONTENUS_DIR points at a clone of it.
+  DIR = Pathname(ENV.fetch("CONTENUS_DIR", Rails.root.join("tmp/contenus").to_s)).join("referentiel")
   DRENAS_PATH = DIR.join("drenas-2026.json")
   SCHOOLS_PATH = DIR.join("etablissements-2026.json")
 
   # Parsed once per run: the schools file is several hundred kilobytes.
   def self.document(path) = (@documents ||= {})[path] ||= JSON.parse(path.read)
+
+  setup { skip "CONTENUS_DIR absent : cloner Lnclassapp/App.Lnclassapp-contenus" unless DIR.join("drenas-2026.json").exist? }
 
   def drenas = self.class.document(DRENAS_PATH)
   def schools = self.class.document(SCHOOLS_PATH)
