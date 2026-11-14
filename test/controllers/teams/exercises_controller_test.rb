@@ -232,4 +232,75 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_not_equal "Titre corrigé", exercise.reload.title
   end
+
+  DENYING_POLICY = Object.new.tap { |policy| policy.define_singleton_method(:call) { |actor:| Shared::Result.failure(:forbidden) } }
+
+  test "edition-texte-lecon: the policy answers before any reading: refused, the text of the exercise is not shown" do
+    exercise = create_exercise(essential: @essential, questions: 1)
+    sign_in_as @member
+
+    Policies::Catalog::ManageContentPolicy.define_singleton_method(:new) { |*| DENYING_POLICY }
+    get text_teams_exercise_path(exercise.public_id)
+
+    assert_response :forbidden
+    assert_no_match exercise.title, response.body
+  ensure
+    Policies::Catalog::ManageContentPolicy.singleton_class.send(:remove_method, :new)
+  end
+
+  test "edition-texte-lecon: the text of an unknown exercise is not found" do
+    sign_in_as @member
+
+    get text_teams_exercise_path("inconnu")
+
+    assert_response :not_found
+  end
+
+  test "edition-texte-lecon: a list of right answers (one per box) sets which propositions are right" do
+    exercise = create_exercise(essential: @essential, questions: 1)
+    question = exercise.questions.first
+    answers = question.answers.order(:position).to_a
+    sign_in_as @member
+
+    patch text_teams_exercise_path(exercise.public_id), as: :turbo_stream, params: { exercise_text: {
+      title: exercise.title, statement: "", hint: "",
+      questions: { question.id.to_s => { content: "Énoncé", keys: { "0" => answers[2].id.to_s, "1" => { "forgé" => "x" } },
+                                         answers: answers.to_h { [ it.id.to_s, { content: it.content } ] } } }
+    } }
+
+    assert_response :success
+    assert_equal [ 3 ], question.answers.reload.where(correct: true).pluck(:position)
+  end
+
+  test "edition-texte-lecon: the right column of a matching question is corrected with its pair" do
+    exercise = create_exercise(essential: @essential, questions: 0)
+    question = create_kind_question(exercise:, question_type: "matching", answers: [ %w[Paris France], %w[Rome Italie], %w[Madrid Espagne] ])
+    left, right, third = question.answers.order(:position).to_a
+    sign_in_as @member
+
+    patch text_teams_exercise_path(exercise.public_id), as: :turbo_stream, params: { exercise_text: {
+      title: exercise.title, statement: "", hint: "",
+      questions: { question.id.to_s => { content: "Associe", answers: {
+        left.id.to_s => { content: "Paris", match_content: "République française" },
+        right.id.to_s => { content: "Rome", match_content: "Italie" },
+        third.id.to_s => { content: "Madrid", match_content: "Espagne" }
+      } } }
+    } }
+
+    assert_response :success
+    assert_equal [ "République française", "Italie", "Espagne" ], question.answers.reload.order(:position).pluck(:match_content)
+  end
+
+  test "edition-texte-lecon: a questions list or a whole text sent as plain text is refused in 422, not a 500" do
+    exercise = create_exercise(essential: @essential, questions: 1)
+    sign_in_as @member
+
+    [ { exercise_text: { title: "Titre corrigé", questions: "x" } }, { exercise_text: "x" } ].each do |params|
+      patch text_teams_exercise_path(exercise.public_id), params:, as: :turbo_stream
+
+      assert_response :unprocessable_entity
+      assert_select "[role=alert]", text: including(tl("text_errors.structure_changed"))
+    end
+    assert_not_equal "Titre corrigé", exercise.reload.title
+  end
 end

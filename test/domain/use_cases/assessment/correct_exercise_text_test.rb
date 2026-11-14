@@ -58,9 +58,9 @@ module UseCases
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
-      def questions(choice_answers: [ AnswerText.new(id: 11, content: "Deux", match_content: nil, correct: false),
+      def questions(content: "Combien vraiment ?", explanation: "Corrigé.", hint: "Compte.", choice_answers: [ AnswerText.new(id: 11, content: "Deux", match_content: nil, correct: false),
                                       AnswerText.new(id: 12, content: "Trois", match_content: nil, correct: true) ])
-        [ QuestionText.new(id: 1, content: "Combien vraiment ?", explanation: "Corrigé.", hint: "Compte.", answers: choice_answers),
+        [ QuestionText.new(id: 1, content:, explanation:, hint:, answers: choice_answers),
           QuestionText.new(id: 2, content: "Calcule bien.", explanation: nil, hint: nil,
                            answers: [ AnswerText.new(id: 21, content: "5", match_content: nil, correct: false) ]) ]
       end
@@ -143,6 +143,36 @@ module UseCases
         refused = save.(false, "Lesquelles ?")
         assert_equal :invalid, refused.code
         assert_includes refused.errors[:"questions.1"], :wrong_correct_count
+      end
+
+      test "a blank question, a too long question, explanation, hint or proposition are each refused with the question number" do
+        assert_equal [ :content_blank ], correct(content: " ").errors[:"questions.1"]
+        assert_equal [ :too_long ], correct(content: "x" * 2_001).errors[:"questions.1"]
+        assert_equal [ :too_long ], correct(explanation: "x" * 2_001).errors[:"questions.1"]
+        assert_equal [ :too_long ], correct(hint: "x" * 501).errors[:"questions.1"]
+        long_choice = [ AnswerText.new(id: 11, content: "x" * 501, match_content: nil, correct: true),
+                        AnswerText.new(id: 12, content: "Trois", match_content: nil, correct: false) ]
+        assert_equal [ :too_long ], correct(choice_answers: long_choice).errors[:"questions.1"]
+        assert_empty @exercises.written
+      end
+
+      test "the right column of a matching question is corrected, trimmed, with its pair; a blank right column is refused" do
+        pairs = [ [ 31, "Paris", "France" ], [ 32, "Rome", "Italie" ], [ 33, "Madrid", "Espagne" ] ]
+        matching = Question.new(id: 3, position: 1, content: "Associe.", explanation: nil, question_type: "matching",
+                                answers: pairs.each_with_index.map { |(id, left, right), rank| Answer.new(id:, position: rank + 1, content: left, correct: true, match_content: right, blank: 0) })
+        @exercises = FakeExercises.new(Entities::Assessment::Exercise.new(id: 5, public_id: "ex5", course_id: 1, title: "Exercice", statement: "Sujet.",
+                                                                          exercise_type: "fixation", status: "published", questions: [ matching ]))
+        save = lambda do |first_right|
+          answers = pairs.map { |id, left, right| AnswerText.new(id:, content: left, match_content: id == 31 ? first_right : right, correct: true) }
+          CorrectExerciseText.new(exercises: @exercises, audit_log: @audit_log, transaction: FakeTransaction.new,
+                                  policy: Policies::Catalog::ManageContentPolicy.new, clock: Clock.new(NOW))
+                             .call(actor: @team, public_id: "ex5", text: Text.new(title: "Exercice", statement: "Sujet.", hint: nil,
+                                                                                  questions: [ QuestionText.new(id: 3, content: "Associe.", explanation: nil, hint: nil, answers:) ]))
+        end
+
+        assert save.(" République française ").success?
+        assert_equal [ "République française", "Italie", "Espagne" ], @exercises.written.sole.questions.sole.answers.map(&:match_content)
+        assert_equal :invalid, save.(" ").code
       end
     end
   end
