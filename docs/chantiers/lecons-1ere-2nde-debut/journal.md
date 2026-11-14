@@ -40,6 +40,7 @@ Options prudentes appliquées ; un enseignant de la matière relit avant publica
 - **Philosophie 1ère** : « Ainsi » est la seule bonne réponse pour ouvrir une conclusion (comme la fiche) ; « Pour conclure » n'est pas proposé.
 - **SVT 1ère A (drogues)** : un document fictif montre la cocaïne raccourcissant le temps de réaction, ce que la fiche ne dit pas en ces termes (« stimulante »).
 - **SVT 1ère C et D** : les corrections de sujets sont courtes et complétées d'un rappel automatique de la méthode et du piège de la notion ; à étoffer.
+- **Français 1ère (vague 2, leçons 4 et 5)** : le `practice` de la notion 3 de « La focalisation » (A1, A2) contient une question `written`, que la règle UDR-0147 refuse ; laissé tel quel (consigne : ne pas toucher au `practice`), donc `verif.rb` y reste en KO sur ce seul point. À corriger à part par une question corrigée automatiquement. Scansion de « Le rythme dans le texte » : seuls des mots sans diérèse ni synérèse ambiguë sont mesurés ; le e muet après voyelle (« pluie », « vie ») est évité en milieu de vers. Un enseignant relit les comptes de syllabes et le classement des focalisations.
 - **Histoire-Géographie 1ère** : le procédé Bessemer (1856) est rattaché à la seconde révolution industrielle, comme la fiche.
 
 ### 2nde (réécriture complète depuis `format-v1/`)
