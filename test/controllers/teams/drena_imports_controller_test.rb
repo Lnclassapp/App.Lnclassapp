@@ -9,7 +9,7 @@ class Teams::DrenaImportsControllerTest < ActionDispatch::IntegrationTest
     @member = create_team_member
   end
 
-  def upload = Rack::Test::UploadedFile.new(Rails.root.join("db/seeds/data/imports/drenas-2026.json"), "application/json")
+  def upload = Rack::Test::UploadedFile.new(drenas_file.path, "application/json")
 
   def post_import(as: :turbo_stream)
     post teams_imports_path, params: { import: { kind: "drenas", files: [ upload ] } }, as:

@@ -28,6 +28,17 @@ module ImportDocuments
     envelope("lnclass.course-tree", "courses" => roots)
   end
 
+  # The 41 DRENA of the school year, from db/seeds/data/drenas.yml. The delivered files (drenas-2026.json,
+  # etablissements-2026.json) live in Lnclassapp/App.Lnclassapp-contenus, under referentiel/.
+  def drenas_document
+    envelope("lnclass.drenas", "drenas" => YAML.load_file(Rails.root.join("db/seeds/data/drenas.yml")).map { { "name" => it } })
+  end
+
+  # The same document, written to a temporary file for a form or a browser upload.
+  def drenas_file
+    Tempfile.create([ "drenas", ".json" ]).tap { |file| file.write(drenas_document.to_json) && file.flush }
+  end
+
   # invalid_at : index des éléments dont le nom est vidé ; duplicate_of : { index => index copié }.
   def mixed(document, invalid_at: [ 3, 7 ], duplicate_of: { 5 => 1 })
     document = document.deep_dup

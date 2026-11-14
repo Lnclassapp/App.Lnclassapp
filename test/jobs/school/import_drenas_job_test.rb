@@ -3,8 +3,6 @@ require "test_helper"
 # DR-02, DR-06, ADR-0066: the delivered file of the 41 DRENA is imported on an empty base, each with its slug drena-…;
 # a file of another format, of another version or over 500 lines is rejected in bloc, and nothing is created.
 class School::ImportDrenasJobTest < ActiveJob::TestCase
-  DELIVERED = Rails.root.join("db/seeds/data/imports/drenas-2026.json")
-
   def import(document)
     report = create_import_report(kind: "drenas")
     Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json), filename: "drenas.json") ])
@@ -17,7 +15,7 @@ class School::ImportDrenasJobTest < ActiveJob::TestCase
   def document(names) = { "format" => "lnclass.drenas", "version" => 1, "drenas" => names.map { { "name" => it } } }
 
   test "DR-02 the delivered file on an empty base: completed, 41 imported, each slug drawn from its name" do
-    delivered = JSON.parse(DELIVERED.read)
+    delivered = drenas_document
     names = delivered.fetch("drenas").pluck("name")
 
     report = import(delivered)
