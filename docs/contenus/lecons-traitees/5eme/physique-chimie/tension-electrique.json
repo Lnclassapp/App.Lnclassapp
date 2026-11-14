@@ -1,0 +1,3246 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Tension électrique",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "echelle-des-unites",
+          "kind": "diagram",
+          "description": "Une flèche horizontale relie trois unités de tension rangées de la plus grande à la plus petite : le kilovolt (kV), le volt (V) et le millivolt (mV). Chaque flèche vers la droite indique qu'on multiplie par 1 000 pour aller vers l'unité suivante, plus petite.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "kv",
+                "label": "kV"
+              },
+              {
+                "id": "v",
+                "label": "V"
+              },
+              {
+                "id": "mv",
+                "label": "mV"
+              }
+            ],
+            "edges": [
+              {
+                "from": "kv",
+                "to": "v",
+                "label": "× 1 000"
+              },
+              {
+                "from": "v",
+                "to": "mv",
+                "label": "× 1 000"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Exprimer une tension et convertir ses unités",
+          "remember": "La **tension électrique** existe entre les deux bornes d'un **dipôle** (un appareil à deux bornes : une pile, une lampe, un interrupteur). C'est le générateur qui la crée dans le circuit. Son symbole est **U** et son unité est le **volt** (symbole V). Pour les petites tensions, on utilise le **millivolt** (mV) : 1 V = 1 000 mV. Pour les très grandes tensions, on utilise le **kilovolt** (kV) : 1 kV = 1 000 V. On note la tension d'un dipôle avec son nom en indice : $U_L$ pour la lampe, $U_G$ pour le générateur.",
+          "method": [
+            "Repérer l'unité de départ et l'unité d'arrivée (kV, V ou mV).",
+            "Trouver le lien entre ces unités : 1 kV = 1 000 V et 1 V = 1 000 mV.",
+            "Calculer : multiplier par 1 000 pour aller vers une unité plus petite, diviser par 1 000 pour aller vers une unité plus grande, puis écrire le résultat avec son unité."
+          ],
+          "example": {
+            "statement": "Le voltmètre du poste radio d'Awa affiche 450 mV aux bornes d'une pile. Exprimer cette tension en volts.",
+            "steps": [
+              "Repérer : l'unité de départ est le mV et l'unité d'arrivée est le V.",
+              "Trouver : 1 V = 1 000 mV, donc le volt est 1 000 fois plus grand que le millivolt.",
+              "Calculer : on va vers une unité plus grande, donc on divise : 450 ÷ 1 000 = 0,45, soit 450 mV = 0,45 V."
+            ]
+          },
+          "pitfall": "Ne multiplie pas quand il faut diviser. Le volt est plus grand que le millivolt : il faut 1 000 mV pour faire 1 V. Contre-exemple : 5 V = 5 000 mV, et non 0,005 mV. Quand tu vas vers une unité plus petite, le nombre devient plus grand ; quand tu vas vers une unité plus grande, le nombre devient plus petit. Contrôle toujours ton résultat avec cette phrase.",
+          "figure": "echelle-des-unites",
+          "practice": {
+            "statement": "Tu t'entraînes à exprimer une tension dans une autre unité.",
+            "questions": [
+              {
+                "content": "La batterie d'une moto a une tension de 12 V. Exprime cette tension en mV.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : l'unité de départ est le V et l'unité d'arrivée est le mV. Étape 2 — Trouver : 1 V = 1 000 mV, donc le millivolt est 1 000 fois plus petit. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie : 12 × 1 000 = 12 000. La tension est 12 000 mV. Diviser par 1 000 donnerait 0,012 mV, ce qui est absurde.",
+                "answers": [
+                  {
+                    "content": "12000",
+                    "correct": true
+                  }
+                ],
+                "unit": "mV",
+                "tolerance": 0,
+                "hint": "On va du volt vers le millivolt, une unité plus petite : le nombre grandit."
+              },
+              {
+                "content": "Un voltmètre indique 1 500 mV aux bornes d'une pile bouton. Exprime cette tension en V.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : l'unité de départ est le mV et l'unité d'arrivée est le V. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus grande, donc on divise : 1 500 ÷ 1 000 = 1,5. La tension est 1,5 V.",
+                "answers": [
+                  {
+                    "content": "1,5",
+                    "correct": true
+                  }
+                ],
+                "unit": "V",
+                "tolerance": 0,
+                "hint": "On va du millivolt vers le volt, une unité plus grande : le nombre diminue."
+              },
+              {
+                "content": "Une ligne à haute tension porte une tension de 33 kV. Quelle écriture est correcte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'unité de départ est le kV et l'unité d'arrivée est le V. Étape 2 — Trouver : 1 kV = 1 000 V. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie : 33 × 1 000 = 33 000 V. L'écriture 0,033 V vient d'une division faite à tort, car le kilovolt est plus grand que le volt.",
+                "answers": [
+                  {
+                    "content": "33 000 V",
+                    "correct": true
+                  },
+                  {
+                    "content": "33 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "3 300 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,033 V",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un kilovolt est plus grand qu'un volt : le nombre de volts est plus grand."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la tension et ses unités",
+              "statement": "Dans cet exercice, tu retrouves le symbole, les unités et les premières conversions d'une tension.",
+              "exercise_type": "fixation",
+              "figure": "echelle-des-unites",
+              "questions": [
+                {
+                  "content": "Quel est le symbole de l'unité de la tension électrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche l'unité de la tension, pas son symbole de grandeur. Étape 2 — Trouver : la tension se note U et son unité est le volt. Étape 3 — Calculer : le symbole de l'unité est donc V. Le A est l'unité de l'intensité, et U ou I sont les symboles des grandeurs, pas des unités.",
+                  "answers": [
+                    {
+                      "content": "V",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "U",
+                      "correct": false
+                    },
+                    {
+                      "content": "I",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le kilovolt (kV) est une unité 1 000 fois plus grande que le volt.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on compare le kV et le V. Étape 2 — Trouver : 1 kV = 1 000 V. Étape 3 — Calculer : le kilovolt contient 1 000 volts, il est donc 1 000 fois plus grand. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "1 V est égal à 1 000 ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on part du volt et on veut une unité plus petite. Étape 2 — Trouver : l'unité 1 000 fois plus petite que le volt est le millivolt (mV). Étape 3 — Calculer : 1 V = 1 000 mV. Le kilovolt est, lui, 1 000 fois plus grand que le volt.",
+                  "answers": [
+                    {
+                      "content": "millivolts",
+                      "correct": true
+                    },
+                    {
+                      "content": "millivolt",
+                      "correct": true
+                    },
+                    {
+                      "content": "mV",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile plate de poste radio porte la tension 4,5 V. Exprime cette tension en mV.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'unité de départ est le V et l'unité d'arrivée est le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie : 4,5 × 1 000 = 4 500. La tension est 4 500 mV.",
+                  "answers": [
+                    {
+                      "content": "4500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mV",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Awa écrit : « 5 V = 0,005 mV ». Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV, le millivolt est plus petit. Étape 3 — Calculer : on multiplie : 5 × 1 000 = 5 000 mV. Awa a divisé alors qu'il fallait multiplier : il faut beaucoup de petits millivolts pour faire un volt, donc le nombre grandit.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : 5 V = 5 000 mV, car on multiplie par 1 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est juste : on divise toujours par 1 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : 5 V = 50 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est juste : le millivolt est plus grand que le volt",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Convertir des tensions de la maison au village",
+              "statement": "Dans cet exercice, tu convertis des tensions de piles, de panneaux solaires et de lignes électriques.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Avant de calculer, dis si tu vas vers une unité plus petite ou plus grande : tu sauras s'il faut multiplier ou diviser par 1 000.",
+              "questions": [
+                {
+                  "content": "Relie chaque tension à sa conversion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : pour chaque tension, on repère l'unité de départ et d'arrivée. Étape 2 — Trouver : 1 kV = 1 000 V et 1 V = 1 000 mV. Étape 3 — Calculer : 2 V × 1 000 = 2 000 mV ; 0,5 V × 1 000 = 500 mV ; 3 kV × 1 000 = 3 000 V ; 250 mV ÷ 1 000 = 0,25 V. On multiplie pour aller vers une unité plus petite et on divise pour aller vers une unité plus grande.",
+                  "answers": [
+                    {
+                      "content": "2 V",
+                      "match": "2 000 mV"
+                    },
+                    {
+                      "content": "0,5 V",
+                      "match": "500 mV"
+                    },
+                    {
+                      "content": "3 kV",
+                      "match": "3 000 V"
+                    },
+                    {
+                      "content": "250 mV",
+                      "match": "0,25 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces tensions de la plus petite à la plus grande.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : les trois tensions n'ont pas la même unité. Étape 2 — Trouver : 1 V = 1 000 mV et 1 kV = 1 000 V. Étape 3 — Calculer : on convertit tout en volts : 0,8 V ; 1 200 mV = 1,2 V ; 0,002 kV = 2 V. Dans l'ordre croissant : 0,8 V, puis 1,2 V, puis 2 V. On ne compare jamais les nombres seuls : 1 200 est grand mais en millivolts.",
+                  "answers": [
+                    {
+                      "content": "0,8 V"
+                    },
+                    {
+                      "content": "1 200 mV"
+                    },
+                    {
+                      "content": "0,002 kV"
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis la bonne valeur : 0,75 V = ___ mV.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie : 0,75 × 1 000 = 750 mV. La valeur 0,00075 viendrait d'une division faite à tort.",
+                  "answers": [
+                    {
+                      "content": "750",
+                      "correct": true
+                    },
+                    {
+                      "content": "75",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 500",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,00075",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ligne électrique est à 2 kV. Exprime cette tension en V.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le kV et l'arrivée le V. Étape 2 — Trouver : 1 kV = 1 000 V. Étape 3 — Calculer : on multiplie : 2 × 1 000 = 2 000 V. La tension est 2 000 V.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelles égalités sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on contrôle chaque égalité en repérant les unités. Étape 2 — Trouver : 1 kV = 1 000 V et 1 V = 1 000 mV. Étape 3 — Calculer : 3 V = 3 000 mV est juste et 2 kV = 2 000 V est juste. En revanche 40 mV = 0,04 V (et non 4 V) et 0,5 V = 500 mV (et non 5 mV) : ces égalités oublient un facteur 1 000 ou le divisent mal.",
+                  "answers": [
+                    {
+                      "content": "3 V = 3 000 mV",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 kV = 2 000 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "40 mV = 4 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,5 V = 5 mV",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le panneau solaire du village donne 18 V : cela fait 18 000 mV.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie : 18 × 1 000 = 18 000 mV. L'affirmation est vraie. Écrire 0,018 mV serait l'erreur de celui qui divise au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mesurer une tension avec un voltmètre",
+          "remember": "Pour mesurer une tension, on utilise un **voltmètre**. Au collège, c'est un **multimètre** placé en position **V** (tension continue). Le voltmètre se branche **en dérivation**, directement aux **bornes du dipôle**, **sans ouvrir le circuit**. On utilise la borne **V** (reliée du côté de la borne + du générateur) et la borne **COM** (de l'autre côté). Si les deux sont inversées, un signe moins s'affiche. Le **calibre** est la tension maximale mesurable dans la position choisie (par exemple 2 V, 20 V ou 200 V). On prend le plus petit calibre supérieur à la tension attendue ; si on ne la connaît pas, on commence par le plus grand calibre, puis on le diminue tant que la mesure reste possible. Le nombre affiché est exprimé dans l'unité du calibre (V ou mV).",
+          "method": [
+            "Placer le multimètre en position V et choisir le plus petit calibre supérieur à la tension attendue.",
+            "Brancher la borne V et la borne COM aux deux bornes du dipôle, en dérivation, sans ouvrir le circuit.",
+            "Lire le nombre affiché et son unité (V si le calibre est en V, mV s'il est en mV).",
+            "Écrire le résultat sous la forme U = valeur unité, avec le nom du dipôle en indice."
+          ],
+          "example": {
+            "statement": "Kouassi mesure la tension d'une pile de poste radio marquée 4,5 V. Son multimètre a les calibres 2 V, 20 V et 200 V. Il choisit le bon calibre et lit 4,48 sur l'écran.",
+            "steps": [
+              "Placer : position V ; le plus petit calibre supérieur à 4,5 V est 20 V.",
+              "Brancher : la borne V du côté de la borne + de la pile, la borne COM du côté −, en dérivation, sans ouvrir le circuit.",
+              "Lire : le nombre affiché est 4,48 ; le calibre est en V, donc l'unité est le volt.",
+              "Écrire : $U_P = 4{,}48$ V, valeur proche de l'indication 4,5 V de la pile."
+            ]
+          },
+          "pitfall": "Ne branche pas le voltmètre en série comme un ampèremètre. Contre-exemple : si tu coupes le circuit de la lampe pour placer le voltmètre au milieu, la lampe ne s'allume plus. Le voltmètre se branche en dérivation, sur les deux bornes du dipôle, sans rien débrancher. Attention aussi au calibre : s'il est plus petit que la tension, l'écran signale un dépassement.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à régler et à brancher un voltmètre.",
+            "questions": [
+              {
+                "content": "Un multimètre a les calibres 2 V, 20 V et 200 V. Quel est le plus petit calibre qui permet de mesurer la batterie de 12 V d'une moto ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Placer : on met le multimètre en position V et on cherche le plus petit calibre supérieur à 12 V. Parmi 2 V, 20 V et 200 V, c'est 20 V. Le calibre 2 V est trop petit : il ne peut pas mesurer 12 V. Le calibre 200 V permettrait la mesure, mais ce n'est pas le plus petit : la lecture serait moins précise.",
+                "answers": [
+                  {
+                    "content": "20 V",
+                    "correct": true
+                  },
+                  {
+                    "content": "2 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "200 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun, il faut la position A",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le plus petit calibre qui est plus grand que 12 V."
+              },
+              {
+                "content": "Remets dans l'ordre les gestes pour mesurer la tension d'une pile.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Placer : on règle d'abord l'appareil (position V et calibre). Étape 2 — Brancher : on relie V et COM aux deux bornes de la pile. Étape 3 — Lire : on lit le nombre et son unité. Étape 4 — Écrire : on écrit U = valeur unité. L'ordre suit la méthode : on ne branche pas avant d'avoir réglé le calibre.",
+                "answers": [
+                  {
+                    "content": "Placer le multimètre en position V avec un calibre adapté"
+                  },
+                  {
+                    "content": "Brancher les bornes V et COM aux deux bornes de la pile"
+                  },
+                  {
+                    "content": "Lire le nombre affiché et son unité"
+                  },
+                  {
+                    "content": "Écrire le résultat sous la forme U = valeur unité"
+                  }
+                ],
+                "hint": "On règle l'appareil avant de brancher, puis on lit, puis on écrit."
+              },
+              {
+                "content": "Un voltmètre se branche en ___ aux bornes du dipôle.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Brancher : le voltmètre se branche en dérivation, c'est-à-dire sur les deux bornes du dipôle étudié, sans ouvrir le circuit. Le brancher en série, comme un ampèremètre, est l'erreur à éviter.",
+                "answers": [
+                  {
+                    "content": "dérivation",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le voltmètre ne coupe jamais le circuit."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Brancher et lire un voltmètre",
+              "statement": "Dans cet exercice, tu branches un voltmètre, tu choisis son calibre et tu lis son écran.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Comment brancher le voltmètre pour mesurer la tension aux bornes d'une lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Brancher : pour mesurer la tension d'un dipôle, on relie V et COM à ses deux bornes, en dérivation, sans ouvrir le circuit. Le montage en série est celui de l'ampèremètre : la lampe ne s'allumerait plus et la mesure serait fausse. Avec une seule borne, il n'y a pas de tension à mesurer, car une tension existe entre deux bornes.",
+                  "answers": [
+                    {
+                      "content": "En dérivation, les bornes V et COM reliées aux deux bornes de la lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "En série avec la lampe, en ouvrant le circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "À côté du circuit, sans le relier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur une seule borne de la lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer une tension, on place le multimètre en position A.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Placer : pour une tension, on place le multimètre en position V. La position A sert à mesurer une intensité, avec un montage en série. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le multimètre est réglé sur le calibre 200 mV. L'écran affiche 148. Quelle est la tension mesurée, en mV ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Lire : l'unité du nombre affiché est celle du calibre. Le calibre est 200 mV, donc le nombre 148 est en millivolts. Étape 4 — Écrire : U = 148 mV. Ce n'est pas 148 V : une telle tension serait énorme pour une petite pile.",
+                  "answers": [
+                    {
+                      "content": "148",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mV",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une pile de poste radio donne environ 1,5 V. Le multimètre a les calibres 200 mV, 2 V, 20 V et 200 V. Choisis le calibre : ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Placer : on cherche le plus petit calibre supérieur à 1,5 V. Le calibre 200 mV (soit 0,2 V) est trop petit. Le calibre 2 V convient, et c'est le plus petit possible. Les calibres 20 V et 200 V fonctionneraient, mais la lecture serait moins précise.",
+                  "answers": [
+                    {
+                      "content": "2 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "200 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aminata coupe le circuit de la lampe de sa moto et place le voltmètre au milieu, entre la batterie et la lampe. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Brancher : un voltmètre se branche en dérivation, sans ouvrir le circuit. Aminata l'a placé en série en coupant le circuit : la lampe ne s'allume plus. Le voltmètre ne mesure pas une intensité : c'est le rôle de l'ampèremètre.",
+                  "answers": [
+                    {
+                      "content": "Le voltmètre est en série : il a fallu couper le circuit et la lampe ne s'allume plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le voltmètre mesure bien la tension de la lampe, qui brille normalement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre mesure l'intensité qui traverse la lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change dans le circuit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Mesurer la tension du poste radio",
+              "statement": "Dans cet exercice, tu choisis les bornes et le calibre d'un multimètre, puis tu lis sa mesure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour la borne et le calibre, repense aux étapes : position V, calibre plus grand que la tension attendue, bornes V et COM en dérivation.",
+              "questions": [
+                {
+                  "content": "Quelles bornes du multimètre utilise-t-on pour mesurer une tension ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Brancher : pour une tension, on utilise la borne V et la borne COM. Les bornes A et 10 A servent à mesurer une intensité. Pour la mesure d'une tension, la borne V se relie du côté de la borne + du générateur et la borne COM de l'autre côté.",
+                  "answers": [
+                    {
+                      "content": "La borne V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne COM",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne A",
+                      "correct": false
+                    },
+                    {
+                      "content": "La borne 10 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un multimètre a les calibres 200 mV, 2 V, 20 V et 200 V. Relie chaque tension attendue au plus petit calibre possible.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Placer : on cherche, pour chaque tension, le plus petit calibre qui la dépasse. 1,2 V demande 2 V ; 9 V demande 20 V ; 110 V demande 200 V ; 0,15 V = 150 mV demande 200 mV. Un calibre plus petit que la tension donne un dépassement, un calibre plus grand donne une lecture moins précise.",
+                  "answers": [
+                    {
+                      "content": "1,2 V",
+                      "match": "2 V"
+                    },
+                    {
+                      "content": "9 V",
+                      "match": "20 V"
+                    },
+                    {
+                      "content": "110 V",
+                      "match": "200 V"
+                    },
+                    {
+                      "content": "0,15 V",
+                      "match": "200 mV"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le multimètre est réglé sur 200 mV et l'écran affiche 63. Quelle est cette tension, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Lire : le calibre est en mV, donc 63 est en millivolts : 63 mV. Étape 4 — Écrire : on veut des volts, donc on divise par 1 000 : 63 ÷ 1 000 = 0,063. La tension est 0,063 V. Écrire 63 V serait oublier l'unité du calibre.",
+                  "answers": [
+                    {
+                      "content": "0,063",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Si l'écran affiche un signe moins devant le nombre, c'est que la borne V et la borne COM sont inversées par rapport au + et au − du générateur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Brancher : la borne V se relie du côté de la borne + du générateur. Si on les inverse, le signe moins s'affiche, mais la valeur du nombre reste la même. Étape 3 — Lire : on lit alors le nombre sans tenir compte du signe pour connaître la tension. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La tension maximale que l'on peut mesurer dans une position du multimètre s'appelle le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Placer : on place le multimètre en position V et on choisit le calibre. Le calibre est la tension maximale mesurable dans la position choisie, par exemple 2 V, 20 V ou 200 V. Il ne faut pas le confondre avec l'unité du nombre affiché, qui dépend du calibre.",
+                  "answers": [
+                    {
+                      "content": "calibre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une pile de 4,5 V, Kouassi règle le calibre sur 2 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : il fallait choisir un calibre supérieur à 4,5 V, donc 20 V. Avec le calibre 2 V, la tension de la pile dépasse le maximum : l'écran signale un dépassement au lieu d'afficher la mesure. Il n'affiche donc pas 2 V, et il ne change pas d'unité tout seul.",
+                  "answers": [
+                    {
+                      "content": "Le calibre est trop petit : l'écran signale un dépassement, la mesure n'est pas lisible",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'écran affiche 2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'écran affiche 4,5 V avec moins de précision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le multimètre se met à mesurer en millivolts",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Prévoir la tension aux bornes d'un dipôle",
+          "remember": "Dans un circuit simple (un générateur, une lampe et un interrupteur en série), la tension dépend du dipôle et de son état. Aux bornes du **générateur**, la tension est non nulle : une pile de 4,5 V neuve donne à peu près 4,5 V. Aux bornes d'une **lampe allumée**, la tension est non nulle : elle est proche de sa tension nominale quand la lampe brille normalement. Aux bornes d'un **fil de connexion** et d'un **interrupteur fermé**, la tension est **nulle** : $U = 0$ V. Aux bornes d'un **interrupteur ouvert**, la tension est **égale à celle du générateur**, même si aucun courant ne passe ; la lampe, éteinte, a alors une tension nulle.",
+          "method": [
+            "Repérer le dipôle visé et son état : générateur, lampe allumée, fil, interrupteur ouvert ou fermé.",
+            "Chercher la règle de ce dipôle : fil et interrupteur fermé, tension nulle ; interrupteur ouvert, tension du générateur ; lampe allumée, tension non nulle.",
+            "Conclure : écrire la valeur de la tension avec son unité."
+          ],
+          "example": {
+            "statement": "Dans le circuit du phare d'une moto (batterie de 12 V, lampe et interrupteur en série), quelle est la tension aux bornes de l'interrupteur quand il est ouvert ?",
+            "steps": [
+              "Repérer : le dipôle visé est l'interrupteur, son état est ouvert ; le circuit est coupé et la lampe est éteinte.",
+              "Chercher : la règle de l'interrupteur ouvert dit que sa tension est égale à celle du générateur.",
+              "Conclure : la tension aux bornes de l'interrupteur est $U = 12$ V."
+            ]
+          },
+          "pitfall": "Ne dis pas « pas de courant, donc pas de tension ». Contre-exemple : un interrupteur ouvert ne laisse passer aucun courant, pourtant sa tension est de 12 V avec une batterie de 12 V, et non 0 V. C'est l'interrupteur fermé qui a une tension nulle. Pour éviter l'erreur, commence toujours par l'état du dipôle : ouvert ou fermé.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir la tension aux bornes d'un interrupteur et d'un fil.",
+            "questions": [
+              {
+                "content": "Dans un circuit avec une pile de 4,5 V, une lampe et un interrupteur fermé, quelle est la tension aux bornes de l'interrupteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le dipôle est l'interrupteur et il est fermé. Étape 2 — Chercher : un interrupteur fermé se comporte comme un fil, sa tension est nulle. Étape 3 — Conclure : la tension est 0 V. La valeur 4,5 V est celle de l'interrupteur ouvert, pas fermé.",
+                "answers": [
+                  {
+                    "content": "0 V",
+                    "correct": true
+                  },
+                  {
+                    "content": "4,5 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "9 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle dépend de la lampe",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un interrupteur fermé laisse passer le courant comme un fil."
+              },
+              {
+                "content": "Le poste radio du village est alimenté par un bloc de piles de 6 V et son interrupteur est ouvert. Quelle est la tension aux bornes de l'interrupteur ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : le dipôle est l'interrupteur et il est ouvert. Étape 2 — Chercher : un interrupteur ouvert coupe le circuit et sa tension est égale à celle du générateur. Étape 3 — Conclure : la tension est 6 V. Elle n'est pas nulle, même si aucun courant ne passe.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "unit": "V",
+                "tolerance": 0,
+                "hint": "Un interrupteur ouvert a la tension du générateur."
+              },
+              {
+                "content": "Un fil de connexion a une tension nulle à ses bornes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le dipôle est un fil de connexion. Étape 2 — Chercher : un fil laisse passer le courant sans « perdre » de tension. Étape 3 — Conclure : sa tension est 0 V. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce qu'un fil fait au courant."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Prévoir la tension aux bornes de dipôles",
+              "statement": "Dans cet exercice, tu prévois la tension aux bornes d'une lampe, d'un interrupteur et d'un fil.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un circuit série contient une pile de 9 V, une lampe et un interrupteur ouvert. Quelle est la tension aux bornes de la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est la lampe, et l'interrupteur du circuit est ouvert. Étape 2 — Chercher : le circuit est coupé, aucun courant ne passe, la lampe est éteinte et sa tension est nulle ; c'est l'interrupteur ouvert qui porte la tension de la pile. Étape 3 — Conclure : U de la lampe = 0 V. Les 9 V se trouvent aux bornes de l'interrupteur, pas de la lampe.",
+                  "answers": [
+                    {
+                      "content": "0 V : la lampe est éteinte",
+                      "correct": true
+                    },
+                    {
+                      "content": "9 V, comme la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 V, la moitié de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa tension nominale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit avec une batterie de 12 V, l'interrupteur fermé a 12 V à ses bornes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le dipôle est un interrupteur fermé. Étape 2 — Chercher : il se comporte comme un fil, sa tension est nulle. Étape 3 — Conclure : la tension est 0 V, pas 12 V. L'affirmation est fausse : les 12 V se trouvent aux bornes de l'interrupteur quand il est ouvert.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'interrupteur est ouvert et le générateur est de 12 V. La tension aux bornes de l'interrupteur est ___ V.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le dipôle est un interrupteur ouvert. Étape 2 — Chercher : sa tension est égale à celle du générateur. Étape 3 — Conclure : elle vaut 12 V. Ce n'est pas 0 V, même si aucun courant ne passe, ni 24 V : on ne double pas la tension.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "24",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque dipôle à ce qu'on lit avec un voltmètre branché à ses bornes.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on repère chaque dipôle et son état. Étape 2 — Chercher : l'interrupteur ouvert a la tension du générateur ; le fil a une tension nulle ; la lampe qui brille normalement a une tension proche de sa tension nominale. Étape 3 — Conclure : on relie chaque dipôle à sa tension.",
+                  "answers": [
+                    {
+                      "content": "Interrupteur ouvert",
+                      "match": "Une tension égale à celle du générateur"
+                    },
+                    {
+                      "content": "Fil de connexion",
+                      "match": "Une tension nulle"
+                    },
+                    {
+                      "content": "Lampe qui brille normalement",
+                      "match": "Une tension proche de sa tension nominale"
+                    }
+                  ]
+                },
+                {
+                  "content": "Konan dit : « L'interrupteur est ouvert, aucun courant ne passe, donc sa tension est 0 V. » La pile fait 4,5 V. Qui a raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle est un interrupteur ouvert. Étape 2 — Chercher : sa tension est égale à celle du générateur. Étape 3 — Conclure : elle vaut 4,5 V. L'absence de courant ne rend pas la tension nulle : c'est justement quand l'interrupteur est ouvert qu'il porte toute la tension de la pile.",
+                  "answers": [
+                    {
+                      "content": "Konan se trompe : la tension de l'interrupteur ouvert est 4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Konan a raison : sans courant, il n'y a pas de tension",
+                      "correct": false
+                    },
+                    {
+                      "content": "Konan se trompe : la tension est 9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Konan se trompe : la tension est 1,5 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les tensions dans le phare de la moto",
+              "statement": "Dans cet exercice, tu prévois des tensions dans le circuit du phare d'une moto : batterie, lampe et interrupteur en série.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Rappelle-toi : fil et interrupteur fermé, 0 V ; interrupteur ouvert, la tension du générateur.",
+              "questions": [
+                {
+                  "content": "Dans un circuit où la batterie fait 12 V, quels dipôles ont une tension nulle à leurs bornes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on repère chaque dipôle et son état. Étape 2 — Chercher : le fil et l'interrupteur fermé laissent passer le courant, leur tension est nulle ; l'interrupteur ouvert porte la tension de la batterie, soit 12 V ; la batterie elle-même a une tension non nulle. Étape 3 — Conclure : le fil et l'interrupteur fermé ont 0 V.",
+                  "answers": [
+                    {
+                      "content": "Le fil de connexion",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur fermé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La batterie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La batterie de la moto fait 12 V et l'interrupteur du phare est ouvert. Quelle est la tension aux bornes de l'interrupteur ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle est l'interrupteur et il est ouvert. Étape 2 — Chercher : sa tension est égale à celle du générateur. Étape 3 — Conclure : elle vaut 12 V. La lampe, éteinte, a une tension nulle, mais pas l'interrupteur.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un interrupteur ouvert coupe le circuit, mais sa tension est égale à celle du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le dipôle est un interrupteur ouvert. Étape 2 — Chercher : sa tension est égale à celle du générateur. Étape 3 — Conclure : on complète par « générateur ». Un interrupteur ouvert n'a pas de tension nulle ; c'est l'interrupteur fermé qui a une tension nulle.",
+                  "answers": [
+                    {
+                      "content": "générateur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le voltmètre branché aux bornes de la lampe éteinte, interrupteur ouvert, indique 0 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le dipôle est la lampe, et l'interrupteur est ouvert. Étape 2 — Chercher : aucun courant ne passe, la lampe est éteinte et c'est l'interrupteur qui porte la tension du générateur. Étape 3 — Conclure : la lampe a 0 V à ses bornes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fil de connexion a une tension ___ à ses bornes.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le dipôle est un fil de connexion. Étape 2 — Chercher : un fil laisse passer le courant sans « perdre » de tension. Étape 3 — Conclure : sa tension est nulle. Elle n'est pas égale à celle de la pile : cette valeur est celle d'un interrupteur ouvert.",
+                  "answers": [
+                    {
+                      "content": "nulle",
+                      "correct": true
+                    },
+                    {
+                      "content": "égale à celle de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "double de celle de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "non nulle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le voltmètre branché aux bornes de l'interrupteur de la moto indique 12 V, et le phare est éteint. Que peut-on en conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le voltmètre indique 12 V aux bornes de l'interrupteur, une tension non nulle. Étape 2 — Chercher : un interrupteur fermé aurait 0 V ; seule la position ouverte donne la tension du générateur. Étape 3 — Conclure : l'interrupteur est ouvert. La batterie n'est pas en panne puisqu'elle fournit bien 12 V.",
+                  "answers": [
+                    {
+                      "content": "L'interrupteur est ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur est fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur est fermé et la lampe est grillée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La batterie est en panne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Utiliser les lois des tensions en série et en dérivation",
+          "remember": "**Dipôles en série** (ils se suivent dans une seule boucle) : la tension aux bornes du générateur est la **somme** des tensions aux bornes des dipôles : $U_G = U_1 + U_2$. C'est la **loi d'additivité des tensions**. **Dipôles en dérivation** (leurs bornes sont reliées aux mêmes deux points) : ils ont la **même tension** : $U_1 = U_2$, égale à celle du générateur sur lequel ils sont branchés. C'est la **loi d'égalité des tensions**.",
+          "method": [
+            "Repérer le montage : dipôles en série (une seule boucle) ou en dérivation (mêmes deux points communs).",
+            "Écrire la loi qui correspond : somme des tensions en série, égalité des tensions en dérivation.",
+            "Remplacer les lettres par les valeurs données, avec leur unité.",
+            "Calculer la tension cherchée et écrire le résultat avec son unité."
+          ],
+          "example": {
+            "statement": "Deux lampes L1 et L2 sont montées en série sur la batterie de 12 V d'une moto. Le voltmètre indique 5 V aux bornes de L1. Quelle est la tension aux bornes de L2 ?",
+            "steps": [
+              "Repérer : les deux lampes se suivent dans une seule boucle, elles sont en série.",
+              "Écrire : en série, $U_G = U_1 + U_2$, donc $U_2 = U_G - U_1$.",
+              "Remplacer : $U_G = 12$ V et $U_1 = 5$ V, donc $U_2 = 12 - 5$.",
+              "Calculer : $U_2 = 7$ V."
+            ]
+          },
+          "pitfall": "Ne mélange pas les deux lois. Contre-exemple : deux lampes en dérivation sur une pile de 6 V ont chacune 6 V à leurs bornes, et non 3 V (6 ÷ 2). En série, au contraire, la tension se partage : si $U_1 = 2$ V et $U_2 = 4$ V, alors $U_G = 6$ V. Demande-toi toujours d'abord : série ou dérivation ?",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une tension avec la loi d'additivité et la loi d'égalité.",
+            "questions": [
+              {
+                "content": "Deux lampes sont en série sur une pile de 9 V. La tension aux bornes de la première est 3,5 V. Quelle est la tension aux bornes de la seconde, en V ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : les deux lampes sont en série, donc on utilise l'additivité. Étape 2 — Écrire : $U_G = U_1 + U_2$, donc $U_2 = U_G - U_1$. Étape 3 — Remplacer : $U_2 = 9 - 3{,}5$. Étape 4 — Calculer : $U_2 = 5{,}5$ V. Diviser 9 V par 2 serait faux : les deux lampes n'ont pas forcément la même tension.",
+                "answers": [
+                  {
+                    "content": "5,5",
+                    "correct": true
+                  }
+                ],
+                "unit": "V",
+                "tolerance": 0,
+                "hint": "En série, les tensions des lampes s'additionnent pour donner celle de la pile."
+              },
+              {
+                "content": "Deux lampes L1 et L2 sont en dérivation sur une pile de 4,5 V. La tension aux bornes de L1 est 4,5 V. Quelle est la tension aux bornes de L2, en V ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : les deux lampes sont en dérivation, donc on utilise l'égalité des tensions. Étape 2 — Écrire : $U_1 = U_2$. Étape 3 — Remplacer : $U_2 = 4{,}5$ V. Étape 4 — Calculer : la tension de L2 est 4,5 V, la même que celle de L1. On n'additionne pas : l'additivité est réservée aux dipôles en série.",
+                "answers": [
+                  {
+                    "content": "4,5",
+                    "correct": true
+                  }
+                ],
+                "unit": "V",
+                "tolerance": 0,
+                "hint": "En dérivation, les dipôles ont la même tension."
+              },
+              {
+                "content": "Deux lampes sont en série sur un générateur. Quelle relation lie $U_G$, $U_1$ et $U_2$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le montage est en série. Étape 2 — Écrire : la loi d'additivité s'écrit $U_G = U_1 + U_2$. Étape 3 — Remplacer et Étape 4 — Calculer serviront ensuite à trouver une inconnue. La relation $U_G = U_1 = U_2$ est celle de l'égalité, valable en dérivation seulement.",
+                "answers": [
+                  {
+                    "content": "$U_G = U_1 + U_2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$U_G = U_1 = U_2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$U_G = U_1 - U_2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$U_1 = U_G + U_2$",
+                    "correct": false
+                  }
+                ],
+                "hint": "En série, la tension du générateur est la somme."
+              },
+              {
+                "content": "Deux lampes en dérivation sur un même générateur n'ont pas la même tension.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les lampes sont en dérivation. Étape 2 — Écrire : la loi d'égalité dit que $U_1 = U_2$. Étape 3 — Remplacer et Étape 4 — Calculer : les deux lampes ont la même tension, égale à celle du générateur. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Dérivation : mêmes deux points communs."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Calculer des tensions dans des montages",
+              "statement": "Dans cet exercice, tu calcules des tensions en série et en dérivation.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux lampes sont en série sur une batterie de 12 V. La tension aux bornes de L1 est 4 V. Quelle est la tension aux bornes de L2, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2$, donc $U_2 = U_G - U_1$. Étape 3 — Remplacer : $U_2 = 12 - 4$. Étape 4 — Calculer : $U_2 = 8$ V.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Trois lampes sont en série sur une batterie de 12 V. On mesure 3,5 V aux bornes de L1 et 4,5 V aux bornes de L2. Quelle est la tension aux bornes de L3, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les trois lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2 + U_3$, donc $U_3 = U_G - U_1 - U_2$. Étape 3 — Remplacer : $U_3 = 12 - 3{,}5 - 4{,}5$. Étape 4 — Calculer : $U_3 = 4$ V. Si l'on oublie la lampe L2, on trouve 8,5 V, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux lampes sont en dérivation sur une pile de 6 V. Le voltmètre indique 6 V aux bornes de L1. Que lit-on aux bornes de L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation. Étape 2 — Écrire : $U_1 = U_2$. Étape 3 — Remplacer : $U_2 = 6$ V. Étape 4 — Calculer : on lit 6 V. Les valeurs 3 V (6 ÷ 2) et 12 V (6 + 6) viennent d'une confusion avec la loi des dipôles en série.",
+                  "answers": [
+                    {
+                      "content": "6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes en série sur une pile de 6 V ont chacune 6 V à leurs bornes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2$. Étape 3 — Remplacer : si chacune avait 6 V, la somme serait 12 V, plus que la pile. Étape 4 — Calculer : c'est impossible, donc l'affirmation est fausse. Il y a 6 V au total, partagés entre les deux lampes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim branche deux lampes en dérivation sur une pile de 9 V. Il calcule 9 ÷ 2 = 4,5 V pour chaque lampe. A-t-il raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation. Étape 2 — Écrire : $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_1 = U_2 = 9$ V. Étape 4 — Calculer : chaque lampe a 9 V. Ibrahim a appliqué un partage qui n'existe qu'en série.",
+                  "answers": [
+                    {
+                      "content": "Non : en dérivation, chaque lampe a 9 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : la tension se partage entre les lampes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : chaque lampe a 18 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : chaque lampe a la moitié de la pile",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Choisir la bonne loi dans le circuit de la moto",
+              "statement": "Dans cet exercice, tu choisis entre l'additivité et l'égalité des tensions pour des lampes de moto et de poste radio.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Avant de calculer, dis si les dipôles sont en série (une seule boucle) ou en dérivation (mêmes deux points communs).",
+              "questions": [
+                {
+                  "content": "Relie chaque situation à ce qui est vrai pour les tensions.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on repère le montage. Étape 2 — Écrire : en série, additivité ; en dérivation, égalité ; un fil a une tension nulle. Étape 3 — Remplacer et Étape 4 — Calculer : on relie chaque situation à sa règle. Les lois ne se mélangent pas : l'égalité ne s'applique pas en série.",
+                  "answers": [
+                    {
+                      "content": "Deux lampes en série",
+                      "match": "La somme des tensions des lampes est égale à celle du générateur"
+                    },
+                    {
+                      "content": "Deux lampes en dérivation",
+                      "match": "Les deux lampes ont la même tension"
+                    },
+                    {
+                      "content": "Un fil de connexion",
+                      "match": "La tension est nulle"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes sont en série sur une batterie de 12 V. La tension aux bornes de L1 est 7,5 V. Quelle est la tension aux bornes de L2, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en série. Étape 2 — Écrire : $U_2 = U_G - U_1$. Étape 3 — Remplacer : $U_2 = 12 - 7{,}5$. Étape 4 — Calculer : $U_2 = 4{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La loi qui dit que la tension du générateur est la somme des tensions des dipôles en série est la loi d'___ des tensions.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le montage est en série. Étape 2 — Écrire : la loi s'écrit $U_G = U_1 + U_2$, c'est la loi d'additivité des tensions. Étape 3 — Remplacer et Étape 4 — Calculer : il n'y a pas de calcul ici, on nomme la loi. L'égalité s'applique, elle, aux dérivations.",
+                  "answers": [
+                    {
+                      "content": "additivité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes L1 et L2 sont en dérivation sur un générateur. Un voltmètre indique 6 V aux bornes de L1. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation. Étape 2 — Écrire : $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_2 = 6$ V et $U_G = 6$ V. Étape 4 — Calculer : ce sont les deux affirmations vraies. Les valeurs 3 V et 12 V viennent d'un partage ou d'une somme qui n'existent qu'en série.",
+                  "answers": [
+                    {
+                      "content": "La tension aux bornes de L2 est 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension aux bornes du générateur est 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension aux bornes de L2 est 3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension aux bornes du générateur est 12 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes sont en série : $U_1 = 2$ V et $U_2 = 3$ V. La tension du générateur est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2$. Étape 3 — Remplacer : $U_G = 2 + 3$. Étape 4 — Calculer : $U_G = 5$ V. La valeur 6 V vient d'un produit 2 × 3, et 1 V d'une soustraction : aucune n'est la loi d'additivité.",
+                  "answers": [
+                    {
+                      "content": "5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer une tension inconnue.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on commence par reconnaître le montage. Étape 2 — Écrire : on écrit la loi qui lui correspond. Étape 3 — Remplacer : on met les valeurs. Étape 4 — Calculer : on calcule et on écrit l'unité. On ne peut pas remplacer des valeurs avant d'avoir écrit la loi.",
+                  "answers": [
+                    {
+                      "content": "Repérer le montage : série ou dérivation"
+                    },
+                    {
+                      "content": "Écrire la loi qui correspond"
+                    },
+                    {
+                      "content": "Remplacer par les valeurs données, avec leur unité"
+                    },
+                    {
+                      "content": "Calculer la tension cherchée et écrire son unité"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le poste radio d'Awa",
+          "statement": "Awa alimente son poste radio avec un bloc de quatre piles de 1,5 V montées en série, relié au poste par un interrupteur. Elle dispose d'un multimètre qui a les calibres 2 V, 20 V et 200 V.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la tension aux bornes du bloc de quatre piles de 1,5 V en série, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les quatre piles se suivent dans une seule boucle, elles sont en série. Étape 2 — Écrire : la tension du bloc est la somme des tensions des piles, $U_G = U_1 + U_2 + U_3 + U_4$. Étape 3 — Remplacer : $U_G = 1{,}5 + 1{,}5 + 1{,}5 + 1{,}5$. Étape 4 — Calculer : $U_G = 6$ V. Garder 1,5 V serait oublier que les tensions de piles en série s'additionnent.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Quel est le plus petit calibre du multimètre qui permet de mesurer la tension de 6 V du bloc de piles ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Placer : on place le multimètre en position V et on choisit le plus petit calibre supérieur à la tension attendue, ici 6 V. Les calibres disponibles sont 2 V, 20 V et 200 V : le calibre 2 V est trop petit et ferait afficher un dépassement ; 20 V convient et c'est le plus petit possible ; 200 V fonctionnerait mais avec une lecture moins précise.",
+              "answers": [
+                {
+                  "content": "20 V",
+                  "correct": true
+                },
+                {
+                  "content": "2 V",
+                  "correct": false
+                },
+                {
+                  "content": "200 V",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun calibre ne convient",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au calibre 20 V, l'écran affiche 6,02 aux bornes du bloc. Exprime cette tension en mV.",
+              "question_type": "numeric",
+              "explanation": "Pour la lecture, Étape 3 — Lire : le calibre est en V, donc 6,02 est en volts : 6,02 V. Pour la conversion, Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie : 6,02 × 1 000 = 6 020. La tension est 6 020 mV. Diviser donnerait 0,00602 mV, ce qui est absurde.",
+              "answers": [
+                {
+                  "content": "6020",
+                  "correct": true
+                }
+              ],
+              "unit": "mV",
+              "tolerance": 0
+            },
+            {
+              "content": "Le bloc de piles a une tension de 6 V et l'interrupteur du poste est ouvert. Quelle est la tension aux bornes de l'interrupteur, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur et son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert a une tension égale à celle du générateur. Étape 3 — Conclure : la tension est 6 V. Elle n'est pas nulle : l'absence de courant ne rend pas la tension nulle.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "L'interrupteur est maintenant fermé et le poste fonctionne. Quelle est la tension aux bornes de l'interrupteur, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur, son état est fermé. Étape 2 — Chercher : un interrupteur fermé se comporte comme un fil et sa tension est nulle. Étape 3 — Conclure : la tension est 0 V. Les 6 V du bloc se retrouvent aux bornes du poste, pas aux bornes de l'interrupteur.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Pour mesurer la tension du bloc, Awa doit couper le circuit et placer le voltmètre en série avec le poste.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Brancher : le voltmètre se branche en dérivation, avec la borne V et la borne COM sur les deux bornes du dipôle, sans ouvrir le circuit. On ne coupe pas le circuit : avec le voltmètre en série, le poste s'éteindrait. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le banc d'essai de Yao",
+          "statement": "Yao teste deux lampes de moto, L1 et L2, sur une batterie de 12 V. Il les monte d'abord en série avec un interrupteur K fermé. Le voltmètre indique 8 V aux bornes de L1.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle loi permet de trouver la tension aux bornes de L2 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : les deux lampes se suivent dans une seule boucle, elles sont en série. Étape 2 — Écrire : en série, on écrit la loi d'additivité $U_G = U_1 + U_2$. L'égalité $U_1 = U_2$ ne vaut qu'en dérivation.",
+              "answers": [
+                {
+                  "content": "La loi d'additivité : $U_G = U_1 + U_2$",
+                  "correct": true
+                },
+                {
+                  "content": "La loi d'égalité : $U_1 = U_2$",
+                  "correct": false
+                },
+                {
+                  "content": "La tension de L2 est toujours 12 V",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune loi : il faut mesurer à nouveau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le montage en série sur la batterie de 12 V, L1 a 8 V. Quelle est la tension aux bornes de L2, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : montage en série. Étape 2 — Écrire : $U_G = U_1 + U_2$, donc $U_2 = U_G - U_1$. Étape 3 — Remplacer : $U_2 = 12 - 8$. Étape 4 — Calculer : $U_2 = 4$ V.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "La tension aux bornes de L2 est 4 V. Exprime-la en mV.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie : 4 × 1 000 = 4 000. La tension est 4 000 mV, soit 4 V. Le nombre grandit quand l'unité diminue.",
+              "answers": [
+                {
+                  "content": "4000",
+                  "correct": true
+                }
+              ],
+              "unit": "mV",
+              "tolerance": 0
+            },
+            {
+              "content": "Yao rebranche les deux lampes en dérivation sur la batterie de 12 V. Quelle est la tension aux bornes de chaque lampe, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les deux lampes sont maintenant en dérivation. Étape 2 — Écrire : $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G = 12$ V. Étape 4 — Calculer : chaque lampe a 12 V. On ne partage pas la tension en dérivation.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le montage en série, quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : montage en série. Étape 2 — Écrire : $U_G = U_1 + U_2$. Étape 3 — Remplacer : $8 + 4 = 12$ V, donc la somme est bien 12 V, et 4 V est plus petit que 8 V. Étape 4 — Calculer : ce sont les deux bonnes affirmations. Chacune 12 V ou 20 V est impossible, car la somme dépasserait 12 V.",
+              "answers": [
+                {
+                  "content": "La somme des tensions des deux lampes est 12 V",
+                  "correct": true
+                },
+                {
+                  "content": "La tension aux bornes de L2 est plus petite que celle de L1",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux lampes ont chacune 12 V",
+                  "correct": false
+                },
+                {
+                  "content": "La tension aux bornes de L2 est 20 V",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'interrupteur K du montage en série est ouvert : le voltmètre branché aux bornes de L1 indique 0 V.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le dipôle visé est la lampe L1 et l'interrupteur du circuit est ouvert. Étape 2 — Chercher : le circuit est coupé, la lampe est éteinte et la tension du générateur se trouve aux bornes de l'interrupteur. Étape 3 — Conclure : L1 a 0 V à ses bornes. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le panneau solaire du village",
+          "statement": "Pour la place du village, un panneau solaire de 12 V alimente deux lampes d'éclairage L1 et L2 montées en dérivation, reliées par un interrupteur commun. Mamadou dispose d'un multimètre avec les calibres 2 V, 20 V et 200 V.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la tension aux bornes de L1, en V, quand les lampes fonctionnent ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les deux lampes sont en dérivation sur le panneau. Étape 2 — Écrire : $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G = 12$ V. Étape 4 — Calculer : $U_1 = 12$ V. La tension ne se partage pas entre les lampes en dérivation.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Exprime la tension du panneau solaire en mV.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie : 12 × 1 000 = 12 000. La tension est 12 000 mV.",
+              "answers": [
+                {
+                  "content": "12000",
+                  "correct": true
+                }
+              ],
+              "unit": "mV",
+              "tolerance": 0
+            },
+            {
+              "content": "L'interrupteur commun est ouvert. Quelle est la tension aux bornes de l'interrupteur, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur, son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert a la tension du générateur. Étape 3 — Conclure : la tension est 12 V. Les lampes, éteintes, ont une tension nulle.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Quel est le plus petit calibre qui permet à Mamadou de mesurer la tension aux bornes de L1 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Placer : on place le multimètre en position V et on choisit le plus petit calibre supérieur à 12 V : c'est 20 V parmi 2 V, 20 V et 200 V. Le calibre 2 V est trop petit, 200 V est possible mais moins précis, et la position A sert à mesurer une intensité.",
+              "answers": [
+                {
+                  "content": "20 V",
+                  "correct": true
+                },
+                {
+                  "content": "2 V",
+                  "correct": false
+                },
+                {
+                  "content": "200 V",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun, il faut la position A",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le soir, Mamadou monte trois lampes en série sur le panneau de 12 V. Les tensions mesurées sont 1,5 V aux bornes de L1 et 6,5 V aux bornes de L2. Quelle est la tension aux bornes de L3, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les trois lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2 + U_3$, donc $U_3 = U_G - U_1 - U_2$. Étape 3 — Remplacer : $U_3 = 12 - 1{,}5 - 6{,}5$. Étape 4 — Calculer : $U_3 = 4$ V. Oublier L2 donnerait 10,5 V, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Mamadou affirme : « Avec deux lampes en dérivation sur le panneau de 12 V, chacune a 6 V, car la tension se partage. » Dis si c'est juste et justifie.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que l'affirmation est fausse (1 point)",
+                "Nomme le montage en dérivation et la loi d'égalité des tensions (1 point)",
+                "Conclut que chaque lampe a 12 V (1 point)"
+              ],
+              "starter": "L'affirmation est fausse, car…",
+              "explanation": "Corrigé modèle. Étape 1 — Repérer : les deux lampes sont en dérivation, donc l'affirmation est fausse. Étape 2 — Écrire : en dérivation, $U_1 = U_2 = U_G$ (loi d'égalité des tensions). Étape 3 — Remplacer : $U_G = 12$ V. Étape 4 — Calculer : chaque lampe a 12 V. Le partage de la tension n'existe qu'en série. Barème : 1 point pour le constat, 1 point pour la loi, 1 point pour la valeur 12 V.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le banc d'essai d'Aminata",
+          "statement": "Aminata réalise un banc d'essai pour la moto de son oncle : une batterie de 12 V, un interrupteur K et deux lampes L1 et L2 montés en série. Son multimètre a les calibres 200 mV, 2 V, 20 V et 200 V. Dans les questions, K est fermé sauf indication contraire.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Comment Aminata doit-elle brancher le voltmètre pour mesurer la tension aux bornes de L1 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Brancher : le voltmètre se branche en dérivation, avec la borne V et la borne COM sur les deux bornes du dipôle étudié, sans ouvrir le circuit. Le branchement en série est celui de l'ampèremètre : il éteindrait la lampe. Une borne de L1 et une borne de L2 donneraient la tension de deux dipôles ensemble, pas celle de L1.",
+              "answers": [
+                {
+                  "content": "En dérivation : la borne V et la borne COM sur les deux bornes de L1, sans ouvrir le circuit",
+                  "correct": true
+                },
+                {
+                  "content": "En série avec L1, en coupant le circuit",
+                  "correct": false
+                },
+                {
+                  "content": "Sur la borne de L1 et la borne de L2",
+                  "correct": false
+                },
+                {
+                  "content": "À côté du banc, sans le relier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel calibre doit-elle choisir pour mesurer la tension de la batterie de 12 V ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Placer : on place le multimètre en position V et on choisit le plus petit calibre supérieur à 12 V : 20 V. Les calibres 200 mV et 2 V sont trop petits et signalent un dépassement. Le calibre 200 V conviendrait, mais la lecture serait moins précise.",
+              "answers": [
+                {
+                  "content": "20 V",
+                  "correct": true
+                },
+                {
+                  "content": "200 mV",
+                  "correct": false
+                },
+                {
+                  "content": "2 V",
+                  "correct": false
+                },
+                {
+                  "content": "200 V",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Elle ajoute une lampe L3 en série. Les tensions mesurées sont 3 V aux bornes de L1 et 4,5 V aux bornes de L2. Quelle est la tension aux bornes de L3, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les trois lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2 + U_3$, donc $U_3 = U_G - U_1 - U_2$. Étape 3 — Remplacer : $U_3 = 12 - 3 - 4{,}5$. Étape 4 — Calculer : $U_3 = 4{,}5$ V.",
+              "answers": [
+                {
+                  "content": "4,5",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le montage à deux lampes, au calibre 20 V, l'écran affiche 7,50 aux bornes de L2. Exprime cette tension en mV.",
+              "question_type": "numeric",
+              "explanation": "Pour la lecture, Étape 3 — Lire : le calibre est en V, donc 7,50 est en volts : 7,50 V. Pour la conversion, Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie : 7,5 × 1 000 = 7 500. La tension est 7 500 mV.",
+              "answers": [
+                {
+                  "content": "7500",
+                  "correct": true
+                }
+              ],
+              "unit": "mV",
+              "tolerance": 0
+            },
+            {
+              "content": "Aminata ouvre l'interrupteur K. Quelle est la tension aux bornes de K, en V ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur K, son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert a une tension égale à celle du générateur. Étape 3 — Conclure : la tension est 12 V. La lampe L1 et la lampe L2 sont alors éteintes avec des tensions nulles.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "V",
+              "tolerance": 0
+            },
+            {
+              "content": "Aminata a placé le voltmètre en série avec L1, en coupant le circuit. Explique son erreur et dis comment la corriger.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que le voltmètre doit se brancher en dérivation, pas en série (1 point)",
+                "Dit comment le brancher : V et COM sur les deux bornes de L1 (1 point)",
+                "Dit qu'on ne coupe pas le circuit et que la lampe ne s'allume plus avec l'erreur (1 point)"
+              ],
+              "starter": "L'erreur est que le voltmètre…",
+              "explanation": "Corrigé modèle. Étape 2 — Brancher : un voltmètre se branche en dérivation. Aminata l'a mis en série en coupant le circuit : L1 ne s'allume plus. Pour corriger, elle remet le circuit comme avant puis relie la borne V et la borne COM aux deux bornes de L1, sans rien débrancher. Barème : 1 point pour le constat de l'erreur, 1 point pour le bon branchement, 1 point pour la conséquence et l'absence de coupure.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Symbole et unités de la tension, conversions kV, V et mV ; branchement et lecture du voltmètre, calibre ; tension aux bornes d'un fil, d'un interrupteur ouvert ou fermé et d'une lampe ; lois d'additivité et d'égalité des tensions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Une pile de poste radio, la batterie d'une moto et une ligne électrique n'ont pas la même tension.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le symbole de l'unité est V ; pour changer d'unité, multiplie ou divise par 1 000.",
+              "questions": [
+                {
+                  "content": "Parmi ces symboles, lequel désigne l'unité de la tension d'une pile de poste radio ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche l'unité de la tension, pas la lettre de la grandeur. Étape 2 — Trouver : la tension se note U et son unité est le volt, de symbole V. Étape 3 — Calculer : la bonne réponse est V. Le U est le symbole de la grandeur elle-même, I celui de l'intensité et A l'unité de l'intensité : ce sont les confusions habituelles.",
+                  "answers": [
+                    {
+                      "content": "V",
+                      "correct": true
+                    },
+                    {
+                      "content": "U",
+                      "correct": false
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "I",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole de la grandeur « tension électrique » est la lettre ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche le symbole de la grandeur, pas celui de son unité. Étape 2 — Trouver : la tension se note U et se mesure en volts (V) ; l'intensité se note I et se mesure en ampères (A). Étape 3 — Calculer : on complète par la lettre U. La lettre V n'est pas la bonne réponse : c'est le symbole de l'unité.",
+                  "answers": [
+                    {
+                      "content": "U",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile d'un poste radio porte la tension 9 V. Exprime cette tension en mV.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie par 1 000 : 9 × 1 000 = 9 000. La tension est 9 000 mV. Diviser donnerait 0,009 mV, ce qui est faux : le millivolt est une unité plus petite, donc le nombre doit grandir.",
+                  "answers": [
+                    {
+                      "content": "9000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mV",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un voltmètre indique 2 500 mV aux bornes d'un panneau solaire. Exprime cette tension en V.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le mV et l'arrivée le V. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus grande, donc on divise par 1 000 : 2 500 ÷ 1 000 = 2,5. La tension est 2,5 V. Multiplier donnerait 2 500 000 V, ce qui est faux : le volt est une unité plus grande, donc le nombre doit diminuer.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "1 kV est égal à 100 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le départ est le kV et l'arrivée le V. Étape 2 — Trouver : le lien est 1 kV = 1 000 V, et non 100 V. Étape 3 — Calculer : on multiplie par 1 000 pour aller vers l'unité plus petite. L'affirmation est fausse : confondre 1 000 et 100 est l'erreur tentante, mais le préfixe kilo veut dire mille.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Kouassi mesure des tensions avec un multimètre qui a les calibres 200 mV, 2 V, 20 V et 200 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Position V, calibre plus grand que la tension attendue, bornes V et COM en dérivation.",
+              "questions": [
+                {
+                  "content": "Pour mesurer la tension aux bornes de la lampe L, comment Kouassi branche-t-il son multimètre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : le multimètre se place en position V pour une tension. Étape 2 — Brancher : on relie la borne V et la borne COM aux deux bornes de L, en dérivation, sans ouvrir le circuit. La position A et le montage en série sont ceux de la mesure d'une intensité ; même en position V, un montage en série éteindrait la lampe.",
+                  "answers": [
+                    {
+                      "content": "En position V, en dérivation sur les deux bornes de L, sans ouvrir le circuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "En position A, en série avec L",
+                      "correct": false
+                    },
+                    {
+                      "content": "En position V, en série avec L, en coupant le circuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "En position A, en dérivation sur L",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouassi veut mesurer une pile de 4,5 V. Quel est le plus petit calibre qui permet cette mesure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : on place le multimètre en position V et on cherche le plus petit calibre supérieur à 4,5 V parmi 200 mV, 2 V, 20 V, 200 V. C'est 20 V. Les calibres 200 mV et 2 V sont trop petits : l'écran signalerait un dépassement. Un calibre plus grand fonctionnerait, mais la lecture serait moins précise, et le but est de prendre le plus petit calibre possible.",
+                  "answers": [
+                    {
+                      "content": "20 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "200 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouassi règle le calibre sur 200 mV et lit 96 à l'écran. Quelle est la tension, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Pour la lecture, Étape 3 — Lire : le calibre est en mV, donc 96 est en millivolts : 96 mV. Pour la conversion, Étape 1 — Repérer : le départ est le mV et l'arrivée le V. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on divise : 96 ÷ 1 000 = 0,096 V. Écrire 96 V serait oublier que le nombre affiché prend l'unité du calibre.",
+                  "answers": [
+                    {
+                      "content": "0,096",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour mesurer une tension, Kouassi place le multimètre sur la position A et le branche en série.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Placer : pour une tension, on place le multimètre en position V. Étape 2 — Brancher : on le branche en dérivation, sans ouvrir le circuit. La position A et le montage en série correspondent à la mesure d'une intensité. L'affirmation est fausse : elle mélange la mesure d'une tension et celle d'une intensité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'écran affiche −4,5 au calibre 20 V aux bornes d'une pile de 4,5 V. Que signifie le signe moins ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Brancher : la borne V se relie du côté de la borne + de la pile et la borne COM du côté −. Étape 3 — Lire : le nombre 4,5 est bien la tension en volts, et le signe moins montre que les deux bornes sont inversées. Un calibre trop petit afficherait un dépassement, pas un signe moins, et une pile déchargée aurait une valeur plus petite.",
+                  "answers": [
+                    {
+                      "content": "La borne V et la borne COM sont inversées par rapport au + et au − de la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile est déchargée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le calibre est trop petit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre est en série",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une lampe de poche, une pile de 4,5 V, une lampe et un interrupteur K sont montés en série.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Fil et interrupteur fermé : 0 V. Interrupteur ouvert : la tension de la pile.",
+              "questions": [
+                {
+                  "content": "Dans la lampe de poche, K est fermé et la lampe brille. Quelle est la tension aux bornes de K, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est K et son état est fermé. Étape 2 — Chercher : un interrupteur fermé se comporte comme un fil et sa tension est nulle. Étape 3 — Conclure : la tension est 0 V. Annoncer 4,5 V serait confondre avec l'interrupteur ouvert, qui porte la tension du générateur.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans la lampe de poche, K est ouvert. Quelle est la tension aux bornes de K, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est K et son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert coupe le circuit et sa tension est égale à celle du générateur. Étape 3 — Conclure : la tension est 4,5 V. Croire qu'elle est nulle parce qu'aucun courant ne passe est l'erreur tentante : seul un interrupteur fermé a une tension nulle.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le voltmètre branché aux bornes d'un fil de connexion de la lampe de poche indique 4,5 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est un fil de connexion. Étape 2 — Chercher : un fil laisse passer le courant sans « perdre » de tension, sa tension est nulle. Étape 3 — Conclure : le voltmètre indique 0 V. L'affirmation est fausse : les 4,5 V sont la tension de la pile, qu'on retrouve aux bornes de K ouvert, pas aux bornes d'un fil.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation de la lampe de poche à la tension que lit un voltmètre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on repère le dipôle et son état. Étape 2 — Chercher : l'interrupteur ouvert a la tension de la pile, soit 4,5 V ; l'interrupteur fermé a une tension nulle ; la lampe qui brille normalement a une tension proche de sa tension nominale. Étape 3 — Conclure : on relie chaque situation à sa tension. Il ne faut pas donner 4,5 V à K fermé : il se comporte comme un fil.",
+                  "answers": [
+                    {
+                      "content": "K ouvert, aux bornes de K",
+                      "match": "4,5 V"
+                    },
+                    {
+                      "content": "K fermé, aux bornes de K",
+                      "match": "0 V"
+                    },
+                    {
+                      "content": "Lampe qui brille normalement, aux bornes de la lampe",
+                      "match": "Une valeur proche de sa tension nominale"
+                    }
+                  ]
+                },
+                {
+                  "content": "K est ouvert et la lampe est éteinte. Quelle est la tension aux bornes de la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est la lampe, et K est ouvert : le circuit est coupé. Étape 2 — Chercher : aucun courant ne passe, la lampe est éteinte, et c'est K ouvert qui porte la tension de la pile. Étape 3 — Conclure : la lampe a 0 V à ses bornes. Les 4,5 V sont aux bornes de K, et la valeur 2,25 V serait un partage qui n'a pas lieu ici.",
+                  "answers": [
+                    {
+                      "content": "0 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "2,25 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa tension nominale",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Des lampes sont branchées sur des générateurs, en série ou en dérivation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Série : la somme des tensions. Dérivation : la même tension.",
+              "questions": [
+                {
+                  "content": "Deux lampes L1 et L2 sont en série sur une batterie de 12 V. La tension aux bornes de L1 est 5 V. Quelle est la tension aux bornes de L2, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2}$, donc $U_{L2} = U_G - U_{L1}$. Étape 3 — Remplacer : $U_{L2} = 12 - 5$. Étape 4 — Calculer : $U_{L2} = 7$ V. Additionner toutes les valeurs données, 17 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux lampes L1 et L2 sont en dérivation sur une pile de 9 V. La tension aux bornes de L1 est 9 V. Que lit-on aux bornes de L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation, elles ont les mêmes deux points communs. Étape 2 — Écrire : la loi d'égalité donne $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G$ = 9 V. Étape 4 — Calculer : on lit 9 V aux bornes de L2. Les valeurs 4,5 V (un partage) et 18 V (une somme) viennent de la loi des dipôles en série, qui ne s'applique pas ici.",
+                  "answers": [
+                    {
+                      "content": "9 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "18 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en série, la tension du générateur est égale à la somme des tensions des dipôles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le montage est en série. Étape 2 — Écrire : la loi d'additivité s'écrit $U_G = U_1 + U_2 + ...$ pour tous les dipôles en série. Étape 3 — Remplacer : on remplace par les valeurs données. Étape 4 — Calculer : la somme des tensions des dipôles est bien la tension du générateur. L'affirmation est vraie ; elle ne vaut pas en dérivation, où les tensions sont égales.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois lampes sont en série sur une pile de 9 V. La tension est 2,5 V aux bornes de L1 et 3,5 V aux bornes de L2. Quelle est la tension aux bornes de L3, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2} + U_{L3}$, donc $U_{L3} = U_G - U_{L1} - U_{L2}$. Étape 3 — Remplacer : $U_{L3} = 9 - 2{,}5 - 3{,}5$. Étape 4 — Calculer : $U_{L3} = 3$ V. Additionner toutes les valeurs données, 15 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux lampes en dérivation sur un générateur ont la même ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation. Étape 2 — Écrire : la loi d'égalité des tensions s'écrit $U_1 = U_2 = U_G$. Étape 3 — Remplacer : on remplace par les valeurs si elles sont données. Étape 4 — Calculer : on complète par « tension ». Ce n'est pas l'intensité : l'égalité des intensités n'est pas la loi des dérivations.",
+                  "answers": [
+                    {
+                      "content": "tension",
+                      "correct": true
+                    },
+                    {
+                      "content": "tension électrique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Tensions de la moto, du poste radio, du panneau solaire et de la lampe de poche : conversions, choix du calibre, tension aux bornes d'un interrupteur ou d'une lampe, lois des tensions en série et en dérivation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Yao est mécanicien de motos à Bouaké. La batterie d'une moto fait 12 V ; le phare et le feu arrière sont deux lampes. Son multimètre a les calibres 2 V, 20 V et 200 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Plus petit calibre supérieur à 12 V ; interrupteur fermé, 0 V ; série : somme ; dérivation : égalité.",
+              "questions": [
+                {
+                  "content": "Yao mesure 11 800 mV aux bornes d'une batterie de moto fatiguée. Exprime cette tension en V.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le mV et l'arrivée le V. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus grande, donc on divise par 1 000 : 11 800 ÷ 1 000 = 11,8. La tension est 11,8 V. Multiplier donnerait 11 800 000 V, ce qui est faux : le volt est une unité plus grande, donc le nombre doit diminuer.",
+                  "answers": [
+                    {
+                      "content": "11,8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Yao veut mesurer la batterie de 12 V d'une moto. Quel est le plus petit calibre qui permet cette mesure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : on place le multimètre en position V et on cherche le plus petit calibre supérieur à 12 V parmi 2 V, 20 V, 200 V. C'est 20 V. Le calibre 2 V est trop petit : l'écran signalerait un dépassement. Un calibre plus grand fonctionnerait, mais la lecture serait moins précise, et le but est de prendre le plus petit calibre possible.",
+                  "answers": [
+                    {
+                      "content": "20 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'interrupteur du phare est fermé et la lampe brille. Quelle est la tension aux bornes de l'interrupteur du phare, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur du phare et son état est fermé. Étape 2 — Chercher : un interrupteur fermé se comporte comme un fil et sa tension est nulle. Étape 3 — Conclure : la tension est 0 V. Annoncer 12 V serait confondre avec l'interrupteur ouvert, qui porte la tension du générateur.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour un essai, Yao monte le phare L1 et le feu arrière L2 en série sur la batterie de 12 V. Le phare a 7 V. Quelle est la tension aux bornes de L2, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2}$, donc $U_{L2} = U_G - U_{L1}$. Étape 3 — Remplacer : $U_{L2} = 12 - 7$. Étape 4 — Calculer : $U_{L2} = 5$ V. Additionner toutes les valeurs données, 19 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Sur la vraie moto, le phare L1 et le feu L2 sont en dérivation sur la batterie de 12 V. La tension aux bornes de L1 est 12 V. Que lit-on aux bornes de L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation, elles ont les mêmes deux points communs. Étape 2 — Écrire : la loi d'égalité donne $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G$ = 12 V. Étape 4 — Calculer : on lit 12 V aux bornes de L2. Les valeurs 6 V (un partage) et 24 V (une somme) viennent de la loi des dipôles en série, qui ne s'applique pas ici.",
+                  "answers": [
+                    {
+                      "content": "12 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la cour, la famille d'Awa écoute un poste radio alimenté par des piles de 1,5 V montées en série. Awa dispose d'un multimètre avec les calibres 200 mV, 2 V, 20 V et 200 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Les tensions de piles en série s'additionnent ; le voltmètre ne coupe jamais le circuit.",
+              "questions": [
+                {
+                  "content": "Awa met cinq piles de 1,5 V en série dans son poste radio. Quelle est la tension du bloc de piles, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les cinq piles se suivent dans une seule boucle, elles sont en série. Étape 2 — Écrire : la tension du bloc est la somme des tensions des piles, $U_G = U_1 + U_2 + U_3 + U_4 + U_5$. Étape 3 — Remplacer : $U_G = 5 \\times 1{,}5$. Étape 4 — Calculer : $U_G = 7{,}5$ V. Garder 1,5 V serait oublier que les tensions de piles en série s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le bloc de cinq piles d'Awa a une tension de 7,5 V. Exprime cette tension en mV.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie par 1 000 : 7,5 × 1 000 = 7 500. La tension est 7 500 mV. Diviser donnerait 0,0075 mV, ce qui est faux : le millivolt est une unité plus petite, donc le nombre doit grandir.",
+                  "answers": [
+                    {
+                      "content": "7500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mV",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Awa mesure le bloc de piles de 7,5 V. Le calibre à choisir est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Placer : on place le multimètre en position V et on cherche le plus petit calibre supérieur à 7,5 V parmi 200 mV, 2 V, 20 V, 200 V. C'est 20 V. Les calibres 200 mV et 2 V sont trop petits : l'écran signalerait un dépassement. Un calibre plus grand fonctionnerait, mais la lecture serait moins précise, et le but est de prendre le plus petit calibre possible.",
+                  "answers": [
+                    {
+                      "content": "20 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "200 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poste est éteint : son interrupteur est ouvert et le bloc de piles fait 7,5 V. Quelle est la tension aux bornes de l'interrupteur du poste, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur du poste et son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert coupe le circuit et sa tension est égale à celle du générateur. Étape 3 — Conclure : la tension est 7,5 V. Croire qu'elle est nulle parce qu'aucun courant ne passe est l'erreur tentante : seul un interrupteur fermé a une tension nulle.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Si Awa coupe un fil et place le voltmètre en série avec le poste, le poste continue de jouer normalement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Placer : le multimètre est bien en position V. Étape 2 — Brancher : mais un voltmètre se branche en dérivation, sur les deux bornes du dipôle, sans ouvrir le circuit. En le plaçant en série, Awa coupe le circuit : le poste ne joue plus et l'écran n'indique pas la tension du poste. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur la place du village, un panneau solaire de 12 V alimente plusieurs lampes d'éclairage, reliées par un interrupteur général.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dérivation : toutes les lampes ont la tension du panneau.",
+              "questions": [
+                {
+                  "content": "Trois lampes L1, L2 et L3 sont en dérivation sur le panneau solaire de 12 V. La tension aux bornes de L1 est 12 V. Que lit-on aux bornes de L3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation, elles ont les mêmes deux points communs. Étape 2 — Écrire : la loi d'égalité donne $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G$ = 12 V. Étape 4 — Calculer : on lit 12 V aux bornes de L3. Les valeurs 6 V (un partage) et 24 V (une somme) viennent de la loi des dipôles en série, qui ne s'applique pas ici.",
+                  "answers": [
+                    {
+                      "content": "12 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La tension du panneau solaire est notée 0,012 kV sur sa plaque. Exprime cette tension en V.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le kV et l'arrivée le V. Étape 2 — Trouver : 1 kV = 1 000 V. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie par 1 000 : 0,012 × 1 000 = 12. La tension est 12 V. Diviser donnerait 0,000012 V, ce qui est faux : le volt est une unité plus petite, donc le nombre doit grandir.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le soir, l'interrupteur général est ouvert. Le voltmètre est placé aux bornes de la lampe L1. Que lit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est la lampe L1 et l'interrupteur général est ouvert. Étape 2 — Chercher : le circuit est coupé, aucun courant ne passe, et c'est l'interrupteur ouvert qui porte la tension du panneau. Étape 3 — Conclure : la lampe a 0 V à ses bornes. La valeur 12 V est celle de l'interrupteur, pas de la lampe, et 6 V ou 24 V n'ont aucune raison d'apparaître.",
+                  "answers": [
+                    {
+                      "content": "0 V : la lampe est éteinte",
+                      "correct": true
+                    },
+                    {
+                      "content": "12 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mamadou monte deux lampes L1 et L2 en série sur le panneau solaire de 12 V. La tension aux bornes de L1 est 5,5 V. Quelle est la tension aux bornes de L2, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2}$, donc $U_{L2} = U_G - U_{L1}$. Étape 3 — Remplacer : $U_{L2} = 12 - 5{,}5$. Étape 4 — Calculer : $U_{L2} = 6{,}5$ V. Additionner toutes les valeurs données, 17,5 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "6,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Trois lampes sont en dérivation sur un panneau solaire de 12 V. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les trois lampes sont en dérivation. Étape 2 — Écrire : $U_1 = U_2 = U_3 = U_G$. Étape 3 — Remplacer : $U_G = 12$ V. Étape 4 — Calculer : chaque lampe a 12 V et le panneau a 12 V. Les affirmations avec 4 V (12 ÷ 3) et avec une somme égale à 12 V viennent de la loi des dipôles en série, qui ne s'applique pas ici.",
+                  "answers": [
+                    {
+                      "content": "Chaque lampe a 12 V à ses bornes",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension du panneau est 12 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque lampe a 4 V à ses bornes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme des tensions des trois lampes est 12 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Adjoua utilise une lampe de poche de 3 V alimentée par deux piles de 1,5 V montées en série, avec un interrupteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Piles en série : on additionne ; lampe qui brille normalement : proche de sa tension nominale.",
+              "questions": [
+                {
+                  "content": "Quelle est la tension totale des deux piles de 1,5 V montées en série, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les deux piles se suivent dans une seule boucle, elles sont en série. Étape 2 — Écrire : la tension du bloc est la somme des tensions des piles, $U_G = U_1 + U_2$. Étape 3 — Remplacer : $U_G = 1{,}5 + 1{,}5$. Étape 4 — Calculer : $U_G = 3$ V. Garder 1,5 V serait oublier que les tensions de piles en série s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La lampe de poche porte l'indication 3 V et la tension aux bornes du bloc de piles est 3 V. Que peut-on dire de la tension aux bornes de la lampe quand elle brille normalement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est la lampe, allumée. Étape 2 — Chercher : la tension d'une lampe allumée est non nulle ; quand elle brille normalement, elle est proche de sa tension nominale. Étape 3 — Conclure : la tension est proche de 3 V. La valeur nulle est celle d'un fil, 1,5 V celle d'une seule pile, et 6 V dépasserait la tension de la pile.",
+                  "answers": [
+                    {
+                      "content": "Elle est proche de 3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est nulle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est proche de 1,5 V, la tension d'une seule pile du bloc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est proche de 6 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua mesure la tension du bloc de piles, de 3 V environ, avec un multimètre aux calibres 200 mV, 2 V, 20 V et 200 V. Quel est le plus petit calibre qui permet cette mesure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : on place le multimètre en position V et on cherche le plus petit calibre supérieur à 3 V parmi 200 mV, 2 V, 20 V, 200 V. C'est 20 V. Les calibres 200 mV et 2 V sont trop petits : l'écran signalerait un dépassement. Un calibre plus grand fonctionnerait, mais la lecture serait moins précise, et le but est de prendre le plus petit calibre possible.",
+                  "answers": [
+                    {
+                      "content": "20 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "200 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua lit 2 970 mV aux bornes de ses piles. Exprime cette tension en V.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le mV et l'arrivée le V. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus grande, donc on divise par 1 000 : 2 970 ÷ 1 000 = 2,97. La tension est 2,97 V. Multiplier donnerait 2 970 000 V, ce qui est faux : le volt est une unité plus grande, donc le nombre doit diminuer.",
+                  "answers": [
+                    {
+                      "content": "2,97",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "L'interrupteur de la lampe de poche d'Adjoua est ouvert. Quelle est la tension aux bornes de l'interrupteur, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur et son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert coupe le circuit et sa tension est égale à celle du générateur. Étape 3 — Conclure : la tension est 3 V. Croire qu'elle est nulle parce qu'aucun courant ne passe est l'erreur tentante : seul un interrupteur fermé a une tension nulle.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier la tension d'un interrupteur ouvert ou d'un fil ; diagnostiquer une panne avec un voltmètre ; comparer un montage en série et un montage en dérivation ; choisir le calibre d'un multimètre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Des élèves discutent des tensions dans un circuit avec une batterie de 12 V, une lampe L et un interrupteur K montés en série. Ils étudient aussi deux lampes sur une pile de 6 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Interrupteur ouvert : la tension du générateur ; série : somme ; dérivation : égalité.",
+              "questions": [
+                {
+                  "content": "Fatou dit : « Quand K est ouvert, la tension aux bornes de K est nulle, puisqu'il ne passe aucun courant. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est K et son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert a une tension égale à celle du générateur. Étape 3 — Conclure : la tension est 12 V. Le raisonnement « pas de courant, donc pas de tension » est faux : c'est justement parce que le circuit est coupé que toute la tension se retrouve aux bornes de K.",
+                  "answers": [
+                    {
+                      "content": "Elle se trompe : K ouvert a la tension de la batterie, soit 12 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a raison : sans courant, la tension est nulle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se trompe : K ouvert a 6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se trompe : K ouvert a 24 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi écrit : « 0,004 V = 4 mV ». Il a raison.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie par 1 000 pour aller vers l'unité plus petite : 0,004 × 1 000 = 4. Donc 0,004 V = 4 mV et Koffi a raison. Écrire 0,000004 mV serait l'erreur de celui qui divise au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le voltmètre branché aux bornes d'un fil de connexion de la moto indique à peu près 0 V. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est un fil de connexion. Étape 2 — Chercher : la règle du fil est que sa tension est nulle, comme celle d'un interrupteur fermé. Étape 3 — Conclure : un voltmètre branché à ses bornes indique donc 0 V ou presque. Un fil cassé couperait le circuit, et le voltmètre en série n'est pas la cause d'une valeur nulle sur un fil en bon état.",
+                  "answers": [
+                    {
+                      "content": "Un fil laisse passer le courant sans « perdre » de tension : sa tension est nulle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fil est cassé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre est en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "La batterie est déchargée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes sont en série sur une pile de 6 V. Quel couple de tensions est possible pour L1 et L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2$. Étape 3 — Remplacer : on teste chaque couple avec $U_G = 6$ V. Étape 4 — Calculer : 2 + 4 = 6 V convient. Les couples 6 + 6 = 12 V et 3 + 6 = 9 V dépassent la pile, et 1 + 4 = 5 V n'atteint pas 6 V : aucun ne respecte l'additivité.",
+                  "answers": [
+                    {
+                      "content": "2 V et 4 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V et 6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V et 6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 V et 4 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes sont en dérivation sur une pile de 6 V. Quel couple de tensions est possible pour L1 et L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation. Étape 2 — Écrire : $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G = 6$ V. Étape 4 — Calculer : chaque lampe a 6 V. Les couples 3 V et 3 V ou 2 V et 4 V partagent la tension comme en série, et 12 V dépasse la pile : aucun ne respecte l'égalité.",
+                  "answers": [
+                    {
+                      "content": "6 V et 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 V et 3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 V et 4 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 V et 12 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le phare d'une moto ne s'allume pas. Fatou cherche la panne avec un multimètre aux calibres 2 V, 20 V et 200 V. La batterie est de 12 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "12 V aux bornes d'un interrupteur : il est ouvert ; 0 V : il est fermé.",
+              "questions": [
+                {
+                  "content": "Fatou branche le voltmètre aux bornes de l'interrupteur du phare : il indique 12 V. Pourquoi le phare ne s'allume-t-il pas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est l'interrupteur, avec une tension de 12 V. Étape 2 — Chercher : un interrupteur fermé aurait 0 V ; seul un interrupteur ouvert a la tension du générateur. Étape 3 — Conclure : l'interrupteur est ouvert, donc le phare reste éteint. La batterie n'est pas vide puisqu'elle fournit bien 12 V.",
+                  "answers": [
+                    {
+                      "content": "L'interrupteur est ouvert et porte toute la tension de la batterie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur est fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "La batterie est vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre est cassé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une autre moto, le voltmètre, bien branché aux bornes de la batterie, indique 0 V. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Brancher : le voltmètre est bien branché en dérivation aux bornes de la batterie. Étape 3 — Lire : il indique 0 V, alors qu'une batterie en état de marche donne près de 12 V. On conclut que la batterie est déchargée. L'interrupteur ouvert n'explique pas cette valeur, puisqu'on mesure directement la batterie.",
+                  "answers": [
+                    {
+                      "content": "La batterie est déchargée et ne fournit plus de tension",
+                      "correct": true
+                    },
+                    {
+                      "content": "La batterie est en parfait état",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur est ouvert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre est en position A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou mesure la tension du phare quand il brille. Le calibre 20 V affiche 11,9. Exprime cette tension en mV.",
+                  "question_type": "numeric",
+                  "explanation": "Pour la lecture, Étape 3 — Lire : le calibre est en V, donc 11,9 est en volts : 11,9 V. Pour la conversion, Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie : 11,9 × 1 000 = 11 900. La tension est 11 900 mV. Diviser par 1 000 donnerait 0,0119 mV, faux.",
+                  "answers": [
+                    {
+                      "content": "11900",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mV",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Remets dans l'ordre les actions de Fatou pour tester l'interrupteur du phare.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Placer : on règle d'abord le multimètre en position V avec un calibre supérieur à 12 V. Étape 2 — Brancher : on relie V et COM aux bornes de l'interrupteur. Étape 3 — Lire : on lit le nombre et l'unité. Enfin on conclut : 12 V veut dire interrupteur ouvert, 0 V veut dire fermé. On ne branche pas avant d'avoir réglé le calibre.",
+                  "answers": [
+                    {
+                      "content": "Régler le multimètre en position V sur le calibre 20 V"
+                    },
+                    {
+                      "content": "Brancher la borne V et la borne COM aux deux bornes de l'interrupteur"
+                    },
+                    {
+                      "content": "Lire le nombre affiché et son unité"
+                    },
+                    {
+                      "content": "Conclure sur l'état de l'interrupteur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tester la batterie, Fatou doit placer le voltmètre en série en coupant le circuit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Placer : le multimètre se règle en position V. Étape 2 — Brancher : il se branche en dérivation, sur les deux bornes de la batterie, sans ouvrir le circuit. Placer le voltmètre en série en coupant le circuit n'est pas la bonne méthode : on ne coupe pas le circuit pour mesurer une tension. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Avec une pile de 4,5 V, Awa réalise deux montages : le montage A avec deux lampes L1 et L2 en série, le montage B avec deux lampes L1 et L2 en dérivation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Série : somme des tensions. Dérivation : chaque lampe a la tension du générateur.",
+              "questions": [
+                {
+                  "content": "Dans le montage B, quelle tension lit-on aux bornes de L1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : dans le montage B, les lampes sont en dérivation. Étape 2 — Écrire : $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G = 4{,}5$ V. Étape 4 — Calculer : $U_1 = 4{,}5$ V. La valeur 2,25 V est le partage de la tension, qui n'existe qu'en série ; 9 V viendrait d'une somme faite à tort.",
+                  "answers": [
+                    {
+                      "content": "4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "2,25 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le montage A, les lampes L1 et L2 sont en série sur la pile de 4,5 V. La tension aux bornes de L1 est 1,5 V. Quelle est la tension aux bornes de L2, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2}$, donc $U_{L2} = U_G - U_{L1}$. Étape 3 — Remplacer : $U_{L2} = 4{,}5 - 1{,}5$. Étape 4 — Calculer : $U_{L2} = 3$ V. Additionner toutes les valeurs données, 6 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans quel montage la somme des tensions des deux lampes est-elle égale à 4,5 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : A est en série et B en dérivation. Étape 2 — Écrire : en série, $U_G = U_1 + U_2$ ; en dérivation, $U_1 = U_2 = U_G$. Étape 3 — Remplacer : en B, la somme vaut 4,5 + 4,5 = 9 V. Étape 4 — Calculer : seul le montage A donne une somme de 4,5 V. Dire « dans les deux montages » est l'erreur de celui qui applique l'additivité en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Dans le montage A, en série",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans le montage B, en dérivation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans les deux montages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans aucun montage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Compare les montages A et B. Dis dans lequel chaque lampe a la tension de la pile et justifie avec la loi des tensions.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Désigne le montage B, en dérivation (1 point)",
+                    "Cite la loi d'égalité des tensions (1 point)",
+                    "Précise que dans le montage A la tension se partage entre les lampes (1 point)"
+                  ],
+                  "starter": "Dans le montage B, les lampes sont…",
+                  "explanation": "Corrigé modèle. Étape 1 — Repérer : A est en série, B en dérivation. Étape 2 — Écrire : en dérivation, $U_1 = U_2 = U_G$ ; en série, $U_G = U_1 + U_2$. Étape 3 — Remplacer : dans B, $U_1 = U_2 = 4{,}5$ V ; dans A, la somme des deux tensions vaut 4,5 V. Étape 4 — Calculer : c'est donc dans le montage B que chaque lampe a la tension de la pile. Barème : 1 point pour le montage B, 1 point pour la loi d'égalité, 1 point pour le partage en série.",
+                  "answers": []
+                },
+                {
+                  "content": "Relie chaque montage à ce qui est vrai pour les tensions.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on repère le type de chaque montage. Étape 2 — Écrire : en série, la somme des tensions des lampes est égale à celle de la pile ; en dérivation, chaque lampe a la tension de la pile ; un fil a une tension nulle. Étape 3 — Remplacer et Étape 4 — Calculer : on relie chaque cas à sa règle. L'égalité ne s'applique pas à un montage en série, et l'additivité pas à un montage en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Montage A, deux lampes en série",
+                      "match": "La somme des tensions des lampes est égale à celle de la pile"
+                    },
+                    {
+                      "content": "Montage B, deux lampes en dérivation",
+                      "match": "Chaque lampe a la tension de la pile"
+                    },
+                    {
+                      "content": "Un fil de connexion dans l'un des montages",
+                      "match": "Sa tension est nulle"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Kouassi mesure les tensions d'un circuit de moto avec un multimètre aux calibres 200 mV, 2 V, 20 V et 200 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour choisir un calibre sans connaître la tension : on part du plus grand.",
+              "questions": [
+                {
+                  "content": "Kouassi veut mesurer une tension d'environ 0,15 V. Quel est le plus petit calibre qui permet cette mesure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : on place le multimètre en position V et on cherche le plus petit calibre supérieur à 0,15 V parmi 200 mV, 2 V, 20 V, 200 V. C'est 200 mV. Un calibre plus grand fonctionnerait, mais la lecture serait moins précise, et le but est de prendre le plus petit calibre possible.",
+                  "answers": [
+                    {
+                      "content": "200 mV",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 200 mV, l'écran affiche 150. Quelle est cette tension, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Pour la lecture, Étape 3 — Lire : le calibre est en mV, donc 150 est en millivolts : 150 mV. Pour la conversion, Étape 1 — Repérer : le départ est le mV et l'arrivée le V. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on divise : 150 ÷ 1 000 = 0,15 V. Écrire 150 V serait oublier l'unité du calibre.",
+                  "answers": [
+                    {
+                      "content": "0,15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Kouassi ne connaît pas la tension qu'il va mesurer. Explique comment il doit choisir le calibre.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Commence par le plus grand calibre (1 point)",
+                    "Diminue ensuite le calibre tant que la mesure reste possible (1 point)"
+                  ],
+                  "starter": "Il commence par…",
+                  "explanation": "Corrigé modèle. Étape 1 — Placer : Kouassi place le multimètre en position V et commence par le plus grand calibre, pour être sûr de ne pas dépasser. Il lit une première valeur. Ensuite il diminue le calibre tant que la mesure reste possible, pour garder le plus petit calibre supérieur à la tension : la lecture est alors plus précise. Barème : 1 point pour le plus grand calibre au départ, 1 point pour la diminution progressive.",
+                  "answers": []
+                },
+                {
+                  "content": "Trois dipôles sont en série sur une batterie de 12 V. La tension est 4,5 V aux bornes de L1 et 3,5 V aux bornes de L2. Quelle est la tension aux bornes de L3, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2} + U_{L3}$, donc $U_{L3} = U_G - U_{L1} - U_{L2}$. Étape 3 — Remplacer : $U_{L3} = 12 - 4{,}5 - 3{,}5$. Étape 4 — Calculer : $U_{L3} = 4$ V. Additionner toutes les valeurs données, 20 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Au calibre 20 V, Kouassi lit −11,9 : la tension vaut 11,9 V, et le signe moins montre que les bornes V et COM sont inversées.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Brancher : la borne V se relie du côté de la borne + du générateur et la borne COM du côté −. Étape 3 — Lire : le nombre affiché est 11,9, en volts puisque le calibre est en V. Le signe moins indique que les deux bornes sont inversées, mais la valeur de la tension reste 11,9 V. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan des tensions",
+          "notions": "Conversions, branchement et lecture du voltmètre avec son calibre, tension aux bornes d'un interrupteur, d'un fil ou d'une lampe, lois d'additivité et d'égalité des tensions : bilan de toute la leçon.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le village a un panneau solaire de 12 V, une radio à piles de 6 V et une ligne électrique. On mesure les tensions avec un multimètre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour changer d'unité : multiplie par 1 000 vers une unité plus petite, divise par 1 000 vers une unité plus grande.",
+              "questions": [
+                {
+                  "content": "Une radio à piles du village porte la tension 6 V. Exprime cette tension en mV.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie par 1 000 : 6 × 1 000 = 6 000. La tension est 6 000 mV. Diviser donnerait 0,006 mV, ce qui est faux : le millivolt est une unité plus petite, donc le nombre doit grandir.",
+                  "answers": [
+                    {
+                      "content": "6000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mV",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Au calibre 200 mV, l'écran affiche 40 et le nombre est en millivolts. Exprime cette tension en V.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le mV et l'arrivée le V. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on va vers une unité plus grande, donc on divise par 1 000 : 40 ÷ 1 000 = 0,04. La tension est 0,04 V. Multiplier donnerait 40 000 V, ce qui est faux : le volt est une unité plus grande, donc le nombre doit diminuer.",
+                  "answers": [
+                    {
+                      "content": "0,04",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une ligne d'alimentation du village porte la tension 15 kV. Exprime cette tension en V.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le départ est le kV et l'arrivée le V. Étape 2 — Trouver : 1 kV = 1 000 V. Étape 3 — Calculer : on va vers une unité plus petite, donc on multiplie par 1 000 : 15 × 1 000 = 15 000. La tension est 15 000 V. Diviser donnerait 0,015 V, ce qui est faux : le volt est une unité plus petite, donc le nombre doit grandir.",
+                  "answers": [
+                    {
+                      "content": "15000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Au calibre 2 V, l'écran affiche 1,52 aux bornes d'une pile. Quelle est la tension ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Lire : l'unité du nombre affiché est celle du calibre. Le calibre est 2 V, donc 1,52 est en volts. Étape 4 — Écrire : on écrit $U = 1{,}52$ V. La valeur 1,52 mV oublierait que le calibre est en V, et 152 V ou 1 520 V viendraient d'une multiplication faite à tort par 100 ou 1 000.",
+                  "answers": [
+                    {
+                      "content": "1,52 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,52 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "152 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 520 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces conversions du village, lesquelles sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on repère l'unité de départ et d'arrivée de chaque égalité. Étape 2 — Trouver : 1 kV = 1 000 V et 1 V = 1 000 mV. Étape 3 — Calculer : 15 × 1 000 = 15 000 V est juste ; 250 ÷ 1 000 = 0,25 V est juste. En revanche 2 V = 2 000 mV (et non 20 mV), et 0,5 kV = 500 V (et non 5 V).",
+                  "answers": [
+                    {
+                      "content": "15 kV = 15 000 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "250 mV = 0,25 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 V = 20 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,5 kV = 5 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mamadou mesure la tension du panneau solaire de 12 V avec un multimètre aux calibres 200 mV, 2 V, 20 V et 200 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Position V, bornes V et COM, dérivation, plus petit calibre supérieur à 12 V.",
+              "questions": [
+                {
+                  "content": "Comment Mamadou doit-il brancher le multimètre pour mesurer la tension aux bornes du panneau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Brancher : on relie la borne V et la borne COM aux deux bornes du dipôle étudié, ici le panneau, en dérivation et sans ouvrir le circuit. Le montage en série est celui de l'ampèremètre, une seule borne ne donne pas de tension, et la position A mesure une intensité, pas une tension.",
+                  "answers": [
+                    {
+                      "content": "En dérivation sur les deux bornes du panneau, sans ouvrir le circuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "En série avec le panneau, en coupant un fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur une seule borne du panneau",
+                      "correct": false
+                    },
+                    {
+                      "content": "En position A, en dérivation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mamadou mesure le panneau de 12 V. Le calibre à choisir est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Placer : on place le multimètre en position V et on cherche le plus petit calibre supérieur à 12 V parmi 200 mV, 2 V, 20 V, 200 V. C'est 20 V. Les calibres 200 mV et 2 V sont trop petits : l'écran signalerait un dépassement. Un calibre plus grand fonctionnerait, mais la lecture serait moins précise, et le but est de prendre le plus petit calibre possible.",
+                  "answers": [
+                    {
+                      "content": "20 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "200 mV",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le voltmètre se branche sans ouvrir le circuit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Brancher : le voltmètre se branche en dérivation, directement aux bornes du dipôle, sans ouvrir le circuit. Étape 3 — Lire : on lit ensuite la tension. C'est la différence avec l'ampèremètre, qu'il faut placer dans le circuit en le coupant. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer la tension du panneau, Mamadou relie son multimètre. Quelles bornes utilise-t-il ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Brancher : pour une tension, on utilise la borne V et la borne COM. Étape 3 — Lire : le nombre affiché se lit alors dans l'unité du calibre. Les bornes A et 10 A sont réservées à la mesure d'une intensité, avec un montage en série : les choisir serait confondre les deux mesures.",
+                  "answers": [
+                    {
+                      "content": "La borne V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne COM",
+                      "correct": true
+                    },
+                    {
+                      "content": "La borne A",
+                      "correct": false
+                    },
+                    {
+                      "content": "La borne 10 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 20 V, l'écran affiche 11,96. Exprime cette tension en mV.",
+                  "question_type": "numeric",
+                  "explanation": "Pour la lecture, Étape 3 — Lire : le calibre est en V, donc 11,96 est en volts. Pour la conversion, Étape 1 — Repérer : le départ est le V et l'arrivée le mV. Étape 2 — Trouver : 1 V = 1 000 mV. Étape 3 — Calculer : on multiplie : 11,96 × 1 000 = 11 960. La tension est 11 960 mV. Diviser donnerait 0,01196 mV, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "11960",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mV",
+                  "tolerance": 0
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le poste radio du village est relié à un bloc de piles de 6 V par un interrupteur K, les trois dipôles étant en série.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Fermé : 0 V. Ouvert : la tension du bloc de piles.",
+              "questions": [
+                {
+                  "content": "K est ouvert, le poste est éteint. Quelle est la tension aux bornes de K, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est K et son état est ouvert. Étape 2 — Chercher : un interrupteur ouvert coupe le circuit et sa tension est égale à celle du générateur. Étape 3 — Conclure : la tension est 6 V. Croire qu'elle est nulle parce qu'aucun courant ne passe est l'erreur tentante : seul un interrupteur fermé a une tension nulle.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "K est fermé, le poste joue. Quelle est la tension aux bornes de K, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est K et son état est fermé. Étape 2 — Chercher : un interrupteur fermé se comporte comme un fil et sa tension est nulle. Étape 3 — Conclure : la tension est 0 V. Annoncer 6 V serait confondre avec l'interrupteur ouvert, qui porte la tension du générateur.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "K est ouvert : le voltmètre branché aux bornes du poste indique 0 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est le poste et K est ouvert. Étape 2 — Chercher : le circuit est coupé, le poste est éteint, et c'est K ouvert qui porte la tension du bloc. Étape 3 — Conclure : le poste a 0 V à ses bornes. L'affirmation est vraie : croire que les 6 V sont aux bornes du poste serait oublier que K ouvert les garde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le circuit du poste, que lit le voltmètre branché aux bornes d'un fil de connexion ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le dipôle visé est un fil de connexion. Étape 2 — Chercher : un fil laisse passer le courant sans « perdre » de tension, sa tension est nulle. Étape 3 — Conclure : le voltmètre indique 0 V. Les 6 V sont ceux du bloc ou de K ouvert, 3 V un partage inventé, et 12 V un doublement sans raison.",
+                  "answers": [
+                    {
+                      "content": "0 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation du circuit du poste à la tension lue.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on repère le dipôle et son état. Étape 2 — Chercher : le poste qui joue normalement a une tension proche de sa tension nominale ; K fermé se comporte comme un fil et a une tension nulle ; K ouvert a la tension du bloc. Étape 3 — Conclure : on relie chaque situation à sa lecture. On ne donne pas 6 V à K fermé : il laisse passer le courant sans perdre de tension.",
+                  "answers": [
+                    {
+                      "content": "Poste qui joue normalement",
+                      "match": "Une tension proche de sa tension nominale"
+                    },
+                    {
+                      "content": "Aux bornes de K fermé",
+                      "match": "0 V"
+                    },
+                    {
+                      "content": "Aux bornes de K ouvert",
+                      "match": "La tension du bloc de piles"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mamadou et Awa montent des lampes sur le panneau solaire de 12 V, en série ou en dérivation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Série : on additionne. Dérivation : chaque lampe a la tension du panneau.",
+              "questions": [
+                {
+                  "content": "Deux lampes L1 et L2 sont en série sur le panneau de 12 V. La tension aux bornes de L1 est 3,5 V. Quelle est la tension aux bornes de L2, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2}$, donc $U_{L2} = U_G - U_{L1}$. Étape 3 — Remplacer : $U_{L2} = 12 - 3{,}5$. Étape 4 — Calculer : $U_{L2} = 8{,}5$ V. Additionner toutes les valeurs données, 15,5 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "8,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux lampes L1 et L2 sont en dérivation sur le panneau de 12 V. La tension aux bornes de L1 est 12 V. Que lit-on aux bornes de L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en dérivation, elles ont les mêmes deux points communs. Étape 2 — Écrire : la loi d'égalité donne $U_1 = U_2 = U_G$. Étape 3 — Remplacer : $U_G$ = 12 V. Étape 4 — Calculer : on lit 12 V aux bornes de L2. Les valeurs 6 V (un partage) et 24 V (une somme) viennent de la loi des dipôles en série, qui ne s'applique pas ici.",
+                  "answers": [
+                    {
+                      "content": "12 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois lampes sont en série sur le panneau de 12 V. La tension est 2,5 V aux bornes de L1 et 5,5 V aux bornes de L2. Quelle est la tension aux bornes de L3, en V ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les dipôles sont en série. Étape 2 — Écrire : $U_G = U_{L1} + U_{L2} + U_{L3}$, donc $U_{L3} = U_G - U_{L1} - U_{L2}$. Étape 3 — Remplacer : $U_{L3} = 12 - 2{,}5 - 5{,}5$. Étape 4 — Calculer : $U_{L3} = 4$ V. Additionner toutes les valeurs données, 20 V, serait faux : la somme des tensions des dipôles doit être égale à celle du générateur, pas la dépasser.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "V",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux lampes sont en série : $U_1 = 4$ V et $U_2 = 8$ V. La tension du générateur est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : les lampes sont en série. Étape 2 — Écrire : $U_G = U_1 + U_2$. Étape 3 — Remplacer : $U_G = 4 + 8$. Étape 4 — Calculer : $U_G = 12$ V. La valeur 32 V vient d'un produit 4 × 8, et 4 V ou 8 V ne tiennent compte que d'une lampe : l'additivité demande de prendre les deux tensions.",
+                  "answers": [
+                    {
+                      "content": "12 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "32 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes L1 et L2 sont en série sur le panneau de 12 V et la tension de L1 est 2,5 V. Calcule la tension de L2, puis dis quelle serait la tension de chaque lampe si elles étaient en dérivation sur le même panneau. Justifie avec les lois.",
+                  "question_type": "written",
+                  "points": 4,
+                  "criteria": [
+                    "Identifie le montage en série et écrit la loi d'additivité (1 point)",
+                    "Calcule la tension de L2 : 12 - 2,5 = 9,5 V (1 point)",
+                    "Identifie le montage en dérivation et cite l'égalité des tensions (1 point)",
+                    "Donne 12 V pour chaque lampe, avec les unités (1 point)"
+                  ],
+                  "starter": "En série, la tension de L2 est…",
+                  "explanation": "Corrigé modèle. Étape 1 — Repérer : en série, les deux lampes se suivent dans une seule boucle. Étape 2 — Écrire : $U_G = U_1 + U_2$, donc $U_2 = U_G - U_1$. Étape 3 — Remplacer : $U_2 = 12 - 2{,}5$. Étape 4 — Calculer : $U_2 = 9{,}5$ V. En dérivation, $U_1 = U_2 = U_G = 12$ V : chaque lampe a 12 V. Barème : 1 point pour la loi d'additivité, 1 point pour 9,5 V, 1 point pour l'égalité en dérivation, 1 point pour 12 V avec les unités.",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

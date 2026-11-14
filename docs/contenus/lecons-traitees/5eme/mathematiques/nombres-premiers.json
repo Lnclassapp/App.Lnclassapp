@@ -1,0 +1,3180 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Nombres premiers",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Mathématiques",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "arbre-180",
+          "kind": "diagram",
+          "description": "Arbre de décomposition de 180. On part de 180 au sommet. À chaque niveau, on sépare un facteur premier à gauche (2, 2, 3) et le quotient à droite (90, 45, 15). Le dernier quotient, 15, se sépare en 3 et 5. On s'arrête quand toutes les branches finissent par un nombre premier : 2, 2, 3, 3 et 5 sont les facteurs de 180.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "n180",
+                "label": "180"
+              },
+              {
+                "id": "f2a",
+                "label": "2"
+              },
+              {
+                "id": "n90",
+                "label": "90"
+              },
+              {
+                "id": "f2b",
+                "label": "2"
+              },
+              {
+                "id": "n45",
+                "label": "45"
+              },
+              {
+                "id": "f3a",
+                "label": "3"
+              },
+              {
+                "id": "n15",
+                "label": "15"
+              },
+              {
+                "id": "f3b",
+                "label": "3"
+              },
+              {
+                "id": "f5",
+                "label": "5"
+              }
+            ],
+            "edges": [
+              {
+                "from": "n180",
+                "to": "f2a"
+              },
+              {
+                "from": "n180",
+                "to": "n90"
+              },
+              {
+                "from": "n90",
+                "to": "f2b"
+              },
+              {
+                "from": "n90",
+                "to": "n45"
+              },
+              {
+                "from": "n45",
+                "to": "f3a"
+              },
+              {
+                "from": "n45",
+                "to": "n15"
+              },
+              {
+                "from": "n15",
+                "to": "f3b"
+              },
+              {
+                "from": "n15",
+                "to": "f5"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un nombre premier",
+          "remember": "Un nombre premier est un entier naturel qui a exactement deux diviseurs : 1 et lui-même. Exemples : 13 a pour diviseurs 1 et 13, c'est un nombre premier ; 12 a pour diviseurs 1, 2, 3, 4, 6 et 12, il n'est pas premier. Un entier qui a plus de deux diviseurs est dit composé. Un diviseur d'un nombre est un nombre qui le divise sans reste : 4 divise 20. Les nombres 0 et 1 ne sont pas premiers (1 n'a qu'un seul diviseur). Le nombre 2 est le seul nombre premier pair. Critères connus : un nombre est divisible par 2 s'il est pair, par 5 s'il finit par 0 ou 5, par 3 si la somme de ses chiffres est dans la table de 3.",
+          "method": [
+            "Vérifier que le nombre est supérieur ou égal à 2.",
+            "Tester les critères de divisibilité par 2, par 3 et par 5.",
+            "Diviser par les nombres premiers suivants (7, 11, 13…) et s'arrêter dès que le quotient est plus petit que le diviseur.",
+            "Conclure : si un nombre testé divise, le nombre est composé ; si aucun ne divise, il est premier."
+          ],
+          "example": {
+            "statement": "Le nombre 79 est-il premier ?",
+            "steps": [
+              "Vérifier : 79 est supérieur ou égal à 2, on peut le tester.",
+              "Tester 2, 3 et 5 : 79 finit par 9 (ni pair, ni 0 ou 5) et 7 + 9 = 16 n'est pas dans la table de 3 : aucun des trois ne le divise.",
+              "Diviser : 79 ÷ 7 donne 11 reste 2 (le quotient 11 est plus grand que 7, on continue) ; 79 ÷ 11 donne 7 reste 2, et 7 est plus petit que 11 : on s'arrête.",
+              "Conclure : aucun des nombres testés ne divise 79, donc 79 est premier."
+            ]
+          },
+          "pitfall": "Ne pense pas que tout nombre impair est premier, ni que 1 est premier. Contre-exemple : 9, 15, 21 et même 133 sont impairs mais composés, car 133 = 7 × 19. De plus, 1 n'a qu'un seul diviseur, alors qu'un nombre premier en a exactement deux. Pour éviter l'erreur, teste toujours 2, 3, 5, puis 7, 11… avant de conclure.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un nombre premier avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Parmi 27, 29, 33 et 35, lequel est un nombre premier ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : tous ces nombres sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 27 et 33 sont dans la table de 3 (2 + 7 = 9 et 3 + 3 = 6), 35 finit par 5 ; 29 n'est ni pair, ni dans la table de 5 et 2 + 9 = 11 n'est pas dans la table de 3. Étape 3 — Diviser 29 par 7 : quotient 4, plus petit que 7, on s'arrête. Étape 4 — Conclure : 29 est premier. Les trois autres sont impairs mais composés : c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "29",
+                    "correct": true
+                  },
+                  {
+                    "content": "27",
+                    "correct": false
+                  },
+                  {
+                    "content": "33",
+                    "correct": false
+                  },
+                  {
+                    "content": "35",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche d'abord un diviseur avec les critères de 3 et de 5 : trois de ces nombres en ont un."
+              },
+              {
+                "content": "Vrai ou faux : 1 est un nombre premier.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : 1 est plus petit que 2, or un nombre premier est supérieur ou égal à 2 et a exactement deux diviseurs. Étape 2 — Tester : le nombre 1 n'a qu'un seul diviseur, lui-même. Étape 3 — Diviser : il n'y a rien d'autre à chercher. Étape 4 — Conclure : 1 n'est pas premier, l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte les diviseurs de 1 : un nombre premier en a deux."
+              },
+              {
+                "content": "Complète : le seul nombre premier pair est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Vérifier : tout nombre pair est divisible par 2. Étape 2 — Tester le critère de 2 : un pair plus grand que 2 a donc au moins trois diviseurs (1, 2 et lui-même). Étape 3 — Diviser : inutile, 2 divise déjà tout nombre pair. Étape 4 — Conclure : seul 2, qui a exactement deux diviseurs (1 et 2), est premier et pair.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un nombre pair plus grand que 2 est divisible par 2 : il a donc plus de deux diviseurs."
+              },
+              {
+                "content": "Quel est le plus petit diviseur de 77 différent de 1 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : 77 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 77 est impair, 7 + 7 = 14 n'est pas dans la table de 3 et il ne finit pas par 0 ou 5. Étape 3 — Diviser par 7 : 77 = 7 × 11 sans reste. Étape 4 — Conclure : le plus petit diviseur de 77 autre que 1 est 7, donc 77 n'est pas premier.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ],
+                "hint": "Après 2, 3 et 5, essaie 7."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un nombre premier",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des nombres de fruits au marché.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi 17, 21, 25 et 39, lequel est un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : tous sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 21 (2 + 1 = 3) et 39 (3 + 9 = 12) sont dans la table de 3, 25 finit par 5 ; 17 n'est ni pair, ni dans la table de 5 et 1 + 7 = 8 n'est pas dans la table de 3. Étape 3 — Diviser 17 par 7 : quotient 2, plus petit que 7, on s'arrête. Étape 4 — Conclure : 17 est premier. Les autres sont impairs mais composés.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    },
+                    {
+                      "content": "21",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    },
+                    {
+                      "content": "39",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 51 est un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : 51 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 51 est impair, mais 5 + 1 = 6 est dans la table de 3, donc 3 divise 51 : 51 = 3 × 17. Étape 3 — Diviser : un diviseur est déjà trouvé. Étape 4 — Conclure : 51 est composé. Il ressemble à un nombre premier parce qu'il est impair, mais cela ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit diviseur de 161 différent de 1 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 161 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 161 est impair, 1 + 6 + 1 = 8 n'est pas dans la table de 3 et 161 ne finit pas par 0 ou 5. Étape 3 — Diviser par 7 : 161 = 7 × 23 sans reste. Étape 4 — Conclure : le plus petit diviseur de 161 autre que 1 est 7, donc 161 n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi 31, 33, 37, 39 et 49, quels nombres sont premiers ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : tous sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 33 (3 + 3 = 6) et 39 (3 + 9 = 12) sont dans la table de 3 ; 31 et 37 passent les trois tests. Étape 3 — Diviser par 7 : 31 ÷ 7 donne 4 reste 3 et 37 ÷ 7 donne 5 reste 2, deux quotients plus petits que 7, donc on s'arrête ; en revanche 49 = 7 × 7. Étape 4 — Conclure : 31 et 37 sont premiers ; 49 est impair mais divisible par 7.",
+                  "answers": [
+                    {
+                      "content": "31",
+                      "correct": true
+                    },
+                    {
+                      "content": "37",
+                      "correct": true
+                    },
+                    {
+                      "content": "33",
+                      "correct": false
+                    },
+                    {
+                      "content": "39",
+                      "correct": false
+                    },
+                    {
+                      "content": "49",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa a 23 mangues. Elle veut les ranger en plusieurs rangées complètes qui ont toutes le même nombre de mangues, avec au moins 2 rangées et au moins 2 mangues par rangée. Est-ce possible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 23 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 23 est impair, 2 + 3 = 5 n'est pas dans la table de 3, il ne finit pas par 0 ou 5. Étape 3 — Diviser par 7 : quotient 3, plus petit que 7, on s'arrête. Étape 4 — Conclure : 23 est premier, ses seuls diviseurs sont 1 et 23, donc le seul rangement est 1 rangée de 23 mangues ou 23 rangées d'une mangue. Avec 2, 3 ou 5 rangées il resterait des mangues.",
+                  "answers": [
+                    {
+                      "content": "Non, car 23 est un nombre premier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, en 2 rangées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, en 3 rangées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, en 5 rangées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi dit : « 119 est impair et n'est dans la table ni de 3 ni de 5, donc 119 est premier. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 119 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : Koffi a raison de dire qu'aucun ne divise 119 (1 + 1 + 9 = 11). Étape 3 — Diviser par 7 : 119 = 7 × 17 sans reste, donc 7 divise 119. Étape 4 — Conclure : 119 est composé. Son erreur est de s'arrêter à 5 : la méthode continue avec 7, 11… jusqu'à ce que le quotient soit plus petit que le diviseur.",
+                  "answers": [
+                    {
+                      "content": "Il a tort : il faut aussi tester 7, et 119 = 7 × 17",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison : il suffit de tester 2, 3 et 5",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a tort : 119 est pair",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison : tous les nombres impairs sont premiers",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Vrai ou faux, complète et relie : reconnaître les nombres premiers au marché",
+              "statement": "Dans cet exercice, tu reconnais des nombres premiers avec des questions de types variés, sur les tas de la marchande Mariam.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche d'abord un diviseur avec les critères de 2, de 3 et de 5, puis essaie 7 et 11.",
+              "questions": [
+                {
+                  "content": "Relie chaque nombre à son plus petit diviseur différent de 1.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Vérifier : tous sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 38 est pair (2), 51 est dans la table de 3 car 5 + 1 = 6 (3), 35 finit par 5 (5). Étape 3 — Diviser : 133 = 7 × 19 et 121 = 11 × 11, car 133 ÷ 7 et 121 ÷ 11 tombent juste et 121 n'est divisible par aucun nombre premier plus petit (2, 3, 5, 7). Étape 4 — Conclure : on obtient 35 avec 5, 51 avec 3, 133 avec 7, 121 avec 11, 38 avec 2.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "match": "5"
+                    },
+                    {
+                      "content": "51",
+                      "match": "3"
+                    },
+                    {
+                      "content": "133",
+                      "match": "7"
+                    },
+                    {
+                      "content": "121",
+                      "match": "11"
+                    },
+                    {
+                      "content": "38",
+                      "match": "2"
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 2 est un nombre premier, même s'il est pair.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : 2 est supérieur ou égal à 2. Étape 2 — Tester : un nombre premier a exactement deux diviseurs. Étape 3 — Diviser : 2 est divisible par 1 et par 2, et par aucun autre nombre. Étape 4 — Conclure : 2 est premier. Il est même le seul nombre premier pair : les autres pairs ont au moins trois diviseurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : un entier qui a plus de deux diviseurs est dit ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : on compte les diviseurs de l'entier. Étape 2 — Tester : un nombre premier en a exactement deux (1 et lui-même). Étape 3 — Diviser : par exemple 12 a pour diviseurs 1, 2, 3, 4, 6 et 12, soit six diviseurs. Étape 4 — Conclure : un entier qui a plus de deux diviseurs est dit composé.",
+                  "answers": [
+                    {
+                      "content": "composé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de diviseurs le nombre 29 possède-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 29 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 29 est impair, 2 + 9 = 11 n'est pas dans la table de 3, il ne finit pas par 0 ou 5. Étape 3 — Diviser par 7 : quotient 4, reste 1, et 4 est plus petit que 7, on s'arrête. Étape 4 — Conclure : 29 est premier, il n'a que deux diviseurs, 1 et 29.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 87 est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : 87 est supérieur ou égal à 2. Étape 2 — Tester 3 : 8 + 7 = 15 est dans la table de 3, donc 3 divise 87 : 87 = 3 × 29. Étape 3 — Diviser : un diviseur autre que 1 et 87 est trouvé. Étape 4 — Conclure : 87 a plus de deux diviseurs, il est composé. Le mot premier serait faux malgré l'aspect de 87, qui est impair.",
+                  "answers": [
+                    {
+                      "content": "composé",
+                      "correct": true
+                    },
+                    {
+                      "content": "premier",
+                      "correct": false
+                    },
+                    {
+                      "content": "ni premier ni composé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour savoir si un nombre est premier.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier que le nombre est supérieur ou égal à 2, car 0 et 1 ne sont pas premiers. Étape 2 — Tester les critères par 2, 3 et 5, qui sont rapides. Étape 3 — Diviser par les nombres premiers suivants (7, 11…) jusqu'à un quotient plus petit que le diviseur. Étape 4 — Conclure. Conclure avant de tester ces nombres mènerait à l'erreur du piège, comme croire que 119 est premier.",
+                  "answers": [
+                    {
+                      "content": "Vérifier que le nombre est supérieur ou égal à 2"
+                    },
+                    {
+                      "content": "Tester les critères de divisibilité par 2, 3 et 5"
+                    },
+                    {
+                      "content": "Diviser par 7, 11, 13… jusqu'à un quotient plus petit que le diviseur"
+                    },
+                    {
+                      "content": "Conclure : composé si un nombre divise, premier sinon"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dresser la liste des nombres premiers inférieurs à 100",
+          "remember": "Il y a 25 nombres premiers inférieurs à 100 : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97. Il y en a 4 inférieurs à 10, 8 inférieurs à 20, 10 inférieurs à 30 et 15 inférieurs à 50. Le plus grand est 97. Pour savoir si un nombre inférieur à 100 est premier, il suffit de tester les nombres premiers 2, 3, 5 et 7, car 11 × 11 = 121 dépasse déjà 100. On retrouve la liste avec le crible d'Ératosthène, une méthode qui barre les multiples dans un tableau (le crible est un tamis : il laisse passer les nombres premiers).",
+          "method": [
+            "Écrire tous les entiers de 2 à N dans un tableau.",
+            "Entourer le plus petit nombre non barré : il est premier.",
+            "Barrer tous les multiples de ce nombre, sauf lui-même.",
+            "Recommencer avec le nombre suivant non barré, jusqu'à un nombre dont le carré dépasse N.",
+            "Conclure : les nombres non barrés sont les nombres premiers inférieurs ou égaux à N."
+          ],
+          "example": {
+            "statement": "Trouver les nombres premiers inférieurs ou égaux à 30 avec le crible.",
+            "steps": [
+              "Écrire : on écrit les entiers 2, 3, 4, 5, …, 30 dans un tableau.",
+              "Entourer : le plus petit nombre non barré est 2, on l'entoure ; il est premier.",
+              "Barrer : on barre ses multiples 4, 6, 8, …, 30, mais pas 2 lui-même.",
+              "Recommencer : avec 3 on barre 9, 15, 21, 27 ; avec 5 on barre 25 ; le suivant est 7 et 7 × 7 = 49 dépasse 30, on s'arrête.",
+              "Conclure : les nombres non barrés sont 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, soit 10 nombres premiers."
+            ]
+          },
+          "pitfall": "Ne barre pas le nombre lui-même en barrant ses multiples, et n'oublie pas 2. Contre-exemple : si tu barres 2 avec tous ses multiples, la liste commence à 3 et le seul nombre premier pair disparaît. Autre erreur : croire que tous les nombres impairs restent. Les nombres 9, 15, 21, 25 et 27 sont impairs, mais ils sont barrés car ce sont des multiples de 3 ou de 5.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser la liste des nombres premiers inférieurs à 100.",
+            "questions": [
+              {
+                "content": "Complète la liste des nombres premiers : 2, 3, 5, 7, 11, 13, 17, 19, 23, ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire les entiers suivant 23 : 24, 25, 26, 27, 28, 29. Étape 2 — Entourer et barrer : 24, 26 et 28 sont pairs, 25 est multiple de 5, 27 est multiple de 3. Étape 3 — Barrer ces multiples. Étape 4 — Recommencer : le premier nombre non barré est 29. Étape 5 — Conclure : 29 est le nombre premier qui suit 23.",
+                "answers": [
+                  {
+                    "content": "29",
+                    "correct": true
+                  }
+                ],
+                "hint": "Barre un par un les nombres 24, 25, 26, 27, 28 qui ont un diviseur."
+              },
+              {
+                "content": "Parmi 51, 53, 57 et 77, lequel est un nombre premier ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les candidats. Étape 2 — Entourer ceux de la liste : 53 est dans la liste des nombres premiers inférieurs à 100. Étape 3 — Barrer les multiples : 51 = 3 × 17, 57 = 3 × 19 et 77 = 7 × 11 sont des multiples de 3 ou de 7, donc barrés. Étape 4 — Recommencer : rien d'autre à tester. Étape 5 — Conclure : seul 53 est premier. Les trois autres sont impairs mais composés.",
+                "answers": [
+                  {
+                    "content": "53",
+                    "correct": true
+                  },
+                  {
+                    "content": "51",
+                    "correct": false
+                  },
+                  {
+                    "content": "57",
+                    "correct": false
+                  },
+                  {
+                    "content": "77",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare avec la liste des nombres premiers inférieurs à 100, ou cherche un multiple de 3 ou de 7."
+              },
+              {
+                "content": "Vrai ou faux : il y a 25 nombres premiers inférieurs à 100.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire les entiers de 2 à 100. Étape 2 — Entourer le premier non barré, 2, et ainsi de suite. Étape 3 — Barrer les multiples. Étape 4 — Recommencer avec 3, 5 et 7, car 11 × 11 = 121 dépasse 100. Étape 5 — Conclure : il reste 25 nombres, de 2 à 97. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Rappelle-toi la liste : elle va de 2 à 97."
+              },
+              {
+                "content": "Combien y a-t-il de nombres premiers inférieurs à 20 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire les entiers de 2 à 19. Étape 2 — Entourer 2, puis barrer 4, 6, 8, 10, 12, 14, 16, 18. Étape 3 — Barrer les multiples de 3 : 9 et 15. Étape 4 — Recommencer : le suivant est 5 et 5 × 5 = 25 dépasse 19, on s'arrête. Étape 5 — Conclure : il reste 2, 3, 5, 7, 11, 13, 17, 19, soit 8 nombres.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "hint": "Écris la liste 2, 3, 5, 7, 11, 13, 17, 19 et compte."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Utiliser la liste des nombres premiers inférieurs à 100",
+              "statement": "Dans cet exercice, tu utilises la liste et le crible pour trouver des nombres premiers sans calculatrice.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le plus grand nombre premier inférieur à 100 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les nombres de 91 à 99. Étape 2 — Entourer le premier non barré après avoir testé les nombres premiers. Étape 3 — Barrer : 98, 96, 94, 92 sont pairs ; 99 = 3 × 33 ; 95 est multiple de 5 ; 93 = 3 × 31 ; 91 = 7 × 13. Étape 4 — Recommencer : on a testé 2, 3, 5 et 7, il suffit pour un nombre inférieur à 100. Étape 5 — Conclure : 97 est le plus grand nombre premier inférieur à 100. Les autres propositions sont impaires mais composées.",
+                  "answers": [
+                    {
+                      "content": "97",
+                      "correct": true
+                    },
+                    {
+                      "content": "99",
+                      "correct": false
+                    },
+                    {
+                      "content": "95",
+                      "correct": false
+                    },
+                    {
+                      "content": "91",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi 31, 39, 41, 47 et 49, quels sont les trois nombres premiers ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Écrire les candidats. Étape 2 — Entourer ceux de la liste : 31, 41 et 47 y figurent. Étape 3 — Barrer les multiples : 39 = 3 × 13 est multiple de 3 et 49 = 7 × 7 est multiple de 7. Étape 4 — Recommencer : 2, 3, 5 et 7 suffisent pour un nombre inférieur à 100. Étape 5 — Conclure : 31, 41 et 47 sont premiers ; 39 et 49 sont des nombres impairs composés.",
+                  "answers": [
+                    {
+                      "content": "31",
+                      "correct": true
+                    },
+                    {
+                      "content": "41",
+                      "correct": true
+                    },
+                    {
+                      "content": "47",
+                      "correct": true
+                    },
+                    {
+                      "content": "39",
+                      "correct": false
+                    },
+                    {
+                      "content": "49",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de nombres premiers inférieurs ou égaux à 30 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les entiers de 2 à 30. Étape 2 — Entourer 2, puis barrer ses multiples. Étape 3 — Barrer les multiples de 3 (9, 15, 21, 27) et de 5 (25). Étape 4 — Recommencer : le suivant est 7 et 7 × 7 = 49 dépasse 30, on s'arrête. Étape 5 — Conclure : il reste 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, soit 10 nombres.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : tous les nombres premiers sont impairs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire la liste des nombres premiers : 2, 3, 5, 7, 11… Étape 2 — Entourer 2 : il est premier. Étape 3 — Barrer les multiples de 2, mais pas 2 lui-même. Étape 4 — Recommencer avec 3. Étape 5 — Conclure : 2 est premier et pair, donc l'affirmation est fausse. 2 est le seul nombre premier pair.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour savoir si un nombre inférieur à 100 est premier, il suffit de tester 2, 3, 5 et ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Écrire : on cherche les diviseurs premiers possibles. Étape 2 — Entourer les nombres premiers 2, 3, 5, 7, 11… Étape 3 — Barrer : 9 n'est pas premier (9 = 3 × 3), donc le tester ne sert à rien. Étape 4 — Recommencer : 11 × 11 = 121 dépasse 100, tester 11 et 13 ne sert donc à rien. Étape 5 — Conclure : il suffit de tester 2, 3, 5 et 7.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "11",
+                      "correct": false
+                    },
+                    {
+                      "content": "13",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam barre 2 et tous ses multiples, y compris le nombre 2 lui-même, dans son tableau du crible. Que se passe-t-il à la fin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les entiers de 2 à 100. Étape 2 — Entourer 2 : c'est le plus petit nombre non barré, il est premier. Étape 3 — Barrer les multiples de 2, mais jamais 2 lui-même. Étape 4 — Recommencer avec 3, 5 et 7. Étape 5 — Conclure : Mariam a barré 2 par erreur, donc il manque 2 dans sa liste des nombres premiers. Le nombre 1 n'est pas dans le tableau, et les multiples de 3 sont barrés comme d'habitude.",
+                  "answers": [
+                    {
+                      "content": "Le nombre 2 manque dans sa liste des nombres premiers",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa liste est complète",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre 1 apparaît dans sa liste",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les multiples de 3 ne sont plus barrés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Ordre, associations et comptages : la liste des nombres premiers",
+              "statement": "Dans cet exercice, tu retrouves la liste des nombres premiers avec des questions de types variés, comme si tu triais les tas du marché.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Appuie-toi sur la liste des nombres premiers inférieurs à 100 et barre les multiples de 2, 3, 5 et 7.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes du crible pour trouver les nombres premiers jusqu'à N.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire tous les entiers de 2 à N. Étape 2 — Entourer le plus petit nombre non barré. Étape 3 — Barrer ses multiples, sauf lui-même. Étape 4 — Recommencer avec le nombre suivant non barré, jusqu'à un carré qui dépasse N. Étape 5 — Conclure en lisant les nombres non barrés. Changer l'ordre, par exemple barrer avant d'entourer, fait perdre le nombre premier.",
+                  "answers": [
+                    {
+                      "content": "Écrire tous les entiers de 2 à N"
+                    },
+                    {
+                      "content": "Entourer le plus petit nombre non barré"
+                    },
+                    {
+                      "content": "Barrer ses multiples, sauf lui-même"
+                    },
+                    {
+                      "content": "Recommencer avec le nombre suivant non barré"
+                    },
+                    {
+                      "content": "Lire les nombres non barrés : ce sont les nombres premiers"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque nombre premier au nombre premier qui le suit dans la liste.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire les entiers qui suivent chaque nombre. Étape 2 — Entourer le premier nombre non barré. Étape 3 — Barrer les multiples : après 7 viennent 8, 9, 10, qui sont barrés, donc 11 ; après 13, 14, 15, 16 sont barrés, donc 17 ; après 19, 20, 21, 22, donc 23 ; après 29, 30, donc 31 ; après 43, 44, 45, 46, donc 47. Étape 4 — Recommencer pour chaque nombre. Étape 5 — Conclure : 7 → 11, 13 → 17, 19 → 23, 29 → 31, 43 → 47.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "match": "11"
+                    },
+                    {
+                      "content": "13",
+                      "match": "17"
+                    },
+                    {
+                      "content": "19",
+                      "match": "23"
+                    },
+                    {
+                      "content": "29",
+                      "match": "31"
+                    },
+                    {
+                      "content": "43",
+                      "match": "47"
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le plus petit nombre premier supérieur à 50 est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire les entiers 51, 52, 53… Étape 2 — Entourer le premier non barré. Étape 3 — Barrer : 51 = 3 × 17, 52 est pair. Étape 4 — Recommencer : 53 n'est divisible ni par 2, 3, 5, ni par 7 (53 ÷ 7 donne 7 reste 4). Étape 5 — Conclure : le plus petit nombre premier supérieur à 50 est 53.",
+                  "answers": [
+                    {
+                      "content": "53",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de nombres premiers compris entre 50 et 100 (50 et 100 exclus) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les entiers de 51 à 99. Étape 2 — Entourer ceux qui restent après avoir barré les multiples de 2, 3, 5 et 7. Étape 3 — Barrer ces multiples. Étape 4 — Recommencer avec 7, le dernier nombre à tester. Étape 5 — Conclure : il reste 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, soit 10 nombres. On peut aussi retrancher : 25 nombres premiers inférieurs à 100, moins 15 inférieurs à 50, donne 10.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi 57, 59, 61, 63 et 65, quels nombres sont premiers ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire les candidats. Étape 2 — Entourer ceux de la liste : 59 et 61 y figurent. Étape 3 — Barrer les multiples : 57 = 3 × 19, 63 = 3 × 21 et 65 = 5 × 13. Étape 4 — Recommencer : il suffit de tester 2, 3, 5 et 7. Étape 5 — Conclure : 59 et 61 sont premiers. 57, 63 et 65 sont impairs mais composés.",
+                  "answers": [
+                    {
+                      "content": "59",
+                      "correct": true
+                    },
+                    {
+                      "content": "61",
+                      "correct": true
+                    },
+                    {
+                      "content": "57",
+                      "correct": false
+                    },
+                    {
+                      "content": "63",
+                      "correct": false
+                    },
+                    {
+                      "content": "65",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 87 est un nombre premier inférieur à 100.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire 87 parmi les entiers de 2 à 100. Étape 2 — Entourer seulement les nombres premiers. Étape 3 — Barrer les multiples de 3 : 8 + 7 = 15 est dans la table de 3, donc 87 = 3 × 29 est barré. Étape 4 — Recommencer : rien d'autre à tester. Étape 5 — Conclure : 87 n'est pas premier. Il est impair, mais cela ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Décomposer un nombre en produit de facteurs premiers",
+          "remember": "Décomposer un entier supérieur ou égal à 2 en produit de facteurs premiers, c'est l'écrire comme un produit de nombres premiers, appelés facteurs. Exemple : $60 = 2 \\times 2 \\times 3 \\times 5$. Quand un facteur se répète, on utilise une puissance : $2^2$ se lit « 2 au carré » et vaut $2 \\times 2$ ; $2^3$ vaut $2 \\times 2 \\times 2 = 8$. Donc $60 = 2^2 \\times 3 \\times 5$. Cette décomposition est unique : seul l'ordre des facteurs peut changer. Un nombre premier se décompose en lui-même : $13 = 13$.",
+          "method": [
+            "Chercher le plus petit nombre premier qui divise le nombre (critères de 2, 3, 5, puis 7, 11…).",
+            "Diviser le nombre par ce nombre premier et noter le quotient.",
+            "Recommencer avec le quotient, jusqu'à obtenir le quotient 1.",
+            "Écrire le produit de tous les diviseurs premiers utilisés, avec une puissance s'ils se répètent, puis vérifier en multipliant."
+          ],
+          "example": {
+            "statement": "Décomposer 180 en produit de facteurs premiers.",
+            "steps": [
+              "Chercher : 180 est pair, donc le plus petit nombre premier qui le divise est 2.",
+              "Diviser : 180 ÷ 2 = 90.",
+              "Recommencer avec le quotient : 90 ÷ 2 = 45 ; 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. Le quotient est 1, on s'arrête.",
+              "Écrire : $180 = 2 \\times 2 \\times 3 \\times 3 \\times 5 = 2^2 \\times 3^2 \\times 5$. Vérifier : $4 \\times 9 \\times 5 = 180$."
+            ]
+          },
+          "pitfall": "Ne t'arrête pas sur un facteur qui n'est pas premier, et ne confonds pas puissance et produit. Contre-exemple : $60 = 4 \\times 3 \\times 5$ n'est pas une décomposition en facteurs premiers, car 4 n'est pas premier ; la bonne est $60 = 2^2 \\times 3 \\times 5$. Et $2^3$ n'est pas $2 \\times 3 = 6$, mais $2 \\times 2 \\times 2 = 8$. Contrôle que chaque facteur est premier.",
+          "figure": "arbre-180",
+          "practice": {
+            "statement": "Tu t'entraînes à décomposer un nombre en produit de facteurs premiers.",
+            "questions": [
+              {
+                "content": "Complète la décomposition : 18 = 2 × 3 × ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Chercher : 18 est pair, le plus petit nombre premier qui le divise est 2. Étape 2 — Diviser : 18 ÷ 2 = 9. Étape 3 — Recommencer : 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. Étape 4 — Écrire : 18 = 2 × 3 × 3. Vérifier : 2 × 3 × 3 = 18. Le facteur qui manque est donc 3.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise 18 par 2, puis divise le quotient par 3 jusqu'à obtenir 1."
+              },
+              {
+                "content": "Quelle est la décomposition de 36 en facteurs premiers ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Chercher : 36 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 36 ÷ 2 = 18. Étape 3 — Recommencer : 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. Étape 4 — Écrire : 36 = 2 × 2 × 3 × 3. Vérifier : 4 × 9 = 36. Les écritures 4 × 9, 6 × 6 et 2 × 18 donnent bien 36 mais contiennent des facteurs qui ne sont pas premiers : c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "2 × 2 × 3 × 3",
+                    "correct": true
+                  },
+                  {
+                    "content": "4 × 9",
+                    "correct": false
+                  },
+                  {
+                    "content": "6 × 6",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 × 18",
+                    "correct": false
+                  }
+                ],
+                "hint": "Chaque facteur doit être un nombre premier."
+              },
+              {
+                "content": "On a trouvé 45 = 3 × 3 × 5. Quel est le plus grand facteur premier de 45 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 45 est 3 (4 + 5 = 9). Étape 2 — Diviser : 45 ÷ 3 = 15. Étape 3 — Recommencer : 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. Étape 4 — Écrire : 45 = 3 × 3 × 5. Vérifier : 9 × 5 = 45. Le plus grand facteur premier est donc 5.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "hint": "Lis les facteurs 3, 3 et 5 et prends le plus grand."
+              },
+              {
+                "content": "Vrai ou faux : 30 = 2 × 3 × 5 est la décomposition de 30 en produit de facteurs premiers.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Chercher : 30 est pair, donc 2 le divise. Étape 2 — Diviser : 30 ÷ 2 = 15. Étape 3 — Recommencer : 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. Étape 4 — Écrire : 30 = 2 × 3 × 5, et 2, 3, 5 sont premiers. Vérifier : 2 × 3 × 5 = 30. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Vérifie que 2, 3 et 5 sont premiers et que leur produit vaut 30."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Décomposer un nombre en produit de facteurs premiers",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche pas à pas sur des nombres de sachets et de fruits.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la décomposition de 24 en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : 24 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 24 ÷ 2 = 12. Étape 3 — Recommencer : 12 ÷ 2 = 6 ; 6 ÷ 2 = 3 ; 3 ÷ 3 = 1. Étape 4 — Écrire : $24 = 2 \\times 2 \\times 2 \\times 3 = 2^3 \\times 3$. Vérifier : $8 \\times 3 = 24$. Les trois autres écritures valent bien 24, mais elles contiennent 4 ou 6, qui ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "$2^3 \\times 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4 \\times 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^2 \\times 6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 40 = 2 × 2 × 2 × ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher : 40 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 40 ÷ 2 = 20. Étape 3 — Recommencer : 20 ÷ 2 = 10 ; 10 ÷ 2 = 5 ; 5 ÷ 5 = 1. Étape 4 — Écrire : 40 = 2 × 2 × 2 × 5. Vérifier : 8 × 5 = 40. Le facteur qui manque est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus grand facteur premier de 56 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 56 est 2. Étape 2 — Diviser : 56 ÷ 2 = 28. Étape 3 — Recommencer avec le quotient : 28 ÷ 2 = 14 ; 14 ÷ 2 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 56 = 2 × 2 × 2 × 7 = $2^3 \\times 7$. Vérifier : 8 × 7 = 56. Le plus grand des facteurs 2, 2, 2 et 7 est 7. Répondre 28 serait une erreur : 28 divise 56 mais n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels nombres premiers divisent 20 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Chercher : 20 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 20 ÷ 2 = 10. Étape 3 — Recommencer : 10 ÷ 2 = 5 ; 5 ÷ 5 = 1. Étape 4 — Écrire : 20 = 2 × 2 × 5. Les nombres premiers qui divisent 20 sont donc 2 et 5. Les nombres 4, 10 et 20 divisent bien 20 mais ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $72 = 8 \\times 9$ est la décomposition de 72 en produit de facteurs premiers.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher : 72 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 72 ÷ 2 = 36. Étape 3 — Recommencer : 36 ÷ 2 = 18 ; 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. Étape 4 — Écrire : $72 = 2^3 \\times 3^2$. L'écriture $8 \\times 9$ vaut bien 72, mais 8 et 9 ne sont pas premiers : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua décompose 60 et écrit 60 = 4 × 3 × 5. Que lui dis-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : 60 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 60 ÷ 2 = 30. Étape 3 — Recommencer : 30 ÷ 2 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. Étape 4 — Écrire : $60 = 2 \\times 2 \\times 3 \\times 5 = 2^2 \\times 3 \\times 5$. Le produit 4 × 3 × 5 vaut bien 60, mais 4 n'est pas premier : Adjoua s'est arrêtée trop tôt.",
+                  "answers": [
+                    {
+                      "content": "Ce n'est pas fini : 4 n'est pas premier, il faut écrire 4 = 2 × 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est correct, car 4 × 3 × 5 = 60",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux, car 4 × 3 × 5 ne donne pas 60",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il manque seulement le facteur 1",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Ordre, calcul et association : décomposer les nombres du marché",
+              "statement": "Dans cet exercice, tu décomposes des nombres en facteurs premiers avec des questions de types variés, sur les sachets du marché.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Divise toujours par le plus petit nombre premier possible et vérifie que chaque facteur est premier.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour décomposer un nombre en produit de facteurs premiers.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Chercher le plus petit nombre premier qui divise le nombre. Étape 2 — Diviser par ce nombre premier. Étape 3 — Recommencer avec le quotient jusqu'à 1. Étape 4 — Écrire le produit des facteurs, puis vérifier en multipliant. Si on écrit le produit avant d'avoir atteint 1, il manque des facteurs, comme dans l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Chercher le plus petit nombre premier qui divise le nombre"
+                    },
+                    {
+                      "content": "Diviser le nombre par ce nombre premier"
+                    },
+                    {
+                      "content": "Recommencer avec le quotient jusqu'à obtenir 1"
+                    },
+                    {
+                      "content": "Écrire le produit des facteurs et vérifier en multipliant"
+                    }
+                  ]
+                },
+                {
+                  "content": "Décompose 48 en produit de facteurs premiers en répétant chaque facteur autant de fois qu'il apparaît. Combien comptes-tu de facteurs ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : 48 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 48 ÷ 2 = 24. Étape 3 — Recommencer : 24 ÷ 2 = 12 ; 12 ÷ 2 = 6 ; 6 ÷ 2 = 3 ; 3 ÷ 3 = 1. Étape 4 — Écrire : $48 = 2 \\times 2 \\times 2 \\times 2 \\times 3 = 2^4 \\times 3$. Vérifier : $16 \\times 3 = 48$. Il y a quatre facteurs 2 et un facteur 3, soit 5 facteurs.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $90 = 2 \\times 3^2 \\times$ ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher : 90 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 90 ÷ 2 = 45. Étape 3 — Recommencer : 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. Étape 4 — Écrire : $90 = 2 \\times 3 \\times 3 \\times 5 = 2 \\times 3^2 \\times 5$. Vérifier : $2 \\times 9 \\times 5 = 90$. Le facteur qui manque est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque nombre à sa décomposition en facteurs premiers.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Chercher le plus petit diviseur premier de chaque nombre. Étape 2 — Diviser : 12 ÷ 2 = 6, 18 ÷ 2 = 9, 30 ÷ 2 = 15, 45 ÷ 3 = 15, 50 ÷ 2 = 25. Étape 3 — Recommencer avec les quotients. Étape 4 — Écrire : $12 = 2^2 \\times 3$, $18 = 2 \\times 3^2$, $30 = 2 \\times 3 \\times 5$, $45 = 3^2 \\times 5$ et $50 = 2 \\times 5^2$. Vérifier par le produit.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "match": "$2^2 \\times 3$"
+                    },
+                    {
+                      "content": "18",
+                      "match": "$2 \\times 3^2$"
+                    },
+                    {
+                      "content": "30",
+                      "match": "$2 \\times 3 \\times 5$"
+                    },
+                    {
+                      "content": "45",
+                      "match": "$3^2 \\times 5$"
+                    },
+                    {
+                      "content": "50",
+                      "match": "$2 \\times 5^2$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 100 se décompose en $2^2 \\times$ ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Chercher : 100 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 100 ÷ 2 = 50. Étape 3 — Recommencer : 50 ÷ 2 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. Étape 4 — Écrire : $100 = 2 \\times 2 \\times 5 \\times 5 = 2^2 \\times 5^2$. La réponse $25$ donne bien 100 mais 25 n'est pas premier ; $5$ donne 20 et $10^2$ donne 400.",
+                  "answers": [
+                    {
+                      "content": "$5^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures sont des décompositions de 28 en produit de facteurs premiers ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Chercher : 28 est pair, le plus petit diviseur premier est 2. Étape 2 — Diviser : 28 ÷ 2 = 14. Étape 3 — Recommencer : 14 ÷ 2 = 7 ; 7 ÷ 7 = 1. Étape 4 — Écrire : $28 = 2 \\times 2 \\times 7 = 2^2 \\times 7$. Les écritures $4 \\times 7$ et $2 \\times 14$ valent 28 mais contiennent 4 et 14, non premiers ; $2 \\times 7$ vaut 14.",
+                  "answers": [
+                    {
+                      "content": "$2^2 \\times 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 2 \\times 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4 \\times 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 7$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les tas de fruits de Mme Awa",
+          "statement": "Mme Awa vend des fruits par tas au marché : 41 mangues, 51 oranges, 53 papayes et 57 ananas (nombres donnés à titre d'exemple). Réponds aux questions en utilisant la méthode des nombres premiers.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pour quels tas le nombre de fruits est-il un nombre premier ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : reconnaître un nombre premier. Étape 1 — Vérifier : les quatre nombres sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5, puis Étape 3 — Diviser par 7, 11… jusqu'à un quotient plus petit que le diviseur. Voici les résultats. 41 : ni 2, ni 3, ni 5 ; 41 ÷ 7 donne 5 reste 6, le quotient 5 est plus petit que 7, aucun diviseur, premier. 51 : 5 + 1 = 6 est dans la table de 3, donc 51 = 3 × 17, composé. 53 : ni 2, ni 3, ni 5 ; 53 ÷ 7 donne 7 reste 4 ; 53 ÷ 11 donne 4 reste 9, le quotient 4 est plus petit que 11, aucun diviseur, premier. 57 : 5 + 7 = 12 est dans la table de 3, donc 57 = 3 × 19, composé. Étape 4 — Conclure : 41 et 53 sont premiers. Les tas de 51 et de 57 sont des nombres impairs mais composés, car ils sont dans la table de 3.",
+              "answers": [
+                {
+                  "content": "Le tas de 41 mangues",
+                  "correct": true
+                },
+                {
+                  "content": "Le tas de 53 papayes",
+                  "correct": true
+                },
+                {
+                  "content": "Le tas de 51 oranges",
+                  "correct": false
+                },
+                {
+                  "content": "Le tas de 57 ananas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mme Awa range ses 51 oranges en rangées complètes qui ont toutes le même nombre d'oranges, avec au moins 2 rangées et au moins 2 oranges par rangée. Quels rangements sont possibles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : un rangement en rangées égales correspond à un diviseur autre que 1 et le nombre lui-même. Étape 1 — Vérifier : 51 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 51 est impair et ne finit pas par 0 ou 5, mais 5 + 1 = 6 est dans la table de 3, donc 51 = 3 × 17. Étape 3 — Diviser : 51 ÷ 3 = 17 sans reste. Étape 4 — Conclure : 51 est composé, on peut ranger les oranges en 17 rangées de 3 ou en 3 rangées de 17. Avec 2 ou 5 oranges par rangée il resterait des oranges. Dire que 51 est premier est l'erreur du piège : il est impair, mais pas premier.",
+              "answers": [
+                {
+                  "content": "3 oranges par rangée ou 17 oranges par rangée",
+                  "correct": true
+                },
+                {
+                  "content": "2 oranges par rangée",
+                  "correct": false
+                },
+                {
+                  "content": "5 oranges par rangée",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun, car 51 est un nombre premier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mme Awa range ses 57 ananas en rangées de 3 ananas. Combien de rangées obtient-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : décomposer par le plus petit diviseur premier. Étape 1 — Chercher : 57 est impair, mais 5 + 7 = 12 est dans la table de 3, donc le plus petit nombre premier qui divise 57 est 3. Étape 2 — Diviser : 57 ÷ 3 = 19. Étape 3 — Recommencer : 19 est premier (il n'est divisible ni par 2, 3 ou 5 ; 19 ÷ 7 donne 2 reste 5), donc 57 = 3 × 19. Étape 4 — Écrire et vérifier : 3 × 19 = 57. Mme Awa obtient 19 rangées de 3 ananas.",
+              "answers": [
+                {
+                  "content": "19",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Complète : le plus petit nombre premier qui divise 57 est ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : tester les critères de divisibilité dans l'ordre. Étape 1 — Vérifier : 57 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 57 finit par 7, il n'est donc ni pair ni dans la table de 5, mais 5 + 7 = 12 est dans la table de 3, donc 3 divise 57. Étape 3 — Diviser : 57 ÷ 3 = 19. Étape 4 — Conclure : le plus petit nombre premier qui divise 57 est 3. Répondre 7 ou 19 oublierait de tester d'abord le critère de 3.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mme Awa ajoute 2 mangues à son tas de 41 mangues. Combien de diviseurs possède le nombre de mangues obtenu ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : reconnaître un nombre premier. Étape 1 — Vérifier : 41 + 2 = 43, qui est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : 43 finit par 3, il est impair ; 4 + 3 = 7 n'est pas dans la table de 3 ; il ne finit pas par 0 ou 5. Étape 3 — Diviser par 7 : 43 ÷ 7 donne 6 reste 1, et 6 est plus petit que 7, on s'arrête. Étape 4 — Conclure : 43 est premier, il a exactement deux diviseurs, 1 et 43.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les sachets d'arachides de Koffi",
+          "statement": "Koffi prépare des sachets d'arachides. Il en a 72 dans un carton et 90 dans un autre (nombres donnés à titre d'exemple). Il utilise la décomposition en facteurs premiers pour les ranger.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la décomposition de 72 en produit de facteurs premiers ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 72 est 2. Étape 2 — Diviser : 72 ÷ 2 = 36. Étape 3 — Recommencer avec le quotient : 36 ÷ 2 = 18 ; 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 72 = 2 × 2 × 2 × 3 × 3 = $2^3 \\times 3^2$. Vérifier : 8 × 9 = 72. La réponse $2^2 \\times 3^3$ vaut 108 et $2^3 \\times 3$ vaut 24 : les exposants sont échangés ou oubliés. La réponse $8 \\times 9$ vaut 72 mais ses facteurs ne sont pas premiers.",
+              "answers": [
+                {
+                  "content": "$2^3 \\times 3^2$",
+                  "correct": true
+                },
+                {
+                  "content": "$2^2 \\times 3^3$",
+                  "correct": false
+                },
+                {
+                  "content": "$2^3 \\times 3$",
+                  "correct": false
+                },
+                {
+                  "content": "$8 \\times 9$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Complète : $126 = 2 \\times 3^2 \\times$ ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 126 est 2. Étape 2 — Diviser : 126 ÷ 2 = 63. Étape 3 — Recommencer avec le quotient : 63 ÷ 3 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 126 = 2 × 3 × 3 × 7 = $2 \\times 3^2 \\times 7$. Vérifier : 2 × 9 × 7 = 126. Le facteur qui manque est 7, car 2 × 9 × 7 = 126.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de fois le facteur 2 apparaît-il dans la décomposition de 72 en produit de facteurs premiers ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 72 est 2. Étape 2 — Diviser : 72 ÷ 2 = 36. Étape 3 — Recommencer avec le quotient : 36 ÷ 2 = 18 ; 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 72 = 2 × 2 × 2 × 3 × 3 = $2^3 \\times 3^2$. Vérifier : 8 × 9 = 72. Le facteur 2 apparaît trois fois, c'est le $2^3$ de l'écriture. Répondre 2 confondrait l'exposant du 3 avec celui du 2.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Vrai ou faux : 72 et 90 ont exactement les mêmes facteurs premiers.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 72 est 2. Étape 2 — Diviser : 72 ÷ 2 = 36. Étape 3 — Recommencer avec le quotient : 36 ÷ 2 = 18 ; 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 72 = 2 × 2 × 2 × 3 × 3 = $2^3 \\times 3^2$. Vérifier : 8 × 9 = 72. Pour 90 : étape 1 — Chercher : le plus petit nombre premier qui divise 90 est 2. étape 2 — Diviser : 90 ÷ 2 = 45. étape 3 — Recommencer avec le quotient : 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. étape 4 — Écrire : 90 = 2 × 3 × 3 × 5 = $2 \\times 3^2 \\times 5$. Vérifier : 2 × 9 × 5 = 90. Les facteurs premiers de 72 sont 2 et 3, ceux de 90 sont 2, 3 et 5. Le facteur 5 n'est pas dans 72 : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les divisions successives qui décomposent 90 en facteurs premiers.",
+              "question_type": "ordering",
+              "explanation": "Méthode : diviser toujours par le plus petit nombre premier possible. Étape 1 — Chercher : 90 est pair, on divise par 2 : 90 ÷ 2 = 45. Étape 2 — Diviser le quotient 45, impair, par 3 car 4 + 5 = 9 : 45 ÷ 3 = 15. Étape 3 — Recommencer : 15 ÷ 3 = 5, puis 5 ÷ 5 = 1. Étape 4 — Écrire : 90 = 2 × 3 × 3 × 5. On ne peut pas diviser 45 par 2 ni diviser 5 avant d'avoir obtenu 5 : l'ordre suit la méthode.",
+              "answers": [
+                {
+                  "content": "90 ÷ 2 = 45"
+                },
+                {
+                  "content": "45 ÷ 3 = 15"
+                },
+                {
+                  "content": "15 ÷ 3 = 5"
+                },
+                {
+                  "content": "5 ÷ 5 = 1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le marché de gros de Mariam",
+          "statement": "Mariam, grossiste, reçoit des lots de sachets de piments. Elle compte 61, 63, 67, 69 et 71 sachets dans cinq lots, puis prépare d'autres rangements (nombres donnés à titre d'exemple). Réponds aux questions comme dans un devoir.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Lesquels de ces lots ont un nombre de sachets qui est un nombre premier ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : reconnaître un nombre premier. Étape 1 — Vérifier : tous les nombres sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5, puis Étape 3 — Diviser par 7, 11… Résultats : 61 : ni 2, ni 3, ni 5 ; 61 ÷ 7 donne 8 reste 5 ; 61 ÷ 11 donne 5 reste 6, le quotient 5 est plus petit que 11, aucun diviseur, premier. 63 : 6 + 3 = 9 est dans la table de 3, donc 63 = 3 × 21, composé. 67 : ni 2, ni 3, ni 5 ; 67 ÷ 7 donne 9 reste 4 ; 67 ÷ 11 donne 6 reste 1, le quotient 6 est plus petit que 11, aucun diviseur, premier. 69 : 6 + 9 = 15 est dans la table de 3, donc 69 = 3 × 23, composé. 71 : ni 2, ni 3, ni 5 ; 71 ÷ 7 donne 10 reste 1 ; 71 ÷ 11 donne 6 reste 5, le quotient 6 est plus petit que 11, aucun diviseur, premier. Étape 4 — Conclure : 61, 67 et 71 sont premiers. 63 et 69 sont impairs mais composés, car ils sont dans la table de 3.",
+              "answers": [
+                {
+                  "content": "Le lot de 61 sachets",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot de 67 sachets",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot de 71 sachets",
+                  "correct": true
+                },
+                {
+                  "content": "Le lot de 63 sachets",
+                  "correct": false
+                },
+                {
+                  "content": "Le lot de 69 sachets",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam a 84 sachets de piments. Quelle est la décomposition de 84 en produit de facteurs premiers ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 84 est 2. Étape 2 — Diviser : 84 ÷ 2 = 42. Étape 3 — Recommencer avec le quotient : 42 ÷ 2 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 84 = 2 × 2 × 3 × 7 = $2^2 \\times 3 \\times 7$. Vérifier : 4 × 3 × 7 = 84. Les écritures $4 \\times 3 \\times 7$ et $2 \\times 3 \\times 14$ valent 84 mais contiennent 4 et 14, qui ne sont pas premiers ; $2^3 \\times 3 \\times 7$ vaut 168.",
+              "answers": [
+                {
+                  "content": "$2^2 \\times 3 \\times 7$",
+                  "correct": true
+                },
+                {
+                  "content": "$4 \\times 3 \\times 7$",
+                  "correct": false
+                },
+                {
+                  "content": "$2 \\times 3 \\times 14$",
+                  "correct": false
+                },
+                {
+                  "content": "$2^3 \\times 3 \\times 7$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la somme des facteurs premiers différents de 84 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 84 est 2. Étape 2 — Diviser : 84 ÷ 2 = 42. Étape 3 — Recommencer avec le quotient : 42 ÷ 2 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 84 = 2 × 2 × 3 × 7 = $2^2 \\times 3 \\times 7$. Vérifier : 4 × 3 × 7 = 84. Les facteurs premiers différents de 84 sont 2, 3 et 7. Leur somme est 2 + 3 + 7 = 12. On ne compte le facteur 2 qu'une fois même s'il apparaît deux fois.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mariam répartit 91 sachets de manière égale dans 7 paniers. Combien de sachets met-elle dans chaque panier ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : un partage égal en 7 paniers existe si 7 divise 91. Étape 1 — Vérifier : 91 est supérieur ou égal à 2. Étape 2 — Tester 2, 3 et 5 : aucun ne divise 91 (91 est impair, 9 + 1 = 10, il ne finit pas par 0 ou 5). Étape 3 — Diviser par 7 : 91 ÷ 7 = 13 sans reste. Étape 4 — Conclure : 91 = 7 × 13 n'est pas premier, et chaque panier reçoit 13 sachets. Dire que 91 est premier serait l'erreur du piège.",
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Vrai ou faux : $105 = 3 \\times 5 \\times 7$ est la décomposition de 105 en produit de facteurs premiers.",
+              "question_type": "true_false",
+              "explanation": "Méthode : décomposer. Étape 1 — Chercher : 105 est impair, mais 1 + 0 + 5 = 6 est dans la table de 3 ; le plus petit diviseur premier est 3. Étape 2 — Diviser : 105 ÷ 3 = 35. Étape 3 — Recommencer : 35 ÷ 5 = 7 ; 7 ÷ 7 = 1. Étape 4 — Écrire : $105 = 3 \\times 5 \\times 7$. Vérifier : $3 \\times 5 = 15$ et $15 \\times 7 = 105$. Les trois facteurs sont premiers : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de nombres premiers sont compris entre 80 et 100 (80 et 100 exclus) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : dresser la liste avec le crible. Étape 1 — Écrire les entiers de 81 à 99. Étape 2 — Entourer le plus petit non barré après avoir barré les multiples de 2, 3, 5 et 7. Étape 3 — Barrer : les pairs, 81, 87, 93, 99 (table de 3), 85 et 95 (table de 5), 91 = 7 × 13. Étape 4 — Recommencer avec 7, le dernier nombre à tester (11 × 11 = 121 dépasse 100). Étape 5 — Conclure : il reste 83, 89 et 97, soit 3 nombres premiers.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le devoir du trimestre : les cageots du grossiste",
+          "statement": "Un grossiste prépare ses cageots pour le marché. Il compte 180 mangues, 360 oranges, 221 papayes et 98 ananas (nombres donnés à titre d'exemple). Réponds aux questions comme dans un devoir de fin de trimestre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien le nombre 180 a-t-il de facteurs premiers différents ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 180 est 2. Étape 2 — Diviser : 180 ÷ 2 = 90. Étape 3 — Recommencer avec le quotient : 90 ÷ 2 = 45 ; 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 180 = 2 × 2 × 3 × 3 × 5 = $2^2 \\times 3^2 \\times 5$. Vérifier : 4 × 9 × 5 = 180. Les facteurs premiers différents sont 2, 3 et 5, soit 3 facteurs. Le facteur 2 apparaît deux fois et le facteur 3 aussi, mais on ne les compte qu'une fois chacun.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la décomposition de 360 en produit de facteurs premiers ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 360 est 2. Étape 2 — Diviser : 360 ÷ 2 = 180. Étape 3 — Recommencer avec le quotient : 180 ÷ 2 = 90 ; 90 ÷ 2 = 45 ; 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 360 = 2 × 2 × 2 × 3 × 3 × 5 = $2^3 \\times 3^2 \\times 5$. Vérifier : 8 × 9 × 5 = 360. La réponse $2^3 \\times 3^3 \\times 5$ vaut 1 080 : l'exposant du 3 est trop grand. Les réponses avec 10 ou 6 contiennent des facteurs non premiers.",
+              "answers": [
+                {
+                  "content": "$2^3 \\times 3^2 \\times 5$",
+                  "correct": true
+                },
+                {
+                  "content": "$2^2 \\times 3^2 \\times 10$",
+                  "correct": false
+                },
+                {
+                  "content": "$2^3 \\times 3^3 \\times 5$",
+                  "correct": false
+                },
+                {
+                  "content": "$2^2 \\times 3 \\times 5 \\times 6$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le grossiste a 221 papayes. Ce nombre est-il premier ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : reconnaître un nombre premier. Étape 1 — Vérifier : 221 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 221 se termine par 1, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 5, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 221 ÷ 7 : quotient 31, reste 4 ; 221 ÷ 11 : quotient 20, reste 1 ; 221 ÷ 13 = 17 sans reste, donc 13 divise 221 : 221 = 13 × 17. Étape 4 — Conclure : 221 a au moins un diviseur autre que 1 et lui-même (13), donc 221 n'est pas premier ; il est composé. Dire que 221 est premier parce que 2, 3, 5 et 7 ne le divisent pas est l'erreur du piège : il faut continuer jusqu'à un quotient plus petit que le diviseur. L'égalité 11 × 20 = 220, et non 221 : 11 ne divise pas 221 (221 ÷ 11 donne 20 reste 1).",
+              "answers": [
+                {
+                  "content": "Non, car 221 = 13 × 17",
+                  "correct": true
+                },
+                {
+                  "content": "Oui, car il n'est divisible ni par 2, ni par 3, ni par 5, ni par 7",
+                  "correct": false
+                },
+                {
+                  "content": "Oui, car il est impair",
+                  "correct": false
+                },
+                {
+                  "content": "Non, car 221 = 11 × 20",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le plus grand facteur premier de 221 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Chercher : 221 est impair, 2 + 2 + 1 = 5 n'est pas dans la table de 3 et il ne finit pas par 0 ou 5 ; 221 ÷ 7 donne 31 reste 4 ; 221 ÷ 11 donne 20 reste 1 ; 221 ÷ 13 = 17 sans reste. Le plus petit nombre premier qui divise 221 est donc 13. Étape 2 — Diviser : 221 ÷ 13 = 17. Étape 3 — Recommencer avec le quotient : 17 est premier (17 ÷ 7 donne 2 reste 3), donc 17 ÷ 17 = 1 et on s'arrête. Étape 4 — Écrire : 221 = 13 × 17. Vérifier : 13 × 17 = 221. Le plus grand des deux facteurs premiers est 17 ; 13 est le plus petit, trouvé en premier.",
+              "answers": [
+                {
+                  "content": "17",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Vrai ou faux : un nombre premier supérieur à 2 est toujours impair.",
+              "question_type": "true_false",
+              "explanation": "Méthode : étudier la parité. Étape 1 — Vérifier : on prend un nombre premier supérieur à 2. Étape 2 — Tester le critère de 2 : si ce nombre était pair, 2 le diviserait. Étape 3 — Diviser : il aurait alors au moins trois diviseurs, 1, 2 et lui-même. Étape 4 — Conclure : un nombre premier supérieur à 2 n'est pas pair, il est impair. L'affirmation est vraie, et le seul premier pair est 2.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Complète : $98 = 2 \\times 7 \\times$ ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 98 est 2. Étape 2 — Diviser : 98 ÷ 2 = 49. Étape 3 — Recommencer avec le quotient : 49 ÷ 7 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 98 = 2 × 7 × 7 = $2 \\times 7^2$. Vérifier : 2 × 49 = 98. Le facteur qui manque est 7, car $2 \\times 7 \\times 7 = 98$ : le facteur 7 se répète, d'où $2 \\times 7^2$.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Reconnaître un nombre premier avec les critères de divisibilité ; connaître la liste des nombres premiers inférieurs à 100 et le crible ; décomposer un nombre en produit de facteurs premiers.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur l'étal d'une marchande, des tas de fruits contiennent 13, 15, 19, 21 ou 23 fruits (nombres donnés à titre d'exemple). Tu reconnais les nombres premiers.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche d'abord si 2, 3 ou 5 divise le nombre, puis essaie 7.",
+              "questions": [
+                {
+                  "content": "Vrai ou faux : 13 est un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : 13 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 13 se termine par 3, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 4, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 13 ÷ 7 : quotient 1, reste 6 ; le quotient 1 est plus petit que 7, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 13, donc 13 est premier. Il n'a pas d'autre diviseur que 1 et 13 : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les nombres de fruits 13, 15, 19 et 23, lequel n'est pas un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : ces nombres sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 15 finit par 5, donc 5 le divise : 15 = 3 × 5, et 1 + 5 = 6 est aussi dans la table de 3. Étape 3 — Diviser : pour 13, 19 et 23, aucun test par 2, 3, 5 ne marche et 7 ne marche pas non plus (quotients 1, 2 et 3). Étape 4 — Conclure : 15 est composé, et 13, 19, 23 sont premiers. Chacun est impair, mais seul 15 a un diviseur autre que 1 et lui-même.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    },
+                    {
+                      "content": "13",
+                      "correct": false
+                    },
+                    {
+                      "content": "19",
+                      "correct": false
+                    },
+                    {
+                      "content": "23",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels tas contiennent un nombre premier de fruits ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : 15, 19, 21 et 23 sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 15 finit par 5, et 21 est dans la table de 3 (2 + 1 = 3), donc 21 = 3 × 7. Étape 3 — Diviser : 19 ÷ 7 donne 2 reste 5 et 23 ÷ 7 donne 3 reste 2, des quotients plus petits que 7, on s'arrête. Étape 4 — Conclure : 19 et 23 sont premiers ; 15 et 21 sont impairs mais composés.",
+                  "answers": [
+                    {
+                      "content": "Le tas de 19 fruits",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le tas de 23 fruits",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le tas de 15 fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tas de 21 fruits",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : un nombre premier a exactement ___ diviseurs.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : on compte les diviseurs d'un nombre premier. Étape 2 — Tester avec un exemple : 13 est divisible par 1 et par 13. Étape 3 — Diviser : aucun autre nombre ne le divise. Étape 4 — Conclure : un nombre premier a exactement deux diviseurs, 1 et lui-même. Un nombre qui en a un seul, comme 1, ou plus de deux, comme 15, n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "deux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de diviseurs possède le nombre 19 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 19 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 19 se termine par 9, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 10, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 19 ÷ 7 : quotient 2, reste 5 ; le quotient 2 est plus petit que 7, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 19, donc 19 est premier. Les diviseurs de 19 sont donc 1 et 19, soit 2 diviseurs.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mariam retrouve les nombres premiers inférieurs à 100 avec le crible d'Ératosthène (barrer les multiples) et la liste de la fiche.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Utilise la liste des nombres premiers inférieurs à 100 et les critères de divisibilité.",
+              "questions": [
+                {
+                  "content": "Quel est le plus petit nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les entiers à partir de 2 : 0 et 1 ne sont pas premiers, car 0 a une infinité de diviseurs et 1 n'en a qu'un. Étape 2 — Entourer le plus petit nombre non barré : 2. Étape 3 — Barrer ses multiples, mais pas lui-même. Étape 4 — Recommencer avec 3. Étape 5 — Conclure : 2 est le plus petit nombre premier. Répondre 1 est l'erreur la plus fréquente, car 1 n'a qu'un seul diviseur.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de nombres premiers inférieurs à 10 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les entiers de 2 à 9. Étape 2 — Entourer 2, puis barrer 4, 6, 8. Étape 3 — Barrer les multiples de 3 : 9. Étape 4 — Recommencer : le suivant est 5 et 5 × 5 = 25 dépasse 9, on s'arrête. Étape 5 — Conclure : il reste 2, 3, 5, 7, soit 4 nombres premiers. Compter 5 en ajoutant 1 serait une erreur, car 1 n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète la liste des nombres premiers : 31, 37, 41, 43, ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire les entiers après 43 : 44, 45, 46, 47. Étape 2 — Entourer le premier non barré. Étape 3 — Barrer : 44 et 46 sont pairs, 45 est multiple de 5 et de 3. Étape 4 — Recommencer : 47 n'est divisible ni par 2, 3, 5, ni par 7 (47 ÷ 7 donne 6 reste 5, 6 est plus petit que 7). Étape 5 — Conclure : le nombre premier qui suit 43 est 47.",
+                  "answers": [
+                    {
+                      "content": "47",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 89 est un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : 89 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 89 se termine par 9, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 17, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 89 ÷ 7 : quotient 12, reste 5 ; 89 ÷ 11 : quotient 8, reste 1 ; le quotient 8 est plus petit que 11, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 89, donc 89 est premier. 89 est dans la liste des nombres premiers inférieurs à 100. L'affirmation est vraie, même si 89 paraît proche de 90 ou de 91, qui sont composés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi 69, 73, 77 et 85, lequel est un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : tous sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 69 (6 + 9 = 15) est dans la table de 3, 85 finit par 5. Étape 3 — Diviser par 7 : 77 = 7 × 11 ; et 73 ÷ 7 donne 10 reste 3 (10 est plus grand que 7), puis 73 ÷ 11 donne 6 reste 7, avec 6 plus petit que 11, on s'arrête. Étape 4 — Conclure : 73 est premier ; 69, 77 et 85 sont impairs mais composés.",
+                  "answers": [
+                    {
+                      "content": "73",
+                      "correct": true
+                    },
+                    {
+                      "content": "69",
+                      "correct": false
+                    },
+                    {
+                      "content": "77",
+                      "correct": false
+                    },
+                    {
+                      "content": "85",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces nombres premiers du plus petit au plus grand : 47, 13, 83, 29 et 71.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier que ces cinq nombres sont premiers : ils figurent tous dans la liste des nombres premiers inférieurs à 100. Étape 2 — Comparer les nombres : 13 est plus petit que 29, qui est plus petit que 47, puis 71, puis 83. Étape 3 — Ranger du plus petit au plus grand : 13, 29, 47, 71, 83. Étape 4 — Conclure : le premier est 13 et le dernier est 83. Il ne faut pas ranger d'après le chiffre des unités (3, 9, 7, 1, 3) mais d'après la valeur du nombre entier.",
+                  "answers": [
+                    {
+                      "content": "13"
+                    },
+                    {
+                      "content": "29"
+                    },
+                    {
+                      "content": "47"
+                    },
+                    {
+                      "content": "71"
+                    },
+                    {
+                      "content": "83"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Koffi décompose en facteurs premiers des nombres de sachets d'arachides (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Divise par le plus petit nombre premier possible et vérifie que chaque facteur est premier.",
+              "questions": [
+                {
+                  "content": "Quelle est la décomposition de 54 en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 54 est 2. Étape 2 — Diviser : 54 ÷ 2 = 27. Étape 3 — Recommencer avec le quotient : 27 ÷ 3 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 54 = 2 × 3 × 3 × 3 = $2 \\times 3^3$. Vérifier : 2 × 27 = 54. L'écriture $6 \\times 9$ vaut 54 mais 6 et 9 ne sont pas premiers ; $2 \\times 3^2$ vaut 18 ; $2^2 \\times 3^3$ vaut 108.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 3^3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6 \\times 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^2 \\times 3^3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 66 = 2 × 3 × ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 66 est 2. Étape 2 — Diviser : 66 ÷ 2 = 33. Étape 3 — Recommencer avec le quotient : 33 ÷ 3 = 11 ; 11 ÷ 11 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 66 = 2 × 3 × 11 = $2 \\times 3 \\times 11$. Vérifier : 2 × 3 × 11 = 66. Le facteur qui manque est 11, qui est un nombre premier. Répondre 33 serait une erreur : 33 n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit facteur premier de 75 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 75 est 3. Étape 2 — Diviser : 75 ÷ 3 = 25. Étape 3 — Recommencer avec le quotient : 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 75 = 3 × 5 × 5 = $3 \\times 5^2$. Vérifier : 3 × 25 = 75. Le plus petit facteur premier est 3. Répondre 5 serait une erreur : 5 est aussi un facteur de 75, mais il est plus grand que 3.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $2^3 \\times 5 = 40$ est la décomposition de 40 en produit de facteurs premiers.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 40 est 2. Étape 2 — Diviser : 40 ÷ 2 = 20. Étape 3 — Recommencer avec le quotient : 20 ÷ 2 = 10 ; 10 ÷ 2 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 40 = 2 × 2 × 2 × 5 = $2^3 \\times 5$. Vérifier : 8 × 5 = 40. On retrouve $2^3 \\times 5$, avec 2 et 5 premiers : l'affirmation est vraie. Piège : ne pas lire $2^3$ comme $2 \\times 3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois facteurs premiers de 78 ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 78 est 2. Étape 2 — Diviser : 78 ÷ 2 = 39. Étape 3 — Recommencer avec le quotient : 39 ÷ 3 = 13 ; 13 ÷ 13 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 78 = 2 × 3 × 13 = $2 \\times 3 \\times 13$. Vérifier : 2 × 3 × 13 = 78. Les facteurs premiers de 78 sont 2, 3 et 13. Les nombres 6 et 26 divisent 78 mais ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "13",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "26",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mme Awa trie ses sachets et revoit toutes les notions de la leçon : nombre premier, liste, décomposition.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rappelle-toi qu'un nombre premier a exactement deux diviseurs.",
+              "questions": [
+                {
+                  "content": "Pourquoi le nombre 1 n'est-il pas un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : un nombre premier est un entier qui a exactement deux diviseurs. Étape 2 — Tester le nombre 1 : le seul nombre qui le divise est 1. Étape 3 — Compter : 1 n'a qu'un seul diviseur et non deux. Étape 4 — Conclure : 1 n'est pas premier. Être impair ne suffit pas, puisque 3 est impair et premier ; et 1 a un diviseur, lui-même, il n'en a pas zéro.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il n'a qu'un seul diviseur, lui-même",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il est impair",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il n'a aucun diviseur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il a deux diviseurs, 1 et 1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque nombre à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Vérifier chaque nombre. Étape 2 — Tester : 2 a exactement deux diviseurs (1 et 2), il est premier et pair ; 9 = 3 × 3 est composé et impair ; 31 n'a aucun diviseur autre que 1 et lui-même (31 ÷ 7 donne 4 reste 3), il est premier et impair ; 12 a six diviseurs, il est composé et pair ; 1 n'a qu'un seul diviseur. Étape 3 — Conclure : la parité ne dit pas si un nombre est premier, comme le montrent 2 et 9.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "match": "premier et pair"
+                    },
+                    {
+                      "content": "9",
+                      "match": "composé et impair"
+                    },
+                    {
+                      "content": "31",
+                      "match": "premier et impair"
+                    },
+                    {
+                      "content": "12",
+                      "match": "composé et pair"
+                    },
+                    {
+                      "content": "1",
+                      "match": "ni premier ni composé"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de nombres premiers inférieurs à 50 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les entiers de 2 à 49. Étape 2 — Entourer 2, puis barrer ses multiples. Étape 3 — Barrer les multiples de 3, de 5 et de 7 (49 = 7 × 7). Étape 4 — Recommencer : le suivant est 11 et 11 × 11 = 121 dépasse 49, on s'arrête. Étape 5 — Conclure : il reste 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, soit 15 nombres premiers.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : la somme de deux nombres premiers est toujours un nombre pair.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : on cherche un contre-exemple. Étape 2 — Tester avec 2 et 3, qui sont premiers : 2 + 3 = 5. Étape 3 — Comparer : 5 est impair, donc la somme de deux nombres premiers n'est pas toujours paire. Étape 4 — Conclure : l'affirmation est fausse. La somme de deux nombres premiers impairs, comme 3 + 5 = 8, est paire, mais quand l'un des deux est 2 elle est impaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 143 est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : 143 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 143 se termine par 3, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 8, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 143 ÷ 7 : quotient 20, reste 3 ; 143 ÷ 11 = 13 sans reste, donc 11 divise 143 : 143 = 11 × 13. Étape 4 — Conclure : 143 a au moins un diviseur autre que 1 et lui-même (11), donc 143 n'est pas premier ; il est composé. Il est impair et n'est dans la table ni de 2, ni de 3, ni de 5, ni de 7, mais il a 11 pour diviseur : il est donc composé.",
+                  "answers": [
+                    {
+                      "content": "composé",
+                      "correct": true
+                    },
+                    {
+                      "content": "premier",
+                      "correct": false
+                    },
+                    {
+                      "content": "ni premier ni composé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao dit : « 2 n'est pas premier car il est pair. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : un nombre premier a exactement deux diviseurs. Étape 2 — Tester 2 : il est divisible par 1 et par 2, et par aucun autre nombre. Étape 3 — Compter : 2 a bien deux diviseurs. Étape 4 — Conclure : 2 est premier, et même le seul nombre premier pair. Les autres nombres pairs, comme 4 ou 6, sont divisibles par 2 en plus de 1 et d'eux-mêmes, donc composés : Yao généralise à tort.",
+                  "answers": [
+                    {
+                      "content": "Il a tort : 2 a exactement deux diviseurs, 1 et 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison : tous les nombres pairs sont composés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a tort : 2 est impair",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison : 2 n'a qu'un seul diviseur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Au marché",
+          "notions": "Utiliser les nombres premiers et la décomposition en facteurs premiers dans des situations de marché : ranger des fruits en rangées égales, composer des paquets, repérer les nombres premiers parmi des numéros de cageots.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Awa range des fruits en rangées égales sur son étal. Pour chaque rangement, il faut au moins 2 rangées et au moins 2 fruits par rangée (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un rangement en rangées égales existe quand le nombre de fruits a un diviseur autre que 1 et lui-même.",
+              "questions": [
+                {
+                  "content": "Awa a 47 bananes. Peut-elle les ranger en plusieurs rangées complètes de même nombre de bananes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 47 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 47 se termine par 7, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 11, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 47 ÷ 7 : quotient 6, reste 5 ; le quotient 6 est plus petit que 7, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 47, donc 47 est premier. Un rangement en rangées égales demande un diviseur autre que 1 et 47. Il n'y en a pas, donc aucun rangement n'est possible. Avec 2, 3 ou 5 rangées il resterait des bananes.",
+                  "answers": [
+                    {
+                      "content": "Non, car 47 est un nombre premier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, en 2 rangées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, en 3 rangées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, en 5 rangées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa a 39 ignames. Quels rangements en rangées complètes sont possibles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 39 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 39 est impair ; la somme de ses chiffres est 12, qui est dans la table de 3, donc 3 le divise : 39 = 3 × 13. Étape 3 — Diviser : un diviseur autre que 1 et le nombre lui-même est déjà trouvé, inutile de continuer. Étape 4 — Conclure : 39 a au moins un diviseur autre que 1 et lui-même (3), donc 39 n'est pas premier ; il est composé. Comme 39 = 3 × 13, on peut ranger 13 rangées de 3 ou 3 rangées de 13. Avec 2 ou 5 rangées il resterait des ignames. Dire que 39 est premier parce qu'il est impair est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "13 rangées de 3 ignames ou 3 rangées de 13 ignames",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 rangées égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 rangées égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun, car 39 est un nombre premier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa range ses 65 oranges en rangées de 5 oranges. Combien de rangées obtient-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 65 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 65 se termine par 5, donc 5 le divise : 65 = 5 × 13. Étape 3 — Diviser : un diviseur autre que 1 et le nombre lui-même est déjà trouvé, inutile de continuer. Étape 4 — Conclure : 65 a au moins un diviseur autre que 1 et lui-même (5), donc 65 n'est pas premier ; il est composé. Le diviseur trouvé est 5 : 65 ÷ 5 = 13. Awa obtient 13 rangées de 5 oranges.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : avec 53 tomates, Awa ne peut faire que 1 rangée de 53 tomates ou 53 rangées d'une tomate.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : 53 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 53 se termine par 3, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 8, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 53 ÷ 7 : quotient 7, reste 4 ; 53 ÷ 11 : quotient 4, reste 9 ; le quotient 4 est plus petit que 11, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 53, donc 53 est premier. Les seuls diviseurs de 53 sont 1 et 53 : il n'y a que ces deux rangements. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quels nombres de fruits Awa peut-elle faire un rangement en au moins 2 rangées égales de plus d'un fruit ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : on cherche les nombres qui ont un diviseur autre que 1 et eux-mêmes. Étape 2 — Tester 2, 3 et 5 : 35 finit par 5, donc 35 = 5 × 7. Étape 3 — Diviser par 7 : 49 = 7 × 7 ; 37 ÷ 7 donne 5 reste 2 et 41 ÷ 7 donne 5 reste 6, deux quotients plus petits que 7. Étape 4 — Conclure : 35 et 49 sont composés, donc Awa peut les ranger ; 37 et 41 sont premiers, aucun rangement n'est possible.",
+                  "answers": [
+                    {
+                      "content": "35 fruits",
+                      "correct": true
+                    },
+                    {
+                      "content": "49 fruits",
+                      "correct": true
+                    },
+                    {
+                      "content": "37 fruits",
+                      "correct": false
+                    },
+                    {
+                      "content": "41 fruits",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Koffi vend des sachets d'arachides. Il décompose le nombre de sachets pour préparer ses paquets (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Divise toujours par le plus petit nombre premier possible, jusqu'à obtenir 1.",
+              "questions": [
+                {
+                  "content": "Koffi a 150 sachets. Quelle est la décomposition de 150 en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 150 est 2. Étape 2 — Diviser : 150 ÷ 2 = 75. Étape 3 — Recommencer avec le quotient : 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 150 = 2 × 3 × 5 × 5 = $2 \\times 3 \\times 5^2$. Vérifier : 2 × 3 × 25 = 150. L'écriture $2 \\times 3 \\times 25$ vaut 150 mais 25 n'est pas premier ; $2 \\times 75$ contient 75, non premier ; $2^2 \\times 3 \\times 5$ vaut 60.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 3 \\times 5^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 75$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^2 \\times 3 \\times 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 220 = 2 × 2 × 5 × ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 220 est 2. Étape 2 — Diviser : 220 ÷ 2 = 110. Étape 3 — Recommencer avec le quotient : 110 ÷ 2 = 55 ; 55 ÷ 5 = 11 ; 11 ÷ 11 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 220 = 2 × 2 × 5 × 11 = $2^2 \\times 5 \\times 11$. Vérifier : 4 × 5 × 11 = 220. Le facteur qui manque est 11, car 4 × 5 × 11 = 220.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de facteurs premiers (en comptant les répétitions) trouve-t-on dans la décomposition de 150 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 150 est 2. Étape 2 — Diviser : 150 ÷ 2 = 75. Étape 3 — Recommencer avec le quotient : 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 150 = 2 × 3 × 5 × 5 = $2 \\times 3 \\times 5^2$. Vérifier : 2 × 3 × 25 = 150. On compte les facteurs 2, 3, 5 et 5, soit 4 facteurs en comptant les répétitions. Répondre 3 compterait seulement les facteurs différents.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi écrit 150 = 10 × 15 et dit que c'est sa décomposition en facteurs premiers. Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 150 est 2. Étape 2 — Diviser : 150 ÷ 2 = 75. Étape 3 — Recommencer avec le quotient : 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 150 = 2 × 3 × 5 × 5 = $2 \\times 3 \\times 5^2$. Vérifier : 2 × 3 × 25 = 150. Le produit 10 × 15 vaut bien 150, et 10 et 15 divisent 150, mais ils ne sont pas premiers (10 = 2 × 5 et 15 = 3 × 5). Koffi s'est arrêté trop tôt.",
+                  "answers": [
+                    {
+                      "content": "Ce n'est pas une décomposition en facteurs premiers car 10 et 15 ne sont pas premiers",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est correct car 10 × 15 = 150",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux car 10 × 15 ne vaut pas 150",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est correct car 10 et 15 sont des diviseurs de 150",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les divisions successives qui décomposent 150 en facteurs premiers.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Chercher : 150 est pair, on divise par 2 : 150 ÷ 2 = 75. Étape 2 — Diviser le quotient 75, impair, par 3 car 7 + 5 = 12 : 75 ÷ 3 = 25. Étape 3 — Recommencer avec 25, qui finit par 5 : 25 ÷ 5 = 5, puis 5 ÷ 5 = 1. Étape 4 — Écrire : 150 = 2 × 3 × 5 × 5. Diviser 75 par 5 avant 3 donnerait le même résultat final mais n'applique pas la méthode, qui prend toujours le plus petit nombre premier.",
+                  "answers": [
+                    {
+                      "content": "150 ÷ 2 = 75"
+                    },
+                    {
+                      "content": "75 ÷ 3 = 25"
+                    },
+                    {
+                      "content": "25 ÷ 5 = 5"
+                    },
+                    {
+                      "content": "5 ÷ 5 = 1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Mariam numérote ses cageots avec des nombres et cherche ceux qui sont premiers (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Barre les multiples de 2, 3, 5 et 7 : ce qui reste est premier.",
+              "questions": [
+                {
+                  "content": "Parmi les cageots numérotés 73, 75, 79, 81 et 83, lesquels portent un nombre premier ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Vérifier : tous les nombres sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 75 finit par 5, et 81 est dans la table de 3 (8 + 1 = 9). Étape 3 — Diviser par 7 : 73 ÷ 7 donne 10 reste 3, 79 ÷ 7 donne 11 reste 2 et 83 ÷ 7 donne 11 reste 6. Comme ces nombres sont inférieurs à 100 et que 11 × 11 = 121 dépasse 100, tester 2, 3, 5 et 7 suffit. Étape 4 — Conclure : 73, 79 et 83 sont premiers ; 75 et 81 sont impairs mais composés.",
+                  "answers": [
+                    {
+                      "content": "Le cageot 73",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cageot 79",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cageot 83",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cageot 75",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cageot 81",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de nombres premiers compris entre 60 et 80 (60 et 80 exclus) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les entiers de 61 à 79. Étape 2 — Entourer les nombres qui restent après avoir barré les multiples de 2, 3, 5 et 7. Étape 3 — Barrer : tous les pairs, 63, 69, 75, 77 et 65 ; 63 = 3 × 21, 69 = 3 × 23, 75 = 3 × 25, 77 = 7 × 11, 65 = 5 × 13. Étape 4 — Recommencer avec 7, le dernier nombre à tester. Étape 5 — Conclure : il reste 61, 67, 71, 73, 79, soit 5 nombres premiers.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le plus grand nombre premier inférieur à 40 est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire les entiers de 39 vers le bas : 39, 38, 37. Étape 2 — Entourer le premier non barré. Étape 3 — Barrer : 39 = 3 × 13 est multiple de 3, 38 est pair. Étape 4 — Recommencer : 37 n'est divisible ni par 2, 3, 5, ni par 7 (37 ÷ 7 donne 5 reste 2). Étape 5 — Conclure : le plus grand nombre premier inférieur à 40 est 37.",
+                  "answers": [
+                    {
+                      "content": "37",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 119 est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : 119 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 119 se termine par 9, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 11, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 119 ÷ 7 = 17 sans reste, donc 7 divise 119 : 119 = 7 × 17. Étape 4 — Conclure : 119 a au moins un diviseur autre que 1 et lui-même (7), donc 119 n'est pas premier ; il est composé. Il est impair et ne finit ni par 0 ni par 5, mais il est divisible par 7 : il est composé. Le croire premier est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "composé",
+                      "correct": true
+                    },
+                    {
+                      "content": "premier",
+                      "correct": false
+                    },
+                    {
+                      "content": "ni premier ni composé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam veut un lot dont le nombre de sachets ne peut pas être partagé en paquets égaux (au moins 2 paquets de plus d'un sachet). Quel lot choisit-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : on cherche un nombre premier. Étape 2 — Tester 2, 3 et 5 : 69 (6 + 9 = 15) et 63 (6 + 3 = 9) sont dans la table de 3, 65 finit par 5. Étape 3 — Diviser 67 par 7 : quotient 9 reste 4, puis 67 ÷ 11 : quotient 6 reste 1, et 6 est plus petit que 11, on s'arrête. Étape 4 — Conclure : 67 est premier, il ne se partage pas. Les trois autres sont impairs mais composés.",
+                  "answers": [
+                    {
+                      "content": "Le lot de 67 sachets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot de 69 sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot de 63 sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot de 65 sachets",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "La commerçante a 200 sachets de piment et veut les répartir. Elle décompose 200 en facteurs premiers (nombre donné à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Divise 200 par 2 jusqu'à ne plus pouvoir, puis par 5.",
+              "questions": [
+                {
+                  "content": "Quelle est la décomposition de 200 en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 200 est 2. Étape 2 — Diviser : 200 ÷ 2 = 100. Étape 3 — Recommencer avec le quotient : 100 ÷ 2 = 50 ; 50 ÷ 2 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 200 = 2 × 2 × 2 × 5 × 5 = $2^3 \\times 5^2$. Vérifier : 8 × 25 = 200. La réponse $2^2 \\times 5^3$ vaut 500 (les exposants sont échangés) ; $2^3 \\times 5$ vaut 40 ; $20 \\times 10$ vaut 200 mais 20 et 10 ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "$2^3 \\times 5^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2^2 \\times 5^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^3 \\times 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20 \\times 10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 250 = 2 × 5 × 5 × ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 250 est 2. Étape 2 — Diviser : 250 ÷ 2 = 125. Étape 3 — Recommencer avec le quotient : 125 ÷ 5 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 250 = 2 × 5 × 5 × 5 = $2 \\times 5^3$. Vérifier : 2 × 125 = 250. Le facteur qui manque est 5, car 2 × 5 × 5 × 5 = 250 : le facteur 5 apparaît trois fois.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de facteurs premiers différents a le nombre 200 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 200 est 2. Étape 2 — Diviser : 200 ÷ 2 = 100. Étape 3 — Recommencer avec le quotient : 100 ÷ 2 = 50 ; 50 ÷ 2 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 200 = 2 × 2 × 2 × 5 × 5 = $2^3 \\times 5^2$. Vérifier : 8 × 25 = 200. Les facteurs premiers différents sont 2 et 5, soit 2 facteurs. Compter 5 (2, 2, 2, 5, 5) compterait les répétitions.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : dans la décomposition de 200 en facteurs premiers, le facteur 2 apparaît exactement trois fois.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 200 est 2. Étape 2 — Diviser : 200 ÷ 2 = 100. Étape 3 — Recommencer avec le quotient : 100 ÷ 2 = 50 ; 50 ÷ 2 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 200 = 2 × 2 × 2 × 5 × 5 = $2^3 \\times 5^2$. Vérifier : 8 × 25 = 200. Le facteur 2 apparaît trois fois dans 2 × 2 × 2 × 5 × 5. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels nombres premiers divisent 200 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 200 est 2. Étape 2 — Diviser : 200 ÷ 2 = 100. Étape 3 — Recommencer avec le quotient : 100 ÷ 2 = 50 ; 50 ÷ 2 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 200 = 2 × 2 × 2 × 5 × 5 = $2^3 \\times 5^2$. Vérifier : 8 × 25 = 200. Les nombres premiers qui divisent 200 sont 2 et 5. Les nombres 4, 10 et 20 divisent aussi 200 mais ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier qu'un nombre est composé ou premier avec un diviseur ; juger des affirmations avec un contre-exemple ; comparer des décompositions en facteurs premiers ; compter des rangements possibles.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour montrer qu'un nombre n'est pas premier, il suffit de trouver un diviseur autre que 1 et lui-même. Tu justifies ainsi la nature de plusieurs nombres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche un diviseur autre que 1 et le nombre : 2, 3, 5, 7, 11, 13… jusqu'à un quotient plus petit que le diviseur.",
+              "questions": [
+                {
+                  "content": "Quelle justification montre que 133 n'est pas un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 133 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 133 se termine par 3, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 7, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 133 ÷ 7 = 19 sans reste, donc 7 divise 133 : 133 = 7 × 19. Étape 4 — Conclure : 133 a au moins un diviseur autre que 1 et lui-même (7), donc 133 n'est pas premier ; il est composé. Seule l'égalité 133 = 7 × 19 prouve que 133 est composé. Être impair, finir par 3 ou ne pas être dans la table de 5 ne prouve rien : 13, 23 et 43 aussi sont dans ces cas et sont premiers.",
+                  "answers": [
+                    {
+                      "content": "133 = 7 × 19, donc 7 divise 133",
+                      "correct": true
+                    },
+                    {
+                      "content": "133 est impair",
+                      "correct": false
+                    },
+                    {
+                      "content": "133 finit par 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "133 n'est pas dans la table de 5",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 111 est un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : 111 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 111 est impair ; la somme de ses chiffres est 3, qui est dans la table de 3, donc 3 le divise : 111 = 3 × 37. Étape 3 — Diviser : un diviseur autre que 1 et le nombre lui-même est déjà trouvé, inutile de continuer. Étape 4 — Conclure : 111 a au moins un diviseur autre que 1 et lui-même (3), donc 111 n'est pas premier ; il est composé. On le justifie par 111 = 3 × 37. Il ressemble à un nombre premier parce qu'il est impair et finit par 1, mais 1 + 1 + 1 = 3 est dans la table de 3.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit diviseur de 169 différent de 1 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 169 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 169 se termine par 9, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 16, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 169 ÷ 7 : quotient 24, reste 1 ; 169 ÷ 11 : quotient 15, reste 4 ; 169 ÷ 13 = 13 sans reste, donc 13 divise 169 : 169 = 13 × 13. Étape 4 — Conclure : 169 a au moins un diviseur autre que 1 et lui-même (13), donc 169 n'est pas premier ; il est composé. Le plus petit diviseur de 169 autre que 1 est donc 13, car 169 = 13 × 13.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 187 = 11 × ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : 187 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 187 se termine par 7, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 16, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 187 ÷ 7 : quotient 26, reste 5 ; 187 ÷ 11 = 17 sans reste, donc 11 divise 187 : 187 = 11 × 17. Étape 4 — Conclure : 187 a au moins un diviseur autre que 1 et lui-même (11), donc 187 n'est pas premier ; il est composé. Le quotient de 187 par 11 est 17, car 11 × 17 = 187. Il manque donc le facteur 17.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi 119, 133, 143 et 149, lequel est un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 149 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 149 se termine par 9, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 14, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 149 ÷ 7 : quotient 21, reste 2 ; 149 ÷ 11 : quotient 13, reste 6 ; 149 ÷ 13 : quotient 11, reste 6 ; le quotient 11 est plus petit que 13, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 149, donc 149 est premier. Les trois autres sont composés : 119 = 7 × 17, 133 = 7 × 19 et 143 = 11 × 13. Ils sont impairs, mais cela ne prouve pas qu'ils sont premiers.",
+                  "answers": [
+                    {
+                      "content": "149",
+                      "correct": true
+                    },
+                    {
+                      "content": "119",
+                      "correct": false
+                    },
+                    {
+                      "content": "133",
+                      "correct": false
+                    },
+                    {
+                      "content": "143",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu raisonnes sur les propriétés des nombres premiers et tu justifies chaque réponse par un exemple ou un contre-exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un seul contre-exemple suffit pour montrer qu'une affirmation est fausse.",
+              "questions": [
+                {
+                  "content": "Vrai ou faux : le produit de deux nombres premiers est un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : on cherche un contre-exemple avec deux nombres premiers. Étape 2 — Tester avec 3 et 5, qui sont premiers : 3 × 5 = 15. Étape 3 — Diviser : 15 est divisible par 3 et par 5, il a quatre diviseurs (1, 3, 5, 15). Étape 4 — Conclure : le produit n'est pas premier, l'affirmation est fausse. Un produit de deux nombres plus grands que 1 a toujours au moins ces deux nombres pour diviseurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si un nombre est impair, alors il est premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : on cherche un contre-exemple impair. Étape 2 — Tester 9 : il est impair et 9 = 3 × 3. Étape 3 — Diviser : 9 a trois diviseurs, 1, 3 et 9. Étape 4 — Conclure : 9 est impair mais pas premier, donc l'affirmation est fausse. 15, 21 et 91 sont d'autres contre-exemples.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : on contrôle chaque affirmation avec la définition. Étape 2 — Tester : 2 a deux diviseurs, 1 et 2, donc il est premier ; la définition d'un nombre premier est bien « deux diviseurs ». Étape 3 — Diviser : 1 n'a qu'un seul diviseur, 9 est impair et composé, et 2 est pair et premier. Étape 4 — Conclure : seules « Le nombre 2 est premier » et « Un nombre premier a exactement deux diviseurs » sont vraies.",
+                  "answers": [
+                    {
+                      "content": "Le nombre 2 est premier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nombre premier a exactement deux diviseurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre 1 est premier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout nombre impair est premier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout nombre pair est composé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la somme de tous les nombres premiers inférieurs à 10 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les entiers de 2 à 9. Étape 2 — Entourer 2 et barrer 4, 6, 8. Étape 3 — Barrer 9, multiple de 3. Étape 4 — Recommencer : le suivant est 5 et 5 × 5 = 25 dépasse 9, on s'arrête. Étape 5 — Conclure : les nombres premiers sont 2, 3, 5 et 7, et leur somme est 2 + 3 + 5 + 7 = 17. Ajouter 1 donnerait 18, une erreur car 1 n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que 210 = 2 × 3 × 5 × 7. Combien de nombres premiers différents divisent 210 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : on lit la décomposition donnée, 210 = 2 × 3 × 5 × 7. Étape 2 — Diviser : chaque facteur divise 210, par exemple 210 ÷ 7 = 30. Étape 3 — Recommencer : 2, 3, 5 et 7 sont tous premiers et tous différents. Étape 4 — Conclure : 4 nombres premiers différents divisent 210. Vérifier : 2 × 3 = 6, 6 × 5 = 30 et 30 × 7 = 210.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les phrases d'une justification montrant que 133 n'est pas premier.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier : 133 est supérieur ou égal à 2 et impair, donc 2 ne le divise pas. Étape 2 — Tester 3 et 5 : 1 + 3 + 3 = 7 n'est pas dans la table de 3, 133 ne finit pas par 0 ou 5. Étape 3 — Diviser par 7 : 133 ÷ 7 = 19 sans reste. Étape 4 — Conclure : 133 = 7 × 19, donc 133 est composé. Dans une justification, la conclusion vient en dernier : on ne l'écrit pas avant d'avoir trouvé le diviseur.",
+                  "answers": [
+                    {
+                      "content": "133 est impair, donc 2 ne le divise pas"
+                    },
+                    {
+                      "content": "1 + 3 + 3 = 7 n'est pas dans la table de 3 et 133 ne finit pas par 0 ou 5"
+                    },
+                    {
+                      "content": "133 ÷ 7 = 19 sans reste"
+                    },
+                    {
+                      "content": "133 = 7 × 19, donc 133 est composé"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu raisonnes avec les décompositions en facteurs premiers de plusieurs nombres (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Décompose chaque nombre avec la méthode, puis compare les facteurs.",
+              "questions": [
+                {
+                  "content": "Quels facteurs premiers sont communs aux décompositions de 84 et de 90 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher le plus petit nombre premier de chaque nombre : 2 pour 84 et pour 90. Étape 2 — Diviser : 84 ÷ 2 = 42 et 90 ÷ 2 = 45. Étape 3 — Recommencer : 42 ÷ 2 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1, donc 84 = 2 × 2 × 3 × 7 ; 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1, donc 90 = 2 × 3 × 3 × 5. Étape 4 — Écrire et comparer : les deux contiennent 2 et 3 ; 7 est seulement dans 84 et 5 seulement dans 90.",
+                  "answers": [
+                    {
+                      "content": "2 et 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "2, 3 et 5",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Décompose 1 000 en produit de facteurs premiers. Combien de facteurs 5 y a-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 1000 est 2. Étape 2 — Diviser : 1000 ÷ 2 = 500. Étape 3 — Recommencer avec le quotient : 500 ÷ 2 = 250 ; 250 ÷ 2 = 125 ; 125 ÷ 5 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 1000 = 2 × 2 × 2 × 5 × 5 × 5 = $2^3 \\times 5^3$. Vérifier : 8 × 125 = 1000. Il y a trois facteurs 5 dans 1 000 = 2 × 2 × 2 × 5 × 5 × 5. Répondre 2 ou 10 viendrait d'une erreur de division.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 144 = 12 × 12, donc la décomposition de 144 en facteurs premiers est 12 × 12.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 144 est 2. Étape 2 — Diviser : 144 ÷ 2 = 72. Étape 3 — Recommencer avec le quotient : 72 ÷ 2 = 36 ; 36 ÷ 2 = 18 ; 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 144 = 2 × 2 × 2 × 2 × 3 × 3 = $2^4 \\times 3^2$. Vérifier : 16 × 9 = 144. L'écriture 12 × 12 vaut bien 144 mais 12 n'est pas premier (12 = 2 × 2 × 3). La bonne décomposition est 2 × 2 × 2 × 2 × 3 × 3, d'où l'affirmation fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la décomposition de 144 en produit de facteurs premiers, le facteur 3 apparaît ___ fois.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 144 est 2. Étape 2 — Diviser : 144 ÷ 2 = 72. Étape 3 — Recommencer avec le quotient : 72 ÷ 2 = 36 ; 36 ÷ 2 = 18 ; 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 144 = 2 × 2 × 2 × 2 × 3 × 3 = $2^4 \\times 3^2$. Vérifier : 16 × 9 = 144. On lit 144 = 2 × 2 × 2 × 2 × 3 × 3 : le facteur 3 apparaît deux fois.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "deux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures sont des décompositions de 162 en produit de facteurs premiers ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 162 est 2. Étape 2 — Diviser : 162 ÷ 2 = 81. Étape 3 — Recommencer avec le quotient : 81 ÷ 3 = 27 ; 27 ÷ 3 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 162 = 2 × 3 × 3 × 3 × 3 = $2 \\times 3^4$. Vérifier : 2 × 81 = 162. L'écriture $2 \\times 9^2$ vaut 162 mais contient 9, non premier ; $6 \\times 27$ contient 6 et 27, non premiers ; $2^2 \\times 3^4$ vaut 324.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 3^4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 × 3 × 3 × 3 × 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 9^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6 \\times 27$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^2 \\times 3^4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Awa range ses mangues en rangées égales : il faut au moins 2 rangées et au moins 2 mangues par rangée (nombres donnés à titre d'exemple). Tu comptes les rangements possibles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un rangement en rangées égales correspond à un diviseur autre que 1 et le nombre.",
+              "questions": [
+                {
+                  "content": "Combien de nombres de rangées différents Awa peut-elle choisir pour ranger 36 mangues ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : un nombre de rangées correspond à un diviseur de 36 autre que 1 et 36. Étape 2 — Diviser : on essaie 2, 3, 4, 5, 6 dans l'ordre : 36 ÷ 2 = 18, 36 ÷ 3 = 12, 36 ÷ 4 = 9, 36 ÷ 5 donne 7 reste 1 (pas de rangement), 36 ÷ 6 = 6. Étape 3 — Recommencer avec les quotients : 18, 12 et 9 sont eux aussi des nombres de rangées possibles, car 36 = 2 × 18 = 3 × 12 = 4 × 9. Étape 4 — Écrire : les diviseurs autres que 1 et 36 sont 2, 3, 4, 6, 9, 12 et 18, soit 7 nombres de rangées. Répondre 9 compterait aussi 1 et 36.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de nombres de rangées différents Awa peut-elle choisir pour ranger 37 mangues ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : 37 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 37 se termine par 7, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 10, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 37 ÷ 7 : quotient 5, reste 2 ; le quotient 5 est plus petit que 7, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 37, donc 37 est premier. Les seuls diviseurs de 37 sont 1 et 37, donc aucun nombre de rangées ne convient : la réponse est 0.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa veut le plus petit nombre de mangues supérieur à 40 qui ne peut pas être rangé en plusieurs rangées égales. Quel est-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : on cherche le plus petit nombre premier supérieur à 40. Étape 2 — Tester 2, 3 et 5 : 42 est pair, 45 finit par 5 ; 41 est impair, 4 + 1 = 5 n'est pas dans la table de 3 et il ne finit pas par 0 ou 5. Étape 3 — Diviser 41 par 7 : quotient 5 reste 6, et 5 est plus petit que 7, on s'arrête. Étape 4 — Conclure : 41 est premier. 43 est aussi premier mais il est plus grand que 41, donc ce n'est pas le plus petit.",
+                  "answers": [
+                    {
+                      "content": "41",
+                      "correct": true
+                    },
+                    {
+                      "content": "42",
+                      "correct": false
+                    },
+                    {
+                      "content": "43",
+                      "correct": false
+                    },
+                    {
+                      "content": "45",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si Awa a un nombre premier de mangues, elle ne peut faire aucun rangement qui respecte la règle de l'énoncé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : un nombre premier a exactement deux diviseurs. Étape 2 — Tester : ses diviseurs sont 1 et lui-même. Étape 3 — Diviser : un nombre de rangées égales est un diviseur. Étape 4 — Conclure : les seuls rangements sont 1 rangée de toutes les mangues ou autant de rangées que de mangues, avec une mangue par rangée, et aucun des deux ne respecte la règle (au moins 2 rangées et au moins 2 mangues par rangée). L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi dit : « Avec 51 mangues, on ne peut pas faire de rangées égales, car 51 est impair. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 51 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 51 est impair ; la somme de ses chiffres est 6, qui est dans la table de 3, donc 3 le divise : 51 = 3 × 17. Étape 3 — Diviser : un diviseur autre que 1 et le nombre lui-même est déjà trouvé, inutile de continuer. Étape 4 — Conclure : 51 a au moins un diviseur autre que 1 et lui-même (3), donc 51 n'est pas premier ; il est composé. Koffi confond impair et premier. Avec 51 = 3 × 17, on range 17 rangées de 3 mangues ou 3 rangées de 17 mangues.",
+                  "answers": [
+                    {
+                      "content": "Il a tort : 51 = 3 × 17, donc 17 rangées de 3 ou 3 rangées de 17",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison : un nombre impair ne se range pas en rangées égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a tort : 51 est pair",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison : 51 est un nombre premier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : reconnaître un nombre premier ; utiliser la liste des nombres premiers inférieurs à 100 et le crible ; décomposer un nombre en produit de facteurs premiers ; résoudre des situations de marché.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Bilan sur les nombres premiers : reconnaître, compter et utiliser la liste (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Teste 2, 3 et 5, puis 7 et 11, et utilise la liste des nombres premiers inférieurs à 100.",
+              "questions": [
+                {
+                  "content": "Parmi 67, 87, 91 et 93, lequel est un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : tous sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 87 (8 + 7 = 15) et 93 (9 + 3 = 12) sont dans la table de 3 ; 67 ne finit ni par un chiffre pair, ni par 0 ou 5, et 6 + 7 = 13 n'est pas dans la table de 3. Étape 3 — Diviser : 91 = 7 × 13 ; 67 ÷ 7 donne 9 reste 4, puis 67 ÷ 11 donne 6 reste 1 avec 6 plus petit que 11, on s'arrête. Étape 4 — Conclure : 67 est premier, les trois autres sont composés.",
+                  "answers": [
+                    {
+                      "content": "67",
+                      "correct": true
+                    },
+                    {
+                      "content": "87",
+                      "correct": false
+                    },
+                    {
+                      "content": "91",
+                      "correct": false
+                    },
+                    {
+                      "content": "93",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi 13, 43, 63, 83 et 93, quels sont les trois nombres premiers ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Vérifier : tous sont supérieurs ou égaux à 2. Étape 2 — Tester 2, 3 et 5 : 63 (6 + 3 = 9) et 93 (9 + 3 = 12) sont dans la table de 3. Étape 3 — Diviser par 7 : 13 ÷ 7 donne 1, 43 ÷ 7 donne 6 reste 1 et 83 ÷ 7 donne 11 reste 6. Comme ces nombres sont inférieurs à 100 et que 11 × 11 = 121 dépasse 100, tester 2, 3, 5 et 7 suffit. Étape 4 — Conclure : 13, 43 et 83 sont premiers ; 63 et 93 sont impairs mais composés.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    },
+                    {
+                      "content": "43",
+                      "correct": true
+                    },
+                    {
+                      "content": "83",
+                      "correct": true
+                    },
+                    {
+                      "content": "63",
+                      "correct": false
+                    },
+                    {
+                      "content": "93",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de nombres premiers sont compris entre 30 et 50 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les entiers de 31 à 49. Étape 2 — Entourer les nombres qui restent après avoir barré les multiples de 2, 3, 5 et 7. Étape 3 — Barrer : les pairs, 33, 39, 45 (table de 3), 35, 49 (7 × 7). Étape 4 — Recommencer : 7 est le dernier nombre à tester. Étape 5 — Conclure : il reste 31, 37, 41, 43, 47, soit 5 nombres premiers.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : 0 est un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : un nombre premier est un entier supérieur ou égal à 2 qui a exactement deux diviseurs. Étape 2 — Tester : 0 est inférieur à 2, et tout nombre divise 0, donc 0 a une infinité de diviseurs. Étape 3 — Comparer : il en faudrait exactement deux. Étape 4 — Conclure : 0 n'est pas premier, l'affirmation est fausse. Comme 1, le nombre 0 est écarté dès la première vérification.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque nombre à son plus petit facteur premier.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Chercher le plus petit nombre premier qui divise chaque nombre. Étape 2 — Tester 2, 3 et 5 : 62 est pair (2) ; 5 + 7 = 12 est dans la table de 3, donc 57 = 3 × 19 (3) ; 55 finit par 5 (5). Étape 3 — Diviser par 7 : 77 = 7 × 11 (7) ; 143 n'est divisible ni par 2, 3, 5 ni par 7, mais 143 ÷ 11 = 13 (11). Étape 4 — Conclure avec les couples 62 et 2, 57 et 3, 55 et 5, 77 et 7, 143 et 11.",
+                  "answers": [
+                    {
+                      "content": "62",
+                      "match": "2"
+                    },
+                    {
+                      "content": "57",
+                      "match": "3"
+                    },
+                    {
+                      "content": "55",
+                      "match": "5"
+                    },
+                    {
+                      "content": "77",
+                      "match": "7"
+                    },
+                    {
+                      "content": "143",
+                      "match": "11"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Bilan sur la décomposition en facteurs premiers de 252 et d'autres nombres (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Divise 252 par 2, puis par 3, jusqu'à obtenir 1, et vérifie par la multiplication.",
+              "questions": [
+                {
+                  "content": "Quelle est la décomposition de 252 en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 252 est 2. Étape 2 — Diviser : 252 ÷ 2 = 126. Étape 3 — Recommencer avec le quotient : 126 ÷ 2 = 63 ; 63 ÷ 3 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 252 = 2 × 2 × 3 × 3 × 7 = $2^2 \\times 3^2 \\times 7$. Vérifier : 4 × 9 × 7 = 252. Les écritures $4 \\times 9 \\times 7$, $2 \\times 3 \\times 42$ et $2^2 \\times 3 \\times 21$ valent toutes 252, mais elles contiennent 4, 9, 42 ou 21, qui ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "$2^2 \\times 3^2 \\times 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4 \\times 9 \\times 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 42$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^2 \\times 3 \\times 21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de fois le facteur 3 apparaît-il dans la décomposition de 252 en facteurs premiers ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 252 est 2. Étape 2 — Diviser : 252 ÷ 2 = 126. Étape 3 — Recommencer avec le quotient : 126 ÷ 2 = 63 ; 63 ÷ 3 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 252 = 2 × 2 × 3 × 3 × 7 = $2^2 \\times 3^2 \\times 7$. Vérifier : 4 × 9 × 7 = 252. Le facteur 3 apparaît deux fois, c'est le 3 au carré de l'écriture. Répondre 1 oublierait la division 63 ÷ 3 = 21 suivie de 21 ÷ 3 = 7.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 308 = 2 × 2 × 7 × ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 308 est 2. Étape 2 — Diviser : 308 ÷ 2 = 154. Étape 3 — Recommencer avec le quotient : 154 ÷ 2 = 77 ; 77 ÷ 7 = 11 ; 11 ÷ 11 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 308 = 2 × 2 × 7 × 11 = $2^2 \\times 7 \\times 11$. Vérifier : 4 × 7 × 11 = 308. Le facteur qui manque est 11, car 4 × 7 × 11 = 308.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : la décomposition de 252 en facteurs premiers contient le facteur 5.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 252 est 2. Étape 2 — Diviser : 252 ÷ 2 = 126. Étape 3 — Recommencer avec le quotient : 126 ÷ 2 = 63 ; 63 ÷ 3 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 252 = 2 × 2 × 3 × 3 × 7 = $2^2 \\times 3^2 \\times 7$. Vérifier : 4 × 9 × 7 = 252. Les facteurs premiers de 252 sont 2, 3 et 7. Le facteur 5 n'y figure pas : 252 ne finit pas par 0 ou 5, donc 5 ne le divise pas. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque décomposition au nombre qu'elle représente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Chercher la valeur de chaque puissance : $2^2 = 4$, $3^2 = 9$, $2^3 = 8$. Étape 2 — Diviser n'est pas nécessaire : on multiplie les facteurs. Étape 3 — Calculer : $4 \\times 5 = 20$, $9 \\times 7 = 63$, $2 \\times 3 \\times 7 = 42$, $8 \\times 7 = 56$, $2 \\times 9 \\times 5 = 90$. Étape 4 — Écrire les couples et vérifier en décomposant : 90 ÷ 2 = 45, puis 45 ÷ 3 = 15, 15 ÷ 3 = 5. Ne pas confondre $2^3$ avec $2 \\times 3$.",
+                  "answers": [
+                    {
+                      "content": "$2^2 \\times 5$",
+                      "match": "20"
+                    },
+                    {
+                      "content": "$3^2 \\times 7$",
+                      "match": "63"
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 7$",
+                      "match": "42"
+                    },
+                    {
+                      "content": "$2^3 \\times 7$",
+                      "match": "56"
+                    },
+                    {
+                      "content": "$2 \\times 3^2 \\times 5$",
+                      "match": "90"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Mme Awa, Koffi et Mariam utilisent les nombres premiers pour répartir leurs marchandises (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un partage en paquets égaux existe quand le nombre a un diviseur autre que 1 et lui-même.",
+              "questions": [
+                {
+                  "content": "Mme Awa range 85 ananas en rangées égales, avec au moins 2 rangées et au moins 2 ananas par rangée. Quel est le plus petit nombre de rangées possible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 85 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 85 se termine par 5, donc 5 le divise : 85 = 5 × 17. Étape 3 — Diviser : un diviseur autre que 1 et le nombre lui-même est déjà trouvé, inutile de continuer. Étape 4 — Conclure : 85 a au moins un diviseur autre que 1 et lui-même (5), donc 85 n'est pas premier ; il est composé. Le plus petit diviseur de 85 est 5 : 85 ÷ 5 = 17, donc 5 rangées de 17 ananas. Avec 2 ou 3 rangées il resterait des ananas.",
+                  "answers": [
+                    {
+                      "content": "5 rangées de 17 ananas",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 rangées de 42 ananas",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 rangées de 28 ananas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun rangement n'est possible",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi a 210 sachets. Quel est le plus grand facteur premier de 210 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 210 est 2. Étape 2 — Diviser : 210 ÷ 2 = 105. Étape 3 — Recommencer avec le quotient : 105 ÷ 3 = 35 ; 35 ÷ 5 = 7 ; 7 ÷ 7 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 210 = 2 × 3 × 5 × 7 = $2 \\times 3 \\times 5 \\times 7$. Vérifier : 2 × 3 × 5 × 7 = 210. Les facteurs premiers de 210 sont 2, 3, 5 et 7. Le plus grand est 7.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : Mariam peut partager 97 sachets en paquets égaux de plus d'un sachet, en faisant au moins deux paquets.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : 97 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 97 se termine par 7, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 16, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 97 ÷ 7 : quotient 13, reste 6 ; 97 ÷ 11 : quotient 8, reste 9 ; le quotient 8 est plus petit que 11, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 97, donc 97 est premier. Comme 97 est premier, ses seuls diviseurs sont 1 et 97 : aucun partage en paquets égaux n'est possible. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels lots peuvent se partager en paquets égaux (au moins 2 paquets de plus d'un sachet) ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : on cherche les nombres composés. Étape 2 — Tester 2, 3 et 5 : aucun ne divise 91 ni 77 (9 + 1 = 10 et 7 + 7 = 14 ne sont pas dans la table de 3). Étape 3 — Diviser par 7 : 91 = 7 × 13 et 77 = 7 × 11 ; en revanche 89 ÷ 7 donne 12 reste 5, 83 ÷ 7 donne 11 reste 6 et 79 ÷ 7 donne 11 reste 2. Comme ces nombres sont inférieurs à 100 et que 11 × 11 = 121 dépasse 100, tester 2, 3, 5 et 7 suffit. Étape 4 — Conclure : 91 et 77 sont composés, donc ils se partagent ; 89, 83 et 79 sont premiers.",
+                  "answers": [
+                    {
+                      "content": "Le lot de 91 sachets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot de 77 sachets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lot de 89 sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot de 83 sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lot de 79 sachets",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : 209 = 11 × ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : 209 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 209 se termine par 9, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 11, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 209 ÷ 7 : quotient 29, reste 6 ; 209 ÷ 11 = 19 sans reste, donc 11 divise 209 : 209 = 11 × 19. Étape 4 — Conclure : 209 a au moins un diviseur autre que 1 et lui-même (11), donc 209 n'est pas premier ; il est composé. Le quotient de 209 par 11 est 19, car 11 × 19 = 209.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan de fin de trimestre : tu mobilises toutes les notions de la leçon (nombres donnés à titre d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Applique les trois méthodes de la leçon : tester les diviseurs, utiliser la liste et décomposer.",
+              "questions": [
+                {
+                  "content": "Quelle est la décomposition de 300 en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 300 est 2. Étape 2 — Diviser : 300 ÷ 2 = 150. Étape 3 — Recommencer avec le quotient : 150 ÷ 2 = 75 ; 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 300 = 2 × 2 × 3 × 5 × 5 = $2^2 \\times 3 \\times 5^2$. Vérifier : 4 × 3 × 25 = 300. La réponse $2^2 \\times 3 \\times 5$ vaut 60 : on a oublié un facteur 5. Les écritures $3 \\times 100$ et $2 \\times 3 \\times 50$ valent 300 mais contiennent 100 et 50, qui ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "$2^2 \\times 3 \\times 5^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2^2 \\times 3 \\times 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 100$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 50$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de nombres premiers différents divisent 300 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : le plus petit nombre premier qui divise 300 est 2. Étape 2 — Diviser : 300 ÷ 2 = 150. Étape 3 — Recommencer avec le quotient : 150 ÷ 2 = 75 ; 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1. On arrive au quotient 1 : on s'arrête. Étape 4 — Écrire : 300 = 2 × 2 × 3 × 5 × 5 = $2^2 \\times 3 \\times 5^2$. Vérifier : 4 × 3 × 25 = 300. Les nombres premiers différents qui divisent 300 sont 2, 3 et 5, soit 3.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 223 est-il un nombre premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : 223 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 223 se termine par 3, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 7, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 223 ÷ 7 : quotient 31, reste 6 ; 223 ÷ 11 : quotient 20, reste 3 ; 223 ÷ 13 : quotient 17, reste 2 ; 223 ÷ 17 : quotient 13, reste 2 ; le quotient 13 est plus petit que 17, on s'arrête. Étape 4 — Conclure : aucun nombre premier testé ne divise 223, donc 223 est premier. La conclusion est valable parce qu'on a testé jusqu'à 17 : le quotient 13 est alors plus petit que 17. L'égalité 7 × 32 = 224 est fausse pour 223, la somme 2 + 2 + 3 = 7 n'est pas dans la table de 3, et un nombre premier peut dépasser 100.",
+                  "answers": [
+                    {
+                      "content": "Oui, car aucun nombre premier testé ne le divise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car 223 = 7 × 32",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car 223 est divisible par 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car il est plus grand que 100",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le plus petit nombre premier qui divise 187 est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : 187 est supérieur ou égal à 2, on peut le tester. Étape 2 — Tester 2, 3 et 5 : 187 se termine par 7, il n'est donc ni pair ni dans la table de 5 ; la somme de ses chiffres est 16, qui n'est pas dans la table de 3. Aucun des trois ne le divise. Étape 3 — Diviser par les nombres premiers suivants : 187 ÷ 7 : quotient 26, reste 5 ; 187 ÷ 11 = 17 sans reste, donc 11 divise 187 : 187 = 11 × 17. Étape 4 — Conclure : 187 a au moins un diviseur autre que 1 et lui-même (11), donc 187 n'est pas premier ; il est composé. Le plus petit nombre premier qui divise 187 est 11, et 187 = 11 × 17.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si un nombre est divisible par 6, alors il n'est pas premier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : on prend un nombre divisible par 6, par exemple 6 × k avec k au moins égal à 1. Étape 2 — Tester : ce nombre est divisible par 2, par 3 et par 6, en plus de 1 et de lui-même. Étape 3 — Diviser : 6 = 2 × 3, donc tout multiple de 6 est divisible par 2 et par 3. Étape 4 — Conclure : il a au moins trois diviseurs, il n'est pas premier. Exemples : 12, 18 et 30 sont composés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

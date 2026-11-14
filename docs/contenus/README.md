@@ -8,7 +8,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 10 de 5ème (les 5 premières en Maths et en Physique-Chimie, chantier `lecons-5eme`), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
 | [`a-reprendre/`](a-reprendre/) | Les 275 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
@@ -28,7 +28,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `3eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `3eme/`, `5eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
 
 ## Boucle courte : corriger une leçon
 
@@ -450,6 +450,25 @@ Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le mê
 - **SVT** : les valeurs énergétiques 17 / 17 / 38 kJ par gramme, les tests de Fehling et du biuret, les noms d'enzymes et leurs conditions d'action, la fibrine, la phagocytose et la coagulation.
 - **Histoire-Géographie** : les « atouts institutionnels » (OHADA, BCEAO, code des investissements), et les dates de la leçon sur l'indépendance (loi-cadre de 1956, référendum de 1958, indépendance du 7 août 1960, présidence fin 1960). L'AOF et les traités de protectorat sont cités sans date.
 - **EDHC** : aucun article de loi, aucune date, aucun numéro d'urgence. Les noms des conventions et chartes citées (femmes, personnes handicapées, enfant, Protocole de Maputo) sont écrits de mémoire, et la ratification par la Côte d'Ivoire n'est pas affirmée. La matière EDHC n'existe pas dans le référentiel : il faut la créer avant d'importer les 3 cours.
+
+### 5ème — `lecons-traitees/5eme/` (chantier `lecons-5eme`)
+
+Les 5 premières leçons de la progression DPFC 2026-2027 de 5ème en Mathématiques et en Physique-Chimie, rédigées le 2026-11-14 au format v3 complet, comme les leçons de 3ème : 4 blocs et 2 exercices par notion (le second de 6 questions de 4 types au moins), 4 problèmes, 4 sujets de devoir de 4 exercices. Langue et difficulté de 5ème : phrases courtes, petits nombres, aucune notion des leçons suivantes. Chaque leçon a eu un rédacteur puis un relecteur indépendant qui a refait chaque calcul avec sympy ; tous les défauts relevés sont corrigés. Un script hors dépôt passe `valider.rb` sur la leçon et sur chaque sujet, puis les règles du format complet. Les points qu'un enseignant doit valider sont dans [le journal du chantier](../chantiers/lecons-5eme/journal.md).
+
+| # | Fichier | Cours | Notions | Figures | Exercices | Questions |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `mathematiques/nombres-premiers.json` | Nombres premiers | 3 | 1 | 26 | 141 |
+| 2 | `mathematiques/segments.json` | Segments | 4 | 6 | 28 | 150 |
+| 3 | `mathematiques/angles.json` | Angles | 4 | 18 | 28 | 145 |
+| 4 | `mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 6 | 28 | 160 |
+| 5 | `mathematiques/figures-symetriques-par-rapport-a-une-droite.json` | Figures symétriques par rapport à une droite | 4 | 8 | 28 | 144 |
+| 1 | `physique-chimie/adaptation-d-un-generateur-a-un-recepteur.json` | Adaptation d'un générateur à un récepteur | 3 | 1 | 26 | 134 |
+| 2 | `physique-chimie/association-de-lampes-electriques.json` | Association de lampes électriques | 4 | 2 | 28 | 146 |
+| 3 | `physique-chimie/association-de-piles-en-serie.json` | Association de piles en série | 3 | 1 | 26 | 134 |
+| 4 | `physique-chimie/intensite-du-courant-electrique.json` | Intensité du courant électrique | 4 | 4 | 28 | 148 |
+| 5 | `physique-chimie/tension-electrique.json` | Tension électrique | 4 | 2 | 28 | 148 |
+
+Aucune sorte de figure ne dessine un schéma électrique : les circuits de Physique-Chimie sont décrits en mots, parfois avec un `diagram`.
 
 ### 3ème au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-3eme-comme-thales`, #484)
 

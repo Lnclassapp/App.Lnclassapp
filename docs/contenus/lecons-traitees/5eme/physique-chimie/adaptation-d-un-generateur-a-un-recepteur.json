@@ -1,0 +1,3103 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Adaptation d'un générateur à un récepteur",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Physique-Chimie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "comparaison-des-tensions",
+          "kind": "diagram",
+          "description": "Schéma en arbre : on compare la tension du générateur à la tension nominale de la lampe. Trois cas partent de la comparaison : tension égale, la lampe fonctionne normalement ; tension du générateur plus petite, éclat faible ; tension du générateur plus grande, éclat très fort et risque de griller.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "c",
+                "label": "Comparer les deux tensions"
+              },
+              {
+                "id": "eg",
+                "label": "Tensions égales",
+                "category": 1
+              },
+              {
+                "id": "pe",
+                "label": "Générateur plus petit",
+                "category": 2
+              },
+              {
+                "id": "gr",
+                "label": "Générateur plus grand",
+                "category": 3
+              },
+              {
+                "id": "r1",
+                "label": "Fonctionnement normal",
+                "category": 1
+              },
+              {
+                "id": "r2",
+                "label": "Éclat faible",
+                "category": 2
+              },
+              {
+                "id": "r3",
+                "label": "Éclat fort, risque de griller",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "c",
+                "to": "eg"
+              },
+              {
+                "from": "c",
+                "to": "pe"
+              },
+              {
+                "from": "c",
+                "to": "gr"
+              },
+              {
+                "from": "eg",
+                "to": "r1"
+              },
+              {
+                "from": "pe",
+                "to": "r2"
+              },
+              {
+                "from": "gr",
+                "to": "r3"
+              }
+            ],
+            "legend": [
+              "Lampe adaptée",
+              "Lampe sous-voltée",
+              "Lampe survoltée"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Lire les indications d'un générateur et d'une lampe",
+          "remember": "Un **générateur** (une pile, par exemple) fournit l'énergie électrique au circuit. Un **récepteur** (une lampe, une radio) utilise cette énergie. Ils portent des indications écrites : la **tension nominale**, en **volts** (symbole V), et, pour une lampe, l'**intensité nominale**, en **ampères** (symbole A). « Nominale » veut dire : la valeur pour laquelle l'appareil est prévu pour bien fonctionner. Exemples : une pile « 4,5 V » ; une lampe « 6 V ; 0,3 A ».",
+          "method": [
+            "Repérer l'appareil (générateur ou récepteur) et lire l'inscription portée sur lui.",
+            "Reconnaître la grandeur de chaque nombre grâce à son unité : le volt (V) pour la tension, l'ampère (A) pour l'intensité.",
+            "Écrire chaque indication complète : la grandeur, sa valeur et son unité (« tension nominale 6 V »)."
+          ],
+          "example": {
+            "statement": "Sur le culot d'une lampe de lampe torche, on lit « 6 V ; 0,3 A ». Que signifient ces deux indications ?",
+            "steps": [
+              "Repérer : la lampe est un récepteur ; l'inscription porte deux nombres, 6 et 0,3.",
+              "Reconnaître : 6 est suivi de V, le volt, donc c'est une tension ; 0,3 est suivi de A, l'ampère, donc c'est une intensité.",
+              "Écrire : la tension nominale de la lampe est 6 V et son intensité nominale est 0,3 A."
+            ]
+          },
+          "pitfall": "Ne confonds pas le volt et l'ampère, et ne te fie pas à la taille du nombre. Contre-exemple : sur une lampe « 6 V ; 0,3 A », le nombre 0,3 est petit mais c'est l'intensité en ampères, pas la tension. Une lampe « 0,3 V » n'existe pas ici : la tension nominale est 6 V. Regarde toujours l'unité qui suit le nombre avant de dire de quelle grandeur il s'agit.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à lire les indications portées par une pile et par une lampe.",
+            "questions": [
+              {
+                "content": "Une pile de radio porte l'inscription « 9 V ». Quelle est sa tension nominale, en volts ?",
+                "question_type": "numeric",
+                "unit": "V",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la pile est un générateur et son inscription est « 9 V ». Étape 2 — Reconnaître : le symbole V désigne le volt, donc 9 est une tension. Étape 3 — Écrire : la tension nominale de la pile est 9 V.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le symbole V signifie volt, l'unité de la tension."
+              },
+              {
+                "content": "Une lampe d'une guirlande porte « 3 V ; 0,2 A ». Que représente le nombre 0,2 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la lampe est un récepteur marqué « 3 V ; 0,2 A ». Étape 2 — Reconnaître : 0,2 est suivi de A, l'ampère : c'est une intensité. Étape 3 — Écrire : 0,2 A est l'intensité nominale de la lampe. La tension nominale est le nombre suivi de V, soit 3 V.",
+                "answers": [
+                  {
+                    "content": "Son intensité nominale, en ampères",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa tension nominale, en volts",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa puissance",
+                    "correct": false
+                  },
+                  {
+                    "content": "La tension de la pile à choisir",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde l'unité qui suit le nombre 0,2."
+              },
+              {
+                "content": "Relie chaque inscription à la grandeur qu'elle indique.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on a quatre inscriptions ou noms à classer. Étape 2 — Reconnaître : V indique une tension, A une intensité ; la pile fournit l'énergie, la lampe l'utilise. Étape 3 — Écrire : chaque inscription est reliée à sa grandeur, chaque appareil à son rôle.",
+                "answers": [
+                  {
+                    "content": "4,5 V",
+                    "match": "Une tension"
+                  },
+                  {
+                    "content": "0,25 A",
+                    "match": "Une intensité"
+                  },
+                  {
+                    "content": "Pile",
+                    "match": "Un générateur"
+                  },
+                  {
+                    "content": "Lampe",
+                    "match": "Un récepteur"
+                  }
+                ],
+                "hint": "Pense à l'unité de chaque nombre et au rôle de l'appareil."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire les inscriptions d'une pile et d'une lampe",
+              "statement": "Dans cet exercice, tu lis les inscriptions de piles et de lampes comme sur une lampe torche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur une pile ronde, on lit « 1,5 V ». Que signifie cette indication ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la pile est un générateur marqué « 1,5 V ». Étape 2 — Reconnaître : l'unité V est le volt : c'est une tension. Étape 3 — Écrire : tension nominale 1,5 V. Ce n'est pas une intensité : l'intensité se donne en ampères (A).",
+                  "answers": [
+                    {
+                      "content": "La tension nominale de la pile est 1,5 volt",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité de la pile est 1,5 ampère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile dure 1,5 heure",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile pèse 1,5 gramme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'inscription « 6 V ; 0,3 A » d'une lampe, le nombre 6 est une tension.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'inscription d'une lampe est « 6 V ; 0,3 A ». Étape 2 — Reconnaître : 6 est suivi de V : c'est une tension en volts. Étape 3 — Écrire : l'affirmation est vraie. Le nombre 0,3 est l'intensité, car il est suivi de A.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'unité de la tension électrique est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche l'unité qui accompagne la tension nominale. Étape 2 — Reconnaître : la tension se mesure en volts, de symbole V. Étape 3 — Écrire : l'unité de la tension est le volt (symbole V). L'ampère, lui, est l'unité de l'intensité.",
+                  "answers": [
+                    {
+                      "content": "volt",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une lampe, « 0,3 A » indique son ___ nominale.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : l'inscription est « 0,3 A ». Étape 2 — Reconnaître : A est le symbole de l'ampère, unité de l'intensité. Étape 3 — Écrire : c'est l'intensité nominale. Choisir « tension » serait confondre l'ampère et le volt.",
+                  "answers": [
+                    {
+                      "content": "intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "tension",
+                      "correct": false
+                    },
+                    {
+                      "content": "masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "couleur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une lampe torche et dans une radio à piles, choisis les deux récepteurs.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on classe quatre éléments d'un circuit. Étape 2 — Reconnaître : un récepteur utilise l'énergie électrique : la lampe et la radio. Étape 3 — Écrire : les récepteurs sont la lampe et la radio. La pile et la pile plate sont des générateurs : elles fournissent l'énergie.",
+                  "answers": [
+                    {
+                      "content": "La lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La radio",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile plate",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître tension et intensité sur des appareils de la maison",
+              "statement": "Dans cet exercice, tu distingues la tension et l'intensité sur les appareils de la maison : lampe torche, radio et guirlande.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Regarde toujours l'unité qui suit le nombre : V pour la tension, A pour l'intensité.",
+              "questions": [
+                {
+                  "content": "Une radio à piles porte l'indication « 6 V ». Quelle est cette grandeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la radio est un récepteur et son inscription est « 6 V ». Étape 2 — Reconnaître : l'unité V indique une tension. Étape 3 — Écrire : la tension nominale de la radio est 6 V. Ce n'est pas une intensité, qui serait en A.",
+                  "answers": [
+                    {
+                      "content": "Sa tension nominale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son intensité nominale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa longueur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le temps de marche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile marquée « 4,5 V » est un récepteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la pile marquée « 4,5 V » est un appareil du circuit. Étape 2 — Reconnaître : une pile fournit l'énergie électrique : c'est un générateur, et 4,5 V est sa tension. Étape 3 — Écrire : l'affirmation est fausse. Confondre générateur et récepteur est l'erreur à éviter : le récepteur est la lampe ou la radio.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque inscription à sa signification.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on lit quatre inscriptions avec leur unité. Étape 2 — Reconnaître : V est le volt (tension), A est l'ampère (intensité). Étape 3 — Écrire : chaque nombre est relié à sa grandeur d'après son unité.",
+                  "answers": [
+                    {
+                      "content": "12 V",
+                      "match": "Une tension"
+                    },
+                    {
+                      "content": "0,5 A",
+                      "match": "Une intensité"
+                    },
+                    {
+                      "content": "Pile ronde",
+                      "match": "Un générateur"
+                    },
+                    {
+                      "content": "Lampe de guirlande",
+                      "match": "Un récepteur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la lecture de l'inscription d'une lampe « 3,5 V ; 0,2 A ».",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on suit la méthode dans l'ordre. Étape 2 — Reconnaître : d'abord on repère l'appareil, puis on reconnaît la grandeur grâce à l'unité. Étape 3 — Écrire : enfin on écrit la grandeur, la valeur et l'unité.",
+                  "answers": [
+                    {
+                      "content": "Repérer la lampe et lire son inscription"
+                    },
+                    {
+                      "content": "Reconnaître V (tension) et A (intensité)"
+                    },
+                    {
+                      "content": "Écrire : tension nominale 3,5 V, intensité nominale 0,2 A"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de guirlande porte « 3 V ; 0,2 A ». Quelle est sa tension nominale, en volts ?",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la lampe est marquée « 3 V ; 0,2 A ». Étape 2 — Reconnaître : 3 est suivi de V : c'est la tension. Étape 3 — Écrire : la tension nominale est 3 V. Prendre 0,2 serait choisir l'intensité par erreur.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'unité de l'intensité nominale d'une lampe est l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche l'unité qui accompagne l'intensité. Étape 2 — Reconnaître : l'intensité se donne en ampères, de symbole A. Étape 3 — Écrire : l'unité est l'ampère (A). Le volt est l'unité de la tension.",
+                  "answers": [
+                    {
+                      "content": "ampere",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Comparer la tension du générateur à celle de la lampe",
+          "remember": "Une lampe est **adaptée** à un générateur quand la tension de celui-ci est **égale** à sa tension nominale. Alors elle fonctionne **normalement**. Si la tension du générateur est **plus petite**, la lampe est **sous-voltée** : son éclat est **faible** (voire nul si la tension est vraiment trop petite). Si elle est **plus grande**, la lampe est **survoltée** : son éclat est **très fort** et elle risque de **griller** (le filament fond et la lampe ne marche plus).",
+          "method": [
+            "Lire la tension nominale de la lampe et la tension du générateur.",
+            "Comparer les deux nombres, exprimés dans la même unité, le volt : égaux, générateur plus petit ou générateur plus grand.",
+            "Conclure : égaux, la lampe fonctionne normalement ; générateur plus petit, éclat faible ; générateur plus grand, éclat très fort et risque de griller."
+          ],
+          "example": {
+            "statement": "Une lampe est marquée « 4,5 V ». On la branche sur une pile de 9 V. Que se passe-t-il ?",
+            "steps": [
+              "Lire : la tension nominale de la lampe est 4,5 V ; la tension du générateur est 9 V.",
+              "Comparer : 9 V est plus grand que 4,5 V (9 > 4,5).",
+              "Conclure : le générateur est trop fort pour la lampe, elle est survoltée : éclat très fort et risque de griller."
+            ]
+          },
+          "pitfall": "Ne pense pas que « plus la tension est grande, mieux la lampe brille ». Une tension trop grande ne rend pas la lampe meilleure : elle la détruit. Contre-exemple : une lampe de 4,5 V branchée sur une pile de 9 V brille très fort et risque de griller. Une lampe n'est bien alimentée que si les deux tensions sont égales.",
+          "figure": "comparaison-des-tensions",
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir le fonctionnement d'une lampe selon la pile utilisée.",
+            "questions": [
+              {
+                "content": "Une lampe de 6 V est branchée sur une pile de 6 V. Comment fonctionne-t-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : la lampe porte 6 V et le générateur 6 V. Étape 2 — Comparer : 6 V est égal à 6 V. Étape 3 — Conclure : Pour la lampe de 6 V : elle fonctionne normalement, car le générateur est adapté à la lampe.",
+                "answers": [
+                  {
+                    "content": "Normalement",
+                    "correct": true
+                  },
+                  {
+                    "content": "Avec un éclat faible",
+                    "correct": false
+                  },
+                  {
+                    "content": "Avec un éclat très fort",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle grille aussitôt",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare les deux nombres : sont-ils égaux ?"
+              },
+              {
+                "content": "Une lampe de 4,5 V est branchée sur une pile ronde de 1,5 V. Quel est son éclat ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 1,5 V. Étape 2 — Comparer : 1,5 V est plus petit que 4,5 V. Étape 3 — Conclure : Pour la lampe de 4,5 V : son éclat est faible : la lampe est sous-voltée.",
+                "answers": [
+                  {
+                    "content": "Faible : elle est sous-voltée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Normal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Très fort",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle grille",
+                    "correct": false
+                  }
+                ],
+                "hint": "1,5 est-il plus petit ou plus grand que 4,5 ?"
+              },
+              {
+                "content": "Une lampe de 3 V branchée sur une pile de 9 V risque de griller.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : la lampe porte 3 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 3 V. Étape 3 — Conclure : Pour la lampe de 3 V : son éclat est très fort et elle risque de griller : la lampe est survoltée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde si la pile est plus forte que la lampe."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Prévoir l'éclat d'une lampe",
+              "statement": "Dans cet exercice, tu prévois l'éclat d'une lampe en comparant sa tension nominale à la tension du générateur.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une lampe de 6 V est branchée sur une pile plate de 4,5 V. Que dire de son éclat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus petit que 6 V. Étape 3 — Conclure : Pour la lampe de 6 V : son éclat est faible : la lampe est sous-voltée. Dire « normal » serait croire que deux tensions proches sont égales.",
+                  "answers": [
+                    {
+                      "content": "Il est faible : la lampe est sous-voltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe grille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de 9 V branchée sur une pile de 9 V fonctionne normalement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 9 V et le générateur 9 V. Étape 2 — Comparer : 9 V est égal à 9 V. Étape 3 — Conclure : Pour la lampe de 9 V : elle fonctionne normalement, car le générateur est adapté à la lampe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de 1,5 V branchée sur une pile de 4,5 V est ___ : elle risque de griller.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la lampe porte 1,5 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus grand que 1,5 V. Étape 3 — Conclure : Pour la lampe de 1,5 V : son éclat est très fort et elle risque de griller : la lampe est survoltée. Le mot attendu est « survoltée ».",
+                  "answers": [
+                    {
+                      "content": "survoltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "survolte",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de 12 V branchée sur une pile de 4,5 V a un éclat ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : la lampe porte 12 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus petit que 12 V. Étape 3 — Conclure : Pour la lampe de 12 V : son éclat est faible : la lampe est sous-voltée.",
+                  "answers": [
+                    {
+                      "content": "faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "nul pour toujours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces branchements, choisis les deux où la lampe risque de griller.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : on lit les deux tensions dans chaque branchement. Étape 2 — Comparer : la lampe risque de griller quand la pile est plus grande : 6 > 3 et 9 > 4,5. Étape 3 — Conclure : ces deux branchements sont survoltés. Les deux autres ne sont pas survoltés : la lampe de 6 V sur la pile de 6 V fonctionne normalement, la lampe de 9 V sur la pile de 4,5 V est sous-voltée.",
+                  "answers": [
+                    {
+                      "content": "Lampe de 3 V sur une pile de 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Lampe de 4,5 V sur une pile de 9 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Lampe de 6 V sur une pile de 6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lampe de 9 V sur une pile de 4,5 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Normale, sous-voltée ou survoltée ?",
+              "statement": "Dans cet exercice, tu classes des branchements de lampes de guirlande et de lampe torche selon la comparaison des tensions.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compare toujours la tension de la pile à la tension nominale de la lampe, pas à son intensité.",
+              "questions": [
+                {
+                  "content": "Une lampe de guirlande de 3 V est branchée sur une pile de 3 V. Quel est le cas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 3 V et le générateur 3 V. Étape 2 — Comparer : 3 V est égal à 3 V. Étape 3 — Conclure : Pour la lampe de guirlande : elle fonctionne normalement, car le générateur est adapté à la lampe.",
+                  "answers": [
+                    {
+                      "content": "Elle est adaptée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est sous-voltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est survoltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il manque une donnée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de 9 V alimente normalement une lampe de 6 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 6 V. Étape 3 — Conclure : Pour la lampe de 6 V : son éclat est très fort et elle risque de griller : la lampe est survoltée. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque branchement au résultat.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : la lampe est toujours de 4,5 V ; les piles sont de 4,5 V, 1,5 V et 9 V. Étape 2 — Comparer : 4,5 = 4,5 ; 1,5 < 4,5 ; 9 > 4,5. Étape 3 — Conclure : égal : normal ; plus petit : éclat faible ; plus grand : risque de griller.",
+                  "answers": [
+                    {
+                      "content": "Lampe de 4,5 V sur une pile de 4,5 V",
+                      "match": "Fonctionnement normal"
+                    },
+                    {
+                      "content": "Lampe de 4,5 V sur une pile de 1,5 V",
+                      "match": "Éclat faible"
+                    },
+                    {
+                      "content": "Lampe de 4,5 V sur une pile de 9 V",
+                      "match": "Risque de griller"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche pour prévoir le fonctionnement d'une lampe.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on commence par les deux valeurs. Étape 2 — Comparer : ensuite on les compare dans la même unité. Étape 3 — Conclure : enfin on conclut.",
+                  "answers": [
+                    {
+                      "content": "Lire la tension de la lampe et celle de la pile"
+                    },
+                    {
+                      "content": "Comparer les deux nombres en volts"
+                    },
+                    {
+                      "content": "Conclure : normal, éclat faible ou risque de griller"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de 4,5 V est branchée sur une lampe de 6 V. De combien de volts la pile est-elle plus faible que la lampe ?",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la lampe est de 6 V et la pile de 4,5 V. Étape 2 — Comparer : 6 − 4,5 = 1,5 V, la pile est plus petite. Étape 3 — Conclure : la pile est plus faible de 1,5 V : lampe sous-voltée, éclat faible.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand les tensions sont égales, on dit que la lampe est ___ au générateur.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on cherche le mot qui décrit une tension égale à la tension nominale. Étape 2 — Comparer : les deux tensions sont égales. Étape 3 — Conclure : la lampe est adaptée au générateur : elle fonctionne normalement.",
+                  "answers": [
+                    {
+                      "content": "adaptée",
+                      "correct": true
+                    },
+                    {
+                      "content": "adapté",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Choisir le générateur adapté à un récepteur",
+          "remember": "Pour alimenter un récepteur (lampe, radio, guirlande), on choisit le générateur dont la **tension est égale à la tension nominale** du récepteur. Les autres générateurs sont à écarter : un générateur de tension plus petite donne un éclat faible, un générateur de tension plus grande risque de détruire le récepteur. Dans les expériences, on utilise des piles. Le courant de la prise de courant de la maison est dangereux : on ne l'utilise jamais pour une expérience.",
+          "method": [
+            "Lire la tension nominale du récepteur sur son inscription.",
+            "Chercher, parmi les générateurs proposés, celui dont la tension est égale à cette valeur.",
+            "Vérifier le choix en examinant les autres générateurs : plus petite, éclat faible ; plus grande, risque de griller ; s'il n'y en a aucun d'égal, le dire."
+          ],
+          "example": {
+            "statement": "Une lampe est marquée « 4,5 V ». On dispose d'une pile ronde de 1,5 V, d'une pile plate de 4,5 V et d'une pile de 9 V. Laquelle choisir ?",
+            "steps": [
+              "Lire : la tension nominale de la lampe est 4,5 V.",
+              "Chercher : la pile plate a une tension de 4,5 V, égale à celle de la lampe.",
+              "Vérifier : la pile de 1,5 V est plus petite (éclat faible) ; la pile de 9 V est plus grande (risque de griller). On choisit la pile plate de 4,5 V."
+            ]
+          },
+          "pitfall": "Ne choisis pas le générateur au hasard, ni « le plus gros nombre pour que ça éclaire fort », ni selon la forme de la pile. Contre-exemple : pour une lampe de 4,5 V, la pile de 9 V a le plus grand nombre mais elle est trop forte pour la lampe, qui risque de griller. Seule la tension égale à 4,5 V convient. Et si aucune pile n'a la bonne tension, ne branche pas : dis qu'aucune n'est adaptée.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à choisir la pile qui convient à une lampe ou à une radio.",
+            "questions": [
+              {
+                "content": "Une radio est marquée « 6 V ». On a des piles de 1,5 V, 6 V et 9 V. Laquelle choisir ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : la tension nominale de la radio est 6 V. Étape 2 — Chercher : la pile de 6 V a la même tension. Étape 3 — Vérifier : 1,5 V donnerait un fonctionnement trop faible et 9 V est trop fort : on choisit 6 V.",
+                "answers": [
+                  {
+                    "content": "La pile de 6 V",
+                    "correct": true
+                  },
+                  {
+                    "content": "La pile de 1,5 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "La pile de 9 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "N'importe laquelle",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche la tension égale à celle de la radio."
+              },
+              {
+                "content": "Pour une lampe de 3 V, une pile de 4,5 V est le meilleur choix.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : la tension nominale de la lampe est 3 V. Étape 2 — Chercher : la pile de 4,5 V n'est pas égale à 3 V. Étape 3 — Vérifier : 4,5 V est plus grand que 3 V : la lampe risque de griller. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le meilleur choix est la tension égale."
+              },
+              {
+                "content": "Pour une guirlande marquée 3 V, on choisit une pile de ___ volts.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : la guirlande est marquée 3 V. Étape 2 — Chercher : on cherche la pile qui a la même tension. Étape 3 — Vérifier : il faut la pile de 3 volts.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Écris seulement un nombre."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Choisir la pile d'une lampe torche",
+              "statement": "Dans cet exercice, tu choisis la pile qui convient à une lampe torche, à une radio ou à une guirlande.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une lampe de lampe torche est marquée « 3 V ». Quelle pile est adaptée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la tension nominale de la lampe est 3 V. Étape 2 — Chercher : seule la pile de 3 V a la tension égale. Étape 3 — Vérifier : 1,5 V est trop petit, 4,5 V et 12 V sont plus grands que 3 V : la lampe risquerait de griller.",
+                  "answers": [
+                    {
+                      "content": "Une pile de 3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 12 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une radio marquée « 9 V » est bien alimentée par une pile de 9 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la tension nominale de la radio est 9 V. Étape 2 — Chercher : la pile de 9 V a la même tension. Étape 3 — Vérifier : les tensions sont égales : la radio est bien alimentée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une guirlande est marquée 4,5 V. Il faut un générateur de ___ volts.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la tension nominale de la guirlande est 4,5 V. Étape 2 — Chercher : on cherche un générateur de même tension. Étape 3 — Vérifier : il faut un générateur de 4,5 volts.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "4.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une lampe de 1,5 V, la pile adaptée est la pile de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : la lampe est de 1,5 V. Étape 2 — Chercher : la pile de 1,5 V est égale à cette valeur. Étape 3 — Vérifier : 3 V, 6 V et 9 V sont plus grands : ils feraient griller la lampe.",
+                  "answers": [
+                    {
+                      "content": "1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une lampe de 6 V, choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : la tension nominale de la lampe est 6 V. Étape 2 — Chercher : 1,5 V est plus petit que 6 V et 12 V est plus grand. Étape 3 — Vérifier : plus petit : éclat faible ; plus grand : risque de griller. Les deux autres affirmations inversent les cas.",
+                  "answers": [
+                    {
+                      "content": "Une pile de 1,5 V donne un éclat faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile de 12 V fait risquer de griller la lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile de 12 V donne un éclat faible",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 1,5 V fait risquer de griller la lampe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le bon générateur pour chaque récepteur",
+              "statement": "Dans cet exercice, tu associes chaque récepteur du ménage au générateur qui lui convient et tu justifies ton choix.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche la pile de tension égale, puis vérifie pourquoi les autres ne conviennent pas.",
+              "questions": [
+                {
+                  "content": "On a une lampe de 6 V et trois générateurs : 4,5 V, 6 V et 12 V. Lequel convient ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe est de 6 V. Étape 2 — Chercher : le générateur de 6 V est égal. Étape 3 — Vérifier : 4,5 V est trop petit (éclat faible), 12 V est trop grand (risque de griller).",
+                  "answers": [
+                    {
+                      "content": "Celui de 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celui de 4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui de 12 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "S'il n'y a aucun générateur de la bonne tension, on prend le plus proche.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on cherche un générateur de tension égale. Étape 2 — Chercher : aucun n'est égal. Étape 3 — Vérifier : prendre le plus proche peut abîmer le récepteur ou donner un éclat faible : il faut dire qu'aucun générateur n'est adapté.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque récepteur à la pile adaptée.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on lit les tensions des récepteurs. Étape 2 — Chercher : on cherche pour chacun la pile de même tension. Étape 3 — Vérifier : 1,5 V avec 1,5 V ; 4,5 V avec 4,5 V ; 9 V avec 9 V.",
+                  "answers": [
+                    {
+                      "content": "Lampe de 1,5 V",
+                      "match": "Pile ronde de 1,5 V"
+                    },
+                    {
+                      "content": "Lampe de 4,5 V",
+                      "match": "Pile plate de 4,5 V"
+                    },
+                    {
+                      "content": "Radio de 9 V",
+                      "match": "Pile de 9 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche pour choisir un générateur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on commence par la valeur du récepteur. Étape 2 — Chercher : puis on cherche le générateur égal. Étape 3 — Vérifier : enfin on vérifie en regardant les autres.",
+                  "answers": [
+                    {
+                      "content": "Lire la tension nominale du récepteur"
+                    },
+                    {
+                      "content": "Chercher le générateur de tension égale"
+                    },
+                    {
+                      "content": "Vérifier en examinant les autres générateurs"
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi des piles de 1,5 V, 3 V, 4,5 V et 9 V, combien sont adaptées à une lampe de 3 V ?",
+                  "question_type": "numeric",
+                  "unit": "pile",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la lampe est de 3 V. Étape 2 — Chercher : une seule pile a 3 V. Étape 3 — Vérifier : les autres sont plus petites ou plus grandes : il y en a une seule adaptée.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une guirlande de 3 V est branchée sur une pile de 1,5 V. Quel est le résultat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la guirlande est de 3 V. Étape 2 — Chercher : 1,5 V est plus petit que 3 V. Étape 3 — Vérifier : le résultat est un éclat faible, car la pile n'est pas adaptée.",
+                  "answers": [
+                    {
+                      "content": "Éclat faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fonctionnement normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Éclat très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle grille",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La lampe torche de Kouassi",
+          "statement": "Kouassi change la lampe de sa lampe torche. Sur le culot, il lit « 3 V ; 0,3 A ». Il dispose d'une pile ronde de 1,5 V, d'une pile de 3 V et d'une pile plate de 4,5 V.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la tension nominale de la lampe de Kouassi, en volts ?",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : la lampe est un récepteur marqué « 3 V ; 0,3 A ». Étape 2 — Reconnaître : le nombre suivi de V est une tension ; celui suivi de A est une intensité. Étape 3 — Écrire : la tension nominale est 3 V, l'intensité nominale 0,3 A. Le nombre 0,3 est l'intensité : le prendre pour la tension serait confondre ampère et volt.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que signifie le nombre 0,3 de l'inscription « 3 V ; 0,3 A » ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : la lampe porte « 3 V ; 0,3 A ». Étape 2 — Reconnaître : A est le symbole de l'ampère, donc 0,3 est une intensité. Étape 3 — Écrire : l'intensité nominale de la lampe est 0,3 A. Ce n'est pas une tension : la tension est le nombre suivi de V.",
+              "answers": [
+                {
+                  "content": "L'intensité nominale de la lampe, en ampères",
+                  "correct": true
+                },
+                {
+                  "content": "La tension nominale en volts",
+                  "correct": false
+                },
+                {
+                  "content": "La tension de la pile à utiliser",
+                  "correct": false
+                },
+                {
+                  "content": "Le nombre de piles à brancher",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle pile Kouassi doit-il choisir pour que sa lampe fonctionne normalement ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : la tension nominale de la lampe est 3 V. Étape 2 — Chercher : la pile de 3 V a une tension égale. Étape 3 — Vérifier : 1,5 V est plus petit (éclat faible) et 4,5 V est plus grand (risque de griller). On choisit donc la pile de 3 V. Le plus grand nombre n'est pas le meilleur choix.",
+              "answers": [
+                {
+                  "content": "La pile de 3 V",
+                  "correct": true
+                },
+                {
+                  "content": "La pile ronde de 1,5 V",
+                  "correct": false
+                },
+                {
+                  "content": "La pile plate de 4,5 V",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune des trois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouassi branche par erreur sa lampe sur la pile plate de 4,5 V. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : la lampe porte 3 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus grand que 3 V. Étape 3 — Conclure : Pour la lampe de Kouassi : son éclat est très fort et elle risque de griller : la lampe est survoltée. Penser que 4,5 V éclaire « mieux » est l'erreur tentante : une tension trop grande détruit la lampe.",
+              "answers": [
+                {
+                  "content": "L'éclat est très fort et la lampe risque de griller",
+                  "correct": true
+                },
+                {
+                  "content": "La lampe fonctionne normalement",
+                  "correct": false
+                },
+                {
+                  "content": "L'éclat est faible",
+                  "correct": false
+                },
+                {
+                  "content": "La lampe ne change pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec la pile ronde de 1,5 V, la lampe de Kouassi brille avec un éclat faible.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Lire : la lampe porte 3 V et le générateur 1,5 V. Étape 2 — Comparer : 1,5 V est plus petit que 3 V. Étape 3 — Conclure : Pour la lampe de Kouassi : son éclat est faible : la lampe est sous-voltée. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La radio de Mariam",
+          "statement": "Mariam possède une radio marquée « 6 V ». Elle a trois générateurs chez elle : une pile de 4,5 V, une pile de 6 V et une pile de 9 V. Elle veut aussi savoir ce qui se passe si elle se trompe de pile.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La radio est un récepteur. Quel est le rôle d'une pile dans ce circuit ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : la radio utilise l'énergie électrique, c'est un récepteur ; la pile est l'autre appareil du circuit. Étape 2 — Reconnaître : la pile fournit cette énergie, c'est un générateur. Étape 3 — Écrire : la pile fournit l'énergie électrique à la radio. Dire que la pile utilise l'énergie de la radio inverse les deux rôles.",
+              "answers": [
+                {
+                  "content": "Fournir l'énergie électrique à la radio",
+                  "correct": true
+                },
+                {
+                  "content": "Utiliser l'énergie de la radio",
+                  "correct": false
+                },
+                {
+                  "content": "Mesurer la tension",
+                  "correct": false
+                },
+                {
+                  "content": "Remplacer l'interrupteur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle pile Mariam doit-elle utiliser pour sa radio de 6 V ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : la radio est marquée 6 V. Étape 2 — Chercher : la pile de 6 V est la seule de tension égale. Étape 3 — Vérifier : 4,5 V est plus petit que 6 V et 9 V est plus grand. On choisit la pile de 6 V. Les autres sont écartées.",
+              "answers": [
+                {
+                  "content": "La pile de 6 V",
+                  "correct": true
+                },
+                {
+                  "content": "La pile de 4,5 V",
+                  "correct": false
+                },
+                {
+                  "content": "La pile de 9 V",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune des trois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque pile utilisée avec la radio de 6 V au résultat.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Lire : la radio est de 6 V ; les piles sont de 4,5 V, 6 V et 9 V. Étape 2 — Comparer : 4,5 < 6 ; 6 = 6 ; 9 > 6. Étape 3 — Conclure : plus petit : fonctionnement trop faible ; égal : normal ; plus grand : risque d'abîmer l'appareil.",
+              "answers": [
+                {
+                  "content": "Pile de 4,5 V",
+                  "match": "Fonctionnement trop faible"
+                },
+                {
+                  "content": "Pile de 6 V",
+                  "match": "Fonctionnement normal"
+                },
+                {
+                  "content": "Pile de 9 V",
+                  "match": "Risque d'abîmer la radio"
+                }
+              ]
+            },
+            {
+              "content": "Une pile de 9 V est ___ pour une radio de 6 V : elle risque de l'abîmer.",
+              "question_type": "select",
+              "explanation": "Méthode. Étape 1 — Lire : la radio porte 6 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 6 V. Étape 3 — Conclure : Pour la radio de 6 V : elle risque d'être abîmée, car la tension du générateur est trop grande. Elle n'est pas « trop faible » : 9 V est plus grand que 6 V.",
+              "answers": [
+                {
+                  "content": "trop forte",
+                  "correct": true
+                },
+                {
+                  "content": "trop faible",
+                  "correct": false
+                },
+                {
+                  "content": "adaptée",
+                  "correct": false
+                },
+                {
+                  "content": "égale à la radio",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si Mariam n'a que des piles de 9 V et de 4,5 V, elle peut prendre la pile de 4,5 V sans aucun effet.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Lire : la radio porte 6 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus petit que 6 V. Étape 3 — Conclure : Pour la radio de 6 V : elle fonctionne trop faiblement, car la tension du générateur est trop petite. Il y a donc un effet : la radio fonctionne mal. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Guirlandes pour la fête de quartier",
+          "statement": "Pour une fête de quartier, des élèves essaient plusieurs lampes de guirlande, chacune avec une pile. Une lampe porte « 1,5 V ; 0,1 A », une autre « 4,5 V ; 0,2 A » et une troisième « 9 V ; 0,3 A ». Les piles disponibles sont de 1,5 V, 4,5 V et 9 V. Un élève affirme : « La pile qui a le plus grand nombre de volts éclaire toujours le mieux. »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque lampe à la pile qui la fait fonctionner normalement.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Lire : les lampes sont de 1,5 V, 4,5 V et 9 V. Étape 2 — Chercher : pour chaque lampe, on prend la pile de même tension. Étape 3 — Vérifier : toute autre pile est plus petite (éclat faible) ou plus grande (risque de griller).",
+              "answers": [
+                {
+                  "content": "Lampe de 1,5 V",
+                  "match": "Pile de 1,5 V"
+                },
+                {
+                  "content": "Lampe de 4,5 V",
+                  "match": "Pile de 4,5 V"
+                },
+                {
+                  "content": "Lampe de 9 V",
+                  "match": "Pile de 9 V"
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'intensité nominale de la lampe de 4,5 V, en ampères ?",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : la lampe est marquée « 4,5 V ; 0,2 A ». Étape 2 — Reconnaître : le nombre suivi de A est une intensité. Étape 3 — Écrire : l'intensité nominale est 0,2 A. Le nombre 4,5 est la tension : il est suivi de V.",
+              "answers": [
+                {
+                  "content": "0,2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On branche la lampe de 1,5 V sur la pile de 9 V. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : la lampe porte 1,5 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 1,5 V. Étape 3 — Conclure : Pour la lampe de 1,5 V : son éclat est très fort et elle risque de griller : la lampe est survoltée. La différence est grande, le risque est donc élevé.",
+              "answers": [
+                {
+                  "content": "L'éclat est très fort et la lampe risque de griller",
+                  "correct": true
+                },
+                {
+                  "content": "Elle fonctionne normalement",
+                  "correct": false
+                },
+                {
+                  "content": "L'éclat est faible",
+                  "correct": false
+                },
+                {
+                  "content": "Elle ne change pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On branche la lampe de 9 V sur la pile de 4,5 V. Quel est le résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : la lampe porte 9 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus petit que 9 V. Étape 3 — Conclure : Pour la lampe de 9 V : son éclat est faible : la lampe est sous-voltée. Une tension trop petite ne détruit pas la lampe, elle la fait seulement briller faiblement.",
+              "answers": [
+                {
+                  "content": "Éclat faible : la lampe est sous-voltée",
+                  "correct": true
+                },
+                {
+                  "content": "Éclat très fort",
+                  "correct": false
+                },
+                {
+                  "content": "Fonctionnement normal",
+                  "correct": false
+                },
+                {
+                  "content": "La lampe grille tout de suite",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'élève affirme : « La pile qui a le plus grand nombre de volts éclaire toujours le mieux. » Dis si c'est juste et justifie avec un exemple.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que l'affirmation est fausse (1 point)",
+                "Donne un exemple chiffré : lampe de 4,5 V sur pile de 9 V (1 point)",
+                "Conclut qu'il faut des tensions égales (1 point)"
+              ],
+              "starter": "L'affirmation est fausse, car…",
+              "explanation": "Corrigé modèle. L'affirmation est fausse. Étape 1 — Lire : prenons une lampe de 4,5 V et une pile de 9 V. Étape 2 — Comparer : 9 V est plus grand que 4,5 V. Étape 3 — Conclure : la lampe est survoltée, l'éclat est très fort et elle risque de griller. Une lampe n'est bien alimentée que si la tension de la pile est égale à sa tension nominale. Barème : 1 point pour le constat, 1 pour l'exemple chiffré, 1 pour la conclusion.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Devoir : la lampe de poche du village",
+          "statement": "Dans un village, une famille a une lampe de poche dont la lampe porte « 3,8 V ; 0,3 A », une radio marquée « 6 V » et une guirlande marquée « 3 V ; 0,15 A ». Les générateurs disponibles sont des piles de 1,5 V, 3 V, 4,5 V, 6 V et 9 V.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la tension nominale de la guirlande ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : la guirlande porte « 3 V ; 0,15 A ». Étape 2 — Reconnaître : V indique la tension, A l'intensité. Étape 3 — Écrire : la tension nominale est 3 V, l'intensité nominale 0,15 A. Les autres propositions confondent la tension et l'intensité.",
+              "answers": [
+                {
+                  "content": "3 V",
+                  "correct": true
+                },
+                {
+                  "content": "0,15 V",
+                  "correct": false
+                },
+                {
+                  "content": "3 A",
+                  "correct": false
+                },
+                {
+                  "content": "0,15 A",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi les piles disponibles, laquelle est adaptée à la radio de 6 V ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : la radio est de 6 V. Étape 2 — Chercher : la pile de 6 V est la seule de tension égale. Étape 3 — Vérifier : 4,5 V et 3 V sont plus petits (trop faible), 9 V est plus grand (risque d'abîmer).",
+              "answers": [
+                {
+                  "content": "La pile de 6 V",
+                  "correct": true
+                },
+                {
+                  "content": "La pile de 4,5 V",
+                  "correct": false
+                },
+                {
+                  "content": "La pile de 9 V",
+                  "correct": false
+                },
+                {
+                  "content": "La pile de 3 V",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle pile peut-on choisir pour la lampe de poche de 3,8 V parmi les piles disponibles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : la lampe de poche est de 3,8 V. Étape 2 — Chercher : aucune pile disponible n'a 3,8 V : 3 V, 4,5 V, 6 V, 9 V ou 1,5 V. Étape 3 — Vérifier : 3 V est plus petit (éclat faible) et 4,5 V plus grand (risque de griller). Il faut donc dire qu'aucune pile n'est adaptée. Prendre « la plus proche » est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "Aucune n'est exactement adaptée",
+                  "correct": true
+                },
+                {
+                  "content": "La pile de 4,5 V",
+                  "correct": false
+                },
+                {
+                  "content": "La pile de 3 V",
+                  "correct": false
+                },
+                {
+                  "content": "La pile de 6 V",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Brancher la guirlande de 3 V sur la pile de 4,5 V la fait fonctionner normalement.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Lire : la lampe porte 3 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus grand que 3 V. Étape 3 — Conclure : Pour la guirlande : son éclat est très fort et elle risque de griller : la lampe est survoltée. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La guirlande de 3 V est branchée sur chacune des piles. Choisis les deux piles qui donnent un éclat plus fort que la normale.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Lire : la guirlande est de 3 V. Étape 2 — Comparer : 4,5 > 3 et 9 > 3 ; 1,5 < 3 ; 3 = 3. Étape 3 — Conclure : les piles de 4,5 V et de 9 V sont plus grandes : éclat plus fort et risque de griller. 1,5 V donne un éclat faible, 3 V un fonctionnement normal.",
+              "answers": [
+                {
+                  "content": "Pile de 4,5 V",
+                  "correct": true
+                },
+                {
+                  "content": "Pile de 9 V",
+                  "correct": true
+                },
+                {
+                  "content": "Pile de 1,5 V",
+                  "correct": false
+                },
+                {
+                  "content": "Pile de 3 V",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mélanie veut brancher la radio de 6 V sur la pile de 9 V « pour qu'elle marche plus fort ». Explique-lui pourquoi ce n'est pas une bonne idée et indique la bonne pile.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Compare 9 V à 6 V (1 point)",
+                "Dit que la radio risque d'être abîmée (1 point)",
+                "Indique la pile de 6 V (1 point)"
+              ],
+              "starter": "Ce n'est pas une bonne idée parce que…",
+              "explanation": "Corrigé modèle. Étape 1 — Lire : la radio a une tension nominale de 6 V et la pile est de 9 V. Étape 2 — Comparer : 9 V est plus grand que 6 V. Étape 3 — Conclure : le générateur n'est pas adapté, la radio risque d'être abîmée au lieu de mieux marcher. Il faut la pile de 6 V. Barème : 1 point pour la comparaison, 1 pour le risque, 1 pour la bonne pile.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Lire la tension nominale et l'intensité nominale d'une pile et d'une lampe ; comparer la tension du générateur à celle de la lampe ; prévoir un fonctionnement normal, un éclat faible ou un risque de griller ; choisir la pile adaptée.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur une lampe de lampe torche on lit « 6 V ; 0,3 A ». Sur la pile plate on lit « 4,5 V ». Sur une radio on lit « 9 V ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le volt (V) indique une tension, l'ampère (A) une intensité.",
+              "questions": [
+                {
+                  "content": "Dans l'inscription « 6 V ; 0,3 A » d'une lampe, quelle est la tension nominale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la lampe porte les deux nombres 6 et 0,3. Étape 2 — Reconnaître : 6 est suivi de V : c'est la tension ; 0,3 est suivi de A : c'est l'intensité. Étape 3 — Écrire : la tension nominale est 6 V. Les propositions « 0,3 V » et « 6 A » échangent l'unité des deux nombres, ce qui est faux : on lit toujours l'unité qui suit le nombre.",
+                  "answers": [
+                    {
+                      "content": "6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,3 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symbole de l'unité d'intensité est la lettre ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche le symbole de l'ampère, l'unité de l'intensité. Étape 2 — Reconnaître : V est le volt, unité de la tension ; A est l'ampère. Étape 3 — Écrire : la lettre cherchée est A. La lettre V est piégeuse : c'est le symbole de la tension, pas de l'intensité.",
+                  "answers": [
+                    {
+                      "content": "A",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile plate marquée « 4,5 V » est un générateur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la pile plate porte « 4,5 V ». Étape 2 — Reconnaître : une pile fournit l'énergie électrique : c'est un générateur ; V indique sa tension. Étape 3 — Écrire : vrai : c'est un générateur de tension 4,5 V. Dire que c'est un récepteur serait inverser les rôles : le récepteur utilise l'énergie, comme la lampe ou la radio.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque inscription à ce qu'elle indique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : trois inscriptions : 9 V, 0,3 A et 4,5 V. Étape 2 — Reconnaître : V est le volt (tension), A l'ampère (intensité) ; la radio est de 9 V, la pile de 4,5 V. Étape 3 — Écrire : 9 V est reliée à la radio, 0,3 A à la lampe, 4,5 V à la pile plate. On ne relie jamais un nombre en ampères à une tension.",
+                  "answers": [
+                    {
+                      "content": "9 V",
+                      "match": "La tension nominale de la radio"
+                    },
+                    {
+                      "content": "0,3 A",
+                      "match": "L'intensité nominale de la lampe"
+                    },
+                    {
+                      "content": "4,5 V",
+                      "match": "La tension de la pile plate"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la tension nominale de la radio, en volts ?",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la radio porte « 9 V ». Étape 2 — Reconnaître : le symbole V désigne le volt : c'est la tension. Étape 3 — Écrire : la tension nominale de la radio est 9 V. Ce n'est pas 4,5, qui est la tension de la pile plate, ni 6, qui est celle de la lampe.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une lampe de 4,5 V est testée avec différentes piles : 1,5 V, 4,5 V et 9 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare le nombre de volts de la pile au nombre de volts de la lampe.",
+              "questions": [
+                {
+                  "content": "La lampe de 4,5 V est branchée sur la pile de 4,5 V. Comment fonctionne-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est égal à 4,5 V. Étape 3 — Conclure : Pour la lampe de 4,5 V : elle fonctionne normalement, car le générateur est adapté à la lampe. Les deux tensions sont égales : aucun risque.",
+                  "answers": [
+                    {
+                      "content": "Normalement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avec un éclat faible",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avec un éclat très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle grille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe de 4,5 V est branchée sur la pile de 1,5 V. Quel est son éclat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 1,5 V. Étape 2 — Comparer : 1,5 V est plus petit que 4,5 V. Étape 3 — Conclure : Pour la lampe de 4,5 V : son éclat est faible : la lampe est sous-voltée. L'éclat n'est pas normal : la tension est trop petite.",
+                  "answers": [
+                    {
+                      "content": "Faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle grille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe de 4,5 V branchée sur la pile de 9 V risque de griller.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 4,5 V. Étape 3 — Conclure : Pour la lampe de 4,5 V : son éclat est très fort et elle risque de griller : la lampe est survoltée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe branchée sur un générateur de tension trop grande est dite ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : le générateur a une tension trop grande pour la lampe. Étape 2 — Comparer : sa tension est plus grande que la tension nominale. Étape 3 — Conclure : la lampe est survoltée ; sous-voltée serait pour une tension trop petite. Le mot « adaptée » est faux : elle n'est pas adaptée.",
+                  "answers": [
+                    {
+                      "content": "survoltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "sous-voltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "éteinte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le générateur a une tension plus petite que la lampe, l'éclat est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la tension du générateur est plus petite que la tension nominale de la lampe. Étape 2 — Comparer : générateur plus petit que la lampe. Étape 3 — Conclure : la lampe est sous-voltée : l'éclat est faible. « Fort » serait l'erreur : l'éclat fort correspond au générateur plus grand que la lampe.",
+                  "answers": [
+                    {
+                      "content": "faible",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour une lampe de 6 V, on dispose de piles de 3 V, 6 V et 12 V. Pour une guirlande de 3 V, on dispose des mêmes piles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche la pile dont le nombre de volts est le même que celui du récepteur.",
+              "questions": [
+                {
+                  "content": "Quelle pile est adaptée à la lampe de 6 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe est de 6 V. Étape 2 — Chercher : la pile de 6 V a la tension égale. Étape 3 — Vérifier : 3 V est plus petit (éclat faible), 12 V est plus grand (risque de griller). « Aucune » est faux : une pile de 6 V existe.",
+                  "answers": [
+                    {
+                      "content": "La pile de 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 12 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile de 12 V convient à la guirlande de 3 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la guirlande est de 3 V. Étape 2 — Chercher : on cherche une pile de 3 V. Étape 3 — Vérifier : 12 V est beaucoup plus grand que 3 V : la guirlande risque de griller. L'affirmation est fausse. Un grand nombre de volts n'est pas un avantage pour le récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour la guirlande de 3 V, choisis les deux piles qui ne conviennent pas.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : la guirlande est de 3 V. Étape 2 — Chercher : seule la pile de 3 V est de tension égale. Étape 3 — Vérifier : 6 V et 12 V sont plus grands que 3 V : elles ne conviennent pas. La pile de 3 V convient, elle ne fait pas partie des piles à écarter.",
+                  "answers": [
+                    {
+                      "content": "La pile de 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 12 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune de ces réponses n'est correcte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du choix d'une pile.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on commence par la valeur du récepteur. Étape 2 — Chercher : on cherche ensuite la pile égale. Étape 3 — Vérifier : on vérifie ensuite les autres piles avant d'écrire la pile choisie. Écrire la pile choisie avant de lire la tension serait une réponse au hasard.",
+                  "answers": [
+                    {
+                      "content": "Lire la tension nominale du récepteur"
+                    },
+                    {
+                      "content": "Chercher la pile de même tension"
+                    },
+                    {
+                      "content": "Vérifier les autres piles"
+                    },
+                    {
+                      "content": "Écrire la pile choisie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une lampe de 12 V, il faut une pile de ___ volts.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la lampe est de 12 V. Étape 2 — Chercher : on cherche la pile de même tension. Étape 3 — Vérifier : toute autre valeur donnerait un éclat faible (plus petite) ou un risque de griller (plus grande). La bonne valeur est 12.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan : une lampe de 3 V ; 0,2 A est branchée successivement sur une pile de 1,5 V, une pile de 3 V et une pile de 4,5 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque pile, compare 3 V à la tension de la pile.",
+              "questions": [
+                {
+                  "content": "Relie chaque pile au résultat avec la lampe de 3 V.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : la lampe est de 3 V ; les piles sont de 1,5 V, 3 V et 4,5 V. Étape 2 — Comparer : 1,5 < 3 ; 3 = 3 ; 4,5 > 3. Étape 3 — Conclure : plus petit : éclat faible ; égal : normal ; plus grand : risque de griller. Inverser deux cas est l'erreur fréquente : une pile plus faible ne fait jamais griller la lampe.",
+                  "answers": [
+                    {
+                      "content": "Pile de 1,5 V",
+                      "match": "Éclat faible"
+                    },
+                    {
+                      "content": "Pile de 3 V",
+                      "match": "Fonctionnement normal"
+                    },
+                    {
+                      "content": "Pile de 4,5 V",
+                      "match": "Risque de griller"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intensité nominale de cette lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la lampe porte « 3 V ; 0,2 A ». Étape 2 — Reconnaître : le nombre suivi de A est une intensité. Étape 3 — Écrire : l'intensité nominale est 0,2 A. 3 est la tension (en volts) ; la proposition 3 A mélange les unités.",
+                  "answers": [
+                    {
+                      "content": "0,2 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,2 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,5 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe de 3 V est adaptée à la pile de 3 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 3 V et le générateur 3 V. Étape 2 — Comparer : 3 V est égal à 3 V. Étape 3 — Conclure : Pour la lampe de 3 V : elle fonctionne normalement, car le générateur est adapté à la lampe. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de piles sur les trois donnent un fonctionnement normal à la lampe de 3 V ?",
+                  "question_type": "numeric",
+                  "unit": "pile",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la lampe est de 3 V ; les piles sont de 1,5 V, 3 V et 4,5 V. Étape 2 — Comparer : une seule pile est égale à 3 V. Étape 3 — Conclure : une seule pile donne un fonctionnement normal. Les deux autres donnent un éclat faible (1,5 V) ou un risque de griller (4,5 V).",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la pile de 4,5 V, la lampe de 3 V est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : la lampe porte 3 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus grand que 3 V. Étape 3 — Conclure : Pour la lampe de 3 V : son éclat est très fort et elle risque de griller : la lampe est survoltée. Elle est survoltée, pas adaptée.",
+                  "answers": [
+                    {
+                      "content": "survoltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "sous-voltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "étanche",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Lire les inscriptions d'une lampe torche, d'une radio et d'une guirlande ; choisir la pile adaptée à chacun de ces appareils du quotidien ; prévoir l'éclat d'une lampe quand on se trompe de pile ; consignes de sécurité sur le courant de la prise.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de nuit d'Adjamé, une vendeuse s'éclaire avec une lampe torche. La lampe de sa torche porte « 4,5 V ; 0,3 A ». Sa pile plate porte « 4,5 V ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque inscription, regarde l'unité qui suit le nombre.",
+              "questions": [
+                {
+                  "content": "Quelle est la tension nominale de la lampe de la vendeuse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la lampe de la torche porte « 4,5 V ; 0,3 A ». Étape 2 — Reconnaître : 4,5 est suivi de V (volt) : c'est la tension ; 0,3 est suivi de A (ampère) : c'est l'intensité. Étape 3 — Écrire : la tension nominale est 4,5 V. Les autres propositions donnent à un nombre une unité qui n'est pas la sienne.",
+                  "answers": [
+                    {
+                      "content": "4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,3 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intensité nominale de la lampe de la torche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la lampe porte « 4,5 V ; 0,3 A ». Étape 2 — Reconnaître : le nombre suivi du symbole A est une intensité. Étape 3 — Écrire : l'intensité nominale est 0,3 A. 4,5 est la tension et non l'intensité.",
+                  "answers": [
+                    {
+                      "content": "0,3 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "4,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile plate de 4,5 V est adaptée à la lampe de la torche.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est égal à 4,5 V. Étape 3 — Conclure : Pour la lampe de la torche : elle fonctionne normalement, car le générateur est adapté à la lampe. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la torche de la vendeuse, la pile est le générateur et la lampe est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la torche contient une pile et une lampe. Étape 2 — Reconnaître : la pile fournit l'énergie électrique : c'est le générateur ; la lampe l'utilise. Étape 3 — Écrire : la lampe est le récepteur. Le mot « générateur » est faux ici : il désigne déjà la pile.",
+                  "answers": [
+                    {
+                      "content": "recepteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La vendeuse remplace sa pile par une pile ronde de 1,5 V. De combien de volts la tension de la pile est-elle plus petite que la tension de la lampe ?",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la lampe est de 4,5 V et la pile de 1,5 V. Étape 2 — Comparer : 4,5 − 1,5 = 3 V ; la pile est plus petite. Étape 3 — Conclure : la pile est plus petite de 3 V : éclat faible. Le résultat est une différence en volts, pas une tension de pile.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une famille d'Abidjan a une radio marquée « 6 V ». Quand le courant de la prise est coupé, elle utilise des piles. Elle a des piles de 1,5 V, 6 V et 9 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La radio est un récepteur : cherche la pile de tension égale à celle de la radio.",
+              "questions": [
+                {
+                  "content": "Quelle pile la famille doit-elle utiliser pour sa radio de 6 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la radio est de 6 V. Étape 2 — Chercher : la pile de 6 V a la tension égale. Étape 3 — Vérifier : 1,5 V est plus petit (trop faible) et 9 V plus grand (risque d'abîmer l'appareil). Chaque pile s'essaie seule : on compare sa tension à celle de la radio.",
+                  "answers": [
+                    {
+                      "content": "La pile de 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que se passe-t-il si la famille utilise la pile de 1,5 V pour la radio de 6 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la radio porte 6 V et le générateur 1,5 V. Étape 2 — Comparer : 1,5 V est plus petit que 6 V. Étape 3 — Conclure : Pour la radio de 6 V : elle fonctionne trop faiblement, car la tension du générateur est trop petite. Le mot « normalement » serait faux.",
+                  "answers": [
+                    {
+                      "content": "Elle fonctionne trop faiblement",
+                      "correct": true
+                    },
+                    {
+                      "content": "La radio fonctionne normalement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La radio fonctionne trop fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "La radio grille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La radio de 6 V est un générateur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la radio est marquée « 6 V ». Étape 2 — Reconnaître : la radio utilise l'énergie électrique : c'est un récepteur ; 6 V est sa tension nominale. Étape 3 — Écrire : l'affirmation est fausse. Un générateur est un appareil qui fournit l'énergie, comme une pile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le courant de la prise de la maison est ___ : on ne l'utilise jamais pour une expérience.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : la prise de courant fournit un courant important. Étape 2 — Reconnaître : ce courant peut causer des blessures graves. Étape 3 — Écrire : il est dangereux ; pour les expériences, on utilise seulement des piles. Penser qu'il est inoffensif est une erreur grave.",
+                  "answers": [
+                    {
+                      "content": "dangereux",
+                      "correct": true
+                    },
+                    {
+                      "content": "inoffensif",
+                      "correct": false
+                    },
+                    {
+                      "content": "faible",
+                      "correct": false
+                    },
+                    {
+                      "content": "adapté aux piles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche de la famille pour choisir la pile de sa radio.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on lit la valeur du récepteur. Étape 2 — Chercher : on cherche la pile égale. Étape 3 — Vérifier : on vérifie les autres piles. Sauter la première étape ferait choisir la pile au hasard.",
+                  "answers": [
+                    {
+                      "content": "Lire la tension nominale de la radio"
+                    },
+                    {
+                      "content": "Chercher la pile de même tension"
+                    },
+                    {
+                      "content": "Vérifier que les autres piles ne conviennent pas"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour la fête de fin d'année, des élèves décorent la cour de l'école avec des guirlandes à piles. Une lampe de guirlande porte « 3 V ; 0,15 A ». Ils ont des piles de 1,5 V, 3 V et 4,5 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une guirlande est un récepteur : sa tension nominale impose la pile à choisir.",
+              "questions": [
+                {
+                  "content": "Quelle pile les élèves choisissent-ils pour la lampe de la guirlande ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe de guirlande est de 3 V. Étape 2 — Chercher : la pile de 3 V a la même tension. Étape 3 — Vérifier : 1,5 V est trop petit et 4,5 V trop grand. « Aucune » est faux : la pile de 3 V existe.",
+                  "answers": [
+                    {
+                      "content": "La pile de 3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune de ces piles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves branchent la lampe sur la pile de 4,5 V. Quel est le résultat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 3 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus grand que 3 V. Étape 3 — Conclure : Pour la lampe de guirlande : son éclat est très fort et elle risque de griller : la lampe est survoltée. « Normal » serait faux.",
+                  "answers": [
+                    {
+                      "content": "Éclat très fort et risque de griller",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fonctionnement normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Éclat faible",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun changement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la pile de 1,5 V, la lampe de guirlande brille faiblement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 3 V et le générateur 1,5 V. Étape 2 — Comparer : 1,5 V est plus petit que 3 V. Étape 3 — Conclure : Pour la lampe de guirlande : son éclat est faible : la lampe est sous-voltée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque pile essayée sur la lampe de 3 V au résultat.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : la lampe de 3 V est testée avec trois piles. Étape 2 — Comparer : 1,5 < 3 ; 3 = 3 ; 4,5 > 3. Étape 3 — Conclure : plus petit : faible ; égal : normal ; plus grand : risque de griller. Une pile de tension plus petite ne fait pas griller la lampe.",
+                  "answers": [
+                    {
+                      "content": "1,5 V",
+                      "match": "Éclat faible"
+                    },
+                    {
+                      "content": "3 V",
+                      "match": "Fonctionnement normal"
+                    },
+                    {
+                      "content": "4,5 V",
+                      "match": "Risque de griller"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'intensité nominale de cette lampe est 0,15 ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la lampe porte « 3 V ; 0,15 A ». Étape 2 — Reconnaître : l'intensité s'exprime en ampères, symbole A. Étape 3 — Écrire : l'intensité nominale est 0,15 A. Le volt est l'unité de la tension, pas de l'intensité.",
+                  "answers": [
+                    {
+                      "content": "A",
+                      "correct": true
+                    },
+                    {
+                      "content": "ampère",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève de 5ème apporte trois appareils : une lampe torche (lampe « 6 V »), un petit poste radio (« 9 V ») et une guirlande (« 1,5 V »). Il a des piles de 1,5 V, 6 V et 9 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Associe chaque appareil à la pile de même tension, puis vérifie les autres piles.",
+              "questions": [
+                {
+                  "content": "Relie chaque appareil à la pile adaptée.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on lit la tension de chaque appareil. Étape 2 — Chercher : on cherche la pile de même tension. Étape 3 — Vérifier : toute autre pile serait trop petite ou trop grande. Associer par la forme de la pile serait faux.",
+                  "answers": [
+                    {
+                      "content": "Lampe torche de 6 V",
+                      "match": "Pile de 6 V"
+                    },
+                    {
+                      "content": "Poste radio de 9 V",
+                      "match": "Pile de 9 V"
+                    },
+                    {
+                      "content": "Guirlande de 1,5 V",
+                      "match": "Pile de 1,5 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève branche la guirlande de 1,5 V sur la pile de 9 V. Que risque-t-il d'arriver ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 1,5 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 1,5 V. Étape 3 — Conclure : Pour la guirlande : son éclat est très fort et elle risque de griller : la lampe est survoltée. L'éclat faible serait pour une pile plus petite.",
+                  "answers": [
+                    {
+                      "content": "La guirlande risque de griller",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille normalement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille faiblement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe torche de 6 V branchée sur la pile de 1,5 V brille avec un éclat faible.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V et le générateur 1,5 V. Étape 2 — Comparer : 1,5 V est plus petit que 6 V. Étape 3 — Conclure : Pour la lampe torche : son éclat est faible : la lampe est sous-voltée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poste radio de 9 V est branché sur la pile de 6 V. Comment fonctionne-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la radio porte 9 V et le générateur 6 V. Étape 2 — Comparer : 6 V est plus petit que 9 V. Étape 3 — Conclure : Pour le poste radio : elle fonctionne trop faiblement, car la tension du générateur est trop petite. Une tension trop petite ne détruit pas l'appareil, elle le fait fonctionner trop faiblement.",
+                  "answers": [
+                    {
+                      "content": "Mal : la tension est trop petite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Normalement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il risque de griller",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mieux que d'habitude",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de ces trois appareils sont bien alimentés quand chacun est branché sur la pile de même tension ?",
+                  "question_type": "numeric",
+                  "unit": "appareils",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : on lit trois appareils (6 V, 9 V, 1,5 V) et trois piles de mêmes tensions. Étape 2 — Comparer : 6 = 6 ; 9 = 9 ; 1,5 = 1,5. Étape 3 — Conclure : les trois appareils fonctionnent normalement. Le résultat est 3, pas 1 ou 2.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier un choix de pile ; corriger une affirmation fausse ; déduire, d'après l'éclat observé, ce que l'on peut dire de la tension de la pile par rapport à celle de la lampe ; présenter un raisonnement en trois étapes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève observe trois lampes identiques de 6 V. La lampe A est branchée sur une pile de 3 V, la lampe B sur une pile de 6 V, la lampe C sur une pile de 12 V. Il note l'éclat de chacune.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare chaque pile à la tension de la lampe (6 V), l'une après l'autre.",
+              "questions": [
+                {
+                  "content": "Relie chaque lampe à l'éclat observé.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : les lampes A, B et C sont de 6 V et sont alimentées par 3 V, 6 V et 12 V. Étape 2 — Comparer : 3 < 6 ; 6 = 6 ; 12 > 6. Étape 3 — Conclure : A : éclat faible ; B : normal ; C : éclat très fort et risque de griller. Il ne faut pas relier la pile la plus grande à l'éclat le meilleur : la plus grande donne le risque de griller.",
+                  "answers": [
+                    {
+                      "content": "Lampe A (pile de 3 V)",
+                      "match": "Éclat faible"
+                    },
+                    {
+                      "content": "Lampe B (pile de 6 V)",
+                      "match": "Éclat normal"
+                    },
+                    {
+                      "content": "Lampe C (pile de 12 V)",
+                      "match": "Éclat très fort, risque de griller"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle lampe est survoltée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit les tensions : 3 V, 6 V et 12 V pour des lampes de 6 V. Étape 2 — Comparer : seule 12 V est plus grande que 6 V. Étape 3 — Conclure : la lampe C est survoltée. La lampe A est sous-voltée, la lampe B est adaptée.",
+                  "answers": [
+                    {
+                      "content": "La lampe C",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe A",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle lampe est sous-voltée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit les tensions : 3 V, 6 V et 12 V pour des lampes de 6 V. Étape 2 — Comparer : seule 3 V est plus petite que 6 V. Étape 3 — Conclure : la lampe A est sous-voltée. Dire que la lampe C est sous-voltée serait confondre les deux cas.",
+                  "answers": [
+                    {
+                      "content": "La lampe A",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe B",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe C",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois lampes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe B est bien alimentée parce que sa pile a la même tension qu'elle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V et le générateur 6 V. Étape 2 — Comparer : 6 V est égal à 6 V. Étape 3 — Conclure : Pour la lampe B : elle fonctionne normalement, car le générateur est adapté à la lampe. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux lampes qui ne sont pas bien alimentées.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : les piles sont de 3 V, 6 V et 12 V pour des lampes de 6 V. Étape 2 — Comparer : 3 ≠ 6 et 12 ≠ 6, mais 6 = 6. Étape 3 — Conclure : les lampes A et C ne sont pas bien alimentées. La lampe B est bien alimentée : elle ne fait pas partie de la réponse.",
+                  "answers": [
+                    {
+                      "content": "La lampe A",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe C",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lampes A et B ensemble",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Marie dit : « Ma lampe de 4,5 V brille faiblement avec cette pile. » On ne connaît pas la tension de sa pile, mais on sait que la pile est parmi : 1,5 V, 3 V, 4,5 V, 6 V et 9 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "L'éclat faible correspond à un générateur de tension plus petite que celle de la lampe.",
+              "questions": [
+                {
+                  "content": "D'après l'éclat faible, quelles piles Marie peut-elle avoir utilisées ? Choisis les deux piles possibles.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : la lampe est de 4,5 V et son éclat est faible. Étape 2 — Comparer : un éclat faible vient d'une pile de tension plus petite que 4,5 V : 1,5 V et 3 V. Étape 3 — Conclure : on garde seulement 1,5 V et 3 V. Les piles de 4,5 V, 6 V et 9 V ne donnent pas un éclat faible : 4,5 V est normal, 6 V et 9 V sont trop fortes.",
+                  "answers": [
+                    {
+                      "content": "La pile de 1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 9 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la lampe de Marie brillait très fort, la pile pourrait être celle de 9 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 4,5 V. Étape 3 — Conclure : Pour la lampe de Marie : son éclat est très fort et elle risque de griller : la lampe est survoltée. Un éclat très fort vient d'une pile plus grande que 4,5 V, donc 9 V convient.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la lampe de Marie fonctionnait normalement, quelle pile aurait-elle utilisée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe est de 4,5 V et elle fonctionne normalement. Étape 2 — Comparer : un fonctionnement normal demande une tension égale à 4,5 V. Étape 3 — Conclure : la pile utilisée est de 4,5 V. 3 V donnerait un éclat faible ; 6 V et 9 V seraient trop fortes.",
+                  "answers": [
+                    {
+                      "content": "La pile de 4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 9 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Marie conclut : « Ma lampe brille faiblement, donc ma pile est trop forte. » Dis si elle a raison et justifie ta réponse.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Dit que Marie a tort (1 point)",
+                    "Compare les deux tensions : un éclat faible correspond à une pile de tension plus petite (1 point)",
+                    "Conclut qu'il faut une pile de 4,5 V (1 point)"
+                  ],
+                  "starter": "Marie a tort, car…",
+                  "explanation": "Corrigé modèle. Marie a tort. Étape 1 — Lire : la lampe est de 4,5 V et son éclat est faible. Étape 2 — Comparer : un éclat faible vient d'une pile dont la tension est plus petite que 4,5 V. Étape 3 — Conclure : la pile n'est pas trop forte mais trop faible ; il faut une pile de 4,5 V. Barème : 1 point pour avoir tort, 1 pour la comparaison, 1 pour la conclusion.",
+                  "answers": []
+                },
+                {
+                  "content": "Une lampe qui brille faiblement est ___ (trop ou pas assez alimentée) : écris le mot « sous-voltée » ou « survoltée ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la lampe brille faiblement. Étape 2 — Comparer : un éclat faible vient d'un générateur de tension plus petite. Étape 3 — Conclure : la lampe est sous-voltée. Le mot « survoltée » est faux : il désigne l'éclat très fort.",
+                  "answers": [
+                    {
+                      "content": "sous-voltee",
+                      "correct": true
+                    },
+                    {
+                      "content": "sous voltee",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève dispose d'un seul générateur : une pile de 4,5 V. Il hésite entre trois lampes : « 1,5 V », « 4,5 V » et « 9 V ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque lampe, compare 4,5 V à sa tension nominale.",
+              "questions": [
+                {
+                  "content": "Quelle lampe est adaptée à la pile de 4,5 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la pile est de 4,5 V. Étape 2 — Chercher : la lampe de 4,5 V a la même tension. Étape 3 — Vérifier : la lampe de 1,5 V est survoltée par la pile ; la lampe de 9 V est sous-voltée. « Toutes les trois » est faux : seule une tension égale convient.",
+                  "answers": [
+                    {
+                      "content": "La lampe de 4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe de 9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque lampe à ce qui se passe avec la pile de 4,5 V.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : la pile est de 4,5 V ; les lampes sont de 1,5 V, 4,5 V et 9 V. Étape 2 — Comparer : 4,5 > 1,5 ; 4,5 = 4,5 ; 4,5 < 9. Étape 3 — Conclure : générateur plus grand : risque de griller ; égal : normal ; plus petit : éclat faible. Attention au sens de la comparaison : c'est la pile que l'on compare à la lampe.",
+                  "answers": [
+                    {
+                      "content": "Lampe de 1,5 V",
+                      "match": "Risque de griller"
+                    },
+                    {
+                      "content": "Lampe de 4,5 V",
+                      "match": "Fonctionnement normal"
+                    },
+                    {
+                      "content": "Lampe de 9 V",
+                      "match": "Éclat faible"
+                    }
+                  ]
+                },
+                {
+                  "content": "Brancher la lampe de 9 V sur la pile de 4,5 V la fait griller.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 9 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus petit que 9 V. Étape 3 — Conclure : Pour la lampe de 9 V : son éclat est faible : la lampe est sous-voltée. La lampe ne grille pas, son éclat est faible : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'élève veut que la lampe de 1,5 V fonctionne normalement, il doit changer de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : la lampe est de 1,5 V et la pile de 4,5 V. Étape 2 — Comparer : la tension de la pile est plus grande que celle de la lampe. Étape 3 — Conclure : il faut changer la pile et prendre une pile de 1,5 V. Changer le fil ou l'interrupteur ne change pas la tension du générateur.",
+                  "answers": [
+                    {
+                      "content": "pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "interrupteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement de l'élève pour conclure.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on lit d'abord la tension de la pile. Étape 2 — Comparer : ensuite on la compare à chaque lampe. Étape 3 — Conclure : enfin on conclut. On ne conclut pas avant d'avoir comparé : sans comparaison des deux tensions, la conclusion serait un simple pari, et l'ordre lire, comparer, conclure est celui de la méthode de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Lire : la pile est de 4,5 V"
+                    },
+                    {
+                      "content": "Comparer 4,5 V à la tension nominale de chaque lampe"
+                    },
+                    {
+                      "content": "Conclure : la lampe de 4,5 V est adaptée"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux élèves se disputent. Ali dit : « Une lampe de 6 V brille plus fort sur une pile de 9 V, donc c'est mieux. » Binta dit : « Il faut toujours la pile de même tension que la lampe. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rappelle-toi ce qui arrive quand le générateur est plus grand que la lampe.",
+              "questions": [
+                {
+                  "content": "Binta a raison : la lampe doit être branchée sur une pile de même tension.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe est de 6 V, Ali propose une pile de 9 V. Étape 2 — Comparer : 9 V est plus grand que 6 V : la lampe est survoltée. Étape 3 — Conclure : une tension égale évite le risque de griller. Binta a raison. Ali se trompe : « briller plus fort » veut dire « risque de griller ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi Ali a-t-il tort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 6 V. Étape 3 — Conclure : Pour la lampe de 6 V : son éclat est très fort et elle risque de griller : la lampe est survoltée. Les autres propositions sont fausses : 9 est plus grand que 6.",
+                  "answers": [
+                    {
+                      "content": "Parce que la lampe risque de griller",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la pile de 9 V est vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la lampe est un générateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que 9 est plus petit que 6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ali insiste : « Mais elle brille plus fort ! » Écris une réponse de trois phrases à Ali pour lui expliquer le risque.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Reconnaît que l'éclat est plus fort",
+                    "Dit que la lampe est survoltée et risque de griller",
+                    "Dit qu'il faut une pile de même tension (6 V)"
+                  ],
+                  "starter": "Elle brille plus fort, mais…",
+                  "explanation": "Corrigé modèle. Étape 1 — Lire : la lampe est de 6 V et la pile de 9 V. Étape 2 — Comparer : 9 V est plus grand que 6 V. Étape 3 — Conclure : la lampe brille plus fort un moment, mais elle est survoltée et risque de griller ; il faut la pile de 6 V. Barème : 1 point par idée correcte.",
+                  "answers": []
+                },
+                {
+                  "content": "Quelle pile Ali doit-il utiliser pour que la lampe de 6 V fonctionne normalement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe est de 6 V. Étape 2 — Chercher : on cherche la pile de 6 V. Étape 3 — Vérifier : 4,5 V et 3 V sont plus petites ; 9 V est plus grande. La seule pile adaptée est la pile de 6 V.",
+                  "answers": [
+                    {
+                      "content": "Une pile de 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile de 4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de volts la pile de 9 V dépasse-t-elle la tension nominale de la lampe de 6 V ?",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : la lampe est de 6 V et la pile de 9 V. Étape 2 — Comparer : 9 − 6 = 3 V : la pile est plus grande. Étape 3 — Conclure : elle dépasse la tension nominale de 3 V : la lampe est survoltée. Le résultat 15 viendrait d'une addition à la place d'une soustraction : pour savoir de combien une tension en dépasse une autre, on soustrait toujours la plus petite à la plus grande.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Lire les indications d'un générateur et d'un récepteur ; comparer les tensions ; prévoir un fonctionnement normal, un éclat faible ou un risque de griller ; choisir le générateur adapté ; justifier par écrit.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Voici les inscriptions relevées à la maison : pile ronde « 1,5 V », pile plate « 4,5 V », lampe de lampe torche « 4,5 V ; 0,25 A », radio « 6 V », lampe de guirlande « 3 V ; 0,1 A ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque inscription, trouve d'abord l'appareil puis la grandeur grâce à l'unité.",
+              "questions": [
+                {
+                  "content": "Relie chaque appareil à sa tension nominale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : trois récepteurs avec leurs inscriptions. Étape 2 — Reconnaître : le nombre suivi de V est la tension de chaque récepteur. Étape 3 — Écrire : torche 4,5 V ; radio 6 V ; guirlande 3 V. Les ampères (0,25 A et 0,1 A) sont des intensités et ne se relient pas à ces tensions.",
+                  "answers": [
+                    {
+                      "content": "Lampe de lampe torche",
+                      "match": "4,5 V"
+                    },
+                    {
+                      "content": "Radio",
+                      "match": "6 V"
+                    },
+                    {
+                      "content": "Lampe de guirlande",
+                      "match": "3 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intensité nominale de la lampe de guirlande ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la lampe de guirlande porte « 3 V ; 0,1 A ». Étape 2 — Reconnaître : le nombre suivi de A est une intensité. Étape 3 — Écrire : l'intensité nominale est 0,1 A. 3 V est la tension, pas l'intensité.",
+                  "answers": [
+                    {
+                      "content": "0,1 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,1 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile ronde et la pile plate sont des récepteurs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la pile ronde (1,5 V) et la pile plate (4,5 V) sont des piles. Étape 2 — Reconnaître : une pile fournit l'énergie : c'est un générateur. Étape 3 — Écrire : l'affirmation est fausse. Les récepteurs sont la lampe, la radio et la guirlande.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'unité de la tension nominale de la radio est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la radio porte « 6 V ». Étape 2 — Reconnaître : V est le symbole du volt. Étape 3 — Écrire : l'unité est le volt. L'ampère n'est pas l'unité de la tension : c'est l'unité de l'intensité, qui s'écrit avec la lettre A et qui est le second nombre porté par une lampe.",
+                  "answers": [
+                    {
+                      "content": "volt",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de générateurs la liste des inscriptions de l'énoncé compte-t-elle ?",
+                  "question_type": "numeric",
+                  "unit": "piles",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la liste contient pile ronde, pile plate, lampe torche, radio, guirlande. Étape 2 — Reconnaître : les piles sont les générateurs ; les trois autres sont des récepteurs. Étape 3 — Écrire : il y a 2 générateurs. Compter les lampes ou la radio comme générateurs est une erreur : ce sont des récepteurs, qui utilisent l'énergie au lieu de la fournir.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On branche la lampe de torche de 4,5 V sur chacune des piles de la maison (1,5 V, 4,5 V) puis la radio de 6 V sur la pile plate de 4,5 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare chaque pile à la tension du récepteur branché.",
+              "questions": [
+                {
+                  "content": "La lampe de 4,5 V est branchée sur la pile ronde de 1,5 V. Quel est son éclat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 1,5 V. Étape 2 — Comparer : 1,5 V est plus petit que 4,5 V. Étape 3 — Conclure : Pour la lampe de torche : son éclat est faible : la lampe est sous-voltée. L'éclat n'est pas normal.",
+                  "answers": [
+                    {
+                      "content": "Faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle grille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lampe de 4,5 V est branchée sur la pile plate de 4,5 V. Comment fonctionne-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 4,5 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est égal à 4,5 V. Étape 3 — Conclure : Pour la lampe de torche : elle fonctionne normalement, car le générateur est adapté à la lampe. Il n'y a aucun problème.",
+                  "answers": [
+                    {
+                      "content": "Normalement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avec un éclat très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle grille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La radio de 6 V branchée sur la pile plate de 4,5 V fonctionne avec une tension trop petite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la radio porte 6 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus petit que 6 V. Étape 3 — Conclure : Pour la radio de 6 V : elle fonctionne trop faiblement, car la tension du générateur est trop petite. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La radio de 6 V est ___ par la pile plate de 4,5 V.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : la radio porte 6 V et le générateur 4,5 V. Étape 2 — Comparer : 4,5 V est plus petit que 6 V. Étape 3 — Conclure : Pour la radio de 6 V : elle fonctionne trop faiblement, car la tension du générateur est trop petite. Elle est sous-voltée, pas survoltée : la pile est plus petite.",
+                  "answers": [
+                    {
+                      "content": "sous-voltée",
+                      "correct": true
+                    },
+                    {
+                      "content": "survoltée",
+                      "correct": false
+                    },
+                    {
+                      "content": "adaptée",
+                      "correct": false
+                    },
+                    {
+                      "content": "court-circuitée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux affirmations vraies sur la radio de 6 V.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : la radio est de 6 V. Étape 2 — Comparer : 4,5 < 6 ; 9 > 6. Étape 3 — Conclure : vraies : 4,5 V est plus petit ; il faut 6 V. Les deux autres propositions inversent la comparaison : la pile de 4,5 V est plus petite que 6 V, et une pile de 9 V est plus grande, donc elle ne convient pas non plus.",
+                  "answers": [
+                    {
+                      "content": "La pile de 4,5 V est plus petite que 6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il lui faut une pile de 6 V pour bien marcher",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 4,5 V est plus grande que 6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pile de 9 V l'alimente normalement",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour la fête du village, un groupe doit choisir les piles de trois appareils : une lampe de 9 V, une radio de 3 V et une guirlande de 6 V. Les piles disponibles sont de 3 V, 6 V et 9 V.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Choisis pour chaque appareil la pile de même tension, puis vérifie les erreurs possibles.",
+              "questions": [
+                {
+                  "content": "Associe chaque appareil de la fête du village à la pile qui lui convient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : les tensions sont 9 V, 3 V et 6 V. Étape 2 — Chercher : chaque appareil prend la pile de même tension. Étape 3 — Vérifier : toute autre pile serait trop petite ou trop grande. Associer au hasard ou par la taille de la pile est faux : seule l'égalité des tensions rend l'association correcte, sinon l'éclat est faible ou la lampe risque de griller.",
+                  "answers": [
+                    {
+                      "content": "Lampe de 9 V",
+                      "match": "Pile de 9 V"
+                    },
+                    {
+                      "content": "Radio de 3 V",
+                      "match": "Pile de 3 V"
+                    },
+                    {
+                      "content": "Guirlande de 6 V",
+                      "match": "Pile de 6 V"
+                    }
+                  ]
+                },
+                {
+                  "content": "Par erreur, le groupe branche la radio de 3 V sur la pile de 9 V. Que risque-t-il d'arriver ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la radio porte 3 V et le générateur 9 V. Étape 2 — Comparer : 9 V est plus grand que 3 V. Étape 3 — Conclure : Pour la radio de 3 V : elle risque d'être abîmée, car la tension du générateur est trop grande. Le mot « normalement » serait faux.",
+                  "answers": [
+                    {
+                      "content": "La radio risque d'être abîmée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fonctionne normalement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille faiblement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par erreur, le groupe branche la lampe de 9 V sur la pile de 3 V. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe porte 9 V et le générateur 3 V. Étape 2 — Comparer : 3 V est plus petit que 9 V. Étape 3 — Conclure : Pour la lampe de 9 V : son éclat est faible : la lampe est sous-voltée. La lampe ne grille pas : la tension est trop petite.",
+                  "answers": [
+                    {
+                      "content": "Éclat faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Éclat très fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fonctionnement normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe grille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La guirlande de 6 V est bien alimentée par la pile de 6 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe porte 6 V et le générateur 6 V. Étape 2 — Comparer : 6 V est égal à 6 V. Étape 3 — Conclure : Pour la guirlande : elle fonctionne normalement, car le générateur est adapté à la lampe. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche pour associer un appareil à sa pile.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on lit d'abord la tension. Étape 2 — Chercher : on cherche la pile égale. Étape 3 — Vérifier : on vérifie les autres. On conclut ensuite par l'association : on ne conclut jamais avant d'avoir vérifié les autres piles, car une pile trop petite ou trop grande ne convient pas.",
+                  "answers": [
+                    {
+                      "content": "Lire la tension de l'appareil"
+                    },
+                    {
+                      "content": "Chercher la pile de même tension"
+                    },
+                    {
+                      "content": "Vérifier les autres piles"
+                    },
+                    {
+                      "content": "Conclure : écrire l'association"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève dispose de trois piles (1,5 V, 4,5 V, 9 V) et d'une lampe marquée « 4,5 V ; 0,3 A ». Il doit remplir une fiche de compte rendu pour son professeur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode : lire, comparer, conclure.",
+              "questions": [
+                {
+                  "content": "Parmi ces piles, laquelle donne un fonctionnement normal à la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la lampe est de 4,5 V. Étape 2 — Chercher : seule la pile de 4,5 V est égale. Étape 3 — Vérifier : 1,5 V est plus petit (éclat faible) et 9 V plus grand (risque de griller). Les trois piles ne conviennent pas toutes : seule une tension égale convient.",
+                  "answers": [
+                    {
+                      "content": "La pile de 4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile de 1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de 9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois piles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète la fiche en reliant chaque pile à son résultat avec la lampe de 4,5 V.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : la lampe est de 4,5 V, les piles de 1,5 V, 4,5 V et 9 V. Étape 2 — Comparer : 1,5 < 4,5 ; 4,5 = 4,5 ; 9 > 4,5. Étape 3 — Conclure : plus petit : éclat faible ; égal : normal ; plus grand : risque de griller. Chaque ligne se justifie par une comparaison des deux nombres de volts, jamais par la forme ou la taille de la pile.",
+                  "answers": [
+                    {
+                      "content": "Pile de 1,5 V",
+                      "match": "Éclat faible"
+                    },
+                    {
+                      "content": "Pile de 4,5 V",
+                      "match": "Fonctionnement normal"
+                    },
+                    {
+                      "content": "Pile de 9 V",
+                      "match": "Risque de griller"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intensité nominale de la lampe, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la lampe porte « 4,5 V ; 0,3 A ». Étape 2 — Reconnaître : le nombre suivi de A est l'intensité. Étape 3 — Écrire : l'intensité nominale est 0,3 A. Le nombre 4,5 est la tension : il est suivi de V, alors que l'intensité est suivie de A. Confondre les deux unités est l'erreur la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "0,3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fonctionnement normal demande que la tension de la pile soit égale à la tension nominale de la lampe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la lampe a une tension nominale ; la pile a une tension. Étape 2 — Comparer : on compare les deux nombres. Étape 3 — Conclure : un fonctionnement normal demande deux tensions égales. Vrai. Une tension plus grande n'est pas meilleure : elle risque de griller la lampe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Rédige la conclusion de la fiche : indique la pile à utiliser pour la lampe de 4,5 V et explique pourquoi les deux autres ne conviennent pas.",
+                  "question_type": "written",
+                  "points": 4,
+                  "criteria": [
+                    "Choisit la pile de 4,5 V (1 point)",
+                    "Explique que 1,5 V est plus petit : éclat faible (1 point)",
+                    "Explique que 9 V est plus grand : risque de griller (1 point)",
+                    "Écrit les valeurs en volts avec des phrases claires (1 point)"
+                  ],
+                  "starter": "Je choisis la pile de 4,5 V parce que…",
+                  "explanation": "Corrigé modèle. Étape 1 — Lire : la lampe est de 4,5 V. Étape 2 — Comparer : la pile de 1,5 V est plus petite, la pile de 4,5 V est égale, la pile de 9 V est plus grande. Étape 3 — Conclure : on utilise la pile de 4,5 V ; avec 1,5 V l'éclat est faible, avec 9 V la lampe risque de griller. Barème : 1 point par critère.",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
