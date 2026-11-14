@@ -24,6 +24,13 @@
   - deux renommages simultanés vers le même nom donnaient un 500 → `attempt_with_cause`, « nom déjà pris » (test) ;
   - borne de l'indice d'exercice alignée sur l'entité (400).
 
+## Couverture des branches (train #606, 99,75 %)
+
+- 17 branches de #605 sans test : refus de policy et exercice/notion introuvable de `edit_text`, `match_content` d'une paire, bonnes réponses en liste, notion sans fiche / sans exemple / nom trop long / écriture refusée hors collision, bornes de texte d'une question. Chacune a son test.
+- `exercise_text` envoyé en simple texte donnait une 500 (`String#[]` avec un symbole) → 422 `structure_changed` (test).
+- Code mort retiré : la conversion `to_unsafe_h` de `scalars` (la question sort déjà de `given_hash`, donc d'un hash).
+- Aucun `:nocov:`.
+
 ## Ce qu'on a appris sur la codebase
 
 - `question_attempts.correct` et `exercise_sessions.score_percent` sont enregistrés : changer `answers.correct` ne touche aucun résultat passé, sans code de plus.

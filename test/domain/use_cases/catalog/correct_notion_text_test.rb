@@ -29,6 +29,7 @@ module UseCases
 
         def correct_text(id:, name:, sheet:, at:)
           raise FakeTransaction::Refused if name == "Collision"
+          raise FakeTransaction::OtherRefusal if name == "Refus"
 
           @written << { id:, name:, sheet:, at: }
           @stored.find { it.id == id }.name = name
@@ -134,6 +135,36 @@ module UseCases
 
         assert_equal :invalid, result.code
         assert_equal [ :taken ], result.errors[:name]
+      end
+
+      test "a write refused for another reason than a name collision reads « write failed », not « name taken »" do
+        result = correct(name: "Refus")
+
+        assert_equal :invalid, result.code
+        assert_equal [ :write_failed ], result.errors[:base]
+        assert_empty @essentials.written
+      end
+
+      test "a notion without a sheet is refused: nothing to correct, reimport" do
+        @essentials = FakeEssentials.new([ Essential.new(id: 10, slug: "thales", course_id: 1, name: "Thalès", status: "published",
+                                                         course_status: "published") ], { 10 => {} })
+
+        result = correct
+
+        assert_equal [ :no_sheet ], result.errors[:base]
+        assert_empty @essentials.written
+      end
+
+      test "a name over the limit is refused; a sheet without an example gets none added" do
+        assert_equal [ :too_long ], correct(name: "x" * (Entities::Catalog::Essential::NAME_MAX + 1)).errors[:name]
+
+        sheet = SHEET.except("example")
+        @essentials = FakeEssentials.new([ Essential.new(id: 10, slug: "thales", course_id: 1, name: "Thalès", status: "published",
+                                                         course_status: "published") ], { 10 => sheet })
+        result = correct(example_steps: [], example_statement: "")
+
+        assert_equal :invalid, result.code
+        assert_equal [ :blank ], result.errors[:"example.statement"]
       end
     end
   end

@@ -258,4 +258,27 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_equal SHEET, essential.reload.sheet
   end
+
+  DENYING_POLICY = Object.new.tap { |policy| policy.define_singleton_method(:call) { |actor:| Shared::Result.failure(:forbidden) } }
+
+  test "edition-texte-lecon: the policy answers before any reading: refused, the text of the notion is not shown" do
+    essential = create_essential(course: @course, name: "La méiose", sheet: SHEET)
+    sign_in_as @member
+
+    Policies::Catalog::ManageContentPolicy.define_singleton_method(:new) { |*| DENYING_POLICY }
+    get text_teams_essential_path(essential.slug)
+
+    assert_response :forbidden
+    assert_no_match "Retiens.", response.body
+  ensure
+    Policies::Catalog::ManageContentPolicy.singleton_class.send(:remove_method, :new)
+  end
+
+  test "edition-texte-lecon: the text of an unknown notion is not found" do
+    sign_in_as @member
+
+    get text_teams_essential_path("inconnue")
+
+    assert_response :not_found
+  end
 end

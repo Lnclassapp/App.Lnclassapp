@@ -54,7 +54,8 @@ module Teams
     # La bonne réponse : un bouton radio « key » (une seule juste), un par case « keys[case] » (liste), ou une case à cocher par proposition.
     def text_from_params
       text = UseCases::Assessment::CorrectExerciseText
-      input = params.fetch(:exercise_text, {})
+      input = params[:exercise_text]
+      input = ActionController::Parameters.new unless input.is_a?(ActionController::Parameters) # texte forgé : structure refusée (422), pas d'erreur 500
       questions = given_hash(input[:questions]).map do |question_id, question|
         keys = [ question[:key], *scalars(question[:keys]) ].compact.map(&:to_s)
         answers = given_hash(question[:answers]).map do |answer_id, answer|
@@ -74,9 +75,8 @@ module Teams
       value.is_a?(Hash) ? value.to_a.select { |_, nested| nested.is_a?(Hash) } : []
     end
 
-    # Les bonnes réponses d'une liste, une par case : seules les valeurs texte comptent.
+    # Les bonnes réponses d'une liste, une par case : seules les valeurs texte comptent (la question vient de given_hash : déjà un hash).
     def scalars(value)
-      value = value.to_unsafe_h if value.respond_to?(:to_unsafe_h)
       value.is_a?(Hash) ? value.values.grep(String) : []
     end
 
