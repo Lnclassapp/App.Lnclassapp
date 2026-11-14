@@ -7,6 +7,63 @@ fr:
         # IL-14 : le bandeau d'accueil, une fois après un retrait (UDR-0081 §3.5).
         removed: "Tu ne fais plus partie de cette classe. Choisis ta classe."
       # Le bandeau bleu de l'accueil (shared/navigation/_home_band) porte ses propres clés : shared.navigation.home_band.
+      # UDR accueil élève §3.2, §3.3 : la carte du prochain exercice (code conservé pour le guidage d'activation, hors des écrans élève).
+      next_step:
+        # « 3E B · CM1T › » : le sigle de l'établissement, ou son nom ; mis en majuscules par la mise en page.
+        class_link: "%{classroom} · %{school}"
+        class_link_label: "Ma classe, %{classroom}"
+        # Sous le titre : la matière et, s'il est connu, l'enseignant qui a donné l'exercice.
+        meta: "%{material} · %{teacher}"
+        progress:
+          one: "%{count} exercice fait sur %{total}"
+          other: "%{count} exercices faits sur %{total}"
+        progress_label: "%{done} exercices faits sur %{total}"
+        late:
+          badge: "En retard"
+          start: "Le faire maintenant"
+          start_label: "Faire maintenant l'exercice « %{title} »"
+          others:
+            one: "Et 1 autre en retard"
+            other: "Et %{count} autres en retard"
+        due:
+          start: "Commencer l'exercice"
+          start_label: "Commencer l'exercice « %{title} »"
+          resume: "Reprendre"
+          resume_label: "Reprendre l'exercice « %{title} »"
+        review:
+          badge: "À revoir"
+          note: "Ta médaille est %{medal}. Relis la fiche, puis refais un exercice."
+          open: "Revoir la fiche"
+          open_label: "Revoir la fiche « %{title} »"
+          meta: "%{material} · Fiche de révision"
+        all_done:
+          overline: "Bravo"
+          title: "Tout est fait !"
+          daily: "Exercice du jour"
+          start: "Faire l'exercice du jour"
+          start_label: "Faire l'exercice du jour « %{title} »"
+          done_today: "Exercice du jour fait. Reviens demain !"
+          tomorrow: "Demain : %{subject}"
+          none: "Rien à te proposer aujourd'hui."
+        unassigned:
+          # Écrit « Exercice du jour · Lnclass » par la vue : le suffixe « · Lnclass » est celui du titre de page (UDR-0054 §3.1).
+          badge: "Exercice du jour"
+          title: "Exercice du jour"
+          start: "Commencer"
+          start_label: "Commencer l'exercice du jour « %{title} »"
+          done_today: "Exercice du jour fait. Reviens demain !"
+          tomorrow: "Demain : %{subject}"
+          none: "Rien à te proposer aujourd'hui."
+          invite: "Ton enseignant n'est pas sur Lnclass ? Invite-le"
+        # Chantier eleve-sans-prof : sans classe, l'exercice du jour de son dernier niveau, sous « Rejoindre ».
+        no_classroom:
+          daily: "Exercice du jour"
+          start: "Faire l'exercice du jour"
+          start_label: "Faire l'exercice du jour « %{title} »"
+          done_today: "Exercice du jour fait. Reviens demain !"
+          tomorrow: "Demain : %{subject}"
+          none: "Rien à te proposer aujourd'hui."
+      # UDR accueil élève §3.3 état 6 : l'élève sans classe active (archivée, ou retiré) ; le code, ou la cascade.
       # UDR XXXX écrans minimalistes style Wave §3 : la carte de la classe (class_card), à cheval sur la jonction bleu → blanc.
       class_card:
         label: "Ta classe"

@@ -21,5 +21,5 @@ Vérifie toi-même les quatre conditions du tableau (≤ 3 fichiers hors tests ;
 ## Étape 2 — Prouver et livrer
 
 - `bin/ci-quiet` sur le head final ; sa ligne de preuve va dans la PR.
-- Une vue touchée : captures 390 px et ordinateur, envoyées au porteur, jamais commitées.
+- Une vue touchée : captures 390 px et ordinateur, envoyées au porteur, jamais commitées. Écran de l'élève : applique d'abord la skill `ecrans-wave` (une retouche qui ajoute un bloc à un écran de l'élève n'en est pas une).
 - PR prête vers `Develop`. Contrat de session : tu la surveilles, tu ne finis pas sur une question.

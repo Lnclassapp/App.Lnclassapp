@@ -139,4 +139,6 @@ git commit -m "docs(docs): open chantier <slug> — memo, prd, plan"
 
 ## Rappels d'exécution (phase 4, quand elle viendra)
 
+- **Travail d'interface de l'élève** : applique la skill `ecrans-wave` (UDR « écrans minimalistes, style Wave ») avant de dessiner ou de coder un écran.
+
 Dans **chaque** lot : test rouge d'abord → `app/domain/` (Ruby pur, zéro `ActiveRecord`/`Orm::`) → `app/infrastructure/` → `app/controllers/` → vues. En-tête HITL 3 lignes sur chaque fichier de `app/` (`docs/guide/conventions.md` §5) — le hook `.githooks/pre-commit` le bloque sinon. Blueprints de couche : `docs/blueprints/`. Un lot vertical n'a **jamais** le droit de redéfinir un port : il s'arrête, le Lot 0 rouvre.

@@ -77,7 +77,7 @@ Pourquoi plutôt qu'un onglet ou une barre du bas : la valeur de l'écran est di
 ## 4. Conséquences
 
 - La règle d'or : **ce qu'on ajoute à un écran de l'élève en retire un autre**. Toute nouvelle carte d'accueil passe par cette UDR.
-- Le chemin grille → exercice passe de 2 clics (carte) à 3 (matière → leçon → sujet) ; le porteur l'accepte pour la lisibilité (maquettes validées). La carte « Prochain exercice » n'existe plus nulle part ; `NextExerciseQuery` et sa carte sont supprimés.
+- Le chemin grille → exercice passe de 2 clics (carte) à 3 (matière → leçon → sujet) ; le porteur l'accepte pour la lisibilité (maquettes validées). La carte « Prochain exercice » n'existe plus nulle part ; **Le code de la carte est conservé, hors des écrans** : `NextExerciseQuery`, la partial `_next_exercise`, les états `next_step/` et leurs clés I18n restent (non affichés), pour le guidage d'activation après l'inscription (issue « Réutiliser « Prochain exercice » dans l'activation après l'inscription »). Seul l'affichage sur l'accueil, la matière et la leçon est retiré. La skill `.claude/skills/ecrans-wave` est le mode d'emploi de cette UDR.
 - « Voir plus (n) » ne fait aucune requête : les lignes en trop sont déjà dans la page, masquées (`hidden`), et révélées par `reveal` (même limite et même contrôleur que l'UDR-0057 R3).
 - Les écrans enseignant, direction et équipe ne changent pas : la barre et la carte d'accueil de l'enseignant restent celles de l'UDR enseignant.
 - La charte `lnclass-design-system` (skill hors dépôt) impose encore la carte « Prochain exercice » : elle est périmée sur ce point, voir le journal du chantier.

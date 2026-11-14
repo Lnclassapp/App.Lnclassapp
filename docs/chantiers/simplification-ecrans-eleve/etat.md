@@ -2,16 +2,17 @@
 
 > Tenu par l'orchestrateur ([`docs/workflows/orchestrateur.md`](../../workflows/orchestrateur.md)). Mis à jour une fois, en fin de session ; toute session d'orchestration commence par le lire. Ni secret, ni identifiant.
 
-**Mis à jour le** : 2026-11-14 · **Vague** : 1 (un seul chantier) · **Où on en est** : lots 0, A, B, C en cours dans une session, une PR vers Develop.
+**Mis à jour le** : 2026-11-14 · **Vague** : 1 (un seul chantier) · **Où on en est** : lots 0, A, B, C, D commités en local dans une session, une PR vers Develop.
 
 ## Lots
 
 | Lot | Session | Branche | PR | SHA de tête vérifié | État |
 |---|---|---|---|---|---|
-| 0 règles et socle | cette session | `feat/simplification-ecrans-eleve` | à ouvrir | — | en cours |
-| A accueil | cette session | idem | idem | — | en cours |
-| B matière | cette session | idem | idem | — | en cours |
-| C leçon | cette session | idem | idem | — | en cours |
+| 0 règles et socle | cette session | `feature/simplification-ecrans-eleve` | à ouvrir | — | fait (commit local) |
+| A accueil | cette session | idem | idem | — | fait (commit local) |
+| B matière | cette session | idem | idem | — | fait (commit local) |
+| C leçon | cette session | idem | idem | — | fait (commit local) |
+| D skill `ecrans-wave` | cette session | idem | idem | — | fait (commit local) |
 
 ## Décisions
 

@@ -10,6 +10,7 @@
       <span class="block text-base leading-snug font-medium text-pretty text-ink"><%= title %></span>
       <% if local_assigns[:detail].present? %><span class="block text-sm text-mute"><%= detail %></span><% end %>
     </span>
-    <% if local_assigns[:value].present? %><span class="shrink-0 text-base font-medium text-ink tabular-nums"><%= value %></span><% end %>
+    <%# Une valeur courte (« 0/4 ») reste en 16 px ; une valeur longue (une échéance) passe en 14 px, sur 112 px au plus, pour ne pas écraser le titre. %>
+    <% if local_assigns[:value].present? %><span class="<%= value.to_s.length > 6 ? "max-w-28 text-sm leading-snug text-mute" : "shrink-0 text-base font-medium text-ink tabular-nums" %> text-right"><%= value %></span><% end %>
   <% end %>
 <% end %>
