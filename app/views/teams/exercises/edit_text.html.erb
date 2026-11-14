@@ -1,0 +1,84 @@
+<%# 🌐 UI · teams/exercises/edit_text — corriger le texte d'un exercice, servi dans le frame « modal » %>
+<%# Rôle : titre, sujet, indice ; par question son énoncé, ses propositions, la bonne réponse, le corrigé et l'indice ; la structure reste à l'import ; refus en 422, saisie gardée %>
+<%# ADR  : 0113 (§4.6, amendement du 2026-11-14), 0115, 0116 · UDR : 0006, 0042 (amendement du 2026-11-14) %>
+<% scope = "teams.exercises.text_errors" %>
+<% given = @text.questions.index_by(&:id) %>
+<% single_key = %w[true_false single_choice] %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "exercise-text-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "exercise-text-form" %>
+    <% end %>
+    <p class="mb-5 flex flex-wrap items-center gap-2 text-sm text-mute">
+      <%= content_status_badge(@exercise.status) %> <%= t(".notice") %>
+    </p>
+    <%= form_with url: text_teams_exercise_path(@exercise.public_id), method: :patch, id: "exercise-text-form", class: "space-y-5" do %>
+      <% if @errors[:base].present? %>
+        <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+          <p><%= @errors[:base].map { t("#{scope}.#{it}") }.to_sentence %></p>
+        </div>
+      <% end %>
+      <%= text_correction_field(name: "exercise_text[title]", id: "exercise_text_title", label: t(".exercise_title"), value: @text.title,
+                                errors: @errors, key: :title, scope:, as: :text, maxlength: Entities::Assessment::Exercise::TITLE_MAX) %>
+      <%= text_correction_field(name: "exercise_text[statement]", id: "exercise_text_statement", label: t(".statement"), value: @text.statement,
+                                errors: @errors, key: :statement, scope:, rows: 4) %>
+      <%= text_correction_field(name: "exercise_text[hint]", id: "exercise_text_hint", label: t(".hint"), value: @text.hint,
+                                errors: @errors, key: :hint, scope:, rows: 2, maxlength: Entities::Assessment::Exercise::HINT_MAX) %>
+      <% @exercise.questions.each_with_index do |question, index| %>
+        <% text = given[question.id] || question %>
+        <% answers_text = Array(text.answers).index_by(&:id) %>
+        <% base = "exercise_text[questions][#{question.id}]" %>
+        <% dom = "exercise_text_question_#{question.id}" %>
+        <% codes = Array(@errors[:"questions.#{index + 1}"]) %>
+        <fieldset class="space-y-3 rounded-ln border border-line p-4" aria-describedby="<%= "#{dom}_error" if codes.any? %>">
+          <legend class="px-1 text-sm font-medium text-ink"><%= t(".question", number: index + 1) %></legend>
+          <% if codes.any? %>
+            <p id="<%= dom %>_error" role="alert" class="text-sm font-medium text-error">
+              <%= codes.map { t("#{scope}.#{it}", default: t("#{scope}.invalid")) }.uniq.to_sentence %>
+            </p>
+          <% end %>
+          <%= text_correction_field(name: "#{base}[content]", id: "#{dom}_content", label: t(".content"), value: text.content,
+                                    errors: {}, key: :content, scope:, rows: 3, maxlength: UseCases::Assessment::CorrectExerciseText::TEXT_MAX) %>
+          <% if question.answers.any? %>
+            <div class="space-y-2">
+              <p class="text-sm font-medium text-ink"><%= t(".answers") %></p>
+              <% question.answers.each_with_index do |answer, rank| %>
+                <% value = answers_text[answer.id] || answer %>
+                <% answer_dom = "#{dom}_answer_#{answer.id}" %>
+                <div class="flex items-start gap-3">
+                  <% if single_key.include?(question.question_type) %>
+                    <%= radio_button_tag "#{base}[key]", answer.id, value.correct, id: "#{answer_dom}_key", class: "mt-10 size-5 shrink-0 accent-brand",
+                                         "aria-label": t(".key", number: rank + 1) %>
+                  <% elsif question.question_type == "select" %>
+                    <%= radio_button_tag "#{base}[keys][#{answer.blank.to_i}]", answer.id, value.correct, id: "#{answer_dom}_key",
+                                         class: "mt-10 size-5 shrink-0 accent-brand", "aria-label": t(".key", number: rank + 1) %>
+                  <% elsif question.question_type.start_with?("multiple_correct") %>
+                    <%= hidden_field_tag "#{base}[answers][#{answer.id}][correct]", "0", id: nil %>
+                    <%= check_box_tag "#{base}[answers][#{answer.id}][correct]", "1", value.correct, id: "#{answer_dom}_key",
+                                      class: "mt-10 size-5 shrink-0 accent-brand", "aria-label": t(".key", number: rank + 1) %>
+                  <% end %>
+                  <div class="min-w-0 flex-1 space-y-2">
+                    <%= text_correction_field(name: "#{base}[answers][#{answer.id}][content]", id: "#{answer_dom}_content",
+                                              label: t(".answer", number: rank + 1), value: value.content, errors: {}, key: :content, scope:,
+                                              as: :text, maxlength: UseCases::Assessment::CorrectExerciseText::ANSWER_MAX) %>
+                    <% unless answer.match_content.nil? %>
+                      <%= text_correction_field(name: "#{base}[answers][#{answer.id}][match_content]", id: "#{answer_dom}_match",
+                                                label: t(".match", number: rank + 1), value: value.match_content, errors: {}, key: :match, scope:,
+                                                as: :text, maxlength: UseCases::Assessment::CorrectExerciseText::ANSWER_MAX) %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          <%= text_correction_field(name: "#{base}[explanation]", id: "#{dom}_explanation", label: t(".explanation"), value: text.explanation.to_s,
+                                    errors: {}, key: :explanation, scope:, rows: 3, maxlength: UseCases::Assessment::CorrectExerciseText::TEXT_MAX) %>
+          <%= text_correction_field(name: "#{base}[hint]", id: "#{dom}_hint", label: t(".question_hint"), value: text.hint.to_s,
+                                    errors: {}, key: :hint, scope:, rows: 2, maxlength: UseCases::Assessment::CorrectExerciseText::HINT_MAX) %>
+        </fieldset>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -70,6 +70,18 @@ module Repositories
 
         assert_equal [ first.slug, second.slug ], @repository.draft_slugs(course_id: @course.id)
       end
+
+      test "edition-lecon-equipe: sheet_of reads the imported sheet; correct_text writes the name and the sheet, slug and status kept" do
+        essential = create_essential(name: "Thalès", sheet: { "remember" => "Retiens.", "practice" => { "kept" => true } })
+        repository = EssentialRepository.new
+
+        assert_equal({ "remember" => "Retiens.", "practice" => { "kept" => true } }, repository.sheet_of(id: essential.id))
+        assert repository.correct_text(id: essential.id, name: "Thalès corrigé", sheet: { "remember" => "Retiens bien." }, at: Time.current)
+
+        essential.reload
+        assert_equal [ "Thalès corrigé", { "remember" => "Retiens bien." }, "published" ], [ essential.name, essential.sheet, essential.status ]
+        assert_equal({}, repository.sheet_of(id: 0))
+      end
     end
   end
 end

@@ -237,6 +237,9 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select paper(@devoirs.first) do
       assert_select "#content_status_exercise_#{@devoirs.first.public_id}"
+      # edition-texte-lecon : « Modifier le texte » ouvre la modale de correction, hors du conteneur que les streams remplacent.
+      assert_select "a[role=menuitem][data-turbo-frame=modal][href='#{text_teams_exercise_path(@devoirs.first.public_id)}']",
+                    text: I18n.t("catalog.content_status.actions.edit_text")
       assert_select "#content_transitions_exercise_#{@devoirs.first.public_id} a[role=menuitem][data-turbo-method=patch]" \
                     "[href='#{archive_teams_exercise_path(@devoirs.first.public_id)}']"
     end
