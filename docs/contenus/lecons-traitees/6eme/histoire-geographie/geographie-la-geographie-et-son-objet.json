@@ -1,0 +1,3770 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — La géographie et son objet",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "paysage-village",
+          "kind": "diagram",
+          "description": "Schéma en arbre du paysage du village de Yaokro. Au sommet, le paysage. Dessous, deux familles : les éléments naturels (rivière, forêt, mare) et les éléments humains (cases, route, champs, école). Chaque famille a sa couleur, expliquée dans la légende du schéma.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "p",
+                "label": "Paysage du village"
+              },
+              {
+                "id": "n",
+                "label": "Éléments naturels",
+                "category": 1
+              },
+              {
+                "id": "h",
+                "label": "Éléments humains",
+                "category": 2
+              },
+              {
+                "id": "n1",
+                "label": "Rivière",
+                "category": 1
+              },
+              {
+                "id": "n2",
+                "label": "Forêt",
+                "category": 1
+              },
+              {
+                "id": "n3",
+                "label": "Mare",
+                "category": 1
+              },
+              {
+                "id": "h1",
+                "label": "Cases",
+                "category": 2
+              },
+              {
+                "id": "h2",
+                "label": "Route",
+                "category": 2
+              },
+              {
+                "id": "h3",
+                "label": "Champs",
+                "category": 2
+              },
+              {
+                "id": "h4",
+                "label": "École",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "p",
+                "to": "n"
+              },
+              {
+                "from": "p",
+                "to": "h"
+              },
+              {
+                "from": "n",
+                "to": "n1"
+              },
+              {
+                "from": "n",
+                "to": "n2"
+              },
+              {
+                "from": "n",
+                "to": "n3"
+              },
+              {
+                "from": "h",
+                "to": "h1"
+              },
+              {
+                "from": "h",
+                "to": "h2"
+              },
+              {
+                "from": "h",
+                "to": "h3"
+              },
+              {
+                "from": "h",
+                "to": "h4"
+              }
+            ],
+            "legend": [
+              "Existe sans l'homme",
+              "Fait ou transformé par l'homme"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "domaines-geographie",
+          "kind": "diagram",
+          "description": "Schéma en arbre des deux domaines de la géographie. La géographie physique étudie les éléments naturels, comme les rivières et les forêts. La géographie humaine étudie les hommes, leurs villages, leurs routes et leurs activités, comme cultiver, pêcher ou vendre au marché.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "g",
+                "label": "La géographie"
+              },
+              {
+                "id": "ph",
+                "label": "Géographie physique",
+                "category": 1
+              },
+              {
+                "id": "hu",
+                "label": "Géographie humaine",
+                "category": 2
+              },
+              {
+                "id": "p1",
+                "label": "Rivières, forêts, mares",
+                "category": 1
+              },
+              {
+                "id": "h1",
+                "label": "Villages, villes, routes",
+                "category": 2
+              },
+              {
+                "id": "h2",
+                "label": "Cultiver, pêcher, vendre",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "g",
+                "to": "ph"
+              },
+              {
+                "from": "g",
+                "to": "hu"
+              },
+              {
+                "from": "ph",
+                "to": "p1"
+              },
+              {
+                "from": "hu",
+                "to": "h1"
+              },
+              {
+                "from": "hu",
+                "to": "h2"
+              }
+            ],
+            "legend": [
+              "Le milieu naturel",
+              "Les hommes et leur travail"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-villes",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire avec sept villes à situer : Korhogo au nord, Bouaké et Yamoussoukro au centre, Man à l'ouest, Abengourou à l'est, Abidjan et San-Pédro au sud. On s'en sert pour dire où se trouve une ville.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "places": [
+              {
+                "id": "korhogo",
+                "label": "Korhogo"
+              },
+              {
+                "id": "bouake",
+                "label": "Bouaké"
+              },
+              {
+                "id": "yamoussoukro",
+                "label": "Yamoussoukro"
+              },
+              {
+                "id": "man",
+                "label": "Man"
+              },
+              {
+                "id": "abengourou",
+                "label": "Abengourou"
+              },
+              {
+                "id": "abidjan",
+                "label": "Abidjan"
+              },
+              {
+                "id": "san_pedro",
+                "label": "San-Pédro"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir la géographie",
+          "remember": "Le mot **géographie** vient du grec et veut dire « décrire la Terre ». La géographie est la science qui étudie les **lieux**, les **paysages** et les **hommes qui les habitent**. Le géographe **observe** un lieu, le **décrit**, puis **explique** pourquoi les hommes y vivent ainsi. Elle étudie l'espace d'aujourd'hui. Elle ne se confond pas avec l'**histoire**, qui raconte le passé des hommes.",
+          "method": [
+            "Repérer le lieu dont on parle (village, ville, région).",
+            "Repérer ce que l'on étudie : le paysage ou les hommes qui y vivent.",
+            "Se demander si l'on décrit ce qui existe aujourd'hui ou si l'on raconte le passé.",
+            "Conclure : c'est de la géographie quand on étudie un lieu, son paysage et ses habitants."
+          ],
+          "example": {
+            "statement": "Une élève décrit la rivière, les champs et le travail des paysans du village de Yaokro, puis explique pourquoi les cases sont construites près de la rivière. Est-ce de la géographie ?",
+            "steps": [
+              "Repérer : le lieu dont on parle est le village de Yaokro.",
+              "Repérer ce que l'on étudie : la rivière et les champs (le paysage) et le travail des paysans (les hommes).",
+              "Se demander : l'élève décrit ce qui existe aujourd'hui à Yaokro et l'explique ; elle ne raconte pas le passé.",
+              "Conclure : oui, c'est de la géographie, car elle étudie un lieu, son paysage et ses habitants."
+            ]
+          },
+          "pitfall": "Ne confonds pas la géographie et l'histoire. L'histoire raconte ce qui s'est passé autrefois ; la géographie décrit et explique les lieux et les hommes qui y vivent. Contre-exemple : « Comment le village de Yaokro a été fondé » est de l'histoire. « Où sont les champs de Yaokro et pourquoi ? » est de la géographie.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître la géographie avec la méthode : repérer le lieu, repérer ce qu'on étudie, décrire ou raconter, conclure.",
+            "questions": [
+              {
+                "content": "La géographie étudie :",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : la géographie étudie un lieu, son paysage et ses habitants. Les dates du passé relèvent de l'histoire.",
+                "answers": [
+                  {
+                    "content": "Les lieux, les paysages et les hommes qui les habitent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Seulement les dates du passé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement les animaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement les chiffres",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce qu'on voit et à ceux qui y vivent."
+              },
+              {
+                "content": "Décrire les champs et la rivière d'un village est de la géographie.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer ce que l'on étudie : un paysage. Étape 3 — il est décrit tel qu'il existe aujourd'hui. Étape 4 — Conclure : c'est de la géographie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "On décrit un paysage d'aujourd'hui."
+              },
+              {
+                "content": "Raconter comment un village a été fondé autrefois relève de l'___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Se demander : on raconte le passé, donc ce n'est pas de la géographie. Étape 4 — Conclure : c'est de l'histoire.",
+                "answers": [
+                  {
+                    "content": "histoire",
+                    "correct": true
+                  },
+                  {
+                    "content": "géographie",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le passé, c'est l'histoire."
+              },
+              {
+                "content": "Le géographe observe, décrit, puis ___ pourquoi les hommes vivent ainsi dans un lieu.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : le travail du géographe suit trois temps : observer, décrire, expliquer.",
+                "answers": [
+                  {
+                    "content": "explique",
+                    "correct": true
+                  },
+                  {
+                    "content": "expliquer",
+                    "correct": true
+                  }
+                ],
+                "hint": "Après décrire, il faut donner des raisons."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la géographie",
+              "statement": "Dans cet exercice, tu utilises la méthode pour reconnaître ce qui relève de la géographie.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que veut dire le mot géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : le mot vient du grec et veut dire « décrire la Terre ». Raconter le passé est le rôle de l'histoire.",
+                  "answers": [
+                    {
+                      "content": "Décrire la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Raconter le passé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Compter les habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dessiner des cartes seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel cas fait-on de la géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le lieu : un village. Étape 2 — Repérer ce que l'on étudie : le paysage et les habitants. Étape 3 — c'est le présent. Étape 4 — Conclure : géographie. Les autres cas parlent du passé ou n'étudient aucun lieu.",
+                  "answers": [
+                    {
+                      "content": "On décrit le paysage et les habitants d'un village d'aujourd'hui",
+                      "correct": true
+                    },
+                    {
+                      "content": "On raconte la naissance d'un roi d'autrefois",
+                      "correct": false
+                    },
+                    {
+                      "content": "On range des dates par ordre",
+                      "correct": false
+                    },
+                    {
+                      "content": "On récite un poème",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois sujets étudiés par la géographie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Repérer ce que l'on étudie : la géographie étudie les lieux, les paysages et les hommes qui y vivent. Les batailles d'autrefois sont de l'histoire, la grammaire est du français.",
+                  "answers": [
+                    {
+                      "content": "Les lieux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les paysages",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les hommes qui habitent un lieu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les batailles d'autrefois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les règles de grammaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois temps du travail du géographe.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 4 — Conclure : on observe d'abord, on décrit ensuite, on explique enfin. On ne peut pas expliquer ce qu'on n'a pas décrit.",
+                  "answers": [
+                    {
+                      "content": "Observer le lieu."
+                    },
+                    {
+                      "content": "Décrire ce que l'on a observé."
+                    },
+                    {
+                      "content": "Expliquer pourquoi les hommes vivent ainsi."
+                    }
+                  ]
+                },
+                {
+                  "content": "Le passé des hommes est raconté par l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Se demander : raconter le passé, c'est de l'histoire. La géographie étudie le présent des lieux.",
+                  "answers": [
+                    {
+                      "content": "histoire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Raconter comment un village a été fondé est de la géographie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Se demander : on raconte le passé, donc c'est de l'histoire. « Où sont les champs du village et pourquoi ? » serait de la géographie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Géographie ou histoire ?",
+              "statement": "Dans cet exercice, tu décides si chaque situation relève de la géographie, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Décrire où se trouvent les champs, la rivière et les cases d'un village relève de la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer ce que l'on étudie : le paysage. Étape 3 — On décrit ce qui existe aujourd'hui. Étape 4 — Conclure : géographie.",
+                  "answers": [
+                    {
+                      "content": "géographie",
+                      "correct": true
+                    },
+                    {
+                      "content": "histoire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le géographe observe, décrit et explique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : ce sont les trois temps de son travail. Il observe le lieu, le décrit, puis explique pourquoi les hommes y vivent ainsi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à la bonne discipline.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Se demander : décrire ou expliquer un lieu d'aujourd'hui est de la géographie ; raconter la fondation est de l'histoire. Étape 4 — Conclure pour chaque situation.",
+                  "answers": [
+                    {
+                      "content": "Décrire les champs d'un village",
+                      "match": "Géographie"
+                    },
+                    {
+                      "content": "Raconter la fondation d'un village",
+                      "match": "Histoire"
+                    },
+                    {
+                      "content": "Réciter une règle de grammaire",
+                      "match": "Français"
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie étudie les lieux, les paysages et les ___ qui y vivent.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer ce que l'on étudie : en plus des lieux, la géographie étudie ceux qui y vivent, les hommes.",
+                  "answers": [
+                    {
+                      "content": "hommes",
+                      "correct": true
+                    },
+                    {
+                      "content": "humains",
+                      "correct": true
+                    },
+                    {
+                      "content": "habitants",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi expliquer la place des cases près d'une rivière est-il de la géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Se demander : on explique un lieu d'aujourd'hui. Étape 4 — Conclure : géographie. Aucune date et aucun récit du passé n'apparaissent.",
+                  "answers": [
+                    {
+                      "content": "On explique l'organisation actuelle d'un lieu et la vie de ses habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "On raconte un événement du passé",
+                      "correct": false
+                    },
+                    {
+                      "content": "On compte des dates",
+                      "correct": false
+                    },
+                    {
+                      "content": "On récite une leçon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases relèvent de la géographie ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Se demander : décrire le travail des paysans et la place du marché, c'est décrire le présent. La fondation et la guerre racontent le passé : histoire.",
+                  "answers": [
+                    {
+                      "content": "Les paysans cultivent des champs près de la rivière.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le marché du village se tient au centre.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un chef a fondé le village il y a longtemps.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une guerre a eu lieu autrefois.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pose-toi toujours la question : parle-t-on d'un lieu d'aujourd'hui ou d'un événement du passé ?"
+            }
+          ]
+        },
+        {
+          "name": "Le paysage : éléments naturels et éléments humains",
+          "remember": "Un **paysage** est ce que l'on voit quand on regarde autour de soi. Les **éléments naturels** existent sans l'homme : rivière, forêt, mare, ciel, arbres sauvages. Les **éléments humains** sont faits ou transformés par l'homme : cases, routes, ponts, champs, école, marché, puits. Un même paysage mêle presque toujours les deux.",
+          "method": [
+            "Observer le paysage et nommer chaque élément que l'on voit.",
+            "Se demander si l'élément existe sans l'homme ou s'il a été fait ou transformé par lui.",
+            "Classer l'élément : naturel ou humain.",
+            "Justifier le classement en une phrase."
+          ],
+          "example": {
+            "statement": "Au bord du village de Yaokro, on voit une rivière, une route en terre, des cases, un champ de manioc et un grand arbre sauvage. Classer la rivière et le champ de manioc.",
+            "steps": [
+              "Observer : les éléments sont la rivière, la route, les cases, le champ de manioc et le grand arbre.",
+              "Se demander : la rivière coule sans l'homme ; le champ a été défriché, planté et entretenu par des paysans.",
+              "Classer : la rivière est un élément naturel ; le champ de manioc est un élément humain.",
+              "Justifier : la rivière « existe sans l'homme » ; le champ est « planté par l'homme »."
+            ]
+          },
+          "pitfall": "Ne classe pas un élément d'après sa couleur ou sa place dans le paysage, mais d'après **celui qui l'a fait**. Un champ de maïs est vert comme une forêt, pourtant il est planté par l'homme : il est humain. Contre-exemple : une forêt et une plantation de cacao sont toutes deux faites d'arbres, mais la forêt est naturelle et la plantation est humaine.",
+          "figure": "paysage-village",
+          "practice": {
+            "statement": "Tu t'entraînes à classer des éléments d'un paysage avec la méthode : observer, se demander, classer, justifier.",
+            "questions": [
+              {
+                "content": "Une mare au bord du village est un élément ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Se demander : la mare existe sans l'homme. Étape 3 — Classer : élément naturel. Étape 4 — Justifier : « existe sans l'homme ».",
+                "answers": [
+                  {
+                    "content": "naturel",
+                    "correct": true
+                  },
+                  {
+                    "content": "humain",
+                    "correct": false
+                  }
+                ],
+                "hint": "Demande-toi qui a fait la mare."
+              },
+              {
+                "content": "Un champ de manioc est un élément naturel, parce qu'il est vert comme la forêt.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Se demander : le champ a été défriché et planté par des paysans. Étape 3 — Classer : élément humain. La couleur verte ne décide pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "La couleur ne compte pas : cherche qui a fait l'élément."
+              },
+              {
+                "content": "Quel élément est un élément humain ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : quatre éléments sont proposés. Étape 2 — Se demander : l'école a été construite par l'homme, les trois autres existent sans lui. Étape 3 — Classer : l'école est humaine.",
+                "answers": [
+                  {
+                    "content": "L'école du village",
+                    "correct": true
+                  },
+                  {
+                    "content": "La rivière",
+                    "correct": false
+                  },
+                  {
+                    "content": "La forêt",
+                    "correct": false
+                  },
+                  {
+                    "content": "La mare",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche ce qui a été construit."
+              },
+              {
+                "content": "Une route en terre qui relie deux villages est un élément ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Se demander : la route a été tracée et entretenue par l'homme. Étape 3 — Classer : élément humain.",
+                "answers": [
+                  {
+                    "content": "humain",
+                    "correct": true
+                  },
+                  {
+                    "content": "humaine",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une route n'existe pas sans l'homme."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Observer et classer des éléments de paysage",
+              "statement": "Dans cet exercice, tu reconnais ce qu'est un paysage et tu classes ses éléments, du plus simple au plus fin.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un paysage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : le paysage est ce que l'on voit autour de soi. Il contient des éléments naturels et des éléments humains. Dire qu'il ne contient que de la nature ou que des constructions est faux : il mêle les deux.",
+                  "answers": [
+                    {
+                      "content": "Ce que l'on voit quand on regarde autour de soi",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les forêts et les rivières",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les maisons et les routes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une liste de villes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle famille classer une forêt ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander : la forêt existe sans l'homme. Étape 3 — Classer : élément naturel. Étape 4 — Justifier : « existe sans l'homme ».",
+                  "answers": [
+                    {
+                      "content": "Les éléments naturels",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les éléments humains",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux familles à la fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux éléments naturels ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Se demander : la rivière et la mare existent sans l'homme. Étape 3 — Classer : éléments naturels. Les cases et le pont sont construits par l'homme.",
+                  "answers": [
+                    {
+                      "content": "Une rivière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une mare",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des cases",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pont",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son classement.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Se demander : qui a fait chaque élément ? La rivière existe sans l'homme. Le champ est planté et le marché construit par l'homme. Étape 3 — Classer, puis Étape 4 — Justifier.",
+                  "answers": [
+                    {
+                      "content": "Une rivière",
+                      "match": "Naturel : elle existe sans l'homme"
+                    },
+                    {
+                      "content": "Un champ de maïs",
+                      "match": "Humain : il est planté par l'homme"
+                    },
+                    {
+                      "content": "Un marché",
+                      "match": "Humain : il est construit par l'homme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paysage montre une rivière, des cases, une forêt, une route, un champ et une mare. Combien d'éléments naturels y a-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Observer : six éléments. Étape 2 — Se demander : ceux qui existent sans l'homme sont la rivière, la forêt et la mare. Étape 3 — Classer : 3 éléments naturels.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une plantation de cacao est un élément naturel parce qu'elle est faite d'arbres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Se demander : la plantation a été installée et entretenue par des planteurs. Étape 3 — Classer : élément humain. Des arbres ne suffisent pas : une forêt existe sans l'homme, une plantation non.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer les éléments du paysage de Yaokro",
+              "statement": "Dans cet exercice, tu appliques la méthode complète pour classer les éléments du paysage du village de Yaokro.",
+              "exercise_type": "fixation",
+              "figure": "paysage-village",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour classer un élément.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer. Étape 2 — Se demander. Étape 3 — Classer. Étape 4 — Justifier. On ne peut pas classer avant d'avoir observé.",
+                  "answers": [
+                    {
+                      "content": "Observer le paysage et nommer chaque élément."
+                    },
+                    {
+                      "content": "Se demander qui a fait l'élément."
+                    },
+                    {
+                      "content": "Classer l'élément : naturel ou humain."
+                    },
+                    {
+                      "content": "Justifier le classement en une phrase."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pont en bois sur la rivière est un élément ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Se demander : le pont a été construit par l'homme. Étape 3 — Classer : élément humain.",
+                  "answers": [
+                    {
+                      "content": "humain",
+                      "correct": true
+                    },
+                    {
+                      "content": "naturel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois éléments humains ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Se demander : la route, le pont et l'école ont été faits par l'homme. Étape 3 — Classer : éléments humains. La rivière et la forêt existent sans l'homme.",
+                  "answers": [
+                    {
+                      "content": "Une route",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pont",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une rivière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une forêt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mare où vivent des poissons est un élément ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Se demander : la mare existe sans l'homme. Étape 3 — Classer : élément naturel.",
+                  "answers": [
+                    {
+                      "content": "naturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "naturelle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase justifie le mieux que le champ de maïs est un élément humain ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Justifier : on cite celui qui a fait l'élément. « Il est vert », « au bord du village » ou « très grand » décrivent le champ, mais n'expliquent pas qu'il est humain.",
+                  "answers": [
+                    {
+                      "content": "Il a été défriché, planté et entretenu par des paysans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est vert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est au bord du village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est très grand",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un même paysage, on trouve des éléments naturels et des éléments humains.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer le paysage de Yaokro : la rivière et la forêt sont naturelles, les cases et la route sont humaines.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque élément, demande-toi : existerait-il si l'homme n'était jamais venu ici ?"
+            }
+          ]
+        },
+        {
+          "name": "Les deux domaines de la géographie : physique et humaine",
+          "remember": "La géographie a deux grands domaines. La **géographie physique** étudie les **éléments naturels** d'un lieu : rivières, forêts, mares. La **géographie humaine** étudie les **hommes** : où ils habitent (villages, villes), comment ils se déplacent (routes) et ce qu'ils font (cultiver, pêcher, élever, vendre au marché). Les deux se complètent : on comprend mieux la vie des hommes quand on connaît le milieu naturel où ils vivent.",
+          "method": [
+            "Lire le sujet d'étude et repérer ce qu'il étudie.",
+            "Se demander s'il s'agit d'un élément naturel ou de la vie et du travail des hommes.",
+            "Classer l'étude : géographie physique ou géographie humaine.",
+            "Justifier le classement en une phrase."
+          ],
+          "example": {
+            "statement": "Classer deux études faites à Yaokro : « étudier la forêt autour du village » et « étudier les marchés où les paysans vendent leur manioc ».",
+            "steps": [
+              "Lire : la première étude porte sur la forêt, la seconde sur les marchés et la vente du manioc.",
+              "Se demander : la forêt est un élément naturel ; le marché et la vente relèvent du travail des hommes.",
+              "Classer : l'étude de la forêt relève de la géographie physique ; l'étude des marchés de la géographie humaine.",
+              "Justifier : la première étudie « un élément naturel », la seconde « ce que font les hommes »."
+            ]
+          },
+          "pitfall": "Ne classe pas une étude d'après le lieu (campagne ou ville), mais d'après **ce qu'elle étudie**. Contre-exemple : étudier une rivière qui traverse une grande ville relève de la géographie physique, car la rivière est naturelle. Étudier les champs d'un village en pleine forêt relève de la géographie humaine, car les champs sont l'œuvre de l'homme.",
+          "figure": "domaines-geographie",
+          "practice": {
+            "statement": "Tu t'entraînes à classer des études avec la méthode : lire, se demander, classer, justifier.",
+            "questions": [
+              {
+                "content": "Étudier une mare est un travail de géographie ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Se demander : la mare est un élément naturel. Étape 3 — Classer : géographie physique.",
+                "answers": [
+                  {
+                    "content": "physique",
+                    "correct": true
+                  },
+                  {
+                    "content": "humaine",
+                    "correct": false
+                  }
+                ],
+                "hint": "La mare existe sans l'homme."
+              },
+              {
+                "content": "Quelle étude relève de la géographie humaine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Se demander : le marché est une activité des hommes. Étape 3 — Classer : géographie humaine. Rivière, forêt et mare sont naturelles.",
+                "answers": [
+                  {
+                    "content": "Les marchés d'un village",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une rivière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une forêt",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une mare",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche ce que font les hommes."
+              },
+              {
+                "content": "La géographie humaine étudie les hommes, leurs villages et leurs activités.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Classer : c'est la définition de la géographie humaine : où les hommes habitent et ce qu'ils font.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Relis la fiche."
+              },
+              {
+                "content": "La géographie qui étudie les rivières et les forêts est la géographie ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Classer : rivières et forêts sont des éléments naturels, donc géographie physique.",
+                "answers": [
+                  {
+                    "content": "physique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Éléments naturels."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Classer des études de géographie",
+              "statement": "Dans cet exercice, tu classes des sujets d'étude en géographie physique ou humaine, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'étudie la géographie physique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Classer : la géographie physique étudie les éléments naturels. Marchés, routes et écoles sont faits par les hommes : géographie humaine.",
+                  "answers": [
+                    {
+                      "content": "Les éléments naturels d'un lieu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les marchés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les routes construites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les écoles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'étudie la géographie humaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Classer : la géographie humaine étudie les hommes et ce qu'ils font. Forêts et rivières relèvent de la géographie physique.",
+                  "answers": [
+                    {
+                      "content": "Les hommes, leurs villages et leurs activités",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les forêts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les rivières",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les animaux sauvages",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sujets relèvent de la géographie physique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Se demander : la forêt et la rivière sont naturelles. Étape 3 — Classer : géographie physique. Le marché et la route sont humains.",
+                  "answers": [
+                    {
+                      "content": "Une forêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une rivière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une route",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque étude à son domaine.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Se demander : la mare est naturelle (physique) ; le travail des pêcheurs et les villages concernent les hommes (humaine). Étape 3 — Classer.",
+                  "answers": [
+                    {
+                      "content": "Étudier une mare",
+                      "match": "Géographie physique"
+                    },
+                    {
+                      "content": "Étudier le travail des pêcheurs",
+                      "match": "Géographie humaine"
+                    },
+                    {
+                      "content": "Raconter la fondation d'un village",
+                      "match": "Histoire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier les champs d'un village est de la géographie physique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Se demander : les champs sont plantés par l'homme. Étape 3 — Classer : géographie humaine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier les marchés où l'on vend du manioc relève de la géographie ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Se demander : vendre au marché est une activité des hommes. Étape 3 — Classer : géographie humaine.",
+                  "answers": [
+                    {
+                      "content": "humaine",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Physique ou humaine : décider et justifier",
+              "statement": "Dans cet exercice, tu décides du domaine de chaque étude et tu justifies, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "domaines-geographie",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour classer une étude.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Se demander. Étape 3 — Classer. Étape 4 — Justifier. On classe après avoir lu, et on justifie une fois le classement fait.",
+                  "answers": [
+                    {
+                      "content": "Lire le sujet d'étude."
+                    },
+                    {
+                      "content": "Se demander s'il s'agit d'un élément naturel ou du travail des hommes."
+                    },
+                    {
+                      "content": "Classer : physique ou humaine."
+                    },
+                    {
+                      "content": "Justifier en une phrase."
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier une route entre deux villages relève de la géographie ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Se demander : la route est faite par l'homme. Étape 3 — Classer : géographie humaine.",
+                  "answers": [
+                    {
+                      "content": "humaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "physique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sujets relèvent de la géographie humaine ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Se demander : le marché, le village et le travail des paysans concernent les hommes. Étape 3 — Classer : géographie humaine. Rivière et forêt sont physiques.",
+                  "answers": [
+                    {
+                      "content": "Un marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail des paysans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une rivière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une forêt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier une forêt relève de la géographie ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Se demander : la forêt existe sans l'homme. Étape 3 — Classer : géographie physique.",
+                  "answers": [
+                    {
+                      "content": "physique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une rivière traverse une grande ville. Étudier cette rivière relève de quel domaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander : la rivière est un élément naturel, même dans une ville. Étape 3 — Classer : géographie physique. On ne classe pas d'après le lieu (ville) mais d'après ce qu'on étudie.",
+                  "answers": [
+                    {
+                      "content": "De la géographie physique",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la géographie humaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des deux à la fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'aucun domaine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux domaines de la géographie se complètent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Classer : on comprend mieux le travail des hommes quand on connaît le milieu naturel où ils vivent. La géographie physique et la géographie humaine se complètent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Demande-toi : l'étude porte-t-elle sur un élément naturel, ou sur ce que font les hommes ?"
+            }
+          ]
+        },
+        {
+          "name": "À quoi sert la géographie : se repérer, aménager, protéger",
+          "remember": "La géographie est utile de trois façons. **Se repérer** : savoir où l'on est, situer une ville sur une carte, dire qu'elle est au nord, au sud, à l'est ou à l'ouest d'une autre. **Aménager** : choisir où construire une école, une route, un marché ou un puits, en tenant compte du paysage. **Protéger** : garder en bon état la forêt, l'eau et les terres pour que les hommes puissent y vivre longtemps.",
+          "method": [
+            "Lire la situation et repérer le besoin ou le problème.",
+            "Se demander si l'on cherche un lieu, un choix de construction ou une chose à garder.",
+            "Associer le besoin à son rôle : se repérer, aménager ou protéger.",
+            "Justifier avec un exemple pris dans la situation."
+          ],
+          "example": {
+            "statement": "Le conseil du village de Yaokro veut construire une école. Il choisit un terrain éloigné de la rivière, qui déborde parfois. À quoi sert ici la géographie ?",
+            "steps": [
+              "Lire : le village veut construire une école et doit éviter la rivière qui déborde.",
+              "Se demander : on cherche un bon endroit pour une construction.",
+              "Associer : choisir où construire, c'est aménager.",
+              "Justifier : on place l'école à l'abri de la rivière, après avoir observé le paysage."
+            ]
+          },
+          "pitfall": "Ne confonds pas **aménager** et **protéger**. Aménager, c'est transformer un lieu pour que les hommes y vivent mieux (construire une route). Protéger, c'est garder un lieu en bon état (interdire de couper une forêt). Contre-exemple : tracer une route est aménager ; empêcher qu'un cours d'eau soit pollué est protéger.",
+          "figure": "carte-villes",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver l'utilité de la géographie avec la méthode : lire, se demander, associer, justifier.",
+            "questions": [
+              {
+                "content": "Choisir où construire un puits, c'est ___ un lieu.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Associer : choisir où construire, c'est aménager.",
+                "answers": [
+                  {
+                    "content": "aménager",
+                    "correct": true
+                  },
+                  {
+                    "content": "protéger",
+                    "correct": false
+                  }
+                ],
+                "hint": "Construire, c'est transformer pour mieux vivre."
+              },
+              {
+                "content": "Dire que Korhogo est au nord d'Abidjan sert à :",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Associer : situer une ville par rapport à une autre, c'est se repérer.",
+                "answers": [
+                  {
+                    "content": "Se repérer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Aménager",
+                    "correct": false
+                  },
+                  {
+                    "content": "Protéger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cultiver",
+                    "correct": false
+                  }
+                ],
+                "hint": "On situe un lieu."
+              },
+              {
+                "content": "Interdire de couper une forêt, c'est protéger.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Associer : on garde la forêt en bon état, c'est protéger.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Garder en bon état."
+              },
+              {
+                "content": "Tracer une route entre deux villages, c'est ___ l'espace.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Associer : transformer un lieu pour que les hommes y vivent mieux, c'est aménager.",
+                "answers": [
+                  {
+                    "content": "aménager",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le verbe commence par a."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Se repérer, aménager ou protéger ?",
+              "statement": "Dans cet exercice, tu associes chaque situation à l'utilité de la géographie, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un habitant cherche où se trouve la ville de Man. Quelle utilité de la géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : chercher où est un lieu, c'est se repérer. Aménager serait construire, protéger serait garder en bon état.",
+                  "answers": [
+                    {
+                      "content": "Se repérer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": false
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cultiver",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le village décide de ne pas couper la forêt près de la source d'eau. Quelle utilité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : garder la forêt en bon état, c'est protéger. Construire ou tracer une route serait aménager.",
+                  "answers": [
+                    {
+                      "content": "Protéger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le village choisit un terrain pour construire un marché. Quelle utilité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : choisir où construire, c'est aménager.",
+                  "answers": [
+                    {
+                      "content": "Aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Compter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action à son utilité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Associer : situer un lieu, c'est se repérer ; construire, c'est aménager ; garder en bon état, c'est protéger.",
+                  "answers": [
+                    {
+                      "content": "Dire que Korhogo est au nord d'Abidjan",
+                      "match": "Se repérer"
+                    },
+                    {
+                      "content": "Construire une route",
+                      "match": "Aménager"
+                    },
+                    {
+                      "content": "Garder une forêt en bon état",
+                      "match": "Protéger"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois utilités de la géographie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Associer : la fiche donne trois utilités : se repérer, aménager et protéger.",
+                  "answers": [
+                    {
+                      "content": "Se repérer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Inventer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oublier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aménager un lieu et protéger un lieu, c'est la même chose.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer : aménager, c'est transformer pour mieux vivre (construire une route) ; protéger, c'est garder en bon état (garder une forêt).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Utiliser la géographie dans un village et sur une carte",
+              "statement": "Dans cet exercice, tu utilises la méthode pour situer des villes sur la carte de la Côte d'Ivoire et pour choisir comment agir dans un village.",
+              "exercise_type": "fixation",
+              "figure": "carte-villes",
+              "questions": [
+                {
+                  "content": "Korhogo est au nord du pays et Abidjan au sud. Où est Korhogo par rapport à Abidjan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on veut situer Korhogo. Étape 3 — Associer : situer un lieu, c'est se repérer. Sur la carte, le nord est en haut : Korhogo est au nord d'Abidjan.",
+                  "answers": [
+                    {
+                      "content": "Au nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'ouest",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Man est à l'ouest du pays et Abengourou à l'est. Par rapport à Man, Abengourou est situé à l'___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Associer : situer un lieu, c'est se repérer. L'est est en face de l'ouest : Abengourou est à l'est de Man.",
+                  "answers": [
+                    {
+                      "content": "est",
+                      "correct": true
+                    },
+                    {
+                      "content": "ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles villes sont au sud de Yamoussoukro ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Associer : se repérer sur la carte. Abidjan et San-Pédro sont plus bas que Yamoussoukro : au sud. Korhogo et Bouaké sont plus haut : au nord.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "San-Pédro",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bouaké",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Se demander. Étape 3 — Associer. Étape 4 — Justifier.",
+                  "answers": [
+                    {
+                      "content": "Lire la situation et repérer le besoin."
+                    },
+                    {
+                      "content": "Se demander ce que l'on cherche."
+                    },
+                    {
+                      "content": "Associer le besoin à son rôle."
+                    },
+                    {
+                      "content": "Justifier avec un exemple."
+                    }
+                  ]
+                },
+                {
+                  "content": "Empêcher qu'un cours d'eau soit pollué, c'est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Associer : garder l'eau en bon état, c'est protéger.",
+                  "answers": [
+                    {
+                      "content": "protéger",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisir l'endroit d'une école en observant le paysage est un exemple d'aménagement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer : choisir où construire est aménager. Étape 4 — Justifier : on regarde le paysage avant de construire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Demande-toi : cherche-t-on un lieu, un endroit où construire, ou quelque chose à garder en bon état ?"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le village de Yaokro vu par les élèves",
+          "statement": "Document (texte écrit pour Lnclass) : « Les élèves de 6ème de Yaokro, village imaginaire, décrivent ce qu'ils voient depuis la cour de l'école : une rivière, une forêt, une mare, des cases, une route en terre et un champ de manioc. »",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels sont les trois éléments naturels du paysage décrit ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode de classement : Étape 1 — Observer : six éléments sont cités. Étape 2 — Se demander qui a fait chacun : la rivière, la forêt et la mare existent sans l'homme. Étape 3 — Classer : éléments naturels. Étape 4 — Justifier : « existe sans l'homme ». La route et le champ sont faits ou plantés par l'homme. Le champ vert ressemble à la forêt, mais c'est le piège : on classe d'après celui qui a fait l'élément.",
+              "answers": [
+                {
+                  "content": "La rivière",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt",
+                  "correct": true
+                },
+                {
+                  "content": "La mare",
+                  "correct": true
+                },
+                {
+                  "content": "La route en terre",
+                  "correct": false
+                },
+                {
+                  "content": "Le champ de manioc",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément du paysage à sa famille.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Observer l'élément. Étape 2 — Se demander qui l'a fait. Étape 3 — Classer. Étape 4 — Justifier. Les cases sont construites, le champ est planté : humains. La mare existe sans l'homme : naturelle.",
+              "answers": [
+                {
+                  "content": "Les cases",
+                  "match": "Éléments humains : construites par l'homme"
+                },
+                {
+                  "content": "La mare",
+                  "match": "Éléments naturels : elle existe sans l'homme"
+                },
+                {
+                  "content": "Le champ de manioc",
+                  "match": "Éléments humains : planté par l'homme"
+                }
+              ]
+            },
+            {
+              "content": "Décrire les champs et la rivière de Yaokro, puis expliquer pourquoi les cases sont près de l'eau, relève de :",
+              "question_type": "single_choice",
+              "explanation": "Méthode pour reconnaître la géographie : Étape 1 — Repérer le lieu : Yaokro. Étape 2 — Repérer ce qu'on étudie : le paysage et les habitants. Étape 3 — On décrit le présent. Étape 4 — Conclure : géographie. L'histoire raconterait le passé du village.",
+              "answers": [
+                {
+                  "content": "La géographie",
+                  "correct": true
+                },
+                {
+                  "content": "L'histoire",
+                  "correct": false
+                },
+                {
+                  "content": "Des mathématiques",
+                  "correct": false
+                },
+                {
+                  "content": "Du français",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Étudier le travail des paysans de Yaokro relève de quel domaine de la géographie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 2 — Se demander : le travail des paysans concerne les hommes. Étape 3 — Classer : géographie humaine. La géographie physique étudierait la rivière ou la forêt.",
+              "answers": [
+                {
+                  "content": "La géographie humaine",
+                  "correct": true
+                },
+                {
+                  "content": "La géographie physique",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun domaine",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux seulement quand il pleut",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un champ est un élément naturel parce qu'il est vert.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Se demander qui a fait le champ : des paysans l'ont défriché et planté. Étape 3 — Classer : élément humain. La couleur ne décide pas du classement.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une décision pour le village de Tiékro",
+          "statement": "Document (texte écrit pour Lnclass) : « Tiékro est un village imaginaire. Ses habitants veulent creuser un puits, tracer une route vers un marché voisin et garder en bon état la forêt qui borde le village. Un enseignant explique que la géographie aide à faire ces choix. »",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Les habitants choisissent le bon endroit pour creuser un puits. À quoi sert ici la géographie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire : on choisit où creuser. Étape 2 — Se demander : c'est un choix de construction. Étape 3 — Associer : aménager. Étape 4 — Justifier : on observe le paysage avant de creuser.",
+              "answers": [
+                {
+                  "content": "À aménager",
+                  "correct": true
+                },
+                {
+                  "content": "À protéger",
+                  "correct": false
+                },
+                {
+                  "content": "À se repérer",
+                  "correct": false
+                },
+                {
+                  "content": "À raconter le passé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Garder en bon état la forêt qui borde Tiékro, à quoi sert la géographie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 2 — Se demander : on veut garder la forêt. Étape 3 — Associer : protéger. Tracer une route serait aménager.",
+              "answers": [
+                {
+                  "content": "À protéger",
+                  "correct": true
+                },
+                {
+                  "content": "À aménager",
+                  "correct": false
+                },
+                {
+                  "content": "À se repérer",
+                  "correct": false
+                },
+                {
+                  "content": "À vendre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque projet de Tiékro à son utilité.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 3 — Associer : tracer une route, c'est aménager ; garder une forêt, c'est protéger ; trouver où est un lieu, c'est se repérer.",
+              "answers": [
+                {
+                  "content": "Tracer une route vers le marché",
+                  "match": "Aménager"
+                },
+                {
+                  "content": "Garder la forêt en bon état",
+                  "match": "Protéger"
+                },
+                {
+                  "content": "Trouver où se situe le marché voisin",
+                  "match": "Se repérer"
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces éléments d'un paysage, lesquels sont humains ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode de classement : Étape 2 — Se demander qui l'a fait : le puits et la route sont faits par l'homme. Étape 3 — Classer : humains. La forêt, la mare et le ciel existent sans l'homme.",
+              "answers": [
+                {
+                  "content": "Le puits",
+                  "correct": true
+                },
+                {
+                  "content": "La route",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt",
+                  "correct": false
+                },
+                {
+                  "content": "La mare",
+                  "correct": false
+                },
+                {
+                  "content": "Le ciel",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Étudier la forêt de Tiékro relève de la géographie ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 2 — Se demander : la forêt est un élément naturel. Étape 3 — Classer : géographie physique.",
+              "answers": [
+                {
+                  "content": "physique",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le paysage de Soubakro",
+          "statement": "Document (texte écrit pour Lnclass) : « Autour du village imaginaire de Soubakro, il y a une forêt et une rivière. Dans le village, on voit des cases, une école, un marché, un puits et un champ de maïs. Les habitants cultivent le maïs, pêchent dans la rivière et vendent leur récolte au marché. » Problème de niveau devoir.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels éléments de Soubakro sont naturels ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 2 — Se demander qui a fait l'élément. La rivière et la forêt existent sans l'homme : naturelles. Le puits est creusé, l'école et le marché sont construits : humains. Étape 3 — Classer, puis Étape 4 — Justifier.",
+              "answers": [
+                {
+                  "content": "La rivière",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt",
+                  "correct": true
+                },
+                {
+                  "content": "Le puits",
+                  "correct": false
+                },
+                {
+                  "content": "L'école",
+                  "correct": false
+                },
+                {
+                  "content": "Le marché",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Étudier la pêche dans la rivière de Soubakro relève surtout de :",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire : on étudie la pêche. Étape 2 — Se demander : pêcher est une activité des hommes. Étape 3 — Classer : géographie humaine. La rivière seule serait de la géographie physique ; ici c'est ce que font les hommes qui compte.",
+              "answers": [
+                {
+                  "content": "La géographie humaine, car on étudie le travail des hommes",
+                  "correct": true
+                },
+                {
+                  "content": "La géographie physique, car il y a une rivière",
+                  "correct": false
+                },
+                {
+                  "content": "L'histoire, car la pêche est ancienne",
+                  "correct": false
+                },
+                {
+                  "content": "D'aucune discipline",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le village veut construire un nouveau marché. Quelle utilité de la géographie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 2 — Se demander : on choisit où construire. Étape 3 — Associer : aménager.",
+              "answers": [
+                {
+                  "content": "Aménager",
+                  "correct": true
+                },
+                {
+                  "content": "Protéger",
+                  "correct": false
+                },
+                {
+                  "content": "Se repérer",
+                  "correct": false
+                },
+                {
+                  "content": "Cultiver",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le champ de maïs de Soubakro est un élément naturel.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Se demander : le champ est planté et entretenu par les habitants. Étape 3 — Classer : élément humain.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les trois temps du travail du géographe qui étudie Soubakro.",
+              "question_type": "ordering",
+              "explanation": "Le géographe observe d'abord, décrit ensuite, explique enfin. Étape 4 — Conclure : on ne peut pas expliquer sans avoir décrit.",
+              "answers": [
+                {
+                  "content": "Observer le village et ses environs."
+                },
+                {
+                  "content": "Décrire ce que l'on a observé."
+                },
+                {
+                  "content": "Expliquer pourquoi les habitants vivent ainsi."
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi le puits est un élément humain alors que la rivière est un élément naturel.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Le puits est dit creusé ou fait par l'homme",
+                "La rivière est dite présente sans l'homme",
+                "Les familles humain et naturel sont bien nommées",
+                "Les phrases sont claires"
+              ],
+              "explanation": "Corrigé modèle : « Le puits est un élément humain, car il a été creusé par les habitants. La rivière est un élément naturel, car elle coule sans l'homme. » Barème sur 2 : 0,5 pour le puits creusé par l'homme ; 0,5 pour la rivière présente sans l'homme ; 0,5 pour les familles « humain » et « naturel » bien nommées ; 0,5 pour la clarté des phrases.",
+              "answers": [],
+              "starter": "Le puits est un élément humain car…"
+            }
+          ]
+        },
+        {
+          "title": "Bilan : la géographie à Gnamakro",
+          "statement": "Problème de synthèse. Document (texte écrit pour Lnclass) : « Ama prépare un exposé sur le village imaginaire de Gnamakro. Elle écrit : Autour du village, il y a une forêt et une rivière. Dans le village, il y a des cases, une école et un champ d'igname. Les habitants veulent protéger la forêt et construire un pont sur la rivière. Ama présente aussi la carte de la Côte d'Ivoire pour dire où se trouve la grande ville d'Abidjan. »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Ama décrit le paysage de Gnamakro et les habitants. Elle fait de la :",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer le lieu : Gnamakro. Étape 2 — Repérer ce qu'on étudie : le paysage et les habitants. Étape 3 — Elle décrit le présent. Étape 4 — Conclure : géographie.",
+              "answers": [
+                {
+                  "content": "Géographie",
+                  "correct": true
+                },
+                {
+                  "content": "Histoire seule",
+                  "correct": false
+                },
+                {
+                  "content": "Musique",
+                  "correct": false
+                },
+                {
+                  "content": "Arithmétique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels éléments de Gnamakro sont humains ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 2 — Se demander qui a fait l'élément. Les cases et l'école sont construites, le champ d'igname est planté. Étape 3 — Classer : humains. La forêt et la rivière existent sans l'homme.",
+              "answers": [
+                {
+                  "content": "Les cases",
+                  "correct": true
+                },
+                {
+                  "content": "L'école",
+                  "correct": true
+                },
+                {
+                  "content": "Le champ d'igname",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt",
+                  "correct": false
+                },
+                {
+                  "content": "La rivière",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque projet de Gnamakro à son utilité.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 3 — Associer. Construire un pont transforme le lieu pour mieux vivre : aménager. Protéger la forêt : la garder en bon état. Situer Abidjan : se repérer.",
+              "answers": [
+                {
+                  "content": "Construire un pont sur la rivière",
+                  "match": "Aménager"
+                },
+                {
+                  "content": "Ne pas couper la forêt",
+                  "match": "Protéger"
+                },
+                {
+                  "content": "Situer Abidjan sur la carte du pays",
+                  "match": "Se repérer"
+                }
+              ]
+            },
+            {
+              "content": "Sur la carte de la Côte d'Ivoire, Korhogo est au nord du pays et Abidjan au sud. Où est Abidjan par rapport à Korhogo ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Associer : situer un lieu, c'est se repérer. Le nord est en haut de la carte, le sud en bas. Abidjan est en bas : au sud de Korhogo.",
+              "answers": [
+                {
+                  "content": "Au sud",
+                  "correct": true
+                },
+                {
+                  "content": "Au nord",
+                  "correct": false
+                },
+                {
+                  "content": "À l'est",
+                  "correct": false
+                },
+                {
+                  "content": "À l'ouest",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Présente en trois ou quatre phrases le paysage de Gnamakro en distinguant ses éléments naturels et ses éléments humains.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Au moins deux éléments naturels sont cités (forêt, rivière)",
+                "Au moins deux éléments humains sont cités (cases, école, champ d'igname)",
+                "Chaque famille est nommée et justifiée",
+                "Les phrases sont complètes et claires"
+              ],
+              "explanation": "Corrigé modèle : « Autour de Gnamakro, on voit des éléments naturels : une forêt et une rivière, qui existent sans l'homme. Dans le village, on voit des éléments humains : des cases et une école, construites par les habitants, et un champ d'igname, planté par eux. Le paysage mêle donc éléments naturels et éléments humains. » Barème sur 3 : 1 point pour les éléments naturels, 1 point pour les éléments humains, 0,5 pour la justification des deux familles, 0,5 pour la clarté.",
+              "answers": [],
+              "starter": "Autour de Gnamakro, on voit…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "La définition de la géographie ; le paysage et ses éléments naturels et humains ; les deux domaines (physique et humaine) ; les trois utilités (se repérer, aménager, protéger).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tu rappelles ce qu'est la géographie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que veut dire le mot géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : le mot vient du grec et veut dire « décrire la Terre ».",
+                  "answers": [
+                    {
+                      "content": "Décrire la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Raconter le passé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Compter les habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mesurer le temps",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'étudie la géographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer ce que l'on étudie : un lieu, son paysage et ses habitants. Le passé relève de l'histoire.",
+                  "answers": [
+                    {
+                      "content": "Les lieux, les paysages et les hommes qui les habitent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement le passé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les chiffres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les animaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie raconte le passé des hommes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Se demander : raconter le passé est le rôle de l'histoire. La géographie décrit et explique les lieux d'aujourd'hui.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le géographe observe, décrit, puis ___ pourquoi les hommes vivent ainsi dans un lieu.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : observer, décrire, expliquer sont les trois temps de son travail.",
+                  "answers": [
+                    {
+                      "content": "explique",
+                      "correct": true
+                    },
+                    {
+                      "content": "expliquer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Raconter la fondation d'un village relève de l'___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Se demander : on raconte le passé, donc c'est de l'histoire.",
+                  "answers": [
+                    {
+                      "content": "histoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "géographie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "La géographie étudie les lieux, les paysages et les hommes."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu classes les éléments d'un paysage de village.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont trois éléments humains ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Se demander : le pont, le marché et la route sont faits par l'homme. Étape 3 — Classer : humains. La forêt et la mare existent sans lui.",
+                  "answers": [
+                    {
+                      "content": "Un pont",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une route",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une forêt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une mare",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux éléments naturels ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Se demander : la forêt et la mare existent sans l'homme. Les cases et le puits sont faits par l'homme.",
+                  "answers": [
+                    {
+                      "content": "Une forêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une mare",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des cases",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un puits",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son classement.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Se demander qui a fait l'élément. Étape 3 — Classer et Étape 4 — Justifier : le puits est creusé, le champ planté, la rivière coule sans l'homme.",
+                  "answers": [
+                    {
+                      "content": "Un puits",
+                      "match": "Humain : creusé par l'homme"
+                    },
+                    {
+                      "content": "Une rivière",
+                      "match": "Naturel : elle coule sans l'homme"
+                    },
+                    {
+                      "content": "Un champ de manioc",
+                      "match": "Humain : planté par l'homme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un champ est un élément humain même s'il est vert comme la forêt.",
+                  "question_type": "true_false",
+                  "explanation": "La couleur ne décide pas. Étape 2 — Le champ est planté par l'homme, donc Étape 3 — il est humain.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paysage montre : une mare, une école, un pont, une forêt. Combien d'éléments humains y a-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Observer : quatre éléments. Étape 2 — Se demander : l'école et le pont sont faits par l'homme. Étape 3 — Classer : 2 éléments humains.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "",
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Demande-toi toujours qui a fait l'élément."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Tu connais les deux domaines de la géographie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'étudie la géographie physique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Classer : la géographie physique étudie les éléments naturels. Marchés, écoles et routes sont humains.",
+                  "answers": [
+                    {
+                      "content": "Les éléments naturels d'un lieu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les marchés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les écoles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les routes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'étudie la géographie humaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Classer : la géographie humaine étudie les hommes et ce qu'ils font.",
+                  "answers": [
+                    {
+                      "content": "Les hommes, leurs villages et leurs activités",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les forêts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les mares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement le ciel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier une rivière relève de la géographie ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Se demander : la rivière est naturelle. Étape 3 — Classer : géographie physique.",
+                  "answers": [
+                    {
+                      "content": "physique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier le travail des pêcheurs relève de la géographie ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Se demander : pêcher est une activité des hommes. Étape 3 — Classer : humaine.",
+                  "answers": [
+                    {
+                      "content": "humaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "physique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux domaines de la géographie se complètent.",
+                  "question_type": "true_false",
+                  "explanation": "On comprend mieux la vie des hommes quand on connaît le milieu naturel : les deux domaines se complètent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Physique : éléments naturels. Humaine : les hommes et leur travail."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu connais les trois utilités de la géographie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les trois utilités de la géographie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Associer : la fiche donne trois utilités : se repérer, aménager et protéger.",
+                  "answers": [
+                    {
+                      "content": "Se repérer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Inventer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oublier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Construire une route entre deux villages, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : transformer un lieu pour mieux vivre, c'est aménager.",
+                  "answers": [
+                    {
+                      "content": "Aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oublier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Garder une forêt en bon état, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : garder en bon état, c'est protéger.",
+                  "answers": [
+                    {
+                      "content": "Protéger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Situer une ville sur une carte, c'est se ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Associer : situer un lieu, c'est se repérer.",
+                  "answers": [
+                    {
+                      "content": "repérer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aménager et protéger veulent dire la même chose.",
+                  "question_type": "true_false",
+                  "explanation": "Aménager transforme un lieu pour mieux vivre ; protéger le garde en bon état.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Se repérer, aménager, protéger."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Le paysage d'un village ivoirien, les activités des habitants (géographie humaine), les décisions du village (aménager, protéger) et la position de villes ivoiriennes sur une carte.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document (texte écrit pour Lnclass) : « Au bord du village imaginaire de Kossikro, on voit une rivière, une forêt, une plantation de cacao, des cases et une route en terre. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels éléments de Kossikro sont naturels ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Se demander : la rivière et la forêt existent sans l'homme. La plantation, les cases et la route sont faites par l'homme.",
+                  "answers": [
+                    {
+                      "content": "La rivière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plantation de cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cases",
+                      "correct": false
+                    },
+                    {
+                      "content": "La route en terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La plantation de cacao est un élément naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Elle a été installée et entretenue par des planteurs. Étape 3 — Classer : élément humain.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase justifie bien que la route en terre est humaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Justifier : on dit qui l'a faite. La couleur, la longueur ou le soleil ne justifient pas le classement.",
+                  "answers": [
+                    {
+                      "content": "Elle a été tracée par l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est brune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est longue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est au soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mare près du village est un élément ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — La mare existe sans l'homme. Étape 3 — Classer : naturel.",
+                  "answers": [
+                    {
+                      "content": "naturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "naturelle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paysage compte une rivière, une forêt, une plantation de cacao, des cases et une route. Combien d'éléments humains compte-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Observer : cinq éléments. Étape 2 — Se demander : la plantation, les cases et la route sont faites par l'homme. Étape 3 — Classer : 3 éléments humains.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "",
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Classe d'après celui qui a fait l'élément."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document (texte écrit pour Lnclass) : « Dans le village imaginaire de Bouakro, les habitants cultivent le manioc, élèvent des poules, pêchent dans la rivière et vendent leurs produits au marché. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Étudier les cultures et le marché de Bouakro relève de la géographie :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander : cultiver et vendre sont des activités des hommes. Étape 3 — Classer : humaine.",
+                  "answers": [
+                    {
+                      "content": "Humaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Physique",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'histoire seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier la rivière de Bouakro relève de la géographie :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander : la rivière est un élément naturel. Étape 3 — Classer : physique.",
+                  "answers": [
+                    {
+                      "content": "Physique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Humaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'histoire seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sujets d'étude de Bouakro relèvent de la géographie humaine ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Se demander : cultiver, pêcher et vendre sont faits par les hommes. Étape 3 — Classer : humaine. La pluie et le vent sont naturels.",
+                  "answers": [
+                    {
+                      "content": "Cultiver le manioc",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pêcher dans la rivière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vendre au marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie qui tombe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier le marché de Bouakro relève de la géographie physique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Le marché est construit par l'homme. Étape 3 — Classer : humaine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail du géographe suit trois temps : observer, décrire et ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Le géographe observe, décrit, puis explique pourquoi les hommes vivent ainsi.",
+                  "answers": [
+                    {
+                      "content": "expliquer",
+                      "correct": true
+                    },
+                    {
+                      "content": "explique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pose-toi la question : l'étude porte-t-elle sur un élément naturel ou sur ce que font les hommes ?"
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document (texte écrit pour Lnclass) : « Les habitants de Dabakro veulent construire une école, creuser un puits et garder en bon état la forêt qui leur donne du bois. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Construire l'école à un bon endroit, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : choisir où construire est aménager.",
+                  "answers": [
+                    {
+                      "content": "Aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oublier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Garder la forêt en bon état, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : garder en bon état est protéger.",
+                  "answers": [
+                    {
+                      "content": "Protéger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oublier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Creuser un puits, c'est ___ un lieu.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Associer : le puits est une construction qui aide les hommes à mieux vivre : aménager.",
+                  "answers": [
+                    {
+                      "content": "aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "protéger",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque projet de Dabakro à son utilité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Associer : construire est aménager, garder en bon état est protéger, trouver un lieu est se repérer.",
+                  "answers": [
+                    {
+                      "content": "Construire une école",
+                      "match": "Aménager"
+                    },
+                    {
+                      "content": "Garder la forêt",
+                      "match": "Protéger"
+                    },
+                    {
+                      "content": "Trouver où est la ville voisine sur la carte",
+                      "match": "Se repérer"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le puits et l'école de Dabakro sont des éléments humains.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Se demander : ils sont faits par l'homme. Étape 3 — Classer : humains.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Construire est aménager ; garder en bon état est protéger."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu lis la carte de la Côte d'Ivoire de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "carte-villes",
+              "questions": [
+                {
+                  "content": "Korhogo est au nord du pays et Yamoussoukro au centre. Où est Korhogo par rapport à Yamoussoukro ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : situer un lieu est se repérer. Le nord est en haut : Korhogo est plus haut que Yamoussoukro.",
+                  "answers": [
+                    {
+                      "content": "Au nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'ouest",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Abidjan est au sud du pays. Où est Abidjan par rapport à Korhogo ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le sud est en face du nord. Korhogo étant au nord d'Abidjan, Abidjan est au sud de Korhogo.",
+                  "answers": [
+                    {
+                      "content": "Au sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "À l'ouest",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Man est à l'ouest du pays et Abengourou à l'est. Par rapport à Abengourou, Man est à l'___.",
+                  "question_type": "select",
+                  "explanation": "L'ouest est en face de l'est. Man est à l'ouest d'Abengourou.",
+                  "answers": [
+                    {
+                      "content": "ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "est",
+                      "correct": false
+                    },
+                    {
+                      "content": "nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque ville à sa position dans le pays.",
+                  "question_type": "matching",
+                  "explanation": "Sur la carte, Korhogo est en haut (nord), Abidjan en bas (sud), Man à gauche (ouest).",
+                  "answers": [
+                    {
+                      "content": "Korhogo",
+                      "match": "Au nord"
+                    },
+                    {
+                      "content": "Abidjan",
+                      "match": "Au sud"
+                    },
+                    {
+                      "content": "Man",
+                      "match": "À l'ouest"
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la carte, San-Pédro est plus au sud que Bouaké.",
+                  "question_type": "true_false",
+                  "explanation": "San-Pédro est un port du sud-ouest, Bouaké est au centre du pays : San-Pédro est plus au sud.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Sur la carte, le nord est en haut."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Repérer des erreurs de classement (géographie ou histoire, naturel ou humain, physique ou humaine, aménager ou protéger) et justifier une réponse avec la méthode.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Des élèves ont fait des erreurs. Tu trouves la bonne correction.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève dit : « Le champ de maïs est naturel, car il est vert. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander qui a fait l'élément : des paysans ont planté le champ. On classe d'après celui qui l'a fait, pas d'après la couleur.",
+                  "answers": [
+                    {
+                      "content": "Le champ est humain, car il est planté par l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le champ est naturel, car il est grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le champ n'est pas un élément du paysage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le champ est naturel, car il est vert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Raconter comment un village a été fondé, c'est de la géographie. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Se demander : on raconte le passé, donc c'est de l'histoire. La géographie décrit les lieux d'aujourd'hui.",
+                  "answers": [
+                    {
+                      "content": "C'est de l'histoire, car on raconte le passé",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est de la géographie, car il y a un village",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est de la physique",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est de la musique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Une rivière qui traverse une ville relève de la géographie humaine. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander : la rivière est un élément naturel, même en ville. On classe d'après ce qu'on étudie, pas d'après le lieu.",
+                  "answers": [
+                    {
+                      "content": "Elle relève de la géographie physique, car la rivière est naturelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle relève de la géographie humaine, car il y a une ville",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle relève des deux à la fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne relève d'aucun domaine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Construire une route, c'est protéger. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : transformer un lieu pour mieux vivre, c'est aménager. Protéger, c'est garder en bon état.",
+                  "answers": [
+                    {
+                      "content": "Construire une route, c'est aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Construire une route, c'est se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est protéger, car la route sert à tous",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est rien de tout cela",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élément est naturel s'il est placé dans la nature.",
+                  "question_type": "true_false",
+                  "explanation": "Un pont est placé au bord d'une rivière mais il est humain. On classe d'après celui qui a fait l'élément.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Reprends la méthode étape par étape."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu dis si chaque affirmation est vraie ou fausse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une plantation d'hévéa est un élément naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Se demander : elle est plantée par l'homme. Étape 3 — Classer : humain.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie étudie les lieux, les paysages et les hommes qui y vivent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer ce que l'on étudie : c'est la définition de la géographie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier un marché relève de la géographie physique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Le marché est fait par l'homme. Étape 3 — Classer : géographie humaine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Garder une forêt en bon état, c'est la protéger.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer : garder en bon état est protéger.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Situer Abidjan sur une carte, c'est aménager.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer : situer un lieu est se repérer. Aménager serait construire ou transformer.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Applique la définition ou la règle de la fiche."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document (texte écrit pour Lnclass) : « À Zouakro, village imaginaire, on voit une forêt, une mare, un champ d'igname, un marché et une route. Les habitants cultivent l'igname et vendent leur récolte. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien d'éléments naturels y a-t-il dans ce paysage ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Observer : cinq éléments. Étape 2 — Se demander : la forêt et la mare existent sans l'homme. Étape 3 — Classer : 2 éléments naturels.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Combien d'éléments humains y a-t-il dans ce paysage ?",
+                  "question_type": "numeric",
+                  "explanation": "Le champ d'igname, le marché et la route sont faits par l'homme : 3 éléments humains. Total : 2 + 3 = 5 éléments.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Étudier la vente de l'igname relève de quel domaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander : vendre est une activité des hommes. Étape 3 — Classer : géographie humaine.",
+                  "answers": [
+                    {
+                      "content": "De la géographie humaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la géographie physique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des deux à la fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'aucun domaine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier la mare de Zouakro relève de quel domaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander : la mare est naturelle. Étape 3 — Classer : géographie physique.",
+                  "answers": [
+                    {
+                      "content": "De la géographie physique",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la géographie humaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des deux à la fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'aucun domaine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les deux domaines se complètent-ils ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Justifier : la vie des hommes dépend du milieu naturel (eau, forêt, terre). La géographie physique et humaine s'éclairent l'une l'autre.",
+                  "answers": [
+                    {
+                      "content": "On comprend mieux le travail des hommes en connaissant le milieu naturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'ils étudient la même rivière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'ils sont tous les deux de l'histoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ne se complètent pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Fais deux classements : naturel ou humain, puis physique ou humaine."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document (texte écrit pour Lnclass) : « Les habitants de Nianakro décident de ne pas couper la forêt près de la source, de construire un marché loin de la rivière qui déborde et de chercher sur une carte la ville voisine de Man. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Ne pas couper la forêt près de la source, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : garder la forêt en bon état, c'est protéger.",
+                  "answers": [
+                    {
+                      "content": "Protéger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Construire le marché loin de la rivière qui déborde, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : choisir où construire en observant le paysage, c'est aménager.",
+                  "answers": [
+                    {
+                      "content": "Aménager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se repérer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oublier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chercher Man sur une carte, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : chercher où est un lieu, c'est se repérer.",
+                  "answers": [
+                    {
+                      "content": "Se repérer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": false
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le marché de Nianakro est un élément humain.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Le marché est construit par l'homme. Étape 3 — Classer : humain.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La rivière qui déborde est un élément humain.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — La rivière existe sans l'homme. Étape 3 — Classer : élément naturel.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Associe chaque décision à son utilité."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : définir la géographie, classer les éléments d'un paysage, distinguer géographie physique et humaine, associer une situation à son utilité (se repérer, aménager, protéger) et situer des villes sur une carte.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document (texte écrit pour Lnclass) : « Au village imaginaire de Gnamakro, on voit une rivière, une forêt, un pont, une école, un champ d'igname et une mare. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels éléments de Gnamakro sont humains ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Se demander : le pont et l'école sont construits, le champ d'igname est planté. Étape 3 — Classer : humains. La rivière et la forêt existent sans l'homme.",
+                  "answers": [
+                    {
+                      "content": "Le pont",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le champ d'igname",
+                      "correct": true
+                    },
+                    {
+                      "content": "La rivière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La forêt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'éléments naturels y a-t-il à Gnamakro ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Observer : six éléments. Étape 2 — Se demander : la rivière, la forêt et la mare existent sans l'homme. Étape 3 — Classer : 3 éléments naturels.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le pont sur la rivière est un élément ___.",
+                  "question_type": "select",
+                  "explanation": "Le pont est construit par l'homme : élément humain.",
+                  "answers": [
+                    {
+                      "content": "humain",
+                      "correct": true
+                    },
+                    {
+                      "content": "naturel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paysage de village mêle des éléments naturels et humains.",
+                  "question_type": "true_false",
+                  "explanation": "Gnamakro réunit une rivière (naturelle) et un pont (humain).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La géographie décrit et explique l'espace où vivent les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "La géographie étudie l'espace où vivent les hommes.",
+                  "answers": [
+                    {
+                      "content": "hommes",
+                      "correct": true
+                    },
+                    {
+                      "content": "humains",
+                      "correct": true
+                    },
+                    {
+                      "content": "êtres humains",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Classe d'après celui qui a fait l'élément."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu distingues la géographie de l'histoire et les domaines de la géographie.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Décrire les champs et les cases d'un village d'aujourd'hui relève de :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Se demander : on décrit le présent d'un lieu. Étape 4 — Conclure : géographie.",
+                  "answers": [
+                    {
+                      "content": "La géographie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'histoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "La musique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les mathématiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Raconter la fondation d'un village relève de :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — On raconte le passé : histoire.",
+                  "answers": [
+                    {
+                      "content": "L'histoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "La géographie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La musique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les mathématiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier une forêt relève de la géographie ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — La forêt est naturelle. Étape 3 — Classer : physique.",
+                  "answers": [
+                    {
+                      "content": "physique",
+                      "correct": true
+                    },
+                    {
+                      "content": "humaine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étudier le marché d'un village relève de la géographie ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Le marché est fait par l'homme. Étape 3 — Classer : humaine.",
+                  "answers": [
+                    {
+                      "content": "humaine",
+                      "correct": true
+                    },
+                    {
+                      "content": "physique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois temps du travail du géographe.",
+                  "question_type": "ordering",
+                  "explanation": "Le géographe observe, décrit puis explique.",
+                  "answers": [
+                    {
+                      "content": "Observer le lieu."
+                    },
+                    {
+                      "content": "Décrire ce que l'on a observé."
+                    },
+                    {
+                      "content": "Expliquer pourquoi les hommes vivent ainsi."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le présent des lieux, c'est la géographie ; le passé, c'est l'histoire."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document (texte écrit pour Lnclass) : « Les habitants du village imaginaire de Tiékro veulent creuser un puits, garder en bon état leur forêt et trouver sur la carte la ville de Daloa. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque projet de Tiékro à son utilité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Associer : creuser est aménager, garder en bon état est protéger, trouver un lieu est se repérer.",
+                  "answers": [
+                    {
+                      "content": "Creuser un puits",
+                      "match": "Aménager"
+                    },
+                    {
+                      "content": "Garder la forêt en bon état",
+                      "match": "Protéger"
+                    },
+                    {
+                      "content": "Trouver Daloa sur la carte",
+                      "match": "Se repérer"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le puits de Tiékro est un élément :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Le puits est creusé par l'homme. Étape 3 — Classer : humain.",
+                  "answers": [
+                    {
+                      "content": "Humain",
+                      "correct": true
+                    },
+                    {
+                      "content": "Naturel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La forêt de Tiékro est un élément :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — La forêt existe sans l'homme. Étape 3 — Classer : naturel.",
+                  "answers": [
+                    {
+                      "content": "Naturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Humain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aménager un lieu veut dire le transformer pour que les hommes y vivent mieux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer : c'est la définition d'aménager.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Garder la forêt en bon état, c'est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Associer : garder en bon état, c'est protéger.",
+                  "answers": [
+                    {
+                      "content": "protéger",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Associe chaque besoin à son utilité."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Tu lis la carte de la Côte d'Ivoire de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "carte-villes",
+              "questions": [
+                {
+                  "content": "Korhogo est au nord et Abidjan au sud. Quelle ville est au sud de l'autre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le nord est en haut, le sud en bas. Abidjan, en bas, est au sud de Korhogo.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles villes sont plus au nord que Yamoussoukro ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Bouaké et Korhogo sont plus haut sur la carte que Yamoussoukro. Abidjan et San-Pédro sont plus bas.",
+                  "answers": [
+                    {
+                      "content": "Bouaké",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": true
+                    },
+                    {
+                      "content": "Abidjan",
+                      "correct": false
+                    },
+                    {
+                      "content": "San-Pédro",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Man est à l'ouest et Abengourou à l'est. Par rapport à Man, Abengourou est à l'___.",
+                  "question_type": "select",
+                  "explanation": "L'est est en face de l'ouest : Abengourou est à l'est de Man.",
+                  "answers": [
+                    {
+                      "content": "est",
+                      "correct": true
+                    },
+                    {
+                      "content": "ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chercher où se trouve Bouaké sur la carte du pays, c'est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Associer : chercher où est un lieu, c'est se repérer.",
+                  "answers": [
+                    {
+                      "content": "Se repérer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aménager",
+                      "correct": false
+                    },
+                    {
+                      "content": "Protéger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Situer une ville sur une carte, c'est se ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Associer : situer un lieu est se repérer.",
+                  "answers": [
+                    {
+                      "content": "repérer",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le nord est en haut de la carte."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

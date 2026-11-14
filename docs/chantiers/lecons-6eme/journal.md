@@ -13,7 +13,7 @@ Histoire-Géographie et EDHC : 30 leçons, rangées dans `docs/contenus/lecons-t
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-11-13 | Les couples `6eme/<matière>` sont ajoutés à la fin de `lecons:` dans `db/seeds/standard/jeu.yml` | Sans eux, `StandardTestSet` refuse le manifeste (`couple_missing`) ; en fin de liste, les 27 premières leçons du test d'activité ne bougent pas | Non |
-| 2026-11-14 | `PRD_COUPLES` du test du manifeste suit le nombre de couples (57 au lot A, 59 au lot B ; 65 après la fusion de Develop, qui apporte les 6 couples de 4ème) | Le test compte les couples du jeu standard | Non |
+| 2026-11-14 | `PRD_COUPLES` du test du manifeste suit le nombre de couples (57 au lot A, 59 au lot B ; 65 après la fusion de Develop, qui apporte les 6 couples de 4ème ; 67 au lot C) | Le test compte les couples du jeu standard | Non |
 
 ## Ce qui a dérapé
 
@@ -46,3 +46,14 @@ Histoire-Géographie et EDHC : 30 leçons, rangées dans `docs/contenus/lecons-t
 - Français L4 : les morales et le découpage du schéma narratif de chaque conte sont des propositions parmi d'autres.
 - Les valeurs des exercices (prix, mesures, masses) sont illustratives ; les textes supports sont écrits pour Lnclass.
 - `valider.rb` ne contrôle pas les sujets : un script hors dépôt les a passés un par un (dette à reprendre dans le script).
+- HG L1 et L2 : siècles, durées et frise renvoyés à la leçon 7 « La notion de chronologie » ; échelle, plan, légende et rose des vents renvoyés à la leçon 10 « Les moyens de représentation de la terre ». Les leçons 1 et 2 traitent l'objet de la discipline (définition, domaines, importance). À confirmer avec le programme.
+- HG L3 sources : sources audiovisuelles non traitées ; archéologiques et iconographiques dans une même notion ; témoin direct/indirect au niveau 6ème ?
+- HG L4 relief : aucune altitude réelle (valeurs illustratives) ; définitions de colline et plateau sans seuil ; contours de la carte schématiques.
+- HG L5 information et dignité : fait/opinion/rumeur, « au moins deux sources sûres » (règle pratique), droit humanitaire non nommé (traité en EDHC leçon 3).
+- HG L5 : DUDH (1948), Convention relative aux droits de l'enfant (1989) et Conventions de Genève nommées sans article ; leur place en 6ème (recoupe EDHC leçons 2 et 3) à confirmer.
+- EDHC L1 droits de l'enfant : relais (centre social, services sociaux, chef de quartier) génériques ; travail interdit défini par trois critères, sans âge minimum ni loi ; distinction besoin/envie.
+- EDHC2 (Les droits humains) : la Déclaration universelle est citée par sa date (1948) et son idée « libres et égaux en dignité et en droits », sans article ; exemples de devoirs et motifs de traitement différencié « justes » (gravité de la maladie, notes) choisis par la rédaction ; découpage en 4 notions non officiel.
+- EDHC3 (DIH) : Conventions de Genève de 1949 sans article ; signature et ratification par la Côte d'Ivoire à confirmer ; « biens civils » et conflit non international évoqués, peut-être au-delà de la 6ème ; cristal rouge volontairement omis ; missions de la Croix-Rouge de Côte d'Ivoire (secours, secourisme) à confirmer.
+- EDHC4 (La Constitution) : sens des mots de la devise = formulations pédagogiques ; drapeau décrit orange-blanc-vert « de gauche à droite », sans le sens des couleurs ; se tenir debout et silencieux pendant l'hymne = règle civique générale.
+- EDHC5 (Le Président de la République) : mandat écrit seulement « élu pour 5 ans, rééligible une fois », sans durée maximale déduite ; « garant de la Constitution » remplacé par « veille au respect de la Constitution et incarne l'unité nationale » (à confirmer selon le programme) ; Vice-Président réduit à « aide le Président », sans remplacement ni désignation (révision de 2020 à confirmer) ; promulgation sans délai ni procédure ; « Constitution de 2016 » sans « (révisée) ».
+- EDHC3 (suite relecture) : la Côte d'Ivoire « s'est engagée à respecter » les Conventions (adhésion de 1961, à confirmer) ; cristal rouge présenté en une phrase (losange rouge) ; FICR ajoutée au schéma du Mouvement, peut-être au-delà de la 6ème.

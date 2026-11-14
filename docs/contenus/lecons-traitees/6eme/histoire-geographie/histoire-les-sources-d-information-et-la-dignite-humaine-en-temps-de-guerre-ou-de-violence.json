@@ -1,0 +1,3207 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — Les sources d'information et la dignité humaine en temps de guerre ou de violence",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "verifier-information",
+          "kind": "diagram",
+          "description": "Un schéma fléché en cinq cases qui montre comment vérifier une information : on reçoit l'information, on cherche sa source d'origine, on la compare avec deux sources sûres, puis on conclut. Si elle est confirmée, on peut la partager ; sinon c'est une rumeur et on ne la partage pas.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "recevoir",
+                "label": "Je reçois une information"
+              },
+              {
+                "id": "source",
+                "label": "Je cherche la source d'origine"
+              },
+              {
+                "id": "recouper",
+                "label": "Je compare avec deux sources sûres"
+              },
+              {
+                "id": "confirmee",
+                "label": "Confirmée : je peux la partager",
+                "category": 1
+              },
+              {
+                "id": "rumeur",
+                "label": "Non confirmée : rumeur, je ne partage pas",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "recevoir",
+                "to": "source"
+              },
+              {
+                "from": "source",
+                "to": "recouper"
+              },
+              {
+                "from": "recouper",
+                "to": "confirmee",
+                "label": "oui"
+              },
+              {
+                "from": "recouper",
+                "to": "rumeur",
+                "label": "non"
+              }
+            ],
+            "legend": [
+              "Information confirmée",
+              "Rumeur"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les sources d'information",
+          "remember": "Une **source d'information** est l'endroit d'où vient une nouvelle : la **radio**, les **journaux**, la **télévision**, les **réseaux sociaux** ou une personne qui raconte ce qu'elle sait. En temps de guerre ou de violence, on a besoin de nouvelles pour se protéger et comprendre ce qui se passe.\n\nMais toutes les sources ne se valent pas. Un **fait** est une chose qui s'est passée et qu'on peut vérifier. Une **opinion** est ce que quelqu'un pense. Une source est **fiable** quand elle dit **qui parle**, **quand**, et donne des **faits précis**. Comme pour les sources de l'histoire, on interroge toujours un document : qui l'a produit, et quand ?",
+          "method": [
+            "Nommer le support de l'information : radio, journal, télévision, réseau social ou parole d'une personne.",
+            "Repérer qui parle et quand : l'auteur ou le média, et la date.",
+            "Distinguer les faits, qu'on peut vérifier, des opinions, que quelqu'un pense.",
+            "Juger si la source est fiable : elle se nomme, donne une date et des faits précis."
+          ],
+          "example": {
+            "statement": "Après des troubles dans un quartier, la radio de la ville annonce le vendredi 3 au soir : « Selon la mairie, le marché rouvrira lundi à 7 h. Pour moi, c'est une mauvaise idée », dit le présentateur. Analyse cette information.",
+            "steps": [
+              "Nommer : le support est la radio.",
+              "Repérer : c'est le présentateur de la radio de la ville qui parle, le soir ; il cite la mairie, et la date est le vendredi 3.",
+              "Distinguer : « la mairie annonce que le marché rouvrira lundi à 7 h » est un fait vérifiable auprès de la mairie ; « c'est une mauvaise idée » est une opinion du présentateur.",
+              "Juger : la source est assez fiable pour le fait, car elle se nomme, donne une date et cite la mairie. L'opinion n'est pas une preuve."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'une nouvelle est vraie parce que beaucoup de gens la partagent. Contre-exemple : vingt personnes t'envoient « le pont est fermé », mais aucune ne dit qui l'a vu ni quand. Le nombre de messages ne prouve rien : il y a peut-être une seule source, répétée vingt fois. Demande toujours : qui parle, quand, avec quels faits ?",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à analyser une source d'information avec la méthode : nommer, repérer, distinguer, juger.",
+            "questions": [
+              {
+                "content": "Un voisin te lit à voix haute un article imprimé sur du papier, avec un titre et une date. Quel est le support ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer le support : un article imprimé sur du papier, avec un titre et une date, est dans un journal. La radio s'écoute, la télévision se regarde à l'écran, un réseau social s'ouvre sur un téléphone ou un ordinateur.",
+                "answers": [
+                  {
+                    "content": "Un journal",
+                    "correct": true
+                  },
+                  {
+                    "content": "La radio",
+                    "correct": false
+                  },
+                  {
+                    "content": "La télévision",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un réseau social",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce qu'on tient dans les mains."
+              },
+              {
+                "content": "Relie chaque phrase à sa nature.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Distinguer : un fait se vérifie (l'heure de fermeture, l'heure du bulletin). Une opinion dit ce que quelqu'un pense (« je trouve… ») et ne se vérifie pas.",
+                "answers": [
+                  {
+                    "content": "Le collège ferme à 17 h, dit la direction.",
+                    "match": "Un fait que l'on vérifie"
+                  },
+                  {
+                    "content": "Je trouve ce programme ennuyeux.",
+                    "match": "Une opinion"
+                  },
+                  {
+                    "content": "On dit que le collège va fermer, partage vite !",
+                    "match": "Une rumeur"
+                  }
+                ],
+                "hint": "Peut-on le vérifier avec une horloge ou un document ?"
+              },
+              {
+                "content": "Une source d'information est fiable quand elle dit qui parle, quand, et donne des ___ précis.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Juger : une source fiable se nomme, donne une date et des faits précis, c'est-à-dire des choses qu'on peut vérifier.",
+                "answers": [
+                  {
+                    "content": "faits",
+                    "correct": true
+                  },
+                  {
+                    "content": "fait",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le contraire d'une opinion."
+              },
+              {
+                "content": "Un message est vrai parce qu'il a été partagé par beaucoup de personnes.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Juger : le nombre de partages ne prouve rien. Il faut savoir qui parle, quand, et avec quels faits.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte les preuves, pas les partages."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître et juger une source d'information",
+              "statement": "Dans cet exercice, tu appliques la méthode : nommer le support, repérer qui parle et quand, distinguer faits et opinions, juger la source.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Awa écoute une voix qui annonce : « Voici le bulletin d'information de 18 h. » Quel est le support ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer le support : on écoute une voix qui annonce un bulletin, c'est la radio. Un journal se lit sur papier et un réseau social s'ouvre sur un écran.",
+                  "answers": [
+                    {
+                      "content": "La radio",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un journal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un réseau social",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une affiche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments permettent de repérer qui parle et quand ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer qui parle et quand : on cherche le nom de l'auteur ou du média et la date. Le nombre de partages, la longueur et la couleur ne disent rien de la source.",
+                  "answers": [
+                    {
+                      "content": "Le nom du média ou de l'auteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La date de la publication",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de partages",
+                      "correct": false
+                    },
+                    {
+                      "content": "La longueur du message",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur de l'écran",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque support à son exemple.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Nommer le support : la radio s'écoute, le journal se lit sur papier, la télévision se regarde au journal télévisé, le réseau social se consulte sur un téléphone.",
+                  "answers": [
+                    {
+                      "content": "Radio",
+                      "match": "Un bulletin que l'on écoute"
+                    },
+                    {
+                      "content": "Journal",
+                      "match": "Un article imprimé daté"
+                    },
+                    {
+                      "content": "Télévision",
+                      "match": "Un journal télévisé que l'on regarde"
+                    },
+                    {
+                      "content": "Réseau social",
+                      "match": "Une publication sur un téléphone"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un présentateur dit : « La mairie annonce un couvre-feu de 20 h. » Que peut-on vérifier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Distinguer : « La mairie annonce un couvre-feu de 20 h » est un fait qu'on peut vérifier auprès de la mairie. « Il a raison », « tout le monde est d'accord » et « elle est juste » sont des opinions.",
+                  "answers": [
+                    {
+                      "content": "Que la mairie a bien annoncé cette règle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Que le présentateur a raison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que tout le monde est d'accord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que la règle est juste pour tous",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message sans auteur ni date mais très partagé est une source fiable.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Juger si la source est fiable : une source fiable se nomme et donne une date. Un message sans auteur ni date n'est pas fiable, même s'il est très partagé. Le nombre de partages est le piège : il ne prouve rien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Analyser plusieurs sources d'information",
+              "statement": "Dans cet exercice, tu analyses des sources d'information variées et tu juges leur fiabilité.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un journal imprime : « Le directeur de l'école annonce la rentrée le 2 octobre » (date du journal : 28 septembre). Cette source est fiable parce que…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer qui parle et quand : le journal et la date du 28 septembre. Étape 4 — Juger : la source cite le directeur, une date d'article et un fait précis. Les gros caractères, la longueur ou le plaisir de lire ne prouvent rien.",
+                  "answers": [
+                    {
+                      "content": "elle nomme une personne et donne une date",
+                      "correct": true
+                    },
+                    {
+                      "content": "elle est écrite en gros caractères",
+                      "correct": false
+                    },
+                    {
+                      "content": "elle est plus longue qu'un message",
+                      "correct": false
+                    },
+                    {
+                      "content": "elle plaît à tout le monde",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« Ce film est le meilleur de l'année » est un fait.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Distinguer le fait de l'opinion : « le meilleur » dépend de ce que chacun pense. C'est une opinion. Un fait se vérifie, comme la date de sortie du film.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une nouvelle qui dit qui parle et quand est plus ___ qu'un message sans auteur.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Juger si la source est fiable : une source qui se nomme et donne une date est plus fiable (plus sûre) qu'un message anonyme.",
+                  "answers": [
+                    {
+                      "content": "fiable",
+                      "correct": true
+                    },
+                    {
+                      "content": "sure",
+                      "correct": true
+                    },
+                    {
+                      "content": "sûr",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi cite quatre sources : la radio, le journal, la télévision et un réseau social. Parmi elles, combien se consultent sur un écran, en comptant le journal imprimé et la radio du poste comme des supports sans écran ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Nommer le support : la télévision et le réseau social se consultent sur un écran. La radio s'écoute et le journal se lit sur papier. Il y a donc 2 supports sur écran.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une publication sur un réseau social dit : « Mon avis : la route est dangereuse. » Cette phrase est ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Distinguer : « Mon avis » annonce une opinion. Un fait se vérifie ; une date et une source officielle sont autre chose.",
+                  "answers": [
+                    {
+                      "content": "une opinion",
+                      "correct": true
+                    },
+                    {
+                      "content": "un fait vérifié",
+                      "correct": false
+                    },
+                    {
+                      "content": "une date",
+                      "correct": false
+                    },
+                    {
+                      "content": "une source officielle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre amis t'envoient le même message sans auteur. Que conclus-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Juger : quatre copies d'un même message ne font pas quatre sources. La source n'est pas connue : il faut la vérifier. Penser « forcément vrai » est le piège du nombre de partages ; « forcément faux » est aussi trop vite dit.",
+                  "answers": [
+                    {
+                      "content": "Il n'y a peut-être qu'une seule source, à vérifier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message est forcément vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le message est forcément faux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre sources sûres le confirment",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque message, pose trois questions : qui parle ? quand ? quel fait précis ?"
+            }
+          ]
+        },
+        {
+          "name": "Vérifier une information et reconnaître une rumeur",
+          "remember": "Une **rumeur** est une nouvelle qui passe de bouche en bouche ou de téléphone en téléphone, **sans preuve**. Elle peut être fausse ou déformée. En temps de violence, une rumeur peut faire peur, mettre en colère et mettre des gens en danger.\n\nPour **vérifier** une information, on cherche sa **source d'origine**, puis on la **recoupe** : on la compare avec au moins **deux autres sources sûres et indépendantes**, qui ne se copient pas entre elles.\n\nSignes d'une rumeur : pas de nom, pas de date, un message qui presse (« partage vite ! »), une nouvelle qui fait très peur ou très colère. Quand on doute, **on ne partage pas**.",
+          "method": [
+            "Lire l'information en entier et noter ce qu'elle affirme.",
+            "Chercher la source d'origine : qui l'a dit en premier, et quand ?",
+            "Recouper : comparer avec au moins deux autres sources sûres et indépendantes.",
+            "Conclure : information confirmée ou rumeur, et ne partager que ce qui est confirmé."
+          ],
+          "example": {
+            "statement": "Un message dit : « Urgent ! L'école est fermée demain à cause d'un danger. Partage vite ! » Il ne cite personne. Vérifie-le.",
+            "steps": [
+              "Lire : le message affirme que l'école est fermée demain pour un danger et demande de le partager vite.",
+              "Chercher : il n'y a ni nom ni date, on ne sait pas qui l'a dit en premier.",
+              "Recouper : le directeur n'a rien annoncé à la radio de la ville, le panneau de l'école ne dit rien, et une enseignante du quartier confirme que l'école ouvre normalement.",
+              "Conclure : c'est une rumeur. On ne la partage pas et on prévient un adulte."
+            ]
+          },
+          "pitfall": "Ne partage pas « au cas où ». Contre-exemple : dix personnes partagent « au cas où » une fausse alerte ; elle arrive chez cent familles qui s'affolent. Partager, c'est déjà diffuser. Ne confonds pas non plus recouper et recevoir trois fois le même message : si les trois viennent du même message, cela fait une seule source, pas trois.",
+          "figure": "verifier-information",
+          "practice": {
+            "statement": "Tu t'entraînes à vérifier une information avec la méthode : lire, chercher la source, recouper, conclure.",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les étapes pour vérifier une information.",
+                "question_type": "ordering",
+                "explanation": "La méthode suit toujours cet ordre. Étape 1 — Lire l'information en entier. Étape 2 — Chercher la source d'origine. Étape 3 — Recouper avec deux autres sources sûres. Étape 4 — Conclure.",
+                "answers": [
+                  {
+                    "content": "Lire l'information en entier."
+                  },
+                  {
+                    "content": "Chercher la source d'origine."
+                  },
+                  {
+                    "content": "Recouper avec deux autres sources sûres."
+                  },
+                  {
+                    "content": "Conclure : confirmée ou rumeur."
+                  }
+                ],
+                "hint": "On lit avant de chercher, on cherche avant de comparer."
+              },
+              {
+                "content": "Un message dit : « Le marché brûle, partage vite ! » sans nom ni date. Quel est le signe d'une rumeur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher la source d'origine : ici, il n'y en a pas, ni date. Étape 4 — Conclure : un message qui presse de partager sans source est un signe de rumeur. Le français, le sujet et l'heure de réception n'en sont pas.",
+                "answers": [
+                  {
+                    "content": "Aucune source ni date, et il presse de partager",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est écrit en français",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il parle du marché",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a été reçu le matin",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche ce qui manque dans le message."
+              },
+              {
+                "content": "Pour vérifier une information, on la compare avec au moins deux autres sources sûres : on dit qu'on la ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Recouper : comparer l'information avec au moins deux autres sources sûres et indépendantes, c'est la recouper.",
+                "answers": [
+                  {
+                    "content": "recoupe",
+                    "correct": true
+                  },
+                  {
+                    "content": "recouper",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le verbe recouper, conjugué avec « on la… »."
+              },
+              {
+                "content": "Si tu doutes d'une information, tu peux la partager « au cas où ».",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : on ne partage que ce qui est confirmé. Partager « au cas où » diffuse peut-être une rumeur.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Partager, c'est diffuser."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Vérifier une information étape par étape",
+              "statement": "Dans cet exercice, tu appliques la méthode : lire, chercher la source, recouper, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la première étape pour vérifier une information ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire l'information en entier et noter ce qu'elle affirme. Partager avant de vérifier, compter les lecteurs ou croire ce qui fait peur ne vérifient rien.",
+                  "answers": [
+                    {
+                      "content": "Lire l'information en entier et noter ce qu'elle affirme",
+                      "correct": true
+                    },
+                    {
+                      "content": "La partager à ses amis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Demander combien de personnes l'ont lue",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croire si elle fait peur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message dit « Le pont est coupé » sans dire qui l'a vu. Quelle est la bonne étape suivante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher la source d'origine : qui l'a dit en premier, et quand ? Sans réponse, on ne peut pas se fier au message.",
+                  "answers": [
+                    {
+                      "content": "Chercher qui l'a dit en premier, et quand",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le partager tout de suite",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'effacer sans lire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le croire car il est court",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sources peuvent servir à recouper une nouvelle sur la fermeture du marché ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Recouper : on prend des sources sûres et indépendantes, comme la radio de la ville ou un journal daté. Un message anonyme et un cousin qui l'a lu ne sont pas indépendants : ils viennent du même message.",
+                  "answers": [
+                    {
+                      "content": "La radio de la ville",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le journal local daté",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message anonyme reçu trois fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cousin qui a lu le même message",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre : Aya reçoit une alerte et veut la vérifier.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire l'alerte en entier. Étape 2 — Chercher la source d'origine. Étape 3 — Recouper avec la radio et le journal. Étape 4 — Conclure et décider. On ne partage qu'à la fin, si l'information est confirmée.",
+                  "answers": [
+                    {
+                      "content": "Lire l'alerte en entier."
+                    },
+                    {
+                      "content": "Chercher qui l'a envoyée en premier."
+                    },
+                    {
+                      "content": "La comparer avec la radio et le journal."
+                    },
+                    {
+                      "content": "Décider de la partager ou non."
+                    }
+                  ]
+                },
+                {
+                  "content": "Recevoir le même message de trois amis, c'est avoir recoupé l'information avec trois sources.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Recouper demande des sources indépendantes. Trois amis qui ont reçu le même message n'ont qu'une seule source. C'est le piège de la méthode : le nombre de copies ne remplace pas la comparaison.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître une rumeur",
+              "statement": "Dans cet exercice, tu repères les signes d'une rumeur et tu choisis la bonne conclusion.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les signes d'une rumeur ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Chercher la source d'origine : pas de nom ni de date est un signe de rumeur. Étape 4 — Conclure : la demande de partager vite et la peur sont aussi des signes. Un média nommé, une date et une confirmation par deux sources sont des signes de fiabilité.",
+                  "answers": [
+                    {
+                      "content": "Aucun nom ni aucune date",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une demande de partager très vite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une nouvelle qui fait très peur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nom de média et une date",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une information confirmée par deux sources sûres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un message signé par un journal connu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une rumeur peut mettre des personnes en danger.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : en temps de violence, une rumeur peut faire peur, mettre en colère et pousser à agir sans réfléchir. Elle peut donc mettre des personnes en danger.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message sans source dit : « Partage vite ! » C'est probablement une ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : un message sans source qui presse de partager est probablement une rumeur.",
+                  "answers": [
+                    {
+                      "content": "rumeur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un groupe de messages, un texte dit « un ami d'un ami a vu ». Quelle est la bonne réaction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher la source d'origine : « un ami d'un ami » ne dit pas qui a vu. Étape 3 — Recouper : on cherche une source sûre. Partager ou grossir le titre diffuse une rumeur.",
+                  "answers": [
+                    {
+                      "content": "Chercher une source sûre avant de croire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le partager pour aider",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le croire car il vient d'un ami",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le recopier avec un titre plus fort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa a lu le message, cherché sa source et l'a comparé à la radio et au journal daté : tout confirme. Sa conclusion est : l'information est ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : si la source est connue et si deux sources sûres confirment, l'information est confirmée. Elle n'est ni une rumeur ni fausse.",
+                  "answers": [
+                    {
+                      "content": "confirmée",
+                      "correct": true
+                    },
+                    {
+                      "content": "une rumeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "fausse",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans importance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour recouper, Koffi veut au moins combien d'autres sources sûres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Recouper : on compare avec au moins deux autres sources sûres et indépendantes. La réponse est 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Une rumeur n'a ni nom ni date ; une information confirmée a été comparée à d'autres sources sûres."
+            }
+          ]
+        },
+        {
+          "name": "Respecter la dignité des victimes",
+          "remember": "En temps de guerre ou de violence, chaque personne garde sa **dignité** : elle a droit au respect, quoi qu'il arrive. Les **victimes** (personnes déplacées, familles en deuil, prisonniers de guerre, blessés) ne doivent pas être humiliées. Les **enfants** ont droit à une protection spéciale.\n\nOn ne diffuse donc pas d'images qui humilient ou qui font peur : une personne en détresse, en pleurs ou dans une situation honteuse. On ne montre ni le visage ni le nom d'un enfant victime. Informer se fait avec des mots respectueux.\n\nCe respect est un principe de la Déclaration universelle des droits de l'homme (1948), de la Convention relative aux droits de l'enfant (1989) et des Conventions de Genève, que fait connaître la Croix-Rouge.",
+          "method": [
+            "Identifier la personne concernée et sa situation : victime, enfant, famille.",
+            "Se demander si l'image ou le message la montre humiliée ou en danger.",
+            "Appliquer la règle : ne pas diffuser, cacher le visage et le nom, protéger l'enfant.",
+            "Choisir le bon geste : ne pas partager, prévenir un adulte, signaler la publication."
+          ],
+          "example": {
+            "statement": "Sur son téléphone, Fatou reçoit la photo d'un enfant en pleurs, avec son nom et son quartier, après des troubles. Un message lui demande de la partager. Que fait-elle ?",
+            "steps": [
+              "Identifier : l'enfant est une victime, et les enfants ont droit à une protection spéciale.",
+              "Se demander : la photo le montre en pleurs, avec son nom et son quartier. Elle l'humilie et peut le mettre en danger.",
+              "Appliquer : on ne diffuse pas cette photo ; le visage et le nom d'un enfant victime restent cachés.",
+              "Choisir : Fatou ne partage pas la photo, la supprime, prévient un adulte et signale la publication."
+            ]
+          },
+          "pitfall": "Ne pense pas « c'est pour informer, donc je peux tout montrer » ni « l'image circule déjà, un partage de plus ne change rien ». Contre-exemple : chaque partage fait voir l'image à des dizaines de personnes en plus, dont peut-être la famille de l'enfant. On peut informer avec des mots respectueux, sans image qui humilie. Chaque partage est un acte dont tu es responsable.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à respecter la dignité des victimes avec la méthode : identifier, se demander, appliquer, choisir.",
+            "questions": [
+              {
+                "content": "Tu reçois la photo d'une femme en pleurs, prise en photo sans qu'elle le sache. Quel est le bon geste ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : une victime en détresse. Étape 2 — Se demander : l'image l'humilie. Étape 4 — Choisir le bon geste : ne pas partager et prévenir un adulte. Partager, publier ou montrer à la classe diffuse l'image.",
+                "answers": [
+                  {
+                    "content": "Ne pas la partager et prévenir un adulte",
+                    "correct": true
+                  },
+                  {
+                    "content": "La partager pour que tout le monde sache",
+                    "correct": false
+                  },
+                  {
+                    "content": "La publier avec son nom",
+                    "correct": false
+                  },
+                  {
+                    "content": "La montrer à toute la classe",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la personne sur la photo."
+              },
+              {
+                "content": "On peut publier le nom et le visage d'un enfant victime, car il faut informer.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Appliquer la règle : on cache le visage et le nom d'un enfant victime. On peut informer sans les montrer.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les enfants ont une protection spéciale."
+              },
+              {
+                "content": "Chaque personne garde sa ___ en temps de violence : elle a droit au respect.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : toute personne, même victime, garde sa dignité, c'est-à-dire son droit au respect.",
+                "answers": [
+                  {
+                    "content": "dignité",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot est dans le titre de la leçon."
+              },
+              {
+                "content": "Relie chaque situation au bon geste.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Appliquer la règle et Étape 4 — Choisir le bon geste : on ne partage pas une image qui humilie, on cache le nom et le visage d'un enfant victime, et on signale une publication choquante en prévenant un adulte.",
+                "answers": [
+                  {
+                    "content": "Une image humilie une personne",
+                    "match": "Ne pas la partager"
+                  },
+                  {
+                    "content": "Un enfant victime est montré avec son nom",
+                    "match": "Cacher le nom et le visage"
+                  },
+                  {
+                    "content": "Une publication humiliante reste en ligne",
+                    "match": "La signaler à un adulte"
+                  }
+                ],
+                "hint": "Un geste simple pour chaque situation."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Protéger la dignité des victimes",
+              "statement": "Dans cet exercice, tu appliques la méthode : identifier, se demander, appliquer la règle, choisir le bon geste.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans un message, on voit une famille déplacée qui pleure, avec son nom et son quartier. Que fais-tu d'abord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la personne concernée et sa situation : ce sont des victimes. Partager, se moquer ou publier ne respecte pas leur dignité.",
+                  "answers": [
+                    {
+                      "content": "Identifier la situation : ce sont des victimes à respecter",
+                      "correct": true
+                    },
+                    {
+                      "content": "La partager vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "La commenter avec une moquerie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La publier sur ton profil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle image faut-il ne pas diffuser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander si l'image montre quelqu'un humilié ou en danger : une personne en pleurs, montrée sans accord, est humiliée. Une affiche, une carte et un logo ne le sont pas.",
+                  "answers": [
+                    {
+                      "content": "Une personne en pleurs, montrée sans son accord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une affiche de la rentrée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une carte du quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le logo d'un journal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles règles protègent un enfant victime ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Appliquer la règle : on cache le visage et le nom d'un enfant victime. Donner son nom ou son quartier peut le mettre en danger.",
+                  "answers": [
+                    {
+                      "content": "Ne pas montrer son visage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne pas écrire son nom",
+                      "correct": true
+                    },
+                    {
+                      "content": "Publier sa photo avec son nom",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dire dans quel quartier il habite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre : Ama reçoit une image qui humilie un enfant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la personne concernée. Étape 2 — Se demander si l'image humilie. Étape 3 — Appliquer la règle : ne pas diffuser. Étape 4 — Choisir le bon geste : prévenir un adulte et signaler.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'enfant : c'est une victime."
+                    },
+                    {
+                      "content": "Constater que l'image l'humilie."
+                    },
+                    {
+                      "content": "Décider de ne pas la diffuser."
+                    },
+                    {
+                      "content": "Prévenir un adulte et signaler."
+                    }
+                  ]
+                },
+                {
+                  "content": "« L'image circule déjà, donc je peux la partager. »",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la règle : un partage de plus fait voir l'image à d'autres personnes. C'est le piège de la leçon : chaque partage est un acte dont on est responsable.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Respecter la dignité en pratique",
+              "statement": "Dans cet exercice, tu choisis des gestes qui respectent la dignité, en suivant la méthode.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève veut montrer en classe la vidéo d'une personne humiliée. Que lui dis-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander si la vidéo humilie : oui. Étape 3 — Appliquer la règle : ne pas diffuser. Les autres raisons (« tout le monde l'a vue », « c'est drôle ») ne changent pas la règle.",
+                  "answers": [
+                    {
+                      "content": "Ne la montre pas : elle humilie cette personne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Montre-la, tout le monde l'a déjà vue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Montre-la, c'est drôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Montre-la, personne ne le saura",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les enfants victimes ont droit à une protection spéciale.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : un enfant victime est une personne qu'il faut protéger en priorité. On cache son visage et son nom.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour informer sans humilier, on utilise des ___ respectueux plutôt qu'une image choquante.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Appliquer la règle : on peut informer avec des mots respectueux, sans image qui humilie.",
+                  "answers": [
+                    {
+                      "content": "mots",
+                      "correct": true
+                    },
+                    {
+                      "content": "mot",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Tu vois une publication qui humilie une personne. Le bon geste est de ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Choisir le bon geste : on ne partage pas et on prévient un adulte pour signaler la publication.",
+                  "answers": [
+                    {
+                      "content": "signaler à un adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "la partager",
+                      "correct": false
+                    },
+                    {
+                      "content": "la commenter",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'ignorer pour toujours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque geste à sa raison.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Appliquer la règle et Étape 4 — Choisir le bon geste : ne pas partager respecte la dignité, cacher le nom protège l'enfant, prévenir un adulte aide à faire retirer la publication.",
+                  "answers": [
+                    {
+                      "content": "Ne pas partager une image humiliante",
+                      "match": "Respecter la dignité"
+                    },
+                    {
+                      "content": "Cacher le nom d'un enfant victime",
+                      "match": "Le protéger"
+                    },
+                    {
+                      "content": "Prévenir un adulte",
+                      "match": "Faire retirer la publication"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Appliquer la règle : on peut informer avec des mots respectueux. Le piège est de croire que l'information justifie toutes les images ; la dignité concerne aussi les enfants.",
+                  "answers": [
+                    {
+                      "content": "Informer et respecter la dignité vont ensemble",
+                      "correct": true
+                    },
+                    {
+                      "content": "Informer permet de tout montrer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Respecter la dignité empêche d'informer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seuls les adultes doivent respecter la dignité",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Avant d'agir, demande-toi : cette image ou ce message respecte-t-il la personne ?"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le bulletin de la radio du quartier",
+          "statement": "Texte écrit pour Lnclass. Bulletin de la radio du quartier, mardi, 18 h : « Selon la mairie, le marché rouvre jeudi à 7 h. Notre présentateur pense que cette décision est trop rapide. » Awa écoute ce bulletin avec son père.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le support de cette information ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Nommer le support : le texte parle d'un bulletin de la radio du quartier. Un journal se lit sur papier et un réseau social s'ouvre sur un téléphone ; la télévision se regarde. La réponse est la radio.",
+              "answers": [
+                {
+                  "content": "La radio",
+                  "correct": true
+                },
+                {
+                  "content": "Un journal",
+                  "correct": false
+                },
+                {
+                  "content": "Un réseau social",
+                  "correct": false
+                },
+                {
+                  "content": "La télévision",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque phrase du bulletin à sa nature.",
+              "question_type": "matching",
+              "explanation": "Méthode : 3) Distinguer les faits des opinions. L'annonce de la mairie et le support du bulletin se vérifient : ce sont des faits. « Trop rapide » est ce que pense le présentateur : c'est une opinion.",
+              "answers": [
+                {
+                  "content": "La mairie annonce que le marché rouvre jeudi à 7 h.",
+                  "match": "Fait sur l'annonce"
+                },
+                {
+                  "content": "Cette décision est trop rapide.",
+                  "match": "Opinion du présentateur"
+                },
+                {
+                  "content": "Le bulletin est diffusé par la radio du quartier.",
+                  "match": "Fait sur le support"
+                }
+              ]
+            },
+            {
+              "content": "Dans le bulletin, c'est la ___ qui annonce que le marché rouvre.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 2) Repérer qui parle. Le bulletin dit « Selon la mairie » : la source du fait est la mairie. Le présentateur donne seulement son opinion.",
+              "answers": [
+                {
+                  "content": "mairie",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Cette source est assez fiable pour le fait annoncé, car elle cite la mairie et donne l'heure.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 4) Juger si la source est fiable. Le bulletin nomme la mairie, donne un jour et une heure précis. C'est un fait vérifiable, donc la source est assez fiable pour ce fait. L'opinion du présentateur n'est pas une preuve.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa dit : « Le présentateur a dit que c'est trop rapide, donc le marché ne rouvrira pas jeudi. » Pourquoi se trompe-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3) Distinguer le fait de l'opinion. L'opinion « trop rapide » ne change pas le fait annoncé par la mairie. Awa confond l'opinion du présentateur avec un fait.",
+              "answers": [
+                {
+                  "content": "Elle confond une opinion avec un fait",
+                  "correct": true
+                },
+                {
+                  "content": "Elle a oublié la radio",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'a pas compris l'heure",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a cru la mairie",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une alerte reçue sur un téléphone",
+          "statement": "Texte écrit pour Lnclass. Koffi reçoit ce message sur un réseau social : « Alerte ! Il y a un danger près du collège demain. Partage à tout le monde, vite ! » Aucun nom, aucune date. Il hésite à le partager.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les étapes que Koffi doit suivre pour vérifier le message.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Lire le message en entier. 2) Chercher la source d'origine. 3) Recouper avec au moins deux sources sûres, comme la radio et le journal. 4) Conclure. On ne décide de partager qu'à la fin.",
+              "answers": [
+                {
+                  "content": "Lire le message en entier."
+                },
+                {
+                  "content": "Chercher qui l'a écrit en premier."
+                },
+                {
+                  "content": "Le comparer avec la radio et le journal."
+                },
+                {
+                  "content": "Décider de le partager ou non."
+                }
+              ]
+            },
+            {
+              "content": "Quels signes font penser à une rumeur ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 2) Chercher la source : sans nom ni date, on ne peut pas vérifier. Une demande de partager vite et la peur sont des signes de rumeur. Une source citée, une date et une confirmation par la radio ou le journal sont des signes de fiabilité.",
+              "answers": [
+                {
+                  "content": "Il n'y a ni nom ni date",
+                  "correct": true
+                },
+                {
+                  "content": "Le message demande de partager vite",
+                  "correct": true
+                },
+                {
+                  "content": "Le message fait peur",
+                  "correct": true
+                },
+                {
+                  "content": "Il cite la mairie et donne une date",
+                  "correct": false
+                },
+                {
+                  "content": "La radio le confirme",
+                  "correct": false
+                },
+                {
+                  "content": "Un journal daté le confirme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi écoute la radio du quartier et lit le journal du matin : rien sur ce danger. Quelle est la conclusion ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3) Recouper : deux sources sûres ne disent rien. 4) Conclure : l'information n'est pas confirmée, c'est probablement une rumeur. Le fait qu'elle fasse peur ne la rend pas vraie.",
+              "answers": [
+                {
+                  "content": "Le message n'est pas confirmé : probablement une rumeur",
+                  "correct": true
+                },
+                {
+                  "content": "Le message est confirmé",
+                  "correct": false
+                },
+                {
+                  "content": "Le message est vrai car il fait peur",
+                  "correct": false
+                },
+                {
+                  "content": "La radio a menti",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi ne doit pas ___ ce message avant de l'avoir vérifié.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 4) Conclure : on ne partage que ce qui est confirmé. Partager un message non vérifié peut répandre une rumeur.",
+              "answers": [
+                {
+                  "content": "partager",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi Koffi ne doit pas partager ce message « au cas où ».",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Koffi ne doit pas partager le message, car il n'a ni nom ni date et qu'il n'est pas confirmé. Partager « au cas où » peut diffuser une rumeur, faire peur à des familles et mettre des personnes en danger. » Points : source absente (0,5) ; partager diffuse une rumeur (0,5) ; conséquences (1).",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Dit que le message n'a ni source ni date",
+                "Explique que partager diffuse peut-être une rumeur",
+                "Indique que la rumeur peut faire peur ou mettre en danger"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une photo qui humilie",
+          "statement": "Texte écrit pour Lnclass. Après des troubles dans un quartier, Fatou reçoit la photo d'une femme qui pleure, devant sa maison. Sous la photo, quelqu'un a écrit son nom et une moquerie. Le message demande : « Partagez pour que tout le monde voie ! »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Que montre la photo ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Identifier la personne concernée : une victime en pleurs, 2) Se demander si le message l'humilie : oui, à cause de la moquerie et du nom écrit. Ce n'est ni une preuve à partager, ni une publicité, ni une carte.",
+              "answers": [
+                {
+                  "content": "Une victime en détresse, humiliée par le message",
+                  "correct": true
+                },
+                {
+                  "content": "Une preuve qu'il faut partager",
+                  "correct": false
+                },
+                {
+                  "content": "Une publicité",
+                  "correct": false
+                },
+                {
+                  "content": "Une carte du quartier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles règles s'appliquent ici ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 3) Appliquer la règle : on ne diffuse pas d'image qui humilie, et on respecte la dignité de la victime. Le nombre de personnes qui voient déjà l'image et le but d'informer ne changent pas la règle.",
+              "answers": [
+                {
+                  "content": "Ne pas diffuser une image qui humilie",
+                  "correct": true
+                },
+                {
+                  "content": "Respecter la dignité de la victime",
+                  "correct": true
+                },
+                {
+                  "content": "Partager si beaucoup de gens la voient déjà",
+                  "correct": false
+                },
+                {
+                  "content": "Partager pour informer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fatou peut garder le nom de la femme sous la photo pour informer.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 3) Appliquer la règle : on cache le nom de la victime. Le nom écrit sous la photo l'expose à des moqueries et à un danger. Informer se fait sans nom.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque geste de Fatou à son effet.",
+              "question_type": "matching",
+              "explanation": "Méthode : 4) Choisir le bon geste. Ne pas partager respecte la dignité ; signaler la publication fait retirer le message ; prévenir un adulte permet à la victime d'être aidée par une personne de confiance.",
+              "answers": [
+                {
+                  "content": "Ne pas partager la photo",
+                  "match": "Respecter la dignité de la femme"
+                },
+                {
+                  "content": "Signaler la publication",
+                  "match": "Faire retirer le message"
+                },
+                {
+                  "content": "Prévenir un adulte",
+                  "match": "Être aidée par une personne de confiance"
+                }
+              ]
+            },
+            {
+              "content": "Écris deux ou trois phrases pour répondre à celui qui a envoyé la photo avec « Partagez pour que tout le monde voie ! ».",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Je ne partage pas cette photo, car elle humilie une femme en difficulté. Chaque personne garde sa dignité, même en temps de violence. Je préviens un adulte et je signale la publication. » Points : refus (0,5) ; raison (1) ; geste (1) ; ton (0,5).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Refuse de partager la photo",
+                "Donne la raison : la dignité de la victime est en jeu",
+                "Propose un bon geste : prévenir un adulte ou signaler",
+                "Ton poli et respectueux"
+              ],
+              "starter": "Je ne partage pas cette photo, car…"
+            }
+          ]
+        },
+        {
+          "title": "Informer en respectant les autres",
+          "statement": "Texte écrit pour Lnclass. Le club de journalisme du collège prépare une page sur les nouvelles du quartier après des troubles. Un élève propose trois contenus : une photo d'un enfant en pleurs avec son nom, un message sans auteur « partagez vite », et un article daté qui cite la mairie et un responsable de quartier.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel contenu est le plus fiable pour la page ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 2) Repérer qui parle et quand : seul l'article cite deux sources et une date. 4) Juger : le message sans auteur n'est pas vérifiable, la photo n'est pas une information, la longueur ne prouve rien.",
+              "answers": [
+                {
+                  "content": "L'article daté qui cite la mairie et un responsable",
+                  "correct": true
+                },
+                {
+                  "content": "Le message sans auteur",
+                  "correct": false
+                },
+                {
+                  "content": "La photo de l'enfant",
+                  "correct": false
+                },
+                {
+                  "content": "Un contenu parce qu'il est court",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que doit faire le club avant de publier ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : vérifier (chercher la source d'origine, recouper avec deux autres sources) et respecter la dignité (cacher le visage et le nom d'un enfant victime). Publier d'abord, demander de partager vite ou garder le nom sont des erreurs.",
+              "answers": [
+                {
+                  "content": "Vérifier la source d'origine",
+                  "correct": true
+                },
+                {
+                  "content": "Comparer avec deux autres sources sûres",
+                  "correct": true
+                },
+                {
+                  "content": "Cacher le visage et le nom d'un enfant victime",
+                  "correct": true
+                },
+                {
+                  "content": "Publier d'abord et vérifier ensuite",
+                  "correct": false
+                },
+                {
+                  "content": "Demander à tous de partager vite",
+                  "correct": false
+                },
+                {
+                  "content": "Garder le nom de l'enfant pour plus de vérité",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le travail du club.",
+              "question_type": "ordering",
+              "explanation": "Méthode : lire, chercher la source, recouper, puis conclure. On retire ce qui humilie (la photo de l'enfant avec son nom) et on publie ce qui est confirmé (l'article daté).",
+              "answers": [
+                {
+                  "content": "Lire les trois contenus."
+                },
+                {
+                  "content": "Chercher la source de chaque contenu."
+                },
+                {
+                  "content": "Comparer avec deux sources sûres."
+                },
+                {
+                  "content": "Retirer ce qui humilie et publier ce qui est confirmé."
+                }
+              ]
+            },
+            {
+              "content": "Le club informe avec des mots ___ et ne montre pas l'enfant.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : appliquer la règle de dignité : on informe avec des mots respectueux, sans image qui humilie. On cache le visage et le nom d'un enfant victime.",
+              "answers": [
+                {
+                  "content": "respectueux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige un petit paragraphe (3 à 5 phrases) qui explique les deux règles du club : vérifier une information et respecter la dignité des victimes.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Le club vérifie chaque information. Il cherche la source d'origine, puis la compare avec deux autres sources sûres. S'il n'est pas sûr, c'est peut-être une rumeur et il ne la partage pas. Le club respecte aussi la dignité des victimes : il ne montre pas d'image qui humilie, et il cache le visage et le nom d'un enfant victime. En cas de doute, il prévient un adulte. Une fausse alerte partagée peut affoler tout un quartier. » Points : vérifier (2) ; dignité (1,5) ; exemple ou conséquence (1) ; geste final (1) ; clarté et vocabulaire (0,5).",
+              "answers": [],
+              "points": 6,
+              "criteria": [
+                "Explique comment vérifier : source d'origine et deux autres sources sûres",
+                "Explique la dignité : ne pas diffuser d'image qui humilie, protéger les enfants",
+                "Donne un exemple ou une conséquence",
+                "Conclut sur le bon geste (ne pas partager, signaler)",
+                "Phrases claires et vocabulaire de la leçon"
+              ],
+              "starter": "Le club vérifie chaque information…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur l'information et la dignité",
+          "notions": "les supports d'information (radio, journal, télévision, réseaux sociaux), le fait et l'opinion, la fiabilité d'une source, la rumeur, le recoupement avec au moins deux autres sources sûres, la dignité des victimes et la protection des enfants.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour réviser, Aya dresse la liste des moyens par lesquels une nouvelle arrive chez elle : la radio, les journaux, la télévision et les réseaux sociaux.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel support s'écoute sans écran ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer le support : la radio s'écoute. Le journal se lit sur papier, la télévision et le réseau social se regardent sur un écran.",
+                  "answers": [
+                    {
+                      "content": "La radio",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le journal",
+                      "correct": false
+                    },
+                    {
+                      "content": "La télévision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le réseau social",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel support se lit sur papier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer le support : le journal imprimé se lit sur papier. Les trois autres passent par le son ou l'écran.",
+                  "answers": [
+                    {
+                      "content": "Le journal",
+                      "correct": true
+                    },
+                    {
+                      "content": "La radio",
+                      "correct": false
+                    },
+                    {
+                      "content": "La télévision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le réseau social",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque support à sa manière d'être reçu.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Nommer le support : chaque support se reçoit d'une façon, par le son, le papier ou l'écran.",
+                  "answers": [
+                    {
+                      "content": "Radio",
+                      "match": "On l'écoute"
+                    },
+                    {
+                      "content": "Journal",
+                      "match": "On le lit sur papier"
+                    },
+                    {
+                      "content": "Télévision",
+                      "match": "On la regarde à l'écran"
+                    },
+                    {
+                      "content": "Réseau social",
+                      "match": "On le consulte sur un téléphone"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une information est une source d'information.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer le support : la source est l'endroit d'où vient la nouvelle (radio, journal, télévision, réseau social ou personne). L'information est la nouvelle elle-même.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne qui raconte ce qu'elle a vu est aussi une ___ d'information.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer le support : la parole d'une personne est aussi une source d'information. On cherche alors qui parle et quand.",
+                  "answers": [
+                    {
+                      "content": "source",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une source est l'endroit d'où vient la nouvelle : un support ou une personne."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Koffi écoute la radio : « Le collège ouvre lundi à 7 h 30, dit le présentateur. Je trouve que c'est trop tôt. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque phrase à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Distinguer : l'annonce de l'heure d'ouverture se vérifie auprès du collège, c'est un fait. « Trop tôt » dépend de ce que pense le présentateur, c'est une opinion.",
+                  "answers": [
+                    {
+                      "content": "Le collège annonce qu'il ouvre lundi à 7 h 30.",
+                      "match": "Fait"
+                    },
+                    {
+                      "content": "C'est trop tôt.",
+                      "match": "Opinion"
+                    },
+                    {
+                      "content": "Le présentateur parle à la radio.",
+                      "match": "Fait sur le support"
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui exprime l'opinion ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer qui parle : « Je trouve » désigne le présentateur. Les autres personnes ne sont pas citées.",
+                  "answers": [
+                    {
+                      "content": "Le présentateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le collège",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mairie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fait peut être vérifié.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Distinguer : un fait est une chose qui s'est passée et qu'on peut vérifier, contrairement à une opinion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« Je trouve que le journal est ennuyeux » est ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Distinguer : « Je trouve » annonce une opinion. Elle ne se vérifie pas.",
+                  "answers": [
+                    {
+                      "content": "une opinion",
+                      "correct": true
+                    },
+                    {
+                      "content": "un fait",
+                      "correct": false
+                    },
+                    {
+                      "content": "une date",
+                      "correct": false
+                    },
+                    {
+                      "content": "une source",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases sont des faits ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Distinguer : la durée et la date se vérifient, ce sont des faits. « Le meilleur » et « trop forte » sont des opinions.",
+                  "answers": [
+                    {
+                      "content": "Le bulletin dure dix minutes.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le journal est daté du lundi.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ce bulletin est le meilleur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cette radio est trop forte.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un fait se vérifie ; une opinion commence souvent par « je trouve » ou « je pense »."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Ama reçoit un message : « Alerte ! Grand danger demain ! Partage vite ! » Il n'a ni nom ni date. Elle veut le vérifier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de vérification.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Chercher la source. Étape 3 — Recouper. Étape 4 — Conclure : c'est l'ordre de la méthode.",
+                  "answers": [
+                    {
+                      "content": "Lire le message en entier."
+                    },
+                    {
+                      "content": "Chercher la source d'origine."
+                    },
+                    {
+                      "content": "Comparer avec deux sources sûres."
+                    },
+                    {
+                      "content": "Conclure : confirmée ou rumeur."
+                    }
+                  ]
+                },
+                {
+                  "content": "Comparer avec d'autres sources, c'est ___ l'information.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Recouper : comparer avec au moins deux autres sources sûres.",
+                  "answers": [
+                    {
+                      "content": "recouper",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce message est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher la source d'origine : sans nom ni date et qui presse de partager, il a les signes d'une rumeur.",
+                  "answers": [
+                    {
+                      "content": "probablement une rumeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "une information confirmée",
+                      "correct": false
+                    },
+                    {
+                      "content": "un fait vérifié",
+                      "correct": false
+                    },
+                    {
+                      "content": "un article de journal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ama peut le partager « au cas où ».",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : on ne partage que ce qui est confirmé. Partager « au cas où » diffuse peut-être une rumeur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour recouper, Ama veut combien d'autres sources sûres, au moins ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Recouper : au moins deux autres sources sûres et indépendantes. La réponse est 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Une rumeur n'a ni nom ni date et presse de partager."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "En temps de violence, un message montre une famille en pleurs avec son nom. On te demande de le partager.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Chaque personne garde sa ___ , même quand elle est victime.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : toute personne garde sa dignité, c'est-à-dire le droit au respect.",
+                  "answers": [
+                    {
+                      "content": "dignité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut montrer le visage et le nom d'un enfant victime.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la règle : on cache le visage et le nom d'un enfant victime pour le protéger.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que fais-tu de ce message ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Choisir le bon geste : ne pas partager et prévenir un adulte. Les trois autres gestes diffusent l'image.",
+                  "answers": [
+                    {
+                      "content": "Je ne le partage pas et je préviens un adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Je le partage vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je le publie avec un commentaire moqueur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je le montre à toute la classe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui doit être protégé en priorité ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : les enfants et les victimes ont droit à une protection. Ceux qui partagent ou commentent n'en ont pas besoin ici.",
+                  "answers": [
+                    {
+                      "content": "Les enfants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les victimes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ceux qui partagent le plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ceux qui commentent le plus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Informer en respectant la dignité, c'est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Appliquer la règle : on informe avec des mots respectueux et on évite les images qui humilient. Tout montrer ou tout cacher n'est pas la règle.",
+                  "answers": [
+                    {
+                      "content": "utiliser des mots respectueux, sans image qui humilie",
+                      "correct": true
+                    },
+                    {
+                      "content": "montrer toutes les images",
+                      "correct": false
+                    },
+                    {
+                      "content": "cacher toutes les nouvelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "inventer des détails",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Protéger les victimes, c'est ne pas diffuser ce qui les humilie."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · L'information dans la vie courante en Côte d'Ivoire",
+          "notions": "analyser une source (radio, journal, réseau social) dans des situations de la vie courante : marché, école, quartier, famille ; distinguer fait et opinion ; reconnaître une rumeur ; protéger la dignité des victimes et des enfants.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Texte écrit pour Lnclass. Le marché de Treichville : le journal du matin, daté du samedi, écrit : « Le prix du sac de riz passe de 12 000 F CFA à 15 000 F CFA, selon le syndicat des commerçants. » Fanta lit l'article à sa mère.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le support de cette information ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer le support : le texte est un article de journal, daté du samedi.",
+                  "answers": [
+                    {
+                      "content": "Un journal",
+                      "correct": true
+                    },
+                    {
+                      "content": "La radio",
+                      "correct": false
+                    },
+                    {
+                      "content": "La télévision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un message oral",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de F CFA le prix du sac augmente-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Distinguer : le prix est un fait chiffré qu'on peut vérifier. L'augmentation est 15 000 − 12 000 = 3 000 F CFA.",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F CFA"
+                },
+                {
+                  "content": "Qui donne l'information ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer qui parle et quand : le journal cite le syndicat des commerçants et il est daté du samedi.",
+                  "answers": [
+                    {
+                      "content": "Le syndicat des commerçants, cité par le journal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fanta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un voisin anonyme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette source est assez fiable, car elle cite un syndicat et une date.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Juger : l'article se nomme, donne une date et des faits précis. La source est assez fiable, même s'il faut la recouper pour être sûr.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque phrase à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Distinguer : le prix se vérifie, c'est un fait. « Trop cher » est une opinion.",
+                  "answers": [
+                    {
+                      "content": "Le sac passe de 12 000 à 15 000 F CFA.",
+                      "match": "Fait"
+                    },
+                    {
+                      "content": "C'est trop cher.",
+                      "match": "Opinion"
+                    },
+                    {
+                      "content": "Le journal est daté du samedi.",
+                      "match": "Fait sur la date"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un prix est un fait qu'on peut vérifier ; « trop cher » est une opinion."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Texte écrit pour Lnclass. À Abidjan, Serge reçoit ce message d'un cousin : « Mon voisin dit qu'un camion bloque le grand pont, ne passez pas par là, partagez ! » Le cousin ne sait pas qui a vu le camion.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la première chose à chercher ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher la source d'origine : qui l'a dit en premier, et quand ? Le nombre de lecteurs, la couleur et la longueur ne prouvent rien.",
+                  "answers": [
+                    {
+                      "content": "Qui a vu le camion en premier, et quand",
+                      "correct": true
+                    },
+                    {
+                      "content": "Combien de gens ont lu le message",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur du camion",
+                      "correct": false
+                    },
+                    {
+                      "content": "La longueur du pont",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sources sûres peuvent confirmer ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Recouper : la radio et un agent sur place sont des sources sûres et indépendantes. Un cousin qui a reçu le même message et un autre message anonyme ne le sont pas.",
+                  "answers": [
+                    {
+                      "content": "La radio qui donne l'état de la circulation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un agent de la circulation sur place",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un autre cousin qui a reçu le même message",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un message anonyme de plus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Serge peut partager le message « au cas où », car il vient d'un cousin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : venir d'un proche ne prouve rien si la source d'origine est inconnue. On ne partage que ce qui est confirmé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message sans source qui demande de partager est souvent une ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : sans source et pressant, c'est souvent une rumeur.",
+                  "answers": [
+                    {
+                      "content": "rumeur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre l'action de Serge.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Chercher la source. Étape 3 — Recouper avec la radio et un agent. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Lire le message en entier."
+                    },
+                    {
+                      "content": "Chercher qui a vu le camion."
+                    },
+                    {
+                      "content": "Écouter la radio et demander à un agent de la circulation."
+                    },
+                    {
+                      "content": "Décider de partager ou non."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un message qui vient d'un proche n'est pas pour autant confirmé."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Texte écrit pour Lnclass. Après des troubles dans un quartier, un élève, Yao, filme avec son téléphone un enfant qui pleure et appelle sa mère. Ses amis lui disent : « Publie ta vidéo, elle va faire le tour de la ville ! »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que doit faire Yao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : un enfant victime. Étape 3 — Appliquer la règle : on ne diffuse pas une vidéo qui expose un enfant. Étape 4 — Choisir : ne pas publier et supprimer. Partager à quelques amis diffuse déjà.",
+                  "answers": [
+                    {
+                      "content": "Ne pas publier la vidéo et la supprimer",
+                      "correct": true
+                    },
+                    {
+                      "content": "La publier avec le nom de l'enfant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La partager à quelques amis seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La poster à la radio du quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cacher le visage d'un enfant victime est une façon de le protéger.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la règle : cacher le visage et le nom d'un enfant victime le protège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque geste à sa raison.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Choisir le bon geste : supprimer évite la diffusion, cacher le nom protège, prévenir un adulte permet d'obtenir de l'aide pour l'enfant et de faire retirer la vidéo.",
+                  "answers": [
+                    {
+                      "content": "Supprimer la vidéo",
+                      "match": "Éviter qu'elle circule"
+                    },
+                    {
+                      "content": "Ne pas écrire le nom",
+                      "match": "Protéger l'enfant"
+                    },
+                    {
+                      "content": "Prévenir un adulte",
+                      "match": "Obtenir de l'aide pour l'enfant et faire retirer la vidéo"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant victime a droit à une protection ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : les enfants ont droit à une protection spéciale.",
+                  "answers": [
+                    {
+                      "content": "spéciale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le piège dans « la vidéo va faire le tour de la ville » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander si la vidéo humilie : oui. Le piège est de croire que beaucoup de vues rendent la diffusion acceptable. Elle reste interdite.",
+                  "answers": [
+                    {
+                      "content": "Croire que plus de vues rendent la diffusion acceptable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Croire que la vidéo est vraie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croire que la ville est grande",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croire qu'elle dure longtemps",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une vidéo qui expose un enfant ne se publie pas, quel que soit le nombre de vues."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Texte écrit pour Lnclass. Le directeur du collège de Daloa veut informer les parents après des troubles dans le quartier. Il hésite entre un message non signé sur un réseau social, une rumeur au marché, une photo sans légende et un affichage daté et signé à l'entrée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel moyen est le plus sûr pour que l'information soit vérifiable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer qui parle et quand : un affichage daté et signé dit qui parle et quand. Étape 4 — Juger : c'est le plus fiable.",
+                  "answers": [
+                    {
+                      "content": "L'affichage daté et signé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message non signé sur un réseau social",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une rumeur au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une photo sans légende",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que doit contenir l'annonce pour être fiable ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Juger : une annonce fiable se nomme et se date. La peur et la demande de partager vite sont des signes de rumeur.",
+                  "answers": [
+                    {
+                      "content": "Le nom du directeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La date de l'annonce",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un mot qui fait peur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une demande de partager vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'annonce doit nommer des élèves victimes avec leur photo.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la règle : on ne nomme ni ne montre des élèves victimes. Informer se fait sans photo ni nom.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour informer sans humilier, le directeur utilise des ___ respectueux.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Appliquer la règle : des mots respectueux, sans image qui humilie.",
+                  "answers": [
+                    {
+                      "content": "mots",
+                      "correct": true
+                    },
+                    {
+                      "content": "mot",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase l'annonce peut-elle contenir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Distinguer et appliquer : la première phrase est un fait précis, daté et vérifiable. Les autres humilient, diffusent une rumeur ou cachent l'information.",
+                  "answers": [
+                    {
+                      "content": "« Les cours reprennent lundi à 7 h 30. »",
+                      "correct": true
+                    },
+                    {
+                      "content": "« Voici la photo d'un élève en larmes. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« On dit que c'est très grave, partagez. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« Ne dites rien aux parents. »",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une annonce fiable nomme son auteur, donne une date et des faits précis."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "justifier qu'une source est fiable ou non, comparer deux sources, recouper une information, expliquer pourquoi une rumeur est dangereuse, justifier le refus de diffuser une image qui humilie.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Texte écrit pour Lnclass. Deux sources parlent de la rentrée. La radio de la ville dit : « La rentrée a lieu lundi, selon l'inspection de l'enseignement. » Un message sans nom dit : « La rentrée est repoussée à jeudi, partage vite ! »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle source est la plus fiable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer qui parle : la radio se nomme et cite l'inspection. Étape 4 — Juger : une source fiable se nomme. Le message sans nom et pressant a les signes d'une rumeur.",
+                  "answers": [
+                    {
+                      "content": "La radio, car elle cite l'inspection et se nomme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message, car il est plus récent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le message, car il presse de partager",
+                      "correct": false
+                    },
+                    {
+                      "content": "La radio, car elle est plus longue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message prouve que la radio s'est trompée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Recouper : un message sans nom ne prouve rien contre une source qui cite l'inspection. Il faut comparer avec d'autres sources sûres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque source à son jugement.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Juger : la radio se nomme et cite sa source, donc fiable. Le message sans nom qui presse a les signes d'une rumeur.",
+                  "answers": [
+                    {
+                      "content": "La radio qui cite l'inspection",
+                      "match": "Fiable"
+                    },
+                    {
+                      "content": "Le message sans nom qui presse",
+                      "match": "Probable rumeur"
+                    },
+                    {
+                      "content": "Un message copié vingt fois",
+                      "match": "Une seule source"
+                    }
+                  ]
+                },
+                {
+                  "content": "Que faire pour être sûr de la date de rentrée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Recouper : on compare avec des sources sûres et indépendantes, comme le collège ou un journal daté. Dix personnes qui ont le même message ne font qu'une source.",
+                  "answers": [
+                    {
+                      "content": "Recouper avec le collège ou un journal daté",
+                      "correct": true
+                    },
+                    {
+                      "content": "Partager le message",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croire le plus récent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Demander à dix personnes qui ont reçu le même message",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après avoir comparé, on peut dire que l'information est ___ ou que c'est une rumeur.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : après recoupement, l'information est confirmée ou c'est une rumeur.",
+                  "answers": [
+                    {
+                      "content": "confirmée",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare qui parle, quand et avec quels faits ; ne choisis pas le message le plus récent."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Texte écrit pour Lnclass. Mariam voit une publication : « Un seul témoin dit qu'un quartier est en danger. Il n'a vu que de loin. » La publication a été partagée mille fois.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Mille partages prouvent que la publication est vraie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Juger : le nombre de partages ne prouve rien. Il faut une source connue et des faits vérifiables.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de sources y a-t-il vraiment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher la source d'origine : tout vient d'un seul témoin. Les partages sont des copies, pas des sources.",
+                  "answers": [
+                    {
+                      "content": "Une seule : un témoin qui a vu de loin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Zéro, car personne n'a parlé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles questions Mariam doit-elle poser ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 et Étape 3 : on cherche l'auteur d'origine, la date, puis on recoupe. Les J'aime, la longueur et la célébrité ne prouvent rien.",
+                  "answers": [
+                    {
+                      "content": "Qui a écrit en premier ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quand cela s'est-il passé ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Qu'en disent deux autres sources sûres ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Combien de gens ont aimé ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "La publication est-elle longue ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le témoin est-il célèbre ?",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement de Mariam.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Chercher la source : un seul témoin. Étape 3 — Recouper. Étape 4 — Conclure : non confirmée, donc pas de partage.",
+                  "answers": [
+                    {
+                      "content": "Lire la publication en entier."
+                    },
+                    {
+                      "content": "Constater qu'il n'y a qu'un témoin."
+                    },
+                    {
+                      "content": "Chercher deux autres sources sûres."
+                    },
+                    {
+                      "content": "Conclure : non confirmée, je ne partage pas."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi cette publication peut-elle être dangereuse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : une rumeur peut faire peur, mettre en colère et mettre des gens en danger. La longueur, l'heure et la langue ne sont pas en cause.",
+                  "answers": [
+                    {
+                      "content": "Elle peut faire peur et pousser à agir sans preuve",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est trop courte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est publiée le soir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est écrite en français",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Mille copies d'un même témoignage restent une seule source."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Texte écrit pour Lnclass. Un élève, Adama, a reçu la photo d'un homme assis par terre, l'air humilié, avec une moquerie. Ses amis rient. Il se demande s'il doit la partager.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la bonne raison de ne pas la partager ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Se demander si l'image humilie : oui. Étape 3 — Appliquer la règle : on respecte la dignité de chaque personne. La couleur, l'âge et les commentaires n'entrent pas en compte.",
+                  "answers": [
+                    {
+                      "content": "Elle humilie un homme et porte atteinte à sa dignité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est en couleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est trop vieille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas assez de commentaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« Mes amis rient, donc ce n'est pas grave. »",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la règle : que d'autres rient ne change pas la règle. Ne pas diffuser une image qui humilie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque réponse d'Adama à son jugement.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Choisir le bon geste : supprimer et prévenir un adulte respectent la dignité ; la partager pour rire humilie.",
+                  "answers": [
+                    {
+                      "content": "Je supprime la photo",
+                      "match": "Respecte la dignité"
+                    },
+                    {
+                      "content": "Je la partage pour rire",
+                      "match": "Humilie l'homme"
+                    },
+                    {
+                      "content": "Je préviens un adulte",
+                      "match": "Aide à faire retirer la photo"
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque partage d'une image humiliante est un ___ dont on est responsable.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Choisir : chaque partage est un acte dont on est responsable.",
+                  "answers": [
+                    {
+                      "content": "acte",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase résume la bonne attitude ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Appliquer la règle : on ne diffuse pas ce qui humilie et on aide à le retirer. Les autres raisons (drôle, tout le monde, discrétion) ne changent pas la règle.",
+                  "answers": [
+                    {
+                      "content": "Je ne diffuse pas ce qui humilie, et j'aide à le faire retirer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Je partage si c'est drôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je partage si tout le monde le fait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Je partage si personne ne me voit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Que d'autres rient ou partagent ne rend pas l'image acceptable."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Texte écrit pour Lnclass. Une radio locale lit un message d'une auditrice : « Un enfant du quartier est en détresse. Voici son nom et son adresse. » L'animateur hésite à lire le nom.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que doit-il faire du nom et de l'adresse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Appliquer la règle : le nom et l'adresse d'un enfant victime restent cachés. Les donner peut le mettre en danger.",
+                  "answers": [
+                    {
+                      "content": "Ne pas les lire, pour protéger l'enfant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les lire pour aider",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lire plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lire deux fois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une radio peut informer sans donner le nom d'un enfant victime.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la règle : on informe avec des mots respectueux, sans nom ni adresse. L'information reste utile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-il dire à l'antenne ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Choisir le bon geste : on peut appeler à aider sans donner de nom, de photo ni d'adresse.",
+                  "answers": [
+                    {
+                      "content": "« Un enfant du quartier a besoin d'aide. »",
+                      "correct": true
+                    },
+                    {
+                      "content": "« Appelez la mairie ou un adulte de confiance. »",
+                      "correct": true
+                    },
+                    {
+                      "content": "« Voici son nom complet. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« Voici sa photo et son adresse. »",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour protéger l'enfant, on cache son nom et son ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Appliquer la règle : on cache le visage, le nom et l'adresse d'un enfant victime.",
+                  "answers": [
+                    {
+                      "content": "visage",
+                      "correct": true
+                    },
+                    {
+                      "content": "adresse",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi cette règle protège-t-elle l'enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'enfant est une victime. Étape 3 — Appliquer : cacher son identité évite qu'il soit reconnu et mis en danger. Elle ne supprime pas la nouvelle.",
+                  "answers": [
+                    {
+                      "content": "Elle évite qu'il soit reconnu et mis en danger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle rend la radio célèbre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle accélère le message",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle supprime la nouvelle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "On peut informer et aider sans nommer l'enfant."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : informer, vérifier, respecter",
+          "notions": "bilan de la leçon : les sources d'information, le fait et l'opinion, la vérification et la rumeur, la dignité des victimes et la protection des enfants, dans des situations mêlées.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Texte écrit pour Lnclass. Dans une classe de 6ème de Yamoussoukro, le maître demande de classer quatre éléments : un bulletin de la radio, un article de journal daté, un message anonyme et une publication qui humilie une personne.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque élément à son jugement.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Juger (méthode 1) et Étape 3 — Appliquer la règle (méthode 3) : les sources qui se nomment sont fiables ; le message anonyme qui presse est une probable rumeur ; la publication qui humilie ne se diffuse pas.",
+                  "answers": [
+                    {
+                      "content": "Bulletin de la radio qui cite sa source",
+                      "match": "Source fiable : la radio se nomme"
+                    },
+                    {
+                      "content": "Article de journal daté et signé",
+                      "match": "Source fiable : le journal est daté"
+                    },
+                    {
+                      "content": "Message anonyme qui presse",
+                      "match": "Probable rumeur"
+                    },
+                    {
+                      "content": "Publication qui humilie",
+                      "match": "À ne pas diffuser"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est une opinion ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Distinguer : la durée, la date et la citation de la mairie se vérifient. « Ennuyeux » est une opinion.",
+                  "answers": [
+                    {
+                      "content": "« Ce journal est ennuyeux. »",
+                      "correct": true
+                    },
+                    {
+                      "content": "« Le bulletin dure dix minutes. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« L'article est daté du lundi. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« La radio cite la mairie. »",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bon élève vérifie avant de partager.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : on ne partage que ce qui est confirmé après avoir cherché la source et recoupé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une nouvelle sans preuve qui circule est une ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : sans preuve, elle peut être fausse ou déformée : c'est une rumeur.",
+                  "answers": [
+                    {
+                      "content": "rumeur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle publication faut-il ne pas diffuser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Appliquer la règle : on ne diffuse pas ce qui humilie. Les trois autres sont des sources nommées.",
+                  "answers": [
+                    {
+                      "content": "Celle qui humilie une personne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une annonce datée de la mairie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un bulletin de la radio",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un article de journal signé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Classe chaque élément : source fiable, probable rumeur, ou à ne pas diffuser."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Texte écrit pour Lnclass. Binta reçoit trois messages : A) « Selon la radio de la ville, le marché ferme à 17 h. » B) « Ils disent que c'est grave, partagez vite ! » C) La photo d'un enfant en pleurs avec son nom.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel message est le plus fiable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer qui parle : seul A cite sa source, la radio. Étape 4 — Juger : B n'a pas de source, C n'est pas une information et humilie un enfant.",
+                  "answers": [
+                    {
+                      "content": "A, car il cite la radio",
+                      "correct": true
+                    },
+                    {
+                      "content": "B, car il presse",
+                      "correct": false
+                    },
+                    {
+                      "content": "C, car il montre une image",
+                      "correct": false
+                    },
+                    {
+                      "content": "B, car il fait peur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que faut-il faire de B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 et 3 : chercher la source d'origine puis recouper. B n'a pas de source : on ne le partage pas.",
+                  "answers": [
+                    {
+                      "content": "Chercher la source et recouper avant de partager",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le partager à tous",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le croire",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'envoyer à la radio sans le lire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que faut-il faire de C ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Appliquer la règle : on ne diffuse pas l'image d'un enfant victime, même sans son nom. Étape 4 — Choisir : prévenir un adulte.",
+                  "answers": [
+                    {
+                      "content": "Ne pas le partager et prévenir un adulte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le partager sans le nom",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le publier avec un commentaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le montrer à la classe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre l'action de Binta.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Repérer qui parle. Étape 3 — Recouper A. Étape 4 — Conclure : ne pas partager B (rumeur) ni C (dignité).",
+                  "answers": [
+                    {
+                      "content": "Lire les trois messages."
+                    },
+                    {
+                      "content": "Repérer qui parle dans chacun."
+                    },
+                    {
+                      "content": "Recouper A avec deux autres sources sûres."
+                    },
+                    {
+                      "content": "Ne pas partager B ni C."
+                    }
+                  ]
+                },
+                {
+                  "content": "Binta veut recouper A avec au moins combien d'autres sources sûres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Recouper : au moins deux autres sources sûres. La réponse est 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ],
+              "hint": "Un message qui cite sa source et sa date est plus fiable ; une image qui humilie ne se partage pas."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Texte écrit pour Lnclass. Voici une phrase d'un élève : « Je partage tout, car informer est plus important que respecter les personnes. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Cette phrase est juste.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la règle : informer et respecter la dignité vont ensemble. On peut informer sans humilier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles erreurs contient cette phrase ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 à 4 : « Je partage tout » ignore la vérification (recouper) et la dignité (ne pas diffuser ce qui humilie). La langue et la longueur ne sont pas des erreurs.",
+                  "answers": [
+                    {
+                      "content": "Elle oublie de vérifier l'information",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle oublie la dignité des victimes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est écrite en français",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est trop courte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par quelle phrase la corriger ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : on ne partage que ce qui est confirmé et respectueux. Les autres phrases entretiennent la rumeur ou empêchent d'informer.",
+                  "answers": [
+                    {
+                      "content": "« Je partage ce qui est confirmé et qui respecte les personnes. »",
+                      "correct": true
+                    },
+                    {
+                      "content": "« Je partage seulement ce qui fait peur. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« Je ne dis jamais rien. »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« Je partage dix fois pour être sûr. »",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Informer et respecter la dignité ___ ensemble.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Appliquer la règle : on peut informer avec des mots respectueux.",
+                  "answers": [
+                    {
+                      "content": "vont",
+                      "correct": true
+                    },
+                    {
+                      "content": "s'opposent",
+                      "correct": false
+                    },
+                    {
+                      "content": "s'ignorent",
+                      "correct": false
+                    },
+                    {
+                      "content": "se détestent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Informer sans humilier, c'est utiliser des ___ respectueux.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Appliquer la règle : des mots respectueux, pas d'image qui humilie.",
+                  "answers": [
+                    {
+                      "content": "mots",
+                      "correct": true
+                    },
+                    {
+                      "content": "mot",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Informer et respecter ne s'opposent pas."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Texte écrit pour Lnclass. Le diagramme de la leçon montre comment vérifier une information : recevoir, chercher la source, comparer avec deux sources sûres, puis conclure.",
+              "exercise_type": "evaluation",
+              "figure": "verifier-information",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les cases du schéma.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Recevoir et lire. Étape 2 — Chercher la source. Étape 3 — Recouper. Étape 4 — Conclure : c'est l'ordre du schéma.",
+                  "answers": [
+                    {
+                      "content": "Je reçois une information."
+                    },
+                    {
+                      "content": "Je cherche la source d'origine."
+                    },
+                    {
+                      "content": "Je compare avec deux sources sûres."
+                    },
+                    {
+                      "content": "Je conclus : confirmée ou rumeur."
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la comparaison confirme l'information, que fait-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : si elle est confirmée et respectueuse, on peut la partager. Sinon, on ne la partage pas.",
+                  "answers": [
+                    {
+                      "content": "On peut la partager avec des mots respectueux",
+                      "correct": true
+                    },
+                    {
+                      "content": "On la cache",
+                      "correct": false
+                    },
+                    {
+                      "content": "On la modifie",
+                      "correct": false
+                    },
+                    {
+                      "content": "On la partage avec une moquerie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la comparaison ne confirme pas l'information, c'est…",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : non confirmée, c'est une rumeur. On ne la partage pas.",
+                  "answers": [
+                    {
+                      "content": "une rumeur, et on ne la partage pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "une information vraie",
+                      "correct": false
+                    },
+                    {
+                      "content": "un fait certain",
+                      "correct": false
+                    },
+                    {
+                      "content": "une source fiable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut sauter l'étape de comparaison si le message est court.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Recouper : la longueur du message ne remplace pas la comparaison.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le schéma, on cherche d'abord la ___ d'origine.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher la source d'origine : qui l'a dit en premier, et quand ?",
+                  "answers": [
+                    {
+                      "content": "source",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le schéma suit les quatre étapes de la méthode de vérification."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
