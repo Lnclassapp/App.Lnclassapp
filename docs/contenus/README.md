@@ -19,7 +19,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 **rédaction → script → relecture IA indépendante → validateur pédagogique (agent) → script → PR → import → publication**
 
-Aucune leçon n'attend plus d'enseignant : l'étape « à faire valider par un enseignant » est remplacée par l'agent `validateur-pedagogique`, qui tranche chaque point avant la PR (ADR-XXXX-validateur-pedagogique-agent).
+Aucune leçon n'attend plus d'enseignant : l'étape « à faire valider par un enseignant » est remplacée par l'agent `validateur-pedagogique`, qui tranche chaque point avant la PR (ADR-0135).
 
 1. **Rédiger.** Copier `prompt-redaction.md`, remplir son bloc **ENTRÉE** (intitulé exact de la progression, niveau, rang). Le résultat est un fichier JSON `lnclass.course-tree` version 3 : les versions 1 et 2 sont **retirées** et refusées à l'import (`format_retired`).
 2. **Contrôler avec le script.** `ruby script/contenus/valider.rb fichier.json`. Il refuse ce que l'import refuserait (gabarit, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, correction absente `blank`, `too_short` ou `too_long`, figures hors règles), avec le code que l'import rend (test de parité `test/script/contenus/parite_import_test.rb`) et avertit des défauts de rédaction : correction qui ne cite aucune étape de La méthode, mots interdits, question qui dépend d'un élément absent. Il ne vérifie pas les calculs.

@@ -37,7 +37,7 @@ Ajouts repris du chantier [`lecons-tle-a1-comme-thales`](../lecons-tle-a1-comme-
 
 ## À trancher
 
-> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 - **Course entre les tests du jeu standard et les dossiers `zz-preuve-test-*`** : déjà notée en Tle A1. En Tle A1, elle a aussi touché `standard_manifest_test` (fichier `zz-preuve-test-*/…/cassee.json` lu puis supprimé pendant le test). Option prudente appliquée : relancer seul. Option possible : un chantier qui isole ces tests.
 - **Limite composée en logarithme** (S4.E3.Q6) : la limite de ln(6 − 2x) quand x tend vers 3 par la gauche se ramène à la limite de ln en 0⁺ de la fiche, mais la fiche ne parle pas de composition de limites. Option prudente appliquée : laissée, l'explication fait le pas. Option possible : la remplacer par une question de variations.

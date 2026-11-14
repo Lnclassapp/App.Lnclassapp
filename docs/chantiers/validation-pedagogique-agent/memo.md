@@ -31,7 +31,7 @@ Décision du porteur du 2026-11-14 : l'étape « à faire valider par un enseign
 
 ## Décision
 
-[ADR-XXXX-validateur-pedagogique-agent](../../decisions/adr/XXXX-validateur-pedagogique-agent.md).
+[ADR-0135](../../decisions/adr/0135-validateur-pedagogique-agent.md).
 
 ## Lots
 

@@ -1,4 +1,4 @@
-# ADR-XXXX : Un agent validateur pédagogique tranche, avant la PR, ce qu'on laissait à un enseignant
+# ADR-0135 : Un agent validateur pédagogique tranche, avant la PR, ce qu'on laissait à un enseignant
 <!-- index
 titre: Validateur pédagogique des leçons
 statut: Accepté

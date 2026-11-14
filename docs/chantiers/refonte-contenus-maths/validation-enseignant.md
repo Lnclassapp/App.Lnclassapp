@@ -15,4 +15,4 @@
 | 9 | Pyramides et cônes | 6 | L'aire latérale du cône (πrg) et celle de la pyramide régulière (apothème) sont-elles au programme ? La sorte `solid` ne trace ni l'apothème ni la génératrice. |
 | 10 | Statistique | 1 | Médiane, effectifs cumulés, classe modale et moyenne par centres de classes sont-ils au programme ? Faut-il garder `exercises[1]`, question 4 (l'angle d'une classe dans un diagramme circulaire) ? |
 
-**Tranché le 2026-11-14** par le validateur pédagogique, à la place de l'enseignant : décisions dans [`validation-pedagogique-agent/decisions/mathematiques-college.md`](../validation-pedagogique-agent/decisions/mathematiques-college.md) (ADR-XXXX-validateur-pedagogique-agent).
+**Tranché le 2026-11-14** par le validateur pédagogique, à la place de l'enseignant : décisions dans [`validation-pedagogique-agent/decisions/mathematiques-college.md`](../validation-pedagogique-agent/decisions/mathematiques-college.md) (ADR-0135).

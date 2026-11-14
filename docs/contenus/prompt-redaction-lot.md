@@ -2,7 +2,7 @@
 
 > Utilisation : ouvrir une session **dans le dépôt Lnclass** (le prompt lit des fichiers de `docs/contenus/` et lance un script), copier tout ce qui suit la ligne `---`, puis remplir le bloc **ENTRÉE** en bas. Un appel = une **matière** et un **niveau** (et sa série) : les leçons demandées pour ce niveau (en général les 10 premières de la progression). Exemples : Mathématiques 3ème (chantier refonte-contenus-maths), Français 3ème (chantier contenus-3e-francais).
 >
-> Ce prompt ne répète pas les règles de rédaction : elles vivent dans [`prompt-redaction.md`](prompt-redaction.md), la source unique. Il ajoute ce qu'un lot demande en plus : composer le plan du niveau, rédiger les leçons sans qu'elles se ressemblent, les contrôler, les ranger. Pipeline d'une leçon : **rédaction → script → relecture IA indépendante → validateur pédagogique (agent) → script → PR → import → publication**. Aucun point n'est renvoyé à un enseignant (ADR-XXXX-validateur-pedagogique-agent).
+> Ce prompt ne répète pas les règles de rédaction : elles vivent dans [`prompt-redaction.md`](prompt-redaction.md), la source unique. Il ajoute ce qu'un lot demande en plus : composer le plan du niveau, rédiger les leçons sans qu'elles se ressemblent, les contrôler, les ranger. Pipeline d'une leçon : **rédaction → script → relecture IA indépendante → validateur pédagogique (agent) → script → PR → import → publication**. Aucun point n'est renvoyé à un enseignant (ADR-0135).
 
 ---
 

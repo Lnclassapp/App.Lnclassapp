@@ -136,7 +136,7 @@ Règle : **le plus petit modèle qui fait le travail** ; on monte d'un cran quan
 |---|---|
 | Orchestrateur (session principale) : cadrage, décisions, arbitrage des revues, fusions qui ne sont pas de routine ; une session par vague ou par jour, état dans `etat.md` ([`orchestrateur.md`](orchestrateur.md)) | **Opus** |
 | Sous-agents de revue : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` | **Opus** |
-| Validateur pédagogique des leçons (`validateur-pedagogique`) : tranche avant la PR chaque point qu'on aurait laissé à un enseignant (fait, programme, niveau, barème, méthode, figures) ([ADR-XXXX](../decisions/adr/XXXX-validateur-pedagogique-agent.md)) | **Opus** |
+| Validateur pédagogique des leçons (`validateur-pedagogique`) : tranche avant la PR chaque point qu'on aurait laissé à un enseignant (fait, programme, niveau, barème, méthode, figures) ([ADR-XXXX](../decisions/adr/0135-validateur-pedagogique-agent.md)) | **Opus** |
 | Agents d'exécution (`executant-lot`) : lots, tests et corrections à partir d'un plan cadré | **Sonnet** |
 | Fusions de routine vers `Develop` (`fusionneur`) : conditions vérifiées une à une, aucune manquante ([`orchestrateur.md`](orchestrateur.md#3-qui-fait-quoi)) | **Sonnet** |
 | Vérifications pures (`verificateur-ci`) : `bin/ci-quiet`, tests système relancés, verdict | **Haiku** |

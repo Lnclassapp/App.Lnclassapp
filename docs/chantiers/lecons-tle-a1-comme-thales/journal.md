@@ -38,7 +38,7 @@ Ajouts repris du chantier [`lecons-tle-c-comme-thales`](../lecons-tle-c-comme-th
 
 ## À trancher
 
-> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 - **Course entre `develop_stage_test` et les dossiers `zz-preuve-test-*`** : en Tle D, le premier `bin/ci-quiet` a échoué parce qu'un autre test créait au même moment un dossier `docs/contenus/lecons-traitees/zz-preuve-test-*` que `develop_stage_test` compte. Relancé seul, le test est vert (12/12), puis `bin/ci-quiet` l'a été aussi. Les tests du jeu standard lancés en même temps que d'autres tests de base de données peuvent aussi finir en interblocage. Option prudente appliquée : relancer seul. Option possible : un chantier qui isole ces tests (dossier temporaire hors de `lecons-traitees/`, ou tests non parallèles).
 - **Lectures graphiques sans tolérance**, **valeurs illustratives**, **textes d'appui de l'oral** : comme en Tle C et D, option prudente appliquée (laissé tel quel ; un enseignant relit avant publication).

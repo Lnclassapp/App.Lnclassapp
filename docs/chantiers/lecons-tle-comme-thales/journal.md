@@ -31,7 +31,7 @@
 
 ## À trancher
 
-> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 - **Course entre les tests du jeu standard et les dossiers `zz-preuve-test-*`** : comme en Tle A1 et A2. Option prudente appliquée : relancer seul le test touché.
 - **Conseil de l'Entente** (indépendance de la Côte d'Ivoire, S1.E3.Q2) : les distracteurs « Soudan français » et « Guinée » sont gardés, car la leçon ne cite que quatre membres. Option possible : les remplacer par des pays hors d'Afrique de l'Ouest.

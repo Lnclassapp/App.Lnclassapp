@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-14 | L'étape « à faire valider par un enseignant » est supprimée ; l'agent `validateur-pedagogique` (Opus) tranche chaque point avant la PR | Décision du porteur | ADR-XXXX-validateur-pedagogique-agent |
+| 2026-11-14 | L'étape « à faire valider par un enseignant » est supprimée ; l'agent `validateur-pedagogique` (Opus) tranche chaque point avant la PR | Décision du porteur | ADR-0135 |
 | 2026-11-14 | Les points existants sont tranchés en 7 parts parallèles (Maths collège, Maths lycée, Physique-Chimie, SVT, Français, Histoire-Géographie, EDHC et Philosophie), chaque part écrivant ses décisions dans `decisions/<part>.md` | Contextes bornés, aucun fichier partagé entre deux agents | non |
 | 2026-11-14 | Un point sur une leçon qui n'est que dans `a-reprendre/` est classé « Hors base » : rien ne la charge, le validateur passera à son retour | Ne pas corriger un fichier qui sera réécrit au format complet | non |
 | 2026-11-14 | Les leçons « déjà publiées en production » sont, par prudence, toutes celles de `lecons-traitees/` présentes sur `origin/main` (3ème, 2nde, 1ère, Tle) : aucune trace écrite ne dit lesquelles l'équipe a publiées, et le 2026-11-12 la production montrait 3ème, 1ère et Tle | Une liste trop longue coûte une vérification ; une liste trop courte laisse une erreur en ligne | non |
