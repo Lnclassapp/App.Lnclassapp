@@ -144,6 +144,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`contrat-de-session`](contrat-de-session/memo.md) | livré | refactoring | 2026-11-05 | Contrat de session |
 | [`copie-refusee-page-bloquee`](copie-refusee-page-bloquee/memo.md) | livré | bugfix | 2026-10-29 | Copie refusée : la page ne répond plus |
 | [`correction-comme-en-classe`](correction-comme-en-classe/memo.md) | livré | feature | 2026-10-28 | Corriger une copie comme en classe |
+| [`corrections-production`](corrections-production/) | pas de memo | — | — | — |
 | [`cours-eleve`](cours-eleve/memo.md) | planification | feature | 2026-10-15 | Page Cours de l'élève aux couleurs Wave et Djamo |
 | [`cours-pleine-largeur`](cours-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La fiche de cours remplit l'écran du téléphone |
 | [`couverture-catalogue`](couverture-catalogue/memo.md) | livré | bugfix | 2026-10-30 | Couverture à 100 % perdue par la refonte des maths |
